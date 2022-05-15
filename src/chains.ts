@@ -25,6 +25,7 @@ export interface Chain {
     symbol: string;
     decimals: number;
     coinGeckoId?: string;
+    coinMinimalDenom?: string; // Only tendermint-based
   };
   _provider?: any;
   getCurrencyPrice: (currency?: Currency) => number | Promise<number>;
@@ -88,7 +89,7 @@ export class SolanaChain implements Chain {
 type TendermintBalanceResponse = {
   balances: [
     {
-      denom: 'uatom' | 'uosmo';
+      denom: string;
       amount: string;
     },
   ];
@@ -103,6 +104,7 @@ export class CosmosHubChain implements Chain {
     symbol: 'ATOM',
     decimals: 6,
     coinGeckoId: 'cosmos',
+    coinMinimalDenom: 'uatom',
   };
   _provider: Axios = axios.create({
     baseURL: 'https://api.cosmos.network',
@@ -114,9 +116,10 @@ export class CosmosHubChain implements Chain {
     const { data } = await this._provider.get<TendermintBalanceResponse>(
       `/cosmos/bank/v1beta1/balances/${address}`,
     );
-    const atomBalance =
-      data.balances.find((v) => v.denom === 'uatom')?.amount ?? 0;
-    const balance = Number(atomBalance) / 10 ** this.currency.decimals;
+    const coinBalance =
+      data.balances.find((v) => v.denom === this.currency.coinMinimalDenom)
+        ?.amount ?? 0;
+    const balance = Number(coinBalance) / 10 ** this.currency.decimals;
     return balance;
   };
 }
@@ -126,6 +129,7 @@ export class OsmosisChain implements Chain {
     symbol: 'OSMO',
     decimals: 6,
     coinGeckoId: 'osmosis',
+    coinMinimalDenom: 'uosmo',
   };
   _provider: Axios = axios.create({
     baseURL: 'https://lcd.dev-osmosis.zone',
@@ -137,9 +141,10 @@ export class OsmosisChain implements Chain {
     const { data } = await this._provider.get<TendermintBalanceResponse>(
       `/cosmos/bank/v1beta1/balances/${address}`,
     );
-    const atomBalance =
-      data.balances.find((v) => v.denom === 'uosmo')?.amount ?? 0;
-    const balance = Number(atomBalance) / 10 ** this.currency.decimals;
+    const coinBalance =
+      data.balances.find((v) => v.denom === this.currency.coinMinimalDenom)
+        ?.amount ?? 0;
+    const balance = Number(coinBalance) / 10 ** this.currency.decimals;
     return balance;
   };
 }
