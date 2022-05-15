@@ -25,6 +25,7 @@
 
 ### 4.0
 
+- 히스토리 기능(과거 특정 시점의 Net worth 구하기)
 - 타인의 투자 포트폴리오 유동화
 
 ## 🚀 Preparing Local Dev Environment
