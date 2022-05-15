@@ -4,7 +4,7 @@ build
 lib
 .DS_Store
 
-## yarn
+## Yarn
 .yarn/*
 !.yarn/cache
 !.yarn/patches
