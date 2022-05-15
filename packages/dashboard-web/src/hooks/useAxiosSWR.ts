@@ -1,6 +1,6 @@
 import axios from 'axios';
 import useSWR, { Key, SWRConfiguration } from 'swr';
-import { defaultConfig } from 'swr/dist/utils/config';
+import { defaultConfig } from 'swr/_internal/dist/_internal';
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
