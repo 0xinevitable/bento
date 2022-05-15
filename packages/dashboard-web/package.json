@@ -1,0 +1,27 @@
+{
+  "name": "@dashboard/web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@dashboard/core": "workspace:^",
+    "next": "^12.1.6",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-is": "^18.0.0",
+    "styled-components": "^5.3.5",
+    "styled-normalize": "^8.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
+    "@types/styled-components": "^5.1.24",
+    "next-plugin-svgr": "^1.1.1",
+    "typescript": "^4.6.3"
+  }
+}

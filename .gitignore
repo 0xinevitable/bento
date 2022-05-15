@@ -1,2 +1,13 @@
 node_modules
+dist
+build
 .DS_Store
+
+## yarn
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
