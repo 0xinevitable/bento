@@ -1,7 +1,7 @@
-type ERCBasedNetworks = 'ethereum' | 'klaytn';
-type TendermintBasedChains = 'cosmos-hub' | 'osmosis';
+export type ERCBasedNetworks = 'ethereum' | 'klaytn';
+export type TendermintBasedChains = 'cosmos-hub' | 'osmosis';
 
-type Wallet =
+export type Wallet =
   | {
       type: 'erc';
       address: string;

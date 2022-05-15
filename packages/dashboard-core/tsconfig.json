@@ -12,7 +12,7 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
-    "outDir": "build",
+    "outDir": "lib",
     "declaration": true,
     "rootDir": "src",
     "jsx": "react"

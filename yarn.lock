@@ -1477,6 +1477,7 @@ __metadata:
     "@types/react": ^17.0.43
     "@types/react-dom": ^17.0.14
     "@types/styled-components": ^5.1.24
+    axios: ^0.27.2
     next: ^12.1.6
     next-plugin-svgr: ^1.1.1
     react: ^18.1.0
@@ -1484,6 +1485,7 @@ __metadata:
     react-is: ^18.0.0
     styled-components: ^5.3.5
     styled-normalize: ^8.0.7
+    swr: ^1.3.0
     typescript: ^4.6.3
   languageName: unknown
   linkType: soft
@@ -8573,6 +8575,15 @@ __metadata:
   bin:
     svgo: bin/svgo
   checksum: b92f71a8541468ffd0b81b8cdb36b1e242eea320bf3c1a9b2c8809945853e9d8c80c19744267eb91cabf06ae9d5fff3592d677df85a31be4ed59ff78534fa420
+  languageName: node
+  linkType: hard
+
+"swr@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "swr@npm:1.3.0"
+  peerDependencies:
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0
+  checksum: e7a184f0d560e9c8be85c023cc8e65e56a88a6ed46f9394b301b07f838edca23d2e303685319a4fcd620b81d447a7bcb489c7fa0a752c259f91764903c690cdb
   languageName: node
   linkType: hard
 
