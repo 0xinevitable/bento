@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "mike-co.import-sorter",
+    "styled-components.vscode-styled-components"
+  ]
+}

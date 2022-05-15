@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "svg.preview.background": "dark-transparent",
+  "solidity.compileUsingRemoteVersion": "v0.5.6+commit.9c3226ce"
+}
