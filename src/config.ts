@@ -5,7 +5,10 @@ type Wallet =
       networks: ('ethereum' | 'klaytn')[];
     }
   | { type: 'solana'; address: string }
-  | { type: 'cosmos-hub'; address: string };
+
+  // FIXME: fix to `type: 'tendermint'` and move them to 'chains' after supporing multichain accounts...
+  | { type: 'cosmos-hub'; address: string }
+  | { type: 'osmosis'; address: string };
 
 export const wallets: Wallet[] = [
   {
@@ -35,5 +38,9 @@ export const wallets: Wallet[] = [
   {
     type: 'cosmos-hub',
     address: 'cosmos15zysaya5j34vy2cqd7y9q8m3drjpy0d2hhgxh0',
+  },
+  {
+    type: 'osmosis',
+    address: 'osmo15zysaya5j34vy2cqd7y9q8m3drjpy0d2lvmkpa',
   },
 ];

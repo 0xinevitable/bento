@@ -83,11 +83,12 @@ export class SolanaChain implements Chain {
   };
 }
 
-// TODO: Tendermint?
+// FIXME: Tendermint chains need it's own handler for `coinMinimalDenom`, IBC, multiple currencies...
+
 type TendermintBalanceResponse = {
   balances: [
     {
-      denom: 'uatom';
+      denom: 'uatom' | 'uosmo';
       amount: string;
     },
   ];
@@ -115,6 +116,29 @@ export class CosmosHubChain implements Chain {
     );
     const atomBalance =
       data.balances.find((v) => v.denom === 'uatom')?.amount ?? 0;
+    const balance = Number(atomBalance) / 10 ** this.currency.decimals;
+    return balance;
+  };
+}
+
+export class OsmosisChain implements Chain {
+  currency = {
+    symbol: 'OSMO',
+    decimals: 6,
+    coinGeckoId: 'osmosis',
+  };
+  _provider: Axios = axios.create({
+    baseURL: 'https://lcd.dev-osmosis.zone',
+  });
+  getCurrencyPrice = (currency: Currency = 'usd') =>
+    priceFromCoinGecko(this.currency.coinGeckoId, currency);
+
+  getBalance = async (address: string) => {
+    const { data } = await this._provider.get<TendermintBalanceResponse>(
+      `/cosmos/bank/v1beta1/balances/${address}`,
+    );
+    const atomBalance =
+      data.balances.find((v) => v.denom === 'uosmo')?.amount ?? 0;
     const balance = Number(atomBalance) / 10 ** this.currency.decimals;
     return balance;
   };

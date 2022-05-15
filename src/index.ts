@@ -3,18 +3,21 @@ import {
   CosmosHubChain,
   EthereumChain,
   KlaytnChain,
+  OsmosisChain,
   SolanaChain,
 } from './chains';
 import { wallets } from './config';
 
 export const chains: Record<
-  'ethereum' | 'klaytn' | 'solana' | 'cosmos-hub',
+  // FIXME: wow
+  'ethereum' | 'klaytn' | 'solana' | 'cosmos-hub' | 'osmosis',
   Chain
 > = {
   ethereum: new EthereumChain(),
   klaytn: new KlaytnChain(),
   solana: new SolanaChain(),
   'cosmos-hub': new CosmosHubChain(),
+  osmosis: new OsmosisChain(),
 };
 
 const safePromiseAll = async (promises: Promise<void>[]) =>
@@ -58,6 +61,14 @@ const main = async () => {
         const currencyPrice = await chain.getCurrencyPrice();
         totalValueInUSD += currencyPrice * balance;
       } else if (wallet.type === 'cosmos-hub') {
+        const chain = chains[wallet.type];
+        const balance = await chain.getBalance(wallet.address);
+        console.log(
+          `${wallet.address} has ${balance} ${chain.currency.symbol}`,
+        );
+        const currencyPrice = await chain.getCurrencyPrice();
+        totalValueInUSD += currencyPrice * balance;
+      } else if (wallet.type === 'osmosis') {
         const chain = chains[wallet.type];
         const balance = await chain.getBalance(wallet.address);
         console.log(
