@@ -5,31 +5,45 @@ import React, { useMemo } from 'react';
 import { TokenIcon } from './components/TokenIcon';
 
 const LandingPage = () => {
-  const [ethereumWalletQuery, klaytnWalletQuery] = useMemo(() => {
-    const addrs = wallets.reduce(
-      (acc, wallet) => {
-        if (wallet.type !== 'erc') {
+  const [cosmosWalletQuery, ethereumWalletQuery, klaytnWalletQuery] =
+    useMemo(() => {
+      const addrs = wallets.reduce(
+        (acc, wallet) => {
+          if (wallet.type === 'tendermint') {
+            return { ...acc, cosmos: [...acc.cosmos, wallet.address] };
+          }
+          if (wallet.type !== 'erc') {
+            return acc;
+          }
+          if (wallet.networks.includes('ethereum')) {
+            return { ...acc, ethereum: [...acc.ethereum, wallet.address] };
+          }
+          if (wallet.networks.includes('klaytn')) {
+            return { ...acc, klaytn: [...acc.klaytn, wallet.address] };
+          }
           return acc;
-        }
-        if (wallet.networks.includes('ethereum')) {
-          return { ...acc, ethereum: [...acc.ethereum, wallet.address] };
-        }
-        if (wallet.networks.includes('klaytn')) {
-          return { ...acc, klaytn: [...acc.klaytn, wallet.address] };
-        }
-        return acc;
-      },
-      { klaytn: [], ethereum: [] },
-    );
+        },
+        { cosmos: [], klaytn: [], ethereum: [] },
+      );
 
-    return [addrs.ethereum.join(','), addrs.klaytn.join(',')];
-  }, []);
+      return [
+        addrs.cosmos.join(','),
+        addrs.ethereum.join(','),
+        addrs.klaytn.join(','),
+      ];
+    }, []);
 
   const { data: ethereumBalance } = useAxiosSWR<WalletBalance[]>(
     `/api/erc/ethereum/${ethereumWalletQuery}`,
   );
   const { data: klaytnBalance } = useAxiosSWR<WalletBalance[]>(
     `/api/erc/klaytn/${klaytnWalletQuery}`,
+  );
+  const { data: cosmosHubBalance } = useAxiosSWR<WalletBalance[]>(
+    `/api/tendermint/cosmos-hub/${cosmosWalletQuery}`,
+  );
+  const { data: osmosisBalance } = useAxiosSWR<WalletBalance[]>(
+    `/api/tendermint/osmosis/${cosmosWalletQuery}`,
   );
 
   const netWorthInUSD = useMemo(
@@ -41,8 +55,16 @@ const LandingPage = () => {
       (klaytnBalance ?? []).reduce(
         (acc, balance) => acc + balance.balance * balance.price,
         0,
+      ) +
+      (cosmosHubBalance ?? []).reduce(
+        (acc, balance) => acc + balance.balance * balance.price,
+        0,
+      ) +
+      (osmosisBalance ?? []).reduce(
+        (acc, balance) => acc + balance.balance * balance.price,
+        0,
       ),
-    [ethereumBalance, klaytnBalance],
+    [ethereumBalance, klaytnBalance, cosmosHubBalance, osmosisBalance],
   );
 
   return (
@@ -88,6 +110,44 @@ const LandingPage = () => {
                 <span className="text-md">KLAY</span>
                 <span className="text-2xl font-bold">
                   {`$${klaytnBalance
+                    .reduce(
+                      (acc, balance) => acc + balance.balance * balance.price,
+                      0,
+                    )
+                    .toLocaleString()}`}
+                </span>
+              </div>
+            </li>
+          )}
+          {cosmosHubBalance && (
+            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+              <TokenIcon
+                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png"
+                alt="cosmos"
+              />
+              <div className="ml-4 flex flex-col">
+                <span className="text-md">ATOM</span>
+                <span className="text-2xl font-bold">
+                  {`$${cosmosHubBalance
+                    .reduce(
+                      (acc, balance) => acc + balance.balance * balance.price,
+                      0,
+                    )
+                    .toLocaleString()}`}
+                </span>
+              </div>
+            </li>
+          )}
+          {osmosisBalance && (
+            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+              <TokenIcon
+                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png"
+                alt="osmosis"
+              />
+              <div className="ml-4 flex flex-col">
+                <span className="text-md">OSMO</span>
+                <span className="text-2xl font-bold">
+                  {`$${osmosisBalance
                     .reduce(
                       (acc, balance) => acc + balance.balance * balance.price,
                       0,
