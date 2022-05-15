@@ -2,7 +2,7 @@
   "name": "dashboard",
   "version": "1.0.0",
   "private": true,
-  "repository": "https://github.com/junhoyeo/dashboard",
+  "repository": "https://github.com/multichain-dashboard/dashboard",
   "author": "Junho Yeo <i@junho.io>",
   "license": "MIT",
   "workspaces": [
