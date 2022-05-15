@@ -61,7 +61,7 @@
   - 네이티브 토큰과 다른 토큰은 `IBC` 를 통해 다른 Cosmos SDK 기반 체인으로 이동이 가능하다.
     - 즉 코스모스 허브의 아톰(ATOM)이 오스모시스 체인으로 이동할 수 있다.
 
-- [ADR-036](https://docs.cosmos.network/master/architecture/adr-036-arbitrary-signature.html)
+- [Bech32](https://docs.cosmos.network/master/spec/addresses/bech32.html)
   - 하나의 주소가 다른 Cosmos SDK 기반 체인별로 호환됨
     - `cosmos15zysaya5j34vy2cqd7y9q8m3drjpy0d2hhgxh0`
     - `osmo15zysaya5j34vy2cqd7y9q8m3drjpy0d2lvmkpa`
@@ -73,9 +73,11 @@
 ## Contributing Guide (Korean)
 
 - **일단 당분간은**
+
   - **완벽한 코드가 아니더라도 대충 커밋해서 바로 `main` 브랜치에 올리자**
   - 그 다음 천천히 고쳐나가자
   - 나중에 고치고 싶은 게 있거나 아쉬운 게 있으면 `TODO`, `FIXME` 등 주석으로 표시하자
+
 - 나중에 따를 것:
   - 가급적 모든 코드 변경은 PR을 통해 이루어져야 합니다.
   - PR의 제목은 **유저의 입장에서 작성된 스토리**여야 합니다.
@@ -92,5 +94,6 @@
       - 다만 이러한 **작은 기술 부채**는 PR의 끝에서 이를 다루는 커밋을 추가하거나, 생긴 시점에 주석이나 Task 카드를 만들어 반드시 표시해 두어야 합니다.
 
 ## Authors
+
 - [@junhoyeo](https://github.com/junhoyeo)
 - [@harugatto](https://github.com/harugatto)
