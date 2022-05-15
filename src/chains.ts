@@ -54,7 +54,7 @@ export class KlaytnChain implements Chain {
   currency = {
     symbol: 'KLAY',
     decimals: 18,
-    coinGeckoId: 'klaytn',
+    coinGeckoId: 'klay-token',
   };
   _provider = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
   getCurrencyPrice = (currency: Currency = 'usd') =>
@@ -99,12 +99,20 @@ type TendermintBalanceResponse = {
   };
 };
 
-export class CosmosHubChain implements Chain {
+export interface TendermintChain extends Chain {
+  bech32Config: {
+    prefix: string;
+  };
+}
+export class CosmosHubChain implements TendermintChain {
   currency = {
     symbol: 'ATOM',
     decimals: 6,
     coinGeckoId: 'cosmos',
     coinMinimalDenom: 'uatom',
+  };
+  bech32Config = {
+    prefix: 'cosmos',
   };
   _provider: Axios = axios.create({
     baseURL: 'https://api.cosmos.network',
@@ -124,12 +132,15 @@ export class CosmosHubChain implements Chain {
   };
 }
 
-export class OsmosisChain implements Chain {
+export class OsmosisChain implements TendermintChain {
   currency = {
     symbol: 'OSMO',
     decimals: 6,
     coinGeckoId: 'osmosis',
     coinMinimalDenom: 'uosmo',
+  };
+  bech32Config = {
+    prefix: 'osmo',
   };
   _provider: Axios = axios.create({
     baseURL: 'https://lcd.dev-osmosis.zone',

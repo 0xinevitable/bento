@@ -1,14 +1,18 @@
+type ERCBasedNetworks = 'ethereum' | 'klaytn';
+type TendermintBasedChains = 'cosmos-hub' | 'osmosis';
+
 type Wallet =
   | {
       type: 'erc';
       address: string;
-      networks: ('ethereum' | 'klaytn')[];
+      networks: ERCBasedNetworks[];
     }
-  | { type: 'solana'; address: string }
-
-  // FIXME: fix to `type: 'tendermint'` and move them to 'chains' after supporing multichain accounts...
-  | { type: 'cosmos-hub'; address: string }
-  | { type: 'osmosis'; address: string };
+  | {
+      type: 'tendermint';
+      address: string;
+      chains: TendermintBasedChains[];
+    }
+  | { type: 'solana'; address: string };
 
 export const wallets: Wallet[] = [
   {
@@ -36,11 +40,8 @@ export const wallets: Wallet[] = [
     address: 'HJLQd7CxQK5epNLE3R4u8b2MdGzmcvXjpntGWfht4FZH',
   },
   {
-    type: 'cosmos-hub',
+    type: 'tendermint',
     address: 'cosmos15zysaya5j34vy2cqd7y9q8m3drjpy0d2hhgxh0',
-  },
-  {
-    type: 'osmosis',
-    address: 'osmo15zysaya5j34vy2cqd7y9q8m3drjpy0d2lvmkpa',
+    chains: ['cosmos-hub', 'osmosis'],
   },
 ];
