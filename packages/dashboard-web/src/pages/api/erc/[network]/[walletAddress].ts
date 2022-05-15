@@ -3,6 +3,13 @@ import { ERCBasedNetworks } from '@dashboard/core/lib/config';
 import { safePromiseAll } from '@dashboard/core/lib/utils';
 import { Chain, EthereumChain, KlaytnChain } from '@dashboard/core/lib/chains';
 
+export type WalletBalance = {
+  walletAddress: string;
+  symbol: string;
+  balance: number;
+  price: number;
+};
+
 interface APIRequest extends NextApiRequest {
   query: {
     network?: ERCBasedNetworks;
@@ -29,7 +36,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
 
   const result = await safePromiseAll(
     wallets.map(async (walletAddress) => {
-      if (network === 'ethereum') {
+      if (['ethereum', 'klaytn'].includes(network)) {
         const chain = chains[network];
         const balance = await chain.getBalance(walletAddress);
         const currencyPrice = await chain.getCurrencyPrice();
@@ -38,18 +45,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
           walletAddress,
           symbol: chain.currency.symbol,
           balance,
-          currencyPrice,
-        };
-      } else if (network === 'klaytn') {
-        const chain = chains[network];
-        const balance = await chain.getBalance(walletAddress);
-        const currencyPrice = await chain.getCurrencyPrice();
-
-        return {
-          walletAddress,
-          symbol: chain.currency.symbol,
-          balance,
-          currencyPrice,
+          price: currencyPrice,
         };
       }
     }),
