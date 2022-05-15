@@ -28,7 +28,7 @@ export interface Chain {
     coinMinimalDenom?: string; // Only tendermint-based
   };
   _provider?: any;
-  getCurrencyPrice: (currency?: Currency) => number | Promise<number>;
+  getCurrencyPrice: (currency?: Currency) => Promise<number>;
   getBalance: (address: string) => Promise<number>;
 }
 
@@ -84,8 +84,6 @@ export class SolanaChain implements Chain {
   };
 }
 
-// FIXME: Tendermint chains need it's own handler for `coinMinimalDenom`, IBC, multiple currencies...
-
 type TendermintBalanceResponse = {
   balances: [
     {
@@ -98,11 +96,43 @@ type TendermintBalanceResponse = {
     total: string; // number-like
   };
 };
+type CosmosHubDelegationsResponse = {
+  height: string; // number-like
+  result: {
+    delegation: {
+      delegator_address: string;
+      validator_address: string;
+      shares: string; // number-like
+    };
+    balance: {
+      denom: string;
+      amount: string; // number-like
+    };
+  }[];
+};
+type TendermintDelegationsResponse = {
+  delegation_responses: {
+    delegation: {
+      delegator_address: string;
+      validator_address: string;
+      shares: string; // number-like
+    };
+    balance: {
+      denom: string;
+      amount: string; // number-like
+    };
+  }[];
+  pagination: {
+    next_key: null;
+    total: string; // number-like
+  };
+};
 
 export interface TendermintChain extends Chain {
   bech32Config: {
     prefix: string;
   };
+  getDelegations: (address: string) => Promise<number>;
 }
 export class CosmosHubChain implements TendermintChain {
   currency = {
@@ -130,6 +160,17 @@ export class CosmosHubChain implements TendermintChain {
     const balance = Number(coinBalance) / 10 ** this.currency.decimals;
     return balance;
   };
+  getDelegations = async (address: string) => {
+    const { data } = await this._provider.get<CosmosHubDelegationsResponse>(
+      `/staking/delegators/${address}/delegations`,
+    );
+    const delegations = data.result;
+    const totalDelegated = delegations.reduce(
+      (acc, cur) => acc + Number(cur.balance.amount),
+      0,
+    );
+    return totalDelegated / 10 ** this.currency.decimals;
+  };
 }
 
 export class OsmosisChain implements TendermintChain {
@@ -143,7 +184,7 @@ export class OsmosisChain implements TendermintChain {
     prefix: 'osmo',
   };
   _provider: Axios = axios.create({
-    baseURL: 'https://lcd.dev-osmosis.zone',
+    baseURL: 'https://osmosis.stakesystems.io',
   });
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
@@ -157,5 +198,16 @@ export class OsmosisChain implements TendermintChain {
         ?.amount ?? 0;
     const balance = Number(coinBalance) / 10 ** this.currency.decimals;
     return balance;
+  };
+  getDelegations = async (address: string) => {
+    const { data } = await this._provider.get<TendermintDelegationsResponse>(
+      `/cosmos/staking/v1beta1/delegations/${address}`,
+    );
+    const delegations = data.delegation_responses;
+    const totalDelegated = delegations.reduce(
+      (acc, cur) => acc + Number(cur.balance.amount),
+      0,
+    );
+    return totalDelegated / 10 ** this.currency.decimals;
   };
 }

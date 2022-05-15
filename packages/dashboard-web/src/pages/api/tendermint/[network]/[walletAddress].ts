@@ -12,6 +12,7 @@ export type WalletBalance = {
   walletAddress: string;
   symbol: string;
   balance: number;
+  delegations: number;
   price: number;
 };
 
@@ -47,15 +48,20 @@ export default async (req: APIRequest, res: NextApiResponse) => {
 
       if (['cosmos-hub', 'osmosis'].includes(network)) {
         const chain = chains[network];
-        const balance = await chain.getBalance(
-          bech32Address.toBech32(chain.bech32Config.prefix),
+        const chainBech32Address = bech32Address.toBech32(
+          chain.bech32Config.prefix,
         );
-        const currencyPrice = await chain.getCurrencyPrice();
+        const [balance, delegations, currencyPrice] = await safePromiseAll([
+          chain.getBalance(chainBech32Address),
+          chain.getDelegations(chainBech32Address),
+          chain.getCurrencyPrice(),
+        ]);
 
         return {
-          walletAddress: bech32Address,
+          walletAddress: chainBech32Address,
           symbol: chain.currency.symbol,
           balance,
+          delegations,
           price: currencyPrice,
         };
       }

@@ -38,8 +38,10 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     wallets.map(async (walletAddress) => {
       if (['ethereum', 'klaytn'].includes(network)) {
         const chain = chains[network];
-        const balance = await chain.getBalance(walletAddress);
-        const currencyPrice = await chain.getCurrencyPrice();
+        const [balance, currencyPrice] = await safePromiseAll([
+          chain.getBalance(walletAddress),
+          chain.getCurrencyPrice(),
+        ]);
 
         return {
           walletAddress,

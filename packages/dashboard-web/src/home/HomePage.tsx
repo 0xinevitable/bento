@@ -1,4 +1,5 @@
 import { WalletBalance } from '@/pages/api/erc/[network]/[walletAddress]';
+import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
 import { wallets } from '@dashboard/core/lib/config';
 import React, { useMemo } from 'react';
@@ -39,10 +40,10 @@ const LandingPage = () => {
   const { data: klaytnBalance } = useAxiosSWR<WalletBalance[]>(
     `/api/erc/klaytn/${klaytnWalletQuery}`,
   );
-  const { data: cosmosHubBalance } = useAxiosSWR<WalletBalance[]>(
+  const { data: cosmosHubBalance } = useAxiosSWR<TendermintWalletBalance[]>(
     `/api/tendermint/cosmos-hub/${cosmosWalletQuery}`,
   );
-  const { data: osmosisBalance } = useAxiosSWR<WalletBalance[]>(
+  const { data: osmosisBalance } = useAxiosSWR<TendermintWalletBalance[]>(
     `/api/tendermint/osmosis/${cosmosWalletQuery}`,
   );
 
@@ -57,11 +58,17 @@ const LandingPage = () => {
         0,
       ) +
       (cosmosHubBalance ?? []).reduce(
-        (acc, balance) => acc + balance.balance * balance.price,
+        (acc, balance) =>
+          acc +
+          balance.balance * balance.price +
+          balance.delegations * balance.price,
         0,
       ) +
       (osmosisBalance ?? []).reduce(
-        (acc, balance) => acc + balance.balance * balance.price,
+        (acc, balance) =>
+          acc +
+          balance.balance * balance.price +
+          balance.delegations * balance.price,
         0,
       ),
     [ethereumBalance, klaytnBalance, cosmosHubBalance, osmosisBalance],
@@ -138,6 +145,26 @@ const LandingPage = () => {
               </div>
             </li>
           )}
+          {cosmosHubBalance && (
+            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+              <TokenIcon
+                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png"
+                alt="cosmos"
+              />
+              <div className="ml-4 flex flex-col">
+                <span className="text-md">Staked ATOM</span>
+                <span className="text-2xl font-bold">
+                  {`$${cosmosHubBalance
+                    .reduce(
+                      (acc, balance) =>
+                        acc + balance.delegations * balance.price,
+                      0,
+                    )
+                    .toLocaleString()}`}
+                </span>
+              </div>
+            </li>
+          )}
           {osmosisBalance && (
             <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
               <TokenIcon
@@ -150,6 +177,26 @@ const LandingPage = () => {
                   {`$${osmosisBalance
                     .reduce(
                       (acc, balance) => acc + balance.balance * balance.price,
+                      0,
+                    )
+                    .toLocaleString()}`}
+                </span>
+              </div>
+            </li>
+          )}
+          {osmosisBalance && (
+            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+              <TokenIcon
+                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png"
+                alt="osmosis"
+              />
+              <div className="ml-4 flex flex-col">
+                <span className="text-md">Staked OSMO</span>
+                <span className="text-2xl font-bold">
+                  {`$${osmosisBalance
+                    .reduce(
+                      (acc, balance) =>
+                        acc + balance.delegations * balance.price,
                       0,
                     )
                     .toLocaleString()}`}
