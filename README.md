@@ -3,7 +3,19 @@
 - 체인별로 데이터랑 서비스가 분산화되어 있음.
 - 대시보드 같은 제품이 하나 나와도 특정 체인에서 나오거나, 체인이나 플랫폼을 미는 VC에서 투자받으니까, 서비스가 특정 체인에만 귀속될 수밖에 없음
 
+## References
+
+대시보드 하는 애들(심심할 때 위에서 세 개만 보면 될 듯)
+
+- [Apeboard](https://apeboard.finance/)
+- [Zapper.fi](https://zapper.fi/)
+- [Keplr](https://www.keplr.app/)
+- [DeBank](https://debank.com/)
+- [Zerion](https://zerion.io/)
+
 ## Milestones
+
+3.0 까지 올해 안에 해보는 게 목표
 
 ### 1.0
 
@@ -18,6 +30,10 @@
 
 - 트랜잭션 라벨링 → 사용자 특성 도출
 - 프로필 기능
+
+### 4.0
+
+- 타인의 투자 포트폴리오 유동화
 
 ## 체인(Chains)
 
