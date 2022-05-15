@@ -1,8 +1,10 @@
-type Wallet = {
-  type: 'erc';
-  address: string;
-  networks: ('ethereum' | 'klaytn')[];
-};
+type Wallet =
+  | {
+      type: 'erc';
+      address: string;
+      networks: ('ethereum' | 'klaytn')[];
+    }
+  | { type: 'solana'; address: string };
 
 export const wallets: Wallet[] = [
   {
@@ -24,5 +26,9 @@ export const wallets: Wallet[] = [
     type: 'erc',
     address: '0x9c7377E72564EcD512a68672BA943AB48dBa0415',
     networks: ['klaytn'],
+  },
+  {
+    type: 'solana',
+    address: 'HJLQd7CxQK5epNLE3R4u8b2MdGzmcvXjpntGWfht4FZH',
   },
 ];
