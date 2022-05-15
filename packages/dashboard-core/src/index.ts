@@ -9,25 +9,24 @@ import {
   TendermintChain,
 } from './chains';
 import { wallets } from './config';
+import { safePromiseAll } from './utils';
 
-export const chains: Record<
-  // FIXME: wow
-  'ethereum' | 'klaytn' | 'solana' | 'cosmos-hub' | 'osmosis',
-  Chain | TendermintChain
-> = {
-  ethereum: new EthereumChain(),
-  klaytn: new KlaytnChain(),
-  solana: new SolanaChain(),
-  'cosmos-hub': new CosmosHubChain(),
-  osmosis: new OsmosisChain(),
-};
-
-const safePromiseAll = async (promises: Promise<void>[]) =>
-  (await Promise.allSettled(promises)).flatMap((res) =>
-    res.status === 'fulfilled' ? res.value : [],
-  );
-
+/**
+ * @deprecated We call each chain separately in the APIs
+ */
 export const main = async () => {
+  const chains: Record<
+    // FIXME: wow
+    'ethereum' | 'klaytn' | 'solana' | 'cosmos-hub' | 'osmosis',
+    Chain | TendermintChain
+  > = {
+    ethereum: new EthereumChain(),
+    klaytn: new KlaytnChain(),
+    solana: new SolanaChain(),
+    'cosmos-hub': new CosmosHubChain(),
+    osmosis: new OsmosisChain(),
+  };
+
   let totalValueInUSD = 0;
 
   await safePromiseAll(
