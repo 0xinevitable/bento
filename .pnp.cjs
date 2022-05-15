@@ -2531,7 +2531,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.1.0"],\
             ["react-dom", "virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:18.1.0"],\
             ["react-is", "npm:18.1.0"],\
-            ["swr", "virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:1.3.0"],\
+            ["swr", "virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:2.0.0-beta.3"],\
             ["tailwindcss", "virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:3.0.24"],\
             ["typescript", "patch:typescript@npm%3A4.6.4#~builtin<compat/typescript>::version=4.6.4&hash=7ad353"]\
           ],\
@@ -10959,19 +10959,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["swr", [\
-        ["npm:1.3.0", {\
-          "packageLocation": "./.yarn/cache/swr-npm-1.3.0-3a8f9fadf5-e7a184f0d5.zip/node_modules/swr/",\
+        ["npm:2.0.0-beta.3", {\
+          "packageLocation": "./.yarn/cache/swr-npm-2.0.0-beta.3-937e7ff593-c4b2463922.zip/node_modules/swr/",\
           "packageDependencies": [\
-            ["swr", "npm:1.3.0"]\
+            ["swr", "npm:2.0.0-beta.3"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:1.3.0", {\
-          "packageLocation": "./.yarn/__virtual__/swr-virtual-8bffabafe6/0/cache/swr-npm-1.3.0-3a8f9fadf5-e7a184f0d5.zip/node_modules/swr/",\
+        ["virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:2.0.0-beta.3", {\
+          "packageLocation": "./.yarn/__virtual__/swr-virtual-6cc59b1135/0/cache/swr-npm-2.0.0-beta.3-937e7ff593-c4b2463922.zip/node_modules/swr/",\
           "packageDependencies": [\
-            ["swr", "virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:1.3.0"],\
+            ["swr", "virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:2.0.0-beta.3"],\
             ["@types/react", "npm:17.0.45"],\
-            ["react", "npm:18.1.0"]\
+            ["react", "npm:18.1.0"],\
+            ["use-sync-external-store", "virtual:6cc59b1135d8dba970daf87894a5b6c9fe3bbede5a88e32b29eb366a4b765b225a8663fb15b421fdcefd3b9cf92328d127109e3f76bf7db7db2d6de77ddfaeb9#npm:1.1.0"]\
           ],\
           "packagePeers": [\
             "@types/react",\
@@ -11450,6 +11451,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bindings", "npm:1.5.0"],\
             ["nan", "npm:2.15.0"],\
             ["node-gyp", "npm:9.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["use-sync-external-store", [\
+        ["npm:1.1.0", {\
+          "packageLocation": "./.yarn/cache/use-sync-external-store-npm-1.1.0-dcd59c7439-8993a0b642.zip/node_modules/use-sync-external-store/",\
+          "packageDependencies": [\
+            ["use-sync-external-store", "npm:1.1.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:6cc59b1135d8dba970daf87894a5b6c9fe3bbede5a88e32b29eb366a4b765b225a8663fb15b421fdcefd3b9cf92328d127109e3f76bf7db7db2d6de77ddfaeb9#npm:1.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/use-sync-external-store-virtual-d1984c0128/0/cache/use-sync-external-store-npm-1.1.0-dcd59c7439-8993a0b642.zip/node_modules/use-sync-external-store/",\
+          "packageDependencies": [\
+            ["use-sync-external-store", "virtual:6cc59b1135d8dba970daf87894a5b6c9fe3bbede5a88e32b29eb366a4b765b225a8663fb15b421fdcefd3b9cf92328d127109e3f76bf7db7db2d6de77ddfaeb9#npm:1.1.0"],\
+            ["@types/react", "npm:17.0.45"],\
+            ["react", "npm:18.1.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
