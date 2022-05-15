@@ -1,6 +1,6 @@
 import { JsonRpcProvider } from '@ethersproject/providers';
 import * as web3 from '@solana/web3.js';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
 import queryString from 'query-string';
 
@@ -79,6 +79,43 @@ export class SolanaChain implements Chain {
       new web3.PublicKey(address),
     );
     const balance = rawBalance / 10 ** this.currency.decimals;
+    return balance;
+  };
+}
+
+// TODO: Tendermint?
+type TendermintBalanceResponse = {
+  balances: [
+    {
+      denom: 'uatom';
+      amount: string;
+    },
+  ];
+  pagination: {
+    next_key: null;
+    total: string; // number-like
+  };
+};
+
+export class CosmosHubChain implements Chain {
+  currency = {
+    symbol: 'ATOM',
+    decimals: 6,
+    coinGeckoId: 'cosmos',
+  };
+  _provider: Axios = axios.create({
+    baseURL: 'https://api.cosmos.network',
+  });
+  getCurrencyPrice = (currency: Currency = 'usd') =>
+    priceFromCoinGecko(this.currency.coinGeckoId, currency);
+
+  getBalance = async (address: string) => {
+    const { data } = await this._provider.get<TendermintBalanceResponse>(
+      `/cosmos/bank/v1beta1/balances/${address}`,
+    );
+    const atomBalance =
+      data.balances.find((v) => v.denom === 'uatom')?.amount ?? 0;
+    const balance = Number(atomBalance) / 10 ** this.currency.decimals;
     return balance;
   };
 }

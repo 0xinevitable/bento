@@ -4,7 +4,8 @@ type Wallet =
       address: string;
       networks: ('ethereum' | 'klaytn')[];
     }
-  | { type: 'solana'; address: string };
+  | { type: 'solana'; address: string }
+  | { type: 'cosmos-hub'; address: string };
 
 export const wallets: Wallet[] = [
   {
@@ -30,5 +31,9 @@ export const wallets: Wallet[] = [
   {
     type: 'solana',
     address: 'HJLQd7CxQK5epNLE3R4u8b2MdGzmcvXjpntGWfht4FZH',
+  },
+  {
+    type: 'cosmos-hub',
+    address: 'cosmos15zysaya5j34vy2cqd7y9q8m3drjpy0d2hhgxh0',
   },
 ];
