@@ -5,7 +5,7 @@
 - SaaS도 할 수 있고 우리가 이걸로 다른 앱 만들어도 됨. 어떤 방식으로든 수익은 나올 것(코스모스 생태계에서 Keplr 의 영향력을 생각해보자). 무조건 독보적인 위치에 들어갈 수 있음
 - 서비스 이름 아직은 없는데 아이디어 나면 ㄱㄱ
 
-## Milestones
+## 🚀 Milestones
 
 3.0 까지 올해 안에 해보는 게 목표
 
@@ -27,7 +27,7 @@
 
 - 타인의 투자 포트폴리오 유동화
 
-## Preparing Local Dev Environment
+## 🚀 Preparing Local Dev Environment
 
 ```bash
 git clone https://github.com/multichain-dashboard/dashboard
@@ -50,7 +50,7 @@ yarn workspace @dashboard/web dev
 
 - `@dashboard/web`의 개발 서버를 켭니다. 기본값으로 `3000` 포트가 설정되어 있습니다.
 
-## Prior Knowledge
+## 👽 Prior Knowledge
 
 ### 체인(Chains)
 
@@ -85,7 +85,7 @@ yarn workspace @dashboard/web dev
 
 솔라나 등
 
-## Contributing Guide (Korean)
+## 🔨 Contributing Guide (Korean)
 
 - **일단 당분간은**
 
@@ -108,7 +108,7 @@ yarn workspace @dashboard/web dev
       - 예를 들어서, 주제를 잘 표현하기 위해서 구현되지 않은 부분을 `TODO` 또는 `FIXME` 주석으로 표시한 다음 커밋하거나, 린터 규칙을 무시할 수 있습니다.
       - 다만 이러한 **작은 기술 부채**는 PR의 끝에서 이를 다루는 커밋을 추가하거나, 생긴 시점에 주석이나 Task 카드를 만들어 반드시 표시해 두어야 합니다.
 
-## References
+## 📒 References
 
 대시보드 하는 애들(심심할 때 위에서 세 개만 보면 될 듯)
 
@@ -118,7 +118,7 @@ yarn workspace @dashboard/web dev
 - [DeBank](https://debank.com/)
 - [Zerion](https://zerion.io/)
 
-## Authors
+## ☠️ Authors
 
 - [@junhoyeo](https://github.com/junhoyeo)
 - [@harugatto](https://github.com/harugatto)
