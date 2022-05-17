@@ -122,7 +122,7 @@ const LandingPage = () => {
         price: (cosmosHubBalance ?? [])[0]?.price ?? 0,
       },
       {
-        symbol: 'OSMOS',
+        symbol: 'OSMO',
         name: 'Osmosis',
         staking: true,
         logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png',
