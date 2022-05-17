@@ -74,7 +74,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
         style={{ transition: 'max-height 1s ease-in-out' }}
       >
         {balances.map((balance) => (
-          <li key={balance.percentage} className="flex align-top">
+          <li key={balance.shortenedWalletAddress} className="flex align-top">
             <span className="text-sm font-bold text-slate-400/90 min-w-[56px]">
               {`${parseFloat(
                 balance.percentage //
