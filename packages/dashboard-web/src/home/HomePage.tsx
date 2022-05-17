@@ -5,6 +5,11 @@ import { wallets } from '@dashboard/core/lib/config';
 import React, { useMemo } from 'react';
 import { TokenIcon } from './components/TokenIcon';
 
+const walletBalanceReducer =
+  (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
+  (acc: number, balance: WalletBalance) =>
+    balance.symbol === symbol ? callback(acc, balance) : acc;
+
 const LandingPage = () => {
   const [
     cosmosWalletQuery,
@@ -65,11 +70,14 @@ const LandingPage = () => {
         name: 'Ethereum',
         logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/info/logo.png',
         netWorth: (ethereumBalance ?? []).reduce(
-          (acc, balance) => acc + balance.balance * balance.price,
+          walletBalanceReducer(
+            'ETH',
+            (acc, balance) => acc + balance.balance * balance.price,
+          ),
           0,
         ),
         amount: (ethereumBalance ?? []).reduce(
-          (acc, balance) => acc + balance.balance,
+          walletBalanceReducer('ETH', (acc, balance) => acc + balance.balance),
           0,
         ),
         price: (ethereumBalance ?? [])[0]?.price ?? 0,
@@ -79,11 +87,17 @@ const LandingPage = () => {
         name: 'Polygon',
         logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polygon/info/logo.png',
         netWorth: (polygonBalance ?? []).reduce(
-          (acc, balance) => acc + balance.balance * balance.price,
+          walletBalanceReducer(
+            'MATIC',
+            (acc, balance) => acc + balance.balance * balance.price,
+          ),
           0,
         ),
         amount: (polygonBalance ?? []).reduce(
-          (acc, balance) => acc + balance.balance,
+          walletBalanceReducer(
+            'MATIC',
+            (acc, balance) => acc + balance.balance,
+          ),
           0,
         ),
         price: (polygonBalance ?? [])[0]?.price ?? 0,
@@ -93,14 +107,35 @@ const LandingPage = () => {
         name: 'Klaytn',
         logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
         netWorth: (klaytnBalance ?? []).reduce(
-          (acc, balance) => acc + balance.balance * balance.price,
+          walletBalanceReducer(
+            'KLAY',
+            (acc, balance) => acc + balance.balance * balance.price,
+          ),
           0,
         ),
         amount: (klaytnBalance ?? []).reduce(
-          (acc, balance) => acc + balance.balance,
+          walletBalanceReducer('KLAY', (acc, balance) => acc + balance.balance),
           0,
         ),
         price: (klaytnBalance ?? [])[0]?.price ?? 0,
+      },
+      {
+        symbol: 'SCNR',
+        name: 'Swapscanner',
+        logo: 'https://api.swapscanner.io/api/tokens/0x8888888888885b073f3c81258c27e83db228d5f3/icon',
+        netWorth: (klaytnBalance ?? []).reduce(
+          walletBalanceReducer(
+            'SCNR',
+            (acc, balance) => acc + balance.balance * balance.price,
+          ),
+          0,
+        ),
+        amount: (klaytnBalance ?? []).reduce(
+          walletBalanceReducer('SCNR', (acc, balance) => acc + balance.balance),
+          0,
+        ),
+        price:
+          (klaytnBalance ?? []).find((v) => v.symbol === 'SCNR')?.price ?? 0,
       },
       {
         symbol: 'COSMOS',

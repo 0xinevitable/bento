@@ -3,6 +3,7 @@ import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
 import queryString from 'query-string';
+import { safePromiseAll } from './utils';
 
 export type Currency = 'usd';
 export const priceFromCoinGecko = async (
@@ -20,6 +21,67 @@ export const priceFromCoinGecko = async (
   return data[coinGeckoId][vsCurrency];
 };
 
+export interface ERC20TokenInput {
+  symbol: string;
+  name: string;
+  decimals: number;
+  address: string;
+}
+
+export interface ERC20Token extends ERC20TokenInput {
+  balance: number;
+  price: number;
+}
+
+const MinimalABIs = {
+  ERC20: [
+    {
+      inputs: [
+        {
+          internalType: 'address',
+          name: 'who',
+          type: 'address',
+        },
+      ],
+      name: 'balanceOf',
+      outputs: [
+        {
+          internalType: 'uint256',
+          name: '',
+          type: 'uint256',
+        },
+      ],
+      type: 'function',
+    },
+  ],
+  LP: [
+    {
+      inputs: [],
+      name: 'getReserves',
+      outputs: [
+        { internalType: 'uint112', name: '_reserve0', type: 'uint112' },
+        { internalType: 'uint112', name: '_reserve1', type: 'uint112' },
+        { internalType: 'uint32', name: '_blockTimestampLast', type: 'uint32' },
+      ],
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'totalSupply',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      type: 'function',
+    },
+  ],
+  Staking: [
+    {
+      inputs: [{ name: '', type: 'address' }],
+      name: 'totalStakedBalanceOf',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      type: 'function',
+    },
+  ],
+};
+
 export interface Chain {
   currency: {
     symbol: string;
@@ -30,6 +92,7 @@ export interface Chain {
   _provider?: any;
   getCurrencyPrice: (currency?: Currency) => Promise<number>;
   getBalance: (address: string) => Promise<number>;
+  getTokenBalances?: (address: string) => Promise<ERC20Token[]>;
 }
 
 export class EthereumChain implements Chain {
@@ -80,6 +143,64 @@ export class KlaytnChain implements Chain {
     const balance = Number(rawBalance) / 10 ** this.currency.decimals;
     return balance;
   };
+
+  tokens: ERC20TokenInput[] = [
+    {
+      symbol: 'SCNR',
+      name: 'Swapscanner',
+      decimals: 25,
+      address: '0x8888888888885b073f3c81258c27e83db228d5f3',
+    },
+  ];
+
+  _SCNR_KLAY_LP = '0xe1783a85616ad7dbd2b326255d38c568c77ffa26';
+  _getStakedSCNRReserves = async () => {
+    const lp = new this._provider.klay.Contract(
+      MinimalABIs.LP,
+      this._SCNR_KLAY_LP,
+    );
+    const { 0: reservesForSCNR, 1: reservesForKLAY } = await lp.methods
+      .getReserves()
+      .call();
+    return { reservesForSCNR, reservesForKLAY };
+  };
+  _getSCNRTokenPrice = async () => {
+    const [staked, klayPrice] = await Promise.all([
+      this._getStakedSCNRReserves(),
+      this.getCurrencyPrice(),
+    ]);
+
+    const { reservesForSCNR, reservesForKLAY } = staked;
+    const amountOfSCNRStaked = reservesForSCNR / 10 ** 25;
+    const amountOfKLAYStaked = reservesForKLAY / 10 ** this.currency.decimals;
+
+    const exchangeRatio = amountOfKLAYStaked / amountOfSCNRStaked;
+    return exchangeRatio * klayPrice;
+  };
+
+  getTokenBalances = async (address: string) =>
+    safePromiseAll(
+      this.tokens.map(async (token) => {
+        const contract = new this._provider.klay.Contract(
+          MinimalABIs.ERC20,
+          token.address,
+        );
+        const [rawBalance, price] = await Promise.all([
+          (contract.methods.balanceOf(address).call() as Promise<string>).catch(
+            () => '0',
+          ),
+          this._getSCNRTokenPrice().catch(() => 0),
+        ]);
+
+        const balance = Number(rawBalance) / 10 ** token.decimals;
+
+        return {
+          ...token,
+          balance,
+          price,
+        };
+      }),
+    );
 }
 
 export class SolanaChain implements Chain {

@@ -41,6 +41,11 @@ export const wallets: Wallet[] = [
     networks: ['klaytn'],
   },
   {
+    type: 'erc',
+    address: '0x3c7263D65c89aE119FdE18cc2BbE3CE9A108133D',
+    networks: ['klaytn'],
+  },
+  {
     type: 'solana',
     address: 'HJLQd7CxQK5epNLE3R4u8b2MdGzmcvXjpntGWfht4FZH',
   },
