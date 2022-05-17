@@ -58,41 +58,102 @@ const LandingPage = () => {
     `/api/tendermint/osmosis/${cosmosWalletQuery}`,
   );
 
+  const tokenBalances = useMemo(() => {
+    const tokens = [
+      {
+        symbol: 'ETH',
+        name: 'Ethereum',
+        logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/info/logo.png',
+        netWorth: (ethereumBalance ?? []).reduce(
+          (acc, balance) => acc + balance.balance * balance.price,
+          0,
+        ),
+        amount: (ethereumBalance ?? []).reduce(
+          (acc, balance) => acc + balance.balance,
+          0,
+        ),
+        price: (ethereumBalance ?? [])[0]?.price ?? 0,
+      },
+      {
+        symbol: 'MATIC',
+        name: 'Polygon',
+        logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polygon/info/logo.png',
+        netWorth: (polygonBalance ?? []).reduce(
+          (acc, balance) => acc + balance.balance * balance.price,
+          0,
+        ),
+        amount: (polygonBalance ?? []).reduce(
+          (acc, balance) => acc + balance.balance,
+          0,
+        ),
+        price: (polygonBalance ?? [])[0]?.price ?? 0,
+      },
+      {
+        symbol: 'KLAY',
+        name: 'Klaytn',
+        logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
+        netWorth: (klaytnBalance ?? []).reduce(
+          (acc, balance) => acc + balance.balance * balance.price,
+          0,
+        ),
+        amount: (klaytnBalance ?? []).reduce(
+          (acc, balance) => acc + balance.balance,
+          0,
+        ),
+        price: (klaytnBalance ?? [])[0]?.price ?? 0,
+      },
+      {
+        symbol: 'COSMOS',
+        name: 'Cosmos Hub',
+        // FIXME: divide staking
+        staking: true,
+        logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png',
+        netWorth: (cosmosHubBalance ?? []).reduce(
+          (acc, balance) =>
+            acc +
+            balance.balance * balance.price +
+            balance.delegations * balance.price,
+          0,
+        ),
+        amount: (cosmosHubBalance ?? []).reduce(
+          (acc, balance) => acc + balance.balance + balance.delegations,
+          0,
+        ),
+        price: (cosmosHubBalance ?? [])[0]?.price ?? 0,
+      },
+      {
+        symbol: 'OSMOS',
+        name: 'Osmosis',
+        staking: true,
+        logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png',
+        netWorth: (osmosisBalance ?? []).reduce(
+          (acc, balance) =>
+            acc +
+            balance.balance * balance.price +
+            balance.delegations * balance.price,
+          0,
+        ),
+        amount: (osmosisBalance ?? []).reduce(
+          (acc, balance) => acc + balance.balance + balance.delegations,
+          0,
+        ),
+        price: (osmosisBalance ?? [])[0]?.price ?? 0,
+      },
+    ];
+
+    tokens.sort((a, b) => b.netWorth - a.netWorth);
+    return tokens;
+  }, [
+    ethereumBalance,
+    polygonBalance,
+    klaytnBalance,
+    cosmosHubBalance,
+    osmosisBalance,
+  ]);
+
   const netWorthInUSD = useMemo(
-    () =>
-      (ethereumBalance ?? []).reduce(
-        (acc, balance) => acc + balance.balance * balance.price,
-        0,
-      ) +
-      (polygonBalance ?? []).reduce(
-        (acc, balance) => acc + balance.balance * balance.price,
-        0,
-      ) +
-      (klaytnBalance ?? []).reduce(
-        (acc, balance) => acc + balance.balance * balance.price,
-        0,
-      ) +
-      (cosmosHubBalance ?? []).reduce(
-        (acc, balance) =>
-          acc +
-          balance.balance * balance.price +
-          balance.delegations * balance.price,
-        0,
-      ) +
-      (osmosisBalance ?? []).reduce(
-        (acc, balance) =>
-          acc +
-          balance.balance * balance.price +
-          balance.delegations * balance.price,
-        0,
-      ),
-    [
-      ethereumBalance,
-      polygonBalance,
-      klaytnBalance,
-      cosmosHubBalance,
-      osmosisBalance,
-    ],
+    () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
+    [tokenBalances],
   );
 
   return (
@@ -106,141 +167,25 @@ const LandingPage = () => {
         </div>
 
         <ul className="mt-8">
-          {ethereumBalance && (
-            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
-              <TokenIcon
-                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/info/logo.png"
-                alt="ethereum"
-              />
+          {tokenBalances.map((info) => (
+            <li
+              key={info.name}
+              className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md"
+            >
+              <TokenIcon src={info.logo} alt={info.name} />
               <div className="ml-4 flex flex-col">
-                <span className="text-md text-slate-400">ETH</span>
+                <span className="text-md">
+                  <span className="text-slate-400">{info.symbol}</span>
+                  <span className="ml-1 text-slate-400/40">
+                    {info.amount.toLocaleString()}
+                  </span>
+                </span>
                 <span className="text-2xl font-bold text-slate-50/90">
-                  {`$${ethereumBalance
-                    .reduce(
-                      (acc, balance) => acc + balance.balance * balance.price,
-                      0,
-                    )
-                    .toLocaleString()}`}
+                  {`$${info.netWorth.toLocaleString()}`}
                 </span>
               </div>
             </li>
-          )}
-          {polygonBalance && (
-            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
-              <TokenIcon
-                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polygon/info/logo.png"
-                alt="ethereum"
-              />
-              <div className="ml-4 flex flex-col">
-                <span className="text-md text-slate-400">MATIC</span>
-                <span className="text-2xl font-bold text-slate-50/90">
-                  {`$${polygonBalance
-                    .reduce(
-                      (acc, balance) => acc + balance.balance * balance.price,
-                      0,
-                    )
-                    .toLocaleString()}`}
-                </span>
-              </div>
-            </li>
-          )}
-          {klaytnBalance && (
-            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
-              <TokenIcon
-                src="https://avatars.githubusercontent.com/u/41137100?s=200&v=4"
-                alt="klaytn"
-              />
-              <div className="ml-4 flex flex-col">
-                <span className="text-md text-slate-400">KLAY</span>
-                <span className="text-2xl font-bold text-slate-50/90">
-                  {`$${klaytnBalance
-                    .reduce(
-                      (acc, balance) => acc + balance.balance * balance.price,
-                      0,
-                    )
-                    .toLocaleString()}`}
-                </span>
-              </div>
-            </li>
-          )}
-          {cosmosHubBalance && (
-            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
-              <TokenIcon
-                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png"
-                alt="cosmos"
-              />
-              <div className="ml-4 flex flex-col">
-                <span className="text-md text-slate-400">ATOM</span>
-                <span className="text-2xl font-bold text-slate-50/90">
-                  {`$${cosmosHubBalance
-                    .reduce(
-                      (acc, balance) => acc + balance.balance * balance.price,
-                      0,
-                    )
-                    .toLocaleString()}`}
-                </span>
-              </div>
-            </li>
-          )}
-          {cosmosHubBalance && (
-            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
-              <TokenIcon
-                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png"
-                alt="cosmos"
-              />
-              <div className="ml-4 flex flex-col">
-                <span className="text-md text-slate-400">Staked ATOM</span>
-                <span className="text-2xl font-bold text-slate-50/90">
-                  {`$${cosmosHubBalance
-                    .reduce(
-                      (acc, balance) =>
-                        acc + balance.delegations * balance.price,
-                      0,
-                    )
-                    .toLocaleString()}`}
-                </span>
-              </div>
-            </li>
-          )}
-          {osmosisBalance && (
-            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
-              <TokenIcon
-                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png"
-                alt="osmosis"
-              />
-              <div className="ml-4 flex flex-col">
-                <span className="text-md text-slate-400">OSMO</span>
-                <span className="text-2xl font-bold text-slate-50/90">
-                  {`$${osmosisBalance
-                    .reduce(
-                      (acc, balance) => acc + balance.balance * balance.price,
-                      0,
-                    )
-                    .toLocaleString()}`}
-                </span>
-              </div>
-            </li>
-          )}
-          {osmosisBalance && (
-            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
-              <TokenIcon
-                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png"
-                alt="osmosis"
-              />
-              <div className="ml-4 flex flex-col">
-                <span className="text-md text-slate-400">Staked OSMO</span>
-                <span className="text-2xl font-bold text-slate-50/90">
-                  {`$${osmosisBalance
-                    .reduce(
-                      (acc, balance) =>
-                        acc + balance.delegations * balance.price,
-                      0,
-                    )
-                    .toLocaleString()}`}
-                </span>
-              </div>
-            </li>
-          )}
+          ))}
         </ul>
       </div>
     </div>
