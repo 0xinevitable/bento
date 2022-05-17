@@ -28,7 +28,8 @@ export interface ERC20TokenInput {
   address: string;
 }
 
-export interface ERC20Token extends ERC20TokenInput {
+export interface ERC20TokenBalance extends ERC20TokenInput {
+  walletAddress: string;
   balance: number;
   price: number;
 }
@@ -92,7 +93,7 @@ export interface Chain {
   _provider?: any;
   getCurrencyPrice: (currency?: Currency) => Promise<number>;
   getBalance: (address: string) => Promise<number>;
-  getTokenBalances?: (address: string) => Promise<ERC20Token[]>;
+  getTokenBalances?: (address: string) => Promise<ERC20TokenBalance[]>;
 }
 
 export class EthereumChain implements Chain {
@@ -178,17 +179,18 @@ export class KlaytnChain implements Chain {
     return exchangeRatio * klayPrice;
   };
 
-  getTokenBalances = async (address: string) =>
+  getTokenBalances = async (walletAddress: string) =>
     safePromiseAll(
       this.tokens.map(async (token) => {
         const contract = new this._provider.klay.Contract(
           MinimalABIs.ERC20,
           token.address,
         );
+        const balanceOfCall: Promise<string> = contract.methods
+          .balanceOf(walletAddress)
+          .call();
         const [rawBalance, price] = await Promise.all([
-          (contract.methods.balanceOf(address).call() as Promise<string>).catch(
-            () => '0',
-          ),
+          balanceOfCall.catch(() => '0'),
           this._getSCNRTokenPrice().catch(() => 0),
         ]);
 
@@ -198,6 +200,7 @@ export class KlaytnChain implements Chain {
           ...token,
           balance,
           price,
+          walletAddress,
         };
       }),
     );
