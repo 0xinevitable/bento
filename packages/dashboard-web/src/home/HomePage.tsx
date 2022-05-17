@@ -75,28 +75,25 @@ const LandingPage = () => {
   );
 
   return (
-    <div className="px-4">
-      <div className="max-w-2xl mt-4 mx-auto">
-        <h1 className="text-xl leading-tight font-bold">
-          Multichain
-          <br />
-          Dashboard
-        </h1>
+    <div className="px-4 pt-6">
+      <div className="max-w-2xl mx-auto relative z-0">
+        <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
+
         <div className="mt-4 flex flex-col justify-center">
-          <span>Net worth</span>
-          <span className="text-2xl font-bold">{`$${netWorthInUSD.toLocaleString()}`}</span>
+          <span className="text-xl text-slate-500">Net worth</span>
+          <span className="text-2xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
         </div>
 
         <ul className="mt-8">
           {ethereumBalance && (
-            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
               <TokenIcon
                 src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/info/logo.png"
                 alt="ethereum"
               />
               <div className="ml-4 flex flex-col">
-                <span className="text-md">ETH</span>
-                <span className="text-2xl font-bold">
+                <span className="text-md text-slate-400">ETH</span>
+                <span className="text-2xl font-bold text-slate-50/90">
                   {`$${ethereumBalance
                     .reduce(
                       (acc, balance) => acc + balance.balance * balance.price,
@@ -108,14 +105,14 @@ const LandingPage = () => {
             </li>
           )}
           {klaytnBalance && (
-            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
               <TokenIcon
                 src="https://avatars.githubusercontent.com/u/41137100?s=200&v=4"
                 alt="klaytn"
               />
               <div className="ml-4 flex flex-col">
-                <span className="text-md">KLAY</span>
-                <span className="text-2xl font-bold">
+                <span className="text-md text-slate-400">KLAY</span>
+                <span className="text-2xl font-bold text-slate-50/90">
                   {`$${klaytnBalance
                     .reduce(
                       (acc, balance) => acc + balance.balance * balance.price,
@@ -127,14 +124,14 @@ const LandingPage = () => {
             </li>
           )}
           {cosmosHubBalance && (
-            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
               <TokenIcon
                 src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png"
                 alt="cosmos"
               />
               <div className="ml-4 flex flex-col">
-                <span className="text-md">ATOM</span>
-                <span className="text-2xl font-bold">
+                <span className="text-md text-slate-400">ATOM</span>
+                <span className="text-2xl font-bold text-slate-50/90">
                   {`$${cosmosHubBalance
                     .reduce(
                       (acc, balance) => acc + balance.balance * balance.price,
@@ -146,14 +143,14 @@ const LandingPage = () => {
             </li>
           )}
           {cosmosHubBalance && (
-            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
               <TokenIcon
                 src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png"
                 alt="cosmos"
               />
               <div className="ml-4 flex flex-col">
-                <span className="text-md">Staked ATOM</span>
-                <span className="text-2xl font-bold">
+                <span className="text-md text-slate-400">Staked ATOM</span>
+                <span className="text-2xl font-bold text-slate-50/90">
                   {`$${cosmosHubBalance
                     .reduce(
                       (acc, balance) =>
@@ -166,14 +163,14 @@ const LandingPage = () => {
             </li>
           )}
           {osmosisBalance && (
-            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
               <TokenIcon
                 src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png"
                 alt="osmosis"
               />
               <div className="ml-4 flex flex-col">
-                <span className="text-md">OSMO</span>
-                <span className="text-2xl font-bold">
+                <span className="text-md text-slate-400">OSMO</span>
+                <span className="text-2xl font-bold text-slate-50/90">
                   {`$${osmosisBalance
                     .reduce(
                       (acc, balance) => acc + balance.balance * balance.price,
@@ -185,14 +182,14 @@ const LandingPage = () => {
             </li>
           )}
           {osmosisBalance && (
-            <li className="mb-2 p-2 border rounded-md flex items-center drop-shadow-2xl">
+            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
               <TokenIcon
                 src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png"
                 alt="osmosis"
               />
               <div className="ml-4 flex flex-col">
-                <span className="text-md">Staked OSMO</span>
-                <span className="text-2xl font-bold">
+                <span className="text-md text-slate-400">Staked OSMO</span>
+                <span className="text-2xl font-bold text-slate-50/90">
                   {`$${osmosisBalance
                     .reduce(
                       (acc, balance) =>

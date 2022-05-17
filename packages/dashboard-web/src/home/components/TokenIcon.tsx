@@ -14,7 +14,7 @@ export const TokenIcon: React.FC<TokenIconProps> = ({
 }) => (
   <img
     className={clsx(
-      'w-12 h-12 rounded-full overflow-hidden shadow-md ring-2 ring-slate-800/5',
+      'w-12 h-12 rounded-full overflow-hidden shadow-md ring-2 ring-slate-600/50',
       className,
     )}
     {...props}
