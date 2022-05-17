@@ -43,7 +43,6 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
 
   return (
     <li
-      key={info.name}
       className={clsx(
         'mb-2 pb-2 h-fit overflow-hidden',
         'border border-slate-700 rounded-md drop-shadow-2xl',

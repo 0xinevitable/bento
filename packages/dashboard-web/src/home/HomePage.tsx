@@ -209,7 +209,7 @@ const LandingPage = () => {
 
         <ul className="mt-8">
           {tokenBalances.map((info) => (
-            <TokenBalanceItem {...info} />
+            <TokenBalanceItem key={info.symbol} {...info} />
           ))}
         </ul>
       </div>
