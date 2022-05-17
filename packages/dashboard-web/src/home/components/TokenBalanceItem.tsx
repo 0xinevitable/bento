@@ -61,10 +61,12 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
       <ul className="pb-2 px-3 flex flex-col">
         {balances.map((balance) => (
           <li key={balance.percentage} className="flex align-top">
-            <span className="text-sm font-bold text-slate-400/90 min-w-[64px]">
-              {`${balance.percentage //
-                .toFixed(2)
-                .toLocaleString()}%`}
+            <span className="text-sm font-bold text-slate-400/90 min-w-[56px]">
+              {`${parseFloat(
+                balance.percentage //
+                  .toFixed(2)
+                  .toString(),
+              ).toLocaleString()}%`}
             </span>
 
             <span className="ml-2 text-sm text-slate-100/40 inline-flex min-w-[100px]">
