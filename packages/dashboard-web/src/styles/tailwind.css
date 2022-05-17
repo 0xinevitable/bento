@@ -1,12 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html {
-  background-color: black;
-}
-
-body {
-  min-height: 100vh;
-  background: radial-gradient(78% 78% at 50% 22%, #111827 0%, #000000 100%);
-}
