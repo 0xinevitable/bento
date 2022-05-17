@@ -1,7 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { ERCBasedNetworks } from '@dashboard/core/lib/config';
 import { safePromiseAll } from '@dashboard/core/lib/utils';
-import { Chain, EthereumChain, KlaytnChain } from '@dashboard/core/lib/chains';
+import {
+  Chain,
+  EthereumChain,
+  KlaytnChain,
+  PolygonChain,
+} from '@dashboard/core/lib/chains';
 
 export type WalletBalance = {
   walletAddress: string;
@@ -19,6 +24,7 @@ interface APIRequest extends NextApiRequest {
 
 const chains: Record<ERCBasedNetworks, Chain> = {
   ethereum: new EthereumChain(),
+  polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),
 };
 
@@ -36,7 +42,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
 
   const result = await safePromiseAll(
     wallets.map(async (walletAddress) => {
-      if (['ethereum', 'klaytn'].includes(network)) {
+      if (['ethereum', 'polygon', 'klaytn'].includes(network)) {
         const chain = chains[network];
         const [balance, currencyPrice] = await safePromiseAll([
           chain.getBalance(walletAddress),

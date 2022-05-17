@@ -50,6 +50,22 @@ export class EthereumChain implements Chain {
   };
 }
 
+export class PolygonChain implements Chain {
+  currency = {
+    symbol: 'MATIC',
+    decimals: 18,
+    coinGeckoId: 'matic-network',
+  };
+  _provider = new JsonRpcProvider('https://polygon-rpc.com');
+  getCurrencyPrice = (currency: Currency = 'usd') =>
+    priceFromCoinGecko(this.currency.coinGeckoId, currency);
+  getBalance = async (address: string) => {
+    const rawBalance = await this._provider.getBalance(address);
+    const balance = Number(rawBalance) / 10 ** this.currency.decimals;
+    return balance;
+  };
+}
+
 export class KlaytnChain implements Chain {
   currency = {
     symbol: 'KLAY',

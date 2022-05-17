@@ -6,36 +6,47 @@ import React, { useMemo } from 'react';
 import { TokenIcon } from './components/TokenIcon';
 
 const LandingPage = () => {
-  const [cosmosWalletQuery, ethereumWalletQuery, klaytnWalletQuery] =
-    useMemo(() => {
-      const addrs = wallets.reduce(
-        (acc, wallet) => {
-          if (wallet.type === 'tendermint') {
-            return { ...acc, cosmos: [...acc.cosmos, wallet.address] };
-          }
-          if (wallet.type !== 'erc') {
-            return acc;
-          }
-          if (wallet.networks.includes('ethereum')) {
-            return { ...acc, ethereum: [...acc.ethereum, wallet.address] };
-          }
-          if (wallet.networks.includes('klaytn')) {
-            return { ...acc, klaytn: [...acc.klaytn, wallet.address] };
-          }
+  const [
+    cosmosWalletQuery,
+    ethereumWalletQuery,
+    polygonWalletQuery,
+    klaytnWalletQuery,
+  ] = useMemo(() => {
+    const addrs = wallets.reduce(
+      (acc, wallet) => {
+        if (wallet.type === 'tendermint') {
+          return { ...acc, cosmos: [...acc.cosmos, wallet.address] };
+        }
+        if (wallet.type !== 'erc') {
           return acc;
-        },
-        { cosmos: [], klaytn: [], ethereum: [] },
-      );
+        }
+        if (wallet.networks.includes('ethereum')) {
+          return { ...acc, ethereum: [...acc.ethereum, wallet.address] };
+        }
+        if (wallet.networks.includes('polygon')) {
+          return { ...acc, polygon: [...acc.polygon, wallet.address] };
+        }
+        if (wallet.networks.includes('klaytn')) {
+          return { ...acc, klaytn: [...acc.klaytn, wallet.address] };
+        }
+        return acc;
+      },
+      { cosmos: [], klaytn: [], polygon: [], ethereum: [] },
+    );
 
-      return [
-        addrs.cosmos.join(','),
-        addrs.ethereum.join(','),
-        addrs.klaytn.join(','),
-      ];
-    }, []);
+    return [
+      addrs.cosmos.join(','),
+      addrs.ethereum.join(','),
+      addrs.polygon.join(','),
+      addrs.klaytn.join(','),
+    ];
+  }, []);
 
   const { data: ethereumBalance } = useAxiosSWR<WalletBalance[]>(
     `/api/erc/ethereum/${ethereumWalletQuery}`,
+  );
+  const { data: polygonBalance } = useAxiosSWR<TendermintWalletBalance[]>(
+    `/api/erc/polygon/${polygonWalletQuery}`,
   );
   const { data: klaytnBalance } = useAxiosSWR<WalletBalance[]>(
     `/api/erc/klaytn/${klaytnWalletQuery}`,
@@ -50,6 +61,10 @@ const LandingPage = () => {
   const netWorthInUSD = useMemo(
     () =>
       (ethereumBalance ?? []).reduce(
+        (acc, balance) => acc + balance.balance * balance.price,
+        0,
+      ) +
+      (polygonBalance ?? []).reduce(
         (acc, balance) => acc + balance.balance * balance.price,
         0,
       ) +
@@ -71,7 +86,13 @@ const LandingPage = () => {
           balance.delegations * balance.price,
         0,
       ),
-    [ethereumBalance, klaytnBalance, cosmosHubBalance, osmosisBalance],
+    [
+      ethereumBalance,
+      polygonBalance,
+      klaytnBalance,
+      cosmosHubBalance,
+      osmosisBalance,
+    ],
   );
 
   return (
@@ -95,6 +116,25 @@ const LandingPage = () => {
                 <span className="text-md text-slate-400">ETH</span>
                 <span className="text-2xl font-bold text-slate-50/90">
                   {`$${ethereumBalance
+                    .reduce(
+                      (acc, balance) => acc + balance.balance * balance.price,
+                      0,
+                    )
+                    .toLocaleString()}`}
+                </span>
+              </div>
+            </li>
+          )}
+          {polygonBalance && (
+            <li className="mb-2 p-2 px-3 border border-slate-700 rounded-md flex items-center drop-shadow-2xl bg-slate-800/25 backdrop-blur-md">
+              <TokenIcon
+                src="https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polygon/info/logo.png"
+                alt="ethereum"
+              />
+              <div className="ml-4 flex flex-col">
+                <span className="text-md text-slate-400">MATIC</span>
+                <span className="text-2xl font-bold text-slate-50/90">
+                  {`$${polygonBalance
                     .reduce(
                       (acc, balance) => acc + balance.balance * balance.price,
                       0,

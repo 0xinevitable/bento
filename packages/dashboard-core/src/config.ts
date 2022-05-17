@@ -1,4 +1,4 @@
-export type ERCBasedNetworks = 'ethereum' | 'klaytn';
+export type ERCBasedNetworks = 'ethereum' | 'polygon' | 'klaytn';
 export type TendermintBasedChains = 'cosmos-hub' | 'osmosis';
 
 export type Wallet =
@@ -15,6 +15,11 @@ export type Wallet =
   | { type: 'solana'; address: string };
 
 export const wallets: Wallet[] = [
+  {
+    type: 'erc',
+    address: '0x458b14915e651243acf89c05859a22d5cff976a6',
+    networks: ['polygon'],
+  },
   {
     type: 'erc',
     address: '0x4a003f0a2c52e37138eb646aB4E669C4A84C1001',
