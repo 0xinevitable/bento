@@ -198,8 +198,8 @@ const LandingPage = () => {
   );
 
   return (
-    <div className="px-4 pt-6">
-      <div className="max-w-2xl mx-auto relative z-0">
+    <div className="min-h-screen px-4 pt-6 pb-24 flex">
+      <div className="w-full max-w-2xl mx-auto relative z-0">
         <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
 
         <div className="mt-4 flex flex-col justify-center">
