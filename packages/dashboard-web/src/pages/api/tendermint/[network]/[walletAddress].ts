@@ -52,9 +52,9 @@ export default async (req: APIRequest, res: NextApiResponse) => {
           chain.bech32Config.prefix,
         );
         const [balance, delegations, currencyPrice] = await safePromiseAll([
-          chain.getBalance(chainBech32Address),
-          chain.getDelegations(chainBech32Address),
-          chain.getCurrencyPrice(),
+          chain.getBalance(chainBech32Address).catch(() => 0),
+          chain.getDelegations(chainBech32Address).catch(() => 0),
+          chain.getCurrencyPrice().catch(() => 0),
         ]);
 
         return {

@@ -45,8 +45,8 @@ export default async (req: APIRequest, res: NextApiResponse) => {
       if (['ethereum', 'polygon', 'klaytn'].includes(network)) {
         const chain = chains[network];
         const [balance, currencyPrice] = await safePromiseAll([
-          chain.getBalance(walletAddress),
-          chain.getCurrencyPrice(),
+          chain.getBalance(walletAddress).catch(() => 0),
+          chain.getCurrencyPrice().catch(() => 0),
         ]);
 
         return {
