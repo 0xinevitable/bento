@@ -3,7 +3,7 @@ import { ERCBasedNetworks } from '@dashboard/core/lib/config';
 import { safePromiseAll } from '@dashboard/core/lib/utils';
 import {
   Chain,
-  ERC20Token,
+  ERC20TokenBalance,
   EthereumChain,
   KlaytnChain,
   PolygonChain,
@@ -46,7 +46,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
       if (['ethereum', 'polygon', 'klaytn'].includes(network)) {
         const chain = chains[network];
 
-        const getTokenBalances = async (): Promise<ERC20Token[]> =>
+        const getTokenBalances = async (): Promise<ERC20TokenBalance[]> =>
           !!chain.getTokenBalances ? chain.getTokenBalances(walletAddress) : [];
 
         const [balance, currencyPrice, tokenBalances] = await Promise.all([
