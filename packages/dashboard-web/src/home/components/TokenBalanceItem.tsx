@@ -2,7 +2,8 @@ import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint
 import { WalletBalance } from '@/pages/api/erc/[network]/[walletAddress]';
 import { shortenAddress } from '@dashboard/core/lib/utils';
 import { TokenIcon } from './TokenIcon';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import clsx from 'clsx';
 
 type TokenBalanceItemProps = {
   symbol: string;
@@ -15,6 +16,8 @@ type TokenBalanceItemProps = {
 };
 
 export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
+  const [collapsed, setCollapsed] = useState<boolean>(true);
+
   const balances = useMemo(() => {
     const items = info.balances.map(
       (balance: WalletBalance | TendermintWalletBalance) => {
@@ -41,9 +44,14 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
   return (
     <li
       key={info.name}
-      className="mb-2 border border-slate-700 rounded-md drop-shadow-2xl bg-slate-800/25 backdrop-blur-md flex flex-col"
+      className={clsx(
+        'mb-2 pb-2 h-fit overflow-hidden',
+        'border border-slate-700 rounded-md drop-shadow-2xl',
+        'bg-slate-800/25 backdrop-blur-md flex flex-col cursor-pointer',
+      )}
+      onClick={() => setCollapsed((prev) => !prev)}
     >
-      <div className="pt-2 pb-1 px-3 flex items-center">
+      <div className={clsx('pt-2 px-3 flex items-center')}>
         <TokenIcon src={info.logo} alt={info.name} />
         <div className="ml-4 flex flex-col">
           <span className="text-md">
@@ -58,7 +66,13 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
         </div>
       </div>
 
-      <ul className="pb-2 px-3 flex flex-col">
+      <ul
+        className={clsx(
+          'px-3 flex flex-col overflow-hidden',
+          collapsed ? 'max-h-0' : 'max-h-[512px]',
+        )}
+        style={{ transition: 'max-height 1s ease-in-out' }}
+      >
         {balances.map((balance) => (
           <li key={balance.percentage} className="flex align-top">
             <span className="text-sm font-bold text-slate-400/90 min-w-[56px]">
