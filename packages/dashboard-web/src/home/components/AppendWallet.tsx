@@ -18,6 +18,9 @@ export const AppendWallet: React.FC = () => {
   const handleAddress = (event: React.ChangeEvent<HTMLInputElement>) =>
     setWalletInfo({ ...walletInfo, address: event.target.value });
   //TODO make handleNetworks
+  const handleSave = (event: React.MouseEvent) => saveWalletsInfo(walletInfo);
+  const handleClear = (event: React.MouseEvent) =>
+    localStorage.removeItem('wallet');
 
   return (
     <li
@@ -71,9 +74,23 @@ export const AppendWallet: React.FC = () => {
               ))}
             </select>
           </fieldset>
-          <button type="button">Append!</button>
+          <button type="button" onClick={handleSave}>
+            Append
+          </button>
+          <button type="button" onClick={handleClear}>
+            Clear
+          </button>
         </form>
       </ul>
     </li>
   );
 };
+
+const saveWalletsInfo = (wallet: Wallet) => {
+  let walletList = getWalletsInfo();
+  walletList.push(wallet);
+  localStorage.setItem('wallet', JSON.stringify({ ...walletList }));
+};
+
+const getWalletsInfo = (): Wallet[] =>
+  Object.values(JSON.parse(localStorage.getItem('wallet') ?? '{}'));
