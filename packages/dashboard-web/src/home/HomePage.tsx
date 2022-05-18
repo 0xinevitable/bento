@@ -1,3 +1,4 @@
+import { Web3Connector } from './components/Web3Connector';
 import { WalletBalance } from '@/pages/api/erc/[network]/[walletAddress]';
 import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
@@ -202,9 +203,15 @@ const LandingPage = () => {
       <div className="w-full max-w-2xl mx-auto relative z-0">
         <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
 
-        <div className="mt-4 flex flex-col justify-center">
-          <span className="text-xl text-slate-500">Net worth</span>
-          <span className="text-2xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
+        <div className="mt-4 w-full flex justify-between">
+          <div className="flex flex-col justify-center">
+            <span className="text-xl text-slate-500">Net worth</span>
+            <span className="text-2xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
+          </div>
+
+          <div className="flex flex-col">
+            <Web3Connector />
+          </div>
         </div>
 
         <ul className="mt-8">
