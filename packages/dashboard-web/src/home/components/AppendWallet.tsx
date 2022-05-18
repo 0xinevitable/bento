@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import { ERCBasedNetworks, Wallet } from '@dashboard/core/lib/config';
 
 const networkType = ['eth', 'osmosis', 'solana'];
-const network = ['ethereum', 'polygon', 'klaytn'];
+const network: ERCBasedNetworks[] = ['ethereum', 'polygon', 'klaytn'];
 
 export const AppendWallet: React.FC = () => {
   const [collapsed, setCollapsed] = useState<boolean>(true);
+  const [walletInfo, setWalletInfo] = useState<Wallet>({
+    type: '',
+    address: '',
+    networks: ['klaytn'], //dummy
+  });
+
+  const handleType = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setWalletInfo({ ...walletInfo, type: event.target.value });
+  const handleAddress = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setWalletInfo({ ...walletInfo, address: event.target.value });
+  //TODO make handleNetworks
 
   return (
     <li
@@ -14,10 +26,14 @@ export const AppendWallet: React.FC = () => {
         'border border-slate-700 rounded-md drop-shadow-2xl',
         'bg-slate-800/25 backdrop-blur-md flex flex-col cursor-pointer',
       )}
-      onClick={() => setCollapsed((prev) => !prev)}
     >
       <div className={clsx('pt-2 px-3 flex items-center')}>
-        <span className="text-xl font-bold text-slate-50/90">Add Wallet</span>
+        <span
+          className="text-xl font-bold text-slate-50/90"
+          onClick={() => setCollapsed((prev) => !prev)}
+        >
+          Add Wallet
+        </span>
       </div>
 
       <ul
@@ -27,34 +43,36 @@ export const AppendWallet: React.FC = () => {
         )}
         style={{ transition: 'max-height 1s ease-in-out' }}
       >
-        <div className="flex flex-row justify-center">
-          <div className="flex justify-center">
+        <form className="flex flex-col h-auto text-slate-50/90">
+          <fieldset>
             {networkType.map((net: string) => (
-              <div className="form-check form-check-inline">
+              <span>
                 <input
-                  className="form-check-input h-4 w-4 mt-1 align-top mr-2"
+                  className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
                   type="radio"
                   name="type"
                   value={net}
+                  onChange={handleType}
                 />
-                <label
-                  className="form-check-label inline-block text-gray-800 mr-4"
-                  htmlFor={net}
-                >
-                  <span className=" text-slate-50/90">{net}</span>
-                </label>
-              </div>
+                {net.toUpperCase()}
+              </span>
             ))}
-          </div>
-          <div>
-            <input type="text" name="Address" placeholder="Address" />
-            <select name="network" multiple>
-              {network.map((net: string) => (
+          </fieldset>
+          <fieldset>
+            <input
+              type="text"
+              name="Address"
+              placeholder="Address"
+              onChange={handleAddress}
+            />
+            <select name="network" multiple className="h-auto">
+              {network.map((net: ERCBasedNetworks) => (
                 <option value={net}>{net}</option>
               ))}
             </select>
-          </div>
-        </div>
+          </fieldset>
+          <button type="button">Append!</button>
+        </form>
       </ul>
     </li>
   );
