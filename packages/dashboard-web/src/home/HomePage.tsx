@@ -5,6 +5,7 @@ import { useAxiosSWR } from '@/hooks/useAxiosSWR';
 import { wallets } from '@dashboard/core/lib/config';
 import React, { useMemo } from 'react';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
+import { AppendWallet } from './components/AppendWallet';
 
 const walletBalanceReducer =
   (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -219,6 +220,7 @@ const LandingPage = () => {
             <TokenBalanceItem key={info.symbol} {...info} />
           ))}
         </ul>
+        <AppendWallet />
       </div>
     </div>
   );
