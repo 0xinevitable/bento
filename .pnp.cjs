@@ -4482,12 +4482,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:1.7.8", {\
           "packageLocation": "./.yarn/cache/@walletconnect-browser-utils-npm-1.7.8-b7419a468f-76d06a45a1.zip/node_modules/@walletconnect/browser-utils/",\
           "packageDependencies": [\
-            ["@walletconnect/browser-utils", "npm:1.7.8"],\
+            ["@walletconnect/browser-utils", "npm:1.7.8"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b2ba0378d6691a924c0c3fde4ba00965f2b323733a8e1874c91a2176d1c8bf96fc69e59d78268eb411ad1dd34f6a9e9389d1dfac5120ba5f5f53ddf7a814792c#npm:1.7.8", {\
+          "packageLocation": "./.yarn/__virtual__/@walletconnect-browser-utils-virtual-60a8eb43ec/0/cache/@walletconnect-browser-utils-npm-1.7.8-b7419a468f-76d06a45a1.zip/node_modules/@walletconnect/browser-utils/",\
+          "packageDependencies": [\
+            ["@walletconnect/browser-utils", "virtual:b2ba0378d6691a924c0c3fde4ba00965f2b323733a8e1874c91a2176d1c8bf96fc69e59d78268eb411ad1dd34f6a9e9389d1dfac5120ba5f5f53ddf7a814792c#npm:1.7.8"],\
+            ["@types/tslib", null],\
             ["@walletconnect/safe-json", "npm:1.0.0"],\
             ["@walletconnect/types", "npm:1.7.8"],\
             ["@walletconnect/window-getters", "npm:1.0.0"],\
             ["@walletconnect/window-metadata", "npm:1.0.0"],\
-            ["detect-browser", "npm:5.2.0"]\
+            ["detect-browser", "npm:5.2.0"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4504,16 +4517,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/@walletconnect-client-virtual-1496fa4817/0/cache/@walletconnect-client-npm-1.7.8-544a4e353d-44e39ab1a0.zip/node_modules/@walletconnect/client/",\
           "packageDependencies": [\
             ["@walletconnect/client", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["@types/tslib", null],\
             ["@types/walletconnect__encoding", null],\
-            ["@walletconnect/core", "npm:1.7.8"],\
+            ["@walletconnect/core", "virtual:1496fa4817ef1f9632803e50e6ed589645638387e60246e40444123ac5d3292869a5e72110313064b90e4588f9a4072df9789414054d4c8e85b42e99e83766ce#npm:1.7.8"],\
             ["@walletconnect/encoding", "npm:1.0.1"],\
             ["@walletconnect/iso-crypto", "virtual:1496fa4817ef1f9632803e50e6ed589645638387e60246e40444123ac5d3292869a5e72110313064b90e4588f9a4072df9789414054d4c8e85b42e99e83766ce#npm:1.7.8"],\
             ["@walletconnect/types", "npm:1.7.8"],\
-            ["@walletconnect/utils", "npm:1.7.8"]\
+            ["@walletconnect/utils", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["tslib", "npm:2.4.0"]\
           ],\
           "packagePeers": [\
+            "@types/tslib",\
             "@types/walletconnect__encoding",\
-            "@walletconnect/encoding"\
+            "@walletconnect/encoding",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4522,10 +4539,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:1.7.8", {\
           "packageLocation": "./.yarn/cache/@walletconnect-core-npm-1.7.8-e6aca1f7a4-a35cc770a0.zip/node_modules/@walletconnect/core/",\
           "packageDependencies": [\
-            ["@walletconnect/core", "npm:1.7.8"],\
-            ["@walletconnect/socket-transport", "npm:1.7.8"],\
+            ["@walletconnect/core", "npm:1.7.8"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:1496fa4817ef1f9632803e50e6ed589645638387e60246e40444123ac5d3292869a5e72110313064b90e4588f9a4072df9789414054d4c8e85b42e99e83766ce#npm:1.7.8", {\
+          "packageLocation": "./.yarn/__virtual__/@walletconnect-core-virtual-efc35a1fd4/0/cache/@walletconnect-core-npm-1.7.8-e6aca1f7a4-a35cc770a0.zip/node_modules/@walletconnect/core/",\
+          "packageDependencies": [\
+            ["@walletconnect/core", "virtual:1496fa4817ef1f9632803e50e6ed589645638387e60246e40444123ac5d3292869a5e72110313064b90e4588f9a4072df9789414054d4c8e85b42e99e83766ce#npm:1.7.8"],\
+            ["@types/tslib", null],\
+            ["@walletconnect/socket-transport", "virtual:efc35a1fd4a9239707f221034ec69e1a15859ea1cec04bfdce22c6462bbd474a60aa79212813f4085e859b11614974d64c33133cb678bde93a96b5d0c33ec761#npm:1.7.8"],\
             ["@walletconnect/types", "npm:1.7.8"],\
-            ["@walletconnect/utils", "npm:1.7.8"]\
+            ["@walletconnect/utils", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4568,11 +4598,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:1.7.8", {\
           "packageLocation": "./.yarn/cache/@walletconnect-http-connection-npm-1.7.8-8c59d47aaf-83b2fba6bd.zip/node_modules/@walletconnect/http-connection/",\
           "packageDependencies": [\
-            ["@walletconnect/http-connection", "npm:1.7.8"],\
+            ["@walletconnect/http-connection", "npm:1.7.8"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8", {\
+          "packageLocation": "./.yarn/__virtual__/@walletconnect-http-connection-virtual-304e7908f5/0/cache/@walletconnect-http-connection-npm-1.7.8-8c59d47aaf-83b2fba6bd.zip/node_modules/@walletconnect/http-connection/",\
+          "packageDependencies": [\
+            ["@walletconnect/http-connection", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["@types/tslib", null],\
             ["@walletconnect/types", "npm:1.7.8"],\
-            ["@walletconnect/utils", "npm:1.7.8"],\
+            ["@walletconnect/utils", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
             ["eventemitter3", "npm:4.0.7"],\
+            ["tslib", "npm:2.4.0"],\
             ["xhr2-cookies", "npm:1.1.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4589,15 +4632,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/@walletconnect-iso-crypto-virtual-4fe70bb14b/0/cache/@walletconnect-iso-crypto-npm-1.7.8-3b86ce86ca-f2ee34d484.zip/node_modules/@walletconnect/iso-crypto/",\
           "packageDependencies": [\
             ["@walletconnect/iso-crypto", "virtual:1496fa4817ef1f9632803e50e6ed589645638387e60246e40444123ac5d3292869a5e72110313064b90e4588f9a4072df9789414054d4c8e85b42e99e83766ce#npm:1.7.8"],\
+            ["@types/tslib", null],\
             ["@types/walletconnect__encoding", null],\
             ["@walletconnect/crypto", "npm:1.0.2"],\
             ["@walletconnect/encoding", "npm:1.0.1"],\
             ["@walletconnect/types", "npm:1.7.8"],\
-            ["@walletconnect/utils", "npm:1.7.8"]\
+            ["@walletconnect/utils", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["tslib", "npm:2.4.0"]\
           ],\
           "packagePeers": [\
+            "@types/tslib",\
             "@types/walletconnect__encoding",\
-            "@walletconnect/encoding"\
+            "@walletconnect/encoding",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4606,8 +4653,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:1.0.0", {\
           "packageLocation": "./.yarn/cache/@walletconnect-jsonrpc-types-npm-1.0.0-a5a7069baa-6f38c5df6b.zip/node_modules/@walletconnect/jsonrpc-types/",\
           "packageDependencies": [\
-            ["@walletconnect/jsonrpc-types", "npm:1.0.0"],\
-            ["keyvaluestorage-interface", "npm:1.0.0"]\
+            ["@walletconnect/jsonrpc-types", "npm:1.0.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:1d3a45041c42b24d9f4520afda2f6aec0acaf4669fa0f2555f67d89362f6a84b140af51d795344b93b1adec0e2357611e98292b3a9d41080ddf3b8100e09c52e#npm:1.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/@walletconnect-jsonrpc-types-virtual-fbb4c8bdf8/0/cache/@walletconnect-jsonrpc-types-npm-1.0.0-a5a7069baa-6f38c5df6b.zip/node_modules/@walletconnect/jsonrpc-types/",\
+          "packageDependencies": [\
+            ["@walletconnect/jsonrpc-types", "virtual:1d3a45041c42b24d9f4520afda2f6aec0acaf4669fa0f2555f67d89362f6a84b140af51d795344b93b1adec0e2357611e98292b3a9d41080ddf3b8100e09c52e#npm:1.0.0"],\
+            ["@types/tslib", null],\
+            ["keyvaluestorage-interface", "npm:1.0.0"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4616,9 +4676,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:1.0.0", {\
           "packageLocation": "./.yarn/cache/@walletconnect-jsonrpc-utils-npm-1.0.0-557b41797b-d760736a38.zip/node_modules/@walletconnect/jsonrpc-utils/",\
           "packageDependencies": [\
-            ["@walletconnect/jsonrpc-utils", "npm:1.0.0"],\
+            ["@walletconnect/jsonrpc-utils", "npm:1.0.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:7a2a0d80ed86d7a80f8d8899c142de3172b0691f2685f0cf2b250c2f2c4a9c56232f9ac83109e923d4ae69ec8218ed03913844e0b64f35e98501484ac6c7c1da#npm:1.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/@walletconnect-jsonrpc-utils-virtual-1d3a45041c/0/cache/@walletconnect-jsonrpc-utils-npm-1.0.0-557b41797b-d760736a38.zip/node_modules/@walletconnect/jsonrpc-utils/",\
+          "packageDependencies": [\
+            ["@walletconnect/jsonrpc-utils", "virtual:7a2a0d80ed86d7a80f8d8899c142de3172b0691f2685f0cf2b250c2f2c4a9c56232f9ac83109e923d4ae69ec8218ed03913844e0b64f35e98501484ac6c7c1da#npm:1.0.0"],\
+            ["@types/tslib", null],\
             ["@walletconnect/environment", "npm:1.0.0"],\
-            ["@walletconnect/jsonrpc-types", "npm:1.0.0"]\
+            ["@walletconnect/jsonrpc-types", "virtual:1d3a45041c42b24d9f4520afda2f6aec0acaf4669fa0f2555f67d89362f6a84b140af51d795344b93b1adec0e2357611e98292b3a9d41080ddf3b8100e09c52e#npm:1.0.0"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4636,13 +4709,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:1.7.8", {\
           "packageLocation": "./.yarn/cache/@walletconnect-qrcode-modal-npm-1.7.8-e859735f2b-dc1c33bb24.zip/node_modules/@walletconnect/qrcode-modal/",\
           "packageDependencies": [\
-            ["@walletconnect/qrcode-modal", "npm:1.7.8"],\
-            ["@walletconnect/browser-utils", "npm:1.7.8"],\
+            ["@walletconnect/qrcode-modal", "npm:1.7.8"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8", {\
+          "packageLocation": "./.yarn/__virtual__/@walletconnect-qrcode-modal-virtual-b2ba0378d6/0/cache/@walletconnect-qrcode-modal-npm-1.7.8-e859735f2b-dc1c33bb24.zip/node_modules/@walletconnect/qrcode-modal/",\
+          "packageDependencies": [\
+            ["@walletconnect/qrcode-modal", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["@types/tslib", null],\
+            ["@walletconnect/browser-utils", "virtual:b2ba0378d6691a924c0c3fde4ba00965f2b323733a8e1874c91a2176d1c8bf96fc69e59d78268eb411ad1dd34f6a9e9389d1dfac5120ba5f5f53ddf7a814792c#npm:1.7.8"],\
             ["@walletconnect/mobile-registry", "npm:1.4.0"],\
             ["@walletconnect/types", "npm:1.7.8"],\
             ["copy-to-clipboard", "npm:3.3.1"],\
             ["preact", "npm:10.4.1"],\
-            ["qrcode", "npm:1.4.4"]\
+            ["qrcode", "npm:1.4.4"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4672,10 +4758,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:1.7.8", {\
           "packageLocation": "./.yarn/cache/@walletconnect-socket-transport-npm-1.7.8-4f2065096f-a14f72b7cd.zip/node_modules/@walletconnect/socket-transport/",\
           "packageDependencies": [\
-            ["@walletconnect/socket-transport", "npm:1.7.8"],\
+            ["@walletconnect/socket-transport", "npm:1.7.8"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:efc35a1fd4a9239707f221034ec69e1a15859ea1cec04bfdce22c6462bbd474a60aa79212813f4085e859b11614974d64c33133cb678bde93a96b5d0c33ec761#npm:1.7.8", {\
+          "packageLocation": "./.yarn/__virtual__/@walletconnect-socket-transport-virtual-dbccd0bb81/0/cache/@walletconnect-socket-transport-npm-1.7.8-4f2065096f-a14f72b7cd.zip/node_modules/@walletconnect/socket-transport/",\
+          "packageDependencies": [\
+            ["@walletconnect/socket-transport", "virtual:efc35a1fd4a9239707f221034ec69e1a15859ea1cec04bfdce22c6462bbd474a60aa79212813f4085e859b11614974d64c33133cb678bde93a96b5d0c33ec761#npm:1.7.8"],\
+            ["@types/tslib", null],\
             ["@walletconnect/types", "npm:1.7.8"],\
-            ["@walletconnect/utils", "npm:1.7.8"],\
-            ["ws", "virtual:4f2065096fc2097b09ba99e760ae587ea123460fd3163e86aacd52a775181d6365e4788249d4cfb2cf333d3138ac0ea51f90534a80a2090881677953a212e578#npm:7.5.3"]\
+            ["@walletconnect/utils", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["tslib", "npm:2.4.0"],\
+            ["ws", "virtual:dbccd0bb814c1c3f048c581dc7cdbc6c605ed7c03ce1ed67f5565361ac48f158bd9dd53543b65c45b787c806f6da561fc272a2496b7bf684d7f9e50749fbc786#npm:7.5.3"]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4693,14 +4792,27 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:1.7.8", {\
           "packageLocation": "./.yarn/cache/@walletconnect-utils-npm-1.7.8-b4b82ea2ed-272f49bcf1.zip/node_modules/@walletconnect/utils/",\
           "packageDependencies": [\
-            ["@walletconnect/utils", "npm:1.7.8"],\
-            ["@walletconnect/browser-utils", "npm:1.7.8"],\
+            ["@walletconnect/utils", "npm:1.7.8"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8", {\
+          "packageLocation": "./.yarn/__virtual__/@walletconnect-utils-virtual-7a2a0d80ed/0/cache/@walletconnect-utils-npm-1.7.8-b4b82ea2ed-272f49bcf1.zip/node_modules/@walletconnect/utils/",\
+          "packageDependencies": [\
+            ["@walletconnect/utils", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["@types/tslib", null],\
+            ["@walletconnect/browser-utils", "virtual:b2ba0378d6691a924c0c3fde4ba00965f2b323733a8e1874c91a2176d1c8bf96fc69e59d78268eb411ad1dd34f6a9e9389d1dfac5120ba5f5f53ddf7a814792c#npm:1.7.8"],\
             ["@walletconnect/encoding", "npm:1.0.1"],\
-            ["@walletconnect/jsonrpc-utils", "npm:1.0.0"],\
+            ["@walletconnect/jsonrpc-utils", "virtual:7a2a0d80ed86d7a80f8d8899c142de3172b0691f2685f0cf2b250c2f2c4a9c56232f9ac83109e923d4ae69ec8218ed03913844e0b64f35e98501484ac6c7c1da#npm:1.0.0"],\
             ["@walletconnect/types", "npm:1.7.8"],\
             ["bn.js", "npm:4.11.8"],\
             ["js-sha3", "npm:0.8.0"],\
-            ["query-string", "npm:6.13.5"]\
+            ["query-string", "npm:6.13.5"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4717,18 +4829,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/@walletconnect-web3-provider-virtual-ec247fb9ae/0/cache/@walletconnect-web3-provider-npm-1.7.8-3002063665-45e7b40542.zip/node_modules/@walletconnect/web3-provider/",\
           "packageDependencies": [\
             ["@walletconnect/web3-provider", "virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:1.7.8"],\
+            ["@types/tslib", null],\
             ["@types/walletconnect__encoding", null],\
             ["@walletconnect/client", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
             ["@walletconnect/encoding", "npm:1.0.1"],\
-            ["@walletconnect/http-connection", "npm:1.7.8"],\
-            ["@walletconnect/qrcode-modal", "npm:1.7.8"],\
+            ["@walletconnect/http-connection", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["@walletconnect/qrcode-modal", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
             ["@walletconnect/types", "npm:1.7.8"],\
-            ["@walletconnect/utils", "npm:1.7.8"],\
+            ["@walletconnect/utils", "virtual:ec247fb9aebd935585edeae0a83e3e48284dc2501a7e1b35a082505af377cc0307cb762fea750cb8b1eb3d7a69f1dc489839494c943a696b0154acc0c0b6448f#npm:1.7.8"],\
+            ["tslib", "npm:2.4.0"],\
             ["web3-provider-engine", "npm:16.0.1"]\
           ],\
           "packagePeers": [\
+            "@types/tslib",\
             "@types/walletconnect__encoding",\
-            "@walletconnect/encoding"\
+            "@walletconnect/encoding",\
+            "tslib"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -13798,10 +13914,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["virtual:4f2065096fc2097b09ba99e760ae587ea123460fd3163e86aacd52a775181d6365e4788249d4cfb2cf333d3138ac0ea51f90534a80a2090881677953a212e578#npm:7.5.3", {\
-          "packageLocation": "./.yarn/__virtual__/ws-virtual-4b17ec23fd/0/cache/ws-npm-7.5.3-3a046a0b1a-423dc0d859.zip/node_modules/ws/",\
+        ["virtual:dbccd0bb814c1c3f048c581dc7cdbc6c605ed7c03ce1ed67f5565361ac48f158bd9dd53543b65c45b787c806f6da561fc272a2496b7bf684d7f9e50749fbc786#npm:7.5.3", {\
+          "packageLocation": "./.yarn/__virtual__/ws-virtual-a105ff646b/0/cache/ws-npm-7.5.3-3a046a0b1a-423dc0d859.zip/node_modules/ws/",\
           "packageDependencies": [\
-            ["ws", "virtual:4f2065096fc2097b09ba99e760ae587ea123460fd3163e86aacd52a775181d6365e4788249d4cfb2cf333d3138ac0ea51f90534a80a2090881677953a212e578#npm:7.5.3"],\
+            ["ws", "virtual:dbccd0bb814c1c3f048c581dc7cdbc6c605ed7c03ce1ed67f5565361ac48f158bd9dd53543b65c45b787c806f6da561fc272a2496b7bf684d7f9e50749fbc786#npm:7.5.3"],\
             ["@types/bufferutil", null],\
             ["@types/utf-8-validate", null],\
             ["bufferutil", null],\
