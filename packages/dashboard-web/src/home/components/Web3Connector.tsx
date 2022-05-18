@@ -7,39 +7,46 @@ import Web3Modal from 'web3modal';
 const providerOptions = {
   injected: {
     display: {
-      logo: 'data:image/gif;base64,INSERT_BASE64_STRING',
-      name: 'Injected',
-      description: 'Connect with the provider in your Browser',
+      name: 'Metamask',
+      description: 'Connect with MetaMask',
     },
     package: null,
   },
-  // Example with WalletConnect provider
   walletconnect: {
     display: {
-      logo: 'data:image/gif;base64,INSERT_BASE64_STRING',
-      name: 'Mobile',
-      description: 'Scan qrcode with your mobile wallet',
+      name: 'WalletConnect',
+      description: 'Connect with WalletConnect',
     },
     package: WalletConnectProvider,
     options: {
-      infuraId: 'INFURA_ID', // required
+      infuraId: 'fcb656a7b4d14c9f9b0803a5d7475877',
     },
   },
 };
 
 export const Web3Connector = () => {
-  const onClick = useCallback(async () => {
+  const onClickConnect = useCallback(async () => {
     const web3Modal = new Web3Modal({
       network: 'mainnet',
       cacheProvider: true,
       providerOptions,
     });
 
-    const instance = await web3Modal.connect();
-    const provider = new Web3Provider(instance);
+    web3Modal.clearCachedProvider();
 
-    console.log(await provider.listAccounts());
+    try {
+      const instance = await web3Modal.connect();
+      const provider = new Web3Provider(instance);
+
+      console.log(await provider.listAccounts());
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
-  return <button onClick={onClick}>Connect Wallet</button>;
+  return (
+    <button className="text-slate-50/60" onClick={onClickConnect}>
+      Connect Wallet
+    </button>
+  );
 };
