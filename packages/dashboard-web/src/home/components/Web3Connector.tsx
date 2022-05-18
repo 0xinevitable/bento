@@ -30,6 +30,7 @@ export const Web3Connector = () => {
       network: 'mainnet',
       cacheProvider: true,
       providerOptions,
+      theme: 'dark',
     });
 
     web3Modal.clearCachedProvider();
