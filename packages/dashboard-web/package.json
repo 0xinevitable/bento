@@ -9,13 +9,18 @@
   },
   "dependencies": {
     "@dashboard/core": "workspace:^",
+    "@ethersproject/providers": "^5.6.6",
+    "@walletconnect/encoding": "^1.0.1",
+    "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^0.27.2",
     "clsx": "^1.1.1",
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-is": "^18.0.0",
-    "swr": "^2.0.0-beta.3"
+    "swr": "^2.0.0-beta.3",
+    "tslib": "^2.4.0",
+    "web3modal": "^1.9.7"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
