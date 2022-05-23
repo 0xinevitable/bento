@@ -7,5 +7,5 @@ const key = '@wallets';
 export const walletsAtom = atom<Wallet[]>({
   key,
   default: [],
-  effects_UNSTABLE: [localStorageEffect(key, [])],
+  effects_UNSTABLE: [localStorageEffect(key)],
 });

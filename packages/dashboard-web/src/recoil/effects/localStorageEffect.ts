@@ -1,9 +1,8 @@
 import { AtomEffect, DefaultValue } from 'recoil';
 
-export const localStorageEffect: <T>(
+export const localStorageEffect: <T>(key: string) => AtomEffect<T> = (
   key: string,
-  defaultValue: T,
-) => AtomEffect<T> = (key: string, defaultValue) => {
+) => {
   const keyWithPrefix = `${key}`;
 
   return ({ setSelf, onSet }) => {
@@ -14,9 +13,8 @@ export const localStorageEffect: <T>(
     if (savedValue != null) {
       try {
         setSelf(JSON.parse(savedValue));
-      } catch (error) {
-        console.error(error);
-        setSelf(defaultValue);
+      } catch {
+        return;
       }
     }
 
