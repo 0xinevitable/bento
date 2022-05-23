@@ -27,6 +27,19 @@ export const WalletList = () => {
               <span className="ml-2 text-white/60">
                 {shortenAddress(wallet.address)}
               </span>
+
+              {wallet.type !== 'solana' && (
+                <span className="ml-4 text-white/60">
+                  {wallet.chains.map((chain) => (
+                    <span
+                      key={chain}
+                      className="mr-1 p-1 text-xs rounded border border-white"
+                    >
+                      {chain}
+                    </span>
+                  ))}
+                </span>
+              )}
             </li>
           ))}
         </ul>
