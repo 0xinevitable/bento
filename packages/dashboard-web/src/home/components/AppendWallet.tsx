@@ -28,11 +28,10 @@ export const AppendWallet: React.FC = () => {
   const [draft, setDraft] = useState<WalletDraft>(defaultWallet);
 
   const handleChains = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (chainId: string) => {
       if (draft.type === 'solana') {
         return;
       }
-      const chainId = event.target.value;
       const previousChains: string[] = draft.chains;
       const chains = previousChains.includes(chainId)
         ? previousChains.filter((v) => v !== chainId)
@@ -58,6 +57,7 @@ export const AppendWallet: React.FC = () => {
           });
         }),
       );
+      setDraft(defaultWallet);
       return;
     }
 
@@ -83,24 +83,26 @@ export const AppendWallet: React.FC = () => {
         'bg-slate-800/25 backdrop-blur-md flex flex-col cursor-pointer',
       )}
     >
-      <form className="flex flex-col h-auto text-slate-50/90">
-        <fieldset>
+      <div className="flex flex-col h-auto text-slate-50/90">
+        <div>
           {WALLET_TYPES.map((walletType: string) => (
             <span key={walletType}>
-              <input
-                className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
-                type="radio"
-                name="type"
-                value={walletType}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setDraft({ ...draft, type: event.target.value })
-                }
-              />
-              {walletType.toUpperCase()}
+              <button
+                className={clsx(
+                  'p-1 px-2 rounded-md border',
+                  draft.type === walletType
+                    ? 'border-white'
+                    : 'border-transparent',
+                )}
+                type="button"
+                onClick={() => setDraft({ ...draft, type: walletType })}
+              >
+                {walletType.toUpperCase()}
+              </button>
             </span>
           ))}
-        </fieldset>
-        <fieldset>
+        </div>
+        <div className="mt-2">
           <input
             type="text"
             className="w-full p-3 px-4 rounded-md bg-slate-800"
@@ -111,27 +113,35 @@ export const AppendWallet: React.FC = () => {
               setDraft({ ...draft, address: event.target.value })
             }
           />
-        </fieldset>
+        </div>
         {draft.type !== 'solana' && (
-          <fieldset>
+          <div>
             {supportedChains.map((chainId: string) => (
               <span key={chainId}>
-                <input
-                  className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
-                  type="checkbox"
-                  name="networks"
-                  value={chainId}
-                  onChange={handleChains}
-                />
-                {chainId.toUpperCase()}
+                <button
+                  className={clsx(
+                    'p-1 px-2 rounded-md border',
+                    draft.chains.includes(chainId)
+                      ? 'border-white'
+                      : 'border-transparent',
+                  )}
+                  type="button"
+                  onClick={() => handleChains(chainId)}
+                >
+                  {chainId.toUpperCase()}
+                </button>
               </span>
             ))}
-          </fieldset>
+          </div>
         )}
-        <button type="button" onClick={handleSave}>
-          Append
+        <button
+          className="mt-2 p-2 px-4 w-fit font-bold text-slate-800 bg-slate-200 rounded-md"
+          type="button"
+          onClick={handleSave}
+        >
+          Add Wallet
         </button>
-      </form>
+      </div>
     </div>
   );
 };

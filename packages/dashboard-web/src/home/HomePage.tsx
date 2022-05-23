@@ -31,16 +31,18 @@ const LandingPage = () => {
         if (wallet.type !== 'erc') {
           return acc;
         }
+
+        let _acc = acc;
         if (wallet.chains.includes('ethereum')) {
-          return { ...acc, ethereum: [...acc.ethereum, wallet.address] };
+          _acc = { ..._acc, ethereum: [..._acc.ethereum, wallet.address] };
         }
         if (wallet.chains.includes('polygon')) {
-          return { ...acc, polygon: [...acc.polygon, wallet.address] };
+          _acc = { ..._acc, polygon: [..._acc.polygon, wallet.address] };
         }
         if (wallet.chains.includes('klaytn')) {
-          return { ...acc, klaytn: [...acc.klaytn, wallet.address] };
+          _acc = { ..._acc, klaytn: [..._acc.klaytn, wallet.address] };
         }
-        return acc;
+        return _acc;
       },
       { cosmos: [], klaytn: [], polygon: [], ethereum: [] },
     );
