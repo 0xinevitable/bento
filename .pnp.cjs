@@ -2645,6 +2645,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:10.4.7"],\
             ["axios", "npm:0.27.2"],\
             ["clsx", "npm:1.1.1"],\
+            ["immer", "npm:9.0.14"],\
             ["next", "virtual:7e2d23cedf19ad83926c8583f6ff6b7d7b0a9015f0052b1eb8f3a6c793b5029c5a3101fd9ad31b607b359ed11f827684f0da867d6bf371ea234b44ed97c73a30#npm:12.1.6"],\
             ["next-intercept-stdout", "npm:1.0.1"],\
             ["next-plugin-svgr", "npm:1.1.1"],\
@@ -8841,6 +8842,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/immediate-npm-3.3.0-d00fd9df7d-634b430510.zip/node_modules/immediate/",\
           "packageDependencies": [\
             ["immediate", "npm:3.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["immer", [\
+        ["npm:9.0.14", {\
+          "packageLocation": "./.yarn/cache/immer-npm-9.0.14-0baed19a8d-17f1365c06.zip/node_modules/immer/",\
+          "packageDependencies": [\
+            ["immer", "npm:9.0.14"]\
           ],\
           "linkType": "HARD"\
         }]\

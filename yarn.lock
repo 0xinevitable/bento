@@ -1553,6 +1553,7 @@ __metadata:
     autoprefixer: ^10.4.7
     axios: ^0.27.2
     clsx: ^1.1.1
+    immer: ^9.0.14
     next: ^12.1.6
     next-intercept-stdout: ^1.0.1
     next-plugin-svgr: ^1.1.1
@@ -6710,6 +6711,13 @@ __metadata:
   version: 3.3.0
   resolution: "immediate@npm:3.3.0"
   checksum: 634b4305101e2452eba6c07d485bf3e415995e533c94b9c3ffbc37026fa1be34def6e4f2276b0dc2162a3f91628564a4bfb26280278b89d3ee54624e854d2f5f
+  languageName: node
+  linkType: hard
+
+"immer@npm:^9.0.14":
+  version: 9.0.14
+  resolution: "immer@npm:9.0.14"
+  checksum: 17f1365c06d653e672a4f609f08e7203e9ab4b4284818332d6ca9b3f3577a0e3c0066ca7933b636fbae560df79a4b3fde70ed717ce3c6e95c39bf3d5861d5be9
   languageName: node
   linkType: hard
 
