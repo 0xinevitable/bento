@@ -27,13 +27,13 @@ const LandingPage = () => {
         if (wallet.type !== 'erc') {
           return acc;
         }
-        if (wallet.networks.includes('ethereum')) {
+        if (wallet.chains.includes('ethereum')) {
           return { ...acc, ethereum: [...acc.ethereum, wallet.address] };
         }
-        if (wallet.networks.includes('polygon')) {
+        if (wallet.chains.includes('polygon')) {
           return { ...acc, polygon: [...acc.polygon, wallet.address] };
         }
-        if (wallet.networks.includes('klaytn')) {
+        if (wallet.chains.includes('klaytn')) {
           return { ...acc, klaytn: [...acc.klaytn, wallet.address] };
         }
         return acc;
