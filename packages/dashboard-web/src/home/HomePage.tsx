@@ -2,10 +2,11 @@ import { Web3Connector } from './components/Web3Connector';
 import { WalletBalance } from '@/pages/api/erc/[network]/[walletAddress]';
 import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
-import { wallets } from '@dashboard/core/lib/config';
 import React, { useMemo } from 'react';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { AppendWallet } from './components/AppendWallet';
+import { walletsAtom } from '@/recoil/wallets';
+import { useRecoilValue } from 'recoil';
 
 const walletBalanceReducer =
   (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -13,6 +14,8 @@ const walletBalanceReducer =
     balance.symbol === symbol ? callback(acc, balance) : acc;
 
 const LandingPage = () => {
+  const wallets = useRecoilValue(walletsAtom);
+
   const [
     cosmosWalletQuery,
     ethereumWalletQuery,
@@ -47,7 +50,7 @@ const LandingPage = () => {
       addrs.polygon.join(','),
       addrs.klaytn.join(','),
     ];
-  }, []);
+  }, [wallets]);
 
   const { data: ethereumBalance } = useAxiosSWR<WalletBalance[]>(
     `/api/erc/ethereum/${ethereumWalletQuery}`,

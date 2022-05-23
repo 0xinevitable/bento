@@ -1,6 +1,9 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import clsx from 'clsx';
 import { Wallet, WALLET_TYPES } from '@dashboard/core/lib/config';
+import React, { useCallback, useMemo, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import clsx from 'clsx';
+
+import { walletsAtom } from '@/recoil/wallets';
 
 const CHAINS_BY_WALLET_TYPE = {
   erc: ['ethereum', 'polygon', 'klaytn'],
@@ -20,7 +23,7 @@ const defaultWallet: WalletDraft = {
 };
 
 export const AppendWallet: React.FC = () => {
-  const [wallets, setWallets] = useState<Wallet[]>([]);
+  const [wallets, setWallets] = useRecoilState(walletsAtom);
   const [draft, setDraft] = useState<WalletDraft>(defaultWallet);
 
   const handleType = useCallback(

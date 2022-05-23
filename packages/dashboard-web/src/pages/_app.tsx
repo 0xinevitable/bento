@@ -1,13 +1,14 @@
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 
 import '@/styles/tailwind.css';
 import '@/styles/global.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <React.Fragment>
+    <RecoilRoot>
       <Component {...pageProps} />
-    </React.Fragment>
+    </RecoilRoot>
   );
 }
 
