@@ -6,6 +6,7 @@ import React, { useMemo } from 'react';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { AppendWallet } from './components/AppendWallet';
 import { walletsAtom } from '@/recoil/wallets';
+import { WalletList } from './components/WalletList';
 import { useRecoilValue } from 'recoil';
 
 const walletBalanceReducer =
@@ -218,6 +219,7 @@ const LandingPage = () => {
           </div>
         </div>
 
+        <WalletList />
         <AppendWallet />
 
         <ul className="mt-8">
