@@ -1,4 +1,4 @@
-import { Wallet } from '@dashboard/core/lib/config';
+import { Wallet } from '@bento/core/lib/config';
 import { atom } from 'recoil';
 
 import { localStorageEffect } from './effects/localStorageEffect';

@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { ERCBasedChains } from '@dashboard/core/lib/config';
-import { safePromiseAll } from '@dashboard/core/lib/utils';
+import { ERCBasedChains } from '@bento/core/lib/config';
+import { safePromiseAll } from '@bento/core/lib/utils';
 import {
   Chain,
   ERC20TokenBalance,
   EthereumChain,
   KlaytnChain,
   PolygonChain,
-} from '@dashboard/core/lib/chains';
+} from '@bento/core/lib/chains';
 
 export type WalletBalance = {
   walletAddress: string;

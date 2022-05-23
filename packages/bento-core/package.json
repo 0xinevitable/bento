@@ -1,8 +1,8 @@
 {
-  "name": "@dashboard/core",
+  "name": "@bento/core",
   "version": "1.0.0",
   "private": true,
-  "repository": "https://github.com/multichain-dashboard/dashboard",
+  "repository": "https://github.com/inevt/dashboard",
   "author": "Junho Yeo <i@junho.io>",
   "license": "MIT",
   "main": "lib/index.js",

@@ -2,7 +2,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 import { walletsAtom } from '@/recoil/wallets';
-import { shortenAddress } from '@dashboard/core/lib/utils';
+import { shortenAddress } from '@bento/core/lib/utils';
 import { NoSSR } from '@/components/NoSSR';
 
 const LOGO_URLS = {

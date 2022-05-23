@@ -1,5 +1,5 @@
 {
-  "name": "@dashboard/web",
+  "name": "@bento/web",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@dashboard/core": "workspace:^",
+    "@bento/core": "workspace:^",
     "@ethersproject/providers": "^5.6.6",
     "@walletconnect/encoding": "^1.0.1",
     "@walletconnect/web3-provider": "^1.7.8",

@@ -1,9 +1,8 @@
-# Multichain Dashboard
+# Bento (弁当)
 
 - 체인별로 데이터랑 서비스가 분산화되어 있음.
 - 대시보드 같은 제품이 하나 나와도 특정 체인에서 나오거나, 체인이나 플랫폼을 미는 VC에서 투자받으니까, 서비스가 특정 체인에만 귀속될 수밖에 없음
 - SaaS도 할 수 있고 우리가 이걸로 다른 앱 만들어도 됨. 어떤 방식으로든 수익은 나올 것(코스모스 생태계에서 Keplr 의 영향력을 생각해보자). 무조건 독보적인 위치에 들어갈 수 있음
-- 서비스 이름 아직은 없는데 아이디어 나면 ㄱㄱ
 
 ## 🚀 Milestones
 
@@ -31,7 +30,7 @@
 ## 🚀 Preparing Local Dev Environment
 
 ```bash
-git clone https://github.com/multichain-dashboard/dashboard
+git clone https://github.com/inevt/dashboard
 cd dashboard
 yarn install
 ```
@@ -39,17 +38,17 @@ yarn install
 - [Yarn Berry의 Plug’n’Play를 통한 Zero-Install](https://toss.tech/article/node-modules-and-yarn-berry)을 사용하고 있습니다. 이 때문에, 처음에 클론하는 저장소의 크기가 생각보다 큽니다.
 
 ```bash
-yarn workspace @dashboard/core build
+yarn workspace @bento/core build
 ```
 
 - 프로젝트 전체는 Yarn Workspaces를 사용한 모노레포로 관리되고 있습니다.
-- `@dashboard/core` 모듈을 먼저 빌드하셔야 합니다. 이후에도 `@dashboard/core`에 수정사항이 있을 경우, `@dashboard/web`의 개발 서버를 끌 필요 없이 바로 빌드만 해주면 알아서 리로딩 됩니다(단, 의존성이 변경되었을 경우 재시작 필요).
+- `@bento/core` 모듈을 먼저 빌드하셔야 합니다. 이후에도 `@bento/core`에 수정사항이 있을 경우, `@bento/web`의 개발 서버를 끌 필요 없이 바로 빌드만 해주면 알아서 리로딩 됩니다(단, 의존성이 변경되었을 경우 재시작 필요).
 
 ```bash
-yarn workspace @dashboard/web dev
+yarn workspace @bento/web dev
 ```
 
-- `@dashboard/web`의 개발 서버를 켭니다. 기본값으로 `3000` 포트가 설정되어 있습니다.
+- `@bento/web`의 개발 서버를 켭니다. 기본값으로 `3000` 포트가 설정되어 있습니다.
 
 ## 👽 Prior Knowledge
 
@@ -118,8 +117,3 @@ yarn workspace @dashboard/web dev
 - [Keplr](https://www.keplr.app/)
 - [DeBank](https://debank.com/)
 - [Zerion](https://zerion.io/)
-
-## ☠️ Authors
-
-- [@junhoyeo](https://github.com/junhoyeo)
-- [@harugatto](https://github.com/harugatto)
