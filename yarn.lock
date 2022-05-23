@@ -1554,11 +1554,13 @@ __metadata:
     axios: ^0.27.2
     clsx: ^1.1.1
     next: ^12.1.6
+    next-intercept-stdout: ^1.0.1
     next-plugin-svgr: ^1.1.1
     postcss: ^8.4.13
     react: ^18.1.0
     react-dom: ^18.1.0
     react-is: ^18.0.0
+    recoil: ^0.7.3-alpha.2
     swr: ^2.0.0-beta.3
     tailwindcss: ^3.0.24
     tslib: ^2.4.0
@@ -6483,6 +6485,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hamt_plus@npm:1.0.2":
+  version: 1.0.2
+  resolution: "hamt_plus@npm:1.0.2"
+  checksum: af26ea32db03009019cc83dfa9411521a2fa16079443de1a502c9be46d8b3c975acda8ed93fc5750ef08d3186d35901e2d8cfe717dd54bea67b358601fa74e4c
+  languageName: node
+  linkType: hard
+
 "har-schema@npm:^2.0.0":
   version: 2.0.0
   resolution: "har-schema@npm:2.0.0"
@@ -6749,6 +6758,15 @@ __metadata:
   version: 2.0.4
   resolution: "inherits@npm:2.0.4"
   checksum: 4a48a733847879d6cf6691860a6b1e3f0f4754176e4d71494c41f3475553768b10f84b5ce1d40fbd0e34e6bfbb864ee35858ad4dd2cf31e02fc4a154b724d7f1
+  languageName: node
+  linkType: hard
+
+"intercept-stdout@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "intercept-stdout@npm:0.1.2"
+  dependencies:
+    lodash.toarray: ^3.0.0
+  checksum: 47816520f3f9e4f644b055922a132f085392722d52c1a5c73b5bc8af1bfa02173e66c77270bcc86cd3f5be6e8a3478ceb7505e43a6b965cd73ded6e67979f4ce
   languageName: node
   linkType: hard
 
@@ -7765,6 +7783,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash._arraycopy@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "lodash._arraycopy@npm:3.0.0"
+  checksum: 4e46138de7cb88b2dd3df5b2527f2a01854536245063fa64ba70ae69848fa3f0b1cc939d0d376a4bbc25d379279f37ab4b60186c4063f9a4db93b7e9b2d9188c
+  languageName: node
+  linkType: hard
+
+"lodash._basevalues@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "lodash._basevalues@npm:3.0.0"
+  checksum: c5853dcc2b8e8f385a5511ea072c862b5806af1d815ea5f753b877fe7351856ce0b555b1d6985943b87b769d6a5726a011caf92be9d389eb17c57fe41f1668dd
+  languageName: node
+  linkType: hard
+
+"lodash._getnative@npm:^3.0.0":
+  version: 3.9.1
+  resolution: "lodash._getnative@npm:3.9.1"
+  checksum: ba2152bb10bf44beb54fcd273598197972c989c2181b54e533cec1ff1ebebdf8bb02d4ffc3d5a648480a48beb3026db191f5de99adecd7eac36bbd6025c9b048
+  languageName: node
+  linkType: hard
+
 "lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
@@ -7772,10 +7811,46 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.isarguments@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "lodash.isarguments@npm:3.1.0"
+  checksum: ae1526f3eb5c61c77944b101b1f655f846ecbedcb9e6b073526eba6890dc0f13f09f72e11ffbf6540b602caee319af9ac363d6cdd6be41f4ee453436f04f13b5
+  languageName: node
+  linkType: hard
+
+"lodash.isarray@npm:^3.0.0":
+  version: 3.0.4
+  resolution: "lodash.isarray@npm:3.0.4"
+  checksum: 3b298fb76ff16981353f7d0695d8680be9451b74d2e76714ddbd903a90fbaa8e1d84979d0ae99325f5a9033776771154b19e05027ab23de83202251c8abe81b5
+  languageName: node
+  linkType: hard
+
+"lodash.keys@npm:^3.0.0":
+  version: 3.1.2
+  resolution: "lodash.keys@npm:3.1.2"
+  dependencies:
+    lodash._getnative: ^3.0.0
+    lodash.isarguments: ^3.0.0
+    lodash.isarray: ^3.0.0
+  checksum: ac7c02c793334c48161a8e8a1f12576c73ee50d1371e75680afc6c2d3740d5e9bdc899517e6c0034014eaa2512c5f433a2e6985c9e16cf28b5c9013ec81bd35e
+  languageName: node
+  linkType: hard
+
 "lodash.sortby@npm:^4.7.0":
   version: 4.7.0
   resolution: "lodash.sortby@npm:4.7.0"
   checksum: db170c9396d29d11fe9a9f25668c4993e0c1331bcb941ddbd48fb76f492e732add7f2a47cfdf8e9d740fa59ac41bbfaf931d268bc72aab3ab49e9f89354d718c
+  languageName: node
+  linkType: hard
+
+"lodash.toarray@npm:^3.0.0":
+  version: 3.0.2
+  resolution: "lodash.toarray@npm:3.0.2"
+  dependencies:
+    lodash._arraycopy: ^3.0.0
+    lodash._basevalues: ^3.0.0
+    lodash.keys: ^3.0.0
+  checksum: 9cc27811f6c59470a124ce69f4245f8481b38215fecc79646d998e3a020f0bf0dc3b44f5b6e31b5356ed82b408977b524f23a60498d57c7a049b9158221164d6
   languageName: node
   linkType: hard
 
@@ -8387,6 +8462,15 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
+  languageName: node
+  linkType: hard
+
+"next-intercept-stdout@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "next-intercept-stdout@npm:1.0.1"
+  dependencies:
+    intercept-stdout: ^0.1.2
+  checksum: 85716609625eca573bda7f6acff3383856e0cbf93787f818485f7f9545b52b34c0c00794ec9e002f104e83cd180a0e2b09d2127f6b50ee0e60b13ae2c0ce06e8
   languageName: node
   linkType: hard
 
@@ -9373,6 +9457,22 @@ __metadata:
   dependencies:
     ms: ^2.1.1
   checksum: 7c5011f19e6ddcb759c1e6756877cee3c9eb78fbd1278eca4572d75f74993f0ccdc1e5f7761de6e682dff5344ee94f7a69bc492e2e8eb81d8777774a2399ce9c
+  languageName: node
+  linkType: hard
+
+"recoil@npm:^0.7.3-alpha.2":
+  version: 0.7.3-alpha.2
+  resolution: "recoil@npm:0.7.3-alpha.2"
+  dependencies:
+    hamt_plus: 1.0.2
+  peerDependencies:
+    react: ">=16.13.1"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 3af4b8ef88f0602515bd2730a8dba12f9aa866db5ce1310e5dc8a431b2e5bd4b5e16b9bc9b2e496b0024b78ece80ebfd61797eb4e64b6cbc62e4e23833d02c6a
   languageName: node
   linkType: hard
 
