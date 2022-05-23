@@ -86,7 +86,7 @@ export const AppendWallet: React.FC = () => {
       <form className="flex flex-col h-auto text-slate-50/90">
         <fieldset>
           {WALLET_TYPES.map((walletType: string) => (
-            <span>
+            <span key={walletType}>
               <input
                 className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
                 type="radio"
@@ -115,7 +115,7 @@ export const AppendWallet: React.FC = () => {
         {draft.type !== 'solana' && (
           <fieldset>
             {supportedChains.map((chainId: string) => (
-              <span>
+              <span key={chainId}>
                 <input
                   className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
                   type="checkbox"

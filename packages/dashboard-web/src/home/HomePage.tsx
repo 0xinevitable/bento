@@ -54,19 +54,21 @@ const LandingPage = () => {
   }, [wallets]);
 
   const { data: ethereumBalance } = useAxiosSWR<WalletBalance[]>(
-    `/api/erc/ethereum/${ethereumWalletQuery}`,
+    !ethereumWalletQuery ? null : `/api/erc/ethereum/${ethereumWalletQuery}`,
   );
   const { data: polygonBalance } = useAxiosSWR<TendermintWalletBalance[]>(
-    `/api/erc/polygon/${polygonWalletQuery}`,
+    !polygonWalletQuery ? null : `/api/erc/polygon/${polygonWalletQuery}`,
   );
   const { data: klaytnBalance } = useAxiosSWR<WalletBalance[]>(
-    `/api/erc/klaytn/${klaytnWalletQuery}`,
+    !klaytnWalletQuery ? null : `/api/erc/klaytn/${klaytnWalletQuery}`,
   );
   const { data: cosmosHubBalance } = useAxiosSWR<TendermintWalletBalance[]>(
-    `/api/tendermint/cosmos-hub/${cosmosWalletQuery}`,
+    !cosmosWalletQuery
+      ? null
+      : `/api/tendermint/cosmos-hub/${cosmosWalletQuery}`,
   );
   const { data: osmosisBalance } = useAxiosSWR<TendermintWalletBalance[]>(
-    `/api/tendermint/osmosis/${cosmosWalletQuery}`,
+    !cosmosWalletQuery ? null : `/api/tendermint/osmosis/${cosmosWalletQuery}`,
   );
 
   const tokenBalances = useMemo(() => {
