@@ -20,8 +20,6 @@ const defaultWallet: WalletDraft = {
 };
 
 export const AppendWallet: React.FC = () => {
-  const [collapsed, setCollapsed] = useState<boolean>(true);
-
   const [wallets, setWallets] = useState<Wallet[]>([]);
   const [draft, setDraft] = useState<WalletDraft>(defaultWallet);
 
@@ -52,8 +50,6 @@ export const AppendWallet: React.FC = () => {
     setDraft(defaultWallet);
   }, [draft]);
 
-  const handleClear = useCallback(() => setWallets([]), []);
-
   const supportedChains = useMemo(() => {
     if (!draft.type) {
       return [];
@@ -65,86 +61,63 @@ export const AppendWallet: React.FC = () => {
   }, [draft.type]);
 
   return (
-    <li
+    <div
       className={clsx(
-        'mb-2 pb-2 h-fit overflow-hidden',
+        'mt-6 mb-2 p-4 h-fit overflow-hidden',
         'border border-slate-700 rounded-md drop-shadow-2xl',
         'bg-slate-800/25 backdrop-blur-md flex flex-col cursor-pointer',
       )}
     >
-      <ul>
-        <code className="text-white">{JSON.stringify(wallets)}</code>
-      </ul>
-      <div className={clsx('pt-2 px-3 flex items-center')}>
-        <span
-          className="text-xl font-bold text-slate-50/90"
-          onClick={() => setCollapsed((prev) => !prev)}
-        >
-          Add Wallet
-        </span>
-      </div>
-
-      <ul
-        className={clsx(
-          'px-3 flex flex-col overflow-hidden',
-          collapsed ? 'max-h-0' : 'max-h-[512px]',
-        )}
-        style={{ transition: 'max-height 1s ease-in-out' }}
-      >
-        <form className="flex flex-col h-auto text-slate-50/90">
+      <form className="flex flex-col h-auto text-slate-50/90">
+        <fieldset>
+          {WALLET_TYPES.map((walletType: string) => (
+            <span>
+              <input
+                className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
+                type="radio"
+                name="type"
+                value={walletType}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  setDraft({ ...draft, type: event.target.value })
+                }
+              />
+              {walletType.toUpperCase()}
+            </span>
+          ))}
+        </fieldset>
+        <fieldset>
+          <input
+            type="text"
+            className="w-full p-3 px-4 rounded-md bg-slate-800"
+            name="Address"
+            placeholder="Address"
+            value={draft.address}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setDraft({ ...draft, address: event.target.value })
+            }
+          />
+        </fieldset>
+        {draft.type !== 'solana' && (
           <fieldset>
-            {WALLET_TYPES.map((walletType: string) => (
+            {supportedChains.map((chainId: string) => (
               <span>
                 <input
                   className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
-                  type="radio"
-                  name="type"
-                  value={walletType}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    setDraft({ ...draft, type: event.target.value })
-                  }
+                  type="checkbox"
+                  name="networks"
+                  value={chainId}
+                  onChange={handleChains}
                 />
-                {walletType.toUpperCase()}
+                {chainId.toUpperCase()}
               </span>
             ))}
           </fieldset>
-          <fieldset>
-            <input
-              type="text"
-              className="w-full p-3 px-4 rounded-md bg-slate-800"
-              name="Address"
-              placeholder="Address"
-              value={draft.address}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setDraft({ ...draft, address: event.target.value })
-              }
-            />
-          </fieldset>
-          {draft.type !== 'solana' && (
-            <fieldset>
-              {supportedChains.map((chainId: string) => (
-                <span>
-                  <input
-                    className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
-                    type="checkbox"
-                    name="networks"
-                    value={chainId}
-                    onChange={handleChains}
-                  />
-                  {chainId.toUpperCase()}
-                </span>
-              ))}
-            </fieldset>
-          )}
-          <button type="button" onClick={handleSave}>
-            Append
-          </button>
-          <button type="button" onClick={handleClear}>
-            Clear
-          </button>
-        </form>
-      </ul>
-    </li>
+        )}
+        <button type="button" onClick={handleSave}>
+          Append
+        </button>
+      </form>
+    </div>
   );
 };
 
