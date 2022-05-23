@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import { walletsAtom } from '@/recoil/wallets';
 import { shortenAddress } from '@dashboard/core/lib/utils';
@@ -12,7 +12,7 @@ const LOGO_URLS = {
 };
 
 export const WalletList = () => {
-  const wallets = useRecoilValue(walletsAtom);
+  const [wallets, setWallets] = useRecoilState(walletsAtom);
 
   return (
     <NoSSR>
@@ -40,6 +40,17 @@ export const WalletList = () => {
                   ))}
                 </span>
               )}
+
+              <span
+                className="ml-auto text-xs text-white/25"
+                onClick={() => {
+                  setWallets(
+                    wallets.filter((w) => w.address !== wallet.address),
+                  );
+                }}
+              >
+                REMOVE
+              </span>
             </li>
           ))}
         </ul>
