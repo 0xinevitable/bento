@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { ERCBasedNetworks } from '@dashboard/core/lib/config';
+import { ERCBasedChains } from '@dashboard/core/lib/config';
 import { safePromiseAll } from '@dashboard/core/lib/utils';
 import {
   Chain,
@@ -18,12 +18,12 @@ export type WalletBalance = {
 
 interface APIRequest extends NextApiRequest {
   query: {
-    network?: ERCBasedNetworks;
+    network?: ERCBasedChains;
     walletAddress?: string;
   };
 }
 
-const chains: Record<ERCBasedNetworks, Chain> = {
+const chains: Record<ERCBasedChains, Chain> = {
   ethereum: new EthereumChain(),
   polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),
@@ -39,7 +39,7 @@ const parseWallets = (mixedQuery: string) => {
 
 export default async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
-  const network = (req.query.network ?? '').toLowerCase() as ERCBasedNetworks;
+  const network = (req.query.network ?? '').toLowerCase() as ERCBasedChains;
 
   const result = await safePromiseAll(
     wallets.map(async (walletAddress) => {

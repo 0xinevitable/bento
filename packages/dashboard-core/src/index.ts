@@ -33,7 +33,7 @@ export const main = async () => {
     wallets.map(async (wallet) => {
       if (wallet.type == 'erc') {
         await safePromiseAll(
-          wallet.networks.map(async (network) => {
+          wallet.chains.map(async (network) => {
             if (network === 'ethereum') {
               const chain = chains[network];
               const balance = await chain.getBalance(wallet.address);

@@ -2,9 +2,12 @@ import { Web3Connector } from './components/Web3Connector';
 import { WalletBalance } from '@/pages/api/erc/[network]/[walletAddress]';
 import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
-import { wallets } from '@dashboard/core/lib/config';
 import React, { useMemo } from 'react';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
+import { AppendWallet } from './components/AppendWallet';
+import { walletsAtom } from '@/recoil/wallets';
+import { WalletList } from './components/WalletList';
+import { useRecoilValue } from 'recoil';
 
 const walletBalanceReducer =
   (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -12,6 +15,8 @@ const walletBalanceReducer =
     balance.symbol === symbol ? callback(acc, balance) : acc;
 
 const LandingPage = () => {
+  const wallets = useRecoilValue(walletsAtom);
+
   const [
     cosmosWalletQuery,
     ethereumWalletQuery,
@@ -26,16 +31,18 @@ const LandingPage = () => {
         if (wallet.type !== 'erc') {
           return acc;
         }
-        if (wallet.networks.includes('ethereum')) {
-          return { ...acc, ethereum: [...acc.ethereum, wallet.address] };
+
+        let _acc = acc;
+        if (wallet.chains.includes('ethereum')) {
+          _acc = { ..._acc, ethereum: [..._acc.ethereum, wallet.address] };
         }
-        if (wallet.networks.includes('polygon')) {
-          return { ...acc, polygon: [...acc.polygon, wallet.address] };
+        if (wallet.chains.includes('polygon')) {
+          _acc = { ..._acc, polygon: [..._acc.polygon, wallet.address] };
         }
-        if (wallet.networks.includes('klaytn')) {
-          return { ...acc, klaytn: [...acc.klaytn, wallet.address] };
+        if (wallet.chains.includes('klaytn')) {
+          _acc = { ..._acc, klaytn: [..._acc.klaytn, wallet.address] };
         }
-        return acc;
+        return _acc;
       },
       { cosmos: [], klaytn: [], polygon: [], ethereum: [] },
     );
@@ -46,22 +53,24 @@ const LandingPage = () => {
       addrs.polygon.join(','),
       addrs.klaytn.join(','),
     ];
-  }, []);
+  }, [wallets]);
 
   const { data: ethereumBalance } = useAxiosSWR<WalletBalance[]>(
-    `/api/erc/ethereum/${ethereumWalletQuery}`,
+    !ethereumWalletQuery ? null : `/api/erc/ethereum/${ethereumWalletQuery}`,
   );
   const { data: polygonBalance } = useAxiosSWR<TendermintWalletBalance[]>(
-    `/api/erc/polygon/${polygonWalletQuery}`,
+    !polygonWalletQuery ? null : `/api/erc/polygon/${polygonWalletQuery}`,
   );
   const { data: klaytnBalance } = useAxiosSWR<WalletBalance[]>(
-    `/api/erc/klaytn/${klaytnWalletQuery}`,
+    !klaytnWalletQuery ? null : `/api/erc/klaytn/${klaytnWalletQuery}`,
   );
   const { data: cosmosHubBalance } = useAxiosSWR<TendermintWalletBalance[]>(
-    `/api/tendermint/cosmos-hub/${cosmosWalletQuery}`,
+    !cosmosWalletQuery
+      ? null
+      : `/api/tendermint/cosmos-hub/${cosmosWalletQuery}`,
   );
   const { data: osmosisBalance } = useAxiosSWR<TendermintWalletBalance[]>(
-    `/api/tendermint/osmosis/${cosmosWalletQuery}`,
+    !cosmosWalletQuery ? null : `/api/tendermint/osmosis/${cosmosWalletQuery}`,
   );
 
   const tokenBalances = useMemo(() => {
@@ -213,6 +222,9 @@ const LandingPage = () => {
             <Web3Connector />
           </div>
         </div>
+
+        <WalletList />
+        <AppendWallet />
 
         <ul className="mt-8">
           {tokenBalances.map((info) => (
