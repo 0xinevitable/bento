@@ -1,26 +1,68 @@
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import clsx from 'clsx';
-import { ERCBasedNetworks, Wallet } from '@dashboard/core/lib/config';
+import { Wallet, WALLET_TYPES } from '@dashboard/core/lib/config';
 
-const networkType = ['eth', 'osmosis', 'solana'];
-const network: ERCBasedNetworks[] = ['ethereum', 'polygon', 'klaytn'];
+const CHAINS_BY_WALLET_TYPE = {
+  erc: ['ethereum', 'polygon', 'klaytn'],
+  tendermint: ['cosmos', 'osmosis'],
+  solana: [],
+} as const;
+
+type WalletDraft = {
+  type: string;
+  address: string;
+  chains: string[];
+};
+const defaultWallet: WalletDraft = {
+  type: '',
+  address: '',
+  chains: [],
+};
 
 export const AppendWallet: React.FC = () => {
   const [collapsed, setCollapsed] = useState<boolean>(true);
-  const [walletInfo, setWalletInfo] = useState<Wallet>({
-    type: '',
-    address: '',
-    networks: ['klaytn'], //dummy
-  });
 
-  const handleType = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setWalletInfo({ ...walletInfo, type: event.target.value });
-  const handleAddress = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setWalletInfo({ ...walletInfo, address: event.target.value });
-  //TODO make handleNetworks
-  const handleSave = (event: React.MouseEvent) => saveWalletsInfo(walletInfo);
-  const handleClear = (event: React.MouseEvent) =>
-    localStorage.removeItem('wallet');
+  const [wallets, setWallets] = useState<Wallet[]>([]);
+  const [draft, setDraft] = useState<WalletDraft>(defaultWallet);
+
+  const handleType = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) =>
+      setDraft({ ...draft, type: event.target.value }),
+    [],
+  );
+
+  const handleChains = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (draft.type === 'solana') {
+        return;
+      }
+      const chainId = event.target.value;
+      const previousChains: string[] = draft.chains;
+      const chains = previousChains.includes(chainId)
+        ? previousChains.filter((v) => v !== chainId)
+        : [...previousChains, chainId];
+
+      setDraft({ ...draft, chains });
+    },
+    [draft],
+  );
+
+  const handleSave = useCallback(() => {
+    setWallets((prev) => [...prev, draft as Wallet]);
+    setDraft(defaultWallet);
+  }, [draft]);
+
+  const handleClear = useCallback(() => setWallets([]), []);
+
+  const supportedChains = useMemo(() => {
+    if (!draft.type) {
+      return [];
+    }
+    const chains = CHAINS_BY_WALLET_TYPE[draft.type];
+    return chains.length > 0 //
+      ? chains
+      : [];
+  }, [draft.type]);
 
   return (
     <li
@@ -30,6 +72,9 @@ export const AppendWallet: React.FC = () => {
         'bg-slate-800/25 backdrop-blur-md flex flex-col cursor-pointer',
       )}
     >
+      <ul>
+        <code className="text-white">{JSON.stringify(wallets)}</code>
+      </ul>
       <div className={clsx('pt-2 px-3 flex items-center')}>
         <span
           className="text-xl font-bold text-slate-50/90"
@@ -48,32 +93,49 @@ export const AppendWallet: React.FC = () => {
       >
         <form className="flex flex-col h-auto text-slate-50/90">
           <fieldset>
-            {networkType.map((net: string) => (
+            {WALLET_TYPES.map((walletType: string) => (
               <span>
                 <input
                   className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
                   type="radio"
                   name="type"
-                  value={net}
-                  onChange={handleType}
+                  value={walletType}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    setDraft({ ...draft, type: event.target.value })
+                  }
                 />
-                {net.toUpperCase()}
+                {walletType.toUpperCase()}
               </span>
             ))}
           </fieldset>
           <fieldset>
             <input
               type="text"
+              className="w-full p-3 px-4 rounded-md bg-slate-800"
               name="Address"
               placeholder="Address"
-              onChange={handleAddress}
+              value={draft.address}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setDraft({ ...draft, address: event.target.value })
+              }
             />
-            <select name="network" multiple className="h-auto">
-              {network.map((net: ERCBasedNetworks) => (
-                <option value={net}>{net}</option>
-              ))}
-            </select>
           </fieldset>
+          {draft.type !== 'solana' && (
+            <fieldset>
+              {supportedChains.map((chainId: string) => (
+                <span>
+                  <input
+                    className="form-check-input h-4 w-4 mt-1 align-top ml-[0.4rem] mr-1"
+                    type="checkbox"
+                    name="networks"
+                    value={chainId}
+                    onChange={handleChains}
+                  />
+                  {chainId.toUpperCase()}
+                </span>
+              ))}
+            </fieldset>
+          )}
           <button type="button" onClick={handleSave}>
             Append
           </button>

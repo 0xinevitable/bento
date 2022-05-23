@@ -1,3 +1,6 @@
+export type WalletType = 'erc' | 'tendermint' | 'solana';
+export const WALLET_TYPES: WalletType[] = ['erc', 'tendermint', 'solana'];
+
 export type ERCBasedChains = 'ethereum' | 'polygon' | 'klaytn';
 export type TendermintBasedChains = 'cosmos-hub' | 'osmosis';
 
