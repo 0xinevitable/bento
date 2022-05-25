@@ -8,6 +8,8 @@ import { AppendWallet } from './components/AppendWallet';
 import { walletsAtom } from '@/recoil/wallets';
 import { WalletList } from './components/WalletList';
 import { useRecoilValue } from 'recoil';
+import { KlaytnChain } from '@bento/core/lib/chains';
+import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 
 const walletBalanceReducer =
   (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -132,25 +134,29 @@ const LandingPage = () => {
         price: (klaytnBalance ?? [])[0]?.price ?? 0,
         balances: (klaytnBalance ?? []).filter((v) => v.symbol === 'KLAY'),
       },
-      {
-        symbol: 'SCNR',
-        name: 'Swapscanner',
-        logo: 'https://api.swapscanner.io/api/tokens/0x8888888888885b073f3c81258c27e83db228d5f3/icon',
+      ...KLAYTN_TOKENS.map((token) => ({
+        ...token,
         netWorth: (klaytnBalance ?? []).reduce(
           walletBalanceReducer(
-            'SCNR',
+            token.symbol,
             (acc, balance) => acc + balance.balance * balance.price,
           ),
           0,
         ),
         amount: (klaytnBalance ?? []).reduce(
-          walletBalanceReducer('SCNR', (acc, balance) => acc + balance.balance),
+          walletBalanceReducer(
+            token.symbol,
+            (acc, balance) => acc + balance.balance,
+          ),
           0,
         ),
         price:
-          (klaytnBalance ?? []).find((v) => v.symbol === 'SCNR')?.price ?? 0,
-        balances: (klaytnBalance ?? []).filter((v) => v.symbol === 'SCNR'),
-      },
+          (klaytnBalance ?? []).find((v) => v.symbol === token.symbol)?.price ??
+          0,
+        balances: (klaytnBalance ?? []).filter(
+          (v) => v.symbol === token.symbol,
+        ),
+      })),
       {
         symbol: 'COSMOS',
         name: 'Cosmos Hub',
@@ -228,7 +234,11 @@ const LandingPage = () => {
 
         <ul className="mt-8">
           {tokenBalances.map((info) => (
-            <TokenBalanceItem key={info.symbol} {...info} />
+            <TokenBalanceItem
+              key={info.symbol}
+              logo={info.logo ?? ''}
+              {...info}
+            />
           ))}
         </ul>
       </div>

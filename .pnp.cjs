@@ -17,7 +17,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],\
     "dependencyTreeRoots": [\
       {\
-        "name": "dashboard",\
+        "name": "bento",\
         "reference": "workspace:."\
       },\
       {\
@@ -34,7 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "fallbackExclusionList": [\
       ["@bento/core", ["workspace:packages/bento-core"]],\
       ["@bento/web", ["workspace:packages/bento-web"]],\
-      ["dashboard", ["workspace:."]]\
+      ["bento", ["workspace:."]]\
     ],\
     "fallbackPool": [\
     ],\
@@ -43,7 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@trivago/prettier-plugin-sort-imports", "virtual:9fcf5a8566365bdc140f7a5344f6f542506b01d9966585bf68815ef4f2701ba10b6ac5c1c8f049a455d9637504a064c16e7812357f6c8abc67269c310fe9d9fd#npm:3.2.0"],\
+            ["@trivago/prettier-plugin-sort-imports", "virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.2.0"],\
             ["@types/node", "npm:17.0.33"],\
             ["prettier", "npm:2.6.2"],\
             ["typescript", "patch:typescript@npm%3A4.6.4#~builtin<compat/typescript>::version=4.6.4&hash=7ad353"]\
@@ -4165,10 +4165,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:9fcf5a8566365bdc140f7a5344f6f542506b01d9966585bf68815ef4f2701ba10b6ac5c1c8f049a455d9637504a064c16e7812357f6c8abc67269c310fe9d9fd#npm:3.2.0", {\
-          "packageLocation": "./.yarn/__virtual__/@trivago-prettier-plugin-sort-imports-virtual-ee810035c8/0/cache/@trivago-prettier-plugin-sort-imports-npm-3.2.0-c5d59a3a56-22461433fa.zip/node_modules/@trivago/prettier-plugin-sort-imports/",\
+        ["virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/@trivago-prettier-plugin-sort-imports-virtual-a154ecdef0/0/cache/@trivago-prettier-plugin-sort-imports-npm-3.2.0-c5d59a3a56-22461433fa.zip/node_modules/@trivago/prettier-plugin-sort-imports/",\
           "packageDependencies": [\
-            ["@trivago/prettier-plugin-sort-imports", "virtual:9fcf5a8566365bdc140f7a5344f6f542506b01d9966585bf68815ef4f2701ba10b6ac5c1c8f049a455d9637504a064c16e7812357f6c8abc67269c310fe9d9fd#npm:3.2.0"],\
+            ["@trivago/prettier-plugin-sort-imports", "virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.2.0"],\
             ["@babel/core", "npm:7.13.10"],\
             ["@babel/generator", "npm:7.13.9"],\
             ["@babel/parser", "npm:7.14.6"],\
@@ -5782,6 +5782,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["bento", [\
+        ["workspace:.", {\
+          "packageLocation": "./",\
+          "packageDependencies": [\
+            ["bento", "workspace:."],\
+            ["@trivago/prettier-plugin-sort-imports", "virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.2.0"],\
+            ["@types/node", "npm:17.0.33"],\
+            ["prettier", "npm:2.6.2"],\
+            ["typescript", "patch:typescript@npm%3A4.6.4#~builtin<compat/typescript>::version=4.6.4&hash=7ad353"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
       ["big.js", [\
         ["npm:5.2.2", {\
           "packageLocation": "./.yarn/cache/big.js-npm-5.2.2-e147c30820-b89b6e8419.zip/node_modules/big.js/",\
@@ -6906,19 +6919,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["type", "npm:1.2.0"]\
           ],\
           "linkType": "HARD"\
-        }]\
-      ]],\
-      ["dashboard", [\
-        ["workspace:.", {\
-          "packageLocation": "./",\
-          "packageDependencies": [\
-            ["dashboard", "workspace:."],\
-            ["@trivago/prettier-plugin-sort-imports", "virtual:9fcf5a8566365bdc140f7a5344f6f542506b01d9966585bf68815ef4f2701ba10b6ac5c1c8f049a455d9637504a064c16e7812357f6c8abc67269c310fe9d9fd#npm:3.2.0"],\
-            ["@types/node", "npm:17.0.33"],\
-            ["prettier", "npm:2.6.2"],\
-            ["typescript", "patch:typescript@npm%3A4.6.4#~builtin<compat/typescript>::version=4.6.4&hash=7ad353"]\
-          ],\
-          "linkType": "SOFT"\
         }]\
       ]],\
       ["dashdash", [\

@@ -4,12 +4,13 @@ import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
 import queryString from 'query-string';
 import { safePromiseAll } from './utils';
+import { ERC20TokenInput, KLAYTN_TOKENS } from './tokens';
 
 export type Currency = 'usd';
 export const priceFromCoinGecko = async (
   coinGeckoId: string,
   vsCurrency: Currency = 'usd',
-) => {
+): Promise<number> => {
   const url = queryString.stringifyUrl({
     url: 'https://api.coingecko.com/api/v3/simple/price',
     query: {
@@ -20,14 +21,6 @@ export const priceFromCoinGecko = async (
   const { data } = await axios.get(url);
   return data[coinGeckoId][vsCurrency];
 };
-
-export interface ERC20TokenInput {
-  symbol: string;
-  name: string;
-  decimals: number;
-  address: string;
-}
-
 export interface ERC20TokenBalance extends ERC20TokenInput {
   walletAddress: string;
   balance: number;
@@ -145,14 +138,7 @@ export class KlaytnChain implements Chain {
     return balance;
   };
 
-  tokens: ERC20TokenInput[] = [
-    {
-      symbol: 'SCNR',
-      name: 'Swapscanner',
-      decimals: 25,
-      address: '0x8888888888885b073f3c81258c27e83db228d5f3',
-    },
-  ];
+  public tokens: ERC20TokenInput[] = KLAYTN_TOKENS;
 
   _SCNR_KLAY_LP = '0xe1783a85616ad7dbd2b326255d38c568c77ffa26';
   _getStakedSCNRReserves = async () => {
@@ -190,8 +176,15 @@ export class KlaytnChain implements Chain {
           .balanceOf(walletAddress)
           .call();
         const [rawBalance, price] = await Promise.all([
-          balanceOfCall.catch(() => '0'),
-          this._getSCNRTokenPrice().catch(() => 0),
+          balanceOfCall.catch((error) => {
+            console.error(error);
+            return '0';
+          }),
+          token.coinGeckoId
+            ? priceFromCoinGecko(token.coinGeckoId).catch(() => 0)
+            : token.symbol === 'SCNR'
+            ? this._getSCNRTokenPrice().catch(() => 0)
+            : 0,
         ]);
 
         const balance = Number(rawBalance) / 10 ** token.decimals;
