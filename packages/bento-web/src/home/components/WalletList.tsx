@@ -7,7 +7,7 @@ import { NoSSR } from '@/components/NoSSR';
 import { copyToClipboard } from '@/utils/clipboard';
 
 const LOGO_URLS = {
-  erc: '/assets/ethereum.png',
+  evm: '/assets/ethereum.png',
   tendermint: '/assets/tendermint.png',
   solana: '/assets/solana.png',
 };

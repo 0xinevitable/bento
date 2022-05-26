@@ -7,7 +7,7 @@ import produce from 'immer';
 import { walletsAtom } from '@/recoil/wallets';
 
 const CHAINS_BY_WALLET_TYPE = {
-  erc: ['ethereum', 'polygon', 'klaytn'],
+  evm: ['ethereum', 'polygon', 'klaytn'],
   tendermint: ['cosmos', 'osmosis'],
   solana: [],
 } as const;
