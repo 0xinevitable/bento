@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import { walletsAtom } from '@/recoil/wallets';
 import { shortenAddress } from '@bento/core/lib/utils';
 import { NoSSR } from '@/components/NoSSR';
+import { copyToClipboard } from '@/utils/clipboard';
 
 const LOGO_URLS = {
   erc: '/assets/ethereum.png',
@@ -26,6 +27,12 @@ export const WalletList = () => {
               />
               <span className="ml-2 text-white/60">
                 {shortenAddress(wallet.address)}
+                <button
+                  className="text-white"
+                  onClick={() => copyToClipboard(wallet.address)}
+                >
+                  Copy
+                </button>
               </span>
 
               {wallet.type !== 'solana' && (
