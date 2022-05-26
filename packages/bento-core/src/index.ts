@@ -31,7 +31,7 @@ export const main = async () => {
 
   await safePromiseAll(
     wallets.map(async (wallet) => {
-      if (wallet.type == 'erc') {
+      if (wallet.type == 'evm') {
         await safePromiseAll(
           wallet.chains.map(async (network) => {
             if (network === 'ethereum') {

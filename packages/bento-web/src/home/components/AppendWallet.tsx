@@ -1,4 +1,4 @@
-import { Wallet, WALLET_TYPES } from '@bento/core/lib/config';
+import { Wallet, WALLET_TYPES } from '@bento/core/lib/types';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import clsx from 'clsx';

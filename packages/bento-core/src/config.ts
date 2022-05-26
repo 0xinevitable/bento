@@ -1,50 +1,36 @@
-export type WalletType = 'erc' | 'tendermint' | 'solana';
-export const WALLET_TYPES: WalletType[] = ['erc', 'tendermint', 'solana'];
+import { Wallet } from './types';
 
-export type ERCBasedChains = 'ethereum' | 'polygon' | 'klaytn';
-export type TendermintBasedChains = 'cosmos-hub' | 'osmosis';
-
-export type Wallet =
-  | {
-      type: 'erc';
-      address: string;
-      chains: ERCBasedChains[];
-    }
-  | {
-      type: 'tendermint';
-      address: string;
-      chains: TendermintBasedChains[];
-    }
-  | { type: 'solana'; address: string };
-
+/**
+ * @deprecated We use them dynamically now
+ */
 export const wallets: Wallet[] = [
   {
-    type: 'erc',
+    type: 'evm',
     address: '0x458b14915e651243acf89c05859a22d5cff976a6',
     chains: ['polygon'],
   },
   {
-    type: 'erc',
+    type: 'evm',
     address: '0x4a003f0a2c52e37138eb646aB4E669C4A84C1001',
     chains: ['ethereum', 'klaytn'],
   },
   {
-    type: 'erc',
+    type: 'evm',
     address: '0x7777777141f111cf9F0308a63dbd9d0CaD3010C4',
     chains: ['ethereum', 'klaytn'],
   },
   {
-    type: 'erc',
+    type: 'evm',
     address: '0x6666666854F24DC3cb86feF8F4DC724F34589044',
     chains: ['klaytn'],
   },
   {
-    type: 'erc',
+    type: 'evm',
     address: '0x9c7377E72564EcD512a68672BA943AB48dBa0415',
     chains: ['klaytn'],
   },
   {
-    type: 'erc',
+    type: 'evm',
     address: '0x3c7263D65c89aE119FdE18cc2BbE3CE9A108133D',
     chains: ['klaytn'],
   },

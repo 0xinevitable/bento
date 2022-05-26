@@ -1,5 +1,5 @@
 import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
-import { WalletBalance } from '@/pages/api/erc/[network]/[walletAddress]';
+import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { shortenAddress } from '@bento/core/lib/utils';
 import { TokenIcon } from './TokenIcon';
 import { useMemo, useState } from 'react';

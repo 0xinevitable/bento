@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { ERCBasedChains } from '@bento/core/lib/config';
+import { EVMBasedChains } from '@bento/core/lib/types';
 import { safePromiseAll } from '@bento/core/lib/utils';
 import {
   Chain,
@@ -18,12 +18,12 @@ export type WalletBalance = {
 
 interface APIRequest extends NextApiRequest {
   query: {
-    network?: ERCBasedChains;
+    network?: EVMBasedChains;
     walletAddress?: string;
   };
 }
 
-const chains: Record<ERCBasedChains, Chain> = {
+const chains: Record<EVMBasedChains, Chain> = {
   ethereum: new EthereumChain(),
   polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),
@@ -38,8 +38,11 @@ const parseWallets = (mixedQuery: string) => {
 };
 
 export default async (req: APIRequest, res: NextApiResponse) => {
+  // 지갑 목록을 가져온다.
   const wallets = parseWallets(req.query.walletAddress ?? '');
-  const network = (req.query.network ?? '').toLowerCase() as ERCBasedChains;
+
+  // 네트워크 주소를 가져온다.
+  const network = (req.query.network ?? '').toLowerCase() as EVMBasedChains;
 
   const result = await safePromiseAll(
     wallets.map(async (walletAddress) => {

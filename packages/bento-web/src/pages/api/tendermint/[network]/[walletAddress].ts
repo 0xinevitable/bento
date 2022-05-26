@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { TendermintBasedChains } from '@bento/core/lib/config';
+import { TendermintBasedChains } from '@bento/core/lib/types';
 import { Bech32Address } from '@bento/core/lib/bech32';
 import { safePromiseAll } from '@bento/core/lib/utils';
 import {

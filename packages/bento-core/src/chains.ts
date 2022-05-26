@@ -21,6 +21,7 @@ export const priceFromCoinGecko = async (
   const { data } = await axios.get(url);
   return data[coinGeckoId][vsCurrency];
 };
+
 export interface ERC20TokenBalance extends ERC20TokenInput {
   walletAddress: string;
   balance: number;
@@ -77,6 +78,7 @@ const MinimalABIs = {
 };
 
 export interface Chain {
+  // 기반 통화(Native Token)
   currency: {
     symbol: string;
     decimals: number;
