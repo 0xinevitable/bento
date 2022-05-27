@@ -149,6 +149,8 @@ export default ProfilePage;
 const BackgroundGradient = styled.div`
   height: 220px;
   position: relative;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 `;
 
 const ProfileImageContainer = styled.div`
