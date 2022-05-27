@@ -15,6 +15,7 @@ function MyApp({ Component, pageProps }) {
     <RecoilRoot>
       <ReactNotifications />
       <Component {...pageProps} />
+      <div id="portal" />
     </RecoilRoot>
   );
 }
