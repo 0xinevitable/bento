@@ -16,9 +16,8 @@ import { ProfileLinkSection } from './components/ProfileLinkSection';
 import { QuestionSection } from './components/QuestionSection';
 import { StickyTab } from './components/StickyTab';
 import { Palette, usePalette } from './hooks/usePalette';
-import { shortenAddress } from './utils/address';
 
-// import { ReactComponent as CheckCircleIcon } from '@/assets/icons/ic-check-circle.svg';
+import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
 
 const data = {
   color: '#39e27d',
@@ -103,7 +102,7 @@ const ProfilePage = () => {
         </Username>
         <Bio>{data.bio}</Bio>
         <PrimaryArchievement>
-          {/* <CheckCircleIcon color={palette.primary} /> */}
+          <CheckCircleIcon color={palette.primary} />
           <span>
             Early holder of{' '}
             <PrimaryArchievementLink style={{ color: palette.primary }}>

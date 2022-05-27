@@ -8,7 +8,7 @@ import { useTimeAgo } from '@/hooks/useTimeAgo';
 import { UserQuestion } from '../../types/UserProfile';
 import { throttle } from '@/utils/throttle';
 
-// import { ReactComponent as HorizontalDotsIcon } from '@/assets/icons/ic-dots-horizontal.svg';
+import HorizontalDotsIcon from '@/assets/icons/ic-dots-horizontal.svg';
 
 type Props = {
   question: UserQuestion;
@@ -132,7 +132,7 @@ type MoreButtonProps = {
 const MoreButton: React.FC<MoreButtonProps> = ({ onClick }) => {
   return (
     <MoreButtonContainer onClick={onClick}>
-      {/* <MoreButtonIcon /> */}
+      <MoreButtonIcon />
     </MoreButtonContainer>
   );
 };
@@ -151,11 +151,11 @@ const MoreButtonContainer = styled.button`
     background-color: rgba(255, 255, 255, 0.3);
   }
 `;
-// const MoreButtonIcon = styled(HorizontalDotsIcon)`
-//   width: 18px;
-//   height: 18px;
-//   color: #262c34;
-// `;
+const MoreButtonIcon = styled(HorizontalDotsIcon)`
+  width: 18px;
+  height: 18px;
+  color: #262c34;
+`;
 
 const Answer = styled.p`
   margin: 0;
