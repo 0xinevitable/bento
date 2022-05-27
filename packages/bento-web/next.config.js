@@ -4,6 +4,9 @@ const withInterceptStdout = require('next-intercept-stdout');
 module.exports = withInterceptStdout(
   withSvgr({
     reactStrictMode: true,
+    compiler: {
+      styledComponents: true,
+    },
     webpack: (config) => {
       config.resolve.fallback = {
         ...config.resolve.fallback,

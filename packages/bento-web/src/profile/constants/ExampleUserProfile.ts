@@ -1,0 +1,136 @@
+import {
+  UserProfile,
+  UserProfileTab,
+  UserQuestions,
+  UserQuestionType,
+} from '../types/UserProfile';
+
+export const ExampleUserProfile: UserProfile = {
+  username: 'junhoyeo',
+  displayName: 'Junho Yeo',
+  images: ['/assets/img-example-cover.png'],
+  verified: true,
+  introduction: 'Creating new networks with @Linky',
+  description: 'Thinking about how we can dominate the world...',
+  tabs: [UserProfileTab.Links, UserProfileTab.Questions],
+  links: [
+    {
+      title: 'Facebook',
+      description: 'My Facebook link',
+      href: 'https://facebook.com/ijustdothethingsilike',
+      image: '/assets/img-example-link.png',
+    },
+    {
+      title: 'Instagram',
+      description: 'My Instagram link',
+      href: 'https://instagram.com/_junhoyeo',
+      image: '/assets/img-example-link.png',
+    },
+    {
+      title: 'GitHub',
+      description: 'My GitHub link',
+      href: 'http://github.com/junhoyeo',
+      image: '/assets/img-example-link.png',
+    },
+    {
+      title: 'Clubhouse',
+      description: 'My Clubhouse link',
+      href: 'http://inssa.club/junhoyeo',
+      image: '/assets/img-example-link.png',
+    },
+  ],
+};
+
+export const ExampleUserQuestions: UserQuestions = {
+  questions: [
+    {
+      request: {
+        type: UserQuestionType.Anonymous,
+        question: 'What do you want',
+        createdAt: new Date().toISOString(),
+      },
+      response: {
+        answer: 'I want to rest for a month',
+        createdAt: '2021-04-14T18:03:30.177Z',
+      },
+    },
+    {
+      request: {
+        type: UserQuestionType.Anonymous,
+        question: 'Mint choco',
+        createdAt: new Date(Date.now() - 60000).toISOString(),
+      },
+      response: {
+        answer: 'I love that',
+        createdAt: '2021-04-14T18:03:30.177Z',
+      },
+    },
+    {
+      request: {
+        type: UserQuestionType.Anonymous,
+        question: 'Can we be the next Asked?',
+        createdAt: '2021-04-14T17:56:30.177Z',
+      },
+      response: {
+        answer: "Nah.\nWe're the next unicorn.",
+        createdAt: '2021-04-14T18:03:30.177Z',
+      },
+    },
+    {
+      request: {
+        type: UserQuestionType.Anonymous,
+        question: 'Is Linky going NYSE?',
+        createdAt: '2021-04-13T23:56:30.177Z',
+      },
+      response: {
+        answer: 'Yeah, but maybe blockchain is faster',
+        createdAt: '2021-04-14T18:03:30.177Z',
+      },
+    },
+    {
+      request: {
+        type: UserQuestionType.Anonymous,
+        question: 'Are you still solo?',
+        createdAt: '2021-04-09T17:56:30.177Z',
+      },
+      response: {
+        answer: 'Unfortunately I am',
+        createdAt: '2021-04-10T18:03:30.177Z',
+      },
+    },
+    {
+      request: {
+        type: UserQuestionType.Anonymous,
+        question: "What's Linky's frontend tech stack",
+        createdAt: '2021-04-07T17:56:30.177Z',
+      },
+      response: {
+        answer:
+          'React, Next.js and Styled-Components. No idea more, but maybe Recoil',
+        createdAt: '2021-04-07T20:03:30.177Z',
+      },
+    },
+    {
+      request: {
+        type: UserQuestionType.Anonymous,
+        question: 'Are you new to Docker',
+        createdAt: '2021-04-07T16:56:30.177Z',
+      },
+      response: {
+        answer: "Yup. It's harder than I thought",
+        createdAt: '2021-04-07T19:03:30.177Z',
+      },
+    },
+    {
+      request: {
+        type: UserQuestionType.Anonymous,
+        question: 'Do you like coffee',
+        createdAt: '2021-03-01T17:56:30.177Z',
+      },
+      response: {
+        answer: "I don't like it that much.",
+        createdAt: '2021-03-01T20:03:30.177Z',
+      },
+    },
+  ],
+};
