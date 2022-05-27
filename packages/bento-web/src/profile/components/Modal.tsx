@@ -2,7 +2,7 @@ import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { Portal } from './Portal';
+import { Portal } from '@/components/Portal';
 
 export type ModalProps = HTMLMotionProps<'div'> & {
   visible: boolean;
