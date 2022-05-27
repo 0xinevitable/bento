@@ -9,6 +9,7 @@ import { walletsAtom } from '@/recoil/wallets';
 import { WalletList } from './components/WalletList';
 import { useRecoilValue } from 'recoil';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
+import { BottomTabBar } from '@/components/BottomTabBar'
 
 const walletBalanceReducer =
   (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -241,6 +242,8 @@ const LandingPage = () => {
           ))}
         </ul>
       </div>
+
+      <BottomTabBar />
     </div>
   );
 };
