@@ -18,9 +18,15 @@ export const ExampleUserProfile: UserProfile = {
   tabs: [UserProfileTab.Links, UserProfileTab.Questions],
   links: [
     {
-      title: 'Facebook',
-      description: 'My Facebook link',
-      href: 'https://facebook.com/ijustdothethingsilike',
+      title: 'GitHub',
+      description: 'My GitHub link',
+      href: 'http://github.com/junhoyeo',
+      image: EXAMPLE_IMAGE,
+    },
+    {
+      title: 'Twitter',
+      description: 'My Twitter link',
+      href: 'https://twitter.com/_junhoyeo',
       image: EXAMPLE_IMAGE,
     },
     {
@@ -30,15 +36,9 @@ export const ExampleUserProfile: UserProfile = {
       image: EXAMPLE_IMAGE,
     },
     {
-      title: 'GitHub',
-      description: 'My GitHub link',
-      href: 'http://github.com/junhoyeo',
-      image: EXAMPLE_IMAGE,
-    },
-    {
-      title: 'Clubhouse',
-      description: 'My Clubhouse link',
-      href: 'http://inssa.club/junhoyeo',
+      title: 'Facebook',
+      description: 'My Facebook link',
+      href: 'https://facebook.com/ijustdothethingsilike',
       image: EXAMPLE_IMAGE,
     },
   ],
