@@ -5,10 +5,13 @@ import {
   UserQuestionType,
 } from '../types/UserProfile';
 
+const EXAMPLE_IMAGE =
+  'https://lh3.googleusercontent.com/ZCpHACZeXMo1F8gnb0BdbzsGovh3nxdouU7LnjZcF4SCW3AQAOQwnh5zXRX34v8AqtO11AXthAes-RAKtAD5xOXM5astTp_29zGo=w397';
+
 export const ExampleUserProfile: UserProfile = {
   username: 'junhoyeo',
   displayName: 'Junho Yeo',
-  images: ['/assets/img-example-cover.png'],
+  images: [EXAMPLE_IMAGE],
   verified: true,
   introduction: 'Creating new networks with @Linky',
   description: 'Thinking about how we can dominate the world...',
@@ -18,25 +21,25 @@ export const ExampleUserProfile: UserProfile = {
       title: 'Facebook',
       description: 'My Facebook link',
       href: 'https://facebook.com/ijustdothethingsilike',
-      image: '/assets/img-example-link.png',
+      image: EXAMPLE_IMAGE,
     },
     {
       title: 'Instagram',
       description: 'My Instagram link',
       href: 'https://instagram.com/_junhoyeo',
-      image: '/assets/img-example-link.png',
+      image: EXAMPLE_IMAGE,
     },
     {
       title: 'GitHub',
       description: 'My GitHub link',
       href: 'http://github.com/junhoyeo',
-      image: '/assets/img-example-link.png',
+      image: EXAMPLE_IMAGE,
     },
     {
       title: 'Clubhouse',
       description: 'My Clubhouse link',
       href: 'http://inssa.club/junhoyeo',
-      image: '/assets/img-example-link.png',
+      image: EXAMPLE_IMAGE,
     },
   ],
 };

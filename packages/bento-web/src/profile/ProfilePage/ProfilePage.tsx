@@ -1,3 +1,4 @@
+import { BottomTabBar } from '@/components/BottomTabBar';
 import axios from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
@@ -8,6 +9,7 @@ import styled, { css } from 'styled-components';
 
 import { MobileSizedPage } from '../components/MobileSizedPage';
 import { Modal } from '../components/Modal';
+import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 
 import { ProfileImage } from './components/ProfileImage';
 import { ProfileLinkSection } from './components/ProfileLinkSection';
@@ -31,26 +33,7 @@ const data = {
   profileImageURL:
     'https://img.seadn.io/files/c021cc895492493a747d6fc6fe7ec540.png?auto=format&w=600',
   bio: 'Software Enginner 🦄⚡️\nBuilding the web3 world 🌎',
-  links: [
-    {
-      title: 'Facebook',
-      description: 'My Facebook link',
-      href: 'https://facebook.com/ijustdothethingsilike',
-      image: '/assets/img-example-link.png',
-    },
-    {
-      title: 'Instagram',
-      description: 'My Instagram link',
-      href: 'https://instagram.com/_junhoyeo',
-      image: '/assets/img-example-link.png',
-    },
-    {
-      title: 'GitHub',
-      description: 'My GitHub link',
-      href: 'http://github.com/junhoyeo',
-      image: '/assets/img-example-link.png',
-    },
-  ],
+  links: ExampleUserProfile.links,
 };
 
 enum AddressProfileTab {
@@ -162,6 +145,8 @@ const ProfilePage = () => {
           )}
         </TabContent>
       </AnimatePresence>
+
+      <BottomTabBar />
     </MobileSizedPage>
   );
 };
