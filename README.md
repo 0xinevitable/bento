@@ -15,17 +15,16 @@
 
 ### 2. Social Profiles
 
-1. Web2 - Profile links + Social (Gen Z)
+#### 2-1. Web2 - Profile links + Social (Gen Z)
 
 - 프로필 링크 제공
 - 익명질문(에스크)
 
-2. Asset-based communities
+#### 2-2. Web3 - Asset-based communities
 
 - 지갑, NFT 목록 등 공개, “업적” 표시
 - “특정 자산 보유”, “몇년부터 활동한 OG” 등
-
-3. 업적 공개된 상태로 토스 “오픈채팅”
+- 업적 공개된 상태로 토스 “오픈채팅”
 
 ### 3. Labeling Transactions
 
