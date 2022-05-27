@@ -39,14 +39,12 @@ const data = {
 enum AddressProfileTab {
   Links = 'Links',
   Questions = 'Questions',
-  Tokens = 'Tokens',
-  Gallery = 'Gallery',
+  Assets = 'Assets',
 }
 const tabs = [
   AddressProfileTab.Links,
   AddressProfileTab.Questions,
-  AddressProfileTab.Tokens,
-  AddressProfileTab.Gallery,
+  AddressProfileTab.Assets,
 ];
 
 const ProfilePage = () => {
@@ -111,9 +109,9 @@ const ProfilePage = () => {
           {/* <CheckCircleIcon color={palette.primary} /> */}
           <span>
             Early holder of{' '}
-            <PrimaryArchievementNFT style={{ color: palette.primary }}>
+            <PrimaryArchievementLink style={{ color: palette.primary }}>
               CloneX
-            </PrimaryArchievementNFT>
+            </PrimaryArchievementLink>
           </span>
         </PrimaryArchievement>
       </Information>
@@ -226,7 +224,7 @@ const PrimaryArchievement = styled.div`
     color: #78797f;
   }
 `;
-const PrimaryArchievementNFT = styled.a`
+const PrimaryArchievementLink = styled.a`
   text-decoration-line: underline;
 `;
 
