@@ -71,18 +71,7 @@ export const ExampleUserQuestions: UserQuestions = {
     {
       request: {
         type: UserQuestionType.Anonymous,
-        question: 'Can we be the next Asked?',
-        createdAt: '2021-04-14T17:56:30.177Z',
-      },
-      response: {
-        answer: "Nah.\nWe're the next unicorn.",
-        createdAt: '2021-04-14T18:03:30.177Z',
-      },
-    },
-    {
-      request: {
-        type: UserQuestionType.Anonymous,
-        question: 'Is Linky going NYSE?',
+        question: 'Are we going NYSE?',
         createdAt: '2021-04-13T23:56:30.177Z',
       },
       response: {
@@ -93,23 +82,12 @@ export const ExampleUserQuestions: UserQuestions = {
     {
       request: {
         type: UserQuestionType.Anonymous,
-        question: 'Are you still solo?',
-        createdAt: '2021-04-09T17:56:30.177Z',
-      },
-      response: {
-        answer: 'Unfortunately I am',
-        createdAt: '2021-04-10T18:03:30.177Z',
-      },
-    },
-    {
-      request: {
-        type: UserQuestionType.Anonymous,
         question: "What's Linky's frontend tech stack",
         createdAt: '2021-04-07T17:56:30.177Z',
       },
       response: {
         answer:
-          'React, Next.js and Styled-Components. No idea more, but maybe Recoil',
+          'Next.js with TypeScript, Recoil for state management, Yarn Workspaces for monorepo management. We use Tailwind CSS and `styled-components` for styling. Someday when everything is ready we can update React to 18.',
         createdAt: '2021-04-07T20:03:30.177Z',
       },
     },

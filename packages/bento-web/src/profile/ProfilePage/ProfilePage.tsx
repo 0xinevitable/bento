@@ -29,7 +29,6 @@ const data = {
       #90cff1 100%
     )
   `,
-  solana: 'HJLQd7CxQK5epNLE3R4u8b2MdGzmcvXjpntGWfht4FZH',
   profileImageURL:
     'https://img.seadn.io/files/c021cc895492493a747d6fc6fe7ec540.png?auto=format&w=600',
   bio: 'Software Enginner 🦄⚡️\nBuilding the web3 world 🌎',
@@ -49,11 +48,9 @@ const tabs = [
 
 const ProfilePage = () => {
   const props = {
-    domain: 'junhoyeo.eth',
-    address: '0x7777777141f111cf9f0308a63dbd9d0cad3010c4',
+    name: 'Junho Yeo',
+    username: 'juno',
   };
-
-  const shortenedAddress = useMemo(() => shortenAddress(props.address), []);
 
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
@@ -66,10 +63,10 @@ const ProfilePage = () => {
 
   const [title, description, image, url] = useMemo(
     () => [
-      `${props.domain ?? 'Unknown'} - Linky`,
+      `${props.name ?? props.username} - Linky`,
       data.bio,
       data.profileImageURL,
-      `https://linky.vc/address/${props.domain ?? props.address}`,
+      `https://linky.vc/address/${props.username}`,
     ],
     [],
   );
@@ -100,10 +97,10 @@ const ProfilePage = () => {
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        <DisplayName>{props.domain ?? 'Unknown'}</DisplayName>
-        <Address style={{ color: palette.primary }}>
-          {`@${shortenedAddress}`}
-        </Address>
+        <DisplayName>{props.name ?? props.username}</DisplayName>
+        <Username style={{ color: palette.primary }}>
+          {`@${props.username}`}
+        </Username>
         <Bio>{data.bio}</Bio>
         <PrimaryArchievement>
           {/* <CheckCircleIcon color={palette.primary} /> */}
@@ -192,7 +189,7 @@ const DisplayName = styled.h1`
   color: #ffffff;
 `;
 
-const Address = styled.p`
+const Username = styled.p`
   margin: 4px 0 0;
   font-size: 16px;
   line-height: 19px;
