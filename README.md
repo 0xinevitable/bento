@@ -1,31 +1,41 @@
-# Bento (弁当)
+# 🍱 Bento, the Web3 SuperApp
+
+## Background
 
 - 체인별로 데이터랑 서비스가 분산화되어 있음.
 - 대시보드 같은 제품이 하나 나와도 특정 체인에서 나오거나, 체인이나 플랫폼을 미는 VC에서 투자받으니까, 서비스가 특정 체인에만 귀속될 수밖에 없음
-- SaaS도 할 수 있고 우리가 이걸로 다른 앱 만들어도 됨. 어떤 방식으로든 수익은 나올 것(코스모스 생태계에서 Keplr 의 영향력을 생각해보자). 무조건 독보적인 위치에 들어갈 수 있음
 
-## 🚀 Milestones
+## 🚣 Milestones
 
-3.0 까지 올해 안에 해보는 게 목표
+### 1. Web3 Dashboard(1.0) ✅
 
-### 1.0
+1.  다양한 체인, 플랫폼별로 파편화된 블록체인 지갑 한번에 모으기(Grouping blockchain wallets)
+2.  현재 자산 가치 표시, 현재 투자하고 있는 디파이 표시 ⇒ 포트폴리오 제공
+3.  지원하는 플랫폼별로 마케팅
 
-- 사용자는 주소 여러 개를 하나의 계정에 연동할 수 있습니다.
-- 사용자는 연결한 모든 계정들의 **네이티브 토큰** 의 잔액을 한눈에 볼 수 있습니다.
+### 2. Social Profiles
 
-### 2.0
+1. Web2 - Profile links + Social (Gen Z)
 
-- 사용자는 각각의 체인(플랫폼) 위에 있는 여러 토큰의 잔액을 함께 볼 수 있습니다.
+- 프로필 링크 제공
+- 익명질문(에스크)
 
-### 3.0
+2. Asset-based communities
 
-- 트랜잭션 라벨링 → 사용자 특성 도출
-- 프로필 기능
+- 지갑, NFT 목록 등 공개, “업적” 표시
+- “특정 자산 보유”, “몇년부터 활동한 OG” 등
 
-### 4.0
+3. 업적 공개된 상태로 토스 “오픈채팅”
 
-- 히스토리 기능(과거 특정 시점의 Net worth 구하기)
-- 타인의 투자 포트폴리오 유동화
+### 3. Labeling Transactions
+
+1.  Transaction History + Social ⇒ Like Venmo, Toss
+2.  Categorization ⇒ SaaS
+
+### 4. SuperApp
+
+- Web3 DApp Explorer
+- Meta + Universe
 
 ## 🚀 Preparing Local Dev Environment
 
