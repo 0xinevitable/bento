@@ -2,7 +2,7 @@
   "name": "bento",
   "version": "1.0.0",
   "private": true,
-  "repository": "https://github.com/inevt/dashboard",
+  "repository": "https://github.com/inevitable-changes/dashboard",
   "author": "Junho Yeo <i@junho.io>",
   "license": "MIT",
   "workspaces": [

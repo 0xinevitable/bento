@@ -40,7 +40,7 @@
 ## 🚀 Preparing Local Dev Environment
 
 ```bash
-git clone https://github.com/inevt/dashboard
+git clone https://github.com/inevitable-changes/dashboard
 cd dashboard
 yarn install
 ```
