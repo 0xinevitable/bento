@@ -1,5 +1,6 @@
 import { BottomTabBar } from '@/components/BottomTabBar';
-import axios from 'axios';
+import { PageContainer } from '@/components/PageContainer';
+
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 
@@ -7,7 +8,6 @@ import DocumentHead from 'next/head';
 import React, { useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { MobileSizedPage } from '../components/MobileSizedPage';
 import { Modal } from '../components/Modal';
 import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 
@@ -75,7 +75,7 @@ const ProfilePage = () => {
   );
 
   return (
-    <MobileSizedPage>
+    <PageContainer>
       <DocumentHead>
         <title>{title}</title>
         <meta property="og:title" content={title} />
@@ -143,9 +143,7 @@ const ProfilePage = () => {
           )}
         </TabContent>
       </AnimatePresence>
-
-      <BottomTabBar />
-    </MobileSizedPage>
+    </PageContainer>
   );
 };
 

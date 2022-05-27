@@ -9,7 +9,8 @@ import { walletsAtom } from '@/recoil/wallets';
 import { WalletList } from './components/WalletList';
 import { useRecoilValue } from 'recoil';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
-import { BottomTabBar } from '@/components/BottomTabBar'
+import { BottomTabBar } from '@/components/BottomTabBar';
+import { PageContainer } from '@/components/PageContainer';
 
 const walletBalanceReducer =
   (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -214,37 +215,33 @@ const LandingPage = () => {
   );
 
   return (
-    <div className="min-h-screen px-4 pt-6 pb-24 flex">
-      <div className="w-full max-w-2xl mx-auto relative z-0">
-        <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
+    <PageContainer>
+      <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
 
-        <div className="mt-4 w-full flex justify-between">
-          <div className="flex flex-col justify-center">
-            <span className="text-xl text-slate-500">Net worth</span>
-            <span className="text-2xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-          </div>
-
-          <div className="flex flex-col">
-            <Web3Connector />
-          </div>
+      <div className="mt-4 w-full flex justify-between">
+        <div className="flex flex-col justify-center">
+          <span className="text-xl text-slate-500">Net worth</span>
+          <span className="text-2xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
         </div>
 
-        <WalletList />
-        <AppendWallet />
-
-        <ul className="mt-8">
-          {tokenBalances.map((info) => (
-            <TokenBalanceItem
-              key={info.symbol}
-              logo={info.logo ?? ''}
-              {...info}
-            />
-          ))}
-        </ul>
+        <div className="flex flex-col">
+          <Web3Connector />
+        </div>
       </div>
 
-      <BottomTabBar />
-    </div>
+      <WalletList />
+      <AppendWallet />
+
+      <ul className="mt-8">
+        {tokenBalances.map((info) => (
+          <TokenBalanceItem
+            key={info.symbol}
+            logo={info.logo ?? ''}
+            {...info}
+          />
+        ))}
+      </ul>
+    </PageContainer>
   );
 };
 
