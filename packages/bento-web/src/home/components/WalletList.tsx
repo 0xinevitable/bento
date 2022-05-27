@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
+import { Store } from 'react-notifications-component';
 
 import { walletsAtom } from '@/recoil/wallets';
 import { shortenAddress } from '@bento/core/lib/utils';
@@ -15,6 +16,23 @@ const LOGO_URLS = {
 export const WalletList = () => {
   const [wallets, setWallets] = useRecoilState(walletsAtom);
 
+  const onClickCopy = useCallback((text) => {
+    copyToClipboard(text);
+    Store.addNotification({
+      title: 'Copied to Clipboard!',
+      message: text,
+      type: 'success',
+      insert: 'top',
+      container: 'top-right',
+      animationIn: ['animate__animated', 'animate__fadeIn'],
+      animationOut: ['animate__animated', 'animate__fadeOut'],
+      dismiss: {
+        duration: 3000,
+        onScreen: true,
+      },
+    });
+  }, []);
+
   return (
     <NoSSR>
       <div className="mt-4">
@@ -29,7 +47,7 @@ export const WalletList = () => {
                 {shortenAddress(wallet.address)}
                 <button
                   className="text-white"
-                  onClick={() => copyToClipboard(wallet.address)}
+                  onClick={() => onClickCopy(wallet.address)}
                 >
                   Copy
                 </button>

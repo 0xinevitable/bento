@@ -2634,6 +2634,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.1.0"],\
             ["react-dom", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:18.1.0"],\
             ["react-is", "npm:18.1.0"],\
+            ["react-notifications-component", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:4.0.1"],\
             ["recoil", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:0.7.3-alpha.2"],\
             ["swr", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:2.0.0-beta.3"],\
             ["tailwindcss", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.0.24"],\
@@ -11940,6 +11941,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/react-is-npm-18.1.0-6642a99f70-d206a0fe67.zip/node_modules/react-is/",\
           "packageDependencies": [\
             ["react-is", "npm:18.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-notifications-component", [\
+        ["npm:4.0.1", {\
+          "packageLocation": "./.yarn/cache/react-notifications-component-npm-4.0.1-fa6b96594e-cf29c0dd84.zip/node_modules/react-notifications-component/",\
+          "packageDependencies": [\
+            ["react-notifications-component", "npm:4.0.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:4.0.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-notifications-component-virtual-96d41582fa/0/cache/react-notifications-component-npm-4.0.1-fa6b96594e-cf29c0dd84.zip/node_modules/react-notifications-component/",\
+          "packageDependencies": [\
+            ["react-notifications-component", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:4.0.1"],\
+            ["@types/react", "npm:17.0.45"],\
+            ["react", "npm:18.1.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
