@@ -46,10 +46,12 @@ const tabs = [
 
 type ProfileInstanceProps = {
   profile: UserProfile;
+  isPreview?: boolean;
 };
 
 export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   profile,
+  isPreview,
 }) => {
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
@@ -72,11 +74,13 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        <Link href="/profile/edit" passHref>
-          <a>
-            <ProfileEditButton />
-          </a>
-        </Link>
+        {!isPreview && (
+          <Link href="/profile/edit" passHref>
+            <a>
+              <ProfileEditButton />
+            </a>
+          </Link>
+        )}
         <DisplayName>{profile.displayName ?? profile.username}</DisplayName>
         <Username style={{ color: palette.primary }}>
           {`@${profile.username}`}

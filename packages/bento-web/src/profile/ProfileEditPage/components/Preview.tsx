@@ -8,7 +8,7 @@ export const Preview = () => {
     <Wrapper>
       <Container>
         <Card>
-          <ProfileInstance profile={ExampleUserProfile} />
+          <ProfileInstance profile={ExampleUserProfile} isPreview />
         </Card>
       </Container>
     </Wrapper>
