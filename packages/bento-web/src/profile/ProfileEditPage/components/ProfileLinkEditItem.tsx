@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 type Props = ProfileLink & {};
 
-export const ProfileLinkItem: React.FC<Props> = ({
+export const ProfileLinkEditItem: React.FC<Props> = ({
   title,
   description,
   href,

@@ -6,7 +6,7 @@ import { FieldTextArea } from '../components/FieldTextArea';
 import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 
 import { Preview } from './components/Preview';
-import { ProfileLinkItem } from './components/ProfileLinkItem';
+import { ProfileLinkEditItem } from './components/ProfileLinkEditItem';
 import { TabBar } from './components/TabBar';
 
 const ManagePage = () => {
@@ -50,7 +50,7 @@ const ManagePage = () => {
             </ProfileContainer>
             <ProfileLinkList id="links">
               {ExampleUserProfile.links.map((item, index) => {
-                return <ProfileLinkItem key={`item-${index}`} {...item} />;
+                return <ProfileLinkEditItem key={`item-${index}`} {...item} />;
               })}
             </ProfileLinkList>
           </Container>
