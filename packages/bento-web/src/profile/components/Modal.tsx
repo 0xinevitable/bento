@@ -71,17 +71,14 @@ const FixedContainer = styled.div<FixedContainerProps>`
   cursor: pointer;
   z-index: 99;
 
-  ${
-    // @ts-ignore
-    ({ disabled }) =>
-      disabled &&
-      css`
-        &,
-        & > div {
-          pointer-events: none;
-        }
-      `
-  };
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      &,
+      & > div {
+        pointer-events: none;
+      }
+    `};
 `;
 
 const AnimatedBlur = styled(motion.div)`

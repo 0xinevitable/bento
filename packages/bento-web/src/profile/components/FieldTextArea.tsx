@@ -33,17 +33,14 @@ const Container = styled.div<ContainerProps>`
   margin-bottom: 32px;
   transition: border-color 0.2s ease-in-out;
 
-  ${
-    // @ts-ignore
-    ({ focused }) =>
-      focused
-        ? css`
-            border-bottom: 2px solid #6ae7e2;
-          `
-        : css`
-            border-bottom: 2px solid black;
-          `
-  }
+  ${({ focused }) =>
+    focused
+      ? css`
+          border-bottom: 2px solid #6ae7e2;
+        `
+      : css`
+          border-bottom: 2px solid black;
+        `}
 `;
 
 const Field = styled.span`
@@ -55,8 +52,5 @@ const Field = styled.span`
 `;
 
 const TextArea = styled.textarea`
-  ${
-    // @ts-ignore
-    inputStyle
-  }
+  ${inputStyle}
 `;

@@ -79,16 +79,13 @@ const TabItem = styled.li<TabItemProps>`
   justify-content: center;
   cursor: pointer;
 
-  ${
-    // @ts-ignore
-    ({ selected, primaryColor }) =>
-      selected &&
-      css`
-        & > span {
-          color: ${primaryColor};
-        }
-      `
-  };
+  ${({ selected, primaryColor }) =>
+    selected &&
+    css`
+      & > span {
+        color: ${primaryColor};
+      }
+    `};
 
   ${({ disabled }) =>
     disabled &&
@@ -116,13 +113,10 @@ const TabIndicator = styled.div<TabIndicatorProps>`
   border-radius: 2px;
   transition: all 0.2s ease-in-out;
 
-  ${
-    // @ts-ignore
-    ({ primaryColor, shadowColor }) => css`
-      background-color: ${primaryColor};
-      box-shadow: 0 4px 12px ${shadowColor};
-    `
-  };
+  ${({ primaryColor, shadowColor }) => css`
+    background-color: ${primaryColor};
+    box-shadow: 0 4px 12px ${shadowColor};
+  `};
 `;
 
 const TabBottomBorder = styled.div`

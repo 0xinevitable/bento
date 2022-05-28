@@ -252,20 +252,17 @@ const TabContent = styled.div<TabContentProps>`
       opacity: 0.65;
     }
 
-    ${
-      // @ts-ignore
-      ({ palette }) => css`
-        background-color: ${palette.primary};
-        box-shadow: 0 8px 16px ${palette.primaryShadow};
-        text-shadow: 2px 2px 4px ${palette.darkShadow};
+    ${({ palette }) => css`
+      background-color: ${palette.primary};
+      box-shadow: 0 8px 16px ${palette.primaryShadow};
+      text-shadow: 2px 2px 4px ${palette.darkShadow};
 
-        &:hover {
-          background-color: ${palette.dark};
-          box-shadow: 0 4px 16px ${palette.darkShadow};
-          transform: scale(1.05);
-        }
-      `
-    };
+      &:hover {
+        background-color: ${palette.dark};
+        box-shadow: 0 4px 16px ${palette.darkShadow};
+        transform: scale(1.05);
+      }
+    `};
   }
 `;
 
@@ -279,9 +276,3 @@ const AnimatedTab = (props: HTMLMotionProps<'div'>) => (
     {...props}
   />
 );
-
-const Logo = styled.img`
-  width: 56px;
-  height: 56px;
-  object-fit: cover;
-`;
