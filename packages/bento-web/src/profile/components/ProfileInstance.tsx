@@ -1,23 +1,21 @@
-import { PageContainer } from '@/components/PageContainer';
-
-import Link from 'next/link';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
-
+import Link from 'next/link';
 import React, { useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { Modal } from '../components/Modal';
-import { ExampleUserProfile } from '../constants/ExampleUserProfile';
-
 import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
-import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
+import { PageContainer } from '@/components/PageContainer';
+
 import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
-import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
+import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
 import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
+import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
+import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
+import { Modal } from '../components/Modal';
+import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 import { UserProfile } from '../types/UserProfile';
-import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 
 const data = {
   color: '#39e27d',

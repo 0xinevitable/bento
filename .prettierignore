@@ -1,0 +1,7 @@
+.next
+.vercel
+
+# Yarn
+.yarn
+.pnp.cjs
+.pnp.loader.mjs

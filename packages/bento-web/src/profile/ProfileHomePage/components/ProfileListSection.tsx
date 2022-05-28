@@ -1,9 +1,10 @@
+import React from 'react';
+import styled from 'styled-components';
+
 import {
   RoundProfile,
   RoundProfileProps,
 } from '@/profile/components/RoundProfile';
-import React from 'react';
-import styled from 'styled-components';
 
 type Props = {
   title: string;

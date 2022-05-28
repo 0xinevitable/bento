@@ -3,12 +3,12 @@ import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import React, { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
-import { QuestionUITexts } from '../../constants/Questions';
+import HorizontalDotsIcon from '@/assets/icons/ic-dots-horizontal.svg';
 import { useTimeAgo } from '@/hooks/useTimeAgo';
-import { UserQuestion } from '../../types/UserProfile';
 import { throttle } from '@/utils/throttle';
 
-import HorizontalDotsIcon from '@/assets/icons/ic-dots-horizontal.svg';
+import { QuestionUITexts } from '../../constants/Questions';
+import { UserQuestion } from '../../types/UserProfile';
 
 type Props = {
   question: UserQuestion;

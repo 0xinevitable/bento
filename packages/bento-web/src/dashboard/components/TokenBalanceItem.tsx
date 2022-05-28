@@ -1,9 +1,11 @@
-import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
-import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { shortenAddress } from '@bento/core/lib/utils';
-import { TokenIcon } from './TokenIcon';
-import { useMemo, useState } from 'react';
 import clsx from 'clsx';
+import { useMemo, useState } from 'react';
+
+import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
+import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
+
+import { TokenIcon } from './TokenIcon';
 
 type TokenBalanceItemProps = {
   symbol: string;

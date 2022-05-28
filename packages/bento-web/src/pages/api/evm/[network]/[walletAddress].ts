@@ -1,6 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { EVMBasedChains } from '@bento/core/lib/types';
-import { safePromiseAll } from '@bento/core/lib/utils';
 import {
   Chain,
   ERC20TokenBalance,
@@ -8,6 +5,9 @@ import {
   KlaytnChain,
   PolygonChain,
 } from '@bento/core/lib/chains';
+import { EVMBasedChains } from '@bento/core/lib/types';
+import { safePromiseAll } from '@bento/core/lib/utils';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export type WalletBalance = {
   walletAddress: string;

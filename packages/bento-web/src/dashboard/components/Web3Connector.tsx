@@ -1,7 +1,6 @@
 import { Web3Provider } from '@ethersproject/providers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import React, { useCallback } from 'react';
-
 import Web3Modal from 'web3modal';
 
 const providerOptions = {

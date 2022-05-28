@@ -3,8 +3,9 @@ import DocumentHead from 'next/head';
 import React, { useMemo } from 'react';
 
 import { PageContainer } from '@/components/PageContainer';
-import { ExampleUserProfile } from '../constants/ExampleUserProfile';
+
 import { ProfileInstance } from '../components/ProfileInstance';
+import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 
 const data = {
   color: '#39e27d',
