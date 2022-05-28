@@ -5,16 +5,17 @@ import {
   UserQuestionType,
 } from '../types/UserProfile';
 
+const PROFILE_IMAGE =
+  'https://img.seadn.io/files/c021cc895492493a747d6fc6fe7ec540.png?auto=format&w=600';
 const EXAMPLE_IMAGE =
   'https://lh3.googleusercontent.com/ZCpHACZeXMo1F8gnb0BdbzsGovh3nxdouU7LnjZcF4SCW3AQAOQwnh5zXRX34v8AqtO11AXthAes-RAKtAD5xOXM5astTp_29zGo=w397';
 
 export const ExampleUserProfile: UserProfile = {
   username: 'juno',
   displayName: 'Junho Yeo',
-  images: [EXAMPLE_IMAGE],
+  images: [PROFILE_IMAGE, EXAMPLE_IMAGE],
   verified: true,
-  introduction: 'Creating new networks with @Linky',
-  description: 'Thinking about how we can dominate the world...',
+  bio: 'Software Enginner 🦄⚡️\nBuilding the web3 world 🌎',
   tabs: [UserProfileTab.Links, UserProfileTab.Questions],
   links: [
     {

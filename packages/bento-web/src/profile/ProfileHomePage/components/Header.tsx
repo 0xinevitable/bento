@@ -55,7 +55,7 @@ const Title = styled.span`
   color: rgba(255, 255, 255, 0.85);
 `;
 const Username = styled.span`
-  margin-top: 8px;
+  margin-top: 2px;
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.45);
 `;

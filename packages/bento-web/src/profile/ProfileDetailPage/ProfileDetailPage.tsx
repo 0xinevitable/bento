@@ -27,8 +27,7 @@ const data = {
       #90cff1 100%
     )
   `,
-  profileImageURL:
-    'https://img.seadn.io/files/c021cc895492493a747d6fc6fe7ec540.png?auto=format&w=600',
+  profileImageURL: ExampleUserProfile.images[0],
   bio: 'Software Enginner 🦄⚡️\nBuilding the web3 world 🌎',
   links: ExampleUserProfile.links,
 };
