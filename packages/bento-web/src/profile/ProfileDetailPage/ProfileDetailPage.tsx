@@ -1,5 +1,6 @@
 import { PageContainer } from '@/components/PageContainer';
 
+import Link from 'next/link';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 
@@ -15,6 +16,7 @@ import { ProfileLinkSection } from './components/ProfileLinkSection';
 import { QuestionSection } from './components/QuestionSection';
 import { StickyTab } from './components/StickyTab';
 import { Palette, usePalette } from './hooks/usePalette';
+import { ProfileEditButton } from './components/ProfileEditButton';
 
 import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
 
@@ -91,6 +93,11 @@ const ProfilePage = () => {
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
+        <Link href="/profile/edit" passHref>
+          <a>
+            <ProfileEditButton />
+          </a>
+        </Link>
         <DisplayName>{profile.displayName ?? profile.username}</DisplayName>
         <Username style={{ color: palette.primary }}>
           {`@${profile.username}`}
@@ -172,6 +179,7 @@ const ClickableProfileImage = styled(ProfileImage)`
 `;
 
 const Information = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
 `;
