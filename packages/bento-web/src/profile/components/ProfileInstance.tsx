@@ -4,22 +4,20 @@ import Link from 'next/link';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 
-import DocumentHead from 'next/head';
 import React, { useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '../components/Modal';
 import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 
-import { ProfileImage } from './components/ProfileImage';
-import { ProfileLinkSection } from './components/ProfileLinkSection';
-import { QuestionSection } from './components/QuestionSection';
-import { StickyTab } from './components/StickyTab';
-import { Palette, usePalette } from './hooks/usePalette';
-import { ProfileEditButton } from './components/ProfileEditButton';
-
 import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
-import { ProfileInstance } from '../components/ProfileInstance';
+import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
+import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
+import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
+import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
+import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
+import { UserProfile } from '../types/UserProfile';
+import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 
 const data = {
   color: '#39e27d',
@@ -46,42 +44,85 @@ const tabs = [
   AddressProfileTab.Assets,
 ];
 
-const profile = ExampleUserProfile;
-
-const ProfilePage = () => {
-  const [title, description, image, url] = useMemo(
-    () => [
-      `${profile.displayName ?? profile.username} - Linky`,
-      data.bio,
-      data.profileImageURL,
-      `https://linky.vc/address/${profile.username}`,
-    ],
-    [],
-  );
-
-  return (
-    <PageContainer>
-      <DocumentHead>
-        <title>{title}</title>
-        <meta property="og:title" content={title} />
-        <meta name="twitter:title" content={title} />
-
-        <meta property="og:description" content={description} />
-        <meta name="twitter:description" content={description} />
-
-        <meta property="og:image" content={image} key="og:image" />
-        <meta property="twitter:image" content={image} key="twitter:image" />
-
-        <meta property="og:url" content={url} />
-        <meta property="twitter:url" content={url} />
-      </DocumentHead>
-
-      <ProfileInstance profile={profile} />
-    </PageContainer>
-  );
+type ProfileInstanceProps = {
+  profile: UserProfile;
 };
 
-export default ProfilePage;
+export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
+  profile,
+}) => {
+  const [isProfileImageModalVisible, setProfileImageModalVisible] =
+    useState<boolean>(false);
+
+  const [selectedTab, setSelectedTab] = useState<AddressProfileTab>(
+    AddressProfileTab.Links,
+  );
+
+  const palette = usePalette(data.color);
+
+  return (
+    <React.Fragment>
+      <BackgroundGradient style={{ background: data.background }}>
+        <ProfileImageContainer>
+          <ClickableProfileImage
+            source={data.profileImageURL}
+            onClick={() => setProfileImageModalVisible((value) => !value)}
+          />
+        </ProfileImageContainer>
+      </BackgroundGradient>
+      <ProfileImageBottomSpacer />
+      <Information>
+        <Link href="/profile/edit" passHref>
+          <a>
+            <ProfileEditButton />
+          </a>
+        </Link>
+        <DisplayName>{profile.displayName ?? profile.username}</DisplayName>
+        <Username style={{ color: palette.primary }}>
+          {`@${profile.username}`}
+        </Username>
+        <Bio>{data.bio}</Bio>
+        <PrimaryArchievement>
+          <CheckCircleIcon color={palette.primary} />
+          <span>
+            Early holder of{' '}
+            <PrimaryArchievementLink style={{ color: palette.primary }}>
+              CloneX
+            </PrimaryArchievementLink>
+          </span>
+        </PrimaryArchievement>
+      </Information>
+      <InformationSpacer />
+      <Modal
+        visible={isProfileImageModalVisible}
+        onDismiss={() => setProfileImageModalVisible((value) => !value)}
+      >
+        <LargeProfileImage src={data.profileImageURL} />
+      </Modal>
+      <StickyTab
+        selected={selectedTab}
+        items={tabs}
+        onChange={(tab) => setSelectedTab(tab)}
+        primaryColor={palette.primary}
+        shadowColor={palette.primaryShadow}
+      />
+      <AnimatePresence initial={false}>
+        <TabContent palette={palette}>
+          {selectedTab === AddressProfileTab.Links && (
+            <AnimatedTab>
+              <ProfileLinkSection items={data.links} />
+            </AnimatedTab>
+          )}
+          {selectedTab === AddressProfileTab.Questions && (
+            <AnimatedTab>
+              <QuestionSection />
+            </AnimatedTab>
+          )}
+        </TabContent>
+      </AnimatePresence>
+    </React.Fragment>
+  );
+};
 
 const BackgroundGradient = styled.div`
   height: 220px;

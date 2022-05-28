@@ -1,3 +1,5 @@
+import { ProfileInstance } from '@/profile/components/ProfileInstance';
+import { ExampleUserProfile } from '@/profile/constants/ExampleUserProfile';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -6,10 +8,7 @@ export const Preview = () => {
     <Wrapper>
       <Container>
         <Card>
-          {/* <Profile
-            profile={ExampleUserProfile}
-            currentTab={ExampleUserProfile.tabs[0]}
-          /> */}
+          <ProfileInstance profile={ExampleUserProfile} />
         </Card>
       </Container>
     </Wrapper>
@@ -47,7 +46,3 @@ const CardContainer = styled.div`
   min-height: 812px;
   background-color: #171b20;
 `;
-
-// const Profile = styled(UserProfile)`
-//   padding-bottom: 32px;
-// `;
