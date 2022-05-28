@@ -9,7 +9,7 @@ const EXAMPLE_IMAGE =
   'https://lh3.googleusercontent.com/ZCpHACZeXMo1F8gnb0BdbzsGovh3nxdouU7LnjZcF4SCW3AQAOQwnh5zXRX34v8AqtO11AXthAes-RAKtAD5xOXM5astTp_29zGo=w397';
 
 export const ExampleUserProfile: UserProfile = {
-  username: 'junhoyeo',
+  username: 'juno',
   displayName: 'Junho Yeo',
   images: [EXAMPLE_IMAGE],
   verified: true,

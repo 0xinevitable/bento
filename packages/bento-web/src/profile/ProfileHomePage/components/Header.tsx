@@ -15,7 +15,7 @@ export const Header = () => {
         onClick={async (event) => {
           event.preventDefault();
           // await Analytics.logEvent('click_home_header_profile');
-          router.push(`/${ExampleUserProfile.username}`);
+          router.push('/profile/account');
         }}
       >
         <Avatar src={ExampleUserProfile.images[0]} />
@@ -38,7 +38,7 @@ const Profile = styled.div`
 
   &:hover {
     transform: scale(1.05);
-    transform-origin: center left;
+    transform-origin: center;
   }
 `;
 
