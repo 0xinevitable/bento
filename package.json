@@ -5,6 +5,9 @@
   "repository": "https://github.com/inevitable-changes/dashboard",
   "author": "Junho Yeo <i@junho.io>",
   "license": "MIT",
+  "scripts": {
+    "lint": "prettier --write ."
+  },
   "workspaces": [
     "packages/*"
   ],
