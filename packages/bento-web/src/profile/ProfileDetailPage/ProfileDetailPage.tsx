@@ -1,4 +1,3 @@
-import { BottomTabBar } from '@/components/BottomTabBar';
 import { PageContainer } from '@/components/PageContainer';
 
 import dedent from 'dedent';
@@ -28,8 +27,7 @@ const data = {
       #90cff1 100%
     )
   `,
-  profileImageURL:
-    'https://img.seadn.io/files/c021cc895492493a747d6fc6fe7ec540.png?auto=format&w=600',
+  profileImageURL: ExampleUserProfile.images[0],
   bio: 'Software Enginner 🦄⚡️\nBuilding the web3 world 🌎',
   links: ExampleUserProfile.links,
 };
@@ -45,12 +43,9 @@ const tabs = [
   AddressProfileTab.Assets,
 ];
 
-const ProfilePage = () => {
-  const props = {
-    name: 'Junho Yeo',
-    username: 'juno',
-  };
+const profile = ExampleUserProfile;
 
+const ProfilePage = () => {
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
 
@@ -62,10 +57,10 @@ const ProfilePage = () => {
 
   const [title, description, image, url] = useMemo(
     () => [
-      `${props.name ?? props.username} - Linky`,
+      `${profile.displayName ?? profile.username} - Linky`,
       data.bio,
       data.profileImageURL,
-      `https://linky.vc/address/${props.username}`,
+      `https://linky.vc/address/${profile.username}`,
     ],
     [],
   );
@@ -96,9 +91,9 @@ const ProfilePage = () => {
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        <DisplayName>{props.name ?? props.username}</DisplayName>
+        <DisplayName>{profile.displayName ?? profile.username}</DisplayName>
         <Username style={{ color: palette.primary }}>
-          {`@${props.username}`}
+          {`@${profile.username}`}
         </Username>
         <Bio>{data.bio}</Bio>
         <PrimaryArchievement>

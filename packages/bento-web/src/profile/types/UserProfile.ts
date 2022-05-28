@@ -15,8 +15,7 @@ export type UserProfile = {
   displayName: string;
   images: string[];
   verified: boolean;
-  introduction: string;
-  description: string;
+  bio: string;
   tabs: UserProfileTab[];
   links: ProfileLink[];
 };
