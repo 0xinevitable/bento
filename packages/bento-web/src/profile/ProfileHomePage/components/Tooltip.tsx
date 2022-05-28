@@ -51,7 +51,7 @@ const Item = styled.span`
 
 export const tooltipWrapperStyle = {
   backdropFilter: 'blur(12px)',
-  '-webkit-backdrop-filter': 'blur(12px)',
+  WebkitBackdropFilter: 'blur(12px)',
   backgroundColor: 'rgba(0, 0, 0, 0.15)',
   borderRadius: 4,
   border: '1px solid rgba(255, 255, 255, 0.45)',

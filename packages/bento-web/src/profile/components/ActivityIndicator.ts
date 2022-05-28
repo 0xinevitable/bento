@@ -19,17 +19,14 @@ export const ActivityIndicator = styled.div<Props>`
   border-left-color: transparent;
   animation: ${rotate} linear infinite 0.75s;
 
-  ${
-    // @ts-ignore
-    ({ color = 'rgba(255, 255, 255, 0.85)', borderSize, size }) => css`
-      color: ${color};
-      border-top-color: ${color};
-      border-right-color: ${color};
+  ${({ color = 'rgba(255, 255, 255, 0.85)', borderSize, size }) => css`
+    color: ${color};
+    border-top-color: ${color};
+    border-right-color: ${color};
 
-      width: ${size}px;
-      height: ${size}px;
+    width: ${size}px;
+    height: ${size}px;
 
-      border-width: ${borderSize}px;
-    `
-  }
+    border-width: ${borderSize}px;
+  `}
 `;
