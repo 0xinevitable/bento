@@ -1,5 +1,8 @@
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+
 import { FieldInput } from '../components/FieldInput';
+import { FieldTextArea } from '../components/FieldTextArea';
 import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 
 import { Preview } from './components/Preview';
@@ -7,10 +10,21 @@ import { ProfileLinkItem } from './components/ProfileLinkItem';
 import { TabBar } from './components/TabBar';
 
 const ManagePage = () => {
+  const [username, setUsername] = useState<string>(ExampleUserProfile.username);
+  const [displayName, setDisplayName] = useState<string>(
+    ExampleUserProfile.displayName,
+  );
+  const [bio, setBio] = useState<string>(ExampleUserProfile.bio);
+
+  const profileDraft = useMemo(
+    () => ({ ...ExampleUserProfile, username, displayName, bio }),
+    [username, displayName, bio],
+  );
+
   return (
     <>
       <Wrapper>
-        <Preview />
+        <Preview profileDraft={profileDraft} />
         <EditorWrapper>
           <TabBar />
           <Container>
@@ -19,16 +33,19 @@ const ManagePage = () => {
                 field="사용자 이름"
                 placeholder="여러분의 링크에 들어가는 이름이에요"
                 defaultValue={ExampleUserProfile.username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <FieldInput
                 field="프로필에 보여질 이름"
                 placeholder="당신의 이름을 적어주세요"
                 defaultValue={ExampleUserProfile.displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
               />
-              <FieldInput
+              <FieldTextArea
                 field="한 줄 소개"
                 placeholder="한 문장으로 당신을 표현해 주세요"
                 defaultValue={ExampleUserProfile.bio}
+                onChange={(e) => setBio(e.target.value)}
               />
             </ProfileContainer>
             <ProfileLinkList id="links">

@@ -28,9 +28,6 @@ const data = {
       #90cff1 100%
     )
   `,
-  profileImageURL: ExampleUserProfile.images[0],
-  bio: 'Software Enginner 🦄⚡️\nBuilding the web3 world 🌎',
-  links: ExampleUserProfile.links,
 };
 
 enum AddressProfileTab {
@@ -61,13 +58,14 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   );
 
   const palette = usePalette(data.color);
+  const profileImageURL = profile.images[0];
 
   return (
     <React.Fragment>
       <BackgroundGradient style={{ background: data.background }}>
         <ProfileImageContainer>
           <ClickableProfileImage
-            source={data.profileImageURL}
+            source={profileImageURL}
             onClick={() => setProfileImageModalVisible((value) => !value)}
           />
         </ProfileImageContainer>
@@ -85,7 +83,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         <Username style={{ color: palette.primary }}>
           {`@${profile.username}`}
         </Username>
-        <Bio>{data.bio}</Bio>
+        <Bio>{profile.bio}</Bio>
         <PrimaryArchievement>
           <CheckCircleIcon color={palette.primary} />
           <span>
@@ -101,7 +99,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         visible={isProfileImageModalVisible}
         onDismiss={() => setProfileImageModalVisible((value) => !value)}
       >
-        <LargeProfileImage src={data.profileImageURL} />
+        <LargeProfileImage src={profileImageURL} />
       </Modal>
       <StickyTab
         selected={selectedTab}
@@ -114,7 +112,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         <TabContent palette={palette}>
           {selectedTab === AddressProfileTab.Links && (
             <AnimatedTab>
-              <ProfileLinkSection items={data.links} />
+              <ProfileLinkSection items={profile.links} />
             </AnimatedTab>
           )}
           {selectedTab === AddressProfileTab.Questions && (

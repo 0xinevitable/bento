@@ -1,14 +1,19 @@
-import { ProfileInstance } from '@/profile/components/ProfileInstance';
-import { ExampleUserProfile } from '@/profile/constants/ExampleUserProfile';
 import React from 'react';
 import styled from 'styled-components';
 
-export const Preview = () => {
+import { ProfileInstance } from '@/profile/components/ProfileInstance';
+import { UserProfile } from '@/profile/types/UserProfile';
+
+type PreviewProps = {
+  profileDraft: UserProfile;
+};
+
+export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
   return (
     <Wrapper>
       <Container>
         <Card>
-          <ProfileInstance profile={ExampleUserProfile} isPreview />
+          <ProfileInstance profile={profileDraft} isPreview />
         </Card>
       </Container>
     </Wrapper>
