@@ -3,23 +3,40 @@ import { ProfileLink } from '@/profile/types/UserProfile';
 import React from 'react';
 import styled from 'styled-components';
 
-type Props = ProfileLink & {};
+type Props = {
+  defaultLink: ProfileLink;
+  linkDraft: ProfileLink;
+  onChange: (link: ProfileLink) => void;
+};
 
 export const ProfileLinkEditItem: React.FC<Props> = ({
-  title,
-  description,
-  href,
-  image,
+  defaultLink,
+  linkDraft,
+  onChange,
 }) => {
   return (
     <Container>
       <LinkImageWrapper>
-        <LinkImage src={image} />
+        <LinkImage src={defaultLink.image} />
       </LinkImageWrapper>
       <Information>
-        <BoldInput placeholder="이름" defaultValue={title}></BoldInput>
-        <Input placeholder="설명" defaultValue={description}></Input>
-        <Input placeholder="링크" defaultValue={href}></Input>
+        <BoldInput
+          placeholder="이름"
+          defaultValue={defaultLink.title}
+          onChange={(e) => onChange({ ...linkDraft, title: e.target.value })}
+        />
+        <Input
+          placeholder="설명"
+          defaultValue={defaultLink.description}
+          onChange={(e) =>
+            onChange({ ...linkDraft, description: e.target.value })
+          }
+        />
+        <Input
+          placeholder="링크"
+          defaultValue={defaultLink.href}
+          onChange={(e) => onChange({ ...linkDraft, href: e.target.value })}
+        />
       </Information>
     </Container>
   );

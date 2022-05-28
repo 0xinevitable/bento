@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { FieldInput } from '../components/FieldInput';
 import { FieldTextArea } from '../components/FieldTextArea';
 import { ExampleUserProfile } from '../constants/ExampleUserProfile';
+import { ProfileLink } from '../types/UserProfile';
 
 import { Preview } from './components/Preview';
 import { ProfileLinkEditItem } from './components/ProfileLinkEditItem';
@@ -15,10 +16,11 @@ const ManagePage = () => {
     ExampleUserProfile.displayName,
   );
   const [bio, setBio] = useState<string>(ExampleUserProfile.bio);
+  const [links, setLinks] = useState<ProfileLink[]>(ExampleUserProfile.links);
 
   const profileDraft = useMemo(
-    () => ({ ...ExampleUserProfile, username, displayName, bio }),
-    [username, displayName, bio],
+    () => ({ ...ExampleUserProfile, username, displayName, bio, links }),
+    [username, displayName, bio, links],
   );
 
   return (
@@ -49,8 +51,19 @@ const ManagePage = () => {
               />
             </ProfileContainer>
             <ProfileLinkList id="links">
-              {ExampleUserProfile.links.map((item, index) => {
-                return <ProfileLinkEditItem key={`item-${index}`} {...item} />;
+              {links.map((item, index) => {
+                return (
+                  <ProfileLinkEditItem
+                    key={`item-${index}`}
+                    linkDraft={item}
+                    defaultLink={ExampleUserProfile.links[index]}
+                    onChange={(updated) =>
+                      setLinks(
+                        links.map((link, i) => (i === index ? updated : link)),
+                      )
+                    }
+                  />
+                );
               })}
             </ProfileLinkList>
           </Container>
