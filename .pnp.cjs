@@ -2667,10 +2667,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/bento-landing/",\
           "packageDependencies": [\
             ["@bento/landing", "workspace:packages/bento-landing"],\
+            ["@types/dedent", "npm:0.7.0"],\
             ["@types/node", "npm:17.0.35"],\
             ["@types/react", "npm:17.0.45"],\
             ["@types/react-dom", "npm:17.0.17"],\
             ["@types/styled-components", "npm:5.1.25"],\
+            ["dedent", "npm:0.7.0"],\
             ["next", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:12.1.6"],\
             ["next-plugin-svgr", "npm:1.1.1"],\
             ["react", "npm:17.0.2"],\
