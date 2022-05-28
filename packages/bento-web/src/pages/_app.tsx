@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { RecoilRoot } from 'recoil';
 import { ReactNotifications } from 'react-notifications-component';
+import { RecoilRoot } from 'recoil';
 
 import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';

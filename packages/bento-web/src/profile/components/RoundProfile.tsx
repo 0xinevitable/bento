@@ -1,8 +1,8 @@
+import { animated, useSpring } from '@react-spring/web';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { ShadowedImage } from './ShadowedImage';
-import { animated, useSpring } from '@react-spring/web';
 
 export type RoundProfileProps = {
   title: string;

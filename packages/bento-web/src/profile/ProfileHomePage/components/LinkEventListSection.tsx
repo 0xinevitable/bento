@@ -1,6 +1,7 @@
-import { ExampleUserProfile } from '@/profile/constants/ExampleUserProfile';
 import React from 'react';
 import styled from 'styled-components';
+
+import { ExampleUserProfile } from '@/profile/constants/ExampleUserProfile';
 
 export const LinkEventListSection: React.FC = () => {
   return (

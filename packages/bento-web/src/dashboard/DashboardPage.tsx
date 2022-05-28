@@ -1,15 +1,17 @@
-import { Web3Connector } from './components/Web3Connector';
+import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
+import React, { useMemo } from 'react';
+import { useRecoilValue } from 'recoil';
+
+import { PageContainer } from '@/components/PageContainer';
+import { useAxiosSWR } from '@/hooks/useAxiosSWR';
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
-import { useAxiosSWR } from '@/hooks/useAxiosSWR';
-import React, { useMemo } from 'react';
-import { TokenBalanceItem } from './components/TokenBalanceItem';
-import { AppendWallet } from './components/AppendWallet';
 import { walletsAtom } from '@/recoil/wallets';
+
+import { AppendWallet } from './components/AppendWallet';
+import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
-import { useRecoilValue } from 'recoil';
-import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
-import { PageContainer } from '@/components/PageContainer';
+import { Web3Connector } from './components/Web3Connector';
 
 const walletBalanceReducer =
   (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>

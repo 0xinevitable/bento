@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
-import { useRecoilState } from 'recoil';
-import { Store } from 'react-notifications-component';
-
-import { walletsAtom } from '@/recoil/wallets';
 import { shortenAddress } from '@bento/core/lib/utils';
+import React, { useCallback } from 'react';
+import { Store } from 'react-notifications-component';
+import { useRecoilState } from 'recoil';
+
 import { NoSSR } from '@/components/NoSSR';
+import { walletsAtom } from '@/recoil/wallets';
 import { copyToClipboard } from '@/utils/clipboard';
 
 const LOGO_URLS = {

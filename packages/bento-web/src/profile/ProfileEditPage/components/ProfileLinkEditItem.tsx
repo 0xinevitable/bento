@@ -1,7 +1,8 @@
-import { ShadowedImage } from '@/profile/components/ShadowedImage';
-import { ProfileLink } from '@/profile/types/UserProfile';
 import React from 'react';
 import styled from 'styled-components';
+
+import { ShadowedImage } from '@/profile/components/ShadowedImage';
+import { ProfileLink } from '@/profile/types/UserProfile';
 
 type Props = {
   defaultLink: ProfileLink;

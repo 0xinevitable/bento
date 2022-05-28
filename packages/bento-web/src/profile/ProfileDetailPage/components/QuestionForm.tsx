@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import { QuestionUITexts } from '../../constants/Questions';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+
+import { QuestionUITexts } from '../../constants/Questions';
 
 export const QuestionForm = () => {
   const [questionText, setQuestionText] =

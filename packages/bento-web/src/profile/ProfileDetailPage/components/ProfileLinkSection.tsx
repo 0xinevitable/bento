@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { ProfileLink } from '../../types/UserProfile';
-
 import { ProfileLinkItem } from './ProfileLinkItem';
 
 type Props = {

@@ -5,7 +5,6 @@ import { FieldInput } from '../components/FieldInput';
 import { FieldTextArea } from '../components/FieldTextArea';
 import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 import { ProfileLink } from '../types/UserProfile';
-
 import { Preview } from './components/Preview';
 import { ProfileLinkEditItem } from './components/ProfileLinkEditItem';
 import { TabBar } from './components/TabBar';

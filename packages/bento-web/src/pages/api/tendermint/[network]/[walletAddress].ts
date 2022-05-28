@@ -1,12 +1,12 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { TendermintBasedChains } from '@bento/core/lib/types';
 import { Bech32Address } from '@bento/core/lib/bech32';
-import { safePromiseAll } from '@bento/core/lib/utils';
 import {
   CosmosHubChain,
   OsmosisChain,
   TendermintChain,
 } from '@bento/core/lib/chains';
+import { TendermintBasedChains } from '@bento/core/lib/types';
+import { safePromiseAll } from '@bento/core/lib/utils';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 export type WalletBalance = {
   walletAddress: string;

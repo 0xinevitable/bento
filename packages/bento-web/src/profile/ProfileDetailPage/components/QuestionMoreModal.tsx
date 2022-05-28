@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Modal } from '../../components/Modal';
 import { Portal } from '@/components/Portal';
+
+import { Modal } from '../../components/Modal';
 
 type Props = {
   isVisible?: boolean;

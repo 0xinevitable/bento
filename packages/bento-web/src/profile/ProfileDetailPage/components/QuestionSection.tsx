@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { ExampleUserQuestions } from '../../constants/ExampleUserProfile';
 import { UserQuestion } from '../../types/UserProfile';
-
 import { QuestionForm } from './QuestionForm';
 import { QuestionItem } from './QuestionItem';
 import { QuestionMoreModal } from './QuestionMoreModal';

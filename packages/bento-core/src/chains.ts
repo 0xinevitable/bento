@@ -3,8 +3,9 @@ import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
 import queryString from 'query-string';
-import { safePromiseAll } from './utils';
+
 import { ERC20TokenInput, KLAYTN_TOKENS } from './tokens';
+import { safePromiseAll } from './utils';
 
 export type Currency = 'usd';
 export const priceFromCoinGecko = async (

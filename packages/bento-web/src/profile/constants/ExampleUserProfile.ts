@@ -1,8 +1,8 @@
 import {
   UserProfile,
   UserProfileTab,
-  UserQuestions,
   UserQuestionType,
+  UserQuestions,
 } from '../types/UserProfile';
 
 const PROFILE_IMAGE =
