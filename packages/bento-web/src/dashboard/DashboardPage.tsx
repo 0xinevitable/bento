@@ -82,7 +82,7 @@ const DashboardPage = () => {
       {
         symbol: 'ETH',
         name: 'Ethereum',
-        logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/info/logo.png',
+        logo: '/assets/ethereum.png',
         netWorth: (ethereumBalance ?? []).reduce(
           walletBalanceReducer(
             'ETH',
@@ -120,7 +120,6 @@ const DashboardPage = () => {
       },
       ...Object.values(groupBy(klaytnBalance ?? [], 'address')).map(
         (balances) => {
-          console.log(balances);
           const [first] = balances;
           const totalAmount = balances.reduce(
             (acc, balance) => acc + balance.balance,
@@ -136,6 +135,7 @@ const DashboardPage = () => {
             amount: totalAmount,
             price: first.price,
             balances: balances,
+            tokenAddress: first.address,
           };
         },
       ),
@@ -210,13 +210,15 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      {/* <WalletList /> */}
-      {/* <AppendWallet /> */}
+      <WalletList />
+      <AppendWallet />
 
       <ul className="mt-8">
         {tokenBalances.map((info) => (
           <TokenBalanceItem
-            key={info.symbol}
+            key={`${info.symbol}-${
+              'tokenAddress' in info ? info.tokenAddress : 'native'
+            }`}
             logo={info.logo ?? ''}
             {...info}
           />
