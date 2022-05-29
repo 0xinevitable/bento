@@ -2693,6 +2693,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/web", "workspace:packages/bento-web"],\
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@ethersproject/providers", "npm:5.6.8"],\
+            ["@iconify/react", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.2.2"],\
             ["@react-spring/web", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.4.5"],\
             ["@types/date-fns", "npm:2.6.0"],\
             ["@types/dedent", "npm:0.7.0"],\
@@ -3770,6 +3771,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/prettier",\
             "prettier"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@iconify/react", [\
+        ["npm:3.2.2", {\
+          "packageLocation": "./.yarn/cache/@iconify-react-npm-3.2.2-58b3f5b834-8b52e1291d.zip/node_modules/@iconify/react/",\
+          "packageDependencies": [\
+            ["@iconify/react", "npm:3.2.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.2.2", {\
+          "packageLocation": "./.yarn/__virtual__/@iconify-react-virtual-d447fdb1a5/0/cache/@iconify-react-npm-3.2.2-58b3f5b834-8b52e1291d.zip/node_modules/@iconify/react/",\
+          "packageDependencies": [\
+            ["@iconify/react", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.2.2"],\
+            ["@types/react", "npm:17.0.45"],\
+            ["react", "npm:17.0.2"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

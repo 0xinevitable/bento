@@ -1607,6 +1607,7 @@ __metadata:
   dependencies:
     "@bento/core": "workspace:^"
     "@ethersproject/providers": ^5.6.8
+    "@iconify/react": ^3.2.2
     "@react-spring/web": ^9.4.5
     "@types/date-fns": ^2.6.0
     "@types/dedent": ^0.7.0
@@ -2675,6 +2676,15 @@ __metadata:
   peerDependencies:
     prettier: 2.x
   checksum: 394c907eda01efdd284d606183d6eb51de36ca908f755d61b50e7054db779a271829e0de12cc41014fd97225a9e383255e01ba22b19207ef34f9b27b5f65290e
+  languageName: node
+  linkType: hard
+
+"@iconify/react@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "@iconify/react@npm:3.2.2"
+  peerDependencies:
+    react: ">=16"
+  checksum: 8b52e1291d7e6c9422ab49eabd6c3bbb29cb852578c08616dd66a2b0e64aad4579ea3e8a6a3881d9d25d363eada16940e78477806fa36cfd98c0cd79778d7d0f
   languageName: node
   linkType: hard
 
