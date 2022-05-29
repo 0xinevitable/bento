@@ -1,6 +1,6 @@
-import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import React, { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
+import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
@@ -188,13 +188,13 @@ const DashboardPage = () => {
   );
 
   return (
-    <PageContainer>
+    <PageContainer className="pt-0">
       <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
 
-      <div className="mt-4 w-full flex justify-between">
+      <div className="mt-10 w-full flex justify-between">
         <div className="flex flex-col justify-center">
-          <span className="text-xl text-slate-500">Net worth</span>
-          <span className="text-2xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
+          <span className="text-md text-slate-50">Net worth</span>
+          <span className="mt-2 text-2xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
         </div>
 
         <div className="flex flex-col">
@@ -202,8 +202,8 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <WalletList />
-      <AppendWallet />
+      {/* <WalletList /> */}
+      {/* <AppendWallet /> */}
 
       <ul className="mt-8">
         {tokenBalances.map((info) => (

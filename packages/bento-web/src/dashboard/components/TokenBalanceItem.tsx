@@ -1,6 +1,7 @@
 import { shortenAddress } from '@bento/core/lib/utils';
 import clsx from 'clsx';
 import { useMemo, useState } from 'react';
+import styled from 'styled-components';
 
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
@@ -44,11 +45,10 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
   }, [info.balances]);
 
   return (
-    <li
+    <Container
       className={clsx(
-        'mb-2 pb-2 h-fit overflow-hidden',
-        'border border-slate-700 rounded-md drop-shadow-2xl',
-        'bg-slate-800/25 backdrop-blur-md flex flex-col cursor-pointer',
+        'mb-2 pb-2 h-fit rounded-md drop-shadow-2xl',
+        'flex flex-col cursor-pointer',
       )}
       onClick={() => setCollapsed((prev) => !prev)}
     >
@@ -106,6 +106,14 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
           </li>
         ))}
       </ul>
-    </li>
+    </Container>
   );
 };
+
+const Container = styled.li`
+  width: 100%;
+  background: #121a32;
+  border: 1px solid #020322;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+`;
