@@ -118,47 +118,19 @@ const DashboardPage = () => {
         price: (polygonBalance ?? [])[0]?.price ?? 0,
         balances: polygonBalance ?? [],
       },
-      {
-        symbol: 'KLAY',
-        name: 'Klaytn',
-        logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
-        netWorth: (klaytnBalance ?? []).reduce(
-          walletBalanceReducer(
-            'KLAY',
-            (acc, balance) => acc + balance.balance * balance.price,
-          ),
-          0,
-        ),
-        amount: (klaytnBalance ?? []).reduce(
-          walletBalanceReducer('KLAY', (acc, balance) => acc + balance.balance),
-          0,
-        ),
-        price: (klaytnBalance ?? [])[0]?.price ?? 0,
-        balances: (klaytnBalance ?? []).filter((v) => v.symbol === 'KLAY'),
-      },
-      ...KLAYTN_TOKENS.map((token) => ({
-        ...token,
-        netWorth: (klaytnBalance ?? []).reduce(
-          walletBalanceReducer(
-            token.symbol,
-            (acc, balance) => acc + balance.balance * balance.price,
-          ),
-          0,
-        ),
-        amount: (klaytnBalance ?? []).reduce(
-          walletBalanceReducer(
-            token.symbol,
-            (acc, balance) => acc + balance.balance,
-          ),
-          0,
-        ),
-        price:
-          (klaytnBalance ?? []).find((v) => v.symbol === token.symbol)?.price ??
-          0,
-        balances: (klaytnBalance ?? []).filter(
-          (v) => v.symbol === token.symbol,
-        ),
-      })),
+      ...(klaytnBalance ?? []).map((balance) => {
+        return {
+          symbol: balance.symbol,
+          name: balance.symbol,
+          logo:
+            balance.logo ??
+            'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
+          netWorth: balance.balance * balance.price,
+          amount: balance.balance,
+          price: balance.price,
+          balances: [balance],
+        };
+      }),
       {
         symbol: 'COSMOS',
         name: 'Cosmos Hub',
