@@ -205,15 +205,20 @@ export class KlaytnChain implements Chain {
     return exchangeRatio * klayPrice;
   };
 
+  _API_KEYS = [
+    'ckey_ec92d129ed8a498f9bca510830b:',
+    'ckey_7af720dd03ef4a15afc1b44e2b4:',
+  ];
+
   getTokenBalances = async (walletAddress: string) => {
+    const API_KEY =
+      this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/8217/address/${walletAddress}/balances_v2/`,
         {
           headers: {
-            Authorization: `Basic ${Base64.encode(
-              'ckey_ec92d129ed8a498f9bca510830b:',
-            )}`,
+            Authorization: `Basic ${Base64.encode(API_KEY)}`,
             'Content-Type': 'application/json',
           },
         },
