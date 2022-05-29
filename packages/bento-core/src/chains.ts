@@ -5,7 +5,11 @@ import Caver from 'caver-js';
 import queryString from 'query-string';
 
 import { ERC20TokenInput, KLAYTN_TOKENS } from './tokens';
-import { safePromiseAll } from './utils';
+
+const Base64 = {
+  encode: (str: string): string =>
+    Buffer.from(str, 'binary').toString('base64'),
+};
 
 export type Currency = 'usd';
 export const priceFromCoinGecko = async (
@@ -126,6 +130,39 @@ export class PolygonChain implements Chain {
   };
 }
 
+export type TokenBalancesResponse = {
+  data: {
+    address: string;
+    updated_at: string;
+    next_update_at: string;
+    quote_currency: string;
+    chain_id: number;
+    items: [
+      {
+        contract_decimals: number;
+        contract_name: string;
+        contract_ticker_symbol: string;
+        contract_address: string;
+        supports_erc: null;
+        logo_url: string;
+        last_transferred_at: null;
+        type: 'cryptocurrency' | 'nft';
+        balance: string;
+        balance_24h: null;
+        quote_rate: number;
+        quote_rate_24h: number;
+        quote: number | null;
+        quote_24h: number | null;
+        // nft_data: NFTData[] | null;
+      },
+    ];
+    pagination: null;
+  };
+  error: false;
+  error_message: null;
+  error_code: null;
+};
+
 export class KlaytnChain implements Chain {
   currency = {
     symbol: 'KLAY',
@@ -168,38 +205,51 @@ export class KlaytnChain implements Chain {
     return exchangeRatio * klayPrice;
   };
 
-  getTokenBalances = async (walletAddress: string) =>
-    safePromiseAll(
-      this.tokens.map(async (token) => {
-        const contract = new this._provider.klay.Contract(
-          MinimalABIs.ERC20,
-          token.address,
-        );
-        const balanceOfCall: Promise<string> = contract.methods
-          .balanceOf(walletAddress)
-          .call();
-        const [rawBalance, price] = await Promise.all([
-          balanceOfCall.catch((error) => {
-            console.error(error);
-            return '0';
-          }),
-          token.coinGeckoId
-            ? priceFromCoinGecko(token.coinGeckoId).catch(() => 0)
-            : token.symbol === 'SCNR'
-            ? this._getSCNRTokenPrice().catch(() => 0)
-            : 0,
-        ]);
+  getTokenBalances = async (walletAddress: string) => {
+    const { data } = await axios
+      .get<TokenBalancesResponse>(
+        `https://api.covalenthq.com/v1/8217/address/${walletAddress}/balances_v2/`,
+        {
+          headers: {
+            Authorization: `Basic ${Base64.encode(
+              'ckey_ec92d129ed8a498f9bca510830b:',
+            )}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .catch((error) => {
+        console.error(error);
+        return { data: { data: { items: [] } } };
+      });
 
-        const balance = Number(rawBalance) / 10 ** token.decimals;
-
-        return {
-          ...token,
-          balance,
-          price,
-          walletAddress,
-        };
-      }),
-    );
+    return data.data.items.flatMap((token) => {
+      if (token.type === 'nft') {
+        return [];
+      }
+      if (
+        token.contract_address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' // Klaytn
+      ) {
+        return [];
+      }
+      const balance =
+        typeof token.balance === 'string'
+          ? Number(token.balance) / 10 ** token.contract_decimals
+          : 0;
+      if (balance <= 0) {
+        return [];
+      }
+      return {
+        walletAddress,
+        name: token.contract_name,
+        symbol: token.contract_ticker_symbol,
+        decimals: token.contract_decimals,
+        address: token.contract_address,
+        balance,
+        price: 0,
+      };
+    });
+  };
 }
 
 export class SolanaChain implements Chain {
