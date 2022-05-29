@@ -181,7 +181,7 @@ const DashboardPage = () => {
     ];
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
-    return tokens;
+    return tokens.filter((v) => v.netWorth > 0);
   }, [
     ethereumBalance,
     polygonBalance,
