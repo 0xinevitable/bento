@@ -28,6 +28,46 @@ export const priceFromCoinGecko = async (
   return data[coinGeckoId][vsCurrency];
 };
 
+// Not recommended
+type CoinMarketCapPriceConversionResponse = {
+  status: {
+    timestamp: string;
+    error_code: number;
+    error_message: null;
+    elapsed: number;
+    credit_count: number;
+    notice: null;
+  };
+  data: {
+    id: number;
+    symbol: string;
+    name: string;
+    amount: number;
+    last_updated: string;
+    quote: {
+      USD: {
+        price: number;
+        last_updated: string;
+      };
+    };
+  };
+};
+export const priceFromCoinMarketCap = async (
+  coinMarketCapId: number | string,
+): Promise<number> => {
+  const url = queryString.stringifyUrl({
+    url: 'https://pro-api.coinmarketcap.com/v2/tools/price-conversion',
+    query: {
+      CMC_PRO_API_KEY: '74cc4bcf-c827-41ef-8550-04ff8a393be5',
+      amount: 1,
+      id: coinMarketCapId,
+    },
+  });
+  const { data } = await axios.get<CoinMarketCapPriceConversionResponse>(url);
+  // NOTE: When quering with `symbol` not `id`, `data.data` is Array
+  return data.data.quote.USD.price;
+};
+
 export interface ERC20TokenBalance extends ERC20TokenInput {
   walletAddress: string;
   balance: number;
@@ -249,11 +289,24 @@ export class KlaytnChain implements Chain {
       const tokenInfo = KLAYTN_TOKENS.find(
         (v) => v.address === token.contract_address,
       );
-      const price = tokenInfo?.coinGeckoId
-        ? await priceFromCoinGecko(tokenInfo.coinGeckoId).catch(() => 0)
-        : symbol === 'SCNR'
-        ? await this._getSCNRTokenPrice().catch(() => 0)
-        : 0;
+      const getPrice = async () => {
+        if (tokenInfo?.coinGeckoId) {
+          return priceFromCoinGecko(tokenInfo.coinGeckoId).catch(() => 0);
+        }
+        if (tokenInfo?.coinMarketCapId) {
+          return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
+            (error) => {
+              console.error(error);
+              return 0;
+            },
+          );
+        }
+        if (symbol === 'SCNR') {
+          return this._getSCNRTokenPrice().catch(() => 0);
+        }
+        return 0;
+      };
+      const price = await getPrice();
       return {
         walletAddress,
         name: tokenInfo?.name ?? token.contract_name,
