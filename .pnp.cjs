@@ -2696,6 +2696,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@react-spring/web", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.4.5"],\
             ["@types/date-fns", "npm:2.6.0"],\
             ["@types/dedent", "npm:0.7.0"],\
+            ["@types/lodash.groupby", "npm:4.6.7"],\
             ["@types/node", "npm:17.0.35"],\
             ["@types/react", "npm:17.0.45"],\
             ["@types/react-dom", "npm:17.0.17"],\
@@ -2710,6 +2711,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["framer-motion", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:6.3.4"],\
             ["immer", "npm:9.0.14"],\
             ["javascript-time-ago", "npm:2.5.4"],\
+            ["lodash.groupby", "npm:4.6.0"],\
             ["next", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:12.1.6"],\
             ["next-intercept-stdout", "npm:1.0.1"],\
             ["next-plugin-svgr", "npm:1.1.1"],\
@@ -4743,6 +4745,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:4.14.182", {\
           "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.182-1073aac722-7dd137aa9d.zip/node_modules/@types/lodash/",\
           "packageDependencies": [\
+            ["@types/lodash", "npm:4.14.182"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/lodash.groupby", [\
+        ["npm:4.6.7", {\
+          "packageLocation": "./.yarn/cache/@types-lodash.groupby-npm-4.6.7-e1e48324d8-2dd7f5c43c.zip/node_modules/@types/lodash.groupby/",\
+          "packageDependencies": [\
+            ["@types/lodash.groupby", "npm:4.6.7"],\
             ["@types/lodash", "npm:4.14.182"]\
           ],\
           "linkType": "HARD"\
@@ -10829,6 +10841,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/lodash.debounce-npm-4.0.8-f1d6e09799-a3f527d22c.zip/node_modules/lodash.debounce/",\
           "packageDependencies": [\
             ["lodash.debounce", "npm:4.0.8"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lodash.groupby", [\
+        ["npm:4.6.0", {\
+          "packageLocation": "./.yarn/cache/lodash.groupby-npm-4.6.0-b885eee622-e2d4d13d12.zip/node_modules/lodash.groupby/",\
+          "packageDependencies": [\
+            ["lodash.groupby", "npm:4.6.0"]\
           ],\
           "linkType": "HARD"\
         }]\

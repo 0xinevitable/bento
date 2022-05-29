@@ -1,6 +1,6 @@
+import groupBy from 'lodash.groupby';
 import React, { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
-import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
@@ -118,19 +118,27 @@ const DashboardPage = () => {
         price: (polygonBalance ?? [])[0]?.price ?? 0,
         balances: polygonBalance ?? [],
       },
-      ...(klaytnBalance ?? []).map((balance) => {
-        return {
-          symbol: balance.symbol,
-          name: balance.symbol,
-          logo:
-            balance.logo ??
-            'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
-          netWorth: balance.balance * balance.price,
-          amount: balance.balance,
-          price: balance.price,
-          balances: [balance],
-        };
-      }),
+      ...Object.values(groupBy(klaytnBalance ?? [], 'address')).map(
+        (balances) => {
+          console.log(balances);
+          const [first] = balances;
+          const totalAmount = balances.reduce(
+            (acc, balance) => acc + balance.balance,
+            0,
+          );
+          return {
+            symbol: first.symbol,
+            name: first.symbol,
+            logo:
+              first.logo ??
+              'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
+            netWorth: totalAmount * first.price,
+            amount: totalAmount,
+            price: first.price,
+            balances: balances,
+          };
+        },
+      ),
       {
         symbol: 'COSMOS',
         name: 'Cosmos Hub',

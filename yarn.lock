@@ -1610,6 +1610,7 @@ __metadata:
     "@react-spring/web": ^9.4.5
     "@types/date-fns": ^2.6.0
     "@types/dedent": ^0.7.0
+    "@types/lodash.groupby": ^4.6.7
     "@types/node": ^17.0.35
     "@types/react": ^17.0.45
     "@types/react-dom": ^17.0.17
@@ -1624,6 +1625,7 @@ __metadata:
     framer-motion: ^6.3.4
     immer: ^9.0.14
     javascript-time-ago: ^2.5.4
+    lodash.groupby: ^4.6.0
     next: ^12.1.6
     next-intercept-stdout: ^1.0.1
     next-plugin-svgr: ^1.1.1
@@ -3355,7 +3357,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.159":
+"@types/lodash.groupby@npm:^4.6.7":
+  version: 4.6.7
+  resolution: "@types/lodash.groupby@npm:4.6.7"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 2dd7f5c43ca4e2202c73a1217ea550fd54746909c19ef38ababe1a3c851c40b1ba66c027397551f9a6f7acf7217507496e316e6de38f3208f4a1f4548b81933b
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*, @types/lodash@npm:^4.14.159":
   version: 4.14.182
   resolution: "@types/lodash@npm:4.14.182"
   checksum: 7dd137aa9dbabd632408bd37009d984655164fa1ecc3f2b6eb94afe35bf0a5852cbab6183148d883e9c73a958b7fec9a9bcf7c8e45d41195add6a18c34958209
@@ -8432,6 +8443,13 @@ __metadata:
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
   checksum: a3f527d22c548f43ae31c861ada88b2637eb48ac6aa3eb56e82d44917971b8aa96fbb37aa60efea674dc4ee8c42074f90f7b1f772e9db375435f6c83a19b3bc6
+  languageName: node
+  linkType: hard
+
+"lodash.groupby@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "lodash.groupby@npm:4.6.0"
+  checksum: e2d4d13d12790a1cacab3f5f120b7c072a792224e83b2f403218866d18efde76024b2579996dfebb230a61ce06469332e16639103669a35a605287e19ced6b9b
   languageName: node
   linkType: hard
 
