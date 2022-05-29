@@ -5,6 +5,7 @@ import Caver from 'caver-js';
 import queryString from 'query-string';
 
 import { ERC20TokenInput, KLAYTN_TOKENS } from './tokens';
+import { safePromiseAll } from './utils';
 
 const Base64 = {
   encode: (str: string): string =>
@@ -228,7 +229,7 @@ export class KlaytnChain implements Chain {
         return { data: { data: { items: [] } } };
       });
 
-    return data.data.items.flatMap((token) => {
+    const promises = data.data.items.flatMap(async (token) => {
       if (token.type === 'nft') {
         return [];
       }
@@ -244,20 +245,27 @@ export class KlaytnChain implements Chain {
       if (balance <= 0) {
         return [];
       }
+      const symbol = token.contract_ticker_symbol;
       const tokenInfo = KLAYTN_TOKENS.find(
         (v) => v.address === token.contract_address,
       );
+      const price = tokenInfo?.coinGeckoId
+        ? await priceFromCoinGecko(tokenInfo.coinGeckoId).catch(() => 0)
+        : symbol === 'SCNR'
+        ? await this._getSCNRTokenPrice().catch(() => 0)
+        : 0;
       return {
         walletAddress,
         name: tokenInfo?.name ?? token.contract_name,
-        symbol: token.contract_ticker_symbol,
+        symbol: tokenInfo?.symbol ?? symbol,
         decimals: token.contract_decimals,
         address: token.contract_address,
-        balance,
         logo: tokenInfo?.logo,
-        price: 0,
+        balance,
+        price,
       };
-    });
+    }) as Promise<ERC20TokenBalance>[];
+    return safePromiseAll(promises);
   };
 }
 

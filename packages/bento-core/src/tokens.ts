@@ -4,7 +4,9 @@ export interface ERC20TokenInput {
   decimals: number;
   address: string;
   coinGeckoId?: string;
+  coinMarketCapId?: string;
   logo?: string;
+  staking?: boolean;
 }
 
 export const KLAYTN_TOKENS: ERC20TokenInput[] = [
@@ -54,5 +56,30 @@ export const KLAYTN_TOKENS: ERC20TokenInput[] = [
     address: '0x5096db80b21ef45230c9e423c373f1fc9c0198dd',
     coinGeckoId: 'wemix-token',
     logo: '/assets/wemix.png',
+  },
+  {
+    symbol: 'CLA',
+    name: 'ClaimSwap',
+    decimals: 18,
+    address: '0xcf87f94fd8f6b6f0b479771f10df672f99eada63',
+    coinGeckoId: 'claimswap',
+    logo: '/assets/claimswap.png',
+  },
+  {
+    symbol: 'KRNO',
+    name: 'Kronos DAO',
+    decimals: 18,
+    address: '0xd676e57ca65b827feb112ad81ff738e7b6c1048d',
+    coinMarketCapId: 'kronos-dao',
+    logo: '/assets/kronos-dao.png',
+  },
+  {
+    symbol: 'KRNO',
+    name: 'Kronos DAO',
+    decimals: 18,
+    address: '0x6555f93f608980526b5ca79b3be2d4edadb5c562',
+    coinMarketCapId: 'kronos-dao',
+    logo: '/assets/kronos-dao.png',
+    staking: true,
   },
 ];
