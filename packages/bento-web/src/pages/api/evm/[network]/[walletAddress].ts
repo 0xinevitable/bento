@@ -14,6 +14,7 @@ export type WalletBalance = {
   symbol: string;
   balance: number;
   price: number;
+  logo?: string;
 };
 
 interface APIRequest extends NextApiRequest {

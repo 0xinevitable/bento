@@ -244,13 +244,17 @@ export class KlaytnChain implements Chain {
       if (balance <= 0) {
         return [];
       }
+      const tokenInfo = KLAYTN_TOKENS.find(
+        (v) => v.address === token.contract_address,
+      );
       return {
         walletAddress,
-        name: token.contract_name,
+        name: tokenInfo?.name ?? token.contract_name,
         symbol: token.contract_ticker_symbol,
         decimals: token.contract_decimals,
         address: token.contract_address,
         balance,
+        logo: tokenInfo?.logo,
         price: 0,
       };
     });

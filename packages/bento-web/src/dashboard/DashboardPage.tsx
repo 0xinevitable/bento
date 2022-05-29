@@ -122,7 +122,9 @@ const DashboardPage = () => {
         return {
           symbol: balance.symbol,
           name: balance.symbol,
-          logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
+          logo:
+            balance.logo ??
+            'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
           netWorth: balance.balance * balance.price,
           amount: balance.balance,
           price: balance.price,
