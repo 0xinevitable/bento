@@ -2,70 +2,17 @@ import { JsonRpcProvider } from '@ethersproject/providers';
 import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
-import queryString from 'query-string';
 
+import { withCache } from './cache';
+import { priceFromCoinGecko } from './pricings/CoinGecko';
+import { priceFromCoinMarketCap } from './pricings/CoinMarketCap';
+import { Currency } from './pricings/Currency';
 import { ERC20TokenInput, KLAYTN_TOKENS } from './tokens';
 import { safePromiseAll } from './utils';
 
 const Base64 = {
   encode: (str: string): string =>
     Buffer.from(str, 'binary').toString('base64'),
-};
-
-export type Currency = 'usd';
-export const priceFromCoinGecko = async (
-  coinGeckoId: string,
-  vsCurrency: Currency = 'usd',
-): Promise<number> => {
-  const url = queryString.stringifyUrl({
-    url: 'https://api.coingecko.com/api/v3/simple/price',
-    query: {
-      ids: coinGeckoId,
-      vs_currencies: vsCurrency,
-    },
-  });
-  const { data } = await axios.get(url);
-  return data[coinGeckoId][vsCurrency];
-};
-
-// Not recommended
-type CoinMarketCapPriceConversionResponse = {
-  status: {
-    timestamp: string;
-    error_code: number;
-    error_message: null;
-    elapsed: number;
-    credit_count: number;
-    notice: null;
-  };
-  data: {
-    id: number;
-    symbol: string;
-    name: string;
-    amount: number;
-    last_updated: string;
-    quote: {
-      USD: {
-        price: number;
-        last_updated: string;
-      };
-    };
-  };
-};
-export const priceFromCoinMarketCap = async (
-  coinMarketCapId: number | string,
-): Promise<number> => {
-  const url = queryString.stringifyUrl({
-    url: 'https://pro-api.coinmarketcap.com/v2/tools/price-conversion',
-    query: {
-      CMC_PRO_API_KEY: '74cc4bcf-c827-41ef-8550-04ff8a393be5',
-      amount: 1,
-      id: coinMarketCapId,
-    },
-  });
-  const { data } = await axios.get<CoinMarketCapPriceConversionResponse>(url);
-  // NOTE: When quering with `symbol` not `id`, `data.data` is Array
-  return data.data.quote.USD.price;
 };
 
 export interface ERC20TokenBalance extends ERC20TokenInput {
@@ -232,7 +179,7 @@ export class KlaytnChain implements Chain {
       .call();
     return { reservesForSCNR, reservesForKLAY };
   };
-  _getSCNRTokenPrice = async () => {
+  _getSCNRTokenPrice = withCache(async () => {
     const [staked, klayPrice] = await Promise.all([
       this._getStakedSCNRReserves(),
       this.getCurrencyPrice(),
@@ -244,7 +191,7 @@ export class KlaytnChain implements Chain {
 
     const exchangeRatio = amountOfKLAYStaked / amountOfSCNRStaked;
     return exchangeRatio * klayPrice;
-  };
+  });
 
   _API_KEYS = [
     'ckey_ec92d129ed8a498f9bca510830b:',
