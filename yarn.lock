@@ -1568,11 +1568,11 @@ __metadata:
   resolution: "@bento/core@workspace:packages/bento-core"
   dependencies:
     "@ethersproject/providers": ^5.6.8
-    "@solana/web3.js": ^1.43.2
-    "@types/node": ^17.0.35
+    "@solana/web3.js": ^1.43.4
+    "@types/node": ^17.0.38
     axios: ^0.27.2
     bech32: ^2.0.0
-    caver-js: 1.8.2-rc.2
+    caver-js: 1.8.2-rc.3
     query-string: ^7.1.1
     ts-node: ^10.8.0
     typescript: ^4.7.2
@@ -1584,7 +1584,7 @@ __metadata:
   resolution: "@bento/landing@workspace:packages/bento-landing"
   dependencies:
     "@types/dedent": ^0.7.0
-    "@types/node": ^17.0.35
+    "@types/node": ^17.0.38
     "@types/react": ^17.0.45
     "@types/react-dom": ^17.0.17
     "@types/styled-components": ^5.1.25
@@ -1612,7 +1612,7 @@ __metadata:
     "@types/date-fns": ^2.6.0
     "@types/dedent": ^0.7.0
     "@types/lodash.groupby": ^4.6.7
-    "@types/node": ^17.0.35
+    "@types/node": ^17.0.38
     "@types/react": ^17.0.45
     "@types/react-dom": ^17.0.17
     "@types/styled-components": ^5.1.25
@@ -1623,7 +1623,7 @@ __metadata:
     clsx: ^1.1.1
     date-fns: ^2.28.0
     dedent: ^0.7.0
-    framer-motion: ^6.3.4
+    framer-motion: ^6.3.6
     immer: ^9.0.14
     javascript-time-ago: ^2.5.4
     lodash.groupby: ^4.6.0
@@ -3051,9 +3051,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/web3.js@npm:^1.43.2":
-  version: 1.43.2
-  resolution: "@solana/web3.js@npm:1.43.2"
+"@solana/web3.js@npm:^1.43.4":
+  version: 1.43.4
+  resolution: "@solana/web3.js@npm:1.43.4"
   dependencies:
     "@babel/runtime": ^7.12.5
     "@ethersproject/sha2": ^5.5.0
@@ -3071,7 +3071,7 @@ __metadata:
     secp256k1: ^4.0.2
     superstruct: ^0.14.2
     tweetnacl: ^1.0.0
-  checksum: 71212c00c2aa1ca030e61838230c8a59881823f7bbe8cfdf279e8de043da2741a709853bd85ef9f0d747b4ae34746cf5cf10bc193083dbe8d70b5c0773bf09f7
+  checksum: 0d036c8d1e234092f598ed559d6fd880d5b1916f94279ddd4209a0c2f76f2c2ef9a899ea0fad19c1e6511d259e460a80b71ac4d4401c707e719ace59803d11bb
   languageName: node
   linkType: hard
 
@@ -3428,10 +3428,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^17.0.35":
-  version: 17.0.35
-  resolution: "@types/node@npm:17.0.35"
-  checksum: 7a24946ae7fd20267ed92466384f594e448bfb151081158d565cc635d406ecb29ea8fb85fcd2a1f71efccf26fb5bd3c6f509bde56077eb8b832b847a6664bc62
+"@types/node@npm:^17.0.38":
+  version: 17.0.38
+  resolution: "@types/node@npm:17.0.38"
+  checksum: 9db1c39d603850ced665ab60b8f8ebce674ff9d762dfff0f776d520e71e4d73fdcd4c7f69213b804d878cf3e726911b09cae4ee66e35ae2724538de9f4838681
   languageName: node
   linkType: hard
 
@@ -4468,7 +4468,7 @@ __metadata:
   resolution: "bento@workspace:."
   dependencies:
     "@ianvs/prettier-plugin-sort-imports": ^3.4.2
-    "@types/node": ^17.0.35
+    "@types/node": ^17.0.38
     prettier: ^2.6.2
     typescript: ^4.7.2
   languageName: unknown
@@ -4966,9 +4966,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caver-js@npm:1.8.2-rc.2":
-  version: 1.8.2-rc.2
-  resolution: "caver-js@npm:1.8.2-rc.2"
+"caver-js@npm:1.8.2-rc.3":
+  version: 1.8.2-rc.3
+  resolution: "caver-js@npm:1.8.2-rc.3"
   dependencies:
     "@babel/runtime": 7.3.1
     "@ethersproject/abi": 5.0.7
@@ -5006,7 +5006,7 @@ __metadata:
     webpack: ^5.65.0
     websocket: 1.0.31
     xhr2-cookies: 1.1.0
-  checksum: 4a641fc3e68f0d8bcc22df83ea8bfe51cd03448d250e039e5c051b4656a4b279a43e891ddb670f93974540f1a297266f092cdb70215adcca6d0b0df192adedf2
+  checksum: e88b27d85ae3ee3542a0125986bf2a797870e664c1457de344bc34c09f095c821c15289481b973631caaa85cd6423df11d93a9208cd5e0f7609247994434552b
   languageName: node
   linkType: hard
 
@@ -6825,9 +6825,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^6.3.4":
-  version: 6.3.4
-  resolution: "framer-motion@npm:6.3.4"
+"framer-motion@npm:^6.3.6":
+  version: 6.3.6
+  resolution: "framer-motion@npm:6.3.6"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     framesync: 6.0.1
@@ -6841,7 +6841,7 @@ __metadata:
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: ea4ea22059f6723804f3890327e4f22c3ead564cbd54dc1df66ff6b010835202e42de0fe325f956074033359904206af72714f01c26859cb80279583908ae3e9
+  checksum: 2d82ff7ce3fdac97a2e52aa6d92907f3ff4ba37389202e0b5efd2b0e9842ca5b3913ed325783e29edea8ccf7ba16077a0b48ec5ae548283f96b6e81ac6ae6cc5
   languageName: node
   linkType: hard
 
