@@ -26,11 +26,15 @@ const DashboardPage = () => {
     ethereumWalletQuery,
     polygonWalletQuery,
     klaytnWalletQuery,
+    solanaWalletQuery,
   ] = useMemo(() => {
     const addrs = wallets.reduce(
       (acc, wallet) => {
         if (wallet.type === 'tendermint') {
           return { ...acc, cosmos: [...acc.cosmos, wallet.address] };
+        }
+        if (wallet.type === 'solana') {
+          return { ...acc, solana: [...acc.solana, wallet.address] };
         }
         if (wallet.type !== 'evm') {
           return acc;
@@ -48,7 +52,7 @@ const DashboardPage = () => {
         }
         return _acc;
       },
-      { cosmos: [], klaytn: [], polygon: [], ethereum: [] },
+      { cosmos: [], solana: [], klaytn: [], polygon: [], ethereum: [] },
     );
 
     return [
@@ -56,6 +60,7 @@ const DashboardPage = () => {
       addrs.ethereum.join(','),
       addrs.polygon.join(','),
       addrs.klaytn.join(','),
+      addrs.solana.join(','),
     ];
   }, [wallets]);
 
@@ -75,6 +80,9 @@ const DashboardPage = () => {
   );
   const { data: osmosisBalance } = useAxiosSWR<TendermintWalletBalance[]>(
     !cosmosWalletQuery ? null : `/api/tendermint/osmosis/${cosmosWalletQuery}`,
+  );
+  const { data: solanaBalance } = useAxiosSWR<TendermintWalletBalance[]>(
+    !solanaWalletQuery ? null : `/api/solana/mainnet/${solanaWalletQuery}`,
   );
 
   const tokenBalances = useMemo(() => {
@@ -178,6 +186,24 @@ const DashboardPage = () => {
         price: (osmosisBalance ?? [])[0]?.price ?? 0,
         balances: osmosisBalance ?? [],
       },
+      {
+        symbol: 'SOL',
+        name: 'Solana',
+        logo: '/assets/solana.png',
+        netWorth: (solanaBalance ?? []).reduce(
+          walletBalanceReducer(
+            'SOL',
+            (acc, balance) => acc + balance.balance * balance.price,
+          ),
+          0,
+        ),
+        amount: (solanaBalance ?? []).reduce(
+          walletBalanceReducer('SOL', (acc, balance) => acc + balance.balance),
+          0,
+        ),
+        price: (solanaBalance ?? [])[0]?.price ?? 0,
+        balances: solanaBalance ?? [],
+      },
     ];
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
@@ -188,6 +214,7 @@ const DashboardPage = () => {
     klaytnBalance,
     cosmosHubBalance,
     osmosisBalance,
+    solanaBalance,
   ]);
 
   const netWorthInUSD = useMemo(

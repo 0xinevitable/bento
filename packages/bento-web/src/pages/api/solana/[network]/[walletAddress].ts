@@ -1,5 +1,4 @@
 import { SolanaChain } from '@bento/core/lib/chains';
-import { EVMBasedChains } from '@bento/core/lib/types';
 import { safePromiseAll } from '@bento/core/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -14,7 +13,7 @@ export type WalletBalance = {
 
 interface APIRequest extends NextApiRequest {
   query: {
-    network?: EVMBasedChains;
+    network?: 'mainnet';
     walletAddress?: string;
   };
 }
