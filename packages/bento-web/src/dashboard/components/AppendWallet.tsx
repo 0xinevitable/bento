@@ -85,7 +85,7 @@ export const AppendWallet: React.FC = () => {
     >
       <div className="flex flex-col h-auto text-slate-50/90">
         <div>
-          {WALLET_TYPES.map((arch) => (
+          {Object.values(WALLET_TYPES).map((arch) => (
             <span key={arch.type}>
               <button
                 className={clsx(

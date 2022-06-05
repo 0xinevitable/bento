@@ -1,3 +1,4 @@
+import { WALLET_TYPES } from '@bento/core/lib/types';
 import { shortenAddress } from '@bento/core/lib/utils';
 import React, { useCallback } from 'react';
 import { Store } from 'react-notifications-component';
@@ -6,12 +7,6 @@ import { useRecoilState } from 'recoil';
 import { NoSSR } from '@/components/NoSSR';
 import { walletsAtom } from '@/recoil/wallets';
 import { copyToClipboard } from '@/utils/clipboard';
-
-const LOGO_URLS = {
-  evm: '/assets/ethereum.png',
-  'cosmos-sdk': '/assets/cosmos-sdk.png',
-  solana: '/assets/solana.png',
-};
 
 export const WalletList = () => {
   const [wallets, setWallets] = useRecoilState(walletsAtom);
@@ -41,7 +36,7 @@ export const WalletList = () => {
             <li className="p-1 flex items-center" key={wallet.address}>
               <img
                 className="w-6 h-6 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25"
-                src={LOGO_URLS[wallet.type]}
+                src={WALLET_TYPES[wallet.type].logo}
               />
               <span className="ml-2 text-white/60">
                 {shortenAddress(wallet.address)}

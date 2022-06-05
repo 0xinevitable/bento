@@ -1,21 +1,21 @@
 export type WalletType = 'evm' | 'cosmos-sdk' | 'solana';
-export const WALLET_TYPES: {
-  type: WalletType;
-  name: string;
-}[] = [
-  {
+export const WALLET_TYPES = {
+  evm: {
     type: 'evm',
     name: 'EVM',
+    logo: '/assets/ethereum.png',
   },
-  {
+  'cosmos-sdk': {
     type: 'cosmos-sdk',
     name: 'Cosmos SDK',
+    logo: '/assets/cosmos-sdk.png',
   },
-  {
+  solana: {
     type: 'solana',
     name: 'Solana',
+    logo: '/assets/solana.png',
   },
-];
+};
 
 export type EVMBasedChains = 'ethereum' | 'polygon' | 'klaytn';
 export type CosmosSDKBasedChains = 'cosmos-hub' | 'osmosis';
