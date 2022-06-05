@@ -3,12 +3,13 @@ import clsx from 'clsx';
 import produce from 'immer';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 
 import { walletsAtom } from '@/recoil/wallets';
 
 const CHAINS_BY_WALLET_TYPE = {
   evm: ['ethereum', 'polygon', 'klaytn'],
-  tendermint: ['cosmos', 'osmosis'],
+  'cosmos-sdk': ['cosmos', 'osmosis'],
   solana: [],
 } as const;
 
@@ -84,25 +85,30 @@ export const AppendWallet: React.FC = () => {
       )}
     >
       <div className="flex flex-col h-auto text-slate-50/90">
-        <div>
-          {WALLET_TYPES.map((walletType: string) => (
-            <span key={walletType}>
-              <button
-                className={clsx(
-                  'p-1 px-2 rounded-md border',
-                  draft.type === walletType
-                    ? 'border-white'
-                    : 'border-transparent',
-                )}
-                type="button"
-                onClick={() => setDraft({ ...draft, type: walletType })}
-              >
-                {walletType.toUpperCase()}
-              </button>
-            </span>
+        <div className="flex flex-wrap">
+          {Object.values(WALLET_TYPES).map((arch) => (
+            <button
+              key={arch.type}
+              className={clsx(
+                'flex flex-col items-center flex-1',
+                'p-2 rounded-md border-2 transition-all',
+                draft.type === arch.type
+                  ? 'border-white'
+                  : 'border-transparent',
+              )}
+              type="button"
+              onClick={() => setDraft({ ...draft, type: arch.type })}
+            >
+              <ArchImage
+                className="ring-1 ring-slate-100/25"
+                alt={arch.type}
+                src={arch.logo}
+              />
+              <span className="mt-2 leading-none">{arch.name}</span>
+            </button>
           ))}
         </div>
-        <div className="mt-2">
+        <div className="mt-3">
           <input
             type="text"
             className="w-full p-3 px-4 rounded-md bg-slate-800"
@@ -146,11 +152,13 @@ export const AppendWallet: React.FC = () => {
   );
 };
 
-const saveWalletsInfo = (wallet: Wallet) => {
-  let walletList = getWalletsInfo();
-  walletList.push(wallet);
-  localStorage.setItem('wallet', JSON.stringify({ ...walletList }));
-};
+const ArchImage = styled.img`
+  width: 54px;
+  min-width: 54px;
+  max-width: 54px;
+  height: 54px;
 
-const getWalletsInfo = (): Wallet[] =>
-  Object.values(JSON.parse(localStorage.getItem('wallet') ?? '{}'));
+  background: white;
+  filter: drop-shadow(0px 4.25px 4.25px rgba(0, 0, 0, 0.25));
+  border-radius: 157.781px;
+`;

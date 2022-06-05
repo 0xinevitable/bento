@@ -71,9 +71,9 @@ yarn workspace @bento/web dev
     - 이더리움(ETH), 폴리곤의 매틱(MATIC), 아발란체(AVAX), 클레이튼(KLAY)
   - 다른 토큰들은 `ERC20` 표준에 맞게 구현/배포된 컨트랙트의 상태로 정의됨
 
-#### Tendermint
+#### Cosmos SDK
 
-- [텐더민트 기반](https://academy.binance.com/ko/articles/tendermint-explained) 블록체인. Cosmos SDK 쓰는 애들
+- Cosmos SDK를 사용해 만들어진 블록체인
 - 코스모스 허브(Cosmos Hub), 오스모시스(Osmosis), ~~테라(Terra, 뒤짐)~~ 등
 
 - 토큰

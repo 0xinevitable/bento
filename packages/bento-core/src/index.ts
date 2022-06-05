@@ -2,11 +2,11 @@ import { Bech32Address } from './bech32';
 import {
   Chain,
   CosmosHubChain,
+  CosmosSDKBasedChain,
   EthereumChain,
   KlaytnChain,
   OsmosisChain,
   SolanaChain,
-  TendermintChain,
 } from './chains';
 import { wallets } from './config';
 import { safePromiseAll } from './utils';
@@ -18,7 +18,7 @@ export const main = async () => {
   const chains: Record<
     // FIXME: wow
     'ethereum' | 'klaytn' | 'solana' | 'cosmos-hub' | 'osmosis',
-    Chain | TendermintChain
+    Chain | CosmosSDKBasedChain
   > = {
     ethereum: new EthereumChain(),
     klaytn: new KlaytnChain(),
@@ -61,7 +61,7 @@ export const main = async () => {
         );
         const currencyPrice = await chain.getCurrencyPrice();
         totalValueInUSD += currencyPrice * balance;
-      } else if (wallet.type === 'tendermint') {
+      } else if (wallet.type === 'cosmos-sdk') {
         const bech32Address = Bech32Address.fromBech32(wallet.address);
 
         await safePromiseAll(
@@ -69,7 +69,7 @@ export const main = async () => {
             const chain = chains[chainId];
             if (!('bech32Config' in chain)) {
               throw new Error(
-                "Current `chain` of `chainId` does not implement `TendermintChain`'s `bech32Config`",
+                "Current `chain` of `chainId` does not implement `CosmosSDKBasedChain`'s `bech32Config`",
               );
             }
             const balance = await chain.getBalance(

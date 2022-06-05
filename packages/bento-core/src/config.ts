@@ -39,7 +39,7 @@ export const wallets: Wallet[] = [
     address: 'HJLQd7CxQK5epNLE3R4u8b2MdGzmcvXjpntGWfht4FZH',
   },
   {
-    type: 'tendermint',
+    type: 'cosmos-sdk',
     address: 'cosmos15zysaya5j34vy2cqd7y9q8m3drjpy0d2hhgxh0',
     chains: ['cosmos-hub', 'osmosis'],
   },

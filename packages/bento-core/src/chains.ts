@@ -78,7 +78,7 @@ export interface Chain {
     logo?: string;
     decimals: number;
     coinGeckoId?: string;
-    coinMinimalDenom?: string; // Only tendermint-based
+    coinMinimalDenom?: string; // Only for Cosmos SDK based chains
   };
   _provider?: any;
   getCurrencyPrice: (currency?: Currency) => Promise<number>;
@@ -297,7 +297,7 @@ export class SolanaChain implements Chain {
   };
 }
 
-type TendermintBalanceResponse = {
+type CosmosSDKBasedBalanceResponse = {
   balances: [
     {
       denom: string;
@@ -323,7 +323,7 @@ type CosmosHubDelegationsResponse = {
     };
   }[];
 };
-type TendermintDelegationsResponse = {
+type CosmosSDKBasedDelegationsResponse = {
   delegation_responses: {
     delegation: {
       delegator_address: string;
@@ -341,13 +341,13 @@ type TendermintDelegationsResponse = {
   };
 };
 
-export interface TendermintChain extends Chain {
+export interface CosmosSDKBasedChain extends Chain {
   bech32Config: {
     prefix: string;
   };
   getDelegations: (address: string) => Promise<number>;
 }
-export class CosmosHubChain implements TendermintChain {
+export class CosmosHubChain implements CosmosSDKBasedChain {
   currency = {
     symbol: 'ATOM',
     name: 'Cosmos Hub',
@@ -366,7 +366,7 @@ export class CosmosHubChain implements TendermintChain {
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
 
   getBalance = async (address: string) => {
-    const { data } = await this._provider.get<TendermintBalanceResponse>(
+    const { data } = await this._provider.get<CosmosSDKBasedBalanceResponse>(
       `/cosmos/bank/v1beta1/balances/${address}`,
     );
     const coinBalance =
@@ -388,7 +388,7 @@ export class CosmosHubChain implements TendermintChain {
   };
 }
 
-export class OsmosisChain implements TendermintChain {
+export class OsmosisChain implements CosmosSDKBasedChain {
   currency = {
     symbol: 'OSMO',
     name: 'Osmosis',
@@ -407,7 +407,7 @@ export class OsmosisChain implements TendermintChain {
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
 
   getBalance = async (address: string) => {
-    const { data } = await this._provider.get<TendermintBalanceResponse>(
+    const { data } = await this._provider.get<CosmosSDKBasedBalanceResponse>(
       `/cosmos/bank/v1beta1/balances/${address}`,
     );
     const coinBalance =
@@ -417,9 +417,10 @@ export class OsmosisChain implements TendermintChain {
     return balance;
   };
   getDelegations = async (address: string) => {
-    const { data } = await this._provider.get<TendermintDelegationsResponse>(
-      `/cosmos/staking/v1beta1/delegations/${address}`,
-    );
+    const { data } =
+      await this._provider.get<CosmosSDKBasedDelegationsResponse>(
+        `/cosmos/staking/v1beta1/delegations/${address}`,
+      );
     const delegations = data.delegation_responses;
     const totalDelegated = delegations.reduce(
       (acc, cur) => acc + Number(cur.balance.amount),
