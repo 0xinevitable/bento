@@ -7,35 +7,71 @@ import { systemFontStack } from '@/styles/fonts';
 export const HeaderSection = () => {
   return (
     <Container id="header">
-      <Badge>INTRODUCING BENTO</Badge>
-      <Title>
-        The Web3
-        <br />
-        Lunchbox
-        <br />
-        Crafted
-        <br />
-        Just For You.
-      </Title>
-      <Description>
-        Group your wallets
-        <br />
-        and track DeFi portfolios
-        <br />
-        in various L1 chains.
-      </Description>
+      <BentoIllust src="/assets/bento-illust.png" />
 
-      <ButtonLink href="https://app.bento.finance">
-        <Button>Launch App</Button>
-      </ButtonLink>
+      <Content>
+        <Badge>INTRODUCING BENTO</Badge>
+        <Title>
+          The Web3
+          <br />
+          Lunchbox
+          <br />
+          Crafted
+          <br />
+          Just For You.
+        </Title>
+        <Description>
+          Group your wallets
+          <br />
+          and track DeFi portfolios
+          <br />
+          in various L1 chains.
+        </Description>
+
+        <ButtonLink href="https://app.bento.finance">
+          <Button>Launch App</Button>
+        </ButtonLink>
+      </Content>
     </Container>
   );
 };
 
 const Container = styled.header`
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1728px;
+  height: calc(100vh + 200px);
+  max-height: 1217px;
+  padding-top: 48px;
+  padding-bottom: 300px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  background-color: black;
+  background-image: url('/assets/header-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+`;
+
+const BentoIllust = styled.img`
+  position: absolute;
+  width: 951px;
+  height: 951px;
+  left: -87px;
+  top: 134px;
+`;
+
+const Content = styled.div`
+  width: 50%;
+  margin-left: 50%;
+  padding-left: 65px;
+
   display: flex;
   flex-direction: column;
-  background-color: black;
 `;
 
 const Title = styled.h1`
