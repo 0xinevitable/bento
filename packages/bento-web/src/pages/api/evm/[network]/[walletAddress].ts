@@ -11,11 +11,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export type WalletBalance = {
   walletAddress: string;
-  address?: string;
+
+  name: string;
+  logo?: string;
   symbol: string;
+  address?: string; // for tokens
+
   balance: number;
   price: number;
-  logo?: string;
 };
 
 interface APIRequest extends NextApiRequest {
@@ -64,6 +67,8 @@ export default async (req: APIRequest, res: NextApiResponse) => {
           {
             walletAddress,
             symbol: chain.currency.symbol,
+            name: chain.currency.name,
+            logo: chain.currency.logo,
             balance,
             price: currencyPrice,
           },
