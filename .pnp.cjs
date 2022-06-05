@@ -2680,6 +2680,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-is", "npm:17.0.2"],\
             ["recoil", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:0.7.3-alpha.2"],\
             ["styled-components", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:5.3.5"],\
+            ["styled-normalize", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:8.0.7"],\
             ["tslib", "npm:2.4.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"]\
           ],\
@@ -14008,6 +14009,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/react",\
             "babel-plugin-macros",\
             "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["styled-normalize", [\
+        ["npm:8.0.7", {\
+          "packageLocation": "./.yarn/cache/styled-normalize-npm-8.0.7-76e7b6a203-afdb450407.zip/node_modules/styled-normalize/",\
+          "packageDependencies": [\
+            ["styled-normalize", "npm:8.0.7"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:8.0.7", {\
+          "packageLocation": "./.yarn/__virtual__/styled-normalize-virtual-83092fe7a3/0/cache/styled-normalize-npm-8.0.7-76e7b6a203-afdb450407.zip/node_modules/styled-normalize/",\
+          "packageDependencies": [\
+            ["styled-normalize", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:8.0.7"],\
+            ["@types/styled-components", "npm:5.1.25"],\
+            ["styled-components", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:5.3.5"]\
+          ],\
+          "packagePeers": [\
+            "@types/styled-components",\
+            "styled-components"\
           ],\
           "linkType": "HARD"\
         }]\
