@@ -7,7 +7,7 @@ import { systemFontStack } from '@/styles/fonts';
 export const HeaderSection = () => {
   return (
     <Container id="header">
-      <BentoIllust src="/assets/bento-illust.png" />
+      <BentoIllust src="/assets/illusts/lunchbox.png" />
 
       <Content>
         <Badge>INTRODUCING BENTO</Badge>
