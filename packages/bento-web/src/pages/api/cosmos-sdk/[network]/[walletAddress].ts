@@ -1,10 +1,10 @@
 import { Bech32Address } from '@bento/core/lib/bech32';
 import {
   CosmosHubChain,
+  CosmosSDKBasedChain,
   OsmosisChain,
-  TendermintChain,
 } from '@bento/core/lib/chains';
-import { TendermintBasedChains } from '@bento/core/lib/types';
+import { CosmosSDKBasedChains } from '@bento/core/lib/types';
 import { safePromiseAll } from '@bento/core/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -22,12 +22,12 @@ export type WalletBalance = {
 
 interface APIRequest extends NextApiRequest {
   query: {
-    network?: TendermintBasedChains;
+    network?: CosmosSDKBasedChains;
     walletAddress?: string;
   };
 }
 
-const chains: Record<TendermintBasedChains, TendermintChain> = {
+const chains: Record<CosmosSDKBasedChains, CosmosSDKBasedChain> = {
   'cosmos-hub': new CosmosHubChain(),
   osmosis: new OsmosisChain(),
 };
@@ -44,7 +44,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
   const network = (
     req.query.network ?? ''
-  ).toLowerCase() as TendermintBasedChains;
+  ).toLowerCase() as CosmosSDKBasedChains;
 
   const result = await safePromiseAll(
     wallets.map(async (walletAddress) => {

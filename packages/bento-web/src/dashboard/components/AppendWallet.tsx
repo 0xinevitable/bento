@@ -8,7 +8,7 @@ import { walletsAtom } from '@/recoil/wallets';
 
 const CHAINS_BY_WALLET_TYPE = {
   evm: ['ethereum', 'polygon', 'klaytn'],
-  tendermint: ['cosmos', 'osmosis'],
+  'cosmos-sdk': ['cosmos', 'osmosis'],
   solana: [],
 } as const;
 

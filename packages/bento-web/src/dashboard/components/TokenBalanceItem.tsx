@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import { WalletBalance as CosmosSDKBasedWalletBalance } from '@/pages/api/cosmos-sdk/[network]/[walletAddress]';
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
-import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
 
 import { TokenIcon } from './TokenIcon';
 
@@ -15,7 +15,7 @@ type TokenBalanceItemProps = {
   netWorth: number;
   amount: number;
   price: number;
-  balances: (WalletBalance | TendermintWalletBalance)[];
+  balances: (WalletBalance | CosmosSDKBasedWalletBalance)[];
 };
 
 export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
@@ -23,7 +23,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
 
   const balances = useMemo(() => {
     const items = info.balances.map(
-      (balance: WalletBalance | TendermintWalletBalance) => {
+      (balance: WalletBalance | CosmosSDKBasedWalletBalance) => {
         const delegations = 'delegations' in balance ? balance.delegations : 0;
         const percentage =
           ((balance.balance + delegations) / info.amount) * 100;

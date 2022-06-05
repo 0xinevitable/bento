@@ -9,7 +9,7 @@ import { copyToClipboard } from '@/utils/clipboard';
 
 const LOGO_URLS = {
   evm: '/assets/ethereum.png',
-  tendermint: '/assets/tendermint.png',
+  'cosmos-sdk': '/assets/tendermint.png',
   solana: '/assets/solana.png',
 };
 

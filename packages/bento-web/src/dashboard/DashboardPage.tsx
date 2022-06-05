@@ -4,8 +4,8 @@ import { useRecoilValue } from 'recoil';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
+import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/[network]/[walletAddress]';
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
-import { WalletBalance as TendermintWalletBalance } from '@/pages/api/tendermint/[network]/[walletAddress]';
 import { walletsAtom } from '@/recoil/wallets';
 
 import { AppendWallet } from './components/AppendWallet';
@@ -30,7 +30,7 @@ const DashboardPage = () => {
   ] = useMemo(() => {
     const addrs = wallets.reduce(
       (acc, wallet) => {
-        if (wallet.type === 'tendermint') {
+        if (wallet.type === 'cosmos-sdk') {
           return { ...acc, cosmos: [...acc.cosmos, wallet.address] };
         }
         if (wallet.type === 'solana') {
@@ -67,23 +67,21 @@ const DashboardPage = () => {
   const { data: ethereumBalance = [] } = useAxiosSWR<WalletBalance[]>(
     !ethereumWalletQuery ? null : `/api/evm/ethereum/${ethereumWalletQuery}`,
   );
-  const { data: polygonBalance = [] } = useAxiosSWR<TendermintWalletBalance[]>(
+  const { data: polygonBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
     !polygonWalletQuery ? null : `/api/evm/polygon/${polygonWalletQuery}`,
   );
   const { data: klaytnBalance = [] } = useAxiosSWR<WalletBalance[]>(
     !klaytnWalletQuery ? null : `/api/evm/klaytn/${klaytnWalletQuery}`,
   );
-  const { data: cosmosHubBalance = [] } = useAxiosSWR<
-    TendermintWalletBalance[]
-  >(
+  const { data: cosmosHubBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
     !cosmosWalletQuery
       ? null
-      : `/api/tendermint/cosmos-hub/${cosmosWalletQuery}`,
+      : `/api/cosmos-sdk/cosmos-hub/${cosmosWalletQuery}`,
   );
-  const { data: osmosisBalance = [] } = useAxiosSWR<TendermintWalletBalance[]>(
-    !cosmosWalletQuery ? null : `/api/tendermint/osmosis/${cosmosWalletQuery}`,
+  const { data: osmosisBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
+    !cosmosWalletQuery ? null : `/api/cosmos-sdk/osmosis/${cosmosWalletQuery}`,
   );
-  const { data: solanaBalance = [] } = useAxiosSWR<TendermintWalletBalance[]>(
+  const { data: solanaBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
     !solanaWalletQuery ? null : `/api/solana/mainnet/${solanaWalletQuery}`,
   );
 
