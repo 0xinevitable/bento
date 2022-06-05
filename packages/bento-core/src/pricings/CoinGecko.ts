@@ -1,7 +1,7 @@
 import axios from 'axios';
 import queryString from 'query-string';
-import { withCache } from 'src/cache';
 
+import { withCache } from '../cache';
 import { Currency } from './Currency';
 
 export const priceFromCoinGecko = withCache(

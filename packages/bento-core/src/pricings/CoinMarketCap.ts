@@ -1,6 +1,7 @@
 import axios from 'axios';
 import queryString from 'query-string';
-import { withCache } from 'src/cache';
+
+import { withCache } from '../cache';
 
 // Not recommended
 type CoinMarketCapPriceConversionResponse = {
