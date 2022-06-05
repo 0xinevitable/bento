@@ -60,6 +60,8 @@ export default async (req: APIRequest, res: NextApiResponse) => {
         return {
           walletAddress: chainBech32Address,
           symbol: chain.currency.symbol,
+          name: chain.currency.name,
+          logo: chain.currency.logo,
           balance,
           delegations,
           price: currencyPrice,

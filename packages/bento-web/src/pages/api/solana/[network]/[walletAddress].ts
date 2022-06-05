@@ -49,6 +49,8 @@ export default async (req: APIRequest, res: NextApiResponse) => {
         {
           walletAddress,
           symbol: chain.currency.symbol,
+          name: chain.currency.name,
+          logo: chain.currency.logo,
           balance,
           price: currencyPrice,
         },
