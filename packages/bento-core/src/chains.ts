@@ -74,6 +74,8 @@ export interface Chain {
   // 기반 통화(Native Token)
   currency: {
     symbol: string;
+    name: string;
+    logo?: string;
     decimals: number;
     coinGeckoId?: string;
     coinMinimalDenom?: string; // Only tendermint-based
@@ -87,6 +89,8 @@ export interface Chain {
 export class EthereumChain implements Chain {
   currency = {
     symbol: 'ETH',
+    name: 'Ethereum',
+    logo: '/assets/ethereum.png',
     decimals: 18,
     coinGeckoId: 'ethereum',
   };
@@ -105,6 +109,8 @@ export class EthereumChain implements Chain {
 export class PolygonChain implements Chain {
   currency = {
     symbol: 'MATIC',
+    name: 'Polygon',
+    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polygon/info/logo.png',
     decimals: 18,
     coinGeckoId: 'matic-network',
   };
@@ -155,6 +161,8 @@ export class KlaytnChain implements Chain {
   currency = {
     symbol: 'KLAY',
     decimals: 18,
+    name: 'KLAYTN',
+    logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
     coinGeckoId: 'klay-token',
   };
   _provider = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
@@ -272,6 +280,8 @@ export class KlaytnChain implements Chain {
 export class SolanaChain implements Chain {
   currency = {
     symbol: 'SOL',
+    name: 'Solana',
+    logo: '/assets/solana.png',
     decimals: 9,
     coinGeckoId: 'solana',
   };
@@ -340,6 +350,8 @@ export interface TendermintChain extends Chain {
 export class CosmosHubChain implements TendermintChain {
   currency = {
     symbol: 'ATOM',
+    name: 'Cosmos Hub',
+    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png',
     decimals: 6,
     coinGeckoId: 'cosmos',
     coinMinimalDenom: 'uatom',
@@ -379,6 +391,8 @@ export class CosmosHubChain implements TendermintChain {
 export class OsmosisChain implements TendermintChain {
   currency = {
     symbol: 'OSMO',
+    name: 'Osmosis',
+    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png',
     decimals: 6,
     coinGeckoId: 'osmosis',
     coinMinimalDenom: 'uosmo',
