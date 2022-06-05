@@ -85,19 +85,19 @@ export const AppendWallet: React.FC = () => {
     >
       <div className="flex flex-col h-auto text-slate-50/90">
         <div>
-          {WALLET_TYPES.map((walletType: string) => (
-            <span key={walletType}>
+          {WALLET_TYPES.map((arch) => (
+            <span key={arch.type}>
               <button
                 className={clsx(
                   'p-1 px-2 rounded-md border',
-                  draft.type === walletType
+                  draft.type === arch.type
                     ? 'border-white'
                     : 'border-transparent',
                 )}
                 type="button"
-                onClick={() => setDraft({ ...draft, type: walletType })}
+                onClick={() => setDraft({ ...draft, type: arch.type })}
               >
-                {walletType.toUpperCase()}
+                {arch.name}
               </button>
             </span>
           ))}
