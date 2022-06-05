@@ -10,7 +10,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export type WalletBalance = {
   walletAddress: string;
+
   symbol: string;
+  name: string;
+  logo: string;
+
   balance: number;
   delegations: number;
   price: number;

@@ -64,149 +64,79 @@ const DashboardPage = () => {
     ];
   }, [wallets]);
 
-  const { data: ethereumBalance } = useAxiosSWR<WalletBalance[]>(
+  const { data: ethereumBalance = [] } = useAxiosSWR<WalletBalance[]>(
     !ethereumWalletQuery ? null : `/api/evm/ethereum/${ethereumWalletQuery}`,
   );
-  const { data: polygonBalance } = useAxiosSWR<TendermintWalletBalance[]>(
+  const { data: polygonBalance = [] } = useAxiosSWR<TendermintWalletBalance[]>(
     !polygonWalletQuery ? null : `/api/evm/polygon/${polygonWalletQuery}`,
   );
-  const { data: klaytnBalance } = useAxiosSWR<WalletBalance[]>(
+  const { data: klaytnBalance = [] } = useAxiosSWR<WalletBalance[]>(
     !klaytnWalletQuery ? null : `/api/evm/klaytn/${klaytnWalletQuery}`,
   );
-  const { data: cosmosHubBalance } = useAxiosSWR<TendermintWalletBalance[]>(
+  const { data: cosmosHubBalance = [] } = useAxiosSWR<
+    TendermintWalletBalance[]
+  >(
     !cosmosWalletQuery
       ? null
       : `/api/tendermint/cosmos-hub/${cosmosWalletQuery}`,
   );
-  const { data: osmosisBalance } = useAxiosSWR<TendermintWalletBalance[]>(
+  const { data: osmosisBalance = [] } = useAxiosSWR<TendermintWalletBalance[]>(
     !cosmosWalletQuery ? null : `/api/tendermint/osmosis/${cosmosWalletQuery}`,
   );
-  const { data: solanaBalance } = useAxiosSWR<TendermintWalletBalance[]>(
+  const { data: solanaBalance = [] } = useAxiosSWR<TendermintWalletBalance[]>(
     !solanaWalletQuery ? null : `/api/solana/mainnet/${solanaWalletQuery}`,
   );
 
   const tokenBalances = useMemo(() => {
-    const tokens = [
-      {
-        symbol: 'ETH',
-        name: 'Ethereum',
-        logo: '/assets/ethereum.png',
-        netWorth: (ethereumBalance ?? []).reduce(
-          walletBalanceReducer(
-            'ETH',
-            (acc, balance) => acc + balance.balance * balance.price,
-          ),
-          0,
-        ),
-        amount: (ethereumBalance ?? []).reduce(
-          walletBalanceReducer('ETH', (acc, balance) => acc + balance.balance),
-          0,
-        ),
-        price: (ethereumBalance ?? [])[0]?.price ?? 0,
-        balances: ethereumBalance ?? [],
-      },
-      {
-        symbol: 'MATIC',
-        name: 'Polygon',
-        logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polygon/info/logo.png',
-        netWorth: (polygonBalance ?? []).reduce(
-          walletBalanceReducer(
-            'MATIC',
-            (acc, balance) => acc + balance.balance * balance.price,
-          ),
-          0,
-        ),
-        amount: (polygonBalance ?? []).reduce(
-          walletBalanceReducer(
-            'MATIC',
-            (acc, balance) => acc + balance.balance,
-          ),
-          0,
-        ),
-        price: (polygonBalance ?? [])[0]?.price ?? 0,
-        balances: polygonBalance ?? [],
-      },
-      ...Object.values(groupBy(klaytnBalance ?? [], 'address')).map(
-        (balances) => {
-          const [first] = balances;
-          const totalAmount = balances.reduce(
-            (acc, balance) => acc + balance.balance,
-            0,
-          );
-          return {
-            symbol: first.symbol,
-            name: first.symbol,
-            logo:
-              first.logo ??
-              'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
-            netWorth: totalAmount * first.price,
-            amount: totalAmount,
-            price: first.price,
-            balances: balances,
-            tokenAddress: first.address,
-          };
-        },
+    // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
+    // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
+    const balancesByPlatform = Object.entries(
+      groupBy(
+        [
+          ethereumBalance,
+          polygonBalance,
+          klaytnBalance,
+          cosmosHubBalance,
+          osmosisBalance,
+          solanaBalance,
+        ].flat(),
+        (balance) => balance.symbol + balance.name,
       ),
-      {
-        symbol: 'COSMOS',
-        name: 'Cosmos Hub',
-        // FIXME: divide staking
-        staking: true,
-        logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png',
-        netWorth: (cosmosHubBalance ?? []).reduce(
-          (acc, balance) =>
-            acc +
-            balance.balance * balance.price +
-            balance.delegations * balance.price,
-          0,
-        ),
-        amount: (cosmosHubBalance ?? []).reduce(
-          (acc, balance) => acc + balance.balance + balance.delegations,
-          0,
-        ),
-        price: (cosmosHubBalance ?? [])[0]?.price ?? 0,
-        balances: cosmosHubBalance ?? [],
-      },
-      {
-        symbol: 'OSMO',
-        name: 'Osmosis',
-        staking: true,
-        logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png',
-        netWorth: (osmosisBalance ?? []).reduce(
-          (acc, balance) =>
-            acc +
-            balance.balance * balance.price +
-            balance.delegations * balance.price,
-          0,
-        ),
-        amount: (osmosisBalance ?? []).reduce(
-          (acc, balance) => acc + balance.balance + balance.delegations,
-          0,
-        ),
-        price: (osmosisBalance ?? [])[0]?.price ?? 0,
-        balances: osmosisBalance ?? [],
-      },
-      {
-        symbol: 'SOL',
-        name: 'Solana',
-        logo: '/assets/solana.png',
-        netWorth: (solanaBalance ?? []).reduce(
-          walletBalanceReducer(
-            'SOL',
-            (acc, balance) => acc + balance.balance * balance.price,
+    ).map((v) => v[1]);
+
+    const tokens = balancesByPlatform
+      .map((balances) => {
+        // NOTE: balances 는 모두 같은 토큰의 정보를 담고 있기에, first 에서만 정보를 꺼내온다.
+        const [first] = balances;
+        return {
+          symbol: first.symbol,
+          name: first.name,
+          logo: first.logo,
+          tokenAddress: 'address' in first ? first.address : null,
+          balances: balances,
+          netWorth: balances.reduce(
+            walletBalanceReducer(
+              first.symbol,
+              (acc, balance) => acc + balance.balance * balance.price,
+            ),
+            0,
           ),
-          0,
-        ),
-        amount: (solanaBalance ?? []).reduce(
-          walletBalanceReducer('SOL', (acc, balance) => acc + balance.balance),
-          0,
-        ),
-        price: (solanaBalance ?? [])[0]?.price ?? 0,
-        balances: solanaBalance ?? [],
-      },
-    ];
+
+          // TODO: Show delegated tokens when they are supported.
+          amount: balances.reduce(
+            walletBalanceReducer(
+              first.symbol,
+              (acc, balance) => acc + balance.balance,
+            ),
+            0,
+          ),
+          price: first.price,
+        };
+      })
+      .flat();
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
+    console.log(tokens);
     return tokens.filter((v) => v.netWorth > 0);
   }, [
     ethereumBalance,
