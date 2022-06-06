@@ -14,8 +14,14 @@ import { WalletList } from './components/WalletList';
 import { Web3Connector } from './components/Web3Connector';
 
 const walletBalanceReducer =
-  (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
-  (acc: number, balance: WalletBalance) =>
+  (
+    symbol: string,
+    callback: (
+      acc: number,
+      balance: WalletBalance | CosmosSDKWalletBalance,
+    ) => number,
+  ) =>
+  (acc: number, balance: WalletBalance | CosmosSDKWalletBalance) =>
     balance.symbol === symbol ? callback(acc, balance) : acc;
 
 const DashboardPage = () => {
@@ -106,6 +112,7 @@ const DashboardPage = () => {
       .map((balances) => {
         // NOTE: balances 는 모두 같은 토큰의 정보를 담고 있기에, first 에서만 정보를 꺼내온다.
         const [first] = balances;
+
         return {
           symbol: first.symbol,
           name: first.name,
@@ -115,16 +122,21 @@ const DashboardPage = () => {
           netWorth: balances.reduce(
             walletBalanceReducer(
               first.symbol,
-              (acc, balance) => acc + balance.balance * balance.price,
+              (acc, balance) =>
+                acc +
+                (balance.balance +
+                  ('delegations' in balance ? balance.delegations : 0)) *
+                  balance.price,
             ),
             0,
           ),
-
-          // TODO: Show delegated tokens when they are supported.
           amount: balances.reduce(
             walletBalanceReducer(
               first.symbol,
-              (acc, balance) => acc + balance.balance,
+              (acc, balance) =>
+                acc +
+                balance.balance +
+                ('delegations' in balance ? balance.delegations : 0),
             ),
             0,
           ),
