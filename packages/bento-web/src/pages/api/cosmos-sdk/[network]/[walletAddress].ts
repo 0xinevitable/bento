@@ -4,6 +4,7 @@ import {
   CosmosSDKBasedChain,
   OsmosisChain,
 } from '@bento/core/lib/chains';
+import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import { CosmosSDKBasedChains } from '@bento/core/lib/types';
 import { safePromiseAll } from '@bento/core/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -55,10 +56,9 @@ export default async (req: APIRequest, res: NextApiResponse) => {
         const chainBech32Address = bech32Address.toBech32(
           chain.bech32Config.prefix,
         );
-        const [balance, delegations, currencyPrice] = await safePromiseAll([
+        const [balance, delegations] = await safePromiseAll([
           chain.getBalance(chainBech32Address).catch(() => 0),
           chain.getDelegations(chainBech32Address).catch(() => 0),
-          chain.getCurrencyPrice().catch(() => 0),
         ]);
 
         return {
@@ -66,13 +66,31 @@ export default async (req: APIRequest, res: NextApiResponse) => {
           symbol: chain.currency.symbol,
           name: chain.currency.name,
           logo: chain.currency.logo,
+          coinGeckoId: chain.currency.coinGeckoId,
           balance,
           delegations,
-          price: currencyPrice,
+          price: undefined,
         };
       }
     }),
   );
 
+  const coinGeckoIds = result
+    .flatMap((x) => (!!x.coinGeckoId ? x.coinGeckoId : []))
+    .filter((x, i, a) => a.indexOf(x) === i);
+
+  const [coinGeckoPricesById] = await safePromiseAll([
+    pricesFromCoinGecko(coinGeckoIds).catch(() => ({})),
+  ]);
+
+  result.forEach((token) => {
+    if (typeof token.price === 'undefined') {
+      if (!!token.coinGeckoId) {
+        token.price = coinGeckoPricesById[token.coinGeckoId];
+      } else {
+        token.price = 0;
+      }
+    }
+  });
   res.status(200).json(result);
 };
