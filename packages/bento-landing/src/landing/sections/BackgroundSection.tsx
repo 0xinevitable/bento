@@ -54,6 +54,7 @@ export const BackgroundSection = () => {
 const Wrapper = styled.section`
   margin: 0 auto;
   padding-top: 25px;
+  padding-bottom: 292px;
   width: 100%;
   max-width: 1728px;
 
