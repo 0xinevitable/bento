@@ -1,5 +1,6 @@
 import { Web3Provider } from '@ethersproject/providers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import Caver from 'caver-js';
 import { useCallback } from 'react';
 import styled from 'styled-components';
 import Web3Modal from 'web3modal';
@@ -10,6 +11,7 @@ import { FieldInput } from '@/profile/components/FieldInput';
 declare global {
   interface Window {
     keplr: any;
+    klaytn: any;
   }
 }
 
@@ -61,18 +63,36 @@ const OnboardingPage: React.FC = () => {
   const connectKeplr = useCallback(async () => {
     if (typeof window.keplr === 'undefined') {
       window.alert('Please install keplr extension');
-    } else {
-      const chainId = 'cosmoshub-4';
-      await window.keplr.enable(chainId);
-
-      const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
-      const accounts = await offlineSigner.getAccounts();
-      const account = accounts[0].address;
-
-      const { pub_key: publicKey, signature } =
-        await window.keplr.signArbitrary(chainId, account, 'waka');
-      console.log({ publicKey, signature, account });
+      return;
     }
+    const chainId = 'cosmoshub-4';
+    await window.keplr.enable(chainId);
+
+    const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
+    const accounts = await offlineSigner.getAccounts();
+    const account = accounts[0].address;
+
+    const { pub_key: publicKey, signature } = await window.keplr.signArbitrary(
+      chainId,
+      account,
+      'waka',
+    );
+    console.log({ publicKey, signature, account });
+  }, []);
+
+  const connectKaikas = useCallback(async () => {
+    if (typeof window.klaytn === 'undefined') {
+      window.alert('Please install kaikas extension');
+      return;
+    }
+
+    const provider = window.klaytn;
+    const accounts = await provider.enable();
+    const account = accounts[0];
+
+    const caver = new Caver(provider);
+    const signature = await caver.klay.sign('waka', account);
+    console.log({ signature });
   }, []);
 
   return (
@@ -87,15 +107,18 @@ const OnboardingPage: React.FC = () => {
           MetaMask or WalletConnect
         </Button>
 
-        <Button className="p-4 text-slate-800 font-bold bg-slate-300">
-          Kaikas
-        </Button>
-
         <Button
           className="p-4 text-slate-800 font-bold bg-slate-300"
           onClick={connectKeplr}
         >
           Keplr
+        </Button>
+
+        <Button
+          className="p-4 text-slate-800 font-bold bg-slate-300"
+          onClick={connectKaikas}
+        >
+          Kaikas
         </Button>
       </div>
     </PageContainer>
