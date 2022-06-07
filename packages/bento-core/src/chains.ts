@@ -5,7 +5,6 @@ import Caver from 'caver-js';
 
 import { withCache } from './cache';
 import { priceFromCoinGecko } from './pricings/CoinGecko';
-import { priceFromCoinMarketCap } from './pricings/CoinMarketCap';
 import { Currency } from './pricings/Currency';
 import { ERC20TokenInput, KLAYTN_TOKENS } from './tokens';
 import { safePromiseAll } from './utils';
@@ -245,16 +244,14 @@ export class KlaytnChain implements Chain {
         (v) => v.address === token.contract_address,
       );
       const getPrice = async () => {
-        if (tokenInfo?.coinGeckoId) {
-          return priceFromCoinGecko(tokenInfo.coinGeckoId).catch(() => 0);
-        }
-        if (tokenInfo?.coinMarketCapId) {
-          return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
-            (error) => {
-              console.error(error);
-              return 0;
-            },
-          );
+        if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
+          // return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
+          //   (error) => {
+          //     console.error(error);
+          //     return 0;
+          //   },
+          // );
+          return undefined;
         }
         if (symbol === 'SCNR') {
           return this._getSCNRTokenPrice().catch(() => 0);
@@ -269,6 +266,8 @@ export class KlaytnChain implements Chain {
         decimals: token.contract_decimals,
         address: token.contract_address,
         logo: tokenInfo?.logo,
+        coinGeckoId: tokenInfo?.coinGeckoId,
+        coinMarketCapId: tokenInfo?.coinMarketCapId,
         balance,
         price,
       };

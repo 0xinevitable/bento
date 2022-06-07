@@ -5,6 +5,8 @@ import {
   KlaytnChain,
   PolygonChain,
 } from '@bento/core/lib/chains';
+import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
+import { pricesFromCoinMarketCap } from '@bento/core/lib/pricings/CoinMarketCap';
 import { EVMBasedChains } from '@bento/core/lib/types';
 import { safePromiseAll } from '@bento/core/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -49,34 +51,72 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   // 네트워크 주소를 가져온다.
   const network = (req.query.network ?? '').toLowerCase() as EVMBasedChains;
 
-  const result = await safePromiseAll(
-    wallets.map(async (walletAddress) => {
-      if (['ethereum', 'polygon', 'klaytn'].includes(network)) {
-        const chain = chains[network];
+  const result: {
+    walletAddress: string;
+    symbol: string;
+    name: string;
+    logo?: string;
+    coinGeckoId?: string;
+    coinMarketCapId?: string;
+    balance: number;
+    price: number | undefined;
+    // price: currencyPrice,
+  }[] = (
+    await safePromiseAll(
+      wallets.map(async (walletAddress) => {
+        if (['ethereum', 'polygon', 'klaytn'].includes(network)) {
+          const chain = chains[network];
+          const getTokenBalances = async (): Promise<ERC20TokenBalance[]> =>
+            !!chain.getTokenBalances
+              ? chain.getTokenBalances(walletAddress)
+              : [];
 
-        const getTokenBalances = async (): Promise<ERC20TokenBalance[]> =>
-          !!chain.getTokenBalances ? chain.getTokenBalances(walletAddress) : [];
+          const [balance, tokenBalances] = await Promise.all([
+            chain.getBalance(walletAddress).catch(() => 0),
+            getTokenBalances().catch(() => []),
+          ]);
 
-        const [balance, currencyPrice, tokenBalances] = await Promise.all([
-          chain.getBalance(walletAddress).catch(() => 0),
-          chain.getCurrencyPrice().catch(() => 0),
-          getTokenBalances().catch(() => []),
-        ]);
+          return [
+            {
+              walletAddress,
+              symbol: chain.currency.symbol,
+              name: chain.currency.name,
+              logo: chain.currency.logo,
+              coinGeckoId: chain.currency.coinGeckoId,
+              balance,
+              // price: currencyPrice,
+            },
+            ...tokenBalances,
+          ];
+        }
+        return [];
+      }),
+    )
+  ).flat();
 
-        return [
-          {
-            walletAddress,
-            symbol: chain.currency.symbol,
-            name: chain.currency.name,
-            logo: chain.currency.logo,
-            balance,
-            price: currencyPrice,
-          },
-          ...tokenBalances,
-        ];
+  const coinGeckoIds = result
+    .flatMap((x) => (!!x.coinGeckoId ? x.coinGeckoId : []))
+    .filter((x, i, a) => a.indexOf(x) === i);
+
+  const coinMarketCapIds = result
+    .flatMap((x) => (!!x.coinMarketCapId ? x.coinMarketCapId : []))
+    .filter((x, i, a) => a.indexOf(x) === i);
+
+  const [coinGeckoPricesById, coinMarketCapPricesById] = await safePromiseAll([
+    pricesFromCoinGecko(coinGeckoIds).catch(() => ({})),
+    pricesFromCoinMarketCap(coinMarketCapIds).catch(() => ({})),
+  ]);
+
+  result.forEach((token) => {
+    if (typeof token.price === 'undefined') {
+      if (!!token.coinGeckoId) {
+        token.price = coinGeckoPricesById[token.coinGeckoId];
+      } else if (!!token.coinMarketCapId) {
+        token.price = coinMarketCapPricesById[token.coinMarketCapId];
+      } else {
+        token.price = 0;
       }
-    }),
-  );
-
+    }
+  });
   res.status(200).json(result);
 };

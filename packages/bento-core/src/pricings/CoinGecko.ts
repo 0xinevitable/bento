@@ -20,3 +20,27 @@ export const priceFromCoinGecko = withCache(
     return data[coinGeckoId][vsCurrency];
   },
 );
+
+export const pricesFromCoinGecko = async (
+  coinGeckoIds: string[],
+  vsCurrency: Currency = 'usd',
+): Promise<Record<string, number>> => {
+  const url = queryString.stringifyUrl({
+    url: 'https://api.coingecko.com/api/v3/simple/price',
+    query: {
+      ids: coinGeckoIds.join(','),
+      vs_currencies: vsCurrency,
+    },
+  });
+  const { data } = await axios.get<{
+    [coinGeckoId: string]: { [vsCurrency: string]: number };
+  }>(url);
+
+  return Object.entries(data).reduce(
+    (acc, [coinGeckoId, price]) => ({
+      ...acc,
+      [coinGeckoId]: price[vsCurrency],
+    }),
+    {},
+  );
+};

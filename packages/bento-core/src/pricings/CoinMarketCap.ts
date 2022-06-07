@@ -2,6 +2,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 import { withCache } from '../cache';
+import { safePromiseAll } from '../utils';
 
 // Not recommended
 type CoinMarketCapPriceConversionResponse = {
@@ -44,3 +45,15 @@ export const priceFromCoinMarketCap = withCache(
     return data.data.quote.USD.price;
   },
 );
+
+export const pricesFromCoinMarketCap = async (coinMarketCapIds: number[]) =>
+  (
+    await safePromiseAll(
+      coinMarketCapIds.map(async (coinMarketCapId) => {
+        const price = await priceFromCoinMarketCap(coinMarketCapId).catch(
+          () => 0,
+        );
+        return { coinMarketCapId, price };
+      }),
+    )
+  ).reduce((acc, cur) => ({ ...acc, [cur.coinMarketCapId]: cur.price }), {});
