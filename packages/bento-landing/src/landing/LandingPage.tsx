@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { BackgroundSection } from './sections/BackgroundSection';
+import { DashboardSection } from './sections/DashboardSection';
 import { HeaderSection } from './sections/HeaderSection';
 
 const LandingPage = () => {
@@ -8,6 +9,7 @@ const LandingPage = () => {
     <Container>
       <HeaderSection />
       <BackgroundSection />
+      <DashboardSection />
     </Container>
   );
 };
