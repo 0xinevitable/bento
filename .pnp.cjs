@@ -2707,6 +2707,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@walletconnect/web3-provider", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:1.7.8"],\
             ["autoprefixer", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:10.4.7"],\
             ["axios", "npm:0.27.2"],\
+            ["caver-js", "npm:1.8.1"],\
             ["clsx", "npm:1.1.1"],\
             ["date-fns", "npm:2.28.0"],\
             ["dedent", "npm:0.7.0"],\
@@ -6868,6 +6869,49 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["caver-js", [\
+        ["npm:1.8.1", {\
+          "packageLocation": "./.yarn/cache/caver-js-npm-1.8.1-96e08dac3b-7ba9dc0a9a.zip/node_modules/caver-js/",\
+          "packageDependencies": [\
+            ["caver-js", "npm:1.8.1"],\
+            ["@babel/runtime", "npm:7.3.1"],\
+            ["@ethersproject/abi", "npm:5.0.7"],\
+            ["any-promise", "npm:1.3.0"],\
+            ["bignumber.js", "npm:8.0.2"],\
+            ["bn.js", "npm:4.11.6"],\
+            ["chai", "npm:4.1.2"],\
+            ["constants-browserify", "npm:1.0.0"],\
+            ["crypto-browserify", "npm:3.12.0"],\
+            ["docdash", "npm:1.2.0"],\
+            ["dotenv", "npm:8.2.0"],\
+            ["elliptic", "npm:6.5.4"],\
+            ["eth-lib", "npm:0.2.8"],\
+            ["ethers", "npm:5.4.1"],\
+            ["ethjs-unit", "npm:0.1.6"],\
+            ["eventemitter3", "npm:4.0.0"],\
+            ["http", "npm:0.0.1-security"],\
+            ["https", "npm:1.0.0"],\
+            ["ipfs-http-client", "npm:49.0.4"],\
+            ["jsdoc", "npm:3.6.10"],\
+            ["lodash", "npm:4.17.21"],\
+            ["mocha", "npm:8.3.2"],\
+            ["multihashes", "npm:4.0.2"],\
+            ["node-fetch", "virtual:d8131170550263e22503ac35a5262f20720740963d5c802f3e6c32d5419e70dc27d7821e4fe15a66fd62302966804d9a24c5e66adde99b66579972ee6cd96b3f#npm:2.6.7"],\
+            ["number-to-bn", "npm:1.7.0"],\
+            ["oboe", "npm:2.1.3"],\
+            ["os", "npm:0.1.2"],\
+            ["request", "npm:2.88.2"],\
+            ["scrypt-js", "npm:3.0.1"],\
+            ["semver", "npm:6.2.0"],\
+            ["stream-browserify", "npm:3.0.0"],\
+            ["stream-http", "npm:3.2.0"],\
+            ["utf8", "npm:2.1.1"],\
+            ["uuid", "npm:8.3.2"],\
+            ["webpack", "virtual:fb724f57749cfcb51affc11b3e553d529a49f9da01df004e5e037ca95dcd59320e1e2e2f14178cb40b5c81c6f3818ec872a341be4526983a241fc235cd646d64#npm:5.72.1"],\
+            ["websocket", "npm:1.0.31"],\
+            ["xhr2-cookies", "npm:1.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:1.8.2-rc.3", {\
           "packageLocation": "./.yarn/cache/caver-js-npm-1.8.2-rc.3-fb724f5774-e88b27d85a.zip/node_modules/caver-js/",\
           "packageDependencies": [\

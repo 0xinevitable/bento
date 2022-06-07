@@ -1621,6 +1621,7 @@ __metadata:
     "@walletconnect/web3-provider": ^1.7.8
     autoprefixer: ^10.4.7
     axios: ^0.27.2
+    caver-js: ^1.8.1
     clsx: ^1.1.1
     date-fns: ^2.28.0
     dedent: ^0.7.0
@@ -5008,6 +5009,50 @@ __metadata:
     websocket: 1.0.31
     xhr2-cookies: 1.1.0
   checksum: e88b27d85ae3ee3542a0125986bf2a797870e664c1457de344bc34c09f095c821c15289481b973631caaa85cd6423df11d93a9208cd5e0f7609247994434552b
+  languageName: node
+  linkType: hard
+
+"caver-js@npm:^1.8.1":
+  version: 1.8.1
+  resolution: "caver-js@npm:1.8.1"
+  dependencies:
+    "@babel/runtime": 7.3.1
+    "@ethersproject/abi": 5.0.7
+    any-promise: 1.3.0
+    bignumber.js: 8.0.2
+    bn.js: 4.11.6
+    chai: 4.1.2
+    constants-browserify: ^1.0.0
+    crypto-browserify: ^3.12.0
+    docdash: ^1.2.0
+    dotenv: 8.2.0
+    elliptic: 6.5.4
+    eth-lib: 0.2.8
+    ethers: 5.4.1
+    ethjs-unit: 0.1.6
+    eventemitter3: 4.0.0
+    http: 0.0.1-security
+    https: ^1.0.0
+    ipfs-http-client: ^49.0.4
+    jsdoc: ^3.6.7
+    lodash: 4.17.21
+    mocha: 8.3.2
+    multihashes: 4.0.2
+    node-fetch: 2.6.7
+    number-to-bn: 1.7.0
+    oboe: 2.1.3
+    os: ^0.1.2
+    request: 2.88.2
+    scrypt-js: 3.0.1
+    semver: 6.2.0
+    stream-browserify: ^3.0.0
+    stream-http: ^3.2.0
+    utf8: 2.1.1
+    uuid: 8.3.2
+    webpack: ^5.65.0
+    websocket: 1.0.31
+    xhr2-cookies: 1.1.0
+  checksum: 7ba9dc0a9aacceca2da07725a8e79e11699808702117aeca2ef304289a006f7e427cc4f1490091f16a51c060b0fff2fb5dfe5e86f3570135f236dfa3ba28e9b3
   languageName: node
   linkType: hard
 
