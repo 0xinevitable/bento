@@ -35,6 +35,8 @@ const providerOptions = {
   },
 };
 
+const messageToBeSigned = 'Sign this message to add your wallet'; // TODO: Add username and more
+
 const OnboardingPage: React.FC = () => {
   const connectMetaMask = useCallback(async () => {
     const web3Modal = new Web3Modal({
@@ -52,9 +54,8 @@ const OnboardingPage: React.FC = () => {
 
       const signer = provider.getSigner();
       const account = await signer.getAddress();
-      const nonce = 'waka';
-      const signature = await signer.signMessage(nonce);
-      console.log({ account, signature });
+      const signature = await signer.signMessage(messageToBeSigned);
+      console.log({ signature, account });
     } catch (error) {
       console.error(error);
     }
@@ -75,7 +76,7 @@ const OnboardingPage: React.FC = () => {
     const { pub_key: publicKey, signature } = await window.keplr.signArbitrary(
       chainId,
       account,
-      'waka',
+      messageToBeSigned,
     );
     console.log({ publicKey, signature, account });
   }, []);
@@ -91,8 +92,8 @@ const OnboardingPage: React.FC = () => {
     const account = accounts[0];
 
     const caver = new Caver(provider);
-    const signature = await caver.rpc.klay.sign(account, 'waka');
-    console.log({ signature });
+    const signature = await caver.rpc.klay.sign(account, messageToBeSigned);
+    console.log({ signature, account });
   }, []);
 
   return (
