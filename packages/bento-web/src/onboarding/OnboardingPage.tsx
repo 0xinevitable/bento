@@ -91,7 +91,7 @@ const OnboardingPage: React.FC = () => {
     const account = accounts[0];
 
     const caver = new Caver(provider);
-    const signature = await caver.klay.sign('waka', account);
+    const signature = await caver.rpc.klay.sign(account, 'waka');
     console.log({ signature });
   }, []);
 
