@@ -1,8 +1,10 @@
 import { Web3Provider } from '@ethersproject/providers';
+import { PublicKey } from '@solana/web3.js';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import Caver from 'caver-js';
 import { useCallback } from 'react';
 import styled from 'styled-components';
+import nacl from 'tweetnacl';
 import Web3Modal from 'web3modal';
 
 import { PageContainer } from '@/components/PageContainer';
@@ -114,6 +116,13 @@ const OnboardingPage: React.FC = () => {
 
     const signature = Buffer.from(signedMessage.signature).toString('hex');
     console.log({ signature, account });
+
+    const isValid = nacl.sign.detached.verify(
+      new Uint8Array(encodedMessage),
+      new Uint8Array(Buffer.from(signature, 'hex')),
+      new PublicKey(account).toBytes(),
+    );
+    console.log({ isValid });
   }, []);
 
   return (

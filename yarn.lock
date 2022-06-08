@@ -1610,6 +1610,7 @@ __metadata:
     "@ethersproject/providers": ^5.6.8
     "@iconify/react": ^3.2.2
     "@react-spring/web": ^9.4.5
+    "@solana/web3.js": ^1.43.6
     "@types/date-fns": ^2.6.0
     "@types/dedent": ^0.7.0
     "@types/lodash.groupby": ^4.6.7
@@ -1645,6 +1646,7 @@ __metadata:
     swr: ^2.0.0-beta.3
     tailwindcss: ^3.0.24
     tslib: ^2.4.0
+    tweetnacl: ^1.0.3
     typescript: ^4.7.2
     web3modal: ^1.9.7
   languageName: unknown
@@ -3074,6 +3076,30 @@ __metadata:
     superstruct: ^0.14.2
     tweetnacl: ^1.0.0
   checksum: 0d036c8d1e234092f598ed559d6fd880d5b1916f94279ddd4209a0c2f76f2c2ef9a899ea0fad19c1e6511d259e460a80b71ac4d4401c707e719ace59803d11bb
+  languageName: node
+  linkType: hard
+
+"@solana/web3.js@npm:^1.43.6":
+  version: 1.43.6
+  resolution: "@solana/web3.js@npm:1.43.6"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+    "@ethersproject/sha2": ^5.5.0
+    "@solana/buffer-layout": ^4.0.0
+    bigint-buffer: ^1.1.5
+    bn.js: ^5.0.0
+    borsh: ^0.7.0
+    bs58: ^4.0.1
+    buffer: 6.0.1
+    fast-stable-stringify: ^1.0.0
+    jayson: ^3.4.4
+    js-sha3: ^0.8.0
+    node-fetch: 2
+    rpc-websockets: ^7.4.2
+    secp256k1: ^4.0.2
+    superstruct: ^0.14.2
+    tweetnacl: ^1.0.0
+  checksum: 67433d24318a6626e55619ebc56111261ceb8fda1966e4ea9c3280e224cb71aea98f56a880a8febf0bea360548499ffb62aff4c96e071d5e6b0ffc579270954d
   languageName: node
   linkType: hard
 
@@ -11499,7 +11525,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tweetnacl@npm:^1.0.0":
+"tweetnacl@npm:^1.0.0, tweetnacl@npm:^1.0.3":
   version: 1.0.3
   resolution: "tweetnacl@npm:1.0.3"
   checksum: e4a57cac188f0c53f24c7a33279e223618a2bfb5fea426231991652a13247bea06b081fd745d71291fcae0f4428d29beba1b984b1f1ce6f66b06a6d1ab90645c

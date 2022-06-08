@@ -12,6 +12,7 @@
     "@ethersproject/providers": "^5.6.8",
     "@iconify/react": "^3.2.2",
     "@react-spring/web": "^9.4.5",
+    "@solana/web3.js": "^1.43.6",
     "@walletconnect/encoding": "^1.0.1",
     "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^0.27.2",
@@ -35,6 +36,7 @@
     "styled-components": "^5.3.5",
     "swr": "^2.0.0-beta.3",
     "tslib": "^2.4.0",
+    "tweetnacl": "^1.0.3",
     "web3modal": "^1.9.7"
   },
   "devDependencies": {

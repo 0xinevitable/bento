@@ -2696,6 +2696,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/providers", "npm:5.6.8"],\
             ["@iconify/react", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.2.2"],\
             ["@react-spring/web", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.4.5"],\
+            ["@solana/web3.js", "npm:1.43.6"],\
             ["@types/date-fns", "npm:2.6.0"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.groupby", "npm:4.6.7"],\
@@ -2731,6 +2732,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["swr", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:2.0.0-beta.3"],\
             ["tailwindcss", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.0.24"],\
             ["tslib", "npm:2.4.0"],\
+            ["tweetnacl", "npm:1.0.3"],\
             ["typescript", "patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"],\
             ["web3modal", "npm:1.9.7"]\
           ],\
@@ -4284,6 +4286,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@solana-web3.js-npm-1.43.4-d813117055-0d036c8d1e.zip/node_modules/@solana/web3.js/",\
           "packageDependencies": [\
             ["@solana/web3.js", "npm:1.43.4"],\
+            ["@babel/runtime", "npm:7.17.9"],\
+            ["@ethersproject/sha2", "npm:5.6.0"],\
+            ["@solana/buffer-layout", "npm:4.0.0"],\
+            ["bigint-buffer", "npm:1.1.5"],\
+            ["bn.js", "npm:5.2.0"],\
+            ["borsh", "npm:0.7.0"],\
+            ["bs58", "npm:4.0.1"],\
+            ["buffer", "npm:6.0.1"],\
+            ["fast-stable-stringify", "npm:1.0.0"],\
+            ["jayson", "npm:3.6.6"],\
+            ["js-sha3", "npm:0.8.0"],\
+            ["node-fetch", "virtual:d8131170550263e22503ac35a5262f20720740963d5c802f3e6c32d5419e70dc27d7821e4fe15a66fd62302966804d9a24c5e66adde99b66579972ee6cd96b3f#npm:2.6.7"],\
+            ["rpc-websockets", "npm:7.4.18"],\
+            ["secp256k1", "npm:4.0.3"],\
+            ["superstruct", "npm:0.14.2"],\
+            ["tweetnacl", "npm:1.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.43.6", {\
+          "packageLocation": "./.yarn/cache/@solana-web3.js-npm-1.43.6-1550041bbe-67433d2431.zip/node_modules/@solana/web3.js/",\
+          "packageDependencies": [\
+            ["@solana/web3.js", "npm:1.43.6"],\
             ["@babel/runtime", "npm:7.17.9"],\
             ["@ethersproject/sha2", "npm:5.6.0"],\
             ["@solana/buffer-layout", "npm:4.0.0"],\
