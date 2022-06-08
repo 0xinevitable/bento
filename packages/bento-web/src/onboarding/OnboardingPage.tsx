@@ -12,6 +12,7 @@ declare global {
   interface Window {
     keplr: any;
     klaytn: any;
+    solana: any;
   }
 }
 
@@ -96,6 +97,25 @@ const OnboardingPage: React.FC = () => {
     console.log({ signature, account });
   }, []);
 
+  const connectSolana = useCallback(async () => {
+    if (typeof window.solana === 'undefined') {
+      window.alert('Please install phantom extension');
+      return;
+    }
+
+    const resp = await window.solana.connect();
+    const account = resp.publicKey.toString();
+
+    const encodedMessage = new TextEncoder().encode(messageToBeSigned);
+    const signedMessage = await window.solana.signMessage(
+      encodedMessage,
+      'utf8',
+    );
+
+    const signature = Buffer.from(signedMessage.signature).toString('hex');
+    console.log({ signature, account });
+  }, []);
+
   return (
     <PageContainer>
       <FieldInput field="Username" />
@@ -120,6 +140,13 @@ const OnboardingPage: React.FC = () => {
           onClick={connectKaikas}
         >
           Kaikas
+        </Button>
+
+        <Button
+          className="p-4 text-slate-800 font-bold bg-slate-300"
+          onClick={connectSolana}
+        >
+          Phantom
         </Button>
       </div>
     </PageContainer>
