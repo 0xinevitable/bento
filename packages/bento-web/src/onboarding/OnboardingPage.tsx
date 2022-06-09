@@ -1,10 +1,10 @@
+import { Base64 } from '@bento/core/lib/utils/Base64';
 import { Web3Provider } from '@ethersproject/providers';
-import { PublicKey } from '@solana/web3.js';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import axios from 'axios';
 import Caver from 'caver-js';
 import { useCallback } from 'react';
 import styled from 'styled-components';
-import nacl from 'tweetnacl';
 import Web3Modal from 'web3modal';
 
 import { PageContainer } from '@/components/PageContainer';
@@ -40,6 +40,21 @@ const providerOptions = {
 
 const messageToBeSigned = 'Sign this message to add your wallet'; // TODO: Add username and more
 
+const validateSignature = async (params: {
+  walletType: 'web3' | 'keplr' | 'kaikas' | 'phantom';
+  walletAddress: string;
+  signature: string;
+  nonce: string;
+}) => {
+  const { walletType, walletAddress, signature, nonce } = params;
+  const { data } = await axios.post(`/api/auth/verify/${walletType}`, {
+    walletAddress,
+    signature,
+    nonce: Base64.encode(nonce),
+  });
+  console.log({ data });
+};
+
 const OnboardingPage: React.FC = () => {
   const connectMetaMask = useCallback(async () => {
     const web3Modal = new Web3Modal({
@@ -59,6 +74,13 @@ const OnboardingPage: React.FC = () => {
       const account = await signer.getAddress();
       const signature = await signer.signMessage(messageToBeSigned);
       console.log({ signature, account });
+
+      await validateSignature({
+        walletType: 'web3',
+        walletAddress: account,
+        signature,
+        nonce: messageToBeSigned,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -82,6 +104,13 @@ const OnboardingPage: React.FC = () => {
       messageToBeSigned,
     );
     console.log({ publicKey, signature, account });
+
+    await validateSignature({
+      walletType: 'keplr',
+      walletAddress: account,
+      signature,
+      nonce: messageToBeSigned,
+    });
   }, []);
 
   const connectKaikas = useCallback(async () => {
@@ -90,13 +119,24 @@ const OnboardingPage: React.FC = () => {
       return;
     }
 
-    const provider = window.klaytn;
-    const accounts = await provider.enable();
-    const account = accounts[0];
+    try {
+      const provider = window.klaytn;
+      const accounts = await provider.enable();
+      const account = accounts[0];
 
-    const caver = new Caver(provider);
-    const signature = await caver.rpc.klay.sign(account, messageToBeSigned);
-    console.log({ signature, account });
+      const caver = new Caver(provider);
+      const signature = await caver.rpc.klay.sign(account, messageToBeSigned);
+      console.log({ signature, account });
+
+      await validateSignature({
+        walletType: 'kaikas',
+        walletAddress: account,
+        signature,
+        nonce: messageToBeSigned,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   const connectSolana = useCallback(async () => {
@@ -117,12 +157,12 @@ const OnboardingPage: React.FC = () => {
     const signature = Buffer.from(signedMessage.signature).toString('hex');
     console.log({ signature, account });
 
-    const isValid = nacl.sign.detached.verify(
-      new Uint8Array(encodedMessage),
-      new Uint8Array(Buffer.from(signature, 'hex')),
-      new PublicKey(account).toBytes(),
-    );
-    console.log({ isValid });
+    await validateSignature({
+      walletType: 'phantom',
+      walletAddress: account,
+      signature,
+      nonce: messageToBeSigned,
+    });
   }, []);
 
   return (
