@@ -12,6 +12,13 @@ export type OpenSeaAsset = {
   image_preview_url: string;
   name: string;
   description: string;
+
+  collection: {
+    name: string;
+    image_url: string;
+    description: string;
+    banner_image_url: string;
+  };
 };
 
 export type GetOpenSeaAssetsParams = {

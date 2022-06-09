@@ -11,6 +11,8 @@ import Web3Modal from 'web3modal';
 import { PageContainer } from '@/components/PageContainer';
 import { FieldInput } from '@/profile/components/FieldInput';
 
+import { OpenSeaAssetItem } from './components/OpenSeaAssetItem';
+
 declare global {
   interface Window {
     keplr: any;
@@ -225,17 +227,11 @@ const OnboardingPage: React.FC = () => {
         </Button>
       </div>
 
-      <ul>
-        {openSeaAssets.map((asset) => {
-          return (
-            <li key={asset.id}>
-              <img src={asset.image_preview_url} />
-              <span>{asset.name}</span>
-              <span>{asset.token_id}</span>
-            </li>
-          );
-        })}
-      </ul>
+      <OpenSeaAssetList>
+        {openSeaAssets.map((asset) => (
+          <OpenSeaAssetItem key={asset.id} asset={asset} />
+        ))}
+      </OpenSeaAssetList>
     </PageContainer>
   );
 };
@@ -243,3 +239,8 @@ const OnboardingPage: React.FC = () => {
 export default OnboardingPage;
 
 const Button = styled.button``;
+
+const OpenSeaAssetList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+`;
