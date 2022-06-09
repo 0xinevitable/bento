@@ -3,7 +3,7 @@ import { Web3Provider } from '@ethersproject/providers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import axios from 'axios';
 import Caver from 'caver-js';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import Web3Modal from 'web3modal';
 
@@ -38,24 +38,40 @@ const providerOptions = {
   },
 };
 
-const messageToBeSigned = 'Sign this message to add your wallet'; // TODO: Add username and more
-
-const validateSignature = async (params: {
-  walletType: 'web3' | 'keplr' | 'kaikas' | 'phantom';
-  walletAddress: string;
-  signature: string;
-  nonce: string;
-}) => {
+const validateSignature = async (
+  params:
+    | {
+        walletType: 'web3' | 'kaikas' | 'phantom';
+        walletAddress: string;
+        signature: string;
+        nonce: string;
+      }
+    | {
+        walletType: 'keplr';
+        walletAddress: string;
+        signature: string;
+        nonce: string;
+        publicKeyValue: string;
+      },
+) => {
   const { walletType, walletAddress, signature, nonce } = params;
   const { data } = await axios.post(`/api/auth/verify/${walletType}`, {
     walletAddress,
     signature,
     nonce: Base64.encode(nonce),
+    ...(walletType === 'keplr' && {
+      publicKeyValue: params.publicKeyValue,
+    }),
   });
   console.log({ data });
 };
 
 const OnboardingPage: React.FC = () => {
+  const messageToBeSigned = useMemo(
+    () => 'Sign this message to add your wallet',
+    [],
+  ); // TODO: Add username and more
+
   const connectMetaMask = useCallback(async () => {
     const web3Modal = new Web3Modal({
       network: 'mainnet',
@@ -73,7 +89,6 @@ const OnboardingPage: React.FC = () => {
       const signer = provider.getSigner();
       const account = await signer.getAddress();
       const signature = await signer.signMessage(messageToBeSigned);
-      console.log({ signature, account });
 
       await validateSignature({
         walletType: 'web3',
@@ -103,13 +118,13 @@ const OnboardingPage: React.FC = () => {
       account,
       messageToBeSigned,
     );
-    console.log({ publicKey, signature, account });
 
     await validateSignature({
       walletType: 'keplr',
       walletAddress: account,
       signature,
       nonce: messageToBeSigned,
+      publicKeyValue: publicKey.value,
     });
   }, []);
 
@@ -126,7 +141,6 @@ const OnboardingPage: React.FC = () => {
 
       const caver = new Caver(provider);
       const signature = await caver.rpc.klay.sign(account, messageToBeSigned);
-      console.log({ signature, account });
 
       await validateSignature({
         walletType: 'kaikas',
@@ -155,7 +169,6 @@ const OnboardingPage: React.FC = () => {
     );
 
     const signature = Buffer.from(signedMessage.signature).toString('hex');
-    console.log({ signature, account });
 
     await validateSignature({
       walletType: 'phantom',
