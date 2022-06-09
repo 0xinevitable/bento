@@ -1,9 +1,10 @@
+import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/core/lib/nfts';
 import { Base64 } from '@bento/core/lib/utils/Base64';
 import { Web3Provider } from '@ethersproject/providers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import axios from 'axios';
 import Caver from 'caver-js';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import Web3Modal from 'web3modal';
 
@@ -178,6 +179,18 @@ const OnboardingPage: React.FC = () => {
     });
   }, []);
 
+  // FIXME: Replace hardcoded wallet address
+  const HARDCODED_WALLET = '0x7777777141f111cf9f0308a63dbd9d0cad3010c4';
+  const [openSeaAssets, setOpenSeaAssets] = useState<OpenSeaAsset[]>([]);
+
+  useEffect(() => {
+    fetchOpenSeaAssets({ owner: HARDCODED_WALLET })
+      .then((assets) => {
+        setOpenSeaAssets(assets);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <PageContainer>
       <FieldInput field="Username" />
@@ -211,6 +224,18 @@ const OnboardingPage: React.FC = () => {
           Phantom
         </Button>
       </div>
+
+      <ul>
+        {openSeaAssets.map((asset) => {
+          return (
+            <li key={asset.id}>
+              <img src={asset.image_preview_url} />
+              <span>{asset.name}</span>
+              <span>{asset.token_id}</span>
+            </li>
+          );
+        })}
+      </ul>
     </PageContainer>
   );
 };
