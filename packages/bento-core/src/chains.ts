@@ -8,11 +8,7 @@ import { priceFromCoinGecko } from './pricings/CoinGecko';
 import { Currency } from './pricings/Currency';
 import { ERC20TokenInput, KLAYTN_TOKENS } from './tokens';
 import { safePromiseAll } from './utils';
-
-const Base64 = {
-  encode: (str: string): string =>
-    Buffer.from(str, 'binary').toString('base64'),
-};
+import { Base64 } from './utils/Base64';
 
 export interface ERC20TokenBalance extends ERC20TokenInput {
   walletAddress: string;
