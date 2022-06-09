@@ -2694,6 +2694,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/web", "workspace:packages/bento-web"],\
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@ethersproject/providers", "npm:5.6.8"],\
+            ["@ethersproject/wallet", "npm:5.6.2"],\
             ["@iconify/react", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.2.2"],\
             ["@react-spring/web", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.4.5"],\
             ["@solana/web3.js", "npm:1.43.6"],\
@@ -3206,6 +3207,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/wordlists", "npm:5.6.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:5.6.2", {\
+          "packageLocation": "./.yarn/cache/@ethersproject-hdnode-npm-5.6.2-51b81e9f92-b096882ac7.zip/node_modules/@ethersproject/hdnode/",\
+          "packageDependencies": [\
+            ["@ethersproject/hdnode", "npm:5.6.2"],\
+            ["@ethersproject/abstract-signer", "npm:5.6.2"],\
+            ["@ethersproject/basex", "npm:5.6.1"],\
+            ["@ethersproject/bignumber", "npm:5.6.2"],\
+            ["@ethersproject/bytes", "npm:5.6.1"],\
+            ["@ethersproject/logger", "npm:5.6.0"],\
+            ["@ethersproject/pbkdf2", "npm:5.6.1"],\
+            ["@ethersproject/properties", "npm:5.6.0"],\
+            ["@ethersproject/sha2", "npm:5.6.1"],\
+            ["@ethersproject/signing-key", "npm:5.6.2"],\
+            ["@ethersproject/strings", "npm:5.6.1"],\
+            ["@ethersproject/transactions", "npm:5.6.2"],\
+            ["@ethersproject/wordlists", "npm:5.6.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@ethersproject/json-wallets", [\
@@ -3244,6 +3264,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/random", "npm:5.6.0"],\
             ["@ethersproject/strings", "npm:5.6.0"],\
             ["@ethersproject/transactions", "npm:5.6.0"],\
+            ["aes-js", "npm:3.0.0"],\
+            ["scrypt-js", "npm:3.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:5.6.1", {\
+          "packageLocation": "./.yarn/cache/@ethersproject-json-wallets-npm-5.6.1-ca08a967bd-811b3596aa.zip/node_modules/@ethersproject/json-wallets/",\
+          "packageDependencies": [\
+            ["@ethersproject/json-wallets", "npm:5.6.1"],\
+            ["@ethersproject/abstract-signer", "npm:5.6.2"],\
+            ["@ethersproject/address", "npm:5.6.1"],\
+            ["@ethersproject/bytes", "npm:5.6.1"],\
+            ["@ethersproject/hdnode", "npm:5.6.2"],\
+            ["@ethersproject/keccak256", "npm:5.6.1"],\
+            ["@ethersproject/logger", "npm:5.6.0"],\
+            ["@ethersproject/pbkdf2", "npm:5.6.1"],\
+            ["@ethersproject/properties", "npm:5.6.0"],\
+            ["@ethersproject/random", "npm:5.6.1"],\
+            ["@ethersproject/strings", "npm:5.6.1"],\
+            ["@ethersproject/transactions", "npm:5.6.2"],\
             ["aes-js", "npm:3.0.0"],\
             ["scrypt-js", "npm:3.0.1"]\
           ],\
@@ -3337,6 +3377,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/pbkdf2", "npm:5.6.0"],\
             ["@ethersproject/bytes", "npm:5.6.1"],\
             ["@ethersproject/sha2", "npm:5.6.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:5.6.1", {\
+          "packageLocation": "./.yarn/cache/@ethersproject-pbkdf2-npm-5.6.1-bd43224272-3160063738.zip/node_modules/@ethersproject/pbkdf2/",\
+          "packageDependencies": [\
+            ["@ethersproject/pbkdf2", "npm:5.6.1"],\
+            ["@ethersproject/bytes", "npm:5.6.1"],\
+            ["@ethersproject/sha2", "npm:5.6.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3675,6 +3724,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/wordlists", "npm:5.6.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:5.6.2", {\
+          "packageLocation": "./.yarn/cache/@ethersproject-wallet-npm-5.6.2-716c695d93-88603a4797.zip/node_modules/@ethersproject/wallet/",\
+          "packageDependencies": [\
+            ["@ethersproject/wallet", "npm:5.6.2"],\
+            ["@ethersproject/abstract-provider", "npm:5.6.1"],\
+            ["@ethersproject/abstract-signer", "npm:5.6.2"],\
+            ["@ethersproject/address", "npm:5.6.1"],\
+            ["@ethersproject/bignumber", "npm:5.6.2"],\
+            ["@ethersproject/bytes", "npm:5.6.1"],\
+            ["@ethersproject/hash", "npm:5.6.1"],\
+            ["@ethersproject/hdnode", "npm:5.6.2"],\
+            ["@ethersproject/json-wallets", "npm:5.6.1"],\
+            ["@ethersproject/keccak256", "npm:5.6.1"],\
+            ["@ethersproject/logger", "npm:5.6.0"],\
+            ["@ethersproject/properties", "npm:5.6.0"],\
+            ["@ethersproject/random", "npm:5.6.1"],\
+            ["@ethersproject/signing-key", "npm:5.6.2"],\
+            ["@ethersproject/transactions", "npm:5.6.2"],\
+            ["@ethersproject/wordlists", "npm:5.6.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@ethersproject/web", [\
@@ -3737,6 +3808,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/logger", "npm:5.6.0"],\
             ["@ethersproject/properties", "npm:5.6.0"],\
             ["@ethersproject/strings", "npm:5.6.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:5.6.1", {\
+          "packageLocation": "./.yarn/cache/@ethersproject-wordlists-npm-5.6.1-98b04664d2-3be4f30070.zip/node_modules/@ethersproject/wordlists/",\
+          "packageDependencies": [\
+            ["@ethersproject/wordlists", "npm:5.6.1"],\
+            ["@ethersproject/bytes", "npm:5.6.1"],\
+            ["@ethersproject/hash", "npm:5.6.1"],\
+            ["@ethersproject/logger", "npm:5.6.0"],\
+            ["@ethersproject/properties", "npm:5.6.0"],\
+            ["@ethersproject/strings", "npm:5.6.1"]\
           ],\
           "linkType": "HARD"\
         }]\
