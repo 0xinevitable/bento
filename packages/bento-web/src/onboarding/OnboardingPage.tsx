@@ -88,7 +88,7 @@ const OnboardingPage: React.FC = () => {
       walletAddress: string;
     }) => {
       const { walletType, walletAddress } = params;
-      const draft: Wallet =
+      const draft =
         walletType === 'keplr'
           ? {
               type: 'cosmos-sdk',
@@ -106,29 +106,24 @@ const OnboardingPage: React.FC = () => {
               chains: ['ethereum', 'polygon', 'klaytn'],
             };
 
-      // FIXME: 이미 있는 지갑을 추가한 경우, 체인만 업데이트
-      // const duplicatedWallet = wallets.find(
-      //   (v) => v.address.toLowerCase() === draft.address.toLowerCase(),
-      // );
-      // if (duplicatedWallet) {
-      //   setWallets((prev) =>
-      //     produce(prev, (walletsDraft) => {
-      //       walletsDraft.forEach((wallet) => {
-      //         if (
-      //           wallet.address === draft.address &&
-      //           wallet.type !== 'solana'
-      //         ) {
-      //           wallet.chains = Array.from(
-      //             new Set([...draft.chains, ...wallet.chains]),
-      //           );
-      //         }
-      //       });
-      //     }),
-      //   );
-      //   return;
-      // }
-
-      setWallets((prev) => [...prev, draft as Wallet]);
+      setWallets((prev) =>
+        produce(prev, (walletsDraft) => {
+          const index = walletsDraft.findIndex(
+            (v) => v.address.toLowerCase() === draft.address.toLowerCase(),
+          );
+          if (index === -1) {
+            walletsDraft.push(draft as Wallet);
+          } else {
+            const wallet = walletsDraft[index];
+            if (wallet.type === 'solana') {
+              return;
+            }
+            wallet.chains = Array.from(
+              new Set([...draft.chains, ...wallet.chains]),
+            ) as any[];
+          }
+        }),
+      );
     },
     [],
   );
