@@ -1,15 +1,20 @@
 import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/core/lib/nfts';
+import { Wallet } from '@bento/core/lib/types';
 import { Base64 } from '@bento/core/lib/utils/Base64';
 import { Web3Provider } from '@ethersproject/providers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import axios from 'axios';
 import Caver from 'caver-js';
+import produce from 'immer';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import Web3Modal from 'web3modal';
 
 import { PageContainer } from '@/components/PageContainer';
+import { WalletList } from '@/dashboard/components/WalletList';
 import { FieldInput } from '@/profile/components/FieldInput';
+import { walletsAtom } from '@/recoil/wallets';
 
 import { OpenSeaAssetItem } from './components/OpenSeaAssetItem';
 
@@ -70,10 +75,63 @@ const validateSignature = async (
 };
 
 const OnboardingPage: React.FC = () => {
+  const [wallets, setWallets] = useRecoilState(walletsAtom);
+
   const messageToBeSigned = useMemo(
     () => 'Sign this message to add your wallet',
     [],
   ); // TODO: Add username and more
+
+  const saveWallet = useCallback(
+    (params: {
+      walletType: 'web3' | 'kaikas' | 'keplr' | 'phantom';
+      walletAddress: string;
+    }) => {
+      const { walletType, walletAddress } = params;
+      const draft: Wallet =
+        walletType === 'keplr'
+          ? {
+              type: 'cosmos-sdk',
+              address: walletAddress,
+              chains: ['cosmos-hub', 'osmosis'],
+            }
+          : walletType === 'phantom'
+          ? {
+              type: 'solana',
+              address: walletAddress,
+            }
+          : {
+              type: 'evm',
+              address: walletAddress,
+              chains: ['ethereum', 'polygon', 'klaytn'],
+            };
+
+      // FIXME: 이미 있는 지갑을 추가한 경우, 체인만 업데이트
+      // const duplicatedWallet = wallets.find(
+      //   (v) => v.address.toLowerCase() === draft.address.toLowerCase(),
+      // );
+      // if (duplicatedWallet) {
+      //   setWallets((prev) =>
+      //     produce(prev, (walletsDraft) => {
+      //       walletsDraft.forEach((wallet) => {
+      //         if (
+      //           wallet.address === draft.address &&
+      //           wallet.type !== 'solana'
+      //         ) {
+      //           wallet.chains = Array.from(
+      //             new Set([...draft.chains, ...wallet.chains]),
+      //           );
+      //         }
+      //       });
+      //     }),
+      //   );
+      //   return;
+      // }
+
+      setWallets((prev) => [...prev, draft as Wallet]);
+    },
+    [],
+  );
 
   const connectMetaMask = useCallback(async () => {
     const web3Modal = new Web3Modal({
@@ -90,15 +148,17 @@ const OnboardingPage: React.FC = () => {
       const provider = new Web3Provider(instance);
 
       const signer = provider.getSigner();
-      const account = await signer.getAddress();
+      const walletAddress = await signer.getAddress();
       const signature = await signer.signMessage(messageToBeSigned);
 
+      const walletType = 'web3';
       await validateSignature({
-        walletType: 'web3',
-        walletAddress: account,
+        walletType,
+        walletAddress,
         signature,
         nonce: messageToBeSigned,
       });
+      saveWallet({ walletType, walletAddress });
     } catch (error) {
       console.error(error);
     }
@@ -114,21 +174,23 @@ const OnboardingPage: React.FC = () => {
 
     const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
     const accounts = await offlineSigner.getAccounts();
-    const account = accounts[0].address;
+    const walletAddress = accounts[0].address;
 
     const { pub_key: publicKey, signature } = await window.keplr.signArbitrary(
       chainId,
-      account,
+      walletAddress,
       messageToBeSigned,
     );
 
+    const walletType = 'keplr';
     await validateSignature({
-      walletType: 'keplr',
-      walletAddress: account,
+      walletType,
+      walletAddress,
       signature,
       nonce: messageToBeSigned,
       publicKeyValue: publicKey.value,
     });
+    saveWallet({ walletType, walletAddress });
   }, []);
 
   const connectKaikas = useCallback(async () => {
@@ -140,17 +202,22 @@ const OnboardingPage: React.FC = () => {
     try {
       const provider = window.klaytn;
       const accounts = await provider.enable();
-      const account = accounts[0];
+      const walletAddress = accounts[0];
 
       const caver = new Caver(provider);
-      const signature = await caver.rpc.klay.sign(account, messageToBeSigned);
+      const signature = await caver.rpc.klay.sign(
+        walletAddress,
+        messageToBeSigned,
+      );
+      const walletType = 'kaikas';
 
       await validateSignature({
-        walletType: 'kaikas',
-        walletAddress: account,
+        walletType,
+        walletAddress,
         signature,
         nonce: messageToBeSigned,
       });
+      saveWallet({ walletType, walletAddress });
     } catch (error) {
       console.error(error);
     }
@@ -163,7 +230,7 @@ const OnboardingPage: React.FC = () => {
     }
 
     const resp = await window.solana.connect();
-    const account = resp.publicKey.toString();
+    const walletAddress = resp.publicKey.toString();
 
     const encodedMessage = new TextEncoder().encode(messageToBeSigned);
     const signedMessage = await window.solana.signMessage(
@@ -173,12 +240,14 @@ const OnboardingPage: React.FC = () => {
 
     const signature = Buffer.from(signedMessage.signature).toString('hex');
 
+    const walletType = 'phantom';
     await validateSignature({
-      walletType: 'phantom',
-      walletAddress: account,
+      walletType,
+      walletAddress,
       signature,
       nonce: messageToBeSigned,
     });
+    saveWallet({ walletType, walletAddress });
   }, []);
 
   // FIXME: Replace hardcoded wallet address
@@ -226,6 +295,8 @@ const OnboardingPage: React.FC = () => {
           Phantom
         </Button>
       </div>
+
+      <WalletList />
 
       <OpenSeaAssetList>
         {openSeaAssets.map((asset) => (
