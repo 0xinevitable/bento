@@ -1607,7 +1607,10 @@ __metadata:
   resolution: "@bento/web@workspace:packages/bento-web"
   dependencies:
     "@bento/core": "workspace:^"
+    "@cosmjs/amino": ^0.28.4
+    "@cosmjs/crypto": 0.28.4
     "@cosmjs/stargate": 0.28.4
+    "@cosmjs/utils": ^0.28.4
     "@ethersproject/providers": ^5.6.8
     "@ethersproject/wallet": ^5.6.2
     "@iconify/react": ^3.2.2
@@ -1664,7 +1667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/amino@npm:0.28.4":
+"@cosmjs/amino@npm:0.28.4, @cosmjs/amino@npm:^0.28.4":
   version: 0.28.4
   resolution: "@cosmjs/amino@npm:0.28.4"
   dependencies:
@@ -1796,7 +1799,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cosmjs/utils@npm:0.28.4":
+"@cosmjs/utils@npm:0.28.4, @cosmjs/utils@npm:^0.28.4":
   version: 0.28.4
   resolution: "@cosmjs/utils@npm:0.28.4"
   checksum: 8c0994ff33850612fa6361effa3412ad44d154ec073308d3c921557a91631cce12a08523633eadda5bad131d88a63d3990b5070b5042dfd45a78597d5c2491cb

@@ -2693,7 +2693,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@bento/web", "workspace:packages/bento-web"],\
             ["@bento/core", "workspace:packages/bento-core"],\
+            ["@cosmjs/amino", "npm:0.28.4"],\
+            ["@cosmjs/crypto", "npm:0.28.4"],\
             ["@cosmjs/stargate", "npm:0.28.4"],\
+            ["@cosmjs/utils", "npm:0.28.4"],\
             ["@ethersproject/providers", "npm:5.6.8"],\
             ["@ethersproject/wallet", "npm:5.6.2"],\
             ["@iconify/react", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.2.2"],\
