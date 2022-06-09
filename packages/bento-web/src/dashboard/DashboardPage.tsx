@@ -12,6 +12,7 @@ import { AppendWallet } from './components/AppendWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
 import { Web3Connector } from './components/Web3Connector';
+import Link from 'next/link';
 
 const walletBalanceReducer =
   (
@@ -174,6 +175,7 @@ const DashboardPage = () => {
 
         <div className="flex flex-col">
           <Web3Connector />
+          <Link href="/onboarding">Onboarding</Link>
         </div>
       </div>
 
