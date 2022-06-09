@@ -54,7 +54,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(24px);
+    backdrop-filter: blur(8px);
     z-index: 1;
   }
 
