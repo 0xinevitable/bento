@@ -11,7 +11,6 @@ import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { walletsAtom } from '@/recoil/wallets';
 
-import { AppendWallet } from './components/AppendWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
 import { Web3Connector } from './components/Web3Connector';

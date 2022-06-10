@@ -1,8 +1,9 @@
 import { WALLET_TYPES } from '@bento/core/lib/types';
 import { shortenAddress } from '@bento/core/lib/utils';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Store } from 'react-notifications-component';
 import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 
 import { NoSSR } from '@/components/NoSSR';
 import { walletsAtom } from '@/recoil/wallets';
@@ -10,6 +11,13 @@ import { copyToClipboard } from '@/utils/clipboard';
 
 export const WalletList = () => {
   const [wallets, setWallets] = useRecoilState(walletsAtom);
+  const [collapsed, setCollapsed] = useState<boolean>(true);
+
+  const renderedWallets = useMemo(
+    () => (collapsed ? wallets.slice(0, 3) : wallets),
+    [collapsed],
+  );
+  const hasCollapseEffect = wallets.length > 3;
 
   const onClickCopy = useCallback((text) => {
     copyToClipboard(text);
@@ -31,8 +39,10 @@ export const WalletList = () => {
   return (
     <NoSSR>
       <div className="mt-4">
+        <h2 className="text-md font-semibold text-slate-50/60">Wallets</h2>
+
         <ul>
-          {wallets.map((wallet) => (
+          {renderedWallets.map((wallet) => (
             <li className="p-1 py-2 flex items-center" key={wallet.address}>
               <img
                 className="w-10 h-10 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25"
@@ -82,7 +92,31 @@ export const WalletList = () => {
             </li>
           ))}
         </ul>
+
+        {hasCollapseEffect && (
+          <ShowAllButtonContainer>
+            <ShowAllButton onClick={() => setCollapsed((prev) => !prev)}>
+              {collapsed ? 'Show All' : 'Show Less'}
+            </ShowAllButton>
+          </ShowAllButtonContainer>
+        )}
       </div>
     </NoSSR>
   );
 };
+
+const ShowAllButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+const ShowAllButton = styled.button`
+  padding: 8px 20px;
+  background: #121a32;
+  border: 1px solid #020322;
+  border-radius: 8px;
+  line-height: 100%;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 500;
+  font-size: 12px;
+`;
