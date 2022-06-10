@@ -1,11 +1,11 @@
-import { shortenAddress } from '@bento/core/lib/utils';
 import clsx from 'clsx';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { WalletBalance as CosmosSDKBasedWalletBalance } from '@/pages/api/cosmos-sdk/[network]/[walletAddress]';
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 
+import { TokenBalanceRatioBar } from './TokenBalanceRatioBar';
 import { TokenIcon } from './TokenIcon';
 
 type TokenBalanceItemProps = {
@@ -19,40 +19,40 @@ type TokenBalanceItemProps = {
 };
 
 export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
-  const [collapsed, setCollapsed] = useState<boolean>(true);
+  // const [collapsed, setCollapsed] = useState<boolean>(true);
 
-  const balances = useMemo(() => {
-    const items = info.balances.map(
-      (balance: WalletBalance | CosmosSDKBasedWalletBalance) => {
-        const delegations = 'delegations' in balance ? balance.delegations : 0;
-        const percentage =
-          ((balance.balance + delegations) / info.amount) * 100;
-        const shortenedWalletAddress = shortenAddress(balance.walletAddress);
+  // const balances = useMemo(() => {
+  //   const items = info.balances.map(
+  //     (balance: WalletBalance | CosmosSDKBasedWalletBalance) => {
+  //       const delegations = 'delegations' in balance ? balance.delegations : 0;
+  //       const percentage =
+  //         ((balance.balance + delegations) / info.amount) * 100;
+  //       const shortenedWalletAddress = shortenAddress(balance.walletAddress);
 
-        return {
-          price: balance.price,
-          balance: balance.balance,
-          delegations,
-          percentage,
-          shortenedWalletAddress,
-        };
-      },
-    );
+  //       return {
+  //         price: balance.price,
+  //         balance: balance.balance,
+  //         delegations,
+  //         percentage,
+  //         shortenedWalletAddress,
+  //       };
+  //     },
+  //   );
 
-    items.sort((a, b) => b.percentage - a.percentage);
+  //   items.sort((a, b) => b.percentage - a.percentage);
 
-    return items;
-  }, [info.balances]);
+  //   return items;
+  // }, [info.balances]);
 
   return (
     <Container
       className={clsx(
-        'mb-2 pb-2 h-fit rounded-md drop-shadow-2xl',
+        'px-3 pb-2 h-fit rounded-md drop-shadow-2xl',
         'flex flex-col cursor-pointer',
       )}
-      onClick={() => setCollapsed((prev) => !prev)}
+      // onClick={() => setCollapsed((prev) => !prev)}
     >
-      <div className={clsx('pt-2 px-3 flex items-center')}>
+      <div className={clsx('pt-2 flex items-center')}>
         <TokenIcon src={info.logo} alt={info.name} />
         <div className="ml-4 flex flex-col">
           <span className="text-md">
@@ -67,7 +67,9 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
         </div>
       </div>
 
-      <ul
+      <TokenBalanceRatioBar balances={info.balances} />
+
+      {/* <ul
         className={clsx(
           'px-3 flex flex-col overflow-hidden',
           collapsed ? 'max-h-0' : 'max-h-[512px]',
@@ -105,13 +107,14 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
             </div>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </Container>
   );
 };
 
 const Container = styled.li`
   width: 100%;
+  width: 240px;
   background: #121a32;
   border: 1px solid #020322;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

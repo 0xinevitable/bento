@@ -1,4 +1,5 @@
 import groupBy from 'lodash.groupby';
+import Link from 'next/link';
 import React, { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -12,7 +13,6 @@ import { AppendWallet } from './components/AppendWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
 import { Web3Connector } from './components/Web3Connector';
-import Link from 'next/link';
 
 const walletBalanceReducer =
   (
@@ -175,14 +175,16 @@ const DashboardPage = () => {
 
         <div className="flex flex-col">
           <Web3Connector />
-          <Link href="/onboarding">Onboarding</Link>
+          <Link href="/onboarding" passHref>
+            <a className="text-white">Onboarding</a>
+          </Link>
         </div>
       </div>
 
       <WalletList />
       <AppendWallet />
 
-      <ul className="mt-8">
+      <ul className="mt-8 flex flex-wrap gap-2">
         {tokenBalances.map((info) => (
           <TokenBalanceItem
             key={`${info.symbol}-${
