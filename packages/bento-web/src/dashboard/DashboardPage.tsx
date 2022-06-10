@@ -247,7 +247,9 @@ const DashboardPage = () => {
       <h2 className="mt-8 text-md font-semibold text-slate-50/60">
         Assets
         {tokenBalances.length > 0 && (
-          <span className="ml-1 text-slate-50/80">{`(${tokenBalances.length})`}</span>
+          <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+            {`(${tokenBalances.length.toLocaleString()})`}
+          </span>
         )}
       </h2>
 

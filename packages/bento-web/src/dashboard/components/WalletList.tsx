@@ -39,7 +39,14 @@ export const WalletList = () => {
   return (
     <NoSSR>
       <div className="mt-4">
-        <h2 className="text-md font-semibold text-slate-50/60">Wallets</h2>
+        <h2 className="text-md font-semibold text-slate-50/60">
+          Wallets
+          {wallets.length > 0 && (
+            <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+              {`(${wallets.length.toLocaleString()})`}
+            </span>
+          )}
+        </h2>
 
         <ul>
           {renderedWallets.map((wallet) => (
