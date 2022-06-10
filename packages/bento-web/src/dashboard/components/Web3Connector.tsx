@@ -47,7 +47,6 @@ export const Web3Connector = () => {
 
       const accounts = await provider.listAccounts();
       const firstAddress = accounts[0];
-      window.alert(firstAddress);
 
       const draft = {
         type: 'evm',

@@ -15,6 +15,7 @@ import { PageContainer } from '@/components/PageContainer';
 import { WalletList } from '@/dashboard/components/WalletList';
 import { FieldInput } from '@/profile/components/FieldInput';
 import { walletsAtom } from '@/recoil/wallets';
+import { toast } from '@/utils/toast';
 
 import { OpenSeaAssetItem } from './components/OpenSeaAssetItem';
 
@@ -161,7 +162,10 @@ const OnboardingPage: React.FC = () => {
 
   const connectKeplr = useCallback(async () => {
     if (typeof window.keplr === 'undefined') {
-      window.alert('Please install keplr extension');
+      toast({
+        type: 'error',
+        title: 'Please install keplr extension',
+      });
       return;
     }
     const chainId = 'cosmoshub-4';
@@ -190,7 +194,10 @@ const OnboardingPage: React.FC = () => {
 
   const connectKaikas = useCallback(async () => {
     if (typeof window.klaytn === 'undefined') {
-      window.alert('Please install kaikas extension');
+      toast({
+        type: 'error',
+        title: 'Please install kaikas extension',
+      });
       return;
     }
 
@@ -220,7 +227,10 @@ const OnboardingPage: React.FC = () => {
 
   const connectSolana = useCallback(async () => {
     if (typeof window.solana === 'undefined') {
-      window.alert('Please install phantom extension');
+      toast({
+        type: 'error',
+        title: 'Please install phantom extension',
+      });
       return;
     }
 
