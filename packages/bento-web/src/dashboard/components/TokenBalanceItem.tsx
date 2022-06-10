@@ -113,10 +113,17 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
 };
 
 const Container = styled.li`
-  width: 100%;
-  width: 240px;
+  width: 250px;
   background: #121a32;
   border: 1px solid #020322;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
+
+  @media screen and (max-width: 797px) {
+    width: calc(50% - 4px);
+  }
+
+  @media screen and (max-width: 537px) {
+    width: 100%;
+  }
 `;
