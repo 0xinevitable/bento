@@ -2,6 +2,7 @@ import groupBy from 'lodash.groupby';
 import Link from 'next/link';
 import React, { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
+import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
@@ -193,7 +194,9 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <h2 className="mt-8 text-md font-semibold text-slate-50/60">
+      <Divider className="my-4" />
+
+      <h2 className="mt-4 text-md font-semibold text-slate-50/60">
         Assets
         {tokenBalances.length > 0 && (
           <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
@@ -218,3 +221,9 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+
+const Divider = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: rgba(248, 250, 252, 0.25);
+`;
