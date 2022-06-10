@@ -179,7 +179,7 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <section className="flex">
+      <TopSection>
         <div className="flex-1 min-w-sm flex">
           <AssetRatioChart
             tokenBalances={tokenBalances}
@@ -204,7 +204,7 @@ const DashboardPage = () => {
             />
           )}
         </div>
-      </section>
+      </TopSection>
 
       <Divider className="my-4" />
 
@@ -244,6 +244,15 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+
+const TopSection = styled.section`
+  width: 100%;
+  display: flex;
+
+  @media screen and (max-width: 647px) {
+    flex-direction: column;
+  }
+`;
 
 const Divider = styled.div`
   height: 1px;

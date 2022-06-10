@@ -47,17 +47,17 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
   return (
     <Container
       className={clsx(
-        'px-3 pb-2 h-fit rounded-md drop-shadow-2xl',
+        'pl-1 pr-3 pb-2 h-fit rounded-md drop-shadow-2xl',
         'flex flex-col cursor-pointer',
       )}
       // onClick={() => setCollapsed((prev) => !prev)}
     >
-      <div className={clsx('pt-2 flex items-center')}>
+      <div className="ml-[-10px] pt-2 flex items-center">
         <TokenIcon src={info.logo} alt={info.name} />
-        <div className="ml-4 flex flex-col">
-          <span className="text-md">
+        <div className="ml-1 min-w-0 flex flex-col flex-1">
+          <span className="text-sm truncate text-slate-400/40">
             <span className="text-slate-400">{info.symbol}</span>
-            <span className="ml-1 text-slate-400/40">
+            <span className="ml-1 text-xs text-slate-400/40">
               {info.amount.toLocaleString()}
             </span>
           </span>
@@ -113,10 +113,17 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
 };
 
 const Container = styled.li`
-  width: 100%;
-  width: 240px;
+  width: 250px;
   background: #121a32;
   border: 1px solid #020322;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
+
+  @media screen and (max-width: 797px) {
+    width: calc(50% - 4px);
+  }
+
+  @media screen and (max-width: 537px) {
+    width: 100%;
+  }
 `;
