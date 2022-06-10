@@ -1,6 +1,6 @@
 import groupBy from 'lodash.groupby';
 import Link from 'next/link';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -10,6 +10,7 @@ import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { walletsAtom } from '@/recoil/wallets';
 
+import { AddWalletModal } from './components/AddWalletModal';
 import { AssetRatioChart } from './components/AssetRatioChart';
 import { EmptyBalance } from './components/EmptyBalance';
 import { EmptyWallet } from './components/EmptyWallet';
@@ -166,6 +167,9 @@ const DashboardPage = () => {
     [tokenBalances],
   );
 
+  const [isAddWalletModalVisible, setAddWalletModalVisible] =
+    useState<boolean>(false);
+
   return (
     <PageContainer className="pt-0">
       <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
@@ -201,7 +205,13 @@ const DashboardPage = () => {
             )}
           </h2>
 
-          {wallets.length > 0 ? <WalletList /> : <EmptyWallet />}
+          {wallets.length > 0 ? (
+            <WalletList />
+          ) : (
+            <EmptyWallet
+              onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
+            />
+          )}
         </div>
       </section>
 
@@ -233,6 +243,11 @@ const DashboardPage = () => {
           <EmptyBalance />
         )}
       </section>
+
+      <AddWalletModal
+        visible={isAddWalletModalVisible}
+        onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
+      />
     </PageContainer>
   );
 };

@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
-export const EmptyWallet = () => {
+type EmptyWalletProps = {
+  onClickConnect: () => void;
+};
+
+export const EmptyWallet: React.FC<EmptyWalletProps> = ({ onClickConnect }) => {
   return (
     <div className="w-full pt-5 flex flex-col items-center">
       <Illust src="/assets/illusts/wallet.png" />
       <Message>Connect your wallet</Message>
-      <Button>Connect</Button>
+      <Button onClick={onClickConnect}>Connect</Button>
     </div>
   );
 };
