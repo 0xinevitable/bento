@@ -1,5 +1,6 @@
 import { WALLET_TYPES } from '@bento/core/lib/types';
 import { shortenAddress } from '@bento/core/lib/utils';
+import { Icon } from '@iconify/react';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -15,7 +16,7 @@ export const WalletList = () => {
 
   const renderedWallets = useMemo(
     () => (collapsed ? wallets.slice(0, 3) : wallets),
-    [collapsed],
+    [collapsed, wallets],
   );
   const hasCollapseEffect = wallets.length > 3;
 
@@ -42,22 +43,26 @@ export const WalletList = () => {
                   {shortenAddress(wallet.address)}
                 </span>
                 <button
-                  className="ml-1 text-white"
+                  className="ml-1 text-white focus:opacity-40"
                   onClick={() => onClickCopy(wallet.address)}
                 >
-                  Copy
+                  <Icon icon="eva:copy-fill" />
                 </button>
 
-                <span
-                  className="ml-auto text-xs text-white/25"
+                <button
+                  className="ml-auto text-white/25"
                   onClick={() => {
                     setWallets(
-                      wallets.filter((w) => w.address !== wallet.address),
+                      wallets.filter(
+                        (w) =>
+                          w.address.toLowerCase() !==
+                          wallet.address.toLowerCase(),
+                      ),
                     );
                   }}
                 >
-                  REMOVE
-                </span>
+                  <Icon icon="entypo:cross" width={20} height={20} />
+                </button>
               </div>
 
               <div>
