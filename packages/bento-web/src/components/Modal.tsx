@@ -69,7 +69,7 @@ const FixedContainer = styled.div<FixedContainerProps>`
   left: 0;
   bottom: 0;
   cursor: pointer;
-  z-index: 99;
+  z-index: 50;
 
   ${({ disabled }) =>
     disabled &&

@@ -1,6 +1,5 @@
 import groupBy from 'lodash.groupby';
-import Link from 'next/link';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -10,12 +9,12 @@ import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { walletsAtom } from '@/recoil/wallets';
 
+import { AddWalletModal } from './components/AddWalletModal';
 import { AssetRatioChart } from './components/AssetRatioChart';
 import { EmptyBalance } from './components/EmptyBalance';
 import { EmptyWallet } from './components/EmptyWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
-import { Web3Connector } from './components/Web3Connector';
 
 const walletBalanceReducer =
   (
@@ -166,6 +165,9 @@ const DashboardPage = () => {
     [tokenBalances],
   );
 
+  const [isAddWalletModalVisible, setAddWalletModalVisible] =
+    useState<boolean>(false);
+
   return (
     <PageContainer className="pt-0">
       <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
@@ -174,13 +176,6 @@ const DashboardPage = () => {
         <div className="flex flex-col justify-center">
           <h2 className="text-md font-semibold text-slate-50/60">Net worth</h2>
           <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-        </div>
-
-        <div className="flex flex-col">
-          <Web3Connector />
-          <Link href="/onboarding" passHref>
-            <a className="text-white">Onboarding</a>
-          </Link>
         </div>
       </div>
 
@@ -201,7 +196,13 @@ const DashboardPage = () => {
             )}
           </h2>
 
-          {wallets.length > 0 ? <WalletList /> : <EmptyWallet />}
+          {wallets.length > 0 ? (
+            <WalletList />
+          ) : (
+            <EmptyWallet
+              onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
+            />
+          )}
         </div>
       </section>
 
@@ -233,6 +234,11 @@ const DashboardPage = () => {
           <EmptyBalance />
         )}
       </section>
+
+      <AddWalletModal
+        visible={isAddWalletModalVisible}
+        onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
+      />
     </PageContainer>
   );
 };

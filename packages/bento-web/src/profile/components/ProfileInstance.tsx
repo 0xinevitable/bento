@@ -1,11 +1,11 @@
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import Link from 'next/link';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
-import { PageContainer } from '@/components/PageContainer';
+import { Modal } from '@/components/Modal';
 
 import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
 import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
@@ -13,8 +13,6 @@ import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkS
 import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
 import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
 import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
-import { Modal } from '../components/Modal';
-import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 import { UserProfile } from '../types/UserProfile';
 
 const data = {
