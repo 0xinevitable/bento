@@ -2,11 +2,12 @@ import { WALLET_TYPES, Wallet } from '@bento/core/lib/types';
 import clsx from 'clsx';
 import produce from 'immer';
 import React, { useCallback, useMemo, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
+import { WalletConnector } from '@/components/WalletConnector';
 import { walletsAtom } from '@/recoil/wallets';
 
 const CHAINS_BY_WALLET_TYPE = {
@@ -35,7 +36,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   visible: isVisible,
   onDismiss,
 }) => {
-  const [wallets, setWallets] = useRecoilState(walletsAtom);
+  const setWallets = useSetRecoilState(walletsAtom);
   const [draft, setDraft] = useState<WalletDraft>(defaultWallet);
 
   const handleChains = useCallback(
@@ -100,6 +101,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
             'bg-slate-800/25 backdrop-blur-md flex flex-col cursor-pointer',
           )}
         >
+          <WalletConnector />
+
           <div className="flex flex-col h-auto text-slate-50/90">
             <div className="flex flex-wrap">
               {Object.values(WALLET_TYPES).map((arch) => (

@@ -6,7 +6,7 @@ import axios from 'axios';
 import Caver from 'caver-js';
 import produce from 'immer';
 import { useCallback, useMemo } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import Web3Modal from 'web3modal';
 
