@@ -5,7 +5,7 @@ import React from 'react';
 export const BottomTabBar = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 h-[72px] w-full">
-      <div className="w-full h-full max-w-2xl mx-auto flex relative bg-slate-900/50 backdrop-blur-md drop-shadow-2xl border-t border-t-slate-800">
+      <div className="w-full h-full max-w-3xl mx-auto flex relative bg-slate-900/50 backdrop-blur-md drop-shadow-2xl border-t border-t-slate-800">
         <Link href="/" passHref>
           <a className="w-[50%] h-full flex flex-col justify-center items-center text-white">
             <Icon className="text-2xl" icon="ic:round-space-dashboard" />

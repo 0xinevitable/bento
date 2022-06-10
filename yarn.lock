@@ -1613,6 +1613,7 @@ __metadata:
     "@cosmjs/utils": ^0.28.4
     "@ethersproject/providers": ^5.6.8
     "@ethersproject/wallet": ^5.6.2
+    "@floating-ui/react-dom-interactions": ^0.6.3
     "@iconify/react": ^3.2.2
     "@react-spring/web": ^9.4.5
     "@solana/web3.js": ^1.43.6
@@ -2897,6 +2898,49 @@ __metadata:
     "@ethersproject/properties": ^5.6.0
     "@ethersproject/strings": ^5.6.1
   checksum: 3be4f300705b3f4f2b1dfa3948aac2e5030ab6216086578ec5cd2fad130b6b30d2a6a3c54d94c6669601ed62b56e7052232bc0a934a451ef3320fd6513734729
+  languageName: node
+  linkType: hard
+
+"@floating-ui/core@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "@floating-ui/core@npm:0.7.2"
+  checksum: 3c25d52b8944d38ba0045580d03f6b7bf03b95aab3dfa90f18f147a43f6d1dbac6ef6f5056bdd0bb7e70f9e39fd3f8b401bae1cab3862f60be8aa0e4190ecb23
+  languageName: node
+  linkType: hard
+
+"@floating-ui/dom@npm:^0.5.1":
+  version: 0.5.2
+  resolution: "@floating-ui/dom@npm:0.5.2"
+  dependencies:
+    "@floating-ui/core": ^0.7.2
+  checksum: ff0897abed2e97a8d134b4dd8fa5309553eda3c25dbc2dbe8f7564b3eeac93d21d9334ae7c1ba1f1e5442ed119d82d2ce6935cd4ff607da1c0c6a913c493f5fc
+  languageName: node
+  linkType: hard
+
+"@floating-ui/react-dom-interactions@npm:^0.6.3":
+  version: 0.6.3
+  resolution: "@floating-ui/react-dom-interactions@npm:0.6.3"
+  dependencies:
+    "@floating-ui/react-dom": ^0.7.1
+    aria-hidden: ^1.1.3
+    use-isomorphic-layout-effect: ^1.1.1
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: ced26b6ab7cfe4c4f907e9ea1a1f721e327d1da2c9139fe3e8470dff079ee8f5a0df87442f404b4bfcdcc3dc87011c82c7592082da96ff96c99b6cd9404ae23e
+  languageName: node
+  linkType: hard
+
+"@floating-ui/react-dom@npm:^0.7.1":
+  version: 0.7.1
+  resolution: "@floating-ui/react-dom@npm:0.7.1"
+  dependencies:
+    "@floating-ui/dom": ^0.5.1
+    use-isomorphic-layout-effect: ^1.1.1
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 3d3ad798e07131ad1d12c37f0475cc8ba091d753547115ec5cff0d8d4bdc28dee27e0fd6da39c8ca5b3066bcce30a97c50bda6ea7b45fc42fbc80c39f85499aa
   languageName: node
   linkType: hard
 
@@ -4489,6 +4533,15 @@ __metadata:
   version: 2.0.1
   resolution: "argparse@npm:2.0.1"
   checksum: 83644b56493e89a254bae05702abf3a1101b4fa4d0ca31df1c9985275a5a5bd47b3c27b7fa0b71098d41114d8ca000e6ed90cad764b306f8a503665e4d517ced
+  languageName: node
+  linkType: hard
+
+"aria-hidden@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "aria-hidden@npm:1.1.3"
+  dependencies:
+    tslib: ^1.0.0
+  checksum: 2d40a328246baac7ae0b243ebe0cbef53c836c5f78c9212e9c1ff93f3aee185bd9aa51773e161e0025722d691c9d5f125070f6175a7074c4a57778ddc30d9e74
   languageName: node
   linkType: hard
 
@@ -11866,7 +11919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^1.10.0":
+"tslib@npm:^1.0.0, tslib@npm:^1.10.0":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
   checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
@@ -12080,6 +12133,18 @@ __metadata:
     nan: ^2.14.2
     node-gyp: latest
   checksum: fd7b246352750fd5032e058ab14220e389bc08bd98d72e9d9f01ac443390435ac354735fb67739d57bb505bfdaeeb2359cd7b8c5d57abc9b82b16455d1be09a3
+  languageName: node
+  linkType: hard
+
+"use-isomorphic-layout-effect@npm:^1.1.1":
+  version: 1.1.2
+  resolution: "use-isomorphic-layout-effect@npm:1.1.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: a6532f7fc9ae222c3725ff0308aaf1f1ddbd3c00d685ef9eee6714fd0684de5cb9741b432fbf51e61a784e2955424864f7ea9f99734a02f237b17ad3e18ea5cb
   languageName: node
   linkType: hard
 

@@ -2699,6 +2699,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@cosmjs/utils", "npm:0.28.4"],\
             ["@ethersproject/providers", "npm:5.6.8"],\
             ["@ethersproject/wallet", "npm:5.6.2"],\
+            ["@floating-ui/react-dom-interactions", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:0.6.3"],\
             ["@iconify/react", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.2.2"],\
             ["@react-spring/web", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.4.5"],\
             ["@solana/web3.js", "npm:1.43.6"],\
@@ -3986,6 +3987,82 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/logger", "npm:5.6.0"],\
             ["@ethersproject/properties", "npm:5.6.0"],\
             ["@ethersproject/strings", "npm:5.6.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@floating-ui/core", [\
+        ["npm:0.7.2", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-core-npm-0.7.2-09d0537320-3c25d52b89.zip/node_modules/@floating-ui/core/",\
+          "packageDependencies": [\
+            ["@floating-ui/core", "npm:0.7.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@floating-ui/dom", [\
+        ["npm:0.5.2", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-dom-npm-0.5.2-45dbc6a9d0-ff0897abed.zip/node_modules/@floating-ui/dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/dom", "npm:0.5.2"],\
+            ["@floating-ui/core", "npm:0.7.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@floating-ui/react-dom", [\
+        ["npm:0.7.1", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-react-dom-npm-0.7.1-05a8a8c752-3d3ad798e0.zip/node_modules/@floating-ui/react-dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/react-dom", "npm:0.7.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b0c0b197e697c3e5dc888d511d787f5980466e6e9ac69f0f6ceb0dcba19680ad3a6bc71e99ef8fbd0c511715e96f2397baa640048cd30eab985d3a1a154f96c1#npm:0.7.1", {\
+          "packageLocation": "./.yarn/__virtual__/@floating-ui-react-dom-virtual-eb4e6fe1c9/0/cache/@floating-ui-react-dom-npm-0.7.1-05a8a8c752-3d3ad798e0.zip/node_modules/@floating-ui/react-dom/",\
+          "packageDependencies": [\
+            ["@floating-ui/react-dom", "virtual:b0c0b197e697c3e5dc888d511d787f5980466e6e9ac69f0f6ceb0dcba19680ad3a6bc71e99ef8fbd0c511715e96f2397baa640048cd30eab985d3a1a154f96c1#npm:0.7.1"],\
+            ["@floating-ui/dom", "npm:0.5.2"],\
+            ["@types/react", "npm:17.0.45"],\
+            ["@types/react-dom", "npm:17.0.17"],\
+            ["react", "npm:17.0.2"],\
+            ["react-dom", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:17.0.2"],\
+            ["use-isomorphic-layout-effect", "virtual:b0c0b197e697c3e5dc888d511d787f5980466e6e9ac69f0f6ceb0dcba19680ad3a6bc71e99ef8fbd0c511715e96f2397baa640048cd30eab985d3a1a154f96c1#npm:1.1.2"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@floating-ui/react-dom-interactions", [\
+        ["npm:0.6.3", {\
+          "packageLocation": "./.yarn/cache/@floating-ui-react-dom-interactions-npm-0.6.3-42828f883b-ced26b6ab7.zip/node_modules/@floating-ui/react-dom-interactions/",\
+          "packageDependencies": [\
+            ["@floating-ui/react-dom-interactions", "npm:0.6.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:0.6.3", {\
+          "packageLocation": "./.yarn/__virtual__/@floating-ui-react-dom-interactions-virtual-b0c0b197e6/0/cache/@floating-ui-react-dom-interactions-npm-0.6.3-42828f883b-ced26b6ab7.zip/node_modules/@floating-ui/react-dom-interactions/",\
+          "packageDependencies": [\
+            ["@floating-ui/react-dom-interactions", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:0.6.3"],\
+            ["@floating-ui/react-dom", "virtual:b0c0b197e697c3e5dc888d511d787f5980466e6e9ac69f0f6ceb0dcba19680ad3a6bc71e99ef8fbd0c511715e96f2397baa640048cd30eab985d3a1a154f96c1#npm:0.7.1"],\
+            ["@types/react", "npm:17.0.45"],\
+            ["@types/react-dom", "npm:17.0.17"],\
+            ["aria-hidden", "npm:1.1.3"],\
+            ["react", "npm:17.0.2"],\
+            ["react-dom", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:17.0.2"],\
+            ["use-isomorphic-layout-effect", "virtual:b0c0b197e697c3e5dc888d511d787f5980466e6e9ac69f0f6ceb0dcba19680ad3a6bc71e99ef8fbd0c511715e96f2397baa640048cd30eab985d3a1a154f96c1#npm:1.1.2"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6181,6 +6258,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/argparse-npm-2.0.1-faff7999e6-83644b5649.zip/node_modules/argparse/",\
           "packageDependencies": [\
             ["argparse", "npm:2.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["aria-hidden", [\
+        ["npm:1.1.3", {\
+          "packageLocation": "./.yarn/cache/aria-hidden-npm-1.1.3-e3cf16306c-2d40a32824.zip/node_modules/aria-hidden/",\
+          "packageDependencies": [\
+            ["aria-hidden", "npm:1.1.3"],\
+            ["tslib", "npm:1.14.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -15095,6 +15182,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bindings", "npm:1.5.0"],\
             ["nan", "npm:2.15.0"],\
             ["node-gyp", "npm:9.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["use-isomorphic-layout-effect", [\
+        ["npm:1.1.2", {\
+          "packageLocation": "./.yarn/cache/use-isomorphic-layout-effect-npm-1.1.2-65facd0a4b-a6532f7fc9.zip/node_modules/use-isomorphic-layout-effect/",\
+          "packageDependencies": [\
+            ["use-isomorphic-layout-effect", "npm:1.1.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b0c0b197e697c3e5dc888d511d787f5980466e6e9ac69f0f6ceb0dcba19680ad3a6bc71e99ef8fbd0c511715e96f2397baa640048cd30eab985d3a1a154f96c1#npm:1.1.2", {\
+          "packageLocation": "./.yarn/__virtual__/use-isomorphic-layout-effect-virtual-5cd1a79403/0/cache/use-isomorphic-layout-effect-npm-1.1.2-65facd0a4b-a6532f7fc9.zip/node_modules/use-isomorphic-layout-effect/",\
+          "packageDependencies": [\
+            ["use-isomorphic-layout-effect", "virtual:b0c0b197e697c3e5dc888d511d787f5980466e6e9ac69f0f6ceb0dcba19680ad3a6bc71e99ef8fbd0c511715e96f2397baa640048cd30eab985d3a1a154f96c1#npm:1.1.2"],\
+            ["@types/react", "npm:17.0.45"],\
+            ["react", "npm:17.0.2"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
