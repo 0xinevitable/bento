@@ -23,3 +23,7 @@ img {
   padding: 4px 6px;
   font-size: 14px;
 }
+
+.web3modal-modal-lightbox {
+  z-index: 90;
+}
