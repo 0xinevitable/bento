@@ -270,7 +270,11 @@ const DashboardPage = () => {
 export default DashboardPage;
 
 const ChartContainer = styled.div`
+  width: 100%;
+  height: 300px;
+
   position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
