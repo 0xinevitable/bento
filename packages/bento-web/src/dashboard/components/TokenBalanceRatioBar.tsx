@@ -5,7 +5,7 @@ import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/[network]/[walletAddress]';
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 
-const tierStyles = ['bg-[#89aacc]', 'bg-[#c74b62]', 'bg-red-900'];
+const tierStyles = ['bg-[#89aacc]', 'bg-[#c74b62]'];
 
 type AssetRatioItem = {
   type: string;

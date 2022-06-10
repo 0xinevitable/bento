@@ -33,44 +33,48 @@ export const WalletList = () => {
       <div className="mt-4">
         <ul>
           {wallets.map((wallet) => (
-            <li className="p-1 flex items-center" key={wallet.address}>
-              <img
-                className="w-6 h-6 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25"
-                src={WALLET_TYPES[wallet.type].logo}
-              />
-              <span className="ml-2 text-white/60">
-                {shortenAddress(wallet.address)}
-                <button
-                  className="text-white"
-                  onClick={() => onClickCopy(wallet.address)}
-                >
-                  Copy
-                </button>
-              </span>
-
-              {wallet.type !== 'solana' && (
-                <span className="ml-4 text-white/60">
-                  {wallet.chains.map((chain) => (
-                    <span
-                      key={chain}
-                      className="mr-1 p-1 text-xs rounded border border-white"
-                    >
-                      {chain}
-                    </span>
-                  ))}
+            <li className="p-1 py-2 flex flex-col" key={wallet.address}>
+              <div className="flex items-center">
+                <img
+                  className="w-6 h-6 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25"
+                  src={WALLET_TYPES[wallet.type].logo}
+                />
+                <span className="ml-2 text-white/60">
+                  {shortenAddress(wallet.address)}
+                  <button
+                    className="ml-1 text-white"
+                    onClick={() => onClickCopy(wallet.address)}
+                  >
+                    Copy
+                  </button>
                 </span>
-              )}
 
-              <span
-                className="ml-auto text-xs text-white/25"
-                onClick={() => {
-                  setWallets(
-                    wallets.filter((w) => w.address !== wallet.address),
-                  );
-                }}
-              >
-                REMOVE
-              </span>
+                <span
+                  className="ml-auto text-xs text-white/25"
+                  onClick={() => {
+                    setWallets(
+                      wallets.filter((w) => w.address !== wallet.address),
+                    );
+                  }}
+                >
+                  REMOVE
+                </span>
+              </div>
+
+              <div className="mt-1">
+                {wallet.type !== 'solana' && (
+                  <span className="mt-1 text-white/60">
+                    {wallet.chains.map((chain) => (
+                      <span
+                        key={chain}
+                        className="mr-1 p-[2px] px-[3px] text-xs rounded border border-white"
+                      >
+                        {chain}
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </div>
             </li>
           ))}
         </ul>
