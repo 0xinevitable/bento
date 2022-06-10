@@ -166,18 +166,19 @@ const DashboardPage = () => {
     [tokenBalances],
   );
 
-  const data = useMemo(
-    () =>
-      tokenBalances.map((info) => {
-        const { symbol, name, netWorth } = info;
-        const percentage = (netWorth / netWorthInUSD) * 100;
-        return {
-          label: `${symbol} ${name}`,
-          value: !percentage || isNaN(percentage) ? 0 : percentage,
-        };
-      }),
-    [tokenBalances],
-  );
+  const data = useMemo(() => {
+    if (tokenBalances.length < 1) {
+      return [{ label: 'Empty', value: 100 }];
+    }
+    return tokenBalances.map((info) => {
+      const { symbol, name, netWorth } = info;
+      const percentage = (netWorth / netWorthInUSD) * 100;
+      return {
+        label: `${symbol} ${name}`,
+        value: !percentage || isNaN(percentage) ? 0 : percentage,
+      };
+    });
+  }, [tokenBalances]);
 
   return (
     <PageContainer className="pt-0">
