@@ -11,6 +11,7 @@ import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { walletsAtom } from '@/recoil/wallets';
 
+import { AppendWallet } from './components/AppendWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
 import { Web3Connector } from './components/Web3Connector';
@@ -185,8 +186,8 @@ const DashboardPage = () => {
 
       <div className="mt-10 w-full flex justify-between">
         <div className="flex flex-col justify-center">
-          <span className="text-md text-slate-50">Net worth</span>
-          <span className="mt-2 text-2xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
+          <h2 className="text-md font-semibold text-slate-50/60">Net worth</h2>
+          <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
         </div>
 
         <div className="flex flex-col">
@@ -244,7 +245,14 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <ul className="mt-8 flex flex-wrap gap-2">
+      <h2 className="mt-8 text-md font-semibold text-slate-50/60">
+        Assets
+        {tokenBalances.length > 0 && (
+          <span className="ml-1 text-slate-50/80">{`(${tokenBalances.length})`}</span>
+        )}
+      </h2>
+
+      <ul className="mt-4 flex flex-wrap gap-2">
         {tokenBalances.map((info) => (
           <TokenBalanceItem
             key={`${info.symbol}-${
