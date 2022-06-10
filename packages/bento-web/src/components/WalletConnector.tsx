@@ -69,7 +69,10 @@ const validateSignature = async (
   console.log({ data });
 };
 
-export const WalletConnector = () => {
+type WalletSelectorProps = {
+  onSave?: () => void;
+};
+export const WalletConnector: React.FC<WalletSelectorProps> = ({ onSave }) => {
   const setWallets = useSetRecoilState(walletsAtom);
 
   const messageToBeSigned = useMemo(
@@ -119,8 +122,9 @@ export const WalletConnector = () => {
           }
         }),
       );
+      onSave?.();
     },
-    [],
+    [onSave],
   );
 
   const connectMetaMask = useCallback(async () => {

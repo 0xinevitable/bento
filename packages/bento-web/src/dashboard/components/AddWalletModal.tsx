@@ -75,7 +75,9 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
       }),
     );
     setDraft(defaultWallet);
-  }, [draft]);
+
+    onDismiss();
+  }, [draft, onDismiss]);
 
   const supportedChains = useMemo(() => {
     if (!draft.type) {
@@ -101,7 +103,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
             'bg-slate-800/5 backdrop-blur-md flex flex-col cursor-pointer',
           )}
         >
-          <WalletConnector />
+          <WalletConnector onSave={onDismiss} />
 
           <div className="flex flex-col h-auto text-slate-50/90">
             <div className="flex flex-wrap">
