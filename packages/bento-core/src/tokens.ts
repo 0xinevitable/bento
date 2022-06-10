@@ -9,7 +9,27 @@ export interface ERC20TokenInput {
   staking?: boolean;
 }
 
+export const ETHEREUM_TOKENS: ERC20TokenInput[] = [
+  {
+    symbol: 'WETH',
+    name: 'Wrapped ETH',
+    decimals: 18,
+    address: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+    coinGeckoId: 'ethereum',
+    logo: '/assets/weth.svg',
+  },
+];
+
 export const KLAYTN_TOKENS: ERC20TokenInput[] = [
+  {
+    // NOTE: The one used in OpenSea
+    symbol: 'WKLAY',
+    name: 'Wrapped KLAY',
+    decimals: 18,
+    address: '0xfd844c2fca5e595004b17615f891620d1cb9bbb2',
+    coinGeckoId: 'klay-token',
+    logo: '/assets/wklay.png',
+  },
   {
     symbol: 'SCNR',
     name: 'Swapscanner',
