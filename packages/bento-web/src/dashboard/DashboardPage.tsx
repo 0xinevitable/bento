@@ -11,6 +11,8 @@ import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { walletsAtom } from '@/recoil/wallets';
 
 import { AssetRatioChart } from './components/AssetRatioChart';
+import { EmptyBalance } from './components/EmptyBalance';
+import { EmptyWallet } from './components/EmptyWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
 import { Web3Connector } from './components/Web3Connector';
@@ -189,8 +191,17 @@ const DashboardPage = () => {
             netWorthInUSD={netWorthInUSD}
           />
         </div>
-        <div className="flex-1">
-          <WalletList />
+        <div className="flex-1 flex flex-col">
+          <h2 className="mt-2 text-md font-semibold text-slate-50/60">
+            Wallets
+            {wallets.length > 0 && (
+              <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                {`(${wallets.length.toLocaleString()})`}
+              </span>
+            )}
+          </h2>
+
+          {wallets.length > 0 ? <WalletList /> : <EmptyWallet />}
         </div>
       </section>
 
@@ -206,17 +217,21 @@ const DashboardPage = () => {
           )}
         </h2>
 
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {tokenBalances.map((info) => (
-            <TokenBalanceItem
-              key={`${info.symbol}-${
-                'tokenAddress' in info ? info.tokenAddress : 'native'
-              }`}
-              logo={info.logo ?? ''}
-              {...info}
-            />
-          ))}
-        </ul>
+        {tokenBalances.length > 0 ? (
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {tokenBalances.map((info) => (
+              <TokenBalanceItem
+                key={`${info.symbol}-${
+                  'tokenAddress' in info ? info.tokenAddress : 'native'
+                }`}
+                logo={info.logo ?? ''}
+                {...info}
+              />
+            ))}
+          </ul>
+        ) : (
+          <EmptyBalance />
+        )}
       </section>
     </PageContainer>
   );

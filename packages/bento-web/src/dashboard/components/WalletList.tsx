@@ -38,76 +38,65 @@ export const WalletList = () => {
 
   return (
     <NoSSR>
-      <div className="mt-4">
-        <h2 className="text-md font-semibold text-slate-50/60">
-          Wallets
-          {wallets.length > 0 && (
-            <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-              {`(${wallets.length.toLocaleString()})`}
-            </span>
-          )}
-        </h2>
+      <ul className="flex flex-col">
+        {renderedWallets.map((wallet) => (
+          <li className="p-1 py-2 flex items-center" key={wallet.address}>
+            <img
+              className="w-10 h-10 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25"
+              src={WALLET_TYPES[wallet.type].logo}
+            />
+            <div className="ml-2 flex flex-col flex-1">
+              <div className="flex items-center">
+                <span className="text-white/60 text-lg">
+                  {shortenAddress(wallet.address)}
+                </span>
+                <button
+                  className="ml-1 text-white"
+                  onClick={() => onClickCopy(wallet.address)}
+                >
+                  Copy
+                </button>
 
-        <ul>
-          {renderedWallets.map((wallet) => (
-            <li className="p-1 py-2 flex items-center" key={wallet.address}>
-              <img
-                className="w-10 h-10 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25"
-                src={WALLET_TYPES[wallet.type].logo}
-              />
-              <div className="ml-2 flex flex-col flex-1">
-                <div className="flex items-center">
-                  <span className="text-white/60 text-lg">
-                    {shortenAddress(wallet.address)}
-                  </span>
-                  <button
-                    className="ml-1 text-white"
-                    onClick={() => onClickCopy(wallet.address)}
-                  >
-                    Copy
-                  </button>
-
-                  <span
-                    className="ml-auto text-xs text-white/25"
-                    onClick={() => {
-                      setWallets(
-                        wallets.filter((w) => w.address !== wallet.address),
-                      );
-                    }}
-                  >
-                    REMOVE
-                  </span>
-                </div>
-
-                <div>
-                  {wallet.type !== 'solana' ? (
-                    wallet.chains.map((chain) => (
-                      <span
-                        key={chain}
-                        className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60"
-                      >
-                        {chain}
-                      </span>
-                    ))
-                  ) : (
-                    <span className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60">
-                      solana
-                    </span>
-                  )}
-                </div>
+                <span
+                  className="ml-auto text-xs text-white/25"
+                  onClick={() => {
+                    setWallets(
+                      wallets.filter((w) => w.address !== wallet.address),
+                    );
+                  }}
+                >
+                  REMOVE
+                </span>
               </div>
-            </li>
-          ))}
-        </ul>
 
-        {hasCollapseEffect && (
-          <ShowAllButtonContainer>
-            <ShowAllButton onClick={() => setCollapsed((prev) => !prev)}>
-              {collapsed ? 'Show All' : 'Show Less'}
-            </ShowAllButton>
-          </ShowAllButtonContainer>
-        )}
-      </div>
+              <div>
+                {wallet.type !== 'solana' ? (
+                  wallet.chains.map((chain) => (
+                    <span
+                      key={chain}
+                      className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60"
+                    >
+                      {chain}
+                    </span>
+                  ))
+                ) : (
+                  <span className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60">
+                    solana
+                  </span>
+                )}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      {hasCollapseEffect && (
+        <ShowAllButtonContainer>
+          <ShowAllButton onClick={() => setCollapsed((prev) => !prev)}>
+            {collapsed ? 'Show All' : 'Show Less'}
+          </ShowAllButton>
+        </ShowAllButtonContainer>
+      )}
     </NoSSR>
   );
 };
