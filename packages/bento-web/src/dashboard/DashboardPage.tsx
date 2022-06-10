@@ -1,7 +1,6 @@
 import groupBy from 'lodash.groupby';
 import Link from 'next/link';
 import React, { useMemo } from 'react';
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -11,11 +10,12 @@ import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { walletsAtom } from '@/recoil/wallets';
 
+import { AssetRatioChart } from './components/AssetRatioChart';
+import { EmptyBalance } from './components/EmptyBalance';
+import { EmptyWallet } from './components/EmptyWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
 import { Web3Connector } from './components/Web3Connector';
-
-const PIE_WIDTH = 12;
 
 const walletBalanceReducer =
   (
@@ -166,19 +166,6 @@ const DashboardPage = () => {
     [tokenBalances],
   );
 
-  const data = useMemo(
-    () =>
-      tokenBalances.map((info) => {
-        const { symbol, name, netWorth } = info;
-        const percentage = (netWorth / netWorthInUSD) * 100;
-        return {
-          label: `${symbol} ${name}`,
-          value: !percentage || isNaN(percentage) ? 0 : percentage,
-        };
-      }),
-    [tokenBalances],
-  );
-
   return (
     <PageContainer className="pt-0">
       <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
@@ -197,105 +184,63 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <div className="flex">
+      <section className="flex">
         <div className="flex-1 min-w-sm flex">
-          <ChartContainer>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={data}
-                  innerRadius={100 - PIE_WIDTH}
-                  outerRadius={100}
-                  cornerRadius={PIE_WIDTH}
-                  paddingAngle={4}
-                  startAngle={90}
-                  endAngle={90 + 360}
-                  dataKey="value"
-                  minAngle={PIE_WIDTH - 2}
-                >
-                  {data.map((_, index) => (
-                    <Cell
-                      key={index}
-                      fill={
-                        [
-                          '#FF214A',
-                          '#f72585',
-                          '#FAA945',
-                          '#d446ff',
-                          '#7c44ff',
-                          '#656fff',
-                          '#4cc9f0',
-                        ][index]
-                      }
-                      stroke="transparent"
-                    />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
-
-            <AvatarContainer>
-              <Avatar src="/assets/avatar.png" />
-            </AvatarContainer>
-          </ChartContainer>
-        </div>
-        <div className="flex-1">
-          <WalletList />
-        </div>
-      </div>
-
-      <h2 className="mt-8 text-md font-semibold text-slate-50/60">
-        Assets
-        {tokenBalances.length > 0 && (
-          <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-            {`(${tokenBalances.length.toLocaleString()})`}
-          </span>
-        )}
-      </h2>
-
-      <ul className="mt-4 flex flex-wrap gap-2">
-        {tokenBalances.map((info) => (
-          <TokenBalanceItem
-            key={`${info.symbol}-${
-              'tokenAddress' in info ? info.tokenAddress : 'native'
-            }`}
-            logo={info.logo ?? ''}
-            {...info}
+          <AssetRatioChart
+            tokenBalances={tokenBalances}
+            netWorthInUSD={netWorthInUSD}
           />
-        ))}
-      </ul>
+        </div>
+        <div className="flex-1 flex flex-col">
+          <h2 className="mt-2 text-md font-semibold text-slate-50/60">
+            Wallets
+            {wallets.length > 0 && (
+              <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                {`(${wallets.length.toLocaleString()})`}
+              </span>
+            )}
+          </h2>
+
+          {wallets.length > 0 ? <WalletList /> : <EmptyWallet />}
+        </div>
+      </section>
+
+      <Divider className="my-4" />
+
+      <section className="mt-4 flex flex-col">
+        <h2 className="text-md font-semibold text-slate-50/60">
+          Assets
+          {tokenBalances.length > 0 && (
+            <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+              {`(${tokenBalances.length.toLocaleString()})`}
+            </span>
+          )}
+        </h2>
+
+        {tokenBalances.length > 0 ? (
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {tokenBalances.map((info) => (
+              <TokenBalanceItem
+                key={`${info.symbol}-${
+                  'tokenAddress' in info ? info.tokenAddress : 'native'
+                }`}
+                logo={info.logo ?? ''}
+                {...info}
+              />
+            ))}
+          </ul>
+        ) : (
+          <EmptyBalance />
+        )}
+      </section>
     </PageContainer>
   );
 };
 
 export default DashboardPage;
 
-const ChartContainer = styled.div`
+const Divider = styled.div`
+  height: 1px;
   width: 100%;
-  height: 300px;
-
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-const AvatarContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const Avatar = styled.img`
-  width: 154px;
-  height: 154px;
-  border-radius: 50%;
-  user-select: none;
+  background-color: rgba(248, 250, 252, 0.25);
 `;
