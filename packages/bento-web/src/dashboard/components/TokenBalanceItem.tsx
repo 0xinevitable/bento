@@ -61,7 +61,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
               {info.amount.toLocaleString()}
             </span>
           </span>
-          <span className="text-2xl font-bold text-slate-50/90">
+          <span className="text-xl font-bold text-slate-50/90">
             {`$${info.netWorth.toLocaleString()}`}
           </span>
         </div>
