@@ -182,7 +182,7 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <div className="flex">
+      <section className="flex">
         <div className="flex-1 min-w-sm flex">
           <AssetRatioChart
             tokenBalances={tokenBalances}
@@ -192,30 +192,32 @@ const DashboardPage = () => {
         <div className="flex-1">
           <WalletList />
         </div>
-      </div>
+      </section>
 
       <Divider className="my-4" />
 
-      <h2 className="mt-4 text-md font-semibold text-slate-50/60">
-        Assets
-        {tokenBalances.length > 0 && (
-          <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-            {`(${tokenBalances.length.toLocaleString()})`}
-          </span>
-        )}
-      </h2>
+      <section className="mt-4 flex flex-col">
+        <h2 className="text-md font-semibold text-slate-50/60">
+          Assets
+          {tokenBalances.length > 0 && (
+            <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+              {`(${tokenBalances.length.toLocaleString()})`}
+            </span>
+          )}
+        </h2>
 
-      <ul className="mt-4 flex flex-wrap gap-2">
-        {tokenBalances.map((info) => (
-          <TokenBalanceItem
-            key={`${info.symbol}-${
-              'tokenAddress' in info ? info.tokenAddress : 'native'
-            }`}
-            logo={info.logo ?? ''}
-            {...info}
-          />
-        ))}
-      </ul>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {tokenBalances.map((info) => (
+            <TokenBalanceItem
+              key={`${info.symbol}-${
+                'tokenAddress' in info ? info.tokenAddress : 'native'
+              }`}
+              logo={info.logo ?? ''}
+              {...info}
+            />
+          ))}
+        </ul>
+      </section>
     </PageContainer>
   );
 };
