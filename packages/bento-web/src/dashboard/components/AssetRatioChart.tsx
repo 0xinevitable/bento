@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import styled, { css } from 'styled-components';
 
@@ -39,8 +39,6 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
     });
   }, [tokenBalances]);
 
-  const [isHovered, setHovered] = useState<boolean>(false);
-
   return (
     <ChartContainer>
       <ResponsiveContainer width="100%" height={300}>
@@ -68,7 +66,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
                     '#7c44ff',
                     '#656fff',
                     '#4cc9f0',
-                  ][index]
+                  ][index] ?? '#5b739b'
                 }
                 stroke="transparent"
               />
@@ -77,10 +75,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
         </PieChart>
       </ResponsiveContainer>
 
-      <AvatarContainer
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
+      <AvatarContainer>
         <Avatar src="/assets/avatar.png" />
       </AvatarContainer>
     </ChartContainer>
