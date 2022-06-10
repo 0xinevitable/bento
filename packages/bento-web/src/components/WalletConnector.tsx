@@ -162,28 +162,34 @@ export const WalletConnector = () => {
       });
       return;
     }
-    const chainId = 'cosmoshub-4';
-    await window.keplr.enable(chainId);
 
-    const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
-    const accounts = await offlineSigner.getAccounts();
-    const walletAddress = accounts[0].address;
+    try {
+      const chainId = 'cosmoshub-4';
+      await window.keplr.enable(chainId);
 
-    const { pub_key: publicKey, signature } = await window.keplr.signArbitrary(
-      chainId,
-      walletAddress,
-      messageToBeSigned,
-    );
+      const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
+      const accounts = await offlineSigner.getAccounts();
+      const walletAddress = accounts[0].address;
 
-    const walletType = 'keplr';
-    await validateSignature({
-      walletType,
-      walletAddress,
-      signature,
-      nonce: messageToBeSigned,
-      publicKeyValue: publicKey.value,
-    });
-    saveWallet({ walletType, walletAddress });
+      const { pub_key: publicKey, signature } =
+        await window.keplr.signArbitrary(
+          chainId,
+          walletAddress,
+          messageToBeSigned,
+        );
+
+      const walletType = 'keplr';
+      await validateSignature({
+        walletType,
+        walletAddress,
+        signature,
+        nonce: messageToBeSigned,
+        publicKeyValue: publicKey.value,
+      });
+      saveWallet({ walletType, walletAddress });
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   const connectKaikas = useCallback(async () => {
