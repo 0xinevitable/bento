@@ -7,11 +7,10 @@ import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 
 const tierStyles = ['bg-[#89aacc]', 'bg-[#c74b62]', 'bg-red-900'];
 
-// const netWorthAssetRatios = [
-//   { percentage: 20 },
-//   { percentage: 76 },
-//   { percentage: 4 },
-// ];
+type AssetRatioItem = {
+  type: string;
+  percentage: number;
+};
 
 type TokenBalanceRatioBarProps = {
   balances: (WalletBalance | CosmosSDKWalletBalance)[];
@@ -27,22 +26,30 @@ export const TokenBalanceRatioBar: React.FC<TokenBalanceRatioBarProps> = ({
         acc + ('delegations' in balance ? balance.delegations : 0),
       0,
     );
-
     const total = wallet + staked;
 
-    return [
-      { label: 'Wallet', percentage: (wallet / total) * 100 },
-      { label: 'Staking', percentage: (staked / total) * 100 },
-    ];
-  }, []);
+    let items: AssetRatioItem[] = [];
+
+    const walletPercentage = (wallet / total) * 100;
+    if (walletPercentage > 0) {
+      items.push({ type: 'Wallet', percentage: walletPercentage });
+    }
+
+    const stakedPercentage = (staked / total) * 100;
+    if (stakedPercentage > 0) {
+      items.push({ type: 'Staked', percentage: stakedPercentage });
+    }
+
+    return items;
+  }, [balances]);
 
   return (
     <ProgressBarContainer className="mt-2">
-      {assetRatios.map(({ label, percentage }, index) => {
+      {assetRatios.map(({ type, percentage }, index) => {
         const className = tierStyles[index];
 
         return (
-          <AnimatedTooltip key={index} label={`${label} ${percentage}%`}>
+          <AnimatedTooltip key={type} label={`${type} ${percentage}%`}>
             <Bar className={className} style={{ maxWidth: `${percentage}%` }} />
           </AnimatedTooltip>
         );
