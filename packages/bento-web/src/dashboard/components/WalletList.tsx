@@ -1,13 +1,13 @@
 import { WALLET_TYPES } from '@bento/core/lib/types';
 import { shortenAddress } from '@bento/core/lib/utils';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Store } from 'react-notifications-component';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { NoSSR } from '@/components/NoSSR';
 import { walletsAtom } from '@/recoil/wallets';
 import { copyToClipboard } from '@/utils/clipboard';
+import { toast } from '@/utils/toast';
 
 export const WalletList = () => {
   const [wallets, setWallets] = useRecoilState(walletsAtom);
@@ -21,18 +21,9 @@ export const WalletList = () => {
 
   const onClickCopy = useCallback((text) => {
     copyToClipboard(text);
-    Store.addNotification({
+    toast({
       title: 'Copied to Clipboard!',
-      message: text,
-      type: 'success',
-      insert: 'top',
-      container: 'top-right',
-      animationIn: ['animate__animated', 'animate__fadeIn'],
-      animationOut: ['animate__animated', 'animate__fadeOut'],
-      dismiss: {
-        duration: 3000,
-        onScreen: true,
-      },
+      description: text,
     });
   }, []);
 
