@@ -1,5 +1,4 @@
 import groupBy from 'lodash.groupby';
-import Link from 'next/link';
 import React, { useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -16,7 +15,6 @@ import { EmptyBalance } from './components/EmptyBalance';
 import { EmptyWallet } from './components/EmptyWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
-import { Web3Connector } from './components/Web3Connector';
 
 const walletBalanceReducer =
   (
@@ -178,13 +176,6 @@ const DashboardPage = () => {
         <div className="flex flex-col justify-center">
           <h2 className="text-md font-semibold text-slate-50/60">Net worth</h2>
           <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-        </div>
-
-        <div className="flex flex-col">
-          <Web3Connector />
-          <Link href="/onboarding" passHref>
-            <a className="text-white">Onboarding</a>
-          </Link>
         </div>
       </div>
 
