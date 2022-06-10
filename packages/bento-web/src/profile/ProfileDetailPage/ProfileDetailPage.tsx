@@ -51,7 +51,9 @@ const ProfileDetailPage = () => {
         <meta property="twitter:url" content={url} />
       </DocumentHead>
 
-      <ProfileInstance profile={profile} />
+      <div className="w-full max-w-xl mx-auto">
+        <ProfileInstance profile={profile} />
+      </div>
     </PageContainer>
   );
 };
