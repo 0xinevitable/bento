@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/[network]/[walletAddress]';
 import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
@@ -39,6 +39,8 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
     });
   }, [tokenBalances]);
 
+  const [isHovered, setHovered] = useState<boolean>(false);
+
   return (
     <ChartContainer>
       <ResponsiveContainer width="100%" height={300}>
@@ -75,7 +77,10 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
         </PieChart>
       </ResponsiveContainer>
 
-      <AvatarContainer>
+      <AvatarContainer
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <Avatar src="/assets/avatar.png" />
       </AvatarContainer>
     </ChartContainer>
@@ -105,9 +110,26 @@ const AvatarContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Avatar = styled.img`
+type AvatarProps = {
+  src: string;
+  enlarge?: boolean;
+};
+const Avatar = styled.div<AvatarProps>`
   width: 154px;
   height: 154px;
   border-radius: 50%;
-  user-select: none;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+  ${({ src }) =>
+    src &&
+    css`
+      background-image: url(${src});
+      background-size: 100%;
+      background-position: center;
+    `};
+
+  &:hover {
+    background-size: 110%;
+  }
 `;
