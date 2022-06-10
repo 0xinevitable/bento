@@ -15,6 +15,7 @@
     "@cosmjs/utils": "^0.28.4",
     "@ethersproject/providers": "^5.6.8",
     "@ethersproject/wallet": "^5.6.2",
+    "@floating-ui/react-dom-interactions": "^0.6.3",
     "@iconify/react": "^3.2.2",
     "@react-spring/web": "^9.4.5",
     "@solana/web3.js": "^1.43.6",
