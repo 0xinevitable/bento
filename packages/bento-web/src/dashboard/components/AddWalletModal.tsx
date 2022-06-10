@@ -97,8 +97,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
         <div
           className={clsx(
             'p-4 h-fit overflow-hidden',
-            'border border-slate-700 rounded-md drop-shadow-2xl',
-            'bg-slate-800/25 backdrop-blur-md flex flex-col cursor-pointer',
+            'border border-slate-800 rounded-md drop-shadow-2xl',
+            'bg-slate-800/5 backdrop-blur-md flex flex-col cursor-pointer',
           )}
         >
           <WalletConnector />
