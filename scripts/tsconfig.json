@@ -9,6 +9,11 @@
     "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "plugins": [
+      {
+        "transform": "typescript-json/lib/transform"
+      }
+    ]
   }
 }
