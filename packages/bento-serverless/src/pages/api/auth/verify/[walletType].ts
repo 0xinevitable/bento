@@ -7,15 +7,6 @@ import Caver from 'caver-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nacl from 'tweetnacl';
 
-export type WalletBalance = {
-  walletAddress: string;
-  address?: string;
-  symbol: string;
-  balance: number;
-  price: number;
-  logo?: string;
-};
-
 type APIRequest = NextApiRequest &
   (
     | {

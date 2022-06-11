@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
-import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/[network]/[walletAddress]';
-import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
+
+import { WalletBalance } from '../types/balance';
 
 const tierStyles = ['bg-[#89aacc]', 'bg-[#c74b62]'];
 
@@ -13,7 +13,7 @@ type AssetRatioItem = {
 };
 
 type TokenBalanceRatioBarProps = {
-  balances: (WalletBalance | CosmosSDKWalletBalance)[];
+  balances: WalletBalance[];
 };
 
 export const TokenBalanceRatioBar: React.FC<TokenBalanceRatioBarProps> = ({

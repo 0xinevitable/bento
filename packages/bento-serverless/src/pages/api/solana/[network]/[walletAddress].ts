@@ -3,15 +3,6 @@ import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import { safePromiseAll } from '@bento/core/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export type WalletBalance = {
-  walletAddress: string;
-  address?: string;
-  symbol: string;
-  balance: number;
-  price: number;
-  logo?: string;
-};
-
 interface APIRequest extends NextApiRequest {
   query: {
     network?: 'mainnet';

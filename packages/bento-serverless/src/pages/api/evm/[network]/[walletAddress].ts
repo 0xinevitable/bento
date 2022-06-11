@@ -11,18 +11,6 @@ import { EVMBasedChains } from '@bento/core/lib/types';
 import { safePromiseAll } from '@bento/core/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export type WalletBalance = {
-  walletAddress: string;
-
-  name: string;
-  logo?: string;
-  symbol: string;
-  address?: string; // for tokens
-
-  balance: number;
-  price: number;
-};
-
 interface APIRequest extends NextApiRequest {
   query: {
     network?: EVMBasedChains;

@@ -5,8 +5,6 @@ import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
-import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/[network]/[walletAddress]';
-import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
 import { walletsAtom } from '@/recoil/wallets';
 
 import { AddWalletModal } from './components/AddWalletModal';
@@ -15,16 +13,16 @@ import { EmptyBalance } from './components/EmptyBalance';
 import { EmptyWallet } from './components/EmptyWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
+import {
+  CosmosSDKWalletBalance,
+  EVMWalletBalance,
+  SolanaWalletBalance,
+  WalletBalance,
+} from './types/balance';
 
 const walletBalanceReducer =
-  (
-    symbol: string,
-    callback: (
-      acc: number,
-      balance: WalletBalance | CosmosSDKWalletBalance,
-    ) => number,
-  ) =>
-  (acc: number, balance: WalletBalance | CosmosSDKWalletBalance) =>
+  (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
+  (acc: number, balance: WalletBalance) =>
     balance.symbol === symbol ? callback(acc, balance) : acc;
 
 const DashboardPage = () => {
@@ -73,13 +71,13 @@ const DashboardPage = () => {
     ];
   }, [wallets]);
 
-  const { data: ethereumBalance = [] } = useAxiosSWR<WalletBalance[]>(
+  const { data: ethereumBalance = [] } = useAxiosSWR<EVMWalletBalance[]>(
     !ethereumWalletQuery ? null : `/api/evm/ethereum/${ethereumWalletQuery}`,
   );
   const { data: polygonBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
     !polygonWalletQuery ? null : `/api/evm/polygon/${polygonWalletQuery}`,
   );
-  const { data: klaytnBalance = [] } = useAxiosSWR<WalletBalance[]>(
+  const { data: klaytnBalance = [] } = useAxiosSWR<EVMWalletBalance[]>(
     !klaytnWalletQuery ? null : `/api/evm/klaytn/${klaytnWalletQuery}`,
   );
   const { data: cosmosHubBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
@@ -90,7 +88,7 @@ const DashboardPage = () => {
   const { data: osmosisBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
     !cosmosWalletQuery ? null : `/api/cosmos-sdk/osmosis/${cosmosWalletQuery}`,
   );
-  const { data: solanaBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
+  const { data: solanaBalance = [] } = useAxiosSWR<SolanaWalletBalance[]>(
     !solanaWalletQuery ? null : `/api/solana/mainnet/${solanaWalletQuery}`,
   );
 
