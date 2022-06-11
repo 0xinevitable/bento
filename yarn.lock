@@ -4945,14 +4945,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bignumber.js@npm:8.0.2":
-  version: 8.0.2
-  resolution: "bignumber.js@npm:8.0.2"
-  checksum: bef57bc46f03da46848330e75eb32fd1ec645bae03a350fc1fa5a0e72f0897c5d3aa1d2a1493f44bf4bdb1eceff3b3675e01fd1accbf0dd598570c16ca5b8df7
-  languageName: node
-  linkType: hard
-
-"bignumber.js@npm:^9.0.0, bignumber.js@npm:^9.0.1":
+"bignumber.js@npm:9.0.2":
   version: 9.0.2
   resolution: "bignumber.js@npm:9.0.2"
   checksum: 8637b71d0a99104b20413c47578953970006fec6b4df796b9dcfd9835ea9c402ea0e727eba9a5ca9f9a393c1d88b6168c5bbe0887598b708d4f8b4870ad62e1f

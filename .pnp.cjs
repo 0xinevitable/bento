@@ -6875,13 +6875,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["bignumber.js", [\
-        ["npm:8.0.2", {\
-          "packageLocation": "./.yarn/cache/bignumber.js-npm-8.0.2-c9ba319196-bef57bc46f.zip/node_modules/bignumber.js/",\
-          "packageDependencies": [\
-            ["bignumber.js", "npm:8.0.2"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:9.0.2", {\
           "packageLocation": "./.yarn/cache/bignumber.js-npm-9.0.2-583f690302-8637b71d0a.zip/node_modules/bignumber.js/",\
           "packageDependencies": [\
@@ -7387,7 +7380,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/runtime", "npm:7.3.1"],\
             ["@ethersproject/abi", "npm:5.0.7"],\
             ["any-promise", "npm:1.3.0"],\
-            ["bignumber.js", "npm:8.0.2"],\
+            ["bignumber.js", "npm:9.0.2"],\
             ["bn.js", "npm:5.2.1"],\
             ["chai", "npm:4.1.2"],\
             ["constants-browserify", "npm:1.0.0"],\
@@ -7430,7 +7423,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/runtime", "npm:7.3.1"],\
             ["@ethersproject/abi", "npm:5.0.7"],\
             ["any-promise", "npm:1.3.0"],\
-            ["bignumber.js", "npm:8.0.2"],\
+            ["bignumber.js", "npm:9.0.2"],\
             ["bn.js", "npm:5.2.1"],\
             ["chai", "npm:4.1.2"],\
             ["constants-browserify", "npm:1.0.0"],\
