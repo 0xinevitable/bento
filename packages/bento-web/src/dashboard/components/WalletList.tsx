@@ -11,7 +11,7 @@ import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
 
 type WalletListProps = {
-  onClickConnect: () => void;
+  onClickConnect?: () => void;
 };
 
 export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
@@ -90,14 +90,18 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
         ))}
       </ul>
 
-      <ButtonList>
-        {hasCollapseEffect && (
-          <ShowAllButton onClick={() => setCollapsed((prev) => !prev)}>
-            {collapsed ? 'Show All' : 'Show Less'}
-          </ShowAllButton>
-        )}
-        <Button onClick={onClickConnect}>Add Another</Button>
-      </ButtonList>
+      {(hasCollapseEffect || !!onClickConnect) && (
+        <ButtonList>
+          {hasCollapseEffect && (
+            <ShowAllButton onClick={() => setCollapsed((prev) => !prev)}>
+              {collapsed ? 'Show All' : 'Show Less'}
+            </ShowAllButton>
+          )}
+          {!!onClickConnect && (
+            <Button onClick={onClickConnect}>Add Another</Button>
+          )}
+        </ButtonList>
+      )}
     </NoSSR>
   );
 };
