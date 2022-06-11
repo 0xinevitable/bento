@@ -1,13 +1,10 @@
 import { Wallet } from '@bento/types';
 import { Base64 } from '@bento/utils/lib/Base64';
-import { Web3Provider } from '@ethersproject/providers';
-import WalletConnectProvider from '@walletconnect/web3-provider';
 import axios from 'axios';
 import produce from 'immer';
 import { useCallback, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import Web3Modal from 'web3modal';
 
 import { walletsAtom } from '@/recoil/wallets';
 import { toast } from '@/utils/toast';
@@ -19,26 +16,6 @@ declare global {
     solana: any;
   }
 }
-
-const providerOptions = {
-  injected: {
-    display: {
-      name: 'Metamask',
-      description: 'Connect with MetaMask',
-    },
-    package: null,
-  },
-  walletconnect: {
-    display: {
-      name: 'WalletConnect',
-      description: 'Connect with WalletConnect',
-    },
-    package: WalletConnectProvider,
-    options: {
-      infuraId: 'fcb656a7b4d14c9f9b0803a5d7475877',
-    },
-  },
-};
 
 const validateSignature = async (
   params:
@@ -127,6 +104,36 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({ onSave }) => {
   );
 
   const connectMetaMask = useCallback(async () => {
+    const [
+      { default: Web3Modal },
+      { default: WalletConnectProvider },
+      { Web3Provider },
+    ] = await Promise.all([
+      import('web3modal'),
+      import('@walletconnect/web3-provider'),
+      import('@ethersproject/providers'),
+    ]);
+
+    const providerOptions = {
+      injected: {
+        display: {
+          name: 'Metamask',
+          description: 'Connect with MetaMask',
+        },
+        package: null,
+      },
+      walletconnect: {
+        display: {
+          name: 'WalletConnect',
+          description: 'Connect with WalletConnect',
+        },
+        package: WalletConnectProvider,
+        options: {
+          infuraId: 'fcb656a7b4d14c9f9b0803a5d7475877',
+        },
+      },
+    };
+
     const web3Modal = new Web3Modal({
       network: 'mainnet',
       cacheProvider: true,
