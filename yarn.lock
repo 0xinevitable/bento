@@ -11117,6 +11117,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"scripts@workspace:scripts":
+  version: 0.0.0-use.local
+  resolution: "scripts@workspace:scripts"
+  languageName: unknown
+  linkType: soft
+
 "scrypt-js@npm:3.0.1, scrypt-js@npm:^3.0.0":
   version: 3.0.1
   resolution: "scrypt-js@npm:3.0.1"

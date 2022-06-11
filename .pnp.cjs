@@ -31,6 +31,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "@bento/web",\
         "reference": "workspace:packages/bento-web"\
+      },\
+      {\
+        "name": "scripts",\
+        "reference": "workspace:scripts"\
       }\
     ],\
     "enableTopLevelFallback": true,\
@@ -39,7 +43,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@bento/core", ["workspace:packages/bento-core"]],\
       ["@bento/landing", ["workspace:packages/bento-landing"]],\
       ["@bento/web", ["workspace:packages/bento-web"]],\
-      ["bento", ["workspace:."]]\
+      ["bento", ["workspace:."]],\
+      ["scripts", ["workspace:scripts"]]\
     ],\
     "fallbackPool": [\
     ],\
@@ -13966,6 +13971,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ajv-keywords", "virtual:8704647575acf2f5b19fccfcb0acebacd9c94259ebe9afcfaf4c053812fd896f10775930ee5a5949e20833a61503d2cd22aa259cbe69729f6a192de4bf43dc00#npm:3.5.2"]\
           ],\
           "linkType": "HARD"\
+        }]\
+      ]],\
+      ["scripts", [\
+        ["workspace:scripts", {\
+          "packageLocation": "./scripts/",\
+          "packageDependencies": [\
+            ["scripts", "workspace:scripts"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["scrypt-js", [\
