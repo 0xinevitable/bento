@@ -1,4 +1,4 @@
-import { safePromiseAll } from '@bento/utils';
+import { safePromiseAll } from '@bento/common';
 
 import { Bech32Address } from './bech32';
 import {

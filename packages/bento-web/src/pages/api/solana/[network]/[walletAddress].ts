@@ -1,6 +1,6 @@
+import { safePromiseAll } from '@bento/common';
 import { SolanaChain } from '@bento/core/lib/chains';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
-import { safePromiseAll } from '@bento/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface APIRequest extends NextApiRequest {

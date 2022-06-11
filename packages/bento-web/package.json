@@ -10,9 +10,8 @@
   },
   "dependencies": {
     "@bento/client": "workspace:^",
+    "@bento/common": "workspace:^",
     "@bento/core": "workspace:^",
-    "@bento/types": "workspace:^",
-    "@bento/utils": "workspace:^",
     "@cosmjs/amino": "^0.28.4",
     "@cosmjs/crypto": "0.28.4",
     "@cosmjs/stargate": "0.28.4",

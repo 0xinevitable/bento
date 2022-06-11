@@ -1,5 +1,4 @@
-import { Wallet } from '@bento/types';
-import { Base64 } from '@bento/utils/lib/Base64';
+import { Base64, Wallet } from '@bento/common';
 import axios from 'axios';
 import produce from 'immer';
 import { useCallback, useMemo } from 'react';

@@ -1,5 +1,4 @@
-import { safePromiseAll } from '@bento/utils';
-import { Base64 } from '@bento/utils/lib/Base64';
+import { Base64, safePromiseAll } from '@bento/common';
 import { JsonRpcProvider } from '@ethersproject/providers';
 import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';

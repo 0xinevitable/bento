@@ -1,4 +1,4 @@
-import { Wallet } from '@bento/types';
+import { Wallet } from '@bento/common';
 import { atom } from 'recoil';
 
 import { localStorageEffect } from './effects/localStorageEffect';

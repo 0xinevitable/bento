@@ -1,4 +1,4 @@
-import { safePromiseAll } from '@bento/utils';
+import { safePromiseAll } from '@bento/common';
 import axios from 'axios';
 import queryString from 'query-string';
 

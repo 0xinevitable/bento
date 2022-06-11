@@ -1,4 +1,4 @@
-import { WALLET_TYPES, Wallet } from '@bento/types';
+import { WALLET_TYPES, Wallet } from '@bento/common';
 import clsx from 'clsx';
 import produce from 'immer';
 import React, { useCallback, useMemo, useState } from 'react';

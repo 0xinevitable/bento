@@ -1,3 +1,5 @@
+import { EVMBasedChains } from '@bento/common';
+import { safePromiseAll } from '@bento/common';
 import {
   Chain,
   ERC20TokenBalance,
@@ -7,8 +9,6 @@ import {
 } from '@bento/core/lib/chains';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import { pricesFromCoinMarketCap } from '@bento/core/lib/pricings/CoinMarketCap';
-import { EVMBasedChains } from '@bento/types';
-import { safePromiseAll } from '@bento/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface APIRequest extends NextApiRequest {
