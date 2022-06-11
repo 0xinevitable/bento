@@ -5244,6 +5244,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/prettier", [\
+        ["npm:2.6.3", {\
+          "packageLocation": "./.yarn/cache/@types-prettier-npm-2.6.3-8d27063d48-e1836699ca.zip/node_modules/@types/prettier/",\
+          "packageDependencies": [\
+            ["@types/prettier", "npm:2.6.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/prop-types", [\
         ["npm:15.7.5", {\
           "packageLocation": "./.yarn/cache/@types-prop-types-npm-15.7.5-2aa48aa177-5b43b8b154.zip/node_modules/@types/prop-types/",\
@@ -14088,7 +14097,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["scripts", "workspace:scripts"],\
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@types/node", "npm:17.0.42"],\
+            ["@types/prettier", "npm:2.6.3"],\
             ["find-yarn-workspace-root", "npm:2.0.0"],\
+            ["prettier", "npm:2.6.2"],\
             ["ttypescript", "virtual:3d037d5e526f3d3d648b34e6f2870741001da83fbe5a06f011f676bb188c06041db8b9f18e1dc28a15d39fd0f2ca8aed5c277ca1e2fd69d4f751809e3cb17f94#npm:1.5.13"],\
             ["typescript", "patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=7ad353"],\
             ["typescript-json", "npm:2.1.6"]\

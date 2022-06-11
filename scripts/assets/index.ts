@@ -3,6 +3,7 @@ import { safePromiseAll } from '@bento/core/lib/utils/safePromiseAll';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import { promises as fs } from 'fs';
 import path from 'path';
+import prettier from 'prettier';
 import TSON from 'typescript-json';
 
 import coingeckoTokenList from './coingecko-coin-list.json';
@@ -79,7 +80,11 @@ const fetchEthereumAssets = async () => {
     return acc;
   }, previousTokens);
 
-  await fs.writeFile(CORE_TOKEN_LISTS.ETHEREUM, stringify(newTokens), 'utf8');
+  await fs.writeFile(
+    CORE_TOKEN_LISTS.ETHEREUM,
+    prettier.format(stringify(newTokens), { parser: 'json' }),
+    'utf8',
+  );
 };
 
 const main = async () => {
