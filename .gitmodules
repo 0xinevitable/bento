@@ -1,0 +1,3 @@
+[submodule "scripts/assets/trustwallet-assets"]
+	path = scripts/assets/trustwallet-assets
+	url = https://github.com/trustwallet/assets
