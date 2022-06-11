@@ -1,3 +1,5 @@
+import { EVMBasedChains } from '@bento/common';
+import { safePromiseAll } from '@bento/common';
 import {
   Chain,
   ERC20TokenBalance,
@@ -7,21 +9,7 @@ import {
 } from '@bento/core/lib/chains';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import { pricesFromCoinMarketCap } from '@bento/core/lib/pricings/CoinMarketCap';
-import { EVMBasedChains } from '@bento/core/lib/types';
-import { safePromiseAll } from '@bento/core/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-export type WalletBalance = {
-  walletAddress: string;
-
-  name: string;
-  logo?: string;
-  symbol: string;
-  address?: string; // for tokens
-
-  balance: number;
-  price: number;
-};
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -57,10 +45,9 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     name: string;
     logo?: string;
     coinGeckoId?: string;
-    coinMarketCapId?: string;
+    coinMarketCapId?: number;
     balance: number;
-    price: number | undefined;
-    // price: currencyPrice,
+    price?: number;
   }[] = (
     await safePromiseAll(
       wallets.map(async (walletAddress) => {

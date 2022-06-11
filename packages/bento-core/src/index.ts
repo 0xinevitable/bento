@@ -1,3 +1,5 @@
+import { safePromiseAll } from '@bento/common';
+
 import { Bech32Address } from './bech32';
 import {
   Chain,
@@ -9,7 +11,6 @@ import {
   SolanaChain,
 } from './chains';
 import { wallets } from './config';
-import { safePromiseAll } from './utils';
 
 /**
  * @deprecated We call each chain separately in the APIs

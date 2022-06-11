@@ -5,9 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
     "start": "next start"
   },
   "dependencies": {
+    "@bento/client": "workspace:^",
+    "@bento/common": "workspace:^",
     "@bento/core": "workspace:^",
     "@cosmjs/amino": "^0.28.4",
     "@cosmjs/crypto": "0.28.4",
@@ -18,7 +21,7 @@
     "@floating-ui/react-dom-interactions": "^0.6.3",
     "@iconify/react": "^3.2.2",
     "@react-spring/web": "^9.4.5",
-    "@solana/web3.js": "^1.43.6",
+    "@solana/web3.js": "^1.44.0",
     "@walletconnect/encoding": "^1.0.1",
     "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^0.27.2",
@@ -46,6 +49,7 @@
     "web3modal": "^1.9.7"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.1.6",
     "@types/date-fns": "^2.6.0",
     "@types/dedent": "^0.7.0",
     "@types/lodash.groupby": "^4.6.7",

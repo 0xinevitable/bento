@@ -1,4 +1,4 @@
-import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/core/lib/nfts';
+import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/client';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 

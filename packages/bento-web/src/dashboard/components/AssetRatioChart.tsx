@@ -2,8 +2,7 @@ import { useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import styled, { css } from 'styled-components';
 
-import { WalletBalance as CosmosSDKWalletBalance } from '@/pages/api/cosmos-sdk/[network]/[walletAddress]';
-import { WalletBalance } from '@/pages/api/evm/[network]/[walletAddress]';
+import { WalletBalance } from '../types/balance';
 
 const PIE_WIDTH = 12;
 
@@ -13,7 +12,7 @@ type AssetRatioChartProps = {
     name: string;
     logo: string;
     tokenAddress: string;
-    balances: (WalletBalance | CosmosSDKWalletBalance)[];
+    balances: WalletBalance[];
     netWorth: number;
     amount: number;
     price: number;

@@ -1,4 +1,4 @@
-import { Wallet } from './types';
+import { Wallet } from '@bento/common';
 
 /**
  * @deprecated We use them dynamically now

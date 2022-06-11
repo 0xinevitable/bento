@@ -1,16 +1,7 @@
+import { safePromiseAll } from '@bento/common';
 import { SolanaChain } from '@bento/core/lib/chains';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
-import { safePromiseAll } from '@bento/core/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-export type WalletBalance = {
-  walletAddress: string;
-  address?: string;
-  symbol: string;
-  balance: number;
-  price: number;
-  logo?: string;
-};
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -35,7 +26,16 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   // const network = (req.query.network ?? '').toLowerCase() as EVMBasedChains; // Assuming this is Mainnet (Beta)
   const chain = new SolanaChain();
 
-  const result = (
+  const result: {
+    walletAddress: string;
+    symbol: string;
+    name: string;
+    logo?: string;
+    coinGeckoId?: string;
+    coinMarketCapId?: number;
+    balance: number;
+    price?: number;
+  }[] = (
     await safePromiseAll(
       wallets.map(async (walletAddress) => {
         // const getTokenBalances = async (): Promise<ERC20TokenBalance[]> => []
