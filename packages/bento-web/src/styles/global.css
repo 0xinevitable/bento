@@ -24,6 +24,7 @@ img {
   font-size: 14px;
 }
 
-.web3modal-modal-lightbox {
+.web3modal-modal-lightbox,
+#WEB3_CONNECT_MODAL_ID > div {
   z-index: 90;
 }
