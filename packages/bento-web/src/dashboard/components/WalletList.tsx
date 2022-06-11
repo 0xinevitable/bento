@@ -1,5 +1,5 @@
-import { WALLET_TYPES } from '@bento/core/lib/types';
-import { shortenAddress } from '@bento/core/lib/utils';
+import { WALLET_TYPES } from '@bento/types';
+import { shortenAddress } from '@bento/utils';
 import { Icon } from '@iconify/react';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRecoilState } from 'recoil';

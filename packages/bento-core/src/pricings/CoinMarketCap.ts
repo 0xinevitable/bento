@@ -1,8 +1,8 @@
+import { safePromiseAll } from '@bento/utils';
 import axios from 'axios';
 import queryString from 'query-string';
 
 import { withCache } from '../cache';
-import { safePromiseAll } from '../utils';
 
 // Not recommended
 type CoinMarketCapPriceConversionResponse = {

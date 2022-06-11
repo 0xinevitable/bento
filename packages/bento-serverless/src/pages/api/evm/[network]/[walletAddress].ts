@@ -7,8 +7,8 @@ import {
 } from '@bento/core/lib/chains';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import { pricesFromCoinMarketCap } from '@bento/core/lib/pricings/CoinMarketCap';
-import { EVMBasedChains } from '@bento/core/lib/types';
-import { safePromiseAll } from '@bento/core/lib/utils';
+import { EVMBasedChains } from '@bento/types';
+import { safePromiseAll } from '@bento/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface APIRequest extends NextApiRequest {

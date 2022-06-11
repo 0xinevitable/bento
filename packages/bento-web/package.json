@@ -9,17 +9,14 @@
     "start": "next start"
   },
   "dependencies": {
-    "@bento/core": "workspace:^",
-    "@cosmjs/amino": "^0.28.4",
-    "@cosmjs/crypto": "0.28.4",
-    "@cosmjs/stargate": "0.28.4",
-    "@cosmjs/utils": "^0.28.4",
+    "@bento/client": "workspace:^",
+    "@bento/types": "workspace:^",
+    "@bento/utils": "workspace:^",
     "@ethersproject/providers": "^5.6.8",
     "@ethersproject/wallet": "^5.6.2",
     "@floating-ui/react-dom-interactions": "^0.6.3",
     "@iconify/react": "^3.2.2",
     "@react-spring/web": "^9.4.5",
-    "@solana/web3.js": "^1.43.6",
     "@walletconnect/encoding": "^1.0.1",
     "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^0.27.2",
@@ -43,7 +40,6 @@
     "styled-components": "^5.3.5",
     "swr": "^2.0.0-beta.3",
     "tslib": "^2.4.0",
-    "tweetnacl": "^1.0.3",
     "web3modal": "^1.9.7"
   },
   "devDependencies": {

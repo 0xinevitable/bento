@@ -1,3 +1,5 @@
+import { safePromiseAll } from '@bento/utils';
+import { Base64 } from '@bento/utils/lib/Base64';
 import { JsonRpcProvider } from '@ethersproject/providers';
 import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
@@ -7,8 +9,6 @@ import { withCache } from './cache';
 import { priceFromCoinGecko } from './pricings/CoinGecko';
 import { Currency } from './pricings/Currency';
 import { ERC20TokenInput, ETHEREUM_TOKENS, KLAYTN_TOKENS } from './tokens';
-import { safePromiseAll } from './utils';
-import { Base64 } from './utils/Base64';
 
 export interface ERC20TokenBalance extends ERC20TokenInput {
   walletAddress: string;

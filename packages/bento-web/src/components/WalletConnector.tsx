@@ -1,5 +1,5 @@
-import { Wallet } from '@bento/core/lib/types';
-import { Base64 } from '@bento/core/lib/utils/Base64';
+import { Wallet } from '@bento/types';
+import { Base64 } from '@bento/utils/lib/Base64';
 import { Web3Provider } from '@ethersproject/providers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import axios from 'axios';

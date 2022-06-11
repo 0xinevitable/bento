@@ -1,4 +1,4 @@
-import { OpenSeaAsset } from '@bento/core/lib/nfts';
+import { OpenSeaAsset } from '@bento/client';
 import React from 'react';
 import styled from 'styled-components';
 

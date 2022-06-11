@@ -1,5 +1,5 @@
 {
-  "name": "@bento/core",
+  "name": "@bento/types",
   "version": "1.0.0",
   "private": true,
   "repository": "https://github.com/inevitable-changes/dashboard",
@@ -9,16 +9,6 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc"
-  },
-  "dependencies": {
-    "@bento/types": "workspace:^",
-    "@bento/utils": "workspace:^",
-    "@ethersproject/providers": "^5.6.8",
-    "@solana/web3.js": "^1.43.4",
-    "axios": "^0.27.2",
-    "bech32": "^2.0.0",
-    "caver-js": "1.8.2-rc.3",
-    "query-string": "^7.1.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.38",

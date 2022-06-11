@@ -5,8 +5,8 @@ import {
   OsmosisChain,
 } from '@bento/core/lib/chains';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
-import { CosmosSDKBasedChains } from '@bento/core/lib/types';
-import { safePromiseAll } from '@bento/core/lib/utils';
+import { CosmosSDKBasedChains } from '@bento/types';
+import { safePromiseAll } from '@bento/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface APIRequest extends NextApiRequest {
