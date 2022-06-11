@@ -57,10 +57,9 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     name: string;
     logo?: string;
     coinGeckoId?: string;
-    coinMarketCapId?: string;
+    coinMarketCapId?: number;
     balance: number;
-    price: number | undefined;
-    // price: currencyPrice,
+    price?: number;
   }[] = (
     await safePromiseAll(
       wallets.map(async (walletAddress) => {

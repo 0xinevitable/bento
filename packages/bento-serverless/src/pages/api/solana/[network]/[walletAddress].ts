@@ -35,7 +35,16 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   // const network = (req.query.network ?? '').toLowerCase() as EVMBasedChains; // Assuming this is Mainnet (Beta)
   const chain = new SolanaChain();
 
-  const result = (
+  const result: {
+    walletAddress: string;
+    symbol: string;
+    name: string;
+    logo?: string;
+    coinGeckoId?: string;
+    coinMarketCapId?: number;
+    balance: number;
+    price?: number;
+  }[] = (
     await safePromiseAll(
       wallets.map(async (walletAddress) => {
         // const getTokenBalances = async (): Promise<ERC20TokenBalance[]> => []
