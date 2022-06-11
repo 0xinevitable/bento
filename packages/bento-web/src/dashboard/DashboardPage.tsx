@@ -195,7 +195,9 @@ const DashboardPage = () => {
           </h2>
 
           {wallets.length > 0 ? (
-            <WalletList />
+            <WalletList
+              onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
+            />
           ) : (
             <EmptyWallet
               onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}

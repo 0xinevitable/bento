@@ -10,7 +10,11 @@ import { walletsAtom } from '@/recoil/wallets';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
 
-export const WalletList = () => {
+type WalletListProps = {
+  onClickConnect: () => void;
+};
+
+export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
   const [wallets, setWallets] = useRecoilState(walletsAtom);
   const [collapsed, setCollapsed] = useState<boolean>(true);
 
@@ -86,18 +90,21 @@ export const WalletList = () => {
         ))}
       </ul>
 
-      {hasCollapseEffect && (
-        <ShowAllButtonContainer>
+      <ButtonList>
+        {hasCollapseEffect && (
           <ShowAllButton onClick={() => setCollapsed((prev) => !prev)}>
             {collapsed ? 'Show All' : 'Show Less'}
           </ShowAllButton>
-        </ShowAllButtonContainer>
-      )}
+        )}
+        <Button onClick={onClickConnect}>Add Another</Button>
+      </ButtonList>
     </NoSSR>
   );
 };
 
-const ShowAllButtonContainer = styled.div`
+const ButtonList = styled.div`
+  margin-top: 12px;
+  margin-bottom: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -107,8 +114,40 @@ const ShowAllButton = styled.button`
   background: #121a32;
   border: 1px solid #020322;
   border-radius: 8px;
-  line-height: 100%;
-  color: rgba(255, 255, 255, 0.65);
+
   font-weight: 500;
   font-size: 12px;
+  line-height: 100%;
+  color: rgba(255, 255, 255, 0.65);
+
+  &:not(:last-of-type) {
+    margin-right: 8px;
+  }
+
+  &:active {
+    opacity: 0.45;
+  }
+`;
+
+const Button = styled.button`
+  padding: 8px 20px;
+  width: fit-content;
+  cursor: pointer;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255, 165, 165, 0.4);
+  background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
+  filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
+  transition: all 0.2s ease-in-out;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
+
+  &:active {
+    opacity: 0.45;
+  }
 `;
