@@ -1,0 +1,33 @@
+{
+  "name": "@bento/serverless",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@bento/core": "workspace:^",
+    "@cosmjs/amino": "^0.28.4",
+    "@cosmjs/crypto": "0.28.4",
+    "@cosmjs/stargate": "0.28.4",
+    "@cosmjs/utils": "^0.28.4",
+    "@ethersproject/wallet": "^5.6.2",
+    "@solana/web3.js": "^1.43.6",
+    "axios": "^0.27.2",
+    "caver-js": "^1.8.1",
+    "immer": "^9.0.14",
+    "lodash.groupby": "^4.6.0",
+    "next": "^12.1.6",
+    "tslib": "^2.4.0",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^12.1.6",
+    "@types/dedent": "^0.7.0",
+    "@types/node": "^17.0.38",
+    "typescript": "^4.7.2"
+  }
+}
