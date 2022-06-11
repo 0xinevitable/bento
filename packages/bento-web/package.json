@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:analyze": "ANALYZE=true next build",
     "start": "next start"
   },
   "dependencies": {
@@ -46,6 +47,7 @@
     "web3modal": "^1.9.7"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.1.6",
     "@types/date-fns": "^2.6.0",
     "@types/dedent": "^0.7.0",
     "@types/lodash.groupby": "^4.6.7",
