@@ -33,10 +33,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:packages/bento-landing"\
       },\
       {\
-        "name": "@bento/serverless",\
-        "reference": "workspace:packages/bento-serverless"\
-      },\
-      {\
         "name": "@bento/types",\
         "reference": "workspace:packages/bento-types"\
       },\
@@ -59,7 +55,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@bento/client", ["workspace:packages/bento-client"]],\
       ["@bento/core", ["workspace:packages/bento-core"]],\
       ["@bento/landing", ["workspace:packages/bento-landing"]],\
-      ["@bento/serverless", ["workspace:packages/bento-serverless"]],\
       ["@bento/types", ["workspace:packages/bento-types"]],\
       ["@bento/utils", ["workspace:packages/bento-utils"]],\
       ["@bento/web", ["workspace:packages/bento-web"]],\
@@ -2727,31 +2722,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "SOFT"\
         }]\
       ]],\
-      ["@bento/serverless", [\
-        ["workspace:packages/bento-serverless", {\
-          "packageLocation": "./packages/bento-serverless/",\
-          "packageDependencies": [\
-            ["@bento/serverless", "workspace:packages/bento-serverless"],\
-            ["@bento/core", "workspace:packages/bento-core"],\
-            ["@bento/types", "workspace:packages/bento-types"],\
-            ["@bento/utils", "workspace:packages/bento-utils"],\
-            ["@cosmjs/amino", "npm:0.28.4"],\
-            ["@cosmjs/crypto", "npm:0.28.4"],\
-            ["@cosmjs/stargate", "npm:0.28.4"],\
-            ["@cosmjs/utils", "npm:0.28.4"],\
-            ["@ethersproject/wallet", "npm:5.6.2"],\
-            ["@next/bundle-analyzer", "npm:12.1.6"],\
-            ["@solana/web3.js", "npm:1.43.6"],\
-            ["@types/dedent", "npm:0.7.0"],\
-            ["@types/node", "npm:17.0.38"],\
-            ["caver-js", "npm:1.8.1"],\
-            ["tslib", "npm:2.4.0"],\
-            ["tweetnacl", "npm:1.0.3"],\
-            ["typescript", "patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"]\
-          ],\
-          "linkType": "SOFT"\
-        }]\
-      ]],\
       ["@bento/types", [\
         ["workspace:packages/bento-types", {\
           "packageLocation": "./packages/bento-types/",\
@@ -2782,14 +2752,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@bento/web", "workspace:packages/bento-web"],\
             ["@bento/client", "workspace:packages/bento-client"],\
+            ["@bento/core", "workspace:packages/bento-core"],\
             ["@bento/types", "workspace:packages/bento-types"],\
             ["@bento/utils", "workspace:packages/bento-utils"],\
+            ["@cosmjs/amino", "npm:0.28.4"],\
+            ["@cosmjs/crypto", "npm:0.28.4"],\
+            ["@cosmjs/stargate", "npm:0.28.4"],\
+            ["@cosmjs/utils", "npm:0.28.4"],\
             ["@ethersproject/providers", "npm:5.6.8"],\
             ["@ethersproject/wallet", "npm:5.6.2"],\
             ["@floating-ui/react-dom-interactions", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:0.6.3"],\
             ["@iconify/react", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.2.2"],\
             ["@next/bundle-analyzer", "npm:12.1.6"],\
             ["@react-spring/web", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.4.5"],\
+            ["@solana/web3.js", "npm:1.44.0"],\
             ["@types/date-fns", "npm:2.6.0"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.groupby", "npm:4.6.7"],\
@@ -2825,6 +2801,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["swr", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:2.0.0-beta.3"],\
             ["tailwindcss", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.0.24"],\
             ["tslib", "npm:2.4.0"],\
+            ["tweetnacl", "npm:1.0.3"],\
             ["typescript", "patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"],\
             ["web3modal", "npm:1.9.7"]\
           ],\
@@ -4745,10 +4722,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:1.43.6", {\
-          "packageLocation": "./.yarn/cache/@solana-web3.js-npm-1.43.6-1550041bbe-67433d2431.zip/node_modules/@solana/web3.js/",\
+        ["npm:1.44.0", {\
+          "packageLocation": "./.yarn/cache/@solana-web3.js-npm-1.44.0-9c0f76151f-f50bef41eb.zip/node_modules/@solana/web3.js/",\
           "packageDependencies": [\
-            ["@solana/web3.js", "npm:1.43.6"],\
+            ["@solana/web3.js", "npm:1.44.0"],\
             ["@babel/runtime", "npm:7.17.9"],\
             ["@ethersproject/sha2", "npm:5.6.0"],\
             ["@solana/buffer-layout", "npm:4.0.0"],\

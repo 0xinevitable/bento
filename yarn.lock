@@ -1615,29 +1615,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bento/serverless@workspace:packages/bento-serverless":
-  version: 0.0.0-use.local
-  resolution: "@bento/serverless@workspace:packages/bento-serverless"
-  dependencies:
-    "@bento/core": "workspace:^"
-    "@bento/types": "workspace:^"
-    "@bento/utils": "workspace:^"
-    "@cosmjs/amino": ^0.28.4
-    "@cosmjs/crypto": 0.28.4
-    "@cosmjs/stargate": 0.28.4
-    "@cosmjs/utils": ^0.28.4
-    "@ethersproject/wallet": ^5.6.2
-    "@next/bundle-analyzer": ^12.1.6
-    "@solana/web3.js": ^1.43.6
-    "@types/dedent": ^0.7.0
-    "@types/node": ^17.0.38
-    caver-js: ^1.8.1
-    tslib: ^2.4.0
-    tweetnacl: ^1.0.3
-    typescript: ^4.7.2
-  languageName: unknown
-  linkType: soft
-
 "@bento/types@workspace:^, @bento/types@workspace:packages/bento-types":
   version: 0.0.0-use.local
   resolution: "@bento/types@workspace:packages/bento-types"
@@ -1663,14 +1640,20 @@ __metadata:
   resolution: "@bento/web@workspace:packages/bento-web"
   dependencies:
     "@bento/client": "workspace:^"
+    "@bento/core": "workspace:^"
     "@bento/types": "workspace:^"
     "@bento/utils": "workspace:^"
+    "@cosmjs/amino": ^0.28.4
+    "@cosmjs/crypto": 0.28.4
+    "@cosmjs/stargate": 0.28.4
+    "@cosmjs/utils": ^0.28.4
     "@ethersproject/providers": ^5.6.8
     "@ethersproject/wallet": ^5.6.2
     "@floating-ui/react-dom-interactions": ^0.6.3
     "@iconify/react": ^3.2.2
     "@next/bundle-analyzer": ^12.1.6
     "@react-spring/web": ^9.4.5
+    "@solana/web3.js": ^1.44.0
     "@types/date-fns": ^2.6.0
     "@types/dedent": ^0.7.0
     "@types/lodash.groupby": ^4.6.7
@@ -1706,6 +1689,7 @@ __metadata:
     swr: ^2.0.0-beta.3
     tailwindcss: ^3.0.24
     tslib: ^2.4.0
+    tweetnacl: ^1.0.3
     typescript: ^4.7.2
     web3modal: ^1.9.7
   languageName: unknown
@@ -3440,9 +3424,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/web3.js@npm:^1.43.6":
-  version: 1.43.6
-  resolution: "@solana/web3.js@npm:1.43.6"
+"@solana/web3.js@npm:^1.44.0":
+  version: 1.44.0
+  resolution: "@solana/web3.js@npm:1.44.0"
   dependencies:
     "@babel/runtime": ^7.12.5
     "@ethersproject/sha2": ^5.5.0
@@ -3460,7 +3444,7 @@ __metadata:
     secp256k1: ^4.0.2
     superstruct: ^0.14.2
     tweetnacl: ^1.0.0
-  checksum: 67433d24318a6626e55619ebc56111261ceb8fda1966e4ea9c3280e224cb71aea98f56a880a8febf0bea360548499ffb62aff4c96e071d5e6b0ffc579270954d
+  checksum: f50bef41ebe3abdab294995313c503150884d9ccbab338407f4a777a9f3e11dd8f49f8bd38d659e3d799b7bcd471d97bc15ee94a79150da5c23e0bd287ebe9b7
   languageName: node
   linkType: hard
 
