@@ -3,7 +3,6 @@ import { Base64 } from '@bento/utils/lib/Base64';
 import { Web3Provider } from '@ethersproject/providers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import axios from 'axios';
-import Caver from 'caver-js';
 import produce from 'immer';
 import { useCallback, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
@@ -210,7 +209,8 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({ onSave }) => {
       const accounts = await provider.enable();
       const walletAddress = accounts[0];
 
-      const caver = new Caver(provider);
+      const Caver = await import('caver-js');
+      const caver = new Caver.default(provider);
       const signature = await caver.rpc.klay.sign(
         walletAddress,
         messageToBeSigned,
