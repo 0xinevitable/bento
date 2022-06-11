@@ -1,1 +1,4 @@
-scripts/
+.github/
+.vim/
+.vscode/
+scripts/assets/
