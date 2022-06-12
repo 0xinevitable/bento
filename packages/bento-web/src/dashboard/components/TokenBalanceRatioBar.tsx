@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -13,10 +14,12 @@ type AssetRatioItem = {
 };
 
 type TokenBalanceRatioBarProps = {
+  className?: string;
   balances: WalletBalance[];
 };
 
 export const TokenBalanceRatioBar: React.FC<TokenBalanceRatioBarProps> = ({
+  className,
   balances,
 }) => {
   const assetRatios = useMemo(() => {
@@ -44,7 +47,7 @@ export const TokenBalanceRatioBar: React.FC<TokenBalanceRatioBarProps> = ({
   }, [balances]);
 
   return (
-    <ProgressBarContainer className="mt-2">
+    <ProgressBarContainer className={clsx('mt-2', className)}>
       {assetRatios.map(({ type, percentage }, index) => {
         const className = tierStyles[index];
 

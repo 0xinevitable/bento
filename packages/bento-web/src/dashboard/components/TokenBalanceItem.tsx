@@ -64,7 +64,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
         </div>
       </div>
 
-      <TokenBalanceRatioBar balances={info.balances} />
+      <TokenBalanceRatioBar className="pl-2" balances={info.balances} />
 
       {/* <ul
         className={clsx(
