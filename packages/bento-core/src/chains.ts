@@ -175,7 +175,7 @@ export class PolygonChain implements Chain {
   currency = {
     symbol: 'MATIC',
     name: 'Polygon',
-    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/polygon/info/logo.png',
+    logo: '/assets/polygon.webp',
     decimals: 18,
     coinGeckoId: 'matic-network',
   };
