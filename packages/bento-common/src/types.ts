@@ -17,7 +17,12 @@ export const WALLET_TYPES = {
   },
 };
 
-export type EVMBasedNetworks = 'ethereum' | 'polygon' | 'klaytn';
+export type EVMBasedNetworks =
+  | 'ethereum'
+  | 'bsc'
+  | 'polygon'
+  | 'klaytn'
+  | 'opensea';
 export type CosmosSDKBasedNetworks = 'cosmos-hub' | 'osmosis';
 
 export type Wallet =
