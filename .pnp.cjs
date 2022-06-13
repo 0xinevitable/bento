@@ -2510,6 +2510,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/client", "workspace:packages/bento-client"],\
             ["@types/node", "npm:17.0.42"],\
             ["axios", "npm:0.27.2"],\
+            ["axios-cache-adapter", "virtual:f55bc88a99a26f41500d422017e45c23bfeb30e41d70d6a6aa44805953ebb12cabbddbc49650837486290ead6ded7fd4ffc66ca84c41734f2510f893ff4e8a9d#npm:2.7.3"],\
             ["query-string", "npm:7.1.1"],\
             ["typescript", "patch:typescript@npm%3A4.7.3#~builtin<compat/typescript>::version=4.7.3&hash=7ad353"]\
           ],\
@@ -6139,6 +6140,30 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["axios-cache-adapter", [\
+        ["npm:2.7.3", {\
+          "packageLocation": "./.yarn/cache/axios-cache-adapter-npm-2.7.3-26c357b785-ff44bee6a2.zip/node_modules/axios-cache-adapter/",\
+          "packageDependencies": [\
+            ["axios-cache-adapter", "npm:2.7.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:f55bc88a99a26f41500d422017e45c23bfeb30e41d70d6a6aa44805953ebb12cabbddbc49650837486290ead6ded7fd4ffc66ca84c41734f2510f893ff4e8a9d#npm:2.7.3", {\
+          "packageLocation": "./.yarn/__virtual__/axios-cache-adapter-virtual-ddac0dd531/0/cache/axios-cache-adapter-npm-2.7.3-26c357b785-ff44bee6a2.zip/node_modules/axios-cache-adapter/",\
+          "packageDependencies": [\
+            ["axios-cache-adapter", "virtual:f55bc88a99a26f41500d422017e45c23bfeb30e41d70d6a6aa44805953ebb12cabbddbc49650837486290ead6ded7fd4ffc66ca84c41734f2510f893ff4e8a9d#npm:2.7.3"],\
+            ["@types/axios", null],\
+            ["axios", "npm:0.27.2"],\
+            ["cache-control-esm", "npm:1.0.0"],\
+            ["md5", "npm:2.3.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/axios",\
+            "axios"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["babel-plugin-dynamic-import-node", [\
         ["npm:2.3.3", {\
           "packageLocation": "./.yarn/cache/babel-plugin-dynamic-import-node-npm-2.3.3-be081936a9-c9d24415bc.zip/node_modules/babel-plugin-dynamic-import-node/",\
@@ -6833,6 +6858,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["cache-control-esm", [\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/cache-control-esm-npm-1.0.0-ee383a8c40-4f8c8399f2.zip/node_modules/cache-control-esm/",\
+          "packageDependencies": [\
+            ["cache-control-esm", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["call-bind", [\
         ["npm:1.0.2", {\
           "packageLocation": "./.yarn/cache/call-bind-npm-1.0.2-c957124861-f8e31de9d1.zip/node_modules/call-bind/",\
@@ -7035,6 +7069,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chalk", "npm:4.1.2"],\
             ["ansi-styles", "npm:4.3.0"],\
             ["supports-color", "npm:7.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["charenc", [\
+        ["npm:0.0.2", {\
+          "packageLocation": "./.yarn/cache/charenc-npm-0.0.2-aca0c2f207-81dcadbe57.zip/node_modules/charenc/",\
+          "packageDependencies": [\
+            ["charenc", "npm:0.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7439,6 +7482,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cross-fetch", "npm:2.2.6"],\
             ["node-fetch", "virtual:9c0f76151f4c3b88a21fa97c32511955817ad3ef934e8c1532c5676b8cd77a1a75316118d89ec7aaf5249ebda8a4fd664be036dc2ebf4229bc67ef6fa2de5971#npm:2.6.7"],\
             ["whatwg-fetch", "npm:2.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["crypt", [\
+        ["npm:0.0.2", {\
+          "packageLocation": "./.yarn/cache/crypt-npm-0.0.2-033627d94f-baf4c7bbe0.zip/node_modules/crypt/",\
+          "packageDependencies": [\
+            ["crypt", "npm:0.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10060,6 +10112,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["is-buffer", [\
+        ["npm:1.1.6", {\
+          "packageLocation": "./.yarn/cache/is-buffer-npm-1.1.6-08199d9ccc-4a186d995d.zip/node_modules/is-buffer/",\
+          "packageDependencies": [\
+            ["is-buffer", "npm:1.1.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["is-callable", [\
         ["npm:1.2.4", {\
           "packageLocation": "./.yarn/cache/is-callable-npm-1.2.4-03fc17459c-1a28d57dc4.zip/node_modules/is-callable/",\
@@ -11270,6 +11331,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/marked-npm-4.0.16-1c7fe7ec7b-c0ef780bf5.zip/node_modules/marked/",\
           "packageDependencies": [\
             ["marked", "npm:4.0.16"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["md5", [\
+        ["npm:2.3.0", {\
+          "packageLocation": "./.yarn/cache/md5-npm-2.3.0-86c49d3915-a63cacf401.zip/node_modules/md5/",\
+          "packageDependencies": [\
+            ["md5", "npm:2.3.0"],\
+            ["charenc", "npm:0.0.2"],\
+            ["crypt", "npm:0.0.2"],\
+            ["is-buffer", "npm:1.1.6"]\
           ],\
           "linkType": "HARD"\
         }]\
