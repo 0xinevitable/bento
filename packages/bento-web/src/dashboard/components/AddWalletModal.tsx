@@ -146,7 +146,13 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
 
           <section className="mt-8">
             <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
-            <WalletConnector networks={networks} onSave={onDismiss} />
+            <WalletConnector
+              networks={networks}
+              onSave={() => {
+                onDismiss();
+                setNetworks([]);
+              }}
+            />
           </section>
         </div>
       </OverlayWrapper>
