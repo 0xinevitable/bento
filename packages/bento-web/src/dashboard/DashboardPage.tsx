@@ -53,13 +53,13 @@ const DashboardPage = () => {
         }
 
         let _acc = acc;
-        if (wallet.chains.includes('ethereum')) {
+        if (wallet.networks.includes('ethereum')) {
           _acc = { ..._acc, ethereum: [..._acc.ethereum, wallet.address] };
         }
-        if (wallet.chains.includes('polygon')) {
+        if (wallet.networks.includes('polygon')) {
           _acc = { ..._acc, polygon: [..._acc.polygon, wallet.address] };
         }
-        if (wallet.chains.includes('klaytn')) {
+        if (wallet.networks.includes('klaytn')) {
           _acc = { ..._acc, klaytn: [..._acc.klaytn, wallet.address] };
         }
         return _acc;

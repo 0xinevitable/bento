@@ -1,4 +1,4 @@
-import { EVMBasedChains } from '@bento/common';
+import { EVMBasedNetworks } from '@bento/common';
 import { safePromiseAll } from '@bento/common';
 import {
   Chain,
@@ -13,12 +13,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface APIRequest extends NextApiRequest {
   query: {
-    network?: EVMBasedChains;
+    network?: EVMBasedNetworks;
     walletAddress?: string;
   };
 }
 
-const chains: Record<EVMBasedChains, Chain> = {
+const chains: Record<EVMBasedNetworks, Chain> = {
   ethereum: new EthereumChain(),
   polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),
@@ -37,7 +37,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
 
   // 네트워크 주소를 가져온다.
-  const network = (req.query.network ?? '').toLowerCase() as EVMBasedChains;
+  const network = (req.query.network ?? '').toLowerCase() as EVMBasedNetworks;
 
   const result: {
     walletAddress: string;

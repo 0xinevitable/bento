@@ -19,12 +19,12 @@ const CHAINS_BY_WALLET_TYPE = {
 type WalletDraft = {
   type: string;
   address: string;
-  chains: string[];
+  networks: string[];
 };
 const defaultWallet: WalletDraft = {
   type: '',
   address: '',
-  chains: [],
+  networks: [],
 };
 
 type Network = {
@@ -96,17 +96,17 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   const setWallets = useSetRecoilState(walletsAtom);
   const [draft, setDraft] = useState<WalletDraft>(defaultWallet);
 
-  const handleChains = useCallback(
+  const handleNetworks = useCallback(
     (chainId: string) => {
       if (draft.type === 'solana') {
         return;
       }
-      const previousChains: string[] = draft.chains;
-      const chains = previousChains.includes(chainId)
-        ? previousChains.filter((v) => v !== chainId)
-        : [...previousChains, chainId];
+      const previousNetworks: string[] = draft.networks;
+      const networks = previousNetworks.includes(chainId)
+        ? previousNetworks.filter((v) => v !== chainId)
+        : [...previousNetworks, chainId];
 
-      setDraft({ ...draft, chains });
+      setDraft({ ...draft, networks });
     },
     [draft],
   );
@@ -126,8 +126,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
           if (wallet.type === 'solana') {
             return;
           }
-          wallet.chains = Array.from(
-            new Set([...draft.chains, ...wallet.chains]),
+          wallet.networks = Array.from(
+            new Set([...draft.networks, ...wallet.networks]),
           ) as any[];
         }
       }),
@@ -137,20 +137,10 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     onDismiss();
   }, [draft, onDismiss]);
 
-  const supportedChains = useMemo(() => {
-    if (!draft.type) {
-      return [];
-    }
-    const chains = CHAINS_BY_WALLET_TYPE[draft.type];
-    return chains.length > 0 //
-      ? chains
-      : [];
-  }, [draft.type]);
-
-  const [chains, setChains] = useState<Network[]>([]);
-  const firstChain = chains[0];
+  const [networks, setNetworks] = useState<Network[]>([]);
+  const firstNetwork = networks[0];
   const onSelectNetwork = useCallback((network: Network) => {
-    setChains((prev) =>
+    setNetworks((prev) =>
       !prev.find((v) => v.id === network.id)
         ? [...prev, network]
         : prev.filter((v) => v.id !== network.id),
@@ -175,10 +165,10 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
             <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
             <div className="flex flex-wrap">
               {NETWORKS.map((network) => {
-                const selected = !!chains.find((v) => v.id === network.id);
+                const selected = !!networks.find((v) => v.id === network.id);
                 const disabled =
-                  typeof firstChain !== 'undefined' &&
-                  firstChain.type !== network.type;
+                  typeof firstNetwork !== 'undefined' &&
+                  firstNetwork.type !== network.type;
 
                 return (
                   <NetworkItem
@@ -210,7 +200,11 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
 
           <section className="mt-8">
             <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
-            <WalletConnector network={firstChain?.type} onSave={onDismiss} />
+            <WalletConnector
+              network={firstNetwork?.type}
+              selectedNetworks={networks.map((v) => v.id)}
+              onSave={onDismiss}
+            />
           </section>
         </div>
       </OverlayWrapper>

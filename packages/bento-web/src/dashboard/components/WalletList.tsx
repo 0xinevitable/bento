@@ -1,4 +1,8 @@
-import { WALLET_TYPES } from '@bento/common';
+import {
+  CosmosSDKBasedNetworks,
+  EVMBasedNetworks,
+  WALLET_TYPES,
+} from '@bento/common';
 import { shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -71,14 +75,16 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
 
               <div>
                 {wallet.type !== 'solana' ? (
-                  wallet.chains.map((chain) => (
-                    <span
-                      key={chain}
-                      className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60"
-                    >
-                      {chain}
-                    </span>
-                  ))
+                  wallet.networks.map(
+                    (network: EVMBasedNetworks | CosmosSDKBasedNetworks) => (
+                      <span
+                        key={network}
+                        className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60"
+                      >
+                        {network}
+                      </span>
+                    ),
+                  )
                 ) : (
                   <span className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60">
                     solana

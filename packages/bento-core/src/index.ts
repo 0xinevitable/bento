@@ -34,7 +34,7 @@ export const main = async () => {
     wallets.map(async (wallet) => {
       if (wallet.type == 'evm') {
         await safePromiseAll(
-          wallet.chains.map(async (network) => {
+          wallet.networks.map(async (network) => {
             if (network === 'ethereum') {
               const chain = chains[network];
               const balance = await chain.getBalance(wallet.address);
@@ -66,7 +66,7 @@ export const main = async () => {
         const bech32Address = Bech32Address.fromBech32(wallet.address);
 
         await safePromiseAll(
-          wallet.chains.map(async (chainId) => {
+          wallet.networks.map(async (chainId) => {
             const chain = chains[chainId];
             if (!('bech32Config' in chain)) {
               throw new Error(

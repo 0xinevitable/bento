@@ -47,10 +47,12 @@ const validateSignature = async (
 
 type WalletSelectorProps = {
   network?: string;
+  selectedNetworks?: string[];
   onSave?: () => void;
 };
 export const WalletConnector: React.FC<WalletSelectorProps> = ({
   network,
+  selectedNetworks,
   onSave,
 }) => {
   const setWallets = useSetRecoilState(walletsAtom);
@@ -71,17 +73,18 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           ? {
               type: 'cosmos-sdk',
               address: walletAddress,
-              chains: ['cosmos-hub', 'osmosis'],
+              networks: selectedNetworks,
             }
           : walletType === 'phantom'
           ? {
               type: 'solana',
               address: walletAddress,
+              // networks,
             }
           : {
               type: 'evm',
               address: walletAddress,
-              chains: ['ethereum', 'polygon', 'klaytn'],
+              networks: selectedNetworks,
             };
 
       setWallets((prev) =>
@@ -96,15 +99,15 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
             if (wallet.type === 'solana') {
               return;
             }
-            wallet.chains = Array.from(
-              new Set([...draft.chains, ...wallet.chains]),
+            wallet.networks = Array.from(
+              new Set([...draft.networks, ...wallet.networks]),
             ) as any[];
           }
         }),
       );
       onSave?.();
     },
-    [onSave],
+    [selectedNetworks, onSave],
   );
 
   const connectMetaMask = useCallback(async () => {
