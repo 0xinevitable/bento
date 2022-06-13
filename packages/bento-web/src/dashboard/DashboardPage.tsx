@@ -99,18 +99,16 @@ const DashboardPage = () => {
   );
 
   const [NFTBalance, setNFTBalance] = useState<NFTWalletBalance[]>([]);
-  // FIXME: Replace hardcoded wallet address
-  const HARDCODED_WALLET = '0x7777777141f111cf9f0308a63dbd9d0cad3010c4';
-
   const [ethereumPrice, setEthereumPrice] = useState<number>(0);
   const [fetchedAssets, setFetchedAssets] = useState<
-    Record<string, (OpenSeaAsset & { walletAddress: string })[]>
+    Record<string, Record<number, (OpenSeaAsset & { walletAddress: string })[]>>
   >({});
 
   useEffect(() => {
     const fetchAssets = async (walletAddress: string) => {
       let cursor: string | null;
       let firstFetch: boolean = true;
+      let index: number = 0;
       while (firstFetch || !!cursor) {
         const { assets, cursor: fetchedCursor } = await fetchOpenSeaAssets({
           owner: walletAddress,
@@ -118,11 +116,12 @@ const DashboardPage = () => {
         });
         firstFetch = false;
         cursor = fetchedCursor;
+        index += 1;
         setFetchedAssets((prev) => ({
-          [walletAddress]: [
-            ...(prev[walletAddress] ?? []),
-            ...assets.map((v) => ({ ...v, walletAddress })),
-          ],
+          [walletAddress]: {
+            ...prev[walletAddress],
+            [index]: assets.map((v) => ({ ...v, walletAddress })),
+          },
         }));
       }
     };
@@ -140,21 +139,20 @@ const DashboardPage = () => {
   }, [wallets]);
 
   useEffect(() => {
-    const groupedByWallets: Record<
-      string,
-      (OpenSeaAsset & { walletAddress: string })[]
-    > = groupBy(Object.values(fetchedAssets).flat(), (v) => v.walletAddress);
-
     safePromiseAll(
-      Object.keys(groupedByWallets).map(async (walletAddress) => {
+      Object.keys(fetchedAssets).map(async (walletAddress) => {
         const groupByCollection: Record<
           string,
           (OpenSeaAsset & { walletAddress: string })[]
-        > = groupBy(groupedByWallets[walletAddress], (v) => v.collection.slug);
+        > = groupBy(
+          Object.values(fetchedAssets[walletAddress]).flat(),
+          (v) => v.collection.slug,
+        );
 
+        const CHUNK_SIZE = 5;
         const balances: NFTWalletBalance[] = (
           await safePromiseAll(
-            chunk(Object.keys(groupByCollection), 5).map(
+            chunk(Object.keys(groupByCollection), CHUNK_SIZE).map(
               async (chunckedCollectionSlugs) =>
                 safePromiseAll(
                   chunckedCollectionSlugs.map(async (collectionSlug) => {
