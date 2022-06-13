@@ -1,9 +1,9 @@
-import { WALLET_TYPES, Wallet } from '@bento/common';
+import { Wallet } from '@bento/common';
 import clsx from 'clsx';
 import produce from 'immer';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
@@ -26,6 +26,57 @@ const defaultWallet: WalletDraft = {
   address: '',
   chains: [],
 };
+
+type Network = {
+  id: string;
+  type: string;
+  name: string;
+  logo: string;
+};
+const NETWORKS: Network[] = [
+  {
+    id: 'ethereum',
+    type: 'evm',
+    name: 'Ethereum',
+    logo: '/assets/ethereum.png',
+  },
+  {
+    id: 'bsc',
+    type: 'evm',
+    name: 'BSC',
+    logo: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
+  },
+  {
+    id: 'polygon',
+    type: 'evm',
+    name: 'Polygon',
+    logo: '/assets/polygon.webp',
+  },
+  {
+    id: 'klaytn',
+    type: 'evm',
+    name: 'Klaytn',
+    logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
+  },
+  {
+    id: 'cosmos',
+    type: 'cosmos-sdk',
+    name: 'Cosmos',
+    logo: 'https://assets-cdn.trustwallet.com/blockchains/cosmos/info/logo.png',
+  },
+  {
+    id: 'osmosis',
+    type: 'cosmos-sdk',
+    name: 'Osmosis',
+    logo: 'https://assets-cdn.trustwallet.com/blockchains/osmosis/info/logo.png',
+  },
+  {
+    id: 'solana',
+    type: 'solana',
+    name: 'Solana',
+    logo: 'https://assets-cdn.trustwallet.com/blockchains/solana/info/logo.png',
+  },
+];
 
 type AddWalletModalProps = {
   visible?: boolean;
@@ -54,6 +105,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     [draft],
   );
 
+  // TODO: Save after signing
   const handleSave = useCallback(() => {
     setWallets((prev) =>
       produce(prev, (walletsDraft) => {
@@ -89,6 +141,16 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
       : [];
   }, [draft.type]);
 
+  const [chains, setChains] = useState<Network[]>([]);
+  const firstChain = chains[0];
+  const onSelectNetwork = useCallback((network: Network) => {
+    setChains((prev) =>
+      !prev.find((v) => v.id === network.id)
+        ? [...prev, network]
+        : prev.filter((v) => v.id !== network.id),
+    );
+  }, []);
+
   return (
     <Portal>
       <OverlayWrapper
@@ -103,72 +165,47 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
             'bg-slate-800/5 backdrop-blur-md flex flex-col cursor-pointer',
           )}
         >
-          <WalletConnector onSave={onDismiss} />
-
-          <div className="flex flex-col h-auto text-slate-50/90">
+          <section>
+            <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
             <div className="flex flex-wrap">
-              {Object.values(WALLET_TYPES).map((arch) => (
-                <button
-                  key={arch.type}
-                  className={clsx(
-                    'flex flex-col items-center flex-1',
-                    'p-2 rounded-md border-2 transition-all',
-                    draft.type === arch.type
-                      ? 'border-white'
-                      : 'border-transparent',
-                  )}
-                  type="button"
-                  onClick={() => setDraft({ ...draft, type: arch.type })}
-                >
-                  <ArchImage
-                    className="ring-1 ring-slate-100/25"
-                    alt={arch.type}
-                    src={arch.logo}
-                  />
-                  <span className="mt-2 leading-none">{arch.name}</span>
-                </button>
-              ))}
+              {NETWORKS.map((network) => {
+                const selected = !!chains.find((v) => v.id === network.id);
+                const disabled =
+                  typeof firstChain !== 'undefined' &&
+                  firstChain.type !== network.type;
+
+                return (
+                  <NetworkItem
+                    key={network.id}
+                    className={clsx(
+                      'p-2 m-1 rounded-md',
+                      disabled && 'opacity-10 cursor-not-allowed',
+                    )}
+                    selected={selected}
+                    onClick={
+                      !disabled //
+                        ? () => onSelectNetwork(network)
+                        : undefined
+                    }
+                  >
+                    <img
+                      className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
+                      src={network.logo}
+                      alt={network.name}
+                    />
+                    <span className="mt-1 text-white text-xs">
+                      {network.name}
+                    </span>
+                  </NetworkItem>
+                );
+              })}
             </div>
-            <div className="mt-3">
-              <input
-                type="text"
-                className="w-full p-3 px-4 rounded-md bg-slate-800"
-                name="Address"
-                placeholder="Address"
-                value={draft.address}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  setDraft({ ...draft, address: event.target.value })
-                }
-              />
-            </div>
-            {draft.type !== 'solana' && (
-              <div>
-                {supportedChains.map((chainId: string) => (
-                  <span key={chainId}>
-                    <button
-                      className={clsx(
-                        'p-1 px-2 rounded-md border',
-                        draft.chains.includes(chainId)
-                          ? 'border-white'
-                          : 'border-transparent',
-                      )}
-                      type="button"
-                      onClick={() => handleChains(chainId)}
-                    >
-                      {chainId.toUpperCase()}
-                    </button>
-                  </span>
-                ))}
-              </div>
-            )}
-            <button
-              className="mt-2 p-2 px-4 w-fit font-bold text-slate-800 bg-slate-200 rounded-md"
-              type="button"
-              onClick={handleSave}
-            >
-              Add Wallet
-            </button>
-          </div>
+          </section>
+
+          <section className="mt-8">
+            <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
+            <WalletConnector network={firstChain?.type} onSave={onDismiss} />
+          </section>
         </div>
       </OverlayWrapper>
     </Portal>
@@ -181,13 +218,21 @@ const OverlayWrapper = styled(Modal)`
   justify-content: center;
 `;
 
-const ArchImage = styled.img`
-  width: 54px;
-  min-width: 54px;
-  max-width: 54px;
-  height: 54px;
+type NetworkItemProps = {
+  selected?: boolean;
+};
+const NetworkItem = styled.div<NetworkItemProps>`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  user-select: none;
 
-  background: white;
-  filter: drop-shadow(0px 4.25px 4.25px rgba(0, 0, 0, 0.25));
-  border-radius: 157.781px;
+  ${({ selected }) =>
+    selected &&
+    css`
+      border-color: rgb(168 85 247 / var(--tw-border-opacity));
+    `};
 `;
