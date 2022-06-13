@@ -105,6 +105,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     [draft],
   );
 
+  // TODO: Save after signing
   const handleSave = useCallback(() => {
     setWallets((prev) =>
       produce(prev, (walletsDraft) => {
