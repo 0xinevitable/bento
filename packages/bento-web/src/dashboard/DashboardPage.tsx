@@ -108,10 +108,9 @@ const DashboardPage = () => {
   >({});
 
   useEffect(() => {
-    const handler = async () => {
+    const fetchAssets = async (walletAddress: string) => {
       let cursor: string | null;
       let firstFetch: boolean = true;
-      const walletAddress = HARDCODED_WALLET;
       while (firstFetch || !!cursor) {
         const { assets, cursor: fetchedCursor } = await fetchOpenSeaAssets({
           owner: walletAddress,
@@ -128,7 +127,15 @@ const DashboardPage = () => {
       }
     };
 
-    handler();
+    const main = async () => {
+      for (const wallet of wallets) {
+        if (wallet.type === 'evm' && wallet.networks.includes('opensea')) {
+          await fetchAssets(wallet.address);
+        }
+      }
+    };
+
+    main();
     priceFromCoinGecko('ethereum').then(setEthereumPrice);
   }, []);
 
