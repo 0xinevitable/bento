@@ -179,7 +179,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [saveWallet]);
 
   const connectKeplr = useCallback(async () => {
     if (typeof window.keplr === 'undefined') {
@@ -217,7 +217,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [saveWallet]);
 
   const connectKaikas = useCallback(async () => {
     if (typeof window.klaytn === 'undefined') {
@@ -251,7 +251,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [saveWallet]);
 
   const connectSolana = useCallback(async () => {
     if (typeof window.solana === 'undefined') {
@@ -281,7 +281,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       nonce: messageToBeSigned,
     });
     saveWallet({ walletType, walletAddress });
-  }, []);
+  }, [saveWallet]);
 
   return (
     <div className="flex gap-2">
