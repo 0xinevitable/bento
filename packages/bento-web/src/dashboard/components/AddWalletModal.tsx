@@ -59,6 +59,12 @@ const NETWORKS: Network[] = [
     logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
   },
   {
+    id: 'opensea',
+    type: 'evm',
+    name: 'OpenSea',
+    logo: '/assets/opensea.png',
+  },
+  {
     id: 'cosmos',
     type: 'cosmos-sdk',
     name: 'Cosmos',
