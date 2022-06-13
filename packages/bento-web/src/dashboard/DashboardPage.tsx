@@ -1,4 +1,4 @@
-import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/client';
+import { OpenSea, OpenSeaAsset } from '@bento/client';
 import { cachedAxios } from '@bento/client';
 import { safePromiseAll } from '@bento/common';
 import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
@@ -112,7 +112,7 @@ const DashboardPage = () => {
       let firstFetch: boolean = true;
 
       while (firstFetch || !!cursor) {
-        const { assets, cursor: fetchedCursor } = await fetchOpenSeaAssets({
+        const { assets, cursor: fetchedCursor } = await OpenSea.getAssets({
           owner: walletAddress,
           cursor,
         });
@@ -167,15 +167,14 @@ const DashboardPage = () => {
                     const collection =
                       groupByCollection[collectionSlug][0].collection;
 
-                    const { data } = await cachedAxios
-                      .get(
-                        `https://api.opensea.io/api/v1/collection/${collectionSlug}/stats`,
-                      )
-                      .catch((error) => {
-                        console.error(error);
-                        // FIXME: Error handling
-                        return { data: { stats: { floor_price: 0 } } };
-                      });
+                    const { floor_price: floorPrice } =
+                      await OpenSea.getCollectionStats(collectionSlug).catch(
+                        (error) => {
+                          console.error(error);
+                          // FIXME: Error handling
+                          return { floor_price: 0 };
+                        },
+                      );
 
                     return {
                       symbol: collection.name,
@@ -183,7 +182,7 @@ const DashboardPage = () => {
                       walletAddress,
                       balance: groupByCollection[collectionSlug].length,
                       logo: collection.image_url,
-                      price: ethereumPrice * data.stats.floor_price,
+                      price: ethereumPrice * floorPrice,
                       type: 'nft' as const,
                     };
                   }),

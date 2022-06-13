@@ -82,7 +82,7 @@ const getCollectionStats = async (slug: string) => {
   const { data } = await cachedAxios.get<OpenSeaCollectionStatsResponse>(
     `https://api.opensea.io/api/v1/collection/${slug}/stats`,
   );
-  return data;
+  return data.stats;
 };
 
 export const OpenSea = {
