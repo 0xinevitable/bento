@@ -1,20 +1,10 @@
-import { Wallet } from '@bento/common';
 import clsx from 'clsx';
-import produce from 'immer';
-import React, { useCallback, useMemo, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
-import { walletsAtom } from '@/recoil/wallets';
-
-const CHAINS_BY_WALLET_TYPE = {
-  evm: ['ethereum', 'polygon', 'klaytn'],
-  'cosmos-sdk': ['cosmos', 'osmosis'],
-  solana: [],
-} as const;
 
 type WalletDraft = {
   type: string;
@@ -93,50 +83,6 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   visible: isVisible,
   onDismiss,
 }) => {
-  const setWallets = useSetRecoilState(walletsAtom);
-  const [draft, setDraft] = useState<WalletDraft>(defaultWallet);
-
-  const handleNetworks = useCallback(
-    (chainId: string) => {
-      if (draft.type === 'solana') {
-        return;
-      }
-      const previousNetworks: string[] = draft.networks;
-      const networks = previousNetworks.includes(chainId)
-        ? previousNetworks.filter((v) => v !== chainId)
-        : [...previousNetworks, chainId];
-
-      setDraft({ ...draft, networks });
-    },
-    [draft],
-  );
-
-  // TODO: Save after signing
-  const handleSave = useCallback(() => {
-    setWallets((prev) =>
-      produce(prev, (walletsDraft) => {
-        const index = walletsDraft.findIndex(
-          (v) => v.address.toLowerCase() === draft.address.toLowerCase(),
-        );
-        if (index === -1) {
-          walletsDraft.push(draft as Wallet);
-        } else {
-          // 이미 있는 지갑을 추가한 경우, 체인만 업데이트
-          const wallet = walletsDraft[index];
-          if (wallet.type === 'solana') {
-            return;
-          }
-          wallet.networks = Array.from(
-            new Set([...draft.networks, ...wallet.networks]),
-          ) as any[];
-        }
-      }),
-    );
-    setDraft(defaultWallet);
-
-    onDismiss();
-  }, [draft, onDismiss]);
-
   const [networks, setNetworks] = useState<Network[]>([]);
   const firstNetwork = networks[0];
   const onSelectNetwork = useCallback((network: Network) => {
