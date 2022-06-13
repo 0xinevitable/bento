@@ -16,6 +16,7 @@ type AssetRatioChartProps = {
     netWorth: number;
     amount: number;
     price: number;
+    type: 'nft';
   }[];
   netWorthInUSD: number;
 };
@@ -28,14 +29,37 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
     if (tokenBalances.length < 1) {
       return [{ label: 'Empty', value: 100 }];
     }
-    return tokenBalances.map((info) => {
-      const { symbol, name, netWorth } = info;
-      const percentage = (netWorth / netWorthInUSD) * 100;
-      return {
-        label: `${symbol} ${name}`,
+
+    // merge type nft with one
+    let items: { label: string; value: number }[] = [];
+    const netWorthInNFTs = tokenBalances.reduce(
+      (acc, info) => (info.type === 'nft' ? (acc += info.netWorth) : acc),
+      0,
+    );
+    if (netWorthInNFTs > 0) {
+      const percentage = (netWorthInNFTs / netWorthInUSD) * 100;
+      items.push({
+        label: 'NFT',
         value: !percentage || isNaN(percentage) ? 0 : percentage,
-      };
-    });
+      });
+    }
+
+    items = items.concat(
+      tokenBalances.flatMap((info) => {
+        if (info.type === 'nft') {
+          return [];
+        }
+
+        const { symbol, name, netWorth } = info;
+        const percentage = (netWorth / netWorthInUSD) * 100;
+        return {
+          label: `${symbol} ${name}`,
+          value: !percentage || isNaN(percentage) ? 0 : percentage,
+        };
+      }),
+    );
+
+    return items;
   }, [tokenBalances]);
 
   return (

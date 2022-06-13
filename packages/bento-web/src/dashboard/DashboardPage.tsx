@@ -21,6 +21,7 @@ import { WalletList } from './components/WalletList';
 import {
   CosmosSDKWalletBalance,
   EVMWalletBalance,
+  NFTWalletBalance,
   SolanaWalletBalance,
   WalletBalance,
 } from './types/balance';
@@ -97,7 +98,7 @@ const DashboardPage = () => {
     !solanaWalletQuery ? null : `/api/solana/mainnet/${solanaWalletQuery}`,
   );
 
-  const [NFTBalance, setNFTBalance] = useState<WalletBalance[]>([]);
+  const [NFTBalance, setNFTBalance] = useState<NFTWalletBalance[]>([]);
   // FIXME: Replace hardcoded wallet address
   const HARDCODED_WALLET = '0x7777777141f111cf9f0308a63dbd9d0cad3010c4';
 
@@ -144,7 +145,7 @@ const DashboardPage = () => {
           (OpenSeaAsset & { walletAddress: string })[]
         > = groupBy(groupedByWallets[walletAddress], (v) => v.collection.slug);
 
-        const balances: WalletBalance[] = (
+        const balances: NFTWalletBalance[] = (
           await safePromiseAll(
             chunk(Object.keys(groupByCollection), 5).map(
               async (chunckedCollectionSlugs) =>
@@ -165,10 +166,12 @@ const DashboardPage = () => {
 
                     return {
                       symbol: collection.name,
+                      name: collection.name,
                       walletAddress,
                       balance: groupByCollection[collectionSlug].length,
                       logo: collection.image_url,
                       price: ethereumPrice * data.stats.floor_price,
+                      type: 'nft' as const,
                     };
                   }),
                 ),
@@ -185,7 +188,7 @@ const DashboardPage = () => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
     // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
     const balancesByPlatform = Object.entries(
-      groupBy(
+      groupBy<WalletBalance>(
         [
           ethereumBalance,
           polygonBalance,
@@ -208,6 +211,7 @@ const DashboardPage = () => {
           symbol: first.symbol,
           name: first.name,
           logo: first.logo,
+          type: 'type' in first ? first.type : undefined,
           tokenAddress: 'address' in first ? first.address : null,
           balances: balances,
           netWorth: balances.reduce(
