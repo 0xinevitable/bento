@@ -8,6 +8,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
 import { walletsAtom } from '@/recoil/wallets';
@@ -291,24 +292,26 @@ const DashboardPage = () => {
           />
         </div>
         <div className="flex-1 flex flex-col">
-          <h2 className="mt-2 text-md font-semibold text-slate-50/60">
-            Wallets
-            {wallets.length > 0 && (
-              <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                {`(${wallets.length.toLocaleString()})`}
-              </span>
-            )}
-          </h2>
+          <NoSSR>
+            <h2 className="mt-2 text-md font-semibold text-slate-50/60">
+              Wallets
+              {wallets.length > 0 && (
+                <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                  {`(${wallets.length.toLocaleString()})`}
+                </span>
+              )}
+            </h2>
 
-          {wallets.length > 0 ? (
-            <WalletList
-              onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-            />
-          ) : (
-            <EmptyWallet
-              onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-            />
-          )}
+            {wallets.length > 0 ? (
+              <WalletList
+                onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
+              />
+            ) : (
+              <EmptyWallet
+                onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
+              />
+            )}
+          </NoSSR>
         </div>
       </TopSection>
 
