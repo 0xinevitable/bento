@@ -43,7 +43,7 @@ export const fetchOpenSeaAssets = async ({
   const url = `${OPENSEA_BASE_URL}/v1/assets`;
   const {
     data: { assets, next },
-  } = await axios.get<OpenSeaAssetsResponse>(
+  } = await cachedAxios.get<OpenSeaAssetsResponse>(
     QueryString.stringifyUrl({ url, query: { owner, cursor } }),
     {
       headers: {
@@ -71,6 +71,6 @@ export const priceFromCoinGecko = async (
       vs_currencies: vsCurrency,
     },
   });
-  const { data } = await axios.get(url);
+  const { data } = await cachedAxios.get(url);
   return data[coinGeckoId][vsCurrency];
 };

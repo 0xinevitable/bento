@@ -1,7 +1,7 @@
 import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/client';
+import { cachedAxios } from '@bento/client';
 import { safePromiseAll } from '@bento/common';
 import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
-import axios from 'axios';
 import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -153,7 +153,7 @@ const DashboardPage = () => {
                     const collection =
                       groupByCollection[collectionSlug][0].collection;
 
-                    const { data } = await axios
+                    const { data } = await cachedAxios
                       .get(
                         `https://api.opensea.io/api/v1/collection/${collectionSlug}/stats`,
                       )

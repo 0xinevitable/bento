@@ -1,5 +1,5 @@
+import { cachedAxios } from '@bento/client';
 import { Base64, Wallet } from '@bento/common';
-import axios from 'axios';
 import clsx from 'clsx';
 import produce from 'immer';
 import { useCallback, useMemo } from 'react';
@@ -34,7 +34,7 @@ const validateSignature = async (
       },
 ) => {
   const { walletType, walletAddress, signature, nonce } = params;
-  const { data } = await axios.post(`/api/auth/verify/${walletType}`, {
+  const { data } = await cachedAxios.post(`/api/auth/verify/${walletType}`, {
     walletAddress,
     signature,
     nonce: Base64.encode(nonce),
