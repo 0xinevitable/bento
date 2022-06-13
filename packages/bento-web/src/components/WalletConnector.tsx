@@ -46,14 +46,26 @@ const validateSignature = async (
 };
 
 type WalletSelectorProps = {
-  network?: string;
+  networks?: {
+    id: string;
+    type: string;
+    name: string;
+    logo: string;
+  }[];
   onSave?: () => void;
 };
 export const WalletConnector: React.FC<WalletSelectorProps> = ({
-  network,
+  networks,
   onSave,
 }) => {
   const setWallets = useSetRecoilState(walletsAtom);
+  const [selectedNetworks, firstNetwork] = useMemo(() => {
+    if (!networks || networks.length === 0) {
+      return [undefined, undefined];
+    }
+    const items = networks.map((v) => v.id);
+    return [items, networks[0].type];
+  }, [networks]);
 
   const messageToBeSigned = useMemo(
     () => 'Sign this message to add your wallet',
@@ -71,17 +83,18 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           ? {
               type: 'cosmos-sdk',
               address: walletAddress,
-              chains: ['cosmos-hub', 'osmosis'],
+              networks: selectedNetworks,
             }
           : walletType === 'phantom'
           ? {
               type: 'solana',
               address: walletAddress,
+              // networks,
             }
           : {
               type: 'evm',
               address: walletAddress,
-              chains: ['ethereum', 'polygon', 'klaytn'],
+              networks: selectedNetworks,
             };
 
       setWallets((prev) =>
@@ -96,15 +109,15 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
             if (wallet.type === 'solana') {
               return;
             }
-            wallet.chains = Array.from(
-              new Set([...draft.chains, ...wallet.chains]),
+            wallet.networks = Array.from(
+              new Set([...draft.networks, ...wallet.networks]),
             ) as any[];
           }
         }),
       );
       onSave?.();
     },
-    [onSave],
+    [selectedNetworks, onSave],
   );
 
   const connectMetaMask = useCallback(async () => {
@@ -166,7 +179,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [saveWallet]);
 
   const connectKeplr = useCallback(async () => {
     if (typeof window.keplr === 'undefined') {
@@ -204,7 +217,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [saveWallet]);
 
   const connectKaikas = useCallback(async () => {
     if (typeof window.klaytn === 'undefined') {
@@ -238,7 +251,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [saveWallet]);
 
   const connectSolana = useCallback(async () => {
     if (typeof window.solana === 'undefined') {
@@ -268,16 +281,16 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       nonce: messageToBeSigned,
     });
     saveWallet({ walletType, walletAddress });
-  }, []);
+  }, [saveWallet]);
 
   return (
     <div className="flex gap-2">
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          network !== 'evm' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'evm' && 'opacity-10 cursor-not-allowed',
         )}
-        onClick={network === 'evm' ? connectMetaMask : undefined}
+        onClick={firstNetwork === 'evm' ? connectMetaMask : undefined}
       >
         MetaMask or WalletConnect
       </Button>
@@ -285,9 +298,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          network !== 'evm' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'evm' && 'opacity-10 cursor-not-allowed',
         )}
-        onClick={network === 'evm' ? connectKaikas : undefined}
+        onClick={firstNetwork === 'evm' ? connectKaikas : undefined}
       >
         Kaikas
       </Button>
@@ -295,9 +308,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          network !== 'cosmos-sdk' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'cosmos-sdk' && 'opacity-10 cursor-not-allowed',
         )}
-        onClick={network === 'cosmos-sdk' ? connectKeplr : undefined}
+        onClick={firstNetwork === 'cosmos-sdk' ? connectKeplr : undefined}
       >
         Keplr
       </Button>
@@ -305,9 +318,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          network !== 'solana' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'solana' && 'opacity-10 cursor-not-allowed',
         )}
-        onClick={network === 'solana' ? connectSolana : undefined}
+        onClick={firstNetwork === 'solana' ? connectSolana : undefined}
       >
         Phantom
       </Button>

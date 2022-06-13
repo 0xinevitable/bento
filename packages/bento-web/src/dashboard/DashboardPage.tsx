@@ -1,4 +1,4 @@
-import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/client';
+import { OpenSea, OpenSeaAsset } from '@bento/client';
 import { cachedAxios } from '@bento/client';
 import { safePromiseAll } from '@bento/common';
 import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
@@ -21,6 +21,7 @@ import { WalletList } from './components/WalletList';
 import {
   CosmosSDKWalletBalance,
   EVMWalletBalance,
+  NFTWalletBalance,
   SolanaWalletBalance,
   WalletBalance,
 } from './types/balance';
@@ -53,13 +54,13 @@ const DashboardPage = () => {
         }
 
         let _acc = acc;
-        if (wallet.chains.includes('ethereum')) {
+        if (wallet.networks.includes('ethereum')) {
           _acc = { ..._acc, ethereum: [..._acc.ethereum, wallet.address] };
         }
-        if (wallet.chains.includes('polygon')) {
+        if (wallet.networks.includes('polygon')) {
           _acc = { ..._acc, polygon: [..._acc.polygon, wallet.address] };
         }
-        if (wallet.chains.includes('klaytn')) {
+        if (wallet.networks.includes('klaytn')) {
           _acc = { ..._acc, klaytn: [..._acc.klaytn, wallet.address] };
         }
         return _acc;
@@ -97,78 +98,92 @@ const DashboardPage = () => {
     !solanaWalletQuery ? null : `/api/solana/mainnet/${solanaWalletQuery}`,
   );
 
-  const [NFTBalance, setNFTBalance] = useState<WalletBalance[]>([]);
-  // FIXME: Replace hardcoded wallet address
-  const HARDCODED_WALLET = '0x7777777141f111cf9f0308a63dbd9d0cad3010c4';
-
+  const [NFTBalance, setNFTBalance] = useState<NFTWalletBalance[]>([]);
   const [ethereumPrice, setEthereumPrice] = useState<number>(0);
-  const [fetchedAssets, setFetchedAssets] = useState<
-    Record<string, (OpenSeaAsset & { walletAddress: string })[]>
-  >({});
+  const [fetchedAssets, setFetchedAssets] = useState<{
+    [walletAddress: string]: {
+      [cursor: string]: (OpenSeaAsset & { walletAddress: string })[];
+    };
+  }>({});
 
   useEffect(() => {
-    const handler = async () => {
-      let cursor: string | null;
+    const fetchAssets = async (walletAddress: string) => {
+      let cursor: string | null = null;
       let firstFetch: boolean = true;
-      const walletAddress = HARDCODED_WALLET;
+
       while (firstFetch || !!cursor) {
-        const { assets, cursor: fetchedCursor } = await fetchOpenSeaAssets({
+        const { assets, cursor: fetchedCursor } = await OpenSea.getAssets({
           owner: walletAddress,
           cursor,
         });
         firstFetch = false;
         cursor = fetchedCursor;
+
         setFetchedAssets((prev) => ({
-          [walletAddress]: [
-            ...(prev[walletAddress] ?? []),
-            ...assets.map((v) => ({ ...v, walletAddress })),
-          ],
+          ...prev,
+          [walletAddress]: {
+            ...prev[walletAddress],
+            [cursor]: assets.map((v) => ({ ...v, walletAddress })),
+          },
         }));
       }
     };
 
-    handler();
+    const main = async () => {
+      for (const wallet of wallets) {
+        if (wallet.type === 'evm' && wallet.networks.includes('opensea')) {
+          await fetchAssets(wallet.address);
+        }
+      }
+    };
+
+    main();
     priceFromCoinGecko('ethereum').then(setEthereumPrice);
-  }, []);
+  }, [wallets]);
 
   useEffect(() => {
-    const groupedByWallets: Record<
-      string,
-      (OpenSeaAsset & { walletAddress: string })[]
-    > = groupBy(Object.values(fetchedAssets).flat(), (v) => v.walletAddress);
+    const flattedAssets = Object.values(fetchedAssets)
+      .map((v) => Object.values(v))
+      .flat(3);
+    const groupedByWalletAddress = groupBy(flattedAssets, 'walletAddress');
 
     safePromiseAll(
-      Object.keys(groupedByWallets).map(async (walletAddress) => {
+      Object.keys(groupedByWalletAddress).map(async (walletAddress) => {
         const groupByCollection: Record<
           string,
           (OpenSeaAsset & { walletAddress: string })[]
-        > = groupBy(groupedByWallets[walletAddress], (v) => v.collection.slug);
+        > = groupBy(
+          groupedByWalletAddress[walletAddress],
+          (v) => v.collection.slug,
+        );
 
-        const balances: WalletBalance[] = (
+        const CHUNK_SIZE = 5;
+        const balances: NFTWalletBalance[] = (
           await safePromiseAll(
-            chunk(Object.keys(groupByCollection), 5).map(
+            chunk(Object.keys(groupByCollection), CHUNK_SIZE).map(
               async (chunckedCollectionSlugs) =>
                 safePromiseAll(
                   chunckedCollectionSlugs.map(async (collectionSlug) => {
                     const collection =
                       groupByCollection[collectionSlug][0].collection;
 
-                    const { data } = await cachedAxios
-                      .get(
-                        `https://api.opensea.io/api/v1/collection/${collectionSlug}/stats`,
-                      )
-                      .catch((error) => {
-                        console.error(error);
-                        // FIXME: Error handling
-                        return { data: { stats: { floor_price: 0 } } };
-                      });
+                    const { floor_price: floorPrice } =
+                      await OpenSea.getCollectionStats(collectionSlug).catch(
+                        (error) => {
+                          console.error(error);
+                          // FIXME: Error handling
+                          return { floor_price: 0 };
+                        },
+                      );
 
                     return {
                       symbol: collection.name,
+                      name: collection.name,
                       walletAddress,
                       balance: groupByCollection[collectionSlug].length,
                       logo: collection.image_url,
-                      price: ethereumPrice * data.stats.floor_price,
+                      price: ethereumPrice * floorPrice,
+                      type: 'nft' as const,
                     };
                   }),
                 ),
@@ -185,7 +200,7 @@ const DashboardPage = () => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
     // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
     const balancesByPlatform = Object.entries(
-      groupBy(
+      groupBy<WalletBalance>(
         [
           ethereumBalance,
           polygonBalance,
@@ -208,6 +223,7 @@ const DashboardPage = () => {
           symbol: first.symbol,
           name: first.name,
           logo: first.logo,
+          type: 'type' in first ? first.type : undefined,
           tokenAddress: 'address' in first ? first.address : null,
           balances: balances,
           netWorth: balances.reduce(

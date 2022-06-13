@@ -1,30 +1,20 @@
-import { Wallet } from '@bento/common';
 import clsx from 'clsx';
-import produce from 'immer';
-import React, { useCallback, useMemo, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
-import { walletsAtom } from '@/recoil/wallets';
-
-const CHAINS_BY_WALLET_TYPE = {
-  evm: ['ethereum', 'polygon', 'klaytn'],
-  'cosmos-sdk': ['cosmos', 'osmosis'],
-  solana: [],
-} as const;
 
 type WalletDraft = {
   type: string;
   address: string;
-  chains: string[];
+  networks: string[];
 };
 const defaultWallet: WalletDraft = {
   type: '',
   address: '',
-  chains: [],
+  networks: [],
 };
 
 type Network = {
@@ -59,6 +49,12 @@ const NETWORKS: Network[] = [
     logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
   },
   {
+    id: 'opensea',
+    type: 'evm',
+    name: 'OpenSea',
+    logo: '/assets/opensea.png',
+  },
+  {
     id: 'cosmos',
     type: 'cosmos-sdk',
     name: 'Cosmos',
@@ -87,64 +83,10 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   visible: isVisible,
   onDismiss,
 }) => {
-  const setWallets = useSetRecoilState(walletsAtom);
-  const [draft, setDraft] = useState<WalletDraft>(defaultWallet);
-
-  const handleChains = useCallback(
-    (chainId: string) => {
-      if (draft.type === 'solana') {
-        return;
-      }
-      const previousChains: string[] = draft.chains;
-      const chains = previousChains.includes(chainId)
-        ? previousChains.filter((v) => v !== chainId)
-        : [...previousChains, chainId];
-
-      setDraft({ ...draft, chains });
-    },
-    [draft],
-  );
-
-  // TODO: Save after signing
-  const handleSave = useCallback(() => {
-    setWallets((prev) =>
-      produce(prev, (walletsDraft) => {
-        const index = walletsDraft.findIndex(
-          (v) => v.address.toLowerCase() === draft.address.toLowerCase(),
-        );
-        if (index === -1) {
-          walletsDraft.push(draft as Wallet);
-        } else {
-          // 이미 있는 지갑을 추가한 경우, 체인만 업데이트
-          const wallet = walletsDraft[index];
-          if (wallet.type === 'solana') {
-            return;
-          }
-          wallet.chains = Array.from(
-            new Set([...draft.chains, ...wallet.chains]),
-          ) as any[];
-        }
-      }),
-    );
-    setDraft(defaultWallet);
-
-    onDismiss();
-  }, [draft, onDismiss]);
-
-  const supportedChains = useMemo(() => {
-    if (!draft.type) {
-      return [];
-    }
-    const chains = CHAINS_BY_WALLET_TYPE[draft.type];
-    return chains.length > 0 //
-      ? chains
-      : [];
-  }, [draft.type]);
-
-  const [chains, setChains] = useState<Network[]>([]);
-  const firstChain = chains[0];
+  const [networks, setNetworks] = useState<Network[]>([]);
+  const firstNetwork = networks[0];
   const onSelectNetwork = useCallback((network: Network) => {
-    setChains((prev) =>
+    setNetworks((prev) =>
       !prev.find((v) => v.id === network.id)
         ? [...prev, network]
         : prev.filter((v) => v.id !== network.id),
@@ -169,10 +111,10 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
             <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
             <div className="flex flex-wrap">
               {NETWORKS.map((network) => {
-                const selected = !!chains.find((v) => v.id === network.id);
+                const selected = !!networks.find((v) => v.id === network.id);
                 const disabled =
-                  typeof firstChain !== 'undefined' &&
-                  firstChain.type !== network.type;
+                  typeof firstNetwork !== 'undefined' &&
+                  firstNetwork.type !== network.type;
 
                 return (
                   <NetworkItem
@@ -204,7 +146,13 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
 
           <section className="mt-8">
             <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
-            <WalletConnector network={firstChain?.type} onSave={onDismiss} />
+            <WalletConnector
+              networks={networks}
+              onSave={() => {
+                onDismiss();
+                setNetworks([]);
+              }}
+            />
           </section>
         </div>
       </OverlayWrapper>

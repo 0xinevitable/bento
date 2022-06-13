@@ -1,4 +1,4 @@
-import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/client';
+import { OpenSea, OpenSeaAsset } from '@bento/client';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -23,7 +23,7 @@ const OnboardingPage: React.FC = () => {
   const [openSeaAssets, setOpenSeaAssets] = useState<OpenSeaAsset[]>([]);
 
   useEffect(() => {
-    fetchOpenSeaAssets({ owner: HARDCODED_WALLET })
+    OpenSea.getAssets({ owner: HARDCODED_WALLET })
       .then(({ assets }) => {
         setOpenSeaAssets(assets);
       })

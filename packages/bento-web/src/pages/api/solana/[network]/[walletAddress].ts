@@ -23,7 +23,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
 
   // 네트워크 주소를 가져온다.
-  // const network = (req.query.network ?? '').toLowerCase() as EVMBasedChains; // Assuming this is Mainnet (Beta)
+  // const network = (req.query.network ?? '').toLowerCase() as EVMBasedNetworks; // Assuming this is Mainnet (Beta)
   const chain = new SolanaChain();
 
   const result: {

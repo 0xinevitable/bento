@@ -17,18 +17,23 @@ export const WALLET_TYPES = {
   },
 };
 
-export type EVMBasedChains = 'ethereum' | 'polygon' | 'klaytn';
-export type CosmosSDKBasedChains = 'cosmos-hub' | 'osmosis';
+export type EVMBasedNetworks =
+  | 'ethereum'
+  | 'bsc'
+  | 'polygon'
+  | 'klaytn'
+  | 'opensea';
+export type CosmosSDKBasedNetworks = 'cosmos-hub' | 'osmosis';
 
 export type Wallet =
   | {
       type: 'evm'; // EVM based chains
       address: string;
-      chains: EVMBasedChains[];
+      networks: EVMBasedNetworks[];
     }
   | {
       type: 'cosmos-sdk'; // Cosmos SDK based chains
       address: string;
-      chains: CosmosSDKBasedChains[];
+      networks: CosmosSDKBasedNetworks[];
     }
   | { type: 'solana'; address: string };
