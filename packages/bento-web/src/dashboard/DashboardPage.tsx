@@ -100,15 +100,17 @@ const DashboardPage = () => {
 
   const [NFTBalance, setNFTBalance] = useState<NFTWalletBalance[]>([]);
   const [ethereumPrice, setEthereumPrice] = useState<number>(0);
-  const [fetchedAssets, setFetchedAssets] = useState<
-    Record<string, Record<number, (OpenSeaAsset & { walletAddress: string })[]>>
-  >({});
+  const [fetchedAssets, setFetchedAssets] = useState<{
+    [walletAddress: string]: {
+      [cursor: string]: (OpenSeaAsset & { walletAddress: string })[];
+    };
+  }>({});
 
   useEffect(() => {
     const fetchAssets = async (walletAddress: string) => {
-      let cursor: string | null;
+      let cursor: string | null = null;
       let firstFetch: boolean = true;
-      let index: number = 0;
+
       while (firstFetch || !!cursor) {
         const { assets, cursor: fetchedCursor } = await fetchOpenSeaAssets({
           owner: walletAddress,
@@ -116,11 +118,12 @@ const DashboardPage = () => {
         });
         firstFetch = false;
         cursor = fetchedCursor;
-        index += 1;
+
         setFetchedAssets((prev) => ({
+          ...prev,
           [walletAddress]: {
             ...prev[walletAddress],
-            [index]: assets.map((v) => ({ ...v, walletAddress })),
+            [cursor]: assets.map((v) => ({ ...v, walletAddress })),
           },
         }));
       }
@@ -139,13 +142,18 @@ const DashboardPage = () => {
   }, [wallets]);
 
   useEffect(() => {
+    const flattedAssets = Object.values(fetchedAssets)
+      .map((v) => Object.values(v))
+      .flat(3);
+    const groupedByWalletAddress = groupBy(flattedAssets, 'walletAddress');
+
     safePromiseAll(
-      Object.keys(fetchedAssets).map(async (walletAddress) => {
+      Object.keys(groupedByWalletAddress).map(async (walletAddress) => {
         const groupByCollection: Record<
           string,
           (OpenSeaAsset & { walletAddress: string })[]
         > = groupBy(
-          Object.values(fetchedAssets[walletAddress]).flat(),
+          groupedByWalletAddress[walletAddress],
           (v) => v.collection.slug,
         );
 
