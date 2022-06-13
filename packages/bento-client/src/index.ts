@@ -1,5 +1,8 @@
-import axios from 'axios';
 import QueryString from 'query-string';
+
+import { cachedAxios } from './cachedAxios';
+
+export { cachedAxios };
 
 export const OPENSEA_BASE_URL = 'https://api.opensea.io/api';
 
