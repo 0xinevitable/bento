@@ -1,5 +1,9 @@
+import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/client';
+import { safePromiseAll } from '@bento/common';
+import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
+import axios from 'axios';
 import groupBy from 'lodash.groupby';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -92,6 +96,58 @@ const DashboardPage = () => {
     !solanaWalletQuery ? null : `/api/solana/mainnet/${solanaWalletQuery}`,
   );
 
+  const [NFTBalance, setNFTBalance] = useState<WalletBalance[]>([]);
+  // FIXME: Replace hardcoded wallet address
+  const HARDCODED_WALLET = '0x7777777141f111cf9f0308a63dbd9d0cad3010c4';
+  useEffect(() => {
+    safePromiseAll([
+      fetchOpenSeaAssets({ owner: HARDCODED_WALLET }),
+      fetchOpenSeaAssets({
+        owner: HARDCODED_WALLET,
+        cursor: 'LXBrPTI3MDY2NjU2MA==',
+      }),
+    ])
+      .then(async (pagedAssets) => {
+        const assets = pagedAssets.flat();
+        // setNFTBalance(assets.groupBy())
+        console.log(assets);
+        const g: Record<string, OpenSeaAsset[]> = groupBy(
+          assets,
+          (v) => v.collection.slug,
+        );
+        console.log(g);
+
+        const ethereumPrice = await priceFromCoinGecko('ethereum');
+
+        const balances = await safePromiseAll(
+          Object.keys(g).map(async (collectionSlug) => {
+            const collection = g[collectionSlug][0].collection;
+            const { data } = await axios
+              .get(
+                `https://api.opensea.io/api/v1/collection/${collectionSlug}/stats`,
+              )
+              .catch((error) => {
+                console.log(error);
+                // FIXME: Error handling
+                return { data: { stats: { floor_price: 0 } } };
+              });
+            return {
+              symbol: collection.name,
+              walletAddress: HARDCODED_WALLET,
+              balance: g[collectionSlug].length,
+              logo: collection.image_url,
+              price: ethereumPrice * data.stats.floor_price,
+            };
+          }),
+        );
+
+        setNFTBalance(balances);
+
+        console.log(balances);
+      })
+      .catch(console.error);
+  }, []);
+
   const tokenBalances = useMemo(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
     // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
@@ -104,6 +160,7 @@ const DashboardPage = () => {
           cosmosHubBalance,
           osmosisBalance,
           solanaBalance,
+          NFTBalance,
         ].flat(),
         (balance) => balance.symbol + balance.name,
       ),
@@ -156,6 +213,7 @@ const DashboardPage = () => {
     cosmosHubBalance,
     osmosisBalance,
     solanaBalance,
+    NFTBalance,
   ]);
 
   const netWorthInUSD = useMemo(

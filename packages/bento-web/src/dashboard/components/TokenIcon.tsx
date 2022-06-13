@@ -68,4 +68,5 @@ const Image = styled.img`
   border: 1px solid rgba(0, 255, 240, 0.33);
   filter: drop-shadow(0px 4.25px 4.25px rgba(0, 0, 0, 0.25));
   border-radius: 157.781px;
+  object-fit: cover;
 `;
