@@ -1,5 +1,6 @@
 import { Base64, Wallet } from '@bento/common';
 import axios from 'axios';
+import clsx from 'clsx';
 import produce from 'immer';
 import { useCallback, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
@@ -45,9 +46,13 @@ const validateSignature = async (
 };
 
 type WalletSelectorProps = {
+  network?: string;
   onSave?: () => void;
 };
-export const WalletConnector: React.FC<WalletSelectorProps> = ({ onSave }) => {
+export const WalletConnector: React.FC<WalletSelectorProps> = ({
+  network,
+  onSave,
+}) => {
   const setWallets = useSetRecoilState(walletsAtom);
 
   const messageToBeSigned = useMemo(
@@ -268,29 +273,41 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({ onSave }) => {
   return (
     <div className="flex gap-2">
       <Button
-        className="p-4 text-slate-800 font-bold bg-slate-300"
-        onClick={connectMetaMask}
+        className={clsx(
+          'p-4 text-slate-800 font-bold bg-slate-300',
+          network !== 'evm' && 'opacity-10 cursor-not-allowed',
+        )}
+        onClick={network === 'evm' ? connectMetaMask : undefined}
       >
         MetaMask or WalletConnect
       </Button>
 
       <Button
-        className="p-4 text-slate-800 font-bold bg-slate-300"
-        onClick={connectKeplr}
-      >
-        Keplr
-      </Button>
-
-      <Button
-        className="p-4 text-slate-800 font-bold bg-slate-300"
-        onClick={connectKaikas}
+        className={clsx(
+          'p-4 text-slate-800 font-bold bg-slate-300',
+          network !== 'evm' && 'opacity-10 cursor-not-allowed',
+        )}
+        onClick={network === 'evm' ? connectKaikas : undefined}
       >
         Kaikas
       </Button>
 
       <Button
-        className="p-4 text-slate-800 font-bold bg-slate-300"
-        onClick={connectSolana}
+        className={clsx(
+          'p-4 text-slate-800 font-bold bg-slate-300',
+          network !== 'cosmos-sdk' && 'opacity-10 cursor-not-allowed',
+        )}
+        onClick={network === 'cosmos-sdk' ? connectKeplr : undefined}
+      >
+        Keplr
+      </Button>
+
+      <Button
+        className={clsx(
+          'p-4 text-slate-800 font-bold bg-slate-300',
+          network !== 'solana' && 'opacity-10 cursor-not-allowed',
+        )}
+        onClick={network === 'solana' ? connectSolana : undefined}
       >
         Phantom
       </Button>

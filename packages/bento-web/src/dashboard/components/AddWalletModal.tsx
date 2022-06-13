@@ -203,7 +203,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
 
           <section className="mt-8">
             <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
-            <WalletConnector onSave={onDismiss} />
+            <WalletConnector network={firstChain?.type} onSave={onDismiss} />
           </section>
         </div>
       </OverlayWrapper>
@@ -227,6 +227,7 @@ const NetworkItem = styled.div<NetworkItemProps>`
   align-items: center;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  user-select: none;
 
   ${({ selected }) =>
     selected &&
