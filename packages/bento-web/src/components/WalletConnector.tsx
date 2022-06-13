@@ -46,16 +46,26 @@ const validateSignature = async (
 };
 
 type WalletSelectorProps = {
-  network?: string;
-  selectedNetworks?: string[];
+  networks?: {
+    id: string;
+    type: string;
+    name: string;
+    logo: string;
+  }[];
   onSave?: () => void;
 };
 export const WalletConnector: React.FC<WalletSelectorProps> = ({
-  network,
-  selectedNetworks,
+  networks,
   onSave,
 }) => {
   const setWallets = useSetRecoilState(walletsAtom);
+  const [selectedNetworks, firstNetwork] = useMemo(() => {
+    if (!networks || networks.length === 0) {
+      return [undefined, undefined];
+    }
+    const items = networks.map((v) => v.id);
+    return [items, networks[0].type];
+  }, [networks]);
 
   const messageToBeSigned = useMemo(
     () => 'Sign this message to add your wallet',
@@ -278,9 +288,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          network !== 'evm' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'evm' && 'opacity-10 cursor-not-allowed',
         )}
-        onClick={network === 'evm' ? connectMetaMask : undefined}
+        onClick={firstNetwork === 'evm' ? connectMetaMask : undefined}
       >
         MetaMask or WalletConnect
       </Button>
@@ -288,9 +298,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          network !== 'evm' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'evm' && 'opacity-10 cursor-not-allowed',
         )}
-        onClick={network === 'evm' ? connectKaikas : undefined}
+        onClick={firstNetwork === 'evm' ? connectKaikas : undefined}
       >
         Kaikas
       </Button>
@@ -298,9 +308,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          network !== 'cosmos-sdk' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'cosmos-sdk' && 'opacity-10 cursor-not-allowed',
         )}
-        onClick={network === 'cosmos-sdk' ? connectKeplr : undefined}
+        onClick={firstNetwork === 'cosmos-sdk' ? connectKeplr : undefined}
       >
         Keplr
       </Button>
@@ -308,9 +318,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          network !== 'solana' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'solana' && 'opacity-10 cursor-not-allowed',
         )}
-        onClick={network === 'solana' ? connectSolana : undefined}
+        onClick={firstNetwork === 'solana' ? connectSolana : undefined}
       >
         Phantom
       </Button>
