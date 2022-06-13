@@ -137,7 +137,7 @@ const DashboardPage = () => {
 
     main();
     priceFromCoinGecko('ethereum').then(setEthereumPrice);
-  }, []);
+  }, [wallets]);
 
   useEffect(() => {
     const groupedByWallets: Record<
