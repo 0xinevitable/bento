@@ -17,7 +17,7 @@ export const TokenIcon: React.FC<TokenIconProps> = ({
 }) => (
   <OuterRing>
     <InnerRing>
-      <Image {...props} />
+      <Image className="ring ring-slate-100/10" {...props} />
     </InnerRing>
   </OuterRing>
 );
@@ -65,7 +65,6 @@ const Image = styled.img`
   height: 54px;
 
   background: white;
-  border: 1px solid rgba(0, 255, 240, 0.33);
   filter: drop-shadow(0px 4.25px 4.25px rgba(0, 0, 0, 0.25));
   border-radius: 157.781px;
   object-fit: cover;
