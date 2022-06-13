@@ -24,7 +24,7 @@ const OnboardingPage: React.FC = () => {
 
   useEffect(() => {
     fetchOpenSeaAssets({ owner: HARDCODED_WALLET })
-      .then((assets) => {
+      .then(({ assets }) => {
         setOpenSeaAssets(assets);
       })
       .catch(console.error);

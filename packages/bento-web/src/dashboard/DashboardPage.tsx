@@ -2,6 +2,7 @@ import { OpenSeaAsset, fetchOpenSeaAssets } from '@bento/client';
 import { safePromiseAll } from '@bento/common';
 import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import axios from 'axios';
+import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -99,54 +100,86 @@ const DashboardPage = () => {
   const [NFTBalance, setNFTBalance] = useState<WalletBalance[]>([]);
   // FIXME: Replace hardcoded wallet address
   const HARDCODED_WALLET = '0x7777777141f111cf9f0308a63dbd9d0cad3010c4';
+
+  const [ethereumPrice, setEthereumPrice] = useState<number>(0);
+  const [fetchedAssets, setFetchedAssets] = useState<
+    Record<string, (OpenSeaAsset & { walletAddress: string })[]>
+  >({});
+
   useEffect(() => {
-    safePromiseAll([
-      fetchOpenSeaAssets({ owner: HARDCODED_WALLET }),
-      fetchOpenSeaAssets({
-        owner: HARDCODED_WALLET,
-        cursor: 'LXBrPTI3MDY2NjU2MA==',
-      }),
-    ])
-      .then(async (pagedAssets) => {
-        const assets = pagedAssets.flat();
-        // setNFTBalance(assets.groupBy())
-        console.log(assets);
-        const g: Record<string, OpenSeaAsset[]> = groupBy(
-          assets,
-          (v) => v.collection.slug,
-        );
-        console.log(g);
+    const handler = async () => {
+      let cursor: string | null;
+      let firstFetch: boolean = true;
+      const walletAddress = HARDCODED_WALLET;
+      while (firstFetch || !!cursor) {
+        const { assets, cursor: fetchedCursor } = await fetchOpenSeaAssets({
+          owner: walletAddress,
+          cursor,
+        });
+        firstFetch = false;
+        cursor = fetchedCursor;
+        setFetchedAssets((prev) => ({
+          [walletAddress]: [
+            ...(prev[walletAddress] ?? []),
+            ...assets.map((v) => ({ ...v, walletAddress })),
+          ],
+        }));
+      }
+    };
 
-        const ethereumPrice = await priceFromCoinGecko('ethereum');
-
-        const balances = await safePromiseAll(
-          Object.keys(g).map(async (collectionSlug) => {
-            const collection = g[collectionSlug][0].collection;
-            const { data } = await axios
-              .get(
-                `https://api.opensea.io/api/v1/collection/${collectionSlug}/stats`,
-              )
-              .catch((error) => {
-                console.log(error);
-                // FIXME: Error handling
-                return { data: { stats: { floor_price: 0 } } };
-              });
-            return {
-              symbol: collection.name,
-              walletAddress: HARDCODED_WALLET,
-              balance: g[collectionSlug].length,
-              logo: collection.image_url,
-              price: ethereumPrice * data.stats.floor_price,
-            };
-          }),
-        );
-
-        setNFTBalance(balances);
-
-        console.log(balances);
-      })
-      .catch(console.error);
+    handler();
+    priceFromCoinGecko('ethereum').then(setEthereumPrice);
   }, []);
+
+  useEffect(() => {
+    const groupedByWallets: Record<
+      string,
+      (OpenSeaAsset & { walletAddress: string })[]
+    > = groupBy(Object.values(fetchedAssets).flat(), (v) => v.walletAddress);
+
+    safePromiseAll(
+      Object.keys(groupedByWallets).map(async (walletAddress) => {
+        const groupByCollection: Record<
+          string,
+          (OpenSeaAsset & { walletAddress: string })[]
+        > = groupBy(groupedByWallets[walletAddress], (v) => v.collection.slug);
+
+        const balances: WalletBalance[] = (
+          await safePromiseAll(
+            chunk(Object.keys(groupByCollection), 5).map(
+              async (chunckedCollectionSlugs) =>
+                safePromiseAll(
+                  chunckedCollectionSlugs.map(async (collectionSlug) => {
+                    const collection =
+                      groupByCollection[collectionSlug][0].collection;
+
+                    const { data } = await axios
+                      .get(
+                        `https://api.opensea.io/api/v1/collection/${collectionSlug}/stats`,
+                      )
+                      .catch((error) => {
+                        console.error(error);
+                        // FIXME: Error handling
+                        return { data: { stats: { floor_price: 0 } } };
+                      });
+
+                    return {
+                      symbol: collection.name,
+                      walletAddress,
+                      balance: groupByCollection[collectionSlug].length,
+                      logo: collection.image_url,
+                      price: ethereumPrice * data.stats.floor_price,
+                    };
+                  }),
+                ),
+            ),
+          )
+        ).flat();
+
+        return balances;
+      }),
+    ).then((v) => setNFTBalance(v.flat()));
+  }, [fetchedAssets]);
 
   const tokenBalances = useMemo(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
@@ -204,7 +237,6 @@ const DashboardPage = () => {
       .flat();
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
-    console.log(tokens);
     return tokens.filter((v) => v.netWorth > 0);
   }, [
     ethereumBalance,

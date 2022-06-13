@@ -2592,6 +2592,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@solana/web3.js", "npm:1.44.0"],\
             ["@types/date-fns", "npm:2.6.0"],\
             ["@types/dedent", "npm:0.7.0"],\
+            ["@types/lodash.chunk", "npm:4.2.7"],\
             ["@types/lodash.groupby", "npm:4.6.7"],\
             ["@types/node", "npm:17.0.42"],\
             ["@types/react", "npm:17.0.45"],\
@@ -2608,6 +2609,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["framer-motion", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:6.3.11"],\
             ["immer", "npm:9.0.14"],\
             ["javascript-time-ago", "npm:2.5.4"],\
+            ["lodash.chunk", "npm:4.2.0"],\
             ["lodash.groupby", "npm:4.6.0"],\
             ["next", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:12.1.6"],\
             ["next-intercept-stdout", "npm:1.0.1"],\
@@ -4780,6 +4782,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:4.14.182", {\
           "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.182-1073aac722-7dd137aa9d.zip/node_modules/@types/lodash/",\
           "packageDependencies": [\
+            ["@types/lodash", "npm:4.14.182"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/lodash.chunk", [\
+        ["npm:4.2.7", {\
+          "packageLocation": "./.yarn/cache/@types-lodash.chunk-npm-4.2.7-7f0e0d6d06-09df5ca00d.zip/node_modules/@types/lodash.chunk/",\
+          "packageDependencies": [\
+            ["@types/lodash.chunk", "npm:4.2.7"],\
             ["@types/lodash", "npm:4.14.182"]\
           ],\
           "linkType": "HARD"\
@@ -11055,6 +11067,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/lodash._getnative-npm-3.9.1-6d612ef543-ba2152bb10.zip/node_modules/lodash._getnative/",\
           "packageDependencies": [\
             ["lodash._getnative", "npm:3.9.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lodash.chunk", [\
+        ["npm:4.2.0", {\
+          "packageLocation": "./.yarn/cache/lodash.chunk-npm-4.2.0-a54ef4d7dd-6286c6d068.zip/node_modules/lodash.chunk/",\
+          "packageDependencies": [\
+            ["lodash.chunk", "npm:4.2.0"]\
           ],\
           "linkType": "HARD"\
         }]\

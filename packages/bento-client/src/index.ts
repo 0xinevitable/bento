@@ -27,6 +27,11 @@ export type GetOpenSeaAssetsParams = {
   cursor?: string;
 };
 
+export type OpenSeaAssetsResponse = {
+  assets: OpenSeaAsset[];
+  next: string;
+};
+
 // https://github.com/linkyvc/frontend/pull/52
 export const fetchOpenSeaAssets = async ({
   owner,
@@ -34,8 +39,8 @@ export const fetchOpenSeaAssets = async ({
 }: GetOpenSeaAssetsParams) => {
   const url = `${OPENSEA_BASE_URL}/v1/assets`;
   const {
-    data: { assets },
-  } = await axios.get<{ assets: OpenSeaAsset[] }>(
+    data: { assets, next },
+  } = await axios.get<OpenSeaAssetsResponse>(
     QueryString.stringifyUrl({ url, query: { owner, cursor } }),
     {
       headers: {
@@ -43,7 +48,11 @@ export const fetchOpenSeaAssets = async ({
       },
     },
   );
-  return assets;
+
+  return {
+    assets,
+    cursor: next,
+  };
 };
 
 // FIXME: Duplicated with @bento/core
