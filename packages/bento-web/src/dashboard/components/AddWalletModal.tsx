@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import produce from 'immer';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
@@ -27,39 +27,52 @@ const defaultWallet: WalletDraft = {
   chains: [],
 };
 
-const NETWORKS = [
+type Network = {
+  id: string;
+  type: string;
+  name: string;
+  logo: string;
+};
+const NETWORKS: Network[] = [
   {
     id: 'ethereum',
+    type: 'evm',
     name: 'Ethereum',
     logo: '/assets/ethereum.png',
   },
   {
     id: 'bsc',
+    type: 'evm',
     name: 'BSC',
     logo: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
   },
   {
     id: 'polygon',
+    type: 'evm',
     name: 'Polygon',
     logo: '/assets/polygon.webp',
   },
   {
     id: 'klaytn',
+    type: 'evm',
     name: 'Klaytn',
     logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
   },
   {
     id: 'cosmos',
+    type: 'cosmos-sdk',
     name: 'Cosmos',
     logo: 'https://assets-cdn.trustwallet.com/blockchains/cosmos/info/logo.png',
   },
   {
     id: 'osmosis',
+    type: 'cosmos-sdk',
     name: 'Osmosis',
     logo: 'https://assets-cdn.trustwallet.com/blockchains/osmosis/info/logo.png',
   },
   {
     id: 'solana',
+    type: 'solana',
     name: 'Solana',
     logo: 'https://assets-cdn.trustwallet.com/blockchains/solana/info/logo.png',
   },
@@ -127,6 +140,16 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
       : [];
   }, [draft.type]);
 
+  const [chains, setChains] = useState<Network[]>([]);
+  const firstChain = chains[0];
+  const onSelectNetwork = useCallback((network: Network) => {
+    setChains((prev) =>
+      !prev.find((v) => v.id === network.id)
+        ? [...prev, network]
+        : prev.filter((v) => v.id !== network.id),
+    );
+  }, []);
+
   return (
     <Portal>
       <OverlayWrapper
@@ -144,21 +167,37 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
           <section>
             <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
             <div className="flex flex-wrap">
-              {NETWORKS.map((network) => (
-                <div
-                  className="flex flex-col flex-1 items-center"
-                  key={network.id}
-                >
-                  <img
-                    className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
-                    src={network.logo}
-                    alt={network.name}
-                  />
-                  <span className="mt-1 text-white text-xs">
-                    {network.name}
-                  </span>
-                </div>
-              ))}
+              {NETWORKS.map((network) => {
+                const selected = !!chains.find((v) => v.id === network.id);
+                const disabled =
+                  typeof firstChain !== 'undefined' &&
+                  firstChain.type !== network.type;
+
+                return (
+                  <NetworkItem
+                    key={network.id}
+                    className={clsx(
+                      'p-2 m-1 rounded-md',
+                      disabled && 'opacity-10 cursor-not-allowed',
+                    )}
+                    selected={selected}
+                    onClick={
+                      !disabled //
+                        ? () => onSelectNetwork(network)
+                        : undefined
+                    }
+                  >
+                    <img
+                      className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
+                      src={network.logo}
+                      alt={network.name}
+                    />
+                    <span className="mt-1 text-white text-xs">
+                      {network.name}
+                    </span>
+                  </NetworkItem>
+                );
+              })}
             </div>
           </section>
 
@@ -176,4 +215,22 @@ const OverlayWrapper = styled(Modal)`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+type NetworkItemProps = {
+  selected?: boolean;
+};
+const NetworkItem = styled.div<NetworkItemProps>`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  ${({ selected }) =>
+    selected &&
+    css`
+      border-color: rgb(168 85 247 / var(--tw-border-opacity));
+    `};
 `;
