@@ -1,5 +1,5 @@
+import { safePromiseAll } from '@bento/common';
 import { ERC20TokenInput } from '@bento/core/lib/tokens';
-import { safePromiseAll } from '@bento/core/lib/utils/safePromiseAll';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import { promises as fs } from 'fs';
 import path from 'path';

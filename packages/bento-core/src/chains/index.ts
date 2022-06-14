@@ -4,65 +4,17 @@ import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
 
-import { withCache } from './cache';
-import { priceFromCoinGecko } from './pricings/CoinGecko';
-import { Currency } from './pricings/Currency';
-import { ERC20TokenInput, ETHEREUM_TOKENS, KLAYTN_TOKENS } from './tokens';
+import { withCache } from '../cache';
+import { priceFromCoinGecko } from '../pricings/CoinGecko';
+import { Currency } from '../pricings/Currency';
+import { ERC20TokenInput, ETHEREUM_TOKENS, KLAYTN_TOKENS } from '../tokens';
+import { MinimalABIs } from './interfaces';
 
 export interface ERC20TokenBalance extends ERC20TokenInput {
   walletAddress: string;
   balance: number;
   price: number;
 }
-
-const MinimalABIs = {
-  ERC20: [
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'who',
-          type: 'address',
-        },
-      ],
-      name: 'balanceOf',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      type: 'function',
-    },
-  ],
-  LP: [
-    {
-      inputs: [],
-      name: 'getReserves',
-      outputs: [
-        { internalType: 'uint112', name: '_reserve0', type: 'uint112' },
-        { internalType: 'uint112', name: '_reserve1', type: 'uint112' },
-        { internalType: 'uint32', name: '_blockTimestampLast', type: 'uint32' },
-      ],
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'totalSupply',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      type: 'function',
-    },
-  ],
-  Staking: [
-    {
-      inputs: [{ name: '', type: 'address' }],
-      name: 'totalStakedBalanceOf',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      type: 'function',
-    },
-  ],
-};
 
 export interface Chain {
   // 기반 통화(Native Token)
@@ -265,6 +217,19 @@ export class KlaytnChain implements Chain {
     const exchangeRatio = amountOfKLAYStaked / amountOfSCNRStaked;
     return exchangeRatio * klayPrice;
   });
+  _SCNR_ADDRESS = '0x8888888888885b073f3c81258c27e83db228d5f3';
+  _SCNR_STAKING = '0x7c59930d1613ca2813e5793da72b324712f6899d';
+  getStakedSCNRInGovernance = async (address: string) => {
+    console.log(address, this._SCNR_STAKING);
+    const staking = new this._provider.klay.Contract(
+      MinimalABIs.Staking,
+      this._SCNR_STAKING,
+    );
+    const stakedBalance = await staking.methods
+      .stakedBalanceOf(address, this._SCNR_ADDRESS)
+      .call();
+    return stakedBalance / 10 ** 25;
+  };
 
   _API_KEYS = [
     'ckey_ec92d129ed8a498f9bca510830b:',
@@ -274,6 +239,7 @@ export class KlaytnChain implements Chain {
   getTokenBalances = async (walletAddress: string) => {
     const API_KEY =
       this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
+
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/8217/address/${walletAddress}/balances_v2/`,
@@ -302,10 +268,12 @@ export class KlaytnChain implements Chain {
         typeof token.balance === 'string'
           ? Number(token.balance) / 10 ** token.contract_decimals
           : 0;
-      if (balance <= 0) {
+      const symbol = token.contract_ticker_symbol;
+      const STAKING_ENABLED = ['SCNR']; // stakable tokens can be indexed with balance 0
+
+      if (balance <= 0 && !STAKING_ENABLED.includes(symbol)) {
         return [];
       }
-      const symbol = token.contract_ticker_symbol;
       const tokenInfo = KLAYTN_TOKENS.find(
         (v) => v.address === token.contract_address,
       );
@@ -325,7 +293,7 @@ export class KlaytnChain implements Chain {
         return 0;
       };
       const price = await getPrice();
-      return {
+      const balanceInfo = {
         walletAddress,
         name: tokenInfo?.name ?? token.contract_name,
         symbol: tokenInfo?.symbol ?? symbol,
@@ -334,9 +302,26 @@ export class KlaytnChain implements Chain {
         logo: tokenInfo?.logo,
         coinGeckoId: tokenInfo?.coinGeckoId,
         coinMarketCapId: tokenInfo?.coinMarketCapId,
+        staking: tokenInfo?.staking,
         balance,
         price,
       };
+      if (symbol === 'SCNR') {
+        const staked = await this.getStakedSCNRInGovernance(
+          walletAddress,
+        ).catch((error) => {
+          console.error(error);
+          // FIXME: Proper error handling
+          return 0;
+        });
+        console.log({ staked });
+
+        return [
+          balanceInfo,
+          { ...balanceInfo, balance: staked, staking: true },
+        ];
+      }
+      return balanceInfo;
     }) as Promise<ERC20TokenBalance>[];
     return safePromiseAll(promises);
   };

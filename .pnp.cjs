@@ -13822,6 +13822,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./scripts/",\
           "packageDependencies": [\
             ["scripts", "workspace:scripts"],\
+            ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@types/node", "npm:17.0.42"],\
             ["@types/prettier", "npm:2.6.3"],\
