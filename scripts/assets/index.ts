@@ -10,11 +10,35 @@ import coingeckoTokenList from './coingecko-coin-list.json';
 
 const TRUSTWALLET_ASSETS_PATH = './assets/trustwallet-assets';
 const WORKSPACE_ROOT_PATH = findWorkspaceRoot(null) ?? '';
-const CORE_TOKEN_LISTS = {
-  ETHEREUM: path.resolve(
-    WORKSPACE_ROOT_PATH,
-    './packages/bento-core/src/tokens/ethereum.json',
-  ),
+const CHAINS = {
+  ETHEREUM: {
+    key: 'ethereum',
+    path: path.resolve(
+      WORKSPACE_ROOT_PATH,
+      './packages/bento-core/src/tokens/ethereum.json',
+    ),
+  },
+  BSC: {
+    key: 'binance',
+    path: path.resolve(
+      WORKSPACE_ROOT_PATH,
+      './packages/bento-core/src/tokens/bsc.json',
+    ),
+  },
+  POLYGON: {
+    key: 'polygon',
+    path: path.resolve(
+      WORKSPACE_ROOT_PATH,
+      './packages/bento-core/src/tokens/polygon.json',
+    ),
+  },
+  // SOLANA: {
+  //   key: 'solana',
+  //   path: path.resolve(
+  //     WORKSPACE_ROOT_PATH,
+  //     './packages/bento-core/src/tokens/solana.json',
+  //   ),
+  // },
 };
 
 type TokenItem = {
@@ -31,9 +55,9 @@ type TokenItem = {
 
 const stringify = TSON.createStringifier<ERC20TokenInput[]>();
 
-const fetchEthereumAssets = async () => {
+const updateAssets = async (chain: { key: string; path: string }) => {
   const result = await fs.readdir(
-    path.resolve(TRUSTWALLET_ASSETS_PATH, './blockchains/ethereum'),
+    path.resolve(TRUSTWALLET_ASSETS_PATH, `./blockchains/${chain.key}`),
   );
   const tokensPromise = result.flatMap(async (filename) => {
     if (!filename.endsWith('.json')) {
@@ -41,7 +65,7 @@ const fetchEthereumAssets = async () => {
     }
     const filePath = path.resolve(
       TRUSTWALLET_ASSETS_PATH,
-      './blockchains/ethereum',
+      `./blockchains/${chain.key}`,
       filename,
     );
     const content = await fs.readFile(filePath, 'utf8');
@@ -50,7 +74,10 @@ const fetchEthereumAssets = async () => {
   const tokens: ERC20TokenInput[] = (await safePromiseAll(tokensPromise))
     .flat()
     .flatMap((token) => {
-      if (token.type !== 'ERC20') {
+      if (
+        (chain.key === 'ethereum' && token.type !== 'ERC20') ||
+        token.type === 'coin'
+      ) {
         return [];
       }
       const coinGeckoId = coingeckoTokenList.find(
@@ -69,7 +96,7 @@ const fetchEthereumAssets = async () => {
     });
 
   const previousTokens = JSON.parse(
-    await fs.readFile(CORE_TOKEN_LISTS.ETHEREUM, 'utf8'),
+    await fs.readFile(chain.path, 'utf8'),
   ) as ERC20TokenInput[];
   const newTokens = tokens.reduce((acc, token) => {
     if (
@@ -81,14 +108,17 @@ const fetchEthereumAssets = async () => {
   }, previousTokens);
 
   await fs.writeFile(
-    CORE_TOKEN_LISTS.ETHEREUM,
+    chain.path,
     prettier.format(stringify(newTokens), { parser: 'json' }),
     'utf8',
   );
 };
 
-const main = async () => {
-  await fetchEthereumAssets();
-};
+const main = async () =>
+  safePromiseAll(
+    Object.values(CHAINS).map(async (chain) => {
+      await updateAssets(chain);
+    }),
+  );
 
 main();

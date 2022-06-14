@@ -1,0 +1,961 @@
+[
+  {
+    "symbol": "BUSD",
+    "name": "BUSD",
+    "decimals": 8,
+    "address": "BUSD-BD1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BUSD-BD1/logo.png"
+  },
+  {
+    "symbol": "USDSB",
+    "name": "USDSB",
+    "decimals": 8,
+    "address": "USDSB-1AC",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/USDSB-1AC/logo.png"
+  },
+  {
+    "symbol": "BTCB",
+    "name": "BTCB",
+    "decimals": 8,
+    "address": "BTCB-1DE",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BTCB-1DE/logo.png"
+  },
+  {
+    "symbol": "TUSDB",
+    "name": "TUSDB",
+    "decimals": 8,
+    "address": "TUSDB-888",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/TUSDB-888/logo.png"
+  },
+  {
+    "symbol": "IDRTB",
+    "name": "IDRTB",
+    "decimals": 8,
+    "address": "IDRTB-178",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/IDRTB-178/logo.png"
+  },
+  {
+    "symbol": "USDT",
+    "name": "USDT",
+    "decimals": 8,
+    "address": "USDT-6D8",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/USDT-6D8/logo.png"
+  },
+  {
+    "symbol": "DAI",
+    "name": "DAI",
+    "decimals": 8,
+    "address": "DAI-D75",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/DAI-D75/logo.png"
+  },
+  {
+    "symbol": "ETH",
+    "name": "ETH",
+    "decimals": 8,
+    "address": "ETH-1C9",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ETH-1C9/logo.png"
+  },
+  {
+    "symbol": "TAUDB",
+    "name": "TAUDB",
+    "decimals": 8,
+    "address": "TAUDB-888",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/TAUDB-888/logo.png"
+  },
+  {
+    "symbol": "THKDB",
+    "name": "THKDB",
+    "decimals": 8,
+    "address": "THKDB-888",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/THKDB-888/logo.png"
+  },
+  {
+    "symbol": "ADA",
+    "name": "ADA",
+    "decimals": 8,
+    "address": "ADA-9F4",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ADA-9F4/logo.png"
+  },
+  {
+    "symbol": "AERGO",
+    "name": "AERGO",
+    "decimals": 8,
+    "address": "AERGO-46B",
+    "coinGeckoId": "aergo",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/AERGO-46B/logo.png"
+  },
+  {
+    "symbol": "ANKR",
+    "name": "ANKR",
+    "decimals": 8,
+    "address": "ANKR-E97",
+    "coinGeckoId": "ankr",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ANKR-E97/logo.png"
+  },
+  {
+    "symbol": "ARPA",
+    "name": "ARPA",
+    "decimals": 8,
+    "address": "ARPA-575",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ARPA-575/logo.png"
+  },
+  {
+    "symbol": "ART",
+    "name": "ART",
+    "decimals": 8,
+    "address": "ART-3C9",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ART-3C9/logo.png"
+  },
+  {
+    "symbol": "ATOM",
+    "name": "ATOM",
+    "decimals": 8,
+    "address": "ATOM-596",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ATOM-596/logo.png"
+  },
+  {
+    "symbol": "ATP",
+    "name": "ATP",
+    "decimals": 8,
+    "address": "ATP-38C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ATP-38C/logo.png"
+  },
+  {
+    "symbol": "AVA",
+    "name": "AVA",
+    "decimals": 8,
+    "address": "AVA-645",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/AVA-645/logo.png"
+  },
+  {
+    "symbol": "AWC",
+    "name": "AWC",
+    "decimals": 8,
+    "address": "AWC-986",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/AWC-986/logo.png"
+  },
+  {
+    "symbol": "AXPR",
+    "name": "AXPR",
+    "decimals": 8,
+    "address": "AXPR-777",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/AXPR-777/logo.png"
+  },
+  {
+    "symbol": "BAKE",
+    "name": "BAKE",
+    "decimals": 8,
+    "address": "BAKE-5E0",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BAKE-5E0/logo.png"
+  },
+  {
+    "symbol": "BAND",
+    "name": "BAND",
+    "decimals": 8,
+    "address": "BAND-34B",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BAND-34B/logo.png"
+  },
+  {
+    "symbol": "BCH",
+    "name": "BCH",
+    "decimals": 8,
+    "address": "BCH-1FD",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BCH-1FD/logo.png"
+  },
+  {
+    "symbol": "BCPT",
+    "name": "BCPT",
+    "decimals": 8,
+    "address": "BCPT-95A",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BCPT-95A/logo.png"
+  },
+  {
+    "symbol": "BEAR",
+    "name": "BEAR",
+    "decimals": 8,
+    "address": "BEAR-14C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BEAR-14C/logo.png"
+  },
+  {
+    "symbol": "BET",
+    "name": "BET",
+    "decimals": 8,
+    "address": "BET-844",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BET-844/logo.png"
+  },
+  {
+    "symbol": "BKBT",
+    "name": "BKBT",
+    "decimals": 8,
+    "address": "BKBT-3A6",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BKBT-3A6/logo.png"
+  },
+  {
+    "symbol": "BLINK",
+    "name": "BLINK",
+    "decimals": 8,
+    "address": "BLINK-9C6",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BLINK-9C6/logo.png"
+  },
+  {
+    "symbol": "BOLT",
+    "name": "BOLT",
+    "decimals": 8,
+    "address": "BOLT-4C6",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BOLT-4C6/logo.png"
+  },
+  {
+    "symbol": "BST2",
+    "name": "BST2",
+    "decimals": 8,
+    "address": "BST2-2F2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BST2-2F2/logo.png"
+  },
+  {
+    "symbol": "BTTB",
+    "name": "BTTB",
+    "decimals": 8,
+    "address": "BTTB-D31",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BTTB-D31/logo.png"
+  },
+  {
+    "symbol": "BULL",
+    "name": "BULL",
+    "decimals": 8,
+    "address": "BULL-BE4",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BULL-BE4/logo.png"
+  },
+  {
+    "symbol": "BURGER",
+    "name": "BURGER",
+    "decimals": 8,
+    "address": "BURGER-33A",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BURGER-33A/logo.png"
+  },
+  {
+    "symbol": "BZNT",
+    "name": "BZNT",
+    "decimals": 8,
+    "address": "BZNT-464",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/BZNT-464/logo.png"
+  },
+  {
+    "symbol": "CAKE",
+    "name": "CAKE",
+    "decimals": 8,
+    "address": "CAKE-435",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/CAKE-435/logo.png"
+  },
+  {
+    "symbol": "CAN",
+    "name": "CAN",
+    "decimals": 8,
+    "address": "CAN-677",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/CAN-677/logo.png"
+  },
+  {
+    "symbol": "CAS",
+    "name": "CAS",
+    "decimals": 8,
+    "address": "CAS-167",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/CAS-167/logo.png"
+  },
+  {
+    "symbol": "CBIX",
+    "name": "CBIX",
+    "decimals": 8,
+    "address": "CBIX-3C9",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/CBIX-3C9/logo.png"
+  },
+  {
+    "symbol": "CBM",
+    "name": "CBM",
+    "decimals": 8,
+    "address": "CBM-4B2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/CBM-4B2/logo.png"
+  },
+  {
+    "symbol": "CHZ",
+    "name": "CHZ",
+    "decimals": 8,
+    "address": "CHZ-ECD",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/CHZ-ECD/logo.png"
+  },
+  {
+    "symbol": "CNNS",
+    "name": "CNNS",
+    "decimals": 8,
+    "address": "CNNS-E16",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/CNNS-E16/logo.png"
+  },
+  {
+    "symbol": "COS",
+    "name": "COS",
+    "decimals": 8,
+    "address": "COS-2E4",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/COS-2E4/logo.png"
+  },
+  {
+    "symbol": "COTI",
+    "name": "COTI",
+    "decimals": 8,
+    "address": "COTI-CBB",
+    "coinGeckoId": "coti",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/COTI-CBB/logo.png"
+  },
+  {
+    "symbol": "COVA",
+    "name": "COVA",
+    "decimals": 8,
+    "address": "COVA-218",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/COVA-218/logo.png"
+  },
+  {
+    "symbol": "CRPT",
+    "name": "CRPT",
+    "decimals": 8,
+    "address": "CRPT-8C9",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/CRPT-8C9/logo.png"
+  },
+  {
+    "symbol": "CSM",
+    "name": "CSM",
+    "decimals": 8,
+    "address": "CSM-734",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/CSM-734/logo.png"
+  },
+  {
+    "symbol": "DEFI",
+    "name": "DEFI",
+    "decimals": 8,
+    "address": "DEFI-FA5",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/DEFI-FA5/logo.png"
+  },
+  {
+    "symbol": "DOGE",
+    "name": "DOGE",
+    "decimals": 8,
+    "address": "DOGE-B67",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/DOGE-B67/logo.png"
+  },
+  {
+    "symbol": "DOS",
+    "name": "DOS",
+    "decimals": 8,
+    "address": "DOS-120",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/DOS-120/logo.png"
+  },
+  {
+    "symbol": "DOT",
+    "name": "DOT",
+    "decimals": 8,
+    "address": "DOT-64C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/DOT-64C/logo.png"
+  },
+  {
+    "symbol": "DREP",
+    "name": "DREP",
+    "decimals": 8,
+    "address": "DREP-7D2",
+    "coinGeckoId": "drep",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/DREP-7D2/logo.png"
+  },
+  {
+    "symbol": "DUSK",
+    "name": "DUSK",
+    "decimals": 8,
+    "address": "DUSK-45E",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/DUSK-45E/logo.png"
+  },
+  {
+    "symbol": "EBST",
+    "name": "EBST",
+    "decimals": 8,
+    "address": "EBST-783",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/EBST-783/logo.png"
+  },
+  {
+    "symbol": "ENTRP",
+    "name": "ENTRP",
+    "decimals": 8,
+    "address": "ENTRP-C8D",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ENTRP-C8D/logo.png"
+  },
+  {
+    "symbol": "EOS",
+    "name": "EOS",
+    "decimals": 8,
+    "address": "EOS-CDD",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/EOS-CDD/logo.png"
+  },
+  {
+    "symbol": "EOSBEAR",
+    "name": "EOSBEAR",
+    "decimals": 8,
+    "address": "EOSBEAR-721",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/EOSBEAR-721/logo.png"
+  },
+  {
+    "symbol": "EOSBULL",
+    "name": "EOSBULL",
+    "decimals": 8,
+    "address": "EOSBULL-F0D",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/EOSBULL-F0D/logo.png"
+  },
+  {
+    "symbol": "EQL",
+    "name": "EQL",
+    "decimals": 8,
+    "address": "EQL-586",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/EQL-586/logo.png"
+  },
+  {
+    "symbol": "ERD",
+    "name": "ERD",
+    "decimals": 8,
+    "address": "ERD-D06",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ERD-D06/logo.png"
+  },
+  {
+    "symbol": "ETHBEAR",
+    "name": "ETHBEAR",
+    "decimals": 8,
+    "address": "ETHBEAR-B2B",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ETHBEAR-B2B/logo.png"
+  },
+  {
+    "symbol": "ETHBULL",
+    "name": "ETHBULL",
+    "decimals": 8,
+    "address": "ETHBULL-D33",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ETHBULL-D33/logo.png"
+  },
+  {
+    "symbol": "EVT",
+    "name": "EVT",
+    "decimals": 8,
+    "address": "EVT-49B",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/EVT-49B/logo.png"
+  },
+  {
+    "symbol": "FRM",
+    "name": "FRM",
+    "decimals": 8,
+    "address": "FRM-DE7",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/FRM-DE7/logo.png"
+  },
+  {
+    "symbol": "FSN",
+    "name": "FSN",
+    "decimals": 8,
+    "address": "FSN-E14",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/FSN-E14/logo.png"
+  },
+  {
+    "symbol": "FTM",
+    "name": "FTM",
+    "decimals": 8,
+    "address": "FTM-A64",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/FTM-A64/logo.png"
+  },
+  {
+    "symbol": "GIV",
+    "name": "GIV",
+    "decimals": 8,
+    "address": "GIV-94E",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/GIV-94E/logo.png"
+  },
+  {
+    "symbol": "GMAT",
+    "name": "GMAT",
+    "decimals": 8,
+    "address": "GMAT-FC8",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/GMAT-FC8/logo.png"
+  },
+  {
+    "symbol": "GTO",
+    "name": "GTO",
+    "decimals": 8,
+    "address": "GTO-908",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/GTO-908/logo.png"
+  },
+  {
+    "symbol": "HNST",
+    "name": "HNST",
+    "decimals": 8,
+    "address": "HNST-3C9",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/HNST-3C9/logo.png"
+  },
+  {
+    "symbol": "HYN",
+    "name": "HYN",
+    "decimals": 8,
+    "address": "HYN-F21",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/HYN-F21/logo.png"
+  },
+  {
+    "symbol": "INJ",
+    "name": "INJ",
+    "decimals": 8,
+    "address": "INJ-FAE",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/INJ-FAE/logo.png"
+  },
+  {
+    "symbol": "IRIS",
+    "name": "IRIS",
+    "decimals": 8,
+    "address": "IRIS-D88",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/IRIS-D88/logo.png"
+  },
+  {
+    "symbol": "KAT",
+    "name": "KAT",
+    "decimals": 8,
+    "address": "KAT-7BB",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/KAT-7BB/logo.png"
+  },
+  {
+    "symbol": "LBA",
+    "name": "LBA",
+    "decimals": 8,
+    "address": "LBA-340",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/LBA-340/logo.png"
+  },
+  {
+    "symbol": "LIT",
+    "name": "LIT",
+    "decimals": 8,
+    "address": "LIT-099",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/LIT-099/logo.png"
+  },
+  {
+    "symbol": "LOKI",
+    "name": "LOKI",
+    "decimals": 8,
+    "address": "LOKI-6A9",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/LOKI-6A9/logo.png"
+  },
+  {
+    "symbol": "LTC",
+    "name": "LTC",
+    "decimals": 8,
+    "address": "LTC-F07",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/LTC-F07/logo.png"
+  },
+  {
+    "symbol": "LTO",
+    "name": "LTO",
+    "decimals": 8,
+    "address": "LTO-BDF",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/LTO-BDF/logo.png"
+  },
+  {
+    "symbol": "MATIC",
+    "name": "MATIC",
+    "decimals": 8,
+    "address": "MATIC-84A",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/MATIC-84A/logo.png"
+  },
+  {
+    "symbol": "MDAB",
+    "name": "MDAB",
+    "decimals": 8,
+    "address": "MDAB-D42",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/MDAB-D42/logo.png"
+  },
+  {
+    "symbol": "MEETONE",
+    "name": "MEETONE",
+    "decimals": 8,
+    "address": "MEETONE-031",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/MEETONE-031/logo.png"
+  },
+  {
+    "symbol": "MITH",
+    "name": "MITH",
+    "decimals": 8,
+    "address": "MITH-C76",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/MITH-C76/logo.png"
+  },
+  {
+    "symbol": "MITX",
+    "name": "MITX",
+    "decimals": 8,
+    "address": "MITX-CAA",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/MITX-CAA/logo.png"
+  },
+  {
+    "symbol": "MTV",
+    "name": "MTV",
+    "decimals": 8,
+    "address": "MTV-4C6",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/MTV-4C6/logo.png"
+  },
+  {
+    "symbol": "MVL",
+    "name": "MVL",
+    "decimals": 8,
+    "address": "MVL-7B0",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/MVL-7B0/logo.png"
+  },
+  {
+    "symbol": "MZK",
+    "name": "MZK",
+    "decimals": 8,
+    "address": "MZK-2C7",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/MZK-2C7/logo.png"
+  },
+  {
+    "symbol": "NEW",
+    "name": "NEW",
+    "decimals": 8,
+    "address": "NEW-09E",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/NEW-09E/logo.png"
+  },
+  {
+    "symbol": "NEXO",
+    "name": "NEXO",
+    "decimals": 8,
+    "address": "NEXO-A84",
+    "coinGeckoId": "nexo",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/NEXO-A84/logo.png"
+  },
+  {
+    "symbol": "NOIZB",
+    "name": "NOIZB",
+    "decimals": 8,
+    "address": "NOIZB-878",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/NOIZB-878/logo.png"
+  },
+  {
+    "symbol": "NOW",
+    "name": "NOW",
+    "decimals": 8,
+    "address": "NOW-E68",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/NOW-E68/logo.png"
+  },
+  {
+    "symbol": "NPXB",
+    "name": "NPXB",
+    "decimals": 8,
+    "address": "NPXB-1E8",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/NPXB-1E8/logo.png"
+  },
+  {
+    "symbol": "NPXSXEM",
+    "name": "NPXSXEM",
+    "decimals": 8,
+    "address": "NPXSXEM-89C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/NPXSXEM-89C/logo.png"
+  },
+  {
+    "symbol": "ONE",
+    "name": "ONE",
+    "decimals": 8,
+    "address": "ONE-5F9",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ONE-5F9/logo.png"
+  },
+  {
+    "symbol": "ONT",
+    "name": "ONT",
+    "decimals": 8,
+    "address": "ONT-33D",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ONT-33D/logo.png"
+  },
+  {
+    "symbol": "PHB",
+    "name": "PHB",
+    "decimals": 8,
+    "address": "PHB-2DF",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/PHB-2DF/logo.png"
+  },
+  {
+    "symbol": "PHV",
+    "name": "PHV",
+    "decimals": 8,
+    "address": "PHV-4A1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/PHV-4A1/logo.png"
+  },
+  {
+    "symbol": "PIBNB",
+    "name": "PIBNB",
+    "decimals": 8,
+    "address": "PIBNB-43C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/PIBNB-43C/logo.png"
+  },
+  {
+    "symbol": "PLG",
+    "name": "PLG",
+    "decimals": 8,
+    "address": "PLG-D8D",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/PLG-D8D/logo.png"
+  },
+  {
+    "symbol": "PVT",
+    "name": "PVT",
+    "decimals": 8,
+    "address": "PVT-554",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/PVT-554/logo.png"
+  },
+  {
+    "symbol": "PYN",
+    "name": "PYN",
+    "decimals": 8,
+    "address": "PYN-C37",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/PYN-C37/logo.png"
+  },
+  {
+    "symbol": "QBX",
+    "name": "QBX",
+    "decimals": 8,
+    "address": "QBX-38C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/QBX-38C/logo.png"
+  },
+  {
+    "symbol": "RAVEN",
+    "name": "RAVEN",
+    "decimals": 8,
+    "address": "RAVEN-F66",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/RAVEN-F66/logo.png"
+  },
+  {
+    "symbol": "RUNE",
+    "name": "RUNE",
+    "decimals": 8,
+    "address": "RUNE-B1A",
+    "coinGeckoId": "rune",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/RUNE-B1A/logo.png"
+  },
+  {
+    "symbol": "SHR",
+    "name": "SHR",
+    "decimals": 8,
+    "address": "SHR-DB6",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/SHR-DB6/logo.png"
+  },
+  {
+    "symbol": "SLV",
+    "name": "SLV",
+    "decimals": 8,
+    "address": "SLV-986",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/SLV-986/logo.png"
+  },
+  {
+    "symbol": "SPNDB",
+    "name": "SPNDB",
+    "decimals": 8,
+    "address": "SPNDB-916",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/SPNDB-916/logo.png"
+  },
+  {
+    "symbol": "STYL",
+    "name": "STYL",
+    "decimals": 8,
+    "address": "STYL-65B",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/STYL-65B/logo.png"
+  },
+  {
+    "symbol": "SWINGBY",
+    "name": "SWINGBY",
+    "decimals": 8,
+    "address": "SWINGBY-888",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/SWINGBY-888/logo.png"
+  },
+  {
+    "symbol": "SWIPE.B",
+    "name": "SWIPE.B",
+    "decimals": 8,
+    "address": "SWIPE.B-DC0",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/SWIPE.B-DC0/logo.png"
+  },
+  {
+    "symbol": "SXP",
+    "name": "SXP",
+    "decimals": 8,
+    "address": "SXP-CCC",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/SXP-CCC/logo.png"
+  },
+  {
+    "symbol": "TM2",
+    "name": "TM2",
+    "decimals": 8,
+    "address": "TM2-0C4",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/TM2-0C4/logo.png"
+  },
+  {
+    "symbol": "TOMOB",
+    "name": "TOMOB",
+    "decimals": 8,
+    "address": "TOMOB-4BC",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/TOMOB-4BC/logo.png"
+  },
+  {
+    "symbol": "TOP",
+    "name": "TOP",
+    "decimals": 8,
+    "address": "TOP-491",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/TOP-491/logo.png"
+  },
+  {
+    "symbol": "TROY",
+    "name": "TROY",
+    "decimals": 8,
+    "address": "TROY-9B8",
+    "coinGeckoId": "troy",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/TROY-9B8/logo.png"
+  },
+  {
+    "symbol": "TRUE",
+    "name": "TRUE",
+    "decimals": 8,
+    "address": "TRUE-D84",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/TRUE-D84/logo.png"
+  },
+  {
+    "symbol": "TRXB",
+    "name": "TRXB",
+    "decimals": 8,
+    "address": "TRXB-2E6",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/TRXB-2E6/logo.png"
+  },
+  {
+    "symbol": "TWT",
+    "name": "TWT",
+    "decimals": 8,
+    "address": "TWT-8C2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/TWT-8C2/logo.png"
+  },
+  {
+    "symbol": "UGAS",
+    "name": "UGAS",
+    "decimals": 8,
+    "address": "UGAS-B0C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/UGAS-B0C/logo.png"
+  },
+  {
+    "symbol": "UND",
+    "name": "UND",
+    "decimals": 8,
+    "address": "UND-EBC",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/UND-EBC/logo.png"
+  },
+  {
+    "symbol": "UPX",
+    "name": "UPX",
+    "decimals": 8,
+    "address": "UPX-F3E",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/UPX-F3E/logo.png"
+  },
+  {
+    "symbol": "VDX",
+    "name": "VDX",
+    "decimals": 8,
+    "address": "VDX-A17",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/VDX-A17/logo.png"
+  },
+  {
+    "symbol": "VIDT",
+    "name": "VIDT",
+    "decimals": 8,
+    "address": "VIDT-F53",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/VIDT-F53/logo.png"
+  },
+  {
+    "symbol": "VOTE",
+    "name": "VOTE",
+    "decimals": 8,
+    "address": "VOTE-FD4",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/VOTE-FD4/logo.png"
+  },
+  {
+    "symbol": "WICC",
+    "name": "WICC",
+    "decimals": 8,
+    "address": "WICC-01D",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/WICC-01D/logo.png"
+  },
+  {
+    "symbol": "WINB",
+    "name": "WINB",
+    "decimals": 8,
+    "address": "WINB-41F",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/WINB-41F/logo.png"
+  },
+  {
+    "symbol": "WISH",
+    "name": "WISH",
+    "decimals": 8,
+    "address": "WISH-2D5",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/WISH-2D5/logo.png"
+  },
+  {
+    "symbol": "WRX",
+    "name": "WRX",
+    "decimals": 8,
+    "address": "WRX-ED1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/WRX-ED1/logo.png"
+  },
+  {
+    "symbol": "XBASE",
+    "name": "XBASE",
+    "decimals": 8,
+    "address": "XBASE-CD2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/XBASE-CD2/logo.png"
+  },
+  {
+    "symbol": "XRP",
+    "name": "XRP",
+    "decimals": 8,
+    "address": "XRP-BF2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/XRP-BF2/logo.png"
+  },
+  {
+    "symbol": "XRPBEAR",
+    "name": "XRPBEAR",
+    "decimals": 8,
+    "address": "XRPBEAR-00B",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/XRPBEAR-00B/logo.png"
+  },
+  {
+    "symbol": "XRPBULL",
+    "name": "XRPBULL",
+    "decimals": 8,
+    "address": "XRPBULL-E7C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/XRPBULL-E7C/logo.png"
+  },
+  {
+    "symbol": "XTZ",
+    "name": "XTZ",
+    "decimals": 8,
+    "address": "XTZ-F7A",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/XTZ-F7A/logo.png"
+  },
+  {
+    "symbol": "XVS",
+    "name": "XVS",
+    "decimals": 8,
+    "address": "XVS-795",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/XVS-795/logo.png"
+  },
+  {
+    "symbol": "YFII",
+    "name": "YFII",
+    "decimals": 8,
+    "address": "YFII-061",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/YFII-061/logo.png"
+  },
+  {
+    "symbol": "ZEBI",
+    "name": "ZEBI",
+    "decimals": 8,
+    "address": "ZEBI-84F",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ZEBI-84F/logo.png"
+  },
+  {
+    "symbol": "ZEC",
+    "name": "ZEC",
+    "decimals": 8,
+    "address": "ZEC-93E",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/binance/assets/ZEC-93E/logo.png"
+  }
+]
