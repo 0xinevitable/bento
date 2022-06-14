@@ -4,65 +4,17 @@ import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
 
-import { withCache } from './cache';
-import { priceFromCoinGecko } from './pricings/CoinGecko';
-import { Currency } from './pricings/Currency';
-import { ERC20TokenInput, ETHEREUM_TOKENS, KLAYTN_TOKENS } from './tokens';
+import { withCache } from '../cache';
+import { priceFromCoinGecko } from '../pricings/CoinGecko';
+import { Currency } from '../pricings/Currency';
+import { ERC20TokenInput, ETHEREUM_TOKENS, KLAYTN_TOKENS } from '../tokens';
+import { MinimalABIs } from './interfaces';
 
 export interface ERC20TokenBalance extends ERC20TokenInput {
   walletAddress: string;
   balance: number;
   price: number;
 }
-
-const MinimalABIs = {
-  ERC20: [
-    {
-      inputs: [
-        {
-          internalType: 'address',
-          name: 'who',
-          type: 'address',
-        },
-      ],
-      name: 'balanceOf',
-      outputs: [
-        {
-          internalType: 'uint256',
-          name: '',
-          type: 'uint256',
-        },
-      ],
-      type: 'function',
-    },
-  ],
-  LP: [
-    {
-      inputs: [],
-      name: 'getReserves',
-      outputs: [
-        { internalType: 'uint112', name: '_reserve0', type: 'uint112' },
-        { internalType: 'uint112', name: '_reserve1', type: 'uint112' },
-        { internalType: 'uint32', name: '_blockTimestampLast', type: 'uint32' },
-      ],
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'totalSupply',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      type: 'function',
-    },
-  ],
-  Staking: [
-    {
-      inputs: [{ name: '', type: 'address' }],
-      name: 'totalStakedBalanceOf',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      type: 'function',
-    },
-  ],
-};
 
 export interface Chain {
   // 기반 통화(Native Token)
