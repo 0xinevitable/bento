@@ -226,7 +226,7 @@ export class KlaytnChain implements Chain {
   currency = {
     symbol: 'KLAY',
     decimals: 18,
-    name: 'KLAYTN',
+    name: 'Klaytn',
     logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
     coinGeckoId: 'klay-token',
   };
