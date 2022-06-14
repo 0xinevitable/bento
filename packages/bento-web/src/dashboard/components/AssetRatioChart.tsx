@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled, { css } from 'styled-components';
 
 import { WalletBalance } from '../types/balance';
+import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
 
 const PIE_WIDTH = 12;
 
@@ -39,7 +40,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
     if (netWorthInNFTs > 0) {
       const percentage = (netWorthInNFTs / netWorthInUSD) * 100;
       items.push({
-        label: 'NFT',
+        label: 'NFTs',
         value: !percentage || isNaN(percentage) ? 0 : percentage,
       });
     }
@@ -50,10 +51,13 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
           return [];
         }
 
-        const { symbol, name, netWorth } = info;
+        const { name, netWorth } = info;
         const percentage = (netWorth / netWorthInUSD) * 100;
+        if (percentage < 0.01) {
+          return [];
+        }
         return {
-          label: `${symbol} ${name}`,
+          label: name,
           value: !percentage || isNaN(percentage) ? 0 : percentage,
         };
       }),
@@ -95,6 +99,19 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
               />
             ))}
           </Pie>
+          <Tooltip
+            content={({ payload }) => {
+              const first = payload[0]?.payload;
+              return (
+                <TooltipContent
+                  label={first?.label ?? ''}
+                  value={first?.value ?? 0}
+                  color={first?.fill ?? '#fff'}
+                />
+              );
+            }}
+            wrapperStyle={tooltipWrapperStyle}
+          />
         </PieChart>
       </ResponsiveContainer>
 
@@ -127,6 +144,8 @@ const AvatarContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  pointer-events: none;
 `;
 type AvatarProps = {
   src: string;
