@@ -20,6 +20,7 @@ export type EVMWalletBalance = {
 
   balance: number;
   price: number;
+  staking?: true;
 };
 
 export type SolanaWalletBalance = {

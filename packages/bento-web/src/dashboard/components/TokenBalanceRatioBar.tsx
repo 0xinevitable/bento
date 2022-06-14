@@ -23,12 +23,30 @@ export const TokenBalanceRatioBar: React.FC<TokenBalanceRatioBarProps> = ({
   balances,
 }) => {
   const assetRatios = useMemo(() => {
-    const wallet = balances.reduce((acc, balance) => acc + balance.balance, 0);
-    const staked = balances.reduce(
-      (acc, balance) =>
-        acc + ('delegations' in balance ? balance.delegations : 0),
-      0,
+    const { wallet, staked } = balances.reduce(
+      (acc, balance) => {
+        const stakingAmount =
+          'delegations' in balance
+            ? balance.delegations
+            : 'staking' in balance && !!balance.staking
+            ? balance.balance
+            : 0;
+        if (!!stakingAmount) {
+          acc.staked += stakingAmount;
+
+          if ('delegations' in balance) {
+            acc.wallet += balance.balance;
+          }
+        } else {
+          acc.wallet += balance.balance;
+        }
+        return acc;
+      },
+      { wallet: 0, staked: 0 },
     );
+    if (balances[0]?.symbol === 'SCNR') {
+      console.log({ wallet, staked });
+    }
     const total = wallet + staked;
 
     let items: AssetRatioItem[] = [];
@@ -52,7 +70,10 @@ export const TokenBalanceRatioBar: React.FC<TokenBalanceRatioBarProps> = ({
         const className = tierStyles[index];
 
         return (
-          <AnimatedTooltip key={type} label={`${type} ${percentage}%`}>
+          <AnimatedTooltip
+            key={type}
+            label={`${type} ${percentage.toLocaleString()}%`}
+          >
             <Bar className={className} style={{ maxWidth: `${percentage}%` }} />
           </AnimatedTooltip>
         );
