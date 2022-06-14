@@ -39,8 +39,15 @@ export const MinimalABIs = {
   ],
   Staking: [
     {
-      inputs: [{ name: '', type: 'address' }],
-      name: 'totalStakedBalanceOf',
+      inputs: [
+        { internalType: 'address', name: '', type: 'address' },
+        {
+          internalType: 'contract IERC20Upgradeable',
+          name: '',
+          type: 'address',
+        },
+      ],
+      name: 'stakedBalanceOf',
       outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
       type: 'function',
     },

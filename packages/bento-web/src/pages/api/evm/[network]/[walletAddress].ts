@@ -20,8 +20,10 @@ interface APIRequest extends NextApiRequest {
 
 const chains: Record<EVMBasedNetworks, Chain> = {
   ethereum: new EthereumChain(),
+  bsc: null,
   polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),
+  opensea: null,
 };
 
 const parseWallets = (mixedQuery: string) => {
