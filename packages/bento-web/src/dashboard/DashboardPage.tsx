@@ -38,6 +38,7 @@ const DashboardPage = () => {
   const [
     cosmosWalletQuery,
     ethereumWalletQuery,
+    bscWalletQuery,
     polygonWalletQuery,
     klaytnWalletQuery,
     solanaWalletQuery,
@@ -58,6 +59,9 @@ const DashboardPage = () => {
         if (wallet.networks.includes('ethereum')) {
           _acc = { ..._acc, ethereum: [..._acc.ethereum, wallet.address] };
         }
+        if (wallet.networks.includes('bsc')) {
+          _acc = { ..._acc, bsc: [..._acc.bsc, wallet.address] };
+        }
         if (wallet.networks.includes('polygon')) {
           _acc = { ..._acc, polygon: [..._acc.polygon, wallet.address] };
         }
@@ -66,12 +70,20 @@ const DashboardPage = () => {
         }
         return _acc;
       },
-      { cosmos: [], solana: [], klaytn: [], polygon: [], ethereum: [] },
+      {
+        cosmos: [],
+        ethereum: [],
+        bsc: [],
+        polygon: [],
+        klaytn: [],
+        solana: [],
+      },
     );
 
     return [
       addrs.cosmos.join(','),
       addrs.ethereum.join(','),
+      addrs.bsc.join(','),
       addrs.polygon.join(','),
       addrs.klaytn.join(','),
       addrs.solana.join(','),
@@ -80,6 +92,9 @@ const DashboardPage = () => {
 
   const { data: ethereumBalance = [] } = useAxiosSWR<EVMWalletBalance[]>(
     !ethereumWalletQuery ? null : `/api/evm/ethereum/${ethereumWalletQuery}`,
+  );
+  const { data: bscBalance = [] } = useAxiosSWR<EVMWalletBalance[]>(
+    !bscWalletQuery ? null : `/api/evm/bsc/${bscWalletQuery}`,
   );
   const { data: polygonBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
     !polygonWalletQuery ? null : `/api/evm/polygon/${polygonWalletQuery}`,
@@ -204,6 +219,7 @@ const DashboardPage = () => {
       groupBy<WalletBalance>(
         [
           ethereumBalance,
+          bscBalance,
           polygonBalance,
           klaytnBalance,
           cosmosHubBalance,
@@ -257,6 +273,7 @@ const DashboardPage = () => {
     return tokens.filter((v) => v.netWorth > 0);
   }, [
     ethereumBalance,
+    bscBalance,
     polygonBalance,
     klaytnBalance,
     cosmosHubBalance,
