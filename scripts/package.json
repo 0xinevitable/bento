@@ -6,6 +6,7 @@
     "generate-assets": "ttsc && node build/assets"
   },
   "dependencies": {
+    "@bento/client": "workspace:^",
     "@bento/common": "workspace:^",
     "@bento/core": "workspace:^",
     "find-yarn-workspace-root": "^2.0.0",

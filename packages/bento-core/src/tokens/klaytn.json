@@ -8,6 +8,84 @@
     "logo": "/assets/wklay.png"
   },
   {
+    "symbol": "oUSDT",
+    "name": "Orbit Bridge Klaytn USD Tether",
+    "decimals": 6,
+    "address": "0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167",
+    "coinGeckoId": "tether",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
+  },
+  {
+    "symbol": "oUSDC",
+    "name": "Orbit Bridge Klaytn USD Coin",
+    "decimals": 6,
+    "address": "0x754288077d0ff82af7a5317c7cb8c444d421d103",
+    "coinGeckoId": "usd-coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+  },
+  {
+    "symbol": "oETH",
+    "name": "Orbit Bridge Klaytn Ethereum",
+    "decimals": 18,
+    "address": "0x34d21b1e550d73cee41151c77f3c73359527a396",
+    "coinGeckoId": "ethereum",
+    "logo": "/assets/oeth.svg"
+  },
+  {
+    "symbol": "WEMIX",
+    "name": "WEMIX",
+    "decimals": 18,
+    "address": "0x5096db80b21ef45230c9e423c373f1fc9c0198dd",
+    "coinGeckoId": "wemix-token",
+    "logo": "/assets/wemix.png"
+  },
+  {
+    "symbol": "KDAI",
+    "name": "Klaytn Dai",
+    "decimals": 18,
+    "address": "0x5c74070fdea071359b86082bd9f9b3deaafbe32b",
+    "coinGeckoId": "dai",
+    "logo": "/assets/kdai.png"
+  },
+  {
+    "symbol": "oXRP",
+    "name": "Orbit Bridge Klaytn Ripple",
+    "decimals": 6,
+    "address": "0x9eaefb09fe4aabfbe6b1ca316a3c36afc83a393f",
+    "coinGeckoId": "ripple",
+    "logo": "/assets/oxrp.svg"
+  },
+  {
+    "symbol": "KSD",
+    "name": "Kokoa Stable Dollar",
+    "decimals": 18,
+    "address": "0x4fa62f1f404188ce860c8f0041d6ac3765a72e67",
+    "logo": "/assets/ksd.png"
+  },
+  {
+    "symbol": "oWBTC",
+    "name": "Orbit Bridge Klaytn Wrapped BTC",
+    "decimals": 8,
+    "address": "0x16d0e1fbd024c600ca0380a4c5d57ee7a2ecbf9c",
+    "coinGeckoId": "bitcoin",
+    "logo": "/assets/owbtc.svg"
+  },
+  {
+    "symbol": "BORA",
+    "name": "BORA",
+    "decimals": 18,
+    "address": "0x02cbe46fb8a1f579254a9b485788f2d86cad51aa",
+    "coinGeckoId": "bora",
+    "logo": "/assets/bora.png"
+  },
+  {
+    "symbol": "PALA",
+    "name": "Pala Token",
+    "decimals": 18,
+    "address": "0x7a1cdca99fe5995ab8e317ede8495c07cbf488ad",
+    "logo": "/assets/pala.jpg"
+  },
+  {
     "symbol": "SCNR",
     "name": "Swapscanner",
     "decimals": 25,
@@ -23,36 +101,12 @@
     "logo": "/assets/klayswap.png"
   },
   {
-    "symbol": "oUSDC",
-    "name": "Orbit Bridge Klaytn USD Coin",
-    "decimals": 6,
-    "address": "0x754288077d0ff82af7a5317c7cb8c444d421d103",
-    "coinGeckoId": "usd-coin",
-    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
-  },
-  {
-    "symbol": "oUSDT",
-    "name": "Orbit Bridge Klaytn USD Tether",
-    "decimals": 6,
-    "address": "0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167",
-    "coinGeckoId": "tether",
-    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
-  },
-  {
     "symbol": "MBX",
     "name": "MARBLEX",
     "decimals": 18,
     "address": "0xd068c52d81f4409b9502da926ace3301cc41f623",
     "coinGeckoId": "marblex",
     "logo": "/assets/marblex.svg"
-  },
-  {
-    "symbol": "WEMIX",
-    "name": "WEMIX",
-    "decimals": 18,
-    "address": "0x5096db80b21ef45230c9e423c373f1fc9c0198dd",
-    "coinGeckoId": "wemix-token",
-    "logo": "/assets/wemix.png"
   },
   {
     "symbol": "CLA",

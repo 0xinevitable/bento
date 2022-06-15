@@ -10846,6 +10846,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "scripts@workspace:scripts"
   dependencies:
+    "@bento/client": "workspace:^"
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
     "@types/node": ^17.0.42
