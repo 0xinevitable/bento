@@ -220,7 +220,6 @@ export class KlaytnChain implements Chain {
   _SCNR_ADDRESS = '0x8888888888885b073f3c81258c27e83db228d5f3';
   _SCNR_STAKING = '0x7c59930d1613ca2813e5793da72b324712f6899d';
   getStakedSCNRInGovernance = async (address: string) => {
-    console.log(address, this._SCNR_STAKING);
     const staking = new this._provider.klay.Contract(
       MinimalABIs.Staking,
       this._SCNR_STAKING,
@@ -314,7 +313,6 @@ export class KlaytnChain implements Chain {
           // FIXME: Proper error handling
           return 0;
         });
-        console.log({ staked });
 
         return [
           balanceInfo,

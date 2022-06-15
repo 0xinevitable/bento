@@ -44,9 +44,6 @@ export const TokenBalanceRatioBar: React.FC<TokenBalanceRatioBarProps> = ({
       },
       { wallet: 0, staked: 0 },
     );
-    if (balances[0]?.symbol === 'SCNR') {
-      console.log({ wallet, staked });
-    }
     const total = wallet + staked;
 
     let items: AssetRatioItem[] = [];
