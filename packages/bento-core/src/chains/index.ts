@@ -130,10 +130,10 @@ export class EthereumChain implements Chain {
   };
 }
 
-export class BSCChain implements Chain {
+export class BNBChain implements Chain {
   currency = {
     symbol: 'BNB',
-    name: 'BSC',
+    name: 'BNB',
     logo: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
     decimals: 18,
     coinGeckoId: 'binancecoin',

@@ -1,7 +1,7 @@
 import { EVMBasedNetworks } from '@bento/common';
 import { safePromiseAll } from '@bento/common';
 import {
-  BSCChain,
+  BNBChain,
   Chain,
   ERC20TokenBalance,
   EthereumChain,
@@ -21,7 +21,7 @@ interface APIRequest extends NextApiRequest {
 
 const chains: Record<EVMBasedNetworks, Chain> = {
   ethereum: new EthereumChain(),
-  bsc: new BSCChain(),
+  bnb: new BNBChain(),
   polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),
   opensea: null,

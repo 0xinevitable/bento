@@ -38,7 +38,7 @@ const DashboardPage = () => {
   const [
     cosmosWalletQuery,
     ethereumWalletQuery,
-    bscWalletQuery,
+    bnbWalletQuery,
     polygonWalletQuery,
     klaytnWalletQuery,
     solanaWalletQuery,
@@ -59,8 +59,8 @@ const DashboardPage = () => {
         if (wallet.networks.includes('ethereum')) {
           _acc = { ..._acc, ethereum: [..._acc.ethereum, wallet.address] };
         }
-        if (wallet.networks.includes('bsc')) {
-          _acc = { ..._acc, bsc: [..._acc.bsc, wallet.address] };
+        if (wallet.networks.includes('bnb')) {
+          _acc = { ..._acc, bnb: [..._acc.bnb, wallet.address] };
         }
         if (wallet.networks.includes('polygon')) {
           _acc = { ..._acc, polygon: [..._acc.polygon, wallet.address] };
@@ -73,7 +73,7 @@ const DashboardPage = () => {
       {
         cosmos: [],
         ethereum: [],
-        bsc: [],
+        bnb: [],
         polygon: [],
         klaytn: [],
         solana: [],
@@ -83,7 +83,7 @@ const DashboardPage = () => {
     return [
       addrs.cosmos.join(','),
       addrs.ethereum.join(','),
-      addrs.bsc.join(','),
+      addrs.bnb.join(','),
       addrs.polygon.join(','),
       addrs.klaytn.join(','),
       addrs.solana.join(','),
@@ -93,8 +93,8 @@ const DashboardPage = () => {
   const { data: ethereumBalance = [] } = useAxiosSWR<EVMWalletBalance[]>(
     !ethereumWalletQuery ? null : `/api/evm/ethereum/${ethereumWalletQuery}`,
   );
-  const { data: bscBalance = [] } = useAxiosSWR<EVMWalletBalance[]>(
-    !bscWalletQuery ? null : `/api/evm/bsc/${bscWalletQuery}`,
+  const { data: bnbBalance = [] } = useAxiosSWR<EVMWalletBalance[]>(
+    !bnbWalletQuery ? null : `/api/evm/bnb/${bnbWalletQuery}`,
   );
   const { data: polygonBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
     !polygonWalletQuery ? null : `/api/evm/polygon/${polygonWalletQuery}`,
@@ -219,7 +219,7 @@ const DashboardPage = () => {
       groupBy<WalletBalance>(
         [
           ethereumBalance,
-          bscBalance,
+          bnbBalance,
           polygonBalance,
           klaytnBalance,
           cosmosHubBalance,
@@ -273,7 +273,7 @@ const DashboardPage = () => {
     return tokens.filter((v) => v.netWorth > 0);
   }, [
     ethereumBalance,
-    bscBalance,
+    bnbBalance,
     polygonBalance,
     klaytnBalance,
     cosmosHubBalance,

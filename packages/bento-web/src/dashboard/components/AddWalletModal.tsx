@@ -31,9 +31,9 @@ const NETWORKS: Network[] = [
     logo: '/assets/ethereum.png',
   },
   {
-    id: 'bsc',
+    id: 'bnb',
     type: 'evm',
-    name: 'BSC',
+    name: 'BNB',
     logo: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
   },
   {

@@ -1,4 +1,4 @@
-import _BNB_TOKENS from './bsc.json';
+import _BNB_TOKENS from './bnb.json';
 import _ETHEREUM_TOKENS from './ethereum.json';
 import _KLAYTN_TOKENS from './klaytn.json';
 
