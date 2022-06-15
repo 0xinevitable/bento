@@ -113,7 +113,11 @@ export const update = async () => {
     } else {
       // replace undefined values
       const index = acc.indexOf(prev);
-      acc[index] = { ...acc[index], ...token };
+      acc[index] = {
+        ...acc[index],
+        ...token,
+        logo: acc[index].logo ?? token.logo,
+      };
     }
     return acc;
   }, previousTokens);
