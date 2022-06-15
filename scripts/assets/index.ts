@@ -20,13 +20,6 @@ const CHAINS = {
       './packages/bento-core/src/tokens/ethereum.json',
     ),
   },
-  BSC: {
-    key: 'binance',
-    path: path.resolve(
-      WORKSPACE_ROOT_PATH,
-      './packages/bento-core/src/tokens/bsc.json',
-    ),
-  },
   POLYGON: {
     key: 'polygon',
     path: path.resolve(
@@ -75,17 +68,20 @@ const updateAssets = async (chain: { key: string; path: string }) => {
       ) {
         return [];
       }
-      const coinGeckoId = coingeckoTokenList.find(
+      const coinGeckoToken = coingeckoTokenList.find(
         (v) =>
-          v.name.toLowerCase() === token.name.toLowerCase() &&
-          v.symbol.toLowerCase() === token.name.toLowerCase(),
-      )?.id;
+          v.platforms.ethereum?.toLowerCase() === token.address.toLowerCase(),
+      );
+      let name: string = coinGeckoToken?.name ?? token.name;
+      if (['ethereum', 'polygon'].includes(chain.key) && name === 'WETH') {
+        name = 'Wrapped Ether';
+      }
       return {
         symbol: token.symbol,
-        name: token.symbol,
+        name,
         decimals: token.decimals,
         address: token.address,
-        coinGeckoId,
+        coinGeckoId: coinGeckoToken?.id,
         logo: token.logoURI,
       };
     });
@@ -94,10 +90,15 @@ const updateAssets = async (chain: { key: string; path: string }) => {
     await fs.readFile(chain.path, 'utf8'),
   ) as ERC20TokenInput[];
   const newTokens = tokens.reduce((acc, token) => {
-    if (
-      !acc.find((v) => v.address.toLowerCase() === token.address.toLowerCase())
-    ) {
+    const prev = acc.find(
+      (v) => v.address?.toLowerCase() === token.address?.toLowerCase(),
+    );
+    if (!prev) {
       acc.push(token);
+    } else {
+      // replace undefined values
+      const index = acc.indexOf(prev);
+      acc[index] = { ...acc[index], ...token };
     }
     return acc;
   }, previousTokens);
