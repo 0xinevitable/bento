@@ -26,6 +26,7 @@ export interface Chain {
     coinGeckoId?: string;
     coinMinimalDenom?: string; // Only for Cosmos SDK based chains
   };
+  chainId?: number;
   _provider?: any;
   getCurrencyPrice: (currency?: Currency) => Promise<number>;
   getBalance: (address: string) => Promise<number>;
@@ -40,6 +41,7 @@ export class EthereumChain implements Chain {
     decimals: 18,
     coinGeckoId: 'ethereum',
   };
+  chainId = 1;
   _provider = new JsonRpcProvider(
     'https://mainnet.infura.io/v3/fcb656a7b4d14c9f9b0803a5d7475877',
   );
@@ -60,7 +62,7 @@ export class EthereumChain implements Chain {
       this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
     const { data } = await axios
       .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/1/address/${walletAddress}/balances_v2/`,
+        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
         {
           headers: {
             Authorization: `Basic ${Base64.encode(API_KEY)}`,
@@ -131,6 +133,7 @@ export class BSCChain implements Chain {
     decimals: 18,
     coinGeckoId: 'binancecoin',
   };
+  chainId = 56;
   _provider = new JsonRpcProvider('https://bsc-dataseed1.binance.org');
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
@@ -149,7 +152,7 @@ export class BSCChain implements Chain {
       this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
     const { data } = await axios
       .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/56/address/${walletAddress}/balances_v2/`,
+        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
         {
           headers: {
             Authorization: `Basic ${Base64.encode(API_KEY)}`,
@@ -271,6 +274,7 @@ export class KlaytnChain implements Chain {
     logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
     coinGeckoId: 'klay-token',
   };
+  chainId = 8217;
   _provider = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
@@ -330,7 +334,7 @@ export class KlaytnChain implements Chain {
 
     const { data } = await axios
       .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/8217/address/${walletAddress}/balances_v2/`,
+        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
         {
           headers: {
             Authorization: `Basic ${Base64.encode(API_KEY)}`,
