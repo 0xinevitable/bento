@@ -29,44 +29,33 @@ const CHAIN_OUTPUT_PATH = path.resolve(
 );
 
 export const update = async () => {
-  const result = await fs.readdir(
-    path.resolve(TRUSTWALLET_ASSETS_PATH, './blockchains/polygon'),
+  const tokenAddrs = await fs.readdir(
+    path.resolve(TRUSTWALLET_ASSETS_PATH, './blockchains/polygon/assets'),
   );
-  const tokensPromise = result.flatMap(async (filename) => {
-    if (!filename.endsWith('.json')) {
-      return [];
-    }
-    const filePath = path.resolve(
-      TRUSTWALLET_ASSETS_PATH,
-      './blockchains/polygon',
-      filename,
-    );
-    const content = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(content).tokens as TokenItem[];
-  });
-  const tokens: ERC20TokenInput[] = (await safePromiseAll(tokensPromise))
-    .flat()
-    .flatMap((token) => {
-      // if (token.type !== 'POLYGON') {
-      //   return [];
-      // }
+  const tokens = await safePromiseAll(
+    tokenAddrs.map(async (tokenAddress) => {
+      const infoFilePath = path.resolve(
+        TRUSTWALLET_ASSETS_PATH,
+        `./blockchains/polygon/assets/${tokenAddress}/info.json`,
+      );
+      const token = JSON.parse(await fs.readFile(infoFilePath, 'utf8'));
       const coinGeckoToken = coingeckoTokenList.find(
         (v) =>
-          v.platforms.polygon?.toLowerCase() === token.address.toLowerCase(),
+          v.platforms['polygon-pos']?.toLowerCase() ===
+          tokenAddress.toLowerCase(),
       );
-      let name: string = coinGeckoToken?.name ?? token.name;
-      if (name === 'WETH') {
-        name = 'Wrapped Ether';
-      }
+      const logoURI = `https://assets-cdn.trustwallet.com/blockchains/solana/assets/${tokenAddress}/logo.png`;
+
       return {
         symbol: token.symbol,
-        name,
+        name: coinGeckoToken?.name ?? token.name,
         decimals: token.decimals,
-        address: token.address,
+        address: tokenAddress,
         coinGeckoId: coinGeckoToken?.id,
-        logo: token.logoURI,
+        logo: logoURI,
       };
-    });
+    }),
+  );
 
   const previousTokens = JSON.parse(
     await fs.readFile(CHAIN_OUTPUT_PATH, 'utf8'),
