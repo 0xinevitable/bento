@@ -1,6 +1,7 @@
 import { EVMBasedNetworks } from '@bento/common';
 import { safePromiseAll } from '@bento/common';
 import {
+  BNBChain,
   Chain,
   ERC20TokenBalance,
   EthereumChain,
@@ -20,11 +21,12 @@ interface APIRequest extends NextApiRequest {
 
 const chains: Record<EVMBasedNetworks, Chain> = {
   ethereum: new EthereumChain(),
-  bsc: null,
+  bnb: new BNBChain(),
   polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),
   opensea: null,
 };
+const SUPPORTED_CHAINS = Object.keys(chains).filter((v) => !!chains[v]);
 
 const parseWallets = (mixedQuery: string) => {
   const query = mixedQuery.toLowerCase();
@@ -53,7 +55,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   }[] = (
     await safePromiseAll(
       wallets.map(async (walletAddress) => {
-        if (['ethereum', 'polygon', 'klaytn'].includes(network)) {
+        if (SUPPORTED_CHAINS.includes(network)) {
           const chain = chains[network];
           const getTokenBalances = async (): Promise<ERC20TokenBalance[]> =>
             !!chain.getTokenBalances

@@ -96,7 +96,7 @@ export const update = async () => {
 
   const CHAIN_OUTPUT_PATH = path.resolve(
     WORKSPACE_ROOT_PATH,
-    './packages/bento-core/src/tokens/bsc.json',
+    './packages/bento-core/src/tokens/bnb.json',
   );
 
   let previousTokens: ERC20TokenInput[] = [];
@@ -113,7 +113,11 @@ export const update = async () => {
     } else {
       // replace undefined values
       const index = acc.indexOf(prev);
-      acc[index] = { ...acc[index], ...token };
+      acc[index] = {
+        ...acc[index],
+        ...token,
+        logo: acc[index].logo ?? token.logo,
+      };
     }
     return acc;
   }, previousTokens);

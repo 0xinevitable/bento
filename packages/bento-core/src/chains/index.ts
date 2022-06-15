@@ -7,7 +7,12 @@ import Caver from 'caver-js';
 import { withCache } from '../cache';
 import { priceFromCoinGecko } from '../pricings/CoinGecko';
 import { Currency } from '../pricings/Currency';
-import { ERC20TokenInput, ETHEREUM_TOKENS, KLAYTN_TOKENS } from '../tokens';
+import {
+  BNB_TOKENS,
+  ERC20TokenInput,
+  ETHEREUM_TOKENS,
+  KLAYTN_TOKENS,
+} from '../tokens';
 import { MinimalABIs } from './interfaces';
 
 export interface ERC20TokenBalance extends ERC20TokenInput {
@@ -26,6 +31,7 @@ export interface Chain {
     coinGeckoId?: string;
     coinMinimalDenom?: string; // Only for Cosmos SDK based chains
   };
+  chainId?: number;
   _provider?: any;
   getCurrencyPrice: (currency?: Currency) => Promise<number>;
   getBalance: (address: string) => Promise<number>;
@@ -40,6 +46,7 @@ export class EthereumChain implements Chain {
     decimals: 18,
     coinGeckoId: 'ethereum',
   };
+  chainId = 1;
   _provider = new JsonRpcProvider(
     'https://mainnet.infura.io/v3/fcb656a7b4d14c9f9b0803a5d7475877',
   );
@@ -60,7 +67,7 @@ export class EthereumChain implements Chain {
       this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
     const { data } = await axios
       .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/1/address/${walletAddress}/balances_v2/`,
+        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
         {
           headers: {
             Authorization: `Basic ${Base64.encode(API_KEY)}`,
@@ -91,7 +98,97 @@ export class EthereumChain implements Chain {
       }
       const symbol = token.contract_ticker_symbol;
       const tokenInfo = ETHEREUM_TOKENS.find(
-        (v) => v.address === token.contract_address,
+        (v) => v.address.toLowerCase() === token.contract_address,
+      );
+      const getPrice = async () => {
+        if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
+          // return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
+          //   (error) => {
+          //     console.error(error);
+          //     return 0;
+          //   },
+          // );
+          return undefined;
+        }
+        return 0;
+      };
+      const price = await getPrice();
+      return {
+        walletAddress,
+        name: tokenInfo?.name ?? token.contract_name,
+        symbol: tokenInfo?.symbol ?? symbol,
+        decimals: token.contract_decimals,
+        address: token.contract_address,
+        logo: tokenInfo?.logo,
+        coinGeckoId: tokenInfo?.coinGeckoId,
+        coinMarketCapId: tokenInfo?.coinMarketCapId,
+        balance,
+        price,
+      };
+    }) as Promise<ERC20TokenBalance>[];
+    return safePromiseAll(promises);
+  };
+}
+
+export class BNBChain implements Chain {
+  currency = {
+    symbol: 'BNB',
+    name: 'BNB',
+    logo: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
+    decimals: 18,
+    coinGeckoId: 'binancecoin',
+  };
+  chainId = 56;
+  _provider = new JsonRpcProvider('https://bsc-dataseed1.binance.org');
+  getCurrencyPrice = (currency: Currency = 'usd') =>
+    priceFromCoinGecko(this.currency.coinGeckoId, currency);
+  getBalance = async (address: string) => {
+    const rawBalance = await this._provider.getBalance(address);
+    const balance = Number(rawBalance) / 10 ** this.currency.decimals;
+    return balance;
+  };
+
+  _API_KEYS = [
+    'ckey_ec92d129ed8a498f9bca510830b:',
+    'ckey_7af720dd03ef4a15afc1b44e2b4:',
+  ];
+  getTokenBalances = async (walletAddress: string) => {
+    const API_KEY =
+      this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
+    const { data } = await axios
+      .get<TokenBalancesResponse>(
+        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
+        {
+          headers: {
+            Authorization: `Basic ${Base64.encode(API_KEY)}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .catch((error) => {
+        console.error(error);
+        return { data: { data: { items: [] } } };
+      });
+
+    const promises = data.data.items.flatMap(async (token) => {
+      if (token.type === 'nft') {
+        return [];
+      }
+      if (
+        token.contract_address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' // Klaytn
+      ) {
+        return [];
+      }
+      const balance =
+        typeof token.balance === 'string'
+          ? Number(token.balance) / 10 ** token.contract_decimals
+          : 0;
+      if (balance <= 0) {
+        return [];
+      }
+      const symbol = token.contract_ticker_symbol;
+      const tokenInfo = BNB_TOKENS.find(
+        (v) => v.address.toLowerCase() === token.contract_address,
       );
       const getPrice = async () => {
         if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
@@ -182,6 +279,7 @@ export class KlaytnChain implements Chain {
     logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
     coinGeckoId: 'klay-token',
   };
+  chainId = 8217;
   _provider = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
@@ -241,7 +339,7 @@ export class KlaytnChain implements Chain {
 
     const { data } = await axios
       .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/8217/address/${walletAddress}/balances_v2/`,
+        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
         {
           headers: {
             Authorization: `Basic ${Base64.encode(API_KEY)}`,
@@ -274,7 +372,7 @@ export class KlaytnChain implements Chain {
         return [];
       }
       const tokenInfo = KLAYTN_TOKENS.find(
-        (v) => v.address === token.contract_address,
+        (v) => v.address.toLowerCase() === token.contract_address,
       );
       const getPrice = async () => {
         if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
