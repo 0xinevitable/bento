@@ -2591,6 +2591,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@next/bundle-analyzer", "npm:12.1.6"],\
             ["@react-spring/web", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.4.5"],\
             ["@solana/web3.js", "npm:1.44.0"],\
+            ["@supabase/supabase-js", "npm:1.35.3"],\
             ["@types/date-fns", "npm:2.6.0"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.chunk", "npm:4.2.7"],\
@@ -4317,6 +4318,71 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@supabase/functions-js", [\
+        ["npm:1.3.3", {\
+          "packageLocation": "./.yarn/cache/@supabase-functions-js-npm-1.3.3-eb00f61b08-dd46a70e43.zip/node_modules/@supabase/functions-js/",\
+          "packageDependencies": [\
+            ["@supabase/functions-js", "npm:1.3.3"],\
+            ["cross-fetch", "npm:3.1.5"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@supabase/gotrue-js", [\
+        ["npm:1.22.16", {\
+          "packageLocation": "./.yarn/cache/@supabase-gotrue-js-npm-1.22.16-1b0d080d7e-834123bf2c.zip/node_modules/@supabase/gotrue-js/",\
+          "packageDependencies": [\
+            ["@supabase/gotrue-js", "npm:1.22.16"],\
+            ["cross-fetch", "npm:3.1.5"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@supabase/postgrest-js", [\
+        ["npm:0.37.3", {\
+          "packageLocation": "./.yarn/cache/@supabase-postgrest-js-npm-0.37.3-fe5239ccb9-40a33d09a9.zip/node_modules/@supabase/postgrest-js/",\
+          "packageDependencies": [\
+            ["@supabase/postgrest-js", "npm:0.37.3"],\
+            ["cross-fetch", "npm:3.1.5"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@supabase/realtime-js", [\
+        ["npm:1.7.2", {\
+          "packageLocation": "./.yarn/cache/@supabase-realtime-js-npm-1.7.2-2857f5eac6-355d0bb073.zip/node_modules/@supabase/realtime-js/",\
+          "packageDependencies": [\
+            ["@supabase/realtime-js", "npm:1.7.2"],\
+            ["@types/phoenix", "npm:1.5.4"],\
+            ["websocket", "npm:1.0.34"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@supabase/storage-js", [\
+        ["npm:1.7.1", {\
+          "packageLocation": "./.yarn/cache/@supabase-storage-js-npm-1.7.1-7704db45d1-c7447ff7ca.zip/node_modules/@supabase/storage-js/",\
+          "packageDependencies": [\
+            ["@supabase/storage-js", "npm:1.7.1"],\
+            ["cross-fetch", "npm:3.1.5"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@supabase/supabase-js", [\
+        ["npm:1.35.3", {\
+          "packageLocation": "./.yarn/cache/@supabase-supabase-js-npm-1.35.3-209b19e513-2715ae2452.zip/node_modules/@supabase/supabase-js/",\
+          "packageDependencies": [\
+            ["@supabase/supabase-js", "npm:1.35.3"],\
+            ["@supabase/functions-js", "npm:1.3.3"],\
+            ["@supabase/gotrue-js", "npm:1.22.16"],\
+            ["@supabase/postgrest-js", "npm:0.37.3"],\
+            ["@supabase/realtime-js", "npm:1.7.2"],\
+            ["@supabase/storage-js", "npm:1.7.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@svgr/babel-plugin-add-jsx-attribute", [\
         ["npm:6.0.0", {\
           "packageLocation": "./.yarn/cache/@svgr-babel-plugin-add-jsx-attribute-npm-6.0.0-617b96ba2c-8200dfa2ee.zip/node_modules/@svgr/babel-plugin-add-jsx-attribute/",\
@@ -4884,6 +4950,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@types/pbkdf2", "npm:3.1.0"],\
             ["@types/node", "npm:17.0.42"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/phoenix", [\
+        ["npm:1.5.4", {\
+          "packageLocation": "./.yarn/cache/@types-phoenix-npm-1.5.4-280fbfc1c0-be6635e3dd.zip/node_modules/@types/phoenix/",\
+          "packageDependencies": [\
+            ["@types/phoenix", "npm:1.5.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7482,6 +7557,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cross-fetch", "npm:2.2.6"],\
             ["node-fetch", "virtual:9c0f76151f4c3b88a21fa97c32511955817ad3ef934e8c1532c5676b8cd77a1a75316118d89ec7aaf5249ebda8a4fd664be036dc2ebf4229bc67ef6fa2de5971#npm:2.6.7"],\
             ["whatwg-fetch", "npm:2.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:3.1.5", {\
+          "packageLocation": "./.yarn/cache/cross-fetch-npm-3.1.5-e414995db9-f6b8c6ee3e.zip/node_modules/cross-fetch/",\
+          "packageDependencies": [\
+            ["cross-fetch", "npm:3.1.5"],\
+            ["node-fetch", "virtual:9c0f76151f4c3b88a21fa97c32511955817ad3ef934e8c1532c5676b8cd77a1a75316118d89ec7aaf5249ebda8a4fd664be036dc2ebf4229bc67ef6fa2de5971#npm:2.6.7"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -15419,6 +15502,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["nan", "npm:2.16.0"],\
             ["node-gyp", "npm:9.0.0"],\
             ["typedarray-to-buffer", "npm:3.1.5"],\
+            ["yaeti", "npm:0.0.6"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.0.34", {\
+          "packageLocation": "./.yarn/cache/websocket-npm-1.0.34-3aaa6c5dc0-8a0ce6d79c.zip/node_modules/websocket/",\
+          "packageDependencies": [\
+            ["websocket", "npm:1.0.34"],\
+            ["bufferutil", "npm:4.0.6"],\
+            ["debug", "virtual:ad73f7eebffd9f95af03bcab3ac4e326aa5af480f9ee144d7c611f1121916e056e8fecbdc19b68cf5a41d2186c4861acdd4ec7e678f803a2cfb5b6a5f5ce7107#npm:2.6.9"],\
+            ["es5-ext", "npm:0.10.61"],\
+            ["typedarray-to-buffer", "npm:3.1.5"],\
+            ["utf-8-validate", "npm:5.0.9"],\
             ["yaeti", "npm:0.0.6"]\
           ],\
           "linkType": "HARD"\

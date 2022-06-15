@@ -22,6 +22,7 @@
     "@iconify/react": "^3.2.2",
     "@react-spring/web": "^9.4.5",
     "@solana/web3.js": "^1.44.0",
+    "@supabase/supabase-js": "^1.35.3",
     "@walletconnect/encoding": "^1.0.1",
     "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^0.27.2",
