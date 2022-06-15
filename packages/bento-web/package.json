@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "env-cmd -f .env.development next dev",
+    "build": "env-cmd -f ${ENVFILE:-.env.development} next build",
     "build:analyze": "ANALYZE=true next build",
     "start": "next start"
   },
