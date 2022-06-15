@@ -1,5 +1,4 @@
 import { OpenSea, OpenSeaAsset } from '@bento/client';
-import { cachedAxios } from '@bento/client';
 import { safePromiseAll } from '@bento/common';
 import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import chunk from 'lodash.chunk';
