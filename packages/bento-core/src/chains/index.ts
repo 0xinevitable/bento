@@ -7,7 +7,12 @@ import Caver from 'caver-js';
 import { withCache } from '../cache';
 import { priceFromCoinGecko } from '../pricings/CoinGecko';
 import { Currency } from '../pricings/Currency';
-import { ERC20TokenInput, ETHEREUM_TOKENS, KLAYTN_TOKENS } from '../tokens';
+import {
+  BNB_TOKENS,
+  ERC20TokenInput,
+  ETHEREUM_TOKENS,
+  KLAYTN_TOKENS,
+} from '../tokens';
 import { MinimalABIs } from './interfaces';
 
 export interface ERC20TokenBalance extends ERC20TokenInput {
@@ -93,7 +98,7 @@ export class EthereumChain implements Chain {
       }
       const symbol = token.contract_ticker_symbol;
       const tokenInfo = ETHEREUM_TOKENS.find(
-        (v) => v.address === token.contract_address,
+        (v) => v.address.toLowerCase() === token.contract_address,
       );
       const getPrice = async () => {
         if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
@@ -182,8 +187,8 @@ export class BSCChain implements Chain {
         return [];
       }
       const symbol = token.contract_ticker_symbol;
-      const tokenInfo = ETHEREUM_TOKENS.find(
-        (v) => v.address === token.contract_address,
+      const tokenInfo = BNB_TOKENS.find(
+        (v) => v.address.toLowerCase() === token.contract_address,
       );
       const getPrice = async () => {
         if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
@@ -367,7 +372,7 @@ export class KlaytnChain implements Chain {
         return [];
       }
       const tokenInfo = KLAYTN_TOKENS.find(
-        (v) => v.address === token.contract_address,
+        (v) => v.address.toLowerCase() === token.contract_address,
       );
       const getPrice = async () => {
         if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
