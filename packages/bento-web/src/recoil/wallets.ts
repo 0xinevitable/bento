@@ -3,7 +3,7 @@ import { atom } from 'recoil';
 
 import { localStorageEffect } from './effects/localStorageEffect';
 
-const key = '@wallets';
+const key = '@wallets_v2';
 export const walletsAtom = atom<Wallet[]>({
   key,
   default: [],
