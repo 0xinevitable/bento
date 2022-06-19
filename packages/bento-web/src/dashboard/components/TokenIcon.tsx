@@ -8,8 +8,8 @@ type TokenIconProps = Omit<
   >,
   'ref'
 > & {
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
 };
 export const TokenIcon: React.FC<TokenIconProps> = ({
   className,

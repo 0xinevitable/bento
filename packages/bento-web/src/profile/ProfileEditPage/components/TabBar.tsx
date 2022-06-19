@@ -17,7 +17,7 @@ export const TabBar = () => {
   }, []);
 
   const moveToSelector = (selector: string) => {
-    document.querySelector(selector).scrollIntoView({
+    document.querySelector(selector)?.scrollIntoView({
       behavior: 'smooth',
     });
   };

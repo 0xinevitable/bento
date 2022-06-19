@@ -66,9 +66,8 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     .flatMap((x) => (!!x.coinGeckoId ? x.coinGeckoId : []))
     .filter((x, i, a) => a.indexOf(x) === i);
 
-  const coinGeckoPricesById = await pricesFromCoinGecko(coinGeckoIds).catch(
-    () => ({}),
-  );
+  const coinGeckoPricesById: Record<string, number | undefined> =
+    await pricesFromCoinGecko(coinGeckoIds).catch(() => ({}));
 
   result.forEach((token) => {
     if (typeof token.price === 'undefined') {

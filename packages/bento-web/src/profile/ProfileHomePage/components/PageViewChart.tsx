@@ -29,7 +29,7 @@ const getWeek = () => {
 const generateExampleData = () => {
   const week = getWeek();
 
-  let data = [];
+  let data: { name: string; views: number; uniqueViews: number }[] = [];
 
   data = data.concat(
     week.flatMap((date) => {

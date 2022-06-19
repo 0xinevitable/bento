@@ -6,9 +6,16 @@ import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
 import '@/styles/global.css';
 
-function MyApp({ Component, pageProps }) {
+import { AppProps } from 'next/app';
+
+type MyAppProps = AppProps & {
+  // FIXME: Type mismatch here
+  Component: any;
+};
+
+function MyApp({ Component, pageProps }: MyAppProps) {
   useEffect(() => {
-    document.querySelector('body').classList.remove('preload');
+    document.querySelector('body')?.classList.remove('preload');
   }, []);
 
   return (

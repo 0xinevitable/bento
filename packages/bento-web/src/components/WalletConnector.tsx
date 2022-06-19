@@ -110,7 +110,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
               return;
             }
             wallet.networks = Array.from(
-              new Set([...draft.networks, ...wallet.networks]),
+              new Set([...(draft.networks ?? []), ...wallet.networks]),
             ) as any[];
           }
         }),

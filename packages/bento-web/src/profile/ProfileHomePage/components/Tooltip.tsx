@@ -20,7 +20,7 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
       <Label>{label}</Label>
       {payload?.map(({ name, value }, index) => (
         <Item key={index} style={{ color: colors?.[index] }}>
-          {`${name}: ${value.toLocaleString()}`}
+          {`${name}: ${(value ?? 0).toLocaleString()}`}
         </Item>
       ))}
     </Container>

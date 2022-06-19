@@ -82,7 +82,7 @@ type AddWalletModalProps = {
 };
 
 export const AddWalletModal: React.FC<AddWalletModalProps> = ({
-  visible: isVisible,
+  visible: isVisible = false,
   onDismiss,
 }) => {
   const [networks, setNetworks] = useState<Network[]>([]);
@@ -180,7 +180,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
             <WalletConnector
               networks={networks}
               onSave={() => {
-                onDismiss();
+                onDismiss?.();
                 setNetworks([]);
               }}
             />
