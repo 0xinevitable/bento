@@ -6,14 +6,24 @@ import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
 import '@/styles/global.css';
 
-function MyApp({ Component, pageProps }) {
+import { AppProps } from 'next/app';
+
+import { SessionManager } from '@/hooks/useSession';
+
+type MyAppProps = AppProps & {
+  // FIXME: Type mismatch here
+  Component: any;
+};
+
+function MyApp({ Component, pageProps }: MyAppProps) {
   useEffect(() => {
-    document.querySelector('body').classList.remove('preload');
+    document.querySelector('body')?.classList.remove('preload');
   }, []);
 
   return (
     <RecoilRoot>
       <ReactNotifications />
+      <SessionManager />
       <Component {...pageProps} />
       <div id="portal" />
     </RecoilRoot>

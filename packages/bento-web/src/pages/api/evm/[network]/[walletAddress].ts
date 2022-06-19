@@ -19,14 +19,16 @@ interface APIRequest extends NextApiRequest {
   };
 }
 
-const chains: Record<EVMBasedNetworks, Chain> = {
+const chains = {
   ethereum: new EthereumChain(),
   bnb: new BNBChain(),
   polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),
   opensea: null,
 };
-const SUPPORTED_CHAINS = Object.keys(chains).filter((v) => !!chains[v]);
+const SUPPORTED_CHAINS = Object.keys(chains).filter(
+  (v) => !!chains[v as keyof typeof chains],
+);
 
 const parseWallets = (mixedQuery: string) => {
   const query = mixedQuery.toLowerCase();
@@ -56,9 +58,10 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     await safePromiseAll(
       wallets.map(async (walletAddress) => {
         if (SUPPORTED_CHAINS.includes(network)) {
-          const chain = chains[network];
+          const chain = chains[network]!;
+
           const getTokenBalances = async (): Promise<ERC20TokenBalance[]> =>
-            !!chain.getTokenBalances
+            'getTokenBalances' in chain
               ? chain.getTokenBalances(walletAddress)
               : [];
 
@@ -93,7 +96,10 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     .flatMap((x) => (!!x.coinMarketCapId ? x.coinMarketCapId : []))
     .filter((x, i, a) => a.indexOf(x) === i);
 
-  const [coinGeckoPricesById, coinMarketCapPricesById] = await safePromiseAll([
+  const [coinGeckoPricesById, coinMarketCapPricesById]: Record<
+    string,
+    number | undefined
+  >[] = await safePromiseAll([
     pricesFromCoinGecko(coinGeckoIds).catch(() => ({})),
     pricesFromCoinMarketCap(coinMarketCapIds).catch(() => ({})),
   ]);

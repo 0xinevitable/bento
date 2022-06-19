@@ -8,7 +8,7 @@ import { TokenIcon } from './TokenIcon';
 type TokenBalanceItemProps = {
   symbol: string;
   name: string;
-  logo: string;
+  logo?: string;
   netWorth: number;
   amount: number;
   price: number;

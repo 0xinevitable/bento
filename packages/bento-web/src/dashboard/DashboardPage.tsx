@@ -1,5 +1,4 @@
 import { OpenSea, OpenSeaAsset } from '@bento/client';
-import { cachedAxios } from '@bento/client';
 import { safePromiseAll } from '@bento/common';
 import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import chunk from 'lodash.chunk';
@@ -43,7 +42,12 @@ const DashboardPage = () => {
     klaytnWalletQuery,
     solanaWalletQuery,
   ] = useMemo(() => {
-    const addrs = wallets.reduce(
+    const addrs = wallets.reduce<
+      Record<
+        'cosmos' | 'ethereum' | 'bnb' | 'polygon' | 'klaytn' | 'solana',
+        string[]
+      >
+    >(
       (acc, wallet) => {
         if (wallet.type === 'cosmos-sdk') {
           return { ...acc, cosmos: [...acc.cosmos, wallet.address] };
@@ -124,14 +128,18 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const fetchAssets = async (walletAddress: string) => {
-      let cursor: string | null = null;
+      let cursor: string | undefined = undefined;
       let firstFetch: boolean = true;
 
       while (firstFetch || !!cursor) {
-        const { assets, cursor: fetchedCursor } = await OpenSea.getAssets({
-          owner: walletAddress,
-          cursor,
-        });
+        // FIXME: TypeScript behaving strange here
+        const res: { assets: OpenSeaAsset[]; cursor: string | undefined } =
+          await OpenSea.getAssets({
+            owner: walletAddress,
+            cursor,
+          });
+
+        const { assets, cursor: fetchedCursor } = res;
         firstFetch = false;
         cursor = fetchedCursor;
 
@@ -139,7 +147,10 @@ const DashboardPage = () => {
           ...prev,
           [walletAddress]: {
             ...prev[walletAddress],
-            [cursor]: assets.map((v) => ({ ...v, walletAddress })),
+            [cursor ?? 'undefined']: assets.map((v) => ({
+              ...v,
+              walletAddress,
+            })),
           },
         }));
       }
@@ -241,7 +252,7 @@ const DashboardPage = () => {
           name: first.name,
           logo: first.logo,
           type: 'type' in first ? first.type : undefined,
-          tokenAddress: 'address' in first ? first.address : null,
+          tokenAddress: 'address' in first ? first.address : undefined,
           balances: balances,
           netWorth: balances.reduce(
             walletBalanceReducer(
@@ -351,7 +362,6 @@ const DashboardPage = () => {
                 key={`${info.symbol}-${
                   'tokenAddress' in info ? info.tokenAddress : 'native'
                 }`}
-                logo={info.logo ?? ''}
                 {...info}
               />
             ))}

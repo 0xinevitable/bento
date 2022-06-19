@@ -1,10 +1,13 @@
+import { Session } from '@supabase/supabase-js';
 import clsx from 'clsx';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
+import { useSession } from '@/hooks/useSession';
+import { Supabase } from '@/utils/Supabase';
 
 type WalletDraft = {
   type: string;
@@ -80,7 +83,7 @@ type AddWalletModalProps = {
 };
 
 export const AddWalletModal: React.FC<AddWalletModalProps> = ({
-  visible: isVisible,
+  visible: isVisible = false,
   onDismiss,
 }) => {
   const [networks, setNetworks] = useState<Network[]>([]);
@@ -91,6 +94,16 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
         ? [...prev, network]
         : prev.filter((v) => v.id !== network.id),
     );
+  }, []);
+
+  const { session } = useSession();
+  console.log({ session });
+
+  const onClickSignInGoogle = useCallback(async () => {
+    const { user, session, error } = await Supabase.auth.signIn({
+      provider: 'google',
+    });
+    console.log({ user, session, error });
   }, []);
 
   return (
@@ -108,6 +121,15 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
           )}
         >
           <section>
+            <h3 className="mb-3 font-bold text-white">Sign In</h3>
+            <div>
+              <button
+                className="m-1 p-2 bg-slate-200"
+                onClick={onClickSignInGoogle}
+              >
+                Google
+              </button>
+            </div>
             <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
             <div className="flex flex-wrap">
               {NETWORKS.map((network) => {
@@ -149,7 +171,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
             <WalletConnector
               networks={networks}
               onSave={() => {
-                onDismiss();
+                onDismiss?.();
                 setNetworks([]);
               }}
             />

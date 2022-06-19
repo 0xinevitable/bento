@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const QuestionMoreModal: React.FC<Props> = ({
-  isVisible,
+  isVisible = false,
   onDismiss,
 }) => {
   const onClickContainer = (event: React.MouseEvent) => {

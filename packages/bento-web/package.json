@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "env-cmd -f .env.development next dev",
+    "build": "env-cmd -f ${ENVFILE:-.env.development} next build",
     "build:analyze": "ANALYZE=true next build",
     "start": "next start"
   },
@@ -22,6 +22,7 @@
     "@iconify/react": "^3.2.2",
     "@react-spring/web": "^9.4.5",
     "@solana/web3.js": "^1.44.0",
+    "@supabase/supabase-js": "^1.35.3",
     "@walletconnect/encoding": "^1.0.1",
     "@walletconnect/web3-provider": "^1.7.8",
     "axios": "^0.27.2",
@@ -60,6 +61,7 @@
     "@types/react-dom": "^17.0.17",
     "@types/styled-components": "^5.1.25",
     "autoprefixer": "^10.4.7",
+    "env-cmd": "^10.1.0",
     "next-intercept-stdout": "^1.0.1",
     "next-plugin-svgr": "^1.1.1",
     "postcss": "^8.4.14",

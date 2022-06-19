@@ -73,7 +73,9 @@ export const QuestionItem: React.FC<Props> = ({
         </QuestionContainer>
         <MoreButton onClick={onClickMoreButton} />
       </Header>
-      <Answer>{question.response.answer}</Answer>
+      {!!question.response?.answer && (
+        <Answer>{question.response.answer}</Answer>
+      )}
     </Container>
   );
 };

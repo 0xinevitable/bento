@@ -5,6 +5,15 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const pick = (obj, keys) =>
+  keys.reduce(
+    (result, key) => ({
+      ...result,
+      [key]: obj[key],
+    }),
+    {},
+  );
+
 module.exports = withBundleAnalyzer(
   withInterceptStdout(
     withSvgr({
@@ -12,6 +21,11 @@ module.exports = withBundleAnalyzer(
       compiler: {
         styledComponents: true,
       },
+      publicRuntimeConfig: pick(process.env, [
+        'ENVIRONMENT',
+        'SUPABASE_URL',
+        'SUPABASE_ANON_KEY',
+      ]),
       webpack: (config) => {
         config.resolve.fallback = {
           ...config.resolve.fallback,

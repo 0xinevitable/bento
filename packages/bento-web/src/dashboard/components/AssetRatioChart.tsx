@@ -11,13 +11,13 @@ type AssetRatioChartProps = {
   tokenBalances: {
     symbol: string;
     name: string;
-    logo: string;
-    tokenAddress: string;
+    logo?: string;
+    tokenAddress?: string;
     balances: WalletBalance[];
     netWorth: number;
     amount: number;
     price: number;
-    type: 'nft';
+    type?: 'nft';
   }[];
   netWorthInUSD: number;
 };
@@ -101,7 +101,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
           </Pie>
           <Tooltip
             content={({ payload }) => {
-              const first = payload[0]?.payload;
+              const first = payload?.[0]?.payload;
               return (
                 <TooltipContent
                   label={first?.label ?? ''}
