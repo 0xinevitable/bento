@@ -8,6 +8,8 @@ import '@/styles/global.css';
 
 import { AppProps } from 'next/app';
 
+import { SessionManager } from '@/hooks/useSession';
+
 type MyAppProps = AppProps & {
   // FIXME: Type mismatch here
   Component: any;
@@ -21,6 +23,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   return (
     <RecoilRoot>
       <ReactNotifications />
+      <SessionManager />
       <Component {...pageProps} />
       <div id="portal" />
     </RecoilRoot>

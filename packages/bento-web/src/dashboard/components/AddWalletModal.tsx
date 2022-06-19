@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components';
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
+import { useSession } from '@/hooks/useSession';
 import { Supabase } from '@/utils/Supabase';
 
 type WalletDraft = {
@@ -95,18 +96,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     );
   }, []);
 
-  const [session, setSession] = useState<Session | null>(null);
-  useEffect(() => {
-    setSession(Supabase.auth.session());
-
-    Supabase.auth.onAuthStateChange((event, session) => {
-      if (event == 'SIGNED_IN') {
-        setSession(session);
-      }
-    });
-  }, []);
-
-  console.log(session);
+  const { session } = useSession();
+  console.log({ session });
 
   const onClickSignInGoogle = useCallback(async () => {
     const { user, session, error } = await Supabase.auth.signIn({
