@@ -2,14 +2,14 @@ import { Wallet } from '@bento/common';
 import { Session } from '@supabase/supabase-js';
 import clsx from 'clsx';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
 import { useSession } from '@/hooks/useSession';
-import { walletsAtom } from '@/recoil/wallets';
+import { useRevalidateWallets } from '@/hooks/useWallets';
 import { Supabase } from '@/utils/Supabase';
 
 type WalletDraft = {
@@ -99,9 +99,6 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     );
   }, []);
 
-  const { session } = useSession();
-  console.log({ session });
-
   const onClickSignInGoogle = useCallback(async () => {
     const { user, session, error } = await Supabase.auth.signIn(
       { provider: 'google' },
@@ -110,27 +107,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     console.log({ user, session, error });
   }, []);
 
-  // FIXME: Move somewhare global
-  const [wallets, setWallets] = useRecoilState(walletsAtom);
-
-  const revalidateWallets = useCallback(async () => {
-    if (!session || !session.user) {
-      return;
-    }
-    const walletQuery = await Supabase.from('wallets')
-      .select('*')
-      .eq('user_id', session.user.id);
-    const wallets = walletQuery.data;
-    console.log({ wallets });
-
-    setWallets(wallets as Wallet[]);
-  }, [session]);
-
-  useEffect(() => {
-    if (wallets.length === 0) {
-      revalidateWallets();
-    }
-  }, [wallets, revalidateWallets]);
+  const revalidateWallets = useRevalidateWallets();
 
   return (
     <Portal>
@@ -199,7 +176,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
               onSave={() => {
                 onDismiss?.();
                 setNetworks([]);
-                revalidateWallets();
+                revalidateWallets?.();
               }}
             />
           </section>

@@ -9,6 +9,7 @@ import '@/styles/global.css';
 import { AppProps } from 'next/app';
 
 import { SessionManager } from '@/hooks/useSession';
+import { WalletManager } from '@/hooks/useWallets';
 
 type MyAppProps = AppProps & {
   // FIXME: Type mismatch here
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     <RecoilRoot>
       <ReactNotifications />
       <SessionManager />
+      <WalletManager />
       <Component {...pageProps} />
       <div id="portal" />
     </RecoilRoot>
