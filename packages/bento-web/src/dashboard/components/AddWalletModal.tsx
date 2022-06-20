@@ -1,12 +1,15 @@
+import { Wallet } from '@bento/common';
 import { Session } from '@supabase/supabase-js';
 import clsx from 'clsx';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
 import { useSession } from '@/hooks/useSession';
+import { walletsAtom } from '@/recoil/wallets';
 import { Supabase } from '@/utils/Supabase';
 
 type WalletDraft = {
@@ -107,6 +110,28 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     console.log({ user, session, error });
   }, []);
 
+  // FIXME: Move somewhare global
+  const [wallets, setWallets] = useRecoilState(walletsAtom);
+
+  const revalidateWallets = useCallback(async () => {
+    if (!session || !session.user) {
+      return;
+    }
+    const walletQuery = await Supabase.from('wallets')
+      .select('*')
+      .eq('user_id', session.user.id);
+    const wallets = walletQuery.data;
+    console.log({ wallets });
+
+    setWallets(wallets as Wallet[]);
+  }, [session]);
+
+  useEffect(() => {
+    if (wallets.length === 0) {
+      revalidateWallets();
+    }
+  }, [wallets, revalidateWallets]);
+
   return (
     <Portal>
       <OverlayWrapper
@@ -174,6 +199,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
               onSave={() => {
                 onDismiss?.();
                 setNetworks([]);
+                revalidateWallets();
               }}
             />
           </section>
