@@ -2,6 +2,7 @@ import React from 'react';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
+import { useSignOut } from '@/hooks/useSignOut';
 import { LoginNudge } from '@/profile/components/LoginNudge';
 
 // import { Analytics } from '@/utils/analytics';
@@ -11,7 +12,8 @@ const SettingsPage = () => {
   //   Analytics.logEvent('view_settings');
   // }, []);
 
-  const { session, signOut } = useSession();
+  const { session } = useSession();
+  const { signOut } = useSignOut();
 
   const isLoggedIn = !!session;
 
