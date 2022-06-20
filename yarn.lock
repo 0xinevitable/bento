@@ -1495,6 +1495,7 @@ __metadata:
     lodash.chunk: ^4.2.0
     lodash.groupby: ^4.6.0
     next: ^12.1.6
+    next-composed-plugins: ^1.0.0
     next-intercept-stdout: ^1.0.1
     next-plugin-svgr: ^1.1.1
     postcss: ^8.4.14
@@ -9363,6 +9364,13 @@ __metadata:
   version: 2.1.1
   resolution: "nested-error-stacks@npm:2.1.1"
   checksum: 5f452fad75db8480b4db584e1602894ff5977f8bf3d2822f7ba5cb7be80e89adf1fffa34dada3347ef313a4288850b4486eb0635b315c32bdfb505577e8880e3
+  languageName: node
+  linkType: hard
+
+"next-composed-plugins@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "next-composed-plugins@npm:1.0.0"
+  checksum: 922c7c073d79dce7465c820e149b7f069f21f4a18b67fc9de3a615155a6f9f9766fe2f8bdf93674712a17fb365f0c5c96644f5487e3bec72f4de2ebab031e96c
   languageName: node
   linkType: hard
 

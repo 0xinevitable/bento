@@ -2615,6 +2615,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash.chunk", "npm:4.2.0"],\
             ["lodash.groupby", "npm:4.6.0"],\
             ["next", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:12.1.6"],\
+            ["next-composed-plugins", "npm:1.0.0"],\
             ["next-intercept-stdout", "npm:1.0.1"],\
             ["next-plugin-svgr", "npm:1.1.1"],\
             ["postcss", "npm:8.4.14"],\
@@ -12094,6 +12095,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "react-dom",\
             "react",\
             "sass"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["next-composed-plugins", [\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/next-composed-plugins-npm-1.0.0-5b99de31ad-922c7c073d.zip/node_modules/next-composed-plugins/",\
+          "packageDependencies": [\
+            ["next-composed-plugins", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
