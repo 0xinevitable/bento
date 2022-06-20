@@ -1,6 +1,6 @@
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
-import { useCallback, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { sessionAtom } from '@/recoil/session';
 import { Supabase } from '@/utils/Supabase';
@@ -41,16 +41,7 @@ export const SessionManager: React.FC = () => {
 };
 
 export const useSession = () => {
-  const [currentSession, setCurrentSession] = useRecoilState(sessionAtom);
+  const currentSession = useRecoilValue(sessionAtom);
 
-  // FIXME: Define once above all `useSession` calls
-  const signOut = useCallback(() => {
-    setCurrentSession(null);
-    Supabase.auth.signOut();
-  }, []);
-
-  return {
-    session: currentSession,
-    signOut,
-  };
+  return { session: currentSession };
 };
