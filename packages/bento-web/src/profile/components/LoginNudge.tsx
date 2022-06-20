@@ -9,7 +9,11 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
   return (
     <Wrapper className={className}>
       <Container>
-        <LockIllust src="/assets/illusts/lock.png" alt="" />
+        <LockIllust
+          className="lock-illust"
+          src="/assets/illusts/lock.png"
+          alt=""
+        />
         <Title className="text-3xl text-white font-bold">Log in to Bento</Title>
         <Content className="mt-10 flex flex-col gap-2">
           <Button className="google ring-1 ring-[#292c4b]/20">
