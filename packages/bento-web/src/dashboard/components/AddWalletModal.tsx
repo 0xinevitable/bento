@@ -1,27 +1,12 @@
-import { Wallet } from '@bento/common';
-import { Session } from '@supabase/supabase-js';
 import clsx from 'clsx';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
-import { useSession } from '@/hooks/useSession';
 import { useRevalidateWallets } from '@/hooks/useWallets';
 import { Supabase } from '@/utils/Supabase';
-
-type WalletDraft = {
-  type: string;
-  address: string;
-  networks: string[];
-};
-const defaultWallet: WalletDraft = {
-  type: '',
-  address: '',
-  networks: [],
-};
 
 export type Network = {
   id: string;
