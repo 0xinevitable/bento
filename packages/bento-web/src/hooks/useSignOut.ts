@@ -13,7 +13,7 @@ export const useSignOut = () => {
     setWallets([]);
     setCurrentSession(null);
     Supabase.auth.signOut();
-  }, []);
+  }, [setWallets, setCurrentSession]);
 
   return { signOut };
 };
