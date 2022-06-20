@@ -7,6 +7,8 @@ import Caver from 'caver-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nacl from 'tweetnacl';
 
+import { Supabase } from '@/utils/Supabase';
+
 type APIRequest = NextApiRequest &
   (
     | {
@@ -37,6 +39,14 @@ const caver = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
 export default async (req: APIRequest, res: NextApiResponse) => {
   const { walletType } = req.query;
   const { walletAddress, signature, nonce, ...optionalParams } = req.body;
+
+  const { user } = await Supabase.auth.api.getUserByCookie(req);
+  if (!user) {
+    res.status(401).json({ message: 'Unauthorized' });
+    return;
+  }
+
+  console.log(user.id);
 
   let isValid: boolean = false;
   const signedMessage = Base64.decode(nonce);
@@ -82,6 +92,22 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   if (!isValid) {
     return res.status(400).json({
       error: 'Invalid signature',
+    });
+  }
+
+  let { error } = await Supabase.from('wallets').upsert(
+    {
+      type: walletType,
+      address: walletAddress,
+      user_id: user.id,
+    },
+    {
+      returning: 'minimal', // Don't return the value after inserting
+    },
+  );
+  if (error) {
+    return res.status(400).json({
+      error: 'Failed to save wallet',
     });
   }
 
