@@ -10,9 +10,10 @@ type LoginNudgeProps = {
 
 export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
   const onClickLogin = useCallback(async (provider: 'google') => {
-    const { user, session, error } = await Supabase.auth.signIn({
-      provider,
-    });
+    const { user, session, error } = await Supabase.auth.signIn(
+      { provider },
+      { redirectTo: window.location.href },
+    );
     console.log({ user, session, error });
   }, []);
 

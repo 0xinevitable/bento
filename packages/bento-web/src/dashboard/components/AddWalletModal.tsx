@@ -100,9 +100,10 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   console.log({ session });
 
   const onClickSignInGoogle = useCallback(async () => {
-    const { user, session, error } = await Supabase.auth.signIn({
-      provider: 'google',
-    });
+    const { user, session, error } = await Supabase.auth.signIn(
+      { provider: 'google' },
+      { redirectTo: window.location.href },
+    );
     console.log({ user, session, error });
   }, []);
 
