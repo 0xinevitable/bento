@@ -126,9 +126,17 @@ export default async (req: APIRequest, res: NextApiResponse) => {
 
   let error: PostgrestError | null = null;
 
+  const walletArchitectureType =
+    walletType === 'phantom'
+      ? 'solana'
+      : walletType === 'keplr'
+      ? 'cosmos-sdk'
+      : 'evm';
+
   if ((prevNetworkQuery.data ?? []).length === 0) {
     const res = await Supabase.from('wallets').upsert(
       {
+        type: walletArchitectureType,
         address: walletAddress,
         user_id: user.id,
         networks: mergedNetworks,
@@ -142,6 +150,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
       .update(
         {
           id: update_id,
+          type: walletArchitectureType,
           address: walletAddress,
           user_id: user.id,
           networks: mergedNetworks,
