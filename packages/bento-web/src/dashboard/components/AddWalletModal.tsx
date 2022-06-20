@@ -20,7 +20,7 @@ const defaultWallet: WalletDraft = {
   networks: [],
 };
 
-type Network = {
+export type Network = {
   id: string;
   type: string;
   name: string;

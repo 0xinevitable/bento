@@ -6,6 +6,7 @@ import { useCallback, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
+import { Network } from '@/dashboard/components/AddWalletModal';
 import { walletsAtom } from '@/recoil/wallets';
 import { toast } from '@/utils/toast';
 
@@ -17,13 +18,14 @@ declare global {
   }
 }
 
-const validateSignature = async (
+const validateAndSaveWallet = async (
   params:
     | {
         walletType: 'web3' | 'kaikas' | 'phantom';
         walletAddress: string;
         signature: string;
         nonce: string;
+        networks: Network[];
       }
     | {
         walletType: 'keplr';
@@ -31,9 +33,10 @@ const validateSignature = async (
         signature: string;
         nonce: string;
         publicKeyValue: string;
+        networks: Network[];
       },
 ) => {
-  const { walletType, walletAddress, signature, nonce } = params;
+  const { walletType, walletAddress, signature, nonce, networks } = params;
   const { data } = await cachedAxios.post(`/api/auth/verify/${walletType}`, {
     walletAddress,
     signature,
@@ -41,6 +44,7 @@ const validateSignature = async (
     ...(walletType === 'keplr' && {
       publicKeyValue: params.publicKeyValue,
     }),
+    networks: Base64.encode(networks.map((v) => v.id).join(',')),
   });
   console.log({ data });
 };
@@ -121,6 +125,10 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
   );
 
   const connectMetaMask = useCallback(async () => {
+    if (!networks) {
+      return;
+    }
+
     const [
       { default: Web3Modal },
       { default: WalletConnectProvider },
@@ -169,19 +177,23 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       const signature = await signer.signMessage(messageToBeSigned);
 
       const walletType = 'web3';
-      await validateSignature({
+      await validateAndSaveWallet({
+        networks,
         walletType,
         walletAddress,
         signature,
         nonce: messageToBeSigned,
       });
-      saveWallet({ walletType, walletAddress });
     } catch (error) {
       console.error(error);
     }
   }, [saveWallet]);
 
   const connectKeplr = useCallback(async () => {
+    if (!networks) {
+      return;
+    }
+
     if (typeof window.keplr === 'undefined') {
       toast({
         type: 'error',
@@ -206,20 +218,24 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         );
 
       const walletType = 'keplr';
-      await validateSignature({
+      await validateAndSaveWallet({
+        networks,
         walletType,
         walletAddress,
         signature,
         nonce: messageToBeSigned,
         publicKeyValue: publicKey.value,
       });
-      saveWallet({ walletType, walletAddress });
     } catch (error) {
       console.error(error);
     }
   }, [saveWallet]);
 
   const connectKaikas = useCallback(async () => {
+    if (!networks) {
+      return;
+    }
+
     if (typeof window.klaytn === 'undefined') {
       toast({
         type: 'error',
@@ -241,19 +257,23 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       );
       const walletType = 'kaikas';
 
-      await validateSignature({
+      await validateAndSaveWallet({
+        networks,
         walletType,
         walletAddress,
         signature,
         nonce: messageToBeSigned,
       });
-      saveWallet({ walletType, walletAddress });
     } catch (error) {
       console.error(error);
     }
   }, [saveWallet]);
 
   const connectSolana = useCallback(async () => {
+    if (!networks) {
+      return;
+    }
+
     if (typeof window.solana === 'undefined') {
       toast({
         type: 'error',
@@ -274,13 +294,13 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     const signature = Buffer.from(signedMessage.signature).toString('hex');
 
     const walletType = 'phantom';
-    await validateSignature({
+    await validateAndSaveWallet({
+      networks,
       walletType,
       walletAddress,
       signature,
       nonce: messageToBeSigned,
     });
-    saveWallet({ walletType, walletAddress });
   }, [saveWallet]);
 
   return (

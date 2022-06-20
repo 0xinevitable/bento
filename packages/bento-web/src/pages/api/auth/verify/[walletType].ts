@@ -19,6 +19,7 @@ type APIRequest = NextApiRequest &
           walletAddress: string;
           signature: string;
           nonce: string;
+          networks: string;
         };
       }
     | {
@@ -30,6 +31,7 @@ type APIRequest = NextApiRequest &
           signature: string;
           nonce: string;
           publicKeyValue: string;
+          networks: string;
         };
       }
   );
@@ -45,8 +47,6 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     res.status(401).json({ message: 'Unauthorized' });
     return;
   }
-
-  console.log(user.id);
 
   let isValid: boolean = false;
   const signedMessage = Base64.decode(nonce);
@@ -95,17 +95,31 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     });
   }
 
+  const networks = (() => {
+    try {
+      return Base64.decode(optionalParams.networks).split(',');
+    } catch {
+      return [] as string[];
+    }
+  })();
+  if (networks.length === 0) {
+    return res.status(400).json({
+      error: 'Invalid networks',
+    });
+  }
+
   let { error } = await Supabase.from('wallets').upsert(
     {
-      type: walletType,
       address: walletAddress,
       user_id: user.id,
+      networks,
     },
     {
       returning: 'minimal', // Don't return the value after inserting
     },
   );
   if (error) {
+    console.log(error);
     return res.status(400).json({
       error: 'Failed to save wallet',
     });
