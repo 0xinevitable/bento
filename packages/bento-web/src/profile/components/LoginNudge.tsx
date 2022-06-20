@@ -1,11 +1,21 @@
 import { Icon } from '@iconify/react';
+import { useCallback } from 'react';
 import styled from 'styled-components';
+
+import { Supabase } from '@/utils/Supabase';
 
 type LoginNudgeProps = {
   className?: string;
 };
 
 export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
+  const onClickLogin = useCallback(async (provider: 'google') => {
+    const { user, session, error } = await Supabase.auth.signIn({
+      provider,
+    });
+    console.log({ user, session, error });
+  }, []);
+
   return (
     <Wrapper className={className}>
       <Container>
@@ -16,7 +26,10 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
         />
         <Title className="text-3xl text-white font-bold">Log in to Bento</Title>
         <Content className="mt-10 flex flex-col gap-2">
-          <Button className="google ring-1 ring-[#292c4b]/20">
+          <Button
+            className="google ring-1 ring-[#292c4b]/20"
+            onClick={() => onClickLogin('google')}
+          >
             <ButtonIcon src="/assets/social/google.png" alt="" />
             Login with Google
           </Button>
