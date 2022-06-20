@@ -3,6 +3,7 @@ import { StdSignDoc, serializeSignDoc } from '@cosmjs/amino';
 import { Secp256k1, Secp256k1Signature, sha256 } from '@cosmjs/crypto';
 import { verifyMessage } from '@ethersproject/wallet';
 import { PublicKey } from '@solana/web3.js';
+import { PostgrestError } from '@supabase/supabase-js';
 import Caver from 'caver-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nacl from 'tweetnacl';
@@ -40,7 +41,11 @@ const caver = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
 
 export default async (req: APIRequest, res: NextApiResponse) => {
   const { walletType } = req.query;
-  const { walletAddress, signature, nonce, ...optionalParams } = req.body;
+  const { signature, nonce, ...optionalParams } = req.body;
+  let walletAddress = optionalParams.walletAddress;
+  if (walletType !== 'phantom') {
+    walletAddress = walletAddress.toLowerCase();
+  }
 
   const { user } = await Supabase.auth.api.getUserByCookie(req);
   if (!user) {
@@ -53,7 +58,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
 
   if (walletType === 'web3') {
     const recovered = verifyMessage(signedMessage, signature);
-    isValid = recovered === walletAddress;
+    isValid = recovered.toLowerCase() === walletAddress;
   } else if (walletType === 'keplr') {
     const secpSignature = Secp256k1Signature.fromFixedLength(
       new Uint8Array(Buffer.from(signature, 'base64')),
@@ -75,7 +80,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
       signedMessage,
       caver.utils.decodeSignature(signature),
     );
-    isValid = recovered === walletAddress;
+    isValid = recovered.toLowerCase() === walletAddress;
   } else if (walletType === 'phantom') {
     const encodedMessage = new TextEncoder().encode(signedMessage);
     isValid = nacl.sign.detached.verify(
@@ -108,16 +113,46 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     });
   }
 
-  let { error } = await Supabase.from('wallets').upsert(
-    {
-      address: walletAddress,
-      user_id: user.id,
-      networks,
-    },
-    {
-      returning: 'minimal', // Don't return the value after inserting
-    },
+  const prevNetworkQuery = await Supabase.from('wallets') //
+    .select('id, address, networks, user_id')
+    .eq('address', walletAddress)
+    .eq('user_id', user.id);
+  const previousNetworks = (prevNetworkQuery.data ?? [])
+    .map((v) => v.networks)
+    .flat();
+  const mergedNetworks = Array.from(
+    new Set([...previousNetworks, ...networks]),
   );
+
+  let error: PostgrestError | null = null;
+
+  if ((prevNetworkQuery.data ?? []).length === 0) {
+    const res = await Supabase.from('wallets').upsert(
+      {
+        address: walletAddress,
+        user_id: user.id,
+        networks: mergedNetworks,
+      },
+      { returning: 'minimal' },
+    );
+    error = res.error;
+  } else if (!!prevNetworkQuery.data?.[0]) {
+    const update_id = prevNetworkQuery.data[0].id;
+    const res = await Supabase.from('wallets')
+      .update(
+        {
+          id: update_id,
+          address: walletAddress,
+          user_id: user.id,
+          networks: mergedNetworks,
+        },
+        { returning: 'minimal' },
+      )
+      .eq('id', update_id);
+    error = res.error;
+  } else {
+    console.log('else', prevNetworkQuery.data);
+  }
   if (error) {
     console.log(error);
     return res.status(400).json({
