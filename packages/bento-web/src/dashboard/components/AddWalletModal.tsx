@@ -1,26 +1,14 @@
-import { Session } from '@supabase/supabase-js';
 import clsx from 'clsx';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
-import { useSession } from '@/hooks/useSession';
+import { useRevalidateWallets } from '@/hooks/useWallets';
 import { Supabase } from '@/utils/Supabase';
 
-type WalletDraft = {
-  type: string;
-  address: string;
-  networks: string[];
-};
-const defaultWallet: WalletDraft = {
-  type: '',
-  address: '',
-  networks: [],
-};
-
-type Network = {
+export type Network = {
   id: string;
   type: string;
   name: string;
@@ -96,9 +84,6 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     );
   }, []);
 
-  const { session } = useSession();
-  console.log({ session });
-
   const onClickSignInGoogle = useCallback(async () => {
     const { user, session, error } = await Supabase.auth.signIn(
       { provider: 'google' },
@@ -106,6 +91,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     );
     console.log({ user, session, error });
   }, []);
+
+  const revalidateWallets = useRevalidateWallets();
 
   return (
     <Portal>
@@ -174,6 +161,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
               onSave={() => {
                 onDismiss?.();
                 setNetworks([]);
+                revalidateWallets?.();
               }}
             />
           </section>

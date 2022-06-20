@@ -1,12 +1,10 @@
 import { cachedAxios } from '@bento/client';
-import { Base64, Wallet } from '@bento/common';
+import { Base64 } from '@bento/common';
 import clsx from 'clsx';
-import produce from 'immer';
 import { useCallback, useMemo } from 'react';
-import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { walletsAtom } from '@/recoil/wallets';
+import { Network } from '@/dashboard/components/AddWalletModal';
 import { toast } from '@/utils/toast';
 
 declare global {
@@ -17,13 +15,14 @@ declare global {
   }
 }
 
-const validateSignature = async (
+const validateAndSaveWallet = async (
   params:
     | {
         walletType: 'web3' | 'kaikas' | 'phantom';
         walletAddress: string;
         signature: string;
         nonce: string;
+        networks: Network[];
       }
     | {
         walletType: 'keplr';
@@ -31,9 +30,10 @@ const validateSignature = async (
         signature: string;
         nonce: string;
         publicKeyValue: string;
+        networks: Network[];
       },
 ) => {
-  const { walletType, walletAddress, signature, nonce } = params;
+  const { walletType, walletAddress, signature, nonce, networks } = params;
   const { data } = await cachedAxios.post(`/api/auth/verify/${walletType}`, {
     walletAddress,
     signature,
@@ -41,6 +41,7 @@ const validateSignature = async (
     ...(walletType === 'keplr' && {
       publicKeyValue: params.publicKeyValue,
     }),
+    networks: Base64.encode(networks.map((v) => v.id).join(',')),
   });
   console.log({ data });
 };
@@ -58,13 +59,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
   networks,
   onSave,
 }) => {
-  const setWallets = useSetRecoilState(walletsAtom);
-  const [selectedNetworks, firstNetwork] = useMemo(() => {
+  const firstNetwork = useMemo(() => {
     if (!networks || networks.length === 0) {
-      return [undefined, undefined];
+      return undefined;
     }
-    const items = networks.map((v) => v.id);
-    return [items, networks[0].type];
+    return networks[0].type;
   }, [networks]);
 
   const messageToBeSigned = useMemo(
@@ -72,55 +71,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     [],
   ); // TODO: Add username and more
 
-  const saveWallet = useCallback(
-    (params: {
-      walletType: 'web3' | 'kaikas' | 'keplr' | 'phantom';
-      walletAddress: string;
-    }) => {
-      const { walletType, walletAddress } = params;
-      const draft =
-        walletType === 'keplr'
-          ? {
-              type: 'cosmos-sdk',
-              address: walletAddress,
-              networks: selectedNetworks,
-            }
-          : walletType === 'phantom'
-          ? {
-              type: 'solana',
-              address: walletAddress,
-              // networks,
-            }
-          : {
-              type: 'evm',
-              address: walletAddress,
-              networks: selectedNetworks,
-            };
-
-      setWallets((prev) =>
-        produce(prev, (walletsDraft) => {
-          const index = walletsDraft.findIndex(
-            (v) => v.address.toLowerCase() === draft.address.toLowerCase(),
-          );
-          if (index === -1) {
-            walletsDraft.push(draft as Wallet);
-          } else {
-            const wallet = walletsDraft[index];
-            if (wallet.type === 'solana') {
-              return;
-            }
-            wallet.networks = Array.from(
-              new Set([...(draft.networks ?? []), ...wallet.networks]),
-            ) as any[];
-          }
-        }),
-      );
-      onSave?.();
-    },
-    [selectedNetworks, onSave],
-  );
-
   const connectMetaMask = useCallback(async () => {
+    if (!networks) {
+      return;
+    }
+
     const [
       { default: Web3Modal },
       { default: WalletConnectProvider },
@@ -169,19 +124,25 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       const signature = await signer.signMessage(messageToBeSigned);
 
       const walletType = 'web3';
-      await validateSignature({
+      await validateAndSaveWallet({
+        networks,
         walletType,
         walletAddress,
         signature,
         nonce: messageToBeSigned,
       });
-      saveWallet({ walletType, walletAddress });
+
+      onSave?.();
     } catch (error) {
       console.error(error);
     }
-  }, [saveWallet]);
+  }, [onSave]);
 
   const connectKeplr = useCallback(async () => {
+    if (!networks) {
+      return;
+    }
+
     if (typeof window.keplr === 'undefined') {
       toast({
         type: 'error',
@@ -206,20 +167,26 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         );
 
       const walletType = 'keplr';
-      await validateSignature({
+      await validateAndSaveWallet({
+        networks,
         walletType,
         walletAddress,
         signature,
         nonce: messageToBeSigned,
         publicKeyValue: publicKey.value,
       });
-      saveWallet({ walletType, walletAddress });
+
+      onSave?.();
     } catch (error) {
       console.error(error);
     }
-  }, [saveWallet]);
+  }, [onSave]);
 
   const connectKaikas = useCallback(async () => {
+    if (!networks) {
+      return;
+    }
+
     if (typeof window.klaytn === 'undefined') {
       toast({
         type: 'error',
@@ -241,19 +208,25 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       );
       const walletType = 'kaikas';
 
-      await validateSignature({
+      await validateAndSaveWallet({
+        networks,
         walletType,
         walletAddress,
         signature,
         nonce: messageToBeSigned,
       });
-      saveWallet({ walletType, walletAddress });
+
+      onSave?.();
     } catch (error) {
       console.error(error);
     }
-  }, [saveWallet]);
+  }, [onSave]);
 
   const connectSolana = useCallback(async () => {
+    if (!networks) {
+      return;
+    }
+
     if (typeof window.solana === 'undefined') {
       toast({
         type: 'error',
@@ -274,14 +247,16 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     const signature = Buffer.from(signedMessage.signature).toString('hex');
 
     const walletType = 'phantom';
-    await validateSignature({
+    await validateAndSaveWallet({
+      networks,
       walletType,
       walletAddress,
       signature,
       nonce: messageToBeSigned,
     });
-    saveWallet({ walletType, walletAddress });
-  }, [saveWallet]);
+
+    onSave?.();
+  }, [onSave]);
 
   return (
     <div className="flex gap-2">
