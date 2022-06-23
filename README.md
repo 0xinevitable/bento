@@ -1,5 +1,7 @@
 # 🍱 Bento, The open-source web3 dashboard
 
+![Dashboard Preview](https://github.com/inevitable-changes/bento/blob/main/docs/images/dashboard-preview.png?raw=true)
+
 ## The Status Quo
 
 - All **dashboard services** out there are either:
