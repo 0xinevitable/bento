@@ -1,7 +1,7 @@
 import { safePromiseAll } from '@bento/common';
 import axios from 'axios';
 import queryString from 'query-string';
-import { Config } from 'src/config';
+import { Config, randomOf } from 'src/config';
 
 import { withCache } from '../cache';
 
@@ -36,7 +36,7 @@ export const priceFromCoinMarketCap = withCache(
     const url = queryString.stringifyUrl({
       url: 'https://pro-api.coinmarketcap.com/v2/tools/price-conversion',
       query: {
-        CMC_PRO_API_KEY: Config.CMC_PRO_API_KEYS[0],
+        CMC_PRO_API_KEY: randomOf(Config.CMC_PRO_API_KEYS),
         amount: 1,
         id: coinMarketCapId,
       },

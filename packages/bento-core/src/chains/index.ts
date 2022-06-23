@@ -3,7 +3,7 @@ import { JsonRpcProvider } from '@ethersproject/providers';
 import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
-import { Config } from 'src/config';
+import { Config, randomOf } from 'src/config';
 
 import { withCache } from '../cache';
 import { priceFromCoinGecko } from '../pricings/CoinGecko';
@@ -60,10 +60,7 @@ export class EthereumChain implements Chain {
   };
 
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY =
-      Config.COVALENT_API_KEYS[
-        Math.floor(Math.random() * Config.COVALENT_API_KEYS.length)
-      ];
+    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
@@ -148,10 +145,7 @@ export class BNBChain implements Chain {
   };
 
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY =
-      Config.COVALENT_API_KEYS[
-        Math.floor(Math.random() * Config.COVALENT_API_KEYS.length)
-      ];
+    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
@@ -326,10 +320,7 @@ export class KlaytnChain implements Chain {
   };
 
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY =
-      Config.COVALENT_API_KEYS[
-        Math.floor(Math.random() * Config.COVALENT_API_KEYS.length)
-      ];
+    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
