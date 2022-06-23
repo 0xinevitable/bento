@@ -48,9 +48,7 @@ export class EthereumChain implements Chain {
     coinGeckoId: 'ethereum',
   };
   chainId = 1;
-  _provider = new JsonRpcProvider(
-    'https://mainnet.infura.io/v3/fcb656a7b4d14c9f9b0803a5d7475877',
-  );
+  _provider = new JsonRpcProvider(Config.RPC_URL.ETHEREUM_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
   getBalance = async (address: string) => {
@@ -135,7 +133,7 @@ export class BNBChain implements Chain {
     coinGeckoId: 'binancecoin',
   };
   chainId = 56;
-  _provider = new JsonRpcProvider('https://bsc-dataseed1.binance.org');
+  _provider = new JsonRpcProvider(Config.RPC_URL.BNB_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
   getBalance = async (address: string) => {
@@ -219,7 +217,7 @@ export class PolygonChain implements Chain {
     decimals: 18,
     coinGeckoId: 'matic-network',
   };
-  _provider = new JsonRpcProvider('https://polygon-rpc.com');
+  _provider = new JsonRpcProvider(Config.RPC_URL.POLYGON_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
   getBalance = async (address: string) => {
@@ -271,7 +269,7 @@ export class KlaytnChain implements Chain {
     coinGeckoId: 'klay-token',
   };
   chainId = 8217;
-  _provider = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
+  _provider = new Caver(Config.RPC_URL.KLAYTN_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
   getBalance = async (address: string) => {
