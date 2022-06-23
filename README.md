@@ -1,11 +1,27 @@
 # 🍱 Bento, The open-source web3 dashboard
 
+## The Status Quo
+
+- All **dashboard services** out there are either:
+  - **Associated with specific Layer-1 chains built by the same team or shared VCs**
+    - Timid movement outside of their current eco
+  - **Maintained as close source software; Development is centralized to the team**
+    - If you want your protocol listed, you have to depend on the team to add support
+
+## Mission
+
+- Make **every user track every asset they own,** regardless of chains and types
+- Make **any builder add support** for their protocol/app freely
+- Provide **social profiles** based on web3
+
 ## 🚀 Preparing Local Dev Environment
+
 ```bash
 git clone https://github.com/inevitable-changes/dashboard
 cd dashboard
 yarn install
 ```
+
 First, clone this repo.
 Since we're using [Zero-Install](https://yarnpkg.com/features/zero-installs) through Yarn Berry's Plug'n'Play, the repository's initial clone size can be larger than you think.
 
