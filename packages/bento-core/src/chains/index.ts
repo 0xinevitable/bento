@@ -1,4 +1,5 @@
 import { Base64, safePromiseAll } from '@bento/common';
+import { Config, randomOf } from '@bento/common';
 import { JsonRpcProvider } from '@ethersproject/providers';
 import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
@@ -47,9 +48,7 @@ export class EthereumChain implements Chain {
     coinGeckoId: 'ethereum',
   };
   chainId = 1;
-  _provider = new JsonRpcProvider(
-    'https://mainnet.infura.io/v3/fcb656a7b4d14c9f9b0803a5d7475877',
-  );
+  _provider = new JsonRpcProvider(Config.RPC_URL.ETHEREUM_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
   getBalance = async (address: string) => {
@@ -58,13 +57,8 @@ export class EthereumChain implements Chain {
     return balance;
   };
 
-  _API_KEYS = [
-    'ckey_ec92d129ed8a498f9bca510830b:',
-    'ckey_7af720dd03ef4a15afc1b44e2b4:',
-  ];
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY =
-      this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
+    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
@@ -139,7 +133,7 @@ export class BNBChain implements Chain {
     coinGeckoId: 'binancecoin',
   };
   chainId = 56;
-  _provider = new JsonRpcProvider('https://bsc-dataseed1.binance.org');
+  _provider = new JsonRpcProvider(Config.RPC_URL.BNB_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
   getBalance = async (address: string) => {
@@ -148,13 +142,8 @@ export class BNBChain implements Chain {
     return balance;
   };
 
-  _API_KEYS = [
-    'ckey_ec92d129ed8a498f9bca510830b:',
-    'ckey_7af720dd03ef4a15afc1b44e2b4:',
-  ];
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY =
-      this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
+    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
@@ -228,7 +217,7 @@ export class PolygonChain implements Chain {
     decimals: 18,
     coinGeckoId: 'matic-network',
   };
-  _provider = new JsonRpcProvider('https://polygon-rpc.com');
+  _provider = new JsonRpcProvider(Config.RPC_URL.POLYGON_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
   getBalance = async (address: string) => {
@@ -280,7 +269,7 @@ export class KlaytnChain implements Chain {
     coinGeckoId: 'klay-token',
   };
   chainId = 8217;
-  _provider = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
+  _provider = new Caver(Config.RPC_URL.KLAYTN_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
   getBalance = async (address: string) => {
@@ -328,15 +317,8 @@ export class KlaytnChain implements Chain {
     return stakedBalance / 10 ** 25;
   };
 
-  _API_KEYS = [
-    'ckey_ec92d129ed8a498f9bca510830b:',
-    'ckey_7af720dd03ef4a15afc1b44e2b4:',
-  ];
-
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY =
-      this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
-
+    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,

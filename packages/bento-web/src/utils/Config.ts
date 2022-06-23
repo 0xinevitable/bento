@@ -1,9 +1,18 @@
-import getConfig from 'next/config';
+import { Config as BentoConfig } from '@bento/common';
+import getNextConfig from 'next/config';
 
-const { publicRuntimeConfig } = getConfig();
+const { publicRuntimeConfig } = getNextConfig();
 
-export const Config = publicRuntimeConfig as {
-  ENVIRONMENT: 'debug' | 'development' | 'production';
-  SUPABASE_URL: string;
-  SUPABASE_ANON_KEY: string;
+const getConfig = () => {
+  const { ENVIRONMENT, ...config } = publicRuntimeConfig as {
+    ENVIRONMENT: 'debug' | 'development' | 'production';
+    [key: string]: string;
+  };
+  return {
+    ENVIRONMENT,
+    SUPABASE_URL: BentoConfig.STORAGE.SUPABASE_URL[ENVIRONMENT],
+    SUPABASE_ANON_KEY: BentoConfig.STORAGE.SUPABASE_ANON_KEY[ENVIRONMENT],
+    ...config,
+  };
 };
+export const Config = getConfig();

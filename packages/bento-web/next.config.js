@@ -21,11 +21,7 @@ module.exports = withPlugins(
     compiler: {
       styledComponents: true,
     },
-    publicRuntimeConfig: pick(process.env, [
-      'ENVIRONMENT',
-      'SUPABASE_URL',
-      'SUPABASE_ANON_KEY',
-    ]),
+    publicRuntimeConfig: pick(process.env, ['ENVIRONMENT']),
     webpack: (config) => {
       config.resolve.fallback = {
         ...config.resolve.fallback,
