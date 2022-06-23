@@ -3,6 +3,7 @@ import { JsonRpcProvider } from '@ethersproject/providers';
 import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
+import { Config } from 'src/config';
 
 import { withCache } from '../cache';
 import { priceFromCoinGecko } from '../pricings/CoinGecko';
@@ -58,13 +59,11 @@ export class EthereumChain implements Chain {
     return balance;
   };
 
-  _API_KEYS = [
-    'ckey_ec92d129ed8a498f9bca510830b:',
-    'ckey_7af720dd03ef4a15afc1b44e2b4:',
-  ];
   getTokenBalances = async (walletAddress: string) => {
     const API_KEY =
-      this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
+      Config.COVALENT_API_KEYS[
+        Math.floor(Math.random() * Config.COVALENT_API_KEYS.length)
+      ];
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
@@ -148,13 +147,11 @@ export class BNBChain implements Chain {
     return balance;
   };
 
-  _API_KEYS = [
-    'ckey_ec92d129ed8a498f9bca510830b:',
-    'ckey_7af720dd03ef4a15afc1b44e2b4:',
-  ];
   getTokenBalances = async (walletAddress: string) => {
     const API_KEY =
-      this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
+      Config.COVALENT_API_KEYS[
+        Math.floor(Math.random() * Config.COVALENT_API_KEYS.length)
+      ];
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
@@ -328,15 +325,11 @@ export class KlaytnChain implements Chain {
     return stakedBalance / 10 ** 25;
   };
 
-  _API_KEYS = [
-    'ckey_ec92d129ed8a498f9bca510830b:',
-    'ckey_7af720dd03ef4a15afc1b44e2b4:',
-  ];
-
   getTokenBalances = async (walletAddress: string) => {
     const API_KEY =
-      this._API_KEYS[Math.floor(Math.random() * this._API_KEYS.length)];
-
+      Config.COVALENT_API_KEYS[
+        Math.floor(Math.random() * Config.COVALENT_API_KEYS.length)
+      ];
     const { data } = await axios
       .get<TokenBalancesResponse>(
         `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
