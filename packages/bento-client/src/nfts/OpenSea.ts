@@ -1,3 +1,4 @@
+import { Config, randomOf } from '@bento/common';
 import QueryString from 'query-string';
 
 import { cachedAxios } from '../cachedAxios';
@@ -41,7 +42,7 @@ const getAssets = async ({ owner, cursor }: GetOpenSeaAssetsParams) => {
     QueryString.stringifyUrl({ url, query: { owner, cursor } }),
     {
       headers: {
-        'X-API-KEY': 'bea970cbbdae445a9f01b827f9ac227e',
+        'X-API-KEY': randomOf(Config.OPENSEA_API_KEYS),
       },
     },
   );
