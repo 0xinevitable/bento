@@ -2508,6 +2508,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/bento-client/",\
           "packageDependencies": [\
             ["@bento/client", "workspace:packages/bento-client"],\
+            ["@bento/common", "workspace:packages/bento-common"],\
             ["@types/node", "npm:17.0.42"],\
             ["axios", "npm:0.27.2"],\
             ["axios-cache-adapter", "virtual:f55bc88a99a26f41500d422017e45c23bfeb30e41d70d6a6aa44805953ebb12cabbddbc49650837486290ead6ded7fd4ffc66ca84c41734f2510f893ff4e8a9d#npm:2.7.3"],\

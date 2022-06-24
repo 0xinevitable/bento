@@ -1396,6 +1396,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bento/client@workspace:packages/bento-client"
   dependencies:
+    "@bento/common": "workspace:^"
     "@types/node": ^17.0.38
     axios: ^0.27.2
     axios-cache-adapter: ^2.7.3
