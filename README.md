@@ -1,6 +1,6 @@
 # 🍱 Bento, The open-source web3 dashboard
 
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/odvwwrld.svg?style=social&label=Follow%20%40odvwwrld)](https://twitter.com/odvwwrld)
 
 ![Dashboard Preview](https://github.com/inevitable-changes/bento/blob/main/docs/images/dashboard-preview.png?raw=true)
 
