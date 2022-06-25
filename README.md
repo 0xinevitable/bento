@@ -27,7 +27,7 @@ yarn install
 ```
 
 - First, clone this repo.
-- Since we're using [Zero-Install](https://yarnpkg.com/features/zero-installs) through Yarn Berry's Plug'n'Play, the repository's initial clone size might be larger than you may think.
+- Since we're using [Zero-Install](https://yarnpkg.com/features/zero-installs) through Yarn Berry's Plug'n'Play, the repository's initial clone size might be significantly larger than you think.
 
 ```js
 {
