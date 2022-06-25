@@ -5,6 +5,8 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/inevitable_odvw.svg?style=social&label=Follow%20%40inevitable_odvw)](https://twitter.com/inevitable_odvw)
 
+[![Cover Artwork](https://github.com/inevitable-changes/bento/blob/main/docs/images/cover-artwork.png?raw=true)](https://twitter.com/inevitable_odvw/status/1540084741269254144)
+
 [![Dashboard Preview](https://github.com/inevitable-changes/bento/blob/main/docs/images/dashboard-preview.png?raw=true)](https://twitter.com/inevitable_odvw/status/1540084741269254144)
 
 ## The Status Quo
@@ -22,6 +24,7 @@
 - Provide **social profiles** based on web3
 
 ## Community & Contribution
+
 - Add questions via [GitHub Issues](https://github.com/inevitable-changes/bento/issues), or by mentioning our [Twitter](https://twitter.com/inevitable_odvw)(we reply quite fast!).
 - Discord community coming soon.
 
