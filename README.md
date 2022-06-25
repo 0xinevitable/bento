@@ -1,6 +1,6 @@
 # 🍱 Bento, The open-source web3 dashboard
 
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/odvwwrld.svg?style=social&label=Follow%20%40odvwwrld)](https://twitter.com/odvwwrld)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/inevitable_odvw.svg?style=social&label=Follow%20%40inevitable_odvw)](https://twitter.com/inevitable_odvw)
 
 ![Dashboard Preview](https://github.com/inevitable-changes/bento/blob/main/docs/images/dashboard-preview.png?raw=true)
 
@@ -17,6 +17,10 @@
 - Make **every user track every asset they own,** regardless of chains and types
 - Make **any builder add support** for their protocol/app freely
 - Provide **social profiles** based on web3
+
+## Community & Contribution
+- Add questions via [GitHub Issues](https://github.com/inevitable-changes/bento/issues), or on our [Twitter(@inevitable_odvw)](https://twitter.com/inevitable_odvw)
+- Discord community coming soon
 
 ## 🚀 Preparing Local Dev Environment
 
