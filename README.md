@@ -1,13 +1,13 @@
 # 🍱 Bento, The open-source web3 dashboard
 
 > **This product is under rapid development and will be available during July 2022**<br />
-> Follow us on [Twitter(@inevitable_odvw)](https://twitter.com/inevitable_odvw) for early access
+> Follow us on [Twitter(@bentoinevitable)](https://twitter.com/bentoinevitable) for early access
 
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/inevitable_odvw.svg?style=social&label=Follow%20%40inevitable_odvw)](https://twitter.com/inevitable_odvw)
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/bentoinevitable.svg?style=social&label=Follow%20%40bentoinevitable)](https://twitter.com/bentoinevitable)
 
-[![Cover Artwork](https://github.com/inevitable-changes/bento/blob/main/docs/images/cover-artwork.png?raw=true)](https://twitter.com/inevitable_odvw/status/1540084741269254144)
+[![Cover Artwork](https://github.com/inevitable-changes/bento/blob/main/docs/images/cover-artwork.png?raw=true)](https://twitter.com/bentoinevitable/status/1540084741269254144)
 
-[![Dashboard Preview](https://github.com/inevitable-changes/bento/blob/main/docs/images/dashboard-preview.png?raw=true)](https://twitter.com/inevitable_odvw/status/1540084741269254144)
+[![Dashboard Preview](https://github.com/inevitable-changes/bento/blob/main/docs/images/dashboard-preview.png?raw=true)](https://twitter.com/bentoinevitable/status/1540084741269254144)
 
 ## The Status Quo
 
@@ -25,7 +25,7 @@
 
 ## Community & Contribution
 
-- Add questions via [GitHub Issues](https://github.com/inevitable-changes/bento/issues), or by mentioning our [Twitter](https://twitter.com/inevitable_odvw)(we reply quite fast!).
+- Add questions via [GitHub Issues](https://github.com/inevitable-changes/bento/issues), or by mentioning our [Twitter](https://twitter.com/bentoinevitable)(we reply quite fast!).
 - Discord community coming soon.
 
 ## 🚀 Preparing Local Dev Environment
