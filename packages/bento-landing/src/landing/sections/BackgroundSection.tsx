@@ -16,14 +16,15 @@ export const BackgroundSection = () => {
           were not available.
         </Title>
         <Description style={{ marginTop: 24 }}>
-          Most apps have a connection with specific Layer-1 chains.
+          All dashboard services out there are either:
           <br />
-          These chains were built by the same team or share the same VCs.
+          Associated with specific layer-1 chains,
           <br />
-          So only a few provided information for multiple chains and multiple
-          apps.
+          built by the same team or shared VCs
           <br />
-          Full integration was impossible for centralized reasons.
+          Or maintained as close-source software.
+          <br />
+          Both making them move timid outside their ecosystem.
         </Description>
         <Description style={{ marginTop: 20, color: 'white' }}>
           We're building Bento to address this.
@@ -33,9 +34,9 @@ export const BackgroundSection = () => {
           <br />
           regardless of chains and types.
           <br />
-          Eventually, this means that we’ll open-source the adaptors
+          We’re building <strong>open-source.</strong>
           <br />
-          so that any developer can add support for their protocol/app freely.
+          Any developer can add support for their protocol/app freely.
         </Description>
 
         <BitcoinIllustContainer>
