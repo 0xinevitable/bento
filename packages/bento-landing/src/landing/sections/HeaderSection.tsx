@@ -7,76 +7,98 @@ import { systemFontStack } from '@/styles/fonts';
 export const HeaderSection = () => {
   return (
     <Container id="header">
-      <BentoIllust src="/assets/illusts/lunchbox.png" />
-
       <Content>
         <Badge>INTRODUCING BENTO</Badge>
         <Title>
-          The Web3
+          The Open-Source
           <br />
-          Lunchbox
-          <br />
-          Crafted
-          <br />
-          Just For You.
+          <TitleGradient>Web3 Dashboard</TitleGradient>
         </Title>
         <Description>
-          Group your wallets
+          Manage and group your wallets,
           <br />
-          and track DeFi portfolios
-          <br />
-          in various L1 chains.
+          Track DeFis and NFTs in various L1 chains.
         </Description>
 
         <ButtonLink href="https://app.bento.finance">
           <Button>Launch App</Button>
         </ButtonLink>
       </Content>
+
+      <IllustContainer>
+        <HeaderBlurIllust src="/assets/illusts/header-blur.png" />
+        <BentoIllust src="/assets/illusts/lunchbox.png" />
+        <BentoZap src="/assets/illusts/bento-zap.png" />
+      </IllustContainer>
     </Container>
   );
 };
 
-const Container = styled.header`
+const Container = styled.section`
   margin: 0 auto;
-  width: 100%;
+  padding-top: 130px;
+  padding-bottom: 100px;
+
   max-width: 1728px;
-  height: calc(100vh + 200px);
-  max-height: 1217px;
-  padding-top: 48px;
-  padding-bottom: 300px;
+  width: 100%;
 
   position: relative;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
-
-  background-color: black;
-  background-image: url('/assets/header-background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center bottom;
+  z-index: 0;
 `;
 
-const BentoIllust = styled.img`
+const IllustContainer = styled.div`
+  margin-top: -195px;
+  width: 925.88px;
+  height: 875.52px;
+  position: relative;
+  z-index: 0;
+`;
+const HEADER_BLUR_SIZE = 155.6;
+const HeaderBlurIllust = styled.img`
+  margin: ${-HEADER_BLUR_SIZE}px;
+  width: ${1146 + HEADER_BLUR_SIZE * 2}px;
+  height: ${602 + HEADER_BLUR_SIZE * 2}px;
+
   position: absolute;
-  width: 951px;
-  height: 951px;
-  left: -87px;
-  top: 134px;
+  top: -164px;
+  left: -202px;
+`;
+const BentoIllust = styled.img`
+  width: 752px;
+  height: 724.93px;
+  transform: rotate(-13deg);
+
+  position: absolute;
+  right: 71.9px;
+  bottom: 75.29px;
+`;
+
+const BENTO_ZAP_BLUR_SIZE = 132.228;
+const BentoZap = styled.img`
+  margin: ${-BENTO_ZAP_BLUR_SIZE}px;
+  width: ${369.51 + BENTO_ZAP_BLUR_SIZE * 2}px;
+  height: ${525.03 + BENTO_ZAP_BLUR_SIZE * 2}px;
+
+  position: absolute;
+  left: 0;
+  bottom: 124.49px;
 `;
 
 const Content = styled.div`
-  width: 50%;
-  margin-left: 50%;
-  padding-left: 65px;
-
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  z-index: 1;
 `;
 
 const Title = styled.h1`
   margin: 0;
-  margin-top: 24px;
+  margin-top: 12px;
 
   font-family: ${systemFontStack};
   font-weight: 900;
@@ -84,21 +106,31 @@ const Title = styled.h1`
   line-height: 103%;
   letter-spacing: 0.01em;
   color: #ffffff;
+  text-align: center;
+`;
+const TitleGradient = styled.span`
+  width: fit-content;
+  background: linear-gradient(180deg, #ffd978 0%, #ff047d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 `;
 
 const Description = styled.p`
   margin: 0;
-  margin-top: 32px;
+  margin-top: 12px;
 
   font-family: ${systemFontStack};
   font-weight: 500;
   font-size: 18px;
   line-height: 120%;
   color: rgba(255, 255, 255, 0.8);
+  text-align: center;
 `;
 
 const ButtonLink = styled.a`
-  margin-top: 48px;
+  margin-top: 42px;
 `;
 
 const Button = styled.button`
