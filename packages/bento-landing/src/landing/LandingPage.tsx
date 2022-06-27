@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { NavigationBar } from '@/components/NavigationBar';
+
 import { BackgroundSection } from './sections/BackgroundSection';
 import { DashboardSection } from './sections/DashboardSection';
 import { HeaderSection } from './sections/HeaderSection';
@@ -7,6 +9,7 @@ import { HeaderSection } from './sections/HeaderSection';
 const LandingPage = () => {
   return (
     <Container>
+      <NavigationBar />
       <HeaderSection />
       <BackgroundSection />
       <DashboardSection />

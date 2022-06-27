@@ -36,7 +36,7 @@ export const HeaderSection = () => {
   );
 };
 
-const Container = styled.header`
+const Container = styled.section`
   margin: 0 auto;
   width: 100%;
   max-width: 1728px;
