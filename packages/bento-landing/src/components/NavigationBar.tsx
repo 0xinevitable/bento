@@ -38,7 +38,7 @@ const Wrapper = styled.header`
   z-index: 90;
 `;
 const Container = styled.div`
-  max-width: 1728px;
+  max-width: 1080px;
   width: 100%;
   height: 100%;
 
@@ -59,4 +59,5 @@ const LogoImage = styled.img`
   margin: ${-BLUR_SIZE}px;
   width: ${156 + BLUR_SIZE * 2}px;
   height: ${78 + BLUR_SIZE * 2}px;
+  transform: scale(1.3);
 `;
