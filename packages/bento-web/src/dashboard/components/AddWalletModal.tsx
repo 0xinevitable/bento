@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
+import { useSession } from '@/hooks/useSession';
 import { useRevalidateWallets } from '@/hooks/useWallets';
 import { Supabase } from '@/utils/Supabase';
 
@@ -74,6 +75,9 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   visible: isVisible = false,
   onDismiss,
 }) => {
+  const { session } = useSession();
+  const isLoggedIn = !!session;
+
   const [networks, setNetworks] = useState<Network[]>([]);
   const firstNetwork = networks[0];
   const onSelectNetwork = useCallback((network: Network) => {
@@ -104,67 +108,126 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
         <div
           className={clsx(
             'p-4 h-fit overflow-hidden',
+            'flex flex-col gap-8',
             'border border-slate-800 rounded-md drop-shadow-2xl',
             'bg-slate-800/5 backdrop-blur-md flex flex-col cursor-pointer',
           )}
         >
-          <section>
-            <h3 className="mb-3 font-bold text-white">Sign In</h3>
-            <div>
-              <button
-                className="m-1 p-2 bg-slate-200"
-                onClick={onClickSignInGoogle}
-              >
-                Google
-              </button>
-            </div>
-            <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
-            <div className="flex flex-wrap">
-              {NETWORKS.map((network) => {
-                const selected = !!networks.find((v) => v.id === network.id);
-                const disabled =
-                  typeof firstNetwork !== 'undefined' &&
-                  firstNetwork.type !== network.type;
+          {isLoggedIn ? (
+            <>
+              <section>
+                <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
+                <div className="flex flex-wrap">
+                  {NETWORKS.map((network) => {
+                    const selected = !!networks.find(
+                      (v) => v.id === network.id,
+                    );
+                    const disabled =
+                      typeof firstNetwork !== 'undefined' &&
+                      firstNetwork.type !== network.type;
 
-                return (
-                  <NetworkItem
-                    key={network.id}
-                    className={clsx(
-                      'p-2 m-1 rounded-md',
-                      disabled && 'opacity-10 cursor-not-allowed',
-                    )}
-                    selected={selected}
-                    onClick={
-                      !disabled //
-                        ? () => onSelectNetwork(network)
-                        : undefined
-                    }
+                    return (
+                      <NetworkItem
+                        key={network.id}
+                        className={clsx(
+                          'p-2 m-1 rounded-md',
+                          disabled && 'opacity-10 cursor-not-allowed',
+                        )}
+                        selected={selected}
+                        onClick={
+                          !disabled //
+                            ? () => onSelectNetwork(network)
+                            : undefined
+                        }
+                      >
+                        <img
+                          className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
+                          src={network.logo}
+                          alt={network.name}
+                        />
+                        <span className="mt-1 text-white text-xs">
+                          {network.name}
+                        </span>
+                      </NetworkItem>
+                    );
+                  })}
+                </div>
+              </section>
+
+              <section>
+                <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
+                <WalletConnector
+                  networks={networks}
+                  onSave={() => {
+                    onDismiss?.();
+                    setNetworks([]);
+                    revalidateWallets?.();
+                  }}
+                />
+              </section>
+            </>
+          ) : (
+            <>
+              <section>
+                <h3 className="mb-3 font-bold text-white">
+                  1. Sign in to save and verify; else it'll be per-device
+                </h3>
+                <div>
+                  <button
+                    className="m-1 p-2 bg-slate-200"
+                    onClick={onClickSignInGoogle}
                   >
-                    <img
-                      className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
-                      src={network.logo}
-                      alt={network.name}
-                    />
-                    <span className="mt-1 text-white text-xs">
-                      {network.name}
-                    </span>
-                  </NetworkItem>
-                );
-              })}
-            </div>
-          </section>
+                    Google
+                  </button>
+                </div>
+              </section>
 
-          <section className="mt-8">
-            <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
-            <WalletConnector
-              networks={networks}
-              onSave={() => {
-                onDismiss?.();
-                setNetworks([]);
-                revalidateWallets?.();
-              }}
-            />
-          </section>
+              <section>
+                <h3 className="mb-3 font-bold text-white">2. Input Address</h3>
+
+                <input />
+              </section>
+
+              <section>
+                <h3 className="mb-3 font-bold text-white">3. Choose Chains</h3>
+                <div className="flex flex-wrap">
+                  {NETWORKS.map((network) => {
+                    const selected = !!networks.find(
+                      (v) => v.id === network.id,
+                    );
+                    const disabled =
+                      typeof firstNetwork !== 'undefined' &&
+                      firstNetwork.type !== network.type;
+
+                    return (
+                      <NetworkItem
+                        key={network.id}
+                        className={clsx(
+                          'p-2 m-1 rounded-md',
+                          disabled && 'opacity-10 cursor-not-allowed',
+                        )}
+                        selected={selected}
+                        onClick={
+                          !disabled //
+                            ? () => onSelectNetwork(network)
+                            : undefined
+                        }
+                      >
+                        <img
+                          className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
+                          src={network.logo}
+                          alt={network.name}
+                        />
+                        <span className="mt-1 text-white text-xs">
+                          {network.name}
+                        </span>
+                      </NetworkItem>
+                    );
+                  })}
+                </div>
+              </section>
+            </>
+          )}
         </div>
       </OverlayWrapper>
     </Portal>
