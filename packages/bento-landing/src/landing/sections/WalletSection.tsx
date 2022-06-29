@@ -28,7 +28,7 @@ export const WalletSection: React.FC = () => {
 };
 
 const Container = styled.section`
-  margin-top: 388px;
+  margin-top: 292px;
   display: flex;
   flex-direction: column;
   align-items: center;
