@@ -126,9 +126,9 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     );
   }, []);
 
-  const onClickSignInGoogle = useCallback(async () => {
+  const onClickSignInGitHub = useCallback(async () => {
     const { user, session, error } = await Supabase.auth.signIn(
-      { provider: 'google' },
+      { provider: 'github' },
       { redirectTo: window.location.href },
     );
     console.log({ user, session, error });
@@ -255,9 +255,9 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
                 <div>
                   <button
                     className="m-1 p-2 bg-slate-200"
-                    onClick={onClickSignInGoogle}
+                    onClick={onClickSignInGitHub}
                   >
-                    Google
+                    GitHub
                   </button>
                 </div>
               </section>
