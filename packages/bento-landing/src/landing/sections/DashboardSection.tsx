@@ -20,14 +20,34 @@ export const DashboardSection = () => {
             /assets/illusts/dashboard@2x.png 2x,
           `}
         />
-        <MockupIllust
-          src="/assets/illusts/dashboard-mockup.png"
-          srcSet={dedent`
-            /assets/illusts/dashboard-mockup.png,
-            /assets/illusts/dashboard-mockup@2x.png 2x,
-          `}
-        />
       </IllustContainer>
+
+      <ChainCardList>
+        <ChainCard>
+          <ChainCardTitle>EVM Based</ChainCardTitle>
+          <ChainLogoList>
+            {Object.entries(CHAIN_LOGOS.EVM).map(([name, src]) => (
+              <ChainLogo key={name} src={src} />
+            ))}
+          </ChainLogoList>
+        </ChainCard>
+        <ChainCard>
+          <ChainCardTitle>Cosmos SDK Based</ChainCardTitle>
+          <ChainLogoList>
+            {Object.entries(CHAIN_LOGOS.CosmosSDK).map(([name, src]) => (
+              <ChainLogo key={name} src={src} />
+            ))}
+          </ChainLogoList>
+        </ChainCard>
+        <ChainCard>
+          <ChainCardTitle>{`Others & Services`}</ChainCardTitle>
+          <ChainLogoList>
+            {Object.entries(CHAIN_LOGOS.Others).map(([name, src]) => (
+              <ChainLogo key={name} src={src} />
+            ))}
+          </ChainLogoList>
+        </ChainCard>
+      </ChainCardList>
     </Container>
   );
 };
@@ -69,21 +89,67 @@ const Title = styled.h2`
 `;
 
 const IllustContainer = styled.div`
-  margin-top: ${64 + 35}px;
-  width: 854px;
-  height: 756px;
+  margin-top: 39px;
+  width: 495.31px;
+  height: 495.31px;
   position: relative;
 `;
 
+const BLUR_SIZE = 200 - 34;
 const DashboardIllust = styled.img`
-  width: 649px;
-  height: 577px;
+  margin-left: ${-BLUR_SIZE}px;
+  margin-bottom: ${-BLUR_SIZE}px;
+  width: ${495.31 + BLUR_SIZE}px;
+  height: ${495.31 + BLUR_SIZE}px;
+`;
 
-  position: absolute;
-  top: -35px;
-  right: 0px;
+const ChainCardList = styled.ul`
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
 `;
-const MockupIllust = styled.img`
-  width: 100%;
-  height: 100%;
+const ChainCard = styled.ul`
+  padding: 24px 30px;
+  background: #1b1a30;
+  border: 1px solid #000000;
+  border-radius: 12px;
 `;
+const ChainCardTitle = styled.h3`
+  margin: 0;
+  font-family: ${systemFontStack};
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #ffd7e6;
+  text-align: center;
+`;
+
+const ChainLogoList = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+`;
+const ChainLogo = styled.img`
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+`;
+
+const CHAIN_LOGOS = {
+  EVM: {
+    ethereum: '/assets/chains/ethereum.png',
+    avalanche: '/assets/chains/avalanche.png',
+    bnb: '/assets/chains/bnb.png',
+    polygon: '/assets/chains/polygon.png',
+    klaytn: '/assets/chains/klaytn.png',
+  },
+  CosmosSDK: {
+    cosmosHub: '/assets/chains/cosmos-hub.png',
+    osmosis: '/assets/chains/osmosis.png',
+  },
+  Others: {
+    solana: '/assets/chains/solana.png',
+    opensea: '/assets/chains/opensea.png',
+  },
+};
