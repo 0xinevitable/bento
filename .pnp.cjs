@@ -2585,6 +2585,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@cosmjs/crypto", "npm:0.28.9"],\
             ["@cosmjs/stargate", "npm:0.28.9"],\
             ["@cosmjs/utils", "npm:0.28.9"],\
+            ["@ethersproject/address", "npm:5.6.1"],\
             ["@ethersproject/providers", "npm:5.6.8"],\
             ["@ethersproject/wallet", "npm:5.6.2"],\
             ["@floating-ui/react-dom-interactions", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:0.6.6"],\

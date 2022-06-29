@@ -1,5 +1,8 @@
+import { Bech32Address } from '@bento/core/lib/bech32';
+import { getAddress, isAddress } from '@ethersproject/address';
+import { PublicKey } from '@solana/web3.js';
 import clsx from 'clsx';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
@@ -66,6 +69,38 @@ const NETWORKS: Network[] = [
   },
 ];
 
+const identifyWalletAddress = (value: string) => {
+  if (value.length < 32) {
+    // minimal length of a valid address(solana)
+    return null;
+  }
+  if (value.startsWith('0x')) {
+    try {
+      const addressWithChecksum = getAddress(value.toLowerCase());
+      if (isAddress(addressWithChecksum)) {
+        return 'ethereum';
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+  try {
+    if (!!Bech32Address.fromBech32(value)) {
+      return 'cosmos-sdk';
+    }
+  } catch {
+    try {
+      if (PublicKey.isOnCurve(new PublicKey(value))) {
+        return 'solana';
+      }
+    } catch {
+      return null;
+    }
+  }
+  return null;
+};
+
 type AddWalletModalProps = {
   visible?: boolean;
   onDismiss?: () => void;
@@ -97,6 +132,17 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   }, []);
 
   const revalidateWallets = useRevalidateWallets();
+
+  const [draftWalletAddress, setDraftWalletAddress] = useState<string>('');
+
+  useEffect(() => {
+    if (!draftWalletAddress) {
+      return;
+    }
+    console.log({ draftWalletAddress });
+    const walletType = identifyWalletAddress(draftWalletAddress);
+    console.log({ walletType });
+  }, [draftWalletAddress]);
 
   return (
     <Portal>
@@ -185,7 +231,10 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
               <section>
                 <h3 className="mb-3 font-bold text-white">2. Input Address</h3>
 
-                <input />
+                <input
+                  value={draftWalletAddress}
+                  onChange={(e) => setDraftWalletAddress(e.target.value)}
+                />
               </section>
 
               <section>
