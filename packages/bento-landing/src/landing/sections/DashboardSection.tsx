@@ -20,13 +20,6 @@ export const DashboardSection = () => {
             /assets/illusts/dashboard@2x.png 2x,
           `}
         />
-        <MockupIllust
-          src="/assets/illusts/dashboard-mockup.png"
-          srcSet={dedent`
-            /assets/illusts/dashboard-mockup.png,
-            /assets/illusts/dashboard-mockup@2x.png 2x,
-          `}
-        />
       </IllustContainer>
     </Container>
   );
@@ -69,21 +62,16 @@ const Title = styled.h2`
 `;
 
 const IllustContainer = styled.div`
-  margin-top: ${64 + 35}px;
-  width: 854px;
-  height: 756px;
+  margin-top: 39px;
+  width: 495.31px;
+  height: 495.31px;
   position: relative;
 `;
 
+const BLUR_SIZE = 200 - 34;
 const DashboardIllust = styled.img`
-  width: 649px;
-  height: 577px;
-
-  position: absolute;
-  top: -35px;
-  right: 0px;
-`;
-const MockupIllust = styled.img`
-  width: 100%;
-  height: 100%;
+  margin-left: ${-BLUR_SIZE}px;
+  margin-bottom: ${-BLUR_SIZE}px;
+  width: ${495.31 + BLUR_SIZE}px;
+  height: ${495.31 + BLUR_SIZE}px;
 `;
