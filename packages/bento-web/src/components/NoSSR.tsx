@@ -1,7 +1,11 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-const _NoSSR: React.FC = (props) => (
+type NoSSRProps = {
+  children?: React.ReactNode;
+};
+
+const _NoSSR: React.FC<NoSSRProps> = (props) => (
   <React.Fragment>{props.children}</React.Fragment>
 );
 

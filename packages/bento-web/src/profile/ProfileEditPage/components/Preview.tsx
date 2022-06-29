@@ -35,7 +35,10 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const Card: React.FC = ({ children }) => (
+type CardProps = {
+  children?: React.ReactNode;
+};
+const Card: React.FC<CardProps> = ({ children }) => (
   <CardWrapper>
     <CardContainer>{children}</CardContainer>
   </CardWrapper>
