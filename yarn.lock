@@ -1465,6 +1465,7 @@ __metadata:
     "@cosmjs/crypto": 0.28.9
     "@cosmjs/stargate": 0.28.9
     "@cosmjs/utils": ^0.28.9
+    "@ethersproject/address": ^5.6.1
     "@ethersproject/providers": ^5.6.8
     "@ethersproject/wallet": ^5.6.2
     "@floating-ui/react-dom-interactions": ^0.6.6
