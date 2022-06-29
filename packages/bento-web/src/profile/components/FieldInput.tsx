@@ -66,6 +66,7 @@ export const inputStyle = css`
   border-bottom-right-radius: 0;
   resize: none;
   line-height: 1.4;
+  outline: 0;
 
   &::placeholder {
     color: #adb5bd;

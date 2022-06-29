@@ -12,6 +12,7 @@ import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
 import { useSession } from '@/hooks/useSession';
 import { useRevalidateWallets } from '@/hooks/useWallets';
+import { FieldInput } from '@/profile/components/FieldInput';
 import { walletsAtom } from '@/recoil/wallets';
 import { Supabase } from '@/utils/Supabase';
 
@@ -265,7 +266,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
               <section>
                 <h3 className="mb-3 font-bold text-white">2. Input Address</h3>
 
-                <input
+                <FieldInput
+                  field="Address"
                   value={draftWalletAddress}
                   onChange={(e) => setDraftWalletAddress(e.target.value)}
                 />
