@@ -78,7 +78,7 @@ const identifyWalletAddress = (value: string) => {
     try {
       const addressWithChecksum = getAddress(value.toLowerCase());
       if (isAddress(addressWithChecksum)) {
-        return 'ethereum';
+        return 'evm';
       }
       return null;
     } catch {
@@ -134,14 +134,15 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   const revalidateWallets = useRevalidateWallets();
 
   const [draftWalletAddress, setDraftWalletAddress] = useState<string>('');
+  const [draftWalletType, setDraftWalletType] = useState<string | null>(null);
 
   useEffect(() => {
     if (!draftWalletAddress) {
       return;
     }
-    console.log({ draftWalletAddress });
-    const walletType = identifyWalletAddress(draftWalletAddress);
-    console.log({ walletType });
+    const _walletType = identifyWalletAddress(draftWalletAddress);
+    setDraftWalletType(_walletType);
+    console.log(_walletType);
   }, [draftWalletAddress]);
 
   return (
@@ -245,8 +246,9 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
                       (v) => v.id === network.id,
                     );
                     const disabled =
-                      typeof firstNetwork !== 'undefined' &&
-                      firstNetwork.type !== network.type;
+                      (typeof firstNetwork !== 'undefined' &&
+                        firstNetwork.type !== network.type) ||
+                      draftWalletType !== network.type;
 
                     return (
                       <NetworkItem
