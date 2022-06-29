@@ -9,7 +9,7 @@ type LoginNudgeProps = {
 };
 
 export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
-  const onClickLogin = useCallback(async (provider: 'google') => {
+  const onClickLogin = useCallback(async (provider: 'google' | 'github') => {
     const { user, session, error } = await Supabase.auth.signIn(
       { provider },
       { redirectTo: window.location.href },
@@ -34,7 +34,10 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
             <ButtonIcon src="/assets/social/google.png" alt="" />
             Login with Google
           </Button>
-          <Button className="github ring-1 ring-white/20">
+          <Button
+            className="github ring-1 ring-white/20"
+            onClick={() => onClickLogin('github')}
+          >
             <ButtonIcon src="/assets/social/github.png" alt="" />
             Login with GitHub
           </Button>
