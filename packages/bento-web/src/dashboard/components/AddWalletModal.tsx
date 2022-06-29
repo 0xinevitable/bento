@@ -2,7 +2,9 @@ import { Bech32Address } from '@bento/core/lib/bech32';
 import { getAddress, isAddress } from '@ethersproject/address';
 import { PublicKey } from '@solana/web3.js';
 import clsx from 'clsx';
+import produce from 'immer';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
@@ -10,6 +12,7 @@ import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
 import { useSession } from '@/hooks/useSession';
 import { useRevalidateWallets } from '@/hooks/useWallets';
+import { walletsAtom } from '@/recoil/wallets';
 import { Supabase } from '@/utils/Supabase';
 
 export type Network = {
@@ -145,6 +148,36 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     console.log(_walletType);
   }, [draftWalletAddress]);
 
+  // Add wallet without session
+  const setWallets = useSetRecoilState(walletsAtom);
+  const onClickAddWallet = useCallback(() => {
+    const walletDraft = {
+      type: draftWalletType as any,
+      address: draftWalletAddress,
+      networks: networks.map((v) => v.id),
+    };
+
+    setWallets((prev) =>
+      produce(prev, (walletsDraft) => {
+        const index = walletsDraft.findIndex(
+          (v) => v.address === walletDraft.address,
+        );
+        if (index === -1) {
+          walletsDraft.push(walletDraft);
+        } else {
+          // update only chain if existing wallet
+          const wallet = walletsDraft[index];
+          if (wallet.type === 'solana') {
+            return;
+          }
+          wallet.networks = Array.from(
+            new Set([...walletDraft.networks, ...wallet.networks]),
+          ) as any[];
+        }
+      }),
+    );
+  }, [draftWalletType, draftWalletAddress, networks, setWallets]);
+
   return (
     <Portal>
       <OverlayWrapper
@@ -277,6 +310,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
                   })}
                 </div>
               </section>
+
+              <Button onClick={onClickAddWallet}>Add Button</Button>
             </>
           )}
         </div>
@@ -308,4 +343,24 @@ const NetworkItem = styled.div<NetworkItemProps>`
     css`
       border-color: rgb(168 85 247 / var(--tw-border-opacity));
     `};
+`;
+
+const Button = styled.button`
+  padding: 20px 80px;
+  cursor: pointer;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255, 165, 165, 0.66);
+  background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
+  filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
+
+  font-weight: 700;
+  font-size: 21.3946px;
+
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.05em;
+
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
 `;

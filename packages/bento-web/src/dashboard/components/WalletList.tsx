@@ -28,7 +28,7 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
   );
   const hasCollapseEffect = wallets.length > 3;
 
-  const onClickCopy = useCallback((text) => {
+  const onClickCopy = useCallback((text: string) => {
     copyToClipboard(text);
     toast({
       title: 'Copied to Clipboard!',
