@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { onMobile } from '@/landing/utils/breakpoints';
 import { systemFontStack } from '@/styles/fonts';
 
-export const Badge = styled.span`
+export const Badge = styled.span.attrs({
+  className: 'badge',
+})`
   padding: 8px 9px;
   width: fit-content;
 
