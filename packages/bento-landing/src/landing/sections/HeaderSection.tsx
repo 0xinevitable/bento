@@ -74,6 +74,10 @@ const Container = styled.section`
   @media screen and (max-height: 650px) {
     padding-top: 90px;
   }
+
+  & *:not(button) {
+    transition: all 0.2s ease-in-out;
+  }
 `;
 
 const IllustContainer = styled.div`
