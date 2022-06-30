@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
-import { onMobile } from '@/landing/utils/breakpoints';
+import { onMobile, onTablet } from '@/landing/utils/breakpoints';
 
 export const NavigationBar = () => {
   return (
@@ -56,9 +56,12 @@ const HiddenTitle = styled.span`
   display: none;
 `;
 const LogoWrapper = styled.div`
-  margin-left: -20px;
   width: 156px;
   height: 78px;
+
+  ${onTablet} {
+    margin-left: -20px;
+  }
 `;
 
 const BLUR_SIZE = 31.2;
