@@ -4,15 +4,23 @@ import styled from 'styled-components';
 import { Badge } from '@/components/Badge';
 import { systemFontStack } from '@/styles/fonts';
 
+import { onMobile, onTablet } from '../utils/breakpoints';
+
 export const HeaderSection = () => {
   return (
     <Container id="header">
       <Content>
         <Badge>INTRODUCING BENTO</Badge>
         <Title>
-          The Open-Source
+          The <span>Open-Source</span>
           <br />
-          <TitleGradient>Web3 Dashboard</TitleGradient>
+          <TitleGradientWrapper>
+            <TitleGradient>
+              Web3
+              <TitleBlank>&nbsp;</TitleBlank>
+            </TitleGradient>
+            <TitleGradient>Dashboard</TitleGradient>
+          </TitleGradientWrapper>
         </Title>
         <Description>
           Manage and group your wallets,
@@ -48,6 +56,24 @@ const Container = styled.section`
   flex-direction: column;
   align-items: center;
   z-index: 0;
+
+  ${onTablet} {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media screen and (max-width: 400px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  ${onMobile} {
+    padding-top: 120px;
+  }
+
+  @media screen and (max-height: 650px) {
+    padding-top: 90px;
+  }
 `;
 
 const IllustContainer = styled.div`
@@ -56,6 +82,46 @@ const IllustContainer = styled.div`
   height: 875.52px;
   position: relative;
   z-index: 0;
+
+  transform-origin: top center;
+
+  @media screen and (max-height: 1100px) {
+    transform: scale(0.75);
+    margin-bottom: ${-875.52 * (1 - 0.75)}px;
+  }
+
+  ${onTablet} {
+    margin-top: -${195 * 0.65}px;
+    transform: scale(0.65);
+    margin-bottom: ${-875.52 * (1 - 0.65)}px;
+  }
+
+  @media screen and (max-width: 620px) {
+    margin-top: -${195 * 0.5}px;
+    transform: scale(0.5);
+    margin-bottom: ${-875.52 * (1 - 0.5)}px;
+  }
+
+  ${onMobile} {
+    margin-right: -10%;
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-top: -${195 * 0.45}px;
+    transform: scale(0.45);
+    margin-bottom: ${-875.52 * (1 - 0.45)}px;
+  }
+
+  @media screen and (max-width: 420px) {
+    margin-top: -10px;
+    transform: scale(0.38);
+    margin-bottom: ${-875.52 * (1 - 0.38)}px;
+
+    @media screen and (max-height: 800px) {
+      margin-top: -40px;
+      margin-bottom: ${-875.52 * (1 - 0.38)}px;
+    }
+  }
 `;
 const HEADER_BLUR_SIZE = 155.6;
 const HeaderBlurIllust = styled.img`
@@ -107,6 +173,33 @@ const Title = styled.h1`
   letter-spacing: 0.01em;
   color: #ffffff;
   text-align: center;
+
+  ${onTablet} {
+    font-size: 48px;
+  }
+
+  ${onMobile} {
+    font-size: 28px;
+    line-height: 42px;
+  }
+
+  & > span {
+    display: inline-block;
+  }
+`;
+const TitleGradientWrapper = styled.span`
+  && {
+    display: inline-flex;
+  }
+
+  ${onMobile} {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+  }
 `;
 const TitleGradient = styled.span`
   width: fit-content;
@@ -115,6 +208,19 @@ const TitleGradient = styled.span`
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
+
+  ${onMobile} {
+    font-size: 42px;
+  }
+`;
+const TitleBlank = styled.span`
+  && {
+    display: unset;
+
+    ${onMobile} {
+      display: none;
+    }
+  }
 `;
 
 const Description = styled.p`
@@ -127,14 +233,31 @@ const Description = styled.p`
   line-height: 120%;
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
+
+  ${onTablet} {
+    font-size: 16px;
+  }
+
+  ${onMobile} {
+    font-size: 14px;
+  }
 `;
 
 const ButtonLink = styled.a`
   margin-top: 42px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  ${onTablet} {
+    margin-top: 24px;
+  }
 `;
 
 const Button = styled.button`
-  padding: 20px 80px;
+  padding: 20px 0;
+  width: 100%;
+  max-width: 282px;
   cursor: pointer;
 
   border-radius: 8px;
@@ -153,4 +276,9 @@ const Button = styled.button`
 
   color: rgba(255, 255, 255, 0.92);
   text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
+
+  ${onMobile} {
+    font-size: 18px;
+    padding: 18px 0;
+  }
 `;

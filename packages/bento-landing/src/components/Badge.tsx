@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { onMobile } from '@/landing/utils/breakpoints';
 import { systemFontStack } from '@/styles/fonts';
 
 export const Badge = styled.span`
@@ -22,4 +23,8 @@ export const Badge = styled.span`
   text-align: center;
 
   color: rgba(255, 255, 255, 0.8);
+
+  ${onMobile} {
+    font-size: 14px;
+  }
 `;
