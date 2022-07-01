@@ -28,8 +28,9 @@ export const HeaderSection = () => {
           Track DeFis and NFTs in various L1 chains.
         </Description>
 
-        <ButtonLink href="https://app.bento.finance">
-          <Button>Launch App</Button>
+        {/* <ButtonLink href="https://app.bento.finance"> */}
+        <ButtonLink href="#" aria-disabled={true}>
+          <Button style={{ cursor: 'none' }}>Coming Soon</Button>
         </ButtonLink>
       </Content>
 
@@ -284,5 +285,38 @@ const Button = styled.button`
   ${onMobile} {
     font-size: 18px;
     padding: 18px 0;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 64px;
+    height: 64px;
+
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-image: url('/assets/cursor.png');
+    background-size: cover;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    border-color: rgba(255, 165, 165, 0.45);
+
+    /* 85% opacity */
+    background: radial-gradient(
+      98% 205% at 0% 0%,
+      rgba(116, 2, 27, 0.85) 0%,
+      rgba(193, 18, 79, 0.85) 100%
+    );
+
+    &::before {
+      opacity: 1;
+      transform: translateX(-50%) scale(1.65);
+    }
   }
 `;
