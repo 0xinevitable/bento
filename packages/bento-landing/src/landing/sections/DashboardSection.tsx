@@ -7,7 +7,7 @@ import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const DashboardSection = () => {
   return (
-    <Container>
+    <Container id="dashboard">
       <Subtitle>Dashboard</Subtitle>
       <Title>
         Track your

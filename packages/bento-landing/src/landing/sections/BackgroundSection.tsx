@@ -7,7 +7,7 @@ import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const BackgroundSection = () => {
   return (
-    <Wrapper id="header">
+    <Wrapper id="background">
       <Container>
         <Badge>BACKGROUND</Badge>
         <Title style={{ marginTop: 26 }}>

@@ -7,7 +7,7 @@ import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const WalletSection: React.FC = () => {
   return (
-    <Container id="header">
+    <Container id="wallets">
       <Subtitle>Dashboard</Subtitle>
       <Title>
         Manage and Share
