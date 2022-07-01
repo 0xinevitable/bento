@@ -12,7 +12,7 @@ import { WalletSection } from './sections/WalletSection';
 
 const LandingPage = () => {
   useEffect(() => {
-    Analytics.logEvent('view_landing');
+    Analytics.logEvent('view_landing', undefined);
   }, []);
 
   return (
