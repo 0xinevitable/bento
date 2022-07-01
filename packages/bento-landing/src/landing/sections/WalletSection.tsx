@@ -3,9 +3,11 @@ import styled from 'styled-components';
 
 import { systemFontStack } from '@/styles/fonts';
 
+import { onMobile, onTablet } from '../utils/breakpoints';
+
 export const WalletSection: React.FC = () => {
   return (
-    <Container id="header">
+    <Container id="wallets">
       <Subtitle>Dashboard</Subtitle>
       <Title>
         Manage and Share
@@ -32,6 +34,10 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  ${onMobile} {
+    padding: 0 20px;
+  }
 `;
 
 const Subtitle = styled.span`
@@ -57,16 +63,34 @@ const Title = styled.h2`
   margin-top: 12px;
 
   font-family: ${systemFontStack};
-  font-weight: 700;
+  font-weight: 900;
   font-size: 54px;
   line-height: 120%;
   text-align: center;
   color: rgba(221, 204, 211, 0.88);
+
+  ${onTablet} {
+    font-size: 42px;
+  }
+
+  ${onMobile} {
+    font-size: 38px;
+  }
 `;
 
 const WalletIllustWrapper = styled.div`
   margin-top: 16px;
   display: flex;
+
+  ${onTablet} {
+    margin: -30px 0;
+    transform: scale(0.85);
+  }
+
+  ${onMobile} {
+    margin: -12% 0;
+    transform: scale(0.68);
+  }
 `;
 const WalletIllust = styled.img`
   margin-top: ${-50}px;
@@ -93,8 +117,46 @@ const WalletList = styled.ul`
   display: flex;
   justify-content: center;
   gap: 16px;
+
+  @media screen and (max-width: 800px) {
+    gap: 12px;
+  }
+
+  ${onTablet} {
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  @media screen and (max-width: 600px) {
+    gap: 6px;
+  }
+
+  ${onMobile} {
+    margin-top: 0;
+    gap: 4px;
+  }
 `;
 const WalletIcon = styled.img`
   width: 131px;
   height: 131px;
+
+  @media screen and (max-width: 800px) {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 86px;
+    height: 86px;
+  }
+
+  ${onMobile} {
+    width: 64px;
+    height: 64px;
+  }
+
+  @media screen and (max-width: 368px) {
+    width: 56px;
+    height: 56px;
+  }
 `;

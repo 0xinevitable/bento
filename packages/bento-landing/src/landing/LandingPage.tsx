@@ -28,7 +28,10 @@ const LandingPage = () => {
 export default LandingPage;
 
 const Container = styled.div`
+  width: 100vw;
   padding-bottom: 100px;
+
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
@@ -37,7 +40,7 @@ const Container = styled.div`
 
 const Footer = styled.footer`
   margin-top: 120px;
-  margin-bottom: 160px;
+  margin-bottom: 100px;
 
   font-family: 'Poppins';
   font-weight: 700;
