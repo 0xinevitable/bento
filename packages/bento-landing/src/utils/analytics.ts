@@ -7,6 +7,9 @@ type AnalyticsEvent = {
 // FIXME: Replace these with proper config
 const AMPLITUDE_API_KEY = '4d0b724074f2c12644648cd87755bfe5';
 const getEnvironment = () => {
+  if (!isBrowser) {
+    return '';
+  }
   return window.location.host.includes('localhost')
     ? 'debug'
     : window.location.host.includes('bento.finance')
