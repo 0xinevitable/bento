@@ -2,6 +2,9 @@ import Head from 'next/head';
 import React, { useEffect } from 'react';
 
 import { GlobalStyle } from '@/components/GlobalStyle';
+import { Analytics } from '@/utils/analytics';
+
+Analytics.initialize();
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
