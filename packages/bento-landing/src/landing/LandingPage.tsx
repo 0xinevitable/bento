@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import MetaHead from '@/components/MetaHead';
 import { NavigationBar } from '@/components/NavigationBar';
 
 import { BackgroundSection } from './sections/BackgroundSection';
@@ -10,6 +11,8 @@ import { WalletSection } from './sections/WalletSection';
 const LandingPage = () => {
   return (
     <Container>
+      <MetaHead />
+
       <NavigationBar />
       <HeaderSection />
       <BackgroundSection />
