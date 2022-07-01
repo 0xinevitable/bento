@@ -264,6 +264,7 @@ const Button = styled.button`
   width: 100%;
   max-width: 282px;
   cursor: pointer;
+  position: relative;
 
   border-radius: 8px;
   border: 1px solid rgba(255, 165, 165, 0.66);
