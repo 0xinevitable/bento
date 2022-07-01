@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import { systemFontStack } from '@/styles/fonts';
 
+import { onMobile, onTablet } from '../utils/breakpoints';
+
 export const DashboardSection = () => {
   return (
     <Container>
@@ -56,6 +58,18 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & * {
+    transition: all 0.2s ease-in-out;
+  }
+
+  ${onMobile} {
+    padding: 0 20px;
+  }
+
+  @media screen and (max-width: 370px) {
+    padding: 0 16px;
+  }
 `;
 
 const Subtitle = styled.span`
@@ -81,11 +95,19 @@ const Title = styled.h2`
   margin-top: 12px;
 
   font-family: ${systemFontStack};
-  font-weight: 700;
+  font-weight: 900;
   font-size: 54px;
   line-height: 120%;
   text-align: center;
   color: rgba(221, 204, 211, 0.88);
+
+  ${onTablet} {
+    font-size: 42px;
+  }
+
+  ${onMobile} {
+    font-size: 38px;
+  }
 `;
 
 const IllustContainer = styled.div`
@@ -93,6 +115,18 @@ const IllustContainer = styled.div`
   width: 495.31px;
   height: 495.31px;
   position: relative;
+
+  ${onTablet} {
+    margin-top: 10px;
+    margin-bottom: -5%;
+    transform: scale(0.85);
+  }
+
+  ${onMobile} {
+    margin-top: -50px;
+    margin-bottom: -18%;
+    transform: scale(0.65);
+  }
 `;
 
 const BLUR_SIZE = 200 - 34;
@@ -105,14 +139,37 @@ const DashboardIllust = styled.img`
 
 const ChainCardList = styled.ul`
   margin-top: 32px;
+  width: auto;
   display: flex;
+  justify-content: center;
   gap: 12px;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+
+    & > li {
+      width: 100%;
+    }
+  }
+
+  ${onMobile} {
+    width: 100%;
+  }
 `;
-const ChainCard = styled.ul`
+const ChainCard = styled.li`
   padding: 24px 30px;
   background: #1b1a30;
   border: 1px solid #000000;
   border-radius: 12px;
+
+  @media screen and (max-width: 1000px) {
+    padding: 20px 28px;
+  }
+
+  @media screen and (max-width: 370px) {
+    padding: 16px 24px;
+  }
 `;
 const ChainCardTitle = styled.h3`
   margin: 0;
@@ -122,6 +179,11 @@ const ChainCardTitle = styled.h3`
   line-height: 27px;
   color: #ffd7e6;
   text-align: center;
+
+  @media screen and (max-width: 1000px) {
+    font-size: 16px;
+    line-height: 120%;
+  }
 `;
 
 const ChainLogoList = styled.div`
@@ -129,11 +191,40 @@ const ChainLogoList = styled.div`
   display: flex;
   justify-content: center;
   gap: 8px;
+
+  @media screen and (max-width: 1000px) {
+    margin-top: 16px;
+    gap: 6px;
+  }
+
+  @media screen and (max-width: 428px) {
+    gap: 4px;
+  }
 `;
 const ChainLogo = styled.img`
   width: 84px;
   height: 84px;
   border-radius: 50%;
+
+  @media screen and (max-width: 1100px) {
+    width: 72px;
+    height: 72px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 64px;
+    height: 64px;
+  }
+
+  @media screen and (max-width: 428px) {
+    width: 56px;
+    height: 56px;
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 const CHAIN_LOGOS = {
