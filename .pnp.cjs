@@ -71,6 +71,45 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "SOFT"\
         }]\
       ]],\
+      ["@amplitude/analytics-connector", [\
+        ["npm:1.4.4", {\
+          "packageLocation": "./.yarn/cache/@amplitude-analytics-connector-npm-1.4.4-aa3d507757-7fad36a668.zip/node_modules/@amplitude/analytics-connector/",\
+          "packageDependencies": [\
+            ["@amplitude/analytics-connector", "npm:1.4.4"],\
+            ["@amplitude/ua-parser-js", "npm:0.7.31"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@amplitude/types", [\
+        ["npm:1.10.0", {\
+          "packageLocation": "./.yarn/cache/@amplitude-types-npm-1.10.0-e27d272eba-2a9a873976.zip/node_modules/@amplitude/types/",\
+          "packageDependencies": [\
+            ["@amplitude/types", "npm:1.10.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@amplitude/ua-parser-js", [\
+        ["npm:0.7.31", {\
+          "packageLocation": "./.yarn/cache/@amplitude-ua-parser-js-npm-0.7.31-540ed0892d-c72e7c8656.zip/node_modules/@amplitude/ua-parser-js/",\
+          "packageDependencies": [\
+            ["@amplitude/ua-parser-js", "npm:0.7.31"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@amplitude/utils", [\
+        ["npm:1.10.0", {\
+          "packageLocation": "./.yarn/cache/@amplitude-utils-npm-1.10.0-9f9f93b4a3-8555c6a444.zip/node_modules/@amplitude/utils/",\
+          "packageDependencies": [\
+            ["@amplitude/utils", "npm:1.10.0"],\
+            ["@amplitude/types", "npm:1.10.0"],\
+            ["tslib", "npm:1.14.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@ampproject/remapping", [\
         ["npm:2.2.0", {\
           "packageLocation": "./.yarn/cache/@ampproject-remapping-npm-2.2.0-114878fa50-d74d170d06.zip/node_modules/@ampproject/remapping/",\
@@ -2452,6 +2491,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
+        ["npm:7.18.6", {\
+          "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.18.6-6a59ef0d54-8b707b64ae.zip/node_modules/@babel/runtime/",\
+          "packageDependencies": [\
+            ["@babel/runtime", "npm:7.18.6"],\
+            ["regenerator-runtime", "npm:0.13.9"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:7.3.1", {\
           "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.3.1-601547fbb8-599a9b5f47.zip/node_modules/@babel/runtime/",\
           "packageDependencies": [\
@@ -2558,6 +2605,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.14"],\
             ["@types/react-dom", "npm:18.0.5"],\
             ["@types/styled-components", "npm:5.1.25"],\
+            ["amplitude-js", "npm:8.18.5"],\
             ["dedent", "npm:0.7.0"],\
             ["next", "virtual:81dc0768566aef699047c9419d66a6b365ec3cd6e3b26781864151df01edcd76c9c5b9af26fdaa3233942f70b40a629a2c0de44f89a220181ba6ed322713f74b#npm:12.2.0"],\
             ["next-plugin-svgr", "npm:1.1.1"],\
@@ -5945,6 +5993,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["amplitude-js", [\
+        ["npm:8.18.5", {\
+          "packageLocation": "./.yarn/cache/amplitude-js-npm-8.18.5-c3ee7e6f1a-07973a3de9.zip/node_modules/amplitude-js/",\
+          "packageDependencies": [\
+            ["amplitude-js", "npm:8.18.5"],\
+            ["@amplitude/analytics-connector", "npm:1.4.4"],\
+            ["@amplitude/ua-parser-js", "npm:0.7.31"],\
+            ["@amplitude/utils", "npm:1.10.0"],\
+            ["@babel/runtime", "npm:7.18.6"],\
+            ["blueimp-md5", "npm:2.19.0"],\
+            ["query-string", "npm:5.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["ansi-colors", [\
         ["npm:4.1.1", {\
           "packageLocation": "./.yarn/cache/ansi-colors-npm-4.1.1-97ad42f223-138d04a510.zip/node_modules/ansi-colors/",\
@@ -6617,6 +6680,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/bluebird-npm-3.7.2-6a54136ee3-869417503c.zip/node_modules/bluebird/",\
           "packageDependencies": [\
             ["bluebird", "npm:3.7.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["blueimp-md5", [\
+        ["npm:2.19.0", {\
+          "packageLocation": "./.yarn/cache/blueimp-md5-npm-2.19.0-0a19585c8c-28095dcbd2.zip/node_modules/blueimp-md5/",\
+          "packageDependencies": [\
+            ["blueimp-md5", "npm:2.19.0"]\
           ],\
           "linkType": "HARD"\
         }]\

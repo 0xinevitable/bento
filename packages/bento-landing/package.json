@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "amplitude-js": "^8.18.5",
     "dedent": "^0.7.0",
     "next": "12.2.0",
     "react": "^18.2.0",
