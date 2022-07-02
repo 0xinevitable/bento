@@ -156,15 +156,15 @@ const BentoIllust = styled.img`
   bottom: 75.29px;
 `;
 
-const BENTO_ZAP_BLUR_SIZE = 132.228;
+const BENTO_ZAP_BLUR_SIZE = 160;
 const BentoZap = styled.img`
   margin: ${-BENTO_ZAP_BLUR_SIZE}px;
-  width: ${369.51 + BENTO_ZAP_BLUR_SIZE * 2}px;
-  height: ${525.03 + BENTO_ZAP_BLUR_SIZE * 2}px;
+  width: ${555.34 + BENTO_ZAP_BLUR_SIZE * 2}px;
+  height: ${585.34 + BENTO_ZAP_BLUR_SIZE * 2}px;
 
   position: absolute;
-  left: 0;
-  bottom: 124.49px;
+  left: -47px;
+  bottom: 109.18px;
 `;
 
 const Content = styled.div`
