@@ -8,6 +8,7 @@ type AnalyticsEvent = {
   click_coming_soon_button: undefined;
   click_twitter_icon: undefined;
   click_github_icon: undefined;
+  click_team_link: undefined;
 };
 
 // FIXME: Replace these with proper config

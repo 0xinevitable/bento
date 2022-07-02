@@ -26,7 +26,12 @@ const LandingPage = () => {
       <WalletSection />
 
       <Footer>
-        <a title="INEVITABLE" href="https://inevitable.team" target="_blank">
+        <a
+          title="INEVITABLE"
+          href="https://inevitable.team"
+          target="_blank"
+          onClick={() => Analytics.logEvent('click_team_link', undefined)}
+        >
           2022 INEVITABLE
         </a>
       </Footer>
