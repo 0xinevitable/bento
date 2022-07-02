@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import GithubIcon from '@/assets/icons/ic-github.svg';
 import TwitterIcon from '@/assets/icons/ic-twitter.svg';
 import { onMobile, onTablet } from '@/landing/utils/breakpoints';
+import { Analytics } from '@/utils/analytics';
 
 export const NavigationBar = () => {
   return (
@@ -20,10 +21,18 @@ export const NavigationBar = () => {
         </Link>
 
         <SocialIconList>
-          <a href="https://twitter.com/bentoinevitable" target="_blank">
+          <a
+            href="https://twitter.com/bentoinevitable"
+            target="_blank"
+            onClick={() => Analytics.logEvent('click_twitter_icon', undefined)}
+          >
             <TwitterIcon />
           </a>
-          <a href="https://github.com/inevitable-changes/bento" target="_blank">
+          <a
+            href="https://github.com/inevitable-changes/bento"
+            target="_blank"
+            onClick={() => Analytics.logEvent('click_github_icon', undefined)}
+          >
             <GithubIcon />
           </a>
         </SocialIconList>

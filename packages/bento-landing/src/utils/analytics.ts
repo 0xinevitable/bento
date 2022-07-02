@@ -2,6 +2,8 @@ const isBrowser = typeof window !== 'undefined';
 
 type AnalyticsEvent = {
   view_landing: undefined;
+  click_twitter_icon: undefined;
+  click_github_icon: undefined;
 };
 
 // FIXME: Replace these with proper config
