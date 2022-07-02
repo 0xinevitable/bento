@@ -1488,6 +1488,7 @@ __metadata:
     next-plugin-svgr: ^1.1.1
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-intersection-observer: ^9.3.5
     react-is: ^18.2.0
     recoil: ^0.7.4
     styled-components: ^5.3.5
@@ -10422,6 +10423,15 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
+  languageName: node
+  linkType: hard
+
+"react-intersection-observer@npm:^9.3.5":
+  version: 9.3.5
+  resolution: "react-intersection-observer@npm:9.3.5"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
+  checksum: 218643acf5d34c8b9bf231e7a92a26a9c10b12159fe19c33c49b6aa92f1e25e5e1803deea0d8095797c101d36f8f57bc44d2edc55d085943b8a0c8391a96e336
   languageName: node
   linkType: hard
 

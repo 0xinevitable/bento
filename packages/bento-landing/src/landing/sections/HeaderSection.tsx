@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
+import { TrackedSection } from '@/components/TrackedSection';
 import { systemFontStack } from '@/styles/fonts';
+import { Analytics } from '@/utils/analytics';
 
 import { onMobile, onTablet } from '../utils/breakpoints';
 
@@ -29,7 +31,13 @@ export const HeaderSection = () => {
         </Description>
 
         {/* <ButtonLink href="https://app.bento.finance"> */}
-        <ButtonLink href="#" aria-disabled={true}>
+        <ButtonLink
+          href="#"
+          aria-disabled={true}
+          onClick={() =>
+            Analytics.logEvent('click_coming_soon_button', undefined)
+          }
+        >
           <Button style={{ cursor: 'none' }}>Coming Soon</Button>
         </ButtonLink>
       </Content>
@@ -43,7 +51,7 @@ export const HeaderSection = () => {
   );
 };
 
-const Container = styled.section`
+const Container = styled(TrackedSection)`
   margin: 0 auto;
   padding-top: 130px;
   padding-bottom: 100px;
