@@ -38,7 +38,7 @@ export const HeaderSection = () => {
             Analytics.logEvent('click_coming_soon_button', undefined)
           }
         >
-          <Button style={{ cursor: 'none' }}>Coming Soon</Button>
+          <Button>Coming Soon</Button>
         </ButtonLink>
       </Content>
 
@@ -271,7 +271,6 @@ const Button = styled.button`
   padding: 20px 0;
   width: 100%;
   max-width: 282px;
-  cursor: pointer;
   position: relative;
 
   border-radius: 8px;
@@ -291,26 +290,13 @@ const Button = styled.button`
   color: rgba(255, 255, 255, 0.92);
   text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
 
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='96' viewport='0 0 100 100' style='fill:black;font-size:48px;'><text y='50%'>⚡</text></svg>")
+      16 0,
+    pointer;
+
   ${onMobile} {
     font-size: 18px;
     padding: 18px 0;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    width: 64px;
-    height: 64px;
-
-    position: absolute;
-    top: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    background-image: url('/assets/cursor.png');
-    background-size: cover;
-    opacity: 0;
-    transition: all 0.2s ease-in-out;
   }
 
   &:hover {
@@ -322,10 +308,5 @@ const Button = styled.button`
       rgba(116, 2, 27, 0.85) 0%,
       rgba(193, 18, 79, 0.85) 100%
     );
-
-    &::before {
-      opacity: 1;
-      transform: translateX(-50%) scale(1.65);
-    }
   }
 `;
