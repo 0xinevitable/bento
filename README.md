@@ -31,8 +31,8 @@
 ## 🚀 Preparing Local Dev Environment
 
 ```bash
-git clone https://github.com/inevitable-changes/dashboard
-cd dashboard
+git clone https://github.com/inevitable-changes/bento
+cd bento
 yarn install
 ```
 
