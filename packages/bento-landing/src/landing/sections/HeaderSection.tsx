@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
+import { TrackedSection } from '@/components/TrackedSection';
 import { systemFontStack } from '@/styles/fonts';
 import { Analytics } from '@/utils/analytics';
 
@@ -50,7 +51,7 @@ export const HeaderSection = () => {
   );
 };
 
-const Container = styled.section`
+const Container = styled(TrackedSection)`
   margin: 0 auto;
   padding-top: 130px;
   padding-bottom: 100px;

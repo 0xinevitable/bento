@@ -1,6 +1,7 @@
 import dedent from 'dedent';
 import styled from 'styled-components';
 
+import { TrackedSection } from '@/components/TrackedSection';
 import { systemFontStack } from '@/styles/fonts';
 
 import { onMobile, onTablet } from '../utils/breakpoints';
@@ -54,7 +55,7 @@ export const DashboardSection = () => {
   );
 };
 
-const Container = styled.section`
+const Container = styled(TrackedSection)`
   display: flex;
   flex-direction: column;
   align-items: center;

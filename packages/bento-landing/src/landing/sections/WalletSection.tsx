@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { TrackedSection } from '@/components/TrackedSection';
 import { systemFontStack } from '@/styles/fonts';
 
 import { onMobile, onTablet } from '../utils/breakpoints';
@@ -29,7 +30,7 @@ export const WalletSection: React.FC = () => {
   );
 };
 
-const Container = styled.section`
+const Container = styled(TrackedSection)`
   margin-top: 292px;
   display: flex;
   flex-direction: column;

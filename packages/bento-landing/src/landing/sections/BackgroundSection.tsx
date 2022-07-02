@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
+import { TrackedSection } from '@/components/TrackedSection';
 import { systemFontStack } from '@/styles/fonts';
 
 import { onMobile, onTablet } from '../utils/breakpoints';
@@ -54,7 +55,7 @@ export const BackgroundSection = () => {
   );
 };
 
-const Wrapper = styled.section`
+const Wrapper = styled(TrackedSection)`
   margin: 0 auto;
   padding-top: 25px;
   padding-bottom: 292px;
