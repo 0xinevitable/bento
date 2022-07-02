@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 import { systemFontStack } from '@/styles/fonts';
+import { Analytics } from '@/utils/analytics';
 
 import { onMobile, onTablet } from '../utils/breakpoints';
 
@@ -29,7 +30,13 @@ export const HeaderSection = () => {
         </Description>
 
         {/* <ButtonLink href="https://app.bento.finance"> */}
-        <ButtonLink href="#" aria-disabled={true}>
+        <ButtonLink
+          href="#"
+          aria-disabled={true}
+          onClick={() =>
+            Analytics.logEvent('click_coming_soon_button', undefined)
+          }
+        >
           <Button style={{ cursor: 'none' }}>Coming Soon</Button>
         </ButtonLink>
       </Content>
