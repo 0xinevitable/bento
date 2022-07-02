@@ -24,7 +24,7 @@ export const TrackedSection = React.forwardRef<
   HTMLElement,
   TrackedSectionProps
 >((props, forwardedRef) => {
-  const [inViewRef, inView] = useInView();
+  const [inViewRef, inView] = useInView({ threshold: 0.3 });
 
   useEffect(() => {
     if (inView) {
