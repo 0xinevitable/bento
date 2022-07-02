@@ -2,6 +2,9 @@ const isBrowser = typeof window !== 'undefined';
 
 type AnalyticsEvent = {
   view_landing: undefined;
+  view_landing_section: {
+    section: string;
+  };
   click_coming_soon_button: undefined;
   click_twitter_icon: undefined;
   click_github_icon: undefined;
