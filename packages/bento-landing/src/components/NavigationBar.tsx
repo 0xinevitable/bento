@@ -2,6 +2,8 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
+import GithubIcon from '@/assets/icons/ic-github.svg';
+import TwitterIcon from '@/assets/icons/ic-twitter.svg';
 import { onMobile, onTablet } from '@/landing/utils/breakpoints';
 
 export const NavigationBar = () => {
@@ -16,6 +18,15 @@ export const NavigationBar = () => {
             </LogoWrapper>
           </a>
         </Link>
+
+        <SocialIconList>
+          <a href="https://twitter.com/bentoinevitable" target="_blank">
+            <TwitterIcon />
+          </a>
+          <a href="https://github.com/inevitable-changes/bento" target="_blank">
+            <GithubIcon />
+          </a>
+        </SocialIconList>
       </Container>
     </Wrapper>
   );
@@ -41,6 +52,10 @@ const Wrapper = styled.header`
 
   ${onMobile} {
     padding: 0 16px;
+  }
+
+  & * {
+    transition: all 0.2s ease-in-out;
   }
 `;
 const Container = styled.div`
@@ -70,4 +85,20 @@ const LogoImage = styled.img`
   width: ${156 + BLUR_SIZE * 2}px;
   height: ${78 + BLUR_SIZE * 2}px;
   transform: scale(1.3);
+`;
+
+const SocialIconList = styled.div`
+  gap: 12px;
+
+  &,
+  & > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & > a:focus {
+    transform: scale(0.85);
+    opacity: 0.45;
+  }
 `;
