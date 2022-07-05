@@ -9,7 +9,7 @@ type LoginNudgeProps = {
 };
 
 export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
-  const onClickLogin = useCallback(async (provider: 'google' | 'github') => {
+  const onClickLogin = useCallback(async (provider: 'twitter' | 'github') => {
     const { user, session, error } = await Supabase.auth.signIn(
       { provider },
       { redirectTo: window.location.href },
@@ -28,11 +28,11 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
         <Title className="text-3xl text-white font-bold">Log in to Bento</Title>
         <Content className="mt-10 flex flex-col gap-2">
           <Button
-            className="google ring-1 ring-[#292c4b]/20"
-            onClick={() => onClickLogin('google')}
+            className="twitter ring-1 ring-[#292c4b]/20"
+            onClick={() => onClickLogin('twitter')}
           >
-            <ButtonIcon src="/assets/social/google.png" alt="" />
-            Login with Google
+            <ButtonIcon src="/assets/social/twitter.png" alt="" />
+            Login with Twitter
           </Button>
           <Button
             className="github ring-1 ring-white/20"
@@ -108,9 +108,9 @@ const Button = styled.button`
 
   transition: all 0.1s ease-in-out;
 
-  &.google {
-    background-color: white;
-    color: rgba(0, 0, 0, 0.85);
+  &.twitter {
+    background-color: #1da1f2;
+    color: #f5f8fa;
     text-shadow: 0px 4px 12px rgba(120, 120, 120, 0.42);
   }
 
@@ -140,4 +140,5 @@ const ButtonIcon = styled.img`
   margin-right: 12px;
   width: 32px;
   height: 32px;
+  object-fit: contain;
 `;
