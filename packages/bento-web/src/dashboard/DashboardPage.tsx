@@ -307,11 +307,21 @@ const DashboardPage = () => {
       <NavigationBar />
       <Black />
       <PageContainer className="pt-0">
-        <div className="flex w-full gap-6">
-          <Card />
-          <Card className="max-w-[300px]" />
-          <Card className="max-w-[300px]" />
+        <div className="mt-6 flex w-full min-h-[345px] gap-6">
+          <Card>
+            <CardTitle>Net Worth</CardTitle>
+          </Card>
+          <Card className="max-w-[300px]">
+            <CardTitle>Wallets</CardTitle>
+          </Card>
+          <Card className="max-w-[300px]">
+            <CardTitle>NFTs</CardTitle>
+          </Card>
         </div>
+
+        <Card className="mt-12">
+          <CardTitle>Assets</CardTitle>
+        </Card>
         {/* <div className="mt-10 w-full flex justify-between">
         <div className="flex flex-col justify-center">
           <h2 className="text-md font-semibold text-slate-50/60">Net worth</h2>
@@ -427,4 +437,10 @@ const Card = styled.div`
   border-radius: 12px;
   flex: 1;
   box-shadow: 0 -4px 12px #000000, 0 2px 8px #191722;
+`;
+const CardTitle = styled.h2`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 100%;
+  color: #ffffff;
 `;
