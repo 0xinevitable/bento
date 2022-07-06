@@ -303,9 +303,12 @@ const DashboardPage = () => {
 
   return (
     <PageContainer className="pt-0">
-      <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
-
-      <div className="mt-10 w-full flex justify-between">
+      <div className="flex w-full gap-6">
+        <Card />
+        <Card className="max-w-[300px]" />
+        <Card className="max-w-[300px]" />
+      </div>
+      {/* <div className="mt-10 w-full flex justify-between">
         <div className="flex flex-col justify-center">
           <h2 className="text-md font-semibold text-slate-50/60">Net worth</h2>
           <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
@@ -369,7 +372,7 @@ const DashboardPage = () => {
         ) : (
           <EmptyBalance />
         )}
-      </section>
+      </section> */}
 
       <AddWalletModal
         visible={isAddWalletModalVisible}
@@ -381,17 +384,25 @@ const DashboardPage = () => {
 
 export default DashboardPage;
 
-const TopSection = styled.section`
-  width: 100%;
-  display: flex;
+// const TopSection = styled.section`
+//   width: 100%;
+//   display: flex;
 
-  @media screen and (max-width: 647px) {
-    flex-direction: column;
-  }
-`;
+//   @media screen and (max-width: 647px) {
+//     flex-direction: column;
+//   }
+// `;
 
-const Divider = styled.div`
-  height: 1px;
-  width: 100%;
-  background-color: rgba(248, 250, 252, 0.25);
+// const Divider = styled.div`
+//   height: 1px;
+//   width: 100%;
+//   background-color: rgba(248, 250, 252, 0.25);
+// `;
+
+const Card = styled.div`
+  padding: 24px 30px;
+  background: rgba(30, 29, 34, 0.44);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  flex: 1;
 `;

@@ -2,10 +2,6 @@ html {
   background-color: black;
 }
 
-body {
-  background: radial-gradient(78% 78% at 50% 22%, #111827 0%, #000000 100%);
-}
-
 img {
   -webkit-user-drag: none;
 }
