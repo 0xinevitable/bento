@@ -3,10 +3,11 @@ import { safePromiseAll } from '@bento/common';
 import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import { NavigationBar } from '@/components/NavigationBar';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
@@ -302,13 +303,16 @@ const DashboardPage = () => {
     useState<boolean>(false);
 
   return (
-    <PageContainer className="pt-0">
-      <div className="flex w-full gap-6">
-        <Card />
-        <Card className="max-w-[300px]" />
-        <Card className="max-w-[300px]" />
-      </div>
-      {/* <div className="mt-10 w-full flex justify-between">
+    <Container>
+      <NavigationBar />
+      <Black />
+      <PageContainer className="pt-0">
+        <div className="flex w-full gap-6">
+          <Card />
+          <Card className="max-w-[300px]" />
+          <Card className="max-w-[300px]" />
+        </div>
+        {/* <div className="mt-10 w-full flex justify-between">
         <div className="flex flex-col justify-center">
           <h2 className="text-md font-semibold text-slate-50/60">Net worth</h2>
           <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
@@ -374,15 +378,32 @@ const DashboardPage = () => {
         )}
       </section> */}
 
-      <AddWalletModal
-        visible={isAddWalletModalVisible}
-        onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
-      />
-    </PageContainer>
+        <AddWalletModal
+          visible={isAddWalletModalVisible}
+          onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
+        />
+      </PageContainer>
+    </Container>
   );
 };
 
 export default DashboardPage;
+
+const Container = styled.div`
+  width: 100vw;
+  padding-bottom: 100px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  background: #0a0a0c;
+`;
+const Black = styled.div`
+  width: 100%;
+  height: 64px;
+  background-color: black;
+`;
 
 // const TopSection = styled.section`
 //   width: 100%;
@@ -402,7 +423,8 @@ export default DashboardPage;
 const Card = styled.div`
   padding: 24px 30px;
   background: rgba(30, 29, 34, 0.44);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   flex: 1;
+  box-shadow: 0 -4px 12px #000000, 0 2px 8px #191722;
 `;
