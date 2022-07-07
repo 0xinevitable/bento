@@ -111,6 +111,7 @@ const LogoImage = styled.img`
   width: ${156 + BLUR_SIZE * 2}px;
   height: ${78 + BLUR_SIZE * 2}px;
   transform: scale(1.3);
+  user-select: none;
 `;
 
 const SocialIconList = styled.div`
