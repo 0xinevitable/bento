@@ -20,6 +20,24 @@ const onTablet = `@media screen and (max-width: ${Breakpoints.Tablet}px)`;
 // import { onMobile, onTablet } from '@/landing/utils/breakpoints';
 // import { Analytics } from '@/utils/analytics';
 
+const NAVIGATION_ITEMS = [
+  {
+    title: 'Dashboard',
+    href: '/',
+    icon: 'ic:round-space-dashboard',
+  },
+  {
+    title: 'Profile',
+    href: '/profile',
+    icon: 'carbon:user-avatar-filled',
+  },
+  {
+    title: 'Settings',
+    href: '/settings',
+    icon: 'majesticons:settings-cog',
+  },
+];
+
 export const NavigationBar = () => {
   const router = useRouter();
   const currentPath = router.asPath;
@@ -37,36 +55,18 @@ export const NavigationBar = () => {
         </Link>
 
         <ul className="flex">
-          <NavigationItem active={currentPath === '/'}>
-            <Link href="/" passHref>
-              <a className="h-full flex gap-2 justify-center items-center">
-                <Icon className="text-xl" icon="ic:round-space-dashboard" />
-                <span className="text-sm font-medium leading-none">
-                  Dashboard
-                </span>
-              </a>
-            </Link>
-          </NavigationItem>
-          <NavigationItem active={currentPath === '/profile'}>
-            <Link href="/profile" passHref>
-              <a className="h-full flex gap-2 justify-center items-center">
-                <Icon className="text-xl" icon="carbon:user-avatar-filled" />
-                <span className="text-sm font-medium leading-none">
-                  Profile
-                </span>
-              </a>
-            </Link>
-          </NavigationItem>
-          <NavigationItem active={currentPath === '/settings'}>
-            <Link href="/settings" passHref>
-              <a className="h-full flex gap-2 justify-center items-center">
-                <Icon className="text-xl" icon="majesticons:settings-cog" />
-                <span className="text-sm font-medium leading-none">
-                  Settings
-                </span>
-              </a>
-            </Link>
-          </NavigationItem>
+          {NAVIGATION_ITEMS.map((item) => (
+            <NavigationItem active={currentPath === item.href}>
+              <Link href={item.href} passHref>
+                <a className="h-full flex gap-2 justify-center items-center">
+                  <Icon className="text-xl" icon={item.icon} />
+                  <span className="text-sm font-medium leading-none">
+                    {item.title}
+                  </span>
+                </a>
+              </Link>
+            </NavigationItem>
+          ))}
         </ul>
 
         <SocialIconList>
