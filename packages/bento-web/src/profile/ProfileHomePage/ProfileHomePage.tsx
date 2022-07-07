@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
+import { useHiddenBodyOverflow } from '@/hooks/useHiddenBodyOverflow';
 import { useSession } from '@/hooks/useSession';
 
 import { LoginNudge } from '../components/LoginNudge';
@@ -12,12 +13,13 @@ import { ProfileListSection } from './components/ProfileListSection';
 
 // import { Analytics } from '@/utils/analytics';
 
-const HomePage = () => {
+const ProfileHomePage = () => {
   // useEffect(() => {
   //   Analytics.logEvent('view_home');
   // }, []);
 
   const { session } = useSession();
+  useHiddenBodyOverflow(!session);
 
   return (
     <PageContainer>
@@ -32,7 +34,7 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default ProfileHomePage;
 
 const FixedLoginNudge = styled(LoginNudge)`
   padding-top: 1.5rem;
