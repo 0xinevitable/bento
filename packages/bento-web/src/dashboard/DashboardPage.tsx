@@ -19,6 +19,7 @@ import { EmptyBalance } from './components/EmptyBalance';
 import { EmptyWallet } from './components/EmptyWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
+import { displayName } from './constants/platform';
 import {
   CosmosSDKWalletBalance,
   EVMWalletBalance,
@@ -308,7 +309,7 @@ const DashboardPage = () => {
       return {
         platform,
         netWorth,
-        name: platform.charAt(0).toUpperCase() + platform.slice(1),
+        name: displayName(platform),
         ratio: (netWorth / netWorthInUSD) * 100,
       };
     });
