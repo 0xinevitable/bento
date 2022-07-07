@@ -35,14 +35,16 @@ const HomePage = () => {
 export default HomePage;
 
 const FixedLoginNudge = styled(LoginNudge)`
+  padding-top: 1.5rem;
+
   position: fixed;
-  margin-top: 1.5rem;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(24px);
+  z-index: 50;
 
   & img.lock-illust {
     filter: drop-shadow(0px 16px 48px rgba(151, 42, 53, 0.45));
