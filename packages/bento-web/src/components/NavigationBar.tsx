@@ -1,7 +1,8 @@
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import GithubIcon from '@/assets/icons/ic-github.svg';
 import TwitterIcon from '@/assets/icons/ic-twitter.svg';
@@ -20,6 +21,9 @@ const onTablet = `@media screen and (max-width: ${Breakpoints.Tablet}px)`;
 // import { Analytics } from '@/utils/analytics';
 
 export const NavigationBar = () => {
+  const router = useRouter();
+  const currentPath = router.asPath;
+
   return (
     <Wrapper>
       <Container>
@@ -33,33 +37,33 @@ export const NavigationBar = () => {
         </Link>
 
         <ul className="flex">
-          <NavigationItem>
+          <NavigationItem active={currentPath === '/'}>
             <Link href="/" passHref>
-              <a className="h-full flex gap-2 justify-center items-center text-white">
+              <a className="h-full flex gap-2 justify-center items-center">
                 <Icon className="text-xl" icon="ic:round-space-dashboard" />
-                <button className="text-sm font-medium leading-none">
+                <span className="text-sm font-medium leading-none">
                   Dashboard
-                </button>
+                </span>
               </a>
             </Link>
           </NavigationItem>
-          <NavigationItem>
+          <NavigationItem active={currentPath === '/profile'}>
             <Link href="/profile" passHref>
-              <a className="h-full flex gap-2 justify-center items-center text-white">
+              <a className="h-full flex gap-2 justify-center items-center">
                 <Icon className="text-xl" icon="carbon:user-avatar-filled" />
-                <button className="text-sm font-medium leading-none">
+                <span className="text-sm font-medium leading-none">
                   Profile
-                </button>
+                </span>
               </a>
             </Link>
           </NavigationItem>
-          <NavigationItem>
+          <NavigationItem active={currentPath === '/settings'}>
             <Link href="/settings" passHref>
-              <a className="h-full flex gap-2 justify-center items-center text-white">
+              <a className="h-full flex gap-2 justify-center items-center">
                 <Icon className="text-xl" icon="majesticons:settings-cog" />
-                <button className="text-sm font-medium leading-none">
+                <span className="text-sm font-medium leading-none">
                   Settings
-                </button>
+                </span>
               </a>
             </Link>
           </NavigationItem>
@@ -164,16 +168,45 @@ const SocialIconList = styled.div`
   }
 `;
 
-const NavigationItem = styled.li`
-  & > a {
-    padding: 4px 8px;
+type NavigationItemProps = {
+  active?: boolean;
+};
+const NavigationItem = styled.li<NavigationItemProps>`
+  height: 64px;
+  position: relative;
+  color: rgba(255, 255, 255, 0.45);
 
-    &:hover {
-      opacity: 0.65;
-    }
+  & > a {
+    padding: 4px 16px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    height: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color: #fe214a;
+    width: 100%;
+
+    transition: height 0.2s ease-in-out;
   }
 
   &:not(:last-of-type) {
-    margin-right: 24px;
+    margin-right: 12px;
   }
+
+  ${({ active }) =>
+    active &&
+    css`
+      color: white;
+
+      &::after {
+        height: 4px;
+      }
+    `};
 `;
