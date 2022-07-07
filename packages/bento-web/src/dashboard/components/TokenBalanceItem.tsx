@@ -53,7 +53,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
   return (
     <Container
       className={clsx(
-        'p-3 h-fit rounded-md drop-shadow-2xl',
+        'py-3 p-3 h-fit rounded-md drop-shadow-2xl',
         'flex flex-col cursor-pointer',
       )}
       // onClick={() => setCollapsed((prev) => !prev)}
@@ -61,7 +61,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
       <div className="flex items-center">
         <div className="relative">
           <img
-            className="w-12 h-12 rounded-full"
+            className="w-16 h-16 rounded-full object-cover"
             src={info.logo}
             alt={info.name}
           />
@@ -70,7 +70,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
             src={platformURL}
           />
         </div>
-        <div className="ml-1 min-w-0 flex flex-col flex-1">
+        <div className="ml-4 min-w-0 flex flex-col flex-1">
           <span className="text-sm truncate text-slate-400/40">
             <span className="text-slate-400">{info.symbol}</span>
             <span className="ml-1 text-xs text-slate-400/40">
@@ -80,9 +80,11 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
           <span className="text-xl font-bold text-slate-50/90">
             {`$${info.netWorth.toLocaleString()}`}
 
-            <span className="ml-1 text-sm font-medium text-slate-400/40">
-              {`$${info.price.toLocaleString()}`}
-            </span>
+            {info.amount !== 1 && (
+              <span className="ml-1 text-sm font-medium text-slate-400/40">
+                {`$${info.price.toLocaleString()}`}
+              </span>
+            )}
           </span>
         </div>
       </div>
@@ -133,7 +135,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
 };
 
 const Container = styled.li`
-  width: 250px;
+  width: calc(33.33% - 8px);
 
   background: #16181a;
   background: linear-gradient(145deg, #141617, #181a1c);
