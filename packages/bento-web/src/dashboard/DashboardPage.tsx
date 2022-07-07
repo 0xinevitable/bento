@@ -7,6 +7,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import { NavigationBar } from '@/components/NavigationBar';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
@@ -211,6 +212,7 @@ const DashboardPage = () => {
                       logo: collection.image_url,
                       price: ethereumPrice * floorPrice,
                       type: 'nft' as const,
+                      platform: 'opensea',
                     };
                   }),
                 ),
@@ -248,6 +250,7 @@ const DashboardPage = () => {
         const [first] = balances;
 
         return {
+          platform: first.platform,
           symbol: first.symbol,
           name: first.name,
           logo: first.logo,
@@ -302,96 +305,144 @@ const DashboardPage = () => {
     useState<boolean>(false);
 
   return (
-    <PageContainer className="pt-0">
-      <div className="absolute top-2 left-2 w-[120px] h-[120px] rounded-full bg-[#fa3737] blur-[88px] -z-10" />
+    <Container>
+      <NavigationBar />
+      <Black />
 
-      <div className="mt-10 w-full flex justify-between">
-        <div className="flex flex-col justify-center">
-          <h2 className="text-md font-semibold text-slate-50/60">Net worth</h2>
-          <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
+      <PageContainer className="pt-0 z-10">
+        <TopLeftBlur src="/assets/blurs/top-left.png" />
+        <TopRightBlur src="/assets/blurs/top-right.png" />
+        <div className="mt-6 flex w-full min-h-[345px] gap-6">
+          <Card>
+            <CardTitle>Net Worth</CardTitle>
+            <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
+            <AssetRatioChart
+              tokenBalances={tokenBalances}
+              netWorthInUSD={netWorthInUSD}
+            />
+          </Card>
+          <Card className="max-w-[300px]">
+            <NoSSR>
+              <React.Fragment>
+                <CardTitle>
+                  Wallets
+                  {wallets.length > 0 && (
+                    <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                      {`(${wallets.length.toLocaleString()})`}
+                    </span>
+                  )}
+                </CardTitle>
+
+                {wallets.length > 0 ? (
+                  <WalletList
+                    onClickConnect={() =>
+                      setAddWalletModalVisible((prev) => !prev)
+                    }
+                  />
+                ) : (
+                  <EmptyWallet
+                    onClickConnect={() =>
+                      setAddWalletModalVisible((prev) => !prev)
+                    }
+                  />
+                )}
+              </React.Fragment>
+            </NoSSR>
+          </Card>
+          <Card className="max-w-[300px]">
+            <CardTitle>NFTs</CardTitle>
+          </Card>
         </div>
-      </div>
 
-      <TopSection>
-        <div className="flex-1 min-w-sm flex">
-          <AssetRatioChart
-            tokenBalances={tokenBalances}
-            netWorthInUSD={netWorthInUSD}
-          />
-        </div>
-        <div className="flex-1 flex flex-col">
-          <NoSSR>
-            <h2 className="mt-2 text-md font-semibold text-slate-50/60">
-              Wallets
-              {wallets.length > 0 && (
-                <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                  {`(${wallets.length.toLocaleString()})`}
-                </span>
-              )}
-            </h2>
-
-            {wallets.length > 0 ? (
-              <WalletList
-                onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-              />
-            ) : (
-              <EmptyWallet
-                onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-              />
+        <Card className="mt-12">
+          <CardTitle>
+            Assets
+            {tokenBalances.length > 0 && (
+              <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                {`(${tokenBalances.length.toLocaleString()})`}
+              </span>
             )}
-          </NoSSR>
-        </div>
-      </TopSection>
-
-      <Divider className="my-4" />
-
-      <section className="mt-4 flex flex-col">
-        <h2 className="text-md font-semibold text-slate-50/60">
-          Assets
-          {tokenBalances.length > 0 && (
-            <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-              {`(${tokenBalances.length.toLocaleString()})`}
-            </span>
+          </CardTitle>
+          {tokenBalances.length > 0 ? (
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {tokenBalances.map((info) => (
+                <TokenBalanceItem
+                  key={`${info.symbol}-${
+                    'tokenAddress' in info ? info.tokenAddress : 'native'
+                  }`}
+                  {...info}
+                />
+              ))}
+            </ul>
+          ) : (
+            <EmptyBalance />
           )}
-        </h2>
+        </Card>
 
-        {tokenBalances.length > 0 ? (
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {tokenBalances.map((info) => (
-              <TokenBalanceItem
-                key={`${info.symbol}-${
-                  'tokenAddress' in info ? info.tokenAddress : 'native'
-                }`}
-                {...info}
-              />
-            ))}
-          </ul>
-        ) : (
-          <EmptyBalance />
-        )}
-      </section>
-
-      <AddWalletModal
-        visible={isAddWalletModalVisible}
-        onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
-      />
-    </PageContainer>
+        <AddWalletModal
+          visible={isAddWalletModalVisible}
+          onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
+        />
+      </PageContainer>
+    </Container>
   );
 };
 
 export default DashboardPage;
 
-const TopSection = styled.section`
-  width: 100%;
-  display: flex;
+const Container = styled.div`
+  width: 100vw;
+  padding-bottom: 100px;
 
-  @media screen and (max-width: 647px) {
-    flex-direction: column;
-  }
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  background: #0a0a0c;
+`;
+const Black = styled.div`
+  width: 100%;
+  height: 64px;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const Divider = styled.div`
-  height: 1px;
-  width: 100%;
-  background-color: rgba(248, 250, 252, 0.25);
+const TOP_LEFT_BLUR = 262.9;
+const TopLeftBlur = styled.img`
+  position: absolute;
+  top: 360px;
+  left: 63px;
+
+  margin: ${-TOP_LEFT_BLUR}px;
+  width: ${280.42 + TOP_LEFT_BLUR * 2}px;
+  height: ${280.42 + TOP_LEFT_BLUR * 2}px;
+  z-index: -1;
+  user-select: none;
+`;
+const TOP_RIGHT_BLUR = 256;
+const TopRightBlur = styled.img`
+  position: absolute;
+  top: -35px;
+  right: 64.48px;
+
+  margin: ${-TOP_RIGHT_BLUR}px;
+  width: ${402 + TOP_RIGHT_BLUR * 2}px;
+  height: ${47 + TOP_RIGHT_BLUR * 2}px;
+  z-index: -1;
+  user-select: none;
+`;
+
+const Card = styled.section`
+  padding: 24px 30px;
+  background: rgba(30, 29, 34, 0.44);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  flex: 1;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1ㅌ), 0 2px 8px #191722;
+`;
+const CardTitle = styled.h2`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 100%;
+  color: #ffffff;
 `;

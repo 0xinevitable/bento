@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { WalletBalance } from '../types/balance';
@@ -6,6 +7,7 @@ import { TokenBalanceRatioBar } from './TokenBalanceRatioBar';
 import { TokenIcon } from './TokenIcon';
 
 type TokenBalanceItemProps = {
+  platform: string;
   symbol: string;
   name: string;
   logo?: string;
@@ -13,6 +15,20 @@ type TokenBalanceItemProps = {
   amount: number;
   price: number;
   balances: WalletBalance[];
+};
+
+const PLATFORM_LOGOS = {
+  ethereum: '/assets/ethereum.png',
+  avalanche: '/assets/avalanche.png',
+  bnb: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
+  polygon: '/assets/polygon.webp',
+  klaytn: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
+  cosmosHub:
+    'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png',
+  osmosis:
+    'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png',
+  solana: '/assets/solana.png',
+  opensea: '/assets/opensea.png',
 };
 
 export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
@@ -41,6 +57,11 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
   //   return items;
   // }, [info.balances]);
 
+  const platformURL = useMemo(
+    () => PLATFORM_LOGOS[info.platform as keyof typeof PLATFORM_LOGOS],
+    [info.platform],
+  );
+
   return (
     <Container
       className={clsx(
@@ -51,6 +72,10 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
     >
       <div className="ml-[-10px] pt-2 flex items-center">
         <TokenIcon src={info.logo} alt={info.name} />
+        <img
+          className="w-6 h-6 absolute top-12 left-[-4px] rounded-full ring-1 ring-black/40"
+          src={platformURL}
+        />
         <div className="ml-1 min-w-0 flex flex-col flex-1">
           <span className="text-sm truncate text-slate-400/40">
             <span className="text-slate-400">{info.symbol}</span>

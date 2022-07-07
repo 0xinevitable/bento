@@ -40,7 +40,7 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
     <NoSSR>
       <ul className="flex flex-col">
         {renderedWallets.map((wallet) => (
-          <li className="p-1 py-2 flex items-center" key={wallet.address}>
+          <li className="py-2 flex items-center" key={wallet.address}>
             <img
               className="w-10 min-w-[40px] h-10 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25"
               src={WALLET_TYPES[wallet.type].logo}
