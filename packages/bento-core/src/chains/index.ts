@@ -520,7 +520,7 @@ export class SolanaChain implements Chain {
         return [];
       }
       if (
-        token.contract_address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' // Klaytn
+        token.contract_address === '11111111111111111111111111111111' // Klaytn
       ) {
         return [];
       }
@@ -533,7 +533,7 @@ export class SolanaChain implements Chain {
       }
       const symbol = token.contract_ticker_symbol;
       const tokenInfo = SOLANA_TOKENS.find(
-        (v) => v.address.toLowerCase() === token.contract_address,
+        (v) => v.address === token.contract_address,
       );
       const getPrice = async () => {
         if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
