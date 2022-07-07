@@ -42,7 +42,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
 
         const [balance, tokenBalances] = await Promise.all([
           chain.getBalance(walletAddress).catch(() => 0),
-          // getTokenBalances().catch(() => []),
+          chain.getTokenBalances(walletAddress).catch(() => []),
           [], // Not Implemented
         ]);
 
