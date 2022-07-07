@@ -176,6 +176,10 @@ const NavigationItem = styled.li<NavigationItemProps>`
   position: relative;
   color: rgba(255, 255, 255, 0.45);
 
+  * {
+    transition: color 0.05s ease;
+  }
+
   & > a {
     padding: 4px 16px;
   }
