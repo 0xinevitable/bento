@@ -212,6 +212,7 @@ const DashboardPage = () => {
                       logo: collection.image_url,
                       price: ethereumPrice * floorPrice,
                       type: 'nft' as const,
+                      platform: 'opensea',
                     };
                   }),
                 ),
@@ -249,6 +250,7 @@ const DashboardPage = () => {
         const [first] = balances;
 
         return {
+          platform: first.platform,
           symbol: first.symbol,
           name: first.name,
           logo: first.logo,
