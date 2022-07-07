@@ -177,7 +177,9 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
         }
       }),
     );
-  }, [draftWalletType, draftWalletAddress, networks, setWallets]);
+
+    onDismiss?.();
+  }, [draftWalletType, draftWalletAddress, networks, setWallets, onDismiss]);
 
   return (
     <Portal>
