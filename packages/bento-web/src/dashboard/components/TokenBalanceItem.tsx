@@ -2,9 +2,11 @@ import clsx from 'clsx';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
+import { PLATFORM_LOGOS } from '../constants/platform';
 import { WalletBalance } from '../types/balance';
-import { TokenBalanceRatioBar } from './TokenBalanceRatioBar';
-import { TokenIcon } from './TokenIcon';
+
+// import { TokenBalanceRatioBar } from './TokenBalanceRatioBar';
+// import { TokenIcon } from './TokenIcon';
 
 type TokenBalanceItemProps = {
   platform: string;
@@ -15,20 +17,6 @@ type TokenBalanceItemProps = {
   amount: number;
   price: number;
   balances: WalletBalance[];
-};
-
-const PLATFORM_LOGOS = {
-  ethereum: '/assets/ethereum.png',
-  avalanche: '/assets/avalanche.png',
-  bnb: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
-  polygon: '/assets/polygon.webp',
-  klaytn: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
-  cosmosHub:
-    'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png',
-  osmosis:
-    'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png',
-  solana: '/assets/solana.png',
-  opensea: '/assets/opensea.png',
 };
 
 export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
