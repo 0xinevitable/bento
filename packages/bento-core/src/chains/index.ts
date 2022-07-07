@@ -109,6 +109,7 @@ export class EthereumChain implements Chain {
       const price = await getPrice();
       return {
         walletAddress,
+        platform: 'ethereum',
         name: tokenInfo?.name ?? token.contract_name,
         symbol: tokenInfo?.symbol ?? symbol,
         decimals: token.contract_decimals,
@@ -194,6 +195,7 @@ export class BNBChain implements Chain {
       const price = await getPrice();
       return {
         walletAddress,
+        platform: 'bnb',
         name: tokenInfo?.name ?? token.contract_name,
         symbol: tokenInfo?.symbol ?? symbol,
         decimals: token.contract_decimals,
@@ -374,6 +376,7 @@ export class KlaytnChain implements Chain {
       const price = await getPrice();
       const balanceInfo = {
         walletAddress,
+        platform: 'klaytn',
         name: tokenInfo?.name ?? token.contract_name,
         symbol: tokenInfo?.symbol ?? symbol,
         decimals: token.contract_decimals,
