@@ -18,6 +18,7 @@ import { EmptyBalance } from './components/EmptyBalance';
 import { EmptyWallet } from './components/EmptyWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
+import { PLATFORM_LOGOS } from './constants/platform';
 import {
   CosmosSDKWalletBalance,
   EVMWalletBalance,
@@ -300,6 +301,19 @@ const DashboardPage = () => {
     [tokenBalances],
   );
 
+  const assetRatioByPlatform = useMemo(() => {
+    const groups = groupBy(tokenBalances, 'platform');
+    return Object.entries(groups).map(([platform, assets]) => {
+      const netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
+      return {
+        platform,
+        netWorth,
+        name: platform.charAt(0).toUpperCase() + platform.slice(1),
+        ratio: (netWorth / netWorthInUSD) * 100,
+      };
+    });
+  }, [netWorthInUSD]);
+
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);
 
@@ -318,9 +332,25 @@ const DashboardPage = () => {
                 netWorthInUSD={netWorthInUSD}
               />
             </div>
-            <div>
+            <AssetCardList className="w-1/2">
+              {assetRatioByPlatform.map((item) => (
+                <AssetRatioCard>
+                  <img
+                    className="w-14 h-14 rounded-full"
+                    src={
+                      PLATFORM_LOGOS[
+                        item.platform as keyof typeof PLATFORM_LOGOS
+                      ]
+                    }
+                    alt={item.name}
+                  />
+                  {item.name}
+                  {`$${item.netWorth.toLocaleString()}`}
+                  {`${item.ratio}%`}
+                </AssetRatioCard>
+              ))}
               {/* TODO: net worth & asset ratio breakdown by chains here */}
-            </div>
+            </AssetCardList>
           </div>
         </Card>
         <Card className="max-w-[400px]">
@@ -429,4 +459,30 @@ const CardTitle = styled.h2`
   font-size: 18px;
   line-height: 100%;
   color: #ffffff;
+`;
+
+const AssetCardList = styled.ul`
+  margin: 0;
+  padding: 0;
+`;
+const AssetRatioCard = styled.li`
+  width: 100%;
+
+  background: #16181a;
+  background: linear-gradient(145deg, #141617, #181a1c);
+  border: 1px solid #2a2e31;
+  box-shadow: inset 5px 5px 16px #0b0c0e, inset -5px -5px 16px #212426;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+
+  @media screen and (max-width: 797px) {
+    width: calc(50% - 4px);
+  }
+
+  @media screen and (max-width: 537px) {
+    width: 100%;
+  }
 `;
