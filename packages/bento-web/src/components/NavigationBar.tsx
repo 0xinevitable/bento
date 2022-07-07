@@ -1,6 +1,8 @@
+import { Icon } from '@iconify/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import GithubIcon from '@/assets/icons/ic-github.svg';
 import TwitterIcon from '@/assets/icons/ic-twitter.svg';
@@ -18,7 +20,28 @@ const onTablet = `@media screen and (max-width: ${Breakpoints.Tablet}px)`;
 // import { onMobile, onTablet } from '@/landing/utils/breakpoints';
 // import { Analytics } from '@/utils/analytics';
 
+const NAVIGATION_ITEMS = [
+  {
+    title: 'Dashboard',
+    href: '/',
+    icon: 'ic:round-space-dashboard',
+  },
+  {
+    title: 'Profile',
+    href: '/profile',
+    icon: 'carbon:user-avatar-filled',
+  },
+  {
+    title: 'Settings',
+    href: '/settings',
+    icon: 'majesticons:settings-cog',
+  },
+];
+
 export const NavigationBar = () => {
+  const router = useRouter();
+  const currentPath = router.asPath;
+
   return (
     <Wrapper>
       <Container>
@@ -30,6 +53,21 @@ export const NavigationBar = () => {
             </LogoWrapper>
           </a>
         </Link>
+
+        <ul className="flex">
+          {NAVIGATION_ITEMS.map((item) => (
+            <NavigationItem active={currentPath === item.href}>
+              <Link href={item.href} passHref>
+                <a className="h-full flex gap-2 justify-center items-center">
+                  <Icon className="text-xl" icon={item.icon} />
+                  <span className="text-sm font-medium leading-none">
+                    {item.title}
+                  </span>
+                </a>
+              </Link>
+            </NavigationItem>
+          ))}
+        </ul>
 
         <SocialIconList>
           <a
@@ -128,4 +166,51 @@ const SocialIconList = styled.div`
     transform: scale(0.85);
     opacity: 0.45;
   }
+`;
+
+type NavigationItemProps = {
+  active?: boolean;
+};
+const NavigationItem = styled.li<NavigationItemProps>`
+  height: 64px;
+  position: relative;
+  color: rgba(255, 255, 255, 0.45);
+
+  * {
+    transition: color 0.05s ease;
+  }
+
+  & > a {
+    padding: 4px 16px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    height: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color: #fe214a;
+    width: 100%;
+
+    transition: height 0.2s ease-in-out;
+  }
+
+  &:not(:last-of-type) {
+    margin-right: 12px;
+  }
+
+  ${({ active }) =>
+    active &&
+    css`
+      color: white;
+
+      &::after {
+        height: 4px;
+      }
+    `};
 `;

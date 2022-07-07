@@ -1,5 +1,3 @@
-import { BottomTabBar } from './BottomTabBar';
-
 type PageContainerProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const PageContainer: React.FC<PageContainerProps> = ({
@@ -15,8 +13,6 @@ export const PageContainer: React.FC<PageContainerProps> = ({
       <div className="w-full max-w-[1100px] mx-auto relative z-0 flex flex-col">
         {children}
       </div>
-
-      <BottomTabBar />
     </div>
   );
 };

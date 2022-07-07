@@ -7,7 +7,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import { NavigationBar } from '@/components/NavigationBar';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
@@ -305,107 +304,85 @@ const DashboardPage = () => {
     useState<boolean>(false);
 
   return (
-    <Container>
-      <NavigationBar />
-      <Black />
-
-      <PageContainer className="pt-0 z-10">
-        <TopLeftBlur src="/assets/blurs/top-left.png" />
-        <TopRightBlur src="/assets/blurs/top-right.png" />
-        <div className="mt-6 flex w-full min-h-[345px] gap-6">
-          <Card>
-            <CardTitle>Net Worth</CardTitle>
-            <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-            <AssetRatioChart
-              tokenBalances={tokenBalances}
-              netWorthInUSD={netWorthInUSD}
-            />
-          </Card>
-          <Card className="max-w-[300px]">
-            <NoSSR>
-              <React.Fragment>
-                <CardTitle>
-                  Wallets
-                  {wallets.length > 0 && (
-                    <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                      {`(${wallets.length.toLocaleString()})`}
-                    </span>
-                  )}
-                </CardTitle>
-
-                {wallets.length > 0 ? (
-                  <WalletList
-                    onClickConnect={() =>
-                      setAddWalletModalVisible((prev) => !prev)
-                    }
-                  />
-                ) : (
-                  <EmptyWallet
-                    onClickConnect={() =>
-                      setAddWalletModalVisible((prev) => !prev)
-                    }
-                  />
-                )}
-              </React.Fragment>
-            </NoSSR>
-          </Card>
-          <Card className="max-w-[300px]">
-            <CardTitle>NFTs</CardTitle>
-          </Card>
-        </div>
-
-        <Card className="mt-12">
-          <CardTitle>
-            Assets
-            {tokenBalances.length > 0 && (
-              <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                {`(${tokenBalances.length.toLocaleString()})`}
-              </span>
-            )}
-          </CardTitle>
-          {tokenBalances.length > 0 ? (
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {tokenBalances.map((info) => (
-                <TokenBalanceItem
-                  key={`${info.symbol}-${
-                    'tokenAddress' in info ? info.tokenAddress : 'native'
-                  }`}
-                  {...info}
-                />
-              ))}
-            </ul>
-          ) : (
-            <EmptyBalance />
-          )}
+    <PageContainer className="pt-0 z-10">
+      <TopLeftBlur src="/assets/blurs/top-left.png" />
+      <TopRightBlur src="/assets/blurs/top-right.png" />
+      <div className="mt-6 flex w-full min-h-[345px] gap-6">
+        <Card>
+          <CardTitle>Net Worth</CardTitle>
+          <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
+          <AssetRatioChart
+            tokenBalances={tokenBalances}
+            netWorthInUSD={netWorthInUSD}
+          />
         </Card>
+        <Card className="max-w-[300px]">
+          <NoSSR>
+            <React.Fragment>
+              <CardTitle>
+                Wallets
+                {wallets.length > 0 && (
+                  <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                    {`(${wallets.length.toLocaleString()})`}
+                  </span>
+                )}
+              </CardTitle>
 
-        <AddWalletModal
-          visible={isAddWalletModalVisible}
-          onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
-        />
-      </PageContainer>
-    </Container>
+              {wallets.length > 0 ? (
+                <WalletList
+                  onClickConnect={() =>
+                    setAddWalletModalVisible((prev) => !prev)
+                  }
+                />
+              ) : (
+                <EmptyWallet
+                  onClickConnect={() =>
+                    setAddWalletModalVisible((prev) => !prev)
+                  }
+                />
+              )}
+            </React.Fragment>
+          </NoSSR>
+        </Card>
+        <Card className="max-w-[300px]">
+          <CardTitle>NFTs</CardTitle>
+        </Card>
+      </div>
+
+      <Card className="mt-12">
+        <CardTitle>
+          Assets
+          {tokenBalances.length > 0 && (
+            <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+              {`(${tokenBalances.length.toLocaleString()})`}
+            </span>
+          )}
+        </CardTitle>
+        {tokenBalances.length > 0 ? (
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {tokenBalances.map((info) => (
+              <TokenBalanceItem
+                key={`${info.symbol}-${
+                  'tokenAddress' in info ? info.tokenAddress : 'native'
+                }`}
+                {...info}
+              />
+            ))}
+          </ul>
+        ) : (
+          <EmptyBalance />
+        )}
+      </Card>
+
+      <AddWalletModal
+        visible={isAddWalletModalVisible}
+        onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
+      />
+    </PageContainer>
   );
 };
 
 export default DashboardPage;
-
-const Container = styled.div`
-  width: 100vw;
-  padding-bottom: 100px;
-
-  position: relative;
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-  background: #0a0a0c;
-`;
-const Black = styled.div`
-  width: 100%;
-  height: 64px;
-  background-color: rgba(0, 0, 0, 0.5);
-`;
 
 const TOP_LEFT_BLUR = 262.9;
 const TopLeftBlur = styled.img`
