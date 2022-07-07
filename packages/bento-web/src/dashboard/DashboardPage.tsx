@@ -3,7 +3,7 @@ import { safePromiseAll } from '@bento/common';
 import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -322,24 +322,32 @@ const DashboardPage = () => {
             />
           </Card>
           <Card className="max-w-[300px]">
-            <CardTitle>
-              Wallets
-              {wallets.length > 0 && (
-                <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                  {`(${wallets.length.toLocaleString()})`}
-                </span>
-              )}
-            </CardTitle>
+            <NoSSR>
+              <React.Fragment>
+                <CardTitle>
+                  Wallets
+                  {wallets.length > 0 && (
+                    <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                      {`(${wallets.length.toLocaleString()})`}
+                    </span>
+                  )}
+                </CardTitle>
 
-            {wallets.length > 0 ? (
-              <WalletList
-                onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-              />
-            ) : (
-              <EmptyWallet
-                onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-              />
-            )}
+                {wallets.length > 0 ? (
+                  <WalletList
+                    onClickConnect={() =>
+                      setAddWalletModalVisible((prev) => !prev)
+                    }
+                  />
+                ) : (
+                  <EmptyWallet
+                    onClickConnect={() =>
+                      setAddWalletModalVisible((prev) => !prev)
+                    }
+                  />
+                )}
+              </React.Fragment>
+            </NoSSR>
           </Card>
           <Card className="max-w-[300px]">
             <CardTitle>NFTs</CardTitle>
