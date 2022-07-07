@@ -63,7 +63,7 @@ const ProfileListRightGradient = styled.div`
   background-image: linear-gradient(
     to right,
     rgba(0, 0, 0, 0),
-    rgba(23, 27, 32, 0.95)
+    rgba(10, 10, 13, 0.95)
   );
   pointer-events: none;
   position: absolute;
