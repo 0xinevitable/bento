@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
@@ -30,6 +31,39 @@ export const NavigationBar = () => {
             </LogoWrapper>
           </a>
         </Link>
+
+        <ul className="flex">
+          <NavigationItem>
+            <Link href="/" passHref>
+              <a className="h-full flex gap-2 justify-center items-center text-white">
+                <Icon className="text-xl" icon="ic:round-space-dashboard" />
+                <button className="text-sm font-medium leading-none">
+                  Dashboard
+                </button>
+              </a>
+            </Link>
+          </NavigationItem>
+          <NavigationItem>
+            <Link href="/profile" passHref>
+              <a className="h-full flex gap-2 justify-center items-center text-white">
+                <Icon className="text-xl" icon="carbon:user-avatar-filled" />
+                <button className="text-sm font-medium leading-none">
+                  Profile
+                </button>
+              </a>
+            </Link>
+          </NavigationItem>
+          <NavigationItem>
+            <Link href="/settings" passHref>
+              <a className="h-full flex gap-2 justify-center items-center text-white">
+                <Icon className="text-xl" icon="majesticons:settings-cog" />
+                <button className="text-sm font-medium leading-none">
+                  Settings
+                </button>
+              </a>
+            </Link>
+          </NavigationItem>
+        </ul>
 
         <SocialIconList>
           <a
@@ -127,5 +161,19 @@ const SocialIconList = styled.div`
   & > a:focus {
     transform: scale(0.85);
     opacity: 0.45;
+  }
+`;
+
+const NavigationItem = styled.li`
+  & > a {
+    padding: 4px 8px;
+
+    &:hover {
+      opacity: 0.65;
+    }
+  }
+
+  &:not(:last-of-type) {
+    margin-right: 24px;
   }
 `;
