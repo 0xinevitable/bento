@@ -17,7 +17,7 @@ export const TokenIcon: React.FC<TokenIconProps> = ({
 }) => (
   <OuterRing>
     <InnerRing>
-      <Image className="ring ring-slate-100/10" {...props} />
+      <Image {...props} />
     </InnerRing>
   </OuterRing>
 );
@@ -32,9 +32,8 @@ const OuterRing = styled.div`
 
   background: radial-gradient(
     98.83% 98.83% at 50.83% 1.17%,
-    #00001e 0%,
-    #01011b 50.52%,
-    #060642 100%
+    #1d0408 46.35%,
+    #4e0505 100%
   );
   border-radius: 157.781px;
 `;
@@ -48,11 +47,16 @@ const InnerRing = styled.div`
   align-items: flex-end;
 
   background: radial-gradient(
+    to bottom,
+    #4b0603 50.52%,
+    #840100 84.83%,
+    #d30027 100%
+  );
+  background: radial-gradient(
     101.25% 101.25% at 51.25% -1.25%,
-    #00001e 0%,
-    #04042a 50.52%,
-    #0b0d7a 85.79%,
-    #2123b8 100%
+    #4b0603 50.52%,
+    #840100 84.83%,
+    #d30027 100%
   );
   box-shadow: 0px 4.25px 21.25px #040325;
   border-radius: 157.781px;
@@ -65,6 +69,7 @@ const Image = styled.img`
   height: 54px;
 
   background: white;
+  outline: 1px solid rgba(176, 171, 83, 0.33);
   filter: drop-shadow(0px 4.25px 4.25px rgba(0, 0, 0, 0.25));
   border-radius: 157.781px;
   object-fit: cover;
