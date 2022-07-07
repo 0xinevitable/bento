@@ -313,42 +313,21 @@ const DashboardPage = () => {
         <div className="mt-6 flex w-full min-h-[345px] gap-6">
           <Card>
             <CardTitle>Net Worth</CardTitle>
+            <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
+            <AssetRatioChart
+              tokenBalances={tokenBalances}
+              netWorthInUSD={netWorthInUSD}
+            />
           </Card>
           <Card className="max-w-[300px]">
-            <CardTitle>Wallets</CardTitle>
-          </Card>
-          <Card className="max-w-[300px]">
-            <CardTitle>NFTs</CardTitle>
-          </Card>
-        </div>
-
-        <Card className="mt-12">
-          <CardTitle>Assets</CardTitle>
-        </Card>
-        {/* <div className="mt-10 w-full flex justify-between">
-        <div className="flex flex-col justify-center">
-          <h2 className="text-md font-semibold text-slate-50/60">Net worth</h2>
-          <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-        </div>
-      </div>
-
-      <TopSection>
-        <div className="flex-1 min-w-sm flex">
-          <AssetRatioChart
-            tokenBalances={tokenBalances}
-            netWorthInUSD={netWorthInUSD}
-          />
-        </div>
-        <div className="flex-1 flex flex-col">
-          <NoSSR>
-            <h2 className="mt-2 text-md font-semibold text-slate-50/60">
+            <CardTitle>
               Wallets
               {wallets.length > 0 && (
                 <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
                   {`(${wallets.length.toLocaleString()})`}
                 </span>
               )}
-            </h2>
+            </CardTitle>
 
             {wallets.length > 0 ? (
               <WalletList
@@ -359,37 +338,36 @@ const DashboardPage = () => {
                 onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
               />
             )}
-          </NoSSR>
+          </Card>
+          <Card className="max-w-[300px]">
+            <CardTitle>NFTs</CardTitle>
+          </Card>
         </div>
-      </TopSection>
 
-      <Divider className="my-4" />
-
-      <section className="mt-4 flex flex-col">
-        <h2 className="text-md font-semibold text-slate-50/60">
-          Assets
-          {tokenBalances.length > 0 && (
-            <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-              {`(${tokenBalances.length.toLocaleString()})`}
-            </span>
+        <Card className="mt-12">
+          <CardTitle>
+            Assets
+            {tokenBalances.length > 0 && (
+              <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                {`(${tokenBalances.length.toLocaleString()})`}
+              </span>
+            )}
+          </CardTitle>
+          {tokenBalances.length > 0 ? (
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {tokenBalances.map((info) => (
+                <TokenBalanceItem
+                  key={`${info.symbol}-${
+                    'tokenAddress' in info ? info.tokenAddress : 'native'
+                  }`}
+                  {...info}
+                />
+              ))}
+            </ul>
+          ) : (
+            <EmptyBalance />
           )}
-        </h2>
-
-        {tokenBalances.length > 0 ? (
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {tokenBalances.map((info) => (
-              <TokenBalanceItem
-                key={`${info.symbol}-${
-                  'tokenAddress' in info ? info.tokenAddress : 'native'
-                }`}
-                {...info}
-              />
-            ))}
-          </ul>
-        ) : (
-          <EmptyBalance />
-        )}
-      </section> */}
+        </Card>
 
         <AddWalletModal
           visible={isAddWalletModalVisible}
@@ -444,22 +422,7 @@ const TopRightBlur = styled.img`
   user-select: none;
 `;
 
-// const TopSection = styled.section`
-//   width: 100%;
-//   display: flex;
-
-//   @media screen and (max-width: 647px) {
-//     flex-direction: column;
-//   }
-// `;
-
-// const Divider = styled.div`
-//   height: 1px;
-//   width: 100%;
-//   background-color: rgba(248, 250, 252, 0.25);
-// `;
-
-const Card = styled.div`
+const Card = styled.section`
   padding: 24px 30px;
   background: rgba(30, 29, 34, 0.44);
   border: 1px solid rgba(255, 255, 255, 0.08);
