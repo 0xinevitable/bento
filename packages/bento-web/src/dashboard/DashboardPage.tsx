@@ -306,7 +306,10 @@ const DashboardPage = () => {
     <Container>
       <NavigationBar />
       <Black />
-      <PageContainer className="pt-0">
+
+      <PageContainer className="pt-0 z-10">
+        <TopLeftBlur src="/assets/blurs/top-left.png" />
+        <TopRightBlur src="/assets/blurs/top-right.png" />
         <div className="mt-6 flex w-full min-h-[345px] gap-6">
           <Card>
             <CardTitle>Net Worth</CardTitle>
@@ -403,6 +406,7 @@ const Container = styled.div`
   width: 100vw;
   padding-bottom: 100px;
 
+  position: relative;
   overflow: hidden;
 
   display: flex;
@@ -412,7 +416,32 @@ const Container = styled.div`
 const Black = styled.div`
   width: 100%;
   height: 64px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const TOP_LEFT_BLUR = 262.9;
+const TopLeftBlur = styled.img`
+  position: absolute;
+  top: 360px;
+  left: 63px;
+
+  margin: ${-TOP_LEFT_BLUR}px;
+  width: ${280.42 + TOP_LEFT_BLUR * 2}px;
+  height: ${280.42 + TOP_LEFT_BLUR * 2}px;
+  z-index: -1;
+  user-select: none;
+`;
+const TOP_RIGHT_BLUR = 256;
+const TopRightBlur = styled.img`
+  position: absolute;
+  top: -35px;
+  right: 64.48px;
+
+  margin: ${-TOP_RIGHT_BLUR}px;
+  width: ${402 + TOP_RIGHT_BLUR * 2}px;
+  height: ${47 + TOP_RIGHT_BLUR * 2}px;
+  z-index: -1;
+  user-select: none;
 `;
 
 // const TopSection = styled.section`
@@ -436,7 +465,7 @@ const Card = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   flex: 1;
-  box-shadow: 0 -4px 12px #000000, 0 2px 8px #191722;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1ㅌ), 0 2px 8px #191722;
 `;
 const CardTitle = styled.h2`
   font-weight: 600;
