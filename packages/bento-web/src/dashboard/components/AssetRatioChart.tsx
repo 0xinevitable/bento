@@ -1,11 +1,22 @@
 import { useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
+import { PLATFORM_LOGOS } from '../constants/platform';
 import { WalletBalance } from '../types/balance';
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
 
-const PIE_WIDTH = 12;
+const CHART_SIZE = 240;
+const PIE_WIDTH = CHART_SIZE * 0.1;
+const AVAILABLE_COLORS = [
+  '#FF214A',
+  '#f72585',
+  '#FAA945',
+  '#d446ff',
+  '#7c44ff',
+  '#656fff',
+  '#4cc9f0',
+];
 
 type AssetRatioChartProps = {
   tokenBalances: {
@@ -32,7 +43,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
     }
 
     // merge type nft with one
-    let items: { label: string; value: number }[] = [];
+    let items: { label: string; value: number; logo?: string }[] = [];
     const netWorthInNFTs = tokenBalances.reduce(
       (acc, info) => (info.type === 'nft' ? (acc += info.netWorth) : acc),
       0,
@@ -40,24 +51,26 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
     if (netWorthInNFTs > 0) {
       const percentage = (netWorthInNFTs / netWorthInUSD) * 100;
       items.push({
-        label: 'NFTs',
+        label: 'OpenSea NFTs',
         value: !percentage || isNaN(percentage) ? 0 : percentage,
+        logo: PLATFORM_LOGOS.opensea,
       });
     }
 
     items = items.concat(
-      tokenBalances.flatMap((info) => {
+      tokenBalances.flatMap((info, index) => {
         if (info.type === 'nft') {
           return [];
         }
 
         const { name, netWorth } = info;
         const percentage = (netWorth / netWorthInUSD) * 100;
-        if (percentage < 0.01) {
+        if (percentage < 0.01 || index > AVAILABLE_COLORS.length + 2) {
           return [];
         }
         return {
           label: name,
+          logo: info.logo,
           value: !percentage || isNaN(percentage) ? 0 : percentage,
         };
       }),
@@ -68,13 +81,13 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
 
   return (
     <ChartContainer>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width={CHART_SIZE} height={CHART_SIZE}>
         <PieChart>
           <Pie
             data={data}
-            innerRadius={100 - PIE_WIDTH}
-            outerRadius={100}
-            cornerRadius={PIE_WIDTH}
+            innerRadius={CHART_SIZE * 0.5 - PIE_WIDTH}
+            outerRadius={CHART_SIZE * 0.5}
+            cornerRadius={4}
             paddingAngle={4}
             startAngle={90}
             endAngle={90 + 360}
@@ -84,17 +97,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
             {data.map((_, index) => (
               <Cell
                 key={index}
-                fill={
-                  [
-                    '#FF214A',
-                    '#f72585',
-                    '#FAA945',
-                    '#d446ff',
-                    '#7c44ff',
-                    '#656fff',
-                    '#4cc9f0',
-                  ][index] ?? '#5b739b'
-                }
+                fill={AVAILABLE_COLORS[index] ?? '#5b739b'}
                 stroke="transparent"
               />
             ))}
@@ -106,7 +109,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
                 <TooltipContent
                   label={first?.label ?? ''}
                   value={first?.value ?? 0}
-                  color={first?.fill ?? '#fff'}
+                  logo={first?.logo}
                 />
               );
             }}
@@ -115,9 +118,9 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
         </PieChart>
       </ResponsiveContainer>
 
-      <AvatarContainer>
+      {/* <AvatarContainer>
         <Avatar src="/assets/avatar.png" />
-      </AvatarContainer>
+      </AvatarContainer> */}
     </ChartContainer>
   );
 };
@@ -132,41 +135,41 @@ const ChartContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const AvatarContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
+// const AvatarContainer = styled.div`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   width: 100%;
+//   height: 100%;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
 
-  pointer-events: none;
-`;
-type AvatarProps = {
-  src: string;
-  enlarge?: boolean;
-};
-const Avatar = styled.div<AvatarProps>`
-  width: 154px;
-  height: 154px;
-  border-radius: 50%;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
+//   pointer-events: none;
+// `;
+// type AvatarProps = {
+//   src: string;
+//   enlarge?: boolean;
+// };
+// const Avatar = styled.div<AvatarProps>`
+//   width: 154px;
+//   height: 154px;
+//   border-radius: 50%;
+//   transition: all 0.3s ease-in-out;
+//   cursor: pointer;
 
-  ${({ src }) =>
-    src &&
-    css`
-      background-image: url(${src});
-      background-size: 100%;
-      background-position: center;
-    `};
+//   ${({ src }) =>
+//     src &&
+//     css`
+//       background-image: url(${src});
+//       background-size: 100%;
+//       background-position: center;
+//     `};
 
-  &:hover {
-    background-size: 110%;
-  }
-`;
+//   &:hover {
+//     background-size: 110%;
+//   }
+// `;

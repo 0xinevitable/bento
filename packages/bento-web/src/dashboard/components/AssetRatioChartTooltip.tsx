@@ -4,22 +4,26 @@ import styled from 'styled-components';
 type TooltipContentProps = {
   label: string;
   value: number;
-  color: string;
+  logo?: string;
 };
 
 export const TooltipContent: React.FC<TooltipContentProps> = ({
   label,
   value,
-  color,
+  logo,
 }) => {
   return (
     <Container>
-      <Label>{label}</Label>
-      <Item style={{ color }}>
-        {`${value.toLocaleString(undefined, {
-          maximumFractionDigits: 2,
-        })}%`}
-      </Item>
+      <img className="w-10 h-10 rounded-full" src={logo} />
+
+      <Information>
+        <ProtocolName>{label}</ProtocolName>
+        <ProtocolRatio>
+          {`${value.toLocaleString(undefined, {
+            maximumFractionDigits: 2,
+          })}%`}
+        </ProtocolRatio>
+      </Information>
     </Container>
   );
 };
@@ -27,19 +31,24 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
 const Container = styled.div`
   padding: 12px;
   display: flex;
+  align-items: center;
+`;
+
+const Information = styled.div`
+  margin-left: 8px;
+  margin-bottom: 4px;
+  display: flex;
   flex-direction: column;
 `;
-
-const Label = styled.label`
-  margin-bottom: 8px;
+const ProtocolName = styled.label`
   color: rgba(255, 255, 255, 0.65);
-  font-weight: bold;
-  font-size: 14.5px;
-`;
-
-const Item = styled.span`
   font-weight: 500;
+  font-size: 16px;
+`;
+const ProtocolRatio = styled.span`
+  font-weight: bold;
   font-size: 14px;
+  color: white;
 
   &:not(:last-of-type) {
     margin-bottom: 6px;
