@@ -353,7 +353,7 @@ const DashboardPage = () => {
         </Card>
       </div>
 
-      <Card className="mt-12">
+      <Card className="mt-12" style={{ flex: 0 }}>
         <CardTitle>
           Assets
           {tokenBalances.length > 0 && (

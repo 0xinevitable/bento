@@ -65,17 +65,23 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
   return (
     <Container
       className={clsx(
-        'pl-1 pr-3 pb-2 h-fit rounded-md drop-shadow-2xl',
+        'p-3 h-fit rounded-md drop-shadow-2xl',
         'flex flex-col cursor-pointer',
       )}
       // onClick={() => setCollapsed((prev) => !prev)}
     >
-      <div className="ml-[-10px] pt-2 flex items-center">
-        <TokenIcon src={info.logo} alt={info.name} />
-        <img
-          className="w-6 h-6 absolute top-12 left-[-4px] rounded-full ring-1 ring-black/40"
-          src={platformURL}
-        />
+      <div className="flex items-center">
+        <div className="relative">
+          <img
+            className="w-12 h-12 rounded-full"
+            src={info.logo}
+            alt={info.name}
+          />
+          <img
+            className="w-6 h-6 absolute bottom-[-8px] left-[-8px] rounded-full ring-1 ring-black/40"
+            src={platformURL}
+          />
+        </div>
         <div className="ml-1 min-w-0 flex flex-col flex-1">
           <span className="text-sm truncate text-slate-400/40">
             <span className="text-slate-400">{info.symbol}</span>
@@ -85,11 +91,15 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
           </span>
           <span className="text-xl font-bold text-slate-50/90">
             {`$${info.netWorth.toLocaleString()}`}
+
+            <span className="ml-1 text-sm font-medium text-slate-400/40">
+              {`$${info.price.toLocaleString()}`}
+            </span>
           </span>
         </div>
       </div>
 
-      <TokenBalanceRatioBar className="pl-2" balances={info.balances} />
+      {/* <TokenBalanceRatioBar className="pl-2" balances={info.balances} /> */}
 
       {/* <ul
         className={clsx(
@@ -136,9 +146,11 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
 
 const Container = styled.li`
   width: 250px;
-  background: #121a32;
-  border: 1px solid #020322;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  background: #16181a;
+  background: linear-gradient(145deg, #141617, #181a1c);
+  border: 1px solid #2a2e31;
+  box-shadow: inset 5px 5px 16px #0b0c0e, inset -5px -5px 16px #212426;
   border-radius: 8px;
 
   @media screen and (max-width: 797px) {
