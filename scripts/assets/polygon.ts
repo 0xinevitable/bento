@@ -44,7 +44,7 @@ export const update = async () => {
           v.platforms['polygon-pos']?.toLowerCase() ===
           tokenAddress.toLowerCase(),
       );
-      const logoURI = `https://assets-cdn.trustwallet.com/blockchains/solana/assets/${tokenAddress}/logo.png`;
+      const logoURI = `https://assets-cdn.trustwallet.com/blockchains/polygon/assets/${tokenAddress}/logo.png`;
 
       return {
         symbol: token.symbol,
