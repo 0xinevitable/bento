@@ -311,12 +311,19 @@ const DashboardPage = () => {
         <Card>
           <CardTitle>Net Worth</CardTitle>
           <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-          <AssetRatioChart
-            tokenBalances={tokenBalances}
-            netWorthInUSD={netWorthInUSD}
-          />
+          <div className="w-full flex">
+            <div className="w-1/2">
+              <AssetRatioChart
+                tokenBalances={tokenBalances}
+                netWorthInUSD={netWorthInUSD}
+              />
+            </div>
+            <div>
+              {/* TODO: net worth & asset ratio breakdown by chains here */}
+            </div>
+          </div>
         </Card>
-        <Card className="max-w-[300px]">
+        <Card className="max-w-[400px]">
           <NoSSR>
             <React.Fragment>
               <CardTitle>
@@ -343,9 +350,6 @@ const DashboardPage = () => {
               )}
             </React.Fragment>
           </NoSSR>
-        </Card>
-        <Card className="max-w-[300px]">
-          <CardTitle>NFTs</CardTitle>
         </Card>
       </div>
 
@@ -410,7 +414,7 @@ const TopRightBlur = styled.img`
 `;
 
 const Card = styled.section`
-  padding: 24px 30px;
+  padding: 24px;
   background: rgba(30, 29, 34, 0.44);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
@@ -418,6 +422,9 @@ const Card = styled.section`
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1ㅌ), 0 2px 8px #191722;
 `;
 const CardTitle = styled.h2`
+  margin: 0;
+  margin-bottom: 8px;
+
   font-weight: 600;
   font-size: 18px;
   line-height: 100%;
