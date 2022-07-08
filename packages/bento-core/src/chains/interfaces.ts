@@ -1,7 +1,7 @@
-import { Currency } from 'src/pricings/Currency';
-import { ERC20TokenInput } from 'src/tokens';
+import { Currency } from '../pricings/Currency';
+import { ERC20TokenInput } from '../tokens';
 
-export interface ERC20TokenBalance extends ERC20TokenInput {
+export interface TokenBalance extends ERC20TokenInput {
   walletAddress: string;
   balance: number;
   price: number;
@@ -21,5 +21,5 @@ export interface Chain {
   _provider?: any;
   getCurrencyPrice: (currency?: Currency) => Promise<number>;
   getBalance: (address: string) => Promise<number>;
-  getTokenBalances?: (address: string) => Promise<ERC20TokenBalance[]>;
+  getTokenBalances?: (address: string) => Promise<TokenBalance[]>;
 }

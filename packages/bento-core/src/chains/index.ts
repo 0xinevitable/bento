@@ -17,7 +17,9 @@ import {
   SOLANA_TOKENS,
 } from '../tokens';
 import { MinimalABIs } from './abi';
-import { Chain, ERC20TokenBalance } from './interfaces';
+import { Chain, TokenBalance } from './interfaces';
+
+export { Chain, TokenBalance };
 
 export class EthereumChain implements Chain {
   currency = {
@@ -100,7 +102,7 @@ export class EthereumChain implements Chain {
         balance,
         price,
       };
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }
@@ -186,7 +188,7 @@ export class BNBChain implements Chain {
         balance,
         price,
       };
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }
@@ -272,7 +274,7 @@ export class PolygonChain implements Chain {
         balance,
         price,
       };
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }
@@ -451,7 +453,7 @@ export class KlaytnChain implements Chain {
         ];
       }
       return balanceInfo;
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }
@@ -539,7 +541,7 @@ export class SolanaChain implements Chain {
         balance,
         price,
       };
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }
