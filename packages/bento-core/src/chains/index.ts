@@ -16,30 +16,7 @@ import {
   POLYGON_TOKENS,
   SOLANA_TOKENS,
 } from '../tokens';
-import { MinimalABIs } from './interfaces';
-
-export interface ERC20TokenBalance extends ERC20TokenInput {
-  walletAddress: string;
-  balance: number;
-  price: number;
-}
-
-export interface Chain {
-  // 기반 통화(Native Token)
-  currency: {
-    symbol: string;
-    name: string;
-    logo?: string;
-    decimals: number;
-    coinGeckoId?: string;
-    coinMinimalDenom?: string; // Only for Cosmos SDK based chains
-  };
-  chainId?: number;
-  _provider?: any;
-  getCurrencyPrice: (currency?: Currency) => Promise<number>;
-  getBalance: (address: string) => Promise<number>;
-  getTokenBalances?: (address: string) => Promise<ERC20TokenBalance[]>;
-}
+import { Chain, ERC20TokenBalance, MinimalABIs } from './interfaces';
 
 export class EthereumChain implements Chain {
   currency = {
