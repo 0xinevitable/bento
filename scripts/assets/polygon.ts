@@ -11,18 +11,6 @@ import {
   stringify,
 } from './config';
 
-type TokenItem = {
-  chainId: number;
-  asset: string;
-  type: 'ERC20' | 'coin' | unknown;
-  address: string;
-  name: string;
-  symbol: string;
-  decimals: 18;
-  logoURI: string;
-  pairs: { base: string }[];
-};
-
 const CHAIN_OUTPUT_PATH = path.resolve(
   WORKSPACE_ROOT_PATH,
   './packages/bento-core/src/tokens/polygon.json',
