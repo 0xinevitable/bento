@@ -56,7 +56,10 @@ export const NavigationBar = () => {
 
         <ul className="flex">
           {NAVIGATION_ITEMS.map((item) => (
-            <NavigationItem active={currentPath === item.href}>
+            <NavigationItem
+              key={`${item.title}-${item.href}`}
+              active={currentPath === item.href}
+            >
               <Link href={item.href} passHref>
                 <a className="h-full flex gap-2 justify-center items-center">
                   <Icon className="text-xl" icon={item.icon} />

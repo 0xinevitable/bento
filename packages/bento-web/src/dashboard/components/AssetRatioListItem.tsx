@@ -24,32 +24,33 @@ export const AssetRatioListItem: React.FC<AssetRatioListItemProps> = (
         <ProtocolName>{props.name}</ProtocolName>
 
         <ProtocolRatio>
-          <strong>{`$${props.netWorth.toLocaleString()}`}</strong>
-
           {`${props.ratio.toLocaleString(undefined, {
             maximumFractionDigits: 2,
           })}%`}
+
+          <strong>{`$${props.netWorth.toLocaleString()}`}</strong>
         </ProtocolRatio>
       </Information>
     </Container>
   );
 };
 const Container = styled.li`
+  width: 100%;
   display: flex;
   align-items: center;
 `;
 
 const PlatformLogo = styled.img`
   margin-right: 8px;
-  width: 36px;
-  height: 36px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   object-fit: cover;
 `;
 const Information = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  flex: 1;
 `;
 
 const ProtocolName = styled.label`
@@ -63,7 +64,7 @@ const ProtocolRatio = styled.span`
   color: rgba(255, 255, 255, 0.65);
 
   & > strong {
-    margin-right: 6px;
+    margin-left: 6px;
     font-size: 15px;
     font-weight: 600;
     color: white;

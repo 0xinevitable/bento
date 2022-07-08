@@ -14,6 +14,7 @@ import {
   ETHEREUM_TOKENS,
   KLAYTN_TOKENS,
   POLYGON_TOKENS,
+  SOLANA_TOKENS,
 } from '../tokens';
 import { MinimalABIs } from './interfaces';
 
@@ -485,6 +486,7 @@ export class SolanaChain implements Chain {
     decimals: 9,
     coinGeckoId: 'solana',
   };
+  chainId = 1399811149;
   _provider = new web3.Connection(web3.clusterApiUrl('mainnet-beta'));
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
@@ -494,6 +496,73 @@ export class SolanaChain implements Chain {
     );
     const balance = rawBalance / 10 ** this.currency.decimals;
     return balance;
+  };
+
+  getTokenBalances = async (walletAddress: string) => {
+    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
+    const { data } = await axios
+      .get<TokenBalancesResponse>(
+        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
+        {
+          headers: {
+            Authorization: `Basic ${Base64.encode(API_KEY)}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .catch((error) => {
+        console.error(error);
+        return { data: { data: { items: [] } } };
+      });
+
+    const promises = data.data.items.flatMap(async (token) => {
+      if (token.type === 'nft') {
+        return [];
+      }
+      if (
+        token.contract_address === '11111111111111111111111111111111' // Klaytn
+      ) {
+        return [];
+      }
+      const balance =
+        typeof token.balance === 'string'
+          ? Number(token.balance) / 10 ** token.contract_decimals
+          : 0;
+      if (balance <= 0) {
+        return [];
+      }
+      const symbol = token.contract_ticker_symbol;
+      const tokenInfo = SOLANA_TOKENS.find(
+        (v) => v.address === token.contract_address,
+      );
+      const getPrice = async () => {
+        if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
+          // return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
+          //   (error) => {
+          //     console.error(error);
+          //     return 0;
+          //   },
+          // );
+          return undefined;
+        }
+        return 0;
+      };
+      const price = await getPrice();
+      return {
+        walletAddress,
+        platform: 'solana',
+        name: tokenInfo?.name ?? token.contract_name,
+        symbol: tokenInfo?.symbol ?? symbol,
+        decimals: token.contract_decimals,
+        address: token.contract_address,
+        logo: tokenInfo?.logo,
+        coinGeckoId: tokenInfo?.coinGeckoId,
+        coinMarketCapId: tokenInfo?.coinMarketCapId,
+        balance,
+        price,
+      };
+    }) as Promise<ERC20TokenBalance>[];
+    return safePromiseAll(promises);
   };
 }
 

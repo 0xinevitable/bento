@@ -335,7 +335,7 @@ const DashboardPage = () => {
             </div>
             <AssetCardList className="w-1/2">
               {assetRatioByPlatform.map((item) => (
-                <AssetRatioListItem {...item} />
+                <AssetRatioListItem key={item.platform} {...item} />
               ))}
               {/* TODO: net worth & asset ratio breakdown by chains here */}
             </AssetCardList>

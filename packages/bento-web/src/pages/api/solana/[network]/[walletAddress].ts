@@ -38,12 +38,10 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   }[] = (
     await safePromiseAll(
       wallets.map(async (walletAddress) => {
-        // const getTokenBalances = async (): Promise<ERC20TokenBalance[]> => []
-
         const [balance, tokenBalances] = await Promise.all([
           chain.getBalance(walletAddress).catch(() => 0),
-          // getTokenBalances().catch(() => []),
-          [], // Not Implemented
+          chain.getTokenBalances(walletAddress).catch(() => []),
+          [],
         ]);
 
         return [
