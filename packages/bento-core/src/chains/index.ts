@@ -26,7 +26,7 @@ export class EthereumChain implements Chain {
   currency = {
     symbol: 'ETH',
     name: 'Ethereum',
-    logo: '/assets/ethereum.png',
+    logo: '/assets/icons/ethereum.png',
     decimals: 18,
     coinGeckoId: 'ethereum',
   };
@@ -112,7 +112,7 @@ export class BNBChain implements Chain {
   currency = {
     symbol: 'BNB',
     name: 'BNB',
-    logo: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
+    logo: 'https://assets-cdn.trustwallet.com/blockicons/binance/info/logo.png',
     decimals: 18,
     coinGeckoId: 'binancecoin',
   };
@@ -198,7 +198,7 @@ export class PolygonChain implements Chain {
   currency = {
     symbol: 'MATIC',
     name: 'Polygon',
-    logo: '/assets/polygon.webp',
+    logo: '/assets/icons/polygon.webp',
     decimals: 18,
     coinGeckoId: 'matic-network',
   };
@@ -284,7 +284,7 @@ export class AvalancheChain implements Chain {
   currency = {
     symbol: 'AVAX',
     name: 'Avalanche',
-    logo: '/assets/avalanche.png',
+    logo: '/assets/icons/avalanche.png',
     decimals: 18,
     coinGeckoId: 'avalanche-2',
   };
@@ -549,7 +549,7 @@ export class SolanaChain implements Chain {
   currency = {
     symbol: 'SOL',
     name: 'Solana',
-    logo: '/assets/solana.png',
+    logo: '/assets/icons/solana.png',
     decimals: 9,
     coinGeckoId: 'solana',
   };
@@ -687,7 +687,7 @@ export class CosmosHubChain implements CosmosSDKBasedChain {
   currency = {
     symbol: 'ATOM',
     name: 'Cosmos Hub',
-    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png',
+    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockicons/cosmos/info/logo.png',
     decimals: 6,
     coinGeckoId: 'cosmos',
     coinMinimalDenom: 'uatom',
@@ -728,7 +728,7 @@ export class OsmosisChain implements CosmosSDKBasedChain {
   currency = {
     symbol: 'OSMO',
     name: 'Osmosis',
-    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png',
+    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockicons/osmosis/info/logo.png',
     decimals: 6,
     coinGeckoId: 'osmosis',
     coinMinimalDenom: 'uosmo',

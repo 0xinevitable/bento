@@ -27,13 +27,13 @@ const NETWORKS: Network[] = [
     id: 'ethereum',
     type: 'evm',
     name: 'Ethereum',
-    logo: '/assets/ethereum.png',
+    logo: '/assets/icons/ethereum.png',
   },
   {
     id: 'avalanche',
     type: 'evm',
     name: 'Avalanche',
-    logo: '/assets/avalanche.png',
+    logo: '/assets/icons/avalanche.png',
   },
   {
     id: 'bnb',
@@ -45,7 +45,7 @@ const NETWORKS: Network[] = [
     id: 'polygon',
     type: 'evm',
     name: 'Polygon',
-    logo: '/assets/polygon.webp',
+    logo: '/assets/icons/polygon.webp',
   },
   {
     id: 'klaytn',
@@ -57,7 +57,7 @@ const NETWORKS: Network[] = [
     id: 'opensea',
     type: 'evm',
     name: 'OpenSea',
-    logo: '/assets/opensea.png',
+    logo: '/assets/icons/opensea.png',
   },
   {
     id: 'cosmos',

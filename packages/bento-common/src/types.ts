@@ -3,17 +3,17 @@ export const WALLET_TYPES = {
   evm: {
     type: 'evm',
     name: 'EVM',
-    logo: '/assets/ethereum.png',
+    logo: '/assets/icons/ethereum.png',
   },
   'cosmos-sdk': {
     type: 'cosmos-sdk',
     name: 'Cosmos SDK',
-    logo: '/assets/cosmos-sdk.png',
+    logo: '/assets/icons/cosmos-sdk.png',
   },
   solana: {
     type: 'solana',
     name: 'Solana',
-    logo: '/assets/solana.png',
+    logo: '/assets/icons/solana.png',
   },
 };
 
