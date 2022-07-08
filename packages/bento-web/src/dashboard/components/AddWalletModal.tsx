@@ -30,6 +30,12 @@ const NETWORKS: Network[] = [
     logo: '/assets/ethereum.png',
   },
   {
+    id: 'avalanche',
+    type: 'evm',
+    name: 'Avalanche',
+    logo: '/assets/avalanche.png',
+  },
+  {
     id: 'bnb',
     type: 'evm',
     name: 'BNB',

@@ -1,6 +1,7 @@
 import { EVMBasedNetworks } from '@bento/common';
 import { safePromiseAll } from '@bento/common';
 import {
+  AvalancheChain,
   BNBChain,
   EthereumChain,
   KlaytnChain,
@@ -20,6 +21,7 @@ interface APIRequest extends NextApiRequest {
 
 const chains = {
   ethereum: new EthereumChain(),
+  avalanche: new AvalancheChain(),
   bnb: new BNBChain(),
   polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),

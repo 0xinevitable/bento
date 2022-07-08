@@ -20,6 +20,7 @@ export const WALLET_TYPES = {
 export type EVMBasedNetworks =
   | 'ethereum'
   | 'bnb'
+  | 'avalanche'
   | 'polygon'
   | 'klaytn'
   | 'opensea';
