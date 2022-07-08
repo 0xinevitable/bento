@@ -26,7 +26,7 @@ const data = {
 //const profile = ExampleUserProfile;
 const defaultProfile: UserProfile = {
   username: '',
-  displayName: '',
+  display_name: '',
   images: [],
   verified: false,
   bio: '',
@@ -39,7 +39,7 @@ const ProfileDetailPage = () => {
 
   const [title, description, image, url] = useMemo(
     () => [
-      `${profile?.displayName ?? profile?.username} - Linky`,
+      `${profile?.display_name ?? profile?.username} - Linky`,
       data.bio,
       data.profileImageURL,
       `https://linky.vc/address/${profile?.username}`,

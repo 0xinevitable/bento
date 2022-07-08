@@ -12,7 +12,7 @@ export enum UserProfileTab {
 
 export type UserProfile = {
   username: string;
-  displayName: string;
+  display_name: string;
   images: string[];
   verified: boolean;
   bio: string;

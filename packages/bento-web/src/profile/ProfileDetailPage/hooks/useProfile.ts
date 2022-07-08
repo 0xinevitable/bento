@@ -6,7 +6,7 @@ import { Supabase } from '@/utils/Supabase';
 
 const defaultProfile: UserProfile = {
   username: '',
-  displayName: '',
+  display_name: '',
   images: [],
   verified: false,
   bio: '',

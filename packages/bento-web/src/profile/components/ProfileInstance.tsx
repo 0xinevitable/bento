@@ -75,7 +75,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             </a>
           </Link>
         )}
-        <DisplayName>{profile.displayName ?? profile.username}</DisplayName>
+        <DisplayName>{profile.display_name ?? profile.username}</DisplayName>
         <Username style={{ color: palette.primary }}>
           {`@${profile.username}`}
         </Username>

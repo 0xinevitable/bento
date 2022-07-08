@@ -12,7 +12,7 @@ const EXAMPLE_IMAGE =
 
 export const ExampleUserProfile: UserProfile = {
   username: 'juno',
-  displayName: 'Junho Yeo',
+  display_name: 'Junho Yeo',
   images: [PROFILE_IMAGE, EXAMPLE_IMAGE],
   verified: true,
   bio: 'Software Enginner 🦄⚡️\nBuilding the web3 world 🌎',

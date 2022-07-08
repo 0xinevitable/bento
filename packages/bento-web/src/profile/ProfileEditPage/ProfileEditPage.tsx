@@ -11,15 +11,15 @@ import { TabBar } from './components/TabBar';
 
 const ManagePage = () => {
   const [username, setUsername] = useState<string>(ExampleUserProfile.username);
-  const [displayName, setDisplayName] = useState<string>(
-    ExampleUserProfile.displayName,
+  const [display_name, setDisplayName] = useState<string>(
+    ExampleUserProfile.display_name,
   );
   const [bio, setBio] = useState<string>(ExampleUserProfile.bio);
   const [links, setLinks] = useState<ProfileLink[]>(ExampleUserProfile.links);
 
   const profileDraft = useMemo(
-    () => ({ ...ExampleUserProfile, username, displayName, bio, links }),
-    [username, displayName, bio, links],
+    () => ({ ...ExampleUserProfile, username, display_name, bio, links }),
+    [username, display_name, bio, links],
   );
 
   return (
@@ -39,7 +39,7 @@ const ManagePage = () => {
               <FieldInput
                 field="프로필에 보여질 이름"
                 placeholder="당신의 이름을 적어주세요"
-                defaultValue={ExampleUserProfile.displayName}
+                defaultValue={ExampleUserProfile.display_name}
                 onChange={(e) => setDisplayName(e.target.value)}
               />
               <FieldTextArea
