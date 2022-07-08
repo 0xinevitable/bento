@@ -65,7 +65,13 @@ const ProfileDetailPage = () => {
       </DocumentHead>
 
       <div className="w-full max-w-xl mx-auto">
-        <ProfileInstance profile={profile ?? defaultProfile} />
+        <ProfileInstance
+          // FIXME:
+          profile={{
+            ...(profile ?? defaultProfile),
+            images: defaultProfile.images,
+          }}
+        />
       </div>
     </PageContainer>
   );

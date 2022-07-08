@@ -5,7 +5,7 @@ import { ShadowedImage } from '@/profile/components/ShadowedImage';
 import { ProfileLink } from '@/profile/types/UserProfile';
 
 type Props = {
-  defaultLink: ProfileLink;
+  defaultLink?: ProfileLink;
   linkDraft: ProfileLink;
   onChange: (link: ProfileLink) => void;
 };
@@ -18,24 +18,24 @@ export const ProfileLinkEditItem: React.FC<Props> = ({
   return (
     <Container>
       <LinkImageWrapper>
-        <LinkImage src={defaultLink.image} />
+        <LinkImage src={defaultLink?.image} />
       </LinkImageWrapper>
       <Information>
         <BoldInput
           placeholder="이름"
-          defaultValue={defaultLink.title}
+          defaultValue={defaultLink?.title ?? ''}
           onChange={(e) => onChange({ ...linkDraft, title: e.target.value })}
         />
         <Input
           placeholder="설명"
-          defaultValue={defaultLink.description}
+          defaultValue={defaultLink?.description ?? ''}
           onChange={(e) =>
             onChange({ ...linkDraft, description: e.target.value })
           }
         />
         <Input
           placeholder="링크"
-          defaultValue={defaultLink.href}
+          defaultValue={defaultLink?.href ?? ''}
           onChange={(e) => onChange({ ...linkDraft, href: e.target.value })}
         />
       </Information>

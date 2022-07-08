@@ -41,7 +41,7 @@ export const useProfile: () => [
 
   useEffect(() => {
     revaildateProfile();
-  }, []);
+  }, [revaildateProfile]);
 
   return [profile, revaildateProfile];
 };
