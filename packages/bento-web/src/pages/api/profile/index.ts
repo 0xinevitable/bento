@@ -9,7 +9,7 @@ type APIRequest = NextApiRequest & {
 };
 
 export default async (req: APIRequest, res: NextApiResponse) => {
-  const { ...Profile } = req.body;
+  const { body: profile } = req;
 
   const { user } = await Supabase.auth.api.getUserByCookie(req);
   if (!user) {
@@ -29,14 +29,14 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   if (!hasProfile) {
     data = await Supabase.from('profile').upsert({
       user_id: user.id,
-      ...Profile,
+      ...profile,
     });
     error = data.error;
   } else {
     data = await Supabase.from('profile')
       .update({
         user_id: user.id,
-        ...Profile,
+        ...profile,
       })
       .eq('id', user.id);
     error = data.error;

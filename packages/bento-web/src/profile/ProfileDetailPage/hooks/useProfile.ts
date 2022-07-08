@@ -4,27 +4,17 @@ import { useSession } from '@/hooks/useSession';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Supabase } from '@/utils/Supabase';
 
-const defaultProfile: UserProfile = {
-  username: '',
-  display_name: '',
-  images: [],
-  verified: false,
-  bio: '',
-  tabs: [],
-  links: [],
-};
-
 export const useProfile: () => [
-  UserProfile | undefined,
-  () => Promise<UserProfile | undefined>,
+  UserProfile | null,
+  () => Promise<UserProfile | null>,
 ] = () => {
   const { session } = useSession();
-  const [profile, setProfile] = useState<UserProfile>();
+  const [profile, setProfile] = useState<UserProfile | null>(null);
 
   const revaildateProfile = useCallback(async () => {
     if (!session || !session.user) {
-      setProfile(defaultProfile);
-      return defaultProfile;
+      setProfile(null);
+      return null;
     }
 
     const profileQuery = await Supabase.from('profile')
@@ -32,11 +22,13 @@ export const useProfile: () => [
       .eq('user_id', session.user.id);
     const profiles: UserProfile[] = profileQuery.data ?? [];
 
-    if (profiles.length == 1) {
-      setProfile(profiles[0]);
+    if (profiles.length === 0) {
+      setProfile(null);
+      return null;
     }
-
-    return profiles[0];
+    const firstProfile = profiles[0];
+    setProfile(firstProfile);
+    return firstProfile;
   }, [session, setProfile]);
 
   useEffect(() => {
