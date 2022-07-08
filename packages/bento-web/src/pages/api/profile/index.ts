@@ -1,4 +1,4 @@
-import { PostgrestError } from '@supabase/supabase-js';
+import { PostgrestError, PostgrestResponse } from '@supabase/supabase-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { UserProfile } from '@/profile/types/UserProfile';
@@ -20,20 +20,32 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   const prevProfileQuery = await Supabase.from('profile') //
     .select('id')
     .eq('user_id', user.id);
-  const previousNetworks = prevProfileQuery.data ?? [];
-  if (previousNetworks.length <= 0) {
-    const data = await Supabase.from('profile').upsert({
+  const previousProfiles = prevProfileQuery.data ?? [];
+  const hasProfile = previousProfiles.length > 0;
+
+  let data: PostgrestResponse<any>;
+  let error: PostgrestError | null = null;
+
+  if (!hasProfile) {
+    data = await Supabase.from('profile').upsert({
       user_id: user.id,
       ...Profile,
     });
-    return res.status(200).json(data);
+    error = data.error;
+  } else {
+    data = await Supabase.from('profile')
+      .update({
+        user_id: user.id,
+        ...Profile,
+      })
+      .eq('id', user.id);
+    error = data.error;
   }
 
-  const update = await Supabase.from('profile')
-    .update({
-      user_id: user.id,
-      ...Profile,
-    })
-    .eq('id', user.id);
-  return res.status(200).json(update);
+  if (!!error) {
+    res.status(500).json({ message: error.message });
+    return;
+  }
+
+  return res.status(200).json(data);
 };
