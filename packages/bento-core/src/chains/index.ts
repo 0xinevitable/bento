@@ -16,7 +16,8 @@ import {
   POLYGON_TOKENS,
   SOLANA_TOKENS,
 } from '../tokens';
-import { Chain, ERC20TokenBalance, MinimalABIs } from './interfaces';
+import { MinimalABIs } from './abi';
+import { Chain, ERC20TokenBalance } from './interfaces';
 
 export class EthereumChain implements Chain {
   currency = {
