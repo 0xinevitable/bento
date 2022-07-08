@@ -2,9 +2,11 @@ import clsx from 'clsx';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
+import { PLATFORM_LOGOS } from '../constants/platform';
 import { WalletBalance } from '../types/balance';
-import { TokenBalanceRatioBar } from './TokenBalanceRatioBar';
-import { TokenIcon } from './TokenIcon';
+
+// import { TokenBalanceRatioBar } from './TokenBalanceRatioBar';
+// import { TokenIcon } from './TokenIcon';
 
 type TokenBalanceItemProps = {
   platform: string;
@@ -15,20 +17,6 @@ type TokenBalanceItemProps = {
   amount: number;
   price: number;
   balances: WalletBalance[];
-};
-
-const PLATFORM_LOGOS = {
-  ethereum: '/assets/ethereum.png',
-  avalanche: '/assets/avalanche.png',
-  bnb: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
-  polygon: '/assets/polygon.webp',
-  klaytn: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
-  cosmosHub:
-    'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png',
-  osmosis:
-    'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png',
-  solana: '/assets/solana.png',
-  opensea: '/assets/opensea.png',
 };
 
 export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
@@ -65,18 +53,24 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
   return (
     <Container
       className={clsx(
-        'pl-1 pr-3 pb-2 h-fit rounded-md drop-shadow-2xl',
+        'py-3 p-3 h-fit rounded-md drop-shadow-2xl',
         'flex flex-col cursor-pointer',
       )}
       // onClick={() => setCollapsed((prev) => !prev)}
     >
-      <div className="ml-[-10px] pt-2 flex items-center">
-        <TokenIcon src={info.logo} alt={info.name} />
-        <img
-          className="w-6 h-6 absolute top-12 left-[-4px] rounded-full ring-1 ring-black/40"
-          src={platformURL}
-        />
-        <div className="ml-1 min-w-0 flex flex-col flex-1">
+      <div className="flex items-center">
+        <div className="relative">
+          <img
+            className="w-16 h-16 rounded-full object-cover"
+            src={info.logo}
+            alt={info.name}
+          />
+          <img
+            className="w-6 h-6 absolute bottom-[-8px] left-[-8px] rounded-full ring-1 ring-black/40"
+            src={platformURL}
+          />
+        </div>
+        <div className="ml-4 min-w-0 flex flex-col flex-1">
           <span className="text-sm truncate text-slate-400/40">
             <span className="text-slate-400">{info.symbol}</span>
             <span className="ml-1 text-xs text-slate-400/40">
@@ -85,11 +79,17 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
           </span>
           <span className="text-xl font-bold text-slate-50/90">
             {`$${info.netWorth.toLocaleString()}`}
+
+            {info.amount !== 1 && (
+              <span className="ml-1 text-sm font-medium text-slate-400/40">
+                {`$${info.price.toLocaleString()}`}
+              </span>
+            )}
           </span>
         </div>
       </div>
 
-      <TokenBalanceRatioBar className="pl-2" balances={info.balances} />
+      {/* <TokenBalanceRatioBar className="pl-2" balances={info.balances} /> */}
 
       {/* <ul
         className={clsx(
@@ -135,10 +135,12 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
 };
 
 const Container = styled.li`
-  width: 250px;
-  background: #121a32;
-  border: 1px solid #020322;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: calc(33.33% - 8px);
+
+  background: #16181a;
+  background: linear-gradient(145deg, #141617, #181a1c);
+  border: 1px solid #2a2e31;
+  box-shadow: inset 5px 5px 16px #0b0c0e, inset -5px -5px 16px #212426;
   border-radius: 8px;
 
   @media screen and (max-width: 797px) {
