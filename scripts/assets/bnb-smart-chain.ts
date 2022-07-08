@@ -1,7 +1,7 @@
 import { cachedAxios } from '@bento/client';
 import { safePromiseAll } from '@bento/common';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
-import { ERC20TokenInput } from '@bento/core/lib/tokens';
+import { TokenInput } from '@bento/core/lib/tokens';
 import { promises as fs } from 'fs';
 import path from 'path';
 import prettier from 'prettier';
@@ -42,7 +42,7 @@ export const update = async () => {
     return acc;
   }, pancakeSwapCoinGeckoAssetList);
 
-  const tokens: ERC20TokenInput[] = bnbTokens.flatMap((token) => {
+  const tokens: TokenInput[] = bnbTokens.flatMap((token) => {
     const coinGeckoToken = coingeckoTokenList.find(
       (v) =>
         v.platforms['binance-smart-chain']?.toLowerCase() ===
@@ -69,7 +69,7 @@ export const update = async () => {
       acc[acc.length - 1].push(token);
       return acc;
     },
-    [[]] as ERC20TokenInput[][],
+    [[]] as TokenInput[][],
   );
 
   const promises = chunks.map(async (chunk) => {
@@ -86,7 +86,7 @@ export const update = async () => {
   });
 
   let index: number = 0;
-  let newTokenChunks: ERC20TokenInput[][] = [];
+  let newTokenChunks: TokenInput[][] = [];
   for (const chunk of promises) {
     console.log(index);
     index += 1;
@@ -99,7 +99,7 @@ export const update = async () => {
     './packages/bento-core/src/tokens/bnb.json',
   );
 
-  let previousTokens: ERC20TokenInput[] = [];
+  let previousTokens: TokenInput[] = [];
   try {
     previousTokens = JSON.parse(await fs.readFile(CHAIN_OUTPUT_PATH, 'utf8'));
   } catch {}

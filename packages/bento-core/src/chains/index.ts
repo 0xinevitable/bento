@@ -10,11 +10,11 @@ import { priceFromCoinGecko } from '../pricings/CoinGecko';
 import { Currency } from '../pricings/Currency';
 import {
   BNB_TOKENS,
-  ERC20TokenInput,
   ETHEREUM_TOKENS,
   KLAYTN_TOKENS,
   POLYGON_TOKENS,
   SOLANA_TOKENS,
+  TokenInput,
 } from '../tokens';
 import { MinimalABIs } from './abi';
 import { Chain, TokenBalance } from './interfaces';
@@ -330,7 +330,7 @@ export class KlaytnChain implements Chain {
     return balance;
   };
 
-  public tokens: ERC20TokenInput[] = KLAYTN_TOKENS;
+  public tokens: TokenInput[] = KLAYTN_TOKENS;
 
   _SCNR_KLAY_LP = '0xe1783a85616ad7dbd2b326255d38c568c77ffa26';
   _getStakedSCNRReserves = async () => {

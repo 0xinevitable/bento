@@ -1,5 +1,5 @@
 import { safePromiseAll } from '@bento/common';
-import { ERC20TokenInput } from '@bento/core/lib/tokens';
+import { TokenInput } from '@bento/core/lib/tokens';
 import { promises as fs } from 'fs';
 import path from 'path';
 import prettier from 'prettier';
@@ -59,7 +59,7 @@ export const update = async () => {
 
   const previousTokens = JSON.parse(
     await fs.readFile(CHAIN_OUTPUT_PATH, 'utf8'),
-  ) as ERC20TokenInput[];
+  ) as TokenInput[];
   const newTokens = tokens.reduce((acc, token) => {
     const prev = acc.find(
       (v) => v.address?.toLowerCase() === token.address?.toLowerCase(),

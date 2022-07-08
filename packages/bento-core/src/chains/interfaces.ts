@@ -1,7 +1,7 @@
 import { Currency } from '../pricings/Currency';
-import { ERC20TokenInput } from '../tokens';
+import { TokenInput } from '../tokens';
 
-export interface TokenBalance extends ERC20TokenInput {
+export interface TokenBalance extends TokenInput {
   walletAddress: string;
   balance: number;
   price: number;

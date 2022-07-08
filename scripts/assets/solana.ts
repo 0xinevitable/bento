@@ -1,5 +1,5 @@
 import { safePromiseAll } from '@bento/common';
-import { ERC20TokenInput } from '@bento/core/lib/tokens';
+import { TokenInput } from '@bento/core/lib/tokens';
 import { promises as fs } from 'fs';
 import path from 'path';
 import prettier from 'prettier';
@@ -43,7 +43,7 @@ export const update = async () => {
     './packages/bento-core/src/tokens/solana.json',
   );
 
-  let previousTokens: ERC20TokenInput[] = [];
+  let previousTokens: TokenInput[] = [];
   try {
     previousTokens = JSON.parse(await fs.readFile(CHAIN_OUTPUT_PATH, 'utf8'));
   } catch {}
