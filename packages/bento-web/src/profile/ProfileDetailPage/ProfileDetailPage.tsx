@@ -6,6 +6,8 @@ import { PageContainer } from '@/components/PageContainer';
 
 import { ProfileInstance } from '../components/ProfileInstance';
 import { ExampleUserProfile } from '../constants/ExampleUserProfile';
+import { UserProfile } from '../types/UserProfile';
+import { useProfile } from './hooks/useProfile';
 
 const data = {
   color: '#39e27d',
@@ -21,15 +23,26 @@ const data = {
   links: ExampleUserProfile.links,
 };
 
-const profile = ExampleUserProfile;
+//const profile = ExampleUserProfile;
+const defaultProfile: UserProfile = {
+  username: '',
+  display_name: '',
+  images: [],
+  verified: false,
+  bio: '',
+  tabs: [],
+  links: [],
+};
 
 const ProfileDetailPage = () => {
+  const [profile, setProfile] = useProfile();
+
   const [title, description, image, url] = useMemo(
     () => [
-      `${profile.displayName ?? profile.username} - Linky`,
+      `${profile?.display_name ?? profile?.username} - Linky`,
       data.bio,
       data.profileImageURL,
-      `https://linky.vc/address/${profile.username}`,
+      `https://linky.vc/address/${profile?.username}`,
     ],
     [],
   );
@@ -52,7 +65,13 @@ const ProfileDetailPage = () => {
       </DocumentHead>
 
       <div className="w-full max-w-xl mx-auto">
-        <ProfileInstance profile={profile} />
+        <ProfileInstance
+          // FIXME:
+          profile={{
+            ...(profile ?? defaultProfile),
+            images: defaultProfile.images,
+          }}
+        />
       </div>
     </PageContainer>
   );

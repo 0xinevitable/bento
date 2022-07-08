@@ -19,7 +19,7 @@ export const Header = () => {
         }}
       >
         <Avatar src={ExampleUserProfile.images[0]} />
-        <Title>{ExampleUserProfile.displayName}</Title>
+        <Title>{ExampleUserProfile.display_name}</Title>
         <Username>{`@${ExampleUserProfile.username}`}</Username>
       </Profile>
     </Container>

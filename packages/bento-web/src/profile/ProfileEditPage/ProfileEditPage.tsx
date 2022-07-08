@@ -1,6 +1,8 @@
-import { useMemo, useState } from 'react';
+import axios from 'axios';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
 import { FieldInput } from '../components/FieldInput';
 import { FieldTextArea } from '../components/FieldTextArea';
 import { ExampleUserProfile } from '../constants/ExampleUserProfile';
@@ -10,43 +12,72 @@ import { ProfileLinkEditItem } from './components/ProfileLinkEditItem';
 import { TabBar } from './components/TabBar';
 
 const ManagePage = () => {
-  const [username, setUsername] = useState<string>(ExampleUserProfile.username);
-  const [displayName, setDisplayName] = useState<string>(
-    ExampleUserProfile.displayName,
-  );
-  const [bio, setBio] = useState<string>(ExampleUserProfile.bio);
-  const [links, setLinks] = useState<ProfileLink[]>(ExampleUserProfile.links);
+  const [profile] = useProfile();
+
+  const [username, setUsername] = useState<string>('');
+  const [displayName, setDisplayName] = useState<string>('');
+  const [bio, setBio] = useState<string>('');
+  const [links, setLinks] = useState<ProfileLink[]>([]);
+
+  useEffect(() => {
+    if (!profile) {
+      return;
+    }
+    setUsername(profile.username);
+    setDisplayName(profile.display_name);
+    setBio(profile.bio);
+    setLinks(profile.links);
+  }, [profile]);
 
   const profileDraft = useMemo(
-    () => ({ ...ExampleUserProfile, username, displayName, bio, links }),
+    () => ({
+      ...profile,
+      username,
+      display_name: displayName,
+      bio,
+      links,
+      images: ExampleUserProfile.images,
+      verified: false,
+      tabs: [],
+    }),
     [username, displayName, bio, links],
   );
+
+  const onSubmit = useCallback(async () => {
+    const { data } = await axios.post(`/api/profile`, {
+      username,
+      display_name: displayName,
+      bio,
+      links,
+    });
+    console?.log(data);
+  }, [username, displayName, bio, links]);
 
   return (
     <>
       <Wrapper>
         <Preview profileDraft={profileDraft} />
         <EditorWrapper>
-          <TabBar />
+          <TabBar onClick={onSubmit} />
           <Container>
             <ProfileContainer id="profile">
               <FieldInput
                 field="사용자 이름"
                 placeholder="여러분의 링크에 들어가는 이름이에요"
-                defaultValue={ExampleUserProfile.username}
-                onChange={(e) => setUsername(e.target.value)}
+                defaultValue={profile?.username ?? ''}
+                onChange={(e) => setUsername(e?.target.value)}
               />
               <FieldInput
                 field="프로필에 보여질 이름"
                 placeholder="당신의 이름을 적어주세요"
-                defaultValue={ExampleUserProfile.displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
+                defaultValue={profile?.display_name ?? ''}
+                onChange={(e) => setDisplayName(e?.target.value)}
               />
               <FieldTextArea
                 field="한 줄 소개"
                 placeholder="한 문장으로 당신을 표현해 주세요"
-                defaultValue={ExampleUserProfile.bio}
-                onChange={(e) => setBio(e.target.value)}
+                defaultValue={profile?.bio ?? ''}
+                onChange={(e) => setBio(e?.target.value)}
               />
             </ProfileContainer>
             <ProfileLinkList id="links">
@@ -55,7 +86,7 @@ const ManagePage = () => {
                   <ProfileLinkEditItem
                     key={`item-${index}`}
                     linkDraft={item}
-                    defaultLink={ExampleUserProfile.links[index]}
+                    defaultLink={profile?.links[index]}
                     onChange={(updated) =>
                       setLinks(
                         links.map((link, i) => (i === index ? updated : link)),
