@@ -1,0 +1,182 @@
+[
+  {
+    "symbol": "USDCso",
+    "name": "USD Coin (Wormhole)",
+    "decimals": 6,
+    "address": "0x0950Fc1AD509358dAeaD5eB8020a3c7d8b43b9DA",
+    "coinGeckoId": "usd-coin-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x0950Fc1AD509358dAeaD5eB8020a3c7d8b43b9DA/logo.png"
+  },
+  {
+    "symbol": "ROSE",
+    "name": "ROSE (Wormhole)",
+    "decimals": 18,
+    "address": "0x12AF5C1a232675f62F405b5812A80e7a6F75D746",
+    "coinGeckoId": "rose-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x12AF5C1a232675f62F405b5812A80e7a6F75D746/logo.png"
+  },
+  {
+    "symbol": "nftRISE",
+    "name": "EverRise NFT Stakes",
+    "decimals": 0,
+    "address": "0x23cD2E6b283754Fd2340a75732f9DdBb5d11807e",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x23cD2E6b283754Fd2340a75732f9DdBb5d11807e/logo.png"
+  },
+  {
+    "symbol": "BNB",
+    "name": "Binance Coin (Wormhole)",
+    "decimals": 18,
+    "address": "0x442F7f22b1EE2c842bEAFf52880d4573E9201158",
+    "coinGeckoId": "binance-coin-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x442F7f22b1EE2c842bEAFf52880d4573E9201158/logo.png"
+  },
+  {
+    "symbol": "USDCpo",
+    "name": "USD Coin (PoS) (Wormhole)",
+    "decimals": 6,
+    "address": "0x543672E9CBEC728CBBa9C3Ccd99ed80aC3607FA8",
+    "coinGeckoId": "usd-coin-pos-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x543672E9CBEC728CBBa9C3Ccd99ed80aC3607FA8/logo.png"
+  },
+  {
+    "symbol": "PNG",
+    "name": "Pangolin",
+    "decimals": 18,
+    "address": "0x60781C2586D68229fde47564546784ab3fACA982",
+    "coinGeckoId": "pangolin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png"
+  },
+  {
+    "symbol": "USDCbs",
+    "name": "USD Coin (Wormhole from BSC)",
+    "decimals": 18,
+    "address": "0x6145E8a910aE937913426BF32De2b26039728ACF",
+    "coinGeckoId": "usd-coin-wormhole-from-bsc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x6145E8a910aE937913426BF32De2b26039728ACF/logo.png"
+  },
+  {
+    "symbol": "LUNA",
+    "name": "Terra Classic (Wormhole)",
+    "decimals": 6,
+    "address": "0x70928E5B188def72817b7775F0BF6325968e563B",
+    "coinGeckoId": "luna-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x70928E5B188def72817b7775F0BF6325968e563B/logo.png"
+  },
+  {
+    "symbol": "ETH",
+    "name": "Ethereum (Wormhole)",
+    "decimals": 18,
+    "address": "0x8b82A291F83ca07Af22120ABa21632088fC92931",
+    "coinGeckoId": "ethereum-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x8b82A291F83ca07Af22120ABa21632088fC92931/logo.png"
+  },
+  {
+    "symbol": "CAKE",
+    "name": "PancakeSwap (Wormhole)",
+    "decimals": 18,
+    "address": "0x98a4d09036Cc5337810096b1D004109686E56Afc",
+    "coinGeckoId": "pancakeswap-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x98a4d09036Cc5337810096b1D004109686E56Afc/logo.png"
+  },
+  {
+    "symbol": "BUSDbs",
+    "name": "Binance USD (Wormhole from BSC)",
+    "decimals": 18,
+    "address": "0xA41a6c7E25DdD361343e8Cb8cFa579bbE5eEdb7a",
+    "coinGeckoId": "binance-usd-wormhole-from-bsc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xA41a6c7E25DdD361343e8Cb8cFa579bbE5eEdb7a/logo.png"
+  },
+  {
+    "symbol": "USDTbs",
+    "name": "Tether USD (Wormhole from BSC)",
+    "decimals": 18,
+    "address": "0xA67BCC0D06d7d13A13A2AE30bF30f1B434f5a28B",
+    "coinGeckoId": "tether-usd-wormhole-from-bsc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xA67BCC0D06d7d13A13A2AE30bF30f1B434f5a28B/logo.png"
+  },
+  {
+    "symbol": "ODDZ",
+    "name": "Oddz",
+    "decimals": 18,
+    "address": "0xB0a6e056B587D0a85640b39b1cB44086F7a26A1E",
+    "coinGeckoId": "oddz",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xB0a6e056B587D0a85640b39b1cB44086F7a26A1E/logo.png"
+  },
+  {
+    "symbol": "USDCet",
+    "name": "USD Coin (Wormhole from Ethereum)",
+    "decimals": 6,
+    "address": "0xB24CA28D4e2742907115fECda335b40dbda07a4C",
+    "coinGeckoId": "usd-coin-wormhole-from-ethereum",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xB24CA28D4e2742907115fECda335b40dbda07a4C/logo.png"
+  },
+  {
+    "symbol": "RISE",
+    "name": "EverRise",
+    "decimals": 18,
+    "address": "0xC17c30e98541188614dF99239cABD40280810cA3",
+    "coinGeckoId": "everrise",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xC17c30e98541188614dF99239cABD40280810cA3/logo.png"
+  },
+  {
+    "symbol": "veRISE",
+    "name": "Vote-escrowed EverRise",
+    "decimals": 18,
+    "address": "0xDbA7b24257fC6e397cB7368B4BC922E944072f1b",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xDbA7b24257fC6e397cB7368B4BC922E944072f1b/logo.png"
+  },
+  {
+    "symbol": "USDTso",
+    "name": "Tether USD (Wormhole)",
+    "decimals": 6,
+    "address": "0xF0FF231e3F1A50F83136717f287ADAB862f89431",
+    "coinGeckoId": "tether-usd-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xF0FF231e3F1A50F83136717f287ADAB862f89431/logo.png"
+  },
+  {
+    "symbol": "GG",
+    "name": "Galaxy Goggle",
+    "decimals": 9,
+    "address": "0xF2F7CE610a091B94d41D69f4fF1129434a82E2f0",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xF2F7CE610a091B94d41D69f4fF1129434a82E2f0/logo.png"
+  },
+  {
+    "symbol": "SOL",
+    "name": "SOL (Wormhole)",
+    "decimals": 9,
+    "address": "0xFE6B19286885a4F7F55AdAD09C3Cd1f906D2478F",
+    "coinGeckoId": "sol-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xFE6B19286885a4F7F55AdAD09C3Cd1f906D2478F/logo.png"
+  },
+  {
+    "symbol": "UST",
+    "name": "TerraUSD (Wormhole)",
+    "decimals": 6,
+    "address": "0xb599c3590F42f8F995ECfa0f85D2980B76862fc1",
+    "coinGeckoId": "terrausd-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xb599c3590F42f8F995ECfa0f85D2980B76862fc1/logo.png"
+  },
+  {
+    "symbol": "claimRISE",
+    "name": "EverRise Rewards",
+    "decimals": 18,
+    "address": "0xbBD7B847C6d0d0B5691518a363194D71426475F1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xbBD7B847C6d0d0B5691518a363194D71426475F1/logo.png"
+  },
+  {
+    "symbol": "APE-X",
+    "name": "Ape-X",
+    "decimals": 9,
+    "address": "0xd039C9079ca7F2a87D632A9C0d7cEa0137bAcFB5",
+    "coinGeckoId": "ape-x",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xd039C9079ca7F2a87D632A9C0d7cEa0137bAcFB5/logo.png"
+  },
+  {
+    "symbol": "MATICpo",
+    "name": "MATIC (Wormhole)",
+    "decimals": 18,
+    "address": "0xf2f13f0B7008ab2FA4A2418F4ccC3684E49D20Eb",
+    "coinGeckoId": "matic-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xf2f13f0B7008ab2FA4A2418F4ccC3684E49D20Eb/logo.png"
+  }
+]

@@ -2,7 +2,7 @@ import { safePromiseAll } from '@bento/common';
 
 const importAndUpdate = async (path: string) => {
   const module = await import(path);
-  return module.update();
+  return module.update().catch(console.error);
 };
 
 const main = async () =>
@@ -10,6 +10,7 @@ const main = async () =>
     importAndUpdate('./ethereum'),
     importAndUpdate('./polygon'),
     // importAndUpdate('./bnb-smart-chain'),
+    importAndUpdate('./avalanche'),
     importAndUpdate('./solana'),
   ]);
 

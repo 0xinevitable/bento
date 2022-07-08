@@ -9,37 +9,18 @@ import { withCache } from '../cache';
 import { priceFromCoinGecko } from '../pricings/CoinGecko';
 import { Currency } from '../pricings/Currency';
 import {
+  AVALANCHE_TOKENS,
   BNB_TOKENS,
-  ERC20TokenInput,
   ETHEREUM_TOKENS,
   KLAYTN_TOKENS,
   POLYGON_TOKENS,
   SOLANA_TOKENS,
+  TokenInput,
 } from '../tokens';
-import { MinimalABIs } from './interfaces';
+import { MinimalABIs } from './abi';
+import { Chain, TokenBalance } from './interfaces';
 
-export interface ERC20TokenBalance extends ERC20TokenInput {
-  walletAddress: string;
-  balance: number;
-  price: number;
-}
-
-export interface Chain {
-  // 기반 통화(Native Token)
-  currency: {
-    symbol: string;
-    name: string;
-    logo?: string;
-    decimals: number;
-    coinGeckoId?: string;
-    coinMinimalDenom?: string; // Only for Cosmos SDK based chains
-  };
-  chainId?: number;
-  _provider?: any;
-  getCurrencyPrice: (currency?: Currency) => Promise<number>;
-  getBalance: (address: string) => Promise<number>;
-  getTokenBalances?: (address: string) => Promise<ERC20TokenBalance[]>;
-}
+export { Chain, TokenBalance };
 
 export class EthereumChain implements Chain {
   currency = {
@@ -122,7 +103,7 @@ export class EthereumChain implements Chain {
         balance,
         price,
       };
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }
@@ -208,7 +189,7 @@ export class BNBChain implements Chain {
         balance,
         price,
       };
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }
@@ -294,7 +275,93 @@ export class PolygonChain implements Chain {
         balance,
         price,
       };
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
+    return safePromiseAll(promises);
+  };
+}
+
+export class AvalancheChain implements Chain {
+  currency = {
+    symbol: 'AVAX',
+    name: 'Avalanche',
+    logo: '/assets/avalanche.png',
+    decimals: 18,
+    coinGeckoId: 'avalanche-2',
+  };
+  chainId = 43114;
+  _provider = new JsonRpcProvider(Config.RPC_URL.AVALANCHE_C_MAINNET);
+  getCurrencyPrice = (currency: Currency = 'usd') =>
+    priceFromCoinGecko(this.currency.coinGeckoId, currency);
+  getBalance = async (address: string) => {
+    const rawBalance = await this._provider.getBalance(address);
+    const balance = Number(rawBalance) / 10 ** this.currency.decimals;
+    return balance;
+  };
+
+  getTokenBalances = async (walletAddress: string) => {
+    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
+    const { data } = await axios
+      .get<TokenBalancesResponse>(
+        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
+        {
+          headers: {
+            Authorization: `Basic ${Base64.encode(API_KEY)}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .catch((error) => {
+        console.error(error);
+        return { data: { data: { items: [] } } };
+      });
+
+    const promises = data.data.items.flatMap(async (token) => {
+      if (token.type === 'nft') {
+        return [];
+      }
+      if (
+        token.contract_address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' // Klaytn
+      ) {
+        return [];
+      }
+      const balance =
+        typeof token.balance === 'string'
+          ? Number(token.balance) / 10 ** token.contract_decimals
+          : 0;
+      if (balance <= 0) {
+        return [];
+      }
+      const symbol = token.contract_ticker_symbol;
+      const tokenInfo = AVALANCHE_TOKENS.find(
+        (v) => v.address.toLowerCase() === token.contract_address.toLowerCase(),
+      );
+      const getPrice = async () => {
+        if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
+          // return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
+          //   (error) => {
+          //     console.error(error);
+          //     return 0;
+          //   },
+          // );
+          return undefined;
+        }
+        return 0;
+      };
+      const price = await getPrice();
+      return {
+        walletAddress,
+        platform: 'avalanche',
+        name: tokenInfo?.name ?? token.contract_name,
+        symbol: tokenInfo?.symbol ?? symbol,
+        decimals: token.contract_decimals,
+        address: token.contract_address,
+        logo: tokenInfo?.logo,
+        coinGeckoId: tokenInfo?.coinGeckoId,
+        coinMarketCapId: tokenInfo?.coinMarketCapId,
+        balance,
+        price,
+      };
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }
@@ -350,7 +417,7 @@ export class KlaytnChain implements Chain {
     return balance;
   };
 
-  public tokens: ERC20TokenInput[] = KLAYTN_TOKENS;
+  public tokens: TokenInput[] = KLAYTN_TOKENS;
 
   _SCNR_KLAY_LP = '0xe1783a85616ad7dbd2b326255d38c568c77ffa26';
   _getStakedSCNRReserves = async () => {
@@ -473,7 +540,7 @@ export class KlaytnChain implements Chain {
         ];
       }
       return balanceInfo;
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }
@@ -561,7 +628,7 @@ export class SolanaChain implements Chain {
         balance,
         price,
       };
-    }) as Promise<ERC20TokenBalance>[];
+    }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
   };
 }

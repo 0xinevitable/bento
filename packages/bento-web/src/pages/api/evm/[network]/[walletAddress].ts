@@ -1,12 +1,12 @@
 import { EVMBasedNetworks } from '@bento/common';
 import { safePromiseAll } from '@bento/common';
 import {
+  AvalancheChain,
   BNBChain,
-  Chain,
-  ERC20TokenBalance,
   EthereumChain,
   KlaytnChain,
   PolygonChain,
+  TokenBalance,
 } from '@bento/core/lib/chains';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import { pricesFromCoinMarketCap } from '@bento/core/lib/pricings/CoinMarketCap';
@@ -21,6 +21,7 @@ interface APIRequest extends NextApiRequest {
 
 const chains = {
   ethereum: new EthereumChain(),
+  avalanche: new AvalancheChain(),
   bnb: new BNBChain(),
   polygon: new PolygonChain(),
   klaytn: new KlaytnChain(),
@@ -60,7 +61,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
         if (SUPPORTED_CHAINS.includes(network)) {
           const chain = chains[network]!;
 
-          const getTokenBalances = async (): Promise<ERC20TokenBalance[]> =>
+          const getTokenBalances = async (): Promise<TokenBalance[]> =>
             'getTokenBalances' in chain
               ? chain.getTokenBalances(walletAddress)
               : [];

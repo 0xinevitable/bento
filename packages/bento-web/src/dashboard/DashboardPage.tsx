@@ -40,13 +40,20 @@ const DashboardPage = () => {
     cosmosWalletQuery,
     ethereumWalletQuery,
     bnbWalletQuery,
+    avalancheWalletQuery,
     polygonWalletQuery,
     klaytnWalletQuery,
     solanaWalletQuery,
   ] = useMemo(() => {
     const addrs = wallets.reduce<
       Record<
-        'cosmos' | 'ethereum' | 'bnb' | 'polygon' | 'klaytn' | 'solana',
+        | 'cosmos'
+        | 'ethereum'
+        | 'bnb'
+        | 'avalanche'
+        | 'polygon'
+        | 'klaytn'
+        | 'solana',
         string[]
       >
     >(
@@ -68,6 +75,9 @@ const DashboardPage = () => {
         if (wallet.networks.includes('bnb')) {
           _acc = { ..._acc, bnb: [..._acc.bnb, wallet.address] };
         }
+        if (wallet.networks.includes('avalanche')) {
+          _acc = { ..._acc, avalanche: [..._acc.avalanche, wallet.address] };
+        }
         if (wallet.networks.includes('polygon')) {
           _acc = { ..._acc, polygon: [..._acc.polygon, wallet.address] };
         }
@@ -80,6 +90,7 @@ const DashboardPage = () => {
         cosmos: [],
         ethereum: [],
         bnb: [],
+        avalanche: [],
         polygon: [],
         klaytn: [],
         solana: [],
@@ -90,6 +101,7 @@ const DashboardPage = () => {
       addrs.cosmos.join(','),
       addrs.ethereum.join(','),
       addrs.bnb.join(','),
+      addrs.avalanche.join(','),
       addrs.polygon.join(','),
       addrs.klaytn.join(','),
       addrs.solana.join(','),
@@ -101,6 +113,9 @@ const DashboardPage = () => {
   );
   const { data: bnbBalance = [] } = useAxiosSWR<EVMWalletBalance[]>(
     !bnbWalletQuery ? null : `/api/evm/bnb/${bnbWalletQuery}`,
+  );
+  const { data: avalancheBalance = [] } = useAxiosSWR<EVMWalletBalance[]>(
+    !avalancheWalletQuery ? null : `/api/evm/avalanche/${avalancheWalletQuery}`,
   );
   const { data: polygonBalance = [] } = useAxiosSWR<CosmosSDKWalletBalance[]>(
     !polygonWalletQuery ? null : `/api/evm/polygon/${polygonWalletQuery}`,
@@ -233,6 +248,7 @@ const DashboardPage = () => {
       groupBy<WalletBalance>(
         [
           ethereumBalance,
+          avalancheBalance,
           bnbBalance,
           polygonBalance,
           klaytnBalance,

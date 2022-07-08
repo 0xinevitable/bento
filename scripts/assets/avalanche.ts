@@ -13,26 +13,26 @@ import {
 
 const CHAIN_OUTPUT_PATH = path.resolve(
   WORKSPACE_ROOT_PATH,
-  './packages/bento-core/src/tokens/polygon.json',
+  './packages/bento-core/src/tokens/avalanche.json',
 );
 
 export const update = async () => {
   const tokenAddrs = await fs.readdir(
-    path.resolve(TRUSTWALLET_ASSETS_PATH, './blockchains/polygon/assets'),
+    path.resolve(TRUSTWALLET_ASSETS_PATH, './blockchains/avalanchec/assets'),
   );
   const tokens = await safePromiseAll(
     tokenAddrs.map(async (tokenAddress) => {
       const infoFilePath = path.resolve(
         TRUSTWALLET_ASSETS_PATH,
-        `./blockchains/polygon/assets/${tokenAddress}/info.json`,
+        `./blockchains/avalanchec/assets/${tokenAddress}/info.json`,
       );
       const token = JSON.parse(await fs.readFile(infoFilePath, 'utf8'));
       const coinGeckoToken = coingeckoTokenList.find(
         (v) =>
-          v.platforms['polygon-pos']?.toLowerCase() ===
+          v.platforms['avalanche']?.toLowerCase() ===
           tokenAddress.toLowerCase(),
       );
-      const logoURI = `https://assets-cdn.trustwallet.com/blockchains/polygon/assets/${tokenAddress}/logo.png`;
+      const logoURI = `https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/${tokenAddress}/logo.png`;
 
       return {
         symbol: token.symbol,
