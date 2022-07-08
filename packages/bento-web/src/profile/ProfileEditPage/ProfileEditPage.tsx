@@ -1,5 +1,8 @@
-import { useMemo, useState } from 'react';
+import axios from 'axios';
+import { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
+
+import { AssetRatioListItem } from '@/dashboard/components/AssetRatioListItem';
 
 import { FieldInput } from '../components/FieldInput';
 import { FieldTextArea } from '../components/FieldTextArea';
@@ -22,12 +25,22 @@ const ManagePage = () => {
     [username, display_name, bio, links],
   );
 
+  const onSubmit = useCallback(async () => {
+    const { data } = await axios.post(`/api/profile`, {
+      username,
+      display_name,
+      bio,
+      links,
+    });
+    console.log(data);
+  }, [username, display_name, bio, links]);
+
   return (
     <>
       <Wrapper>
         <Preview profileDraft={profileDraft} />
         <EditorWrapper>
-          <TabBar />
+          <TabBar onClick={onSubmit} />
           <Container>
             <ProfileContainer id="profile">
               <FieldInput

@@ -6,7 +6,11 @@ const tabs = [
   { selector: '#links', name: '링크 목록' },
 ];
 
-export const TabBar = () => {
+type TabBarProps = {
+  onClick: () => void;
+};
+
+export const TabBar: React.FC<TabBarProps> = ({ onClick, ...props }) => {
   const [currentTab, setCurrentTab] = useState<string | undefined>(undefined);
   useEffect(() => {
     if (window.location.hash) {
@@ -38,6 +42,7 @@ export const TabBar = () => {
           </Tab>
         ))}
       </TabList>
+      <button onClick={onClick}>submit</button>
     </Container>
   );
 };
