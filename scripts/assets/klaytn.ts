@@ -253,7 +253,6 @@ export const update = async () => {
             .reverse()
             .join('')),
     JSON.parse(decodeURIComponent(Base64.decode(t).replace(/\+/gi, '%20'))));
-  // console.log(klaytnTokens, klaytnTokens.length);
 
   const tokens: TokenInput[] = klaytnTokens.flatMap((minToken) => {
     const token = {
@@ -324,7 +323,6 @@ export const update = async () => {
       logo: tokenLogoURI,
     };
   });
-  // console.log(tokens, tokens.length);
 
   for (const token of tokens) {
     if (!!token.coinGeckoId) {
