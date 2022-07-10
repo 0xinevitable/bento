@@ -112,7 +112,7 @@ export class BNBChain implements Chain {
   currency = {
     symbol: 'BNB',
     name: 'BNB',
-    logo: 'https://assets-cdn.trustwallet.com/blockicons/binance/info/logo.png',
+    logo: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
     decimals: 18,
     coinGeckoId: 'binancecoin',
   };
@@ -687,7 +687,7 @@ export class CosmosHubChain implements CosmosSDKBasedChain {
   currency = {
     symbol: 'ATOM',
     name: 'Cosmos Hub',
-    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockicons/cosmos/info/logo.png',
+    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/cosmos/info/logo.png',
     decimals: 6,
     coinGeckoId: 'cosmos',
     coinMinimalDenom: 'uatom',
@@ -728,7 +728,7 @@ export class OsmosisChain implements CosmosSDKBasedChain {
   currency = {
     symbol: 'OSMO',
     name: 'Osmosis',
-    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockicons/osmosis/info/logo.png',
+    logo: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/osmosis/info/logo.png',
     decimals: 6,
     coinGeckoId: 'osmosis',
     coinMinimalDenom: 'uosmo',
