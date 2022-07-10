@@ -5,7 +5,7 @@
     "decimals": 18,
     "address": "0xfd844c2fca5e595004b17615f891620d1cb9bbb2",
     "coinGeckoId": "klay-token",
-    "logo": "/assets/wklay.png"
+    "logo": "/assets/icons/wklay.png"
   },
   {
     "symbol": "oUSDT",
@@ -29,7 +29,7 @@
     "decimals": 18,
     "address": "0x34d21b1e550d73cee41151c77f3c73359527a396",
     "coinGeckoId": "ethereum",
-    "logo": "/assets/oeth.svg"
+    "logo": "/assets/icons/oeth.svg"
   },
   {
     "symbol": "WEMIX",
@@ -37,7 +37,7 @@
     "decimals": 18,
     "address": "0x5096db80b21ef45230c9e423c373f1fc9c0198dd",
     "coinGeckoId": "wemix-token",
-    "logo": "/assets/wemix.png"
+    "logo": "/assets/icons/wemix.png"
   },
   {
     "symbol": "KDAI",
@@ -45,7 +45,7 @@
     "decimals": 18,
     "address": "0x5c74070fdea071359b86082bd9f9b3deaafbe32b",
     "coinGeckoId": "dai",
-    "logo": "/assets/kdai.png"
+    "logo": "/assets/icons/kdai.png"
   },
   {
     "symbol": "oXRP",
@@ -53,14 +53,14 @@
     "decimals": 6,
     "address": "0x9eaefb09fe4aabfbe6b1ca316a3c36afc83a393f",
     "coinGeckoId": "ripple",
-    "logo": "/assets/oxrp.svg"
+    "logo": "/assets/icons/oxrp.svg"
   },
   {
     "symbol": "KSD",
     "name": "Kokoa Stable Dollar",
     "decimals": 18,
     "address": "0x4fa62f1f404188ce860c8f0041d6ac3765a72e67",
-    "logo": "/assets/ksd.png"
+    "logo": "/assets/icons/ksd.png"
   },
   {
     "symbol": "oWBTC",
@@ -68,7 +68,7 @@
     "decimals": 8,
     "address": "0x16d0e1fbd024c600ca0380a4c5d57ee7a2ecbf9c",
     "coinGeckoId": "bitcoin",
-    "logo": "/assets/owbtc.svg"
+    "logo": "/assets/icons/owbtc.svg"
   },
   {
     "symbol": "BORA",
@@ -76,14 +76,14 @@
     "decimals": 18,
     "address": "0x02cbe46fb8a1f579254a9b485788f2d86cad51aa",
     "coinGeckoId": "bora",
-    "logo": "/assets/bora.png"
+    "logo": "/assets/icons/bora.png"
   },
   {
     "symbol": "PALA",
     "name": "Pala Token",
     "decimals": 18,
     "address": "0x7a1cdca99fe5995ab8e317ede8495c07cbf488ad",
-    "logo": "/assets/pala.jpg"
+    "logo": "/assets/icons/pala.jpg"
   },
   {
     "symbol": "SCNR",
@@ -98,7 +98,7 @@
     "decimals": 18,
     "address": "0xc6a2ad8cc6e4a7e08fc37cc5954be07d499e7654",
     "coinGeckoId": "klayswap-protocol",
-    "logo": "/assets/klayswap.png"
+    "logo": "/assets/icons/klayswap.png"
   },
   {
     "symbol": "MBX",
@@ -106,7 +106,7 @@
     "decimals": 18,
     "address": "0xd068c52d81f4409b9502da926ace3301cc41f623",
     "coinGeckoId": "marblex",
-    "logo": "/assets/marblex.svg"
+    "logo": "/assets/icons/marblex.svg"
   },
   {
     "symbol": "CLA",
@@ -114,7 +114,7 @@
     "decimals": 18,
     "address": "0xcf87f94fd8f6b6f0b479771f10df672f99eada63",
     "coinMarketCapId": 18371,
-    "logo": "/assets/claimswap.png"
+    "logo": "/assets/icons/claimswap.png"
   },
   {
     "symbol": "KRNO",
@@ -122,7 +122,7 @@
     "decimals": 18,
     "address": "0xd676e57ca65b827feb112ad81ff738e7b6c1048d",
     "coinMarketCapId": 15546,
-    "logo": "/assets/kronos-dao.png"
+    "logo": "/assets/icons/kronos-dao.png"
   },
   {
     "symbol": "KRNO",
@@ -130,7 +130,7 @@
     "decimals": 18,
     "address": "0x6555f93f608980526b5ca79b3be2d4edadb5c562",
     "coinMarketCapId": 15546,
-    "logo": "/assets/kronos-dao.png",
+    "logo": "/assets/icons/kronos-dao.png",
     "staking": true
   }
 ]
