@@ -152,6 +152,17 @@ const DashboardPage = () => {
         // NOTE: balances 는 모두 같은 토큰의 정보를 담고 있기에, first 에서만 정보를 꺼내온다.
         const [first] = balances;
 
+        const amount = balances.reduce(
+          walletBalanceReducer(
+            first.symbol,
+            (acc, balance) =>
+              acc +
+              balance.balance +
+              ('delegations' in balance ? balance.delegations : 0),
+          ),
+          0,
+        );
+
         return {
           platform: first.platform,
           symbol: first.symbol,
@@ -160,27 +171,8 @@ const DashboardPage = () => {
           type: 'type' in first ? first.type : undefined,
           tokenAddress: 'address' in first ? first.address : undefined,
           balances: balances,
-          netWorth: balances.reduce(
-            walletBalanceReducer(
-              first.symbol,
-              (acc, balance) =>
-                acc +
-                (balance.balance +
-                  ('delegations' in balance ? balance.delegations : 0)) *
-                  balance.price,
-            ),
-            0,
-          ),
-          amount: balances.reduce(
-            walletBalanceReducer(
-              first.symbol,
-              (acc, balance) =>
-                acc +
-                balance.balance +
-                ('delegations' in balance ? balance.delegations : 0),
-            ),
-            0,
-          ),
+          netWorth: amount * first.price,
+          amount,
           price: first.price,
         };
       })
