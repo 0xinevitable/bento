@@ -1,4 +1,8 @@
-import { Wallet } from '@bento/common';
+import {
+  CosmosSDKBasedNetworks,
+  EVMBasedNetworks,
+  Wallet,
+} from '@bento/common';
 import { useMemo } from 'react';
 import { SWRResponse } from 'swr';
 
@@ -30,14 +34,7 @@ type PartialRecord<K extends keyof any, T> = {
 };
 
 type Requests = PartialRecord<
-  | 'ethereum'
-  | 'bnb'
-  | 'avalanche'
-  | 'polygon'
-  | 'klaytn'
-  | 'cosmos-hub'
-  | 'osmosis'
-  | 'solana',
+  EVMBasedNetworks | CosmosSDKBasedNetworks | 'solana',
   [string, string]
 >;
 
@@ -67,10 +64,10 @@ export const useWalletBalances = ({ wallets }: Options) => {
 
     wallets.forEach((wallet) => {
       if (wallet.type === 'solana') {
-        const previous = data[wallet.type]?.[1] ?? [];
+        const previousAddrs = data[wallet.type]?.[1] ?? [];
         data[wallet.type] = [
           KEYS_BY_NETWORK[wallet.type],
-          [...previous, wallet.address],
+          [...previousAddrs, wallet.address],
         ];
         return;
       }
@@ -78,10 +75,10 @@ export const useWalletBalances = ({ wallets }: Options) => {
         if (network === 'opensea') {
           return;
         }
-        const previous = data[network]?.[1] ?? [];
+        const previousAddrs = data[network]?.[1] ?? [];
         data[network] = [
           KEYS_BY_NETWORK[network],
-          [...previous, wallet.address],
+          [...previousAddrs, wallet.address],
         ];
       });
     });
@@ -99,16 +96,7 @@ export const useWalletBalances = ({ wallets }: Options) => {
     (EVMWalletBalance | CosmosSDKWalletBalance | SolanaWalletBalance)[]
   >(calculatedRequests, useAxiosSWR);
 
-  const balances = useMemo(
-    () =>
-      result.flatMap((v) => {
-        if (!v.data) {
-          return [];
-        }
-        return v.data;
-      }),
-    [result],
-  );
+  const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
 
   return { balances };
 };
