@@ -16,6 +16,14 @@ const MANUALLY_OVERRIDED_IDS = [
   ['0x02cbe46fb8a1f579254a9b485788f2d86cad51aa', 'bora'],
 ];
 
+const MANUALLY_OVERRIDED_NAMES = [
+  ['0xd676e57ca65b827feb112ad81ff738e7b6c1048d', 'Kronos DAO'],
+];
+
+const MANUALLY_OVERRIDED_COINGECKO_IDS = [
+  ['0xd676e57ca65b827feb112ad81ff738e7b6c1048d', undefined],
+];
+
 // From Dexata
 const getTokenAddressImgURL = (mixedAddr: string) => {
   const addr = mixedAddr.toLowerCase();
@@ -309,9 +317,18 @@ export const update = async () => {
     }
 
     let tokenName = token.name;
-    if (token.address === '0xd676e57ca65b827feb112ad81ff738e7b6c1048d') {
-      tokenName = 'Kronos DAO';
-    }
+    MANUALLY_OVERRIDED_NAMES.forEach(([addr, newName]) => {
+      if (token.address === addr) {
+        tokenName = newName;
+      }
+    });
+
+    let coinGeckoId = coinGeckoToken?.id;
+    MANUALLY_OVERRIDED_COINGECKO_IDS.forEach(([addr, coinGeckoId]) => {
+      if (token.address === addr) {
+        coinGeckoId = coinGeckoId;
+      }
+    });
 
     const tokenLogoURI = getTokenAddressImgURL(token.address);
     return {
@@ -319,7 +336,7 @@ export const update = async () => {
       name: tokenName,
       decimals: token.decimals,
       address: token.address,
-      coinGeckoId: coinGeckoToken?.id,
+      coinGeckoId,
       logo: tokenLogoURI,
     };
   });
