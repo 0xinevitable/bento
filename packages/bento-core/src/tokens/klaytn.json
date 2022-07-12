@@ -122,7 +122,6 @@
     "name": "Kronos DAO",
     "decimals": 9,
     "address": "0xd676e57ca65b827feb112ad81ff738e7b6c1048d",
-    "coinGeckoId": "kronos-dao",
     "coinMarketCapId": 15546,
     "logo": "/assets/icons/kronos-dao.png"
   },
