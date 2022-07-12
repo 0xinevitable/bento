@@ -1,9 +1,5 @@
-import { OpenSea, OpenSeaAsset } from '@bento/client';
-import { safePromiseAll } from '@bento/common';
-import { priceFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
-import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -19,7 +15,8 @@ import { EmptyWallet } from './components/EmptyWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
 import { displayName } from './constants/platform';
-import { NFTWalletBalance, WalletBalance } from './types/balance';
+import { WalletBalance } from './types/balance';
+import { useNFTBalances } from './utils/useNFTBalances';
 import { useWalletBalances } from './utils/useWalletBalances';
 
 const walletBalanceReducer =
@@ -30,119 +27,14 @@ const walletBalanceReducer =
 const DashboardPage = () => {
   const wallets = useRecoilValue(walletsAtom);
   const { balances: walletBalances } = useWalletBalances({ wallets });
-
-  const [NFTBalance, setNFTBalance] = useState<NFTWalletBalance[]>([]);
-  const [ethereumPrice, setEthereumPrice] = useState<number>(0);
-  const [fetchedAssets, setFetchedAssets] = useState<{
-    [walletAddress: string]: {
-      [cursor: string]: (OpenSeaAsset & { walletAddress: string })[];
-    };
-  }>({});
-
-  useEffect(() => {
-    const fetchAssets = async (walletAddress: string) => {
-      let cursor: string | undefined = undefined;
-      let firstFetch: boolean = true;
-
-      while (firstFetch || !!cursor) {
-        // FIXME: TypeScript behaving strange here
-        const res: { assets: OpenSeaAsset[]; cursor: string | undefined } =
-          await OpenSea.getAssets({
-            owner: walletAddress,
-            cursor,
-          });
-
-        const { assets, cursor: fetchedCursor } = res;
-        firstFetch = false;
-        cursor = fetchedCursor;
-
-        setFetchedAssets((prev) => ({
-          ...prev,
-          [walletAddress]: {
-            ...prev[walletAddress],
-            [cursor ?? 'undefined']: assets.map((v) => ({
-              ...v,
-              walletAddress,
-            })),
-          },
-        }));
-      }
-    };
-
-    const main = async () => {
-      for (const wallet of wallets) {
-        if (wallet.type === 'evm' && wallet.networks.includes('opensea')) {
-          await fetchAssets(wallet.address);
-        }
-      }
-    };
-
-    main();
-    priceFromCoinGecko('ethereum').then(setEthereumPrice);
-  }, [wallets]);
-
-  useEffect(() => {
-    const flattedAssets = Object.values(fetchedAssets)
-      .map((v) => Object.values(v))
-      .flat(3);
-    const groupedByWalletAddress = groupBy(flattedAssets, 'walletAddress');
-
-    safePromiseAll(
-      Object.keys(groupedByWalletAddress).map(async (walletAddress) => {
-        const groupByCollection: Record<
-          string,
-          (OpenSeaAsset & { walletAddress: string })[]
-        > = groupBy(
-          groupedByWalletAddress[walletAddress],
-          (v) => v.collection.slug,
-        );
-
-        const CHUNK_SIZE = 5;
-        const balances: NFTWalletBalance[] = (
-          await safePromiseAll(
-            chunk(Object.keys(groupByCollection), CHUNK_SIZE).map(
-              async (chunckedCollectionSlugs) =>
-                safePromiseAll(
-                  chunckedCollectionSlugs.map(async (collectionSlug) => {
-                    const collection =
-                      groupByCollection[collectionSlug][0].collection;
-
-                    const { floor_price: floorPrice } =
-                      await OpenSea.getCollectionStats(collectionSlug).catch(
-                        (error) => {
-                          console.error(error);
-                          // FIXME: Error handling
-                          return { floor_price: 0 };
-                        },
-                      );
-
-                    return {
-                      symbol: collection.name,
-                      name: collection.name,
-                      walletAddress,
-                      balance: groupByCollection[collectionSlug].length,
-                      logo: collection.image_url,
-                      price: ethereumPrice * floorPrice,
-                      type: 'nft' as const,
-                      platform: 'opensea',
-                    };
-                  }),
-                ),
-            ),
-          )
-        ).flat();
-
-        return balances;
-      }),
-    ).then((v) => setNFTBalance(v.flat()));
-  }, [fetchedAssets]);
+  const { balances: NFTBalances } = useNFTBalances({ wallets });
 
   const tokenBalances = useMemo(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
     // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
     const balancesByPlatform = Object.entries(
       groupBy<WalletBalance>(
-        [...walletBalances, ...NFTBalance],
+        [...walletBalances, ...NFTBalances],
         (balance) => balance.symbol + balance.name,
       ),
     ).map((v) => v[1]);
@@ -180,7 +72,7 @@ const DashboardPage = () => {
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
     return tokens.filter((v) => v.netWorth > 0);
-  }, [walletBalances, NFTBalance]);
+  }, [walletBalances, NFTBalances]);
 
   const netWorthInUSD = useMemo(
     () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
