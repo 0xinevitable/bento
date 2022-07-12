@@ -14,7 +14,9 @@ type Options = {
 };
 
 export const useNFTBalances = ({ wallets }: Options) => {
-  const [NFTBalance, setNFTBalance] = useState<NFTWalletBalance[]>([]);
+  const [openSeaNFTBalance, setOpenSeaNFTBalance] = useState<
+    NFTWalletBalance[]
+  >([]);
   const [ethereumPrice, setEthereumPrice] = useState<number>(0);
   const [fetchedAssets, setFetchedAssets] = useState<{
     [walletAddress: string]: {
@@ -116,8 +118,8 @@ export const useNFTBalances = ({ wallets }: Options) => {
 
         return balances;
       }),
-    ).then((v) => setNFTBalance(v.flat()));
+    ).then((v) => setOpenSeaNFTBalance(v.flat()));
   }, [fetchedAssets]);
 
-  return { balances: NFTBalance };
+  return { balances: openSeaNFTBalance };
 };
