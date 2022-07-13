@@ -11,13 +11,6 @@ import { Preview } from './components/Preview';
 import { ProfileLinkEditItem } from './components/ProfileLinkEditItem';
 import { TabBar } from './components/TabBar';
 
-const emptyProfileLink: ProfileLink = {
-  title: '',
-  description: '',
-  href: '',
-  image: '',
-};
-
 const ManagePage = () => {
   const [profile] = useProfile();
 
@@ -89,33 +82,20 @@ const ManagePage = () => {
             </ProfileContainer>
             <ProfileLinkList id="links">
               {links.map((item, index) => {
-                const deleteLink = () => {
-                  const deletedLinks = links.filter((_, i) => !(i === index));
-                  setLinks(deletedLinks);
-                };
-
                 return (
-                  <>
-                    <ProfileLinkEditItem
-                      key={`item-${index}`}
-                      linkDraft={item}
-                      defaultLink={profile?.links[index]}
-                      onChange={(updated) =>
-                        setLinks(
-                          links.map((link, i) =>
-                            i === index ? updated : link,
-                          ),
-                        )
-                      }
-                    />
-                    <button onClick={deleteLink}>Delete link</button>
-                  </>
+                  <ProfileLinkEditItem
+                    key={`item-${index}`}
+                    linkDraft={item}
+                    defaultLink={profile?.links[index]}
+                    onChange={(updated) =>
+                      setLinks(
+                        links.map((link, i) => (i === index ? updated : link)),
+                      )
+                    }
+                  />
                 );
               })}
             </ProfileLinkList>
-            <button onClick={() => setLinks([...links, emptyProfileLink])}>
-              Add link
-            </button>
           </Container>
         </EditorWrapper>
       </Wrapper>

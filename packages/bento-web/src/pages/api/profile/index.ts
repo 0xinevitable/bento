@@ -18,7 +18,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   }
 
   const prevProfileQuery = await Supabase.from('profile') //
-    .select('*')
+    .select('id')
     .eq('user_id', user.id);
   const previousProfiles = prevProfileQuery.data ?? [];
   const hasProfile = previousProfiles.length > 0;
@@ -38,7 +38,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
         user_id: user.id,
         ...profile,
       })
-      .eq('user_id', user.id);
+      .eq('id', user.id);
     error = data.error;
   }
 
