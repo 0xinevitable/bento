@@ -10,6 +10,10 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color: transparent;
   }
 
+  .preload * {
+    transition: none !important;
+  }
+
   ::selection {
     color: rgba(255, 255, 255, 0.65);
     background-color: rgba(152, 24, 35, 0.65);
