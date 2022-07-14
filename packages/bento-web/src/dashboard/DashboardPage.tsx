@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Badge } from '@/components/Badge';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
+import { useSession } from '@/hooks/useSession';
 import { walletsAtom } from '@/recoil/wallets';
 
 import { AddWalletModal } from './components/AddWalletModal';
@@ -24,6 +25,7 @@ const walletBalanceReducer =
     balance.symbol === symbol ? callback(acc, balance) : acc;
 
 const DashboardPage = () => {
+  const { session } = useSession();
   const wallets = useRecoilValue(walletsAtom);
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: NFTBalances } = useNFTBalances({ wallets });
@@ -99,7 +101,7 @@ const DashboardPage = () => {
       <TopLeftBlur src="/assets/blurs/top-left.png" />
       <TopRightBlur src="/assets/blurs/top-right.png" />
 
-      {wallets.length < 1 ? (
+      {wallets.length < 1 || !session ? (
         <React.Fragment>
           <div className="mt-12">
             <Badge>⚡ Bento.Finance</Badge>
