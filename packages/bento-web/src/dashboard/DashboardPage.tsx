@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { Badge } from '@/components/Badge';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
@@ -120,6 +121,7 @@ const DashboardPage = () => {
                 Connect Wallet
               </Button>
               <a
+                title="About"
                 className="mt-2 text-white/50 text-sm flex items-center gap-1 mx-auto"
                 href="https://bento.finance"
                 target="_blank"
@@ -135,7 +137,13 @@ const DashboardPage = () => {
             <ProtocolList>
               {NETWORKS.map((network) => (
                 <li key={network.id}>
-                  <img src={network.logo} />
+                  <AnimatedTooltip label={network.name}>
+                    <img
+                      className="cursor-pointer"
+                      alt={network.name}
+                      src={network.logo}
+                    />
+                  </AnimatedTooltip>
                 </li>
               ))}
             </ProtocolList>
