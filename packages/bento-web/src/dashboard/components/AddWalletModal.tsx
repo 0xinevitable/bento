@@ -22,7 +22,7 @@ export type Network = {
   name: string;
   logo: string;
 };
-const NETWORKS: Network[] = [
+export const NETWORKS: Network[] = [
   {
     id: 'ethereum',
     type: 'evm',
