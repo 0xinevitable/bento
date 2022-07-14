@@ -36,7 +36,7 @@ export const AnimatedTooltip = ({
   });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
-    useHover(context, { restMs: 40 }),
+    useHover(context, { restMs: 10 }),
     useFocus(context),
     useRole(context, { role: 'tooltip' }),
     useDismiss(context),
