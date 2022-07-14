@@ -107,7 +107,7 @@ const DashboardPage = () => {
 
       {!pageLoaded ? null : !hasWallet ? (
         <React.Fragment>
-          <div className="mt-12 flex flex-col items-center">
+          <div className="mt-[64px] flex flex-col items-center">
             <Badge>⚡ Bento.Finance</Badge>
             <h1 className="mt-4 text-white text-5xl font-black leading-[120%] text-center">
               Group Identity
@@ -320,7 +320,8 @@ const Button = styled.button`
 `;
 
 const ProtocolSection = styled.section`
-  margin-top: 100px;
+  margin-top: 86px;
+  margin-bottom: 100px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -337,9 +338,10 @@ const ProtocolList = styled.ul`
   margin-top: 24px;
 
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  align-items: center;
 
   img {
     width: 56px;
