@@ -3,6 +3,7 @@ import React, { useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import { Badge } from '@/components/Badge';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { walletsAtom } from '@/recoil/wallets';
@@ -10,8 +11,6 @@ import { walletsAtom } from '@/recoil/wallets';
 import { AddWalletModal } from './components/AddWalletModal';
 import { AssetRatioChart } from './components/AssetRatioChart';
 import { AssetRatioListItem } from './components/AssetRatioListItem';
-import { EmptyBalance } from './components/EmptyBalance';
-import { EmptyWallet } from './components/EmptyWallet';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
 import { displayName } from './constants/platform';
@@ -101,9 +100,24 @@ const DashboardPage = () => {
       <TopRightBlur src="/assets/blurs/top-right.png" />
 
       {wallets.length < 1 ? (
-        <EmptyWallet
-          onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-        />
+        <React.Fragment>
+          <div className="mt-12">
+            <Badge>⚡ Bento.Finance</Badge>
+            <h1 className="mt-4 text-white text-5xl font-black leading-[120%]">
+              Group
+              <br />
+              Your Identity
+              <br />
+              From Web3 Finance
+            </h1>
+
+            <div className="mt-6">
+              <Button onClick={() => setAddWalletModalVisible((prev) => !prev)}>
+                Connect Wallet
+              </Button>
+            </div>
+          </div>
+        </React.Fragment>
       ) : (
         <React.Fragment>
           <div className="mt-6 flex w-full min-h-[345px] gap-6">
@@ -243,4 +257,40 @@ const AssetCardList = styled.ul`
   border: 1px solid #2a2e31;
   box-shadow: inset 5px 5px 16px #0b0c0e, inset -5px -5px 16px #212426;
   border-radius: 8px;
+`;
+
+const Button = styled.button`
+  padding: 20px 32px;
+  /* width: 100%; */
+  width: fit-content;
+  /* max-width: 282px; */
+  position: relative;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255, 165, 165, 0.66);
+  background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
+  filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21.3946px;
+
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.05em;
+
+  /* color: rgba(255, 255, 255, 0.92); */
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
+
+  &:hover {
+    border-color: rgba(255, 165, 165, 0.45);
+
+    /* 85% opacity */
+    background: radial-gradient(
+      98% 205% at 0% 0%,
+      rgba(116, 2, 27, 0.85) 0%,
+      rgba(193, 18, 79, 0.85) 100%
+    );
+  }
 `;
