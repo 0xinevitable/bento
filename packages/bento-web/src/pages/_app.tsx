@@ -7,6 +7,7 @@ import '@/styles/tailwind.css';
 import '@/styles/global.css';
 
 import { AppProps } from 'next/app';
+import Head from 'next/head';
 import styled from 'styled-components';
 
 import { NavigationBar } from '@/components/NavigationBar';
@@ -24,20 +25,34 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   }, []);
 
   return (
-    <RecoilRoot>
-      <ReactNotifications />
-      <SessionManager />
-      <WalletManager />
+    <React.Fragment>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <RecoilRoot>
+        <ReactNotifications />
+        <SessionManager />
+        <WalletManager />
 
-      <Container>
-        <NavigationBar />
-        <Black />
+        <Container>
+          <NavigationBar />
+          <Black />
 
-        <Component {...pageProps} />
-      </Container>
+          <Component {...pageProps} />
+        </Container>
 
-      <div id="portal" />
-    </RecoilRoot>
+        <div id="portal" />
+      </RecoilRoot>
+    </React.Fragment>
   );
 }
 
@@ -45,7 +60,6 @@ export default MyApp;
 
 const Container = styled.div`
   width: 100vw;
-  padding-bottom: 100px;
 
   position: relative;
   overflow: hidden;
