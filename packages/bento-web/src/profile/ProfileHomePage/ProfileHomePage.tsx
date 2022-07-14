@@ -37,7 +37,7 @@ const ProfileHomePage = () => {
 export default ProfileHomePage;
 
 const FixedLoginNudge = styled(LoginNudge)`
-  padding-top: 1.5rem;
+  padding-top: calc(1.5rem + 64px);
 
   position: fixed;
   top: 0;
