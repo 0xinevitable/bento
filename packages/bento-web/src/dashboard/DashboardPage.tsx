@@ -1,12 +1,11 @@
 import groupBy from 'lodash.groupby';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
-import { useSession } from '@/hooks/useSession';
 import { walletsAtom } from '@/recoil/wallets';
 
 import { AddWalletModal } from './components/AddWalletModal';
@@ -25,7 +24,6 @@ const walletBalanceReducer =
     balance.symbol === symbol ? callback(acc, balance) : acc;
 
 const DashboardPage = () => {
-  const { session } = useSession();
   const wallets = useRecoilValue(walletsAtom);
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: NFTBalances } = useNFTBalances({ wallets });
@@ -96,12 +94,17 @@ const DashboardPage = () => {
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);
 
+  const [pageLoaded, setPageLoaded] = useState<boolean>(false);
+  useEffect(() => setPageLoaded(true), []);
+
+  const hasWallet = wallets.length > 0;
+
   return (
     <PageContainer className="pt-0 z-10">
       <TopLeftBlur src="/assets/blurs/top-left.png" />
       <TopRightBlur src="/assets/blurs/top-right.png" />
 
-      {wallets.length < 1 || !session ? (
+      {!pageLoaded ? null : !hasWallet ? (
         <React.Fragment>
           <div className="mt-12">
             <Badge>⚡ Bento.Finance</Badge>
@@ -133,12 +136,13 @@ const DashboardPage = () => {
                     netWorthInUSD={netWorthInUSD}
                   />
                 </div>
-                <AssetCardList className="w-1/2">
-                  {assetRatioByPlatform.map((item) => (
-                    <AssetRatioListItem key={item.platform} {...item} />
-                  ))}
-                  {/* TODO: net worth & asset ratio breakdown by chains here */}
-                </AssetCardList>
+                {assetRatioByPlatform.length && (
+                  <AssetCardList className="w-1/2">
+                    {assetRatioByPlatform.map((item) => (
+                      <AssetRatioListItem key={item.platform} {...item} />
+                    ))}
+                  </AssetCardList>
+                )}
               </div>
             </Card>
             <Card className="max-w-[400px]">
