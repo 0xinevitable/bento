@@ -42,7 +42,7 @@ const useSWRs = <T extends any>(
   requests: Requests,
   hook: typeof useAxiosSWR,
 ) => {
-  const keys = Object.keys(requests) as (keyof typeof KEYS_BY_NETWORK)[];
+  const keys = Object.keys(KEYS_BY_NETWORK) as (keyof typeof KEYS_BY_NETWORK)[];
   const res: SWRResponse<T, any>[] = [];
   for (const key of keys) {
     const req = requests[key];
