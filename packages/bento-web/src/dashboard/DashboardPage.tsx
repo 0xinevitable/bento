@@ -99,79 +99,80 @@ const DashboardPage = () => {
     <PageContainer className="pt-0 z-10">
       <TopLeftBlur src="/assets/blurs/top-left.png" />
       <TopRightBlur src="/assets/blurs/top-right.png" />
-      <div className="mt-6 flex w-full min-h-[345px] gap-6">
-        <Card>
-          <CardTitle>Net Worth</CardTitle>
-          <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-          <div className="w-full flex">
-            <div className="w-1/2">
-              <AssetRatioChart
-                tokenBalances={tokenBalances}
-                netWorthInUSD={netWorthInUSD}
-              />
-            </div>
-            <AssetCardList className="w-1/2">
-              {assetRatioByPlatform.map((item) => (
-                <AssetRatioListItem key={item.platform} {...item} />
-              ))}
-              {/* TODO: net worth & asset ratio breakdown by chains here */}
-            </AssetCardList>
+
+      {wallets.length < 1 ? (
+        <EmptyWallet
+          onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
+        />
+      ) : (
+        <React.Fragment>
+          <div className="mt-6 flex w-full min-h-[345px] gap-6">
+            <Card>
+              <CardTitle>Net Worth</CardTitle>
+              <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
+              <div className="w-full flex">
+                <div className="w-1/2">
+                  <AssetRatioChart
+                    tokenBalances={tokenBalances}
+                    netWorthInUSD={netWorthInUSD}
+                  />
+                </div>
+                <AssetCardList className="w-1/2">
+                  {assetRatioByPlatform.map((item) => (
+                    <AssetRatioListItem key={item.platform} {...item} />
+                  ))}
+                  {/* TODO: net worth & asset ratio breakdown by chains here */}
+                </AssetCardList>
+              </div>
+            </Card>
+            <Card className="max-w-[400px]">
+              <NoSSR>
+                <React.Fragment>
+                  <CardTitle>
+                    Wallets
+                    {wallets.length > 0 && (
+                      <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                        {`(${wallets.length.toLocaleString()})`}
+                      </span>
+                    )}
+                  </CardTitle>
+
+                  {wallets.length > 0 && (
+                    <WalletList
+                      onClickConnect={() =>
+                        setAddWalletModalVisible((prev) => !prev)
+                      }
+                    />
+                  )}
+                </React.Fragment>
+              </NoSSR>
+            </Card>
           </div>
-        </Card>
-        <Card className="max-w-[400px]">
-          <NoSSR>
-            <React.Fragment>
-              <CardTitle>
-                Wallets
-                {wallets.length > 0 && (
-                  <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                    {`(${wallets.length.toLocaleString()})`}
-                  </span>
-                )}
-              </CardTitle>
 
-              {wallets.length > 0 ? (
-                <WalletList
-                  onClickConnect={() =>
-                    setAddWalletModalVisible((prev) => !prev)
-                  }
-                />
-              ) : (
-                <EmptyWallet
-                  onClickConnect={() =>
-                    setAddWalletModalVisible((prev) => !prev)
-                  }
-                />
+          <Card className="mt-12" style={{ flex: 0 }}>
+            <CardTitle>
+              Assets
+              {tokenBalances.length > 0 && (
+                <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                  {`(${tokenBalances.length.toLocaleString()})`}
+                </span>
               )}
-            </React.Fragment>
-          </NoSSR>
-        </Card>
-      </div>
-
-      <Card className="mt-12" style={{ flex: 0 }}>
-        <CardTitle>
-          Assets
-          {tokenBalances.length > 0 && (
-            <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-              {`(${tokenBalances.length.toLocaleString()})`}
-            </span>
-          )}
-        </CardTitle>
-        {tokenBalances.length > 0 ? (
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {tokenBalances.map((info) => (
-              <TokenBalanceItem
-                key={`${info.symbol}-${
-                  'tokenAddress' in info ? info.tokenAddress : 'native'
-                }`}
-                {...info}
-              />
-            ))}
-          </ul>
-        ) : (
-          <EmptyBalance />
-        )}
-      </Card>
+            </CardTitle>
+            {tokenBalances.length > 0 && (
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {tokenBalances.map((info) => (
+                  <TokenBalanceItem
+                    key={`${info.symbol}-${
+                      'tokenAddress' in info ? info.tokenAddress : 'native'
+                    }`}
+                    {...info}
+                  />
+                ))}
+              </ul>
+            )}
+          </Card>
+        </React.Fragment>
+      )}
 
       <AddWalletModal
         visible={isAddWalletModalVisible}
