@@ -8,7 +8,7 @@ import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { walletsAtom } from '@/recoil/wallets';
 
-import { AddWalletModal } from './components/AddWalletModal';
+import { AddWalletModal, NETWORKS } from './components/AddWalletModal';
 import { AssetRatioChart } from './components/AssetRatioChart';
 import { AssetRatioListItem } from './components/AssetRatioListItem';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
@@ -106,9 +106,9 @@ const DashboardPage = () => {
 
       {!pageLoaded ? null : !hasWallet ? (
         <React.Fragment>
-          <div className="mt-12">
+          <div className="mt-12 flex flex-col items-center">
             <Badge>⚡ Bento.Finance</Badge>
-            <h1 className="mt-4 text-white text-5xl font-black leading-[120%]">
+            <h1 className="mt-4 text-white text-5xl font-black leading-[120%] text-center">
               Group
               <br />
               Your Identity
@@ -122,6 +122,17 @@ const DashboardPage = () => {
               </Button>
             </div>
           </div>
+
+          <ProtocolSection>
+            <Subtitle>Your favorite chains and protocols</Subtitle>
+            <ProtocolList>
+              {NETWORKS.map((network) => (
+                <li key={network.id}>
+                  <img src={network.logo} />
+                </li>
+              ))}
+            </ProtocolList>
+          </ProtocolSection>
         </React.Fragment>
       ) : (
         <React.Fragment>
@@ -298,5 +309,37 @@ const Button = styled.button`
       rgba(116, 2, 27, 0.85) 0%,
       rgba(193, 18, 79, 0.85) 100%
     );
+  }
+`;
+
+const ProtocolSection = styled.section`
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Subtitle = styled.h2`
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 103%;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+`;
+const ProtocolList = styled.ul`
+  margin-top: 24px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+
+  img {
+    width: 56px;
+    height: 56px;
+
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    user-select: none;
   }
 `;
