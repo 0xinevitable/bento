@@ -109,9 +109,7 @@ const DashboardPage = () => {
           <div className="mt-12 flex flex-col items-center">
             <Badge>⚡ Bento.Finance</Badge>
             <h1 className="mt-4 text-white text-5xl font-black leading-[120%] text-center">
-              Group
-              <br />
-              Your Identity
+              Group Identity
               <br />
               From Web3 Finance
             </h1>
