@@ -1,3 +1,4 @@
+import { Icon } from '@iconify/react';
 import groupBy from 'lodash.groupby';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -114,10 +115,18 @@ const DashboardPage = () => {
               From Web3 Finance
             </h1>
 
-            <div className="mt-6">
+            <div className="mt-6 flex flex-col gap-2">
               <Button onClick={() => setAddWalletModalVisible((prev) => !prev)}>
                 Connect Wallet
               </Button>
+              <a
+                className="mt-2 text-white/50 text-sm flex items-center gap-1 mx-auto"
+                href="https://bento.finance"
+                target="_blank"
+              >
+                <span className="leading-none mt-[1.5px]">About</span>
+                <Icon icon="heroicons-solid:external-link" />
+              </a>
             </div>
           </div>
 
