@@ -1,8 +1,14 @@
+import clsx from 'clsx';
 import styled from 'styled-components';
 
-export const EmptyBalance = () => {
+type Props = React.HTMLAttributes<HTMLDivElement>;
+
+export const EmptyBalance: React.FC<Props> = ({ className, ...props }) => {
   return (
-    <div className="w-full pt-12 flex flex-col items-center">
+    <div
+      className={clsx('w-full flex flex-col items-center', className)}
+      {...props}
+    >
       <Illust src="/assets/illusts/bitcoin.png" />
       <Message>Assets will show up here</Message>
     </div>

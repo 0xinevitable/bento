@@ -1,12 +1,21 @@
+import clsx from 'clsx';
 import styled from 'styled-components';
 
-type EmptyWalletProps = {
+type DivProps = React.HTMLAttributes<HTMLDivElement>;
+type EmptyWalletProps = DivProps & {
   onClickConnect: () => void;
 };
 
-export const EmptyWallet: React.FC<EmptyWalletProps> = ({ onClickConnect }) => {
+export const EmptyWallet: React.FC<EmptyWalletProps> = ({
+  className,
+  onClickConnect,
+  ...props
+}) => {
   return (
-    <div className="w-full pt-5 flex flex-col items-center">
+    <div
+      className={clsx('w-full flex flex-col items-center', className)}
+      {...props}
+    >
       <Illust src="/assets/illusts/wallet.png" />
       <Message>Connect your wallet</Message>
       <Button onClick={onClickConnect}>Connect</Button>
