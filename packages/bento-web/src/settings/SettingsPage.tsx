@@ -1,11 +1,20 @@
+import { GetServerSideProps } from 'next';
 import React from 'react';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
 import { LoginNudge } from '@/profile/components/LoginNudge';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 // import { Analytics } from '@/utils/analytics';
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  if (!FeatureFlags.isProfileEnabled) {
+    return { notFound: true };
+  }
+  return { props: {} };
+};
 
 const SettingsPage = () => {
   // useEffect(() => {

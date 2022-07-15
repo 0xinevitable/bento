@@ -1,1 +1,4 @@
-export { default } from '@/profile/ProfileEditPage/ProfileEditPage';
+export {
+  default,
+  getServerSideProps,
+} from '@/profile/ProfileEditPage/ProfileEditPage';

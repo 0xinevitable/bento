@@ -1,9 +1,11 @@
+import { GetServerSideProps } from 'next';
 import React from 'react';
 import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useHiddenBodyOverflow } from '@/hooks/useHiddenBodyOverflow';
 import { useSession } from '@/hooks/useSession';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { LoginNudge } from '../components/LoginNudge';
 import { Header } from './components/Header';
@@ -12,6 +14,13 @@ import { PageViewChart } from './components/PageViewChart';
 import { ProfileListSection } from './components/ProfileListSection';
 
 // import { Analytics } from '@/utils/analytics';
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  if (!FeatureFlags.isProfileEnabled) {
+    return { notFound: true };
+  }
+  return { props: {} };
+};
 
 const ProfileHomePage = () => {
   // useEffect(() => {

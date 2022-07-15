@@ -1,1 +1,1 @@
-export { default } from '@/settings/SettingsPage';
+export { default, getServerSideProps } from '@/settings/SettingsPage';

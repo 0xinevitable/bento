@@ -1,4 +1,5 @@
 import { OpenSea, OpenSeaAsset } from '@bento/client';
+import { GetServerSideProps } from 'next';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -6,6 +7,7 @@ import { PageContainer } from '@/components/PageContainer';
 import { WalletConnector } from '@/components/WalletConnector';
 import { WalletList } from '@/dashboard/components/WalletList';
 import { FieldInput } from '@/profile/components/FieldInput';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { OpenSeaAssetItem } from './components/OpenSeaAssetItem';
 
@@ -16,6 +18,13 @@ declare global {
     solana: any;
   }
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  if (!FeatureFlags.isProfileEnabled) {
+    return { notFound: true };
+  }
+  return { props: {} };
+};
 
 const OnboardingPage: React.FC = () => {
   // FIXME: Replace hardcoded wallet address
