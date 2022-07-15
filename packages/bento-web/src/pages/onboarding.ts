@@ -1,1 +1,1 @@
-export { default } from '@/onboarding/OnboardingPage';
+export { default, getServerSideProps } from '@/onboarding/OnboardingPage';

@@ -1,8 +1,10 @@
 import dedent from 'dedent';
+import { GetServerSideProps } from 'next';
 import DocumentHead from 'next/head';
 import React, { useMemo } from 'react';
 
 import { PageContainer } from '@/components/PageContainer';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { ProfileInstance } from '../components/ProfileInstance';
 import { ExampleUserProfile } from '../constants/ExampleUserProfile';
@@ -32,6 +34,13 @@ const defaultProfile: UserProfile = {
   bio: '',
   tabs: [],
   links: [],
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  if (!FeatureFlags.isProfileEnabled) {
+    return { notFound: true };
+  }
+  return { props: {} };
 };
 
 const ProfileDetailPage = () => {

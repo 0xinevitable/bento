@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { GetServerSideProps } from 'next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
 import { FieldInput } from '../components/FieldInput';
@@ -16,6 +19,13 @@ const emptyProfileLink: ProfileLink = {
   description: '',
   href: '',
   image: '',
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  if (!FeatureFlags.isProfileEnabled) {
+    return { notFound: true };
+  }
+  return { props: {} };
 };
 
 const ManagePage = () => {
