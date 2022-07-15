@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components';
 
 import GithubIcon from '@/assets/icons/ic-github.svg';
 import TwitterIcon from '@/assets/icons/ic-twitter.svg';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 const Breakpoints = {
   Mobile: 512,
@@ -54,23 +55,25 @@ export const NavigationBar = () => {
           </a>
         </Link>
 
-        <ul className="flex">
-          {NAVIGATION_ITEMS.map((item) => (
-            <NavigationItem
-              key={`${item.title}-${item.href}`}
-              active={currentPath === item.href}
-            >
-              <Link href={item.href} passHref>
-                <a className="h-full flex gap-2 justify-center items-center">
-                  <Icon className="text-xl" icon={item.icon} />
-                  <span className="text-sm font-medium leading-none">
-                    {item.title}
-                  </span>
-                </a>
-              </Link>
-            </NavigationItem>
-          ))}
-        </ul>
+        {FeatureFlags.isProfileEnabled && (
+          <ul className="flex">
+            {NAVIGATION_ITEMS.map((item) => (
+              <NavigationItem
+                key={`${item.title}-${item.href}`}
+                active={currentPath === item.href}
+              >
+                <Link href={item.href} passHref>
+                  <a className="h-full flex gap-2 justify-center items-center">
+                    <Icon className="text-xl" icon={item.icon} />
+                    <span className="text-sm font-medium leading-none">
+                      {item.title}
+                    </span>
+                  </a>
+                </Link>
+              </NavigationItem>
+            ))}
+          </ul>
+        )}
 
         <SocialIconList>
           <a
