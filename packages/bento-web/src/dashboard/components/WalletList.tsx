@@ -9,7 +9,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { NoSSR } from '@/components/NoSSR';
 import { walletsAtom } from '@/recoil/wallets';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
@@ -37,7 +36,7 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
   }, []);
 
   return (
-    <NoSSR>
+    <React.Fragment>
       <ul className="flex flex-col">
         {renderedWallets.map((wallet) => (
           <li className="py-2 flex items-center" key={wallet.address}>
@@ -108,7 +107,7 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
           )}
         </ButtonList>
       )}
-    </NoSSR>
+    </React.Fragment>
   );
 };
 

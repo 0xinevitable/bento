@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { walletsAtom } from '@/recoil/wallets';
 
@@ -131,26 +130,22 @@ const DashboardPage = () => {
               </div>
             </Card>
             <Card className="max-w-[400px]">
-              <NoSSR>
-                <React.Fragment>
-                  <CardTitle>
-                    Wallets
-                    {wallets.length > 0 && (
-                      <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                        {`(${wallets.length.toLocaleString()})`}
-                      </span>
-                    )}
-                  </CardTitle>
+              <CardTitle>
+                Wallets
+                {wallets.length > 0 && (
+                  <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
+                    {`(${wallets.length.toLocaleString()})`}
+                  </span>
+                )}
+              </CardTitle>
 
-                  {wallets.length > 0 && (
-                    <WalletList
-                      onClickConnect={() =>
-                        setAddWalletModalVisible((prev) => !prev)
-                      }
-                    />
-                  )}
-                </React.Fragment>
-              </NoSSR>
+              {wallets.length > 0 && (
+                <WalletList
+                  onClickConnect={() =>
+                    setAddWalletModalVisible((prev) => !prev)
+                  }
+                />
+              )}
             </Card>
           </div>
 
