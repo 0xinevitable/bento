@@ -114,14 +114,14 @@ const DashboardPage = () => {
               <CardTitle>Net Worth</CardTitle>
               <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
               <div className="w-full flex">
-                <div className="w-1/2">
+                <div>
                   <AssetRatioChart
                     tokenBalances={tokenBalances}
                     netWorthInUSD={netWorthInUSD}
                   />
                 </div>
                 {assetRatioByPlatform.length && (
-                  <AssetCardList className="w-1/2">
+                  <AssetCardList className="flex-1">
                     {assetRatioByPlatform.map((item) => (
                       <AssetRatioListItem key={item.platform} {...item} />
                     ))}
