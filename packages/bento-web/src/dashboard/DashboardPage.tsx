@@ -128,9 +128,11 @@ const DashboardPage = () => {
             <Card className="max-w-[400px]">
               <CardTitle>
                 <span>Wallets</span>
-                {wallets.length > 0 && (
-                  <InlineBadge>{wallets.length.toLocaleString()}</InlineBadge>
-                )}
+                <InlineBadge>
+                  {wallets.length > 0 //
+                    ? wallets.length.toLocaleString()
+                    : '-'}
+                </InlineBadge>
               </CardTitle>
 
               {wallets.length > 0 && (
@@ -146,11 +148,11 @@ const DashboardPage = () => {
           <Card className="mt-12" style={{ flex: 0 }}>
             <CardTitle>
               <span>Assets</span>
-              {renderedTokenBalances.length > 0 && (
-                <InlineBadge>
-                  {renderedTokenBalances.length.toLocaleString()}
-                </InlineBadge>
-              )}
+              <InlineBadge>
+                {renderedTokenBalances.length > 0
+                  ? renderedTokenBalances.length.toLocaleString()
+                  : '-'}
+              </InlineBadge>
             </CardTitle>
 
             <div className="mt-3 w-full flex items-center">
