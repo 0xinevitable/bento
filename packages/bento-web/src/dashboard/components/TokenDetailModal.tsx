@@ -1,5 +1,6 @@
+import { OpenSeaAsset } from '@bento/client';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from '@/components/Modal';
@@ -18,9 +19,6 @@ export type TokenDetailModalParams = {
     amount: number;
     price: number;
     type?: 'nft';
-
-    // TODO: Add proper types
-    assets?: any[];
   };
 };
 type Props = TokenDetailModalParams & {
@@ -33,6 +31,14 @@ export const TokenDetailModal: React.FC<Props> = ({
   onDismiss,
   tokenBalance,
 }) => {
+  const assets = useMemo<OpenSeaAsset[]>(
+    () =>
+      tokenBalance?.balances.flatMap((item) =>
+        'assets' in item ? item.assets : [],
+      ) ?? [],
+    [tokenBalance],
+  );
+
   return (
     <Portal>
       <OverlayWrapper
@@ -53,6 +59,19 @@ export const TokenDetailModal: React.FC<Props> = ({
                 )}
               </TokenInformation>
             </TokenHeader>
+
+            {tokenBalance.type === 'nft' && (
+              <AssetList>
+                {assets.map((asset) => (
+                  <AssetListItem key={asset.id}>
+                    <AssetImage src={asset.image_url} />
+                    <AssetName className="text-sm text-gray-400">
+                      {asset.name || `#${asset.id}`}
+                    </AssetName>
+                  </AssetListItem>
+                ))}
+              </AssetList>
+            )}
           </Content>
         )}
       </OverlayWrapper>
@@ -106,3 +125,22 @@ const TokenName = styled.h2`
   color: white;
 `;
 const TokenSymbol = styled.span``;
+
+const AssetList = styled.ul`
+  margin-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 16px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+`;
+const AssetListItem = styled.li``;
+const AssetName = styled.span``;
+const AssetImage = styled.img`
+  width: 182px;
+  height: 182px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: black;
+`;
