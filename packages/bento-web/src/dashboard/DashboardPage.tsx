@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import { Badge } from '@/components/Badge';
 import { PageContainer } from '@/components/PageContainer';
 import { walletsAtom } from '@/recoil/wallets';
 
@@ -131,11 +132,9 @@ const DashboardPage = () => {
             </Card>
             <Card className="max-w-[400px]">
               <CardTitle>
-                Wallets
+                <span>Wallets</span>
                 {wallets.length > 0 && (
-                  <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                    {`(${wallets.length.toLocaleString()})`}
-                  </span>
+                  <InlineBadge>{wallets.length.toLocaleString()}</InlineBadge>
                 )}
               </CardTitle>
 
@@ -151,11 +150,11 @@ const DashboardPage = () => {
 
           <Card className="mt-12" style={{ flex: 0 }}>
             <CardTitle>
-              Assets
+              <span>Assets</span>
               {tokenBalances.length > 0 && (
-                <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                  {`(${tokenBalances.length.toLocaleString()})`}
-                </span>
+                <InlineBadge>
+                  {tokenBalances.length.toLocaleString()}
+                </InlineBadge>
               )}
             </CardTitle>
             {tokenBalances.length > 0 && (
@@ -232,6 +231,9 @@ const CardTitle = styled.h2`
   font-size: 18px;
   line-height: 100%;
   color: #ffffff;
+
+  display: flex;
+  align-items: center;
 `;
 
 const AssetCardList = styled.ul`
@@ -250,4 +252,11 @@ const AssetCardList = styled.ul`
   border: 1px solid #2a2e31;
   box-shadow: inset 5px 5px 16px #0b0c0e, inset -5px -5px 16px #212426;
   border-radius: 8px;
+`;
+
+const InlineBadge = styled(Badge)`
+  margin-left: 8px;
+  padding: 6px;
+  display: inline-flex;
+  font-size: 13px;
 `;
