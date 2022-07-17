@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
 
-import { WalletBalance } from '../types/balance';
+import { WalletBalance } from '../types/WalletBalance';
 
 export type TokenDetailModalParams = {
   tokenBalance?: {

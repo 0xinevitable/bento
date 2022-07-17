@@ -3,7 +3,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled from 'styled-components';
 
 import { PLATFORM_LOGOS } from '@/dashboard/constants/platform';
-import { WalletBalance } from '@/dashboard/types/balance';
+import { WalletBalance } from '@/dashboard/types/WalletBalance';
 
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
 

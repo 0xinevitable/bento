@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { displayName } from '@/dashboard/constants/platform';
-import { WalletBalance } from '@/dashboard/types/balance';
+import { WalletBalance } from '@/dashboard/types/WalletBalance';
 
 import { AssetRatioChart } from './AssetRatioChart';
 import { AssetRatioListItem } from './AssetRatioListItem';

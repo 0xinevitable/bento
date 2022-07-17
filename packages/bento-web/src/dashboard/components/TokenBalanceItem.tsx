@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Badge } from '@/components/Badge';
 
 import { PLATFORM_LOGOS } from '../constants/platform';
-import { WalletBalance } from '../types/balance';
+import { WalletBalance } from '../types/WalletBalance';
 
 type TokenBalanceItemProps = {
   platform: string;

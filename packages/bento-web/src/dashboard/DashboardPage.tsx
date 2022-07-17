@@ -18,7 +18,7 @@ import {
 import { WalletList } from './components/WalletList';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { IntroSection } from './sections/IntroSection';
-import { WalletBalance } from './types/balance';
+import { WalletBalance } from './types/WalletBalance';
 import { useNFTBalances } from './utils/useNFTBalances';
 import { useWalletBalances } from './utils/useWalletBalances';
 

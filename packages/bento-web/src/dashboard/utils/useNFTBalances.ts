@@ -5,7 +5,7 @@ import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
 import { useEffect, useState } from 'react';
 
-import { NFTWalletBalance } from '../types/balance';
+import { NFTWalletBalance } from '../types/WalletBalance';
 
 const CHUNK_SIZE = 5;
 
