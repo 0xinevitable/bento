@@ -42,12 +42,14 @@ export type NFTWalletBalance = {
   walletAddress: string;
   platform: string;
 
-  symbol: string;
+  symbol: string | null;
   name: string;
   address?: string;
   balance: number;
   price: number;
   logo?: string;
+
+  assets?: any[];
 };
 
 export type WalletBalance =

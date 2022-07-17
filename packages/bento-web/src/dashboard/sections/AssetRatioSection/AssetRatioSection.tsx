@@ -11,7 +11,7 @@ import { AssetRatioListItem } from './AssetRatioListItem';
 type AssetRatioSectionProps = {
   netWorthInUSD: number;
   tokenBalances: {
-    symbol: string;
+    symbol: string | null;
     name: string;
     logo?: string;
     tokenAddress?: string;

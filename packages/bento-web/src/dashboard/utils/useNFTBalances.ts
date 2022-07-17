@@ -88,8 +88,9 @@ export const useNFTBalances = ({ wallets }: Options) => {
               async (chunckedCollectionSlugs) =>
                 safePromiseAll(
                   chunckedCollectionSlugs.map(async (collectionSlug) => {
-                    const collection =
-                      groupByCollection[collectionSlug][0].collection;
+                    const assets = groupByCollection[collectionSlug];
+                    const first = assets[0];
+                    const collection = first.collection;
 
                     const { floor_price: floorPrice } =
                       await OpenSea.getCollectionStats(collectionSlug).catch(
@@ -101,7 +102,7 @@ export const useNFTBalances = ({ wallets }: Options) => {
                       );
 
                     return {
-                      symbol: collection.name,
+                      symbol: first.asset_contract.symbol || null,
                       name: collection.name,
                       walletAddress,
                       balance: groupByCollection[collectionSlug].length,
@@ -109,6 +110,7 @@ export const useNFTBalances = ({ wallets }: Options) => {
                       price: ethereumPrice * floorPrice,
                       type: 'nft' as const,
                       platform: 'opensea',
+                      assets,
                     };
                   }),
                 ),

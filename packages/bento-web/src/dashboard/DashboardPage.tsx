@@ -11,6 +11,10 @@ import { walletsAtom } from '@/recoil/wallets';
 
 import { AddWalletModal } from './components/AddWalletModal';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
+import {
+  TokenDetailModal,
+  TokenDetailModalParams,
+} from './components/TokenDetailModal';
 import { WalletList } from './components/WalletList';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { IntroSection } from './sections/IntroSection';
@@ -19,9 +23,9 @@ import { useNFTBalances } from './utils/useNFTBalances';
 import { useWalletBalances } from './utils/useWalletBalances';
 
 const walletBalanceReducer =
-  (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
+  (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
   (acc: number, balance: WalletBalance) =>
-    balance.symbol === symbol ? callback(acc, balance) : acc;
+    (balance.symbol ?? balance.name) === key ? callback(acc, balance) : acc;
 
 const DashboardPage = () => {
   const wallets = useRecoilValue(walletsAtom);
@@ -45,7 +49,7 @@ const DashboardPage = () => {
 
         const amount = balances.reduce(
           walletBalanceReducer(
-            first.symbol,
+            first.symbol ?? first.name,
             (acc, balance) =>
               acc +
               balance.balance +
@@ -91,6 +95,10 @@ const DashboardPage = () => {
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);
+  const [isTokenDetailModalVisible, setTokenDetailModalVisible] =
+    useState<boolean>(false);
+  const [tokenDetailModalParams, setTokenDetailModalParams] =
+    useState<TokenDetailModalParams>({});
 
   const [pageLoaded, setPageLoaded] = useState<boolean>(false);
   useEffect(() => setPageLoaded(true), []);
@@ -161,10 +169,15 @@ const DashboardPage = () => {
               <ul className="mt-4 flex flex-wrap gap-2">
                 {renderedTokenBalances.map((info) => (
                   <TokenBalanceItem
-                    key={`${info.symbol}-${
+                    key={`${info.symbol ?? info.name}-${
                       'tokenAddress' in info ? info.tokenAddress : 'native'
                     }`}
                     {...info}
+                    type={info.type ?? 'ft'}
+                    onClick={() => {
+                      setTokenDetailModalVisible((prev) => !prev);
+                      setTokenDetailModalParams({ tokenBalance: info });
+                    }}
                   />
                 ))}
               </ul>
@@ -178,6 +191,14 @@ const DashboardPage = () => {
       <AddWalletModal
         visible={isAddWalletModalVisible}
         onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
+      />
+      <TokenDetailModal
+        visible={isTokenDetailModalVisible}
+        onDismiss={() => {
+          setTokenDetailModalVisible((prev) => !prev);
+          setTokenDetailModalParams({});
+        }}
+        {...tokenDetailModalParams}
       />
     </PageContainer>
   );

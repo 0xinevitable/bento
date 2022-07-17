@@ -7,46 +7,23 @@ import { Badge } from '@/components/Badge';
 import { PLATFORM_LOGOS } from '../constants/platform';
 import { WalletBalance } from '../types/balance';
 
-// import { TokenBalanceRatioBar } from './TokenBalanceRatioBar';
-// import { TokenIcon } from './TokenIcon';
-
 type TokenBalanceItemProps = {
   platform: string;
-  symbol: string;
+  symbol: string | null;
   name: string;
   logo?: string;
   netWorth: number;
   amount: number;
   price: number;
   balances: WalletBalance[];
+  type: string;
+  onClick: () => void;
 };
 
-export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
-  // const [collapsed, setCollapsed] = useState<boolean>(true);
-
-  // const balances = useMemo(() => {
-  //   const items = info.balances.map(
-  //     (balance: WalletBalance) => {
-  //       const delegations = 'delegations' in balance ? balance.delegations : 0;
-  //       const percentage =
-  //         ((balance.balance + delegations) / info.amount) * 100;
-  //       const shortenedWalletAddress = shortenAddress(balance.walletAddress);
-
-  //       return {
-  //         price: balance.price,
-  //         balance: balance.balance,
-  //         delegations,
-  //         percentage,
-  //         shortenedWalletAddress,
-  //       };
-  //     },
-  //   );
-
-  //   items.sort((a, b) => b.percentage - a.percentage);
-
-  //   return items;
-  // }, [info.balances]);
-
+export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
+  onClick,
+  ...info
+}) => {
   const platformURL = useMemo(
     () => PLATFORM_LOGOS[info.platform as keyof typeof PLATFORM_LOGOS],
     [info.platform],
@@ -58,7 +35,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
         'py-3 p-3 h-fit rounded-md drop-shadow-2xl',
         'flex flex-col cursor-pointer',
       )}
-      // onClick={() => setCollapsed((prev) => !prev)}
+      onClick={onClick}
     >
       <div className="flex items-center">
         <div className="relative">
@@ -74,7 +51,9 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
         </div>
         <div className="ml-4 min-w-0 flex flex-col flex-1">
           <span className="text-sm text-slate-400/40 flex items-center">
-            <span className="truncate text-slate-400">{info.symbol}</span>
+            <span className="truncate text-slate-400">
+              {info.type === 'nft' ? info.name : info.symbol}
+            </span>
             <InlineBadge>{info.amount.toLocaleString()}</InlineBadge>
           </span>
           <span className="text-xl font-bold text-slate-50/90">
@@ -88,48 +67,6 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
           </span>
         </div>
       </div>
-
-      {/* <TokenBalanceRatioBar className="pl-2" balances={info.balances} /> */}
-
-      {/* <ul
-        className={clsx(
-          'px-3 flex flex-col overflow-hidden',
-          collapsed ? 'max-h-0' : 'max-h-[512px]',
-        )}
-        style={{ transition: 'max-height 1s ease-in-out' }}
-      >
-        {balances.map((balance) => (
-          <li key={balance.shortenedWalletAddress} className="flex align-top">
-            <span className="text-sm font-bold text-slate-400/90 min-w-[56px]">
-              {`${parseFloat(
-                balance.percentage //
-                  .toFixed(2)
-                  .toString(),
-              ).toLocaleString()}%`}
-            </span>
-
-            <span className="ml-2 text-sm text-slate-100/40 inline-flex min-w-[100px]">
-              {balance.shortenedWalletAddress}
-            </span>
-
-            <div className="ml-4 text-sm text-slate-200/70 flex flex-col items-start">
-              <span>
-                <span className="text-xs">Wallet</span>
-                &nbsp;
-                {balance.balance.toLocaleString()}
-              </span>
-
-              {balance.delegations > 0 && (
-                <span>
-                  <span className="text-xs">Staking</span>
-                  &nbsp;
-                  {balance.delegations.toLocaleString()}
-                </span>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul> */}
     </Container>
   );
 };
