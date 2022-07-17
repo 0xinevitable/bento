@@ -9,13 +9,14 @@ import { WalletBalance } from '../types/balance';
 
 type TokenBalanceItemProps = {
   platform: string;
-  symbol: string;
+  symbol: string | null;
   name: string;
   logo?: string;
   netWorth: number;
   amount: number;
   price: number;
   balances: WalletBalance[];
+  type: string;
   onClick: () => void;
 };
 
@@ -50,7 +51,9 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
         </div>
         <div className="ml-4 min-w-0 flex flex-col flex-1">
           <span className="text-sm text-slate-400/40 flex items-center">
-            <span className="truncate text-slate-400">{info.symbol}</span>
+            <span className="truncate text-slate-400">
+              {info.type === 'nft' ? info.name : info.symbol}
+            </span>
             <InlineBadge>{info.amount.toLocaleString()}</InlineBadge>
           </span>
           <span className="text-xl font-bold text-slate-50/90">

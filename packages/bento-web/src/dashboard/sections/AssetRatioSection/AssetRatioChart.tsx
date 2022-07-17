@@ -21,7 +21,7 @@ const AVAILABLE_COLORS = [
 
 type AssetRatioChartProps = {
   tokenBalances: {
-    symbol: string;
+    symbol: string | null;
     name: string;
     logo?: string;
     tokenAddress?: string;

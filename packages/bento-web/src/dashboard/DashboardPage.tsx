@@ -22,9 +22,9 @@ import { useNFTBalances } from './utils/useNFTBalances';
 import { useWalletBalances } from './utils/useWalletBalances';
 
 const walletBalanceReducer =
-  (symbol: string, callback: (acc: number, balance: WalletBalance) => number) =>
+  (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
   (acc: number, balance: WalletBalance) =>
-    balance.symbol === symbol ? callback(acc, balance) : acc;
+    (balance.symbol ?? balance.name) === key ? callback(acc, balance) : acc;
 
 const DashboardPage = () => {
   const wallets = useRecoilValue(walletsAtom);
@@ -48,7 +48,7 @@ const DashboardPage = () => {
 
         const amount = balances.reduce(
           walletBalanceReducer(
-            first.symbol,
+            first.symbol ?? first.name,
             (acc, balance) =>
               acc +
               balance.balance +
@@ -165,10 +165,11 @@ const DashboardPage = () => {
               <ul className="mt-4 flex flex-wrap gap-2">
                 {renderedTokenBalances.map((info) => (
                   <TokenBalanceItem
-                    key={`${info.symbol}-${
+                    key={`${info.symbol ?? info.name}-${
                       'tokenAddress' in info ? info.tokenAddress : 'native'
                     }`}
                     {...info}
+                    type={info.type ?? 'ft'}
                     onClick={() => {
                       setTokenDetailModalVisible((prev) => !prev);
                       setTokenDetailModalParams({ tokenBalance: info });

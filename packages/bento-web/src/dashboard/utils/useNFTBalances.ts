@@ -102,7 +102,7 @@ export const useNFTBalances = ({ wallets }: Options) => {
                       );
 
                     return {
-                      symbol: first.asset_contract.symbol ?? collection.name,
+                      symbol: first.asset_contract.symbol || null,
                       name: collection.name,
                       walletAddress,
                       balance: groupByCollection[collectionSlug].length,
