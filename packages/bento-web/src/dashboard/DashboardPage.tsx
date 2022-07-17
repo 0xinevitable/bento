@@ -72,6 +72,14 @@ const DashboardPage = () => {
     return tokens.filter((v) => v.netWorth > 0);
   }, [walletBalances, NFTBalances]);
 
+  const [isNFTsShown, setNFTsShown] = useState<boolean>(false);
+  const renderedTokenBalances = useMemo(() => {
+    if (isNFTsShown) {
+      return tokenBalances;
+    }
+    return tokenBalances.filter((v) => v.type !== 'nft');
+  }, [isNFTsShown, tokenBalances]);
+
   const netWorthInUSD = useMemo(
     () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
     [tokenBalances],
@@ -126,25 +134,28 @@ const DashboardPage = () => {
           <Card className="mt-12" style={{ flex: 0 }}>
             <CardTitle>
               <span>Assets</span>
-              {tokenBalances.length > 0 && (
+              {renderedTokenBalances.length > 0 && (
                 <InlineBadge>
-                  {tokenBalances.length.toLocaleString()}
+                  {renderedTokenBalances.length.toLocaleString()}
                 </InlineBadge>
               )}
             </CardTitle>
 
             <div className="mt-3 w-full flex items-center">
-              <div className="flex items-center">
-                <Checkbox />
+              <div
+                className="flex items-center cursor-pointer select-none"
+                onClick={() => setNFTsShown((prev) => !prev)}
+              >
+                <Checkbox checked={isNFTsShown} />
                 <span className="ml-[6px] text-white/80 text-sm">
                   Show NFTs
                 </span>
               </div>
             </div>
 
-            {tokenBalances.length > 0 && (
+            {renderedTokenBalances.length > 0 && (
               <ul className="mt-4 flex flex-wrap gap-2">
-                {tokenBalances.map((info) => (
+                {renderedTokenBalances.map((info) => (
                   <TokenBalanceItem
                     key={`${info.symbol}-${
                       'tokenAddress' in info ? info.tokenAddress : 'native'
