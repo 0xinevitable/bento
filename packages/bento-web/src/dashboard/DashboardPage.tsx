@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
+import { Checkbox } from '@/components/Checkbox';
 import { PageContainer } from '@/components/PageContainer';
 import { walletsAtom } from '@/recoil/wallets';
 
@@ -131,6 +132,16 @@ const DashboardPage = () => {
                 </InlineBadge>
               )}
             </CardTitle>
+
+            <div className="mt-3 w-full flex items-center">
+              <div className="flex items-center">
+                <Checkbox />
+                <span className="ml-[6px] text-white/80 text-sm">
+                  Show NFTs
+                </span>
+              </div>
+            </div>
+
             {tokenBalances.length > 0 && (
               <ul className="mt-4 flex flex-wrap gap-2">
                 {tokenBalances.map((info) => (
