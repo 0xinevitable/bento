@@ -115,7 +115,6 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
 
 const ButtonList = styled.div`
   margin-top: 12px;
-  margin-bottom: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
