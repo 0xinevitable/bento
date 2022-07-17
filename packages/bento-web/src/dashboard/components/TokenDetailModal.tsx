@@ -108,8 +108,8 @@ const TokenHeader = styled.div`
 `;
 
 const TokenImage = styled.img`
-  width: 128px;
-  height: 128px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   object-fit: cover;
 `;
@@ -120,11 +120,13 @@ const TokenInformation = styled.div`
   flex-direction: column;
 `;
 const TokenName = styled.h2`
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   color: white;
 `;
-const TokenSymbol = styled.span``;
+const TokenSymbol = styled.span`
+  font-size: 14px;
+`;
 
 const AssetList = styled.ul`
   margin-top: 16px;
