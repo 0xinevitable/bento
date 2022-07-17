@@ -171,6 +171,8 @@ const DashboardPage = () => {
               </ul>
             )}
           </Card>
+
+          <div className="w-full h-24" />
         </React.Fragment>
       )}
 
