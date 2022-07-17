@@ -46,14 +46,12 @@ export const NavigationBar = () => {
   return (
     <Wrapper>
       <Container>
-        <Link href="/" passHref>
-          <a>
-            <HiddenTitle>Bento</HiddenTitle>
-            <LogoWrapper>
-              <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
-            </LogoWrapper>
-          </a>
-        </Link>
+        <a href="https://bento.finance" target="_blank">
+          <HiddenTitle>Bento</HiddenTitle>
+          <LogoWrapper>
+            <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
+          </LogoWrapper>
+        </a>
 
         {FeatureFlags.isProfileEnabled && (
           <ul className="flex">

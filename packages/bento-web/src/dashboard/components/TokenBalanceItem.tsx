@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
+import { Badge } from '@/components/Badge';
+
 import { PLATFORM_LOGOS } from '../constants/platform';
 import { WalletBalance } from '../types/balance';
 
@@ -71,11 +73,9 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
           />
         </div>
         <div className="ml-4 min-w-0 flex flex-col flex-1">
-          <span className="text-sm truncate text-slate-400/40">
-            <span className="text-slate-400">{info.symbol}</span>
-            <span className="ml-1 text-xs text-slate-400/40">
-              {info.amount.toLocaleString()}
-            </span>
+          <span className="text-sm text-slate-400/40 flex items-center">
+            <span className="truncate text-slate-400">{info.symbol}</span>
+            <InlineBadge>{info.amount.toLocaleString()}</InlineBadge>
           </span>
           <span className="text-xl font-bold text-slate-50/90">
             {`$${info.netWorth.toLocaleString()}`}
@@ -154,4 +154,12 @@ const Container = styled.li`
   img {
     user-select: none;
   }
+`;
+
+const InlineBadge = styled(Badge)`
+  margin-left: 8px;
+  padding: 4px;
+  padding-bottom: 3px;
+  display: inline-flex;
+  font-size: 10px;
 `;

@@ -3,15 +3,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
+import { Badge } from '@/components/Badge';
 import { PageContainer } from '@/components/PageContainer';
 import { walletsAtom } from '@/recoil/wallets';
 
 import { AddWalletModal } from './components/AddWalletModal';
-import { AssetRatioChart } from './components/AssetRatioChart';
-import { AssetRatioListItem } from './components/AssetRatioListItem';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { WalletList } from './components/WalletList';
-import { displayName } from './constants/platform';
+import { AssetRatioSection } from './sections/AssetRatioSection';
 import { IntroSection } from './sections/IntroSection';
 import { WalletBalance } from './types/balance';
 import { useNFTBalances } from './utils/useNFTBalances';
@@ -77,19 +76,6 @@ const DashboardPage = () => {
     [tokenBalances],
   );
 
-  const assetRatioByPlatform = useMemo(() => {
-    const groups = groupBy(tokenBalances, 'platform');
-    return Object.entries(groups).map(([platform, assets]) => {
-      const netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
-      return {
-        platform,
-        netWorth,
-        name: displayName(platform),
-        ratio: (netWorth / netWorthInUSD) * 100,
-      };
-    });
-  }, [netWorthInUSD]);
-
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);
 
@@ -113,29 +99,16 @@ const DashboardPage = () => {
             <Card>
               <CardTitle>Net Worth</CardTitle>
               <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-              <div className="mt-6 w-full flex">
-                <div>
-                  <AssetRatioChart
-                    tokenBalances={tokenBalances}
-                    netWorthInUSD={netWorthInUSD}
-                  />
-                </div>
-                {assetRatioByPlatform.length && (
-                  <AssetCardList className="flex-1">
-                    {assetRatioByPlatform.map((item) => (
-                      <AssetRatioListItem key={item.platform} {...item} />
-                    ))}
-                  </AssetCardList>
-                )}
-              </div>
+              <AssetRatioSection
+                netWorthInUSD={netWorthInUSD}
+                tokenBalances={tokenBalances}
+              />
             </Card>
             <Card className="max-w-[400px]">
               <CardTitle>
-                Wallets
+                <span>Wallets</span>
                 {wallets.length > 0 && (
-                  <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                    {`(${wallets.length.toLocaleString()})`}
-                  </span>
+                  <InlineBadge>{wallets.length.toLocaleString()}</InlineBadge>
                 )}
               </CardTitle>
 
@@ -151,11 +124,11 @@ const DashboardPage = () => {
 
           <Card className="mt-12" style={{ flex: 0 }}>
             <CardTitle>
-              Assets
+              <span>Assets</span>
               {tokenBalances.length > 0 && (
-                <span className="ml-1 text-slate-50/80 text-[#88a9ca]">
-                  {`(${tokenBalances.length.toLocaleString()})`}
-                </span>
+                <InlineBadge>
+                  {tokenBalances.length.toLocaleString()}
+                </InlineBadge>
               )}
             </CardTitle>
             {tokenBalances.length > 0 && (
@@ -232,22 +205,14 @@ const CardTitle = styled.h2`
   font-size: 18px;
   line-height: 100%;
   color: #ffffff;
-`;
-
-const AssetCardList = styled.ul`
-  margin: 0;
-  margin-left: 20px;
-  padding: 10px 12px;
-  width: 100%;
-  height: fit-content;
 
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  align-items: center;
+`;
 
-  background: #16181a;
-  background: linear-gradient(145deg, #141617, #181a1c);
-  border: 1px solid #2a2e31;
-  box-shadow: inset 5px 5px 16px #0b0c0e, inset -5px -5px 16px #212426;
-  border-radius: 8px;
+const InlineBadge = styled(Badge)`
+  margin-left: 8px;
+  padding: 6px;
+  display: inline-flex;
+  font-size: 13px;
 `;
