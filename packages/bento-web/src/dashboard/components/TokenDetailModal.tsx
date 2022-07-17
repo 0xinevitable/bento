@@ -1,7 +1,7 @@
 import { OpenSeaAsset } from '@bento/client';
 import clsx from 'clsx';
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { Portal } from '@/components/Portal';
@@ -62,14 +62,33 @@ export const TokenDetailModal: React.FC<Props> = ({
 
             {tokenBalance.type === 'nft' && (
               <AssetList>
-                {assets.map((asset) => (
-                  <AssetListItem key={asset.id}>
-                    <AssetImage src={asset.image_url} />
-                    <AssetName className="text-sm text-gray-400">
-                      {asset.name || `#${asset.id}`}
-                    </AssetName>
-                  </AssetListItem>
-                ))}
+                {assets.map((asset) => {
+                  const isVideo =
+                    !!asset.animation_url ||
+                    asset.image_url.toLowerCase().endsWith('.mp4');
+
+                  return (
+                    <AssetListItem key={asset.id}>
+                      {!isVideo ? (
+                        <AssetImage src={asset.image_url} />
+                      ) : (
+                        <AssetVideo
+                          src={asset.animation_url}
+                          poster={asset.image_url || asset.image_preview_url}
+                          width={98}
+                          height={98}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                        />
+                      )}
+                      <AssetName className="text-sm text-gray-400">
+                        {asset.name || `#${asset.id}`}
+                      </AssetName>
+                    </AssetListItem>
+                  );
+                })}
               </AssetList>
             )}
           </Content>
@@ -150,10 +169,16 @@ const AssetName = styled.span`
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
-const AssetImage = styled.img`
+const assetMediaStyle = css`
   width: 182px;
   height: 182px;
   object-fit: cover;
   border-radius: 8px;
   background-color: black;
+`;
+const AssetImage = styled.img`
+  ${assetMediaStyle}
+`;
+const AssetVideo = styled.video`
+  ${assetMediaStyle}
 `;
