@@ -1,5 +1,4 @@
 import { OpenSeaAsset } from '@bento/client';
-import clsx from 'clsx';
 import React, { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
