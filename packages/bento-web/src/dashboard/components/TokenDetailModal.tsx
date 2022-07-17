@@ -9,7 +9,7 @@ import { WalletBalance } from '../types/balance';
 
 export type TokenDetailModalParams = {
   tokenBalance?: {
-    symbol: string;
+    symbol: string | null;
     name: string;
     logo?: string;
     tokenAddress?: string;
@@ -18,6 +18,9 @@ export type TokenDetailModalParams = {
     amount: number;
     price: number;
     type?: 'nft';
+
+    // TODO: Add proper types
+    assets?: any[];
   };
 };
 type Props = TokenDetailModalParams & {
@@ -38,16 +41,19 @@ export const TokenDetailModal: React.FC<Props> = ({
         transition={{ ease: 'linear' }}
       >
         {!tokenBalance ? null : (
-          <div
-            className={clsx(
-              'p-4 h-fit overflow-hidden',
-              'flex flex-col gap-8',
-              'border border-slate-800 rounded-md drop-shadow-2xl',
-              'bg-slate-800/5 backdrop-blur-md flex flex-col cursor-pointer',
-            )}
-          >
-            <img src={tokenBalance.logo} />
-          </div>
+          <Content>
+            <TokenHeader>
+              <TokenImage src={tokenBalance.logo} />
+              <TokenInformation>
+                <TokenName>{tokenBalance.name}</TokenName>
+                {tokenBalance.symbol !== null && (
+                  <TokenSymbol className="text-gray-400">
+                    {`$${tokenBalance.symbol}`}
+                  </TokenSymbol>
+                )}
+              </TokenInformation>
+            </TokenHeader>
+          </Content>
         )}
       </OverlayWrapper>
     </Portal>
@@ -64,3 +70,39 @@ const OverlayWrapper = styled(Modal)`
     user-select: none;
   }
 `;
+const Content = styled.div`
+  padding: 16px;
+  max-width: 800px;
+  width: 95vw;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #323232;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.45);
+`;
+const TokenHeader = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const TokenImage = styled.img`
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+`;
+
+const TokenInformation = styled.div`
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+`;
+const TokenName = styled.h2`
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+`;
+const TokenSymbol = styled.span``;
