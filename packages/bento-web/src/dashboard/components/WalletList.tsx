@@ -43,7 +43,7 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
         {renderedWallets.map((wallet) => (
           <li className="py-2 flex items-center" key={wallet.address}>
             <img
-              className="w-10 min-w-[40px] h-10 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25"
+              className="w-10 min-w-[40px] h-10 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25 select-none"
               src={WALLET_TYPES[wallet.type].logo}
             />
             <div className="ml-2 flex flex-col flex-1">
@@ -125,6 +125,7 @@ const ShowAllButton = styled.button`
   background: #121a32;
   border: 1px solid #020322;
   border-radius: 8px;
+  user-select: none;
 
   font-weight: 500;
   font-size: 12px;
@@ -144,6 +145,7 @@ const Button = styled.button`
   padding: 8px 20px;
   width: fit-content;
   cursor: pointer;
+  user-select: none;
 
   border-radius: 8px;
   border: 1px solid rgba(255, 165, 165, 0.4);

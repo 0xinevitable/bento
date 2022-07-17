@@ -46,6 +46,7 @@ const PlatformLogo = styled.img`
   height: 24px;
   border-radius: 50%;
   object-fit: cover;
+  user-select: none;
 `;
 const Information = styled.div`
   display: flex;
