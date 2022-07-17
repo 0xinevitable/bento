@@ -15,14 +15,15 @@ export const AssetRatioListItem: React.FC<AssetRatioListItemProps> = (
 ) => {
   return (
     <Container>
-      <PlatformLogo
-        src={PLATFORM_LOGOS[props.platform as keyof typeof PLATFORM_LOGOS]}
-        alt={props.name}
-      />
+      <ProtocolHeader>
+        <PlatformLogo
+          src={PLATFORM_LOGOS[props.platform as keyof typeof PLATFORM_LOGOS]}
+          alt={props.name}
+        />
+        <ProtocolName>{props.name}</ProtocolName>
+      </ProtocolHeader>
 
       <Information>
-        <ProtocolName>{props.name}</ProtocolName>
-
         <ProtocolRatio>
           {`${props.ratio.toLocaleString(undefined, {
             maximumFractionDigits: 2,
@@ -38,6 +39,12 @@ const Container = styled.li`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+`;
+const ProtocolHeader = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 const PlatformLogo = styled.img`
@@ -46,17 +53,22 @@ const PlatformLogo = styled.img`
   height: 24px;
   border-radius: 50%;
   object-fit: cover;
+  user-select: none;
 `;
-const Information = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex: 1;
-`;
-
 const ProtocolName = styled.label`
   color: rgba(255, 255, 255, 0.65);
   font-weight: 500;
   font-size: 14px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
+const Information = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 `;
 const ProtocolRatio = styled.span`
   font-weight: 500;

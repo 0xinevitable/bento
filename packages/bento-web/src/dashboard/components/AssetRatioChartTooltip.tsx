@@ -32,6 +32,10 @@ const Container = styled.div`
   padding: 12px;
   display: flex;
   align-items: center;
+
+  * {
+    user-select: none;
+  }
 `;
 
 const Information = styled.div`

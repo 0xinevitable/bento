@@ -66,7 +66,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = (info) => {
             alt={info.name}
           />
           <img
-            className="w-6 h-6 absolute bottom-[-8px] left-[-8px] rounded-full ring-1 ring-black/40"
+            className="w-6 h-6 absolute bottom-[-8px] left-[-8px] rounded-full ring-2 ring-black/20"
             src={platformURL}
           />
         </div>
@@ -149,5 +149,9 @@ const Container = styled.li`
 
   @media screen and (max-width: 537px) {
     width: 100%;
+  }
+
+  img {
+    user-select: none;
   }
 `;

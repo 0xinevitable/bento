@@ -109,11 +109,11 @@ const DashboardPage = () => {
         />
       ) : (
         <React.Fragment>
-          <div className="mt-6 flex w-full min-h-[345px] gap-6">
+          <div className="mt-6 flex w-full gap-6">
             <Card>
               <CardTitle>Net Worth</CardTitle>
               <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-              <div className="w-full flex">
+              <div className="mt-6 w-full flex">
                 <div>
                   <AssetRatioChart
                     tokenBalances={tokenBalances}
@@ -213,10 +213,15 @@ const TopRightBlur = styled.img`
 
 const Card = styled.section`
   padding: 24px;
-  background: rgba(30, 29, 34, 0.44);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  height: fit-content;
+
   flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(30, 29, 34, 0.44);
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1ㅌ), 0 2px 8px #191722;
 `;
 const CardTitle = styled.h2`
