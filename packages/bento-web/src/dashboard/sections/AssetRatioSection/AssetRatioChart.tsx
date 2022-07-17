@@ -2,8 +2,9 @@ import { useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled from 'styled-components';
 
-import { PLATFORM_LOGOS } from '../constants/platform';
-import { WalletBalance } from '../types/balance';
+import { PLATFORM_LOGOS } from '@/dashboard/constants/platform';
+import { WalletBalance } from '@/dashboard/types/balance';
+
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
 
 const CHART_SIZE = 240;

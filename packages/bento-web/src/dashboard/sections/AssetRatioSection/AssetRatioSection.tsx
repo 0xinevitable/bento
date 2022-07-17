@@ -2,10 +2,11 @@ import groupBy from 'lodash.groupby';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { AssetRatioChart } from '../components/AssetRatioChart';
-import { AssetRatioListItem } from '../components/AssetRatioListItem';
-import { displayName } from '../constants/platform';
-import { WalletBalance } from '../types/balance';
+import { displayName } from '@/dashboard/constants/platform';
+import { WalletBalance } from '@/dashboard/types/balance';
+
+import { AssetRatioChart } from './AssetRatioChart';
+import { AssetRatioListItem } from './AssetRatioListItem';
 
 type AssetRatioSectionProps = {
   netWorthInUSD: number;

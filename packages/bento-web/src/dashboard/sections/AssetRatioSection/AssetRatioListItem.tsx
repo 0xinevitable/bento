@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { PLATFORM_LOGOS } from '../constants/platform';
+import { PLATFORM_LOGOS } from '@/dashboard/constants/platform';
 
 type AssetRatioListItemProps = {
   platform: string;
