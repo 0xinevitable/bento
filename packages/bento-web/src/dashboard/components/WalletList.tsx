@@ -13,6 +13,8 @@ import { walletsAtom } from '@/recoil/wallets';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
 
+import { NETWORKS } from './AddWalletModal';
+
 type WalletListProps = {
   onClickConnect?: () => void;
 };
@@ -80,13 +82,13 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
                         key={network}
                         className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60"
                       >
-                        {network}
+                        {NETWORKS.find((v) => v.id === network)?.name}
                       </span>
                     ),
                   )
                 ) : (
                   <span className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60">
-                    solana
+                    Solana
                   </span>
                 )}
               </div>
