@@ -135,8 +135,19 @@ const AssetList = styled.ul`
   flex-wrap: wrap;
   gap: 12px;
 `;
-const AssetListItem = styled.li``;
-const AssetName = styled.span``;
+const AssetListItem = styled.li`
+  width: 182px;
+
+  display: flex;
+  flex-direction: column;
+`;
+const AssetName = styled.span`
+  margin-top: 4px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
 const AssetImage = styled.img`
   width: 182px;
   height: 182px;
