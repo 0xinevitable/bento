@@ -10,6 +10,10 @@ import { walletsAtom } from '@/recoil/wallets';
 
 import { AddWalletModal } from './components/AddWalletModal';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
+import {
+  TokenDetailModal,
+  TokenDetailModalParams,
+} from './components/TokenDetailModal';
 import { WalletList } from './components/WalletList';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { IntroSection } from './sections/IntroSection';
@@ -87,6 +91,10 @@ const DashboardPage = () => {
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);
+  const [isTokenDetailModalVisible, setTokenDetailModalVisible] =
+    useState<boolean>(false);
+  const [tokenDetailModalParams, setTokenDetailModalParams] =
+    useState<TokenDetailModalParams>({});
 
   const [pageLoaded, setPageLoaded] = useState<boolean>(false);
   useEffect(() => setPageLoaded(true), []);
@@ -161,6 +169,10 @@ const DashboardPage = () => {
                       'tokenAddress' in info ? info.tokenAddress : 'native'
                     }`}
                     {...info}
+                    onClick={() => {
+                      setTokenDetailModalVisible((prev) => !prev);
+                      setTokenDetailModalParams({ tokenBalance: info });
+                    }}
                   />
                 ))}
               </ul>
@@ -174,6 +186,14 @@ const DashboardPage = () => {
       <AddWalletModal
         visible={isAddWalletModalVisible}
         onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
+      />
+      <TokenDetailModal
+        visible={isTokenDetailModalVisible}
+        onDismiss={() => {
+          setTokenDetailModalVisible((prev) => !prev);
+          setTokenDetailModalParams({});
+        }}
+        {...tokenDetailModalParams}
       />
     </PageContainer>
   );
