@@ -215,4 +215,5 @@ const InlineBadge = styled(Badge)`
   padding: 6px;
   display: inline-flex;
   font-size: 13px;
+  backdrop-filter: none;
 `;
