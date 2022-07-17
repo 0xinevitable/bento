@@ -1,31 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export const useLocalStorage = <T>(
   key: string,
   defaultValue?: T,
-): [T | undefined | null, (value?: T | null) => void] => {
-  const [storedValue, setStoredValue] = useState<T | undefined | null>(
-    undefined,
+): [T | undefined, (value: T) => void] => {
+  const [currentState, setCurrentState] = useState<T | undefined>(() => {
+    if (typeof localStorage === 'undefined') {
+      return undefined;
+    }
+
+    const storedJson = localStorage.getItem(key);
+    return storedJson ? JSON.parse(storedJson) : defaultValue;
+  });
+
+  const setState = useCallback(
+    (value: T) => {
+      const savedValue = JSON.stringify(value);
+
+      localStorage.setItem(key, savedValue);
+      setCurrentState(value);
+    },
+    [key],
   );
 
-  useEffect(() => {
-    const storeParsedValue = () => {
-      const value = window.localStorage.getItem(key);
-      if (value === null && defaultValue !== undefined) {
-        setStoredValue(defaultValue);
-        return;
-      }
-      setStoredValue(value ? JSON.parse(value) : null);
-    };
-
-    storeParsedValue();
-  }, []);
-
-  const setValue = (value?: T | null) => {
-    const valueToStore = value instanceof Function ? value(storedValue) : value;
-    setStoredValue(valueToStore);
-    window.localStorage.setItem(key, JSON.stringify(valueToStore));
-  };
-
-  return [storedValue || defaultValue, setValue];
+  return [currentState, setState];
 };

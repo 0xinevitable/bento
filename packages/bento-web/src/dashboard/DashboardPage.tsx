@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Badge } from '@/components/Badge';
 import { Checkbox } from '@/components/Checkbox';
 import { PageContainer } from '@/components/PageContainer';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { walletsAtom } from '@/recoil/wallets';
 
 import { AddWalletModal } from './components/AddWalletModal';
@@ -72,7 +73,10 @@ const DashboardPage = () => {
     return tokens.filter((v) => v.netWorth > 0);
   }, [walletBalances, NFTBalances]);
 
-  const [isNFTsShown, setNFTsShown] = useState<boolean>(false);
+  const [isNFTsShown, setNFTsShown] = useLocalStorage<boolean>(
+    '@is-nfts-shown-v1',
+    true,
+  );
   const renderedTokenBalances = useMemo(() => {
     if (isNFTsShown) {
       return tokenBalances;
@@ -144,9 +148,9 @@ const DashboardPage = () => {
             <div className="mt-3 w-full flex items-center">
               <div
                 className="flex items-center cursor-pointer select-none"
-                onClick={() => setNFTsShown((prev) => !prev)}
+                onClick={() => setNFTsShown(!isNFTsShown)}
               >
-                <Checkbox checked={isNFTsShown} />
+                <Checkbox checked={isNFTsShown ?? false} readOnly />
                 <span className="ml-[6px] text-white/80 text-sm">
                   Show NFTs
                 </span>
