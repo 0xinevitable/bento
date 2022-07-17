@@ -72,7 +72,7 @@ const DashboardPage = () => {
     return tokens.filter((v) => v.netWorth > 0);
   }, [walletBalances, NFTBalances]);
 
-  const [isNFTsShown, setNFTsShown] = useState<boolean>(false);
+  const [isNFTsShown, setNFTsShown] = useState<boolean>(true);
   const renderedTokenBalances = useMemo(() => {
     if (isNFTsShown) {
       return tokenBalances;
