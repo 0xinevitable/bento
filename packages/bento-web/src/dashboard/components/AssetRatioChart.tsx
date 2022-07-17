@@ -127,7 +127,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
 
 const ChartContainer = styled.div`
   width: 100%;
-  height: 300px;
+  height: ${CHART_SIZE}px;
 
   position: relative;
 

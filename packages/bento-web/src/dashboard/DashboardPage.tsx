@@ -109,11 +109,11 @@ const DashboardPage = () => {
         />
       ) : (
         <React.Fragment>
-          <div className="mt-6 flex w-full min-h-[345px] gap-6">
+          <div className="mt-6 flex w-full gap-6">
             <Card>
               <CardTitle>Net Worth</CardTitle>
               <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-              <div className="w-full flex">
+              <div className="mt-4 w-full flex">
                 <div>
                   <AssetRatioChart
                     tokenBalances={tokenBalances}
