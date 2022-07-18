@@ -12,7 +12,7 @@ import {
   CosmosSDKWalletBalance,
   EVMWalletBalance,
   SolanaWalletBalance,
-} from '../types/balance';
+} from '../types/WalletBalance';
 
 type Key = string;
 type Address = string;

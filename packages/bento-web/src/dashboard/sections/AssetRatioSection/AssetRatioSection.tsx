@@ -3,24 +3,14 @@ import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { displayName } from '@/dashboard/constants/platform';
-import { WalletBalance } from '@/dashboard/types/balance';
+import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 import { AssetRatioChart } from './AssetRatioChart';
 import { AssetRatioListItem } from './AssetRatioListItem';
 
 type AssetRatioSectionProps = {
   netWorthInUSD: number;
-  tokenBalances: {
-    symbol: string | null;
-    name: string;
-    logo?: string;
-    tokenAddress?: string;
-    balances: WalletBalance[];
-    netWorth: number;
-    amount: number;
-    price: number;
-    type?: 'nft';
-  }[];
+  tokenBalances: DashboardTokenBalance[];
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
