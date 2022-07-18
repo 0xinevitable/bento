@@ -5,24 +5,16 @@ import styled from 'styled-components';
 import { Badge } from '@/components/Badge';
 
 import { PLATFORM_LOGOS } from '../constants/platform';
-import { WalletBalance } from '../types/WalletBalance';
+import { TokenBalance } from '../types/TokenBalance';
 
 type TokenBalanceItemProps = {
-  platform: string;
-  symbol: string | null;
-  name: string;
-  logo?: string;
-  netWorth: number;
-  amount: number;
-  price: number;
-  balances: WalletBalance[];
-  type: string;
+  tokenBalance: TokenBalance;
   onClick: () => void;
 };
 
 export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
+  tokenBalance: info,
   onClick,
-  ...info
 }) => {
   const platformURL = useMemo(
     () => PLATFORM_LOGOS[info.platform as keyof typeof PLATFORM_LOGOS],

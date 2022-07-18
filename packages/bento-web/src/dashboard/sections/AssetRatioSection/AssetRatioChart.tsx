@@ -3,7 +3,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled from 'styled-components';
 
 import { PLATFORM_LOGOS } from '@/dashboard/constants/platform';
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { TokenBalance } from '@/dashboard/types/TokenBalance';
 
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
 
@@ -20,17 +20,7 @@ const AVAILABLE_COLORS = [
 ];
 
 type AssetRatioChartProps = {
-  tokenBalances: {
-    symbol: string | null;
-    name: string;
-    logo?: string;
-    tokenAddress?: string;
-    balances: WalletBalance[];
-    netWorth: number;
-    amount: number;
-    price: number;
-    type?: 'nft';
-  }[];
+  tokenBalances: TokenBalance[];
   netWorthInUSD: number;
 };
 
