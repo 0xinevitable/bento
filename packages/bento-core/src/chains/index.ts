@@ -13,6 +13,7 @@ import {
   BNB_TOKENS,
   ETHEREUM_TOKENS,
   KLAYTN_TOKENS,
+  OSMOSIS_MAINNET_ASSETLIST,
   POLYGON_TOKENS,
   SOLANA_TOKENS,
   TokenInput,
@@ -701,10 +702,13 @@ export class CosmosHubChain implements CosmosSDKBasedChain {
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
 
-  getBalance = async (address: string) => {
-    const { data } = await this._provider.get<CosmosSDKBasedBalanceResponse>(
+  _getBalances = withCache(async (address: string) =>
+    this._provider.get<CosmosSDKBasedBalanceResponse>(
       `/cosmos/bank/v1beta1/balances/${address}`,
-    );
+    ),
+  );
+  getBalance = async (address: string) => {
+    const { data } = await this._getBalances(address);
     const coinBalance =
       data.balances.find((v) => v.denom === this.currency.coinMinimalDenom)
         ?.amount ?? 0;
@@ -721,6 +725,11 @@ export class CosmosHubChain implements CosmosSDKBasedChain {
       0,
     );
     return totalDelegated / 10 ** this.currency.decimals;
+  };
+  getTokenBalances = async (_address: string) => {
+    // const { data } = await this._getBalances(address);
+    // return data.balances as any;
+    return [];
   };
 }
 
@@ -742,10 +751,13 @@ export class OsmosisChain implements CosmosSDKBasedChain {
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
 
-  getBalance = async (address: string) => {
-    const { data } = await this._provider.get<CosmosSDKBasedBalanceResponse>(
+  _getBalances = withCache(async (address: string) =>
+    this._provider.get<CosmosSDKBasedBalanceResponse>(
       `/cosmos/bank/v1beta1/balances/${address}`,
-    );
+    ),
+  );
+  getBalance = async (address: string) => {
+    const { data } = await this._getBalances(address);
     const coinBalance =
       data.balances.find((v) => v.denom === this.currency.coinMinimalDenom)
         ?.amount ?? 0;
@@ -763,5 +775,50 @@ export class OsmosisChain implements CosmosSDKBasedChain {
       0,
     );
     return totalDelegated / 10 ** this.currency.decimals;
+  };
+  getTokenBalances = async (walletAddress: string) => {
+    const { data } = await this._getBalances(walletAddress);
+    return data.balances.flatMap((asset) => {
+      if (asset.denom === this.currency.coinMinimalDenom) {
+        return [];
+      }
+      const knownAsset = OSMOSIS_MAINNET_ASSETLIST.assets.find(
+        (item) => item.base === asset.denom,
+      );
+      if (!knownAsset) {
+        return [];
+      }
+
+      const decimals =
+        knownAsset.denom_units.find((v) => v.denom === knownAsset.display)
+          ?.exponent ?? this.currency.decimals;
+      const balance =
+        typeof asset.amount === 'string'
+          ? Number(asset.amount) / 10 ** decimals
+          : 0;
+      if (balance <= 0) {
+        return [];
+      }
+
+      const getPrice = () => {
+        if (knownAsset.coingecko_id) {
+          return undefined;
+        }
+        return 0;
+      };
+      const price = getPrice();
+
+      return {
+        walletAddress,
+        platform: 'osmosis',
+        name: knownAsset.name,
+        symbol: knownAsset.symbol,
+        decimals,
+        logo: knownAsset.logo_URIs.png,
+        coinGeckoId: knownAsset.coingecko_id,
+        balance,
+        price,
+      };
+    });
   };
 }

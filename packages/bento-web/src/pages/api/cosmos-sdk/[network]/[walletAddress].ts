@@ -5,6 +5,7 @@ import {
   CosmosHubChain,
   CosmosSDKBasedChain,
   OsmosisChain,
+  TokenBalance,
 } from '@bento/core/lib/chains';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -54,23 +55,32 @@ export default async (req: APIRequest, res: NextApiResponse) => {
           const chainBech32Address = bech32Address.toBech32(
             chain.bech32Config.prefix,
           );
-          const [balance, delegations] = await safePromiseAll([
+
+          const getTokenBalances = async (): Promise<TokenBalance[]> =>
+            'getTokenBalances' in chain
+              ? chain.getTokenBalances?.(chainBech32Address) ?? []
+              : [];
+          const [balance, delegations, tokenBalances] = await Promise.all([
             chain.getBalance(chainBech32Address).catch(() => 0),
             chain.getDelegations(chainBech32Address).catch(() => 0),
+            getTokenBalances(),
           ]);
 
-          return {
-            walletAddress: chainBech32Address,
-            platform: network,
+          return [
+            {
+              walletAddress: chainBech32Address,
+              platform: network,
 
-            symbol: chain.currency.symbol,
-            name: chain.currency.name,
-            logo: chain.currency.logo,
-            coinGeckoId: chain.currency.coinGeckoId,
-            balance,
-            delegations,
-            price: undefined,
-          };
+              symbol: chain.currency.symbol,
+              name: chain.currency.name,
+              logo: chain.currency.logo,
+              coinGeckoId: chain.currency.coinGeckoId,
+              balance,
+              delegations,
+              price: undefined,
+            },
+            ...tokenBalances,
+          ];
         }
         return [];
       }),

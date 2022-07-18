@@ -1,10 +1,11 @@
 import { Currency } from '../pricings/Currency';
 import { TokenInput } from '../tokens';
 
-export interface TokenBalance extends TokenInput {
+export interface TokenBalance extends Omit<TokenInput, 'address'> {
   walletAddress: string;
   balance: number;
-  price: number;
+  price?: number;
+  address?: string;
 }
 
 export interface Chain {
