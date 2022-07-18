@@ -701,10 +701,13 @@ export class CosmosHubChain implements CosmosSDKBasedChain {
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
 
-  getBalance = async (address: string) => {
-    const { data } = await this._provider.get<CosmosSDKBasedBalanceResponse>(
+  _getBalances = withCache(async (address: string) =>
+    this._provider.get<CosmosSDKBasedBalanceResponse>(
       `/cosmos/bank/v1beta1/balances/${address}`,
-    );
+    ),
+  );
+  getBalance = async (address: string) => {
+    const { data } = await this._getBalances(address);
     const coinBalance =
       data.balances.find((v) => v.denom === this.currency.coinMinimalDenom)
         ?.amount ?? 0;
@@ -742,10 +745,13 @@ export class OsmosisChain implements CosmosSDKBasedChain {
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
 
-  getBalance = async (address: string) => {
-    const { data } = await this._provider.get<CosmosSDKBasedBalanceResponse>(
+  _getBalances = withCache(async (address: string) =>
+    this._provider.get<CosmosSDKBasedBalanceResponse>(
       `/cosmos/bank/v1beta1/balances/${address}`,
-    );
+    ),
+  );
+  getBalance = async (address: string) => {
+    const { data } = await this._getBalances(address);
     const coinBalance =
       data.balances.find((v) => v.denom === this.currency.coinMinimalDenom)
         ?.amount ?? 0;
