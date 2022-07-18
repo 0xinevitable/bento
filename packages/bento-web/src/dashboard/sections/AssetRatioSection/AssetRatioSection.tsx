@@ -3,14 +3,14 @@ import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { displayName } from '@/dashboard/constants/platform';
-import { TokenBalance } from '@/dashboard/types/TokenBalance';
+import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 import { AssetRatioChart } from './AssetRatioChart';
 import { AssetRatioListItem } from './AssetRatioListItem';
 
 type AssetRatioSectionProps = {
   netWorthInUSD: number;
-  tokenBalances: TokenBalance[];
+  tokenBalances: DashboardTokenBalance[];
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,

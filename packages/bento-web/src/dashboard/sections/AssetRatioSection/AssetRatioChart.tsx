@@ -3,7 +3,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled from 'styled-components';
 
 import { PLATFORM_LOGOS } from '@/dashboard/constants/platform';
-import { TokenBalance } from '@/dashboard/types/TokenBalance';
+import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
 
@@ -20,7 +20,7 @@ const AVAILABLE_COLORS = [
 ];
 
 type AssetRatioChartProps = {
-  tokenBalances: TokenBalance[];
+  tokenBalances: DashboardTokenBalance[];
   netWorthInUSD: number;
 };
 

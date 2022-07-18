@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import { Badge } from '@/components/Badge';
 
 import { PLATFORM_LOGOS } from '../constants/platform';
-import { TokenBalance } from '../types/TokenBalance';
+import { DashboardTokenBalance } from '../types/TokenBalance';
 
 type TokenBalanceItemProps = {
-  tokenBalance: TokenBalance;
+  tokenBalance: DashboardTokenBalance;
   onClick: () => void;
 };
 

@@ -18,7 +18,7 @@ import {
 import { WalletList } from './components/WalletList';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { IntroSection } from './sections/IntroSection';
-import { TokenBalance } from './types/TokenBalance';
+import { DashboardTokenBalance } from './types/TokenBalance';
 import { WalletBalance } from './types/WalletBalance';
 import { useNFTBalances } from './utils/useNFTBalances';
 import { useWalletBalances } from './utils/useWalletBalances';
@@ -33,7 +33,7 @@ const DashboardPage = () => {
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: NFTBalances } = useNFTBalances({ wallets });
 
-  const tokenBalances = useMemo<TokenBalance[]>(() => {
+  const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
     // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
     const balancesByPlatform = Object.entries(

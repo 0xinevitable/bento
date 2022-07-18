@@ -1,6 +1,6 @@
 import { WalletBalance } from './WalletBalance';
 
-export type TokenBalance = {
+export type DashboardTokenBalance = {
   symbol: string | null;
   name: string;
   logo?: string;
