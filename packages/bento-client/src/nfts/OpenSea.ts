@@ -10,8 +10,11 @@ export type OpenSeaAsset = {
   token_id: string;
   num_sales: number;
   background_color: null;
+
   image_url: string;
   image_preview_url: string;
+  animation_url: string;
+
   name: string;
   description: string;
 
@@ -21,6 +24,10 @@ export type OpenSeaAsset = {
     image_url: string;
     description: string;
     banner_image_url: string;
+  };
+
+  asset_contract: {
+    symbol: string | '';
   };
 };
 
