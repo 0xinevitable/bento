@@ -25,9 +25,11 @@ export const AssetRatioListItem: React.FC<AssetRatioListItemProps> = (
 
       <Information>
         <ProtocolRatio>
-          {`${props.ratio.toLocaleString(undefined, {
-            maximumFractionDigits: 2,
-          })}%`}
+          <span className="ratio">
+            {`${props.ratio.toLocaleString(undefined, {
+              maximumFractionDigits: 2,
+            })}%`}
+          </span>
 
           <strong>{`$${props.netWorth.toLocaleString()}`}</strong>
         </ProtocolRatio>
@@ -84,5 +86,11 @@ const ProtocolRatio = styled.span`
 
   &:not(:last-of-type) {
     margin-bottom: 6px;
+  }
+
+  @media screen and (max-width: 340px) {
+    & > span.ratio {
+      display: none;
+    }
   }
 `;

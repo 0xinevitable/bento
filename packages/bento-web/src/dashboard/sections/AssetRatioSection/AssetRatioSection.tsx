@@ -32,7 +32,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   }, [netWorthInUSD]);
 
   return (
-    <div className="mt-6 w-full flex">
+    <Container>
       <div>
         <AssetRatioChart
           tokenBalances={tokenBalances}
@@ -46,10 +46,24 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
           ))}
         </AssetCardList>
       )}
-    </div>
+    </Container>
   );
 };
 
+const Container = styled.div`
+  margin-top: 24px;
+  width: 100%;
+  display: flex;
+
+  @media screen and (max-width: 640px) {
+    flex-direction: column;
+
+    & > ul {
+      margin-top: 24px;
+      margin-left: 0;
+    }
+  }
+`;
 const AssetCardList = styled.ul`
   margin: 0;
   margin-left: 20px;

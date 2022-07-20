@@ -117,7 +117,7 @@ const DashboardPage = () => {
         />
       ) : (
         <React.Fragment>
-          <div className="mt-6 flex w-full gap-6">
+          <TopSummaryContainer>
             <Card>
               <CardTitle>Net Worth</CardTitle>
               <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
@@ -144,7 +144,7 @@ const DashboardPage = () => {
                 />
               )}
             </Card>
-          </div>
+          </TopSummaryContainer>
 
           <Card className="mt-12" style={{ flex: 0 }}>
             <CardTitle>
@@ -236,6 +236,28 @@ const TopRightBlur = styled.img`
   user-select: none;
 `;
 
+const TopSummaryContainer = styled.div`
+  margin-top: 24px;
+  display: flex;
+  width: 100%;
+  gap: 24px;
+
+  @media screen and (max-width: 1180px) {
+    gap: 16px;
+  }
+
+  @media screen and (max-width: 940px) {
+    flex-direction: column;
+
+    & section {
+      /* && { */
+      max-width: unset;
+      width: 100%;
+      /* } */
+    }
+  }
+`;
+
 const Card = styled.section`
   padding: 24px;
   height: fit-content;
@@ -247,7 +269,15 @@ const Card = styled.section`
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background-color: rgba(30, 29, 34, 0.44);
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1ㅌ), 0 2px 8px #191722;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1), 0 2px 8px #191722;
+
+  @media screen and (max-width: 400px) {
+    padding: 20px;
+  }
+
+  @media screen and (max-width: 340px) {
+    padding: 16px;
+  }
 `;
 const CardTitle = styled.h2`
   margin: 0;
