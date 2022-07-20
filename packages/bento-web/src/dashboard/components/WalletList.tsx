@@ -5,6 +5,7 @@ import {
 } from '@bento/common';
 import { shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
+import clsx from 'clsx';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -16,10 +17,14 @@ import { toast } from '@/utils/toast';
 import { NETWORKS } from './AddWalletModal';
 
 type WalletListProps = {
+  className?: string;
   onClickConnect?: () => void;
 };
 
-export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
+export const WalletList: React.FC<WalletListProps> = ({
+  className,
+  onClickConnect,
+}) => {
   const [wallets, setWallets] = useRecoilState(walletsAtom);
   const [collapsed, setCollapsed] = useState<boolean>(true);
 
@@ -39,7 +44,7 @@ export const WalletList: React.FC<WalletListProps> = ({ onClickConnect }) => {
 
   return (
     <React.Fragment>
-      <ul className="flex flex-col">
+      <ul className={clsx('flex flex-col', className)}>
         {renderedWallets.map((wallet) => (
           <li className="py-2 flex items-center" key={wallet.address}>
             <img

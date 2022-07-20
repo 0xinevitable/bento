@@ -1,3 +1,5 @@
+import { Icon } from '@iconify/react';
+import clsx from 'clsx';
 import groupBy from 'lodash.groupby';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -7,6 +9,7 @@ import { Badge } from '@/components/Badge';
 import { Checkbox } from '@/components/Checkbox';
 import { PageContainer } from '@/components/PageContainer';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useWindowSize } from '@/hooks/useWindowSize';
 import { walletsAtom } from '@/recoil/wallets';
 
 import { AddWalletModal } from './components/AddWalletModal';
@@ -106,6 +109,11 @@ const DashboardPage = () => {
 
   const hasWallet = wallets.length > 0;
 
+  const [isWalletListOpen, setWalletListOpen] = useState<boolean>(false);
+  const { width: screenWidth } = useWindowSize();
+  const isMobile = screenWidth <= 640;
+  const isWalletListOpenable = !isMobile || isWalletListOpen;
+
   return (
     <PageContainer className="pt-0 z-10">
       <TopLeftBlur src="/assets/blurs/top-left.png" />
@@ -127,17 +135,35 @@ const DashboardPage = () => {
               />
             </Card>
             <Card className="max-w-[400px]">
-              <CardTitle>
-                <span>Wallets</span>
-                <InlineBadge>
-                  {wallets.length > 0 //
-                    ? wallets.length.toLocaleString()
-                    : '-'}
-                </InlineBadge>
-              </CardTitle>
+              <div
+                className={clsx(
+                  'w-full flex justify-between items-center',
+                  isMobile && 'cursor-pointer select-none',
+                )}
+                onClick={() => setWalletListOpen((prev) => !prev)}
+              >
+                <PlainCardTitle>
+                  <span>Wallets</span>
+                  <InlineBadge>
+                    {wallets.length > 0 //
+                      ? wallets.length.toLocaleString()
+                      : '-'}
+                  </InlineBadge>
+                </PlainCardTitle>
 
-              {wallets.length > 0 && (
+                {isMobile && (
+                  <IconButton
+                    className={isWalletListOpen ? 'open' : 'closed'}
+                    onClick={() => setWalletListOpen((prev) => !prev)}
+                  >
+                    <Icon icon="fa-solid:chevron-down" width={12} height={12} />
+                  </IconButton>
+                )}
+              </div>
+
+              {(isMobile ? isWalletListOpen : true) && wallets.length > 0 && (
                 <WalletList
+                  className="mt-2"
                   onClickConnect={() =>
                     setAddWalletModalVisible((prev) => !prev)
                   }
@@ -290,6 +316,37 @@ const CardTitle = styled.h2`
 
   display: flex;
   align-items: center;
+`;
+const PlainCardTitle = styled(CardTitle)`
+  margin-bottom: 0;
+`;
+const IconButton = styled.button`
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.65);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  &.open {
+    transform: rotate(180deg);
+
+    & > svg {
+      margin-top: 2px;
+    }
+  }
 `;
 
 const InlineBadge = styled(Badge)`
