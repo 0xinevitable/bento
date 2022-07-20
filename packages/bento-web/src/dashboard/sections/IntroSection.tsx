@@ -1,8 +1,11 @@
 import { Icon } from '@iconify/react';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { Badge } from '@/components/Badge';
+import { useSession } from '@/hooks/useSession';
+import { Supabase } from '@/utils/Supabase';
 
 import { NETWORKS } from '../components/AddWalletModal';
 
@@ -12,6 +15,21 @@ type IntroSectionProps = {
 export const IntroSection: React.FC<IntroSectionProps> = ({
   onClickConnectWallet,
 }) => {
+  const { session } = useSession();
+
+  const login = useCallback(async (provider: 'twitter' | 'github') => {
+    const { user, session, error } = await Supabase.auth.signIn(
+      { provider },
+      { redirectTo: window.location.href },
+    );
+    console.log({ user, session, error });
+  }, []);
+
+  const onClickLogin = useCallback(() => {
+    // Add selection modal
+    login('twitter');
+  }, [login]);
+
   return (
     <div>
       <div className="mt-[64px] flex flex-col items-center">
@@ -23,7 +41,15 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
         </h1>
 
         <div className="mt-6 flex flex-col gap-2">
-          <Button onClick={onClickConnectWallet}>Connect Wallet</Button>
+          <Button
+            onClick={
+              !session //
+                ? onClickLogin
+                : onClickConnectWallet
+            }
+          >
+            {!session ? 'View your Dashboard' : 'Connect Wallet'}
+          </Button>
           <a
             title="About"
             className="mt-2 text-white/50 text-sm flex items-center gap-1 mx-auto"
