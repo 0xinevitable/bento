@@ -1,10 +1,12 @@
 import { cachedAxios } from '@bento/client';
 import { Base64 } from '@bento/common';
+import { AxiosError } from 'axios';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { Network } from '@/dashboard/components/AddWalletModal';
+import { useSignOut } from '@/hooks/useSignOut';
 import { toast } from '@/utils/toast';
 
 declare global {
@@ -16,7 +18,7 @@ declare global {
 }
 
 const validateAndSaveWallet = async (
-  params:
+  params: (
     | {
         walletType: 'web3' | 'kaikas' | 'phantom';
         walletAddress: string;
@@ -31,19 +33,27 @@ const validateAndSaveWallet = async (
         nonce: string;
         publicKeyValue: string;
         networks: Network[];
-      },
+      }
+  ) & { signOut?: () => void },
 ) => {
   const { walletType, walletAddress, signature, nonce, networks } = params;
-  const { data } = await cachedAxios.post(`/api/auth/verify/${walletType}`, {
-    walletAddress,
-    signature,
-    nonce: Base64.encode(nonce),
-    ...(walletType === 'keplr' && {
-      publicKeyValue: params.publicKeyValue,
-    }),
-    networks: Base64.encode(networks.map((v) => v.id).join(',')),
-  });
-  console.log({ data });
+  try {
+    const { data } = await cachedAxios.post(`/api/auth/verify/${walletType}`, {
+      walletAddress,
+      signature,
+      nonce: Base64.encode(nonce),
+      ...(walletType === 'keplr' && {
+        publicKeyValue: params.publicKeyValue,
+      }),
+      networks: Base64.encode(networks.map((v) => v.id).join(',')),
+    });
+    console.log({ data });
+  } catch (error) {
+    const maybeAxiosError = error as AxiosError;
+    if (maybeAxiosError?.response?.status === 401) {
+      params?.signOut?.();
+    }
+  }
 };
 
 type WalletSelectorProps = {
@@ -70,6 +80,8 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     () => 'Sign this message to add your wallet',
     [],
   ); // TODO: Add username and more
+
+  const { signOut } = useSignOut();
 
   const connectMetaMask = useCallback(async () => {
     if (!networks) {
@@ -130,6 +142,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         walletAddress,
         signature,
         nonce: messageToBeSigned,
+        signOut,
       });
 
       onSave?.();
@@ -174,6 +187,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         signature,
         nonce: messageToBeSigned,
         publicKeyValue: publicKey.value,
+        signOut,
       });
 
       onSave?.();
@@ -214,6 +228,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         walletAddress,
         signature,
         nonce: messageToBeSigned,
+        signOut,
       });
 
       onSave?.();
@@ -253,6 +268,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       walletAddress,
       signature,
       nonce: messageToBeSigned,
+      signOut,
     });
 
     onSave?.();
