@@ -6,6 +6,8 @@ import styled, { css } from 'styled-components';
 
 import GithubIcon from '@/assets/icons/ic-github.svg';
 import TwitterIcon from '@/assets/icons/ic-twitter.svg';
+import { useSession } from '@/hooks/useSession';
+import { useSignOut } from '@/hooks/useSignOut';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 
 const Breakpoints = {
@@ -43,6 +45,9 @@ export const NavigationBar = () => {
   const router = useRouter();
   const currentPath = router.asPath;
 
+  const { session } = useSession();
+  const { signOut } = useSignOut();
+
   return (
     <Wrapper>
       <Container>
@@ -74,6 +79,14 @@ export const NavigationBar = () => {
         )}
 
         <SocialIconList>
+          {!!session && (
+            <button
+              className="h-8 text-white text-sm mr-4 hover:text-white/70 transition-colors"
+              onClick={signOut}
+            >
+              Logout
+            </button>
+          )}
           <a
             href="https://twitter.com/bentoinevitable"
             target="_blank"
