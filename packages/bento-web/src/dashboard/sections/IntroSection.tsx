@@ -1,19 +1,20 @@
 import { Icon } from '@iconify/react';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { Badge } from '@/components/Badge';
 import { useSession } from '@/hooks/useSession';
 import { Supabase } from '@/utils/Supabase';
+import { Analytics } from '@/utils/analytics';
 
 import { NETWORKS } from '../components/AddWalletModal';
 
 type IntroSectionProps = {
-  onClickConnectWallet?: () => void;
+  onConnectWallet?: () => void;
 };
 export const IntroSection: React.FC<IntroSectionProps> = ({
-  onClickConnectWallet,
+  onConnectWallet,
 }) => {
   const { session } = useSession();
 
@@ -22,13 +23,38 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
       { provider },
       { redirectTo: window.location.href },
     );
+    Analytics.logEvent('sign_in', { anonymous: false });
     console.log({ user, session, error });
   }, []);
 
   const onClickLogin = useCallback(() => {
+    Analytics.logEvent('click_dashboard_login', {
+      title: 'View your Dashboard',
+    });
+
     // Add selection modal
     login('twitter');
   }, [login]);
+
+  const onClickConnectWallet = useCallback(() => {
+    Analytics.logEvent('click_dashboard_connect_wallet', {
+      title: 'Connect Wallet',
+    });
+    onConnectWallet?.();
+  }, [onConnectWallet]);
+
+  const hasLoggedLoginViewEvent = useRef<boolean>(false);
+  const hasLoggedConnectWalletViewEvent = useRef<boolean>(false);
+
+  useEffect(() => {
+    if (!session || !hasLoggedLoginViewEvent.current) {
+      Analytics.logEvent('view_dashboard_login', undefined);
+      hasLoggedLoginViewEvent.current = true;
+    } else if (!hasLoggedConnectWalletViewEvent.current) {
+      Analytics.logEvent('view_dashboard_connect_wallet', undefined);
+      hasLoggedConnectWalletViewEvent.current = true;
+    }
+  }, [session]);
 
   return (
     <div>
@@ -55,6 +81,14 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
             className="mt-2 text-white/50 text-sm flex items-center gap-1 mx-auto"
             href="https://bento.finance"
             target="_blank"
+            onClick={() => {
+              Analytics.logEvent('click_landing_link', {
+                title: 'About',
+                medium: !session
+                  ? 'dashboard_login'
+                  : 'dashboard_connect_wallet',
+              });
+            }}
           >
             <span className="leading-none mt-[1.5px]">About</span>
             <Icon icon="heroicons-solid:external-link" />

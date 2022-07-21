@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
 import GithubIcon from '@/assets/icons/ic-github.svg';
@@ -9,6 +9,7 @@ import TwitterIcon from '@/assets/icons/ic-twitter.svg';
 import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
 import { FeatureFlags } from '@/utils/FeatureFlag';
+import { Analytics } from '@/utils/analytics';
 
 const Breakpoints = {
   Mobile: 512,
@@ -48,10 +49,26 @@ export const NavigationBar = () => {
   const { session } = useSession();
   const { signOut } = useSignOut();
 
+  const onClickLogout = useCallback(async () => {
+    await Analytics.logEvent('click_logout', {
+      medium: 'gnb',
+    });
+    signOut();
+  }, [signOut]);
+
   return (
     <Wrapper>
       <Container>
-        <a href="https://bento.finance" target="_blank">
+        <a
+          href="https://bento.finance"
+          target="_blank"
+          onClick={() =>
+            Analytics.logEvent('click_landing_link', {
+              title: 'Bento',
+              medium: 'gnb',
+            })
+          }
+        >
           <HiddenTitle>Bento</HiddenTitle>
           <LogoWrapper>
             <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
@@ -82,7 +99,7 @@ export const NavigationBar = () => {
           {!!session && (
             <button
               className="h-8 text-white text-sm mr-4 hover:text-white/70 transition-colors"
-              onClick={signOut}
+              onClick={onClickLogout}
             >
               Logout
             </button>
@@ -90,14 +107,24 @@ export const NavigationBar = () => {
           <a
             href="https://twitter.com/bentoinevitable"
             target="_blank"
-            // onClick={() => Analytics.logEvent('click_twitter_icon', undefined)}
+            onClick={() =>
+              Analytics.logEvent('click_social_link', {
+                type: 'twitter',
+                medium: 'gnb',
+              })
+            }
           >
             <TwitterIcon />
           </a>
           <a
             href="https://github.com/inevitable-changes/bento"
             target="_blank"
-            // onClick={() => Analytics.logEvent('click_github_icon', undefined)}
+            onClick={() =>
+              Analytics.logEvent('click_social_link', {
+                type: 'github',
+                medium: 'gnb',
+              })
+            }
           >
             <GithubIcon />
           </a>

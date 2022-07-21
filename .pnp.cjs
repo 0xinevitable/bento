@@ -2643,6 +2643,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@react-spring/web", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.4.5"],\
             ["@solana/web3.js", "npm:1.47.3"],\
             ["@supabase/supabase-js", "npm:1.35.4"],\
+            ["@types/amplitude-js", "npm:8.16.2"],\
             ["@types/date-fns", "npm:2.6.0"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.chunk", "npm:4.2.7"],\
@@ -2653,6 +2654,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/styled-components", "npm:5.1.25"],\
             ["@walletconnect/encoding", "npm:1.0.1"],\
             ["@walletconnect/web3-provider", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:1.7.8"],\
+            ["amplitude-js", "npm:8.18.5"],\
             ["autoprefixer", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:10.4.7"],\
             ["axios", "npm:0.27.2"],\
             ["caver-js", "npm:1.8.2"],\
@@ -4862,6 +4864,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@tsconfig-node16-npm-1.0.3-6a4a30eda2-3a8b657dd0.zip/node_modules/@tsconfig/node16/",\
           "packageDependencies": [\
             ["@tsconfig/node16", "npm:1.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/amplitude-js", [\
+        ["npm:8.16.2", {\
+          "packageLocation": "./.yarn/cache/@types-amplitude-js-npm-8.16.2-2f0f0baea9-4b6763098a.zip/node_modules/@types/amplitude-js/",\
+          "packageDependencies": [\
+            ["@types/amplitude-js", "npm:8.16.2"]\
           ],\
           "linkType": "HARD"\
         }]\

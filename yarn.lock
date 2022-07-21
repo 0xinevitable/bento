@@ -1518,6 +1518,7 @@ __metadata:
     "@react-spring/web": ^9.4.5
     "@solana/web3.js": ^1.47.3
     "@supabase/supabase-js": ^1.35.4
+    "@types/amplitude-js": ^8.16.2
     "@types/date-fns": ^2.6.0
     "@types/dedent": ^0.7.0
     "@types/lodash.chunk": ^4.2.7
@@ -1528,6 +1529,7 @@ __metadata:
     "@types/styled-components": ^5.1.25
     "@walletconnect/encoding": ^1.0.1
     "@walletconnect/web3-provider": ^1.7.8
+    amplitude-js: ^8.18.5
     autoprefixer: ^10.4.7
     axios: ^0.27.2
     caver-js: ^1.8.2
@@ -3359,6 +3361,13 @@ __metadata:
   version: 1.0.3
   resolution: "@tsconfig/node16@npm:1.0.3"
   checksum: 3a8b657dd047495b7ad23437d6afd20297ce90380ff0bdee93fc7d39a900dbd8d9e26e53ff6b465e7967ce2adf0b218782590ce9013285121e6a5928fbd6819f
+  languageName: node
+  linkType: hard
+
+"@types/amplitude-js@npm:^8.16.2":
+  version: 8.16.2
+  resolution: "@types/amplitude-js@npm:8.16.2"
+  checksum: 4b6763098af5f0a5b06030cd094bd834ba11eeed7625f2ac040ecaf8f1a951b1420ece0f1ed7a086ebbcd29f1ae959715c3b70e21b42e5dda4ef38a4f07d7391
   languageName: node
   linkType: hard
 

@@ -15,6 +15,7 @@ import { useRevalidateWallets } from '@/hooks/useWallets';
 import { FieldInput } from '@/profile/components/FieldInput';
 import { walletsAtom } from '@/recoil/wallets';
 import { Supabase } from '@/utils/Supabase';
+import { Analytics } from '@/utils/analytics';
 
 export type Network = {
   id: string;
@@ -123,9 +124,20 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   const { session } = useSession();
   const isLoggedIn = !!session;
 
+  useEffect(() => {
+    if (!isVisible) {
+      return;
+    }
+
+    Analytics.logEvent('view_connect_wallet', undefined);
+  }, [isVisible]);
+
   const [networks, setNetworks] = useState<Network[]>([]);
   const firstNetwork = networks[0];
   const onSelectNetwork = useCallback((network: Network) => {
+    Analytics.logEvent('click_connect_wallet_select_chain', {
+      type: network.id as any,
+    });
     setNetworks((prev) =>
       !prev.find((v) => v.id === network.id)
         ? [...prev, network]
@@ -152,7 +164,6 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     }
     const _walletType = identifyWalletAddress(draftWalletAddress);
     setDraftWalletType(_walletType);
-    console.log(_walletType);
   }, [draftWalletAddress]);
 
   // Add wallet without session

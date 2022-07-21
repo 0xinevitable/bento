@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import clsx from 'clsx';
 import groupBy from 'lodash.groupby';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -12,6 +12,7 @@ import { PageContainer } from '@/components/PageContainer';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { walletsAtom } from '@/recoil/wallets';
+import { Analytics } from '@/utils/analytics';
 
 import { AddWalletModal } from './components/AddWalletModal';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
@@ -114,6 +115,24 @@ const DashboardPage = () => {
   const { width: screenWidth } = useWindowSize();
   const isMobile = screenWidth <= 640;
 
+  useEffect(() => {
+    Analytics.logEvent('view_dashboard_tab', undefined);
+  }, []);
+
+  const hasLoggedViewEvent = useRef<boolean>(false);
+  useEffect(() => {
+    if (!pageLoaded || hasLoggedViewEvent.current) {
+      return;
+    }
+
+    if (!hasWallet) {
+      return;
+    } else {
+      Analytics.logEvent('view_dashboard_main', undefined);
+      hasLoggedViewEvent.current = true;
+    }
+  }, [pageLoaded, hasWallet]);
+
   return (
     <PageContainer className="pt-0 z-10">
       <MetaHead />
@@ -122,7 +141,7 @@ const DashboardPage = () => {
 
       {!pageLoaded ? null : !hasWallet ? (
         <IntroSection
-          onClickConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
+          onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
         />
       ) : (
         <React.Fragment>
@@ -141,7 +160,24 @@ const DashboardPage = () => {
                   'w-full flex justify-between items-center',
                   isMobile && 'cursor-pointer select-none',
                 )}
-                onClick={() => setWalletListOpen((prev) => !prev)}
+                onClick={() => {
+                  setWalletListOpen((prev) => {
+                    if (prev === false) {
+                      // opening
+                      Analytics.logEvent(
+                        'click_dashboard_main_show_wallet_list',
+                        undefined,
+                      );
+                    } else {
+                      // closing
+                      Analytics.logEvent(
+                        'click_dashboard_main_hide_wallet_list',
+                        undefined,
+                      );
+                    }
+                    return !prev;
+                  });
+                }}
               >
                 <PlainCardTitle>
                   <span>Wallets</span>
@@ -186,7 +222,16 @@ const DashboardPage = () => {
             <div className="mt-3 w-full flex items-center">
               <div
                 className="flex items-center cursor-pointer select-none"
-                onClick={() => setNFTsShown(!isNFTsShown)}
+                onClick={() => {
+                  if (!isNFTsShown) {
+                    // showing
+                    Analytics.logEvent('click_show_nfts', undefined);
+                  } else {
+                    // hiding
+                    Analytics.logEvent('click_hide_nfts', undefined);
+                  }
+                  setNFTsShown(!isNFTsShown);
+                }}
               >
                 <Checkbox checked={isNFTsShown ?? false} readOnly />
                 <span className="ml-[6px] text-white/80 text-sm">
@@ -206,6 +251,12 @@ const DashboardPage = () => {
                       key={key}
                       tokenBalance={item}
                       onClick={() => {
+                        Analytics.logEvent('click_balance_item', {
+                          name: item.name,
+                          symbol: item.symbol ?? undefined,
+                          platform: item.platform,
+                          address: item.tokenAddress ?? undefined,
+                        });
                         setTokenDetailModalVisible((prev) => !prev);
                         setTokenDetailModalParams({ tokenBalance: item });
                       }}
