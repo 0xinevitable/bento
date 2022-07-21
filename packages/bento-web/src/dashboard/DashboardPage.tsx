@@ -141,7 +141,7 @@ const DashboardPage = () => {
 
       {!pageLoaded ? null : !hasWallet ? (
         <IntroSection
-          onClickConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
+          onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
         />
       ) : (
         <React.Fragment>
@@ -160,7 +160,24 @@ const DashboardPage = () => {
                   'w-full flex justify-between items-center',
                   isMobile && 'cursor-pointer select-none',
                 )}
-                onClick={() => setWalletListOpen((prev) => !prev)}
+                onClick={() => {
+                  setWalletListOpen((prev) => {
+                    if (prev === false) {
+                      // opening
+                      Analytics.logEvent(
+                        'click_dashboard_main_show_wallet_list',
+                        undefined,
+                      );
+                    } else {
+                      // closing
+                      Analytics.logEvent(
+                        'click_dashboard_main_hide_wallet_list',
+                        undefined,
+                      );
+                    }
+                    return !prev;
+                  });
+                }}
               >
                 <PlainCardTitle>
                   <span>Wallets</span>

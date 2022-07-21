@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import { Network } from '@/dashboard/components/AddWalletModal';
 import { useSignOut } from '@/hooks/useSignOut';
+import { Analytics } from '@/utils/analytics';
 import { toast } from '@/utils/toast';
 
 export const WALLETS = {
@@ -96,6 +97,10 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       return;
     }
 
+    Analytics.logEvent('click_connect_wallet_select_wallet', {
+      type: 'metamask-or-walletconnect',
+    });
+
     const [
       { default: Web3Modal },
       { default: WalletConnectProvider },
@@ -151,6 +156,12 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         signature,
         nonce: messageToBeSigned,
         signOut,
+      }).then(() => {
+        Analytics.logEvent('connect_wallet', {
+          type: 'metamask-or-walletconnect',
+          networks: networks.map((v) => v.id) as any[],
+          address: walletAddress,
+        });
       });
 
       onSave?.();
@@ -163,6 +174,10 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     if (!networks) {
       return;
     }
+
+    Analytics.logEvent('click_connect_wallet_select_wallet', {
+      type: 'keplr',
+    });
 
     if (typeof window.keplr === 'undefined') {
       toast({
@@ -196,6 +211,12 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         nonce: messageToBeSigned,
         publicKeyValue: publicKey.value,
         signOut,
+      }).then(() => {
+        Analytics.logEvent('connect_wallet', {
+          type: 'keplr',
+          networks: networks.map((v) => v.id) as any[],
+          address: walletAddress,
+        });
       });
 
       onSave?.();
@@ -208,6 +229,10 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     if (!networks) {
       return;
     }
+
+    Analytics.logEvent('click_connect_wallet_select_wallet', {
+      type: 'kaikas',
+    });
 
     if (typeof window.klaytn === 'undefined') {
       toast({
@@ -237,6 +262,12 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         signature,
         nonce: messageToBeSigned,
         signOut,
+      }).then(() => {
+        Analytics.logEvent('connect_wallet', {
+          type: 'kaikas',
+          networks: networks.map((v) => v.id) as any[],
+          address: walletAddress,
+        });
       });
 
       onSave?.();
@@ -245,10 +276,14 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     }
   }, [onSave]);
 
-  const connectSolana = useCallback(async () => {
+  const connectPhantom = useCallback(async () => {
     if (!networks) {
       return;
     }
+
+    Analytics.logEvent('click_connect_wallet_select_wallet', {
+      type: 'phantom',
+    });
 
     if (typeof window.solana === 'undefined') {
       toast({
@@ -277,6 +312,12 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       signature,
       nonce: messageToBeSigned,
       signOut,
+    }).then(() => {
+      Analytics.logEvent('connect_wallet', {
+        type: 'phantom',
+        networks: networks.map((v) => v.id) as any[],
+        address: walletAddress,
+      });
     });
 
     onSave?.();
@@ -329,7 +370,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           'p-4 text-slate-800 font-bold bg-slate-300',
           firstNetwork !== 'solana' && 'opacity-20 cursor-not-allowed',
         )}
-        onClick={firstNetwork === 'solana' ? connectSolana : undefined}
+        onClick={firstNetwork === 'solana' ? connectPhantom : undefined}
       >
         <IconList>
           <img src={WALLETS.phantom} alt="Phantom" />

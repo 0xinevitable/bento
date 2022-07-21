@@ -11,10 +11,10 @@ import { Analytics } from '@/utils/analytics';
 import { NETWORKS } from '../components/AddWalletModal';
 
 type IntroSectionProps = {
-  onClickConnectWallet?: () => void;
+  onConnectWallet?: () => void;
 };
 export const IntroSection: React.FC<IntroSectionProps> = ({
-  onClickConnectWallet,
+  onConnectWallet,
 }) => {
   const { session } = useSession();
 
@@ -23,6 +23,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
       { provider },
       { redirectTo: window.location.href },
     );
+    Analytics.logEvent('sign_in', { anonymous: false });
     console.log({ user, session, error });
   }, []);
 
@@ -34,6 +35,13 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
     // Add selection modal
     login('twitter');
   }, [login]);
+
+  const onClickConnectWallet = useCallback(() => {
+    Analytics.logEvent('click_dashboard_connect_wallet', {
+      title: 'Connect Wallet',
+    });
+    onConnectWallet?.();
+  }, [onConnectWallet]);
 
   const hasLoggedLoginViewEvent = useRef<boolean>(false);
   const hasLoggedConnectWalletViewEvent = useRef<boolean>(false);

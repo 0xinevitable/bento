@@ -13,6 +13,9 @@ import styled from 'styled-components';
 import { NavigationBar } from '@/components/NavigationBar';
 import { SessionManager } from '@/hooks/useSession';
 import { WalletManager } from '@/hooks/useWallets';
+import { Analytics } from '@/utils/analytics';
+
+Analytics.initialize();
 
 type MyAppProps = AppProps & {
   // FIXME: Type mismatch here

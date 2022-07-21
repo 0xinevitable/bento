@@ -10,30 +10,27 @@ type AnalyticsEvent = {
   click_dashboard_login: {
     title: string;
   };
-  login: {
+  sign_in: {
     anonymous: false;
   };
 
   // Dashboard View
   view_dashboard_connect_wallet: undefined;
-
   click_dashboard_connect_wallet: {
     title: string;
   };
 
   // 지갑 연결 모달
-  view_connect_wallet: {
-    medium: 'dashboard_connect_wallet' | 'dashboard_main';
-  };
+  view_connect_wallet: undefined;
   click_connect_wallet_select_chain: {
     type: keyof typeof KEYS_BY_NETWORK;
   };
   click_connect_wallet_select_wallet: {
-    type: keyof typeof WALLETS;
+    type: keyof typeof WALLETS | 'metamask-or-walletconnect';
   };
   connect_wallet: {
-    type: keyof typeof WALLETS;
-    network: keyof typeof KEYS_BY_NETWORK;
+    type: keyof typeof WALLETS | 'metamask-or-walletconnect';
+    networks: (keyof typeof KEYS_BY_NETWORK)[];
     address: string;
   };
 
