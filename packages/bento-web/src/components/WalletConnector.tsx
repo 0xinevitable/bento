@@ -9,7 +9,7 @@ import { Network } from '@/dashboard/components/AddWalletModal';
 import { useSignOut } from '@/hooks/useSignOut';
 import { toast } from '@/utils/toast';
 
-const WALLET_ICONS = {
+export const WALLETS = {
   metamask: '/assets/wallets/metamask.png',
   walletconnect: '/assets/wallets/walletconnect.png',
   keplr: '/assets/wallets/keplr.png',
@@ -292,8 +292,8 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         onClick={firstNetwork === 'evm' ? connectMetaMask : undefined}
       >
         <IconList>
-          <img src={WALLET_ICONS.metamask} alt="Metamask" />
-          <img src={WALLET_ICONS.walletconnect} alt="WalletConnect" />
+          <img src={WALLETS.metamask} alt="Metamask" />
+          <img src={WALLETS.walletconnect} alt="WalletConnect" />
         </IconList>
         MetaMask or WalletConnect
       </Button>
@@ -306,7 +306,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         onClick={firstNetwork === 'evm' ? connectKaikas : undefined}
       >
         <IconList>
-          <img src={WALLET_ICONS.kaikas} alt="Kaikas" />
+          <img src={WALLETS.kaikas} alt="Kaikas" />
         </IconList>
         Kaikas
       </Button>
@@ -319,7 +319,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         onClick={firstNetwork === 'cosmos-sdk' ? connectKeplr : undefined}
       >
         <IconList>
-          <img src={WALLET_ICONS.keplr} alt="Keplr" />
+          <img src={WALLETS.keplr} alt="Keplr" />
         </IconList>
         Keplr
       </Button>
@@ -332,7 +332,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         onClick={firstNetwork === 'solana' ? connectSolana : undefined}
       >
         <IconList>
-          <img src={WALLET_ICONS.phantom} alt="Phantom" />
+          <img src={WALLETS.phantom} alt="Phantom" />
         </IconList>
         Phantom
       </Button>
