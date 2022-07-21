@@ -81,6 +81,14 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
             className="mt-2 text-white/50 text-sm flex items-center gap-1 mx-auto"
             href="https://bento.finance"
             target="_blank"
+            onClick={() => {
+              Analytics.logEvent('click_landing_link', {
+                title: 'About',
+                medium: !session
+                  ? 'dashboard_login'
+                  : 'dashboard_connect_wallet',
+              });
+            }}
           >
             <span className="leading-none mt-[1.5px]">About</span>
             <Icon icon="heroicons-solid:external-link" />

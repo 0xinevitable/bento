@@ -222,7 +222,16 @@ const DashboardPage = () => {
             <div className="mt-3 w-full flex items-center">
               <div
                 className="flex items-center cursor-pointer select-none"
-                onClick={() => setNFTsShown(!isNFTsShown)}
+                onClick={() => {
+                  if (!isNFTsShown) {
+                    // showing
+                    Analytics.logEvent('click_show_nfts', undefined);
+                  } else {
+                    // hiding
+                    Analytics.logEvent('click_hide_nfts', undefined);
+                  }
+                  setNFTsShown(!isNFTsShown);
+                }}
               >
                 <Checkbox checked={isNFTsShown ?? false} readOnly />
                 <span className="ml-[6px] text-white/80 text-sm">
@@ -242,6 +251,12 @@ const DashboardPage = () => {
                       key={key}
                       tokenBalance={item}
                       onClick={() => {
+                        Analytics.logEvent('click_balance_item', {
+                          name: item.name,
+                          symbol: item.symbol ?? undefined,
+                          platform: item.platform,
+                          address: item.tokenAddress ?? undefined,
+                        });
                         setTokenDetailModalVisible((prev) => !prev);
                         setTokenDetailModalParams({ tokenBalance: item });
                       }}

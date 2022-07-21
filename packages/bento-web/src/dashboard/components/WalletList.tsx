@@ -11,6 +11,7 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { walletsAtom } from '@/recoil/wallets';
+import { Analytics } from '@/utils/analytics';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
 
@@ -34,13 +35,20 @@ export const WalletList: React.FC<WalletListProps> = ({
   );
   const hasCollapseEffect = wallets.length > 3;
 
-  const onClickCopy = useCallback((text: string) => {
-    copyToClipboard(text);
-    toast({
-      title: 'Copied to Clipboard!',
-      description: text,
-    });
-  }, []);
+  const onClickCopy = useCallback(
+    (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
+      Analytics.logEvent('click_copy_wallet_address', {
+        type: walletType,
+        address: walletAddress,
+      });
+      copyToClipboard(walletAddress);
+      toast({
+        title: 'Copied to Clipboard!',
+        description: walletAddress,
+      });
+    },
+    [],
+  );
 
   return (
     <React.Fragment>
@@ -58,7 +66,7 @@ export const WalletList: React.FC<WalletListProps> = ({
                 </span>
                 <button
                   className="ml-1 text-white focus:opacity-40"
-                  onClick={() => onClickCopy(wallet.address)}
+                  onClick={() => onClickCopy(wallet.address, wallet.type)}
                 >
                   <Icon icon="eva:copy-fill" />
                 </button>
@@ -106,7 +114,22 @@ export const WalletList: React.FC<WalletListProps> = ({
       {(hasCollapseEffect || !!onClickConnect) && (
         <ButtonList>
           {hasCollapseEffect && (
-            <ShowAllButton onClick={() => setCollapsed((prev) => !prev)}>
+            <ShowAllButton
+              onClick={() =>
+                setCollapsed((prev) => {
+                  if (!prev) {
+                    // currently not collapsed
+                    // collapsing(closing)
+                    Analytics.logEvent('click_show_less_wallets', undefined);
+                  } else {
+                    // currently collapsed
+                    // opening(show all)
+                    Analytics.logEvent('click_show_all_wallets', undefined);
+                  }
+                  return !prev;
+                })
+              }
+            >
               {collapsed ? 'Show All' : 'Show Less'}
             </ShowAllButton>
           )}

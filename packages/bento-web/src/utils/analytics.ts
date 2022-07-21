@@ -47,7 +47,12 @@ type AnalyticsEvent = {
 
   click_show_nfts: undefined;
   click_hide_nfts: undefined;
-  click_balance_item: {};
+  click_balance_item: {
+    name: string;
+    symbol: string | undefined;
+    platform: string;
+    address: string | undefined;
+  };
 
   click_logout: {
     medium: 'gnb';
@@ -57,6 +62,7 @@ type AnalyticsEvent = {
     medium: 'gnb';
   };
   click_landing_link: {
+    title: string;
     medium: 'gnb' | 'dashboard_login' | 'dashboard_connect_wallet';
   };
 };
