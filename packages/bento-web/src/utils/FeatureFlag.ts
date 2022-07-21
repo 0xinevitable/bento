@@ -9,7 +9,7 @@ enum Environment {
 }
 
 const definedFeatures = {
-  isProfileEnabled: Environment.development,
+  isProfileEnabled: Environment.off,
 };
 
 type FeatureName = keyof typeof definedFeatures;
