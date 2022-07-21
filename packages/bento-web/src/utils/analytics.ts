@@ -1,3 +1,5 @@
+import { Session } from '@supabase/supabase-js';
+
 import { WALLETS } from '@/components/WalletConnector';
 import { KEYS_BY_NETWORK } from '@/dashboard/utils/useWalletBalances';
 
@@ -112,8 +114,17 @@ async function logEvent<TName extends keyof AnalyticsEvent>(
   amplitude?.logEvent(name, eventProperties);
 }
 
+export async function updateUserProperties(session: Session | null) {
+  const userId = session?.user?.id ?? null;
+  const amplitude = await getAmplitude();
+  amplitude?.setUserId(userId);
+
+  console.debug('[Analytics] Set user id:', userId);
+}
+
 export const Analytics = {
   getAmplitude,
   initialize,
   logEvent,
+  updateUserProperties,
 };

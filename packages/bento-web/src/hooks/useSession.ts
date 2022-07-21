@@ -1,10 +1,12 @@
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
+import { current } from 'immer';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { sessionAtom } from '@/recoil/session';
 import { Supabase } from '@/utils/Supabase';
+import { Analytics } from '@/utils/analytics';
 import { toast } from '@/utils/toast';
 
 const handleAuthChange = async (
@@ -65,6 +67,8 @@ export const SessionManager: React.FC = () => {
   }, [router.query]);
 
   useEffect(() => {
+    Analytics.updateUserProperties(currentSession);
+
     if (!currentSession) {
       return;
     }
