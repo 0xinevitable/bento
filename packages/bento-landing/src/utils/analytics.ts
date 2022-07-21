@@ -5,7 +5,10 @@ type AnalyticsEvent = {
   view_landing_section: {
     section: string;
   };
-  click_coming_soon_button: undefined;
+
+  click_app_link: undefined;
+  // click_coming_soon_button: undefined;
+
   click_twitter_icon: undefined;
   click_github_icon: undefined;
   click_team_link: undefined;

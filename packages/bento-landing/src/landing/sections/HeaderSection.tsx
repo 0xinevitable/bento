@@ -30,15 +30,11 @@ export const HeaderSection = () => {
           Track DeFis and NFTs in various L1 chains.
         </Description>
 
-        {/* <ButtonLink href="https://app.bento.finance"> */}
         <ButtonLink
-          href="#"
-          aria-disabled={true}
-          onClick={() =>
-            Analytics.logEvent('click_coming_soon_button', undefined)
-          }
+          href="https://app.bento.finance"
+          onClick={() => Analytics.logEvent('click_app_link', undefined)}
         >
-          <Button>Coming Soon</Button>
+          <Button>Launch App</Button>
         </ButtonLink>
       </Content>
 
@@ -290,9 +286,10 @@ const Button = styled.button`
   color: rgba(255, 255, 255, 0.92);
   text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
 
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='96' viewport='0 0 100 100' style='fill:black;font-size:48px;'><text y='50%'>⚡</text></svg>")
+  /* cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='96' viewport='0 0 100 100' style='fill:black;font-size:48px;'><text y='50%'>⚡</text></svg>")
       16 0,
-    pointer;
+    pointer; */
+  cursor: pointer;
 
   ${onMobile} {
     font-size: 18px;
