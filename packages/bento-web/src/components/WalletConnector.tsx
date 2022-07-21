@@ -9,6 +9,14 @@ import { Network } from '@/dashboard/components/AddWalletModal';
 import { useSignOut } from '@/hooks/useSignOut';
 import { toast } from '@/utils/toast';
 
+const WALLET_ICONS = {
+  metamask: '/assets/wallets/metamask.png',
+  walletconnect: '/assets/wallets/walletconnect.png',
+  keplr: '/assets/wallets/keplr.png',
+  kaikas: '/assets/wallets/kaikas.png',
+  phantom: '/assets/wallets/phantom.png',
+};
+
 declare global {
   interface Window {
     keplr: any;
@@ -279,44 +287,77 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          firstNetwork !== 'evm' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'evm' && 'opacity-20 cursor-not-allowed',
         )}
         onClick={firstNetwork === 'evm' ? connectMetaMask : undefined}
       >
+        <IconList>
+          <img src={WALLET_ICONS.metamask} alt="Metamask" />
+          <img src={WALLET_ICONS.walletconnect} alt="WalletConnect" />
+        </IconList>
         MetaMask or WalletConnect
       </Button>
 
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          firstNetwork !== 'evm' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'evm' && 'opacity-20 cursor-not-allowed',
         )}
         onClick={firstNetwork === 'evm' ? connectKaikas : undefined}
       >
+        <IconList>
+          <img src={WALLET_ICONS.kaikas} alt="Kaikas" />
+        </IconList>
         Kaikas
       </Button>
 
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          firstNetwork !== 'cosmos-sdk' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'cosmos-sdk' && 'opacity-20 cursor-not-allowed',
         )}
         onClick={firstNetwork === 'cosmos-sdk' ? connectKeplr : undefined}
       >
+        <IconList>
+          <img src={WALLET_ICONS.keplr} alt="Keplr" />
+        </IconList>
         Keplr
       </Button>
 
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          firstNetwork !== 'solana' && 'opacity-10 cursor-not-allowed',
+          firstNetwork !== 'solana' && 'opacity-20 cursor-not-allowed',
         )}
         onClick={firstNetwork === 'solana' ? connectSolana : undefined}
       >
+        <IconList>
+          <img src={WALLET_ICONS.phantom} alt="Phantom" />
+        </IconList>
         Phantom
       </Button>
     </div>
   );
 };
 
-const Button = styled.button``;
+const Button = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  flex: 1;
+  justify-content: center;
+
+  &:first-of-type {
+    min-width: 240px;
+  }
+`;
+const IconList = styled.div`
+  margin-bottom: 8px;
+  gap: 8px;
+  display: flex;
+
+  & > img {
+    width: 72px;
+  }
+`;
