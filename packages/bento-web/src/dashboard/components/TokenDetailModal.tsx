@@ -101,7 +101,7 @@ const OverlayWrapper = styled(Modal)`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 52px;
+  margin-top: 52px;
 
   &,
   & > * {
@@ -114,7 +114,7 @@ const Content = styled.div`
   height: 100%;
   width: 95vw;
 
-  max-height: calc(100vh - 64px - 48px);
+  max-height: calc(100vh - 64px - 84px);
   overflow: scroll;
 
   display: flex;
@@ -165,6 +165,14 @@ const AssetListItem = styled.li`
 
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 840px) {
+    width: calc(33% - 6px);
+  }
+
+  @media screen and (max-width: 664px) {
+    width: calc(50% - 6px);
+  }
 `;
 const AssetName = styled.span`
   margin-top: 4px;
@@ -174,8 +182,9 @@ const AssetName = styled.span`
   text-overflow: ellipsis;
 `;
 const assetMediaStyle = css`
-  width: 182px;
-  height: 182px;
+  width: 100%;
+  aspect-ratio: 1;
+
   object-fit: cover;
   border-radius: 8px;
   background-color: black;
