@@ -1,11 +1,12 @@
 import { Icon } from '@iconify/react';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { Badge } from '@/components/Badge';
 import { useSession } from '@/hooks/useSession';
 import { Supabase } from '@/utils/Supabase';
+import { Analytics } from '@/utils/analytics';
 
 import { NETWORKS } from '../components/AddWalletModal';
 
@@ -26,9 +27,26 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
   }, []);
 
   const onClickLogin = useCallback(() => {
+    Analytics.logEvent('click_dashboard_login', {
+      title: 'View your Dashboard',
+    });
+
     // Add selection modal
     login('twitter');
   }, [login]);
+
+  const hasLoggedLoginViewEvent = useRef<boolean>(false);
+  const hasLoggedConnectWalletViewEvent = useRef<boolean>(false);
+
+  useEffect(() => {
+    if (!session || !hasLoggedLoginViewEvent.current) {
+      Analytics.logEvent('view_dashboard_login', undefined);
+      hasLoggedLoginViewEvent.current = true;
+    } else if (!hasLoggedConnectWalletViewEvent.current) {
+      Analytics.logEvent('view_dashboard_connect_wallet', undefined);
+      hasLoggedConnectWalletViewEvent.current = true;
+    }
+  }, [session]);
 
   return (
     <div>

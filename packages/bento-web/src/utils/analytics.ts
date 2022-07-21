@@ -4,6 +4,8 @@ import { KEYS_BY_NETWORK } from '@/dashboard/utils/useWalletBalances';
 const isBrowser = typeof window !== 'undefined';
 
 type AnalyticsEvent = {
+  view_dashboard_tab: undefined;
+
   view_dashboard_login: undefined;
   click_dashboard_login: {
     title: string;

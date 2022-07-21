@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import clsx from 'clsx';
 import groupBy from 'lodash.groupby';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -12,6 +12,7 @@ import { PageContainer } from '@/components/PageContainer';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { walletsAtom } from '@/recoil/wallets';
+import { Analytics } from '@/utils/analytics';
 
 import { AddWalletModal } from './components/AddWalletModal';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
@@ -113,6 +114,24 @@ const DashboardPage = () => {
   const [isWalletListOpen, setWalletListOpen] = useState<boolean>(false);
   const { width: screenWidth } = useWindowSize();
   const isMobile = screenWidth <= 640;
+
+  useEffect(() => {
+    Analytics.logEvent('view_dashboard_tab', undefined);
+  }, []);
+
+  const hasLoggedViewEvent = useRef<boolean>(false);
+  useEffect(() => {
+    if (!pageLoaded || hasLoggedViewEvent.current) {
+      return;
+    }
+
+    if (!hasWallet) {
+      return;
+    } else {
+      Analytics.logEvent('view_dashboard_main', undefined);
+      hasLoggedViewEvent.current = true;
+    }
+  }, [pageLoaded, hasWallet]);
 
   return (
     <PageContainer className="pt-0 z-10">
