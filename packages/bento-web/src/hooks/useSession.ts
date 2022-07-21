@@ -37,6 +37,16 @@ export const SessionManager: React.FC = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (!currentSession) {
+      return;
+    }
+
+    if (window.location.hash.includes('access_token=')) {
+      window.location.hash = '';
+    }
+  }, [currentSession]);
+
   return null;
 };
 
