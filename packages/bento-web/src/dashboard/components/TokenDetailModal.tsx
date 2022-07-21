@@ -101,6 +101,7 @@ const OverlayWrapper = styled(Modal)`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 52px;
 
   &,
   & > * {
@@ -110,7 +111,11 @@ const OverlayWrapper = styled(Modal)`
 const Content = styled.div`
   padding: 16px;
   max-width: 800px;
+  height: 100%;
   width: 95vw;
+
+  max-height: calc(100vh - 64px - 48px);
+  overflow: scroll;
 
   display: flex;
   flex-direction: column;
