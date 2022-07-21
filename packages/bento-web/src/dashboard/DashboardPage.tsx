@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 import { Checkbox } from '@/components/Checkbox';
+import MetaHead from '@/components/MetaHead';
 import { PageContainer } from '@/components/PageContainer';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useWindowSize } from '@/hooks/useWindowSize';
@@ -112,10 +113,10 @@ const DashboardPage = () => {
   const [isWalletListOpen, setWalletListOpen] = useState<boolean>(false);
   const { width: screenWidth } = useWindowSize();
   const isMobile = screenWidth <= 640;
-  const isWalletListOpenable = !isMobile || isWalletListOpen;
 
   return (
     <PageContainer className="pt-0 z-10">
+      <MetaHead />
       <TopLeftBlur src="/assets/blurs/top-left.png" />
       <TopRightBlur src="/assets/blurs/top-right.png" />
 
