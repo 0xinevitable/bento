@@ -63,7 +63,8 @@ export const WalletList: React.FC<WalletListProps> = ({
                   <Icon icon="eva:copy-fill" />
                 </button>
 
-                <button
+                {/* FIXME: Add delete feature */}
+                {/* <button
                   className="ml-auto text-white/25"
                   onClick={() => {
                     setWallets(
@@ -76,7 +77,7 @@ export const WalletList: React.FC<WalletListProps> = ({
                   }}
                 >
                   <Icon icon="entypo:cross" width={20} height={20} />
-                </button>
+                </button> */}
               </div>
 
               <div>
