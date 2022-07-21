@@ -59,7 +59,7 @@ export const TokenDetailModal: React.FC<Props> = ({
               </TokenInformation>
             </TokenHeader>
 
-            {tokenBalance.type === 'nft' && (
+            {tokenBalance.type === 'nft' ? (
               <AssetList>
                 {assets.map((asset) => {
                   const isVideo =
@@ -89,6 +89,12 @@ export const TokenDetailModal: React.FC<Props> = ({
                   );
                 })}
               </AssetList>
+            ) : (
+              <div className="w-full h-24 flex items-center justify-center">
+                <p className="w-full text-gray-400 text-center">
+                  More data coming soon...
+                </p>
+              </div>
             )}
           </Content>
         )}
