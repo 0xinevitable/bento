@@ -118,11 +118,15 @@ export const useWalletBalances = ({ wallets }: Options) => {
     if (!coinGeckoIds.length) {
       return;
     }
+
     pricesFromCoinGecko(coinGeckoIds)
       .then(setCoinGeckoPricesByIds)
       .catch(() => {});
-  }, [coinGeckoIds]);
+  }, [JSON.stringify(coinGeckoIds)]);
 
+  useEffect(() => {
+    fetchPrices();
+  }, [fetchPrices]);
   useInterval(fetchPrices, 15_000);
 
   const balancesWithPrices = useMemo(
