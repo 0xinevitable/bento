@@ -9,6 +9,7 @@ export type CosmosSDKWalletBalance = {
   balance: number;
   delegations: number;
   price: number;
+  coinGeckoId?: string;
 };
 
 export type EVMWalletBalance = {
@@ -23,6 +24,7 @@ export type EVMWalletBalance = {
   balance: number;
   price: number;
   staking?: true;
+  coinGeckoId?: string;
 };
 
 export type SolanaWalletBalance = {
@@ -35,6 +37,7 @@ export type SolanaWalletBalance = {
   balance: number;
   price: number;
   logo?: string;
+  coinGeckoId?: string;
 };
 
 export type NFTWalletBalance = {

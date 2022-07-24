@@ -3,7 +3,9 @@ import {
   EVMBasedNetworks,
   Wallet,
 } from '@bento/common';
-import { useMemo } from 'react';
+import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
+import produce from 'immer';
+import { useEffect, useMemo, useState } from 'react';
 import { SWRResponse } from 'swr';
 
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
@@ -98,5 +100,42 @@ export const useWalletBalances = ({ wallets }: Options) => {
 
   const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
 
-  return { balances };
+  const coinGeckoIds = useMemo<string[]>(() => {
+    if (result.some((v) => v.isLoading)) {
+      return [];
+    }
+    return balances
+      .flatMap((x) => x.coinGeckoId || [])
+      .filter((x, i, a) => a.indexOf(x) === i);
+  }, [result]);
+
+  const [coinGeckoPricesByIds, setCoinGeckoPricesByIds] = useState<
+    Record<string, number | undefined>
+  >({});
+  useEffect(() => {
+    if (!coinGeckoIds.length) {
+      return;
+    }
+    pricesFromCoinGecko(coinGeckoIds)
+      .then(setCoinGeckoPricesByIds)
+      .catch(() => {});
+  }, [coinGeckoIds]);
+
+  const balancesWithPrices = useMemo(
+    () =>
+      produce(balances, (draft) => {
+        draft.forEach((token) => {
+          if (typeof token.price === 'undefined') {
+            if (!!token.coinGeckoId) {
+              token.price = coinGeckoPricesByIds[token.coinGeckoId] ?? 0;
+            } else {
+              token.price = 0;
+            }
+          }
+        });
+      }),
+    [balances, coinGeckoPricesByIds],
+  );
+
+  return { balances: balancesWithPrices };
 };
