@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Modal } from '@/components/Modal';
-import { Portal } from '@/components/Portal';
 
 type Props = {
   isVisible?: boolean;
@@ -18,17 +17,15 @@ export const QuestionMoreModal: React.FC<Props> = ({
   };
 
   return (
-    <Portal>
-      <OverlayWrapper
-        visible={isVisible}
-        onDismiss={onDismiss}
-        transition={{ ease: 'linear' }}
-      >
-        <Container onClick={onClickContainer}>
-          <Title>질문 공유하기</Title>
-        </Container>
-      </OverlayWrapper>
-    </Portal>
+    <OverlayWrapper
+      visible={isVisible}
+      onDismiss={onDismiss}
+      transition={{ ease: 'linear' }}
+    >
+      <Container onClick={onClickContainer}>
+        <Title>질문 공유하기</Title>
+      </Container>
+    </OverlayWrapper>
   );
 };
 
