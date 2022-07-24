@@ -13179,8 +13179,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/client", "workspace:packages/bento-client"],\
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
+            ["@types/dedent", "npm:0.7.0"],\
             ["@types/node", "npm:17.0.42"],\
             ["@types/prettier", "npm:2.6.3"],\
+            ["axios", "npm:0.27.2"],\
+            ["dedent", "npm:0.7.0"],\
             ["find-yarn-workspace-root", "npm:2.0.0"],\
             ["prettier", "npm:2.6.2"],\
             ["ttypescript", "virtual:3d037d5e526f3d3d648b34e6f2870741001da83fbe5a06f011f676bb188c06041db8b9f18e1dc28a15d39fd0f2ca8aed5c277ca1e2fd69d4f751809e3cb17f94#npm:1.5.13"],\
