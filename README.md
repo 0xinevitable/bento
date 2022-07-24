@@ -1,13 +1,13 @@
 # 🍱 Bento, The open-source web3 dashboard
 
-> **This product is under rapid development and will be available during July 2022**<br />
-> Follow us on [Twitter(@bentoinevitable)](https://twitter.com/bentoinevitable) for early access
+> **LIVE under [https://bento.finance](https://bento.finance), This product is still under rapid development 🎉**<br />
+> Follow us on [Twitter(@bentoinevitable)](https://twitter.com/bentoinevitable) for updates!
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/bentoinevitable.svg?style=social&label=Follow%20%40bentoinevitable)](https://twitter.com/bentoinevitable)
 
-[![Cover Artwork](https://github.com/inevitable-changes/bento/blob/main/docs/images/cover-artwork.png?raw=true)](https://twitter.com/bentoinevitable/status/1540084741269254144)
+[![Cover Artwork](https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/og-image.png)](https://bento.finance)
 
-[![Dashboard Preview](https://raw.githubusercontent.com/inevitable-changes/bento/main/docs/images/dashboard-preview.png?)](https://twitter.com/bentoinevitable/status/1540084741269254144)
+[![Dashboard Preview](https://raw.githubusercontent.com/inevitable-changes/bento/main/docs/images/dashboard-preview.png?)](https://bento.finance)
 
 ## The Status Quo
 
