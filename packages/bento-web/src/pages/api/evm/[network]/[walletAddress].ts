@@ -8,7 +8,6 @@ import {
   PolygonChain,
   TokenBalance,
 } from '@bento/core/lib/chains';
-import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import { pricesFromCoinMarketCap } from '@bento/core/lib/pricings/CoinMarketCap';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -91,26 +90,17 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     )
   ).flat();
 
-  const coinGeckoIds = result
-    .flatMap((x) => (!!x.coinGeckoId ? x.coinGeckoId : []))
-    .filter((x, i, a) => a.indexOf(x) === i);
-
   const coinMarketCapIds = result
     .flatMap((x) => (!!x.coinMarketCapId ? x.coinMarketCapId : []))
     .filter((x, i, a) => a.indexOf(x) === i);
 
-  const [coinGeckoPricesById, coinMarketCapPricesById]: Record<
-    string,
-    number | undefined
-  >[] = await safePromiseAll([
-    pricesFromCoinGecko(coinGeckoIds).catch(() => ({})),
-    pricesFromCoinMarketCap(coinMarketCapIds).catch(() => ({})),
-  ]);
+  const coinMarketCapPricesById: Record<string, number | undefined> =
+    await pricesFromCoinMarketCap(coinMarketCapIds).catch(() => ({}));
 
   result.forEach((token) => {
     if (typeof token.price === 'undefined') {
       if (!!token.coinGeckoId) {
-        token.price = coinGeckoPricesById[token.coinGeckoId];
+        token.price = undefined;
       } else if (!!token.coinMarketCapId) {
         token.price = coinMarketCapPricesById[token.coinMarketCapId];
       } else {
