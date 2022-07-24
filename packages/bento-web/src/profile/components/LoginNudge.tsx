@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { Modal } from '@/components/Modal';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 
 type LoginNudgeProps = {
@@ -47,11 +48,15 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({
             <ButtonIcon src="/assets/social/github.png" alt="" />
             Login with GitHub
           </Button>
-          <Bar />
-          <Button className="default">
-            <Icon icon="fa6-solid:wand-magic-sparkles" />
-            <span className="ml-2">Use Magic Email Link</span>
-          </Button>
+          {FeatureFlags.isEmailMagicLinkEnabled && (
+            <>
+              <Bar />
+              <Button className="default">
+                <Icon icon="fa6-solid:wand-magic-sparkles" />
+                <span className="ml-2">Use Magic Email Link</span>
+              </Button>
+            </>
+          )}
         </Content>
       </Container>
     </Wrapper>
