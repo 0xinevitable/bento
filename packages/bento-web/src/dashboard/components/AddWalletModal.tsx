@@ -348,9 +348,11 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
 };
 
 const OverlayWrapper = styled(Modal)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 type NetworkItemProps = {

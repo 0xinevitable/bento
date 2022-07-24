@@ -104,14 +104,16 @@ export const TokenDetailModal: React.FC<Props> = ({
 };
 
 const OverlayWrapper = styled(Modal)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 52px;
+  .modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 52px;
 
-  &,
-  & > * {
-    user-select: none;
+    &,
+    & > * {
+      user-select: none;
+    }
   }
 `;
 const Content = styled.div`
