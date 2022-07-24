@@ -7,7 +7,7 @@
 
 [![Cover Artwork](https://github.com/inevitable-changes/bento/blob/main/docs/images/cover-artwork.png?raw=true)](https://twitter.com/bentoinevitable/status/1540084741269254144)
 
-[![Dashboard Preview](https://github.com/inevitable-changes/bento/blob/main/docs/images/dashboard-preview.png?raw=true)](https://twitter.com/bentoinevitable/status/1540084741269254144)
+[![Dashboard Preview](https://raw.githubusercontent.com/inevitable-changes/bento/main/docs/images/dashboard-preview.png?)](https://twitter.com/bentoinevitable/status/1540084741269254144)
 
 ## The Status Quo
 
