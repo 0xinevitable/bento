@@ -1,13 +1,12 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useHiddenBodyOverflow } from '@/hooks/useHiddenBodyOverflow';
 import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 
-import { LoginNudge } from '../components/LoginNudge';
+import { FixedLoginNudge } from '../components/LoginNudge';
 import { Header } from './components/Header';
 import { LinkEventListSection } from './components/LinkEventListSection';
 import { PageViewChart } from './components/PageViewChart';
@@ -44,23 +43,6 @@ const ProfileHomePage = () => {
 };
 
 export default ProfileHomePage;
-
-const FixedLoginNudge = styled(LoginNudge)`
-  padding-top: calc(1.5rem + 64px);
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(24px);
-  z-index: 50;
-
-  & img.lock-illust {
-    filter: drop-shadow(0px 16px 48px rgba(151, 42, 53, 0.45));
-  }
-`;
 
 const ExampleProfiles = [
   {

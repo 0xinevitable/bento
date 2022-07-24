@@ -2,13 +2,19 @@ import { Icon } from '@iconify/react';
 import { useCallback } from 'react';
 import styled from 'styled-components';
 
+import { Modal } from '@/components/Modal';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 
 type LoginNudgeProps = {
   className?: string;
+  accessory?: React.ReactNode;
 };
 
-export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
+export const LoginNudge: React.FC<LoginNudgeProps> = ({
+  className,
+  accessory,
+}) => {
   const onClickLogin = useCallback(async (provider: 'twitter' | 'github') => {
     const { user, session, error } = await Supabase.auth.signIn(
       { provider },
@@ -20,6 +26,7 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
   return (
     <Wrapper className={className}>
       <Container>
+        {accessory}
         <LockIllust
           className="lock-illust"
           src="/assets/illusts/lock.png"
@@ -41,11 +48,15 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({ className }) => {
             <ButtonIcon src="/assets/social/github.png" alt="" />
             Login with GitHub
           </Button>
-          <Bar />
-          <Button className="default">
-            <Icon icon="fa6-solid:wand-magic-sparkles" />
-            <span className="ml-2">Use Magic Email Link</span>
-          </Button>
+          {FeatureFlags.isEmailMagicLinkEnabled && (
+            <>
+              <Bar />
+              <Button className="default">
+                <Icon icon="fa6-solid:wand-magic-sparkles" />
+                <span className="ml-2">Use Magic Email Link</span>
+              </Button>
+            </>
+          )}
         </Content>
       </Container>
     </Wrapper>
@@ -67,6 +78,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  position: relative;
 `;
 
 const LockIllust = styled.img`
@@ -141,4 +154,51 @@ const ButtonIcon = styled.img`
   width: 32px;
   height: 32px;
   object-fit: contain;
+`;
+
+type FixedLoginNudgeProps = LoginNudgeProps & {
+  visible?: boolean;
+  onDismiss?: () => void;
+};
+export const FixedLoginNudge: React.FC<FixedLoginNudgeProps> = ({
+  visible: isVisible = false,
+  onDismiss,
+  ...loginNudgeProps
+}) => {
+  return (
+    <OverlayWrapper
+      visible={isVisible}
+      onDismiss={onDismiss}
+      transition={{ ease: 'linear' }}
+    >
+      <StyledLoginNudge {...loginNudgeProps} />
+    </OverlayWrapper>
+  );
+};
+const OverlayWrapper = styled(Modal)`
+  .animated-blur {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  .modal-background {
+    align-items: flex-start;
+  }
+
+  .modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+const StyledLoginNudge = styled(LoginNudge)`
+  width: 90vw;
+
+  margin-top: calc(48px + 64px + 1.5rem);
+
+  & > div {
+    padding-top: 0;
+  }
+
+  & img.lock-illust {
+    filter: drop-shadow(0px 16px 48px rgba(151, 42, 53, 0.45));
+  }
 `;

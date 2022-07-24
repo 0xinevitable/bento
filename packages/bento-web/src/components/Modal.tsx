@@ -10,6 +10,7 @@ export type ModalProps = HTMLMotionProps<'div'> & {
 };
 
 export const Modal: React.FC<ModalProps> = ({
+  className,
   visible,
   onDismiss,
   children,
@@ -21,8 +22,9 @@ export const Modal: React.FC<ModalProps> = ({
     <Portal>
       <AnimatePresence>
         {visible && (
-          <FixedContainer disabled={disabled}>
+          <FixedContainer className={className} disabled={disabled}>
             <AnimatedBlur
+              className="animated-blur"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -43,6 +45,7 @@ export const Modal: React.FC<ModalProps> = ({
               }}
             >
               <ModalContainer
+                className="modal-container"
                 initial={{ transform: 'translate3d(0, 350px, 0)', opacity: 0 }}
                 animate={{ transform: 'translate3d(0, 0px, 0)', opacity: 1 }}
                 exit={{ transform: 'translate3d(0, 350px, 0)', opacity: 0 }}

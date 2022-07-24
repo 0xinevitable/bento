@@ -10,6 +10,7 @@ enum Environment {
 
 const definedFeatures = {
   isProfileEnabled: Environment.off,
+  isEmailMagicLinkEnabled: Environment.off,
 };
 
 type FeatureName = keyof typeof definedFeatures;

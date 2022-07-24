@@ -1,10 +1,12 @@
 import { Icon } from '@iconify/react';
-import { useCallback, useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { Badge } from '@/components/Badge';
 import { useSession } from '@/hooks/useSession';
+import { FixedLoginNudge } from '@/profile/components/LoginNudge';
 import { Supabase } from '@/utils/Supabase';
 import { Analytics } from '@/utils/analytics';
 
@@ -17,6 +19,8 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
   onConnectWallet,
 }) => {
   const { session } = useSession();
+  const [isFixedLoginNudgeVisible, setFixedLoginNudgeVisible] =
+    useState<boolean>(false);
 
   const login = useCallback(async (provider: 'twitter' | 'github') => {
     const { user, session, error } = await Supabase.auth.signIn(
@@ -32,8 +36,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
       title: 'View your Dashboard',
     });
 
-    // Add selection modal
-    login('twitter');
+    setFixedLoginNudgeVisible(true);
   }, [login]);
 
   const onClickConnectWallet = useCallback(() => {
@@ -112,6 +115,19 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
           ))}
         </ProtocolList>
       </ProtocolSection>
+
+      <FixedLoginNudge
+        visible={isFixedLoginNudgeVisible}
+        accessory={
+          <FixedAccessoryRow>
+            <CloseButton
+              onClick={() => setFixedLoginNudgeVisible((prev) => !prev)}
+            >
+              <Icon icon="maki:cross" width={24} height={24} />
+            </CloseButton>
+          </FixedAccessoryRow>
+        }
+      />
     </div>
   );
 };
@@ -183,5 +199,24 @@ const ProtocolList = styled.ul`
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.05);
     user-select: none;
+  }
+`;
+
+const FixedAccessoryRow = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  justify-content: flex-end;
+`;
+const CloseButton = styled.button`
+  color: rgba(255, 255, 255, 0.6);
+  padding: 8px;
+  font-size: 28px;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    color: rgba(255, 255, 255, 0.3);
   }
 `;

@@ -33,10 +33,12 @@ export const QuestionMoreModal: React.FC<Props> = ({
 };
 
 const OverlayWrapper = styled(Modal)`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .modal-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const Container = styled.div`
