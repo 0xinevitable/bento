@@ -39,67 +39,65 @@ export const TokenDetailModal: React.FC<Props> = ({
   );
 
   return (
-    <Portal>
-      <OverlayWrapper
-        visible={isVisible}
-        onDismiss={onDismiss}
-        transition={{ ease: 'linear' }}
-      >
-        {!tokenBalance ? null : (
-          <Content>
-            <TokenHeader>
-              <TokenImage src={tokenBalance.logo} />
-              <TokenInformation>
-                <TokenName>{tokenBalance.name}</TokenName>
-                {tokenBalance.symbol !== null && (
-                  <TokenSymbol className="text-gray-400">
-                    {`$${tokenBalance.symbol}`}
-                  </TokenSymbol>
-                )}
-              </TokenInformation>
-            </TokenHeader>
+    <OverlayWrapper
+      visible={isVisible}
+      onDismiss={onDismiss}
+      transition={{ ease: 'linear' }}
+    >
+      {!tokenBalance ? null : (
+        <Content>
+          <TokenHeader>
+            <TokenImage src={tokenBalance.logo} />
+            <TokenInformation>
+              <TokenName>{tokenBalance.name}</TokenName>
+              {tokenBalance.symbol !== null && (
+                <TokenSymbol className="text-gray-400">
+                  {`$${tokenBalance.symbol}`}
+                </TokenSymbol>
+              )}
+            </TokenInformation>
+          </TokenHeader>
 
-            {tokenBalance.type === 'nft' ? (
-              <AssetList>
-                {assets.map((asset) => {
-                  const isVideo =
-                    !!asset.animation_url ||
-                    asset.image_url.toLowerCase().endsWith('.mp4');
+          {tokenBalance.type === 'nft' ? (
+            <AssetList>
+              {assets.map((asset) => {
+                const isVideo =
+                  !!asset.animation_url ||
+                  asset.image_url.toLowerCase().endsWith('.mp4');
 
-                  return (
-                    <AssetListItem key={asset.id}>
-                      {!isVideo ? (
-                        <AssetImage src={asset.image_url} />
-                      ) : (
-                        <AssetVideo
-                          src={asset.animation_url}
-                          poster={asset.image_url || asset.image_preview_url}
-                          width={98}
-                          height={98}
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                        />
-                      )}
-                      <AssetName className="text-sm text-gray-400">
-                        {asset.name || `#${asset.id}`}
-                      </AssetName>
-                    </AssetListItem>
-                  );
-                })}
-              </AssetList>
-            ) : (
-              <div className="w-full h-24 flex items-center justify-center">
-                <p className="w-full text-gray-400 text-center">
-                  More data coming soon...
-                </p>
-              </div>
-            )}
-          </Content>
-        )}
-      </OverlayWrapper>
-    </Portal>
+                return (
+                  <AssetListItem key={asset.id}>
+                    {!isVideo ? (
+                      <AssetImage src={asset.image_url} />
+                    ) : (
+                      <AssetVideo
+                        src={asset.animation_url}
+                        poster={asset.image_url || asset.image_preview_url}
+                        width={98}
+                        height={98}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+                    )}
+                    <AssetName className="text-sm text-gray-400">
+                      {asset.name || `#${asset.id}`}
+                    </AssetName>
+                  </AssetListItem>
+                );
+              })}
+            </AssetList>
+          ) : (
+            <div className="w-full h-24 flex items-center justify-center">
+              <p className="w-full text-gray-400 text-center">
+                More data coming soon...
+              </p>
+            </div>
+          )}
+        </Content>
+      )}
+    </OverlayWrapper>
   );
 };
 

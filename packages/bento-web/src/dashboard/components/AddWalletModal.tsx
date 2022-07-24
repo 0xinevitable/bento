@@ -8,7 +8,6 @@ import { useSetRecoilState } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
-import { Portal } from '@/components/Portal';
 import { WalletConnector } from '@/components/WalletConnector';
 import { useSession } from '@/hooks/useSession';
 import { useRevalidateWallets } from '@/hooks/useWallets';
@@ -199,151 +198,145 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   }, [draftWalletType, draftWalletAddress, networks, setWallets, onDismiss]);
 
   return (
-    <Portal>
-      <OverlayWrapper
-        visible={isVisible}
-        onDismiss={onDismiss}
-        transition={{ ease: 'linear' }}
+    <OverlayWrapper
+      visible={isVisible}
+      onDismiss={onDismiss}
+      transition={{ ease: 'linear' }}
+    >
+      <div
+        className={clsx(
+          'p-4 h-fit overflow-hidden',
+          'flex flex-col gap-8',
+          'border border-slate-800 rounded-md drop-shadow-2xl',
+          'bg-slate-800/5 backdrop-blur-md flex flex-col cursor-pointer',
+        )}
       >
-        <div
-          className={clsx(
-            'p-4 h-fit overflow-hidden',
-            'flex flex-col gap-8',
-            'border border-slate-800 rounded-md drop-shadow-2xl',
-            'bg-slate-800/5 backdrop-blur-md flex flex-col cursor-pointer',
-          )}
-        >
-          {isLoggedIn ? (
-            <>
-              <section>
-                <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
-                <div className="flex flex-wrap">
-                  {NETWORKS.map((network) => {
-                    const selected = !!networks.find(
-                      (v) => v.id === network.id,
-                    );
-                    const disabled =
-                      typeof firstNetwork !== 'undefined' &&
-                      firstNetwork.type !== network.type;
+        {isLoggedIn ? (
+          <>
+            <section>
+              <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
+              <div className="flex flex-wrap">
+                {NETWORKS.map((network) => {
+                  const selected = !!networks.find((v) => v.id === network.id);
+                  const disabled =
+                    typeof firstNetwork !== 'undefined' &&
+                    firstNetwork.type !== network.type;
 
-                    return (
-                      <NetworkItem
-                        key={network.id}
-                        className={clsx(
-                          'p-2 m-1 rounded-md',
-                          disabled && 'opacity-10 cursor-not-allowed',
-                        )}
-                        selected={selected}
-                        onClick={
-                          !disabled //
-                            ? () => onSelectNetwork(network)
-                            : undefined
-                        }
-                      >
-                        <img
-                          className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
-                          src={network.logo}
-                          alt={network.name}
-                        />
-                        <span className="mt-1 text-white text-xs">
-                          {network.name}
-                        </span>
-                      </NetworkItem>
-                    );
-                  })}
-                </div>
-              </section>
+                  return (
+                    <NetworkItem
+                      key={network.id}
+                      className={clsx(
+                        'p-2 m-1 rounded-md',
+                        disabled && 'opacity-10 cursor-not-allowed',
+                      )}
+                      selected={selected}
+                      onClick={
+                        !disabled //
+                          ? () => onSelectNetwork(network)
+                          : undefined
+                      }
+                    >
+                      <img
+                        className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
+                        src={network.logo}
+                        alt={network.name}
+                      />
+                      <span className="mt-1 text-white text-xs">
+                        {network.name}
+                      </span>
+                    </NetworkItem>
+                  );
+                })}
+              </div>
+            </section>
 
-              <section>
-                <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
-                <WalletConnector
-                  networks={networks}
-                  onSave={() => {
-                    onDismiss?.();
-                    setNetworks([]);
-                    revalidateWallets?.();
-                  }}
-                />
-              </section>
-            </>
-          ) : (
-            <>
-              <section>
-                <h3 className="mb-3 font-bold text-white">
-                  1. Sign in to save and verify; else it'll be per-device
-                </h3>
-                <div>
-                  <button
-                    className="m-1 p-2 bg-slate-200"
-                    onClick={() => onClickSignIn('twitter')}
-                  >
-                    Twitter
-                  </button>
-                  <button
-                    className="m-1 p-2 bg-slate-200"
-                    onClick={() => onClickSignIn('github')}
-                  >
-                    GitHub
-                  </button>
-                </div>
-              </section>
+            <section>
+              <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
+              <WalletConnector
+                networks={networks}
+                onSave={() => {
+                  onDismiss?.();
+                  setNetworks([]);
+                  revalidateWallets?.();
+                }}
+              />
+            </section>
+          </>
+        ) : (
+          <>
+            <section>
+              <h3 className="mb-3 font-bold text-white">
+                1. Sign in to save and verify; else it'll be per-device
+              </h3>
+              <div>
+                <button
+                  className="m-1 p-2 bg-slate-200"
+                  onClick={() => onClickSignIn('twitter')}
+                >
+                  Twitter
+                </button>
+                <button
+                  className="m-1 p-2 bg-slate-200"
+                  onClick={() => onClickSignIn('github')}
+                >
+                  GitHub
+                </button>
+              </div>
+            </section>
 
-              <section>
-                <h3 className="mb-3 font-bold text-white">2. Input Address</h3>
+            <section>
+              <h3 className="mb-3 font-bold text-white">2. Input Address</h3>
 
-                <FieldInput
-                  field="Address"
-                  value={draftWalletAddress}
-                  onChange={(e) => setDraftWalletAddress(e.target.value)}
-                />
-              </section>
+              <FieldInput
+                field="Address"
+                value={draftWalletAddress}
+                onChange={(e) => setDraftWalletAddress(e.target.value)}
+              />
+            </section>
 
-              <section>
-                <h3 className="mb-3 font-bold text-white">3. Choose Chains</h3>
-                <div className="flex flex-wrap">
-                  {NETWORKS.map((network) => {
-                    const selected = !!networks.find(
-                      (v) => v.id === network.id,
-                    );
-                    const disabled =
-                      (typeof firstNetwork !== 'undefined' &&
-                        firstNetwork.type !== network.type) ||
-                      draftWalletType !== network.type;
+            <section>
+              <h3 className="mb-3 font-bold text-white">3. Choose Chains</h3>
+              <div className="flex flex-wrap">
+                {NETWORKS.map((network) => {
+                  const selected = !!networks.find((v) => v.id === network.id);
+                  const disabled =
+                    (typeof firstNetwork !== 'undefined' &&
+                      firstNetwork.type !== network.type) ||
+                    draftWalletType !== network.type;
 
-                    return (
-                      <NetworkItem
-                        key={network.id}
-                        className={clsx(
-                          'p-2 m-1 rounded-md',
-                          disabled && 'opacity-10 cursor-not-allowed',
-                        )}
-                        selected={selected}
-                        onClick={
-                          !disabled //
-                            ? () => onSelectNetwork(network)
-                            : undefined
-                        }
-                      >
-                        <img
-                          className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
-                          src={network.logo}
-                          alt={network.name}
-                        />
-                        <span className="mt-1 text-white text-xs">
-                          {network.name}
-                        </span>
-                      </NetworkItem>
-                    );
-                  })}
-                </div>
-              </section>
+                  return (
+                    <NetworkItem
+                      key={network.id}
+                      className={clsx(
+                        'p-2 m-1 rounded-md',
+                        disabled && 'opacity-10 cursor-not-allowed',
+                      )}
+                      selected={selected}
+                      onClick={
+                        !disabled //
+                          ? () => onSelectNetwork(network)
+                          : undefined
+                      }
+                    >
+                      <img
+                        className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
+                        src={network.logo}
+                        alt={network.name}
+                      />
+                      <span className="mt-1 text-white text-xs">
+                        {network.name}
+                      </span>
+                    </NetworkItem>
+                  );
+                })}
+              </div>
+            </section>
 
-              <Button onClick={onClickAddWallet}>Add Button</Button>
-            </>
-          )}
-        </div>
-      </OverlayWrapper>
-    </Portal>
+            <Button onClick={onClickAddWallet}>Add Button</Button>
+          </>
+        )}
+      </div>
+    </OverlayWrapper>
   );
 };
 
