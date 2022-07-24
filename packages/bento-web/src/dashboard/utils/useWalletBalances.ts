@@ -5,10 +5,11 @@ import {
 } from '@bento/common';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import produce from 'immer';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { SWRResponse } from 'swr';
 
 import { useAxiosSWR } from '@/hooks/useAxiosSWR';
+import { useInterval } from '@/hooks/useInterval';
 
 import {
   CosmosSDKWalletBalance,
@@ -112,7 +113,8 @@ export const useWalletBalances = ({ wallets }: Options) => {
   const [coinGeckoPricesByIds, setCoinGeckoPricesByIds] = useState<
     Record<string, number | undefined>
   >({});
-  useEffect(() => {
+
+  const fetchPrices = useCallback(() => {
     if (!coinGeckoIds.length) {
       return;
     }
@@ -120,6 +122,8 @@ export const useWalletBalances = ({ wallets }: Options) => {
       .then(setCoinGeckoPricesByIds)
       .catch(() => {});
   }, [coinGeckoIds]);
+
+  useInterval(fetchPrices, 15_000);
 
   const balancesWithPrices = useMemo(
     () =>
