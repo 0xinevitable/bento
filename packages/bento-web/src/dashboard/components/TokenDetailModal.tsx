@@ -1,5 +1,6 @@
 import { OpenSeaAsset, cachedAxios } from '@bento/client';
 import { shortenAddress } from '@bento/common';
+import clsx from 'clsx';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
@@ -82,9 +83,11 @@ export const TokenDetailModal: React.FC<Props> = ({
   }, [tokenBalance]);
 
   const [TVL, setTVL] = useState<number | null>(null);
+  const [priceChange, setPriceChange] = useState<number | null>(null);
   useEffect(() => {
     if (!tokenBalance?.coinGeckoId) {
       setTVL(null);
+      setPriceChange(null);
       return;
     }
 
@@ -92,6 +95,7 @@ export const TokenDetailModal: React.FC<Props> = ({
 
     cachedAxios.get(url).then(({ data }) => {
       setTVL(data.market_data?.total_value_locked?.usd ?? null);
+      setPriceChange(data.market_data?.price_change_percentage_24h ?? null);
     });
   }, [tokenBalance]);
 
@@ -143,6 +147,25 @@ export const TokenDetailModal: React.FC<Props> = ({
                   <div>
                     <span className="field">Price</span>
                     <span className="value">
+                      {priceChange !== null && (
+                        <span
+                          className={clsx(
+                            'mr-1 text-sm font-semibold',
+                            priceChange === 0
+                              ? 'text-gray-400'
+                              : priceChange < 0
+                              ? 'text-red-400'
+                              : 'text-green-400',
+                          )}
+                        >
+                          {`${
+                            priceChange < 0 ? '' : '+'
+                          }${priceChange.toLocaleString(undefined, {
+                            maximumFractionDigits: 2,
+                          })}%`}
+                        </span>
+                      )}
+
                       {`$${tokenBalance.price.toLocaleString(undefined, {
                         maximumSignificantDigits: 6,
                       })}`}
