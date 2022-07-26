@@ -1,11 +1,16 @@
 import { OpenSeaAsset } from '@bento/client';
+import { shortenAddress } from '@bento/common';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
+import { Badge } from '@/components/Badge';
 import { Modal } from '@/components/Modal';
 
 import { WalletBalance } from '../types/WalletBalance';
 import { AssetMedia } from './AssetMedia';
+
+const capitalize = (value: string) =>
+  value.charAt(0).toUpperCase() + value.slice(1);
 
 export type TokenDetailModalParams = {
   tokenBalance?: {
@@ -25,6 +30,12 @@ type Props = TokenDetailModalParams & {
   onDismiss?: () => void;
 };
 
+type WalletPosition = 'wallet' | 'stake' | 'delegation';
+type WalletsByPosition = Record<
+  WalletPosition,
+  { amount: number; address: string }[]
+>;
+
 export const TokenDetailModal: React.FC<Props> = ({
   visible: isVisible = false,
   onDismiss,
@@ -37,6 +48,37 @@ export const TokenDetailModal: React.FC<Props> = ({
       ) ?? [],
     [tokenBalance],
   );
+
+  const walletsByPosition = useMemo<WalletsByPosition>(() => {
+    let walletsByPosition: WalletsByPosition = {
+      wallet: [],
+      stake: [],
+      delegation: [],
+    };
+
+    if (tokenBalance?.type === 'nft' || !tokenBalance?.balances) {
+      return walletsByPosition;
+    }
+
+    for (let wallet of tokenBalance.balances) {
+      if (wallet.balance > 0) {
+        const position =
+          'staking' in wallet && wallet.staking ? 'stake' : 'wallet';
+        walletsByPosition[position].push({
+          amount: wallet.balance,
+          address: wallet.walletAddress,
+        });
+      }
+      if ('delegations' in wallet && wallet.delegations > 0) {
+        walletsByPosition.delegation.push({
+          amount: wallet.delegations,
+          address: wallet.walletAddress,
+        });
+      }
+    }
+
+    return walletsByPosition;
+  }, [tokenBalance]);
 
   return (
     <OverlayWrapper
@@ -80,11 +122,78 @@ export const TokenDetailModal: React.FC<Props> = ({
               })}
             </AssetList>
           ) : (
-            <div className="w-full h-24 flex items-center justify-center">
-              <p className="w-full text-gray-400 text-center">
-                More data coming soon...
-              </p>
-            </div>
+            <>
+              <FungibleTokenInfo>
+                <FungibleTokenTable>
+                  <div>
+                    <span className="field">Price</span>
+                    <span className="value">
+                      {`$${tokenBalance.price.toLocaleString(undefined, {
+                        maximumSignificantDigits: 6,
+                      })}`}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="field">Type</span>
+                    <span className="value">
+                      {typeof tokenBalance.tokenAddress === 'undefined'
+                        ? 'Native'
+                        : 'Token'}
+                    </span>
+                  </div>
+                </FungibleTokenTable>
+                <AllocationSection>
+                  {(['wallet', 'stake', 'delegation'] as const).map(
+                    (position) => {
+                      const wallets = walletsByPosition[position];
+                      if (!wallets.length) {
+                        return null;
+                      }
+
+                      const total = wallets.reduce(
+                        (acc, wallet) => acc + wallet.amount,
+                        0,
+                      );
+                      return (
+                        <li>
+                          <AllocationSectionTitle>
+                            <InlineBadge>{capitalize(position)}</InlineBadge>
+
+                            <PositionRatio>
+                              {`${(
+                                (total / tokenBalance.amount) *
+                                100
+                              ).toLocaleString()}%`}
+                            </PositionRatio>
+                          </AllocationSectionTitle>
+                          <AllocationWalletList>
+                            {walletsByPosition[position].map((wallet) => (
+                              <li className="w-full justify-between flex items-center">
+                                <span className="flex items-center gap-2 font-semibold text-lg">
+                                  <TokenIcon src={tokenBalance.logo} />
+                                  {wallet.amount.toLocaleString(undefined, {
+                                    maximumSignificantDigits: 6,
+                                  })}
+                                </span>
+                                <span className="text-gray-400">
+                                  {shortenAddress(wallet.address)}
+                                </span>
+                              </li>
+                            ))}
+                          </AllocationWalletList>
+                        </li>
+                      );
+                    },
+                  )}
+                </AllocationSection>
+              </FungibleTokenInfo>
+
+              <div className="w-full h-24 flex items-center justify-center">
+                <p className="w-full text-gray-400 text-center">
+                  More data coming soon...
+                </p>
+              </div>
+            </>
           )}
         </Content>
       )}
@@ -128,10 +237,14 @@ const TokenHeader = styled.div`
 `;
 
 const TokenImage = styled.img`
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   object-fit: cover;
+`;
+const TokenIcon = styled(TokenImage)`
+  width: 28px;
+  height: 28px;
 `;
 
 const TokenInformation = styled.div`
@@ -140,12 +253,15 @@ const TokenInformation = styled.div`
   flex-direction: column;
 `;
 const TokenName = styled.h2`
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
   color: white;
+  line-height: 1;
 `;
 const TokenSymbol = styled.span`
-  font-size: 14px;
+  margin-top: 6px;
+  font-size: 18px;
+  line-height: 1;
 `;
 
 const AssetList = styled.ul`
@@ -177,4 +293,88 @@ const AssetName = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+const FungibleTokenInfo = styled.div`
+  margin-top: 16px;
+
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 16px;
+
+  width: 100%;
+  display: flex;
+  color: white;
+
+  & > div:first-of-type {
+    margin-right: 32px;
+  }
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+
+    & > div:first-of-type {
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+  }
+`;
+const FungibleTokenTable = styled.div`
+  flex: 1;
+  font-size: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  & > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  span.field {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  span.value {
+    color: rgba(255, 255, 255, 0.95);
+  }
+`;
+const AllocationSection = styled.ul`
+  width: 100%;
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+const AllocationSectionTitle = styled.h4`
+  display: flex;
+  align-items: center;
+`;
+const InlineBadge = styled(Badge)`
+  padding: 6px;
+  padding-bottom: 5px;
+  display: inline-flex;
+  font-size: 18px;
+  backdrop-filter: none;
+`;
+const PositionRatio = styled.span`
+  margin-top: 2px;
+  margin-left: 6px;
+
+  font-size: 22px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.4);
+`;
+const AllocationWalletList = styled.ul`
+  margin-top: 12px;
+  width: 100%;
+  padding: 0 6px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
