@@ -1,11 +1,11 @@
 import { OpenSeaAsset } from '@bento/client';
 import React, { useMemo } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { Modal } from '@/components/Modal';
-import { Portal } from '@/components/Portal';
 
 import { WalletBalance } from '../types/WalletBalance';
+import { AssetMedia } from './AssetMedia';
 
 export type TokenDetailModalParams = {
   tokenBalance?: {
@@ -67,20 +67,11 @@ export const TokenDetailModal: React.FC<Props> = ({
 
                 return (
                   <AssetListItem key={asset.id}>
-                    {!isVideo ? (
-                      <AssetImage src={asset.image_url} />
-                    ) : (
-                      <AssetVideo
-                        src={asset.animation_url}
-                        poster={asset.image_url || asset.image_preview_url}
-                        width={98}
-                        height={98}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                      />
-                    )}
+                    <AssetMedia
+                      src={!isVideo ? asset.image_url : asset.animation_url}
+                      poster={asset.image_url || asset.image_preview_url}
+                      isVideo={isVideo}
+                    />
                     <AssetName className="text-sm text-gray-400">
                       {asset.name || `#${asset.id}`}
                     </AssetName>
@@ -186,18 +177,4 @@ const AssetName = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-`;
-const assetMediaStyle = css`
-  width: 100%;
-  aspect-ratio: 1;
-
-  object-fit: cover;
-  border-radius: 8px;
-  background-color: black;
-`;
-const AssetImage = styled.img`
-  ${assetMediaStyle}
-`;
-const AssetVideo = styled.video`
-  ${assetMediaStyle}
 `;
