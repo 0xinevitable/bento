@@ -75,6 +75,7 @@ const DashboardPage = () => {
           netWorth: amount * first.price,
           amount,
           price: first.price,
+          coinGeckoId: 'coinGeckoId' in first ? first.coinGeckoId : undefined,
         };
       })
       .flat();

@@ -1,6 +1,6 @@
-import { OpenSeaAsset } from '@bento/client';
+import { OpenSeaAsset, cachedAxios } from '@bento/client';
 import { shortenAddress } from '@bento/common';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
@@ -23,6 +23,7 @@ export type TokenDetailModalParams = {
     amount: number;
     price: number;
     type?: 'nft';
+    coinGeckoId?: string;
   };
 };
 type Props = TokenDetailModalParams & {
@@ -80,6 +81,20 @@ export const TokenDetailModal: React.FC<Props> = ({
     return walletsByPosition;
   }, [tokenBalance]);
 
+  const [TVL, setTVL] = useState<number | null>(null);
+  useEffect(() => {
+    if (!tokenBalance?.coinGeckoId) {
+      setTVL(null);
+      return;
+    }
+
+    const url = `https://api.coingecko.com/api/v3/coins/${tokenBalance.coinGeckoId}?tickers=false&market_data=true&community_data=false&developer_data=false`;
+
+    cachedAxios.get(url).then(({ data }) => {
+      setTVL(data.market_data?.total_value_locked?.usd ?? null);
+    });
+  }, [tokenBalance]);
+
   return (
     <OverlayWrapper
       visible={isVisible}
@@ -133,6 +148,12 @@ export const TokenDetailModal: React.FC<Props> = ({
                       })}`}
                     </span>
                   </div>
+                  {TVL !== null && (
+                    <div>
+                      <span className="field">TVL</span>
+                      <span className="value">{`$${TVL.toLocaleString()}`}</span>
+                    </div>
+                  )}
                   <div>
                     <span className="field">Type</span>
                     <span className="value">
@@ -321,7 +342,7 @@ const FungibleTokenInfo = styled.div`
 `;
 const FungibleTokenTable = styled.div`
   flex: 1;
-  font-size: 20px;
+  font-size: 18.5px;
 
   display: flex;
   flex-direction: column;
