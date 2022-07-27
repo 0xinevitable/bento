@@ -15,9 +15,7 @@ import {
 } from './components/TokenDetailModal';
 import { IntroSection } from './sections/IntroSection';
 
-const DynamicDashboardMain = dynamic(() => import('./sections/DashboardMain'), {
-  suspense: true,
-});
+const DynamicDashboardMain = dynamic(() => import('./sections/DashboardMain'));
 
 const DashboardPage = () => {
   const wallets = useRecoilValue(walletsAtom);
