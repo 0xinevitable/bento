@@ -16,10 +16,21 @@ export const ProfileLinkItem: React.FC<Props> = ({
     <Wrapper>
       <Link href={href} rel="nofollow" target="_blank">
         <Container>
-          <LinkImageWrapper>
-            <LinkImage src={image} />
-          </LinkImageWrapper>
-          <Information>
+          {image && (
+            <LinkImageWrapper>
+              <LinkImage src={image} />
+            </LinkImageWrapper>
+          )}
+          <Information
+            style={
+              !image
+                ? {
+                    marginLeft: 0,
+                    alignItems: 'center',
+                  }
+                : undefined
+            }
+          >
             <Title>{title}</Title>
             <Description>{description}</Description>
           </Information>
@@ -35,10 +46,12 @@ const Wrapper = styled.li`
 `;
 const Link = styled.a``;
 const Container = styled.div`
-  display: flex;
   padding: 12px;
-  background-color: #262b34;
+  height: ${86 + 12 * 2}px;
+
+  display: flex;
   border-radius: 8px;
+  background-color: #262b34;
 `;
 
 const LinkImageWrapper = styled.div`

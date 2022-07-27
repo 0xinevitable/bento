@@ -8,7 +8,6 @@ import { FeatureFlags } from '@/utils/FeatureFlag';
 import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
 import { FieldInput } from '../components/FieldInput';
 import { FieldTextArea } from '../components/FieldTextArea';
-import { ExampleUserProfile } from '../constants/ExampleUserProfile';
 import { ProfileLink } from '../types/UserProfile';
 import { Preview } from './components/Preview';
 import { ProfileLinkEditItem } from './components/ProfileLinkEditItem';
@@ -28,13 +27,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
 };
 
-const ManagePage = () => {
+const ProfileEditPage = () => {
   const [profile] = useProfile();
 
   const [username, setUsername] = useState<string>('');
   const [displayName, setDisplayName] = useState<string>('');
   const [bio, setBio] = useState<string>('');
   const [links, setLinks] = useState<ProfileLink[]>([]);
+  const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
     if (!profile) {
@@ -44,6 +44,11 @@ const ManagePage = () => {
     setDisplayName(profile.display_name);
     setBio(profile.bio);
     setLinks(profile.links);
+    if (!!profile.images) {
+      setImages(profile.images);
+    } else {
+      setImages(['/assets/mockups/profile-default.png']);
+    }
   }, [profile]);
 
   const profileDraft = useMemo(
@@ -53,11 +58,11 @@ const ManagePage = () => {
       display_name: displayName,
       bio,
       links,
-      images: ExampleUserProfile.images,
+      images,
       verified: false,
       tabs: [],
     }),
-    [username, displayName, bio, links],
+    [username, displayName, images, bio, links],
   );
 
   const onSubmit = useCallback(async () => {
@@ -133,7 +138,7 @@ const ManagePage = () => {
   );
 };
 
-export default ManagePage;
+export default ProfileEditPage;
 
 const Wrapper = styled.div`
   width: 100%;

@@ -1,9 +1,11 @@
 import dedent from 'dedent';
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+
+import { Skeleton } from '@/components/Skeleton';
 
 type ProfileImageType = React.HTMLAttributes<HTMLDivElement> & {
-  source: string;
+  source?: string;
   children?: React.ReactNode;
 };
 
@@ -12,9 +14,16 @@ export const ProfileImage: React.FC<ProfileImageType> = ({
   children,
   ...props
 }) => {
+  const [loaded, setLoaded] = useState<boolean>(false);
+
   return (
     <ImageContainer {...props}>
-      <Image src={source} />
+      {!loaded && <ImageSkeleton />}
+      <Image
+        src={source}
+        onLoad={() => setLoaded(true)}
+        style={{ display: !loaded ? 'none' : undefined }}
+      />
       <BlurUnderlay src={source} />
       <ImageBorder className="image-border" />
       {children}
@@ -27,18 +36,24 @@ const ImageContainer = styled.div`
   height: 128px;
   position: relative;
   border-radius: 50%;
+  filter: drop-shadow(0px 21px 12px rgba(0, 0, 0, 0.25));
 `;
-const Image = styled.img`
+const imageStyles = css`
   width: 128px;
   height: 128px;
-  filter: drop-shadow(0px 21px 12px rgba(0, 0, 0, 0.25));
-  border-radius: 90px;
+  border-radius: 50%;
   z-index: 2;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  background: black;
+`;
+const Image = styled.img`
+  ${imageStyles}
+  background-color: black;
+`;
+const ImageSkeleton = styled(Skeleton)`
+  ${imageStyles}
 `;
 const BlurUnderlay = styled(Image)`
   position: absolute;
@@ -66,8 +81,8 @@ const gradientBorderMask = dedent`
   ') 0 / 100% 100%;
 `;
 const ImageBorder = styled.div`
-  width: 128px;
-  height: 128px;
+  width: 129px;
+  height: 129px;
   position: relative;
   z-index: 8;
 
@@ -85,6 +100,11 @@ const ImageBorder = styled.div`
     -webkit-mask: ${gradientBorderMask};
   }
 
-  /* FIXME: fetch gradent from palette */
-  background-image: linear-gradient(131.57deg, #39e27d 3.15%, #5a897d 88.22%);
+  background-color: #e35252;
+  background-image: linear-gradient(
+    to right bottom,
+    #ff3e3e 0%,
+    #ff8f3a 30%,
+    #ff214a 65%
+  );
 `;

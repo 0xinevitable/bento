@@ -24,13 +24,9 @@ import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
 import { UserProfile } from '../types/UserProfile';
 
 const data = {
-  color: '#39e27d',
+  color: '#ff3856',
   background: dedent`
-    radial-gradient(
-      73.41% 194.47% at 0% -2.27%,
-      #39e27d 0%,
-      #90cff1 100%
-    )
+    linear-gradient(to right bottom, #E35252 0%, #DB6E57 29.47%, #C22E3A 65.1%)
   `,
 };
 
@@ -116,7 +112,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   }, [walletBalances]);
 
   const palette = usePalette(data.color);
-  const profileImageURL = profile.images[0];
+  const profileImageURL = profile.images?.[0];
 
   return (
     <React.Fragment>
