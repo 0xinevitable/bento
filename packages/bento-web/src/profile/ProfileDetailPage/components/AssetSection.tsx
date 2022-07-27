@@ -80,7 +80,7 @@ const Description = styled.p`
 `;
 
 const AssetSkeleton = styled(Skeleton)`
-  width: 536px;
+  width: 100%;
   height: 88px;
   margin-top: 8px;
   border-radius: 8px;
