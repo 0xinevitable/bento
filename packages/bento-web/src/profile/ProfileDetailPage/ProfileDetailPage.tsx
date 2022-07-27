@@ -35,7 +35,7 @@ const ProfileDetailPage = () => {
     () => [
       `${profile?.display_name ?? profile?.username} - Linky`,
       profile?.bio ?? '',
-      profile?.images || ['/assets/illusts/bento-zap.png'],
+      profile?.images || [],
       `https://linky.vc/address/${profile?.username}`,
     ],
     [profile],
@@ -51,12 +51,16 @@ const ProfileDetailPage = () => {
         <meta property="og:description" content={description} />
         <meta name="twitter:description" content={description} />
 
-        <meta property="og:image" content={images[0]} key="og:image" />
-        <meta
-          property="twitter:image"
-          content={images[0]}
-          key="twitter:image"
-        />
+        {images.length > 0 && (
+          <>
+            <meta property="og:image" content={images[0]} key="og:image" />
+            <meta
+              property="twitter:image"
+              content={images[0]}
+              key="twitter:image"
+            />
+          </>
+        )}
 
         <meta property="og:url" content={url} />
         <meta property="twitter:url" content={url} />
@@ -67,7 +71,10 @@ const ProfileDetailPage = () => {
           // FIXME:
           profile={{
             ...(profile ?? defaultProfile),
-            images,
+            images:
+              !!profile && !profile.images?.[0]
+                ? ['/assets/mockups/profile-default.png']
+                : null,
           }}
         />
       </div>

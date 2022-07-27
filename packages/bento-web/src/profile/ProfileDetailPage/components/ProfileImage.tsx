@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 type ProfileImageType = React.HTMLAttributes<HTMLDivElement> & {
-  source: string;
+  source?: string;
   children?: React.ReactNode;
 };
 

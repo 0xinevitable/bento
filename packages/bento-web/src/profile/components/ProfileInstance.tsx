@@ -111,7 +111,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   }, [walletBalances]);
 
   const palette = usePalette(data.color);
-  const profileImageURL = profile.images[0];
+  const profileImageURL = profile.images?.[0];
 
   return (
     <React.Fragment>

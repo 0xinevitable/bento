@@ -13,7 +13,7 @@ export enum UserProfileTab {
 export type UserProfile = {
   username: string;
   display_name: string;
-  images: string[];
+  images: string[] | null;
   verified: boolean;
   bio: string;
   tabs: UserProfileTab[];
