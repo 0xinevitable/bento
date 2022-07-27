@@ -1,6 +1,8 @@
 import dedent from 'dedent';
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+
+import { Skeleton } from '@/components/Skeleton';
 
 type ProfileImageType = React.HTMLAttributes<HTMLDivElement> & {
   source?: string;
@@ -12,9 +14,16 @@ export const ProfileImage: React.FC<ProfileImageType> = ({
   children,
   ...props
 }) => {
+  const [loaded, setLoaded] = useState<boolean>(false);
+
   return (
     <ImageContainer {...props}>
-      <Image src={source} />
+      {!loaded && <ImageSkeleton />}
+      <Image
+        src={source}
+        onLoad={() => setLoaded(true)}
+        style={{ display: !loaded ? 'none' : undefined }}
+      />
       <BlurUnderlay src={source} />
       <ImageBorder className="image-border" />
       {children}
@@ -27,18 +36,24 @@ const ImageContainer = styled.div`
   height: 128px;
   position: relative;
   border-radius: 50%;
+  filter: drop-shadow(0px 21px 12px rgba(0, 0, 0, 0.25));
 `;
-const Image = styled.img`
+const imageStyles = css`
   width: 128px;
   height: 128px;
-  filter: drop-shadow(0px 21px 12px rgba(0, 0, 0, 0.25));
-  border-radius: 90px;
+  border-radius: 50%;
   z-index: 2;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  background: black;
+`;
+const Image = styled.img`
+  ${imageStyles}
+  background-color: black;
+`;
+const ImageSkeleton = styled(Skeleton)`
+  ${imageStyles}
 `;
 const BlurUnderlay = styled(Image)`
   position: absolute;
