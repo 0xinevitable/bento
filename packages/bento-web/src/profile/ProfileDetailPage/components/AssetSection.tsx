@@ -1,12 +1,7 @@
-import groupBy from 'lodash.groupby';
-import React, { useMemo } from 'react';
-import { useRecoilValue } from 'recoil';
+import React from 'react';
 import styled from 'styled-components';
 
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
-import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
-import { walletsAtom } from '@/recoil/wallets';
 
 type Props = { tokenBalances: DashboardTokenBalance[] };
 
