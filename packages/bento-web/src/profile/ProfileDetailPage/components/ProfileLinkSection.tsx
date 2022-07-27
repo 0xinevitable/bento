@@ -35,7 +35,7 @@ const ProfileLinkList = styled.ul`
 `;
 
 const LinkSkeleton = styled(Skeleton)`
-  width: 536px;
+  width: 100%;
   height: 110px;
   margin-top: 8px;
   border-radius: 8px;
