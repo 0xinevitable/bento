@@ -39,7 +39,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
           netWorthInUSD={netWorthInUSD}
         />
       </div>
-      {assetRatioByPlatform.length && (
+      {!!assetRatioByPlatform.length && (
         <AssetCardList className="flex-1">
           {assetRatioByPlatform.map((item) => (
             <AssetRatioListItem key={item.platform} {...item} />
