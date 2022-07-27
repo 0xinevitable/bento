@@ -12,7 +12,7 @@ import {
   TokenDetailModal,
   TokenDetailModalParams,
 } from './components/TokenDetailModal';
-import { DashboardSection } from './sections/DashboardSection';
+import { DashboardMain } from './sections/DashboardMain';
 import { IntroSection } from './sections/IntroSection';
 
 const DashboardPage = () => {
@@ -59,8 +59,9 @@ const DashboardPage = () => {
           onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
         />
       ) : (
-        <DashboardSection
+        <DashboardMain
           wallets={wallets}
+          setAddWalletModalVisible={setAddWalletModalVisible}
           setTokenDetailModalVisible={setTokenDetailModalVisible}
           setTokenDetailModalParams={setTokenDetailModalParams}
         />

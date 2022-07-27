@@ -14,18 +14,18 @@ import { Analytics } from '@/utils/analytics';
 import { TokenBalanceItem } from '../components/TokenBalanceItem';
 import { TokenDetailModalParams } from '../components/TokenDetailModal';
 import { WalletList } from '../components/WalletList';
-import { AssetRatioSection } from '../sections/AssetRatioSection';
 import { DashboardTokenBalance } from '../types/TokenBalance';
 import { WalletBalance } from '../types/WalletBalance';
 import { useNFTBalances } from '../utils/useNFTBalances';
 import { useWalletBalances } from '../utils/useWalletBalances';
+import { AssetRatioSection } from './AssetRatioSection';
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
   (acc: number, balance: WalletBalance) =>
     (balance.symbol ?? balance.name) === key ? callback(acc, balance) : acc;
 
-type DashboardSectionProps = {
+type DashboardMainProps = {
   wallets: Wallet[];
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setTokenDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,7 +34,7 @@ type DashboardSectionProps = {
   >;
 };
 
-export const DashboardSection: React.FC<DashboardSectionProps> = ({
+export const DashboardMain: React.FC<DashboardMainProps> = ({
   wallets,
   setAddWalletModalVisible,
   setTokenDetailModalVisible,
