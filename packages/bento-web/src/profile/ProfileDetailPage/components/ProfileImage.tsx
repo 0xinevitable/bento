@@ -66,8 +66,8 @@ const gradientBorderMask = dedent`
   ') 0 / 100% 100%;
 `;
 const ImageBorder = styled.div`
-  width: 128px;
-  height: 128px;
+  width: 129px;
+  height: 129px;
   position: relative;
   z-index: 8;
 
