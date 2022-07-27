@@ -8,6 +8,7 @@ import styled, { css } from 'styled-components';
 
 import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
 import { Modal } from '@/components/Modal';
+import { Skeleton } from '@/components/Skeleton';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
@@ -132,20 +133,40 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             </a>
           </Link>
         )}
-        <DisplayName>{profile.display_name ?? profile.username}</DisplayName>
-        <Username style={{ color: palette.primary }}>
-          {`@${profile.username}`}
-        </Username>
-        <Bio>{profile.bio}</Bio>
-        <PrimaryArchievement>
-          <CheckCircleIcon color={palette.primary} />
-          <span>
-            Early holder of{' '}
-            <PrimaryArchievementLink style={{ color: palette.primary }}>
-              CloneX
-            </PrimaryArchievementLink>
-          </span>
-        </PrimaryArchievement>
+        {!!profile.display_name ? (
+          <DisplayName>{profile.display_name ?? profile.username}</DisplayName>
+        ) : (
+          <DefaultSkeleton
+            style={{
+              height: '34px',
+              width: '120px',
+              marginBottom: '10px',
+            }}
+          />
+        )}
+        {!!profile.username ? (
+          <Username style={{ color: palette.primary }}>
+            {`@${profile.username}`}
+          </Username>
+        ) : (
+          <DefaultSkeleton
+            style={{
+              height: '19px',
+              width: '80px',
+              marginBottom: '10px',
+            }}
+          />
+        )}
+        {!!profile.bio ? (
+          <Bio>{profile.bio}</Bio>
+        ) : (
+          <DefaultSkeleton
+            style={{
+              height: '22px',
+              width: '200px',
+            }}
+          />
+        )}
       </Information>
       <InformationSpacer />
       <Modal
@@ -246,27 +267,14 @@ const Bio = styled.p`
   white-space: break-spaces;
 `;
 
-const PrimaryArchievement = styled.div`
-  margin-top: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  & > span {
-    margin-left: 4px;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    color: #78797f;
-  }
-`;
-const PrimaryArchievementLink = styled.a`
-  text-decoration-line: underline;
-`;
-
 const InformationSpacer = styled.div`
   width: 100%;
   height: 26px;
+`;
+
+const DefaultSkeleton = styled(Skeleton)`
+  border-radius: 6px;
+  align-self: center;
 `;
 
 const LargeProfileImage = styled.img`
