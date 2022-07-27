@@ -59,23 +59,16 @@ export const NavigationBar = () => {
   return (
     <Wrapper>
       <Container>
-        <a
-          href="https://bento.finance"
-          target="_blank"
-          onClick={() =>
-            Analytics.logEvent('click_landing_link', {
-              title: 'Bento',
-              medium: 'gnb',
-            })
-          }
-        >
-          <HiddenTitle>Bento</HiddenTitle>
-          <LogoWrapper>
-            <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
-          </LogoWrapper>
-        </a>
+        <Link href="/" passHref>
+          <a>
+            <HiddenTitle>Bento</HiddenTitle>
+            <LogoWrapper>
+              <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
+            </LogoWrapper>
+          </a>
+        </Link>
 
-        {FeatureFlags.isProfileEnabled && (
+        {!!session && FeatureFlags.isProfileEnabled && (
           <ul className="flex">
             {NAVIGATION_ITEMS.map((item) => (
               <NavigationItem
