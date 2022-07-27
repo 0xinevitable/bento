@@ -46,14 +46,15 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const ProfileDetailPage = () => {
   const [profile, setProfile] = useProfile();
 
-  const [title, description, image, url] = useMemo(
+  console.log(profile);
+  const [title, description, images, url] = useMemo(
     () => [
       `${profile?.display_name ?? profile?.username} - Linky`,
       data.bio,
-      data.profileImageURL,
+      profile?.images || ['/assets/illusts/bento-zap.png'],
       `https://linky.vc/address/${profile?.username}`,
     ],
-    [],
+    [profile],
   );
 
   return (
@@ -66,8 +67,12 @@ const ProfileDetailPage = () => {
         <meta property="og:description" content={description} />
         <meta name="twitter:description" content={description} />
 
-        <meta property="og:image" content={image} key="og:image" />
-        <meta property="twitter:image" content={image} key="twitter:image" />
+        <meta property="og:image" content={images[0]} key="og:image" />
+        <meta
+          property="twitter:image"
+          content={images[0]}
+          key="twitter:image"
+        />
 
         <meta property="og:url" content={url} />
         <meta property="twitter:url" content={url} />
@@ -78,7 +83,7 @@ const ProfileDetailPage = () => {
           // FIXME:
           profile={{
             ...(profile ?? defaultProfile),
-            images: defaultProfile.images,
+            images,
           }}
         />
       </div>
