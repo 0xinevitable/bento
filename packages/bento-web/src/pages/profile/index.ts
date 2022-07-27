@@ -1,4 +1,4 @@
 export {
   default,
   getServerSideProps,
-} from '@/profile/ProfileHomePage/ProfileHomePage';
+} from '@/profile/ProfileDetailPage/ProfileDetailPage';
