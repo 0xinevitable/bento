@@ -11,9 +11,9 @@ type Props = {
 export const ProfileLinkSection: React.FC<Props> = ({ items }) => {
   return (
     <ProfileLinkList>
-      {items.map((item, index) => {
-        return <ProfileLinkItem key={`item-${index}`} {...item} />;
-      })}
+      {items.map((item, index) => (
+        <ProfileLinkItem key={`item-${index}`} {...item} />
+      ))}
     </ProfileLinkList>
   );
 };
