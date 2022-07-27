@@ -44,7 +44,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const ProfileDetailPage = () => {
-  const [profile, setProfile] = useProfile();
+  const [profile] = useProfile();
 
   console.log(profile);
   const [title, description, images, url] = useMemo(
