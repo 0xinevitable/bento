@@ -85,6 +85,11 @@ const ImageBorder = styled.div`
     -webkit-mask: ${gradientBorderMask};
   }
 
-  /* FIXME: fetch gradent from palette */
-  background-image: linear-gradient(131.57deg, #39e27d 3.15%, #5a897d 88.22%);
+  background-color: #e35252;
+  background-image: linear-gradient(
+    to right bottom,
+    #ff3e3e 0%,
+    #ff8f3a 30%,
+    #ff214a 65%
+  );
 `;
