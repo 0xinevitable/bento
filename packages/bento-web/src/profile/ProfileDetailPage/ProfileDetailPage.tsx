@@ -25,7 +25,6 @@ const data = {
   links: ExampleUserProfile.links,
 };
 
-//const profile = ExampleUserProfile;
 const defaultProfile: UserProfile = {
   username: '',
   display_name: '',
@@ -33,7 +32,7 @@ const defaultProfile: UserProfile = {
   verified: false,
   bio: '',
   tabs: [],
-  links: [],
+  links: null,
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -80,7 +79,6 @@ const ProfileDetailPage = () => {
 
       <div className="w-full max-w-xl mx-auto">
         <ProfileInstance
-          // FIXME:
           profile={{
             ...(profile ?? defaultProfile),
             images,

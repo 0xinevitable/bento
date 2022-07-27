@@ -17,7 +17,7 @@ export type UserProfile = {
   verified: boolean;
   bio: string;
   tabs: UserProfileTab[];
-  links: ProfileLink[];
+  links: ProfileLink[] | null;
 };
 
 export enum UserQuestionType {
