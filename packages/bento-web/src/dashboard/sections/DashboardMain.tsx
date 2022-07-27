@@ -235,6 +235,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   );
 };
 
+export default DashboardMain;
+
 const TopSummaryContainer = styled.div`
   margin-top: 24px;
   display: flex;

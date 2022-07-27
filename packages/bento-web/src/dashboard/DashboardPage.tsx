@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -12,8 +13,11 @@ import {
   TokenDetailModal,
   TokenDetailModalParams,
 } from './components/TokenDetailModal';
-import { DashboardMain } from './sections/DashboardMain';
 import { IntroSection } from './sections/IntroSection';
+
+const DynamicDashboardMain = dynamic(() => import('./sections/DashboardMain'), {
+  suspense: true,
+});
 
 const DashboardPage = () => {
   const wallets = useRecoilValue(walletsAtom);
@@ -59,7 +63,7 @@ const DashboardPage = () => {
           onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
         />
       ) : (
-        <DashboardMain
+        <DynamicDashboardMain
           wallets={wallets}
           setAddWalletModalVisible={setAddWalletModalVisible}
           setTokenDetailModalVisible={setTokenDetailModalVisible}
