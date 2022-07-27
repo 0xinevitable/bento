@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Skeleton } from '@/components/Skeleton';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 type Props = { tokenBalances: DashboardTokenBalance[] };
@@ -8,22 +9,30 @@ type Props = { tokenBalances: DashboardTokenBalance[] };
 export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
   return (
     <ul>
-      {tokenBalances.map((item) => {
-        return (
-          <Container>
-            <Logo src={item.logo} />
-            <Information>
-              <Title>{item.name}</Title>
-              <Description>
-                <span>{`$${item.netWorth.toLocaleString()}`}</span>
-                <span className="ml-2 text-white/60">
-                  {`${item.amount.toLocaleString()} ${item.symbol}`}
-                </span>
-              </Description>
-            </Information>
-          </Container>
-        );
-      })}
+      {!!tokenBalances ? (
+        tokenBalances.map((item) => {
+          return (
+            <Container>
+              <Logo src={item.logo} />
+              <Information>
+                <Title>{item.name}</Title>
+                <Description>
+                  <span>{`$${item.netWorth.toLocaleString()}`}</span>
+                  <span className="ml-2 text-white/60">
+                    {`${item.amount.toLocaleString()} ${item.symbol}`}
+                  </span>
+                </Description>
+              </Information>
+            </Container>
+          );
+        })
+      ) : (
+        <>
+          <AssetSkeleton />
+          <AssetSkeleton />
+          <AssetSkeleton />
+        </>
+      )}
     </ul>
   );
 };
@@ -68,4 +77,12 @@ const Description = styled.p`
   line-height: 1.2;
   letter-spacing: -0.5px;
   color: rgba(255, 255, 255, 0.8);
+`;
+
+const AssetSkeleton = styled(Skeleton)`
+  width: 536px;
+  height: 88px;
+  margin-top: 8px;
+  border-radius: 8px;
+  align-self: center;
 `;
