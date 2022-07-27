@@ -9,7 +9,6 @@ export const useProfile: () => [
   () => Promise<UserProfile | null>,
 ] = () => {
   const { session } = useSession();
-  console.log(session);
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   const revaildateProfile = useCallback(async () => {

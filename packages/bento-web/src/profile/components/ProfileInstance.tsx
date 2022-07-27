@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
 import { Modal } from '@/components/Modal';
 
+import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
 import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
@@ -114,6 +115,11 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           {selectedTab === AddressProfileTab.Questions && (
             <AnimatedTab>
               <QuestionSection />
+            </AnimatedTab>
+          )}
+          {selectedTab === AddressProfileTab.Assets && (
+            <AnimatedTab>
+              <AssetSection />
             </AnimatedTab>
           )}
         </TabContent>
