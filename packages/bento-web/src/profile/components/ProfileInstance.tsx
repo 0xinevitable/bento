@@ -1,12 +1,19 @@
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
+import groupBy from 'lodash.groupby';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
 import { Modal } from '@/components/Modal';
+import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
+import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
+import { walletsAtom } from '@/recoil/wallets';
 
+import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
 import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
@@ -42,6 +49,11 @@ type ProfileInstanceProps = {
   isPreview?: boolean;
 };
 
+const walletBalanceReducer =
+  (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
+  (acc: number, balance: WalletBalance) =>
+    (balance.symbol ?? balance.name) === key ? callback(acc, balance) : acc;
+
 export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   profile,
   isPreview,
@@ -52,6 +64,55 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const [selectedTab, setSelectedTab] = useState<AddressProfileTab>(
     AddressProfileTab.Links,
   );
+
+  const wallets = useRecoilValue(walletsAtom);
+  const { balances: walletBalances } = useWalletBalances({ wallets });
+
+  const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
+    // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
+    // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
+    const balancesByPlatform = Object.entries(
+      groupBy<WalletBalance>(
+        [...walletBalances],
+        (balance) => balance.symbol + balance.name,
+      ),
+    ).map((v) => v[1]);
+
+    const tokens = balancesByPlatform
+      .map((balances) => {
+        // NOTE: balances 는 모두 같은 토큰의 정보를 담고 있기에, first 에서만 정보를 꺼내온다.
+        const [first] = balances;
+
+        const amount = balances.reduce(
+          walletBalanceReducer(
+            first.symbol ?? first.name,
+            (acc, balance) =>
+              acc +
+              balance.balance +
+              ('delegations' in balance ? balance.delegations : 0),
+          ),
+          0,
+        );
+
+        return {
+          platform: first.platform,
+          symbol: first.symbol,
+          name: first.name,
+          logo: first.logo,
+          type: 'type' in first ? first.type : undefined,
+          tokenAddress: 'address' in first ? first.address : undefined,
+          balances: balances,
+          netWorth: amount * first.price,
+          amount,
+          price: first.price,
+          coinGeckoId: 'coinGeckoId' in first ? first.coinGeckoId : undefined,
+        };
+      })
+      .flat();
+
+    tokens.sort((a, b) => b.netWorth - a.netWorth);
+    return tokens.filter((v) => v.netWorth > 0);
+  }, [walletBalances]);
 
   const palette = usePalette(data.color);
   const profileImageURL = profile.images[0];
@@ -114,6 +175,11 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           {selectedTab === AddressProfileTab.Questions && (
             <AnimatedTab>
               <QuestionSection />
+            </AnimatedTab>
+          )}
+          {selectedTab === AddressProfileTab.Assets && (
+            <AnimatedTab>
+              <AssetSection tokenBalances={tokenBalances} />
             </AnimatedTab>
           )}
         </TabContent>

@@ -26,6 +26,7 @@ const ImageContainer = styled.div`
   width: 128px;
   height: 128px;
   position: relative;
+  border-radius: 50%;
 `;
 const Image = styled.img`
   width: 128px;
@@ -37,6 +38,7 @@ const Image = styled.img`
   top: 0;
   left: 0;
   right: 0;
+  background: black;
 `;
 const BlurUnderlay = styled(Image)`
   position: absolute;
