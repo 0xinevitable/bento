@@ -216,7 +216,7 @@ export const TokenDetailModal: React.FC<Props> = ({
                                 <span className="flex items-center gap-2 font-semibold text-lg">
                                   <TokenIcon src={tokenBalance.logo} />
                                   {wallet.amount.toLocaleString(undefined, {
-                                    maximumSignificantDigits: 6,
+                                    maximumFractionDigits: 6,
                                   })}
                                 </span>
                                 <span className="text-gray-400">
