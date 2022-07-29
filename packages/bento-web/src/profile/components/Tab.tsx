@@ -121,6 +121,7 @@ const TabIndicator = styled.div<TabIndicatorProps>`
 
 const TabBottomBorder = styled.div`
   width: 100vw;
+  max-width: 576px;
   height: 1px;
   position: absolute;
   bottom: 0;
