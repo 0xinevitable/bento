@@ -8,15 +8,18 @@ type Props = {
   defaultLink?: ProfileLink;
   linkDraft: ProfileLink;
   onChange: (link: ProfileLink) => void;
+  onDelete: () => void;
 };
 
 export const ProfileLinkEditItem: React.FC<Props> = ({
   defaultLink,
   linkDraft,
   onChange,
+  onDelete,
 }) => {
   return (
     <Container>
+      <button onClick={onDelete}>Delete</button>
       <LinkImageWrapper>
         <LinkImage src={defaultLink?.image} />
       </LinkImageWrapper>
