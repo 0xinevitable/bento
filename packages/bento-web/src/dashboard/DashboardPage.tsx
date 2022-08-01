@@ -32,8 +32,12 @@ const DashboardPage = () => {
 
   const hasWallet = wallets.length > 0;
 
+  const hasLoggedTabViewEvent = useRef<boolean>(false);
   useEffect(() => {
-    Analytics.logEvent('view_dashboard_tab', undefined);
+    if (!hasLoggedTabViewEvent.current) {
+      Analytics.logEvent('view_dashboard_tab', undefined);
+    }
+    hasLoggedTabViewEvent.current = true;
   }, []);
 
   const hasLoggedViewEvent = useRef<boolean>(false);

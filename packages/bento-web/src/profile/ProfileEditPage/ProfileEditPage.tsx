@@ -43,7 +43,7 @@ const ProfileEditPage = () => {
     setUsername(profile.username);
     setDisplayName(profile.display_name);
     setBio(profile.bio);
-    setLinks(profile.links);
+    setLinks(profile.links ?? []);
     if (!!profile.images) {
       setImages(profile.images);
     } else {
@@ -104,27 +104,23 @@ const ProfileEditPage = () => {
             </ProfileContainer>
             <ProfileLinkList id="links">
               {links.map((item, index) => {
-                const deleteLink = () => {
-                  const deletedLinks = links.filter((_, i) => !(i === index));
-                  setLinks(deletedLinks);
-                };
-
                 return (
-                  <>
-                    <ProfileLinkEditItem
-                      key={`item-${index}`}
-                      linkDraft={item}
-                      defaultLink={profile?.links[index]}
-                      onChange={(updated) =>
-                        setLinks(
-                          links.map((link, i) =>
-                            i === index ? updated : link,
-                          ),
-                        )
-                      }
-                    />
-                    <button onClick={deleteLink}>Delete link</button>
-                  </>
+                  <ProfileLinkEditItem
+                    key={`item-${index}`}
+                    linkDraft={item}
+                    defaultLink={profile?.links?.[index]}
+                    onChange={(updated) =>
+                      setLinks(
+                        links.map((link, i) => (i === index ? updated : link)),
+                      )
+                    }
+                    onDelete={() => {
+                      const deletedLinks = links.filter(
+                        (_, i) => !(i === index),
+                      );
+                      setLinks(deletedLinks);
+                    }}
+                  />
                 );
               })}
             </ProfileLinkList>

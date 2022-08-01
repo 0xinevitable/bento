@@ -44,7 +44,7 @@ export const useRevalidateWallets = () => {
     }
 
     return wallets;
-  }, [session, setWallets]);
+  }, [JSON.stringify(session), setWallets]);
 
   return revalidateWallets;
 };
