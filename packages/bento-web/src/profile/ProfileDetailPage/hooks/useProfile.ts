@@ -29,7 +29,7 @@ export const useProfile: () => [
     const firstProfile = profiles[0];
     setProfile(firstProfile);
     return firstProfile;
-  }, [session, setProfile]);
+  }, [JSON.stringify(session), setProfile]);
 
   useEffect(() => {
     revaildateProfile();

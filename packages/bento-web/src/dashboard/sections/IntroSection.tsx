@@ -57,7 +57,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
       Analytics.logEvent('view_dashboard_connect_wallet', undefined);
       hasLoggedConnectWalletViewEvent.current = true;
     }
-  }, [session]);
+  }, [JSON.stringify(session)]);
 
   return (
     <div>
