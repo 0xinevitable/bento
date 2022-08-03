@@ -1,4 +1,5 @@
 import dedent from 'dedent';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import { systemFontStack } from '@/dashboard-landing/styles/fonts';
@@ -9,6 +10,17 @@ const ASSETS = {
     '/assets/landing/header-illust@2x.png',
   ],
 };
+
+const float = (y: number, reverse: boolean = false) => ({
+  initial: { y: !reverse ? -y : y },
+  animate: { y: !reverse ? y : -y },
+  transition: {
+    ease: 'linear',
+    repeat: Infinity,
+    repeatType: 'mirror',
+    duration: 2,
+  } as const,
+});
 
 export const HeaderSection: React.FC = () => {
   return (
@@ -29,17 +41,20 @@ export const HeaderSection: React.FC = () => {
           `}
           />
 
-          <AbsoluteContainer style={{ top: 152, left: -42 }}>
+          <AbsoluteContainer
+            style={{ top: 152, left: -42 }}
+            {...float(8, true)}
+          >
             <IRContainer>
               <IRButton>SEARCHING INVESTORS</IRButton>
-              <IRHelp>Talk with us</IRHelp>
+              <IRHelp {...float(2, true)}>Talk with us</IRHelp>
             </IRContainer>
           </AbsoluteContainer>
 
-          <AbsoluteContainer style={{ top: 220, right: -107 }}>
+          <AbsoluteContainer style={{ top: 220, right: -107 }} {...float(18)}>
             <CTAContainer>
               <CTAButton>Find your Identity</CTAButton>
-              <CTAHelp>Merge your wallets into one</CTAHelp>
+              <CTAHelp {...float(8)}>Merge your wallets into one</CTAHelp>
             </CTAContainer>
           </AbsoluteContainer>
         </IllustContainer>
@@ -86,7 +101,7 @@ const Title = styled.h1`
   }
 `;
 
-const AbsoluteContainer = styled.div`
+const AbsoluteContainer = styled(motion.div)`
   position: absolute;
 `;
 
@@ -115,7 +130,7 @@ const IRButton = styled.button`
   letter-spacing: 0.01em;
   color: #000000;
 `;
-const IRHelp = styled.span`
+const IRHelp = styled(motion.span)`
   padding: 6px 8px;
   background-color: rgba(64, 36, 8, 0.8);
   border: 1px solid #ffda79;
@@ -158,7 +173,7 @@ const CTAButton = styled.button`
 
   color: #ffffff;
 `;
-const CTAHelp = styled.span`
+const CTAHelp = styled(motion.span)`
   width: fit-content;
   padding: 6px 8px;
 
