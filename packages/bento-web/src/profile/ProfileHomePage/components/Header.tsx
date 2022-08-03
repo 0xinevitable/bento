@@ -18,7 +18,7 @@ export const Header = () => {
           router.push('/profile/account');
         }}
       >
-        <Avatar src={ExampleUserProfile.images[0]} />
+        <Avatar src={ExampleUserProfile.images?.[0] ?? ''} />
         <Title>{ExampleUserProfile.display_name}</Title>
         <Username>{`@${ExampleUserProfile.username}`}</Username>
       </Profile>

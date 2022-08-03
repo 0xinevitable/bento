@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { TrackedSection } from '@/components/TrackedSection';
-import { systemFontStack } from '@/styles/fonts';
 
+import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const WalletSection: React.FC = () => {
@@ -16,7 +16,7 @@ export const WalletSection: React.FC = () => {
         Your Wallets
       </Title>
       <WalletIllustWrapper>
-        <WalletIllust src="/assets/illusts/wallet.png" />
+        <WalletIllust src="/assets/landing/illusts/wallet.png" />
       </WalletIllustWrapper>
 
       <WalletList>

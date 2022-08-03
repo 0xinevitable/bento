@@ -1473,31 +1473,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bento/landing@workspace:packages/bento-landing":
-  version: 0.0.0-use.local
-  resolution: "@bento/landing@workspace:packages/bento-landing"
-  dependencies:
-    "@types/dedent": ^0.7.0
-    "@types/node": ^18.0.3
-    "@types/react": ^18.0.15
-    "@types/react-dom": ^18.0.6
-    "@types/styled-components": ^5.1.25
-    amplitude-js: ^8.18.5
-    dedent: ^0.7.0
-    next: 12.2.2
-    next-plugin-svgr: ^1.1.1
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    react-intersection-observer: ^9.3.5
-    react-is: ^18.2.0
-    recoil: ^0.7.4
-    styled-components: ^5.3.5
-    styled-normalize: ^8.0.7
-    tslib: ^2.4.0
-    typescript: ^4.7.4
-  languageName: unknown
-  linkType: soft
-
 "@bento/web@workspace:packages/bento-web":
   version: 0.0.0-use.local
   resolution: "@bento/web@workspace:packages/bento-web"
@@ -1550,6 +1525,7 @@ __metadata:
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-intersection-observer: ^9.4.0
     react-is: ^18.2.0
     react-localization: ^1.0.19
     react-notifications-component: ^4.0.1
@@ -9652,12 +9628,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-intersection-observer@npm:^9.3.5":
-  version: 9.3.5
-  resolution: "react-intersection-observer@npm:9.3.5"
+"react-intersection-observer@npm:^9.4.0":
+  version: 9.4.0
+  resolution: "react-intersection-observer@npm:9.4.0"
   peerDependencies:
     react: ^15.0.0 || ^16.0.0 || ^17.0.0|| ^18.0.0
-  checksum: 218643acf5d34c8b9bf231e7a92a26a9c10b12159fe19c33c49b6aa92f1e25e5e1803deea0d8095797c101d36f8f57bc44d2edc55d085943b8a0c8391a96e336
+  checksum: 6b9caff424c27ffac81bd7275f0d97512366d24434ebe15718f5e106e7198448a7027b1586ecbbb3eff81ac1348362320b7f740ac3d6cd505d62222fd251d718
   languageName: node
   linkType: hard
 
@@ -10747,15 +10723,6 @@ __metadata:
     babel-plugin-macros:
       optional: true
   checksum: 86d55819ebeabd283a574d2f44f7d3f8fa6b8c28fa41687ece161bf1e910e04965611618921d8f5cd33dc6dae1033b926a70421ae5ea045440a9861edc3e0d87
-  languageName: node
-  linkType: hard
-
-"styled-normalize@npm:^8.0.7":
-  version: 8.0.7
-  resolution: "styled-normalize@npm:8.0.7"
-  peerDependencies:
-    styled-components: ^4.0.0 || ^5.0.0
-  checksum: afdb450407ec4dcd41b4806a1193060e128f617fbbb6c14cc8679f9a651b93afc54bd13035c84aec3c298a7ae0084aef4a8a651c082c9bf209843b17cfc73305
   languageName: node
   linkType: hard
 

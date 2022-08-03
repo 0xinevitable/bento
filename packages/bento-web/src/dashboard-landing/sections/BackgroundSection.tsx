@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 import { TrackedSection } from '@/components/TrackedSection';
-import { systemFontStack } from '@/styles/fonts';
 
+import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const BackgroundSection = () => {
@@ -43,11 +43,11 @@ export const BackgroundSection = () => {
         </Description>
 
         <BitcoinIllustContainer>
-          <Illust src="/assets/illusts/bitcoin.png" />
+          <Illust src="/assets/landing/illusts/bitcoin.png" />
           <IllustShadow style={{ left: 30, bottom: 29 }} />
         </BitcoinIllustContainer>
         <EthereumIllustContainer>
-          <Illust src="/assets/illusts/ethereum.png" />
+          <Illust src="/assets/landing/illusts/ethereum.png" />
           <IllustShadow style={{ top: 69, left: 62 }} />
         </EthereumIllustContainer>
       </Container>
