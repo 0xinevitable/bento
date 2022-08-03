@@ -5,6 +5,7 @@ html {
 
 img {
   -webkit-user-drag: none;
+  max-width: unset;
 }
 
 ::selection {
