@@ -9,6 +9,10 @@ const ASSETS = {
     '/assets/landing/header-illust.png',
     '/assets/landing/header-illust@2x.png',
   ],
+  PAWN: [
+    '/assets/landing/header-pawn.png',
+    '/assets/landing/header-pawn@2x.png',
+  ],
 };
 
 const float = (y: number, reverse: boolean = false) => ({
@@ -36,9 +40,25 @@ export const HeaderSection: React.FC = () => {
           <Illust
             src={ASSETS.ILLUST[0]}
             srcSet={dedent`
-            ${ASSETS.ILLUST[0]} 1x,
-            ${ASSETS.ILLUST[1]} 2x
-          `}
+              ${ASSETS.ILLUST[0]} 1x,
+              ${ASSETS.ILLUST[1]} 2x
+            `}
+          />
+
+          <Pawn
+            src={ASSETS.PAWN[0]}
+            srcSet={dedent`
+              ${ASSETS.PAWN[0]} 1x,
+              ${ASSETS.PAWN[1]} 2x
+            `}
+            initial={{ y: 5, scale: 1, rotate: 10 }}
+            animate={{ y: 5, scale: 1.1, rotate: 10 }}
+            transition={{
+              ease: 'linear',
+              repeat: Infinity,
+              repeatType: 'mirror',
+              duration: 2,
+            }}
           />
 
           <AbsoluteContainer
@@ -218,4 +238,14 @@ const Illust = styled.img`
   margin-bottom: ${-ILLUST_BLUR_BOTTOM}px;
   width: ${662 + ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
   height: ${413.74 + ILLUST_BLUR_BOTTOM}px;
+`;
+
+const Pawn = styled(motion.img)`
+  width: ${413.74 + ILLUST_BLUR_BOTTOM}px;
+  height: ${413.74 + ILLUST_BLUR_BOTTOM}px;
+
+  position: absolute;
+  top: 0;
+  left: ${173.3 - ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
+  bottom: 0;
 `;
