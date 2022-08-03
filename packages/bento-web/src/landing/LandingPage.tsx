@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import MetaHead from '@/components/MetaHead';
 import { NavigationBar } from '@/components/NavigationBar';
 
+import { HeaderSection } from './components/HeaderSection';
+
 const LandingPage: React.FC = () => {
   return (
     <Container>
       <MetaHead />
 
       <NavigationBar />
+
+      <HeaderSection />
     </Container>
   );
 };
