@@ -88,7 +88,7 @@ const getEnvironment = () => {
   }
   return window.location.host.includes('localhost')
     ? 'debug'
-    : window.location.host.includes('app.bento.finance')
+    : window.location.host.includes('bento.finance')
     ? 'production'
     : 'development';
 };

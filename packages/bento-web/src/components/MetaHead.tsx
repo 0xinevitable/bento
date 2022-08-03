@@ -5,8 +5,8 @@ const meta = {
   title: 'Bento - Web3 Dashboard',
   description:
     'The open-source, multi-chain web3 dashboard. Track every asset you own, regardless of chains and types.',
-  image: 'https://app.bento.finance/assets/og-image.png',
-  url: 'https://app.bento.finance',
+  image: 'https://bento.finance/assets/og-image.png',
+  url: 'https://bento.finance',
 };
 
 type MetaHeadProps = {

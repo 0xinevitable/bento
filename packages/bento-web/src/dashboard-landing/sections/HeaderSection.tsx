@@ -31,7 +31,7 @@ export const HeaderSection = () => {
         </Description>
 
         <ButtonLink
-          href="https://app.bento.finance"
+          href="/home"
           target="_blank"
           onClick={() => Analytics.logEvent('click_app_link', undefined)}
         >
