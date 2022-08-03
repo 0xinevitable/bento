@@ -1,4 +1,5 @@
 import dedent from 'dedent';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
@@ -47,10 +48,12 @@ export const DashboardSection: React.FC = () => {
           of chains and types. And since it’s open-source, any developer or team
           can add support for their protocol/app.
         </Paragraph>
-        <LearnMore>
-          <span>Learn More</span>
-          <LearnMoreChevron />
-        </LearnMore>
+        <Link href="/dashboard" passHref>
+          <LearnMore>
+            <span>Learn More</span>
+            <LearnMoreChevron />
+          </LearnMore>
+        </Link>
 
         <ChainLogoList>
           {CHAINS.map((chain) => (
