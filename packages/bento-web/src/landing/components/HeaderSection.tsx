@@ -1,5 +1,6 @@
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import { systemFontStack } from '@/dashboard-landing/styles/fonts';
@@ -73,7 +74,9 @@ export const HeaderSection: React.FC = () => {
 
           <AbsoluteContainer style={{ top: 220, right: -107 }} {...float(18)}>
             <CTAContainer>
-              <CTAButton>Find your Identity</CTAButton>
+              <Link href="/home">
+                <CTAButton>Find your Identity</CTAButton>
+              </Link>
               <CTAHelp {...float(8)}>Merge your wallets into one</CTAHelp>
             </CTAContainer>
           </AbsoluteContainer>
@@ -145,10 +148,20 @@ const IRButton = styled.button`
   font-weight: 800;
   font-size: 18.8px;
   line-height: 100%;
-
   text-align: center;
   letter-spacing: 0.01em;
   color: #000000;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: 0px 4px 24px rgba(250, 209, 105, 0.55);
+  }
+
+  &:focus {
+    filter: opacity(0.66);
+  }
 `;
 const IRHelp = styled(motion.span)`
   padding: 6px 8px;
@@ -187,11 +200,20 @@ const CTAButton = styled.button`
   font-weight: 800;
   font-size: 24px;
   line-height: 103%;
-
   text-align: center;
   letter-spacing: 0.01em;
-
   color: #ffffff;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: 0px 4px 24px rgba(255, 33, 74, 0.55);
+  }
+
+  &:focus {
+    filter: opacity(0.66);
+  }
 `;
 const CTAHelp = styled(motion.span)`
   width: fit-content;
