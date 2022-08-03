@@ -10,6 +10,14 @@ const ASSETS = {
   ],
 };
 
+const cardSources = (name: string) => ({
+  src: `/assets/landing/dashboard-card-${name}.png`,
+  srcSet: dedent`
+    /assets/landing/dashboard-card-${name}.png 1x,
+    /assets/landing/dashboard-card-${name}@2x.png 2x
+  `,
+});
+
 export const DashboardSection: React.FC = () => {
   return (
     <Section>
@@ -35,10 +43,26 @@ export const DashboardSection: React.FC = () => {
           <Illust
             src={ASSETS.ILLUST[0]}
             srcSet={dedent`
-            ${ASSETS.ILLUST[0]} 1x,
-            ${ASSETS.ILLUST[1]} 2x
-          `}
+              ${ASSETS.ILLUST[0]} 1x,
+              ${ASSETS.ILLUST[1]} 2x
+            `}
           />
+
+          <EthereumCardContainer>
+            <EthereumCard {...cardSources('ethereum')} />
+          </EthereumCardContainer>
+          <CloneXCardContainer>
+            <CloneXCard {...cardSources('clonex')} />
+          </CloneXCardContainer>
+          <DaiCardContainer>
+            <DaiCard {...cardSources('dai')} />
+          </DaiCardContainer>
+          <OsmosisCardContainer>
+            <OsmosisCard {...cardSources('osmosis')} />
+          </OsmosisCardContainer>
+          <TetherCardContainer>
+            <TetherCard {...cardSources('tether')} />
+          </TetherCardContainer>
         </IllustContainer>
       </IllustWrapper>
     </Section>
@@ -116,6 +140,11 @@ const IllustContainer = styled.div`
   position: relative;
   width: 748.51px;
   height: 602.55px;
+  display: flex;
+
+  img {
+    object-fit: cover;
+  }
 `;
 
 const ILLUST_BLUR_TOP = 120 - 53.47;
@@ -130,4 +159,101 @@ const Illust = styled.img`
   margin-left: ${-ILLUST_BLUR_LEFT}px;
   margin-right: ${-ILLUST_BLUR_RIGHT}px;
   margin-bottom: ${-ILLUST_BLUR_BOTTOM}px;
+`;
+
+const EthereumCardContainer = styled.div`
+  width: 315.17px;
+  height: 192.86px;
+
+  position: absolute;
+  top: 18.49px;
+  right: 52.78px;
+  transform: rotate(-7deg);
+`;
+const ETHEREUM_CARD_BLUR_TOP = 20 - 13;
+const ETHEREUM_CARD_BLUR_LEFT = 20 - 6.24;
+const EthereumCard = styled.img`
+  width: ${315.17 + ETHEREUM_CARD_BLUR_LEFT}px;
+  height: ${192.86 + ETHEREUM_CARD_BLUR_TOP}px;
+
+  margin-top: ${-ETHEREUM_CARD_BLUR_TOP}px;
+  margin-left: ${-ETHEREUM_CARD_BLUR_LEFT}px;
+`;
+
+const CloneXCardContainer = styled.div`
+  width: 299.35px;
+  height: 163.05px;
+
+  position: absolute;
+  top: 335.55px;
+  left: 435.48px;
+  transform: rotate(12deg);
+`;
+const CLONEX_CARD_BLUR_BOTTOM = 20 - 4.47;
+const CLONEX_CARD_BLUR_LEFT = CLONEX_CARD_BLUR_BOTTOM;
+const CloneXCard = styled.img`
+  width: ${299.35 + CLONEX_CARD_BLUR_LEFT}px;
+  height: ${163.05 + CLONEX_CARD_BLUR_BOTTOM}px;
+
+  margin-left: ${-CLONEX_CARD_BLUR_LEFT}px;
+  margin-bottom: ${-CLONEX_CARD_BLUR_BOTTOM}px;
+`;
+
+const DAI_CARD_BLUR_TOP = 15.48;
+const DAI_CARD_BLUR_LEFT = 15.48;
+const DAI_CARD_BLUR_BOTTOM = 15.48 - 1.89;
+const DaiCardContainer = styled.div`
+  width: 209.98px;
+  height: 93.76px;
+
+  position: absolute;
+  top: 251.11px;
+  left: 7.66px;
+  transform: rotate(-12.5deg);
+`;
+const DaiCard = styled.img`
+  width: ${209.98 + DAI_CARD_BLUR_LEFT}px;
+  height: ${93.76 + DAI_CARD_BLUR_TOP + DAI_CARD_BLUR_BOTTOM}px;
+
+  margin-top: ${-DAI_CARD_BLUR_TOP}px;
+  margin-left: ${-DAI_CARD_BLUR_LEFT}px;
+  margin-bottom: ${-DAI_CARD_BLUR_BOTTOM}px;
+`;
+
+const OsmosisCardContainer = styled.div`
+  width: 232.48px;
+  height: 149.45px;
+
+  position: absolute;
+  top: 67.51px;
+  left: 110.73px;
+  transform: rotate(4deg);
+`;
+const OSMOSIS_CARD_BLUR_LEFT = 15.97 - 9.35;
+const OSMOSIS_CARD_BLUR_BOTTOM = 15.97 - 4.98;
+const OsmosisCard = styled.img`
+  width: ${232.48 + OSMOSIS_CARD_BLUR_LEFT}px;
+  height: ${149.45 + OSMOSIS_CARD_BLUR_BOTTOM}px;
+
+  margin-left: ${-OSMOSIS_CARD_BLUR_LEFT}px;
+  margin-bottom: ${-OSMOSIS_CARD_BLUR_BOTTOM}px;
+`;
+
+const TETHER_CARD_BLUR_TOP = 17.01 - 11.06;
+const TETHER_CARD_BLUR_LEFT = 17.01 - 5.31;
+const TetherCardContainer = styled.div`
+  width: 269.82px;
+  height: 167.04px;
+
+  position: absolute;
+  top: 405.36px;
+  left: 90.75px;
+  transform: rotate(-14deg);
+`;
+const TetherCard = styled.img`
+  width: ${269.82 + TETHER_CARD_BLUR_LEFT}px;
+  height: ${167.04 + TETHER_CARD_BLUR_TOP}px;
+
+  margin-top: ${-TETHER_CARD_BLUR_TOP}px;
+  margin-left: ${-TETHER_CARD_BLUR_LEFT}px;
 `;
