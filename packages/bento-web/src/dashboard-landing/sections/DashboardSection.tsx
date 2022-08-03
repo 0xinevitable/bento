@@ -230,18 +230,18 @@ const ChainLogo = styled.img`
 
 const CHAIN_LOGOS = {
   EVM: {
-    ethereum: '/assets/landing/chains/ethereum.png',
-    avalanche: '/assets/landing/chains/avalanche.png',
-    bnb: '/assets/landing/chains/bnb.png',
-    polygon: '/assets/landing/chains/polygon.png',
-    klaytn: '/assets/landing/chains/klaytn.png',
+    ethereum: '/assets/icons/ethereum.png',
+    avalanche: '/assets/icons/avalanche.png',
+    bnb: '/assets/icons/bnb.png',
+    polygon: '/assets/icons/polygon.png',
+    klaytn: '/assets/icons/klaytn.png',
   },
   CosmosSDK: {
-    cosmosHub: '/assets/landing/chains/cosmos-hub.png',
-    osmosis: '/assets/landing/chains/osmosis.png',
+    cosmosHub: '/assets/icons/cosmos-hub.png',
+    osmosis: '/assets/icons/osmosis.png',
   },
   Others: {
-    solana: '/assets/landing/chains/solana.png',
-    opensea: '/assets/landing/chains/opensea.png',
+    solana: '/assets/icons/solana.png',
+    opensea: '/assets/icons/opensea.png',
   },
 };
