@@ -32,7 +32,6 @@ export const HeaderSection = () => {
 
         <ButtonLink
           href="/home"
-          target="_blank"
           onClick={() => Analytics.logEvent('click_app_link', undefined)}
         >
           <Button>Launch App</Button>
