@@ -1,6 +1,14 @@
+import dedent from 'dedent';
 import styled from 'styled-components';
 
 import { systemFontStack } from '@/dashboard-landing/styles/fonts';
+
+const ASSETS = {
+  ILLUST: [
+    '/assets/landing/header-illust.png',
+    '/assets/landing/header-illust@2x.png',
+  ],
+};
 
 export const HeaderSection: React.FC = () => {
   return (
@@ -11,24 +19,51 @@ export const HeaderSection: React.FC = () => {
         <span>{` a pretty big space.`}</span>
       </Title>
 
-      <IRContainer>
-        <IRButton>SEARCHING INVESTORS</IRButton>
-        <IRHelp>Talk with us</IRHelp>
-      </IRContainer>
+      <IllustWrapper>
+        <IllustContainer>
+          <Illust
+            src={ASSETS.ILLUST[0]}
+            srcSet={dedent`
+            ${ASSETS.ILLUST[0]} 1x,
+            ${ASSETS.ILLUST[1]} 2x
+          `}
+          />
 
-      <CTAContainer>
-        <CTAButton>Find your Identity</CTAButton>
-        <CTAHelp>Merge your wallets into one</CTAHelp>
-      </CTAContainer>
+          <AbsoluteContainer style={{ top: 152, left: -42 }}>
+            <IRContainer>
+              <IRButton>SEARCHING INVESTORS</IRButton>
+              <IRHelp>Talk with us</IRHelp>
+            </IRContainer>
+          </AbsoluteContainer>
+
+          <AbsoluteContainer style={{ top: 220, right: -107 }}>
+            <CTAContainer>
+              <CTAButton>Find your Identity</CTAButton>
+              <CTAHelp>Merge your wallets into one</CTAHelp>
+            </CTAContainer>
+          </AbsoluteContainer>
+        </IllustContainer>
+      </IllustWrapper>
     </Container>
   );
 };
 
 const Container = styled.section`
   padding-top: ${130 - 65}px;
+  height: ${584.74 - 65}px;
+  position: relative;
 
-  & > * {
+  background-image: url('/assets/landing/header-background.jpg');
+  background-size: 100% 100%;
+  background-position: center;
+
+  * {
     font-family: 'Raleway', ${systemFontStack};
+  }
+
+  img,
+  button {
+    user-select: none;
   }
 `;
 const Title = styled.h1`
@@ -49,6 +84,10 @@ const Title = styled.h1`
     margin-top: 4px;
     margin-left: 72px;
   }
+`;
+
+const AbsoluteContainer = styled.div`
+  position: absolute;
 `;
 
 const IRContainer = styled.div`
@@ -137,4 +176,31 @@ const CTAHelp = styled.span`
   line-height: 103%;
   text-align: center;
   color: #ff214a;
+`;
+
+const IllustWrapper = styled.div`
+  position: absolute;
+  margin: auto;
+  top: ${171 - 65}px;
+  left: 0;
+  right: 0;
+
+  width: 662px;
+  height: 413.74px;
+`;
+const IllustContainer = styled.div`
+  position: relative;
+  width: 662px;
+  height: 413.74px;
+`;
+
+const ILLUST_BLUR_LEFT = 80;
+const ILLUST_BLUR_RIGHT = 32;
+const ILLUST_BLUR_BOTTOM = 80 - 61.74;
+const Illust = styled.img`
+  margin-left: ${-ILLUST_BLUR_LEFT}px;
+  margin-right: ${-ILLUST_BLUR_RIGHT}px;
+  margin-bottom: ${-ILLUST_BLUR_BOTTOM}px;
+  width: ${662 + ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
+  height: ${413.74 + ILLUST_BLUR_BOTTOM}px;
 `;
