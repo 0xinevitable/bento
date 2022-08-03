@@ -17,10 +17,10 @@ export const DashboardSection = () => {
       </Title>
       <IllustContainer>
         <DashboardIllust
-          src="/assets/landing/illusts/dashboard.png"
+          src="/assets/dashboard-landing/illusts/dashboard.png"
           srcSet={dedent`
-            /assets/landing/illusts/dashboard.png,
-            /assets/landing/illusts/dashboard@2x.png 2x,
+            /assets/dashboard-landing/illusts/dashboard.png,
+            /assets/dashboard-landing/illusts/dashboard@2x.png 2x,
           `}
         />
       </IllustContainer>

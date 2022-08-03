@@ -43,11 +43,11 @@ export const BackgroundSection = () => {
         </Description>
 
         <BitcoinIllustContainer>
-          <Illust src="/assets/landing/illusts/bitcoin.png" />
+          <Illust src="/assets/dashboard-landing/illusts/bitcoin.png" />
           <IllustShadow style={{ left: 30, bottom: 29 }} />
         </BitcoinIllustContainer>
         <EthereumIllustContainer>
-          <Illust src="/assets/landing/illusts/ethereum.png" />
+          <Illust src="/assets/dashboard-landing/illusts/ethereum.png" />
           <IllustShadow style={{ top: 69, left: 62 }} />
         </EthereumIllustContainer>
       </Container>

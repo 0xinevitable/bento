@@ -16,7 +16,7 @@ export const WalletSection: React.FC = () => {
         Your Wallets
       </Title>
       <WalletIllustWrapper>
-        <WalletIllust src="/assets/landing/illusts/wallet.png" />
+        <WalletIllust src="/assets/dashboard-landing/illusts/wallet.png" />
       </WalletIllustWrapper>
 
       <WalletList>

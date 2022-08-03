@@ -40,9 +40,9 @@ export const HeaderSection = () => {
       </Content>
 
       <IllustContainer>
-        <HeaderBlurIllust src="/assets/landing/illusts/header-blur.png" />
-        <BentoIllust src="/assets/landing/illusts/lunchbox.png" />
-        <BentoZap src="/assets/landing/illusts/bento-zap.png" />
+        <HeaderBlurIllust src="/assets/dashboard-landing/illusts/header-blur.png" />
+        <BentoIllust src="/assets/dashboard-landing/illusts/lunchbox.png" />
+        <BentoZap src="/assets/dashboard-landing/illusts/bento-zap.png" />
       </IllustContainer>
     </Container>
   );
