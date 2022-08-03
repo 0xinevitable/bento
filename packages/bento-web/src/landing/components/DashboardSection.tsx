@@ -1,6 +1,14 @@
+import dedent from 'dedent';
 import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
+
+const ASSETS = {
+  ILLUST: [
+    '/assets/landing/dashboard-illust.png',
+    '/assets/landing/dashboard-illust@2x.png',
+  ],
+};
 
 export const DashboardSection: React.FC = () => {
   return (
@@ -21,6 +29,18 @@ export const DashboardSection: React.FC = () => {
           <LearnMoreChevron />
         </LearnMore>
       </Information>
+
+      <IllustWrapper>
+        <IllustContainer>
+          <Illust
+            src={ASSETS.ILLUST[0]}
+            srcSet={dedent`
+            ${ASSETS.ILLUST[0]} 1x,
+            ${ASSETS.ILLUST[1]} 2x
+          `}
+          />
+        </IllustContainer>
+      </IllustWrapper>
     </Section>
   );
 };
@@ -29,6 +49,7 @@ const Section = styled.section`
   margin: 135.26px auto 0;
   max-width: 1180px;
   width: 100%;
+  position: relative;
 `;
 const Information = styled.div`
   display: flex;
@@ -85,3 +106,28 @@ const LearnMoreChevron: React.FC = () => (
     />
   </svg>
 );
+
+const IllustWrapper = styled.div`
+  position: absolute;
+  top: -112px;
+  right: ${-110 - 43.49}px;
+`;
+const IllustContainer = styled.div`
+  position: relative;
+  width: 748.51px;
+  height: 602.55px;
+`;
+
+const ILLUST_BLUR_TOP = 120 - 53.47;
+const ILLUST_BLUR_LEFT = 120 - 66.8;
+const ILLUST_BLUR_RIGHT = 120 - 40.71;
+const ILLUST_BLUR_BOTTOM = 120 - 63.08;
+const Illust = styled.img`
+  width: ${748.51 + ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
+  height: ${602.55 + ILLUST_BLUR_TOP + ILLUST_BLUR_BOTTOM}px;
+
+  margin-top: ${-ILLUST_BLUR_TOP}px;
+  margin-left: ${-ILLUST_BLUR_LEFT}px;
+  margin-right: ${-ILLUST_BLUR_RIGHT}px;
+  margin-bottom: ${-ILLUST_BLUR_BOTTOM}px;
+`;

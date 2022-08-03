@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { systemFontStack } from '@/dashboard-landing/styles/fonts';
-
 const ASSETS = {
   ILLUST: [
     '/assets/landing/header-illust.png',
