@@ -1,6 +1,7 @@
 import dedent from 'dedent';
 import styled from 'styled-components';
 
+import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { Badge } from '@/components/Badge';
 
 const ASSETS = {
@@ -9,6 +10,20 @@ const ASSETS = {
     '/assets/landing/dashboard-illust@2x.png',
   ],
 };
+
+const CHAINS = [
+  { name: 'Ethereum', src: '/assets/icons/ethereum.png' },
+  { name: 'BNB', src: '/assets/icons/bnb.png' },
+  { name: 'Avalanche', src: '/assets/icons/avalanche.png' },
+  { name: 'Polygon', src: '/assets/icons/polygon.png' },
+  { name: 'Optimism', src: '/assets/icons/optimism.png' },
+  { name: 'Klaytn', src: '/assets/icons/klaytn.png' },
+  { name: 'Cosmos Hub', src: '/assets/icons/cosmos-hub.png' },
+  { name: 'Osmosis', src: '/assets/icons/osmosis.png' },
+  { name: 'Evmos', src: '/assets/icons/evmos.png' },
+  { name: 'OpenSea', src: '/assets/icons/opensea.png' },
+  { name: 'Solana', src: '/assets/icons/solana.png' },
+];
 
 const cardSources = (name: string) => ({
   src: `/assets/landing/dashboard-card-${name}.png`,
@@ -36,6 +51,14 @@ export const DashboardSection: React.FC = () => {
           <span>Learn More</span>
           <LearnMoreChevron />
         </LearnMore>
+
+        <ChainLogoList>
+          {CHAINS.map((chain) => (
+            <AnimatedTooltip label={chain.name}>
+              <ChainLogo src={chain.src} alt={chain.name} />
+            </AnimatedTooltip>
+          ))}
+        </ChainLogoList>
       </Information>
 
       <IllustWrapper>
@@ -130,6 +153,24 @@ const LearnMoreChevron: React.FC = () => (
     />
   </svg>
 );
+
+const ChainLogoList = styled.div`
+  margin-top: 52px;
+  width: 240.8px;
+  height: 81.6px;
+
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 4px;
+  row-gap: 8px;
+`;
+const ChainLogo = styled.img`
+  width: 36.8px;
+  height: 36.8px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+`;
 
 const IllustWrapper = styled.div`
   position: absolute;
