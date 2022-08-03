@@ -49,8 +49,8 @@ export const HeaderSection: React.FC = () => {
 };
 
 const Container = styled.section`
-  padding-top: ${130 - 65}px;
-  height: ${584.74 - 65}px;
+  padding-top: 130px;
+  height: 584.74px;
   position: relative;
 
   background-image: url('/assets/landing/header-background.jpg');
@@ -181,7 +181,7 @@ const CTAHelp = styled.span`
 const IllustWrapper = styled.div`
   position: absolute;
   margin: auto;
-  top: ${171 - 65}px;
+  top: 171px;
   left: 0;
   right: 0;
 

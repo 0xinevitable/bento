@@ -48,7 +48,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
         <Container>
           <NavigationBar />
-          <Black />
 
           <Component {...pageProps} />
         </Container>
@@ -70,9 +69,4 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: #0a0a0c;
-`;
-const Black = styled.div`
-  width: 100%;
-  height: 64px;
-  background-color: rgba(0, 0, 0, 0.5);
 `;
