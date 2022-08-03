@@ -95,10 +95,6 @@ const Container = styled.section`
   background-size: 100% 100%;
   background-position: center;
 
-  * {
-    font-family: 'Raleway', ${systemFontStack};
-  }
-
   img,
   button {
     user-select: none;
