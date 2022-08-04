@@ -1,5 +1,5 @@
 import dedent from 'dedent';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 
@@ -12,7 +12,15 @@ const ASSETS = {
     '/assets/landing/status-quo-wallet.png',
     '/assets/landing/status-quo-wallet@2x.png',
   ],
-};
+  NOISES: [
+    { src: '/assets/landing/noise-1.svg', top: 169.57, left: 43.52 },
+    { src: '/assets/landing/noise-2.svg', top: 138.01, left: 251.19 },
+    { src: '/assets/landing/noise-3.svg', top: 259.44, left: 288.64 },
+    { src: '/assets/landing/noise-4.svg', top: 417.18, left: 246.65 },
+    { src: '/assets/landing/noise-5.svg', top: 366.11, left: 179.69 },
+    { src: '/assets/landing/noise-6.svg', top: 261.71, left: 57.13 },
+  ],
+} as const;
 
 export const StatueQuoSection: React.FC = () => {
   return (
@@ -53,6 +61,10 @@ export const StatueQuoSection: React.FC = () => {
               `}
             />
           </WalletIllustContainer>
+
+          {ASSETS.NOISES.map(({ src, top, left }) => (
+            <Noise key={src} src={src} top={top} left={left} />
+          ))}
         </IllustContainer>
       </IllustWrapper>
     </Section>
@@ -123,6 +135,8 @@ const ChessKingIllust = styled.img`
   margin-left: ${-CHESS_KING_BLUR_LEFT}px;
   margin-right: ${-CHESS_KING_BLUR_RIGHT}px;
   margin-bottom: ${-CHESS_KING_BLUR_BOTTOM}px;
+
+  filter: saturate(1.2);
 `;
 
 const WALLET_ILLUST_BLUR_TOP = 140 - 98.51;
@@ -153,4 +167,16 @@ const InequalSymbol = styled.img`
   top: 181px;
   left: 358px;
   z-index: -1;
+`;
+
+type NoiseProps = {
+  top: number;
+  left: number;
+};
+const Noise = styled.img<NoiseProps>`
+  ${({ top, left }) => css`
+    position: absolute;
+    top: ${top}px;
+    left: ${left}px;
+  `}
 `;
