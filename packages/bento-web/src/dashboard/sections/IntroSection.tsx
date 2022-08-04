@@ -82,8 +82,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
           <a
             title="About"
             className="mt-2 text-white/50 text-sm flex items-center gap-1 mx-auto"
-            href="https://bento.finance"
-            target="_blank"
+            href="/"
             onClick={() => {
               Analytics.logEvent('click_landing_link', {
                 title: 'About',

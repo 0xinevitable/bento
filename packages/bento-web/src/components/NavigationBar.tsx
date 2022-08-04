@@ -27,7 +27,7 @@ const onTablet = `@media screen and (max-width: ${Breakpoints.Tablet}px)`;
 const NAVIGATION_ITEMS = [
   {
     title: 'Dashboard',
-    href: '/',
+    href: '/home',
     icon: 'ic:round-space-dashboard',
   },
   {

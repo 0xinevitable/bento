@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 import { TrackedSection } from '@/components/TrackedSection';
-import { systemFontStack } from '@/styles/fonts';
 import { Analytics } from '@/utils/analytics';
 
+import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const HeaderSection = () => {
@@ -31,8 +31,7 @@ export const HeaderSection = () => {
         </Description>
 
         <ButtonLink
-          href="https://app.bento.finance"
-          target="_blank"
+          href="/home"
           onClick={() => Analytics.logEvent('click_app_link', undefined)}
         >
           <Button>Launch App</Button>
@@ -40,9 +39,9 @@ export const HeaderSection = () => {
       </Content>
 
       <IllustContainer>
-        <HeaderBlurIllust src="/assets/illusts/header-blur.png" />
-        <BentoIllust src="/assets/illusts/lunchbox.png" />
-        <BentoZap src="/assets/illusts/bento-zap.png" />
+        <HeaderBlurIllust src="/assets/dashboard-landing/illusts/header-blur.png" />
+        <BentoIllust src="/assets/dashboard-landing/illusts/lunchbox.png" />
+        <BentoZap src="/assets/dashboard-landing/illusts/bento-zap.png" />
       </IllustContainer>
     </Container>
   );

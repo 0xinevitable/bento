@@ -2,8 +2,8 @@ import dedent from 'dedent';
 import styled from 'styled-components';
 
 import { TrackedSection } from '@/components/TrackedSection';
-import { systemFontStack } from '@/styles/fonts';
 
+import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const DashboardSection = () => {
@@ -17,10 +17,10 @@ export const DashboardSection = () => {
       </Title>
       <IllustContainer>
         <DashboardIllust
-          src="/assets/illusts/dashboard.png"
+          src="/assets/dashboard-landing/illusts/dashboard.png"
           srcSet={dedent`
-            /assets/illusts/dashboard.png,
-            /assets/illusts/dashboard@2x.png 2x,
+            /assets/dashboard-landing/illusts/dashboard.png,
+            /assets/dashboard-landing/illusts/dashboard@2x.png 2x,
           `}
         />
       </IllustContainer>
@@ -230,18 +230,18 @@ const ChainLogo = styled.img`
 
 const CHAIN_LOGOS = {
   EVM: {
-    ethereum: '/assets/chains/ethereum.png',
-    avalanche: '/assets/chains/avalanche.png',
-    bnb: '/assets/chains/bnb.png',
-    polygon: '/assets/chains/polygon.png',
-    klaytn: '/assets/chains/klaytn.png',
+    ethereum: '/assets/icons/ethereum.png',
+    avalanche: '/assets/icons/avalanche.png',
+    bnb: '/assets/icons/bnb.png',
+    polygon: '/assets/icons/polygon.png',
+    klaytn: '/assets/icons/klaytn.png',
   },
   CosmosSDK: {
-    cosmosHub: '/assets/chains/cosmos-hub.png',
-    osmosis: '/assets/chains/osmosis.png',
+    cosmosHub: '/assets/icons/cosmos-hub.png',
+    osmosis: '/assets/icons/osmosis.png',
   },
   Others: {
-    solana: '/assets/chains/solana.png',
-    opensea: '/assets/chains/opensea.png',
+    solana: '/assets/icons/solana.png',
+    opensea: '/assets/icons/opensea.png',
   },
 };

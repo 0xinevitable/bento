@@ -7,7 +7,7 @@ export const LinkEventListSection: React.FC = () => {
   return (
     <section>
       <LinkEventItemList>
-        {ExampleUserProfile.links.map(({ title }) => (
+        {ExampleUserProfile.links?.map(({ title }) => (
           <LinkEventItem key={title} title={title} />
         ))}
       </LinkEventItemList>

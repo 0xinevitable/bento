@@ -45,7 +45,7 @@ export const NETWORKS: Network[] = [
     id: 'polygon',
     type: 'evm',
     name: 'Polygon',
-    logo: '/assets/icons/polygon.webp',
+    logo: '/assets/icons/polygon.png',
   },
   {
     id: 'klaytn',

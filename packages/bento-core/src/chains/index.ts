@@ -199,7 +199,7 @@ export class PolygonChain implements Chain {
   currency = {
     symbol: 'MATIC',
     name: 'Polygon',
-    logo: '/assets/icons/polygon.webp',
+    logo: '/assets/icons/polygon.png',
     decimals: 18,
     coinGeckoId: 'matic-network',
   };
