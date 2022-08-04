@@ -55,41 +55,50 @@ const DashboardPage = () => {
   }, [pageLoaded, hasWallet]);
 
   return (
-    <PageContainer className="pt-0 z-10">
-      <MetaHead />
-      <TopLeftBlur src="/assets/blurs/top-left.png" />
-      <TopRightBlur src="/assets/blurs/top-right.png" />
+    <>
+      <Black />
+      <PageContainer className="pt-0 z-10">
+        <MetaHead />
+        <TopLeftBlur src="/assets/blurs/top-left.png" />
+        <TopRightBlur src="/assets/blurs/top-right.png" />
 
-      {!pageLoaded ? null : !hasWallet ? (
-        <IntroSection
-          onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
-        />
-      ) : (
-        <DynamicDashboardMain
-          wallets={wallets}
-          setAddWalletModalVisible={setAddWalletModalVisible}
-          setTokenDetailModalVisible={setTokenDetailModalVisible}
-          setTokenDetailModalParams={setTokenDetailModalParams}
-        />
-      )}
+        {!pageLoaded ? null : !hasWallet ? (
+          <IntroSection
+            onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
+          />
+        ) : (
+          <DynamicDashboardMain
+            wallets={wallets}
+            setAddWalletModalVisible={setAddWalletModalVisible}
+            setTokenDetailModalVisible={setTokenDetailModalVisible}
+            setTokenDetailModalParams={setTokenDetailModalParams}
+          />
+        )}
 
-      <AddWalletModal
-        visible={isAddWalletModalVisible}
-        onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
-      />
-      <TokenDetailModal
-        visible={isTokenDetailModalVisible}
-        onDismiss={() => {
-          setTokenDetailModalVisible((prev) => !prev);
-          setTokenDetailModalParams({});
-        }}
-        {...tokenDetailModalParams}
-      />
-    </PageContainer>
+        <AddWalletModal
+          visible={isAddWalletModalVisible}
+          onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
+        />
+        <TokenDetailModal
+          visible={isTokenDetailModalVisible}
+          onDismiss={() => {
+            setTokenDetailModalVisible((prev) => !prev);
+            setTokenDetailModalParams({});
+          }}
+          {...tokenDetailModalParams}
+        />
+      </PageContainer>
+    </>
   );
 };
 
 export default DashboardPage;
+
+const Black = styled.div`
+  width: 100%;
+  height: 64px;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
 
 const TOP_LEFT_BLUR = 262.9;
 const TopLeftBlur = styled.img`

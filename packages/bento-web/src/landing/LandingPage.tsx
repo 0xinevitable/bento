@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 import MetaHead from '@/components/MetaHead';
 import { NavigationBar } from '@/components/NavigationBar';
+import { systemFontStack } from '@/dashboard-landing/styles/fonts';
+
+import { DashboardSection } from './components/DashboardSection';
+import { HeaderSection } from './components/HeaderSection';
 
 const LandingPage: React.FC = () => {
   return (
@@ -9,6 +13,9 @@ const LandingPage: React.FC = () => {
       <MetaHead />
 
       <NavigationBar />
+
+      <HeaderSection />
+      <DashboardSection />
     </Container>
   );
 };
@@ -24,4 +31,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: black;
+
+  * {
+    font-family: 'Raleway', ${systemFontStack};
+  }
 `;
