@@ -6,6 +6,7 @@ import { systemFontStack } from '@/dashboard-landing/styles/fonts';
 
 import { DashboardSection } from './components/DashboardSection';
 import { HeaderSection } from './components/HeaderSection';
+import { StatueQuoSection } from './components/StatueQuoSection';
 
 const LandingPage: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const LandingPage: React.FC = () => {
 
       <HeaderSection />
       <DashboardSection />
+      <StatueQuoSection />
     </Container>
   );
 };
