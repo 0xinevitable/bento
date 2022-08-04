@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { systemFontStack } from '@/dashboard-landing/styles/fonts';
-
 const ASSETS = {
   ILLUST: [
     '/assets/landing/header-illust.png',
@@ -94,10 +92,6 @@ const Container = styled.section`
   background-image: url('/assets/landing/header-background.jpg');
   background-size: 100% 100%;
   background-position: center;
-
-  * {
-    font-family: 'Raleway', ${systemFontStack};
-  }
 
   img,
   button {
