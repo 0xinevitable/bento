@@ -57,7 +57,7 @@ export const DashboardSection: React.FC = () => {
 
         <ChainLogoList>
           {CHAINS.map((chain) => (
-            <AnimatedTooltip label={chain.name}>
+            <AnimatedTooltip key={chain.src} label={chain.name}>
               <ChainLogo src={chain.src} alt={chain.name} />
             </AnimatedTooltip>
           ))}
