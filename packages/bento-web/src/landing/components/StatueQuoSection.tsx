@@ -20,6 +20,13 @@ const ASSETS = {
     { src: '/assets/landing/noise-5.svg', top: 366.11, left: 179.69 },
     { src: '/assets/landing/noise-6.svg', top: 261.71, left: 57.13 },
   ],
+  WALLETS: [
+    { value: 'cosmos15zy...gxh0', top: 89.21, left: 242.11 },
+    { value: '0x7777...10c4', top: 206.1, left: 53.73 },
+    { value: '0x7777...10c4', top: 265, left: 654 },
+    { value: 'H6RMXJBoZ9...2SLXd', top: 315.04, left: 80.97 },
+    { value: '0x4a00...1001', top: 394.06, left: 284.04 },
+  ],
 } as const;
 
 export const StatueQuoSection: React.FC = () => {
@@ -64,6 +71,11 @@ export const StatueQuoSection: React.FC = () => {
 
           {ASSETS.NOISES.map(({ src, top, left }) => (
             <Noise key={src} src={src} top={top} left={left} />
+          ))}
+          {ASSETS.WALLETS.map(({ value, top, left }) => (
+            <Wallet key={value} top={top} left={left}>
+              {value}
+            </Wallet>
           ))}
         </IllustContainer>
       </IllustWrapper>
@@ -113,6 +125,8 @@ const IllustContainer = styled.div`
   width: 804.92px;
   height: 513px;
   z-index: 0;
+
+  filter: saturate(1.2);
 `;
 
 const CHESS_KING_BLUR_TOP = 140 - 52.9;
@@ -135,8 +149,6 @@ const ChessKingIllust = styled.img`
   margin-left: ${-CHESS_KING_BLUR_LEFT}px;
   margin-right: ${-CHESS_KING_BLUR_RIGHT}px;
   margin-bottom: ${-CHESS_KING_BLUR_BOTTOM}px;
-
-  filter: saturate(1.2);
 `;
 
 const WALLET_ILLUST_BLUR_TOP = 140 - 98.51;
@@ -169,11 +181,32 @@ const InequalSymbol = styled.img`
   z-index: -1;
 `;
 
-type NoiseProps = {
+type PositionProps = {
   top: number;
   left: number;
 };
-const Noise = styled.img<NoiseProps>`
+const Noise = styled.img<PositionProps>`
+  ${({ top, left }) => css`
+    position: absolute;
+    top: ${top}px;
+    left: ${left}px;
+  `}
+`;
+const Wallet = styled.span<PositionProps>`
+  padding: 6.8px 9px;
+  background-color: rgba(51, 9, 17, 0.75);
+  border: 1px solid #ff214a;
+  box-shadow: 0px 4.5px 9px rgba(0, 0, 0, 0.44);
+  border-radius: 9px;
+
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 103%;
+  text-align: center;
+  color: #ff214a;
+
+  z-index: 2;
+
   ${({ top, left }) => css`
     position: absolute;
     top: ${top}px;
