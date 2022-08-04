@@ -118,7 +118,7 @@ const Paragraph = styled.p`
 const IllustWrapper = styled.div`
   position: absolute;
   top: -79px;
-  right: ${-110 - 38.08}px;
+  right: ${-110 + 38.08}px;
 `;
 const IllustContainer = styled.div`
   position: relative;

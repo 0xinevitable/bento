@@ -178,7 +178,7 @@ const ChainLogo = styled.img`
 const IllustWrapper = styled.div`
   position: absolute;
   top: -112px;
-  right: ${-110 - 43.49}px;
+  right: ${-110 + 43.49}px;
 `;
 const IllustContainer = styled.div`
   position: relative;
