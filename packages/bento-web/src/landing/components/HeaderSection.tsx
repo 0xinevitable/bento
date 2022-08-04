@@ -1,4 +1,6 @@
 import dedent from 'dedent';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import { systemFontStack } from '@/dashboard-landing/styles/fonts';
@@ -8,7 +10,22 @@ const ASSETS = {
     '/assets/landing/header-illust.png',
     '/assets/landing/header-illust@2x.png',
   ],
+  PAWN: [
+    '/assets/landing/header-pawn.png',
+    '/assets/landing/header-pawn@2x.png',
+  ],
 };
+
+const float = (y: number, reverse: boolean = false) => ({
+  initial: { y: !reverse ? -y : y },
+  animate: { y: !reverse ? y : -y },
+  transition: {
+    ease: 'linear',
+    repeat: Infinity,
+    repeatType: 'mirror',
+    duration: 2,
+  } as const,
+});
 
 export const HeaderSection: React.FC = () => {
   return (
@@ -24,22 +41,43 @@ export const HeaderSection: React.FC = () => {
           <Illust
             src={ASSETS.ILLUST[0]}
             srcSet={dedent`
-            ${ASSETS.ILLUST[0]} 1x,
-            ${ASSETS.ILLUST[1]} 2x
-          `}
+              ${ASSETS.ILLUST[0]} 1x,
+              ${ASSETS.ILLUST[1]} 2x
+            `}
           />
 
-          <AbsoluteContainer style={{ top: 152, left: -42 }}>
+          <Pawn
+            src={ASSETS.PAWN[0]}
+            srcSet={dedent`
+              ${ASSETS.PAWN[0]} 1x,
+              ${ASSETS.PAWN[1]} 2x
+            `}
+            initial={{ y: 5, scale: 1, rotate: 10 }}
+            animate={{ y: 5, scale: 1.1, rotate: 10 }}
+            transition={{
+              ease: 'linear',
+              repeat: Infinity,
+              repeatType: 'mirror',
+              duration: 2,
+            }}
+          />
+
+          <AbsoluteContainer
+            style={{ top: 152, left: -42 }}
+            {...float(8, true)}
+          >
             <IRContainer>
               <IRButton>SEARCHING INVESTORS</IRButton>
-              <IRHelp>Talk with us</IRHelp>
+              <IRHelp {...float(2, true)}>Talk with us</IRHelp>
             </IRContainer>
           </AbsoluteContainer>
 
-          <AbsoluteContainer style={{ top: 220, right: -107 }}>
+          <AbsoluteContainer style={{ top: 220, right: -107 }} {...float(18)}>
             <CTAContainer>
-              <CTAButton>Find your Identity</CTAButton>
-              <CTAHelp>Merge your wallets into one</CTAHelp>
+              <Link href="/home">
+                <CTAButton>Find your Identity</CTAButton>
+              </Link>
+              <CTAHelp {...float(8)}>Merge your wallets into one</CTAHelp>
             </CTAContainer>
           </AbsoluteContainer>
         </IllustContainer>
@@ -86,7 +124,7 @@ const Title = styled.h1`
   }
 `;
 
-const AbsoluteContainer = styled.div`
+const AbsoluteContainer = styled(motion.div)`
   position: absolute;
 `;
 
@@ -110,12 +148,22 @@ const IRButton = styled.button`
   font-weight: 800;
   font-size: 18.8px;
   line-height: 100%;
-
   text-align: center;
   letter-spacing: 0.01em;
   color: #000000;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: 0px 4px 24px rgba(250, 209, 105, 0.55);
+  }
+
+  &:focus {
+    filter: opacity(0.66);
+  }
 `;
-const IRHelp = styled.span`
+const IRHelp = styled(motion.span)`
   padding: 6px 8px;
   background-color: rgba(64, 36, 8, 0.8);
   border: 1px solid #ffda79;
@@ -152,13 +200,22 @@ const CTAButton = styled.button`
   font-weight: 800;
   font-size: 24px;
   line-height: 103%;
-
   text-align: center;
   letter-spacing: 0.01em;
-
   color: #ffffff;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: 0px 4px 24px rgba(255, 33, 74, 0.55);
+  }
+
+  &:focus {
+    filter: opacity(0.66);
+  }
 `;
-const CTAHelp = styled.span`
+const CTAHelp = styled(motion.span)`
   width: fit-content;
   padding: 6px 8px;
 
@@ -203,4 +260,14 @@ const Illust = styled.img`
   margin-bottom: ${-ILLUST_BLUR_BOTTOM}px;
   width: ${662 + ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
   height: ${413.74 + ILLUST_BLUR_BOTTOM}px;
+`;
+
+const Pawn = styled(motion.img)`
+  width: ${413.74 + ILLUST_BLUR_BOTTOM}px;
+  height: ${413.74 + ILLUST_BLUR_BOTTOM}px;
+
+  position: absolute;
+  top: 0;
+  left: ${173.3 - ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
+  bottom: 0;
 `;
