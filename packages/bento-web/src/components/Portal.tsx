@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-export const Portal: React.FC<React.PropsWithChildren<{ id: string }>> = ({
+type PortalProps = {
+  id?: string;
+};
+
+export const Portal: React.FC<React.PropsWithChildren<PortalProps>> = ({
   id,
   children,
 }) => {
