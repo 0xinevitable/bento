@@ -34,7 +34,6 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  background-color: black;
 
   * {
     font-family: 'Raleway', ${systemFontStack};

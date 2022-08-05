@@ -2,6 +2,7 @@ import dedent from 'dedent';
 import styled, { css } from 'styled-components';
 
 import { Badge } from '@/components/Badge';
+import { Portal } from '@/components/Portal';
 
 const ASSETS = {
   DIAGRAM: [
@@ -9,8 +10,8 @@ const ASSETS = {
     '/assets/landing/identity-diagram@2x.png',
   ],
   BACKGROUND: [
-    '/assets/landing/identity-background.png',
-    '/assets/landing/identity-background@2x.png',
+    '/assets/landing/identity-background.jpg',
+    '/assets/landing/identity-background@2x.jpg',
   ],
 } as const;
 
@@ -29,14 +30,24 @@ export const IdentitySection: React.FC = () => {
         </Paragraph>
       </Information>
 
+      <Portal id="landing-background">
+        <Background
+          src={ASSETS.BACKGROUND[0]}
+          srcSet={dedent`
+            ${ASSETS.BACKGROUND[0]} 1x,
+            ${ASSETS.BACKGROUND[1]} 2x
+          `}
+        />
+      </Portal>
+
       <IllustWrapper>
         <IllustContainer>
           <Illust
             src={ASSETS.DIAGRAM[0]}
             srcSet={dedent`
-                ${ASSETS.DIAGRAM[0]} 1x,
-                ${ASSETS.DIAGRAM[1]} 2x
-              `}
+              ${ASSETS.DIAGRAM[0]} 1x,
+              ${ASSETS.DIAGRAM[1]} 2x
+            `}
           />
         </IllustContainer>
       </IllustWrapper>
@@ -77,6 +88,14 @@ const Paragraph = styled.p`
   color: #ffffff;
 `;
 
+const Background = styled.img`
+  position: fixed;
+  width: 1240px;
+  height: 687.76px;
+  z-index: -1;
+  bottom: 0;
+  right: 0;
+`;
 const IllustWrapper = styled.div`
   position: absolute;
   top: 67px;

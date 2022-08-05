@@ -36,67 +36,88 @@ const cardSources = (name: string) => ({
 
 export const DashboardSection: React.FC = () => {
   return (
-    <Section>
-      <Information>
-        <Badge>Dashboard for all L1s</Badge>
-        <Title>
-          View Your <br />
-          Entire Portfolio
-        </Title>
-        <Paragraph>
-          Bento’s goal to make every user track every asset they own, regardless
-          of chains and types. And since it’s open-source, any developer or team
-          can add support for their protocol/app.
-        </Paragraph>
-        <Link href="/dashboard" passHref>
-          <LearnMore>
-            <span>Learn More</span>
-            <LearnMoreChevron />
-          </LearnMore>
-        </Link>
+    <Wrapper>
+      <Section>
+        <Information>
+          <Badge>Dashboard for all L1s</Badge>
+          <Title>
+            View Your <br />
+            Entire Portfolio
+          </Title>
+          <Paragraph>
+            Bento’s goal to make every user track every asset they own,
+            regardless of chains and types. And since it’s open-source, any
+            developer or team can add support for their protocol/app.
+          </Paragraph>
+          <Link href="/dashboard" passHref>
+            <LearnMore>
+              <span>Learn More</span>
+              <LearnMoreChevron />
+            </LearnMore>
+          </Link>
 
-        <ChainLogoList>
-          {CHAINS.map((chain) => (
-            <AnimatedTooltip key={chain.src} label={chain.name}>
-              <ChainLogo src={chain.src} alt={chain.name} />
-            </AnimatedTooltip>
-          ))}
-        </ChainLogoList>
-      </Information>
+          <ChainLogoList>
+            {CHAINS.map((chain) => (
+              <AnimatedTooltip key={chain.src} label={chain.name}>
+                <ChainLogo src={chain.src} alt={chain.name} />
+              </AnimatedTooltip>
+            ))}
+          </ChainLogoList>
+        </Information>
 
-      <IllustWrapper>
-        <IllustContainer>
-          <Illust
-            src={ASSETS.ILLUST[0]}
-            srcSet={dedent`
+        <IllustWrapper>
+          <IllustContainer>
+            <Illust
+              src={ASSETS.ILLUST[0]}
+              srcSet={dedent`
               ${ASSETS.ILLUST[0]} 1x,
               ${ASSETS.ILLUST[1]} 2x
             `}
-          />
+            />
 
-          <EthereumCardContainer>
-            <EthereumCard {...cardSources('ethereum')} />
-          </EthereumCardContainer>
-          <CloneXCardContainer>
-            <CloneXCard {...cardSources('clonex')} />
-          </CloneXCardContainer>
-          <DaiCardContainer>
-            <DaiCard {...cardSources('dai')} />
-          </DaiCardContainer>
-          <OsmosisCardContainer>
-            <OsmosisCard {...cardSources('osmosis')} />
-          </OsmosisCardContainer>
-          <TetherCardContainer>
-            <TetherCard {...cardSources('tether')} />
-          </TetherCardContainer>
-        </IllustContainer>
-      </IllustWrapper>
-    </Section>
+            <EthereumCardContainer>
+              <EthereumCard {...cardSources('ethereum')} />
+            </EthereumCardContainer>
+            <CloneXCardContainer>
+              <CloneXCard {...cardSources('clonex')} />
+            </CloneXCardContainer>
+            <DaiCardContainer>
+              <DaiCard {...cardSources('dai')} />
+            </DaiCardContainer>
+            <OsmosisCardContainer>
+              <OsmosisCard {...cardSources('osmosis')} />
+            </OsmosisCardContainer>
+            <TetherCardContainer>
+              <TetherCard {...cardSources('tether')} />
+            </TetherCardContainer>
+          </IllustContainer>
+        </IllustWrapper>
+      </Section>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  padding-top: 135.26px;
+  width: 100%;
+  display: flex;
+  position: relative;
+
+  &:before {
+    content: '';
+    width: 100%;
+    height: 420px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    background-image: linear-gradient(to bottom, black, rgba(255, 255, 255, 0));
+  }
+`;
 const Section = styled.section`
-  margin: 135.26px auto 0;
+  margin: 0 auto;
   max-width: 1180px;
   width: 100%;
   position: relative;
