@@ -53,6 +53,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         </Container>
 
         <div id="portal" />
+        <div id="landing-background" />
       </RecoilRoot>
     </React.Fragment>
   );
@@ -68,5 +69,4 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  background: #0a0a0c;
 `;

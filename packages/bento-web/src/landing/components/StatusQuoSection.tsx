@@ -29,7 +29,7 @@ const ASSETS = {
   ],
 } as const;
 
-export const StatueQuoSection: React.FC = () => {
+export const StatusQuoSection: React.FC = () => {
   return (
     <Section>
       <Information>

@@ -6,7 +6,8 @@ import { systemFontStack } from '@/dashboard-landing/styles/fonts';
 
 import { DashboardSection } from './components/DashboardSection';
 import { HeaderSection } from './components/HeaderSection';
-import { StatueQuoSection } from './components/StatueQuoSection';
+import { IdentitySection } from './components/IdentitySection';
+import { StatusQuoSection } from './components/StatusQuoSection';
 
 const LandingPage: React.FC = () => {
   return (
@@ -17,7 +18,8 @@ const LandingPage: React.FC = () => {
 
       <HeaderSection />
       <DashboardSection />
-      <StatueQuoSection />
+      <StatusQuoSection />
+      <IdentitySection />
     </Container>
   );
 };
@@ -32,7 +34,6 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  background-color: black;
 
   * {
     font-family: 'Raleway', ${systemFontStack};

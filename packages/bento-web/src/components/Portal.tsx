@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-export const Portal: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+export const Portal: React.FC<React.PropsWithChildren<{ id: string }>> = ({
+  id,
+  children,
+}) => {
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
-    containerRef.current = document.querySelector('#portal');
+    containerRef.current = document.querySelector(`#${id}`);
     return () => setMounted(false);
   }, []);
 
