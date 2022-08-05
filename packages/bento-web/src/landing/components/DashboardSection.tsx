@@ -70,9 +70,9 @@ export const DashboardSection: React.FC = () => {
             <Illust
               src={ASSETS.ILLUST[0]}
               srcSet={dedent`
-              ${ASSETS.ILLUST[0]} 1x,
-              ${ASSETS.ILLUST[1]} 2x
-            `}
+                ${ASSETS.ILLUST[0]} 1x,
+                ${ASSETS.ILLUST[1]} 2x
+              `}
             />
 
             <EthereumCardContainer>
