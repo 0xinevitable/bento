@@ -11,6 +11,37 @@ export const RoadmapSection: React.FC = () => {
             <Badge>Near Future</Badge>
             <Title>Roadmap</Title>
           </Information>
+
+          <RoadmapList>
+            <RoadmapItem>
+              <RoadmapTitle>User Profiles</RoadmapTitle>
+              <RoadmapDate>2022.08</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
+              <RoadmapTitle>Archivements Beta</RoadmapTitle>
+              <RoadmapDate>2022.08</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
+              <RoadmapTitle>Anon Login</RoadmapTitle>
+              <RoadmapDate>2022.08</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
+              <RoadmapTitle>API Refactoring</RoadmapTitle>
+              <RoadmapDate>2022.09</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
+              <RoadmapTitle>Identity API Beta</RoadmapTitle>
+              <RoadmapDate>2022.09</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
+              <RoadmapTitle>Automation of Archivement Generation</RoadmapTitle>
+              <RoadmapDate>2022.09</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
+              <RoadmapTitle>Devnet Release</RoadmapTitle>
+              <RoadmapDate>2022 Q4</RoadmapDate>
+            </RoadmapItem>
+          </RoadmapList>
         </Section>
       </SectionContainer>
     </Wrapper>
@@ -18,7 +49,8 @@ export const RoadmapSection: React.FC = () => {
 };
 
 const Wrapper = styled.div`
-  padding-top: 200px;
+  margin-top: -100px;
+  padding-top: 300px;
   width: 100%;
   display: flex;
 
@@ -27,7 +59,7 @@ const Wrapper = styled.div`
   &:before {
     content: '';
     width: 100%;
-    height: 200px;
+    height: 300px;
 
     position: absolute;
     top: 0;
@@ -61,4 +93,51 @@ const Title = styled.h2`
   line-height: 103%;
   letter-spacing: 0.01em;
   color: #ffffff;
+`;
+
+const RoadmapList = styled.ul`
+  margin-top: 40px;
+  margin-left: 20px;
+  padding-left: 32px;
+  position: relative;
+
+  &:before {
+    content: '';
+    left: 0;
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 1px;
+  }
+`;
+const RoadmapItem = styled.li`
+  padding: 10px 0;
+  position: relative;
+
+  &:not(:last-of-type) {
+    margin-bottom: 20px;
+  }
+
+  &:before {
+    content: '';
+    left: ${-32 - 9}px;
+    top: 18px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 4px solid white;
+    background-color: black;
+  }
+`;
+const RoadmapTitle = styled.h3`
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+`;
+const RoadmapDate = styled.span`
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: bold;
+  font-size: 18px;
 `;
