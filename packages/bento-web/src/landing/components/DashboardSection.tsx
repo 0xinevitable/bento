@@ -200,6 +200,16 @@ const IllustWrapper = styled.div`
   position: absolute;
   top: -112px;
   right: ${-110 + 43.49}px;
+
+  @media (max-width: 1235px) {
+    right: ${(-110 + 43.49) * 0.9}px;
+    transform: scale(0.8);
+  }
+
+  @media (max-width: 1135px) {
+    right: ${-110 + 43.49 * 0.8}px;
+    transform: scale(0.65);
+  }
 `;
 const IllustContainer = styled.div`
   position: relative;
