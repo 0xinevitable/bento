@@ -202,13 +202,18 @@ const IllustWrapper = styled.div`
   right: ${-110 + 43.49}px;
 
   @media (max-width: 1235px) {
-    right: ${(-110 + 43.49) * 0.9}px;
-    transform: scale(0.8);
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+      margin: 0 auto;
+    }
   }
 
-  @media (max-width: 1135px) {
-    right: ${-110 + 43.49 * 0.8}px;
-    transform: scale(0.65);
+  @media screen and (max-width: 500px) {
+    margin: -40px 0;
   }
 `;
 const IllustContainer = styled.div`
@@ -219,6 +224,22 @@ const IllustContainer = styled.div`
 
   img {
     object-fit: cover;
+  }
+
+  @media screen and (max-width: 800px) {
+    transform: scale(0.9);
+  }
+
+  @media screen and (max-width: 695px) {
+    transform: scale(0.85);
+  }
+
+  @media screen and (max-width: 500px) {
+    transform: scale(0.8);
+  }
+
+  @media screen and (max-width: 500px) {
+    transform: scale(0.7);
   }
 `;
 
