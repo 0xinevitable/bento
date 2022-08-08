@@ -10,8 +10,8 @@ const ASSETS = {
     '/assets/landing/identity-diagram@2x.png',
   ],
   BACKGROUND: [
-    '/assets/landing/identity-background.jpg',
-    '/assets/landing/identity-background@2x.jpg',
+    '/assets/landing/identity-background.png',
+    '/assets/landing/identity-background@2x.png',
   ],
 } as const;
 
@@ -31,13 +31,19 @@ export const IdentitySection: React.FC = () => {
       </Information>
 
       <Portal id="landing-background">
-        <Background
-          src={ASSETS.BACKGROUND[0]}
-          srcSet={dedent`
-            ${ASSETS.BACKGROUND[0]} 1x,
-            ${ASSETS.BACKGROUND[1]} 2x
-          `}
-        />
+        <BackgroundContainer>
+          <BackgroundContent>
+            <BackgroundMargin>
+              <Background
+                src={ASSETS.BACKGROUND[0]}
+                srcSet={dedent`
+                  ${ASSETS.BACKGROUND[0]} 1x,
+                  ${ASSETS.BACKGROUND[1]} 2x
+                `}
+              />
+            </BackgroundMargin>
+          </BackgroundContent>
+        </BackgroundContainer>
       </Portal>
 
       <IllustWrapper>
@@ -88,13 +94,31 @@ const Paragraph = styled.p`
   color: #ffffff;
 `;
 
-const Background = styled.img`
+const BackgroundContainer = styled.div`
   position: fixed;
-  width: 1240px;
-  height: 687.76px;
+  width: 100%;
+  height: 100%;
   z-index: -1;
   bottom: 0;
   right: 0;
+`;
+const BackgroundContent = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1180px;
+  height: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+`;
+const BackgroundMargin = styled.div`
+  margin-right: -232px;
+  margin-bottom: -88px;
+`;
+const Background = styled.img`
+  width: 1240px;
+  height: 687.76px;
 `;
 const IllustWrapper = styled.div`
   position: absolute;

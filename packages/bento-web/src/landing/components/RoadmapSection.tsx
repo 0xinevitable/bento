@@ -50,7 +50,8 @@ export const RoadmapSection: React.FC = () => {
 
 const Wrapper = styled.div`
   margin-top: -100px;
-  padding-top: 300px;
+  padding-top: 200px;
+
   width: 100%;
   display: flex;
 
@@ -59,7 +60,7 @@ const Wrapper = styled.div`
   &:before {
     content: '';
     width: 100%;
-    height: 300px;
+    height: 200px;
 
     position: absolute;
     top: 0;
@@ -70,7 +71,9 @@ const Wrapper = styled.div`
   }
 `;
 const SectionContainer = styled.div`
+  padding-bottom: 100px;
   width: 100%;
+
   display: flex;
   background-color: black;
 `;
