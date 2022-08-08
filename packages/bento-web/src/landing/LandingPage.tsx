@@ -30,8 +30,6 @@ export default LandingPage;
 
 const Container = styled.div`
   width: 100vw;
-  padding-bottom: 100px;
-
   overflow: hidden;
 
   display: flex;
