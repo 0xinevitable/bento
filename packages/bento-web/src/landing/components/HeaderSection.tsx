@@ -27,71 +27,77 @@ const float = (y: number, reverse: boolean = false) => ({
 
 export const HeaderSection: React.FC = () => {
   return (
-    <Container>
-      <Title>
-        <span>{`The blockchain is`}</span>
-        {`\n`}
-        <span>{` a pretty big space.`}</span>
-      </Title>
+    <Wrapper>
+      <Container>
+        <Title>
+          <span>{`The blockchain is`}</span>
+          {`\n`}
+          <span>{` a pretty big space.`}</span>
+        </Title>
 
-      <IllustWrapper>
-        <IllustContainer>
-          <Illust
-            src={ASSETS.ILLUST[0]}
-            srcSet={dedent`
+        <IllustWrapper>
+          <IllustContainer>
+            <Illust
+              src={ASSETS.ILLUST[0]}
+              srcSet={dedent`
               ${ASSETS.ILLUST[0]} 1x,
               ${ASSETS.ILLUST[1]} 2x
             `}
-          />
+            />
 
-          <Pawn
-            src={ASSETS.PAWN[0]}
-            srcSet={dedent`
+            <Pawn
+              src={ASSETS.PAWN[0]}
+              srcSet={dedent`
               ${ASSETS.PAWN[0]} 1x,
               ${ASSETS.PAWN[1]} 2x
             `}
-            initial={{ y: 5, scale: 1, rotate: 10 }}
-            animate={{ y: 5, scale: 1.1, rotate: 10 }}
-            transition={{
-              ease: 'linear',
-              repeat: Infinity,
-              repeatType: 'mirror',
-              duration: 2,
-            }}
-          />
+              initial={{ y: 5, scale: 1, rotate: 10 }}
+              animate={{ y: 5, scale: 1.1, rotate: 10 }}
+              transition={{
+                ease: 'linear',
+                repeat: Infinity,
+                repeatType: 'mirror',
+                duration: 2,
+              }}
+            />
 
-          <AbsoluteContainer
-            style={{ top: 152, left: -42 }}
-            {...float(8, true)}
-          >
-            <IRContainer>
-              <IRButton>SEARCHING INVESTORS</IRButton>
-              <IRHelp {...float(2, true)}>Talk with us</IRHelp>
-            </IRContainer>
-          </AbsoluteContainer>
+            <AbsoluteContainer
+              style={{ top: 152, left: -42 }}
+              {...float(8, true)}
+            >
+              <IRContainer>
+                <IRButton>SEARCHING INVESTORS</IRButton>
+                <IRHelp {...float(2, true)}>Talk with us</IRHelp>
+              </IRContainer>
+            </AbsoluteContainer>
 
-          <AbsoluteContainer style={{ top: 220, right: -107 }} {...float(18)}>
-            <CTAContainer>
-              <Link href="/home">
-                <CTAButton>Find your Identity</CTAButton>
-              </Link>
-              <CTAHelp {...float(8)}>Merge your wallets into one</CTAHelp>
-            </CTAContainer>
-          </AbsoluteContainer>
-        </IllustContainer>
-      </IllustWrapper>
-    </Container>
+            <AbsoluteContainer style={{ top: 220, right: -107 }} {...float(18)}>
+              <CTAContainer>
+                <Link href="/home">
+                  <CTAButton>Find your Identity</CTAButton>
+                </Link>
+                <CTAHelp {...float(8)}>Merge your wallets into one</CTAHelp>
+              </CTAContainer>
+            </AbsoluteContainer>
+          </IllustContainer>
+        </IllustWrapper>
+      </Container>
+    </Wrapper>
   );
 };
 
-const Container = styled.section`
-  padding-top: 130px;
-  height: 584.74px;
-  position: relative;
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 0 32px;
 
   background-image: url('/assets/landing/header-background.jpg');
   background-size: 100% 100%;
   background-position: center;
+`;
+const Container = styled.section`
+  padding-top: 130px;
+  height: 584.74px;
+  position: relative;
 
   img,
   button {

@@ -31,58 +31,64 @@ const ASSETS = {
 
 export const StatusQuoSection: React.FC = () => {
   return (
-    <Section>
-      <Information>
-        <Badge>The Status Quo</Badge>
-        <Title>
-          Users are <br />
-          NOT Wallets
-        </Title>
-        <Paragraph>
-          Exactly. Users are entirely different from wallets, <br />
-          a more extensive concept by itself. <br />
-          But current web3 products treat them the same. <br />
-          In the cross-chain universe, user activities and assets no longer
-          remain in one address or chain.
-        </Paragraph>
-      </Information>
+    <Wrapper>
+      <Section>
+        <Information>
+          <Badge>The Status Quo</Badge>
+          <Title>
+            Users are <br />
+            NOT Wallets
+          </Title>
+          <Paragraph>
+            Exactly. Users are entirely different from wallets, <br />
+            a more extensive concept by itself. <br />
+            But current web3 products treat them the same. <br />
+            In the cross-chain universe, user activities and assets no longer
+            remain in one address or chain.
+          </Paragraph>
+        </Information>
 
-      <IllustWrapper>
-        <IllustContainer>
-          <ChessKingIllustContainer>
-            <ChessKingIllust
-              src={ASSETS.KING[0]}
-              srcSet={dedent`
+        <IllustWrapper>
+          <IllustContainer>
+            <ChessKingIllustContainer>
+              <ChessKingIllust
+                src={ASSETS.KING[0]}
+                srcSet={dedent`
                 ${ASSETS.KING[0]} 1x,
                 ${ASSETS.KING[1]} 2x
               `}
-            />
-          </ChessKingIllustContainer>
-          <InequalSymbol src="/assets/landing/inequal.svg" />
-          <WalletIllustContainer>
-            <WalletIllust
-              src={ASSETS.WALLET[0]}
-              srcSet={dedent`
+              />
+            </ChessKingIllustContainer>
+            <InequalSymbol src="/assets/landing/inequal.svg" />
+            <WalletIllustContainer>
+              <WalletIllust
+                src={ASSETS.WALLET[0]}
+                srcSet={dedent`
                 ${ASSETS.WALLET[0]} 1x,
                 ${ASSETS.WALLET[1]} 2x
               `}
-            />
-          </WalletIllustContainer>
+              />
+            </WalletIllustContainer>
 
-          {ASSETS.NOISES.map(({ src, top, left }) => (
-            <Noise key={src} src={src} top={top} left={left} />
-          ))}
-          {ASSETS.WALLETS.map(({ value, top, left }) => (
-            <Wallet key={value} top={top} left={left}>
-              {value}
-            </Wallet>
-          ))}
-        </IllustContainer>
-      </IllustWrapper>
-    </Section>
+            {ASSETS.NOISES.map(({ src, top, left }) => (
+              <Noise key={src} src={src} top={top} left={left} />
+            ))}
+            {ASSETS.WALLETS.map(({ value, top, left }) => (
+              <Wallet key={value} top={top} left={left}>
+                {value}
+              </Wallet>
+            ))}
+          </IllustContainer>
+        </IllustWrapper>
+      </Section>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 0 32px;
+`;
 const Section = styled.section`
   margin: 170px auto 0;
   max-width: 1180px;

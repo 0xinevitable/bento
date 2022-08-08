@@ -98,6 +98,7 @@ export const DashboardSection: React.FC = () => {
 };
 
 const Wrapper = styled.div`
+  padding: 0 32px;
   padding-top: 135.26px;
   width: 100%;
   display: flex;

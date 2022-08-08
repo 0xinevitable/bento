@@ -17,50 +17,56 @@ const ASSETS = {
 
 export const IdentitySection: React.FC = () => {
   return (
-    <Section>
-      <Information>
-        <Badge>Blockchain for Cross-Chain Identity</Badge>
-        <Title>
-          Define your <br />
-          identity
-        </Title>
-        <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Paragraph>
-      </Information>
+    <Wrapper>
+      <Section>
+        <Information>
+          <Badge>Blockchain for Cross-Chain Identity</Badge>
+          <Title>
+            Define your <br />
+            identity
+          </Title>
+          <Paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </Paragraph>
+        </Information>
 
-      <Portal id="landing-background">
-        <BackgroundContainer>
-          <BackgroundContent>
-            <BackgroundMargin>
-              <Background
-                src={ASSETS.BACKGROUND[0]}
-                srcSet={dedent`
+        <Portal id="landing-background">
+          <BackgroundContainer>
+            <BackgroundContent>
+              <BackgroundMargin>
+                <Background
+                  src={ASSETS.BACKGROUND[0]}
+                  srcSet={dedent`
                   ${ASSETS.BACKGROUND[0]} 1x,
                   ${ASSETS.BACKGROUND[1]} 2x
                 `}
-              />
-            </BackgroundMargin>
-          </BackgroundContent>
-        </BackgroundContainer>
-      </Portal>
+                />
+              </BackgroundMargin>
+            </BackgroundContent>
+          </BackgroundContainer>
+        </Portal>
 
-      <IllustWrapper>
-        <IllustContainer>
-          <Illust
-            src={ASSETS.DIAGRAM[0]}
-            srcSet={dedent`
+        <IllustWrapper>
+          <IllustContainer>
+            <Illust
+              src={ASSETS.DIAGRAM[0]}
+              srcSet={dedent`
               ${ASSETS.DIAGRAM[0]} 1x,
               ${ASSETS.DIAGRAM[1]} 2x
             `}
-          />
-        </IllustContainer>
-      </IllustWrapper>
-    </Section>
+            />
+          </IllustContainer>
+        </IllustWrapper>
+      </Section>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 0 32px;
+`;
 const Section = styled.section`
   margin: 170px auto 0;
   max-width: 1180px;

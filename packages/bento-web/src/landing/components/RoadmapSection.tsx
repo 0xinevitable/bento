@@ -71,7 +71,7 @@ const Wrapper = styled.div`
   }
 `;
 const SectionContainer = styled.div`
-  padding-bottom: 100px;
+  padding: 0 20px;
   width: 100%;
 
   display: flex;

@@ -29,7 +29,6 @@ const LandingPage: React.FC = () => {
 export default LandingPage;
 
 const Container = styled.div`
-  padding: 0 32px;
   width: 100vw;
   overflow: hidden;
 
