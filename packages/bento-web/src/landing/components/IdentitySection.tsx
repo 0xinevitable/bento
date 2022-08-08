@@ -38,9 +38,9 @@ export const IdentitySection: React.FC = () => {
                 <Background
                   src={ASSETS.BACKGROUND[0]}
                   srcSet={dedent`
-                  ${ASSETS.BACKGROUND[0]} 1x,
-                  ${ASSETS.BACKGROUND[1]} 2x
-                `}
+                    ${ASSETS.BACKGROUND[0]} 1x,
+                    ${ASSETS.BACKGROUND[1]} 2x
+                  `}
                 />
               </BackgroundMargin>
             </BackgroundContent>
@@ -52,9 +52,9 @@ export const IdentitySection: React.FC = () => {
             <Illust
               src={ASSETS.DIAGRAM[0]}
               srcSet={dedent`
-              ${ASSETS.DIAGRAM[0]} 1x,
-              ${ASSETS.DIAGRAM[1]} 2x
-            `}
+                ${ASSETS.DIAGRAM[0]} 1x,
+                ${ASSETS.DIAGRAM[1]} 2x
+              `}
             />
           </IllustContainer>
         </IllustWrapper>

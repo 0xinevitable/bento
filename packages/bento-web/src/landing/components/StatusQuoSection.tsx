@@ -54,9 +54,9 @@ export const StatusQuoSection: React.FC = () => {
               <ChessKingIllust
                 src={ASSETS.KING[0]}
                 srcSet={dedent`
-                ${ASSETS.KING[0]} 1x,
-                ${ASSETS.KING[1]} 2x
-              `}
+                  ${ASSETS.KING[0]} 1x,
+                  ${ASSETS.KING[1]} 2x
+                `}
               />
             </ChessKingIllustContainer>
             <InequalSymbol src="/assets/landing/inequal.svg" />
@@ -64,9 +64,9 @@ export const StatusQuoSection: React.FC = () => {
               <WalletIllust
                 src={ASSETS.WALLET[0]}
                 srcSet={dedent`
-                ${ASSETS.WALLET[0]} 1x,
-                ${ASSETS.WALLET[1]} 2x
-              `}
+                  ${ASSETS.WALLET[0]} 1x,
+                  ${ASSETS.WALLET[1]} 2x
+                `}
               />
             </WalletIllustContainer>
 
@@ -94,6 +94,10 @@ const Section = styled.section`
   max-width: 1180px;
   width: 100%;
   position: relative;
+
+  @media (max-width: 1235px) {
+    margin-top: 32px;
+  }
 `;
 
 const Information = styled.div`
@@ -125,6 +129,22 @@ const IllustWrapper = styled.div`
   position: absolute;
   top: -79px;
   right: ${-110 + 38.08}px;
+
+  @media (max-width: 1235px) {
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -5%;
+
+    & > div {
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 683px) {
+    margin-top: 16px;
+  }
 `;
 const IllustContainer = styled.div`
   position: relative;
@@ -133,6 +153,23 @@ const IllustContainer = styled.div`
   z-index: 0;
 
   filter: saturate(1.2);
+
+  @media (max-width: 872px) {
+    min-width: 804.92px;
+    transform: scale(0.85);
+  }
+
+  @media (max-width: 683px) {
+    transform: scale(0.8) rotate(22deg);
+  }
+
+  @media (max-width: 535px) {
+    transform: scale(0.75) rotate(28deg);
+  }
+
+  @media (max-width: 400px) {
+    transform: scale(0.7) rotate(28deg);
+  }
 `;
 
 const CHESS_KING_BLUR_TOP = 140 - 52.9;
