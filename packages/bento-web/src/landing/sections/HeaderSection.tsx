@@ -72,7 +72,7 @@ export const HeaderSection: React.FC = () => {
               </IRContainer>
             </IRAbsoluteContainer>
 
-            <CTAAbsoluteContainer>
+            <CTAAbsoluteContainer {...float(18)}>
               <CTAContainer>
                 <Link href="/home">
                   <CTAButton>Find your Identity</CTAButton>
