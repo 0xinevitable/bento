@@ -306,7 +306,7 @@ const CTAButton = styled.button`
   }
 `;
 const CTAHelp = styled(motion.span)`
-  width: fit-content;
+  width: max-content;
   padding: 6px 8px;
 
   background: rgba(51, 9, 17, 0.75);
@@ -345,7 +345,7 @@ const IllustWrapper = styled.div`
   left: 0;
   right: 0;
 
-  margin-left: -6%;
+  margin-left: ${(-6 / 100) * 662}px;
   display: flex;
   justify-content: center;
 

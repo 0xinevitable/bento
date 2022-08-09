@@ -37,5 +37,9 @@ const Container = styled.div`
 
   section * {
     font-family: 'Raleway', ${systemFontStack};
+
+    &:not(h1, h1 span) {
+      transition: all 0.2s ease-in-out;
+    }
   }
 `;
