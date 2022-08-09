@@ -68,7 +68,7 @@ const Wrapper = styled.div`
     left: 0;
     right: 0;
 
-    background-image: linear-gradient(to top, black, rgba(255, 255, 255, 0));
+    background-image: linear-gradient(to top, black, rgba(0, 0, 0, 0));
   }
 `;
 const SectionContainer = styled.div`
