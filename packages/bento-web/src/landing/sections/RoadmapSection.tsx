@@ -125,14 +125,28 @@ const RoadmapItem = styled.li`
     border: 4px solid white;
     background-color: black;
   }
+
+  @media screen and (max-width: 840px) {
+    &:before {
+      top: 12px;
+    }
+  }
 `;
 const RoadmapTitle = styled.h3`
   color: white;
   font-weight: bold;
   font-size: 24px;
+
+  @media screen and (max-width: 840px) {
+    font-size: 18px;
+  }
 `;
 const RoadmapDate = styled.span`
   color: rgba(255, 255, 255, 0.65);
   font-weight: bold;
   font-size: 18px;
+
+  @media screen and (max-width: 840px) {
+    font-size: 16px;
+  }
 `;
