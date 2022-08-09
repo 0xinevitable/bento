@@ -4,9 +4,12 @@ import styled from 'styled-components';
 import { Skeleton } from '@/components/Skeleton';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
-type Props = { tokenBalances: DashboardTokenBalance[] };
+type Props = {
+  tokenBalances: DashboardTokenBalance[];
+  isEdit: Boolean;
+};
 
-export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
+export const AssetSection: React.FC<Props> = ({ tokenBalances, isEdit }) => {
   return (
     <ul>
       {!!tokenBalances ? (

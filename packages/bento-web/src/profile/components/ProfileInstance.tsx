@@ -18,6 +18,7 @@ import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
 import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
+import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
 import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
 import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
 import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
@@ -35,6 +36,12 @@ enum AddressProfileTab {
   Questions = 'Questions',
   Assets = 'Assets',
 }
+
+export enum TagType {
+  h1 = 'h1',
+  p = 'p',
+}
+
 const tabs = [
   AddressProfileTab.Links,
   AddressProfileTab.Questions,
@@ -114,6 +121,8 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const palette = usePalette(data.color);
   const profileImageURL = profile.images?.[0];
 
+  const [isEdit, setEdit] = useState<Boolean>(false);
+
   return (
     <React.Fragment>
       <BackgroundGradient style={{ background: data.background }}>
@@ -126,47 +135,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        {!isPreview && (
-          <Link href="/profile/edit" passHref>
-            <a>
-              <ProfileEditButton />
-            </a>
-          </Link>
-        )}
-        {!!profile.display_name ? (
-          <DisplayName>{profile.display_name ?? profile.username}</DisplayName>
-        ) : (
-          <DefaultSkeleton
-            style={{
-              height: '34px',
-              width: '120px',
-              marginBottom: '10px',
-            }}
-          />
-        )}
-        {!!profile.username ? (
-          <Username style={{ color: palette.primary }}>
-            {`@${profile.username}`}
-          </Username>
-        ) : (
-          <DefaultSkeleton
-            style={{
-              height: '19px',
-              width: '80px',
-              marginBottom: '10px',
-            }}
-          />
-        )}
-        {!!profile.bio ? (
-          <Bio>{profile.bio}</Bio>
-        ) : (
-          <DefaultSkeleton
-            style={{
-              height: '22px',
-              width: '200px',
-            }}
-          />
-        )}
+        <ProfileViewer profile={profile} isPreview={isPreview} />
       </Information>
       <InformationSpacer />
       <Modal
@@ -186,17 +155,17 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         <TabContent palette={palette}>
           {selectedTab === AddressProfileTab.Links && (
             <AnimatedTab>
-              <ProfileLinkSection items={profile.links} />
+              <ProfileLinkSection items={profile.links} isEdit={isEdit} />
             </AnimatedTab>
           )}
           {selectedTab === AddressProfileTab.Questions && (
             <AnimatedTab>
-              <QuestionSection />
+              <QuestionSection isEdit={isEdit} />
             </AnimatedTab>
           )}
           {selectedTab === AddressProfileTab.Assets && (
             <AnimatedTab>
-              <AssetSection tokenBalances={tokenBalances} />
+              <AssetSection tokenBalances={tokenBalances} isEdit={isEdit} />
             </AnimatedTab>
           )}
         </TabContent>
