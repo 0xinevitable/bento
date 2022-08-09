@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import styled from 'styled-components';
 
+import { useWindowSize } from '@/hooks/useWindowSize';
+
 const ASSETS = {
   ILLUST: [
     '/assets/landing/header-illust.png',
@@ -26,6 +28,9 @@ const float = (y: number, reverse: boolean = false) => ({
 });
 
 export const HeaderSection: React.FC = () => {
+  const { width: screenWidth } = useWindowSize();
+  const isMobileView = screenWidth <= 665;
+
   return (
     <Wrapper>
       <Container>
@@ -65,19 +70,23 @@ export const HeaderSection: React.FC = () => {
               />
             </MainIllust>
 
-            <IRAbsoluteContainer {...float(8, true)}>
-              <IRContainer>
-                <IRButton>SEARCHING INVESTORS</IRButton>
-                <IRHelp {...float(2, true)}>Talk with us</IRHelp>
-              </IRContainer>
-            </IRAbsoluteContainer>
+            {!isMobileView && (
+              <IRAbsoluteContainer {...float(8, true)}>
+                <IRContainer>
+                  <IRButton>SEARCHING INVESTORS</IRButton>
+                  <IRHelp {...float(2, true)}>Talk with us</IRHelp>
+                </IRContainer>
+              </IRAbsoluteContainer>
+            )}
 
-            <CTAAbsoluteContainer {...float(18)}>
+            <CTAAbsoluteContainer {...float(!isMobileView ? 18 : 8)}>
               <CTAContainer>
                 <Link href="/home">
                   <CTAButton>Find your Identity</CTAButton>
                 </Link>
-                <CTAHelp {...float(8)}>Merge your wallets into one</CTAHelp>
+                <CTAHelp {...float(!isMobileView ? 8 : 4)}>
+                  Merge your wallets into one
+                </CTAHelp>
               </CTAContainer>
             </CTAAbsoluteContainer>
           </IllustContainer>
