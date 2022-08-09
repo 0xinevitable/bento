@@ -75,7 +75,7 @@ export const StatusQuoSection: React.FC = () => {
               <Noise key={src} src={src} top={top} left={left} />
             ))}
             {ASSETS.WALLETS.map(({ value, top, left }) => (
-              <Wallet key={value} top={top} left={left}>
+              <Wallet key={`${top}-${left}`} top={top} left={left}>
                 {value}
               </Wallet>
             ))}
