@@ -30,55 +30,56 @@ export const HeaderSection: React.FC = () => {
     <Wrapper>
       <Container>
         <Title>
-          <span>{`The blockchain is`}</span>
+          <span>
+            The <span style={{ display: 'inline-block' }}>blockchain is</span>
+          </span>
           {`\n`}
           <span>{` a pretty big space.`}</span>
         </Title>
 
         <IllustWrapper>
           <IllustContainer>
-            <Illust
-              src={ASSETS.ILLUST[0]}
-              srcSet={dedent`
+            <MainIllust>
+              <Illust
+                src={ASSETS.ILLUST[0]}
+                srcSet={dedent`
               ${ASSETS.ILLUST[0]} 1x,
               ${ASSETS.ILLUST[1]} 2x
             `}
-            />
+              />
 
-            <Pawn
-              src={ASSETS.PAWN[0]}
-              srcSet={dedent`
+              <Pawn
+                src={ASSETS.PAWN[0]}
+                srcSet={dedent`
               ${ASSETS.PAWN[0]} 1x,
               ${ASSETS.PAWN[1]} 2x
             `}
-              initial={{ y: 5, scale: 1, rotate: 10 }}
-              animate={{ y: 5, scale: 1.1, rotate: 10 }}
-              transition={{
-                ease: 'linear',
-                repeat: Infinity,
-                repeatType: 'mirror',
-                duration: 2,
-              }}
-            />
+                initial={{ y: 5, scale: 1, rotate: 10 }}
+                animate={{ y: 5, scale: 1.1, rotate: 10 }}
+                transition={{
+                  ease: 'linear',
+                  repeat: Infinity,
+                  repeatType: 'mirror',
+                  duration: 2,
+                }}
+              />
+            </MainIllust>
 
-            <AbsoluteContainer
-              style={{ top: 152, left: -42 }}
-              {...float(8, true)}
-            >
+            <IRAbsoluteContainer {...float(8, true)}>
               <IRContainer>
                 <IRButton>SEARCHING INVESTORS</IRButton>
                 <IRHelp {...float(2, true)}>Talk with us</IRHelp>
               </IRContainer>
-            </AbsoluteContainer>
+            </IRAbsoluteContainer>
 
-            <AbsoluteContainer style={{ top: 220, right: -107 }} {...float(18)}>
+            <CTAAbsoluteContainer>
               <CTAContainer>
                 <Link href="/home">
                   <CTAButton>Find your Identity</CTAButton>
                 </Link>
                 <CTAHelp {...float(8)}>Merge your wallets into one</CTAHelp>
               </CTAContainer>
-            </AbsoluteContainer>
+            </CTAAbsoluteContainer>
           </IllustContainer>
         </IllustWrapper>
       </Container>
@@ -93,6 +94,10 @@ const Wrapper = styled.div`
   background-image: url('/assets/landing/header-background.jpg');
   background-size: 100% 100%;
   background-position: center;
+
+  @media screen and (max-width: 620px) {
+    padding: 0 20px;
+  }
 `;
 const Container = styled.section`
   padding-top: 130px;
@@ -102,6 +107,10 @@ const Container = styled.section`
   img,
   button {
     user-select: none;
+  }
+
+  @media screen and (max-width: 665px) {
+    height: fit-content;
   }
 `;
 const Title = styled.h1`
@@ -129,12 +138,33 @@ const Title = styled.h1`
       margin-left: 72px;
     }
   }
+
+  @media screen and (max-width: 620px) {
+    font-size: 48px;
+
+    & > span:last-of-type {
+      margin-left: 0;
+    }
+  }
 `;
 
 const AbsoluteContainer = styled(motion.div)`
   position: absolute;
 `;
 
+const IRAbsoluteContainer = styled(AbsoluteContainer)`
+  top: 152px;
+  left: -42px;
+
+  @media screen and (max-width: 840px) {
+    top: 107px;
+    left: 44px;
+  }
+
+  @media screen and (max-width: 665px) {
+    display: none;
+  }
+`;
 const IRContainer = styled.div`
   position: relative;
   width: 268px;
@@ -188,10 +218,42 @@ const IRHelp = styled(motion.span)`
   color: #fcd570;
 `;
 
+const CTAAbsoluteContainer = styled(AbsoluteContainer)`
+  top: 220px;
+  right: -107px;
+
+  @media screen and (max-width: 840px) {
+    top: 201px;
+    right: -33px;
+  }
+
+  @media screen and (max-width: 712px) {
+    right: -15px;
+  }
+
+  @media screen and (max-width: 665px) {
+    top: -29px;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+  }
+`;
 const CTAContainer = styled.div`
   width: 362px;
   height: 136.46px;
   position: relative;
+
+  @media screen and (max-width: 840px) {
+    width: 272px;
+    height: 140px;
+  }
+
+  @media screen and (max-width: 665px) {
+    width: 208px;
+    height: 49px;
+  }
 `;
 const CTAButton = styled.button`
   padding: 17px 26px;
@@ -221,6 +283,17 @@ const CTAButton = styled.button`
   &:focus {
     filter: opacity(0.66);
   }
+
+  @media screen and (max-width: 665px) {
+    width: 208px;
+    height: 49px;
+    padding: 0;
+
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    transform: rotate(0);
+  }
 `;
 const CTAHelp = styled(motion.span)`
   width: fit-content;
@@ -240,6 +313,19 @@ const CTAHelp = styled(motion.span)`
   line-height: 103%;
   text-align: center;
   color: #ff214a;
+
+  @media screen and (max-width: 840px) {
+    top: unset;
+    left: unset;
+    right: 0;
+    bottom: 0;
+  }
+
+  @media screen and (max-width: 665px) {
+    width: unset;
+    bottom: -19px;
+    right: -70px;
+  }
 `;
 
 const IllustWrapper = styled.div`
@@ -249,14 +335,41 @@ const IllustWrapper = styled.div`
   left: 0;
   right: 0;
 
-  margin-left: -10%;
+  margin-left: -6%;
   display: flex;
   justify-content: center;
+
+  @media screen and (max-width: 665px) {
+    position: static;
+    margin-left: -10%;
+  }
+
+  @media screen and (max-width: 665px) {
+    margin-left: 0;
+    margin-top: ${28 + 20}px;
+  }
 `;
 const IllustContainer = styled.div`
   position: relative;
+  min-width: 662px;
   width: 662px;
   height: 413.74px;
+
+  @media screen and (max-width: 665px) {
+    min-width: unset;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+  }
+`;
+const MainIllust = styled.div`
+  @media screen and (max-width: 665px) {
+    margin-left: -8%;
+    position: relative;
+    width: 662px;
+    min-width: 662px;
+  }
 `;
 
 const ILLUST_BLUR_LEFT = 80;

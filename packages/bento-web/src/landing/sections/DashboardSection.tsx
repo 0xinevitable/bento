@@ -118,6 +118,10 @@ const Wrapper = styled.div`
 
     background-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0));
   }
+
+  @media (max-width: 1235px) {
+    padding-top: 64px;
+  }
 `;
 const Section = styled.section`
   margin: 0 auto;
