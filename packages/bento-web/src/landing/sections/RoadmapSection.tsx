@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 
+import { SectionTitle } from '../components/SectionTitle';
+
 export const RoadmapSection: React.FC = () => {
   return (
     <Wrapper>
@@ -9,7 +11,7 @@ export const RoadmapSection: React.FC = () => {
         <Section>
           <Information>
             <Badge>Near Future</Badge>
-            <Title>Roadmap</Title>
+            <SectionTitle>Roadmap</SectionTitle>
           </Information>
 
           <RoadmapList>
@@ -87,15 +89,6 @@ const Section = styled.section`
 const Information = styled.div`
   display: flex;
   flex-direction: column;
-`;
-const Title = styled.h2`
-  margin-top: 27px;
-
-  font-weight: 900;
-  font-size: 52px;
-  line-height: 103%;
-  letter-spacing: 0.01em;
-  color: #ffffff;
 `;
 
 const RoadmapList = styled.ul`

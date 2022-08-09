@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { Badge } from '@/components/Badge';
 
+import { SectionTitle } from '../components/SectionTitle';
+
 const ASSETS = {
   ILLUST: [
     '/assets/landing/dashboard-illust.png',
@@ -40,10 +42,10 @@ export const DashboardSection: React.FC = () => {
       <Section>
         <Information>
           <Badge>Dashboard for all L1s</Badge>
-          <Title>
+          <SectionTitle>
             View Your <br />
             Entire Portfolio
-          </Title>
+          </SectionTitle>
           <Paragraph>
             Bento’s goal to make every user track every asset they own,
             regardless of chains and types. And since it’s open-source, any
@@ -127,15 +129,7 @@ const Information = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Title = styled.h2`
-  margin-top: 27px;
 
-  font-weight: 900;
-  font-size: 52px;
-  line-height: 103%;
-  letter-spacing: 0.01em;
-  color: #ffffff;
-`;
 const Paragraph = styled.p`
   margin-top: 24px;
   max-width: 469px;

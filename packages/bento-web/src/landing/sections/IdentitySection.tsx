@@ -1,8 +1,10 @@
 import dedent from 'dedent';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 import { Portal } from '@/components/Portal';
+
+import { SectionTitle } from '../components/SectionTitle';
 
 const ASSETS = {
   DIAGRAM: [
@@ -21,10 +23,10 @@ export const IdentitySection: React.FC = () => {
       <Section>
         <Information>
           <Badge>Blockchain for Cross-Chain Identity</Badge>
-          <Title>
+          <SectionTitle>
             Define your <br />
             identity
-          </Title>
+          </SectionTitle>
           <Paragraph>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -79,15 +81,7 @@ const Information = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Title = styled.h2`
-  margin-top: 27px;
 
-  font-weight: 900;
-  font-size: 52px;
-  line-height: 103%;
-  letter-spacing: 0.01em;
-  color: #ffffff;
-`;
 const Paragraph = styled.p`
   margin-top: 24px;
   max-width: 348px;

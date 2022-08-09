@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 
+import { SectionTitle } from '../components/SectionTitle';
+
 const ASSETS = {
   KING: [
     '/assets/landing/status-quo-king.png',
@@ -35,10 +37,10 @@ export const StatusQuoSection: React.FC = () => {
       <Section>
         <Information>
           <Badge>The Status Quo</Badge>
-          <Title>
+          <SectionTitle>
             Users are <br />
             NOT Wallets
-          </Title>
+          </SectionTitle>
           <Paragraph>
             Exactly. Users are entirely different from wallets, <br />
             a more extensive concept by itself. <br />
@@ -104,15 +106,7 @@ const Information = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Title = styled.h2`
-  margin-top: 27px;
 
-  font-weight: 900;
-  font-size: 52px;
-  line-height: 103%;
-  letter-spacing: 0.01em;
-  color: #ffffff;
-`;
 const Paragraph = styled.p`
   margin-top: 24px;
   max-width: 469px;
