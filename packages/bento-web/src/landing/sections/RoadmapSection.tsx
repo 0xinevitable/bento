@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { Badge } from '@/components/Badge';
+import { SectionBadge } from '../components/SectionBadge';
+import { SectionTitle } from '../components/SectionTitle';
 
 export const RoadmapSection: React.FC = () => {
   return (
@@ -8,8 +9,8 @@ export const RoadmapSection: React.FC = () => {
       <SectionContainer>
         <Section>
           <Information>
-            <Badge>Near Future</Badge>
-            <Title>Roadmap</Title>
+            <SectionBadge>Near Future</SectionBadge>
+            <SectionTitle>Roadmap</SectionTitle>
           </Information>
 
           <RoadmapList>
@@ -67,11 +68,11 @@ const Wrapper = styled.div`
     left: 0;
     right: 0;
 
-    background-image: linear-gradient(to top, black, rgba(255, 255, 255, 0));
+    background-image: linear-gradient(to top, black, rgba(0, 0, 0, 0));
   }
 `;
 const SectionContainer = styled.div`
-  padding-bottom: 100px;
+  padding: 0 20px;
   width: 100%;
 
   display: flex;
@@ -87,15 +88,6 @@ const Section = styled.section`
 const Information = styled.div`
   display: flex;
   flex-direction: column;
-`;
-const Title = styled.h2`
-  margin-top: 27px;
-
-  font-weight: 900;
-  font-size: 52px;
-  line-height: 103%;
-  letter-spacing: 0.01em;
-  color: #ffffff;
 `;
 
 const RoadmapList = styled.ul`
@@ -133,14 +125,28 @@ const RoadmapItem = styled.li`
     border: 4px solid white;
     background-color: black;
   }
+
+  @media screen and (max-width: 840px) {
+    &:before {
+      top: 12px;
+    }
+  }
 `;
 const RoadmapTitle = styled.h3`
   color: white;
   font-weight: bold;
   font-size: 24px;
+
+  @media screen and (max-width: 840px) {
+    font-size: 18px;
+  }
 `;
 const RoadmapDate = styled.span`
   color: rgba(255, 255, 255, 0.65);
   font-weight: bold;
   font-size: 18px;
+
+  @media screen and (max-width: 840px) {
+    font-size: 16px;
+  }
 `;

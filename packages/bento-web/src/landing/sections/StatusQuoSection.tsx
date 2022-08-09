@@ -1,7 +1,8 @@
 import dedent from 'dedent';
 import styled, { css } from 'styled-components';
 
-import { Badge } from '@/components/Badge';
+import { SectionBadge } from '../components/SectionBadge';
+import { SectionTitle } from '../components/SectionTitle';
 
 const ASSETS = {
   KING: [
@@ -31,78 +32,80 @@ const ASSETS = {
 
 export const StatusQuoSection: React.FC = () => {
   return (
-    <Section>
-      <Information>
-        <Badge>The Status Quo</Badge>
-        <Title>
-          Users are <br />
-          NOT Wallets
-        </Title>
-        <Paragraph>
-          Exactly. Users are entirely different from wallets, <br />
-          a more extensive concept by itself. <br />
-          But current web3 products treat them the same. <br />
-          In the cross-chain universe, user activities and assets no longer
-          remain in one address or chain.
-        </Paragraph>
-      </Information>
+    <Wrapper>
+      <Section>
+        <Information>
+          <SectionBadge>The Status Quo</SectionBadge>
+          <SectionTitle>
+            Users are <br />
+            NOT Wallets
+          </SectionTitle>
+          <Paragraph>
+            Exactly. Users are entirely different from wallets, <br />
+            a more extensive concept by itself. <br />
+            But current web3 products treat them the same. <br />
+            In the cross-chain universe, user activities and assets no longer
+            remain in one address or chain.
+          </Paragraph>
+        </Information>
 
-      <IllustWrapper>
-        <IllustContainer>
-          <ChessKingIllustContainer>
-            <ChessKingIllust
-              src={ASSETS.KING[0]}
-              srcSet={dedent`
-                ${ASSETS.KING[0]} 1x,
-                ${ASSETS.KING[1]} 2x
-              `}
-            />
-          </ChessKingIllustContainer>
-          <InequalSymbol src="/assets/landing/inequal.svg" />
-          <WalletIllustContainer>
-            <WalletIllust
-              src={ASSETS.WALLET[0]}
-              srcSet={dedent`
-                ${ASSETS.WALLET[0]} 1x,
-                ${ASSETS.WALLET[1]} 2x
-              `}
-            />
-          </WalletIllustContainer>
+        <IllustWrapper>
+          <IllustContainer>
+            <ChessKingIllustContainer>
+              <ChessKingIllust
+                src={ASSETS.KING[0]}
+                srcSet={dedent`
+                  ${ASSETS.KING[0]} 1x,
+                  ${ASSETS.KING[1]} 2x
+                `}
+              />
+            </ChessKingIllustContainer>
+            <InequalSymbol src="/assets/landing/inequal.svg" />
+            <WalletIllustContainer>
+              <WalletIllust
+                src={ASSETS.WALLET[0]}
+                srcSet={dedent`
+                  ${ASSETS.WALLET[0]} 1x,
+                  ${ASSETS.WALLET[1]} 2x
+                `}
+              />
+            </WalletIllustContainer>
 
-          {ASSETS.NOISES.map(({ src, top, left }) => (
-            <Noise key={src} src={src} top={top} left={left} />
-          ))}
-          {ASSETS.WALLETS.map(({ value, top, left }) => (
-            <Wallet key={value} top={top} left={left}>
-              {value}
-            </Wallet>
-          ))}
-        </IllustContainer>
-      </IllustWrapper>
-    </Section>
+            {ASSETS.NOISES.map(({ src, top, left }) => (
+              <Noise key={src} src={src} top={top} left={left} />
+            ))}
+            {ASSETS.WALLETS.map(({ value, top, left }) => (
+              <Wallet key={value} top={top} left={left}>
+                {value}
+              </Wallet>
+            ))}
+          </IllustContainer>
+        </IllustWrapper>
+      </Section>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 0 32px;
+`;
 const Section = styled.section`
   margin: 170px auto 0;
   max-width: 1180px;
   width: 100%;
   position: relative;
+
+  @media (max-width: 1235px) {
+    margin-top: 32px;
+  }
 `;
 
 const Information = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Title = styled.h2`
-  margin-top: 27px;
 
-  font-weight: 900;
-  font-size: 52px;
-  line-height: 103%;
-  letter-spacing: 0.01em;
-  color: #ffffff;
-`;
 const Paragraph = styled.p`
   margin-top: 24px;
   max-width: 469px;
@@ -119,6 +122,22 @@ const IllustWrapper = styled.div`
   position: absolute;
   top: -79px;
   right: ${-110 + 38.08}px;
+
+  @media (max-width: 1235px) {
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -5%;
+
+    & > div {
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 683px) {
+    margin-top: 16px;
+  }
 `;
 const IllustContainer = styled.div`
   position: relative;
@@ -127,6 +146,23 @@ const IllustContainer = styled.div`
   z-index: 0;
 
   filter: saturate(1.2);
+
+  @media (max-width: 872px) {
+    min-width: 804.92px;
+    transform: scale(0.85);
+  }
+
+  @media (max-width: 683px) {
+    transform: scale(0.8) rotate(22deg);
+  }
+
+  @media (max-width: 535px) {
+    transform: scale(0.75) rotate(28deg);
+  }
+
+  @media (max-width: 400px) {
+    transform: scale(0.7) rotate(28deg);
+  }
 `;
 
 const CHESS_KING_BLUR_TOP = 140 - 52.9;

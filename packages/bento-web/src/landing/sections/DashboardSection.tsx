@@ -3,7 +3,9 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
-import { Badge } from '@/components/Badge';
+
+import { SectionBadge } from '../components/SectionBadge';
+import { SectionTitle } from '../components/SectionTitle';
 
 const ASSETS = {
   ILLUST: [
@@ -39,11 +41,11 @@ export const DashboardSection: React.FC = () => {
     <Wrapper>
       <Section>
         <Information>
-          <Badge>Dashboard for all L1s</Badge>
-          <Title>
+          <SectionBadge>Dashboard for all L1s</SectionBadge>
+          <SectionTitle>
             View Your <br />
             Entire Portfolio
-          </Title>
+          </SectionTitle>
           <Paragraph>
             Bento’s goal to make every user track every asset they own,
             regardless of chains and types. And since it’s open-source, any
@@ -98,6 +100,7 @@ export const DashboardSection: React.FC = () => {
 };
 
 const Wrapper = styled.div`
+  padding: 0 32px;
   padding-top: 135.26px;
   width: 100%;
   display: flex;
@@ -113,7 +116,11 @@ const Wrapper = styled.div`
     left: 0;
     right: 0;
 
-    background-image: linear-gradient(to bottom, black, rgba(255, 255, 255, 0));
+    background-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0));
+  }
+
+  @media (max-width: 1235px) {
+    padding-top: 64px;
   }
 `;
 const Section = styled.section`
@@ -126,15 +133,7 @@ const Information = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Title = styled.h2`
-  margin-top: 27px;
 
-  font-weight: 900;
-  font-size: 52px;
-  line-height: 103%;
-  letter-spacing: 0.01em;
-  color: #ffffff;
-`;
 const Paragraph = styled.p`
   margin-top: 24px;
   max-width: 469px;
@@ -200,6 +199,21 @@ const IllustWrapper = styled.div`
   position: absolute;
   top: -112px;
   right: ${-110 + 43.49}px;
+
+  @media (max-width: 1235px) {
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    margin: -40px 0;
+  }
 `;
 const IllustContainer = styled.div`
   position: relative;
@@ -209,6 +223,22 @@ const IllustContainer = styled.div`
 
   img {
     object-fit: cover;
+  }
+
+  @media screen and (max-width: 800px) {
+    transform: scale(0.9);
+  }
+
+  @media screen and (max-width: 695px) {
+    transform: scale(0.85);
+  }
+
+  @media screen and (max-width: 500px) {
+    transform: scale(0.8);
+  }
+
+  @media screen and (max-width: 500px) {
+    transform: scale(0.7);
   }
 `;
 

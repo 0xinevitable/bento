@@ -4,11 +4,11 @@ import MetaHead from '@/components/MetaHead';
 import { NavigationBar } from '@/components/NavigationBar';
 import { systemFontStack } from '@/dashboard-landing/styles/fonts';
 
-import { DashboardSection } from './components/DashboardSection';
-import { HeaderSection } from './components/HeaderSection';
-import { IdentitySection } from './components/IdentitySection';
-import { RoadmapSection } from './components/RoadmapSection';
-import { StatusQuoSection } from './components/StatusQuoSection';
+import { DashboardSection } from './sections/DashboardSection';
+import { HeaderSection } from './sections/HeaderSection';
+import { IdentitySection } from './sections/IdentitySection';
+import { RoadmapSection } from './sections/RoadmapSection';
+import { StatusQuoSection } from './sections/StatusQuoSection';
 
 const LandingPage: React.FC = () => {
   return (
