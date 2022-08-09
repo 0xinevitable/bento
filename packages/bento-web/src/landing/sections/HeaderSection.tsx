@@ -306,7 +306,7 @@ const CTAButton = styled.button`
   }
 `;
 const CTAHelp = styled(motion.span)`
-  width: fit-content;
+  width: max-content;
   padding: 6px 8px;
 
   background: rgba(51, 9, 17, 0.75);
