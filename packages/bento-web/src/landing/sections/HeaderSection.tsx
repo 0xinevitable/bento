@@ -180,6 +180,7 @@ const IRContainer = styled.div`
   height: 117.1px;
 `;
 const IRButton = styled.button`
+  width: fit-content;
   padding: 13.31px 20.36px;
   background: linear-gradient(155.97deg, #ffd978 15.42%, #d09600 102.91%);
   box-shadow: 0px 3.13px 12.53px rgba(250, 209, 105, 0.3);
