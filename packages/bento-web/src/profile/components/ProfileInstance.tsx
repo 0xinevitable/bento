@@ -38,11 +38,6 @@ enum AddressProfileTab {
   Assets = 'Assets',
 }
 
-export enum TagType {
-  h1 = 'h1',
-  p = 'p',
-}
-
 const tabs = [
   AddressProfileTab.Links,
   AddressProfileTab.Questions,
@@ -122,7 +117,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const palette = usePalette(data.color);
   const profileImageURL = profile.images?.[0];
 
-  const [isEdit, setEdit] = useState<Boolean>(false);
+  const [isEdting, setEditing] = useState<Boolean>(false);
 
   return (
     <React.Fragment>
@@ -136,13 +131,13 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        <button onClick={() => setEdit((isEdit) => !isEdit)}>
-          <ProfileEditButton isEdit={isEdit} />
+        <button onClick={() => setEditing((isEdting) => !isEdting)}>
+          <ProfileEditButton isEditing={isEdting} />
         </button>
-        {!isEdit ? (
+        {!isEdting ? (
           <ProfileViewer profile={profile} isPreview={isPreview} />
         ) : (
-          <ProfileEditor profile={profile} />
+          <ProfileEditor currentProfile={profile} />
         )}
       </Information>
       <InformationSpacer />
@@ -163,17 +158,20 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         <TabContent palette={palette}>
           {selectedTab === AddressProfileTab.Links && (
             <AnimatedTab>
-              <ProfileLinkSection items={profile.links} isEdit={isEdit} />
+              <ProfileLinkSection items={profile.links} isEditing={isEdting} />
             </AnimatedTab>
           )}
           {selectedTab === AddressProfileTab.Questions && (
             <AnimatedTab>
-              <QuestionSection isEdit={isEdit} />
+              <QuestionSection isEditing={isEdting} />
             </AnimatedTab>
           )}
           {selectedTab === AddressProfileTab.Assets && (
             <AnimatedTab>
-              <AssetSection tokenBalances={tokenBalances} isEdit={isEdit} />
+              <AssetSection
+                tokenBalances={tokenBalances}
+                isEditing={isEdting}
+              />
             </AnimatedTab>
           )}
         </TabContent>
