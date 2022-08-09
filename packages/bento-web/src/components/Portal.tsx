@@ -6,7 +6,7 @@ type PortalProps = {
 };
 
 export const Portal: React.FC<React.PropsWithChildren<PortalProps>> = ({
-  id,
+  id = 'portal',
   children,
 }) => {
   const [mounted, setMounted] = useState(false);
