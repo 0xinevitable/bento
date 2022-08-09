@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-import { Badge } from '@/components/Badge';
-
+import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 
 export const RoadmapSection: React.FC = () => {
@@ -10,7 +9,7 @@ export const RoadmapSection: React.FC = () => {
       <SectionContainer>
         <Section>
           <Information>
-            <Badge>Near Future</Badge>
+            <SectionBadge>Near Future</SectionBadge>
             <SectionTitle>Roadmap</SectionTitle>
           </Information>
 

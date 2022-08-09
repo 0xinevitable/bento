@@ -1,8 +1,7 @@
 import dedent from 'dedent';
 import styled, { css } from 'styled-components';
 
-import { Badge } from '@/components/Badge';
-
+import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 
 const ASSETS = {
@@ -36,7 +35,7 @@ export const StatusQuoSection: React.FC = () => {
     <Wrapper>
       <Section>
         <Information>
-          <Badge>The Status Quo</Badge>
+          <SectionBadge>The Status Quo</SectionBadge>
           <SectionTitle>
             Users are <br />
             NOT Wallets

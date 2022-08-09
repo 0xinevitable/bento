@@ -1,9 +1,9 @@
 import dedent from 'dedent';
 import styled from 'styled-components';
 
-import { Badge } from '@/components/Badge';
 import { Portal } from '@/components/Portal';
 
+import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 
 const ASSETS = {
@@ -22,7 +22,7 @@ export const IdentitySection: React.FC = () => {
     <Wrapper>
       <Section>
         <Information>
-          <Badge>Blockchain for Cross-Chain Identity</Badge>
+          <SectionBadge>Blockchain for Cross-Chain Identity</SectionBadge>
           <SectionTitle>
             Define your <br />
             identity

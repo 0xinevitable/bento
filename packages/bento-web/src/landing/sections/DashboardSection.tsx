@@ -3,8 +3,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
-import { Badge } from '@/components/Badge';
 
+import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 
 const ASSETS = {
@@ -41,7 +41,7 @@ export const DashboardSection: React.FC = () => {
     <Wrapper>
       <Section>
         <Information>
-          <Badge>Dashboard for all L1s</Badge>
+          <SectionBadge>Dashboard for all L1s</SectionBadge>
           <SectionTitle>
             View Your <br />
             Entire Portfolio
