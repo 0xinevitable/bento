@@ -8,4 +8,8 @@ export const SectionTitle = styled.h2`
   line-height: 103%;
   letter-spacing: 0.01em;
   color: #ffffff;
+
+  @media screen and (max-width: 600px) {
+    font-size: 36px;
+  }
 `;
