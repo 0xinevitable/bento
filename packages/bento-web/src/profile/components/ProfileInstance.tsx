@@ -16,6 +16,7 @@ import { walletsAtom } from '@/recoil/wallets';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
+import { ProfileEditor } from '../ProfileDetailPage/components/ProfileEditor';
 import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
 import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
@@ -135,7 +136,14 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        <ProfileViewer profile={profile} isPreview={isPreview} />
+        <button onClick={() => setEdit((isEdit) => !isEdit)}>
+          <ProfileEditButton isEdit={isEdit} />
+        </button>
+        {!isEdit ? (
+          <ProfileViewer profile={profile} isPreview={isPreview} />
+        ) : (
+          <ProfileEditor profile={profile} />
+        )}
       </Information>
       <InformationSpacer />
       <Modal
@@ -211,39 +219,9 @@ const Information = styled.div`
   flex-direction: column;
 `;
 
-const DisplayName = styled.h1`
-  margin: 0;
-  font-weight: 900;
-  font-size: 28px;
-  line-height: 34px;
-  text-align: center;
-  color: #ffffff;
-`;
-
-const Username = styled.p`
-  margin: 4px 0 0;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-`;
-
-const Bio = styled.p`
-  margin: 16px 0 0;
-  font-size: 18px;
-  line-height: 22px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.8);
-  white-space: break-spaces;
-`;
-
 const InformationSpacer = styled.div`
   width: 100%;
   height: 26px;
-`;
-
-const DefaultSkeleton = styled(Skeleton)`
-  border-radius: 6px;
-  align-self: center;
 `;
 
 const LargeProfileImage = styled.img`

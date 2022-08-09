@@ -26,13 +26,6 @@ export const ProfileViewer: React.FC<Props> = ({ profile, isPreview }) => {
 
   return (
     <>
-      {!isPreview && (
-        <Link href="/profile/edit" passHref>
-          <a>
-            <ProfileEditButton />
-          </a>
-        </Link>
-      )}
       {!!profile.display_name ? (
         <DisplayName>{profile.display_name ?? profile.username}</DisplayName>
       ) : (
