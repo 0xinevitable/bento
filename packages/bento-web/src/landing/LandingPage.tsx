@@ -35,7 +35,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  * {
+  section * {
     font-family: 'Raleway', ${systemFontStack};
   }
 `;
