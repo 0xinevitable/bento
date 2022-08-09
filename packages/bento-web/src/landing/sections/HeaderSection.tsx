@@ -105,6 +105,9 @@ const Container = styled.section`
   }
 `;
 const Title = styled.h1`
+  width: fit-content;
+  margin: 0 auto;
+
   font-weight: 900;
   font-size: 64px;
   font-variant: small-caps;
@@ -118,9 +121,13 @@ const Title = styled.h1`
   display: flex;
   flex-direction: column;
 
-  & > span:last-of-type {
-    margin-top: 4px;
-    margin-left: 72px;
+  & > span {
+    width: fit-content;
+
+    &:last-of-type {
+      margin-top: 4px;
+      margin-left: 72px;
+    }
   }
 `;
 
@@ -242,8 +249,9 @@ const IllustWrapper = styled.div`
   left: 0;
   right: 0;
 
-  width: 662px;
-  height: 413.74px;
+  margin-left: -10%;
+  display: flex;
+  justify-content: center;
 `;
 const IllustContainer = styled.div`
   position: relative;
