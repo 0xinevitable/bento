@@ -75,6 +75,11 @@ const Section = styled.section`
   width: 100%;
   height: 814px;
   position: relative;
+
+  @media (max-width: 1235px) {
+    margin-top: 32px;
+    height: fit-content;
+  }
 `;
 
 const Information = styled.div`
@@ -124,6 +129,35 @@ const IllustWrapper = styled.div`
   position: absolute;
   top: 67px;
   right: ${-110 + 81.13}px;
+
+  @media (max-width: 1235px) {
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+      margin: 0 auto;
+      height: fit-content;
+      width: fit-content;
+    }
+
+    & > div > img {
+      width: 100%;
+      max-width: 700px;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    & > div > img {
+      width: 450px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    margin-left: 10%;
+  }
 `;
 const IllustContainer = styled.div`
   position: relative;
