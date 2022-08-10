@@ -2,15 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
-import { TrackedSection } from '@/components/TrackedSection';
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
 import { Analytics } from '@/utils/analytics';
 
 import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
-export const HeaderSection = () => {
+export const HeaderSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
   return (
-    <Container id="header">
+    <Container {...trackedSectionOptions}>
       <Content>
         <Badge>INTRODUCING BENTO</Badge>
         <Title>

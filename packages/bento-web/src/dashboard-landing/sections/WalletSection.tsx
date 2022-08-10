@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { TrackedSection } from '@/components/TrackedSection';
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
 
 import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
-export const WalletSection: React.FC = () => {
+export const WalletSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
   return (
-    <Container id="wallets">
+    <Container {...trackedSectionOptions}>
       <Subtitle>Dashboard</Subtitle>
       <Title>
         Manage and Share
