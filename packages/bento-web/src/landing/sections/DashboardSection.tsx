@@ -3,6 +3,10 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
@@ -36,10 +40,12 @@ const cardSources = (name: string) => ({
   `,
 });
 
-export const DashboardSection: React.FC = () => {
+export const DashboardSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
   return (
     <Wrapper>
-      <Section>
+      <Section {...trackedSectionOptions}>
         <Information>
           <SectionBadge>Dashboard for all L1s</SectionBadge>
           <SectionTitle>
@@ -123,7 +129,7 @@ const Wrapper = styled.div`
     padding-top: 64px;
   }
 `;
-const Section = styled.section`
+const Section = styled(TrackedSection)`
   margin: 0 auto;
   max-width: 1180px;
   width: 100%;

@@ -3,6 +3,10 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import styled from 'styled-components';
 
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
 import { useWindowSize } from '@/hooks/useWindowSize';
 
 const ASSETS = {
@@ -27,13 +31,15 @@ const float = (y: number, reverse: boolean = false) => ({
   } as const,
 });
 
-export const HeaderSection: React.FC = () => {
+export const HeaderSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
   const { width: screenWidth } = useWindowSize();
   const isMobileView = screenWidth <= 665;
 
   return (
     <Wrapper>
-      <Container>
+      <Section {...trackedSectionOptions}>
         <Title>
           <span>
             The <span style={{ display: 'inline-block' }}>blockchain is</span>
@@ -91,7 +97,7 @@ export const HeaderSection: React.FC = () => {
             </CTAAbsoluteContainer>
           </IllustContainer>
         </IllustWrapper>
-      </Container>
+      </Section>
     </Wrapper>
   );
 };
@@ -108,7 +114,7 @@ const Wrapper = styled.div`
     padding: 0 20px;
   }
 `;
-const Container = styled.section`
+const Section = styled(TrackedSection)`
   padding-top: 130px;
   height: 584.74px;
   position: relative;
