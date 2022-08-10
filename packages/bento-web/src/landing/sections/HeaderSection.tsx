@@ -88,12 +88,23 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
             </MainIllust>
 
             {!isMobileView && (
-              <IRAbsoluteContainer {...float(8, true)}>
-                <IRContainer>
-                  <IRButton>SEARCHING INVESTORS</IRButton>
-                  <IRHelp {...float(2, true)}>Talk with us</IRHelp>
-                </IRContainer>
-              </IRAbsoluteContainer>
+              <TwitterAbsoluteContainer {...float(8, true)}>
+                <TwitterContainer>
+                  <a
+                    href="https://twitter.com/bentoinevitable"
+                    target="_blank"
+                    onClick={() =>
+                      Analytics.logEvent('click_social_link', {
+                        type: 'twitter',
+                        medium: 'landing_header',
+                      })
+                    }
+                  >
+                    <TwitterButton>FOLLOW US ON TWITTER</TwitterButton>
+                  </a>
+                  <TwitterHelp {...float(2, true)}>Talk with us</TwitterHelp>
+                </TwitterContainer>
+              </TwitterAbsoluteContainer>
             )}
 
             <CTAAbsoluteContainer {...float(!isMobileView ? 18 : 8)}>
@@ -176,7 +187,7 @@ const AbsoluteContainer = styled(motion.div)`
   position: absolute;
 `;
 
-const IRAbsoluteContainer = styled(AbsoluteContainer)`
+const TwitterAbsoluteContainer = styled(AbsoluteContainer)`
   top: 152px;
   left: -42px;
 
@@ -189,13 +200,13 @@ const IRAbsoluteContainer = styled(AbsoluteContainer)`
     display: none;
   }
 `;
-const IRContainer = styled.div`
+const TwitterContainer = styled.div`
   position: relative;
   width: 268px;
   height: 117.1px;
 `;
-const IRButton = styled.button`
-  width: fit-content;
+const TwitterButton = styled.button`
+  width: max-content;
   padding: 13.31px 20.36px;
   background: linear-gradient(155.97deg, #ffd978 15.42%, #d09600 102.91%);
   box-shadow: 0px 3.13px 12.53px rgba(250, 209, 105, 0.3);
@@ -225,7 +236,7 @@ const IRButton = styled.button`
     filter: opacity(0.66);
   }
 `;
-const IRHelp = styled(motion.span)`
+const TwitterHelp = styled(motion.span)`
   padding: 6px 8px;
   background-color: rgba(64, 36, 8, 0.8);
   border: 1px solid #ffda79;
