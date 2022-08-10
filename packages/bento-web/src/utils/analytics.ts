@@ -17,7 +17,7 @@ export type AnalyticsEvent = {
   };
 
   click_app_link: {
-    medium: 'dashboard_landing';
+    medium: 'landing' | 'dashboard_landing';
   };
   click_team_link: {
     medium: 'dashboard_landing';

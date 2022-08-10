@@ -37,6 +37,13 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
   const { width: screenWidth } = useWindowSize();
   const isMobileView = screenWidth <= 665;
 
+  const onClickApp = useCallback(async () => {
+    await Analytics.logEvent('click_app_link', {
+      medium: 'landing',
+    });
+    router.push('/home');
+  }, []);
+
   return (
     <Wrapper>
       <Section {...trackedSectionOptions}>
@@ -87,9 +94,7 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
 
             <CTAAbsoluteContainer {...float(!isMobileView ? 18 : 8)}>
               <CTAContainer>
-                <Link href="/home">
-                  <CTAButton>Find your Identity</CTAButton>
-                </Link>
+                <CTAButton onClick={onClickApp}>Find your Identity</CTAButton>
                 <CTAHelp {...float(!isMobileView ? 8 : 4)}>
                   Merge your wallets into one
                 </CTAHelp>
