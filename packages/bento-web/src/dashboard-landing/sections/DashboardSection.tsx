@@ -1,14 +1,19 @@
 import dedent from 'dedent';
 import styled from 'styled-components';
 
-import { TrackedSection } from '@/components/TrackedSection';
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
 
 import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
-export const DashboardSection = () => {
+export const DashboardSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
   return (
-    <Container id="dashboard">
+    <Container {...trackedSectionOptions}>
       <Subtitle>Dashboard</Subtitle>
       <Title>
         Track your

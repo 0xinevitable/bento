@@ -1,9 +1,16 @@
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
 import { useWindowSize } from '@/hooks/useWindowSize';
+import { Analytics } from '@/utils/analytics';
 
 const ASSETS = {
   ILLUST: [
@@ -27,13 +34,23 @@ const float = (y: number, reverse: boolean = false) => ({
   } as const,
 });
 
-export const HeaderSection: React.FC = () => {
+export const HeaderSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
+  const router = useRouter();
   const { width: screenWidth } = useWindowSize();
   const isMobileView = screenWidth <= 665;
 
+  const onClickApp = useCallback(async () => {
+    await Analytics.logEvent('click_app_link', {
+      medium: 'landing',
+    });
+    router.push('/home');
+  }, []);
+
   return (
     <Wrapper>
-      <Container>
+      <Section {...trackedSectionOptions}>
         <Title>
           <span>
             The <span style={{ display: 'inline-block' }}>blockchain is</span>
@@ -48,17 +65,17 @@ export const HeaderSection: React.FC = () => {
               <Illust
                 src={ASSETS.ILLUST[0]}
                 srcSet={dedent`
-              ${ASSETS.ILLUST[0]} 1x,
-              ${ASSETS.ILLUST[1]} 2x
-            `}
+                  ${ASSETS.ILLUST[0]} 1x,
+                  ${ASSETS.ILLUST[1]} 2x
+                `}
               />
 
               <Pawn
                 src={ASSETS.PAWN[0]}
                 srcSet={dedent`
-              ${ASSETS.PAWN[0]} 1x,
-              ${ASSETS.PAWN[1]} 2x
-            `}
+                  ${ASSETS.PAWN[0]} 1x,
+                  ${ASSETS.PAWN[1]} 2x
+                `}
                 initial={{ y: 5, scale: 1, rotate: 10 }}
                 animate={{ y: 5, scale: 1.1, rotate: 10 }}
                 transition={{
@@ -81,9 +98,7 @@ export const HeaderSection: React.FC = () => {
 
             <CTAAbsoluteContainer {...float(!isMobileView ? 18 : 8)}>
               <CTAContainer>
-                <Link href="/home">
-                  <CTAButton>Find your Identity</CTAButton>
-                </Link>
+                <CTAButton onClick={onClickApp}>Find your Identity</CTAButton>
                 <CTAHelp {...float(!isMobileView ? 8 : 4)}>
                   Merge your wallets into one
                 </CTAHelp>
@@ -91,7 +106,7 @@ export const HeaderSection: React.FC = () => {
             </CTAAbsoluteContainer>
           </IllustContainer>
         </IllustWrapper>
-      </Container>
+      </Section>
     </Wrapper>
   );
 };
@@ -108,7 +123,7 @@ const Wrapper = styled.div`
     padding: 0 20px;
   }
 `;
-const Container = styled.section`
+const Section = styled(TrackedSection)`
   padding-top: 130px;
   height: 584.74px;
   position: relative;

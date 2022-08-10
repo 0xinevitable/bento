@@ -1,13 +1,20 @@
 import styled from 'styled-components';
 
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
+
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 
-export const RoadmapSection: React.FC = () => {
+export const RoadmapSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
   return (
     <Wrapper>
       <SectionContainer>
-        <Section>
+        <Section {...trackedSectionOptions}>
           <Information>
             <SectionBadge>Near Future</SectionBadge>
             <SectionTitle>Roadmap</SectionTitle>
@@ -78,7 +85,7 @@ const SectionContainer = styled.div`
   display: flex;
   background-color: black;
 `;
-const Section = styled.section`
+const Section = styled(TrackedSection)`
   margin: 0 auto;
   max-width: 1180px;
   width: 100%;

@@ -5,18 +5,26 @@ import { KEYS_BY_NETWORK } from '@/dashboard/utils/useWalletBalances';
 
 const isBrowser = typeof window !== 'undefined';
 
-type AnalyticsEvent = {
+export type AnalyticsEvent = {
   view_landing: undefined;
   view_landing_section: {
     section: string;
   };
 
-  click_app_link: undefined;
-  // click_coming_soon_button: undefined;
+  view_dashboard_landing: undefined;
+  view_dashboard_landing_section: {
+    section: string;
+  };
 
-  click_twitter_icon: undefined;
-  click_github_icon: undefined;
-  click_team_link: undefined;
+  click_dashboard_landing_link: {
+    medium: 'landing';
+  };
+  click_app_link: {
+    medium: 'landing' | 'dashboard_landing';
+  };
+  click_team_link: {
+    medium: 'dashboard_landing';
+  };
 
   view_dashboard_tab: undefined;
 

@@ -1,6 +1,11 @@
 import dedent from 'dedent';
 import styled, { css } from 'styled-components';
 
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
+
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 
@@ -30,10 +35,12 @@ const ASSETS = {
   ],
 } as const;
 
-export const StatusQuoSection: React.FC = () => {
+export const StatusQuoSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
   return (
     <Wrapper>
-      <Section>
+      <Section {...trackedSectionOptions}>
         <Information>
           <SectionBadge>The Status Quo</SectionBadge>
           <SectionTitle>
@@ -90,7 +97,7 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 0 32px;
 `;
-const Section = styled.section`
+const Section = styled(TrackedSection)`
   margin: 170px auto 0;
   max-width: 1180px;
   width: 100%;
