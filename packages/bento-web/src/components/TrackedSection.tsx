@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 
-import { Analytics } from '@/utils/analytics';
+import { Analytics, AnalyticsEvent } from '@/utils/analytics';
 
 type RefForwardedSectionProps = React.HTMLAttributes<HTMLElement> & {
   forwardedRef?: React.ForwardedRef<HTMLElement>;
@@ -16,10 +16,16 @@ export const RelativeSection = styled.section`
   position: relative;
 `;
 
-export type TrackedSectionProps = React.HTMLAttributes<HTMLElement> & {
+export type TrackedSectionOptions = {
   id: string;
-  ref?: React.ForwardedRef<HTMLElement>;
+  event: keyof AnalyticsEvent;
 };
+
+export type TrackedSectionProps = React.HTMLAttributes<HTMLElement> &
+  TrackedSectionOptions & {
+    ref?: React.ForwardedRef<HTMLElement>;
+  };
+
 export const TrackedSection = React.forwardRef<
   HTMLElement,
   TrackedSectionProps
@@ -28,9 +34,7 @@ export const TrackedSection = React.forwardRef<
 
   useEffect(() => {
     if (inView) {
-      Analytics.logEvent('view_landing_section', {
-        section: props.id,
-      });
+      Analytics.logEvent(props.event, { section: props.id });
     }
   }, [inView, props.id]);
 

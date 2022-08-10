@@ -5,7 +5,7 @@ import { KEYS_BY_NETWORK } from '@/dashboard/utils/useWalletBalances';
 
 const isBrowser = typeof window !== 'undefined';
 
-type AnalyticsEvent = {
+export type AnalyticsEvent = {
   view_landing: undefined;
   view_landing_section: {
     section: string;
