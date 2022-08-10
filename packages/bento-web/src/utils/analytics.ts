@@ -81,7 +81,7 @@ export type AnalyticsEvent = {
   };
   click_social_link: {
     type: 'github' | 'twitter';
-    medium: 'gnb';
+    medium: 'gnb' | 'landing_header';
   };
   click_landing_link: {
     title: string;
