@@ -1,5 +1,7 @@
 import dedent from 'dedent';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
@@ -7,6 +9,7 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@/components/TrackedSection';
+import { Analytics } from '@/utils/analytics';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
@@ -43,6 +46,15 @@ const cardSources = (name: string) => ({
 export const DashboardSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
 }) => {
+  const router = useRouter();
+
+  const onClickLearnMore = useCallback(async () => {
+    await Analytics.logEvent('click_dashboard_landing_link', {
+      medium: 'landing',
+    });
+    router.push('/dashboard');
+  }, []);
+
   return (
     <Wrapper>
       <Section {...trackedSectionOptions}>
@@ -57,12 +69,10 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
             regardless of chains and types. And since it’s open-source, any
             developer or team can add support for their protocol/app.
           </Paragraph>
-          <Link href="/dashboard" passHref>
-            <LearnMore>
-              <span>Learn More</span>
-              <LearnMoreChevron />
-            </LearnMore>
-          </Link>
+          <LearnMore onClick={onClickLearnMore}>
+            <span>Learn More</span>
+            <LearnMoreChevron />
+          </LearnMore>
 
           <ChainLogoList>
             {CHAINS.map((chain) => (
@@ -151,7 +161,7 @@ const Paragraph = styled.p`
   letter-spacing: 0.01em;
   color: #ffffff;
 `;
-const LearnMore = styled.a`
+const LearnMore = styled.button`
   margin-top: 24px;
 
   display: flex;

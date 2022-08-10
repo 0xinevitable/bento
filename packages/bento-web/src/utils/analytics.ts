@@ -16,6 +16,9 @@ export type AnalyticsEvent = {
     section: string;
   };
 
+  click_dashboard_landing_link: {
+    medium: 'landing';
+  };
   click_app_link: {
     medium: 'landing' | 'dashboard_landing';
   };
