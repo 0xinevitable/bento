@@ -1,6 +1,8 @@
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -8,6 +10,7 @@ import {
   TrackedSectionOptions,
 } from '@/components/TrackedSection';
 import { useWindowSize } from '@/hooks/useWindowSize';
+import { Analytics } from '@/utils/analytics';
 
 const ASSETS = {
   ILLUST: [
@@ -34,6 +37,7 @@ const float = (y: number, reverse: boolean = false) => ({
 export const HeaderSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
 }) => {
+  const router = useRouter();
   const { width: screenWidth } = useWindowSize();
   const isMobileView = screenWidth <= 665;
 
@@ -61,17 +65,17 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
               <Illust
                 src={ASSETS.ILLUST[0]}
                 srcSet={dedent`
-              ${ASSETS.ILLUST[0]} 1x,
-              ${ASSETS.ILLUST[1]} 2x
-            `}
+                  ${ASSETS.ILLUST[0]} 1x,
+                  ${ASSETS.ILLUST[1]} 2x
+                `}
               />
 
               <Pawn
                 src={ASSETS.PAWN[0]}
                 srcSet={dedent`
-              ${ASSETS.PAWN[0]} 1x,
-              ${ASSETS.PAWN[1]} 2x
-            `}
+                  ${ASSETS.PAWN[0]} 1x,
+                  ${ASSETS.PAWN[1]} 2x
+                `}
                 initial={{ y: 5, scale: 1, rotate: 10 }}
                 animate={{ y: 5, scale: 1.1, rotate: 10 }}
                 transition={{
