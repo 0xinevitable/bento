@@ -37,7 +37,11 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
 
         <ButtonLink
           href="/home"
-          onClick={() => Analytics.logEvent('click_app_link', undefined)}
+          onClick={() =>
+            Analytics.logEvent('click_app_link', {
+              medium: 'dashboard_landing',
+            })
+          }
         >
           <Button>Launch App</Button>
         </ButtonLink>

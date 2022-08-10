@@ -16,10 +16,12 @@ export type AnalyticsEvent = {
     section: string;
   };
 
-  click_app_link: undefined;
-  click_twitter_icon: undefined;
-  click_github_icon: undefined;
-  click_team_link: undefined;
+  click_app_link: {
+    medium: 'dashboard_landing';
+  };
+  click_team_link: {
+    medium: 'dashboard_landing';
+  };
 
   view_dashboard_tab: undefined;
 

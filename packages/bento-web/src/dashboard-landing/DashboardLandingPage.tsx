@@ -33,7 +33,11 @@ const DashboardLandingPage = () => {
           title="INEVITABLE"
           href="https://inevitable.team"
           target="_blank"
-          onClick={() => Analytics.logEvent('click_team_link', undefined)}
+          onClick={() =>
+            Analytics.logEvent('click_team_link', {
+              medium: 'dashboard_landing',
+            })
+          }
         >
           2022 INEVITABLE
         </a>
