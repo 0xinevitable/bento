@@ -34,11 +34,19 @@ export const RoadmapSection: React.FC<TrackedSectionOptions> = ({
               <RoadmapDate>2022.08</RoadmapDate>
             </RoadmapItem>
             <RoadmapItem>
-              <RoadmapTitle>API Refactoring</RoadmapTitle>
+              <RoadmapTitle>Support for Optimism/Evmos</RoadmapTitle>
+              <RoadmapDate>~2022.09</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
+              <RoadmapTitle>
+                Dashboard V2 with Improved Reliability
+                <br />
+                <small>(API Refactoring, Edge Proxies, Data Caching...)</small>
+              </RoadmapTitle>
               <RoadmapDate>2022.09</RoadmapDate>
             </RoadmapItem>
             <RoadmapItem>
-              <RoadmapTitle>Identity API Beta</RoadmapTitle>
+              <RoadmapTitle>Support Ethereum DeFis</RoadmapTitle>
               <RoadmapDate>2022.09</RoadmapDate>
             </RoadmapItem>
             <RoadmapItem>
@@ -46,8 +54,24 @@ export const RoadmapSection: React.FC<TrackedSectionOptions> = ({
               <RoadmapDate>2022.09</RoadmapDate>
             </RoadmapItem>
             <RoadmapItem>
+              <RoadmapTitle>Support Osmosis LP Pools</RoadmapTitle>
+              <RoadmapDate>2022.10</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
+              <RoadmapTitle>
+                Dashboard V3
+                <br />
+                <small>(Improved UI/UX)</small>
+              </RoadmapTitle>
+              <RoadmapDate>2022.10</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
+              <RoadmapTitle>Identity API Beta</RoadmapTitle>
+              <RoadmapDate>2022.10</RoadmapDate>
+            </RoadmapItem>
+            <RoadmapItem>
               <RoadmapTitle>Devnet Release</RoadmapTitle>
-              <RoadmapDate>2022 Q4</RoadmapDate>
+              <RoadmapDate>~2022 Q4</RoadmapDate>
             </RoadmapItem>
           </RoadmapList>
         </Section>
