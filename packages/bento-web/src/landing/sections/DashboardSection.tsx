@@ -65,9 +65,11 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
             Entire Portfolio
           </SectionTitle>
           <Paragraph>
-            Bento’s goal to make every user track every asset they own,
-            regardless of chains and types. And since it’s open-source, any
-            developer or team can add support for their protocol/app.
+            Bento is an open-source web3 dashboard in that users can add
+            multiple wallets and group their crypto assets into one.
+            <br />
+            Investing in DeFi? View not only balances but your stakes for
+            various protocols as well.
           </Paragraph>
           <LearnMore onClick={onClickLearnMore}>
             <span>Learn More</span>
