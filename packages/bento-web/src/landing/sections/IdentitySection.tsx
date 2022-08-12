@@ -34,8 +34,27 @@ export const IdentitySection: React.FC<TrackedSectionOptions> = ({
             identity
           </SectionTitle>
           <Paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            After receiving proof(<code>"signatures"</code>) that
+            cryptographically proves the signer's ownership of each wallet,
+            Bento register new "users" and save wallets under that identity.
+            <br />
+            <br />
+            So we now have an abstraction layer of user identity, and it'll soon
+            be decentralized as an application-specific blockchain, based on the{' '}
+            <a href="https://github.com/cosmos/cosmos-sdk" target="_blank">
+              Cosmos SDK
+            </a>{' '}
+            and{' '}
+            <a href="https://tendermint.com" target="_blank">
+              Tendermint consensus
+            </a>
+            ; User identifiers as <code>Accounts</code>, wallet validation
+            requests as <code>Messages</code>, validation logic as{' '}
+            <code>Modules</code>.
+            <br />
+            <br />
+            Third-party apps will be able to consume, relay, and commit data to
+            the identity chain, with all cross-chain identities and actions.
           </Paragraph>
         </Information>
 
@@ -102,7 +121,21 @@ const Paragraph = styled.p`
   font-size: 16px;
   line-height: 145%;
   letter-spacing: 0.01em;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.9);
+
+  @media (max-width: 1235px) {
+    max-width: 80%;
+  }
+
+  a {
+    text-decoration: underline;
+    color: white;
+  }
+
+  code {
+    font-family: monospace;
+    font-style: italic;
+  }
 `;
 
 const BackgroundContainer = styled.div`
