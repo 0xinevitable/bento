@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 const meta = {
-  title: 'Bento - Web3 Dashboard',
+  title: 'Bento | Your Cross-chain Web3 Dashboard',
   description:
     'The open-source, cross-chain web3 dashboard. Add multiple wallets, group your crypto—native tokens, DAOs, and NFTs—into one, and keep track of your favorite DeFi investments.',
   image: 'https://bento.finance/assets/og-image.png',
