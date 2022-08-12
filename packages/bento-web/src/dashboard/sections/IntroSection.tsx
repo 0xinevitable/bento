@@ -25,7 +25,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
   const login = useCallback(async (provider: 'twitter' | 'github') => {
     const { user, session, error } = await Supabase.auth.signIn(
       { provider },
-      { redirectTo: window.location.href },
+      { redirectTo: `${window.location.origin}/home` },
     );
     Analytics.logEvent('sign_in', { anonymous: false });
     console.log({ user, session, error });
