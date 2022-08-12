@@ -72,7 +72,7 @@ export const NavigationBar = () => {
           </a>
         </Link>
 
-        {!!session && FeatureFlags.isProfileEnabled && (
+        {!!session && (
           <ul className="flex">
             {NAVIGATION_ITEMS.map((item) => (
               <NavigationItem
