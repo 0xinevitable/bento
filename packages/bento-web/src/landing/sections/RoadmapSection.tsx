@@ -46,7 +46,11 @@ export const RoadmapSection: React.FC<TrackedSectionOptions> = ({
               <RoadmapDate>2022.09</RoadmapDate>
             </RoadmapItem>
             <RoadmapItem>
-              <RoadmapTitle>Support Ethereum DeFis</RoadmapTitle>
+              <RoadmapTitle>
+                Support major Ethereum DeFis
+                <br />
+                <small>(MakerDAO, Lido, Uniswap, Curve, Aave, Sushi...)</small>
+              </RoadmapTitle>
               <RoadmapDate>2022.09</RoadmapDate>
             </RoadmapItem>
             <RoadmapItem>
@@ -61,7 +65,7 @@ export const RoadmapSection: React.FC<TrackedSectionOptions> = ({
               <RoadmapTitle>
                 Dashboard V3
                 <br />
-                <small>(Improved UI/UX)</small>
+                <small>(Improved UI/UX, Staking Interface...)</small>
               </RoadmapTitle>
               <RoadmapDate>2022.10</RoadmapDate>
             </RoadmapItem>
