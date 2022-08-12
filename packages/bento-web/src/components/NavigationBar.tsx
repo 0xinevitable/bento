@@ -30,16 +30,20 @@ const NAVIGATION_ITEMS = [
     href: '/home',
     icon: 'ic:round-space-dashboard',
   },
-  {
-    title: 'Profile',
-    href: '/profile',
-    icon: 'carbon:user-avatar-filled',
-  },
-  {
-    title: 'Settings',
-    href: '/settings',
-    icon: 'majesticons:settings-cog',
-  },
+  ...(FeatureFlags.isProfileEnabled
+    ? [
+        {
+          title: 'Profile',
+          href: '/profile',
+          icon: 'carbon:user-avatar-filled',
+        },
+      ]
+    : []),
+  // {
+  //   title: 'Settings',
+  //   href: '/settings',
+  //   icon: 'majesticons:settings-cog',
+  // },
 ];
 
 export const NavigationBar = () => {
