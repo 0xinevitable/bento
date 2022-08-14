@@ -1,13 +1,16 @@
+import axios from 'axios';
 import dedent from 'dedent';
-import React from 'react';
+import { GetServerSideProps } from 'next';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { UserProfile } from '@/profile/types/UserProfile';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { usePalette } from '../hooks/usePalette';
 
 type ProfileInfoProps = {
-  currentProfile: UserProfile;
+  currentProfile: UserProfile | null;
 };
 
 const data = {
@@ -22,20 +25,40 @@ export const ProfileEditor: React.FC<ProfileInfoProps> = ({
 }) => {
   const palette = usePalette(data.color);
 
+  const [username, setUsername] = useState<string>(
+    currentProfile?.username ?? '',
+  );
+  const [displayName, setDisplayName] = useState<string>(
+    currentProfile?.display_name ?? '',
+  );
+  const [bio, setBio] = useState<string>(currentProfile?.bio ?? '');
+
+  const onSubmit = useCallback(async () => {
+    const { data } = await axios.post(`/api/profile`, {
+      username,
+      display_name: displayName,
+      bio,
+    });
+    console.log(data);
+  }, [username, displayName, bio]);
+
   return (
     <Container>
       <NameField
         placeholder="Name"
-        defaultValue={currentProfile?.display_name ?? ''}
+        defaultValue={displayName}
+        onChange={(e) => setDisplayName(e.target.value)}
       />
       <UserNameField
         style={{ color: palette.primary }}
         placeholder="@username"
-        defaultValue={currentProfile?.username ?? ''}
+        defaultValue={username}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <BioField
         placeholder="Description"
-        defaultValue={currentProfile?.bio ?? ''}
+        defaultValue={bio}
+        onChange={(e) => setBio(e.target.value)}
       />
     </Container>
   );

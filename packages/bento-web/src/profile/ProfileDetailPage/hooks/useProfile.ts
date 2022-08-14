@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { useSession } from '@/hooks/useSession';
 import { UserProfile } from '@/profile/types/UserProfile';
+import { profileAtom } from '@/recoil/profile';
 import { Supabase } from '@/utils/Supabase';
 
 export const useProfile: () => [
@@ -9,7 +11,7 @@ export const useProfile: () => [
   () => Promise<UserProfile | null>,
 ] = () => {
   const { session } = useSession();
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [profile, setProfile] = useRecoilState(profileAtom);
 
   const revaildateProfile = useCallback(async () => {
     if (!session || !session.user) {
