@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
-import { TrackedSection } from '@/components/TrackedSection';
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
 
 import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
-export const BackgroundSection = () => {
+export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
   return (
-    <Wrapper id="background">
+    <Wrapper {...trackedSectionOptions}>
       <Container>
         <Badge>BACKGROUND</Badge>
         <Title style={{ marginTop: 26 }}>

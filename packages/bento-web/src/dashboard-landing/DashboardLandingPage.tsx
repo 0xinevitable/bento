@@ -10,9 +10,9 @@ import { DashboardSection } from './sections/DashboardSection';
 import { HeaderSection } from './sections/HeaderSection';
 import { WalletSection } from './sections/WalletSection';
 
-const LandingPage = () => {
+const DashboardLandingPage = () => {
   useEffect(() => {
-    Analytics.logEvent('view_landing', undefined);
+    Analytics.logEvent('view_dashboard_landing', undefined);
   }, []);
 
   return (
@@ -20,17 +20,24 @@ const LandingPage = () => {
       <MetaHead />
 
       <NavigationBar />
-      <HeaderSection />
-      <BackgroundSection />
-      <DashboardSection />
-      <WalletSection />
+      <HeaderSection id="header" event="view_dashboard_landing_section" />
+      <BackgroundSection
+        id="background"
+        event="view_dashboard_landing_section"
+      />
+      <DashboardSection id="dashboard" event="view_dashboard_landing_section" />
+      <WalletSection id="wallets" event="view_dashboard_landing_section" />
 
       <Footer>
         <a
           title="INEVITABLE"
           href="https://inevitable.team"
           target="_blank"
-          onClick={() => Analytics.logEvent('click_team_link', undefined)}
+          onClick={() =>
+            Analytics.logEvent('click_team_link', {
+              medium: 'dashboard_landing',
+            })
+          }
         >
           2022 INEVITABLE
         </a>
@@ -39,7 +46,7 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default DashboardLandingPage;
 
 const Container = styled.div`
   width: 100vw;

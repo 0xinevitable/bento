@@ -1,8 +1,15 @@
 import dedent from 'dedent';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/TrackedSection';
+import { Analytics } from '@/utils/analytics';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
@@ -36,10 +43,21 @@ const cardSources = (name: string) => ({
   `,
 });
 
-export const DashboardSection: React.FC = () => {
+export const DashboardSection: React.FC<TrackedSectionOptions> = ({
+  ...trackedSectionOptions
+}) => {
+  const router = useRouter();
+
+  const onClickLearnMore = useCallback(async () => {
+    await Analytics.logEvent('click_dashboard_landing_link', {
+      medium: 'landing',
+    });
+    router.push('/dashboard');
+  }, []);
+
   return (
     <Wrapper>
-      <Section>
+      <Section {...trackedSectionOptions}>
         <Information>
           <SectionBadge>Dashboard for all L1s</SectionBadge>
           <SectionTitle>
@@ -47,16 +65,16 @@ export const DashboardSection: React.FC = () => {
             Entire Portfolio
           </SectionTitle>
           <Paragraph>
-            Bento’s goal to make every user track every asset they own,
-            regardless of chains and types. And since it’s open-source, any
-            developer or team can add support for their protocol/app.
+            Bento is an open-source web3 dashboard in that users can add
+            multiple wallets and group their crypto assets into one.
+            <br />
+            Investing in DeFi? View not only balances but your stakes for
+            various protocols as well.
           </Paragraph>
-          <Link href="/dashboard" passHref>
-            <LearnMore>
-              <span>Learn More</span>
-              <LearnMoreChevron />
-            </LearnMore>
-          </Link>
+          <LearnMore onClick={onClickLearnMore}>
+            <span>Learn More</span>
+            <LearnMoreChevron />
+          </LearnMore>
 
           <ChainLogoList>
             {CHAINS.map((chain) => (
@@ -123,7 +141,7 @@ const Wrapper = styled.div`
     padding-top: 64px;
   }
 `;
-const Section = styled.section`
+const Section = styled(TrackedSection)`
   margin: 0 auto;
   max-width: 1180px;
   width: 100%;
@@ -145,7 +163,7 @@ const Paragraph = styled.p`
   letter-spacing: 0.01em;
   color: #ffffff;
 `;
-const LearnMore = styled.a`
+const LearnMore = styled.button`
   margin-top: 24px;
 
   display: flex;
