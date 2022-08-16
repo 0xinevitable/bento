@@ -1,8 +1,8 @@
-import dedent from 'dedent';
 import { GetServerSideProps } from 'next';
 import DocumentHead from 'next/head';
 import React, { useMemo } from 'react';
 
+import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 
@@ -31,15 +31,14 @@ const ProfileDetailPage = () => {
   const [profile] = useProfile();
 
   console.log(profile);
-  const [title, description, images, url] = useMemo(
-    () => [
-      `${profile?.display_name ?? profile?.username} - Linky`,
+  const [title, description, images] = useMemo(() => {
+    const username = profile?.display_name ?? profile?.username;
+    return [
+      !username ? 'Bento Profile' : `${username} - Bento`,
       profile?.bio ?? '',
       profile?.images || [],
-      `https://linky.vc/address/${profile?.username}`,
-    ],
-    [profile],
-  );
+    ];
+  }, [profile]);
 
   return (
     <PageContainer>
@@ -62,20 +61,22 @@ const ProfileDetailPage = () => {
           </>
         )}
 
-        <meta property="og:url" content={url} />
-        <meta property="twitter:url" content={url} />
+        {/* <meta property="og:url" content={url} />
+        <meta property="twitter:url" content={url} /> */}
       </DocumentHead>
 
       <div className="w-full max-w-xl mx-auto">
-        <ProfileInstance
-          profile={{
-            ...(profile ?? defaultProfile),
-            images:
-              !!profile && !profile.images?.[0]
-                ? ['/assets/mockups/profile-default.png']
-                : null,
-          }}
-        />
+        <NoSSR>
+          <ProfileInstance
+            profile={{
+              ...(profile ?? defaultProfile),
+              images:
+                !!profile && !profile.images?.[0]
+                  ? ['/assets/mockups/profile-default.png']
+                  : null,
+            }}
+          />
+        </NoSSR>
       </div>
     </PageContainer>
   );
