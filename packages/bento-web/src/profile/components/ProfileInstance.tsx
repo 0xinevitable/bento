@@ -1,14 +1,11 @@
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
-import Link from 'next/link';
 import React, { useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
-import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
 import { Modal } from '@/components/Modal';
-import { Skeleton } from '@/components/Skeleton';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
@@ -117,7 +114,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const palette = usePalette(data.color);
   const profileImageURL = profile.images?.[0];
 
-  const [isEdting, setEditing] = useState<Boolean>(false);
+  const [isEditing, setEditing] = useState<Boolean>(false);
 
   return (
     <React.Fragment>
@@ -131,10 +128,10 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        <button onClick={() => setEditing((isEdting) => !isEdting)}>
-          <ProfileEditButton isEditing={isEdting} />
+        <button onClick={() => setEditing((isEditing) => !isEditing)}>
+          <ProfileEditButton isEditing={isEditing} />
         </button>
-        {!isEdting ? (
+        {!isEditing ? (
           <ProfileViewer profile={profile} isPreview={isPreview} />
         ) : (
           <ProfileEditor currentProfile={profile} />
@@ -158,19 +155,19 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         <TabContent palette={palette}>
           {selectedTab === AddressProfileTab.Links && (
             <AnimatedTab>
-              <ProfileLinkSection items={profile.links} isEditing={isEdting} />
+              <ProfileLinkSection items={profile.links} isEditing={isEditing} />
             </AnimatedTab>
           )}
           {selectedTab === AddressProfileTab.Questions && (
             <AnimatedTab>
-              <QuestionSection isEditing={isEdting} />
+              <QuestionSection isEditing={isEditing} />
             </AnimatedTab>
           )}
           {selectedTab === AddressProfileTab.Assets && (
             <AnimatedTab>
               <AssetSection
                 tokenBalances={tokenBalances}
-                isEditing={isEdting}
+                isEditing={isEditing}
               />
             </AnimatedTab>
           )}
