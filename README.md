@@ -5,7 +5,7 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/bentoinevitable.svg?style=social&label=Follow%20%40bentoinevitable)](https://twitter.com/bentoinevitable)
 
-[![Cover Artwork](https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/og-image.png)](https://bento.finance)
+[![Cover Artwork](https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/og-image-v3.png)](https://bento.finance)
 
 [![Dashboard Preview](https://raw.githubusercontent.com/inevitable-changes/bento/main/docs/images/dashboard-preview.png?)](https://bento.finance)
 
