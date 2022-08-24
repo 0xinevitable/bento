@@ -76,10 +76,6 @@ const ProfileDetailPage = () => {
           <ProfileInstance
             profile={{
               ...(profile ?? defaultProfile),
-              images:
-                !!profile && !profile.images?.[0]
-                  ? ['/assets/mockups/profile-default.png']
-                  : null,
             }}
           />
         </NoSSR>

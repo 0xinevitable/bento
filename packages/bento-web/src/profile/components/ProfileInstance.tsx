@@ -112,7 +112,8 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   }, [walletBalances]);
 
   const palette = usePalette(data.color);
-  const profileImageURL = profile.images?.[0];
+  const profileImageURL =
+    profile.images?.[0] ?? '/assets/mockups/profile-default.png';
 
   const [isEditing, setEditing] = useState<Boolean>(false);
 
