@@ -9,6 +9,7 @@ import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
+import { WalletList } from '@/dashboard/components/WalletList';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
@@ -22,9 +23,9 @@ import {
   UserInformationDraft,
 } from '../ProfileDetailPage/components/ProfileEditor';
 import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
-import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
+// import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
 import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
-import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
+// import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
 import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
 import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
 import { UserProfile } from '../types/UserProfile';
@@ -39,6 +40,7 @@ const data = {
 enum ProfileTab {
   Links = 'Links',
   Questions = 'Questions',
+  Wallets = 'Wallets',
   Assets = 'Assets',
   NFTs = 'NFTs',
 }
@@ -46,6 +48,7 @@ enum ProfileTab {
 const PROFILE_TABS = [
   ...(FeatureFlags.isProfileLinksEnabled ? [ProfileTab.Links] : []),
   ...(FeatureFlags.isProfileQuestionsEnabled ? [ProfileTab.Questions] : []),
+  ProfileTab.Wallets,
   ProfileTab.Assets,
   ProfileTab.NFTs,
 ];
@@ -211,14 +214,19 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       />
       <AnimatePresence initial={false}>
         <TabContent palette={palette}>
-          <AnimatedTab selected={selectedTab === ProfileTab.Links}>
+          {/* <AnimatedTab selected={selectedTab === ProfileTab.Links}>
             <ProfileLinkSection
               items={profile?.links ?? null}
               isEditing={isEditing}
             />
-          </AnimatedTab>
-          <AnimatedTab selected={selectedTab === ProfileTab.Questions}>
+          </AnimatedTab> */}
+
+          {/* <AnimatedTab selected={selectedTab === ProfileTab.Questions}>
             <QuestionSection isEditing={isEditing} />
+          </AnimatedTab> */}
+
+          <AnimatedTab selected={selectedTab === ProfileTab.Wallets}>
+            <WalletList />
           </AnimatedTab>
           <AnimatedTab selected={selectedTab === ProfileTab.Assets}>
             <AssetSection tokenBalances={tokenBalances} isEditing={isEditing} />
