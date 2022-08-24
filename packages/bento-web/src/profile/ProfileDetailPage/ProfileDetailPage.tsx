@@ -6,25 +6,60 @@ import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
+import { Supabase } from '@/utils/Supabase';
 
 import { FixedLoginNudge } from '../components/LoginNudge';
 import { ProfileInstance } from '../components/ProfileInstance';
+import { UserProfile } from '../types/UserProfile';
 import { useProfile } from './hooks/useProfile';
 
-export const getServerSideProps: GetServerSideProps = async () => {
+type Props =
+  | {
+      type: 'MY_PROFILE';
+    }
+  | {
+      type: 'USER_PROFILE';
+      profile?: UserProfile | null;
+    };
+
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context,
+) => {
   if (!FeatureFlags.isProfileEnabled) {
     return { notFound: true };
   }
-  return { props: {} };
+  const username = context.query.username as string | undefined;
+  if (!username) {
+    return { props: { type: 'MY_PROFILE' } };
+  }
+
+  let profile: UserProfile | null = null;
+  const profileQuery = await Supabase.from('profile')
+    .select('*')
+    .eq('username', username);
+  const profiles: UserProfile[] = profileQuery.data ?? [];
+
+  if (profiles.length > 0) {
+    profile = profiles[0];
+  }
+
+  if (!!profile) {
+    return { props: { type: 'USER_PROFILE', profile } };
+  }
+  return { notFound: true };
 };
 
-const ProfileDetailPage = () => {
-  const { profile, revaildateProfile } = useProfile();
-
+const ProfileDetailPage = (props: Props) => {
   const { session } = useSession();
 
-  // FIXME: True for now
-  const isMyProfile = true;
+  const { profile, revaildateProfile } = useProfile(
+    props.type === 'MY_PROFILE'
+      ? { type: 'MY_PROFILE' }
+      : {
+          type: 'USER_PROFILE',
+          username: props.profile?.username,
+        },
+  );
 
   const [title, description, images] = useMemo(() => {
     const username = profile?.display_name ?? profile?.username;
@@ -69,7 +104,10 @@ const ProfileDetailPage = () => {
         </NoSSR>
       </div>
 
-      <FixedLoginNudge visible={!session && isMyProfile} redirectTo="current" />
+      <FixedLoginNudge
+        visible={!session && props.type === 'MY_PROFILE'}
+        redirectTo="current"
+      />
     </PageContainer>
   );
 };
