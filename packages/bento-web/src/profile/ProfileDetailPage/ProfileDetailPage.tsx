@@ -85,7 +85,7 @@ const ProfileDetailPage = () => {
         </NoSSR>
       </div>
 
-      <FixedLoginNudge visible={!session && isMyProfile} />
+      <FixedLoginNudge visible={!session && isMyProfile} redirectTo="current" />
     </PageContainer>
   );
 };
