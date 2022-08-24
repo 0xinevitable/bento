@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
-import MetaHead from '@/components/MetaHead';
 import { NavigationBar } from '@/components/NavigationBar';
 import { systemFontStack } from '@/dashboard-landing/styles/fonts';
 import { Analytics } from '@/utils/analytics';
@@ -19,8 +18,6 @@ const LandingPage: React.FC = () => {
 
   return (
     <Container>
-      <MetaHead />
-
       <NavigationBar />
 
       <HeaderSection id="header" event="view_landing_section" />

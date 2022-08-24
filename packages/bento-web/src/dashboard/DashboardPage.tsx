@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import MetaHead from '@/components/MetaHead';
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
 import { walletsAtom } from '@/recoil/wallets';
@@ -60,7 +59,6 @@ const DashboardPage = () => {
     <>
       <Black />
       <PageContainer className="pt-0 z-10">
-        <MetaHead />
         <TopLeftBlur src="/assets/blurs/top-left.png" />
         <TopRightBlur src="/assets/blurs/top-right.png" />
 

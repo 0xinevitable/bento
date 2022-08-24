@@ -96,23 +96,33 @@ const ProfileDetailPage = (props: Props) => {
     <PageContainer>
       <DocumentHead>
         <title>{title}</title>
-        <meta property="og:title" content={title} />
-        <meta name="twitter:title" content={title} />
+        <meta key="title" name="title" content={title} />
+        <meta key="og:title" property="og:title" content={title} />
+        <meta key="twitter:title" name="twitter:title" content={title} />
 
         {description.length > 0 && (
           <>
-            <meta property="og:description" content={description} />
-            <meta name="twitter:description" content={description} />
+            <meta key="description" name="description" content={description} />
+            <meta
+              key="og:description"
+              property="og:description"
+              content={description}
+            />
+            <meta
+              key="twitter:description"
+              name="twitter:description"
+              content={description}
+            />
           </>
         )}
 
         {images.length > 0 && (
           <>
-            <meta property="og:image" content={images[0]} key="og:image" />
+            <meta key="og:image" property="og:image" content={images[0]} />
             <meta
+              key="twitter:image"
               property="twitter:image"
               content={images[0]}
-              key="twitter:image"
             />
           </>
         )}

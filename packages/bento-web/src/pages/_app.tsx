@@ -7,9 +7,9 @@ import '@/styles/tailwind.css';
 import '@/styles/global.css';
 
 import { AppProps } from 'next/app';
-import Head from 'next/head';
 import styled from 'styled-components';
 
+import { MetaHead } from '@/components/MetaHead';
 import { NavigationBar } from '@/components/NavigationBar';
 import { SessionManager } from '@/hooks/useSession';
 import { WalletManager } from '@/hooks/useWallets';
@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
   return (
     <React.Fragment>
-      <Head>
+      <MetaHead>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Raleway:wght@400;700;800;900&display=swap"
           rel="stylesheet"
         />
-      </Head>
+      </MetaHead>
       <RecoilRoot>
         <ReactNotifications />
         <SessionManager />

@@ -14,35 +14,50 @@ type MetaHeadProps = {
   children?: React.ReactNode;
 };
 
-const MetaHead = ({ title, children }: MetaHeadProps) => {
+export const MetaHead = ({ title, children }: MetaHeadProps) => {
   const router = useRouter();
   const currentTitle = title ?? meta.title;
 
   return (
     <Head>
       <title>{currentTitle}</title>
-      <meta name="title" content={currentTitle} />
-      <meta name="description" content={meta.description} />
+      <meta key="title" name="title" content={currentTitle} />
+      <meta key="description" name="description" content={meta.description} />
       <link
+        key="canonical"
         rel="canonical"
         href={`${meta.url}${router.asPath.split('?')[0]}`}
       />
 
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={meta.url} />
-      <meta property="og:title" content={currentTitle} />
-      <meta property="og:description" content={meta.description} />
-      <meta property="og:image" content={meta.image} />
+      <meta key="og:type" property="og:type" content="website" />
+      <meta key="og:url" property="og:url" content={meta.url} />
+      <meta key="og:title" property="og:title" content={currentTitle} />
+      <meta
+        key="og:description"
+        property="og:description"
+        content={meta.description}
+      />
+      <meta key="og:image" property="og:image" content={meta.image} />
 
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={meta.url} />
-      <meta property="twitter:title" content={currentTitle} />
-      <meta property="twitter:description" content={meta.description} />
-      <meta property="twitter:image" content={meta.image} />
-      <meta name="theme-color" content="#050606" />
+      <meta
+        key="twitter:card"
+        property="twitter:card"
+        content="summary_large_image"
+      />
+      <meta key="twitter:url" property="twitter:url" content={meta.url} />
+      <meta
+        key="twitter:title"
+        property="twitter:title"
+        content={currentTitle}
+      />
+      <meta
+        key="twitter:description"
+        property="twitter:description"
+        content={meta.description}
+      />
+      <meta key="twitter:image" property="twitter:image" content={meta.image} />
+      <meta key="theme-color" name="theme-color" content="#050606" />
       {children}
     </Head>
   );
 };
-
-export default MetaHead;
