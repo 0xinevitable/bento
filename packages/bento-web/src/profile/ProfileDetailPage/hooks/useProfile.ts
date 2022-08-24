@@ -28,13 +28,13 @@ export const useProfile: (options?: ProfileOptions) => {
       return;
     }
 
-    let query = Supabase.from('profile').select('*');
-
-    if (!options || options.type === 'MY_PROFILE') {
-      query = query.eq('user_id', session.user.id);
-    } else {
-      query = query.eq('username', options.preloadedProfile?.username);
-    }
+    const userId =
+      !options || options.type === 'MY_PROFILE'
+        ? session.user.id
+        : options.preloadedProfile?.user_id;
+    const query = Supabase.from('profile') //
+      .select('*')
+      .eq('user_id', userId);
 
     const profileQueryResult = await query;
     const profiles: UserProfile[] = profileQueryResult.data ?? [];
