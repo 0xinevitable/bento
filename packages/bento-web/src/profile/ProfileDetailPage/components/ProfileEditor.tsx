@@ -25,7 +25,7 @@ export const ProfileEditor: React.FC<Props> = ({
     <Container>
       <FieldInput
         field="Name"
-        placeholder="Name"
+        placeholder="e.g., Junho Yeo"
         defaultValue={draft.displayName}
         onChange={(e) =>
           setDraft((v) => ({ ...v, displayName: e.target.value }))
@@ -39,7 +39,7 @@ export const ProfileEditor: React.FC<Props> = ({
       />
       <FieldInput
         field="Description"
-        placeholder="Description"
+        placeholder="e.g., 19 y.o. Builder from Seoul"
         defaultValue={draft.bio}
         onChange={(e) => setDraft((v) => ({ ...v, bio: e.target.value }))}
       />
