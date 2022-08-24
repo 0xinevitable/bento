@@ -9,7 +9,6 @@ import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { FixedLoginNudge } from '../components/LoginNudge';
 import { ProfileInstance } from '../components/ProfileInstance';
-import { UserProfile } from '../types/UserProfile';
 import { useProfile } from './hooks/useProfile';
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -61,7 +60,7 @@ const ProfileDetailPage = () => {
         <meta property="twitter:url" content={url} /> */}
       </DocumentHead>
 
-      <div className="w-full max-w-xl mx-auto">
+      <div className="w-full max-w-xl mt-[64px] mx-auto">
         <NoSSR>
           <ProfileInstance
             profile={profile ?? undefined}
