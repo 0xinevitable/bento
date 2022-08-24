@@ -1,9 +1,10 @@
 import { OpenSeaAsset } from '@bento/client';
+import { Wallet } from '@bento/common';
 import axios from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
@@ -16,6 +17,7 @@ import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { walletsAtom } from '@/recoil/wallets';
 import { FeatureFlags } from '@/utils/FeatureFlag';
+import { Supabase } from '@/utils/Supabase';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import {
@@ -56,6 +58,7 @@ const PROFILE_TABS = [
 type ProfileInstanceProps = {
   profile?: UserProfile;
   revaildateProfile?: () => Promise<void>;
+  isMyProfile?: boolean;
 };
 
 const walletBalanceReducer =
@@ -63,16 +66,37 @@ const walletBalanceReducer =
   (acc: number, balance: WalletBalance) =>
     (balance.symbol ?? balance.name) === key ? callback(acc, balance) : acc;
 
+const fetchWallets = async (userId: string): Promise<Wallet[]> => {
+  const walletQuery = await Supabase.from('wallets')
+    .select('*')
+    .eq('user_id', userId);
+  return walletQuery.data ?? [];
+};
+
 export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   profile,
   revaildateProfile,
+  isMyProfile = false,
 }) => {
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
 
   const [selectedTab, setSelectedTab] = useState<ProfileTab>(PROFILE_TABS[0]);
 
-  const wallets = useRecoilValue(walletsAtom);
+  const myWalletsInState = useRecoilValue(walletsAtom);
+  const [wallets, setWallets] = useState<Wallet[]>([]);
+  useEffect(() => {
+    if (isMyProfile) {
+      setWallets(myWalletsInState);
+    } else if (!!profile?.user_id) {
+      fetchWallets(profile.user_id)
+        .then(setWallets)
+        .catch(() => {
+          setWallets([]);
+        });
+    }
+  }, [isMyProfile, myWalletsInState, profile?.user_id]);
+
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: nftBalances } = useNFTBalances({ wallets });
 
@@ -178,17 +202,19 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        {!isEditing ? (
-          <ProfileEditButton onClick={onProfileEdit}>
-            Edit Profile
-          </ProfileEditButton>
-        ) : (
-          <ProfileEditButton onClick={() => setEditing((prev) => !prev)}>
-            Cancel
-          </ProfileEditButton>
-        )}
+        {isMyProfile ? (
+          !isEditing ? (
+            <ProfileEditButton onClick={onProfileEdit}>
+              Edit Profile
+            </ProfileEditButton>
+          ) : (
+            <ProfileEditButton onClick={() => setEditing((prev) => !prev)}>
+              Cancel
+            </ProfileEditButton>
+          )
+        ) : null}
 
-        {!isEditing ? (
+        {!isMyProfile || !isEditing ? (
           <ProfileViewer profile={profile} />
         ) : (
           <ProfileEditor
@@ -226,7 +252,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           </AnimatedTab> */}
 
           <AnimatedTab selected={selectedTab === ProfileTab.Wallets}>
-            <WalletList />
+            <WalletList wallets={wallets} />
           </AnimatedTab>
           <AnimatedTab selected={selectedTab === ProfileTab.Assets}>
             <AssetSection tokenBalances={tokenBalances} isEditing={isEditing} />

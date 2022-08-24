@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
-import MetaHead from '@/components/MetaHead';
 import { NavigationBar } from '@/components/NavigationBar';
 import { Analytics } from '@/utils/analytics';
 
@@ -17,8 +16,6 @@ const DashboardLandingPage = () => {
 
   return (
     <Container>
-      <MetaHead />
-
       <NavigationBar />
       <HeaderSection id="header" event="view_dashboard_landing_section" />
       <BackgroundSection

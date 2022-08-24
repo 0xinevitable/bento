@@ -6,53 +6,133 @@ import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
+import { Supabase } from '@/utils/Supabase';
 
 import { FixedLoginNudge } from '../components/LoginNudge';
 import { ProfileInstance } from '../components/ProfileInstance';
 import { UserProfile } from '../types/UserProfile';
 import { useProfile } from './hooks/useProfile';
 
-export const getServerSideProps: GetServerSideProps = async () => {
+type Props =
+  | {
+      type: 'MY_PROFILE';
+      profile?: UserProfile | null;
+    }
+  | {
+      type: 'USER_PROFILE';
+      profile?: UserProfile | null;
+    };
+
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context,
+) => {
   if (!FeatureFlags.isProfileEnabled) {
     return { notFound: true };
   }
-  return { props: {} };
+
+  const { user: userFromCookie } = await Supabase.auth.api.getUserByCookie(
+    context.req,
+  );
+
+  const username = context.query.username as string | undefined;
+  if (!username) {
+    return { props: { type: 'MY_PROFILE' } };
+  }
+
+  let profile: UserProfile | null = null;
+  const profileQuery = await Supabase.from('profile')
+    .select('*')
+    .eq('username', username);
+  const profiles: UserProfile[] = profileQuery.data ?? [];
+
+  if (profiles.length > 0) {
+    profile = profiles[0];
+  }
+
+  if (!!profile) {
+    return {
+      props: {
+        type:
+          userFromCookie?.id === profile.user_id //
+            ? 'MY_PROFILE'
+            : 'USER_PROFILE',
+        profile,
+      },
+    };
+  }
+  return { notFound: true };
 };
 
-const ProfileDetailPage = () => {
-  const { profile, revaildateProfile } = useProfile();
-
+const ProfileDetailPage = (props: Props) => {
   const { session } = useSession();
 
-  // FIXME: True for now
-  const isMyProfile = true;
+  const { profile, revaildateProfile } = useProfile({
+    type: props.type,
+    preloadedProfile: props.profile,
+  });
 
   const [title, description, images] = useMemo(() => {
-    const username = profile?.display_name ?? profile?.username;
-    return [
-      !username ? 'Bento Profile' : `${username} - Bento`,
-      profile?.bio ?? '',
-      profile?.images || [],
-    ];
+    let _title: string = '';
+    let _description: string = '';
+    let _images: string[] = [];
+
+    if (props.type === 'MY_PROFILE') {
+      _title = 'My Profile | Bento';
+      _description = '';
+      _images = ['/static/images/profile-default.jpg'];
+    }
+
+    if (props.type === 'USER_PROFILE') {
+      const username = props.profile?.username ?? 'unknown';
+      const displayName = props.profile?.display_name;
+
+      if (!!displayName) {
+        _title = `${displayName} (@${username}) | Bento`;
+      } else {
+        _title = `@${username} | Bento`;
+      }
+
+      _description = props.profile?.bio ?? '';
+      _images = [
+        ...(props.profile?.images ?? []),
+        '/static/images/profile-default.jpg',
+      ];
+    }
+
+    return [_title, _description, _images];
   }, [profile]);
 
   return (
     <PageContainer>
       <DocumentHead>
         <title>{title}</title>
-        <meta property="og:title" content={title} />
-        <meta name="twitter:title" content={title} />
+        <meta key="title" name="title" content={title} />
+        <meta key="og:title" property="og:title" content={title} />
+        <meta key="twitter:title" name="twitter:title" content={title} />
 
-        <meta property="og:description" content={description} />
-        <meta name="twitter:description" content={description} />
+        {description.length > 0 && (
+          <>
+            <meta key="description" name="description" content={description} />
+            <meta
+              key="og:description"
+              property="og:description"
+              content={description}
+            />
+            <meta
+              key="twitter:description"
+              name="twitter:description"
+              content={description}
+            />
+          </>
+        )}
 
         {images.length > 0 && (
           <>
-            <meta property="og:image" content={images[0]} key="og:image" />
+            <meta key="og:image" property="og:image" content={images[0]} />
             <meta
+              key="twitter:image"
               property="twitter:image"
               content={images[0]}
-              key="twitter:image"
             />
           </>
         )}
@@ -61,16 +141,20 @@ const ProfileDetailPage = () => {
         <meta property="twitter:url" content={url} /> */}
       </DocumentHead>
 
-      <div className="w-full max-w-xl mx-auto">
+      <div className="w-full max-w-xl mt-[64px] mx-auto">
         <NoSSR>
           <ProfileInstance
             profile={profile ?? undefined}
             revaildateProfile={revaildateProfile}
+            isMyProfile={props.type === 'MY_PROFILE'}
           />
         </NoSSR>
       </div>
 
-      <FixedLoginNudge visible={!session && isMyProfile} redirectTo="current" />
+      <FixedLoginNudge
+        visible={!session && props.type === 'MY_PROFILE'}
+        redirectTo="current"
+      />
     </PageContainer>
   );
 };

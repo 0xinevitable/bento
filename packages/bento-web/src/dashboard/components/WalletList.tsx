@@ -2,15 +2,14 @@ import {
   CosmosSDKBasedNetworks,
   EVMBasedNetworks,
   WALLET_TYPES,
+  Wallet,
 } from '@bento/common';
 import { shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import clsx from 'clsx';
 import React, { useCallback, useMemo, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import { walletsAtom } from '@/recoil/wallets';
 import { Analytics } from '@/utils/analytics';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
@@ -19,14 +18,15 @@ import { NETWORKS } from './AddWalletModal';
 
 type WalletListProps = {
   className?: string;
+  wallets: Wallet[];
   onClickConnect?: () => void;
 };
 
 export const WalletList: React.FC<WalletListProps> = ({
   className,
+  wallets,
   onClickConnect,
 }) => {
-  const wallets = useRecoilValue(walletsAtom);
   const [collapsed, setCollapsed] = useState<boolean>(true);
 
   const renderedWallets = useMemo(
