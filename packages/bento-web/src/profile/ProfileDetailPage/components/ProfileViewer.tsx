@@ -1,5 +1,5 @@
 import dedent from 'dedent';
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { Skeleton } from '@/components/Skeleton';
@@ -15,17 +15,26 @@ const data = {
 };
 
 type Props = {
-  profile: UserProfile;
-  isPreview?: boolean;
+  profile?: UserProfile;
 };
 
-export const ProfileViewer: React.FC<Props> = ({ profile, isPreview }) => {
+export const ProfileViewer: React.FC<Props> = ({ profile }) => {
   const palette = usePalette(data.color);
+
+  const displayName = useMemo(() => {
+    const value = profile?.display_name || profile?.username;
+    if (typeof value === 'undefined') {
+      return null;
+    }
+    return value;
+  }, [profile]);
 
   return (
     <>
-      {!!profile.display_name ? (
-        <DisplayName>{profile.display_name ?? profile.username}</DisplayName>
+      {typeof displayName === 'string' ? (
+        displayName.length > 0 ? (
+          <DisplayName>{displayName}</DisplayName>
+        ) : null
       ) : (
         <DefaultSkeleton
           style={{
@@ -35,9 +44,9 @@ export const ProfileViewer: React.FC<Props> = ({ profile, isPreview }) => {
           }}
         />
       )}
-      {!!profile.username ? (
+      {typeof profile?.username === 'string' ? (
         <Username style={{ color: palette.primary }}>
-          {`@${profile.username}`}
+          {`@${profile.username || 'unknown'}`}
         </Username>
       ) : (
         <DefaultSkeleton
@@ -48,8 +57,10 @@ export const ProfileViewer: React.FC<Props> = ({ profile, isPreview }) => {
           }}
         />
       )}
-      {!!profile.bio ? (
-        <Bio>{profile.bio}</Bio>
+      {typeof profile?.bio === 'string' ? (
+        profile.bio.length > 0 ? (
+          <Bio>{profile.bio}</Bio>
+        ) : null
       ) : (
         <DefaultSkeleton
           style={{

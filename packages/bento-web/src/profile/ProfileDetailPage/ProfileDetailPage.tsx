@@ -12,16 +12,6 @@ import { ProfileInstance } from '../components/ProfileInstance';
 import { UserProfile } from '../types/UserProfile';
 import { useProfile } from './hooks/useProfile';
 
-const defaultProfile: UserProfile = {
-  username: '',
-  display_name: '',
-  images: [],
-  verified: false,
-  bio: '',
-  tabs: [],
-  links: null,
-};
-
 export const getServerSideProps: GetServerSideProps = async () => {
   if (!FeatureFlags.isProfileEnabled) {
     return { notFound: true };
@@ -74,9 +64,7 @@ const ProfileDetailPage = () => {
       <div className="w-full max-w-xl mx-auto">
         <NoSSR>
           <ProfileInstance
-            profile={{
-              ...(profile ?? defaultProfile),
-            }}
+            profile={profile ?? undefined}
             revaildateProfile={revaildateProfile}
           />
         </NoSSR>

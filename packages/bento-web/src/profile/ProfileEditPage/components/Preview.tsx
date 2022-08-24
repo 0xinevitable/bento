@@ -14,7 +14,7 @@ export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
       <Container>
         <Card>
           {/* FIXME: */}
-          <ProfileInstance profile={profileDraft as any} isPreview />
+          <ProfileInstance profile={profileDraft as any} />
         </Card>
       </Container>
     </Wrapper>

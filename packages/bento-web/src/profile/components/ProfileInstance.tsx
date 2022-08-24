@@ -46,9 +46,8 @@ const tabs = [
 ];
 
 type ProfileInstanceProps = {
-  profile: UserProfile;
+  profile?: UserProfile;
   revaildateProfile?: () => Promise<void>;
-  isPreview?: boolean;
 };
 
 const walletBalanceReducer =
@@ -59,7 +58,6 @@ const walletBalanceReducer =
 export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   profile,
   revaildateProfile,
-  isPreview,
 }) => {
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
@@ -117,7 +115,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
   const palette = usePalette(data.color);
   const profileImageURL =
-    profile.images?.[0] ?? '/assets/mockups/profile-default.png';
+    profile?.images?.[0] ?? '/assets/mockups/profile-default.png';
 
   const [isEditing, setEditing] = useState<Boolean>(false);
 
@@ -129,9 +127,9 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const onProfileEdit = useCallback(async () => {
     if (!isEditing) {
       setDraft({
-        username: profile.username ?? '',
-        displayName: profile.display_name ?? '',
-        bio: profile.bio ?? '',
+        username: profile?.username ?? '',
+        displayName: profile?.display_name ?? '',
+        bio: profile?.bio ?? '',
       });
       setTimeout(() => {
         setEditing(true);
@@ -175,7 +173,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         )}
 
         {!isEditing ? (
-          <ProfileViewer profile={profile} isPreview={isPreview} />
+          <ProfileViewer profile={profile} />
         ) : (
           <ProfileEditor
             draft={draft}
@@ -202,7 +200,10 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         <TabContent palette={palette}>
           {selectedTab === ProfileTab.Links && (
             <AnimatedTab>
-              <ProfileLinkSection items={profile.links} isEditing={isEditing} />
+              <ProfileLinkSection
+                items={profile?.links ?? null}
+                isEditing={isEditing}
+              />
             </AnimatedTab>
           )}
           {selectedTab === ProfileTab.Questions && (
