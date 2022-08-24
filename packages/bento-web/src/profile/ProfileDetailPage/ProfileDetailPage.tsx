@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const ProfileDetailPage = () => {
-  const [profile] = useProfile();
+  const { profile, revaildateProfile } = useProfile();
 
   const { session } = useSession();
 
@@ -77,6 +77,7 @@ const ProfileDetailPage = () => {
             profile={{
               ...(profile ?? defaultProfile),
             }}
+            revaildateProfile={revaildateProfile}
           />
         </NoSSR>
       </div>

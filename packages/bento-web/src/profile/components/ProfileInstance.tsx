@@ -1,7 +1,8 @@
+import axios from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
@@ -14,7 +15,10 @@ import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
-import { ProfileEditor } from '../ProfileDetailPage/components/ProfileEditor';
+import {
+  ProfileEditor,
+  UserInformationDraft,
+} from '../ProfileDetailPage/components/ProfileEditor';
 import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
 import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
@@ -44,6 +48,7 @@ const tabs = [
 
 type ProfileInstanceProps = {
   profile: UserProfile;
+  revaildateProfile?: () => Promise<void>;
   isPreview?: boolean;
 };
 
@@ -54,6 +59,7 @@ const walletBalanceReducer =
 
 export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   profile,
+  revaildateProfile,
   isPreview,
 }) => {
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
@@ -116,6 +122,37 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
   const [isEditing, setEditing] = useState<Boolean>(false);
 
+  const [draft, setDraft] = useState<UserInformationDraft>({
+    username: '',
+    displayName: '',
+    bio: '',
+  });
+  const onProfileEdit = useCallback(async () => {
+    if (!isEditing) {
+      setDraft({
+        username: profile.username ?? '',
+        displayName: profile.display_name ?? '',
+        bio: profile.bio ?? '',
+      });
+      setTimeout(() => {
+        setEditing(true);
+      });
+      return;
+    }
+
+    try {
+      const { data } = await axios.post(`/api/profile`, {
+        username: draft.username,
+        display_name: draft.displayName,
+        bio: draft.bio,
+      });
+      console.log(data);
+
+      setEditing(false);
+      revaildateProfile?.();
+    } catch (e) {}
+  }, [profile, isEditing, draft]);
+
   return (
     <React.Fragment>
       <BackgroundGradient style={{ background: data.background }}>
@@ -128,15 +165,12 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        <ProfileEditButton
-          isEditing={isEditing}
-          onClick={() => setEditing((isEditing) => !isEditing)}
-        />
+        <ProfileEditButton isEditing={isEditing} onClick={onProfileEdit} />
 
         {!isEditing ? (
           <ProfileViewer profile={profile} isPreview={isPreview} />
         ) : (
-          <ProfileEditor currentProfile={profile} />
+          <ProfileEditor draft={draft} setDraft={setDraft} />
         )}
       </Information>
       <InformationSpacer />

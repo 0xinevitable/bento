@@ -1,17 +1,8 @@
-import axios from 'axios';
 import dedent from 'dedent';
-import { GetServerSideProps } from 'next';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-import { UserProfile } from '@/profile/types/UserProfile';
-import { FeatureFlags } from '@/utils/FeatureFlag';
-
 import { usePalette } from '../hooks/usePalette';
-
-type ProfileInfoProps = {
-  currentProfile: UserProfile | null;
-};
 
 const data = {
   color: '#ff3856',
@@ -20,45 +11,39 @@ const data = {
     `,
 };
 
-export const ProfileEditor: React.FC<ProfileInfoProps> = ({
-  currentProfile,
-}) => {
+export type UserInformationDraft = {
+  username: string;
+  displayName: string;
+  bio: string;
+};
+
+type Props = {
+  draft: UserInformationDraft;
+  setDraft: React.Dispatch<React.SetStateAction<UserInformationDraft>>;
+};
+
+export const ProfileEditor: React.FC<Props> = ({ draft, setDraft }) => {
   const palette = usePalette(data.color);
-
-  const [username, setUsername] = useState<string>(
-    currentProfile?.username ?? '',
-  );
-  const [displayName, setDisplayName] = useState<string>(
-    currentProfile?.display_name ?? '',
-  );
-  const [bio, setBio] = useState<string>(currentProfile?.bio ?? '');
-
-  const onSubmit = useCallback(async () => {
-    const { data } = await axios.post(`/api/profile`, {
-      username,
-      display_name: displayName,
-      bio,
-    });
-    console.log(data);
-  }, [username, displayName, bio]);
 
   return (
     <Container>
       <NameField
         placeholder="Name"
-        defaultValue={displayName}
-        onChange={(e) => setDisplayName(e.target.value)}
+        defaultValue={draft.displayName}
+        onChange={(e) =>
+          setDraft((v) => ({ ...v, displayName: e.target.value }))
+        }
       />
       <UserNameField
         style={{ color: palette.primary }}
         placeholder="@username"
-        defaultValue={username}
-        onChange={(e) => setUsername(e.target.value)}
+        defaultValue={draft.username}
+        onChange={(e) => setDraft((v) => ({ ...v, username: e.target.value }))}
       />
       <BioField
         placeholder="Description"
-        defaultValue={bio}
-        onChange={(e) => setBio(e.target.value)}
+        defaultValue={draft.bio}
+        onChange={(e) => setDraft((v) => ({ ...v, bio: e.target.value }))}
       />
     </Container>
   );
