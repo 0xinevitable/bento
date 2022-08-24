@@ -9,7 +9,7 @@ enum Environment {
 }
 
 const definedFeatures = {
-  isProfileEnabled: Environment.debug,
+  isProfileEnabled: Environment.production,
   isEmailMagicLinkEnabled: Environment.off,
 };
 
