@@ -128,9 +128,11 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        <button onClick={() => setEditing((isEditing) => !isEditing)}>
-          <ProfileEditButton isEditing={isEditing} />
-        </button>
+        <ProfileEditButton
+          isEditing={isEditing}
+          onClick={() => setEditing((isEditing) => !isEditing)}
+        />
+
         {!isEditing ? (
           <ProfileViewer profile={profile} isPreview={isPreview} />
         ) : (
