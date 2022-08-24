@@ -28,6 +28,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   if (!FeatureFlags.isProfileEnabled) {
     return { notFound: true };
   }
+
+  const { user: userFromCookie } = await Supabase.auth.api.getUserByCookie(
+    context.req,
+  );
+
   const username = context.query.username as string | undefined;
   if (!username) {
     return { props: { type: 'MY_PROFILE' } };
@@ -44,7 +49,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   }
 
   if (!!profile) {
-    return { props: { type: 'USER_PROFILE', profile } };
+    return {
+      props: {
+        type:
+          userFromCookie?.id === profile.user_id //
+            ? 'MY_PROFILE'
+            : 'USER_PROFILE',
+        profile,
+      },
+    };
   }
   return { notFound: true };
 };
