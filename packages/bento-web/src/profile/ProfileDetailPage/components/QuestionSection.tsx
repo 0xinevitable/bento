@@ -7,7 +7,11 @@ import { QuestionForm } from './QuestionForm';
 import { QuestionItem } from './QuestionItem';
 import { QuestionMoreModal } from './QuestionMoreModal';
 
-export const QuestionSection = () => {
+type Props = {
+  isEditing: Boolean;
+};
+
+export const QuestionSection: React.FC<Props> = ({ isEditing }) => {
   const [isMoreModalVisible, setMoreModalVisible] = useState<boolean>(false);
 
   const onClickMoreButton = useCallback((_question: UserQuestion) => {

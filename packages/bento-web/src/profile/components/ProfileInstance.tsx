@@ -1,23 +1,26 @@
+import axios from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
-import Link from 'next/link';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
-import CheckCircleIcon from '@/assets/icons/ic-check-circle.svg';
 import { Modal } from '@/components/Modal';
-import { Skeleton } from '@/components/Skeleton';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { walletsAtom } from '@/recoil/wallets';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
-import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
+import {
+  ProfileEditor,
+  UserInformationDraft,
+} from '../ProfileDetailPage/components/ProfileEditor';
 import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
+import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
 import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
 import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
 import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
@@ -30,20 +33,21 @@ const data = {
   `,
 };
 
-enum AddressProfileTab {
+enum ProfileTab {
   Links = 'Links',
   Questions = 'Questions',
   Assets = 'Assets',
 }
+
 const tabs = [
-  AddressProfileTab.Links,
-  AddressProfileTab.Questions,
-  AddressProfileTab.Assets,
+  ProfileTab.Links,
+  ...(FeatureFlags.isProfileQuestionsEnabled ? [ProfileTab.Questions] : []),
+  ProfileTab.Assets,
 ];
 
 type ProfileInstanceProps = {
-  profile: UserProfile;
-  isPreview?: boolean;
+  profile?: UserProfile;
+  revaildateProfile?: () => Promise<void>;
 };
 
 const walletBalanceReducer =
@@ -53,14 +57,12 @@ const walletBalanceReducer =
 
 export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   profile,
-  isPreview,
+  revaildateProfile,
 }) => {
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
 
-  const [selectedTab, setSelectedTab] = useState<AddressProfileTab>(
-    AddressProfileTab.Links,
-  );
+  const [selectedTab, setSelectedTab] = useState<ProfileTab>(ProfileTab.Links);
 
   const wallets = useRecoilValue(walletsAtom);
   const { balances: walletBalances } = useWalletBalances({ wallets });
@@ -112,7 +114,41 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   }, [walletBalances]);
 
   const palette = usePalette(data.color);
-  const profileImageURL = profile.images?.[0];
+  const profileImageURL =
+    profile?.images?.[0] ?? '/assets/mockups/profile-default.png';
+
+  const [isEditing, setEditing] = useState<Boolean>(false);
+
+  const [draft, setDraft] = useState<UserInformationDraft>({
+    username: '',
+    displayName: '',
+    bio: '',
+  });
+  const onProfileEdit = useCallback(async () => {
+    if (!isEditing) {
+      setDraft({
+        username: profile?.username ?? '',
+        displayName: profile?.display_name ?? '',
+        bio: profile?.bio ?? '',
+      });
+      setTimeout(() => {
+        setEditing(true);
+      });
+      return;
+    }
+
+    try {
+      const { data } = await axios.post(`/api/profile`, {
+        username: draft.username,
+        display_name: draft.displayName,
+        bio: draft.bio,
+      });
+      console.log(data);
+
+      setEditing(false);
+      revaildateProfile?.();
+    } catch (e) {}
+  }, [profile, isEditing, draft]);
 
   return (
     <React.Fragment>
@@ -126,45 +162,23 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        {!isPreview && (
-          <Link href="/profile/edit" passHref>
-            <a>
-              <ProfileEditButton />
-            </a>
-          </Link>
-        )}
-        {!!profile.display_name ? (
-          <DisplayName>{profile.display_name ?? profile.username}</DisplayName>
+        {!isEditing ? (
+          <ProfileEditButton onClick={onProfileEdit}>
+            Edit Profile
+          </ProfileEditButton>
         ) : (
-          <DefaultSkeleton
-            style={{
-              height: '34px',
-              width: '120px',
-              marginBottom: '10px',
-            }}
-          />
+          <ProfileEditButton onClick={() => setEditing((prev) => !prev)}>
+            Cancel
+          </ProfileEditButton>
         )}
-        {!!profile.username ? (
-          <Username style={{ color: palette.primary }}>
-            {`@${profile.username}`}
-          </Username>
+
+        {!isEditing ? (
+          <ProfileViewer profile={profile} />
         ) : (
-          <DefaultSkeleton
-            style={{
-              height: '19px',
-              width: '80px',
-              marginBottom: '10px',
-            }}
-          />
-        )}
-        {!!profile.bio ? (
-          <Bio>{profile.bio}</Bio>
-        ) : (
-          <DefaultSkeleton
-            style={{
-              height: '22px',
-              width: '200px',
-            }}
+          <ProfileEditor
+            draft={draft}
+            setDraft={setDraft}
+            onSubmit={onProfileEdit}
           />
         )}
       </Information>
@@ -184,19 +198,25 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       />
       <AnimatePresence initial={false}>
         <TabContent palette={palette}>
-          {selectedTab === AddressProfileTab.Links && (
+          {selectedTab === ProfileTab.Links && (
             <AnimatedTab>
-              <ProfileLinkSection items={profile.links} />
+              <ProfileLinkSection
+                items={profile?.links ?? null}
+                isEditing={isEditing}
+              />
             </AnimatedTab>
           )}
-          {selectedTab === AddressProfileTab.Questions && (
+          {selectedTab === ProfileTab.Questions && (
             <AnimatedTab>
-              <QuestionSection />
+              <QuestionSection isEditing={isEditing} />
             </AnimatedTab>
           )}
-          {selectedTab === AddressProfileTab.Assets && (
+          {selectedTab === ProfileTab.Assets && (
             <AnimatedTab>
-              <AssetSection tokenBalances={tokenBalances} />
+              <AssetSection
+                tokenBalances={tokenBalances}
+                isEditing={isEditing}
+              />
             </AnimatedTab>
           )}
         </TabContent>
@@ -242,39 +262,14 @@ const Information = styled.div`
   flex-direction: column;
 `;
 
-const DisplayName = styled.h1`
-  margin: 0;
-  font-weight: 900;
-  font-size: 28px;
-  line-height: 34px;
-  text-align: center;
-  color: #ffffff;
-`;
-
-const Username = styled.p`
-  margin: 4px 0 0;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
-`;
-
-const Bio = styled.p`
-  margin: 16px 0 0;
-  font-size: 18px;
-  line-height: 22px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.8);
-  white-space: break-spaces;
-`;
+const ProfileEditButton = styled.button.attrs({
+  className:
+    'w-fit p-1 px-3 text-slate-100/75 border-2 border-slate-100/75 rounded-2xl absolute top-[-24px] right-6 hover:opacity-50 transition-all',
+})``;
 
 const InformationSpacer = styled.div`
   width: 100%;
   height: 26px;
-`;
-
-const DefaultSkeleton = styled(Skeleton)`
-  border-radius: 6px;
-  align-self: center;
 `;
 
 const LargeProfileImage = styled.img`

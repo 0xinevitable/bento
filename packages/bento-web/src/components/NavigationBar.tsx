@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import GithubIcon from '@/assets/icons/ic-github.svg';
@@ -10,6 +10,8 @@ import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Analytics } from '@/utils/analytics';
+
+import { NoSSR } from './NoSSR';
 
 const Breakpoints = {
   Mobile: 512,
@@ -20,9 +22,6 @@ const Breakpoints = {
 
 const onMobile = `@media screen and (max-width: ${Breakpoints.Mobile}px)`;
 const onTablet = `@media screen and (max-width: ${Breakpoints.Tablet}px)`;
-
-// import { onMobile, onTablet } from '@/landing/utils/breakpoints';
-// import { Analytics } from '@/utils/analytics';
 
 const NAVIGATION_ITEMS = [
   {
@@ -39,16 +38,11 @@ const NAVIGATION_ITEMS = [
         },
       ]
     : []),
-  // {
-  //   title: 'Settings',
-  //   href: '/settings',
-  //   icon: 'majesticons:settings-cog',
-  // },
 ];
 
 export const NavigationBar = () => {
   const router = useRouter();
-  const currentPath = router.asPath;
+  const currentPath = useMemo(() => router.asPath, [router]);
 
   const { session } = useSession();
   const { signOut } = useSignOut();
@@ -72,7 +66,7 @@ export const NavigationBar = () => {
           </a>
         </Link>
 
-        {!!session && (
+        <NoSSR>
           <ul className="flex">
             {NAVIGATION_ITEMS.map((item) => (
               <NavigationItem
@@ -90,7 +84,7 @@ export const NavigationBar = () => {
               </NavigationItem>
             ))}
           </ul>
-        )}
+        </NoSSR>
 
         <SocialIconList>
           {!!session && (

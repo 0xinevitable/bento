@@ -8,9 +8,10 @@ import { ProfileLinkItem } from './ProfileLinkItem';
 
 type Props = {
   items: ProfileLink[] | null;
+  isEditing: Boolean;
 };
 
-export const ProfileLinkSection: React.FC<Props> = ({ items }) => {
+export const ProfileLinkSection: React.FC<Props> = ({ items, isEditing }) => {
   return (
     <ProfileLinkList>
       {!!items ? (

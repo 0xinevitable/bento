@@ -9,19 +9,31 @@ import { Supabase } from '@/utils/Supabase';
 type LoginNudgeProps = {
   className?: string;
   accessory?: React.ReactNode;
+  redirectTo?: 'current' | 'home' | string;
 };
 
 export const LoginNudge: React.FC<LoginNudgeProps> = ({
   className,
   accessory,
+  redirectTo,
 }) => {
-  const onClickLogin = useCallback(async (provider: 'twitter' | 'github') => {
-    const { user, session, error } = await Supabase.auth.signIn(
-      { provider },
-      { redirectTo: `${window.location.origin}/home` },
-    );
-    console.log({ user, session, error });
-  }, []);
+  const onClickLogin = useCallback(
+    async (provider: 'twitter' | 'github') => {
+      const { user, session, error } = await Supabase.auth.signIn(
+        { provider },
+        {
+          redirectTo:
+            redirectTo === 'current'
+              ? window.location.href
+              : redirectTo === 'home'
+              ? `${window.location.origin}/home`
+              : redirectTo,
+        },
+      );
+      console.log({ user, session, error });
+    },
+    [redirectTo],
+  );
 
   return (
     <Wrapper className={className}>

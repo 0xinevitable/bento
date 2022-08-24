@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import MetaHead from '@/components/MetaHead';
 import { PageContainer } from '@/components/PageContainer';
+import { useSession } from '@/hooks/useSession';
 import { walletsAtom } from '@/recoil/wallets';
 import { Analytics } from '@/utils/analytics';
 
@@ -18,6 +19,7 @@ import { IntroSection } from './sections/IntroSection';
 const DynamicDashboardMain = dynamic(() => import('./sections/DashboardMain'));
 
 const DashboardPage = () => {
+  const { session } = useSession();
   const wallets = useRecoilValue(walletsAtom);
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
@@ -30,7 +32,7 @@ const DashboardPage = () => {
   const [pageLoaded, setPageLoaded] = useState<boolean>(false);
   useEffect(() => setPageLoaded(true), []);
 
-  const hasWallet = wallets.length > 0;
+  const hasWallet = !!session && wallets.length > 0;
 
   const hasLoggedTabViewEvent = useRef<boolean>(false);
   useEffect(() => {

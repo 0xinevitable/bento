@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const ProfileEditPage = () => {
-  const [profile] = useProfile();
+  const { profile } = useProfile();
 
   const [username, setUsername] = useState<string>('');
   const [displayName, setDisplayName] = useState<string>('');

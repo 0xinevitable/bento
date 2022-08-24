@@ -1,24 +1,16 @@
-import dedent from 'dedent';
 import { GetServerSideProps } from 'next';
 import DocumentHead from 'next/head';
 import React, { useMemo } from 'react';
 
+import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
+import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 
+import { FixedLoginNudge } from '../components/LoginNudge';
 import { ProfileInstance } from '../components/ProfileInstance';
 import { UserProfile } from '../types/UserProfile';
 import { useProfile } from './hooks/useProfile';
-
-const defaultProfile: UserProfile = {
-  username: '',
-  display_name: '',
-  images: [],
-  verified: false,
-  bio: '',
-  tabs: [],
-  links: null,
-};
 
 export const getServerSideProps: GetServerSideProps = async () => {
   if (!FeatureFlags.isProfileEnabled) {
@@ -28,18 +20,21 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const ProfileDetailPage = () => {
-  const [profile] = useProfile();
+  const { profile, revaildateProfile } = useProfile();
 
-  console.log(profile);
-  const [title, description, images, url] = useMemo(
-    () => [
-      `${profile?.display_name ?? profile?.username} - Linky`,
+  const { session } = useSession();
+
+  // FIXME: True for now
+  const isMyProfile = true;
+
+  const [title, description, images] = useMemo(() => {
+    const username = profile?.display_name ?? profile?.username;
+    return [
+      !username ? 'Bento Profile' : `${username} - Bento`,
       profile?.bio ?? '',
       profile?.images || [],
-      `https://linky.vc/address/${profile?.username}`,
-    ],
-    [profile],
-  );
+    ];
+  }, [profile]);
 
   return (
     <PageContainer>
@@ -62,21 +57,20 @@ const ProfileDetailPage = () => {
           </>
         )}
 
-        <meta property="og:url" content={url} />
-        <meta property="twitter:url" content={url} />
+        {/* <meta property="og:url" content={url} />
+        <meta property="twitter:url" content={url} /> */}
       </DocumentHead>
 
       <div className="w-full max-w-xl mx-auto">
-        <ProfileInstance
-          profile={{
-            ...(profile ?? defaultProfile),
-            images:
-              !!profile && !profile.images?.[0]
-                ? ['/assets/mockups/profile-default.png']
-                : null,
-          }}
-        />
+        <NoSSR>
+          <ProfileInstance
+            profile={profile ?? undefined}
+            revaildateProfile={revaildateProfile}
+          />
+        </NoSSR>
       </div>
+
+      <FixedLoginNudge visible={!session && isMyProfile} redirectTo="current" />
     </PageContainer>
   );
 };
