@@ -149,6 +149,7 @@ const ProfileDetailPage = (props: Props) => {
           <ProfileInstance
             profile={profile ?? undefined}
             revaildateProfile={revaildateProfile}
+            isMyProfile={props.type === 'MY_PROFILE'}
           />
         </NoSSR>
       </div>

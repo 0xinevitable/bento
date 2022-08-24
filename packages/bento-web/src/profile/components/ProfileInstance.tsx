@@ -56,6 +56,7 @@ const PROFILE_TABS = [
 type ProfileInstanceProps = {
   profile?: UserProfile;
   revaildateProfile?: () => Promise<void>;
+  isMyProfile?: boolean;
 };
 
 const walletBalanceReducer =
@@ -66,6 +67,7 @@ const walletBalanceReducer =
 export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   profile,
   revaildateProfile,
+  isMyProfile = false,
 }) => {
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
@@ -178,17 +180,19 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        {!isEditing ? (
-          <ProfileEditButton onClick={onProfileEdit}>
-            Edit Profile
-          </ProfileEditButton>
-        ) : (
-          <ProfileEditButton onClick={() => setEditing((prev) => !prev)}>
-            Cancel
-          </ProfileEditButton>
-        )}
+        {isMyProfile ? (
+          !isEditing ? (
+            <ProfileEditButton onClick={onProfileEdit}>
+              Edit Profile
+            </ProfileEditButton>
+          ) : (
+            <ProfileEditButton onClick={() => setEditing((prev) => !prev)}>
+              Cancel
+            </ProfileEditButton>
+          )
+        ) : null}
 
-        {!isEditing ? (
+        {!isMyProfile || !isEditing ? (
           <ProfileViewer profile={profile} />
         ) : (
           <ProfileEditor
