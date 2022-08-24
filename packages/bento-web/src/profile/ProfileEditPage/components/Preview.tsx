@@ -5,7 +5,7 @@ import { ProfileInstance } from '@/profile/components/ProfileInstance';
 import { UserProfile } from '@/profile/types/UserProfile';
 
 type PreviewProps = {
-  profileDraft?: UserProfile;
+  profileDraft?: Omit<UserProfile, 'user_id'>;
 };
 
 export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
