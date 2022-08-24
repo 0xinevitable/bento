@@ -67,7 +67,7 @@ export const NavigationBar = () => {
         </Link>
 
         <NoSSR>
-          <ul className="flex">
+          <NavigationList>
             {NAVIGATION_ITEMS.map((item) => (
               <NavigationItem
                 key={`${item.title}-${item.href}`}
@@ -83,7 +83,7 @@ export const NavigationBar = () => {
                 </Link>
               </NavigationItem>
             ))}
-          </ul>
+          </NavigationList>
         </NoSSR>
 
         <SocialIconList>
@@ -200,6 +200,14 @@ const SocialIconList = styled.div`
   & > a:focus {
     transform: scale(0.85);
     opacity: 0.45;
+  }
+`;
+
+const NavigationList = styled.ul`
+  display: flex;
+
+  @media screen and (max-width: 680px) {
+    display: none;
   }
 `;
 
