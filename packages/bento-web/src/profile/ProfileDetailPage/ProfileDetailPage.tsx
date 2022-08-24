@@ -62,12 +62,34 @@ const ProfileDetailPage = (props: Props) => {
   );
 
   const [title, description, images] = useMemo(() => {
-    const username = profile?.display_name ?? profile?.username;
-    return [
-      !username ? 'Bento Profile' : `${username} - Bento`,
-      profile?.bio ?? '',
-      profile?.images || [],
-    ];
+    let _title: string = '';
+    let _description: string = '';
+    let _images: string[] = [];
+
+    if (props.type === 'MY_PROFILE') {
+      _title = 'My Profile | Bento';
+      _description = '';
+      _images = ['/static/images/profile-default.jpg'];
+    }
+
+    if (props.type === 'USER_PROFILE') {
+      const username = props.profile?.username ?? 'unknown';
+      const displayName = props.profile?.display_name;
+
+      if (!!displayName) {
+        _title = `${displayName} (@${username}) | Bento`;
+      } else {
+        _title = `@${username} | Bento`;
+      }
+
+      _description = props.profile?.bio ?? '';
+      _images = [
+        ...(props.profile?.images ?? []),
+        '/static/images/profile-default.jpg',
+      ];
+    }
+
+    return [_title, _description, _images];
   }, [profile]);
 
   return (
@@ -77,8 +99,12 @@ const ProfileDetailPage = (props: Props) => {
         <meta property="og:title" content={title} />
         <meta name="twitter:title" content={title} />
 
-        <meta property="og:description" content={description} />
-        <meta name="twitter:description" content={description} />
+        {description.length > 0 && (
+          <>
+            <meta property="og:description" content={description} />
+            <meta name="twitter:description" content={description} />
+          </>
+        )}
 
         {images.length > 0 && (
           <>
