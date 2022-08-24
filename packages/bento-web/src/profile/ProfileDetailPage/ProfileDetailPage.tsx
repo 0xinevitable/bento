@@ -4,8 +4,10 @@ import React, { useMemo } from 'react';
 
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
+import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 
+import { FixedLoginNudge } from '../components/LoginNudge';
 import { ProfileInstance } from '../components/ProfileInstance';
 import { UserProfile } from '../types/UserProfile';
 import { useProfile } from './hooks/useProfile';
@@ -30,7 +32,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const ProfileDetailPage = () => {
   const [profile] = useProfile();
 
-  console.log(profile);
+  const { session } = useSession();
+
+  // FIXME: True for now
+  const isMyProfile = true;
+
   const [title, description, images] = useMemo(() => {
     const username = profile?.display_name ?? profile?.username;
     return [
@@ -78,6 +84,8 @@ const ProfileDetailPage = () => {
           />
         </NoSSR>
       </div>
+
+      <FixedLoginNudge visible={!session && isMyProfile} />
     </PageContainer>
   );
 };
