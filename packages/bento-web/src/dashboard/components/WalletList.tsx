@@ -7,7 +7,7 @@ import { shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import clsx from 'clsx';
 import React, { useCallback, useMemo, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import { walletsAtom } from '@/recoil/wallets';
@@ -26,7 +26,7 @@ export const WalletList: React.FC<WalletListProps> = ({
   className,
   onClickConnect,
 }) => {
-  const [wallets, setWallets] = useRecoilState(walletsAtom);
+  const wallets = useRecoilValue(walletsAtom);
   const [collapsed, setCollapsed] = useState<boolean>(true);
 
   const renderedWallets = useMemo(
