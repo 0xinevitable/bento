@@ -1,3 +1,4 @@
+import { OpenSeaAsset } from '@bento/client';
 import axios from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
@@ -7,8 +8,10 @@ import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
+import { AssetMedia } from '@/dashboard/components/AssetMedia';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { walletsAtom } from '@/recoil/wallets';
 import { FeatureFlags } from '@/utils/FeatureFlag';
@@ -37,12 +40,14 @@ enum ProfileTab {
   Links = 'Links',
   Questions = 'Questions',
   Assets = 'Assets',
+  NFTs = 'NFTs',
 }
 
-const tabs = [
-  ProfileTab.Links,
+const PROFILE_TABS = [
+  ...(FeatureFlags.isProfileLinksEnabled ? [ProfileTab.Links] : []),
   ...(FeatureFlags.isProfileQuestionsEnabled ? [ProfileTab.Questions] : []),
   ProfileTab.Assets,
+  ProfileTab.NFTs,
 ];
 
 type ProfileInstanceProps = {
@@ -62,10 +67,11 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
 
-  const [selectedTab, setSelectedTab] = useState<ProfileTab>(ProfileTab.Links);
+  const [selectedTab, setSelectedTab] = useState<ProfileTab>(PROFILE_TABS[0]);
 
   const wallets = useRecoilValue(walletsAtom);
   const { balances: walletBalances } = useWalletBalances({ wallets });
+  const { balances: nftBalances } = useNFTBalances({ wallets });
 
   const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
@@ -112,6 +118,13 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     tokens.sort((a, b) => b.netWorth - a.netWorth);
     return tokens.filter((v) => v.netWorth > 0);
   }, [walletBalances]);
+
+  const nftAssets = useMemo<OpenSeaAsset[]>(
+    () =>
+      nftBalances?.flatMap((item) => ('assets' in item ? item.assets : [])) ??
+      [],
+    [nftBalances],
+  );
 
   const palette = usePalette(data.color);
   const profileImageURL =
@@ -191,34 +204,47 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </Modal>
       <StickyTab
         selected={selectedTab}
-        items={tabs}
+        items={PROFILE_TABS}
         onChange={(tab) => setSelectedTab(tab)}
         primaryColor={palette.primary}
         shadowColor={palette.primaryShadow}
       />
       <AnimatePresence initial={false}>
         <TabContent palette={palette}>
-          {selectedTab === ProfileTab.Links && (
-            <AnimatedTab>
-              <ProfileLinkSection
-                items={profile?.links ?? null}
-                isEditing={isEditing}
-              />
-            </AnimatedTab>
-          )}
-          {selectedTab === ProfileTab.Questions && (
-            <AnimatedTab>
-              <QuestionSection isEditing={isEditing} />
-            </AnimatedTab>
-          )}
-          {selectedTab === ProfileTab.Assets && (
-            <AnimatedTab>
-              <AssetSection
-                tokenBalances={tokenBalances}
-                isEditing={isEditing}
-              />
-            </AnimatedTab>
-          )}
+          <AnimatedTab selected={selectedTab === ProfileTab.Links}>
+            <ProfileLinkSection
+              items={profile?.links ?? null}
+              isEditing={isEditing}
+            />
+          </AnimatedTab>
+          <AnimatedTab selected={selectedTab === ProfileTab.Questions}>
+            <QuestionSection isEditing={isEditing} />
+          </AnimatedTab>
+          <AnimatedTab selected={selectedTab === ProfileTab.Assets}>
+            <AssetSection tokenBalances={tokenBalances} isEditing={isEditing} />
+          </AnimatedTab>
+          <AnimatedTab selected={selectedTab === ProfileTab.NFTs}>
+            <AssetList>
+              {nftAssets.map((asset) => {
+                const isVideo =
+                  !!asset.animation_url ||
+                  asset.image_url.toLowerCase().endsWith('.mp4');
+
+                return (
+                  <AssetListItem key={asset.id}>
+                    <AssetMedia
+                      src={!isVideo ? asset.image_url : asset.animation_url}
+                      poster={asset.image_url || asset.image_preview_url}
+                      isVideo={isVideo}
+                    />
+                    <AssetName className="text-sm text-gray-400">
+                      {asset.name || `#${asset.id}`}
+                    </AssetName>
+                  </AssetListItem>
+                );
+              })}
+            </AssetList>
+          </AnimatedTab>
         </TabContent>
       </AnimatePresence>
     </React.Fragment>
@@ -306,13 +332,46 @@ const TabContent = styled.div<TabContentProps>`
   }
 `;
 
-const AnimatedTab = (props: HTMLMotionProps<'div'>) => (
+type AnimatedTabProps = {
+  selected: boolean;
+};
+const AnimatedTab = (props: AnimatedTabProps & HTMLMotionProps<'div'>) => (
   <motion.div
-    initial={{ opacity: 0, transform: 'scale(0.9)' }}
-    animate={{ opacity: 1, transform: 'scale(1)' }}
-    exit={{ opacity: 0, transform: 'scale(0.9)' }}
-    style={{ originY: 0 }}
+    animate={
+      !props.selected
+        ? { opacity: 0, transform: 'scale(0.9)' }
+        : { opacity: 1, transform: 'scale(1)' }
+    }
+    style={{
+      originY: 0,
+      paddingBottom: 64,
+      display: !props.selected ? 'none' : 'block',
+    }}
     transition={{ duration: 0.35 }}
     {...props}
   />
 );
+
+// FIXME: Those are similar declares with `TokenDetailModal`
+const AssetList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+`;
+const AssetListItem = styled.li`
+  display: flex;
+  flex-direction: column;
+
+  width: calc((100% - 24px) / 3);
+
+  @media screen and (max-width: 36rem) {
+    width: calc((100% - 12px) / 2);
+  }
+`;
+const AssetName = styled.span`
+  margin-top: 4px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
