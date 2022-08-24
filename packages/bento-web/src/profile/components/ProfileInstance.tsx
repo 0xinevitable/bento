@@ -2,7 +2,7 @@ import axios from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
@@ -14,7 +14,6 @@ import { walletsAtom } from '@/recoil/wallets';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
-import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
 import {
   ProfileEditor,
   UserInformationDraft,
@@ -165,12 +164,20 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        <ProfileEditButton isEditing={isEditing} onClick={onProfileEdit} />
+        {!isEditing && (
+          <ProfileEditButton onClick={onProfileEdit}>
+            Edit Profile
+          </ProfileEditButton>
+        )}
 
         {!isEditing ? (
           <ProfileViewer profile={profile} isPreview={isPreview} />
         ) : (
-          <ProfileEditor draft={draft} setDraft={setDraft} />
+          <ProfileEditor
+            draft={draft}
+            setDraft={setDraft}
+            onSubmit={onProfileEdit}
+          />
         )}
       </Information>
       <InformationSpacer />
@@ -249,6 +256,11 @@ const Information = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const ProfileEditButton = styled.button.attrs({
+  className:
+    'w-fit p-1 px-3 text-slate-100/75 border border-slate-100/75 rounded-2xl absolute top-[-24px] right-6 hover:opacity-50 transition-all',
+})``;
 
 const InformationSpacer = styled.div`
   width: 100%;
