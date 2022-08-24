@@ -15,7 +15,7 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances, isEditing }) => {
       {!!tokenBalances ? (
         tokenBalances.map((item) => {
           return (
-            <Container>
+            <Container key={`${item.symbol}-${item.tokenAddress ?? 'native'}`}>
               <Logo src={item.logo} />
               <Information>
                 <Title>{item.name}</Title>

@@ -211,51 +211,40 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       />
       <AnimatePresence initial={false}>
         <TabContent palette={palette}>
-          {selectedTab === ProfileTab.Links && (
-            <AnimatedTab>
-              <ProfileLinkSection
-                items={profile?.links ?? null}
-                isEditing={isEditing}
-              />
-            </AnimatedTab>
-          )}
-          {selectedTab === ProfileTab.Questions && (
-            <AnimatedTab>
-              <QuestionSection isEditing={isEditing} />
-            </AnimatedTab>
-          )}
-          {selectedTab === ProfileTab.Assets && (
-            <AnimatedTab>
-              <AssetSection
-                tokenBalances={tokenBalances}
-                isEditing={isEditing}
-              />
-            </AnimatedTab>
-          )}
-          {selectedTab === ProfileTab.NFTs && (
-            <AnimatedTab>
-              <AssetList>
-                {nftAssets.map((asset) => {
-                  const isVideo =
-                    !!asset.animation_url ||
-                    asset.image_url.toLowerCase().endsWith('.mp4');
+          <AnimatedTab selected={selectedTab === ProfileTab.Links}>
+            <ProfileLinkSection
+              items={profile?.links ?? null}
+              isEditing={isEditing}
+            />
+          </AnimatedTab>
+          <AnimatedTab selected={selectedTab === ProfileTab.Questions}>
+            <QuestionSection isEditing={isEditing} />
+          </AnimatedTab>
+          <AnimatedTab selected={selectedTab === ProfileTab.Assets}>
+            <AssetSection tokenBalances={tokenBalances} isEditing={isEditing} />
+          </AnimatedTab>
+          <AnimatedTab selected={selectedTab === ProfileTab.NFTs}>
+            <AssetList>
+              {nftAssets.map((asset) => {
+                const isVideo =
+                  !!asset.animation_url ||
+                  asset.image_url.toLowerCase().endsWith('.mp4');
 
-                  return (
-                    <AssetListItem key={asset.id}>
-                      <AssetMedia
-                        src={!isVideo ? asset.image_url : asset.animation_url}
-                        poster={asset.image_url || asset.image_preview_url}
-                        isVideo={isVideo}
-                      />
-                      <AssetName className="text-sm text-gray-400">
-                        {asset.name || `#${asset.id}`}
-                      </AssetName>
-                    </AssetListItem>
-                  );
-                })}
-              </AssetList>
-            </AnimatedTab>
-          )}
+                return (
+                  <AssetListItem key={asset.id}>
+                    <AssetMedia
+                      src={!isVideo ? asset.image_url : asset.animation_url}
+                      poster={asset.image_url || asset.image_preview_url}
+                      isVideo={isVideo}
+                    />
+                    <AssetName className="text-sm text-gray-400">
+                      {asset.name || `#${asset.id}`}
+                    </AssetName>
+                  </AssetListItem>
+                );
+              })}
+            </AssetList>
+          </AnimatedTab>
         </TabContent>
       </AnimatePresence>
     </React.Fragment>
@@ -343,12 +332,21 @@ const TabContent = styled.div<TabContentProps>`
   }
 `;
 
-const AnimatedTab = (props: HTMLMotionProps<'div'>) => (
+type AnimatedTabProps = {
+  selected: boolean;
+};
+const AnimatedTab = (props: AnimatedTabProps & HTMLMotionProps<'div'>) => (
   <motion.div
-    initial={{ opacity: 0, transform: 'scale(0.9)' }}
-    animate={{ opacity: 1, transform: 'scale(1)' }}
-    exit={{ opacity: 0, transform: 'scale(0.9)' }}
-    style={{ originY: 0, paddingBottom: 64 }}
+    animate={
+      !props.selected
+        ? { opacity: 0, transform: 'scale(0.9)' }
+        : { opacity: 1, transform: 'scale(1)' }
+    }
+    style={{
+      originY: 0,
+      paddingBottom: 64,
+      display: !props.selected ? 'none' : 'block',
+    }}
     transition={{ duration: 0.35 }}
     {...props}
   />
