@@ -10,6 +10,7 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { walletsAtom } from '@/recoil/wallets';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import { ProfileEditButton } from '../ProfileDetailPage/components/ProfileEditButton';
@@ -29,16 +30,16 @@ const data = {
   `,
 };
 
-enum AddressProfileTab {
+enum ProfileTab {
   Links = 'Links',
   Questions = 'Questions',
   Assets = 'Assets',
 }
 
 const tabs = [
-  AddressProfileTab.Links,
-  AddressProfileTab.Questions,
-  AddressProfileTab.Assets,
+  ProfileTab.Links,
+  ...(FeatureFlags.isProfileQuestionsEnabled ? [ProfileTab.Questions] : []),
+  ProfileTab.Assets,
 ];
 
 type ProfileInstanceProps = {
@@ -58,9 +59,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
 
-  const [selectedTab, setSelectedTab] = useState<AddressProfileTab>(
-    AddressProfileTab.Links,
-  );
+  const [selectedTab, setSelectedTab] = useState<ProfileTab>(ProfileTab.Links);
 
   const wallets = useRecoilValue(walletsAtom);
   const { balances: walletBalances } = useWalletBalances({ wallets });
@@ -154,17 +153,17 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       />
       <AnimatePresence initial={false}>
         <TabContent palette={palette}>
-          {selectedTab === AddressProfileTab.Links && (
+          {selectedTab === ProfileTab.Links && (
             <AnimatedTab>
               <ProfileLinkSection items={profile.links} isEditing={isEditing} />
             </AnimatedTab>
           )}
-          {selectedTab === AddressProfileTab.Questions && (
+          {selectedTab === ProfileTab.Questions && (
             <AnimatedTab>
               <QuestionSection isEditing={isEditing} />
             </AnimatedTab>
           )}
-          {selectedTab === AddressProfileTab.Assets && (
+          {selectedTab === ProfileTab.Assets && (
             <AnimatedTab>
               <AssetSection
                 tokenBalances={tokenBalances}
