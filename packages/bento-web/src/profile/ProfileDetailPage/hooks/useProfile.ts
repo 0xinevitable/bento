@@ -6,14 +6,10 @@ import { UserProfile } from '@/profile/types/UserProfile';
 import { profileAtom } from '@/recoil/profile';
 import { Supabase } from '@/utils/Supabase';
 
-export type ProfileOptions =
-  | {
-      type: 'MY_PROFILE';
-    }
-  | {
-      type: 'USER_PROFILE';
-      username?: string;
-    };
+export type ProfileOptions = {
+  type: 'MY_PROFILE' | 'USER_PROFILE';
+  preloadedProfile?: UserProfile | null;
+};
 
 export const useProfile: (options?: ProfileOptions) => {
   profile: UserProfile | null;
@@ -26,7 +22,7 @@ export const useProfile: (options?: ProfileOptions) => {
     if (
       !session ||
       !session.user ||
-      (options?.type === 'USER_PROFILE' && !options.username)
+      (options?.type === 'USER_PROFILE' && !options?.preloadedProfile)
     ) {
       setProfile(null);
       return;
@@ -37,7 +33,7 @@ export const useProfile: (options?: ProfileOptions) => {
     if (!options || options.type === 'MY_PROFILE') {
       query = query.eq('user_id', session.user.id);
     } else {
-      query = query.eq('username', options.username);
+      query = query.eq('username', options.preloadedProfile?.username);
     }
 
     const profileQueryResult = await query;
@@ -55,5 +51,8 @@ export const useProfile: (options?: ProfileOptions) => {
     revaildateProfile();
   }, [revaildateProfile]);
 
-  return { profile, revaildateProfile };
+  return {
+    profile: profile || (options?.preloadedProfile ?? null),
+    revaildateProfile,
+  };
 };

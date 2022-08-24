@@ -167,6 +167,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
           {(isMobile ? isWalletListOpen : true) && wallets.length > 0 && (
             <WalletList
+              wallets={wallets}
               className="mt-2"
               onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
             />

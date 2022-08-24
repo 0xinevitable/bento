@@ -16,6 +16,7 @@ import { useProfile } from './hooks/useProfile';
 type Props =
   | {
       type: 'MY_PROFILE';
+      profile?: UserProfile | null;
     }
   | {
       type: 'USER_PROFILE';
@@ -65,14 +66,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 const ProfileDetailPage = (props: Props) => {
   const { session } = useSession();
 
-  const { profile, revaildateProfile } = useProfile(
-    props.type === 'MY_PROFILE'
-      ? { type: 'MY_PROFILE' }
-      : {
-          type: 'USER_PROFILE',
-          username: props.profile?.username,
-        },
-  );
+  const { profile, revaildateProfile } = useProfile({
+    type: props.type,
+    preloadedProfile: props.profile,
+  });
 
   const [title, description, images] = useMemo(() => {
     let _title: string = '';
