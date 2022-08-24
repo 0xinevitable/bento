@@ -1,5 +1,4 @@
 import dedent from 'dedent';
-import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -7,7 +6,6 @@ import { Skeleton } from '@/components/Skeleton';
 import { UserProfile } from '@/profile/types/UserProfile';
 
 import { usePalette } from '../hooks/usePalette';
-import { ProfileEditButton } from './ProfileEditButton';
 
 const data = {
   color: '#ff3856',

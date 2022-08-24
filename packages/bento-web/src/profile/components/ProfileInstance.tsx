@@ -164,9 +164,13 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       </BackgroundGradient>
       <ProfileImageBottomSpacer />
       <Information>
-        {!isEditing && (
+        {!isEditing ? (
           <ProfileEditButton onClick={onProfileEdit}>
             Edit Profile
+          </ProfileEditButton>
+        ) : (
+          <ProfileEditButton onClick={() => setEditing((prev) => !prev)}>
+            Cancel
           </ProfileEditButton>
         )}
 
@@ -259,7 +263,7 @@ const Information = styled.div`
 
 const ProfileEditButton = styled.button.attrs({
   className:
-    'w-fit p-1 px-3 text-slate-100/75 border border-slate-100/75 rounded-2xl absolute top-[-24px] right-6 hover:opacity-50 transition-all',
+    'w-fit p-1 px-3 text-slate-100/75 border-2 border-slate-100/75 rounded-2xl absolute top-[-24px] right-6 hover:opacity-50 transition-all',
 })``;
 
 const InformationSpacer = styled.div`
