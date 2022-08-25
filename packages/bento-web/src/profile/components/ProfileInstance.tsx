@@ -299,6 +299,32 @@ const TickerContainer = styled.div`
   display: flex;
   align-items: center;
   overflow: hidden;
+
+  position: relative;
+  z-index: 0;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+
+    width: 40px;
+    height: 40px;
+
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+  }
+
+  &:before {
+    left: 0;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+
+  &:after {
+    right: 0;
+  }
 `;
 
 const tickerSlide = keyframes`
