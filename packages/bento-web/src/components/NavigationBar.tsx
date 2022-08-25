@@ -42,7 +42,12 @@ const NAVIGATION_ITEMS = [
 
 export const NavigationBar = () => {
   const router = useRouter();
-  const currentPath = useMemo(() => router.route, [router]);
+  const currentPath = useMemo(() => {
+    if (router.route.startsWith('/u/')) {
+      return '/profile';
+    }
+    return router.route;
+  }, [router]);
 
   const { session } = useSession();
   const { signOut } = useSignOut();
