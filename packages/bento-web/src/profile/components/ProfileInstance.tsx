@@ -6,7 +6,7 @@ import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
@@ -191,10 +191,22 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
   return (
     <React.Fragment>
+      <TickerContainer>
+        <Tickers>
+          IDENTITY/FROM/BENTO&nbsp; IDENTITY/FROM/BENTO&nbsp;
+          IDENTITY/FROM/BENTO&nbsp; IDENTITY/FROM/BENTO&nbsp;
+          IDENTITY/FROM/BENTO&nbsp; IDENTITY/FROM/BENTO&nbsp;
+        </Tickers>
+      </TickerContainer>
       <ProfileImageContainer>
         <ProfileImage src={profileImageURL} />
 
-        {isMyProfile ? (
+        <EarlyBentoBadge
+          alt="2022 OG - Early Bento"
+          src="/assets/profile/2022-early-bento.png"
+        />
+
+        {/* {isMyProfile ? (
           !isEditing ? (
             <ProfileEditButton onClick={onProfileEdit}>
               Edit Profile
@@ -204,7 +216,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
               Cancel
             </ProfileEditButton>
           )
-        ) : null}
+        ) : null} */}
 
         <Information>
           {!isMyProfile || !isEditing ? (
@@ -279,6 +291,39 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   );
 };
 
+const TickerContainer = styled.div`
+  width: 100%;
+  height: 40px;
+  background: #000000;
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+`;
+
+const tickerSlide = keyframes`
+  to {
+    transform: translate3d(-55%, 0, 0);
+  }
+`;
+const Tickers = styled.div`
+  margin-bottom: -4px;
+
+  white-space: nowrap;
+  animation-timing-function: linear;
+  animation: ${tickerSlide} 44s infinite;
+  animation-direction: alternate;
+
+  font-family: 'Hanson';
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  text-align: center;
+  color: #eb4c5b;
+
+  user-select: none;
+`;
+
 const ProfileImageContainer = styled.div`
   width: 100%;
   padding-bottom: 100%;
@@ -306,6 +351,31 @@ const ProfileImage = styled.img`
   height: 100%;
 
   position: absolute;
+`;
+const EarlyBentoBadge = styled.img`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+
+  filter: saturate(1.25) drop-shadow(0px 8px 24px rgba(0, 0, 0, 0.6));
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+
+  @media screen and (max-width: 36rem) {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media screen and (max-width: 320px) {
+    top: 16px;
+    right: 16px;
+    width: 84px;
+    height: 84px;
+  }
 `;
 
 const Information = styled.div`
