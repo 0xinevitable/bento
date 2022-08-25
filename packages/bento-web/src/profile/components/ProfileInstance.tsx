@@ -6,7 +6,7 @@ import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
@@ -31,6 +31,7 @@ import { ProfileWalletList } from '../ProfileDetailPage/components/ProfileWallet
 import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
 import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
 import { UserProfile } from '../types/UserProfile';
+import { TickerCarousel } from './TickerCarousel';
 
 const data = {
   color: '#ff3856',
@@ -192,13 +193,8 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
   return (
     <React.Fragment>
-      <TickerContainer>
-        <Tickers>
-          IDENTITY/FROM/BENTO&nbsp; IDENTITY/FROM/BENTO&nbsp;
-          IDENTITY/FROM/BENTO&nbsp; IDENTITY/FROM/BENTO&nbsp;
-          IDENTITY/FROM/BENTO&nbsp; IDENTITY/FROM/BENTO&nbsp;
-        </Tickers>
-      </TickerContainer>
+      <TickerCarousel />
+
       <ProfileImageContainer>
         <ProfileImage src={profileImageURL} />
 
@@ -293,65 +289,6 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     </React.Fragment>
   );
 };
-
-const TickerContainer = styled.div`
-  width: 100%;
-  height: 40px;
-  background: #000000;
-
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-
-  position: relative;
-  z-index: 0;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    z-index: 1;
-
-    width: 40px;
-    height: 40px;
-
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-  }
-
-  &:before {
-    left: 0;
-    transform: matrix(-1, 0, 0, 1, 0, 0);
-  }
-
-  &:after {
-    right: 0;
-  }
-`;
-
-const tickerSlide = keyframes`
-  to {
-    transform: translate3d(-55%, 0, 0);
-  }
-`;
-const Tickers = styled.div`
-  margin-bottom: -4px;
-
-  white-space: nowrap;
-  animation-timing-function: linear;
-  animation: ${tickerSlide} 44s infinite;
-  animation-direction: alternate;
-
-  font-family: 'Hanson';
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 100%;
-  text-align: center;
-  color: #eb4c5b;
-
-  user-select: none;
-`;
 
 const ProfileImageContainer = styled.div`
   width: 100%;
