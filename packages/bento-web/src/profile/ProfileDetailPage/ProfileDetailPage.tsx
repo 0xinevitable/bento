@@ -103,7 +103,7 @@ const ProfileDetailPage = (props: Props) => {
   }, [profile]);
 
   return (
-    <PageContainer>
+    <PageContainer className="pt-0 px-0 z-10">
       <DocumentHead>
         <title>{title}</title>
         <meta key="title" name="title" content={title} />

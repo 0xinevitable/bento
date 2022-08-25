@@ -24,7 +24,6 @@ import {
   ProfileEditor,
   UserInformationDraft,
 } from '../ProfileDetailPage/components/ProfileEditor';
-import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 // import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
 import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
 // import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
@@ -192,16 +191,9 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
   return (
     <React.Fragment>
-      <BackgroundGradient style={{ background: data.background }}>
-        <ProfileImageContainer>
-          <ClickableProfileImage
-            source={profileImageURL}
-            onClick={() => setProfileImageModalVisible((value) => !value)}
-          />
-        </ProfileImageContainer>
-      </BackgroundGradient>
-      <ProfileImageBottomSpacer />
-      <Information>
+      <ProfileImageContainer>
+        <ProfileImage src={profileImageURL} />
+
         {isMyProfile ? (
           !isEditing ? (
             <ProfileEditButton onClick={onProfileEdit}>
@@ -214,17 +206,19 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           )
         ) : null}
 
-        {!isMyProfile || !isEditing ? (
-          <ProfileViewer profile={profile} />
-        ) : (
-          <ProfileEditor
-            draft={draft}
-            setDraft={setDraft}
-            onSubmit={onProfileEdit}
-          />
-        )}
-      </Information>
-      <InformationSpacer />
+        <Information>
+          {!isMyProfile || !isEditing ? (
+            <ProfileViewer profile={profile} />
+          ) : (
+            <ProfileEditor
+              draft={draft}
+              setDraft={setDraft}
+              onSubmit={onProfileEdit}
+            />
+          )}
+        </Information>
+      </ProfileImageContainer>
+
       <Modal
         visible={isProfileImageModalVisible}
         onDismiss={() => setProfileImageModalVisible((value) => !value)}
@@ -285,51 +279,62 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   );
 };
 
-const BackgroundGradient = styled.div`
-  height: 220px;
-  position: relative;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-`;
-
 const ProfileImageContainer = styled.div`
-  position: absolute;
-  bottom: -32px;
-  left: 0;
-  right: 0;
-  height: 128px;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const ProfileImageBottomSpacer = styled.div`
-  width: 100%;
-  height: 48px;
-`;
-const ClickableProfileImage = styled(ProfileImage)`
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  padding-bottom: 100%;
+  background-color: red;
+  position: relative;
+  aspect-ratio: 1;
+  z-index: 0;
 
-  &:hover {
-    transform: scale(1.1);
+  &:after {
+    content: '';
+    width: 100%;
+    height: 75%;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+    z-index: 1;
   }
+`;
+const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
 `;
 
 const Information = styled.div`
-  position: relative;
+  position: absolute;
+  left: 24px;
+  bottom: 18px;
+
   display: flex;
   flex-direction: column;
+  z-index: 2;
 `;
 
-const ProfileEditButton = styled.button.attrs({
-  className:
-    'w-fit p-1 px-3 text-slate-100/75 border-2 border-slate-100/75 rounded-2xl absolute top-[-24px] right-6 hover:opacity-50 transition-all',
-})``;
+const ProfileEditButton = styled.button`
+  padding: 4px 12px;
 
-const InformationSpacer = styled.div`
-  width: 100%;
-  height: 26px;
+  border-radius: 24px;
+  border-width: 2px;
+
+  position: absolute;
+  top: 20px;
+  right: 16px;
+
+  color: rgb(241 245 249 / 0.75);
+  border-color: rgb(241 245 249 / 0.75);
+  transition: all 0.2s ease-in-out;
+
+  :hover {
+    opacity: 0.5;
+  }
 `;
 
 const LargeProfileImage = styled.img`
