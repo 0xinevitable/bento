@@ -20,6 +20,7 @@ import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
+import { FixedFooter } from '../ProfileDetailPage/components/FixedFooter';
 import {
   ProfileEditor,
   UserInformationDraft,
@@ -287,6 +288,8 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           </AnimatedTab>
         </TabContent>
       </AnimatePresence>
+
+      {isMyProfile && <FixedFooter />}
     </React.Fragment>
   );
 };
@@ -479,7 +482,7 @@ const AnimatedTab = (props: AnimatedTabProps & HTMLMotionProps<'div'>) => (
     }
     style={{
       originY: 0,
-      paddingBottom: 64,
+      paddingBottom: 220,
       display: !props.selected ? 'none' : 'block',
     }}
     transition={{ duration: 0.35 }}
