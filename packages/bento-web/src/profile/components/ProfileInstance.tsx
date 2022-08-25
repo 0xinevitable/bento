@@ -391,7 +391,7 @@ const EarlyBentoBadge = styled.img`
   user-select: none;
   transition: all 0.2s ease-in-out;
 
-  @media screen and (max-width: 36rem) {
+  @media screen and (max-width: 32rem) {
     width: 100px;
     height: 100px;
   }
@@ -499,7 +499,7 @@ const AssetListItem = styled.li`
 
   width: calc((100% - 24px) / 3);
 
-  @media screen and (max-width: 36rem) {
+  @media screen and (max-width: 32rem) {
     width: calc((100% - 12px) / 2);
   }
 `;

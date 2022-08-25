@@ -141,7 +141,7 @@ const ProfileDetailPage = (props: Props) => {
         <meta property="twitter:url" content={url} /> */}
       </DocumentHead>
 
-      <div className="w-full max-w-xl mt-[64px] mx-auto">
+      <div className="w-full max-w-lg mt-[64px] mx-auto">
         <NoSSR>
           <ProfileInstance
             profile={profile ?? undefined}
