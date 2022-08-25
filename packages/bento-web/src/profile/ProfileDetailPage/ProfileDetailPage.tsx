@@ -103,7 +103,7 @@ const ProfileDetailPage = (props: Props) => {
   }, [profile]);
 
   return (
-    <PageContainer>
+    <PageContainer className="pt-0 px-0 z-10">
       <DocumentHead>
         <title>{title}</title>
         <meta key="title" name="title" content={title} />
@@ -141,7 +141,7 @@ const ProfileDetailPage = (props: Props) => {
         <meta property="twitter:url" content={url} /> */}
       </DocumentHead>
 
-      <div className="w-full max-w-xl mt-[64px] mx-auto">
+      <div className="w-full max-w-lg mt-[64px] mx-auto">
         <NoSSR>
           <ProfileInstance
             profile={profile ?? undefined}

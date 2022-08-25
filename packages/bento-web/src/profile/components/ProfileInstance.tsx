@@ -6,11 +6,10 @@ import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
-import { WalletList } from '@/dashboard/components/WalletList';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
@@ -20,13 +19,14 @@ import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
+import { FixedFooter } from '../ProfileDetailPage/components/FixedFooter';
 import {
   ProfileEditor,
   UserInformationDraft,
 } from '../ProfileDetailPage/components/ProfileEditor';
-import { ProfileImage } from '../ProfileDetailPage/components/ProfileImage';
 // import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
 import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
+import { ProfileWalletList } from '../ProfileDetailPage/components/ProfileWalletList';
 // import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
 import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
 import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
@@ -157,7 +157,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const profileImageURL =
     profile?.images?.[0] ?? '/assets/mockups/profile-default.png';
 
-  const [isEditing, setEditing] = useState<Boolean>(false);
+  const [isEditing, setEditing] = useState<boolean>(false);
 
   const [draft, setDraft] = useState<UserInformationDraft>({
     username: '',
@@ -192,42 +192,48 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
   return (
     <React.Fragment>
-      <BackgroundGradient style={{ background: data.background }}>
-        <ProfileImageContainer>
-          <ClickableProfileImage
-            source={profileImageURL}
-            onClick={() => setProfileImageModalVisible((value) => !value)}
-          />
-        </ProfileImageContainer>
-      </BackgroundGradient>
-      <ProfileImageBottomSpacer />
-      <Information>
-        {isMyProfile ? (
-          !isEditing ? (
-            <ProfileEditButton onClick={onProfileEdit}>
-              Edit Profile
-            </ProfileEditButton>
-          ) : (
-            <ProfileEditButton onClick={() => setEditing((prev) => !prev)}>
-              Cancel
-            </ProfileEditButton>
-          )
-        ) : null}
+      <TickerContainer>
+        <Tickers>
+          IDENTITY/FROM/BENTO&nbsp; IDENTITY/FROM/BENTO&nbsp;
+          IDENTITY/FROM/BENTO&nbsp; IDENTITY/FROM/BENTO&nbsp;
+          IDENTITY/FROM/BENTO&nbsp; IDENTITY/FROM/BENTO&nbsp;
+        </Tickers>
+      </TickerContainer>
+      <ProfileImageContainer>
+        <ProfileImage src={profileImageURL} />
 
-        {!isMyProfile || !isEditing ? (
+        <EarlyBentoBadge
+          alt="2022 OG - Early Bento"
+          src="/assets/profile/2022-early-bento.png"
+        />
+
+        {isMyProfile && !isEditing && (
+          <ProfileEditButton onClick={onProfileEdit}>
+            Edit Profile
+          </ProfileEditButton>
+        )}
+
+        <Information>
           <ProfileViewer profile={profile} />
-        ) : (
+        </Information>
+      </ProfileImageContainer>
+
+      <ProfileEditModal
+        visible={isEditing}
+        onDismiss={() => setEditing((prev) => !prev)}
+      >
+        <ProfileEditContainer>
           <ProfileEditor
             draft={draft}
             setDraft={setDraft}
             onSubmit={onProfileEdit}
           />
-        )}
-      </Information>
-      <InformationSpacer />
+        </ProfileEditContainer>
+      </ProfileEditModal>
+
       <Modal
         visible={isProfileImageModalVisible}
-        onDismiss={() => setProfileImageModalVisible((value) => !value)}
+        onDismiss={() => setProfileImageModalVisible((prev) => !prev)}
       >
         <LargeProfileImage src={profileImageURL} />
       </Modal>
@@ -252,7 +258,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           </AnimatedTab> */}
 
           <AnimatedTab selected={selectedTab === ProfileTab.Wallets}>
-            <WalletList wallets={wallets} />
+            <ProfileWalletList wallets={wallets} />
           </AnimatedTab>
           <AnimatedTab selected={selectedTab === ProfileTab.Assets}>
             <AssetSection tokenBalances={tokenBalances} isEditing={isEditing} />
@@ -281,55 +287,153 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           </AnimatedTab>
         </TabContent>
       </AnimatePresence>
+
+      {isMyProfile && <FixedFooter />}
     </React.Fragment>
   );
 };
 
-const BackgroundGradient = styled.div`
-  height: 220px;
+const TickerContainer = styled.div`
+  width: 100%;
+  height: 40px;
+  background: #000000;
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
   position: relative;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  z-index: 0;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+
+    width: 40px;
+    height: 40px;
+
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+  }
+
+  &:before {
+    left: 0;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+
+  &:after {
+    right: 0;
+  }
+`;
+
+const tickerSlide = keyframes`
+  to {
+    transform: translate3d(-55%, 0, 0);
+  }
+`;
+const Tickers = styled.div`
+  margin-bottom: -4px;
+
+  white-space: nowrap;
+  animation-timing-function: linear;
+  animation: ${tickerSlide} 44s infinite;
+  animation-direction: alternate;
+
+  font-family: 'Hanson';
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  text-align: center;
+  color: #eb4c5b;
+
+  user-select: none;
 `;
 
 const ProfileImageContainer = styled.div`
-  position: absolute;
-  bottom: -32px;
-  left: 0;
-  right: 0;
-  height: 128px;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const ProfileImageBottomSpacer = styled.div`
-  width: 100%;
-  height: 48px;
-`;
-const ClickableProfileImage = styled(ProfileImage)`
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  padding-bottom: 100%;
+  background-color: red;
+  position: relative;
+  aspect-ratio: 1;
+  z-index: 0;
 
-  &:hover {
-    transform: scale(1.1);
+  &:after {
+    content: '';
+    width: 100%;
+    height: 75%;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+    z-index: 1;
+  }
+`;
+const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+`;
+const EarlyBentoBadge = styled.img`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+
+  filter: saturate(1.25) drop-shadow(0px 8px 24px rgba(0, 0, 0, 0.6));
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+
+  @media screen and (max-width: 32rem) {
+    width: 100px;
+    height: 100px;
+  }
+
+  @media screen and (max-width: 320px) {
+    top: 16px;
+    right: 16px;
+    width: 84px;
+    height: 84px;
   }
 `;
 
 const Information = styled.div`
-  position: relative;
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 18px;
+
   display: flex;
   flex-direction: column;
+  z-index: 2;
 `;
 
-const ProfileEditButton = styled.button.attrs({
-  className:
-    'w-fit p-1 px-3 text-slate-100/75 border-2 border-slate-100/75 rounded-2xl absolute top-[-24px] right-6 hover:opacity-50 transition-all',
-})``;
+const ProfileEditButton = styled.button`
+  padding: 4px 12px;
 
-const InformationSpacer = styled.div`
-  width: 100%;
-  height: 26px;
+  border-radius: 24px;
+  border-width: 2px;
+
+  position: absolute;
+  top: 20px;
+  left: 16px;
+
+  color: rgb(241 245 249 / 0.75);
+  border-color: rgb(241 245 249 / 0.75);
+  transition: all 0.2s ease-in-out;
+
+  :hover {
+    opacity: 0.5;
+  }
 `;
 
 const LargeProfileImage = styled.img`
@@ -378,7 +482,7 @@ const AnimatedTab = (props: AnimatedTabProps & HTMLMotionProps<'div'>) => (
     }
     style={{
       originY: 0,
-      paddingBottom: 64,
+      paddingBottom: 220,
       display: !props.selected ? 'none' : 'block',
     }}
     transition={{ duration: 0.35 }}
@@ -398,7 +502,7 @@ const AssetListItem = styled.li`
 
   width: calc((100% - 24px) / 3);
 
-  @media screen and (max-width: 36rem) {
+  @media screen and (max-width: 32rem) {
     width: calc((100% - 12px) / 2);
   }
 `;
@@ -408,4 +512,25 @@ const AssetName = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+const ProfileEditModal = styled(Modal)`
+  .modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+const ProfileEditContainer = styled.div`
+  padding: 32px 16px;
+  width: 80vw;
+  max-width: ${500 * 0.8}px;
+
+  border-radius: 8px;
+  background-color: rgba(38, 43, 52, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  user-select: none;
 `;

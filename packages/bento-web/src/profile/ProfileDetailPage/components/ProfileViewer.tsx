@@ -30,7 +30,7 @@ export const ProfileViewer: React.FC<Props> = ({ profile }) => {
   }, [profile]);
 
   return (
-    <>
+    <Column>
       {typeof displayName === 'string' ? (
         displayName.length > 0 ? (
           <DisplayName>{displayName}</DisplayName>
@@ -38,9 +38,8 @@ export const ProfileViewer: React.FC<Props> = ({ profile }) => {
       ) : (
         <DefaultSkeleton
           style={{
-            height: '34px',
-            width: '120px',
-            marginBottom: '10px',
+            height: '32px',
+            width: '160px',
           }}
         />
       )}
@@ -51,9 +50,8 @@ export const ProfileViewer: React.FC<Props> = ({ profile }) => {
       ) : (
         <DefaultSkeleton
           style={{
-            height: '19px',
+            height: '21.6px',
             width: '80px',
-            marginBottom: '10px',
           }}
         />
       )}
@@ -64,41 +62,45 @@ export const ProfileViewer: React.FC<Props> = ({ profile }) => {
       ) : (
         <DefaultSkeleton
           style={{
-            height: '22px',
+            height: '19.2px',
             width: '200px',
           }}
         />
       )}
-    </>
+    </Column>
   );
 };
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
 
 const DisplayName = styled.h1`
   margin: 0;
   font-weight: 900;
-  font-size: 28px;
-  line-height: 34px;
-  text-align: center;
+  font-size: 32px;
+  line-height: 100%;
   color: #ffffff;
 `;
 
 const DefaultSkeleton = styled(Skeleton)`
   border-radius: 6px;
-  align-self: center;
 `;
 
-const Username = styled.p`
-  margin: 4px 0 0;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: center;
+const Username = styled.span`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 120%;
 `;
 
 const Bio = styled.p`
-  margin: 16px 0 0;
-  font-size: 18px;
-  line-height: 22px;
-  text-align: center;
+  margin: 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+
   color: rgba(255, 255, 255, 0.8);
   white-space: break-spaces;
 `;

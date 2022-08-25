@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
 import { FieldInput } from '@/profile/components/FieldInput';
+import { FieldTextArea } from '@/profile/components/FieldTextArea';
 
 export type UserInformationDraft = {
   username: string;
@@ -37,11 +38,12 @@ export const ProfileEditor: React.FC<Props> = ({
         defaultValue={draft.username}
         onChange={(e) => setDraft((v) => ({ ...v, username: e.target.value }))}
       />
-      <FieldInput
+      <FieldTextArea
         field="Description"
         placeholder="e.g., 19 y.o. Builder from Seoul"
         defaultValue={draft.bio}
         onChange={(e) => setDraft((v) => ({ ...v, bio: e.target.value }))}
+        rows={5}
       />
       <SaveButton onClick={onSubmit}>Save</SaveButton>
     </Container>
