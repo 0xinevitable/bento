@@ -10,7 +10,6 @@ import styled, { css, keyframes } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
-import { WalletList } from '@/dashboard/components/WalletList';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
@@ -27,6 +26,7 @@ import {
 } from '../ProfileDetailPage/components/ProfileEditor';
 // import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
 import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
+import { ProfileWalletList } from '../ProfileDetailPage/components/ProfileWalletList';
 // import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
 import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
 import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
@@ -259,7 +259,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           </AnimatedTab> */}
 
           <AnimatedTab selected={selectedTab === ProfileTab.Wallets}>
-            <WalletList wallets={wallets} />
+            <ProfileWalletList wallets={wallets} />
           </AnimatedTab>
           <AnimatedTab selected={selectedTab === ProfileTab.Assets}>
             <AssetSection tokenBalances={tokenBalances} isEditing={isEditing} />
