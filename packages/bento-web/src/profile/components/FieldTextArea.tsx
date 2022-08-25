@@ -28,9 +28,9 @@ type ContainerProps = {
   focused: boolean;
 };
 const Container = styled.div<ContainerProps>`
+  width: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 32px;
   transition: border-color 0.2s ease-in-out;
 
   ${({ focused }) =>

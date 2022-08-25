@@ -157,7 +157,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const profileImageURL =
     profile?.images?.[0] ?? '/assets/mockups/profile-default.png';
 
-  const [isEditing, setEditing] = useState<Boolean>(false);
+  const [isEditing, setEditing] = useState<boolean>(false);
 
   const [draft, setDraft] = useState<UserInformationDraft>({
     username: '',
@@ -207,34 +207,33 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           src="/assets/profile/2022-early-bento.png"
         />
 
-        {/* {isMyProfile ? (
-          !isEditing ? (
-            <ProfileEditButton onClick={onProfileEdit}>
-              Edit Profile
-            </ProfileEditButton>
-          ) : (
-            <ProfileEditButton onClick={() => setEditing((prev) => !prev)}>
-              Cancel
-            </ProfileEditButton>
-          )
-        ) : null} */}
+        {isMyProfile && !isEditing && (
+          <ProfileEditButton onClick={onProfileEdit}>
+            Edit Profile
+          </ProfileEditButton>
+        )}
 
         <Information>
-          {!isMyProfile || !isEditing ? (
-            <ProfileViewer profile={profile} />
-          ) : (
-            <ProfileEditor
-              draft={draft}
-              setDraft={setDraft}
-              onSubmit={onProfileEdit}
-            />
-          )}
+          <ProfileViewer profile={profile} />
         </Information>
       </ProfileImageContainer>
 
+      <ProfileEditModal
+        visible={isEditing}
+        onDismiss={() => setEditing((prev) => !prev)}
+      >
+        <ProfileEditContainer>
+          <ProfileEditor
+            draft={draft}
+            setDraft={setDraft}
+            onSubmit={onProfileEdit}
+          />
+        </ProfileEditContainer>
+      </ProfileEditModal>
+
       <Modal
         visible={isProfileImageModalVisible}
-        onDismiss={() => setProfileImageModalVisible((value) => !value)}
+        onDismiss={() => setProfileImageModalVisible((prev) => !prev)}
       >
         <LargeProfileImage src={profileImageURL} />
       </Modal>
@@ -410,6 +409,7 @@ const EarlyBentoBadge = styled.img`
 const Information = styled.div`
   position: absolute;
   left: 24px;
+  right: 24px;
   bottom: 18px;
 
   display: flex;
@@ -425,7 +425,7 @@ const ProfileEditButton = styled.button`
 
   position: absolute;
   top: 20px;
-  right: 16px;
+  left: 16px;
 
   color: rgb(241 245 249 / 0.75);
   border-color: rgb(241 245 249 / 0.75);
@@ -512,4 +512,25 @@ const AssetName = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+const ProfileEditModal = styled(Modal)`
+  .modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+const ProfileEditContainer = styled.div`
+  padding: 32px 16px;
+  width: 80vw;
+  max-width: ${500 * 0.8}px;
+
+  border-radius: 8px;
+  background-color: rgba(38, 43, 52, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  user-select: none;
 `;
