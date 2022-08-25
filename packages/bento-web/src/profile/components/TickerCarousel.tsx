@@ -57,8 +57,6 @@ const tickerSlide = keyframes`
   }
 `;
 const Tickers = styled.div`
-  margin-bottom: -4px;
-
   display: flex;
   gap: 24px;
 
