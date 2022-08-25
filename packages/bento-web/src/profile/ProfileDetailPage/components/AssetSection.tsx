@@ -7,10 +7,9 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 type Props = {
   tokenBalances: DashboardTokenBalance[];
-  isEditing: Boolean;
 };
 
-export const AssetSection: React.FC<Props> = ({ tokenBalances, isEditing }) => {
+export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
   return (
     <ul>
       {!!tokenBalances ? (

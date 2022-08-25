@@ -251,19 +251,18 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
           {/* <AnimatedTab selected={selectedTab === ProfileTab.Links}>
             <ProfileLinkSection
               items={profile?.links ?? null}
-              isEditing={isEditing}
             />
           </AnimatedTab> */}
 
           {/* <AnimatedTab selected={selectedTab === ProfileTab.Questions}>
-            <QuestionSection isEditing={isEditing} />
+            <QuestionSection />
           </AnimatedTab> */}
 
           <AnimatedTab selected={selectedTab === ProfileTab.Wallets}>
             <ProfileWalletList wallets={wallets} />
           </AnimatedTab>
           <AnimatedTab selected={selectedTab === ProfileTab.Assets}>
-            <AssetSection tokenBalances={tokenBalances} isEditing={isEditing} />
+            <AssetSection tokenBalances={tokenBalances} />
           </AnimatedTab>
           <AnimatedTab selected={selectedTab === ProfileTab.NFTs}>
             <AssetList>
