@@ -42,7 +42,7 @@ const NAVIGATION_ITEMS = [
 
 export const NavigationBar = () => {
   const router = useRouter();
-  const currentPath = useMemo(() => router.asPath, [router]);
+  const currentPath = useMemo(() => router.route, [router]);
 
   const { session } = useSession();
   const { signOut } = useSignOut();
