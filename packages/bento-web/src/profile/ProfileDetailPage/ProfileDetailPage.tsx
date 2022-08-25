@@ -102,6 +102,8 @@ const ProfileDetailPage = (props: Props) => {
     return [_title, _description, _images];
   }, [profile]);
 
+  const isLoginRequired = !session && props.type === 'MY_PROFILE';
+
   return (
     <PageContainer className="pt-0 px-0 z-10">
       <DocumentHead>
@@ -141,20 +143,19 @@ const ProfileDetailPage = (props: Props) => {
         <meta property="twitter:url" content={url} /> */}
       </DocumentHead>
 
-      <div className="w-full max-w-lg mt-[64px] mx-auto">
-        <NoSSR>
-          <ProfileInstance
-            profile={profile ?? undefined}
-            revaildateProfile={revaildateProfile}
-            isMyProfile={props.type === 'MY_PROFILE'}
-          />
-        </NoSSR>
-      </div>
+      {!isLoginRequired && (
+        <div className="w-full max-w-lg mt-[64px] mx-auto">
+          <NoSSR>
+            <ProfileInstance
+              profile={profile ?? undefined}
+              revaildateProfile={revaildateProfile}
+              isMyProfile={props.type === 'MY_PROFILE'}
+            />
+          </NoSSR>
+        </div>
+      )}
 
-      <FixedLoginNudge
-        visible={!session && props.type === 'MY_PROFILE'}
-        redirectTo="current"
-      />
+      <FixedLoginNudge visible={isLoginRequired} redirectTo="current" />
     </PageContainer>
   );
 };
