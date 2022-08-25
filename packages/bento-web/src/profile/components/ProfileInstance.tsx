@@ -202,10 +202,12 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       <ProfileImageContainer>
         <ProfileImage src={profileImageURL} />
 
-        <EarlyBentoBadge
-          alt="2022 OG - Early Bento"
-          src="/assets/profile/2022-early-bento.png"
-        />
+        {!!profile && (
+          <EarlyBentoBadge
+            alt="2022 OG - Early Bento"
+            src="/assets/profile/2022-early-bento.png"
+          />
+        )}
 
         {isMyProfile && !isEditing && (
           <ProfileEditButton onClick={onProfileEdit}>
@@ -379,6 +381,7 @@ const ProfileImage = styled.img`
   height: 100%;
 
   position: absolute;
+  background-color: black;
 `;
 const EarlyBentoBadge = styled.img`
   position: absolute;
