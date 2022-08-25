@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Badge } from '@/components/Badge';
 import { Skeleton } from '@/components/Skeleton';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 type Props = {
   tokenBalances: DashboardTokenBalance[];
-  isEditing: Boolean;
 };
 
-export const AssetSection: React.FC<Props> = ({ tokenBalances, isEditing }) => {
+export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
   return (
     <ul>
       {!!tokenBalances ? (
@@ -18,13 +18,17 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances, isEditing }) => {
             <Container key={`${item.symbol}-${item.tokenAddress ?? 'native'}`}>
               <Logo src={item.logo} />
               <Information>
-                <Title>{item.name}</Title>
-                <Description>
-                  <span>{`$${item.netWorth.toLocaleString()}`}</span>
-                  <span className="ml-2 text-white/60">
-                    {`${item.amount.toLocaleString()} ${item.symbol}`}
-                  </span>
-                </Description>
+                <Row>
+                  <Title>{item.name}</Title>
+                  <NetWorth>{`$${item.netWorth.toLocaleString()}`}</NetWorth>
+                </Row>
+                <Row>
+                  <InlineBadge>{`$${item.price.toLocaleString()}`}</InlineBadge>
+                  <TokenAmount>
+                    {`${item.amount.toLocaleString()}`}
+                    <span className="symbol">{` ${item.symbol}`}</span>
+                  </TokenAmount>
+                </Row>
               </Information>
             </Container>
           );
@@ -44,23 +48,35 @@ const Container = styled.li`
   margin-top: 8px;
   display: flex;
   padding: 12px;
-  background-color: #262b34;
   border-radius: 8px;
+
+  background: #16181a;
+  background: linear-gradient(145deg, #141617, #181a1c);
+  border: 1px solid #2a2e31;
 `;
 
 const Logo = styled.img`
-  width: 64px;
-  height: 64px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.28);
 `;
 
 const Information = styled.div`
   flex: 1;
-  margin-left: 16px;
+  margin-left: 8px;
+  z-index: 9;
+  width: calc(100% - 30px - 8px);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  z-index: 9;
+  gap: 4px;
+`;
+const Row = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Title = styled.h3`
@@ -70,16 +86,40 @@ const Title = styled.h3`
   line-height: 1.2;
   letter-spacing: -0.3px;
   color: white;
-  word-break: keep-all;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+const InlineBadge = styled(Badge)`
+  padding: 4px;
+  padding-bottom: 3px;
+  display: inline-flex;
+  font-size: 12px;
+  backdrop-filter: none;
 `;
 
-const Description = styled.p`
-  margin: 0;
-  margin-top: 4px;
+const NetWorth = styled.span`
+  margin-left: 4px;
+
   font-size: 15px;
   line-height: 1.2;
   letter-spacing: -0.5px;
   color: rgba(255, 255, 255, 0.8);
+`;
+const TokenAmount = styled.span`
+  margin-left: 4px;
+
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: rgba(255, 255, 255, 0.45);
+
+  @media screen and (max-width: 400px) {
+    span.symbol {
+      display: none;
+    }
+  }
 `;
 
 const AssetSkeleton = styled(Skeleton)`

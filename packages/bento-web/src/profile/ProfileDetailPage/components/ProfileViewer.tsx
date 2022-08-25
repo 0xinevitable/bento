@@ -10,8 +10,8 @@ import { usePalette } from '../hooks/usePalette';
 const data = {
   color: '#ff3856',
   background: dedent`
-      linear-gradient(to right bottom, #E35252 0%, #DB6E57 29.47%, #C22E3A 65.1%)
-    `,
+    linear-gradient(to right bottom, #E35252 0%, #DB6E57 29.47%, #C22E3A 65.1%)
+  `,
 };
 
 type Props = {
@@ -60,12 +60,7 @@ export const ProfileViewer: React.FC<Props> = ({ profile }) => {
           <Bio>{profile.bio}</Bio>
         ) : null
       ) : (
-        <DefaultSkeleton
-          style={{
-            height: '19.2px',
-            width: '200px',
-          }}
-        />
+        <BioSkeleton />
       )}
     </Column>
   );
@@ -103,4 +98,18 @@ const Bio = styled.p`
 
   color: rgba(255, 255, 255, 0.8);
   white-space: break-spaces;
+
+  @media screen and (max-width: 32rem) {
+    margin-top: 4px;
+    font-size: 14px;
+  }
+`;
+const BioSkeleton = styled(DefaultSkeleton)`
+  height: 19.2px;
+  width: 200px;
+
+  @media screen and (max-width: 32rem) {
+    margin-top: 4px;
+    height: ${14 * 1.2}px;
+  }
 `;
