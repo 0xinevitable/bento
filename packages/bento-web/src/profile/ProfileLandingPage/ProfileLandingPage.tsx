@@ -87,9 +87,11 @@ const IllustContainer = styled.div`
 const EarlyBentoBadgeShadow = styled.div`
   width: 248px;
   height: 248px;
+  border-radius: 50%;
 
   display: flex;
-  filter: saturate(1.25) drop-shadow(0px 8px 24px rgba(0, 0, 0, 0.55));
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.55);
+  filter: saturate(1.25);
 `;
 const EarlyBentoBadge = styled(Image)`
   border-radius: 50%;
