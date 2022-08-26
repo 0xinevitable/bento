@@ -217,6 +217,7 @@ const StarSticker = styled(Image).attrs({
 const UniswapBadgeContainer = styled.div`
   width: 125px;
   height: 125px;
+  border-radius: 50%;
 
   position: absolute;
   top: 22.5px;
@@ -224,7 +225,8 @@ const UniswapBadgeContainer = styled.div`
   transform: rotate(-20deg);
 
   display: flex;
-  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.55));
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.55);
+  filter: saturate(120%);
 `;
 const UniswapBadge = styled(Image).attrs({
   src: '/assets/profile/badge-uniswap.png',
@@ -235,13 +237,15 @@ const UniswapBadge = styled(Image).attrs({
 const OsmosisBadgeContainer = styled.div`
   width: 98px;
   height: 98px;
+  border-radius: 50%;
 
   position: absolute;
   top: ${22.5 + 44.5}px;
   right: ${-61 - 98}px;
 
   display: flex;
-  filter: drop-shadow(0px 3px 9px rgba(0, 0, 0, 0.55));
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.55);
+  filter: saturate(120%);
 `;
 const OsmosisBadge = styled(Image).attrs({
   src: '/assets/profile/badge-osmosis.png',
