@@ -83,6 +83,10 @@ const IllustContainer = styled.div`
   height: 248px;
   width: 248px;
   position: relative;
+
+  * {
+    user-select: none;
+  }
 `;
 const EarlyBentoBadgeShadow = styled.div`
   width: 248px;
