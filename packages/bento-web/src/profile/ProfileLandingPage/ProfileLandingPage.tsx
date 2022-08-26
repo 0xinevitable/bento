@@ -11,45 +11,7 @@ export default function ProfileLandingPage() {
     <>
       <StyledTickerCarousel className="mt-[64px]" />
       <StyledPageContainer className="pt-0 z-10">
-        <IllustContainer>
-          <EarlyBentoBadgeShadow>
-            <EarlyBentoBadge
-              alt="2022 OG - Early Bento"
-              src="/assets/profile/2022-early-bento.png"
-              width={248 * 2}
-              height={248 * 2}
-              quality={100}
-            />
-          </EarlyBentoBadgeShadow>
-
-          <UniswapBadgeContainer>
-            <UniswapBadge />
-          </UniswapBadgeContainer>
-          <OsmosisBadgeContainer>
-            <OsmosisBadge />
-          </OsmosisBadgeContainer>
-
-          <S1IllustContainer>
-            <S1Illust />
-          </S1IllustContainer>
-
-          <RightStickerWrapper>
-            <RightStickerContainer>
-              <DefineYourselfStickerContainer>
-                <DefineYourselfSticker />
-              </DefineYourselfStickerContainer>
-              <BuidlStickerTopContainer>
-                <BuidlStickerTop />
-              </BuidlStickerTopContainer>
-              <BuidlStickerBottomContainer>
-                <BuidlStickerBottom />
-              </BuidlStickerBottomContainer>
-              <StarStickerContainer>
-                <StarSticker />
-              </StarStickerContainer>
-            </RightStickerContainer>
-          </RightStickerWrapper>
-        </IllustContainer>
+        <Illust />
 
         <Title>
           <span>Web3 Profiles</span>
@@ -76,6 +38,48 @@ const StyledPageContainer = styled(PageContainer)`
     align-items: center;
   }
 `;
+
+const Illust: React.FC = () => (
+  <IllustContainer>
+    <EarlyBentoBadgeShadow>
+      <EarlyBentoBadge
+        alt="2022 OG - Early Bento"
+        src="/assets/profile/2022-early-bento.png"
+        width={248 * 2}
+        height={248 * 2}
+        quality={100}
+      />
+    </EarlyBentoBadgeShadow>
+
+    <UniswapBadgeContainer>
+      <UniswapBadge />
+    </UniswapBadgeContainer>
+    <OsmosisBadgeContainer>
+      <OsmosisBadge />
+    </OsmosisBadgeContainer>
+
+    <S1IllustContainer>
+      <S1Illust />
+    </S1IllustContainer>
+
+    <RightStickerWrapper>
+      <RightStickerContainer>
+        <DefineYourselfStickerContainer>
+          <DefineYourselfSticker />
+        </DefineYourselfStickerContainer>
+        <BuidlStickerTopContainer>
+          <BuidlStickerTop />
+        </BuidlStickerTopContainer>
+        <BuidlStickerBottomContainer>
+          <BuidlStickerBottom />
+        </BuidlStickerBottomContainer>
+        <StarStickerContainer>
+          <StarSticker />
+        </StarStickerContainer>
+      </RightStickerContainer>
+    </RightStickerWrapper>
+  </IllustContainer>
+);
 
 const IllustContainer = styled.div`
   margin-top: 164px;
