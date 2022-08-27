@@ -19,6 +19,7 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({
 }) => {
   const onClickLogin = useCallback(
     async (provider: 'twitter' | 'github') => {
+      console.log({ redirectTo });
       const { user, session, error } = await Supabase.auth.signIn(
         { provider },
         {
@@ -27,7 +28,7 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({
               ? window.location.href
               : redirectTo === 'home'
               ? `${window.location.origin}/home`
-              : redirectTo,
+              : `${window.location.origin}/${redirectTo}`,
         },
       );
       console.log({ user, session, error });

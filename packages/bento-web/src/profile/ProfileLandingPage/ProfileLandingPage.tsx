@@ -1,12 +1,37 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
+import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
+import { useSession } from '@/hooks/useSession';
 
+import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
+import { FixedLoginNudge } from '../components/LoginNudge';
 import { TickerCarousel } from '../components/TickerCarousel';
 
 export default function ProfileLandingPage() {
+  const router = useRouter();
+  const { session } = useSession();
+  const { profile } = useProfile({ type: 'MY_PROFILE' });
+  const [isLoginRequired, setLoginRequired] = useState<boolean>(false);
+
+  const hasUsername = !!profile?.username;
+
+  const onClickCreateProfile = useCallback(() => {
+    if (!session) {
+      setLoginRequired(true);
+      return;
+    }
+    if (hasUsername) {
+      router.push(`/u/${profile.username}`);
+    } else {
+      // setup user information
+    }
+  }, [session, profile, hasUsername]);
+
   return (
     <>
       <StyledTickerCarousel className="mt-[64px]" />
@@ -20,9 +45,15 @@ export default function ProfileLandingPage() {
         </Title>
 
         <ButtonContainer>
-          <CTAButton>Create Your Profile</CTAButton>
-          <CTABadge>Less than a minute</CTABadge>
+          <NoSSR>
+            <CTAButton onClick={onClickCreateProfile}>
+              {hasUsername ? 'Go to your profile' : 'Create Your Profile'}
+            </CTAButton>
+            {!hasUsername && <CTABadge>Less than a minute</CTABadge>}
+          </NoSSR>
         </ButtonContainer>
+
+        <FixedLoginNudge visible={isLoginRequired} redirectTo="/profile" />
       </StyledPageContainer>
     </>
   );

@@ -1,14 +1,13 @@
 import { GetServerSideProps } from 'next';
 import DocumentHead from 'next/head';
-import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useMemo } from 'react';
 
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
-import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 
-import { FixedLoginNudge } from '../components/LoginNudge';
 import { ProfileInstance } from '../components/ProfileInstance';
 import { UserProfile } from '../types/UserProfile';
 import { useProfile } from './hooks/useProfile';
@@ -35,18 +34,41 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   );
 
   const username = context.query.username as string | undefined;
-  if (!username) {
-    return { props: { type: 'MY_PROFILE' } };
+
+  // Anonymous user in `/profile` -> redirect to `/landing`
+  // FIXME: 토큰 설정 직후 redirect 에는 여기서 계속 걸리는듯...
+  if (!username && !userFromCookie) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/profile/landing',
+      },
+    };
   }
 
   let profile: UserProfile | null = null;
-  const profileQuery = await Supabase.from('profile')
-    .select('*')
-    .eq('username', username);
-  const profiles: UserProfile[] = profileQuery.data ?? [];
-
+  let query = Supabase.from('profile').select('*');
+  if (!!username) {
+    query = query.eq('username', username);
+  } else if (!!userFromCookie) {
+    query = query.eq('user_id', userFromCookie.id);
+  }
+  const profiles: UserProfile[] = (await query).data ?? [];
   if (profiles.length > 0) {
     profile = profiles[0];
+  }
+
+  if (!username) {
+    // Visiters or user without profile trying to view 'my profile' -> redirect to `/landing`
+    if (!profile?.username) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/profile/landing',
+        },
+      };
+    }
+    return { props: { type: 'MY_PROFILE' } };
   }
 
   if (!!profile) {
@@ -64,8 +86,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 };
 
 const ProfileDetailPage = (props: Props) => {
-  const { session } = useSession();
-
   const { profile, revaildateProfile } = useProfile({
     type: props.type,
     preloadedProfile: props.profile,
@@ -102,7 +122,16 @@ const ProfileDetailPage = (props: Props) => {
     return [_title, _description, _images];
   }, [profile]);
 
-  const isLoginRequired = !session && props.type === 'MY_PROFILE';
+  const router = useRouter();
+  useEffect(() => {
+    Supabase.auth.onAuthStateChange((event, _session) => {
+      if (event === 'SIGNED_OUT') {
+        setTimeout(() => {
+          router.push('/profile');
+        });
+      }
+    });
+  }, []);
 
   return (
     <PageContainer className="pt-0 px-0 z-10">
@@ -143,19 +172,15 @@ const ProfileDetailPage = (props: Props) => {
         <meta property="twitter:url" content={url} /> */}
       </DocumentHead>
 
-      {!isLoginRequired && (
-        <div className="w-full max-w-lg mt-[64px] mx-auto">
-          <NoSSR>
-            <ProfileInstance
-              profile={profile ?? undefined}
-              revaildateProfile={revaildateProfile}
-              isMyProfile={props.type === 'MY_PROFILE'}
-            />
-          </NoSSR>
-        </div>
-      )}
-
-      <FixedLoginNudge visible={isLoginRequired} redirectTo="current" />
+      <div className="w-full max-w-lg mt-[64px] mx-auto">
+        <NoSSR>
+          <ProfileInstance
+            profile={profile ?? undefined}
+            revaildateProfile={revaildateProfile}
+            isMyProfile={props.type === 'MY_PROFILE'}
+          />
+        </NoSSR>
+      </div>
     </PageContainer>
   );
 };
