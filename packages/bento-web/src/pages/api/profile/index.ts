@@ -20,6 +20,9 @@ const getKoreanTimestring = (timestamp: string) => {
   return format(new Date(utc + KR_TIME_DIFF), 'yyyy-MM-dd HH:mm:ss');
 };
 
+const capitalize = (value: string) =>
+  value.charAt(0).toUpperCase() + value.slice(1);
+
 const notifySlack = async (user: User, profile: UserProfile) => {
   if (!Config.SLACK_NEW_PROFILE_WEBHOOK) {
     // disabled
@@ -28,7 +31,7 @@ const notifySlack = async (user: User, profile: UserProfile) => {
   const provider = user.app_metadata.provider;
   await axios
     .post(Config.SLACK_NEW_PROFILE_WEBHOOK, {
-      provider: (provider || 'None')?.toUpperCase(),
+      provider: capitalize(provider || 'none'),
       social_url: !provider
         ? 'No social link available'
         : provider === 'twitter'
