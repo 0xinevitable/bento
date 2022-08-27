@@ -10,24 +10,28 @@ type Props = {
 export const NFTSection: React.FC<Props> = ({ nftAssets }) => {
   return (
     <AssetList>
-      {nftAssets.map((asset) => {
-        const isVideo =
-          !!asset.animation_url ||
-          asset.image_url.toLowerCase().endsWith('.mp4');
+      {nftAssets.length > 0 ? (
+        nftAssets.map((asset) => {
+          const isVideo =
+            !!asset.animation_url ||
+            asset.image_url.toLowerCase().endsWith('.mp4');
 
-        return (
-          <AssetListItem key={asset.id}>
-            <AssetMedia
-              src={!isVideo ? asset.image_url : asset.animation_url}
-              poster={asset.image_url || asset.image_preview_url}
-              isVideo={isVideo}
-            />
-            <AssetName className="text-sm text-gray-400">
-              {asset.name || `#${asset.id}`}
-            </AssetName>
-          </AssetListItem>
-        );
-      })}
+          return (
+            <AssetListItem key={asset.id}>
+              <AssetMedia
+                src={!isVideo ? asset.image_url : asset.animation_url}
+                poster={asset.image_url || asset.image_preview_url}
+                isVideo={isVideo}
+              />
+              <AssetName className="text-sm text-gray-400">
+                {asset.name || `#${asset.id}`}
+              </AssetName>
+            </AssetListItem>
+          );
+        })
+      ) : (
+        <Empty>No NFTs Found</Empty>
+      )}
     </AssetList>
   );
 };
@@ -54,4 +58,11 @@ const AssetName = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+const Empty = styled.span`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: white;
 `;
