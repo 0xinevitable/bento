@@ -33,6 +33,8 @@ import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
 import { UserProfile } from '../types/UserProfile';
 import { TickerCarousel } from './TickerCarousel';
 
+const MINIMAL_NET_WORTH = 0.0001;
+
 const data = {
   color: '#ff3856',
   background: dedent`
@@ -142,7 +144,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       .flat();
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
-    return tokens.filter((v) => v.netWorth > 0);
+    return tokens.filter((v) => v.netWorth > MINIMAL_NET_WORTH);
   }, [walletBalances]);
 
   const nftAssets = useMemo<OpenSeaAsset[]>(
