@@ -126,12 +126,14 @@ const ProfileDetailPage = (props: Props) => {
   useEffect(() => {
     Supabase.auth.onAuthStateChange((event, _session) => {
       if (event === 'SIGNED_OUT') {
-        setTimeout(() => {
+        if (router.pathname !== '/u/[username]') {
+          // my profile
+          // NOTE: stay in same context but to reload session-based memos
           router.push('/profile');
-        });
+        }
       }
     });
-  }, []);
+  }, [router]);
 
   return (
     <PageContainer className="pt-0 px-0 z-10">
