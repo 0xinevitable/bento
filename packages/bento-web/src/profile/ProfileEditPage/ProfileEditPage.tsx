@@ -21,7 +21,7 @@ const emptyProfileLink: ProfileLink = {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  if (!FeatureFlags.isProfileEnabled) {
+  if (!FeatureFlags.isProfileDetailedEditorEnabled) {
     return { notFound: true };
   }
   return { props: {} };
