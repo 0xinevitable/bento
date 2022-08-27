@@ -1,24 +1,66 @@
+import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
+import { Modal } from '@/components/Modal';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
 
+import {
+  ProfileEditor,
+  UserInformationDraft,
+} from '../ProfileDetailPage/components/ProfileEditor';
 import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
 import { FixedLoginNudge } from '../components/LoginNudge';
 import { TickerCarousel } from '../components/TickerCarousel';
+import { UserProfile } from '../types/UserProfile';
 
 export default function ProfileLandingPage() {
   const router = useRouter();
   const { session } = useSession();
-  const { profile } = useProfile({ type: 'MY_PROFILE' });
+  const { profile, revaildateProfile } = useProfile({ type: 'MY_PROFILE' });
   const [isLoginRequired, setLoginRequired] = useState<boolean>(false);
 
   const hasUsername = !!profile?.username;
+  const [isEditing, setEditing] = useState<boolean>(false);
+  const [draft, setDraft] = useState<UserInformationDraft>({
+    username: '',
+    displayName: '',
+    bio: '',
+  });
+  const onProfileEdit = useCallback(async () => {
+    if (!isEditing) {
+      setDraft({
+        username: profile?.username ?? '',
+        displayName: profile?.display_name ?? '',
+        bio: profile?.bio ?? '',
+      });
+      setTimeout(() => {
+        setEditing(true);
+      });
+      return;
+    }
+
+    try {
+      const { data } = await axios.post(`/api/profile`, {
+        username: draft.username,
+        display_name: draft.displayName,
+        bio: draft.bio,
+      });
+      console.log(data);
+
+      const [createdProfile] = data.body as UserProfile[];
+
+      setEditing(false);
+      revaildateProfile?.();
+
+      router.push(`/u/${createdProfile.username}`);
+    } catch (e) {}
+  }, [profile, isEditing, draft]);
 
   const onClickCreateProfile = useCallback(() => {
     if (!session) {
@@ -29,6 +71,7 @@ export default function ProfileLandingPage() {
       router.push(`/u/${profile.username}`);
     } else {
       // setup user information
+      setEditing(true);
     }
   }, [session, profile, hasUsername]);
 
@@ -52,6 +95,19 @@ export default function ProfileLandingPage() {
             {!hasUsername && <CTABadge>Less than a minute</CTABadge>}
           </NoSSR>
         </ButtonContainer>
+
+        <ProfileEditModal
+          visible={isEditing}
+          onDismiss={() => setEditing((prev) => !prev)}
+        >
+          <ProfileEditContainer>
+            <ProfileEditor
+              draft={draft}
+              setDraft={setDraft}
+              onSubmit={onProfileEdit}
+            />
+          </ProfileEditContainer>
+        </ProfileEditModal>
 
         <FixedLoginNudge visible={isLoginRequired} redirectTo="/profile" />
       </StyledPageContainer>
@@ -400,4 +456,29 @@ const CTABadge = styled.span`
   letter-spacing: -0.5px;
 
   color: #ff214a;
+`;
+
+const ProfileEditModal = styled(Modal)`
+  .modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+const ProfileEditContainer = styled.div`
+  padding: 32px 16px;
+
+  width: 80vw;
+  max-width: ${500 * 0.8}px;
+
+  max-height: calc(100vh - 64px - 84px);
+  overflow: scroll;
+
+  border-radius: 8px;
+  background-color: rgba(38, 43, 52, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+  user-select: none;
 `;

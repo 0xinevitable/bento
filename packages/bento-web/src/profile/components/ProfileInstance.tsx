@@ -191,8 +191,6 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     } catch (e) {}
   }, [profile, isEditing, draft]);
 
-  console.log({ isMyProfile });
-
   return (
     <React.Fragment>
       <TickerCarousel />
