@@ -11,14 +11,14 @@ export const NFTSection: React.FC<Props> = ({ nftAssets }) => {
   return (
     <AssetList>
       {nftAssets.length > 0 ? (
-        nftAssets.map((asset) => {
+        nftAssets.map((asset, index) => {
           const isVideo =
             !!asset.animation_url ||
             asset.image_url?.toLowerCase()?.endsWith('.mp4') ||
             false;
 
           return (
-            <AssetListItem key={asset.id}>
+            <AssetListItem key={`${asset.id}-${index}`}>
               <AssetMedia
                 src={
                   !isVideo
