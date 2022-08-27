@@ -35,9 +35,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 
   const username = context.query.username as string | undefined;
 
-  // Anonymous user in `/profile` -> redirect to `/landing`
-  // FIXME: 토큰 설정 직후 redirect 에는 여기서 계속 걸리는듯...
-  if (!username && !userFromCookie) {
+  // username should not be empty
+  if (!username) {
     return {
       redirect: {
         permanent: false,
@@ -47,28 +46,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   }
 
   let profile: UserProfile | null = null;
-  let query = Supabase.from('profile').select('*');
-  if (!!username) {
-    query = query.eq('username', username);
-  } else if (!!userFromCookie) {
-    query = query.eq('user_id', userFromCookie.id);
-  }
+  const query = Supabase.from('profile') //
+    .select('*')
+    .eq('username', username);
   const profiles: UserProfile[] = (await query).data ?? [];
   if (profiles.length > 0) {
     profile = profiles[0];
-  }
-
-  if (!username) {
-    // Visiters or user without profile trying to view 'my profile' -> redirect to `/landing`
-    if (!profile?.username) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: '/profile/landing',
-        },
-      };
-    }
-    return { props: { type: 'MY_PROFILE' } };
   }
 
   if (!!profile) {
