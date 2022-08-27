@@ -14,13 +14,22 @@ export const NFTSection: React.FC<Props> = ({ nftAssets }) => {
         nftAssets.map((asset) => {
           const isVideo =
             !!asset.animation_url ||
-            asset.image_url.toLowerCase().endsWith('.mp4');
+            asset.image_url?.toLowerCase()?.endsWith('.mp4') ||
+            false;
 
           return (
             <AssetListItem key={asset.id}>
               <AssetMedia
-                src={!isVideo ? asset.image_url : asset.animation_url}
-                poster={asset.image_url || asset.image_preview_url}
+                src={
+                  !isVideo
+                    ? asset.image_url || asset.collection.image_url
+                    : asset.animation_url
+                }
+                poster={
+                  asset.image_url ||
+                  asset.image_preview_url ||
+                  asset.collection.image_url
+                }
                 isVideo={isVideo}
               />
               <AssetName className="text-sm text-gray-400">
