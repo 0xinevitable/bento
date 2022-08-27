@@ -10,7 +10,6 @@ import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
-import { AssetMedia } from '@/dashboard/components/AssetMedia';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
@@ -23,6 +22,7 @@ import { toast } from '@/utils/toast';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import { FixedFooter } from '../ProfileDetailPage/components/FixedFooter';
+import { NFTSection } from '../ProfileDetailPage/components/NFTSection';
 import {
   ProfileEditor,
   UserInformationDraft,
@@ -315,26 +315,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             <AssetSection tokenBalances={tokenBalances} />
           </AnimatedTab>
           <AnimatedTab selected={selectedTab === ProfileTab.NFTs}>
-            <AssetList>
-              {nftAssets.map((asset) => {
-                const isVideo =
-                  !!asset.animation_url ||
-                  asset.image_url.toLowerCase().endsWith('.mp4');
-
-                return (
-                  <AssetListItem key={asset.id}>
-                    <AssetMedia
-                      src={!isVideo ? asset.image_url : asset.animation_url}
-                      poster={asset.image_url || asset.image_preview_url}
-                      isVideo={isVideo}
-                    />
-                    <AssetName className="text-sm text-gray-400">
-                      {asset.name || `#${asset.id}`}
-                    </AssetName>
-                  </AssetListItem>
-                );
-              })}
-            </AssetList>
+            <NFTSection nftAssets={nftAssets} />
           </AnimatedTab>
         </TabContent>
       </AnimatePresence>
@@ -493,30 +474,6 @@ const AnimatedTab = (props: AnimatedTabProps & HTMLMotionProps<'div'>) => (
     {...props}
   />
 );
-
-// FIXME: Those are similar declares with `TokenDetailModal`
-const AssetList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-`;
-const AssetListItem = styled.li`
-  display: flex;
-  flex-direction: column;
-
-  width: calc((100% - 24px) / 3);
-
-  @media screen and (max-width: 32rem) {
-    width: calc((100% - 12px) / 2);
-  }
-`;
-const AssetName = styled.span`
-  margin-top: 4px;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`;
 
 const ProfileEditModal = styled(Modal)`
   .modal-container {
