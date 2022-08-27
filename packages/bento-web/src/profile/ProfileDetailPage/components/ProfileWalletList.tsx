@@ -29,7 +29,7 @@ export const ProfileWalletList: React.FC<ProfileWalletListProps> = ({
       });
       copyToClipboard(walletAddress);
       toast({
-        title: 'Copied to Clipboard!',
+        title: 'Copied to clipboard!',
         description: walletAddress,
       });
     },
