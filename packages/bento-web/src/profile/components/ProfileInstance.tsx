@@ -2,15 +2,25 @@ import { OpenSeaAsset } from '@bento/client';
 import { Wallet } from '@bento/common';
 import axios, { AxiosError } from 'axios';
 import dedent from 'dedent';
-import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
+import {
+  AnimatePresence,
+  HTMLMotionProps,
+  isBrowser,
+  motion,
+} from 'framer-motion';
 import groupBy from 'lodash.groupby';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
-import { AssetMedia } from '@/dashboard/components/AssetMedia';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
@@ -18,11 +28,14 @@ import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { walletsAtom } from '@/recoil/wallets';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
+import { Analytics } from '@/utils/analytics';
 import { copyToClipboard } from '@/utils/clipboard';
+import { throttle } from '@/utils/throttle';
 import { toast } from '@/utils/toast';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import { FixedFooter } from '../ProfileDetailPage/components/FixedFooter';
+import { NFTSection } from '../ProfileDetailPage/components/NFTSection';
 import {
   ProfileEditor,
   UserInformationDraft,
@@ -75,7 +88,7 @@ const PROFILE_TABS = [
 ];
 
 type ProfileInstanceProps = {
-  profile?: UserProfile;
+  profile: UserProfile | null;
   revaildateProfile?: () => Promise<void>;
   isMyProfile?: boolean;
 };
@@ -102,6 +115,39 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     useState<boolean>(false);
 
   const [selectedTab, setSelectedTab] = useState<ProfileTab>(PROFILE_TABS[0]);
+  const tabEventProps = useMemo(
+    () =>
+      !profile
+        ? null
+        : {
+            tab: selectedTab.toLowerCase(),
+            user_id: profile.user_id,
+            username: profile.username,
+            is_my_profile: isMyProfile,
+          },
+    [selectedTab, profile, isMyProfile],
+  );
+
+  const hasLoggedPageViewEvent = useRef<boolean>(false);
+  useEffect(() => {
+    if (!profile || hasLoggedPageViewEvent.current) {
+      return;
+    }
+    hasLoggedPageViewEvent.current = true;
+    Analytics.logEvent('view_profile', {
+      user_id: profile.user_id,
+      username: profile.username,
+      is_my_profile: isMyProfile,
+    });
+  }, [profile, isMyProfile]);
+
+  // TODO: check if this render twice in production too
+  useEffect(() => {
+    if (!tabEventProps) {
+      return;
+    }
+    Analytics.logEvent('view_profile_tab', tabEventProps);
+  }, [JSON.stringify(tabEventProps)]);
 
   const myWalletsInState = useRecoilValue(walletsAtom);
   const [wallets, setWallets] = useState<Wallet[]>([]);
@@ -184,6 +230,9 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   });
   const onProfileEdit = useCallback(async () => {
     if (!isEditing) {
+      Analytics.logEvent('click_edit_my_profile', {
+        title: 'Edit Profile',
+      });
       setDraft({
         username: profile?.username ?? '',
         displayName: profile?.display_name ?? '',
@@ -266,7 +315,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         )}
 
         <Information>
-          <ProfileViewer profile={profile} />
+          <ProfileViewer profile={profile ?? undefined} />
         </Information>
       </ProfileImageContainer>
 
@@ -315,26 +364,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             <AssetSection tokenBalances={tokenBalances} />
           </AnimatedTab>
           <AnimatedTab selected={selectedTab === ProfileTab.NFTs}>
-            <AssetList>
-              {nftAssets.map((asset) => {
-                const isVideo =
-                  !!asset.animation_url ||
-                  asset.image_url.toLowerCase().endsWith('.mp4');
-
-                return (
-                  <AssetListItem key={asset.id}>
-                    <AssetMedia
-                      src={!isVideo ? asset.image_url : asset.animation_url}
-                      poster={asset.image_url || asset.image_preview_url}
-                      isVideo={isVideo}
-                    />
-                    <AssetName className="text-sm text-gray-400">
-                      {asset.name || `#${asset.id}`}
-                    </AssetName>
-                  </AssetListItem>
-                );
-              })}
-            </AssetList>
+            <NFTSection nftAssets={nftAssets} />
           </AnimatedTab>
         </TabContent>
       </AnimatePresence>
@@ -342,7 +372,15 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       {isMyProfile && (
         <FixedFooter
           onClickShare={() => {
-            // Analytics.logEvent();
+            Analytics.logEvent('click_share_my_profile', {
+              title: 'Share',
+            });
+
+            Analytics.logEvent('click_copy_profile_link', {
+              user_id: profile?.user_id ?? '',
+              username: profile?.username ?? '',
+              is_my_profile: true,
+            });
             copyToClipboard(`${window.location.origin}/u/${profile?.username}`);
             toast({
               title: 'Copied link to clipboard!',
@@ -493,30 +531,6 @@ const AnimatedTab = (props: AnimatedTabProps & HTMLMotionProps<'div'>) => (
     {...props}
   />
 );
-
-// FIXME: Those are similar declares with `TokenDetailModal`
-const AssetList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-`;
-const AssetListItem = styled.li`
-  display: flex;
-  flex-direction: column;
-
-  width: calc((100% - 24px) / 3);
-
-  @media screen and (max-width: 32rem) {
-    width: calc((100% - 12px) / 2);
-  }
-`;
-const AssetName = styled.span`
-  margin-top: 4px;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`;
 
 const ProfileEditModal = styled(Modal)`
   .modal-container {

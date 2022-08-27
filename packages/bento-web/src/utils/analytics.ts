@@ -87,6 +87,40 @@ export type AnalyticsEvent = {
     title: string;
     medium: 'gnb' | 'dashboard_login' | 'dashboard_connect_wallet';
   };
+
+  view_profile_landing: undefined;
+  click_profile_landing_login: {
+    title: string;
+  };
+  click_profile_landing_create_your_profile: {
+    title: string;
+  };
+  click_profile_landing_goto_your_profile: {
+    title: string;
+  };
+
+  view_profile: {
+    user_id: string;
+    username: string;
+    is_my_profile: boolean;
+  };
+  view_profile_tab: {
+    tab: string;
+    user_id: string;
+    username: string;
+    is_my_profile: boolean;
+  };
+  click_edit_my_profile: {
+    title: string;
+  };
+  click_share_my_profile: {
+    title: string;
+  };
+  click_copy_profile_link: {
+    user_id: string;
+    username: string;
+    is_my_profile: boolean;
+  };
 };
 
 const AMPLITUDE_API_KEY = '705bcde0ed4620f7f2815b1e095c50f6';

@@ -30,7 +30,7 @@ const Container = styled.div`
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 95%);
   pointer-events: none;
 
-  & > & {
+  & > * {
     pointer-events: all;
   }
 `;

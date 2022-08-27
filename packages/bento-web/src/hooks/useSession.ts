@@ -1,5 +1,4 @@
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
-import { current } from 'immer';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -73,7 +72,7 @@ export const SessionManager: React.FC = () => {
     if (window.location.hash.includes('access_token=')) {
       window.location.hash = '';
     }
-  }, [currentSession]);
+  }, [JSON.stringify(currentSession)]);
 
   return null;
 };

@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
@@ -9,6 +9,7 @@ import { Modal } from '@/components/Modal';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
+import { Analytics } from '@/utils/analytics';
 import { toast } from '@/utils/toast';
 
 import {
@@ -33,11 +34,20 @@ const EMPTY_DRAFT: UserInformationDraft = {
   bio: '',
 };
 
+const CTA_TITLE = {
+  CREATE_YOUR_PROFILE: 'Create Your Profile',
+  GOTO_YOUT_PROFILE: 'Go to your profile',
+};
+
 export default function ProfileLandingPage() {
   const router = useRouter();
   const { session } = useSession();
   const { profile, revaildateProfile } = useProfile({ type: 'MY_PROFILE' });
   const [isLoginRequired, setLoginRequired] = useState<boolean>(false);
+
+  useEffect(() => {
+    Analytics.logEvent('view_profile_landing', undefined);
+  }, []);
 
   const hasUsername = !!profile?.username;
   const [isEditing, setEditing] = useState<boolean>(false);
@@ -104,14 +114,23 @@ export default function ProfileLandingPage() {
 
   const onClickCreateProfile = useCallback(() => {
     if (!session) {
+      Analytics.logEvent('click_profile_landing_login', {
+        title: CTA_TITLE.CREATE_YOUR_PROFILE,
+      });
       setLoginRequired(true);
       return;
     }
-    if (hasUsername) {
-      router.push(`/u/${profile.username}`);
-    } else {
-      // setup user information
+    if (!hasUsername) {
+      // new user; setup user information
+      Analytics.logEvent('click_profile_landing_create_your_profile', {
+        title: CTA_TITLE.CREATE_YOUR_PROFILE,
+      });
       setEditing(true);
+    } else {
+      Analytics.logEvent('click_profile_landing_goto_your_profile', {
+        title: CTA_TITLE.GOTO_YOUT_PROFILE,
+      });
+      router.push(`/u/${profile.username}`);
     }
   }, [session, profile, hasUsername]);
 
@@ -130,7 +149,9 @@ export default function ProfileLandingPage() {
         <ButtonContainer>
           <NoSSR>
             <CTAButton onClick={onClickCreateProfile}>
-              {hasUsername ? 'Go to your profile' : 'Create Your Profile'}
+              {hasUsername
+                ? CTA_TITLE.GOTO_YOUT_PROFILE
+                : CTA_TITLE.CREATE_YOUR_PROFILE}
             </CTAButton>
             {!hasUsername && <CTABadge>Less than a minute</CTABadge>}
           </NoSSR>

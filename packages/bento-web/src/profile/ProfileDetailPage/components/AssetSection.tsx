@@ -12,7 +12,7 @@ type Props = {
 export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
   return (
     <ul>
-      {!!tokenBalances ? (
+      {tokenBalances.length > 0 ? (
         tokenBalances.map((item) => {
           return (
             <Container key={`${item.symbol}-${item.tokenAddress ?? 'native'}`}>
@@ -34,11 +34,7 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
           );
         })
       ) : (
-        <>
-          <AssetSkeleton />
-          <AssetSkeleton />
-          <AssetSkeleton />
-        </>
+        <Empty>No Assets Found</Empty>
       )}
     </ul>
   );
@@ -122,10 +118,18 @@ const TokenAmount = styled.span`
   }
 `;
 
+// FIXME: Show skeletons again
 const AssetSkeleton = styled(Skeleton)`
   width: 100%;
   height: 88px;
   margin-top: 8px;
   border-radius: 8px;
   align-self: center;
+`;
+
+const Empty = styled.span`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: white;
 `;
