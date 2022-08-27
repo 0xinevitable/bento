@@ -1,4 +1,4 @@
-import React from 'react';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
@@ -22,26 +22,40 @@ export const ProfileEditor: React.FC<Props> = ({
   setDraft,
   onSubmit,
 }) => {
+  const onKeyDown = useCallback<
+    React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>
+  >(
+    (e) => {
+      if (e.key === 'Enter') {
+        onSubmit();
+      }
+    },
+    [onSubmit],
+  );
+
   return (
     <Container>
       <FieldInput
         field="Name"
         placeholder="e.g., Junho Yeo"
         defaultValue={draft.displayName}
+        onKeyDown={onKeyDown}
         onChange={(e) =>
           setDraft((v) => ({ ...v, displayName: e.target.value }))
         }
       />
       <FieldInput
         field="Username"
-        placeholder="@username"
+        placeholder="username (will be shown after @)"
         defaultValue={draft.username}
+        onKeyDown={onKeyDown}
         onChange={(e) => setDraft((v) => ({ ...v, username: e.target.value }))}
       />
       <FieldTextArea
         field="Description"
         placeholder="e.g., 19 y.o. Builder from Seoul"
         defaultValue={draft.bio}
+        onKeyDown={onKeyDown}
         onChange={(e) => setDraft((v) => ({ ...v, bio: e.target.value }))}
         rows={5}
       />
