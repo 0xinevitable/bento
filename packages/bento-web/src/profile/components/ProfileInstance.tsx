@@ -207,9 +207,17 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
       setEditing(false);
       setDraft(EMPTY_DRAFT);
-      revaildateProfile?.();
 
-      router.push(`/u/${createdProfile.username}`);
+      toast({
+        type: 'success',
+        title: 'Changes Saved',
+      });
+
+      if (createdProfile.username !== profile?.username) {
+        router.push(`/u/${createdProfile.username}`);
+      } else {
+        revaildateProfile?.();
+      }
     } catch (e) {
       if (e instanceof AxiosError) {
         const errorResponse = e.response?.data as ErrorResponse;

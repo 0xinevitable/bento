@@ -70,6 +70,11 @@ export default function ProfileLandingPage() {
       setDraft(EMPTY_DRAFT);
       revaildateProfile?.();
 
+      toast({
+        type: 'success',
+        title: 'Changes Saved',
+      });
+
       router.push(`/u/${createdProfile.username}`);
     } catch (e) {
       if (e instanceof AxiosError) {
