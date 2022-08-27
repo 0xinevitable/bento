@@ -1,13 +1,44 @@
-import { PostgrestError, PostgrestResponse } from '@supabase/supabase-js';
+import { PostgrestError, PostgrestResponse, User } from '@supabase/supabase-js';
+import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { UserProfile } from '@/profile/types/UserProfile';
+import { Config } from '@/utils/Config';
 import { Supabase } from '@/utils/Supabase';
 
 const MATCH_RULE = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,37}$/;
 
 type APIRequest = NextApiRequest & {
   body: UserProfile;
+};
+
+const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+const getKoreanTimestring = (timestamp: string) => {
+  const curr = new Date(timestamp);
+  const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+  return new Date(utc + KR_TIME_DIFF).toString();
+};
+
+const notifySlack = async (user: User, profile: UserProfile) => {
+  if (!Config.SLACK_NEW_PROFILE_WEBHOOK) {
+    // disabled
+    return;
+  }
+  const provider = user.app_metadata.provider;
+  await axios
+    .post(Config.SLACK_NEW_PROFILE_WEBHOOK, {
+      provider: provider,
+      social_url:
+        provider === 'twitter'
+          ? `https://twitter.com/${user.user_metadata.user_name}`
+          : `https://github.com/${user.user_metadata.user_name}`,
+      user_id: user.id,
+      username: profile.username,
+      joined_at: getKoreanTimestring(user.created_at),
+    })
+    .catch((e) => {
+      console.error('[Slack] Failed to send webhook', e);
+    });
 };
 
 export default async (req: APIRequest, res: NextApiResponse) => {
@@ -84,6 +115,8 @@ export default async (req: APIRequest, res: NextApiResponse) => {
       ...profile,
     });
     error = data.error;
+
+    await notifySlack(user, profile);
   } else {
     data = await Supabase.from('profile')
       .update({
