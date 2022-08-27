@@ -16,11 +16,11 @@ import { useProfile } from './hooks/useProfile';
 type Props =
   | {
       type: 'MY_PROFILE';
-      profile?: UserProfile | null;
+      profile: UserProfile;
     }
   | {
       type: 'USER_PROFILE';
-      profile?: UserProfile | null;
+      profile: UserProfile;
     };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (
@@ -78,7 +78,7 @@ const ProfileDetailPage = (props: Props) => {
   useEffect(() => {
     if (session) {
       setProfileType(
-        session.user?.id === props.profile?.user_id
+        session.user?.id === props.profile.user_id
           ? 'MY_PROFILE'
           : 'USER_PROFILE',
       );
@@ -103,8 +103,8 @@ const ProfileDetailPage = (props: Props) => {
     }
 
     if (profileType === 'USER_PROFILE') {
-      const username = props.profile?.username ?? 'unknown';
-      const displayName = props.profile?.display_name;
+      const username = props.profile.username ?? 'unknown';
+      const displayName = props.profile.display_name;
 
       if (!!displayName) {
         _title = `${displayName} (@${username}) | Bento`;
@@ -112,9 +112,9 @@ const ProfileDetailPage = (props: Props) => {
         _title = `@${username} | Bento`;
       }
 
-      _description = props.profile?.bio ?? '';
+      _description = props.profile.bio ?? '';
       _images = [
-        ...(props.profile?.images ?? []),
+        ...(props.profile.images ?? []),
         '/static/images/profile-default.jpg',
       ];
     }
@@ -173,13 +173,13 @@ const ProfileDetailPage = (props: Props) => {
       </DocumentHead>
 
       <div className="w-full max-w-lg mt-[64px] mx-auto">
-        <NoSSR>
-          <ProfileInstance
-            profile={profile ?? undefined}
-            revaildateProfile={revaildateProfile}
-            isMyProfile={profileType === 'MY_PROFILE'}
-          />
-        </NoSSR>
+        {/* <NoSSR> */}
+        <ProfileInstance
+          profile={profile}
+          revaildateProfile={revaildateProfile}
+          isMyProfile={profileType === 'MY_PROFILE'}
+        />
+        {/* </NoSSR> */}
       </div>
     </PageContainer>
   );
