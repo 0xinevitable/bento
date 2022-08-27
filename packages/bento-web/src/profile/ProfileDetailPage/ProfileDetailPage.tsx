@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   let profile: UserProfile | null = null;
   const query = Supabase.from('profile') //
     .select('*')
-    .eq('username', username);
+    .eq('username', username.toLowerCase());
   const profiles: UserProfile[] = (await query).data ?? [];
   if (profiles.length > 0) {
     profile = profiles[0];

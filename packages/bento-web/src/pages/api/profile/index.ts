@@ -11,7 +11,8 @@ type APIRequest = NextApiRequest & {
 };
 
 export default async (req: APIRequest, res: NextApiResponse) => {
-  const { body: profile } = req;
+  let { body: profile } = req;
+  profile.username = (profile?.username || '').toLowerCase();
 
   const { user } = await Supabase.auth.api.getUserByCookie(req);
   if (!user) {

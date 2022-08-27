@@ -247,7 +247,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     // FIXME: Duplicated logic
     try {
       const { data } = await axios.post(`/api/profile`, {
-        username: draft.username,
+        username: draft.username.toLowerCase(),
         display_name: draft.displayName,
         bio: draft.bio,
       });
