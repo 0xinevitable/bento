@@ -2,10 +2,14 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
 
-export const FixedFooter: React.FC = () => {
+type FixedFooterProps = {
+  onClickShare: () => void;
+};
+
+export const FixedFooter: React.FC<FixedFooterProps> = ({ onClickShare }) => {
   return (
     <Container className="w-full max-w-lg mx-auto">
-      <ShareButton>Share</ShareButton>
+      <ShareButton onClick={onClickShare}>Share</ShareButton>
     </Container>
   );
 };

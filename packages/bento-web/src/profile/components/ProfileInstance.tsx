@@ -18,6 +18,7 @@ import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { walletsAtom } from '@/recoil/wallets';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
+import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
@@ -338,7 +339,18 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         </TabContent>
       </AnimatePresence>
 
-      {isMyProfile && <FixedFooter />}
+      {isMyProfile && (
+        <FixedFooter
+          onClickShare={() => {
+            // Analytics.logEvent();
+            copyToClipboard(`${window.location.origin}/u/${profile?.username}`);
+            toast({
+              title: 'Copied link to clipboard!',
+              description: `Profile @${profile?.username}`,
+            });
+          }}
+        />
+      )}
     </React.Fragment>
   );
 };

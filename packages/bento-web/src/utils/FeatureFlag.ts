@@ -12,6 +12,7 @@ const definedFeatures = {
   isProfileEnabled: Environment.production,
   isProfileLinksEnabled: Environment.off,
   isProfileQuestionsEnabled: Environment.off,
+  isProfileDetailedEditorEnabled: Environment.off,
   isEmailMagicLinkEnabled: Environment.off,
 };
 
