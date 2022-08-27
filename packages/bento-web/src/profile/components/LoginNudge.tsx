@@ -15,7 +15,7 @@ type LoginNudgeProps = {
 export const LoginNudge: React.FC<LoginNudgeProps> = ({
   className,
   accessory,
-  redirectTo,
+  redirectTo = 'current',
 }) => {
   const onClickLogin = useCallback(
     async (provider: 'twitter' | 'github') => {
