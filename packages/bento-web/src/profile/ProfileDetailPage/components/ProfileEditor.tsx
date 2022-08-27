@@ -33,6 +33,8 @@ export const ProfileEditor: React.FC<Props> = ({
     [onSubmit],
   );
 
+  // FIXME: value as controlled (왜냐면 username 검증 실패시 리셋하는 로직이 있기 때문)
+
   return (
     <Container>
       <FieldInput
