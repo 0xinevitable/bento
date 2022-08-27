@@ -39,7 +39,7 @@ const MINIMAL_NET_WORTH = 0.0001;
 
 type ErrorResponse =
   | {
-      code: 'USERNAME_EXIST' | 'VALUE_REQUIRED' | string;
+      code: 'USERNAME_UNUSABLE' | 'VALUE_REQUIRED' | string;
       message: string;
     }
   | undefined;
@@ -221,7 +221,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     } catch (e) {
       if (e instanceof AxiosError) {
         const errorResponse = e.response?.data as ErrorResponse;
-        if (errorResponse?.code === 'USERNAME_EXIST') {
+        if (errorResponse?.code === 'USERNAME_UNUSABLE') {
           toast({
             type: 'error',
             title: errorResponse.message,

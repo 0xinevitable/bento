@@ -4,6 +4,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Supabase } from '@/utils/Supabase';
 
+const MATCH_RULE = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,37}$/;
+
 type APIRequest = NextApiRequest & {
   body: UserProfile;
 };
@@ -23,6 +25,20 @@ export default async (req: APIRequest, res: NextApiResponse) => {
       message: 'Username is required',
     });
     return;
+  }
+
+  if (profile.username.length > 38) {
+    res.status(400).json({
+      code: 'USERNAME_UNUSABLE',
+      message: `Username can't be longer than 38 characters`,
+    });
+  }
+  const matches = MATCH_RULE.exec(profile.username);
+  if (!matches?.length) {
+    res.status(400).json({
+      code: 'USERNAME_UNUSABLE',
+      message: `Username contains invalid characters`,
+    });
   }
 
   if (!profile.display_name) {
@@ -53,7 +69,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     profileWithDuplicatedUsername.user_id !== user.id
   ) {
     res.status(400).json({
-      code: 'USERNAME_EXIST',
+      code: 'USERNAME_UNUSABLE',
       message: `Username '${profile.username}' already exists`,
     });
     return;
