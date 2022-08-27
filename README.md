@@ -1,6 +1,6 @@
 # 🍱 Bento, The open-source web3 dashboard
 
-> **LIVE under [https://bento.finance](https://bento.finance), This product is still under rapid development 🎉**<br />
+> **LIVE at [https://bento.finance](https://bento.finance), This product is still under rapid development 🎉**<br />
 > Follow us on [Twitter(@bentoinevitable)](https://twitter.com/bentoinevitable) for updates!
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/bentoinevitable.svg?style=social&label=Follow%20%40bentoinevitable)](https://twitter.com/bentoinevitable)
