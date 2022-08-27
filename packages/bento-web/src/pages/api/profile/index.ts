@@ -32,6 +32,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
       code: 'USERNAME_UNUSABLE',
       message: `Username can't be longer than 38 characters`,
     });
+    return;
   }
   const matches = MATCH_RULE.exec(profile.username);
   if (!matches?.length) {
@@ -39,6 +40,7 @@ export default async (req: APIRequest, res: NextApiResponse) => {
       code: 'USERNAME_UNUSABLE',
       message: `Username contains invalid characters`,
     });
+    return;
   }
 
   if (!profile.display_name) {
