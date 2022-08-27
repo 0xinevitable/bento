@@ -39,7 +39,7 @@ const MINIMAL_NET_WORTH = 0.0001;
 
 type ErrorResponse =
   | {
-      code: string;
+      code: 'USERNAME_EXIST' | 'VALUE_REQUIRED' | string;
       message: string;
     }
   | undefined;
@@ -228,6 +228,11 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             description: 'Please choose another username',
           });
           setDraft((prev) => ({ ...prev, username: '' }));
+        } else if (errorResponse?.code === 'VALUE_REQUIRED') {
+          toast({
+            type: 'error',
+            title: errorResponse.message,
+          });
         } else {
           toast({
             type: 'error',

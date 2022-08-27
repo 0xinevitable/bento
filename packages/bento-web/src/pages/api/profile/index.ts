@@ -17,6 +17,22 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     return;
   }
 
+  if (!profile.username) {
+    res.status(400).json({
+      code: 'VALUE_REQUIRED',
+      message: 'Username is required',
+    });
+    return;
+  }
+
+  if (!profile.display_name) {
+    res.status(400).json({
+      code: 'VALUE_REQUIRED',
+      message: 'Display name is required',
+    });
+    return;
+  }
+
   const prevProfileQuery = await Supabase.from('profile') //
     .select('*')
     .eq('user_id', user.id);

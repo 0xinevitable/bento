@@ -22,7 +22,7 @@ import { UserProfile } from '../types/UserProfile';
 
 type ErrorResponse =
   | {
-      code: string;
+      code: 'USERNAME_EXIST' | 'VALUE_REQUIRED' | string;
       message: string;
     }
   | undefined;
@@ -86,6 +86,11 @@ export default function ProfileLandingPage() {
             description: 'Please choose another username',
           });
           setDraft((prev) => ({ ...prev, username: '' }));
+        } else if (errorResponse?.code === 'VALUE_REQUIRED') {
+          toast({
+            type: 'error',
+            title: errorResponse.message,
+          });
         } else {
           toast({
             type: 'error',
