@@ -1,5 +1,6 @@
 import { PostgrestError, PostgrestResponse, User } from '@supabase/supabase-js';
 import axios from 'axios';
+import { format } from 'date-fns';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { UserProfile } from '@/profile/types/UserProfile';
@@ -16,7 +17,7 @@ const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
 const getKoreanTimestring = (timestamp: string) => {
   const curr = new Date(timestamp);
   const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
-  return new Date(utc + KR_TIME_DIFF).toString();
+  return format(new Date(utc + KR_TIME_DIFF), 'yyyy-MM-dd HH:mm:ss');
 };
 
 const notifySlack = async (user: User, profile: UserProfile) => {
@@ -34,7 +35,7 @@ const notifySlack = async (user: User, profile: UserProfile) => {
         ? `https://twitter.com/${user.user_metadata.user_name}`
         : `https://github.com/${user.user_metadata.user_name}`,
       user_id: user.id,
-      username: profile.username,
+      profile_url: `https://www.bento.finance/u/${profile.username}`,
       joined_at: getKoreanTimestring(user.created_at),
     })
     .catch((e) => {
