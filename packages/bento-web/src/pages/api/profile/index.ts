@@ -26,6 +26,23 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   let data: PostgrestResponse<any>;
   let error: PostgrestError | null = null;
 
+  // check for duplicated username here
+  const duplicatedUsernameQuery = await Supabase.from('profile') //
+    .select('*')
+    .eq('username', profile.username);
+  const [profileWithDuplicatedUsername] = (duplicatedUsernameQuery.data ??
+    []) as UserProfile[];
+  if (
+    !!profileWithDuplicatedUsername &&
+    profileWithDuplicatedUsername.user_id !== user.id
+  ) {
+    res.status(400).json({
+      code: 'USERNAME_EXIST',
+      message: `Username '${profile.username}' already exists`,
+    });
+    return;
+  }
+
   if (!hasProfile) {
     data = await Supabase.from('profile').upsert({
       user_id: user.id,

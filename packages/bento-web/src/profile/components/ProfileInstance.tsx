@@ -1,9 +1,10 @@
 import { OpenSeaAsset } from '@bento/client';
 import { Wallet } from '@bento/common';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
@@ -17,6 +18,7 @@ import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { walletsAtom } from '@/recoil/wallets';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
+import { toast } from '@/utils/toast';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
 import { FixedFooter } from '../ProfileDetailPage/components/FixedFooter';
@@ -34,6 +36,19 @@ import { UserProfile } from '../types/UserProfile';
 import { TickerCarousel } from './TickerCarousel';
 
 const MINIMAL_NET_WORTH = 0.0001;
+
+type ErrorResponse =
+  | {
+      code: string;
+      message: string;
+    }
+  | undefined;
+
+const EMPTY_DRAFT: UserInformationDraft = {
+  username: '',
+  displayName: '',
+  bio: '',
+};
 
 const data = {
   color: '#ff3856',
@@ -81,6 +96,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   revaildateProfile,
   isMyProfile = false,
 }) => {
+  const router = useRouter();
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
 
@@ -178,6 +194,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       return;
     }
 
+    // FIXME: Duplicated logic
     try {
       const { data } = await axios.post(`/api/profile`, {
         username: draft.username,
@@ -186,10 +203,33 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       });
       console.log(data);
 
+      const [createdProfile] = data.body as UserProfile[];
+
       setEditing(false);
+      setDraft(EMPTY_DRAFT);
       revaildateProfile?.();
-    } catch (e) {}
-  }, [profile, isEditing, draft]);
+
+      router.push(`/u/${createdProfile.username}`);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        const errorResponse = e.response?.data as ErrorResponse;
+        if (errorResponse?.code === 'USERNAME_EXIST') {
+          toast({
+            type: 'error',
+            title: errorResponse.message,
+            description: 'Please choose another username',
+          });
+          setDraft((prev) => ({ ...prev, username: '' }));
+        } else {
+          toast({
+            type: 'error',
+            title: 'Server Error',
+            description: errorResponse?.message || 'Something went wrong',
+          });
+        }
+      }
+    }
+  }, [profile, isEditing, draft, router]);
 
   return (
     <React.Fragment>

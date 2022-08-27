@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
@@ -9,6 +9,7 @@ import { Modal } from '@/components/Modal';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
+import { toast } from '@/utils/toast';
 
 import {
   ProfileEditor,
@@ -19,6 +20,19 @@ import { FixedLoginNudge } from '../components/LoginNudge';
 import { TickerCarousel } from '../components/TickerCarousel';
 import { UserProfile } from '../types/UserProfile';
 
+type ErrorResponse =
+  | {
+      code: string;
+      message: string;
+    }
+  | undefined;
+
+const EMPTY_DRAFT: UserInformationDraft = {
+  username: '',
+  displayName: '',
+  bio: '',
+};
+
 export default function ProfileLandingPage() {
   const router = useRouter();
   const { session } = useSession();
@@ -27,11 +41,7 @@ export default function ProfileLandingPage() {
 
   const hasUsername = !!profile?.username;
   const [isEditing, setEditing] = useState<boolean>(false);
-  const [draft, setDraft] = useState<UserInformationDraft>({
-    username: '',
-    displayName: '',
-    bio: '',
-  });
+  const [draft, setDraft] = useState<UserInformationDraft>(EMPTY_DRAFT);
   const onProfileEdit = useCallback(async () => {
     if (!isEditing) {
       setDraft({
@@ -45,6 +55,7 @@ export default function ProfileLandingPage() {
       return;
     }
 
+    // FIXME: Duplicated logic
     try {
       const { data } = await axios.post(`/api/profile`, {
         username: draft.username,
@@ -56,11 +67,30 @@ export default function ProfileLandingPage() {
       const [createdProfile] = data.body as UserProfile[];
 
       setEditing(false);
+      setDraft(EMPTY_DRAFT);
       revaildateProfile?.();
 
       router.push(`/u/${createdProfile.username}`);
-    } catch (e) {}
-  }, [profile, isEditing, draft]);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        const errorResponse = e.response?.data as ErrorResponse;
+        if (errorResponse?.code === 'USERNAME_EXIST') {
+          toast({
+            type: 'error',
+            title: errorResponse.message,
+            description: 'Please choose another username',
+          });
+          setDraft((prev) => ({ ...prev, username: '' }));
+        } else {
+          toast({
+            type: 'error',
+            title: 'Server Error',
+            description: errorResponse?.message || 'Something went wrong',
+          });
+        }
+      }
+    }
+  }, [profile, isEditing, draft, router]);
 
   const onClickCreateProfile = useCallback(() => {
     if (!session) {
