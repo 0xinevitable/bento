@@ -43,7 +43,7 @@ const validateAndSaveWallet = async (
         publicKeyValue: string;
         networks: Network[];
       }
-  ) & { signOut?: () => void },
+  ) & { signOut: () => Promise<void> },
 ) => {
   const { walletType, walletAddress, signature, nonce, networks } = params;
   try {
@@ -60,7 +60,7 @@ const validateAndSaveWallet = async (
   } catch (error) {
     const maybeAxiosError = error as AxiosError;
     if (maybeAxiosError?.response?.status === 401) {
-      params?.signOut?.();
+      await params.signOut();
     }
   }
 };

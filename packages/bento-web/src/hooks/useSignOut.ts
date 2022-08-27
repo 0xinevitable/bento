@@ -9,10 +9,10 @@ export const useSignOut = () => {
   const setWallets = useSetRecoilState(walletsAtom);
   const setCurrentSession = useSetRecoilState(sessionAtom);
 
-  const signOut = useCallback(() => {
+  const signOut = useCallback(async () => {
     setWallets([]);
     setCurrentSession(null);
-    Supabase.auth.signOut();
+    await Supabase.auth.signOut();
   }, [setWallets, setCurrentSession]);
 
   return { signOut };

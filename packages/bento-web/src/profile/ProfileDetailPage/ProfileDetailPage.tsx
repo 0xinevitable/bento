@@ -1,10 +1,11 @@
 import { GetServerSideProps } from 'next';
 import DocumentHead from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
+import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 
@@ -69,8 +70,24 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 };
 
 const ProfileDetailPage = (props: Props) => {
+  const [profileType, setProfileType] = useState<'MY_PROFILE' | 'USER_PROFILE'>(
+    props.type,
+  );
+
+  const { session } = useSession();
+  useEffect(() => {
+    if (session) {
+      setProfileType(
+        session.user?.id === props.profile?.user_id
+          ? 'MY_PROFILE'
+          : 'USER_PROFILE',
+      );
+    }
+  }, [session, props.profile]);
+
+  // FIXME: Divide `useMyProfile` / `useUserProfile` if needed
   const { profile, revaildateProfile } = useProfile({
-    type: props.type,
+    type: 'USER_PROFILE',
     preloadedProfile: props.profile,
   });
 
@@ -79,13 +96,13 @@ const ProfileDetailPage = (props: Props) => {
     let _description: string = '';
     let _images: string[] = [];
 
-    if (props.type === 'MY_PROFILE') {
+    if (profileType === 'MY_PROFILE') {
       _title = 'My Profile | Bento';
       _description = '';
       _images = ['/static/images/profile-default.jpg'];
     }
 
-    if (props.type === 'USER_PROFILE') {
+    if (profileType === 'USER_PROFILE') {
       const username = props.profile?.username ?? 'unknown';
       const displayName = props.profile?.display_name;
 
@@ -109,14 +126,12 @@ const ProfileDetailPage = (props: Props) => {
   useEffect(() => {
     Supabase.auth.onAuthStateChange((event, _session) => {
       if (event === 'SIGNED_OUT') {
-        if (router.pathname !== '/u/[username]') {
-          // my profile
-          // NOTE: stay in same context but to reload session-based memos
-          router.push('/profile');
+        if (profileType === 'MY_PROFILE') {
+          setProfileType('USER_PROFILE');
         }
       }
     });
-  }, [router]);
+  }, [router, profileType]);
 
   return (
     <PageContainer className="pt-0 px-0 z-10">
@@ -162,7 +177,7 @@ const ProfileDetailPage = (props: Props) => {
           <ProfileInstance
             profile={profile ?? undefined}
             revaildateProfile={revaildateProfile}
-            isMyProfile={props.type === 'MY_PROFILE'}
+            isMyProfile={profileType === 'MY_PROFILE'}
           />
         </NoSSR>
       </div>

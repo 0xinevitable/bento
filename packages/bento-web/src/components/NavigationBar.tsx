@@ -60,7 +60,7 @@ export const NavigationBar = () => {
     await Analytics.logEvent('click_logout', {
       medium: 'gnb',
     });
-    signOut();
+    await signOut();
   }, [signOut]);
 
   return (
