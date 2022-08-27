@@ -87,16 +87,14 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const myWalletsInState = useRecoilValue(walletsAtom);
   const [wallets, setWallets] = useState<Wallet[]>([]);
   useEffect(() => {
-    if (isMyProfile) {
-      setWallets(myWalletsInState);
-    } else if (!!profile?.user_id) {
+    if (!!profile?.user_id) {
       fetchWallets(profile.user_id)
         .then(setWallets)
         .catch(() => {
           setWallets([]);
         });
     }
-  }, [isMyProfile, myWalletsInState, profile?.user_id]);
+  }, [myWalletsInState, profile?.user_id]);
 
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: nftBalances } = useNFTBalances({ wallets });
@@ -190,6 +188,8 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       revaildateProfile?.();
     } catch (e) {}
   }, [profile, isEditing, draft]);
+
+  console.log({ isMyProfile });
 
   return (
     <React.Fragment>

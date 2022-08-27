@@ -13,9 +13,6 @@ const handleAuthChange = async (
   event: AuthChangeEvent,
   session: Session | null,
 ) => {
-  if (!session) {
-    return;
-  }
   await fetch('/api/auth', {
     method: 'POST',
     headers: new Headers({ 'Content-Type': 'application/json' }),

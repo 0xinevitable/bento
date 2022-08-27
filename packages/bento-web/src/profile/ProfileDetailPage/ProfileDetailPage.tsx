@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import DocumentHead from 'next/head';
-import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
@@ -8,7 +9,6 @@ import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 
-import { FixedLoginNudge } from '../components/LoginNudge';
 import { ProfileInstance } from '../components/ProfileInstance';
 import { UserProfile } from '../types/UserProfile';
 import { useProfile } from './hooks/useProfile';
@@ -35,16 +35,22 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   );
 
   const username = context.query.username as string | undefined;
+
+  // username should not be empty
   if (!username) {
-    return { props: { type: 'MY_PROFILE' } };
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/profile/landing',
+      },
+    };
   }
 
   let profile: UserProfile | null = null;
-  const profileQuery = await Supabase.from('profile')
+  const query = Supabase.from('profile') //
     .select('*')
     .eq('username', username);
-  const profiles: UserProfile[] = profileQuery.data ?? [];
-
+  const profiles: UserProfile[] = (await query).data ?? [];
   if (profiles.length > 0) {
     profile = profiles[0];
   }
@@ -64,10 +70,24 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 };
 
 const ProfileDetailPage = (props: Props) => {
-  const { session } = useSession();
+  const [profileType, setProfileType] = useState<'MY_PROFILE' | 'USER_PROFILE'>(
+    props.type,
+  );
 
+  const { session } = useSession();
+  useEffect(() => {
+    if (session) {
+      setProfileType(
+        session.user?.id === props.profile?.user_id
+          ? 'MY_PROFILE'
+          : 'USER_PROFILE',
+      );
+    }
+  }, [session, props.profile]);
+
+  // FIXME: Divide `useMyProfile` / `useUserProfile` if needed
   const { profile, revaildateProfile } = useProfile({
-    type: props.type,
+    type: 'USER_PROFILE',
     preloadedProfile: props.profile,
   });
 
@@ -76,13 +96,13 @@ const ProfileDetailPage = (props: Props) => {
     let _description: string = '';
     let _images: string[] = [];
 
-    if (props.type === 'MY_PROFILE') {
+    if (profileType === 'MY_PROFILE') {
       _title = 'My Profile | Bento';
       _description = '';
       _images = ['/static/images/profile-default.jpg'];
     }
 
-    if (props.type === 'USER_PROFILE') {
+    if (profileType === 'USER_PROFILE') {
       const username = props.profile?.username ?? 'unknown';
       const displayName = props.profile?.display_name;
 
@@ -102,7 +122,16 @@ const ProfileDetailPage = (props: Props) => {
     return [_title, _description, _images];
   }, [profile]);
 
-  const isLoginRequired = !session && props.type === 'MY_PROFILE';
+  const router = useRouter();
+  useEffect(() => {
+    Supabase.auth.onAuthStateChange((event, _session) => {
+      if (event === 'SIGNED_OUT') {
+        if (profileType === 'MY_PROFILE') {
+          setProfileType('USER_PROFILE');
+        }
+      }
+    });
+  }, [router, profileType]);
 
   return (
     <PageContainer className="pt-0 px-0 z-10">
@@ -143,19 +172,15 @@ const ProfileDetailPage = (props: Props) => {
         <meta property="twitter:url" content={url} /> */}
       </DocumentHead>
 
-      {!isLoginRequired && (
-        <div className="w-full max-w-lg mt-[64px] mx-auto">
-          <NoSSR>
-            <ProfileInstance
-              profile={profile ?? undefined}
-              revaildateProfile={revaildateProfile}
-              isMyProfile={props.type === 'MY_PROFILE'}
-            />
-          </NoSSR>
-        </div>
-      )}
-
-      <FixedLoginNudge visible={isLoginRequired} redirectTo="current" />
+      <div className="w-full max-w-lg mt-[64px] mx-auto">
+        <NoSSR>
+          <ProfileInstance
+            profile={profile ?? undefined}
+            revaildateProfile={revaildateProfile}
+            isMyProfile={profileType === 'MY_PROFILE'}
+          />
+        </NoSSR>
+      </div>
     </PageContainer>
   );
 };

@@ -43,6 +43,10 @@ const NAVIGATION_ITEMS = [
 export const NavigationBar = () => {
   const router = useRouter();
   const currentPath = useMemo(() => {
+    if (router.route.startsWith('/profile')) {
+      // e.g. /profile/landing
+      return '/profile';
+    }
     if (router.route.startsWith('/u/')) {
       return '/profile';
     }
@@ -56,7 +60,7 @@ export const NavigationBar = () => {
     await Analytics.logEvent('click_logout', {
       medium: 'gnb',
     });
-    signOut();
+    await signOut();
   }, [signOut]);
 
   return (
