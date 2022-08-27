@@ -27,11 +27,12 @@ const notifySlack = async (user: User, profile: UserProfile) => {
   const provider = user.app_metadata.provider;
   await axios
     .post(Config.SLACK_NEW_PROFILE_WEBHOOK, {
-      provider: provider,
-      social_url:
-        provider === 'twitter'
-          ? `https://twitter.com/${user.user_metadata.user_name}`
-          : `https://github.com/${user.user_metadata.user_name}`,
+      provider: (provider || 'None')?.toUpperCase(),
+      social_url: !provider
+        ? 'No social link available'
+        : provider === 'twitter'
+        ? `https://twitter.com/${user.user_metadata.user_name}`
+        : `https://github.com/${user.user_metadata.user_name}`,
       user_id: user.id,
       username: profile.username,
       joined_at: getKoreanTimestring(user.created_at),
