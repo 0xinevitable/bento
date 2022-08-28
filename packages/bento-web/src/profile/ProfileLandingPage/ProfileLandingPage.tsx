@@ -170,6 +170,16 @@ export default function ProfileLandingPage() {
           </NoSSR>
         </ButtonContainer>
 
+        <Paragraph>
+          Early profile creators will get the
+          <br /> <span className="highlight">2022 EARLY BENTO Badge!</span>
+          <br />
+          {` We’re making the home of soulbound tokens`}
+          <br />
+          {` -not bound to your wallet, `}
+          <span className="highlight">but to your true identity</span>
+        </Paragraph>
+
         <ProfileEditModal
           visible={isEditing}
           onDismiss={() => setEditing((prev) => !prev)}
@@ -202,6 +212,8 @@ const StyledTickerCarousel = styled(TickerCarousel)`
   top: 0;
 `;
 const StyledPageContainer = styled(PageContainer)`
+  padding-bottom: 100px;
+
   & > div {
     align-items: center;
   }
@@ -238,6 +250,8 @@ const Title = styled.h1`
 const ButtonContainer = styled.div`
   margin-top: 32px;
   width: 352px;
+  max-width: 80vw;
+
   position: relative;
   z-index: 1;
 `;
@@ -275,6 +289,39 @@ const CTABadge = styled.span`
   letter-spacing: -0.5px;
 
   color: #ff214a;
+`;
+
+const Paragraph = styled.p`
+  margin: 24px 0 0;
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 145%;
+  /* or 23px */
+  z-index: 2;
+
+  text-align: center;
+  letter-spacing: 0.01em;
+
+  color: #a8a8a8;
+
+  span.highlight {
+    /* fallback */
+    color: #ff7f75;
+
+    display: inline-block;
+
+    background: linear-gradient(
+      90deg,
+      #ff7f75 26.58%,
+      #ff7b9b 49.22%,
+      #ff7b7b 71.38%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
 `;
 
 const ProfileEditModal = styled(Modal)`
