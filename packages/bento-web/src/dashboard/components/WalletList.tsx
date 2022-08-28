@@ -6,10 +6,12 @@ import {
 } from '@bento/common';
 import { shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
+import axios from 'axios';
 import clsx from 'clsx';
 import React, { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import { useRevalidateWallets } from '@/hooks/useWallets';
 import { Analytics } from '@/utils/analytics';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
@@ -28,6 +30,7 @@ export const WalletList: React.FC<WalletListProps> = ({
   onClickConnect,
 }) => {
   const [collapsed, setCollapsed] = useState<boolean>(true);
+  const revalidateWallets = useRevalidateWallets();
 
   const renderedWallets = useMemo(
     () => (collapsed ? wallets.slice(0, 3) : wallets),
@@ -71,21 +74,34 @@ export const WalletList: React.FC<WalletListProps> = ({
                   <Icon icon="eva:copy-fill" />
                 </button>
 
-                {/* FIXME: Add delete feature */}
-                {/* <button
+                <button
                   className="ml-auto text-white/25"
-                  onClick={() => {
-                    setWallets(
-                      wallets.filter(
-                        (w) =>
-                          w.address.toLowerCase() !==
-                          wallet.address.toLowerCase(),
-                      ),
-                    );
+                  onClick={async () => {
+                    let walletAddress = wallet.address;
+                    try {
+                      await axios.post(`/api/profile/delete-wallet`, {
+                        walletAddress,
+                      });
+                      await revalidateWallets();
+
+                      toast({
+                        type: 'success',
+                        title: 'Deleted Wallet',
+                        description: `Removed wallet ${shortenAddress(
+                          walletAddress,
+                        )}`,
+                      });
+                    } catch (error: any) {
+                      toast({
+                        type: 'error',
+                        title: 'Server Error',
+                        description: error.message || 'Something went wrong',
+                      });
+                    }
                   }}
                 >
                   <Icon icon="entypo:cross" width={20} height={20} />
-                </button> */}
+                </button>
               </div>
 
               <div>
