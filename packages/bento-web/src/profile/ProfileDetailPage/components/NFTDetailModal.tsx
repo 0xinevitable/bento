@@ -89,6 +89,10 @@ const Content = styled.div`
   border: 1px solid #323232;
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.45);
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 const AssetListItem = styled.div`
@@ -96,6 +100,10 @@ const AssetListItem = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const TokenHeader = styled.div`
@@ -106,6 +114,16 @@ const TokenHeader = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 500px) {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+  }
 `;
 
 const TokenName = styled.h2`
@@ -121,6 +139,10 @@ const TokenName = styled.h2`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media screen and (max-width: 500px) {
+    margin-top: 0;
+  }
 `;
 
 const CollectionRow = styled.div`
