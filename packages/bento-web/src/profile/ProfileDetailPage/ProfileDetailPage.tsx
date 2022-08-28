@@ -133,6 +133,9 @@ const ProfileDetailPage = (props: Props) => {
     });
   }, [router, profileType]);
 
+  const ogImageURL =
+    images[0] || 'https://bento.finance/assets/mockups/profile-default.png';
+
   return (
     <PageContainer className="pt-0 px-0 z-10">
       <DocumentHead>
@@ -157,13 +160,13 @@ const ProfileDetailPage = (props: Props) => {
           </>
         )}
 
-        {images.length > 0 && (
+        {ogImageURL && (
           <>
-            <meta key="og:image" property="og:image" content={images[0]} />
+            <meta key="og:image" property="og:image" content={ogImageURL} />
             <meta
               key="twitter:image"
               property="twitter:image"
-              content={images[0]}
+              content={ogImageURL}
             />
           </>
         )}
