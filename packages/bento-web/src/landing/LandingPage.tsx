@@ -31,7 +31,10 @@ const LandingPage: React.FC = () => {
               WE LAUNCHED PROFILES.
             </BannerTitle>
 
-            <SoWhatButton>So what?</SoWhatButton>
+            <SoWhatButtonContainer>
+              <SoWhatButton>So what?</SoWhatButton>
+              <CTABadge>See what the fuss is about</CTABadge>
+            </SoWhatButtonContainer>
           </BannerContent>
 
           <DefineYourselfStickerContainer>
@@ -149,10 +152,47 @@ const BannerTitle = styled.h2`
   color: #ffffff;
   text-shadow: 0px 4px 12px #000000;
 `;
-const SoWhatButton = styled(Button)`
+
+const SoWhatButtonContainer = styled.div`
   margin-top: 20px;
   width: 260px;
   height: 56px;
+  position: relative;
+`;
+const SoWhatButton = styled(Button)`
+  width: 260px;
+  height: 56px;
+`;
+
+// FIXME: Duplicatded declares
+const CTABadge = styled.span`
+  position: absolute;
+  top: -12px;
+  /* right: -52px; */
+  right: -57px;
+
+  width: fit-content;
+  padding: 6px 12px;
+  background: rgba(51, 9, 17, 0.88);
+  border: 1px solid #ff214a;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.44);
+  border-radius: 36px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 83%;
+  /* identical to box height, or 12px */
+
+  text-align: center;
+  letter-spacing: -0.5px;
+
+  color: #ff214a;
 `;
 
 const BannerImageContainer = styled.div`
@@ -177,8 +217,8 @@ const DefineYourselfStickerContainer = styled.div`
   height: 39.84px;
 
   position: absolute;
-  left: 79.04px;
-  top: -21.46px;
+  left: 44px;
+  top: 13px;
   z-index: 4;
 
   transform: rotate(12.5deg);
