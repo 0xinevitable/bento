@@ -1,15 +1,11 @@
 import Image from 'next/image';
-import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
-import { NavigationBar } from '@/components/NavigationBar';
 import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@/components/TrackedSection';
-import { systemFontStack } from '@/dashboard-landing/styles/fonts';
-import { Analytics } from '@/utils/analytics';
 
 type Props = TrackedSectionOptions & {
   onClickBanner: () => void;
@@ -51,10 +47,8 @@ export const ProfileBanner: React.FC<Props> = ({ onClickBanner, ...props }) => {
 const BannerWrapper = styled(TrackedSection)`
   padding: 0 16px;
   padding-top: ${82 + 234}px;
-  background-color: #0f0a10;
-  background: linear-gradient(to right, #090307, #0f0a10);
   position: relative;
-  z-index: 0;
+  z-index: 1;
 
   &:after {
     content: '';
@@ -133,7 +127,6 @@ const BannerTitle = styled.h2`
   font-weight: 900;
   font-size: 32px;
   line-height: 120%;
-  /* or 38px */
 
   color: #ffffff;
   text-shadow: 0px 4px 12px #000000;
@@ -165,7 +158,6 @@ const SoWhatButton = styled(Button)`
 const CTABadge = styled.span`
   position: absolute;
   top: -12px;
-  /* right: -52px; */
   right: -57px;
 
   width: fit-content;
@@ -184,7 +176,6 @@ const CTABadge = styled.span`
   font-weight: 600;
   font-size: 14px;
   line-height: 83%;
-  /* identical to box height, or 12px */
 
   text-align: center;
   letter-spacing: -0.5px;

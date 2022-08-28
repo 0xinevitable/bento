@@ -124,14 +124,29 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 0 32px;
+  padding: 200px 32px 0;
+  margin-top: -200px;
 
   background-image: url('/assets/landing/header-background.jpg');
   background-size: 100% 100%;
   background-position: center;
+  position: relative;
+  z-index: 0;
 
   @media screen and (max-width: 620px) {
-    padding: 0 20px;
+    padding: 200px 20px 0;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(180deg, black, rgba(0, 0, 0, 0));
+    z-index: 0;
   }
 `;
 const Section = styled(TrackedSection)`
