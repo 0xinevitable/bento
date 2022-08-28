@@ -73,6 +73,10 @@ const Container = styled.div`
       transition: all 0.2s ease-in-out;
     }
   }
+
+  & img {
+    user-select: none;
+  }
 `;
 
 const BannerWrapper = styled.div`
@@ -162,6 +166,7 @@ const BannerImageContainer = styled.div`
   filter: saturate(120%);
 `;
 const BannerImage = styled(Image).attrs({
+  alt: 'Bento Profiles',
   src: '/assets/profile/profile-nudge.png',
   width: 491.62 * 1.5,
   height: 496 * 1.5,
@@ -180,6 +185,7 @@ const DefineYourselfStickerContainer = styled.div`
   filter: drop-shadow(0px 3.79416px 3.79416px rgba(0, 0, 0, 0.25));
 `;
 const DefineYourselfSticker = styled(Image).attrs({
+  alt: 'Define Yourself',
   src: '/assets/profile/sticker-define-yourself.png',
   width: 380,
   height: 42,
@@ -196,6 +202,7 @@ const TapeContainer = styled.div`
   filter: saturate(140%);
 `;
 const Tape = styled(Image).attrs({
+  alt: '',
   src: '/assets/profile/profile-nudge-tape.png',
   width: 870,
   height: 370,

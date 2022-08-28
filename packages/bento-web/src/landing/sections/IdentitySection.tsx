@@ -145,6 +145,10 @@ const BackgroundContainer = styled.div`
   z-index: -1;
   bottom: 0;
   right: 0;
+
+  * {
+    user-select: none;
+  }
 `;
 const BackgroundContent = styled.div`
   margin: 0 auto;
