@@ -1,3 +1,4 @@
+import { motion, useTransform, useViewportScroll } from 'framer-motion';
 import Image from 'next/image';
 import styled from 'styled-components';
 
@@ -12,9 +13,12 @@ type Props = TrackedSectionOptions & {
 };
 
 export const ProfileBanner: React.FC<Props> = ({ onClickBanner, ...props }) => {
+  const { scrollY } = useViewportScroll();
+  const scale = useTransform(scrollY, [0, 100, 300], [1, 1.5, 0.8]);
+
   return (
     <BannerWrapper {...props}>
-      <Banner>
+      <Banner style={{ scale }}>
         <BannerContent>
           <BannerTitle>
             HEY YOU!
@@ -67,7 +71,7 @@ const BannerWrapper = styled(TrackedSection)`
     margin-bottom: -48px;
   }
 `;
-const Banner = styled.div`
+const Banner = styled(motion.div)`
   margin: 0 auto;
   max-width: 1200px;
   width: 100%;

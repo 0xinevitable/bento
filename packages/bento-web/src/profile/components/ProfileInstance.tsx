@@ -2,12 +2,7 @@ import { OpenSeaAsset } from '@bento/client';
 import { Wallet } from '@bento/common';
 import axios, { AxiosError } from 'axios';
 import dedent from 'dedent';
-import {
-  AnimatePresence,
-  HTMLMotionProps,
-  isBrowser,
-  motion,
-} from 'framer-motion';
+import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
 import { useRouter } from 'next/router';
 import React, {

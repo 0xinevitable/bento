@@ -48,8 +48,8 @@ export const ProfileWalletList: React.FC<ProfileWalletListProps> = ({
   return (
     <React.Fragment>
       <ul className={clsx('flex flex-col gap-6', className)}>
-        {sortedWallets.map((wallet) => (
-          <li className="py-2 flex" key={wallet.address}>
+        {sortedWallets.map((wallet, index) => (
+          <li className="py-2 flex" key={`${wallet.address}-${index}`}>
             <img
               className="w-[64px] min-w-[64px] h-[64px] rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25 select-none"
               src={WALLET_TYPES[wallet.type].logo}

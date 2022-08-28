@@ -13,9 +13,11 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
   return (
     <ul>
       {tokenBalances.length > 0 ? (
-        tokenBalances.map((item) => {
+        tokenBalances.map((item, index) => {
           return (
-            <Container key={`${item.symbol}-${item.tokenAddress ?? 'native'}`}>
+            <Container
+              key={`${item.symbol}-${item.tokenAddress ?? 'native'}-${index}`}
+            >
               <Logo src={item.logo} />
               <Information>
                 <Row>
