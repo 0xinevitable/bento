@@ -115,6 +115,12 @@ const TokenName = styled.h2`
   font-weight: bold;
   color: white;
   line-height: 1;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const CollectionRow = styled.div`
@@ -133,7 +139,13 @@ const CollectionImage = styled.img`
   background-color: black;
 `;
 const CollectionName = styled.span`
-  font-size: 16px;
-  line-height: 1;
+  font-size: 14.8px;
+  line-height: 1.2;
   color: rgba(255, 255, 255, 0.75);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
