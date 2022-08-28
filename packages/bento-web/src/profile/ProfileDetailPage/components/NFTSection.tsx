@@ -1,13 +1,45 @@
 import { OpenSeaAsset } from '@bento/client';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
+import { UserProfile } from '@/profile/types/UserProfile';
+import { Analytics } from '@/utils/analytics';
+
+import { NFTDetailModal } from './NFTDetailModal';
 
 type Props = {
+  selected: boolean;
   nftAssets: OpenSeaAsset[];
+  profile: UserProfile | null;
+  isMyProfile: boolean;
+  onClickSetAsProfile: (assetImage: string) => void;
 };
 
-export const NFTSection: React.FC<Props> = ({ nftAssets }) => {
+export const NFTSection: React.FC<Props> = ({
+  nftAssets,
+  selected,
+  profile,
+  isMyProfile,
+  onClickSetAsProfile,
+}) => {
+  const [selectedNFT, setSelectedNFT] = useState<OpenSeaAsset | null>(null);
+
+  useEffect(() => {
+    if (!selectedNFT || !profile) {
+      return;
+    }
+
+    Analytics.logEvent('view_profile_nft', {
+      user_id: profile.user_id ?? '',
+      username: profile.username ?? '',
+      is_my_profile: isMyProfile,
+      token_network: 'ethereum',
+      token_contract: selectedNFT.asset_contract.address,
+      token_id: selectedNFT.token_id,
+    });
+  }, [selectedNFT, isMyProfile, profile]);
+
   return (
     <AssetList>
       {nftAssets.length > 0 ? (
@@ -18,7 +50,10 @@ export const NFTSection: React.FC<Props> = ({ nftAssets }) => {
             false;
 
           return (
-            <AssetListItem key={`${asset.id}-${index}`}>
+            <AssetListItem
+              key={`${asset.id}-${index}`}
+              onClick={() => setSelectedNFT(asset)}
+            >
               <AssetMedia
                 src={
                   !isVideo
@@ -33,13 +68,36 @@ export const NFTSection: React.FC<Props> = ({ nftAssets }) => {
                 isVideo={isVideo}
               />
               <AssetName className="text-sm text-gray-400">
-                {asset.name || `#${asset.id}`}
+                {asset.name || `#${asset.token_id}`}
               </AssetName>
             </AssetListItem>
           );
         })
       ) : (
         <Empty>No NFTs Found</Empty>
+      )}
+
+      {selected && (
+        <NFTDetailModal
+          asset={selectedNFT}
+          visible={!!selectedNFT}
+          onDismiss={() => setSelectedNFT(null)}
+          isMyProfile={isMyProfile}
+          onClickSetAsProfile={(assetImage) => {
+            if (!profile || !selectedNFT) {
+              return;
+            }
+            Analytics.logEvent('set_nft_as_profile', {
+              user_id: profile.user_id ?? '',
+              username: profile.username ?? '',
+              is_my_profile: isMyProfile,
+              token_network: 'ethereum',
+              token_contract: selectedNFT.asset_contract.address,
+              token_id: selectedNFT.token_id,
+            });
+            onClickSetAsProfile(assetImage);
+          }}
+        />
       )}
     </AssetList>
   );

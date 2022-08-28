@@ -143,7 +143,7 @@ export const TokenDetailModal: React.FC<Props> = ({
                       isVideo={isVideo}
                     />
                     <AssetName className="text-sm text-gray-400">
-                      {asset.name || `#${asset.id}`}
+                      {asset.name || `#${asset.token_id}`}
                     </AssetName>
                   </AssetListItem>
                 );
