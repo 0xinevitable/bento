@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { Head } from 'next/document';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
