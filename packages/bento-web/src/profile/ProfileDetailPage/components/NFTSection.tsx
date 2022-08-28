@@ -50,10 +50,7 @@ export const NFTSection: React.FC<Props> = ({
             false;
 
           return (
-            <AssetListItem
-              key={`${asset.id}-${index}`}
-              onClick={() => setSelectedNFT(asset)}
-            >
+            <AssetListItem key={index} onClick={() => setSelectedNFT(asset)}>
               <AssetMedia
                 src={
                   !isVideo
