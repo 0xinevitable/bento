@@ -28,6 +28,7 @@ export type OpenSeaAsset = {
 
   asset_contract: {
     symbol: string | '';
+    address: string;
   };
 };
 
