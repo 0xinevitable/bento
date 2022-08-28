@@ -135,7 +135,7 @@ export default function ProfileLandingPage() {
   }, [session, profile, hasUsername]);
 
   return (
-    <>
+    <Container>
       <StyledTickerCarousel className="mt-[64px]" />
       <StyledPageContainer className="pt-0 z-10">
         <Illust />
@@ -172,9 +172,16 @@ export default function ProfileLandingPage() {
 
         <FixedLoginNudge visible={isLoginRequired} redirectTo="/profile" />
       </StyledPageContainer>
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 
 const StyledTickerCarousel = styled(TickerCarousel)`
   width: 100vw;
@@ -226,6 +233,21 @@ const Illust: React.FC = () => (
         </StarStickerContainer>
       </RightStickerContainer>
     </RightStickerWrapper>
+
+    <ProfileStackWrapper>
+      <ProfileStackContainer>
+        <ProfileBentoContainer>
+          <ProfileBento />
+        </ProfileBentoContainer>
+        <ProfileCloneXContainer>
+          <ProfileCloneX />
+        </ProfileCloneXContainer>
+      </ProfileStackContainer>
+    </ProfileStackWrapper>
+
+    <ProfileMegamiContainer>
+      <ProfileMegami />
+    </ProfileMegamiContainer>
   </IllustContainer>
 );
 
@@ -235,6 +257,8 @@ const IllustContainer = styled.div`
   height: 248px;
   width: 248px;
   position: relative;
+  z-index: 0;
+  filter: saturate(120%);
 
   * {
     user-select: none;
@@ -247,40 +271,12 @@ const EarlyBentoBadgeShadow = styled.div`
 
   display: flex;
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.55);
-  filter: saturate(1.25);
 `;
 const EarlyBentoBadge = styled(Image)`
   border-radius: 50%;
 
   user-select: none;
   transition: all 0.2s ease-in-out;
-`;
-
-const Title = styled.h1`
-  width: fit-content;
-  margin: 44px auto 0;
-
-  font-weight: 900;
-  font-size: 52px;
-  font-variant: small-caps;
-  line-height: 83%;
-
-  text-align: center;
-  letter-spacing: -0.5px;
-
-  color: #ffffff;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  & > span {
-    width: fit-content;
-  }
-
-  @media screen and (max-width: 620px) {
-    font-size: 48px;
-  }
 `;
 
 const RightStickerWrapper = styled.div`
@@ -305,7 +301,7 @@ const DefineYourselfStickerContainer = styled.div`
   z-index: -2;
 
   transform: rotate(-22deg);
-  filter: saturate(120%) drop-shadow(0px 8px 24px rgba(0, 0, 0, 0.55))
+  filter: drop-shadow(0px 8px 24px rgba(0, 0, 0, 0.55))
     drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 `;
 const DefineYourselfSticker = styled(Image).attrs({
@@ -375,10 +371,10 @@ const UniswapBadgeContainer = styled.div`
   top: 22.5px;
   right: -96.71px;
   transform: rotate(-20deg);
+  z-index: 2;
 
   display: flex;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.55);
-  filter: saturate(120%);
 `;
 const UniswapBadge = styled(Image).attrs({
   src: '/assets/profile/badge-uniswap.png',
@@ -394,10 +390,10 @@ const OsmosisBadgeContainer = styled.div`
   position: absolute;
   top: ${22.5 + 44.5}px;
   right: ${-61 - 98}px;
+  z-index: 2;
 
   display: flex;
   box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.55);
-  filter: saturate(120%);
 `;
 const OsmosisBadge = styled(Image).attrs({
   src: '/assets/profile/badge-osmosis.png',
@@ -478,10 +474,120 @@ const S1Illust: React.FC = () => (
   </svg>
 );
 
+const ProfileStackWrapper = styled.div`
+  position: absolute;
+  right: ${-85 - 557}px;
+  z-index: 1;
+`;
+const ProfileStackContainer = styled.div`
+  position: relative;
+  width: 557px;
+  height: 642px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 425px;
+    height: 288px;
+    left: 66px;
+    top: 354px;
+
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 78.12%);
+  }
+`;
+const ProfileBentoContainer = styled.div`
+  position: absolute;
+  top: 90px;
+  left: 169.69px;
+
+  width: 236.66px;
+  height: 512.46px;
+  transform: rotate(12deg);
+`;
+const ProfileBento = styled(Image).attrs({
+  src: '/assets/profile/profile-bento.png',
+  width: 236.66 * 1.5,
+  height: 512.46 * 1.5,
+  quality: 100,
+})``;
+const ProfileCloneXContainer = styled.div`
+  position: absolute;
+  top: 24.46px;
+  left: 69.57px;
+
+  width: 264.34px;
+  height: 572.38px;
+  transform: rotate(-15deg);
+  filter: drop-shadow(0px 8px 124px rgba(0, 0, 0, 0.88));
+`;
+const ProfileCloneX = styled(Image).attrs({
+  src: '/assets/profile/profile-clonex.png',
+  width: 264.34 * 1.5,
+  height: 572.38 * 1.5,
+  quality: 100,
+})``;
+const ProfileMegamiContainer = styled.div`
+  position: absolute;
+  top: 254px;
+  left: ${-385.5 - 60}px;
+
+  width: 385.54px;
+  height: 834.83px;
+  transform: rotate(-15deg);
+  filter: drop-shadow(0px 11.6681px 180.856px rgba(0, 0, 0, 0.88));
+
+  &:after {
+    content: '';
+    top: 320px;
+    left: 0px;
+
+    position: absolute;
+    width: 594px;
+    height: 586px;
+
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 55.82%);
+  }
+`;
+const ProfileMegami = styled(Image).attrs({
+  src: '/assets/profile/profile-megami.png',
+  width: 385.54 * 1.5,
+  height: 834.83 * 1.5,
+  quality: 100,
+})``;
+
+const Title = styled.h1`
+  width: fit-content;
+  margin: 44px auto 0;
+
+  font-weight: 900;
+  font-size: 52px;
+  font-variant: small-caps;
+  line-height: 83%;
+
+  text-align: center;
+  letter-spacing: -0.5px;
+
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+
+  & > span {
+    width: fit-content;
+  }
+
+  @media screen and (max-width: 620px) {
+    font-size: 48px;
+  }
+`;
+
 const ButtonContainer = styled.div`
   margin-top: 32px;
   width: 352px;
   position: relative;
+  z-index: 1;
 `;
 const CTAButton = styled(Button)`
   width: 100%;
