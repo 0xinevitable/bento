@@ -364,7 +364,10 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             <AssetSection tokenBalances={tokenBalances} />
           </AnimatedTab>
           <AnimatedTab selected={selectedTab === ProfileTab.NFTs}>
-            <NFTSection nftAssets={nftAssets} />
+            <NFTSection
+              nftAssets={nftAssets}
+              selected={selectedTab === ProfileTab.NFTs}
+            />
           </AnimatedTab>
         </TabContent>
       </AnimatePresence>

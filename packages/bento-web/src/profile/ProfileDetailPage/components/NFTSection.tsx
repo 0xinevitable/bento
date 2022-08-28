@@ -1,13 +1,19 @@
 import { OpenSeaAsset } from '@bento/client';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
 
+import { NFTDetailModal } from './NFTDetailModal';
+
 type Props = {
+  selected: boolean;
   nftAssets: OpenSeaAsset[];
 };
 
-export const NFTSection: React.FC<Props> = ({ nftAssets }) => {
+export const NFTSection: React.FC<Props> = ({ nftAssets, selected }) => {
+  const [selectedNFT, setSelectedNFT] = useState<OpenSeaAsset | null>(null);
+
   return (
     <AssetList>
       {nftAssets.length > 0 ? (
@@ -18,7 +24,10 @@ export const NFTSection: React.FC<Props> = ({ nftAssets }) => {
             false;
 
           return (
-            <AssetListItem key={`${asset.id}-${index}`}>
+            <AssetListItem
+              key={`${asset.id}-${index}`}
+              onClick={() => setSelectedNFT(asset)}
+            >
               <AssetMedia
                 src={
                   !isVideo
@@ -40,6 +49,14 @@ export const NFTSection: React.FC<Props> = ({ nftAssets }) => {
         })
       ) : (
         <Empty>No NFTs Found</Empty>
+      )}
+
+      {selected && (
+        <NFTDetailModal
+          asset={selectedNFT}
+          visible={!!selectedNFT}
+          onDismiss={() => setSelectedNFT(null)}
+        />
       )}
     </AssetList>
   );
