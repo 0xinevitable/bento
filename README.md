@@ -7,7 +7,9 @@
 
 [![Cover Artwork](https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/og-image-v3.png)](https://bento.finance)
 
-[![Dashboard Preview](https://raw.githubusercontent.com/inevitable-changes/bento/main/docs/images/dashboard-preview.png?)](https://bento.finance)
+[![Bento Profiles](https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/profile/og-image.png)](https://bento.finance/profile/landing)
+
+[![Dashboard Preview](https://raw.githubusercontent.com/inevitable-changes/bento/main/docs/images/dashboard-preview.png?)](https://bento.finance/home)
 
 ## The Status Quo
 

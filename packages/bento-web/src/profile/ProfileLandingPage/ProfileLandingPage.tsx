@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { Head } from 'next/document';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
@@ -136,6 +137,18 @@ export default function ProfileLandingPage() {
 
   return (
     <Container>
+      <Head>
+        <meta
+          key="og:image"
+          property="og:image"
+          content="https://bento.finance/assets/profile/og-image.png"
+        />
+        <meta
+          key="twitter:image"
+          property="twitter:image"
+          content="https://bento.finance/assets/profile/og-image.png"
+        />
+      </Head>
       <StyledTickerCarousel className="mt-[64px]" />
       <StyledPageContainer className="pt-0 z-10">
         <Illust />
