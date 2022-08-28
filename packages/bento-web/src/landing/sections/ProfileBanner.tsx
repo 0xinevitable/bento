@@ -67,6 +67,11 @@ const BannerWrapper = styled(TrackedSection)`
     height: 500px;
     background: linear-gradient(180deg, black 30%, rgba(0, 0, 0, 0));
   }
+
+  @media screen and (max-width: 580px) {
+    padding-top: ${82 + 146}px;
+    margin-bottom: -48px;
+  }
 `;
 const Banner = styled.div`
   margin: 0 auto;
@@ -83,18 +88,26 @@ const Banner = styled.div`
   border: 1px solid #3d3d3d;
   border-radius: 24px;
 
-  /* &:after {
-    content: '';
-    position: absolute;
-    left: 1px;
-    right: 1px;
-    bottom: 0px;
-    z-index: 2;
-    width: calc(100% -2px);
-    height: 200px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
-    border-radius: 24px;
-  } */
+  @media screen and (max-width: 950px) {
+    &:after {
+      content: '';
+      position: absolute;
+      left: 1px;
+      right: 1px;
+      bottom: 0px;
+      z-index: 3;
+      width: calc(100% -2px);
+      height: 200px;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+      border-radius: 24px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    &:after {
+      height: 280px;
+    }
+  }
 `;
 const BannerContent = styled.div`
   position: absolute;
@@ -105,7 +118,14 @@ const BannerContent = styled.div`
 
   display: flex;
   flex-direction: column;
-  z-index: 3;
+  z-index: 4;
+
+  @media screen and (max-width: 580px) {
+    top: unset;
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+  }
 `;
 const BannerTitle = styled.h2`
   font-family: 'Poppins';
@@ -117,6 +137,10 @@ const BannerTitle = styled.h2`
 
   color: #ffffff;
   text-shadow: 0px 4px 12px #000000;
+
+  @media screen and (max-width: 580px) {
+    font-size: 24px;
+  }
 `;
 
 const SoWhatButtonContainer = styled.div`
@@ -124,6 +148,13 @@ const SoWhatButtonContainer = styled.div`
   width: 260px;
   height: 56px;
   position: relative;
+
+  @media screen and (max-width: 580px) {
+    &,
+    & > button {
+      width: 100%;
+    }
+  }
 `;
 const SoWhatButton = styled(Button)`
   width: 260px;
@@ -159,6 +190,10 @@ const CTABadge = styled.span`
   letter-spacing: -0.5px;
 
   color: #ff214a;
+
+  @media screen and (max-width: 580px) {
+    right: -10px;
+  }
 `;
 
 const BannerImageContainer = styled.div`
@@ -170,6 +205,21 @@ const BannerImageContainer = styled.div`
   width: 491.62px;
   height: 496px;
   filter: saturate(120%);
+
+  @media screen and (max-width: 950px) {
+    right: 0;
+  }
+
+  @media screen and (max-width: 800px) {
+    right: -30px;
+  }
+
+  @media screen and (max-width: 580px) {
+    width: 301px;
+    height: 303.68px;
+    right: -15px;
+    bottom: 104px;
+  }
 `;
 const BannerImage = styled(Image).attrs({
   alt: 'Bento Profiles',
@@ -189,6 +239,23 @@ const DefineYourselfStickerContainer = styled.div`
 
   transform: rotate(12.5deg);
   filter: drop-shadow(0px 3.79416px 3.79416px rgba(0, 0, 0, 0.25));
+
+  @media screen and (max-width: 800px) {
+    top: -140px;
+  }
+
+  @media screen and (max-width: 580px) {
+    top: 48px;
+    width: 265.35px;
+    height: 29.33px;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 180.84px;
+    height: 19.99px;
+
+    top: ${-72.68 - 20}px;
+  }
 `;
 const DefineYourselfSticker = styled(Image).attrs({
   alt: 'Define Yourself',
@@ -206,6 +273,10 @@ const TapeContainer = styled.div`
   right: 0;
   z-index: 2;
   filter: saturate(140%);
+
+  @media screen and (max-width: 950px) {
+    display: none;
+  }
 `;
 const Tape = styled(Image).attrs({
   alt: '',
