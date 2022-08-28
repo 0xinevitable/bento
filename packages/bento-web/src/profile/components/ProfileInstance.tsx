@@ -298,8 +298,11 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     <React.Fragment>
       <TickerCarousel />
 
-      <ProfileImageContainer>
-        <ProfileImage src={profileImageURL} />
+      <ProfileImageContainer $isDefault={!profile?.images?.[0]}>
+        <ProfileImage
+          src={profileImageURL}
+          $isDefault={!profile?.images?.[0]}
+        />
 
         {!!profile && (
           <EarlyBentoBadge
@@ -443,13 +446,17 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   );
 };
 
-const ProfileImageContainer = styled.div`
+type IsDefaultImageProps = {
+  $isDefault: boolean;
+};
+const ProfileImageContainer = styled.div<IsDefaultImageProps>`
   width: 100%;
   padding-bottom: 100%;
-  background-color: red;
+  background-color: black;
   position: relative;
   aspect-ratio: 1;
   z-index: 0;
+  overflow: hidden;
 
   &:after {
     content: '';
@@ -461,16 +468,32 @@ const ProfileImageContainer = styled.div`
     right: 0;
     bottom: 0;
 
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 25%, #000000 80%);
     z-index: 1;
+
+    ${({ $isDefault }) =>
+      $isDefault &&
+      css`
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+      `};
   }
 `;
-const ProfileImage = styled.img`
+const ProfileImage = styled.img<IsDefaultImageProps>`
+  margin-top: -5%;
   width: 100%;
-  height: 100%;
+  height: 90%;
+  object-fit: cover;
 
   position: absolute;
   background-color: black;
+
+  ${({ $isDefault }) =>
+    $isDefault &&
+    css`
+      margin-top: 0;
+      width: 100%;
+      height: 100%;
+    `};
 `;
 const EarlyBentoBadge = styled.img`
   position: absolute;
