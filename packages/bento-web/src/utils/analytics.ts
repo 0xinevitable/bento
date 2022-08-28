@@ -16,6 +16,7 @@ export type AnalyticsEvent = {
     section: string;
   };
 
+  click_dashboard_profile_nudge: undefined;
   click_dashboard_landing_link: {
     medium: 'landing';
   };
