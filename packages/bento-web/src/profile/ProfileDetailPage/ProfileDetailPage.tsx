@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import DocumentHead from 'next/head';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
 
@@ -99,7 +99,7 @@ const ProfileDetailPage = (props: Props) => {
     if (profileType === 'MY_PROFILE') {
       _title = 'My Profile | Bento';
       _description = '';
-      _images = ['/static/images/profile-default.jpg'];
+      _images = props.profile.images ?? [];
     }
 
     if (profileType === 'USER_PROFILE') {
@@ -113,10 +113,7 @@ const ProfileDetailPage = (props: Props) => {
       }
 
       _description = props.profile.bio ?? '';
-      _images = [
-        ...(props.profile.images ?? []),
-        '/static/images/profile-default.jpg',
-      ];
+      _images = props.profile.images ?? [];
     }
 
     return [_title, _description, _images];
@@ -138,11 +135,17 @@ const ProfileDetailPage = (props: Props) => {
 
   return (
     <PageContainer className="pt-0 px-0 z-10">
-      <DocumentHead>
+      <Head>
         <title>{title}</title>
         <meta key="title" name="title" content={title} />
         <meta key="og:title" property="og:title" content={title} />
         <meta key="twitter:title" name="twitter:title" content={title} />
+
+        <link
+          key="canonical"
+          rel="canonical"
+          href={`https://bento.finance${router.asPath.split('?')[0]}`}
+        />
 
         {description.length > 0 && (
           <>
@@ -170,10 +173,7 @@ const ProfileDetailPage = (props: Props) => {
             />
           </>
         )}
-
-        {/* <meta property="og:url" content={url} />
-        <meta property="twitter:url" content={url} /> */}
-      </DocumentHead>
+      </Head>
 
       <div className="w-full max-w-lg mt-[64px] mx-auto">
         <NoSSR>

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
+import { MetaHead } from '@/components/MetaHead';
 import { Modal } from '@/components/Modal';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
@@ -137,18 +138,11 @@ export default function ProfileLandingPage() {
 
   return (
     <Container>
-      <Head>
-        <meta
-          key="og:image"
-          property="og:image"
-          content="https://bento.finance/assets/profile/og-image.png"
-        />
-        <meta
-          key="twitter:image"
-          property="twitter:image"
-          content="https://bento.finance/assets/profile/og-image.png"
-        />
-      </Head>
+      <MetaHead
+        title="Web3 Profiles like never before"
+        image="https://bento.finance/assets/profile/og-image.png"
+      />
+
       <StyledTickerCarousel className="mt-[64px]" />
       <StyledPageContainer className="pt-0 z-10">
         <Illusts />

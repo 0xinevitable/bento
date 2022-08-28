@@ -12,11 +12,13 @@ const meta = {
 type MetaHeadProps = {
   title?: string;
   children?: React.ReactNode;
+  image?: string;
 };
 
-export const MetaHead = ({ title, children }: MetaHeadProps) => {
+export const MetaHead = ({ title, image, children }: MetaHeadProps) => {
   const router = useRouter();
   const currentTitle = title ?? meta.title;
+  const imageURL = image ?? meta.image;
 
   return (
     <Head>
@@ -37,7 +39,7 @@ export const MetaHead = ({ title, children }: MetaHeadProps) => {
         property="og:description"
         content={meta.description}
       />
-      <meta key="og:image" property="og:image" content={meta.image} />
+      <meta key="og:image" property="og:image" content={imageURL} />
 
       <meta
         key="twitter:card"
@@ -55,7 +57,7 @@ export const MetaHead = ({ title, children }: MetaHeadProps) => {
         property="twitter:description"
         content={meta.description}
       />
-      <meta key="twitter:image" property="twitter:image" content={meta.image} />
+      <meta key="twitter:image" property="twitter:image" content={imageURL} />
       <meta key="theme-color" name="theme-color" content="#050606" />
       {children}
     </Head>

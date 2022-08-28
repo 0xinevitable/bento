@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import { MetaHead } from '@/components/MetaHead';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
@@ -77,6 +78,8 @@ const ProfileEditPage = () => {
 
   return (
     <>
+      <MetaHead />
+
       <Wrapper>
         <Preview profileDraft={profileDraft} />
         <EditorWrapper>

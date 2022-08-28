@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
 
+import { MetaHead } from '@/components/MetaHead';
 import { PageContainer } from '@/components/PageContainer';
 import { useHiddenBodyOverflow } from '@/hooks/useHiddenBodyOverflow';
 import { useSession } from '@/hooks/useSession';
@@ -31,6 +32,8 @@ const ProfileHomePage = () => {
 
   return (
     <PageContainer>
+      <MetaHead />
+
       <Header />
       <PageViewChart />
       <LinkEventListSection />

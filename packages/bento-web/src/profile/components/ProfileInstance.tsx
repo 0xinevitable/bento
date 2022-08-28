@@ -25,7 +25,6 @@ import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 import { Analytics } from '@/utils/analytics';
 import { copyToClipboard } from '@/utils/clipboard';
-import { throttle } from '@/utils/throttle';
 import { toast } from '@/utils/toast';
 
 import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
