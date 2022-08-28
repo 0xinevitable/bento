@@ -53,7 +53,7 @@ export const NFTDetailModal: React.FC<Props> = ({
             </AssetListItem>
 
             <TokenHeader>
-              <TokenName>{asset.name || `#${asset.id}`}</TokenName>
+              <TokenName>{asset.name || `#${asset.token_id}`}</TokenName>
 
               <CollectionRow>
                 <CollectionImage src={asset.collection.image_url} />
@@ -237,7 +237,7 @@ const MdiImageIcon: React.FC = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g clip-path="url(#clip0_1089_552)">
+    <g clipPath="url(#clip0_1089_552)">
       <path
         d="M21 19V5C21 3.9 20.1 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19ZM8.5 13.5L11 16.51L14.5 12L19 18H5L8.5 13.5Z"
         fill="white"
