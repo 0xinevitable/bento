@@ -343,6 +343,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         primaryColor={palette.primary}
         shadowColor={palette.primaryShadow}
       />
+
       <AnimatePresence initial={false}>
         <TabContent palette={palette}>
           {/* <AnimatedTab selected={selectedTab === ProfileTab.Links}>

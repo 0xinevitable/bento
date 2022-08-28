@@ -176,13 +176,13 @@ const ProfileDetailPage = (props: Props) => {
       </DocumentHead>
 
       <div className="w-full max-w-lg mt-[64px] mx-auto">
-        {/* <NoSSR> */}
-        <ProfileInstance
-          profile={profile}
-          revaildateProfile={revaildateProfile}
-          isMyProfile={profileType === 'MY_PROFILE'}
-        />
-        {/* </NoSSR> */}
+        <NoSSR>
+          <ProfileInstance
+            profile={profile}
+            revaildateProfile={revaildateProfile}
+            isMyProfile={profileType === 'MY_PROFILE'}
+          />
+        </NoSSR>
       </div>
     </PageContainer>
   );
