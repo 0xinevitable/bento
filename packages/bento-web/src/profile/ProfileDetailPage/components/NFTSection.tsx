@@ -9,9 +9,16 @@ import { NFTDetailModal } from './NFTDetailModal';
 type Props = {
   selected: boolean;
   nftAssets: OpenSeaAsset[];
+  isMyProfile: boolean;
+  onClickSetAsProfile: (assetImage: string) => void;
 };
 
-export const NFTSection: React.FC<Props> = ({ nftAssets, selected }) => {
+export const NFTSection: React.FC<Props> = ({
+  nftAssets,
+  selected,
+  isMyProfile,
+  onClickSetAsProfile,
+}) => {
   const [selectedNFT, setSelectedNFT] = useState<OpenSeaAsset | null>(null);
 
   return (
@@ -56,6 +63,8 @@ export const NFTSection: React.FC<Props> = ({ nftAssets, selected }) => {
           asset={selectedNFT}
           visible={!!selectedNFT}
           onDismiss={() => setSelectedNFT(null)}
+          isMyProfile={isMyProfile}
+          onClickSetAsProfile={onClickSetAsProfile}
         />
       )}
     </AssetList>

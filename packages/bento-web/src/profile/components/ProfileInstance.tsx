@@ -367,6 +367,52 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             <NFTSection
               nftAssets={nftAssets}
               selected={selectedTab === ProfileTab.NFTs}
+              isMyProfile={isMyProfile}
+              onClickSetAsProfile={async (assetImage) => {
+                try {
+                  await axios.post(`/api/profile`, {
+                    username: profile?.username.toLowerCase(),
+                    display_name: profile?.display_name,
+                    images: [assetImage],
+                  });
+                  revaildateProfile?.();
+
+                  setTimeout(() => {
+                    toast({
+                      type: 'success',
+                      title: 'Changes Saved',
+                    });
+
+                    document.body.scrollIntoView({
+                      behavior: 'smooth',
+                    });
+                  });
+                } catch (e) {
+                  if (e instanceof AxiosError) {
+                    const errorResponse = e.response?.data as ErrorResponse;
+                    if (errorResponse?.code === 'USERNAME_UNUSABLE') {
+                      toast({
+                        type: 'error',
+                        title: errorResponse.message,
+                        description: 'Please choose another username',
+                      });
+                      setDraft((prev) => ({ ...prev, username: '' }));
+                    } else if (errorResponse?.code === 'VALUE_REQUIRED') {
+                      toast({
+                        type: 'error',
+                        title: errorResponse.message,
+                      });
+                    } else {
+                      toast({
+                        type: 'error',
+                        title: 'Server Error',
+                        description:
+                          errorResponse?.message || 'Something went wrong',
+                      });
+                    }
+                  }
+                }
+              }}
             />
           </AnimatedTab>
         </TabContent>
