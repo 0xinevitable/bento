@@ -368,6 +368,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
               nftAssets={nftAssets}
               selected={selectedTab === ProfileTab.NFTs}
               isMyProfile={isMyProfile}
+              profile={profile}
               onClickSetAsProfile={async (assetImage) => {
                 try {
                   await axios.post(`/api/profile`, {

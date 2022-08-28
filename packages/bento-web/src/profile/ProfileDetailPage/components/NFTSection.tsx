@@ -1,14 +1,17 @@
 import { OpenSeaAsset } from '@bento/client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
+import { UserProfile } from '@/profile/types/UserProfile';
+import { Analytics } from '@/utils/analytics';
 
 import { NFTDetailModal } from './NFTDetailModal';
 
 type Props = {
   selected: boolean;
   nftAssets: OpenSeaAsset[];
+  profile: UserProfile | null;
   isMyProfile: boolean;
   onClickSetAsProfile: (assetImage: string) => void;
 };
@@ -16,10 +19,26 @@ type Props = {
 export const NFTSection: React.FC<Props> = ({
   nftAssets,
   selected,
+  profile,
   isMyProfile,
   onClickSetAsProfile,
 }) => {
   const [selectedNFT, setSelectedNFT] = useState<OpenSeaAsset | null>(null);
+
+  useEffect(() => {
+    if (!selectedNFT || !profile) {
+      return;
+    }
+
+    Analytics.logEvent('view_profile_nft', {
+      user_id: profile.user_id ?? '',
+      username: profile.username ?? '',
+      is_my_profile: isMyProfile,
+      token_network: 'ethereum',
+      token_contract: selectedNFT.asset_contract.address,
+      token_id: selectedNFT.token_id,
+    });
+  }, [selectedNFT, isMyProfile, profile]);
 
   return (
     <AssetList>
@@ -64,7 +83,20 @@ export const NFTSection: React.FC<Props> = ({
           visible={!!selectedNFT}
           onDismiss={() => setSelectedNFT(null)}
           isMyProfile={isMyProfile}
-          onClickSetAsProfile={onClickSetAsProfile}
+          onClickSetAsProfile={(assetImage) => {
+            if (!profile || !selectedNFT) {
+              return;
+            }
+            Analytics.logEvent('set_nft_as_profile', {
+              user_id: profile.user_id ?? '',
+              username: profile.username ?? '',
+              is_my_profile: isMyProfile,
+              token_network: 'ethereum',
+              token_contract: selectedNFT.asset_contract.address,
+              token_id: selectedNFT.token_id,
+            });
+            onClickSetAsProfile(assetImage);
+          }}
         />
       )}
     </AssetList>

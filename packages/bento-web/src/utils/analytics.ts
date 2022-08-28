@@ -110,6 +110,22 @@ export type AnalyticsEvent = {
     username: string;
     is_my_profile: boolean;
   };
+  view_profile_nft: {
+    user_id: string;
+    username: string;
+    is_my_profile: boolean;
+    token_network: 'ethereum';
+    token_contract: string;
+    token_id: string;
+  };
+  set_nft_as_profile: {
+    user_id: string;
+    username: string;
+    is_my_profile: boolean;
+    token_network: 'ethereum';
+    token_contract: string;
+    token_id: string;
+  };
   click_edit_my_profile: {
     title: string;
   };
