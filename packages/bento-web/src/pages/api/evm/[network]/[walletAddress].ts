@@ -7,8 +7,8 @@ import {
   KlaytnChain,
   PolygonChain,
   TokenBalance,
-} from '@bento/core/lib/chains';
-import { pricesFromCoinMarketCap } from '@bento/core/lib/pricings/CoinMarketCap';
+} from '@bento/core/chains';
+import { pricesFromCoinMarketCap } from '@bento/core/pricings/CoinMarketCap';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface APIRequest extends NextApiRequest {

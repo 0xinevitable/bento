@@ -21,7 +21,7 @@ import {
 import { MinimalABIs } from './abi';
 import { Chain, TokenBalance } from './interfaces';
 
-export { Chain, TokenBalance };
+export type { Chain, TokenBalance };
 
 export class EthereumChain implements Chain {
   currency = {

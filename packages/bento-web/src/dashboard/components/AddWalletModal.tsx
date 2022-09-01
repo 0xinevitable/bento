@@ -1,4 +1,4 @@
-import { Bech32Address } from '@bento/core/lib/bech32';
+import { Bech32Address } from '@bento/core/bech32';
 import { getAddress, isAddress } from '@ethersproject/address';
 import { PublicKey } from '@solana/web3.js';
 import clsx from 'clsx';
