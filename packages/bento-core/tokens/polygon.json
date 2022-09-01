@@ -73,7 +73,7 @@
   },
   {
     "symbol": "IDIA",
-    "name": "Impossible Finance IDIA",
+    "name": "Impossible Finance",
     "decimals": 18,
     "address": "0x0b15Ddf19D47E6a86A56148fb4aFFFc6929BcB89",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x0b15Ddf19D47E6a86A56148fb4aFFFc6929BcB89/logo.png"
@@ -668,5 +668,35 @@
     "decimals": 18,
     "address": "0xfad70FD116559914240faB82b0078c4E82a6a1B8",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xfad70FD116559914240faB82b0078c4E82a6a1B8/logo.png"
+  },
+  {
+    "symbol": "WALLET",
+    "name": "Ambire Wallet",
+    "decimals": 18,
+    "address": "0x564906ec1DF8399F00e4ad32c0eCAC0404a27A1c",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x564906ec1DF8399F00e4ad32c0eCAC0404a27A1c/logo.png"
+  },
+  {
+    "symbol": "MPH",
+    "name": "Morpher Token",
+    "decimals": 18,
+    "address": "0x65C9e3289e5949134759119DBc9F862E8d6F2fBE",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x65C9e3289e5949134759119DBc9F862E8d6F2fBE/logo.png"
+  },
+  {
+    "symbol": "$ZKP",
+    "name": "Panther Protocol",
+    "decimals": 18,
+    "address": "0x9A06Db14D639796B25A6ceC6A1bf614fd98815EC",
+    "coinGeckoId": "panther",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x9A06Db14D639796B25A6ceC6A1bf614fd98815EC/logo.png"
+  },
+  {
+    "symbol": "BIFI",
+    "name": "Beefy.Finance",
+    "decimals": 18,
+    "address": "0xFbdd194376de19a88118e84E279b977f165d01b8",
+    "coinGeckoId": "beefy-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xFbdd194376de19a88118e84E279b977f165d01b8/logo.png"
   }
 ]

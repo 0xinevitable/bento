@@ -2404,5 +2404,21 @@
     "address": "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6",
     "coinGeckoId": "stargate-finance",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6/logo.png"
+  },
+  {
+    "symbol": "SAITAMA",
+    "name": "Saitama",
+    "decimals": 9,
+    "address": "0xCE3f08e664693ca792caCE4af1364D5e220827B2",
+    "coinGeckoId": "saitama-inu",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xCE3f08e664693ca792caCE4af1364D5e220827B2/logo.png"
+  },
+  {
+    "symbol": "AGIX",
+    "name": "SingularityNET",
+    "decimals": 8,
+    "address": "0x5B7533812759B45C2B44C19e320ba2cD2681b542",
+    "coinGeckoId": "singularitynet",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5B7533812759B45C2B44C19e320ba2cD2681b542/logo.png"
   }
 ]
