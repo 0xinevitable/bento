@@ -96,7 +96,7 @@ export const update = async () => {
 
   const CHAIN_OUTPUT_PATH = path.resolve(
     WORKSPACE_ROOT_PATH,
-    './packages/bento-core/src/tokens/bnb.json',
+    './packages/bento-core/tokens/bnb.json',
   );
 
   let previousTokens: TokenInput[] = [];

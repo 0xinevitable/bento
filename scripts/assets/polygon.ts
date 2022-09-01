@@ -13,7 +13,7 @@ import {
 
 const CHAIN_OUTPUT_PATH = path.resolve(
   WORKSPACE_ROOT_PATH,
-  './packages/bento-core/src/tokens/polygon.json',
+  './packages/bento-core/tokens/polygon.json',
 );
 
 export const update = async () => {
