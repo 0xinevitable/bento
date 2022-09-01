@@ -23,12 +23,13 @@ export type Secrets = EnvironmentSecrets & typeof HARDCODED_SECRETS;
 const splitAPIKeys = (value: string | undefined) => value?.split(',') || [];
 
 export const Config: Secrets = {
-  SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY || '',
-  SUPABASE_URL: process.env.SUPABASE_URL || '',
-  SLACK_NEW_PROFILE_WEBHOOK: process.env.SLACK_NEW_PROFILE_WEBHOOK || '',
-  OPENSEA_API_KEYS: splitAPIKeys(process.env.OPENSEA_API_KEYS),
-  COVALENT_API_KEYS: splitAPIKeys(process.env.COVALENT_API_KEYS),
-  CMC_PRO_API_KEYS: splitAPIKeys(process.env.CMC_PRO_API_KEYS),
+  SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
+  SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  SLACK_NEW_PROFILE_WEBHOOK:
+    process.env.NEXT_PUBLIC_SLACK_NEW_PROFILE_WEBHOOK || '',
+  OPENSEA_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_OPENSEA_API_KEYS),
+  COVALENT_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_COVALENT_API_KEYS),
+  CMC_PRO_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_CMC_PRO_API_KEYS),
   ...HARDCODED_SECRETS,
 };
 
