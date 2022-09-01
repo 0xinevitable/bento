@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { ShadowedImage } from '../../components/ShadowedImage';
 import { ProfileLink } from '../../types/UserProfile';
@@ -32,7 +32,7 @@ export const ProfileLinkItem: React.FC<Props> = ({
             }
           >
             <Title>{title}</Title>
-            <Description>{description}</Description>
+            {!!description && <Description>{description}</Description>}
           </Information>
         </Container>
       </Link>
@@ -72,6 +72,14 @@ const Information = styled.div`
   z-index: 9;
 `;
 
+const secondLineClamp = css`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 const Title = styled.h3`
   margin: 0;
   font-weight: 700;
@@ -80,6 +88,8 @@ const Title = styled.h3`
   letter-spacing: -0.3px;
   color: white;
   word-break: keep-all;
+
+  ${secondLineClamp}
 `;
 
 const Description = styled.p`
@@ -89,4 +99,6 @@ const Description = styled.p`
   line-height: 1.2;
   letter-spacing: -0.5px;
   color: rgba(255, 255, 255, 0.8);
+
+  ${secondLineClamp}
 `;

@@ -1,6 +1,6 @@
 export type ProfileLink = {
   title: string;
-  description: string;
+  description?: string;
   href: string;
   image: string;
 };

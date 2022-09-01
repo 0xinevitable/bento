@@ -347,7 +347,10 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         <TabContent palette={palette}>
           {FeatureFlags.isProfileLinksEnabled && (
             <AnimatedTab selected={selectedTab === ProfileTab.Links}>
-              <ProfileLinkSection items={profile?.links ?? null} />
+              <ProfileLinkSection
+                isMyProfile={isMyProfile}
+                items={profile?.links ?? null}
+              />
             </AnimatedTab>
           )}
 

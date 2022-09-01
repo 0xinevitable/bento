@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const SyncRSSButton: React.FC = () => {
+type Props = React.HTMLAttributes<HTMLButtonElement>;
+
+export const SyncRSSButton: React.FC<Props> = (props) => {
   return (
-    <Button>
+    <Button {...props}>
       <ButtonTitle>Sync links from Social Media</ButtonTitle>
       <SocialMediaList>
         {SOCIAL_MEDIA_ICONS.map((item) => (
