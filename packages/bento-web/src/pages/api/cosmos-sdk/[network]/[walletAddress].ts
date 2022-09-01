@@ -1,6 +1,6 @@
 import { CosmosSDKBasedNetworks } from '@bento/common';
 import { safePromiseAll } from '@bento/common';
-import { Bech32Address } from '@bento/core/bech32';
+import { Bech32Address } from '@bento/core/address';
 import {
   CosmosHubChain,
   CosmosSDKBasedChain,
