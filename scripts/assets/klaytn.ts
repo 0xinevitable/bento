@@ -356,7 +356,7 @@ export const update = async () => {
 
   const CHAIN_OUTPUT_PATH = path.resolve(
     WORKSPACE_ROOT_PATH,
-    './packages/bento-core/src/tokens/klaytn.json',
+    './packages/bento-core/tokens/klaytn.json',
   );
   let previousTokens: TokenInput[] = [];
   try {

@@ -21,6 +21,9 @@ module.exports = withPlugins(
     compiler: {
       styledComponents: true,
     },
+    experimental: {
+      externalDir: true,
+    },
     publicRuntimeConfig: pick(process.env, ['ENVIRONMENT']),
     webpack: (config) => {
       config.resolve.fallback = {

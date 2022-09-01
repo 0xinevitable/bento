@@ -14,8 +14,8 @@
     "baseUrl": ".",
     "outDir": "lib",
     "declaration": true,
-    "rootDir": "src",
+    "rootDir": ".",
     "jsx": "react"
   },
-  "include": ["src/**/*"]
+  "include": ["**/*"]
 }
