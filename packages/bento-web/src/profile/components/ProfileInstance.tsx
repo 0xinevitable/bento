@@ -34,7 +34,7 @@ import {
   ProfileEditor,
   UserInformationDraft,
 } from '../ProfileDetailPage/components/ProfileEditor';
-// import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
+import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
 import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
 import { ProfileWalletList } from '../ProfileDetailPage/components/ProfileWalletList';
 // import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
@@ -345,11 +345,11 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
       <AnimatePresence initial={false}>
         <TabContent palette={palette}>
-          {/* <AnimatedTab selected={selectedTab === ProfileTab.Links}>
-            <ProfileLinkSection
-              items={profile?.links ?? null}
-            />
-          </AnimatedTab> */}
+          {FeatureFlags.isProfileLinksEnabled && (
+            <AnimatedTab selected={selectedTab === ProfileTab.Links}>
+              <ProfileLinkSection items={profile?.links ?? null} />
+            </AnimatedTab>
+          )}
 
           {/* <AnimatedTab selected={selectedTab === ProfileTab.Questions}>
             <QuestionSection />

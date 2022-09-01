@@ -5,6 +5,7 @@ import { Skeleton } from '@/components/Skeleton';
 
 import { ProfileLink } from '../../types/UserProfile';
 import { ProfileLinkItem } from './ProfileLinkItem';
+import { SyncRSSButton } from './SyncRSSButton';
 
 type Props = {
   items: ProfileLink[] | null;
@@ -13,6 +14,7 @@ type Props = {
 export const ProfileLinkSection: React.FC<Props> = ({ items }) => {
   return (
     <ProfileLinkList>
+      <SyncRSSButton />
       {!!items ? (
         items?.map((item, index) => (
           <ProfileLinkItem key={`item-${index}`} {...item} />
