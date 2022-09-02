@@ -7,18 +7,19 @@ import { MetaHead } from '@/components/MetaHead';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
+import { LinkBlock } from '../blocks/types';
 import { FieldInput } from '../components/FieldInput';
 import { FieldTextArea } from '../components/FieldTextArea';
-import { ProfileLink } from '../types/UserProfile';
+import { BlockEditItem } from './components/BlockEditItem';
 import { Preview } from './components/Preview';
-import { ProfileLinkEditItem } from './components/ProfileLinkEditItem';
 import { TabBar } from './components/TabBar';
 
-const emptyProfileLink: ProfileLink = {
+const emptyBlock: LinkBlock = {
+  type: 'link',
   title: '',
   description: '',
-  href: '',
-  image: '',
+  url: '',
+  images: [''],
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -34,7 +35,7 @@ const ProfileEditPage = () => {
   const [username, setUsername] = useState<string>('');
   const [displayName, setDisplayName] = useState<string>('');
   const [bio, setBio] = useState<string>('');
-  const [links, setLinks] = useState<ProfileLink[]>([]);
+  const [blocks, setBlocks] = useState<LinkBlock[]>([]);
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
@@ -44,7 +45,10 @@ const ProfileEditPage = () => {
     setUsername(profile.username);
     setDisplayName(profile.display_name);
     setBio(profile.bio);
-    setLinks(profile.links ?? []);
+
+    // FIXME:
+    setBlocks([]);
+
     if (!!profile.images) {
       setImages(profile.images);
     } else {
@@ -58,12 +62,12 @@ const ProfileEditPage = () => {
       username,
       display_name: displayName,
       bio,
-      links,
+      links: blocks,
       images,
       verified: false,
       tabs: [],
     }),
-    [username, displayName, images, bio, links],
+    [username, displayName, images, bio, blocks],
   );
 
   const onSubmit = useCallback(async () => {
@@ -71,10 +75,10 @@ const ProfileEditPage = () => {
       username,
       display_name: displayName,
       bio,
-      links,
+      links: blocks,
     });
     console?.log(data);
-  }, [username, displayName, bio, links]);
+  }, [username, displayName, bio, blocks]);
 
   return (
     <>
@@ -106,28 +110,29 @@ const ProfileEditPage = () => {
               />
             </ProfileContainer>
             <ProfileLinkList id="links">
-              {links.map((item, index) => {
+              {blocks.map((item, index) => {
                 return (
-                  <ProfileLinkEditItem
+                  <BlockEditItem
                     key={`item-${index}`}
                     linkDraft={item}
-                    defaultLink={profile?.links?.[index]}
+                    // FIXME: default block
+                    // defaultBlock={profile?.blocks?.[index]}
                     onChange={(updated) =>
-                      setLinks(
-                        links.map((link, i) => (i === index ? updated : link)),
+                      setBlocks(
+                        blocks.map((link, i) => (i === index ? updated : link)),
                       )
                     }
                     onDelete={() => {
-                      const deletedLinks = links.filter(
+                      const deletedLinks = blocks.filter(
                         (_, i) => !(i === index),
                       );
-                      setLinks(deletedLinks);
+                      setBlocks(deletedLinks);
                     }}
                   />
                 );
               })}
             </ProfileLinkList>
-            <button onClick={() => setLinks([...links, emptyProfileLink])}>
+            <button onClick={() => setBlocks([...blocks, emptyBlock])}>
               Add link
             </button>
           </Container>
@@ -148,6 +153,7 @@ const Wrapper = styled.div`
 
 const EditorWrapper = styled.div`
   height: 100vh;
+  padding-top: 64px;
   margin-left: auto;
   width: 38vw;
   background-color: #171c21;

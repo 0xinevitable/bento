@@ -23,6 +23,8 @@ export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
 
 const Wrapper = styled.div`
   height: 100vh;
+  padding-top: 64px;
+
   flex: 1;
   position: sticky;
   top: 0;
