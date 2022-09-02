@@ -27,6 +27,10 @@ export const LinkBlockItem: React.FC<Props> = (props) => {
             style={!hasImage ? { alignItems: 'center' } : {}}
           >
             <Title>{props.title}</Title>
+
+            {!!props.description && (
+              <Description>{props.description}</Description>
+            )}
           </Information>
         </Container>
       </Link>
@@ -148,6 +152,14 @@ const Information = styled.div`
   transition: color 0.2s ease-in-out;
 `;
 
+const secondLineClamp = css`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 const Title = styled.h3`
   margin: 0;
   font-weight: 600;
@@ -155,13 +167,17 @@ const Title = styled.h3`
   line-height: 1.2;
   letter-spacing: -0.3px;
   word-break: keep-all;
+
+  ${secondLineClamp}
 `;
 
-// const Description = styled.p`
-//   margin: 0;
-//   margin-top: 4px;
-//   font-size: 15px;
-//   line-height: 1.2;
-//   letter-spacing: -0.5px;
-//   color: rgba(255, 255, 255, 0.8);
-// `;
+const Description = styled.p`
+  margin: 0;
+  margin-top: 4px;
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: rgba(255, 255, 255, 0.8);
+
+  ${secondLineClamp}
+`;
