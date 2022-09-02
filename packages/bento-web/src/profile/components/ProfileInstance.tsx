@@ -349,7 +349,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             <AnimatedTab selected={selectedTab === ProfileTab.Links}>
               <ProfileLinkSection
                 isMyProfile={isMyProfile}
-                items={profile?.links ?? null}
+                blocks={profile?.links ?? null}
               />
             </AnimatedTab>
           )}

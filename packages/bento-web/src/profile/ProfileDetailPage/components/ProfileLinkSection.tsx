@@ -2,18 +2,23 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Skeleton } from '@/components/Skeleton';
+import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
+import { TextBlockItem } from '@/profile/blocks/TextBlockItem';
+import { VideoBlockItem } from '@/profile/blocks/VideoBlockItem';
+import { Block } from '@/profile/blocks/types';
 
-import { ProfileLink } from '../../types/UserProfile';
-import { ProfileLinkItem } from './ProfileLinkItem';
 import { SyncRSSButton } from './SyncRSSButton';
 import { SyncRSSModal } from './SyncRSSModal';
 
 type Props = {
   isMyProfile: boolean;
-  items: ProfileLink[] | null;
+  blocks: Block[] | null;
 };
 
-export const ProfileLinkSection: React.FC<Props> = ({ isMyProfile, items }) => {
+export const ProfileLinkSection: React.FC<Props> = ({
+  isMyProfile,
+  blocks,
+}) => {
   const isSyncRSSButtonShown = !!isMyProfile;
   const [isSyncRSSModalVisible, setSyncRSSModalVisible] =
     useState<boolean>(false);
@@ -32,10 +37,18 @@ export const ProfileLinkSection: React.FC<Props> = ({ isMyProfile, items }) => {
         </>
       )}
 
-      {!!items ? (
-        items?.map((item, index) => (
-          <ProfileLinkItem key={`item-${index}`} {...item} />
-        ))
+      {!!blocks ? (
+        blocks.map((item, index) => {
+          if (item.type === 'link') {
+            return <LinkBlockItem key={`link-${index}`} {...item} />;
+          }
+          if (item.type === 'text') {
+            return <TextBlockItem key={`text-${index}`} {...item} />;
+          }
+          if (item.type === 'video') {
+            return <VideoBlockItem key={`video-${index}`} {...item} />;
+          }
+        })
       ) : (
         <>
           <LinkSkeleton />

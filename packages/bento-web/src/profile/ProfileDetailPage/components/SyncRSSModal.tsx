@@ -4,9 +4,8 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
+import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
 import { FieldInput } from '@/profile/components/FieldInput';
-
-import { ProfileLinkItem } from './ProfileLinkItem';
 
 type Props = {
   isVisible?: boolean;
@@ -74,12 +73,13 @@ export const SyncRSSModal: React.FC<Props> = ({
               const description =
                 item.summary || item.contentSnippet || item.content;
               return (
-                <ProfileLinkItem
+                <LinkBlockItem
                   key={index}
                   title={item.title || ''}
                   description={description}
-                  href={item.link || ''}
-                  image={item.ogImageURL || ''}
+                  url={item.link || ''}
+                  images={[item.ogImageURL || '']}
+                  type="link"
                 />
               );
             })}

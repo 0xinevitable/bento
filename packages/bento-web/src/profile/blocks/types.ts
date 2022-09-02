@@ -1,10 +1,10 @@
 export type LinkBlock = {
   type: 'link';
   title: string;
+  description?: string;
   url: string;
   images?: string[];
   stickers?: string[];
-  hidden: boolean;
   large?: boolean;
 };
 
@@ -12,7 +12,6 @@ export type TextBlock = {
   type: 'text';
   title: string;
   description?: string;
-  hidden: boolean;
 };
 
 export type VideoBlock = {
@@ -21,7 +20,6 @@ export type VideoBlock = {
   url: string;
   provider?: 'youtube';
   thumbnailURL?: string;
-  hidden: boolean;
 };
 
 export type BlockOptions = {
@@ -30,5 +28,6 @@ export type BlockOptions = {
     backgroundColor?: string;
     collapsed?: boolean;
   };
+  hidden?: boolean;
 };
 export type Block = (LinkBlock | TextBlock | VideoBlock) & BlockOptions;
