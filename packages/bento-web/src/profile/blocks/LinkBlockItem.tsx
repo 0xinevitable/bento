@@ -26,10 +26,12 @@ export const LinkBlockItem: React.FC<Props> = (props) => {
             className="information"
             style={!hasImage ? { alignItems: 'center' } : {}}
           >
-            <Title>{props.title}</Title>
+            <Title className="title">{props.title}</Title>
 
             {!!props.description && (
-              <Description>{props.description}</Description>
+              <Description className="description">
+                {props.description}
+              </Description>
             )}
           </Information>
         </Container>
@@ -104,7 +106,13 @@ const Container = styled.div<ContainerProps>`
   }
 
   &:hover .information {
-    color: black;
+    .title {
+      color: black;
+    }
+
+    .description {
+      color: rgba(0, 0, 0, 0.8);
+    }
   }
 
   ${({ large }) =>
