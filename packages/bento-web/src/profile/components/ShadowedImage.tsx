@@ -34,7 +34,7 @@ const Image = styled.img`
   top: 0;
   z-index: 2;
   border-radius: 8px;
-  background-color: #eeeeee;
+  background-color: #171717;
 `;
 
 const ImageBlur = styled(Image)`

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+
+import { shimmer } from '@/components/Skeleton';
 
 import { ShadowedImage } from '../components/ShadowedImage';
 import { LinkBlock } from './types';
@@ -7,7 +9,19 @@ import { LinkBlock } from './types';
 type Props = LinkBlock & {};
 
 export const LinkBlockItem: React.FC<Props> = (props) => {
-  const hasImage = !!props.images?.[0];
+  const image = props.images?.[0];
+  const hasImage = !!image;
+
+  const [imageLoading, setImageLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (!image) {
+      return;
+    }
+    const img = new Image();
+    img.src = image;
+    img.onload = () => setImageLoading(false);
+  }, [image]);
 
   return (
     <Wrapper>
@@ -17,13 +31,16 @@ export const LinkBlockItem: React.FC<Props> = (props) => {
           {hasImage &&
             (!props.large ? (
               <LinkImageWrapper>
-                <LinkImage src={props.images?.[0]} />
+                {imageLoading ? (
+                  <LinkImageSkeleton />
+                ) : (
+                  <LinkImage src={image} />
+                )}
               </LinkImageWrapper>
+            ) : imageLoading ? (
+              <LargeLinkImageSkeleton />
             ) : (
-              <LargeImage
-                referrerPolicy="no-referrer"
-                src={props.images?.[0]}
-              />
+              <LargeImage referrerPolicy="no-referrer" src={image} />
             ))}
           <Information
             className="information"
@@ -146,10 +163,34 @@ const LinkImage = styled(ShadowedImage)`
   width: 86px;
   height: 86px;
 `;
+
 const LargeImage = styled.img`
   width: 100%;
   border-radius: 8px;
   z-index: 2;
+`;
+
+const customSkeletonStyle = css`
+  border-radius: 8px;
+
+  position: relative;
+  background-color: #171717;
+  background-image: linear-gradient(to right, #171717, #3b3b3b, #171717);
+  background-repeat: no-repeat;
+  background-size: 500% 100%;
+  animation: 1s ease-in-out infinite forwards running ${shimmer};
+`;
+const LinkImageSkeleton = styled.div`
+  width: 86px;
+  height: 86px;
+
+  ${customSkeletonStyle}
+`;
+const LargeLinkImageSkeleton = styled.div`
+  width: 100%;
+  z-index: 2;
+
+  ${customSkeletonStyle}
 `;
 
 const Information = styled.div`
