@@ -125,6 +125,11 @@ const Container = styled.div<ContainerProps>`
     padding-top: calc(var(--width) * 2.25);
   }
 
+  .title,
+  .description {
+    transition: all var(--time) ease;
+  }
+
   &:hover .information {
     .title {
       color: black;
