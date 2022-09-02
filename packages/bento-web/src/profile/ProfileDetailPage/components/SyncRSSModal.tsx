@@ -31,6 +31,8 @@ type FeedItem = {
   ogImageURL: string | null;
 };
 
+const RSS_FEED_LIMIT = 15;
+
 export const SyncRSSModal: React.FC<Props> = ({
   isVisible = false,
   onDismiss,
@@ -42,7 +44,7 @@ export const SyncRSSModal: React.FC<Props> = ({
   const onClickSubscribe = useCallback(async () => {
     setLoading(true);
     const { data } = await axios.get(
-      `https://feed.inevitable.team/api/rss?rssURL=${rssURL}`,
+      `https://feed.inevitable.team/api/rss?rssURL=${rssURL}&limit=${RSS_FEED_LIMIT}`,
     );
     setLoading(false);
     setFeedItems(data);
