@@ -20,7 +20,10 @@ export const LinkBlockItem: React.FC<Props> = (props) => {
                 <LinkImage src={props.images?.[0]} />
               </LinkImageWrapper>
             ) : (
-              <LargeImage src={props.images?.[0]} />
+              <LargeImage
+                referrerPolicy="no-referrer"
+                src={props.images?.[0]}
+              />
             ))}
           <Information
             className="information"

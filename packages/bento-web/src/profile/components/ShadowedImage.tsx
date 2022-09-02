@@ -13,8 +13,13 @@ export const ShadowedImage: React.FC<Props> = ({
   blurStyle,
 }) => (
   <ImageWrapper className={className}>
-    <Image className={className} src={src} />
-    <ImageBlur className={`blur ${className}`} src={src} style={blurStyle} />
+    <Image referrerPolicy="no-referrer" className={className} src={src} />
+    <ImageBlur
+      referrerPolicy="no-referrer"
+      className={`blur ${className}`}
+      src={src}
+      style={blurStyle}
+    />
   </ImageWrapper>
 );
 
