@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React from 'react';
 import styled from 'styled-components';
 
 import { Skeleton } from '@/components/Skeleton';
@@ -8,7 +9,6 @@ import { VideoBlockItem } from '@/profile/blocks/VideoBlockItem';
 import { Block } from '@/profile/blocks/types';
 
 import { SyncRSSButton } from './SyncRSSButton';
-import { SyncRSSModal } from './SyncRSSModal';
 
 type Props = {
   isMyProfile: boolean;
@@ -19,22 +19,13 @@ export const ProfileLinkSection: React.FC<Props> = ({
   isMyProfile,
   blocks,
 }) => {
+  const router = useRouter();
   const isSyncRSSButtonShown = !!isMyProfile;
-  const [isSyncRSSModalVisible, setSyncRSSModalVisible] =
-    useState<boolean>(false);
 
   return (
     <ProfileLinkList>
       {isSyncRSSButtonShown && (
-        <>
-          <SyncRSSButton
-            onClick={() => setSyncRSSModalVisible((prev) => !prev)}
-          />
-          <SyncRSSModal
-            isVisible={isSyncRSSModalVisible}
-            onDismiss={() => setSyncRSSModalVisible((prev) => !prev)}
-          />
-        </>
+        <SyncRSSButton onClick={() => router.push('/profile/edit')} />
       )}
 
       {!!blocks ? (

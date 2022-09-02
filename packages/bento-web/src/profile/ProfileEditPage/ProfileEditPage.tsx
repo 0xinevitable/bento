@@ -1,10 +1,15 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { GetServerSideProps } from 'next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/Button';
+import { Checkbox } from '@/components/Checkbox';
 import { MetaHead } from '@/components/MetaHead';
+import { Modal } from '@/components/Modal';
+import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
 import { FeatureFlags } from '@/utils/FeatureFlag';
+import { toast } from '@/utils/toast';
 
 import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
 import { LinkBlock } from '../blocks/types';
@@ -13,6 +18,32 @@ import { FieldTextArea } from '../components/FieldTextArea';
 import { BlockEditItem } from './components/BlockEditItem';
 import { Preview } from './components/Preview';
 import { TabBar } from './components/TabBar';
+
+type Props = {
+  isVisible?: boolean;
+  onDismiss?: () => void;
+};
+
+type FeedItem = {
+  link?: string;
+  guid?: string;
+  title?: string;
+  pubDate?: string;
+  creator?: string;
+  summary?: string;
+  content?: string;
+  contentSnippet?: string;
+  isoDate?: string;
+  categories?: string[];
+  enclosure?: {
+    url: string;
+    length?: number;
+    type?: string;
+  };
+  ogImageURL: string | null;
+};
+
+const RSS_FEED_LIMIT = 15;
 
 const emptyBlock: LinkBlock = {
   type: 'link',
@@ -80,6 +111,39 @@ const ProfileEditPage = () => {
     console?.log(data);
   }, [username, displayName, bio, blocks]);
 
+  const [rssURL, setRssURL] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [feedItems, setFeedItems] = useState<FeedItem[]>([]);
+
+  const onClickSubscribe = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        `https://feed.inevitable.team/api/rss?rssURL=${rssURL}&limit=${RSS_FEED_LIMIT}`,
+      );
+      setLoading(false);
+      setFeedItems(data);
+    } catch (error) {
+      setLoading(false);
+      setRssURL('');
+      console.error(error);
+
+      let description = 'Something went wrong';
+      if (error instanceof AxiosError) {
+        description = error.response?.data?.message || description;
+      } else {
+        description = (error as any).message || description;
+      }
+      toast({
+        type: 'error',
+        title: 'Server Error',
+        description,
+      });
+    }
+  }, [rssURL]);
+
+  const blockURLs = useMemo(() => blocks.map((v) => v.url), [blocks]);
+
   return (
     <>
       <MetaHead />
@@ -89,7 +153,7 @@ const ProfileEditPage = () => {
         <EditorWrapper>
           <TabBar onClick={onSubmit} />
           <Container>
-            <ProfileContainer id="profile">
+            {/* <ProfileContainer id="profile">
               <FieldInput
                 field="사용자 이름"
                 placeholder="여러분의 링크에 들어가는 이름이에요"
@@ -108,8 +172,8 @@ const ProfileEditPage = () => {
                 defaultValue={profile?.bio ?? ''}
                 onChange={(e) => setBio(e?.target.value)}
               />
-            </ProfileContainer>
-            <ProfileLinkList id="links">
+            </ProfileContainer> */}
+            {/* <ProfileLinkList id="links">
               {blocks.map((item, index) => {
                 return (
                   <BlockEditItem
@@ -131,10 +195,64 @@ const ProfileEditPage = () => {
                   />
                 );
               })}
-            </ProfileLinkList>
-            <button onClick={() => setBlocks([...blocks, emptyBlock])}>
+            </ProfileLinkList> */}
+            {/* <button onClick={() => setBlocks([...blocks, emptyBlock])}>
               Add link
-            </button>
+            </button> */}
+
+            {loading ? (
+              <Title>Loading...</Title>
+            ) : !feedItems.length ? (
+              <>
+                <Title>Subscribe RSS</Title>
+                <FieldInput
+                  field="URL"
+                  value={rssURL}
+                  onChange={(e) => setRssURL(e.target.value)}
+                />
+                <Button onClick={onClickSubscribe}>Subscribe</Button>
+              </>
+            ) : (
+              <ProfileLinkList>
+                {feedItems.map((item, index) => {
+                  const description =
+                    item.summary || item.contentSnippet || item.content;
+
+                  const linkItem: LinkBlock = {
+                    type: 'link',
+                    title: item.title || '',
+                    description: description,
+                    url: item.link || '',
+                    images: [item.ogImageURL || ''],
+                  };
+                  const isIncluded = blockURLs.includes(item.link || '');
+                  return (
+                    <LinkBlockItemWrapper key={index}>
+                      <Checkbox
+                        checked={isIncluded}
+                        readOnly
+                        onClick={() => {
+                          if (isIncluded) {
+                            setBlocks(
+                              blocks.filter((v) => v.url !== item.link),
+                            );
+                          } else {
+                            setBlocks([...blocks, linkItem]);
+                          }
+                        }}
+                      />
+                      <LinkBlockItem
+                        title={item.title || ''}
+                        description={description}
+                        url={item.link || ''}
+                        images={[item.ogImageURL || '']}
+                        type="link"
+                      />
+                    </LinkBlockItemWrapper>
+                  );
+                })}
+              </ProfileLinkList>
+            )}
           </Container>
         </EditorWrapper>
       </Wrapper>
@@ -174,7 +292,30 @@ const ProfileContainer = styled.div`
   flex-direction: column;
 `;
 
+// const ProfileLinkList = styled.ul`
+//   margin: 16px 0 0;
+//   padding: 0;
+// `;
+
+const Title = styled.span`
+  margin: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 18.5px;
+  cursor: text;
+`;
+
 const ProfileLinkList = styled.ul`
-  margin: 16px 0 0;
-  padding: 0;
+  list-style-type: none;
+`;
+
+const LinkBlockItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  & > input {
+    width: 24px;
+    height: 24px;
+  }
 `;
