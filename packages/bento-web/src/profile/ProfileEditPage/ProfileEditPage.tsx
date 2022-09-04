@@ -276,7 +276,7 @@ const EditorWrapper = styled.div`
   height: 100vh;
   padding-top: 64px;
   margin-left: auto;
-  width: 38vw;
+  width: 55vw;
   background-color: #171c21;
   display: flex;
   flex-direction: column;
