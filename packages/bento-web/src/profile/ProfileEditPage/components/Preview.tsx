@@ -5,7 +5,7 @@ import { ProfileInstance } from '@/profile/components/ProfileInstance';
 import { UserProfile } from '@/profile/types/UserProfile';
 
 type PreviewProps = {
-  profileDraft?: Omit<UserProfile, 'user_id'>;
+  profileDraft: UserProfile | null;
 };
 
 export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
@@ -13,8 +13,7 @@ export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
     <Wrapper>
       <Container>
         <Card>
-          {/* FIXME: */}
-          <ProfileInstance profile={profileDraft as any} />
+          <ProfileInstance profile={profileDraft} />
         </Card>
       </Container>
     </Wrapper>

@@ -88,16 +88,19 @@ const ProfileEditPage = () => {
   }, [profile]);
 
   const profileDraft = useMemo(
-    () => ({
-      ...profile,
-      username,
-      display_name: displayName,
-      bio,
-      links: blocks,
-      images,
-      verified: false,
-      tabs: [],
-    }),
+    () =>
+      !profile
+        ? null
+        : {
+            ...profile,
+            username,
+            display_name: displayName,
+            bio,
+            links: blocks,
+            images,
+            verified: false,
+            tabs: [],
+          },
     [username, displayName, images, bio, blocks],
   );
 
