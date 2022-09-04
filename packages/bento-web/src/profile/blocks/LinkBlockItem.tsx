@@ -20,6 +20,7 @@ export const LinkBlockItem: React.FC<Props> = (props) => {
     }
     const img = new Image();
     img.src = image;
+    img.referrerPolicy = 'no-referrer';
     img.onload = () => setImageLoading(false);
   }, [image]);
 
