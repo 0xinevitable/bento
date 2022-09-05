@@ -13,26 +13,38 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
   return (
     <ul>
       {tokenBalances.length > 0 ? (
-        tokenBalances.map((item, index) => {
-          return (
-            <Container key={index}>
-              <Logo src={item.logo} />
-              <Information>
-                <Row>
-                  <Title>{item.name}</Title>
-                  <NetWorth>{`$${item.netWorth.toLocaleString()}`}</NetWorth>
-                </Row>
-                <Row>
-                  <InlineBadge>{`$${item.price.toLocaleString()}`}</InlineBadge>
-                  <TokenAmount>
-                    {`${item.amount.toLocaleString()}`}
-                    <span className="symbol">{` ${item.symbol}`}</span>
-                  </TokenAmount>
-                </Row>
-              </Information>
-            </Container>
-          );
-        })
+        <>
+          <Container>
+            <Information>
+              <Row>
+                <Title>Net Worth</Title>
+                <TotalWorth>{`$${tokenBalances
+                  .reduce((acc, item) => acc + item.netWorth, 0)
+                  .toLocaleString()}`}</TotalWorth>
+              </Row>
+            </Information>
+          </Container>
+          {tokenBalances.map((item, index) => {
+            return (
+              <Container key={index}>
+                <Logo src={item.logo} />
+                <Information>
+                  <Row>
+                    <Title>{item.name}</Title>
+                    <NetWorth>{`$${item.netWorth.toLocaleString()}`}</NetWorth>
+                  </Row>
+                  <Row>
+                    <InlineBadge>{`$${item.price.toLocaleString()}`}</InlineBadge>
+                    <TokenAmount>
+                      {`${item.amount.toLocaleString()}`}
+                      <span className="symbol">{` ${item.symbol}`}</span>
+                    </TokenAmount>
+                  </Row>
+                </Information>
+              </Container>
+            );
+          })}
+        </>
       ) : (
         <Empty>No Assets Found</Empty>
       )}
@@ -103,6 +115,12 @@ const NetWorth = styled.span`
   letter-spacing: -0.5px;
   color: rgba(255, 255, 255, 0.8);
 `;
+
+const TotalWorth = styled(NetWorth)`
+  font-size: 17px;
+  letter-spacing: 0px;
+`;
+
 const TokenAmount = styled.span`
   margin-left: 4px;
 
