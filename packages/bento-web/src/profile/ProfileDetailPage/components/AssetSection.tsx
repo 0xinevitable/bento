@@ -17,7 +17,7 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
           <Container>
             <Information>
               <Row>
-                <Title>Net Worth</Title>
+                <Title>Total Worth</Title>
                 <TotalWorth>{`$${tokenBalances
                   .reduce((acc, item) => acc + item.netWorth, 0)
                   .toLocaleString()}`}</TotalWorth>
