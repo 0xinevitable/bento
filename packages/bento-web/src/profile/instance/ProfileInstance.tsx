@@ -16,18 +16,19 @@ import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
-import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
-import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
-import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
-import { Palette, usePalette } from '@/profile/hooks/usePalette';
-import { UserProfile } from '@/profile/types/UserProfile';
 import { walletsAtom } from '@/recoil/wallets';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 import { Analytics } from '@/utils/analytics';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
+
+import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
+import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
+import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
+import { Palette, usePalette } from '@/profile/hooks/usePalette';
+import { UserProfile } from '@/profile/types/UserProfile';
 
 import {
   ProfileEditor,

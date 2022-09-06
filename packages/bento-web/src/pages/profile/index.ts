@@ -1,8 +1,9 @@
 import { GetServerSideProps } from 'next';
 
-import { UserProfile } from '@/profile/types/UserProfile';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
+
+import { UserProfile } from '@/profile/types/UserProfile';
 
 // /profile handler
 export const getServerSideProps: GetServerSideProps = async (context) => {

@@ -6,10 +6,11 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
-import { useProfile } from '@/profile/hooks/useProfile';
-import { ProfileInstance } from '@/profile/instance';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
+
+import { useProfile } from '@/profile/hooks/useProfile';
+import { ProfileInstance } from '@/profile/instance';
 
 import { UserProfile } from '../types/UserProfile';
 

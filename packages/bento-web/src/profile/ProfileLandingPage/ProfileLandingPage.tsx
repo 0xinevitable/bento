@@ -9,13 +9,14 @@ import { Modal } from '@/components/Modal';
 import { NoSSR } from '@/components/NoSSR';
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
+import { Analytics } from '@/utils/analytics';
+import { toast } from '@/utils/toast';
+
 import {
   ProfileEditor,
   UserInformationDraft,
 } from '@/profile/components/ProfileEditor';
 import { useProfile } from '@/profile/hooks/useProfile';
-import { Analytics } from '@/utils/analytics';
-import { toast } from '@/utils/toast';
 
 import { FixedLoginNudge } from '../components/LoginNudge';
 import { TickerCarousel } from '../instance/components/TickerCarousel';

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 import { Skeleton } from '@/components/Skeleton';
+
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 type Props = {

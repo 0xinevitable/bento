@@ -6,9 +6,10 @@ import styled from 'styled-components';
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { Badge } from '@/components/Badge';
 import { useSession } from '@/hooks/useSession';
-import { FixedLoginNudge } from '@/profile/components/LoginNudge';
 import { Supabase } from '@/utils/Supabase';
 import { Analytics } from '@/utils/analytics';
+
+import { FixedLoginNudge } from '@/profile/components/LoginNudge';
 
 import { NETWORKS } from '../components/AddWalletModal';
 

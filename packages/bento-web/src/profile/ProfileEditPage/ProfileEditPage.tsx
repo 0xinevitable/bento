@@ -6,11 +6,12 @@ import styled from 'styled-components';
 import { Button } from '@/components/Button';
 import { Checkbox } from '@/components/Checkbox';
 import { MetaHead } from '@/components/MetaHead';
+import { FeatureFlags } from '@/utils/FeatureFlag';
+import { toast } from '@/utils/toast';
+
 // import { Modal } from '@/components/Modal';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
 import { useProfile } from '@/profile/hooks/useProfile';
-import { FeatureFlags } from '@/utils/FeatureFlag';
-import { toast } from '@/utils/toast';
 
 import { LinkBlock } from '../blocks/types';
 import { FieldInput } from '../components/FieldInput';
