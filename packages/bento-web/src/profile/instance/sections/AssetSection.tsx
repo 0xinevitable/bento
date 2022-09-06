@@ -6,6 +6,8 @@ import { Skeleton } from '@/components/Skeleton';
 
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
+import { Empty } from './Empty';
+
 type Props = {
   tokenBalances: DashboardTokenBalance[];
 };
