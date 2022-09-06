@@ -6,16 +6,16 @@ import styled from 'styled-components';
 import { Button } from '@/components/Button';
 import { Checkbox } from '@/components/Checkbox';
 import { MetaHead } from '@/components/MetaHead';
-import { Modal } from '@/components/Modal';
+// import { Modal } from '@/components/Modal';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
+import { useProfile } from '@/profile/hooks/useProfile';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { toast } from '@/utils/toast';
 
-import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
 import { LinkBlock } from '../blocks/types';
 import { FieldInput } from '../components/FieldInput';
-import { FieldTextArea } from '../components/FieldTextArea';
-import { BlockEditItem } from './components/BlockEditItem';
+// import { FieldTextArea } from '../components/FieldTextArea';
+// import { BlockEditItem } from './components/BlockEditItem';
 import { Preview } from './components/Preview';
 import { TabBar } from './components/TabBar';
 

@@ -20,6 +20,8 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
+import { Palette, usePalette } from '@/profile/hooks/usePalette';
+import { UserProfile } from '@/profile/types/UserProfile';
 import { walletsAtom } from '@/recoil/wallets';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
@@ -27,21 +29,18 @@ import { Analytics } from '@/utils/analytics';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
 
-import { AssetSection } from '../ProfileDetailPage/components/AssetSection';
-import { FixedFooter } from '../ProfileDetailPage/components/FixedFooter';
-import { NFTSection } from '../ProfileDetailPage/components/NFTSection';
 import {
   ProfileEditor,
   UserInformationDraft,
-} from '../ProfileDetailPage/components/ProfileEditor';
-import { ProfileLinkSection } from '../ProfileDetailPage/components/ProfileLinkSection';
-import { ProfileViewer } from '../ProfileDetailPage/components/ProfileViewer';
-import { ProfileWalletList } from '../ProfileDetailPage/components/ProfileWalletList';
-// import { QuestionSection } from '../ProfileDetailPage/components/QuestionSection';
-import { StickyTab } from '../ProfileDetailPage/components/StickyTab';
-import { Palette, usePalette } from '../ProfileDetailPage/hooks/usePalette';
-import { UserProfile } from '../types/UserProfile';
-import { TickerCarousel } from './TickerCarousel';
+} from '../components/ProfileEditor';
+import { FixedFooter } from './components/FixedFooter';
+import { ProfileViewer } from './components/ProfileViewer';
+import { StickyTab } from './components/StickyTab';
+import { TickerCarousel } from './components/TickerCarousel';
+import { AssetSection } from './sections/AssetSection';
+import { NFTSection } from './sections/NFTSection';
+import { ProfileLinkSection } from './sections/ProfileLinkSection';
+import { ProfileWalletList } from './sections/ProfileWalletList';
 
 const MINIMAL_NET_WORTH = 0.0001;
 

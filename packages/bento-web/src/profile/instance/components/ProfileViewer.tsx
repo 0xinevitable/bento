@@ -3,9 +3,8 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { Skeleton } from '@/components/Skeleton';
+import { usePalette } from '@/profile/hooks/usePalette';
 import { UserProfile } from '@/profile/types/UserProfile';
-
-import { usePalette } from '../hooks/usePalette';
 
 const data = {
   color: '#ff3856',
