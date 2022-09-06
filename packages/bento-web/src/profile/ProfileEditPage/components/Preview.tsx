@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { NoSSR } from '@/components/NoSSR';
+
 import { ProfileInstance } from '@/profile/instance';
 import { UserProfile } from '@/profile/types/UserProfile';
 
@@ -13,7 +15,9 @@ export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
     <Wrapper>
       <Container>
         <Card>
-          <ProfileInstance profile={profileDraft} />
+          <NoSSR>
+            <ProfileInstance profile={profileDraft} />
+          </NoSSR>
         </Card>
       </Container>
     </Wrapper>

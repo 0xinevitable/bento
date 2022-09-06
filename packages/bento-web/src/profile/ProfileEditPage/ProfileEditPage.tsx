@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Button } from '@/components/Button';
 import { Checkbox } from '@/components/Checkbox';
 import { MetaHead } from '@/components/MetaHead';
+import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { toast } from '@/utils/toast';
 
@@ -15,6 +16,7 @@ import { useProfile } from '@/profile/hooks/useProfile';
 
 import { LinkBlock } from '../blocks/types';
 import { FieldInput } from '../components/FieldInput';
+import { FixedLoginNudge } from '../components/LoginNudge';
 // import { FieldTextArea } from '../components/FieldTextArea';
 // import { BlockEditItem } from './components/BlockEditItem';
 import { Preview } from './components/Preview';
@@ -62,6 +64,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const ProfileEditPage = () => {
+  const { session } = useSession();
   const { profile } = useProfile();
 
   const [username, setUsername] = useState<string>('');
@@ -259,6 +262,8 @@ const ProfileEditPage = () => {
             )}
           </Container>
         </EditorWrapper>
+
+        <FixedLoginNudge visible={!session} />
       </Wrapper>
     </>
   );
