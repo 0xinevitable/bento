@@ -481,6 +481,7 @@ const ProfileImage = styled.img<IsDefaultImageProps>`
   width: 100%;
   height: 90%;
   object-fit: cover;
+  user-select: none;
 
   position: absolute;
   background-color: black;
