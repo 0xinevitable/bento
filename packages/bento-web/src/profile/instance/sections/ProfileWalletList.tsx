@@ -5,10 +5,11 @@ import clsx from 'clsx';
 import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { NETWORKS, Network } from '@/dashboard/components/AddWalletModal';
 import { Analytics } from '@/utils/analytics';
 import { copyToClipboard } from '@/utils/clipboard';
 import { toast } from '@/utils/toast';
+
+import { NETWORKS, Network } from '@/dashboard/components/AddWalletModal';
 
 import { Empty } from './Empty';
 

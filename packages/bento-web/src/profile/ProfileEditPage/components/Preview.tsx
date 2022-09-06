@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ProfileInstance } from '@/profile/components/ProfileInstance';
+import { NoSSR } from '@/components/NoSSR';
+
+import { ProfileInstance } from '@/profile/instance';
 import { UserProfile } from '@/profile/types/UserProfile';
 
 type PreviewProps = {
-  profileDraft?: Omit<UserProfile, 'user_id'>;
+  profileDraft: UserProfile | null;
 };
 
 export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
@@ -13,8 +15,9 @@ export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
     <Wrapper>
       <Container>
         <Card>
-          {/* FIXME: */}
-          <ProfileInstance profile={profileDraft as any} />
+          <NoSSR>
+            <ProfileInstance profile={profileDraft} />
+          </NoSSR>
         </Card>
       </Container>
     </Wrapper>
@@ -23,6 +26,8 @@ export const Preview: React.FC<PreviewProps> = ({ profileDraft }) => {
 
 const Wrapper = styled.div`
   height: 100vh;
+  padding-top: 64px;
+
   flex: 1;
   position: sticky;
   top: 0;
@@ -53,5 +58,5 @@ const CardContainer = styled.div`
   margin: 8px;
   width: 412px;
   min-height: 812px;
-  background-color: #171b20;
+  background-color: black;
 `;

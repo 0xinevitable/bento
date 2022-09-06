@@ -45,6 +45,7 @@
     "react-is": "^18.2.0",
     "react-localization": "^1.0.19",
     "react-notifications-component": "^4.0.1",
+    "react-youtube": "^9.0.3",
     "recharts": "^2.1.12",
     "recoil": "^0.7.4",
     "styled-components": "^5.3.5",

@@ -2,9 +2,10 @@ import { useCallback, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { useSession } from '@/hooks/useSession';
-import { UserProfile } from '@/profile/types/UserProfile';
 import { profileAtom } from '@/recoil/profile';
 import { Supabase } from '@/utils/Supabase';
+
+import { UserProfile } from '@/profile/types/UserProfile';
 
 export type ProfileOptions = {
   type: 'MY_PROFILE' | 'USER_PROFILE';

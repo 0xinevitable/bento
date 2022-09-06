@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { AnimatedTooltip } from '@/components/AnimatedToolTip';
 import { Modal } from '@/components/Modal';
+
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
 
 export type NFTDetailModalParams = {

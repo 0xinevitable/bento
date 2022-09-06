@@ -28,7 +28,7 @@ export const TabBar: React.FC<TabBarProps> = ({ onClick, ...props }) => {
 
   return (
     <Container>
-      <TabList>
+      {/* <TabList>
         {tabs.map(({ selector, name }) => (
           <Tab
             key={selector}
@@ -42,7 +42,7 @@ export const TabBar: React.FC<TabBarProps> = ({ onClick, ...props }) => {
           </Tab>
         ))}
       </TabList>
-      <button onClick={onClick}>submit</button>
+      <button onClick={onClick}>submit</button> */}
     </Container>
   );
 };

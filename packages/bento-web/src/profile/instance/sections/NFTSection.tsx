@@ -2,9 +2,10 @@ import { OpenSeaAsset } from '@bento/client';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { Analytics } from '@/utils/analytics';
+
 import { AssetMedia } from '@/dashboard/components/AssetMedia';
 import { UserProfile } from '@/profile/types/UserProfile';
-import { Analytics } from '@/utils/analytics';
 
 import { Empty } from './Empty';
 import { NFTDetailModal } from './NFTDetailModal';
