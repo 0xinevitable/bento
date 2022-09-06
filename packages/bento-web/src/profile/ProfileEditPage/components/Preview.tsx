@@ -54,5 +54,5 @@ const CardContainer = styled.div`
   margin: 8px;
   width: 412px;
   min-height: 812px;
-  background-color: #171b20;
+  background-color: black;
 `;
