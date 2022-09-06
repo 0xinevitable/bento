@@ -5,6 +5,8 @@ import { Badge } from '@/components/Badge';
 import { Skeleton } from '@/components/Skeleton';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
+import { Empty } from './Empty';
+
 type Props = {
   tokenBalances: DashboardTokenBalance[];
 };
@@ -143,11 +145,4 @@ const AssetSkeleton = styled(Skeleton)`
   margin-top: 8px;
   border-radius: 8px;
   align-self: center;
-`;
-
-const Empty = styled.span`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  color: white;
 `;
