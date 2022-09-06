@@ -3,12 +3,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Skeleton } from '@/components/Skeleton';
+import { FeatureFlags } from '@/utils/FeatureFlag';
 
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
 import { TextBlockItem } from '@/profile/blocks/TextBlockItem';
 import { VideoBlockItem } from '@/profile/blocks/VideoBlockItem';
 import { Block } from '@/profile/blocks/types';
 
+import { Empty } from './Empty';
 import { SyncRSSButton } from './SyncRSSButton';
 
 type Props = {
@@ -21,7 +23,8 @@ export const ProfileLinkSection: React.FC<Props> = ({
   blocks,
 }) => {
   const router = useRouter();
-  const isSyncRSSButtonShown = !!isMyProfile;
+  const isSyncRSSButtonShown =
+    !!isMyProfile && FeatureFlags.isProfileRSSSubscriptionEnabled;
 
   return (
     <ProfileLinkList>
@@ -30,17 +33,21 @@ export const ProfileLinkSection: React.FC<Props> = ({
       )}
 
       {!!blocks ? (
-        blocks.map((item, index) => {
-          if (item.type === 'link') {
-            return <LinkBlockItem key={`link-${index}`} {...item} />;
-          }
-          if (item.type === 'text') {
-            return <TextBlockItem key={`text-${index}`} {...item} />;
-          }
-          if (item.type === 'video') {
-            return <VideoBlockItem key={`video-${index}`} {...item} />;
-          }
-        })
+        blocks.length > 0 ? (
+          blocks.map((item, index) => {
+            if (item.type === 'link') {
+              return <LinkBlockItem key={`link-${index}`} {...item} />;
+            }
+            if (item.type === 'text') {
+              return <TextBlockItem key={`text-${index}`} {...item} />;
+            }
+            if (item.type === 'video') {
+              return <VideoBlockItem key={`video-${index}`} {...item} />;
+            }
+          })
+        ) : (
+          <Empty>No Links</Empty>
+        )
       ) : (
         <>
           <LinkSkeleton />

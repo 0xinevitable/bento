@@ -207,59 +207,60 @@ const ProfileEditPage = () => {
               Add link
             </button> */}
 
-            {loading ? (
-              <Title>Loading...</Title>
-            ) : !feedItems.length ? (
-              <>
-                <Title>Subscribe RSS</Title>
-                <FieldInput
-                  field="URL"
-                  value={rssURL}
-                  onChange={(e) => setRssURL(e.target.value)}
-                />
-                <Button onClick={onClickSubscribe}>Subscribe</Button>
-              </>
-            ) : (
-              <ProfileLinkList>
-                {feedItems.map((item, index) => {
-                  const description =
-                    item.summary || item.contentSnippet || item.content;
+            {FeatureFlags.isProfileRSSSubscriptionEnabled &&
+              (loading ? (
+                <Title>Loading...</Title>
+              ) : !feedItems.length ? (
+                <>
+                  <Title>Subscribe RSS</Title>
+                  <FieldInput
+                    field="URL"
+                    value={rssURL}
+                    onChange={(e) => setRssURL(e.target.value)}
+                  />
+                  <Button onClick={onClickSubscribe}>Subscribe</Button>
+                </>
+              ) : (
+                <ProfileLinkList>
+                  {feedItems.map((item, index) => {
+                    const description =
+                      item.summary || item.contentSnippet || item.content;
 
-                  const linkItem: LinkBlock = {
-                    type: 'link',
-                    title: item.title || '',
-                    description: description,
-                    url: item.link || '',
-                    images: [item.ogImageURL || ''],
-                  };
-                  const isIncluded = blockURLs.includes(item.link || '');
-                  return (
-                    <LinkBlockItemWrapper key={index}>
-                      <Checkbox
-                        checked={isIncluded}
-                        readOnly
-                        onClick={() => {
-                          if (isIncluded) {
-                            setBlocks(
-                              blocks.filter((v) => v.url !== item.link),
-                            );
-                          } else {
-                            setBlocks([...blocks, linkItem]);
-                          }
-                        }}
-                      />
-                      <LinkBlockItem
-                        title={item.title || ''}
-                        description={description}
-                        url={item.link || ''}
-                        images={[item.ogImageURL || '']}
-                        type="link"
-                      />
-                    </LinkBlockItemWrapper>
-                  );
-                })}
-              </ProfileLinkList>
-            )}
+                    const linkItem: LinkBlock = {
+                      type: 'link',
+                      title: item.title || '',
+                      description: description,
+                      url: item.link || '',
+                      images: [item.ogImageURL || ''],
+                    };
+                    const isIncluded = blockURLs.includes(item.link || '');
+                    return (
+                      <LinkBlockItemWrapper key={index}>
+                        <Checkbox
+                          checked={isIncluded}
+                          readOnly
+                          onClick={() => {
+                            if (isIncluded) {
+                              setBlocks(
+                                blocks.filter((v) => v.url !== item.link),
+                              );
+                            } else {
+                              setBlocks([...blocks, linkItem]);
+                            }
+                          }}
+                        />
+                        <LinkBlockItem
+                          title={item.title || ''}
+                          description={description}
+                          url={item.link || ''}
+                          images={[item.ogImageURL || '']}
+                          type="link"
+                        />
+                      </LinkBlockItemWrapper>
+                    );
+                  })}
+                </ProfileLinkList>
+              ))}
           </Container>
         </EditorWrapper>
 
