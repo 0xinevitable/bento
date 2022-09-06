@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
+
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
 import { FieldInput } from '@/profile/components/FieldInput';
 

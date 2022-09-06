@@ -5,10 +5,11 @@ import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { Network } from '@/dashboard/components/AddWalletModal';
 import { useSignOut } from '@/hooks/useSignOut';
 import { Analytics } from '@/utils/analytics';
 import { toast } from '@/utils/toast';
+
+import { Network } from '@/dashboard/components/AddWalletModal';
 
 export const WALLETS = {
   metamask: '/assets/wallets/metamask.png',

@@ -3,9 +3,10 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { UserProfile } from '@/profile/types/UserProfile';
 import { Config } from '@/utils/Config';
 import { Supabase } from '@/utils/Supabase';
+
+import { UserProfile } from '@/profile/types/UserProfile';
 
 const MATCH_RULE = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,37}$/;
 

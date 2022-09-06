@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ProfileInstance } from '@/profile/components/ProfileInstance';
+import { ProfileInstance } from '@/profile/instance';
 import { UserProfile } from '@/profile/types/UserProfile';
 
 type PreviewProps = {

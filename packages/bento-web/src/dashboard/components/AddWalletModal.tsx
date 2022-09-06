@@ -11,10 +11,11 @@ import { Modal } from '@/components/Modal';
 import { WalletConnector } from '@/components/WalletConnector';
 import { useSession } from '@/hooks/useSession';
 import { useRevalidateWallets } from '@/hooks/useWallets';
-import { FieldInput } from '@/profile/components/FieldInput';
 import { walletsAtom } from '@/recoil/wallets';
 import { Supabase } from '@/utils/Supabase';
 import { Analytics } from '@/utils/analytics';
+
+import { FieldInput } from '@/profile/components/FieldInput';
 
 export type Network = {
   id: string;

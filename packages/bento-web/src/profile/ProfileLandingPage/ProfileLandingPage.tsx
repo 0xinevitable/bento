@@ -1,5 +1,4 @@
 import axios, { AxiosError } from 'axios';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -16,10 +15,11 @@ import { toast } from '@/utils/toast';
 import {
   ProfileEditor,
   UserInformationDraft,
-} from '../ProfileDetailPage/components/ProfileEditor';
-import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
+} from '@/profile/components/ProfileEditor';
+import { useProfile } from '@/profile/hooks/useProfile';
+
 import { FixedLoginNudge } from '../components/LoginNudge';
-import { TickerCarousel } from '../components/TickerCarousel';
+import { TickerCarousel } from '../instance/components/TickerCarousel';
 import { UserProfile } from '../types/UserProfile';
 import { Illusts } from './Illusts';
 
