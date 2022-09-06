@@ -23,6 +23,18 @@ export const WalletManager: React.FC = () => {
     }
   }, [wallets, revalidateWallets]);
 
+  useEffect(() => {
+    Supabase.auth.onAuthStateChange((event, _session) => {
+      if (event == 'SIGNED_IN') {
+        revalidateWallets().then((wallets) => {
+          if (!wallets || wallets.length === 0) {
+            setWalletEmpty(true);
+          }
+        });
+      }
+    });
+  }, [revalidateWallets]);
+
   return null;
 };
 
