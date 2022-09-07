@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
-import { NavigationBar } from '@/components/NavigationBar';
 import { Analytics } from '@/utils/analytics';
 
 import { BackgroundSection } from './sections/BackgroundSection';
@@ -16,7 +15,6 @@ const DashboardLandingPage = () => {
 
   return (
     <Container>
-      <NavigationBar />
       <HeaderSection id="header" event="view_dashboard_landing_section" />
       <BackgroundSection
         id="background"
