@@ -52,6 +52,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
           </Container>
 
           <div id="portal" />
+          <div id="mobile-menu" />
           <div id="landing-background" />
         </RevalidateWalletsProvider>
       </RecoilRoot>
