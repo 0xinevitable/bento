@@ -17,16 +17,15 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
     <ul>
       {tokenBalances.length > 0 ? (
         <>
-          <Container>
-            <Information>
-              <Row>
-                <Title>Total Worth</Title>
-                <TotalWorth>{`$${tokenBalances
-                  .reduce((acc, item) => acc + item.netWorth, 0)
-                  .toLocaleString()}`}</TotalWorth>
-              </Row>
-            </Information>
-          </Container>
+          <NetWorthContainer>
+            <NetWorthTitle>Token Net Worth</NetWorthTitle>
+            <span className="mt-2 text-3xl font-bold text-slate-50">
+              {`$${tokenBalances
+                .reduce((acc, item) => acc + item.netWorth, 0)
+                .toLocaleString()}`}
+            </span>
+          </NetWorthContainer>
+
           {tokenBalances.map((item, index) => {
             return (
               <Container key={index}>
@@ -34,7 +33,7 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
                 <Information>
                   <Row>
                     <Title>{item.name}</Title>
-                    <NetWorth>{`$${item.netWorth.toLocaleString()}`}</NetWorth>
+                    <TokenNetWorth>{`$${item.netWorth.toLocaleString()}`}</TokenNetWorth>
                   </Row>
                   <Row>
                     <InlineBadge>{`$${item.price.toLocaleString()}`}</InlineBadge>
@@ -54,6 +53,21 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
     </ul>
   );
 };
+
+const NetWorthContainer = styled.div`
+  margin-top: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+`;
+const NetWorthTitle = styled.span`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 100%;
+  color: #ffffff;
+`;
 
 const Container = styled.li`
   margin-top: 8px;
@@ -110,7 +124,7 @@ const InlineBadge = styled(Badge)`
   backdrop-filter: none;
 `;
 
-const NetWorth = styled.span`
+const TokenNetWorth = styled.span`
   margin-left: 4px;
 
   font-size: 15px;
@@ -118,12 +132,6 @@ const NetWorth = styled.span`
   letter-spacing: -0.5px;
   color: rgba(255, 255, 255, 0.8);
 `;
-
-const TotalWorth = styled(NetWorth)`
-  font-size: 17px;
-  letter-spacing: 0px;
-`;
-
 const TokenAmount = styled.span`
   margin-left: 4px;
 
