@@ -3,7 +3,6 @@ import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { MetaHead } from '@/components/MetaHead';
-import { NavigationBar } from '@/components/NavigationBar';
 import { Analytics } from '@/utils/analytics';
 
 import { systemFontStack } from '@/dashboard-landing/styles/fonts';
@@ -31,7 +30,6 @@ const LandingPage: React.FC = () => {
     <Container>
       <MetaHead />
 
-      <NavigationBar />
       <ProfileBanner
         id="profile-nudge"
         event="view_landing_section"
