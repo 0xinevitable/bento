@@ -16,7 +16,7 @@ export const Portal: React.FC<React.PropsWithChildren<PortalProps>> = ({
     setMounted(true);
     containerRef.current = document.querySelector(`#${id}`);
     return () => setMounted(false);
-  }, []);
+  }, [id]);
 
   return mounted && !!containerRef.current
     ? createPortal(children, containerRef.current)
