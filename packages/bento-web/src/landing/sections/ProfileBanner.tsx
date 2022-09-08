@@ -1,4 +1,4 @@
-import { motion, useTransform, useViewportScroll } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import styled from 'styled-components';
 
@@ -13,12 +13,13 @@ type Props = TrackedSectionOptions & {
 };
 
 export const ProfileBanner: React.FC<Props> = ({ onClickBanner, ...props }) => {
-  const { scrollY } = useViewportScroll();
-  const scale = useTransform(scrollY, [0, 100, 300], [1, 1.5, 0.8]);
-
   return (
     <BannerWrapper {...props}>
-      <Banner style={{ scale }}>
+      <Banner
+        initial={{ transform: `translate3d(0, -300px, 0)`, opacity: 0 }}
+        animate={{ transform: `translate3d(0, 0px, 0)`, opacity: 1 }}
+        transition={{ ease: 'easeInOut', duration: 0.3 }}
+      >
         <BannerContent>
           <BannerTitle>
             HEY YOU!

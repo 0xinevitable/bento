@@ -10,10 +10,9 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import styled from 'styled-components';
 
-import { MetaHead } from '@/components/MetaHead';
 import { NavigationBar } from '@/components/NavigationBar';
 import { SessionManager } from '@/hooks/useSession';
-import { WalletManager } from '@/hooks/useWallets';
+import { RevalidateWalletsProvider } from '@/hooks/useWallets';
 import { Analytics } from '@/utils/analytics';
 
 Analytics.initialize();
@@ -45,16 +44,17 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       <RecoilRoot>
         <ReactNotifications />
         <SessionManager />
-        <WalletManager />
+        <RevalidateWalletsProvider>
+          <Container>
+            <NavigationBar />
 
-        <Container>
-          <NavigationBar />
+            <Component {...pageProps} />
+          </Container>
 
-          <Component {...pageProps} />
-        </Container>
-
-        <div id="portal" />
-        <div id="landing-background" />
+          <div id="portal" />
+          <div id="mobile-menu" />
+          <div id="landing-background" />
+        </RevalidateWalletsProvider>
       </RecoilRoot>
     </React.Fragment>
   );

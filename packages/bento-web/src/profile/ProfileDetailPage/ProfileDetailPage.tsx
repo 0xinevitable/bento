@@ -9,9 +9,10 @@ import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
 
-import { ProfileInstance } from '../components/ProfileInstance';
+import { useProfile } from '@/profile/hooks/useProfile';
+import { ProfileInstance } from '@/profile/instance';
+
 import { UserProfile } from '../types/UserProfile';
-import { useProfile } from './hooks/useProfile';
 
 type Props =
   | {

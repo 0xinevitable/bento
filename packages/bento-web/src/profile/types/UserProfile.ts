@@ -1,9 +1,4 @@
-export type ProfileLink = {
-  title: string;
-  description: string;
-  href: string;
-  image: string;
-};
+import { Block } from '../blocks/types';
 
 export enum UserProfileTab {
   Links = 'Links',
@@ -18,7 +13,7 @@ export type UserProfile = {
   verified: boolean;
   bio: string;
   tabs: UserProfileTab[];
-  links: ProfileLink[] | null;
+  links: Block[] | null;
 };
 
 export enum UserQuestionType {

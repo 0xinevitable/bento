@@ -3,7 +3,10 @@ import styled from 'styled-components';
 
 import { Badge } from '@/components/Badge';
 import { Skeleton } from '@/components/Skeleton';
+
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
+
+import { Empty } from './Empty';
 
 type Props = {
   tokenBalances: DashboardTokenBalance[];
@@ -13,32 +16,58 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
   return (
     <ul>
       {tokenBalances.length > 0 ? (
-        tokenBalances.map((item, index) => {
-          return (
-            <Container key={index}>
-              <Logo src={item.logo} />
-              <Information>
-                <Row>
-                  <Title>{item.name}</Title>
-                  <NetWorth>{`$${item.netWorth.toLocaleString()}`}</NetWorth>
-                </Row>
-                <Row>
-                  <InlineBadge>{`$${item.price.toLocaleString()}`}</InlineBadge>
-                  <TokenAmount>
-                    {`${item.amount.toLocaleString()}`}
-                    <span className="symbol">{` ${item.symbol}`}</span>
-                  </TokenAmount>
-                </Row>
-              </Information>
-            </Container>
-          );
-        })
+        <>
+          <NetWorthContainer>
+            <NetWorthTitle>Token Net Worth</NetWorthTitle>
+            <span className="mt-2 text-3xl font-bold text-slate-50">
+              {`$${tokenBalances
+                .reduce((acc, item) => acc + item.netWorth, 0)
+                .toLocaleString()}`}
+            </span>
+          </NetWorthContainer>
+
+          {tokenBalances.map((item, index) => {
+            return (
+              <Container key={index}>
+                <Logo src={item.logo} />
+                <Information>
+                  <Row>
+                    <Title>{item.name}</Title>
+                    <TokenNetWorth>{`$${item.netWorth.toLocaleString()}`}</TokenNetWorth>
+                  </Row>
+                  <Row>
+                    <InlineBadge>{`$${item.price.toLocaleString()}`}</InlineBadge>
+                    <TokenAmount>
+                      {`${item.amount.toLocaleString()}`}
+                      <span className="symbol">{` ${item.symbol}`}</span>
+                    </TokenAmount>
+                  </Row>
+                </Information>
+              </Container>
+            );
+          })}
+        </>
       ) : (
         <Empty>No Assets Found</Empty>
       )}
     </ul>
   );
 };
+
+const NetWorthContainer = styled.div`
+  margin-top: 24px;
+  margin-bottom: 24px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+`;
+const NetWorthTitle = styled.span`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 100%;
+  color: #ffffff;
+`;
 
 const Container = styled.li`
   margin-top: 8px;
@@ -95,7 +124,7 @@ const InlineBadge = styled(Badge)`
   backdrop-filter: none;
 `;
 
-const NetWorth = styled.span`
+const TokenNetWorth = styled.span`
   margin-left: 4px;
 
   font-size: 15px;
@@ -125,11 +154,4 @@ const AssetSkeleton = styled(Skeleton)`
   margin-top: 8px;
   border-radius: 8px;
   align-self: center;
-`;
-
-const Empty = styled.span`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  color: white;
 `;

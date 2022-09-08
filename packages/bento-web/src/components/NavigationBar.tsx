@@ -1,7 +1,8 @@
-import { Icon } from '@iconify/react';
+import { Icon as Iconify } from '@iconify/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import GithubIcon from '@/assets/icons/ic-github.svg';
@@ -11,7 +12,9 @@ import { useSignOut } from '@/hooks/useSignOut';
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Analytics } from '@/utils/analytics';
 
+import { Icon } from './Icon';
 import { NoSSR } from './NoSSR';
+import { Portal } from './Portal';
 
 const Breakpoints = {
   Mobile: 512,
@@ -63,6 +66,8 @@ export const NavigationBar = () => {
     await signOut();
   }, [signOut]);
 
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+
   return (
     <Wrapper>
       <Container>
@@ -84,7 +89,7 @@ export const NavigationBar = () => {
               >
                 <Link href={item.href} passHref>
                   <a className="h-full flex gap-2 justify-center items-center">
-                    <Icon className="text-xl" icon={item.icon} />
+                    <Iconify className="text-xl" icon={item.icon} />
                     <span className="text-sm font-medium leading-none">
                       {item.title}
                     </span>
@@ -129,7 +134,49 @@ export const NavigationBar = () => {
             <GithubIcon />
           </a>
         </SocialIconList>
+
+        <MobileMenuButton onClick={() => setMobileMenuOpen((prev) => !prev)}>
+          <Icon
+            size={30}
+            icon={!isMobileMenuOpen ? 'ic-mobile-menu' : 'ic-mobile-close'}
+            color="white"
+          />
+        </MobileMenuButton>
       </Container>
+
+      <Portal id="mobile-menu">
+        <MobileMenuContainer
+          style={isMobileMenuOpen ? { height: '100%' } : { height: 0 }}
+        >
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <MobileMenuContent
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                {NAVIGATION_ITEMS.map((item) => (
+                  <MobileMenuItem
+                    key={`${item.title}-${item.href}`}
+                    style={{
+                      color: currentPath === item.href ? '#ff375c' : 'white',
+                    }}
+                  >
+                    <Link href={item.href} passHref>
+                      <a className="h-full flex gap-2 items-center">
+                        <Iconify className="text-xl" icon={item.icon} />
+                        <span className="text-2xl font-medium leading-none">
+                          {item.title}
+                        </span>
+                      </a>
+                    </Link>
+                  </MobileMenuItem>
+                ))}
+              </MobileMenuContent>
+            )}
+          </AnimatePresence>
+        </MobileMenuContainer>
+      </Portal>
     </Wrapper>
   );
 };
@@ -196,22 +243,6 @@ const LogoImage = styled.img`
   user-select: none;
 `;
 
-const SocialIconList = styled.div`
-  gap: 12px;
-
-  &,
-  & > a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  & > a:focus {
-    transform: scale(0.85);
-    opacity: 0.45;
-  }
-`;
-
 const NavigationList = styled.ul`
   display: flex;
 
@@ -265,4 +296,65 @@ const NavigationItem = styled.li<NavigationItemProps>`
         height: 4px;
       }
     `};
+`;
+
+const SocialIconList = styled.div`
+  gap: 12px;
+
+  &,
+  & > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & > a:focus {
+    transform: scale(0.85);
+    opacity: 0.45;
+  }
+
+  @media screen and (max-width: 680px) {
+    display: none;
+  }
+`;
+
+const MobileMenuButton = styled.button`
+  width: 40px;
+  height: 40px;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid white;
+  border-radius: 2px;
+
+  display: none;
+
+  @media screen and (max-width: 680px) {
+    display: flex;
+  }
+`;
+
+const MobileMenuContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 80;
+  background-color: black;
+  transition: all 0.5s ease-in-out;
+`;
+const MobileMenuContent = styled(motion.ul)`
+  margin: 0 auto;
+  padding: ${64 + 16}px 20px 0;
+  max-width: 1100px;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
+const MobileMenuItem = styled.li`
+  padding: 16px 0;
 `;

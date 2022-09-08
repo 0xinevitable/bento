@@ -1,24 +1,59 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { GetServerSideProps } from 'next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/Button';
+import { Checkbox } from '@/components/Checkbox';
 import { MetaHead } from '@/components/MetaHead';
+import { useSession } from '@/hooks/useSession';
 import { FeatureFlags } from '@/utils/FeatureFlag';
+import { toast } from '@/utils/toast';
 
-import { useProfile } from '../ProfileDetailPage/hooks/useProfile';
+// import { Modal } from '@/components/Modal';
+import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
+import { useProfile } from '@/profile/hooks/useProfile';
+
+import { LinkBlock } from '../blocks/types';
 import { FieldInput } from '../components/FieldInput';
-import { FieldTextArea } from '../components/FieldTextArea';
-import { ProfileLink } from '../types/UserProfile';
+import { FixedLoginNudge } from '../components/LoginNudge';
+// import { FieldTextArea } from '../components/FieldTextArea';
+// import { BlockEditItem } from './components/BlockEditItem';
 import { Preview } from './components/Preview';
-import { ProfileLinkEditItem } from './components/ProfileLinkEditItem';
 import { TabBar } from './components/TabBar';
 
-const emptyProfileLink: ProfileLink = {
+type Props = {
+  isVisible?: boolean;
+  onDismiss?: () => void;
+};
+
+type FeedItem = {
+  link?: string;
+  guid?: string;
+  title?: string;
+  pubDate?: string;
+  creator?: string;
+  summary?: string;
+  content?: string;
+  contentSnippet?: string;
+  isoDate?: string;
+  categories?: string[];
+  enclosure?: {
+    url: string;
+    length?: number;
+    type?: string;
+  };
+  ogImageURL: string | null;
+};
+
+const RSS_FEED_LIMIT = 15;
+
+const emptyBlock: LinkBlock = {
+  type: 'link',
   title: '',
   description: '',
-  href: '',
-  image: '',
+  url: '',
+  images: [''],
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -29,12 +64,13 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const ProfileEditPage = () => {
+  const { session } = useSession();
   const { profile } = useProfile();
 
   const [username, setUsername] = useState<string>('');
   const [displayName, setDisplayName] = useState<string>('');
   const [bio, setBio] = useState<string>('');
-  const [links, setLinks] = useState<ProfileLink[]>([]);
+  const [blocks, setBlocks] = useState<LinkBlock[]>([]);
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
@@ -44,7 +80,10 @@ const ProfileEditPage = () => {
     setUsername(profile.username);
     setDisplayName(profile.display_name);
     setBio(profile.bio);
-    setLinks(profile.links ?? []);
+
+    // FIXME:
+    setBlocks([]);
+
     if (!!profile.images) {
       setImages(profile.images);
     } else {
@@ -53,17 +92,20 @@ const ProfileEditPage = () => {
   }, [profile]);
 
   const profileDraft = useMemo(
-    () => ({
-      ...profile,
-      username,
-      display_name: displayName,
-      bio,
-      links,
-      images,
-      verified: false,
-      tabs: [],
-    }),
-    [username, displayName, images, bio, links],
+    () =>
+      !profile
+        ? null
+        : {
+            ...profile,
+            username,
+            display_name: displayName,
+            bio,
+            links: blocks,
+            images,
+            verified: false,
+            tabs: [],
+          },
+    [username, displayName, images, bio, blocks],
   );
 
   const onSubmit = useCallback(async () => {
@@ -71,10 +113,43 @@ const ProfileEditPage = () => {
       username,
       display_name: displayName,
       bio,
-      links,
+      links: blocks,
     });
     console?.log(data);
-  }, [username, displayName, bio, links]);
+  }, [username, displayName, bio, blocks]);
+
+  const [rssURL, setRssURL] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [feedItems, setFeedItems] = useState<FeedItem[]>([]);
+
+  const onClickSubscribe = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        `https://feed.inevitable.team/api/rss?rssURL=${rssURL}&limit=${RSS_FEED_LIMIT}`,
+      );
+      setLoading(false);
+      setFeedItems(data);
+    } catch (error) {
+      setLoading(false);
+      setRssURL('');
+      console.error(error);
+
+      let description = 'Something went wrong';
+      if (error instanceof AxiosError) {
+        description = error.response?.data?.message || description;
+      } else {
+        description = (error as any).message || description;
+      }
+      toast({
+        type: 'error',
+        title: 'Server Error',
+        description,
+      });
+    }
+  }, [rssURL]);
+
+  const blockURLs = useMemo(() => blocks.map((v) => v.url), [blocks]);
 
   return (
     <>
@@ -85,7 +160,7 @@ const ProfileEditPage = () => {
         <EditorWrapper>
           <TabBar onClick={onSubmit} />
           <Container>
-            <ProfileContainer id="profile">
+            {/* <ProfileContainer id="profile">
               <FieldInput
                 field="사용자 이름"
                 placeholder="여러분의 링크에 들어가는 이름이에요"
@@ -104,34 +179,92 @@ const ProfileEditPage = () => {
                 defaultValue={profile?.bio ?? ''}
                 onChange={(e) => setBio(e?.target.value)}
               />
-            </ProfileContainer>
-            <ProfileLinkList id="links">
-              {links.map((item, index) => {
+            </ProfileContainer> */}
+            {/* <ProfileLinkList id="links">
+              {blocks.map((item, index) => {
                 return (
-                  <ProfileLinkEditItem
+                  <BlockEditItem
                     key={`item-${index}`}
                     linkDraft={item}
-                    defaultLink={profile?.links?.[index]}
+                    // FIXME: default block
+                    // defaultBlock={profile?.blocks?.[index]}
                     onChange={(updated) =>
-                      setLinks(
-                        links.map((link, i) => (i === index ? updated : link)),
+                      setBlocks(
+                        blocks.map((link, i) => (i === index ? updated : link)),
                       )
                     }
                     onDelete={() => {
-                      const deletedLinks = links.filter(
+                      const deletedLinks = blocks.filter(
                         (_, i) => !(i === index),
                       );
-                      setLinks(deletedLinks);
+                      setBlocks(deletedLinks);
                     }}
                   />
                 );
               })}
-            </ProfileLinkList>
-            <button onClick={() => setLinks([...links, emptyProfileLink])}>
+            </ProfileLinkList> */}
+            {/* <button onClick={() => setBlocks([...blocks, emptyBlock])}>
               Add link
-            </button>
+            </button> */}
+
+            {FeatureFlags.isProfileRSSSubscriptionEnabled &&
+              (loading ? (
+                <Title>Loading...</Title>
+              ) : !feedItems.length ? (
+                <>
+                  <Title>Subscribe RSS</Title>
+                  <FieldInput
+                    field="URL"
+                    value={rssURL}
+                    onChange={(e) => setRssURL(e.target.value)}
+                  />
+                  <Button onClick={onClickSubscribe}>Subscribe</Button>
+                </>
+              ) : (
+                <ProfileLinkList>
+                  {feedItems.map((item, index) => {
+                    const description =
+                      item.summary || item.contentSnippet || item.content;
+
+                    const linkItem: LinkBlock = {
+                      type: 'link',
+                      title: item.title || '',
+                      description: description,
+                      url: item.link || '',
+                      images: [item.ogImageURL || ''],
+                    };
+                    const isIncluded = blockURLs.includes(item.link || '');
+                    return (
+                      <LinkBlockItemWrapper key={index}>
+                        <Checkbox
+                          checked={isIncluded}
+                          readOnly
+                          onClick={() => {
+                            if (isIncluded) {
+                              setBlocks(
+                                blocks.filter((v) => v.url !== item.link),
+                              );
+                            } else {
+                              setBlocks([...blocks, linkItem]);
+                            }
+                          }}
+                        />
+                        <LinkBlockItem
+                          title={item.title || ''}
+                          description={description}
+                          url={item.link || ''}
+                          images={[item.ogImageURL || '']}
+                          type="link"
+                        />
+                      </LinkBlockItemWrapper>
+                    );
+                  })}
+                </ProfileLinkList>
+              ))}
           </Container>
         </EditorWrapper>
+
+        <FixedLoginNudge visible={!session} />
       </Wrapper>
     </>
   );
@@ -148,8 +281,9 @@ const Wrapper = styled.div`
 
 const EditorWrapper = styled.div`
   height: 100vh;
+  padding-top: 64px;
   margin-left: auto;
-  width: 38vw;
+  width: 55vw;
   background-color: #171c21;
   display: flex;
   flex-direction: column;
@@ -168,7 +302,30 @@ const ProfileContainer = styled.div`
   flex-direction: column;
 `;
 
+// const ProfileLinkList = styled.ul`
+//   margin: 16px 0 0;
+//   padding: 0;
+// `;
+
+const Title = styled.span`
+  margin: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 18.5px;
+  cursor: text;
+`;
+
 const ProfileLinkList = styled.ul`
-  margin: 16px 0 0;
-  padding: 0;
+  list-style-type: none;
+`;
+
+const LinkBlockItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  & > input {
+    width: 24px;
+    height: 24px;
+  }
 `;

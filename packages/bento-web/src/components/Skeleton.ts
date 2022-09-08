@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-const shimmer = keyframes`
+export const shimmer = keyframes`
   0% {
     background-position: -400px 0;
   }

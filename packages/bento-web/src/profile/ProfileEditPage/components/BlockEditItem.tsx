@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { LinkBlock } from '@/profile/blocks/types';
 import { ShadowedImage } from '@/profile/components/ShadowedImage';
-import { ProfileLink } from '@/profile/types/UserProfile';
 
 type Props = {
-  defaultLink?: ProfileLink;
-  linkDraft: ProfileLink;
-  onChange: (link: ProfileLink) => void;
+  defaultBlock?: LinkBlock;
+  linkDraft: LinkBlock;
+  onChange: (link: LinkBlock) => void;
   onDelete: () => void;
 };
 
-export const ProfileLinkEditItem: React.FC<Props> = ({
-  defaultLink,
+export const BlockEditItem: React.FC<Props> = ({
+  defaultBlock,
   linkDraft,
   onChange,
   onDelete,
@@ -21,25 +21,25 @@ export const ProfileLinkEditItem: React.FC<Props> = ({
     <Container>
       <button onClick={onDelete}>Delete</button>
       <LinkImageWrapper>
-        <LinkImage src={defaultLink?.image} />
+        <LinkImage src={defaultBlock?.images?.[0]} />
       </LinkImageWrapper>
       <Information>
         <BoldInput
           placeholder="이름"
-          defaultValue={defaultLink?.title ?? ''}
+          defaultValue={defaultBlock?.title ?? ''}
           onChange={(e) => onChange({ ...linkDraft, title: e.target.value })}
         />
         <Input
           placeholder="설명"
-          defaultValue={defaultLink?.description ?? ''}
+          defaultValue={defaultBlock?.description ?? ''}
           onChange={(e) =>
             onChange({ ...linkDraft, description: e.target.value })
           }
         />
         <Input
           placeholder="링크"
-          defaultValue={defaultLink?.href ?? ''}
-          onChange={(e) => onChange({ ...linkDraft, href: e.target.value })}
+          defaultValue={defaultBlock?.url ?? ''}
+          onChange={(e) => onChange({ ...linkDraft, url: e.target.value })}
         />
       </Information>
     </Container>

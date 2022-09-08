@@ -49,4 +49,5 @@ const TabOverflow = styled.div`
 `;
 const TabBackground = styled.div`
   padding-top: 16px;
+  background-color: black;
 `;

@@ -1,6 +1,7 @@
 import { Session } from '@supabase/supabase-js';
 
 import { WALLETS } from '@/components/WalletConnector';
+
 import { KEYS_BY_NETWORK } from '@/dashboard/utils/useWalletBalances';
 
 const isBrowser = typeof window !== 'undefined';

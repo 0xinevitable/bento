@@ -2,10 +2,12 @@ import { OpenSeaAsset } from '@bento/client';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { AssetMedia } from '@/dashboard/components/AssetMedia';
-import { UserProfile } from '@/profile/types/UserProfile';
 import { Analytics } from '@/utils/analytics';
 
+import { AssetMedia } from '@/dashboard/components/AssetMedia';
+import { UserProfile } from '@/profile/types/UserProfile';
+
+import { Empty } from './Empty';
 import { NFTDetailModal } from './NFTDetailModal';
 
 type Props = {
@@ -122,11 +124,4 @@ const AssetName = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-`;
-
-const Empty = styled.span`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  color: white;
 `;
