@@ -1,4 +1,4 @@
-import dedent from 'dedent';
+import Image from 'next/image';
 import styled from 'styled-components';
 
 import { Portal } from '@/components/Portal';
@@ -11,14 +11,8 @@ import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 
 const ASSETS = {
-  DIAGRAM: [
-    '/assets/landing/identity-diagram.png',
-    '/assets/landing/identity-diagram@2x.png',
-  ],
-  BACKGROUND: [
-    '/assets/landing/identity-background.png',
-    '/assets/landing/identity-background@2x.png',
-  ],
+  DIAGRAM: '/assets/landing/identity-diagram.png',
+  BACKGROUND: '/assets/landing/identity-background.png',
 } as const;
 
 export const IdentitySection: React.FC<TrackedSectionOptions> = ({
@@ -62,13 +56,9 @@ export const IdentitySection: React.FC<TrackedSectionOptions> = ({
           <BackgroundContainer>
             <BackgroundContent>
               <BackgroundMargin>
-                <Background
-                  src={ASSETS.BACKGROUND[0]}
-                  srcSet={dedent`
-                    ${ASSETS.BACKGROUND[0]} 1x,
-                    ${ASSETS.BACKGROUND[1]} 2x
-                  `}
-                />
+                <BackgroundImageContainer>
+                  <Background src={ASSETS.BACKGROUND} />
+                </BackgroundImageContainer>
               </BackgroundMargin>
             </BackgroundContent>
           </BackgroundContainer>
@@ -76,13 +66,9 @@ export const IdentitySection: React.FC<TrackedSectionOptions> = ({
 
         <IllustWrapper>
           <IllustContainer>
-            <Illust
-              src={ASSETS.DIAGRAM[0]}
-              srcSet={dedent`
-                ${ASSETS.DIAGRAM[0]} 1x,
-                ${ASSETS.DIAGRAM[1]} 2x
-              `}
-            />
+            <IllustImageContainer>
+              <Illust src={ASSETS.DIAGRAM} />
+            </IllustImageContainer>
           </IllustContainer>
         </IllustWrapper>
       </Section>
@@ -164,10 +150,14 @@ const BackgroundMargin = styled.div`
   margin-right: -232px;
   margin-bottom: -88px;
 `;
-const Background = styled.img`
+const BackgroundImageContainer = styled.div`
   width: 1240px;
   height: 687.76px;
 `;
+const Background = styled(Image).attrs({
+  width: 1240,
+  height: 687.76,
+})``;
 const IllustWrapper = styled.div`
   position: absolute;
   top: 67px;
@@ -211,8 +201,12 @@ const IllustContainer = styled.div`
   filter: saturate(1.2);
 `;
 
-const Illust = styled.img`
+const IllustImageContainer = styled.div`
   width: 861.03px;
   height: 749px;
-  object-fit: contain;
 `;
+const Illust = styled(Image).attrs({
+  width: 861.03,
+  height: 749,
+  objectFit: 'contain',
+})``;

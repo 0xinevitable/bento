@@ -1,4 +1,5 @@
 import dedent from 'dedent';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
@@ -79,7 +80,14 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
           <ChainLogoList>
             {CHAINS.map((chain) => (
               <AnimatedTooltip key={chain.src} label={chain.name}>
-                <ChainLogo src={chain.src} alt={chain.name} />
+                <ChainLogoContainer>
+                  <ChainLogo
+                    src={chain.src}
+                    alt={chain.name}
+                    width="64"
+                    height="64"
+                  />
+                </ChainLogoContainer>
               </AnimatedTooltip>
             ))}
           </ChainLogoList>
@@ -204,13 +212,17 @@ const ChainLogoList = styled.div`
   flex-wrap: wrap;
   column-gap: 4px;
   row-gap: 8px;
+  z-index: 3;
 `;
-const ChainLogo = styled.img`
+const ChainLogoContainer = styled.div`
   width: 36.8px;
   height: 36.8px;
   border-radius: 50%;
-  object-fit: cover;
+  overflow: hidden;
   cursor: pointer;
+`;
+const ChainLogo = styled(Image)`
+  object-fit: cover;
 `;
 
 const IllustWrapper = styled.div`

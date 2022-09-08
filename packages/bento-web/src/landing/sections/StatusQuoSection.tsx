@@ -1,4 +1,5 @@
 import dedent from 'dedent';
+import Image from 'next/image';
 import styled, { css } from 'styled-components';
 
 import {
@@ -10,14 +11,8 @@ import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 
 const ASSETS = {
-  KING: [
-    '/assets/landing/status-quo-king.png',
-    '/assets/landing/status-quo-king@2x.png',
-  ],
-  WALLET: [
-    '/assets/landing/status-quo-wallet.png',
-    '/assets/landing/status-quo-wallet@2x.png',
-  ],
+  KING: '/assets/landing/status-quo-king.png',
+  WALLET: '/assets/landing/status-quo-wallet.png',
   NOISES: [
     { src: '/assets/landing/noise-1.svg', top: 169.57, left: 43.52 },
     { src: '/assets/landing/noise-2.svg', top: 138.01, left: 251.19 },
@@ -58,25 +53,17 @@ export const StatusQuoSection: React.FC<TrackedSectionOptions> = ({
 
         <IllustWrapper>
           <IllustContainer>
-            <ChessKingIllustContainer>
-              <ChessKingIllust
-                src={ASSETS.KING[0]}
-                srcSet={dedent`
-                  ${ASSETS.KING[0]} 1x,
-                  ${ASSETS.KING[1]} 2x
-                `}
-              />
-            </ChessKingIllustContainer>
+            <ChessKingIllustWrapper>
+              <ChessKingIllustContainer>
+                <ChessKingIllust src={ASSETS.KING} />
+              </ChessKingIllustContainer>
+            </ChessKingIllustWrapper>
             <InequalSymbol src="/assets/landing/inequal.svg" />
-            <WalletIllustContainer>
-              <WalletIllust
-                src={ASSETS.WALLET[0]}
-                srcSet={dedent`
-                  ${ASSETS.WALLET[0]} 1x,
-                  ${ASSETS.WALLET[1]} 2x
-                `}
-              />
-            </WalletIllustContainer>
+            <WalletIllustWrapper>
+              <WalletIllustContainer>
+                <WalletIllust src={ASSETS.WALLET} />
+              </WalletIllustContainer>
+            </WalletIllustWrapper>
 
             {ASSETS.NOISES.map(({ src, top, left }) => (
               <Noise key={src} src={src} top={top} left={left} />
@@ -176,7 +163,7 @@ const CHESS_KING_BLUR_TOP = 140 - 52.9;
 const CHESS_KING_BLUR_LEFT = 140 - 20.82;
 const CHESS_KING_BLUR_RIGHT = 140 - 19.41;
 const CHESS_KING_BLUR_BOTTOM = 140 + 11.76;
-const ChessKingIllustContainer = styled.div`
+const ChessKingIllustWrapper = styled.div`
   width: 443.09px;
   height: 455.76px;
 
@@ -184,7 +171,7 @@ const ChessKingIllustContainer = styled.div`
   top: 0;
   left: 0;
 `;
-const ChessKingIllust = styled.img`
+const ChessKingIllustContainer = styled.div`
   width: ${443.09 + CHESS_KING_BLUR_TOP + CHESS_KING_BLUR_BOTTOM}px;
   height: ${455.76 + CHESS_KING_BLUR_LEFT + CHESS_KING_BLUR_RIGHT}px;
 
@@ -193,10 +180,15 @@ const ChessKingIllust = styled.img`
   margin-right: ${-CHESS_KING_BLUR_RIGHT}px;
   margin-bottom: ${-CHESS_KING_BLUR_BOTTOM}px;
 `;
+const ChessKingIllust = styled(Image).attrs({
+  width: 443.09 * 2,
+  height: 455.76 * 2,
+  objectFit: 'contain',
+})``;
 
 const WALLET_ILLUST_BLUR_TOP = 140 - 98.51;
 const WALLET_ILLUST_BLUR_RIGHT = 140 - 30.28;
-const WalletIllustContainer = styled.div`
+const WalletIllustWrapper = styled.div`
   width: 355.5px;
   height: 345px;
 
@@ -205,7 +197,7 @@ const WalletIllustContainer = styled.div`
   right: 0;
   z-index: 1;
 `;
-const WalletIllust = styled.img`
+const WalletIllustContainer = styled.div`
   width: ${355.5 + WALLET_ILLUST_BLUR_RIGHT}px;
   height: ${345 + WALLET_ILLUST_BLUR_TOP}px;
 
@@ -213,6 +205,11 @@ const WalletIllust = styled.img`
   margin-right: ${-WALLET_ILLUST_BLUR_RIGHT}px;
   z-index: 0;
 `;
+const WalletIllust = styled(Image).attrs({
+  width: 355.5 * 2,
+  height: 345 * 2,
+  objectFit: 'contain',
+})``;
 
 const InequalSymbol = styled.img`
   width: 141px;

@@ -1,5 +1,6 @@
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
@@ -13,14 +14,8 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 import { Analytics } from '@/utils/analytics';
 
 const ASSETS = {
-  ILLUST: [
-    '/assets/landing/header-illust.png',
-    '/assets/landing/header-illust@2x.png',
-  ],
-  PAWN: [
-    '/assets/landing/header-pawn.png',
-    '/assets/landing/header-pawn@2x.png',
-  ],
+  ILLUST: '/assets/landing/header-illust.png',
+  PAWN: '/assets/landing/header-pawn.png',
 };
 
 const float = (y: number, reverse: boolean = false) => ({
@@ -62,20 +57,11 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
         <IllustWrapper>
           <IllustContainer>
             <MainIllust>
-              <Illust
-                src={ASSETS.ILLUST[0]}
-                srcSet={dedent`
-                  ${ASSETS.ILLUST[0]} 1x,
-                  ${ASSETS.ILLUST[1]} 2x
-                `}
-              />
+              <IllustImageContainer>
+                <Illust src={ASSETS.ILLUST} />
+              </IllustImageContainer>
 
-              <Pawn
-                src={ASSETS.PAWN[0]}
-                srcSet={dedent`
-                  ${ASSETS.PAWN[0]} 1x,
-                  ${ASSETS.PAWN[1]} 2x
-                `}
+              <PawnImageContainer
                 initial={{ y: 5, scale: 1, rotate: 10 }}
                 animate={{ y: 5, scale: 1.1, rotate: 10 }}
                 transition={{
@@ -84,7 +70,9 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
                   repeatType: 'mirror',
                   duration: 2,
                 }}
-              />
+              >
+                <Pawn src={ASSETS.PAWN} />
+              </PawnImageContainer>
             </MainIllust>
 
             {!isMobileView && (
@@ -426,15 +414,19 @@ const MainIllust = styled.div`
 const ILLUST_BLUR_LEFT = 80;
 const ILLUST_BLUR_RIGHT = 32;
 const ILLUST_BLUR_BOTTOM = 80 - 61.74;
-const Illust = styled.img`
+const IllustImageContainer = styled.div`
   margin-left: ${-ILLUST_BLUR_LEFT}px;
   margin-right: ${-ILLUST_BLUR_RIGHT}px;
   margin-bottom: ${-ILLUST_BLUR_BOTTOM}px;
   width: ${662 + ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
   height: ${413.74 + ILLUST_BLUR_BOTTOM}px;
 `;
+const Illust = styled(Image).attrs({
+  width: 662 * 2,
+  height: 413.74 * 2,
+})``;
 
-const Pawn = styled(motion.img)`
+const PawnImageContainer = styled(motion.div)`
   width: ${413.74 + ILLUST_BLUR_BOTTOM}px;
   height: ${413.74 + ILLUST_BLUR_BOTTOM}px;
 
@@ -443,3 +435,7 @@ const Pawn = styled(motion.img)`
   left: ${173.3 - ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
   bottom: 0;
 `;
+const Pawn = styled(Image).attrs({
+  width: 413.74 * 2,
+  height: 413.74 * 2,
+})``;
