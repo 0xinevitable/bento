@@ -1,7 +1,7 @@
+import { LinkBlock } from '@linky/profile-engine';
 import React from 'react';
 import styled from 'styled-components';
 
-import { LinkBlock } from '@/profile/blocks/types';
 import { ShadowedImage } from '@/profile/components/ShadowedImage';
 
 type Props = {
