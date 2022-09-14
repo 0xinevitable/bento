@@ -1,3 +1,4 @@
+import { Block } from '@linky/profile-engine';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
@@ -8,7 +9,6 @@ import { FeatureFlags } from '@/utils/FeatureFlag';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
 import { TextBlockItem } from '@/profile/blocks/TextBlockItem';
 import { VideoBlockItem } from '@/profile/blocks/VideoBlockItem';
-import { Block } from '@/profile/blocks/types';
 
 import { Empty } from './Empty';
 import { SyncRSSButton } from './SyncRSSButton';

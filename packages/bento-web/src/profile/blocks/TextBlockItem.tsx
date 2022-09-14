@@ -1,7 +1,6 @@
+import { TextBlock } from '@linky/profile-engine';
 import React from 'react';
 import styled from 'styled-components';
-
-import { TextBlock } from './types';
 
 type Props = TextBlock & {};
 

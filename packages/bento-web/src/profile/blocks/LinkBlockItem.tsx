@@ -1,10 +1,10 @@
+import { LinkBlock } from '@linky/profile-engine';
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { shimmer } from '@/components/Skeleton';
 
 import { ShadowedImage } from '../components/ShadowedImage';
-import { LinkBlock } from './types';
 
 type Props = LinkBlock & {};
 

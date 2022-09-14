@@ -10,6 +10,7 @@
   },
   "workspaces": [
     "packages/*",
+    "linky-frontend/packages/*",
     "scripts"
   ],
   "devDependencies": {

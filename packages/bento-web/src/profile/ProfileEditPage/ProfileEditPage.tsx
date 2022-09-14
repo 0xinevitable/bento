@@ -1,3 +1,4 @@
+import { LinkBlock } from '@linky/profile-engine';
 import axios, { AxiosError } from 'axios';
 import { GetServerSideProps } from 'next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -14,7 +15,6 @@ import { toast } from '@/utils/toast';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
 import { useProfile } from '@/profile/hooks/useProfile';
 
-import { LinkBlock } from '../blocks/types';
 import { FieldInput } from '../components/FieldInput';
 import { FixedLoginNudge } from '../components/LoginNudge';
 // import { FieldTextArea } from '../components/FieldTextArea';

@@ -41,16 +41,17 @@ yarn install
 - First, clone this repo.
 - Since we're using [Zero-Install](https://yarnpkg.com/features/zero-installs) through Yarn Berry's Plug'n'Play, the repository's initial clone size might be significantly larger than you think.
 
-```js
-{
-  "CMC_PRO_API_KEYS": [""],
-  "COVALENT_API_KEYS": [""],
-  "RPC_URL": { ... },
-  "STORAGE": { ... }
-}
+```env
+ENVIRONMENT=development
+NEXT_PUBLIC_SUPABASE_ANON_KEY
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+NEXT_PUBLIC_SLACK_NEW_PROFILE_WEBHOOK=
+NEXT_PUBLIC_OPENSEA_API_KEYS=
+NEXT_PUBLIC_COVALENT_API_KEYS=ckey_xxx:,ckey_xxx:
+NEXT_PUBLIC_CMC_PRO_API_KEYS=
 ```
 
-- Copy `src/config/secrets.example.json` inside `@bento/common` to `src/config/secrets.json` and fill in the contents.
+- Copy `.env.example` inside `@bento/web` to `.env.debug.local`/`.env.development.local` and fill in the contents.
 
 ```bash
 yarn workspace @bento/common build
@@ -66,6 +67,14 @@ yarn workspace @bento/web dev
 ```
 
 - Finally, we start the development server. By default, the port is set to `3000`.
+
+## Production Deployment
+
+Since this project uses [`vercel-submodules`](https://github.com/junhoyeo/vercel-submodules), we have our custom `Install Command` set in Vercel:
+
+```bash
+npx vercel-submodules --paths linky-frontend && yarn install
+```
 
 ## 🏛️ Licensing
 

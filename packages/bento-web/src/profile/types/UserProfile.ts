@@ -1,4 +1,4 @@
-import { Block } from '../blocks/types';
+import { Block } from '@linky/profile-engine';
 
 export enum UserProfileTab {
   Links = 'Links',

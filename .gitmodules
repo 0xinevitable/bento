@@ -1,3 +1,6 @@
 [submodule "scripts/assets/trustwallet-assets"]
 	path = scripts/assets/trustwallet-assets
 	url = https://github.com/trustwallet/assets
+[submodule "linky-frontend"]
+	path = linky-frontend
+	url = https://github.com/inevitable-changes/linky
