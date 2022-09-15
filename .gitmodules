@@ -4,3 +4,6 @@
 [submodule "linky-frontend"]
 	path = linky-frontend
 	url = https://github.com/inevitable-changes/linky
+[submodule "packages/bento-private"]
+	path = packages/bento-private
+	url = https://junhoyeo@github.com/inevitable-changes/bento-private
