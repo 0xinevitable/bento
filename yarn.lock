@@ -2784,6 +2784,7 @@ __metadata:
     "@types/react": ^18.0.15
     "@types/react-dom": ^18.0.6
     "@types/styled-components": ^5.1.25
+    cobe: ^0.6.1
     eslint: ^8.19.0
     eslint-config-next: ^12.2.2
     eslint-config-prettier: ^8.5.0
@@ -8345,6 +8346,15 @@ __metadata:
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
   checksum: 30befca8019b2eb7dbad38cff6266cf543091dae2825c856a62a8ccf2c3ab9c2907c4d12b288b73101196767f66812365400a227581484a05f968b0307cfaf12
+  languageName: node
+  linkType: hard
+
+"cobe@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "cobe@npm:0.6.1"
+  dependencies:
+    phenomenon: ^1.6.0
+  checksum: 476b5a1b81899ca8ddca5f545728c61cc9f1015668c6b7a076e86b5ef7b156a102b6b7d40019a739124fc3f5eb27a3bc476ebfd6f8ec9bca22d74630918dcf31
   languageName: node
   linkType: hard
 
@@ -15034,6 +15044,13 @@ __metadata:
   version: 2.1.0
   resolution: "performance-now@npm:2.1.0"
   checksum: 534e641aa8f7cba160f0afec0599b6cecefbb516a2e837b512be0adbe6c1da5550e89c78059c7fabc5c9ffdf6627edabe23eb7c518c4500067a898fa65c2b550
+  languageName: node
+  linkType: hard
+
+"phenomenon@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "phenomenon@npm:1.6.0"
+  checksum: e05ca8223a9df42c5cee02c082103ef96a349424fec18a8478d2171060a63095e21bef394529263c64d8082aff43204a0fa1355211fd7ac2a338c2839fffbca3
   languageName: node
   linkType: hard
 

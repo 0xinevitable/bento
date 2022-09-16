@@ -4839,6 +4839,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.15"],\
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/styled-components", "npm:5.1.25"],\
+            ["cobe", "npm:0.6.1"],\
             ["eslint", "npm:8.23.1"],\
             ["eslint-config-next", "virtual:3a240f26825e24d4fc608a24795bbd83008d181dbe7886040df43658e6d8bfaf25446794a37393872143c6c6427525fd6b8c1abc991eb8322d5911a77f54fa71#npm:12.3.0"],\
             ["eslint-config-prettier", "virtual:3a240f26825e24d4fc608a24795bbd83008d181dbe7886040df43658e6d8bfaf25446794a37393872143c6c6427525fd6b8c1abc991eb8322d5911a77f54fa71#npm:8.5.0"],\
@@ -12231,6 +12232,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/clsx-npm-1.2.1-77792dc182-30befca801.zip/node_modules/clsx/",\
           "packageDependencies": [\
             ["clsx", "npm:1.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["cobe", [\
+        ["npm:0.6.1", {\
+          "packageLocation": "./.yarn/cache/cobe-npm-0.6.1-a8dfaeffcb-476b5a1b81.zip/node_modules/cobe/",\
+          "packageDependencies": [\
+            ["cobe", "npm:0.6.1"],\
+            ["phenomenon", "npm:1.6.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -19910,6 +19921,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/performance-now-npm-2.1.0-45e3ce7e49-534e641aa8.zip/node_modules/performance-now/",\
           "packageDependencies": [\
             ["performance-now", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["phenomenon", [\
+        ["npm:1.6.0", {\
+          "packageLocation": "./.yarn/cache/phenomenon-npm-1.6.0-d06142df21-e05ca8223a.zip/node_modules/phenomenon/",\
+          "packageDependencies": [\
+            ["phenomenon", "npm:1.6.0"]\
           ],\
           "linkType": "HARD"\
         }]\
