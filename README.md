@@ -33,10 +33,12 @@
 ```bash
 git clone https://github.com/inevitable-changes/bento
 cd bento
+git submodule update --init --recursive
 yarn install
 ```
 
 - First, clone this repo.
+- Install private submodules(We'll soon make the project buildable for external users without access).
 - Since we're using [Zero-Install](https://yarnpkg.com/features/zero-installs) through Yarn Berry's Plug'n'Play, the repository's initial clone size might be significantly larger than you think.
 
 ```env
