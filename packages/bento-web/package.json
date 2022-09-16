@@ -12,6 +12,7 @@
     "@bento/client": "workspace:^",
     "@bento/common": "workspace:^",
     "@bento/core": "workspace:^",
+    "@bento/private": "workspace:^",
     "@cosmjs/amino": "^0.28.10",
     "@cosmjs/crypto": "0.28.10",
     "@cosmjs/stargate": "0.28.10",
