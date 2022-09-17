@@ -1,13 +1,13 @@
+import { MetaHead } from '@bento/client/components/MetaHead';
+import { useSession } from '@bento/client/hooks/useSession';
+import { walletsAtom } from '@bento/client/recoil/wallets';
+import { Analytics } from '@bento/client/utils/analytics';
+import { useAtomValue } from 'jotai';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useRef, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-import { MetaHead } from '@/components/MetaHead';
 import { PageContainer } from '@/components/PageContainer';
-import { useSession } from '@/hooks/useSession';
-import { walletsAtom } from '@/recoil/wallets';
-import { Analytics } from '@/utils/analytics';
 
 import { AddWalletModal } from './components/AddWalletModal';
 import {
@@ -20,7 +20,7 @@ const DynamicDashboardMain = dynamic(() => import('./sections/DashboardMain'));
 
 const DashboardPage = () => {
   const { session } = useSession();
-  const wallets = useRecoilValue(walletsAtom);
+  const wallets = useAtomValue(walletsAtom);
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);

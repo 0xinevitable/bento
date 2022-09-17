@@ -1,23 +1,14 @@
 import { cachedAxios } from '@bento/client';
+import { Network } from '@bento/client/constants/networks';
+import { WALLETS } from '@bento/client/constants/wallets';
+import { useSignOut } from '@bento/client/hooks/useSignOut';
+import { Analytics } from '@bento/client/utils/analytics';
+import { toast } from '@bento/client/utils/toast';
 import { Base64 } from '@bento/common';
 import { AxiosError } from 'axios';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
-
-import { useSignOut } from '@/hooks/useSignOut';
-import { Analytics } from '@/utils/analytics';
-import { toast } from '@/utils/toast';
-
-import { Network } from '@/dashboard/components/AddWalletModal';
-
-export const WALLETS = {
-  metamask: '/assets/wallets/metamask.png',
-  walletconnect: '/assets/wallets/walletconnect.png',
-  keplr: '/assets/wallets/keplr.png',
-  kaikas: '/assets/wallets/kaikas.png',
-  phantom: '/assets/wallets/phantom.png',
-};
 
 declare global {
   interface Window {

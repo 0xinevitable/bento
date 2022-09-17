@@ -1,12 +1,11 @@
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import styled from 'styled-components';
-
-import { Button } from '@/components/Button';
+import { Button } from '@bento/client/components/Button';
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@/components/TrackedSection';
+} from '@bento/client/components/TrackedSection';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import styled from 'styled-components';
 
 type Props = TrackedSectionOptions & {
   onClickBanner: () => void;
@@ -127,8 +126,6 @@ const BannerContent = styled.div`
   }
 `;
 const BannerTitle = styled.h2`
-  font-family: 'Poppins';
-  font-style: normal;
   font-weight: 900;
   font-size: 32px;
   line-height: 120%;
@@ -177,7 +174,7 @@ const CTABadge = styled.span`
   align-items: center;
 
   font-family: 'Raleway';
-  font-style: normal;
+
   font-weight: 600;
   font-size: 14px;
   line-height: 83%;

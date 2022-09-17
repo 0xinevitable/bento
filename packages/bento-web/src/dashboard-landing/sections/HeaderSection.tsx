@@ -1,14 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-
-import { Badge } from '@/components/Badge';
+import { Badge } from '@bento/client/components/Badge';
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@/components/TrackedSection';
-import { Analytics } from '@/utils/analytics';
+} from '@bento/client/components/TrackedSection';
+import { Analytics } from '@bento/client/utils/analytics';
+import React from 'react';
+import styled from 'styled-components';
 
-import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const HeaderSection: React.FC<TrackedSectionOptions> = ({
@@ -184,7 +182,6 @@ const Title = styled.h1`
   margin: 0;
   margin-top: 12px;
 
-  font-family: ${systemFontStack};
   font-weight: 900;
   font-size: 64px;
   line-height: 103%;
@@ -245,7 +242,6 @@ const Description = styled.p`
   margin: 0;
   margin-top: 12px;
 
-  font-family: ${systemFontStack};
   font-weight: 500;
   font-size: 18px;
   line-height: 120%;
@@ -283,8 +279,6 @@ const Button = styled.button`
   background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
   filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
 
-  font-family: ${systemFontStack};
-  font-style: normal;
   font-weight: 700;
   font-size: 21.3946px;
 

@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 import { ReactNotifications } from 'react-notifications-component';
-import { RecoilRoot } from 'recoil';
 
 import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
-import '@/styles/global.css';
 
+import { SessionManager } from '@bento/client/hooks/useSession';
+import { RevalidateWalletsProvider } from '@bento/client/hooks/useWallets';
+import { Analytics } from '@bento/client/utils/analytics';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import styled from 'styled-components';
 
 import { NavigationBar } from '@/components/NavigationBar';
-import { SessionManager } from '@/hooks/useSession';
-import { RevalidateWalletsProvider } from '@/hooks/useWallets';
-import { Analytics } from '@/utils/analytics';
+import { GlobalStyle } from '@/styles/GlobalStyle';
 
 Analytics.initialize();
 
@@ -41,21 +40,21 @@ function MyApp({ Component, pageProps }: MyAppProps) {
           rel="stylesheet"
         />
       </Head>
-      <RecoilRoot>
-        <ReactNotifications />
-        <SessionManager />
-        <RevalidateWalletsProvider>
-          <Container>
-            <NavigationBar />
 
-            <Component {...pageProps} />
-          </Container>
+      <GlobalStyle />
+      <ReactNotifications />
+      <SessionManager />
+      <RevalidateWalletsProvider>
+        <Container>
+          <NavigationBar />
 
-          <div id="portal" />
-          <div id="mobile-menu" />
-          <div id="landing-background" />
-        </RevalidateWalletsProvider>
-      </RecoilRoot>
+          <Component {...pageProps} />
+        </Container>
+
+        <div id="portal" />
+        <div id="mobile-menu" />
+        <div id="landing-background" />
+      </RevalidateWalletsProvider>
     </React.Fragment>
   );
 }

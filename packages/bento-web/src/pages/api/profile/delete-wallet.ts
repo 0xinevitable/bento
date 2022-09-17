@@ -1,9 +1,7 @@
+import { Supabase } from '@bento/client/utils/Supabase';
+import { UserProfile } from '@bento/private/profile/types/UserProfile';
 import { PostgrestError, PostgrestResponse } from '@supabase/supabase-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-import { Supabase } from '@/utils/Supabase';
-
-import { UserProfile } from '@/profile/types/UserProfile';
 
 type APIRequest = NextApiRequest & {
   body: UserProfile;

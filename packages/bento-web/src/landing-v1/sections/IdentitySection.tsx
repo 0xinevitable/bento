@@ -1,11 +1,10 @@
-import Image from 'next/image';
-import styled from 'styled-components';
-
-import { Portal } from '@/components/Portal';
+import { Portal } from '@bento/client/components/Portal';
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@/components/TrackedSection';
+} from '@bento/client/components/TrackedSection';
+import Image from 'next/image';
+import styled from 'styled-components';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';

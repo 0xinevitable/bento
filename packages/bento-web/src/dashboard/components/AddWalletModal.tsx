@@ -1,84 +1,21 @@
+import { Modal } from '@bento/client/components/Modal';
+import { NETWORKS, Network } from '@bento/client/constants/networks';
+import { useSession } from '@bento/client/hooks/useSession';
+import { useRevalidateWallets } from '@bento/client/hooks/useWallets';
+import { walletsAtom } from '@bento/client/recoil/wallets';
+import { Supabase } from '@bento/client/utils/Supabase';
+import { Analytics } from '@bento/client/utils/analytics';
 import { Bech32Address } from '@bento/core/address';
+import { FieldInput } from '@bento/private/profile/components/FieldInput';
 import { getAddress, isAddress } from '@ethersproject/address';
 import { PublicKey } from '@solana/web3.js';
 import clsx from 'clsx';
 import produce from 'immer';
+import { useImmerAtom } from 'jotai/immer';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import styled, { css } from 'styled-components';
 
-import { Modal } from '@/components/Modal';
 import { WalletConnector } from '@/components/WalletConnector';
-import { useSession } from '@/hooks/useSession';
-import { useRevalidateWallets } from '@/hooks/useWallets';
-import { walletsAtom } from '@/recoil/wallets';
-import { Supabase } from '@/utils/Supabase';
-import { Analytics } from '@/utils/analytics';
-
-import { FieldInput } from '@/profile/components/FieldInput';
-
-export type Network = {
-  id: string;
-  type: string;
-  name: string;
-  logo: string;
-};
-export const NETWORKS: Network[] = [
-  {
-    id: 'ethereum',
-    type: 'evm',
-    name: 'Ethereum',
-    logo: '/assets/icons/ethereum.png',
-  },
-  {
-    id: 'avalanche',
-    type: 'evm',
-    name: 'Avalanche',
-    logo: '/assets/icons/avalanche.png',
-  },
-  {
-    id: 'bnb',
-    type: 'evm',
-    name: 'BNB',
-    logo: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
-  },
-  {
-    id: 'polygon',
-    type: 'evm',
-    name: 'Polygon',
-    logo: '/assets/icons/polygon.png',
-  },
-  {
-    id: 'klaytn',
-    type: 'evm',
-    name: 'Klaytn',
-    logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
-  },
-  {
-    id: 'opensea',
-    type: 'evm',
-    name: 'OpenSea',
-    logo: '/assets/icons/opensea.png',
-  },
-  {
-    id: 'cosmos',
-    type: 'cosmos-sdk',
-    name: 'Cosmos',
-    logo: 'https://assets-cdn.trustwallet.com/blockchains/cosmos/info/logo.png',
-  },
-  {
-    id: 'osmosis',
-    type: 'cosmos-sdk',
-    name: 'Osmosis',
-    logo: 'https://assets-cdn.trustwallet.com/blockchains/osmosis/info/logo.png',
-  },
-  {
-    id: 'solana',
-    type: 'solana',
-    name: 'Solana',
-    logo: 'https://assets-cdn.trustwallet.com/blockchains/solana/info/logo.png',
-  },
-];
 
 const identifyWalletAddress = (value: string) => {
   if (value.length < 32) {
@@ -167,7 +104,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   }, [draftWalletAddress]);
 
   // Add wallet without session
-  const setWallets = useSetRecoilState(walletsAtom);
+  const [, setWallets] = useImmerAtom(walletsAtom);
   const onClickAddWallet = useCallback(() => {
     const walletDraft = {
       type: draftWalletType as any,

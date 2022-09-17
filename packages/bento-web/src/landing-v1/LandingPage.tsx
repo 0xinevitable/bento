@@ -1,11 +1,9 @@
+import { MetaHead } from '@bento/client/components/MetaHead';
+import { systemFontStack } from '@bento/client/styles/fonts';
+import { Analytics } from '@bento/client/utils/analytics';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
-
-import { MetaHead } from '@/components/MetaHead';
-import { Analytics } from '@/utils/analytics';
-
-import { systemFontStack } from '@/dashboard-landing/styles/fonts';
 
 import { DashboardSection } from './sections/DashboardSection';
 import { HeaderSection } from './sections/HeaderSection';
@@ -55,7 +53,12 @@ const Container = styled.div`
   flex-direction: column;
 
   section * {
-    font-family: 'Raleway', ${systemFontStack};
+    /*
+      FIXME: reset.css가 두번(Tailwind의 reset 스타일과 styled-reset) 들어가면서
+      font-family가 우선순위 밀리는 문제 이렇게 해결.
+      Tailwind 걷어내고 !important 없애기
+    */
+    font-family: 'Raleway', ${systemFontStack} !important;
 
     &:not(h1, h1 span) {
       transition: all 0.2s ease-in-out;

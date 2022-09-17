@@ -1,3 +1,9 @@
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@bento/client/components/TrackedSection';
+import { useWindowSize } from '@bento/client/hooks/useWindowSize';
+import { Analytics } from '@bento/client/utils/analytics';
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -5,13 +11,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styled from 'styled-components';
-
-import {
-  TrackedSection,
-  TrackedSectionOptions,
-} from '@/components/TrackedSection';
-import { useWindowSize } from '@/hooks/useWindowSize';
-import { Analytics } from '@/utils/analytics';
 
 const ASSETS = {
   ILLUST: '/assets/landing/header-illust.png',
@@ -220,7 +219,6 @@ const TwitterButton = styled.button`
   top: 35.74px;
   left: 1.14px;
 
-  font-family: 'Poppins';
   font-weight: 800;
   font-size: 18.8px;
   line-height: 100%;

@@ -1,17 +1,14 @@
+import { AnimatedTooltip } from '@bento/client/components/AnimatedToolTip';
+import { Badge } from '@bento/client/components/Badge';
+import { NETWORKS } from '@bento/client/constants/networks';
+import { useSession } from '@bento/client/hooks/useSession';
+import { Supabase } from '@bento/client/utils/Supabase';
+import { Analytics } from '@bento/client/utils/analytics';
+import { FixedLoginNudge } from '@bento/private/profile/components/LoginNudge';
 import { Icon } from '@iconify/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
-import { AnimatedTooltip } from '@/components/AnimatedToolTip';
-import { Badge } from '@/components/Badge';
-import { useSession } from '@/hooks/useSession';
-import { Supabase } from '@/utils/Supabase';
-import { Analytics } from '@/utils/analytics';
-
-import { FixedLoginNudge } from '@/profile/components/LoginNudge';
-
-import { NETWORKS } from '../components/AddWalletModal';
 
 type IntroSectionProps = {
   onConnectWallet?: () => void;
@@ -144,7 +141,6 @@ const Button = styled.button`
   background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
   filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
 
-  font-style: normal;
   font-weight: 700;
   font-size: 21.3946px;
 

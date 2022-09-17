@@ -1,11 +1,10 @@
+import { Badge } from '@bento/client/components/Badge';
+import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
 import clsx from 'clsx';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { Badge } from '@/components/Badge';
-
 import { PLATFORM_LOGOS } from '../constants/platform';
-import { DashboardTokenBalance } from '../types/TokenBalance';
 
 type TokenBalanceItemProps = {
   tokenBalance: DashboardTokenBalance;

@@ -1,12 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@/components/TrackedSection';
+} from '@bento/client/components/TrackedSection';
+import React from 'react';
+import styled from 'styled-components';
 
-import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const WalletSection: React.FC<TrackedSectionOptions> = ({
@@ -47,7 +45,6 @@ const Container = styled(TrackedSection)`
 `;
 
 const Subtitle = styled.span`
-  font-family: ${systemFontStack};
   font-weight: 600;
   font-size: 24px;
   line-height: 36px;
@@ -68,7 +65,6 @@ const Title = styled.h2`
   margin: 0;
   margin-top: 12px;
 
-  font-family: ${systemFontStack};
   font-weight: 900;
   font-size: 54px;
   line-height: 120%;

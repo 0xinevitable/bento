@@ -73,7 +73,7 @@ yarn workspace @bento/web dev
 Since this project uses [`vercel-submodules`](https://github.com/junhoyeo/vercel-submodules), we have our custom `Install Command` set in Vercel:
 
 ```bash
-npx vercel-submodules --paths linky-frontend packages/bento-private && yarn install
+npx vercel-submodules --paths packages/bento-private packages/linky-profile-engine && yarn install
 ```
 
 ## 🏛️ Licensing

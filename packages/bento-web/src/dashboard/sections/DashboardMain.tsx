@@ -1,3 +1,12 @@
+import { Badge } from '@bento/client/components/Badge';
+import { Checkbox } from '@bento/client/components/Checkbox';
+import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
+import { WalletBalance } from '@bento/client/dashboard/types/WalletBalance';
+import { useNFTBalances } from '@bento/client/dashboard/utils/useNFTBalances';
+import { useWalletBalances } from '@bento/client/dashboard/utils/useWalletBalances';
+import { useLocalStorage } from '@bento/client/hooks/useLocalStorage';
+import { useWindowSize } from '@bento/client/hooks/useWindowSize';
+import { Analytics } from '@bento/client/utils/analytics';
 import { Wallet } from '@bento/common';
 import { Icon } from '@iconify/react';
 import clsx from 'clsx';
@@ -5,19 +14,9 @@ import groupBy from 'lodash.groupby';
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
-import { Badge } from '@/components/Badge';
-import { Checkbox } from '@/components/Checkbox';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { useWindowSize } from '@/hooks/useWindowSize';
-import { Analytics } from '@/utils/analytics';
-
 import { TokenBalanceItem } from '../components/TokenBalanceItem';
 import { TokenDetailModalParams } from '../components/TokenDetailModal';
 import { WalletList } from '../components/WalletList';
-import { DashboardTokenBalance } from '../types/TokenBalance';
-import { WalletBalance } from '../types/WalletBalance';
-import { useNFTBalances } from '../utils/useNFTBalances';
-import { useWalletBalances } from '../utils/useWalletBalances';
 import { AssetRatioSection } from './AssetRatioSection';
 
 const walletBalanceReducer =
