@@ -61,9 +61,6 @@ const DashboardPage = () => {
       <MetaHead />
       <Black />
       <PageContainer className="pt-0 z-10">
-        <TopLeftBlur src="/assets/blurs/top-left.png" />
-        <TopRightBlur src="/assets/blurs/top-right.png" />
-
         {!pageLoaded ? null : !hasWallet ? (
           <IntroSection
             onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
