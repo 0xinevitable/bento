@@ -1,11 +1,8 @@
 import { Wallet } from '@bento/common';
-import { atom } from 'recoil';
+import { atomWithStorage } from 'jotai/utils';
 
-import { localStorageEffect } from './effects/localStorageEffect';
+import { storage } from './storage';
 
 const key = '@wallets_v3';
-export const walletsAtom = atom<Wallet[]>({
-  key,
-  default: [],
-  effects_UNSTABLE: [localStorageEffect(key)],
-});
+// @ts-ignore FIXME:
+export const walletsAtom = atomWithStorage<Wallet[]>(key, [], storage);

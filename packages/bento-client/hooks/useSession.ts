@@ -1,7 +1,7 @@
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
+import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { sessionAtom } from '../recoil/session';
 import { Supabase } from '../utils/Supabase';
@@ -21,7 +21,7 @@ const handleAuthChange = async (
 };
 
 export const SessionManager: React.FC = () => {
-  const [currentSession, setCurrentSession] = useRecoilState(sessionAtom);
+  const [currentSession, setCurrentSession] = useAtom(sessionAtom);
 
   useEffect(() => {
     setCurrentSession(Supabase.auth.session());
@@ -78,7 +78,7 @@ export const SessionManager: React.FC = () => {
 };
 
 export const useSession = () => {
-  const currentSession = useRecoilValue(sessionAtom);
+  const currentSession = useAtomValue(sessionAtom);
 
   return { session: currentSession };
 };

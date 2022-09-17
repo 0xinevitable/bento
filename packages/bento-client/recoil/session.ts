@@ -1,8 +1,4 @@
 import { Session } from '@supabase/supabase-js';
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 
-const key = '@session';
-export const sessionAtom = atom<Session | null>({
-  key,
-  default: null,
-});
+export const sessionAtom = atom<Session | null>(null);

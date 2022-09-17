@@ -21,6 +21,7 @@
     "framer-motion": "^7.3.5",
     "immer": "^9.0.15",
     "javascript-time-ago": "^2.5.7",
+    "jotai": "^1.8.3",
     "lodash.chunk": "^4.2.0",
     "lodash.groupby": "^4.6.0",
     "next": "^12.3.0",
@@ -30,7 +31,6 @@
     "react-intersection-observer": "^9.4.0",
     "react-is": "^18.2.0",
     "react-notifications-component": "^4.0.1",
-    "recoil": "^0.7.5",
     "styled-components": "^5.3.5",
     "swr": "^2.0.0-beta.4"
   },

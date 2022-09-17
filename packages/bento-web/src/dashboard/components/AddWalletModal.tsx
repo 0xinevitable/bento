@@ -1,18 +1,18 @@
+import { walletsAtom } from '@bento/client/recoil/wallets';
 import { Bech32Address } from '@bento/core/address';
 import { FieldInput } from '@bento/private/profile/components/FieldInput';
 import { getAddress, isAddress } from '@ethersproject/address';
 import { PublicKey } from '@solana/web3.js';
 import clsx from 'clsx';
 import produce from 'immer';
+import { useImmerAtom } from 'jotai/immer';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import styled, { css } from 'styled-components';
 
 import { Modal } from '@/components/Modal';
 import { WalletConnector } from '@/components/WalletConnector';
 import { useSession } from '@/hooks/useSession';
 import { useRevalidateWallets } from '@/hooks/useWallets';
-import { walletsAtom } from '@/recoil/wallets';
 import { Supabase } from '@/utils/Supabase';
 import { Analytics } from '@/utils/analytics';
 
@@ -166,7 +166,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   }, [draftWalletAddress]);
 
   // Add wallet without session
-  const setWallets = useSetRecoilState(walletsAtom);
+  const [, setWallets] = useImmerAtom(walletsAtom);
   const onClickAddWallet = useCallback(() => {
     const walletDraft = {
       type: draftWalletType as any,

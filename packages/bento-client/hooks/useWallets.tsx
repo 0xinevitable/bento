@@ -1,6 +1,6 @@
 import { Wallet } from '@bento/common';
+import { useAtom, useSetAtom } from 'jotai';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { walletsAtom } from '../recoil/wallets';
 import { Supabase } from '../utils/Supabase';
@@ -14,7 +14,7 @@ export const RevalidateWalletsProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { session } = useSession();
-  const setWallets = useSetRecoilState(walletsAtom);
+  const setWallets = useSetAtom(walletsAtom);
 
   const revalidateWallets = useCallback(async () => {
     if (!session || !session.user) {
@@ -32,7 +32,7 @@ export const RevalidateWalletsProvider: React.FC<React.PropsWithChildren> = ({
     return wallets;
   }, [JSON.stringify(session), setWallets]);
 
-  const [wallets] = useRecoilState(walletsAtom);
+  const [wallets] = useAtom(walletsAtom);
   const [isWalletEmpty, setWalletEmpty] = useState<boolean>(false);
 
   useEffect(() => {

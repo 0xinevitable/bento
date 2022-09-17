@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { ReactNotifications } from 'react-notifications-component';
-import { RecoilRoot } from 'recoil';
 
 import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
@@ -41,21 +40,20 @@ function MyApp({ Component, pageProps }: MyAppProps) {
           rel="stylesheet"
         />
       </Head>
-      <RecoilRoot>
-        <ReactNotifications />
-        <SessionManager />
-        <RevalidateWalletsProvider>
-          <Container>
-            <NavigationBar />
 
-            <Component {...pageProps} />
-          </Container>
+      <ReactNotifications />
+      <SessionManager />
+      <RevalidateWalletsProvider>
+        <Container>
+          <NavigationBar />
 
-          <div id="portal" />
-          <div id="mobile-menu" />
-          <div id="landing-background" />
-        </RevalidateWalletsProvider>
-      </RecoilRoot>
+          <Component {...pageProps} />
+        </Container>
+
+        <div id="portal" />
+        <div id="mobile-menu" />
+        <div id="landing-background" />
+      </RevalidateWalletsProvider>
     </React.Fragment>
   );
 }

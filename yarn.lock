@@ -1773,6 +1773,7 @@ __metadata:
     framer-motion: ^7.3.5
     immer: ^9.0.15
     javascript-time-ago: ^2.5.7
+    jotai: ^1.8.3
     lodash.chunk: ^4.2.0
     lodash.groupby: ^4.6.0
     next: ^12.3.0
@@ -1782,7 +1783,6 @@ __metadata:
     react-intersection-observer: ^9.4.0
     react-is: ^18.2.0
     react-notifications-component: ^4.0.1
-    recoil: ^0.7.5
     styled-components: ^5.3.5
     swr: ^2.0.0-beta.4
     typescript: ^4.7.4
@@ -1841,6 +1841,7 @@ __metadata:
     eslint-config-next: ^12.2.2
     eslint-config-prettier: ^8.5.0
     framer-motion: ^7.3.5
+    jotai: ^1.8.3
     lodash.groupby: ^4.6.0
     next: ^12.2.2
     next-composed-plugins: ^1.0.1
@@ -1852,7 +1853,6 @@ __metadata:
     react-localization: ^1.0.19
     react-youtube: ^10.0.0
     recharts: ^2.1.14
-    recoil: ^0.7.5
     styled-components: ^5.3.5
     styled-reset: ^4.4.2
     typescript: ^4.7.4
@@ -1899,6 +1899,7 @@ __metadata:
     framer-motion: ^6.4.3
     immer: ^9.0.15
     javascript-time-ago: ^2.5.6
+    jotai: ^1.8.3
     lodash.chunk: ^4.2.0
     lodash.groupby: ^4.6.0
     next: 12.2.2
@@ -1913,7 +1914,6 @@ __metadata:
     react-is: ^18.2.0
     react-notifications-component: ^4.0.1
     recharts: ^2.1.12
-    recoil: ^0.7.4
     styled-components: ^5.3.5
     swr: ^2.0.0-beta.4
     tailwindcss: ^3.1.5
@@ -8436,13 +8436,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hamt_plus@npm:1.0.2":
-  version: 1.0.2
-  resolution: "hamt_plus@npm:1.0.2"
-  checksum: af26ea32db03009019cc83dfa9411521a2fa16079443de1a502c9be46d8b3c975acda8ed93fc5750ef08d3186d35901e2d8cfe717dd54bea67b358601fa74e4c
-  languageName: node
-  linkType: hard
-
 "har-schema@npm:^2.0.0":
   version: 2.0.0
   resolution: "har-schema@npm:2.0.0"
@@ -9426,6 +9419,43 @@ __metadata:
   bin:
     jayson: bin/jayson.js
   checksum: 404c0b602f3af70565c6a1ee0ea5dcbc1c5881c9ab5838c556a5c53ce066749e3b08aaf098330ac9cf3c132929f2afd6b89dd35725a2f55d313630893204c3b7
+  languageName: node
+  linkType: hard
+
+"jotai@npm:^1.8.3":
+  version: 1.8.3
+  resolution: "jotai@npm:1.8.3"
+  peerDependencies:
+    "@babel/core": "*"
+    "@babel/template": "*"
+    "@tanstack/query-core": "*"
+    "@urql/core": "*"
+    immer: "*"
+    optics-ts: "*"
+    react: ">=16.8"
+    valtio: "*"
+    wonka: "*"
+    xstate: "*"
+  peerDependenciesMeta:
+    "@babel/core":
+      optional: true
+    "@babel/template":
+      optional: true
+    "@tanstack/query-core":
+      optional: true
+    "@urql/core":
+      optional: true
+    immer:
+      optional: true
+    optics-ts:
+      optional: true
+    valtio:
+      optional: true
+    wonka:
+      optional: true
+    xstate:
+      optional: true
+  checksum: 794fb2be7e1b1979004f6fa86f1fec90095f3d933983ab9bce1238460d980cf8b960efa00779aacf318a4872ff3d1cf2e5f64d53b84fe949269486d19f95b51a
   languageName: node
   linkType: hard
 
@@ -11870,38 +11900,6 @@ __metadata:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 58f11fe8c9c4c36ddfe464ed896a7fd61b3c6cedeeab07cd86f286604dc11e96d2dc9288c55bb9c4e3c083ee325ffcccb5d0e6bc43a747c72110d25300624b22
-  languageName: node
-  linkType: hard
-
-"recoil@npm:^0.7.4":
-  version: 0.7.4
-  resolution: "recoil@npm:0.7.4"
-  dependencies:
-    hamt_plus: 1.0.2
-  peerDependencies:
-    react: ">=16.13.1"
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: 797b97ee74b2fbbb8e4dda8a951b13569d45a3440cfc05e870056255ff22c73aa816de70d66168a5b9ebe16c14d262777947dd752c8cb9559ef8ae3fbb586472
-  languageName: node
-  linkType: hard
-
-"recoil@npm:^0.7.5":
-  version: 0.7.5
-  resolution: "recoil@npm:0.7.5"
-  dependencies:
-    hamt_plus: 1.0.2
-  peerDependencies:
-    react: ">=16.13.1"
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: 19b410cca6839c8b886b91378112e12de3e0393b547211dafcf7a272c1aa2d7af6c09a9ed39fb3e1997abe5f3d6583e3774dc9f9cdda8c36e4cb0be64a1b17ce
   languageName: node
   linkType: hard
 
