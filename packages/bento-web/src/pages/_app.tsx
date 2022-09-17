@@ -3,7 +3,6 @@ import { ReactNotifications } from 'react-notifications-component';
 
 import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
-import '@/styles/global.css';
 
 import { SessionManager } from '@bento/client/hooks/useSession';
 import { RevalidateWalletsProvider } from '@bento/client/hooks/useWallets';
@@ -13,6 +12,7 @@ import Head from 'next/head';
 import styled from 'styled-components';
 
 import { NavigationBar } from '@/components/NavigationBar';
+import { GlobalStyle } from '@/styles/GlobalStyle';
 
 Analytics.initialize();
 
@@ -41,6 +41,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         />
       </Head>
 
+      <GlobalStyle />
       <ReactNotifications />
       <SessionManager />
       <RevalidateWalletsProvider>

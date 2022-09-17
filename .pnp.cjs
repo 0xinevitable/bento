@@ -2715,6 +2715,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-notifications-component", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:4.0.1"],\
             ["recharts", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:2.1.12"],\
             ["styled-components", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:5.3.5"],\
+            ["styled-reset", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:4.4.2"],\
             ["tailwindcss", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.1.5"],\
             ["tslib", "npm:2.4.0"],\
             ["tweetnacl", "npm:1.0.3"],\
@@ -14866,6 +14867,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["styled-reset", "npm:4.4.2"]\
           ],\
           "linkType": "SOFT"\
+        }],\
+        ["virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:4.4.2", {\
+          "packageLocation": "./.yarn/__virtual__/styled-reset-virtual-fcc722678d/0/cache/styled-reset-npm-4.4.2-6f715641a7-1ee15f6391.zip/node_modules/styled-reset/",\
+          "packageDependencies": [\
+            ["styled-reset", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:4.4.2"],\
+            ["@types/styled-components", "npm:5.1.25"],\
+            ["styled-components", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:5.3.5"]\
+          ],\
+          "packagePeers": [\
+            "@types/styled-components",\
+            "styled-components"\
+          ],\
+          "linkType": "HARD"\
         }],\
         ["virtual:3a240f26825e24d4fc608a24795bbd83008d181dbe7886040df43658e6d8bfaf25446794a37393872143c6c6427525fd6b8c1abc991eb8322d5911a77f54fa71#npm:4.4.2", {\
           "packageLocation": "./.yarn/__virtual__/styled-reset-virtual-1d951999e6/0/cache/styled-reset-npm-4.4.2-6f715641a7-1ee15f6391.zip/node_modules/styled-reset/",\
