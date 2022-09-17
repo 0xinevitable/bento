@@ -3,4 +3,7 @@
 	url = https://github.com/trustwallet/assets
 [submodule "packages/bento-private"]
 	path = packages/bento-private
-	url = https://junhoyeo@github.com/inevitable-changes/bento-private
+	url = https://github.com/inevitable-changes/bento-private
+[submodule "packages/linky-profile-engine"]
+	path = packages/linky-profile-engine
+	url = https://github.com/inevitable-changes/linky-profile-engine.git
