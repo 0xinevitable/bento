@@ -5,10 +5,9 @@ import groupBy from 'lodash.groupby';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { displayName } from '@/dashboard/constants/platform';
+import { PLATFORM_LOGOS, displayName } from '@/dashboard/constants/platform';
 
 import { AssetRatioChart } from './AssetRatioChart';
-import { AssetRatioListItem } from './AssetRatioListItem';
 
 type AssetRatioCardProps = {
   netWorthInUSD: number;
@@ -29,7 +28,7 @@ export const AssetRatioCard: React.FC<AssetRatioCardProps> = ({
         ratio: (netWorth / netWorthInUSD) * 100,
       };
     });
-    // maximum length is 7
+    // maximum length is 3
     return items.slice(0, 3);
   }, [netWorthInUSD]);
 
@@ -39,7 +38,7 @@ export const AssetRatioCard: React.FC<AssetRatioCardProps> = ({
 
       <Information>
         <Field>Net Worth</Field>
-        <Title>{netWorthInUSD.toLocaleString()}</Title>
+        <Title>{`$${netWorthInUSD.toLocaleString()}`}</Title>
       </Information>
 
       <div>
@@ -51,7 +50,17 @@ export const AssetRatioCard: React.FC<AssetRatioCardProps> = ({
 
       <BadgeList>
         {assetRatioByPlatform.map((item) => (
-          <AssetRatioListItem key={item.platform} {...item} />
+          <Badge key={item.platform}>
+            <img
+              src={PLATFORM_LOGOS[item.platform as keyof typeof PLATFORM_LOGOS]}
+              alt={item.name}
+            />
+            <span>
+              {`${item.ratio.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}%`}
+            </span>
+          </Badge>
         ))}
       </BadgeList>
     </Container>
@@ -108,7 +117,36 @@ const BadgeList = styled.ul`
   align-items: center;
   gap: 6px;
 `;
-const Badge = styled.li``;
+const Badge = styled.li`
+  padding: 6px 12px 6px 8px;
+  gap: 6px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border-radius: 30px;
+  background: ${Colors.gray600};
+
+  /* shadow-default */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.18);
+
+  & > img {
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    user-select: none;
+  }
+
+  & > span {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    text-align: center;
+    color: ${Colors.gray100};
+  }
+`;
 
 const Illust = () => (
   <svg
