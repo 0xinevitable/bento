@@ -7,8 +7,8 @@ import { PLATFORM_LOGOS } from '@/dashboard/constants/platform';
 
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
 
-const CHART_SIZE = 240;
-const PIE_WIDTH = CHART_SIZE * 0.1;
+const CHART_SIZE = 184;
+const PIE_WIDTH = 18;
 const AVAILABLE_COLORS = [
   '#FF214A',
   '#f72585',
@@ -147,7 +147,7 @@ const AvatarContainer = styled.div`
 const BentoZapImage = styled.img.attrs({
   src: '/assets/illusts/bento-zap.png',
 })`
-  width: 160px;
-  height: 160px;
+  width: 115px;
+  height: 115px;
   user-select: none;
 `;

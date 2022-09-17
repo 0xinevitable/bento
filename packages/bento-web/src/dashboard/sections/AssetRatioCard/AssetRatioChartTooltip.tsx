@@ -32,6 +32,7 @@ const Container = styled.div`
   padding: 12px;
   display: flex;
   align-items: center;
+  width: max-content;
 
   * {
     user-select: none;
@@ -40,9 +41,9 @@ const Container = styled.div`
 
 const Information = styled.div`
   margin-left: 8px;
-  margin-bottom: 4px;
   display: flex;
   flex-direction: column;
+  gap: 8px;
 `;
 const ProtocolName = styled.label`
   color: rgba(255, 255, 255, 0.65);

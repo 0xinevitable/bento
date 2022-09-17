@@ -17,7 +17,7 @@ import styled from 'styled-components';
 import { TokenBalanceItem } from '../components/TokenBalanceItem';
 import { TokenDetailModalParams } from '../components/TokenDetailModal';
 import { WalletList } from '../components/WalletList';
-import { AssetRatioSection } from './AssetRatioSection';
+import { AssetRatioCard } from './AssetRatioCard';
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -112,14 +112,11 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   return (
     <React.Fragment>
       <TopSummaryContainer>
-        <Card>
-          <CardTitle>Net Worth</CardTitle>
-          <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-          <AssetRatioSection
-            netWorthInUSD={netWorthInUSD}
-            tokenBalances={tokenBalances}
-          />
-        </Card>
+        <AssetRatioCard
+          netWorthInUSD={netWorthInUSD}
+          tokenBalances={tokenBalances}
+        />
+
         <Card className="max-w-[400px]">
           <div
             className={clsx(
