@@ -1,6 +1,5 @@
+import { UserProfile } from '@bento/private/profile/types/UserProfile';
 import { atom } from 'recoil';
-
-import { UserProfile } from '@/profile/types/UserProfile';
 
 import { localStorageEffect } from './effects/localStorageEffect';
 

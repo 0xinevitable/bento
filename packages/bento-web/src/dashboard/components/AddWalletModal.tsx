@@ -1,4 +1,5 @@
 import { Bech32Address } from '@bento/core/address';
+import { FieldInput } from '@bento/private/profile/components/FieldInput';
 import { getAddress, isAddress } from '@ethersproject/address';
 import { PublicKey } from '@solana/web3.js';
 import clsx from 'clsx';
@@ -14,8 +15,6 @@ import { useRevalidateWallets } from '@/hooks/useWallets';
 import { walletsAtom } from '@/recoil/wallets';
 import { Supabase } from '@/utils/Supabase';
 import { Analytics } from '@/utils/analytics';
-
-import { FieldInput } from '@/profile/components/FieldInput';
 
 export type Network = {
   id: string;

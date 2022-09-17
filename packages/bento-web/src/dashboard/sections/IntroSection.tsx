@@ -1,3 +1,4 @@
+import { FixedLoginNudge } from '@bento/private/profile/components/LoginNudge';
 import { Icon } from '@iconify/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -8,8 +9,6 @@ import { Badge } from '@/components/Badge';
 import { useSession } from '@/hooks/useSession';
 import { Supabase } from '@/utils/Supabase';
 import { Analytics } from '@/utils/analytics';
-
-import { FixedLoginNudge } from '@/profile/components/LoginNudge';
 
 import { NETWORKS } from '../components/AddWalletModal';
 

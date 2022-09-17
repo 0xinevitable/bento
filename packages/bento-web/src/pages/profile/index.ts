@@ -1,9 +1,8 @@
+import { UserProfile } from '@bento/private/profile/types/UserProfile';
 import { GetServerSideProps } from 'next';
 
 import { FeatureFlags } from '@/utils/FeatureFlag';
 import { Supabase } from '@/utils/Supabase';
-
-import { UserProfile } from '@/profile/types/UserProfile';
 
 // /profile handler
 export const getServerSideProps: GetServerSideProps = async (context) => {
