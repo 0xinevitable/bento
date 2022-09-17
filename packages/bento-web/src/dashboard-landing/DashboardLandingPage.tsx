@@ -57,7 +57,6 @@ const Footer = styled.footer`
   margin-top: 120px;
   margin-bottom: 100px;
 
-  font-family: 'Poppins';
   font-weight: 700;
   font-size: 24px;
   line-height: 120%;

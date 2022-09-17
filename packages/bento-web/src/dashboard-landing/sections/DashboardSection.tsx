@@ -5,7 +5,6 @@ import {
 import dedent from 'dedent';
 import styled from 'styled-components';
 
-import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const DashboardSection: React.FC<TrackedSectionOptions> = ({
@@ -78,7 +77,6 @@ const Container = styled(TrackedSection)`
 `;
 
 const Subtitle = styled.span`
-  font-family: ${systemFontStack};
   font-weight: 600;
   font-size: 24px;
   line-height: 36px;
@@ -99,7 +97,6 @@ const Title = styled.h2`
   margin: 0;
   margin-top: 12px;
 
-  font-family: ${systemFontStack};
   font-weight: 900;
   font-size: 54px;
   line-height: 120%;
@@ -178,7 +175,6 @@ const ChainCard = styled.li`
 `;
 const ChainCardTitle = styled.h3`
   margin: 0;
-  font-family: ${systemFontStack};
   font-weight: 500;
   font-size: 18px;
   line-height: 27px;

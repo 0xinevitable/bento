@@ -1,3 +1,4 @@
+import { systemFontStack } from '@bento/client/styles/fonts';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
@@ -7,6 +8,13 @@ export const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     word-break: keep-all;
+
+    /*
+      FIXME: reset.css가 두번(Tailwind의 reset 스타일과 styled-reset) 들어가면서
+      font-family가 우선순위 밀리는 문제 이렇게 해결.
+      Tailwind 걷어내고 !important 없애기
+    */
+    font-family: ${systemFontStack} !important;
   }
 
   html {

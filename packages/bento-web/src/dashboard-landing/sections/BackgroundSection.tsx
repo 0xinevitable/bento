@@ -5,7 +5,6 @@ import {
 } from '@bento/client/components/TrackedSection';
 import styled from 'styled-components';
 
-import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
@@ -101,7 +100,6 @@ const Container = styled.div`
 const Title = styled.h2`
   margin: 0;
 
-  font-family: ${systemFontStack};
   font-weight: 900;
   font-size: 48px;
   line-height: 103%;
@@ -129,7 +127,6 @@ const Description = styled.p`
   width: 100%;
   max-width: 600px;
 
-  font-family: ${systemFontStack};
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;

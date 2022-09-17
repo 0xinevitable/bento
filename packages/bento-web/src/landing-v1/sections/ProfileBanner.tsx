@@ -126,8 +126,6 @@ const BannerContent = styled.div`
   }
 `;
 const BannerTitle = styled.h2`
-  font-family: 'Poppins';
-  font-style: normal;
   font-weight: 900;
   font-size: 32px;
   line-height: 120%;
@@ -176,7 +174,7 @@ const CTABadge = styled.span`
   align-items: center;
 
   font-family: 'Raleway';
-  font-style: normal;
+
   font-weight: 600;
   font-size: 14px;
   line-height: 83%;

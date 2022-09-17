@@ -141,7 +141,6 @@ const Button = styled.button`
   background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
   filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
 
-  font-style: normal;
   font-weight: 700;
   font-size: 21.3946px;
 

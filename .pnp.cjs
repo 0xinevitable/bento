@@ -2565,6 +2565,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@floating-ui/react-dom-interactions", "virtual:f55bc88a99a26f41500d422017e45c23bfeb30e41d70d6a6aa44805953ebb12cabbddbc49650837486290ead6ded7fd4ffc66ca84c41734f2510f893ff4e8a9d#npm:0.9.3"],\
             ["@supabase/supabase-js", "npm:1.35.6"],\
             ["@types/amplitude-js", "npm:8.16.2"],\
+            ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.chunk", "npm:4.2.7"],\
             ["@types/lodash.groupby", "npm:4.6.7"],\
             ["@types/node", "npm:18.0.3"],\
@@ -2574,6 +2575,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["amplitude-js", "npm:8.21.0"],\
             ["axios", "npm:0.27.2"],\
             ["axios-cache-adapter", "virtual:f55bc88a99a26f41500d422017e45c23bfeb30e41d70d6a6aa44805953ebb12cabbddbc49650837486290ead6ded7fd4ffc66ca84c41734f2510f893ff4e8a9d#npm:2.7.3"],\
+            ["dedent", "npm:0.7.0"],\
             ["framer-motion", "virtual:f55bc88a99a26f41500d422017e45c23bfeb30e41d70d6a6aa44805953ebb12cabbddbc49650837486290ead6ded7fd4ffc66ca84c41734f2510f893ff4e8a9d#npm:7.3.5"],\
             ["immer", "npm:9.0.15"],\
             ["javascript-time-ago", "npm:2.5.7"],\
