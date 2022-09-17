@@ -1,6 +1,7 @@
-import { cachedAxios } from '@bento/client';
 import useSWR, { Key, SWRConfiguration } from 'swr';
-import { defaultConfig } from 'swr/_internal/dist/_internal';
+import { defaultConfig } from 'swr/_internal';
+
+import { cachedAxios } from '../cachedAxios';
 
 const fetcher = (url: string) => cachedAxios.get(url).then((res) => res.data);
 
