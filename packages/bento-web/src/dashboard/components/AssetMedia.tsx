@@ -1,7 +1,6 @@
+import { Skeleton } from '@bento/client/components/Skeleton';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-
-import { Skeleton } from '@/components/Skeleton';
 
 type AssetMediaProps = {
   className?: string;

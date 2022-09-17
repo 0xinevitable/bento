@@ -1,3 +1,8 @@
+import { NETWORKS } from '@bento/client/constants/networks';
+import { useRevalidateWallets } from '@bento/client/hooks/useWallets';
+import { Analytics } from '@bento/client/utils/analytics';
+import { copyToClipboard } from '@bento/client/utils/clipboard';
+import { toast } from '@bento/client/utils/toast';
 import {
   CosmosSDKBasedNetworks,
   EVMBasedNetworks,
@@ -10,13 +15,6 @@ import axios from 'axios';
 import clsx from 'clsx';
 import React, { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-
-import { useRevalidateWallets } from '@/hooks/useWallets';
-import { Analytics } from '@/utils/analytics';
-import { copyToClipboard } from '@/utils/clipboard';
-import { toast } from '@/utils/toast';
-
-import { NETWORKS } from './AddWalletModal';
 
 type WalletListProps = {
   className?: string;

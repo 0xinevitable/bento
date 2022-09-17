@@ -1,7 +1,6 @@
+import { Analytics } from '@bento/client/utils/analytics';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-
-import { Analytics } from '@/utils/analytics';
 
 import { BackgroundSection } from './sections/BackgroundSection';
 import { DashboardSection } from './sections/DashboardSection';

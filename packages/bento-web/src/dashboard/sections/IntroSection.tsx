@@ -1,16 +1,14 @@
+import { AnimatedTooltip } from '@bento/client/components/AnimatedToolTip';
+import { Badge } from '@bento/client/components/Badge';
+import { NETWORKS } from '@bento/client/constants/networks';
+import { useSession } from '@bento/client/hooks/useSession';
+import { Supabase } from '@bento/client/utils/Supabase';
+import { Analytics } from '@bento/client/utils/analytics';
 import { FixedLoginNudge } from '@bento/private/profile/components/LoginNudge';
 import { Icon } from '@iconify/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
-import { AnimatedTooltip } from '@/components/AnimatedToolTip';
-import { Badge } from '@/components/Badge';
-import { useSession } from '@/hooks/useSession';
-import { Supabase } from '@/utils/Supabase';
-import { Analytics } from '@/utils/analytics';
-
-import { NETWORKS } from '../components/AddWalletModal';
 
 type IntroSectionProps = {
   onConnectWallet?: () => void;

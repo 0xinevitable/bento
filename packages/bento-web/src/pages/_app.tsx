@@ -5,14 +5,14 @@ import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
 import '@/styles/global.css';
 
+import { SessionManager } from '@bento/client/hooks/useSession';
+import { RevalidateWalletsProvider } from '@bento/client/hooks/useWallets';
+import { Analytics } from '@bento/client/utils/analytics';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import styled from 'styled-components';
 
 import { NavigationBar } from '@/components/NavigationBar';
-import { SessionManager } from '@/hooks/useSession';
-import { RevalidateWalletsProvider } from '@/hooks/useWallets';
-import { Analytics } from '@/utils/analytics';
 
 Analytics.initialize();
 

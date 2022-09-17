@@ -1,4 +1,9 @@
 import {
+  CosmosSDKWalletBalance,
+  EVMWalletBalance,
+  SolanaWalletBalance,
+} from '@bento/client/dashboard/types/WalletBalance';
+import {
   CosmosSDKBasedNetworks,
   EVMBasedNetworks,
   Wallet,
@@ -10,11 +15,6 @@ import { SWRResponse } from 'swr';
 
 import { useAxiosSWR } from '../../hooks/useAxiosSWR';
 import { useInterval } from '../../hooks/useInterval';
-import {
-  CosmosSDKWalletBalance,
-  EVMWalletBalance,
-  SolanaWalletBalance,
-} from '../types/WalletBalance';
 
 type Key = string;
 type Address = string;

@@ -1,9 +1,9 @@
+import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
 import groupBy from 'lodash.groupby';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { displayName } from '@/dashboard/constants/platform';
-import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 import { AssetRatioChart } from './AssetRatioChart';
 import { AssetRatioListItem } from './AssetRatioListItem';

@@ -1,11 +1,10 @@
-import dedent from 'dedent';
-import Image from 'next/image';
-import styled, { css } from 'styled-components';
-
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@/components/TrackedSection';
+} from '@bento/client/components/TrackedSection';
+import dedent from 'dedent';
+import Image from 'next/image';
+import styled, { css } from 'styled-components';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';

@@ -1,10 +1,9 @@
-import dedent from 'dedent';
-import styled from 'styled-components';
-
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@/components/TrackedSection';
+} from '@bento/client/components/TrackedSection';
+import dedent from 'dedent';
+import styled from 'styled-components';
 
 import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';

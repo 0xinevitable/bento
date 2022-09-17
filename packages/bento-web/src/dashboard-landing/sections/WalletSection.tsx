@@ -1,10 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@/components/TrackedSection';
+} from '@bento/client/components/TrackedSection';
+import React from 'react';
+import styled from 'styled-components';
 
 import { systemFontStack } from '../styles/fonts';
 import { onMobile, onTablet } from '../utils/breakpoints';

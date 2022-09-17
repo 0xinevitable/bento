@@ -1,16 +1,15 @@
+import { AnimatedTooltip } from '@bento/client/components/AnimatedToolTip';
+import {
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@bento/client/components/TrackedSection';
+import { Analytics } from '@bento/client/utils/analytics';
 import dedent from 'dedent';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styled from 'styled-components';
-
-import { AnimatedTooltip } from '@/components/AnimatedToolTip';
-import {
-  TrackedSection,
-  TrackedSectionOptions,
-} from '@/components/TrackedSection';
-import { Analytics } from '@/utils/analytics';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';

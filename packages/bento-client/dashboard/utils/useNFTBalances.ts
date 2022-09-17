@@ -1,11 +1,10 @@
 import { OpenSea, OpenSeaAsset } from '@bento/client';
+import { NFTWalletBalance } from '@bento/client/dashboard/types/WalletBalance';
 import { Wallet, safePromiseAll } from '@bento/common';
 import { priceFromCoinGecko } from '@bento/core/pricings/CoinGecko';
 import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
 import { useEffect, useState } from 'react';
-
-import { NFTWalletBalance } from '../types/WalletBalance';
 
 const CHUNK_SIZE = 5;
 
