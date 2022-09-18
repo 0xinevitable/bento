@@ -1,4 +1,4 @@
-import { AnimatedTooltip } from '@bento/client/components/AnimatedToolTip';
+import { AnimatedToolTip } from '@bento/client/components/AnimatedToolTip';
 import { Badge } from '@bento/client/components/Badge';
 import { NETWORKS } from '@bento/client/constants/networks';
 import { useSession } from '@bento/client/hooks/useSession';
@@ -100,7 +100,7 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
         <ProtocolList>
           {NETWORKS.map((network) => (
             <li key={network.id}>
-              <AnimatedTooltip label={network.name}>
+              <AnimatedToolTip label={network.name}>
                 <Image
                   className="cursor-pointer"
                   alt={network.name}
@@ -108,7 +108,7 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
                   width={56}
                   height={56}
                 />
-              </AnimatedTooltip>
+              </AnimatedToolTip>
             </li>
           ))}
         </ProtocolList>

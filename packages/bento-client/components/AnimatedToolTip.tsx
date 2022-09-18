@@ -20,7 +20,7 @@ interface Props {
   children: JSX.Element;
 }
 
-export const AnimatedTooltip = ({
+export const AnimatedToolTip = ({
   children,
   label,
   placement = 'top',
