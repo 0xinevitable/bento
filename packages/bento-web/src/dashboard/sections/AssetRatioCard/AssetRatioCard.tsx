@@ -72,6 +72,7 @@ const Container = styled.div`
   padding: 28px 24px;
   gap: 24px;
   flex: 1;
+  z-index: 0;
 
   position: relative;
   overflow: hidden;
@@ -82,13 +83,8 @@ const Container = styled.div`
   border-radius: 36px;
   background: linear-gradient(180deg, #14191e 0%, #0f1214 100%);
 
-  @media screen and (max-width: 640px) {
-    flex-direction: column;
-
-    & > ul {
-      margin-top: 24px;
-      margin-left: 0;
-    }
+  @media screen and (max-width: 940px) {
+    max-width: 100%;
   }
 `;
 
@@ -155,7 +151,13 @@ const Illust = () => (
     viewBox="0 0 229 382"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    style={{ position: 'absolute', top: 0, right: 0, filter: 'saturate(120%)' }}
+    style={{
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      filter: 'saturate(120%)',
+      zIndex: -1,
+    }}
   >
     <g clip-path="url(#clip0_199_1955)">
       <g filter="url(#filter0_d_199_1955)">

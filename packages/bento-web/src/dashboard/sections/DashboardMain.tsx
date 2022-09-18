@@ -201,10 +201,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 export default DashboardMain;
 
 const TopSummaryContainer = styled.div`
-  margin-top: 24px;
+  margin-top: 27px;
   display: flex;
   width: 100%;
-  gap: 24px;
+  gap: 32px;
 
   @media screen and (max-width: 1180px) {
     gap: 16px;
