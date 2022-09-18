@@ -1,9 +1,9 @@
-import { AnimatedTooltip } from '@bento/client/components/AnimatedToolTip';
 import {
+  AnimatedToolTip,
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components/TrackedSection';
-import { Analytics } from '@bento/client/utils/analytics';
+} from '@bento/client/components';
+import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -78,7 +78,7 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
 
           <ChainLogoList>
             {CHAINS.map((chain) => (
-              <AnimatedTooltip key={chain.src} label={chain.name}>
+              <AnimatedToolTip key={chain.src} label={chain.name}>
                 <ChainLogoContainer>
                   <ChainLogo
                     src={chain.src}
@@ -87,7 +87,7 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
                     height="64"
                   />
                 </ChainLogoContainer>
-              </AnimatedTooltip>
+              </AnimatedToolTip>
             ))}
           </ChainLogoList>
         </Information>

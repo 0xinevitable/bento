@@ -1,4 +1,4 @@
-import { Badge } from '@bento/client/components/Badge';
+import { Badge } from '@bento/client/components';
 import styled from 'styled-components';
 
 export const SectionBadge = styled(Badge)`

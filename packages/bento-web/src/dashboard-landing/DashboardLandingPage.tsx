@@ -1,4 +1,4 @@
-import { Analytics } from '@bento/client/utils/analytics';
+import { Analytics } from '@bento/client/utils';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 

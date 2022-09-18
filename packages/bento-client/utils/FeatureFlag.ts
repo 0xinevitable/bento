@@ -1,5 +1,5 @@
 // Credits to @devxoul; We made this at PocketLesson
-import { Config } from '../utils/Config';
+import { Config } from '../utils';
 
 enum Environment {
   off = 0,

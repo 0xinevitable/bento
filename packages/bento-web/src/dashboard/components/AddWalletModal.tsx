@@ -1,10 +1,9 @@
-import { Modal } from '@bento/client/components/Modal';
+import { Modal } from '@bento/client/components';
 import { NETWORKS, Network } from '@bento/client/constants/networks';
 import { useSession } from '@bento/client/hooks/useSession';
 import { useRevalidateWallets } from '@bento/client/hooks/useWallets';
-import { walletsAtom } from '@bento/client/recoil/wallets';
-import { Supabase } from '@bento/client/utils/Supabase';
-import { Analytics } from '@bento/client/utils/analytics';
+import { walletsAtom } from '@bento/client/jotai';
+import { Analytics, Supabase } from '@bento/client/utils';
 import { Bech32Address } from '@bento/core/address';
 import { FieldInput } from '@bento/private/profile/components/FieldInput';
 import { getAddress, isAddress } from '@ethersproject/address';
@@ -277,6 +276,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     </OverlayWrapper>
   );
 };
+
+export default AddWalletModal;
 
 const OverlayWrapper = styled(Modal)`
   .modal-container {

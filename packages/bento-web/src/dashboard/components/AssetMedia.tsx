@@ -1,4 +1,4 @@
-import { Skeleton } from '@bento/client/components/Skeleton';
+import { Skeleton } from '@bento/client/components';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 

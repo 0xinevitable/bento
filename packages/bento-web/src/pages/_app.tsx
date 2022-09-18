@@ -1,12 +1,11 @@
-import { ToastProvider } from '@bento/client/utils/toast';
+import { SessionManager } from '@bento/client/hooks/useSession';
+import { RevalidateWalletsProvider } from '@bento/client/hooks/useWallets';
+import { Analytics, ToastProvider } from '@bento/client/utils';
 import React, { useEffect } from 'react';
 
 import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
 
-import { SessionManager } from '@bento/client/hooks/useSession';
-import { RevalidateWalletsProvider } from '@bento/client/hooks/useWallets';
-import { Analytics } from '@bento/client/utils/analytics';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import styled from 'styled-components';

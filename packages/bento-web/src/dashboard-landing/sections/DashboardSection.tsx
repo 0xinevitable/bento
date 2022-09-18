@@ -1,7 +1,7 @@
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components/TrackedSection';
+} from '@bento/client/components';
 import dedent from 'dedent';
 import styled from 'styled-components';
 

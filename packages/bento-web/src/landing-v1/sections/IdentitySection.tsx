@@ -1,8 +1,8 @@
-import { Portal } from '@bento/client/components/Portal';
 import {
+  Portal,
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components/TrackedSection';
+} from '@bento/client/components';
 import Image from 'next/image';
 import styled from 'styled-components';
 

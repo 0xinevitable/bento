@@ -1,7 +1,7 @@
-import { MetaHead } from '@bento/client/components/MetaHead';
+import { MetaHead } from '@bento/client/components';
 import { useSession } from '@bento/client/hooks/useSession';
-import { walletsAtom } from '@bento/client/recoil/wallets';
-import { Analytics } from '@bento/client/utils/analytics';
+import { walletsAtom } from '@bento/client/jotai';
+import { Analytics } from '@bento/client/utils';
 import { useAtomValue } from 'jotai';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useRef, useState } from 'react';
@@ -9,14 +9,16 @@ import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 
-import { AddWalletModal } from './components/AddWalletModal';
-import {
-  TokenDetailModal,
-  TokenDetailModalParams,
-} from './components/TokenDetailModal';
-import { IntroSection } from './sections/IntroSection';
+import { DashboardIntro } from './DashboardIntro';
+import { TokenDetailModalParams } from './components/TokenDetailModal';
 
-const DynamicDashboardMain = dynamic(() => import('./sections/DashboardMain'));
+const DynamicDashboardMain = dynamic(() => import('./DashboardMain'));
+const DynmaicAddWalletModal = dynamic(
+  () => import('./components/AddWalletModal'),
+);
+const DynamicTokenDetailModal = dynamic(
+  () => import('./components/TokenDetailModal'),
+);
 
 const DashboardPage = () => {
   const { session } = useSession();
@@ -62,7 +64,7 @@ const DashboardPage = () => {
       <Black />
       <PageContainer className="pt-0 z-10">
         {!pageLoaded ? null : !hasWallet ? (
-          <IntroSection
+          <DashboardIntro
             onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
           />
         ) : (
@@ -74,11 +76,11 @@ const DashboardPage = () => {
           />
         )}
 
-        <AddWalletModal
+        <DynmaicAddWalletModal
           visible={isAddWalletModalVisible}
           onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
         />
-        <TokenDetailModal
+        <DynamicTokenDetailModal
           visible={isTokenDetailModalVisible}
           onDismiss={() => {
             setTokenDetailModalVisible((prev) => !prev);
@@ -97,29 +99,4 @@ const Black = styled.div`
   width: 100%;
   height: 64px;
   background-color: rgba(0, 0, 0, 0.5);
-`;
-
-const TOP_LEFT_BLUR = 262.9;
-const TopLeftBlur = styled.img`
-  position: absolute;
-  top: 360px;
-  left: 63px;
-
-  margin: ${-TOP_LEFT_BLUR}px;
-  width: ${280.42 + TOP_LEFT_BLUR * 2}px;
-  height: ${280.42 + TOP_LEFT_BLUR * 2}px;
-  z-index: -1;
-  user-select: none;
-`;
-const TOP_RIGHT_BLUR = 256;
-const TopRightBlur = styled.img`
-  position: absolute;
-  top: -35px;
-  right: 64.48px;
-
-  margin: ${-TOP_RIGHT_BLUR}px;
-  width: ${402 + TOP_RIGHT_BLUR * 2}px;
-  height: ${47 + TOP_RIGHT_BLUR * 2}px;
-  z-index: -1;
-  user-select: none;
 `;

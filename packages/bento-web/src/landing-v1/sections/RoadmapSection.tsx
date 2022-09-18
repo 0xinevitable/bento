@@ -1,7 +1,7 @@
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components/TrackedSection';
+} from '@bento/client/components';
 import styled from 'styled-components';
 
 import { SectionBadge } from '../components/SectionBadge';

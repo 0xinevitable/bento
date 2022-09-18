@@ -1,10 +1,7 @@
-import { Icon } from '@bento/client/components/Icon';
-import { NoSSR } from '@bento/client/components/NoSSR';
-import { Portal } from '@bento/client/components/Portal';
+import { Icon, NoSSR, Portal } from '@bento/client/components';
 import { useSession } from '@bento/client/hooks/useSession';
 import { useSignOut } from '@bento/client/hooks/useSignOut';
-import { FeatureFlags } from '@bento/client/utils/FeatureFlag';
-import { Analytics } from '@bento/client/utils/analytics';
+import { Analytics, FeatureFlags } from '@bento/client/utils';
 import { Icon as Iconify } from '@iconify/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';

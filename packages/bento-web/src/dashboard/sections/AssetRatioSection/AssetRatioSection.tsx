@@ -1,19 +1,18 @@
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
-import { Colors } from '@bento/client/styles/colors';
-import { systemFontStack } from '@bento/client/styles/fonts';
+import { Colors, systemFontStack } from '@bento/client/styles';
 import groupBy from 'lodash.groupby';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { PLATFORM_LOGOS, displayName } from '@/dashboard/constants/platform';
+import { displayName } from '@/dashboard/constants/platform';
 
 import { AssetRatioChart } from './AssetRatioChart';
 
-type AssetRatioCardProps = {
+type AssetRatioSectionProps = {
   netWorthInUSD: number;
   tokenBalances: DashboardTokenBalance[];
 };
-export const AssetRatioCard: React.FC<AssetRatioCardProps> = ({
+export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
   netWorthInUSD,
 }) => {
@@ -51,10 +50,7 @@ export const AssetRatioCard: React.FC<AssetRatioCardProps> = ({
       <BadgeList>
         {assetRatioByPlatform.map((item) => (
           <Badge key={item.platform}>
-            <img
-              src={PLATFORM_LOGOS[item.platform as keyof typeof PLATFORM_LOGOS]}
-              alt={item.name}
-            />
+            <img src={`/assets/icons/${item.platform}.png`} alt={item.name} />
             <span>
               {`${item.ratio.toLocaleString(undefined, {
                 maximumFractionDigits: 2,
@@ -146,7 +142,7 @@ const Badge = styled.li`
   }
 `;
 
-const Illust = () => (
+const Illust: React.FC = () => (
   <svg
     width="229"
     height="382"
@@ -161,7 +157,7 @@ const Illust = () => (
       zIndex: -1,
     }}
   >
-    <g clip-path="url(#clip0_199_1955)">
+    <g clipPath="url(#clip0_199_1955)">
       <g filter="url(#filter0_d_199_1955)">
         <rect
           x="135"
@@ -170,7 +166,7 @@ const Illust = () => (
           height="254"
           rx="127"
           fill="url(#paint0_radial_199_1955)"
-          shape-rendering="crispEdges"
+          shapeRendering="crispEdges"
         />
         <rect
           x="136.814"
@@ -179,8 +175,8 @@ const Illust = () => (
           height="250.371"
           rx="125.186"
           stroke="url(#paint1_linear_199_1955)"
-          stroke-width="3.62857"
-          shape-rendering="crispEdges"
+          strokeWidth="3.62857"
+          shapeRendering="crispEdges"
         />
       </g>
       <g filter="url(#filter1_d_199_1955)">
@@ -192,7 +188,7 @@ const Illust = () => (
           rx="127"
           transform="rotate(57 213.022 -103)"
           fill="url(#paint2_radial_199_1955)"
-          shape-rendering="crispEdges"
+          shapeRendering="crispEdges"
         />
         <rect
           x="212.489"
@@ -202,17 +198,17 @@ const Illust = () => (
           rx="125.186"
           transform="rotate(57 212.489 -100.49)"
           stroke="url(#paint3_linear_199_1955)"
-          stroke-width="3.62857"
-          shape-rendering="crispEdges"
+          strokeWidth="3.62857"
+          shapeRendering="crispEdges"
         />
       </g>
       <g filter="url(#filter2_d_199_1955)">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M407.578 174.735C380.153 132.84 329.221 109.461 277.033 119.605C208.182 132.988 163.216 199.653 176.599 268.504C183.635 304.698 205.394 334.292 234.454 352.278L236.324 349.167C208.113 331.693 186.992 302.955 180.161 267.812C167.16 200.928 210.841 136.168 277.725 123.167C325.614 113.858 372.413 133.607 399.905 170.125L407.578 174.735Z"
           fill="url(#paint4_linear_199_1955)"
-          shape-rendering="crispEdges"
+          shapeRendering="crispEdges"
         />
       </g>
     </g>
@@ -224,9 +220,9 @@ const Illust = () => (
         width="278"
         height="278"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -259,9 +255,9 @@ const Illust = () => (
         width="278.03"
         height="278.03"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -294,9 +290,9 @@ const Illust = () => (
         width="257.335"
         height="259.03"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -330,9 +326,9 @@ const Illust = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(368 51) rotate(147.832) scale(261.079 359.639)"
       >
-        <stop stop-color="#280807" />
-        <stop offset="0.328125" stop-color="#280807" stop-opacity="0.666667" />
-        <stop offset="1" stop-color="#280807" stop-opacity="0" />
+        <stop stopColor="#280807" />
+        <stop offset="0.328125" stopColor="#280807" stopOpacity="0.666667" />
+        <stop offset="1" stopColor="#280807" stopOpacity="0" />
       </radialGradient>
       <linearGradient
         id="paint1_linear_199_1955"
@@ -342,9 +338,9 @@ const Illust = () => (
         y2="297.5"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FF3856" />
-        <stop offset="0.651042" stop-color="#C60126" />
-        <stop offset="1" stop-color="#8A283B" stop-opacity="0.27" />
+        <stop stopColor="#FF3856" />
+        <stop offset="0.651042" stopColor="#C60126" />
+        <stop offset="1" stopColor="#8A283B" stopOpacity="0.27" />
       </linearGradient>
       <radialGradient
         id="paint2_radial_199_1955"
@@ -354,9 +350,9 @@ const Illust = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(446.022 -89) rotate(147.832) scale(261.079 359.639)"
       >
-        <stop stop-color="#280807" />
-        <stop offset="0.328125" stop-color="#280807" stop-opacity="0.666667" />
-        <stop offset="1" stop-color="#280807" stop-opacity="0" />
+        <stop stopColor="#280807" />
+        <stop offset="0.328125" stopColor="#280807" stopOpacity="0.666667" />
+        <stop offset="1" stopColor="#280807" stopOpacity="0" />
       </radialGradient>
       <linearGradient
         id="paint3_linear_199_1955"
@@ -366,10 +362,10 @@ const Illust = () => (
         y2="61.8181"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FF3856" />
-        <stop offset="0.447917" stop-color="#C60126" />
-        <stop offset="0.765625" stop-color="#8A283B" stop-opacity="0.27" />
-        <stop offset="1" stop-color="#8A283B" stop-opacity="0" />
+        <stop stopColor="#FF3856" />
+        <stop offset="0.447917" stopColor="#C60126" />
+        <stop offset="0.765625" stopColor="#8A283B" stopOpacity="0.27" />
+        <stop offset="1" stopColor="#8A283B" stopOpacity="0" />
       </linearGradient>
       <linearGradient
         id="paint4_linear_199_1955"
@@ -379,11 +375,11 @@ const Illust = () => (
         y2="183.423"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#FF3856" />
-        <stop offset="0.477161" stop-color="#C60126" />
-        <stop offset="0.6114" stop-color="#9A1E35" />
-        <stop offset="0.782341" stop-color="#8A283B" stop-opacity="0.53" />
-        <stop offset="1" stop-color="#8A283B" stop-opacity="0" />
+        <stop stopColor="#FF3856" />
+        <stop offset="0.477161" stopColor="#C60126" />
+        <stop offset="0.6114" stopColor="#9A1E35" />
+        <stop offset="0.782341" stopColor="#8A283B" stopOpacity="0.53" />
+        <stop offset="1" stopColor="#8A283B" stopOpacity="0" />
       </linearGradient>
       <clipPath id="clip0_199_1955">
         <rect

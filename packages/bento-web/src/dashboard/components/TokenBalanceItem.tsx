@@ -1,10 +1,7 @@
-import { Badge } from '@bento/client/components/Badge';
+import { Badge } from '@bento/client/components';
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
-import { Colors } from '@bento/client/styles/colors';
-import { useMemo } from 'react';
+import { Colors } from '@bento/client/styles';
 import styled from 'styled-components';
-
-import { PLATFORM_LOGOS } from '../constants/platform';
 
 const capitalize = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);
@@ -18,11 +15,6 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
   tokenBalance: info,
   onClick,
 }) => {
-  const platformURL = useMemo(
-    () => PLATFORM_LOGOS[info.platform as keyof typeof PLATFORM_LOGOS],
-    [info.platform],
-  );
-
   return (
     <Container
       className="py-3 p-3 h-fit rounded-md flex flex-col cursor-pointer"
@@ -35,7 +27,10 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
             src={info.logo}
             alt={info.name}
           />
-          <PlatformBadge alt={capitalize(info.platform)} src={platformURL} />
+          <PlatformBadge
+            alt={capitalize(info.platform)}
+            src={`/assets/icons/${info.platform}.png`}
+          />
         </div>
         <div className="ml-4 min-w-0 flex flex-col flex-1">
           <span className="text-sm text-slate-400/40 flex items-center">

@@ -1,5 +1,4 @@
-import { FeatureFlags } from '@bento/client/utils/FeatureFlag';
-import { Supabase } from '@bento/client/utils/Supabase';
+import { FeatureFlags, Supabase } from '@bento/client/utils';
 import { UserProfile } from '@bento/private/profile/types/UserProfile';
 import { GetServerSideProps } from 'next';
 

@@ -1,6 +1,5 @@
 import { OpenSeaAsset, cachedAxios } from '@bento/client';
-import { Badge } from '@bento/client/components/Badge';
-import { Modal } from '@bento/client/components/Modal';
+import { Badge, Modal } from '@bento/client/components';
 import { WalletBalance } from '@bento/client/dashboard/types/WalletBalance';
 import { shortenAddress } from '@bento/common';
 import clsx from 'clsx';
@@ -252,6 +251,8 @@ export const TokenDetailModal: React.FC<Props> = ({
     </OverlayWrapper>
   );
 };
+
+export default TokenDetailModal;
 
 const OverlayWrapper = styled(Modal)`
   .modal-container {

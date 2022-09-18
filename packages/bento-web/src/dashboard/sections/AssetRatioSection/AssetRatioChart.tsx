@@ -3,8 +3,6 @@ import { useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled from 'styled-components';
 
-import { PLATFORM_LOGOS } from '@/dashboard/constants/platform';
-
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
 
 const CHART_SIZE = 184;
@@ -44,7 +42,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
       items.push({
         label: 'OpenSea NFTs',
         value: !percentage || isNaN(percentage) ? 0 : percentage,
-        logo: PLATFORM_LOGOS.opensea,
+        logo: '/assets/icons/opensea.png',
       });
     }
 

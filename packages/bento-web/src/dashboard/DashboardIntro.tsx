@@ -1,19 +1,17 @@
-import { AnimatedTooltip } from '@bento/client/components/AnimatedToolTip';
-import { Badge } from '@bento/client/components/Badge';
+import { AnimatedToolTip, Badge } from '@bento/client/components';
 import { NETWORKS } from '@bento/client/constants/networks';
 import { useSession } from '@bento/client/hooks/useSession';
-import { Supabase } from '@bento/client/utils/Supabase';
-import { Analytics } from '@bento/client/utils/analytics';
+import { Analytics, Supabase } from '@bento/client/utils';
 import { FixedLoginNudge } from '@bento/private/profile/components/LoginNudge';
 import { Icon } from '@iconify/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-type IntroSectionProps = {
+type DashboardIntroProps = {
   onConnectWallet?: () => void;
 };
-export const IntroSection: React.FC<IntroSectionProps> = ({
+export const DashboardIntro: React.FC<DashboardIntroProps> = ({
   onConnectWallet,
 }) => {
   const { session } = useSession();
@@ -101,13 +99,15 @@ export const IntroSection: React.FC<IntroSectionProps> = ({
         <ProtocolList>
           {NETWORKS.map((network) => (
             <li key={network.id}>
-              <AnimatedTooltip label={network.name}>
-                <img
+              <AnimatedToolTip label={network.name}>
+                <Image
                   className="cursor-pointer"
                   alt={network.name}
                   src={network.logo}
+                  width={56}
+                  height={56}
                 />
-              </AnimatedTooltip>
+              </AnimatedToolTip>
             </li>
           ))}
         </ProtocolList>

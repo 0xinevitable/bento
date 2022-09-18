@@ -1,24 +1,20 @@
-import { Badge } from '@bento/client/components/Badge';
-import { Button } from '@bento/client/components/Button';
-import { Checkbox } from '@bento/client/components/Checkbox';
+import { Badge, Checkbox } from '@bento/client/components';
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
 import { WalletBalance } from '@bento/client/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@bento/client/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@bento/client/dashboard/utils/useWalletBalances';
 import { useLocalStorage } from '@bento/client/hooks/useLocalStorage';
-import { useWindowSize } from '@bento/client/hooks/useWindowSize';
-import { Colors } from '@bento/client/styles/colors';
-import { systemFontStack } from '@bento/client/styles/fonts';
-import { Analytics } from '@bento/client/utils/analytics';
+import { Colors, systemFontStack } from '@bento/client/styles';
+import { Analytics } from '@bento/client/utils';
 import { Wallet } from '@bento/common';
 import groupBy from 'lodash.groupby';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { TokenBalanceItem } from '../components/TokenBalanceItem';
-import { TokenDetailModalParams } from '../components/TokenDetailModal';
-import { WalletList } from '../components/WalletList';
-import { AssetRatioCard } from './AssetRatioCard';
+import { TokenBalanceItem } from './components/TokenBalanceItem';
+import { TokenDetailModalParams } from './components/TokenDetailModal';
+import { AssetRatioSection } from './sections/AssetRatioSection';
+import { WalletListSection } from './sections/WalletListSection';
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -106,36 +102,21 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     [tokenBalances],
   );
 
-  const [isWalletListOpen, setWalletListOpen] = useState<boolean>(false);
-  const { width: screenWidth } = useWindowSize();
-  const isMobile = screenWidth <= 640;
-
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardContent>
         <TopSummaryContainer>
-          <AssetRatioCard
+          <AssetRatioSection
             netWorthInUSD={netWorthInUSD}
             tokenBalances={tokenBalances}
           />
 
-          <div className="flex-1 flex flex-col relative">
-            <SectionTitleContainer>
-              <SectionTitle>Wallets</SectionTitle>
-            </SectionTitleContainer>
-
-            <WalletList wallets={wallets} />
-
-            <div className="mt-[10px] flex justify-center">
-              <AddWalletButton
-                onClick={() => setAddWalletModalVisible((prev) => !prev)}
-              >
-                Add Another
-              </AddWalletButton>
-            </div>
-          </div>
+          <WalletListSection
+            wallets={wallets}
+            onClickAddWallet={() => setAddWalletModalVisible((prev) => !prev)}
+          />
         </TopSummaryContainer>
 
         <div>
@@ -253,32 +234,7 @@ const AssetListCard = styled.section`
     gap: 4px;
   }
 `;
-const CardTitle = styled.h2`
-  margin: 0;
-  margin-bottom: 8px;
 
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 100%;
-  color: #ffffff;
-
-  display: flex;
-  align-items: center;
-`;
-
-const SectionTitleContainer = styled.div`
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-
-  background-image: linear-gradient(
-    to bottom,
-    ${Colors.black} 40%,
-    transparent
-  );
-`;
 const SectionTitle = styled.h3`
   /* FIXME: !important */
   &,
@@ -292,22 +248,6 @@ const SectionTitle = styled.h3`
   line-height: 100%;
   letter-spacing: -0.5px;
   color: ${Colors.gray400};
-`;
-
-// FIXME: Design component
-const AddWalletButton = styled(Button)`
-  && {
-    height: unset;
-    padding: 12px 18px;
-
-    /* FIXME: !important */
-    font-family: 'Raleway', ${systemFontStack} !important;
-    font-weight: 800;
-    font-size: 14px;
-    line-height: 100%;
-    text-align: center;
-    color: ${Colors.white};
-  }
 `;
 
 const InlineBadge = styled(Badge)`

@@ -1,5 +1,4 @@
-import { Config } from '@bento/client/utils/Config';
-import { Supabase } from '@bento/client/utils/Supabase';
+import { Config, Supabase } from '@bento/client/utils';
 import { UserProfile } from '@bento/private/profile/types/UserProfile';
 import { PostgrestError, PostgrestResponse, User } from '@supabase/supabase-js';
 import axios from 'axios';

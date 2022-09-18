@@ -8,7 +8,7 @@ module.exports = {
   // @ianvs/prettier-plugin-sort-imports
   importOrder: [
     '<THIRD_PARTY_MODULES>',
-    '@/(assets|components|hooks|pages|recoil|styles|utils)/(.*)$',
+    '@/(assets|components|hooks|pages|jotai|styles|utils)/(.*)$',
     '@/(.*)$',
     '^[./](.*)$',
   ],

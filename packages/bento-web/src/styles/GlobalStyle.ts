@@ -1,4 +1,4 @@
-import { systemFontStack } from '@bento/client/styles/fonts';
+import { systemFontStack } from '@bento/client/styles';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 

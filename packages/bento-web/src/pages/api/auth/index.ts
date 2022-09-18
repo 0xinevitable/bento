@@ -1,4 +1,4 @@
-import { Supabase } from '@bento/client/utils/Supabase';
+import { Supabase } from '@bento/client/utils';
 import { NextApiResponse } from 'next';
 
 export default function handler(
