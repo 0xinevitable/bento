@@ -1,6 +1,4 @@
-import { Icon } from '@bento/client/components/Icon';
-import { NoSSR } from '@bento/client/components/NoSSR';
-import { Portal } from '@bento/client/components/Portal';
+import { Icon, NoSSR, Portal } from '@bento/client/components';
 import { useSession } from '@bento/client/hooks/useSession';
 import { useSignOut } from '@bento/client/hooks/useSignOut';
 import { Analytics, FeatureFlags } from '@bento/client/utils';

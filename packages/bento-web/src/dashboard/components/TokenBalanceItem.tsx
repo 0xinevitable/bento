@@ -1,4 +1,4 @@
-import { Badge } from '@bento/client/components/Badge';
+import { Badge } from '@bento/client/components';
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
 import { Colors } from '@bento/client/styles';
 import styled from 'styled-components';

@@ -1,5 +1,4 @@
-import { Badge } from '@bento/client/components/Badge';
-import { Checkbox } from '@bento/client/components/Checkbox';
+import { Badge, Checkbox } from '@bento/client/components';
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
 import { WalletBalance } from '@bento/client/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@bento/client/dashboard/utils/useNFTBalances';

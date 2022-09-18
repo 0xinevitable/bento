@@ -1,7 +1,7 @@
 import {
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components/TrackedSection';
+} from '@bento/client/components';
 import { useWindowSize } from '@bento/client/hooks/useWindowSize';
 import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';

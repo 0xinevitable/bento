@@ -1,8 +1,8 @@
-import { Button } from '@bento/client/components/Button';
 import {
+  Button,
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components/TrackedSection';
+} from '@bento/client/components';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import styled from 'styled-components';

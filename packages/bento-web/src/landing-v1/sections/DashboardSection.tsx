@@ -1,8 +1,8 @@
-import { AnimatedToolTip } from '@bento/client/components/AnimatedToolTip';
 import {
+  AnimatedToolTip,
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components/TrackedSection';
+} from '@bento/client/components';
 import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import Image from 'next/image';

@@ -1,4 +1,4 @@
-import { MetaHead } from '@bento/client/components/MetaHead';
+import { MetaHead } from '@bento/client/components';
 import { systemFontStack } from '@bento/client/styles';
 import { Analytics } from '@bento/client/utils';
 import { useRouter } from 'next/router';

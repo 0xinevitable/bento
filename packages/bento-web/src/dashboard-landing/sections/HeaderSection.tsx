@@ -1,8 +1,8 @@
-import { Badge } from '@bento/client/components/Badge';
 import {
+  Badge,
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components/TrackedSection';
+} from '@bento/client/components';
 import { Analytics } from '@bento/client/utils';
 import React from 'react';
 import styled from 'styled-components';

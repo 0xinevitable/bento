@@ -1,5 +1,4 @@
-import { AnimatedToolTip } from '@bento/client/components/AnimatedToolTip';
-import { Badge } from '@bento/client/components/Badge';
+import { AnimatedToolTip, Badge } from '@bento/client/components';
 import { NETWORKS } from '@bento/client/constants/networks';
 import { useSession } from '@bento/client/hooks/useSession';
 import { Analytics, Supabase } from '@bento/client/utils';

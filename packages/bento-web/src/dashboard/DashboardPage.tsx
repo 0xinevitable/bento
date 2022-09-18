@@ -1,4 +1,4 @@
-import { MetaHead } from '@bento/client/components/MetaHead';
+import { MetaHead } from '@bento/client/components';
 import { useSession } from '@bento/client/hooks/useSession';
 import { walletsAtom } from '@bento/client/jotai';
 import { Analytics } from '@bento/client/utils';

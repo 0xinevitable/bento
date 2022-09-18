@@ -1,4 +1,4 @@
-import { Modal } from '@bento/client/components/Modal';
+import { Modal } from '@bento/client/components';
 import { NETWORKS, Network } from '@bento/client/constants/networks';
 import { useSession } from '@bento/client/hooks/useSession';
 import { useRevalidateWallets } from '@bento/client/hooks/useWallets';
