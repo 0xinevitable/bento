@@ -32,7 +32,7 @@ export const NETWORKS: Network[] = [
     id: 'bnb',
     type: 'evm',
     name: 'BNB',
-    logo: 'https://assets-cdn.trustwallet.com/blockchains/binance/info/logo.png',
+    logo: '/assets/icons/bnb.png',
   },
   {
     id: 'polygon',
@@ -44,7 +44,7 @@ export const NETWORKS: Network[] = [
     id: 'klaytn',
     type: 'evm',
     name: 'Klaytn',
-    logo: 'https://avatars.githubusercontent.com/u/41137100?s=200&v=4',
+    logo: '/assets/icons/klaytn.png',
   },
   {
     id: 'opensea',
@@ -56,18 +56,18 @@ export const NETWORKS: Network[] = [
     id: 'cosmos',
     type: 'cosmos-sdk',
     name: 'Cosmos',
-    logo: 'https://assets-cdn.trustwallet.com/blockchains/cosmos/info/logo.png',
+    logo: '/assets/icons/cosmos-hub.png',
   },
   {
     id: 'osmosis',
     type: 'cosmos-sdk',
     name: 'Osmosis',
-    logo: 'https://assets-cdn.trustwallet.com/blockchains/osmosis/info/logo.png',
+    logo: '/assets/icons/osmosis.png',
   },
   {
     id: 'solana',
     type: 'solana',
     name: 'Solana',
-    logo: 'https://assets-cdn.trustwallet.com/blockchains/solana/info/logo.png',
+    logo: '/assets/icons/solana.png',
   },
 ];

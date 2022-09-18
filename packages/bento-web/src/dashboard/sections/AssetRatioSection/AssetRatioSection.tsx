@@ -5,7 +5,7 @@ import groupBy from 'lodash.groupby';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { PLATFORM_LOGOS, displayName } from '@/dashboard/constants/platform';
+import { displayName } from '@/dashboard/constants/platform';
 
 import { AssetRatioChart } from './AssetRatioChart';
 
@@ -51,10 +51,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       <BadgeList>
         {assetRatioByPlatform.map((item) => (
           <Badge key={item.platform}>
-            <img
-              src={PLATFORM_LOGOS[item.platform as keyof typeof PLATFORM_LOGOS]}
-              alt={item.name}
-            />
+            <img src={`/assets/icons/${item.platform}.png`} alt={item.name} />
             <span>
               {`${item.ratio.toLocaleString(undefined, {
                 maximumFractionDigits: 2,

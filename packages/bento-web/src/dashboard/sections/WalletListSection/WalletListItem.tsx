@@ -1,4 +1,3 @@
-import { NETWORKS } from '@bento/client/constants/networks';
 import { Colors } from '@bento/client/styles/colors';
 import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
@@ -30,12 +29,12 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
         <PlatformList>
           {wallet.type === 'solana' ? (
             <PlatformListItem>
-              <img src={NETWORKS.find((v) => v.id === 'solana')?.logo} />
+              <img src="/assets/icons/solana.png" />
             </PlatformListItem>
           ) : (
             wallet.networks.map((network) => (
               <PlatformListItem key={network}>
-                <img src={NETWORKS.find((v) => v.id === network)?.logo} />
+                <img src={`/assets/icons/${network}.png`} />
               </PlatformListItem>
             ))
           )}

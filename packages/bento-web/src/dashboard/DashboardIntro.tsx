@@ -6,6 +6,7 @@ import { Supabase } from '@bento/client/utils/Supabase';
 import { Analytics } from '@bento/client/utils/analytics';
 import { FixedLoginNudge } from '@bento/private/profile/components/LoginNudge';
 import { Icon } from '@iconify/react';
+import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
@@ -101,10 +102,12 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
           {NETWORKS.map((network) => (
             <li key={network.id}>
               <AnimatedTooltip label={network.name}>
-                <img
+                <Image
                   className="cursor-pointer"
                   alt={network.name}
                   src={network.logo}
+                  width={56}
+                  height={56}
                 />
               </AnimatedTooltip>
             </li>
