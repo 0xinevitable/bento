@@ -82,6 +82,10 @@ const WalletItemList = styled.ul`
   flex-direction: column;
   gap: 4px;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const Footer = styled.div`
   position: absolute;
