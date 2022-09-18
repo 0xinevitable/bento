@@ -63,7 +63,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
 };
 
 const Container = styled.li`
-  width: calc(33.33% - 8px);
+  width: calc((100% - 8px) / 3);
 
   background: #16181a;
   background: linear-gradient(145deg, #141617, #181a1c);
@@ -72,7 +72,7 @@ const Container = styled.li`
   border-radius: 8px;
 
   @media screen and (max-width: 797px) {
-    width: calc(50% - 4px);
+    width: calc((100% - 4px) / 2);
   }
 
   @media screen and (max-width: 537px) {

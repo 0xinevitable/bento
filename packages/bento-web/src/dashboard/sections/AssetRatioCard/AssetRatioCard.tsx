@@ -85,6 +85,8 @@ const Container = styled.div`
 
   @media screen and (max-width: 940px) {
     max-width: 100%;
+    width: 100%;
+    flex: unset;
   }
 `;
 

@@ -11,8 +11,6 @@ import { Colors } from '@bento/client/styles/colors';
 import { systemFontStack } from '@bento/client/styles/fonts';
 import { Analytics } from '@bento/client/utils/analytics';
 import { Wallet } from '@bento/common';
-import { Icon } from '@iconify/react';
-import clsx from 'clsx';
 import groupBy from 'lodash.groupby';
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
@@ -114,84 +112,92 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
   return (
     <React.Fragment>
-      <TopSummaryContainer>
-        <AssetRatioCard
-          netWorthInUSD={netWorthInUSD}
-          tokenBalances={tokenBalances}
-        />
+      <div style={{ width: '100%', height: 32 }} />
 
-        <div className="flex-1 flex flex-col relative">
-          <SectionTitleContainer>
-            <SectionTitle>Wallets</SectionTitle>
-          </SectionTitleContainer>
+      <DashboardContent>
+        <TopSummaryContainer>
+          <AssetRatioCard
+            netWorthInUSD={netWorthInUSD}
+            tokenBalances={tokenBalances}
+          />
 
-          <WalletList wallets={wallets} />
+          <div className="flex-1 flex flex-col relative">
+            <SectionTitleContainer>
+              <SectionTitle>Wallets</SectionTitle>
+            </SectionTitleContainer>
 
-          <div className="mt-[10px] flex justify-center">
-            <AddWalletButton
-              onClick={() => setAddWalletModalVisible((prev) => !prev)}
-            >
-              Add Another
-            </AddWalletButton>
+            <WalletList wallets={wallets} />
+
+            <div className="mt-[10px] flex justify-center">
+              <AddWalletButton
+                onClick={() => setAddWalletModalVisible((prev) => !prev)}
+              >
+                Add Another
+              </AddWalletButton>
+            </div>
           </div>
-        </div>
-      </TopSummaryContainer>
+        </TopSummaryContainer>
 
-      <Card className="mt-12" style={{ flex: 0 }}>
-        <CardTitle>
-          <span>Assets</span>
-          <InlineBadge>
-            {renderedTokenBalances.length > 0
-              ? renderedTokenBalances.length.toLocaleString()
-              : '-'}
-          </InlineBadge>
-        </CardTitle>
-
-        <div className="mt-3 w-full flex items-center">
-          <div
-            className="flex items-center cursor-pointer select-none"
-            onClick={() => {
-              if (!isNFTsShown) {
-                // showing
-                Analytics.logEvent('click_show_nfts', undefined);
-              } else {
-                // hiding
-                Analytics.logEvent('click_hide_nfts', undefined);
-              }
-              setNFTsShown(!isNFTsShown);
-            }}
+        <div>
+          <SectionTitle
+            style={{ marginBottom: 12, display: 'flex', alignItems: 'center' }}
           >
-            <Checkbox checked={isNFTsShown ?? false} readOnly />
-            <span className="ml-[6px] text-white/80 text-sm">Show NFTs</span>
-          </div>
-        </div>
+            <span>Assets</span>
+            <InlineBadge>
+              {renderedTokenBalances.length > 0
+                ? renderedTokenBalances.length.toLocaleString()
+                : '-'}
+            </InlineBadge>
+          </SectionTitle>
 
-        {renderedTokenBalances.length > 0 && (
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {renderedTokenBalances.map((item) => {
-              const key = `${item.symbol ?? item.name}-${
-                'tokenAddress' in item ? item.tokenAddress : 'native'
-              }`;
-              return (
-                <TokenBalanceItem
-                  key={key}
-                  tokenBalance={item}
-                  onClick={() => {
-                    Analytics.logEvent('click_balance_item', {
-                      name: item.name,
-                      symbol: item.symbol ?? undefined,
-                      platform: item.platform,
-                      address: item.tokenAddress ?? undefined,
-                    });
-                    setTokenDetailModalVisible((prev) => !prev);
-                    setTokenDetailModalParams({ tokenBalance: item });
-                  }}
-                />
-              );
-            })}
-          </ul>
-        )}
-      </Card>
+          <div className="mb-4 w-full flex items-center">
+            <div
+              className="flex items-center cursor-pointer select-none"
+              onClick={() => {
+                if (!isNFTsShown) {
+                  // showing
+                  Analytics.logEvent('click_show_nfts', undefined);
+                } else {
+                  // hiding
+                  Analytics.logEvent('click_hide_nfts', undefined);
+                }
+                setNFTsShown(!isNFTsShown);
+              }}
+            >
+              <Checkbox checked={isNFTsShown ?? false} readOnly />
+              <span className="ml-[6px] text-white/80 text-sm">Show NFTs</span>
+            </div>
+          </div>
+
+          <AssetListCard>
+            {renderedTokenBalances.length > 0 && (
+              <ul>
+                {renderedTokenBalances.map((item) => {
+                  const key = `${item.symbol ?? item.name}-${
+                    'tokenAddress' in item ? item.tokenAddress : 'native'
+                  }`;
+                  return (
+                    <TokenBalanceItem
+                      key={key}
+                      tokenBalance={item}
+                      onClick={() => {
+                        Analytics.logEvent('click_balance_item', {
+                          name: item.name,
+                          symbol: item.symbol ?? undefined,
+                          platform: item.platform,
+                          address: item.tokenAddress ?? undefined,
+                        });
+                        setTokenDetailModalVisible((prev) => !prev);
+                        setTokenDetailModalParams({ tokenBalance: item });
+                      }}
+                    />
+                  );
+                })}
+              </ul>
+            )}
+          </AssetListCard>
+        </div>
+      </DashboardContent>
 
       <div className="w-full h-24" />
     </React.Fragment>
@@ -200,47 +206,51 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
 export default DashboardMain;
 
+const DashboardContent = styled.div`
+  padding: 27px 33px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  background: ${Colors.black};
+  border: 1px solid ${Colors.gray700};
+  border-radius: 16px;
+
+  @media screen and (max-width: 940px) {
+    padding: 0;
+    border: 0;
+  }
+`;
 const TopSummaryContainer = styled.div`
-  margin-top: 27px;
   display: flex;
   width: 100%;
   gap: 32px;
 
-  @media screen and (max-width: 1180px) {
-    gap: 16px;
-  }
-
   @media screen and (max-width: 940px) {
     flex-direction: column;
-
-    & section {
-      /* && { */
-      max-width: unset;
-      width: 100%;
-      /* } */
-    }
   }
 `;
 
-const Card = styled.section`
-  padding: 24px;
+const AssetListCard = styled.section`
+  padding: 16px;
   height: fit-content;
 
   flex: 1;
   display: flex;
   flex-direction: column;
 
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: rgba(30, 29, 34, 0.44);
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1), 0 2px 8px #191722;
+  background: ${Colors.gray850};
+  border-radius: 8px;
 
   @media screen and (max-width: 400px) {
-    padding: 20px;
+    padding: 12px;
   }
 
-  @media screen and (max-width: 340px) {
-    padding: 16px;
+  & > ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
   }
 `;
 const CardTitle = styled.h2`
