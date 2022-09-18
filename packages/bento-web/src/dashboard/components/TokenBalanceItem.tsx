@@ -1,5 +1,6 @@
 import { Badge } from '@bento/client/components/Badge';
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
+import { Colors } from '@bento/client/styles/colors';
 import clsx from 'clsx';
 import { useMemo } from 'react';
 import styled from 'styled-components';
@@ -65,10 +66,8 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
 const Container = styled.li`
   width: calc((100% - 8px) / 3);
 
-  background: #16181a;
-  background: linear-gradient(145deg, #141617, #181a1c);
-  border: 1px solid #2a2e31;
-  box-shadow: inset 5px 5px 16px #0b0c0e, inset -5px -5px 16px #212426;
+  background: ${Colors.gray900};
+  border: 1px solid ${Colors.gray800};
   border-radius: 8px;
 
   @media screen and (max-width: 797px) {
