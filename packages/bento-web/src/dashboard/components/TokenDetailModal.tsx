@@ -253,6 +253,8 @@ export const TokenDetailModal: React.FC<Props> = ({
   );
 };
 
+export default TokenDetailModal;
+
 const OverlayWrapper = styled(Modal)`
   .modal-container {
     display: flex;

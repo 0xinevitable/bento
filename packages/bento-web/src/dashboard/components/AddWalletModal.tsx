@@ -278,6 +278,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   );
 };
 
+export default AddWalletModal;
+
 const OverlayWrapper = styled(Modal)`
   .modal-container {
     display: flex;

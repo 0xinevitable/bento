@@ -10,13 +10,15 @@ import styled from 'styled-components';
 import { PageContainer } from '@/components/PageContainer';
 
 import { DashboardIntro } from './DashboardIntro';
-import { AddWalletModal } from './components/AddWalletModal';
-import {
-  TokenDetailModal,
-  TokenDetailModalParams,
-} from './components/TokenDetailModal';
+import { TokenDetailModalParams } from './components/TokenDetailModal';
 
 const DynamicDashboardMain = dynamic(() => import('./DashboardMain'));
+const DynmaicAddWalletModal = dynamic(
+  () => import('./components/AddWalletModal'),
+);
+const DynamicTokenDetailModal = dynamic(
+  () => import('./components/TokenDetailModal'),
+);
 
 const DashboardPage = () => {
   const { session } = useSession();
@@ -74,11 +76,11 @@ const DashboardPage = () => {
           />
         )}
 
-        <AddWalletModal
+        <DynmaicAddWalletModal
           visible={isAddWalletModalVisible}
           onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
         />
-        <TokenDetailModal
+        <DynamicTokenDetailModal
           visible={isTokenDetailModalVisible}
           onDismiss={() => {
             setTokenDetailModalVisible((prev) => !prev);
