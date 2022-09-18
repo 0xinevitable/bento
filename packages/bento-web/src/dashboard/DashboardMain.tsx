@@ -15,10 +15,10 @@ import groupBy from 'lodash.groupby';
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
-import { TokenBalanceItem } from '../components/TokenBalanceItem';
-import { TokenDetailModalParams } from '../components/TokenDetailModal';
-import { WalletList } from '../components/WalletList';
-import { AssetRatioCard } from './AssetRatioCard';
+import { TokenBalanceItem } from './components/TokenBalanceItem';
+import { TokenDetailModalParams } from './components/TokenDetailModal';
+import { WalletList } from './components/WalletList';
+import { AssetRatioCard } from './sections/AssetRatioCard';
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>

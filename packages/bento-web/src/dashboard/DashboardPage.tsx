@@ -9,14 +9,14 @@ import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 
+import { DashboardIntro } from './DashboardIntro';
 import { AddWalletModal } from './components/AddWalletModal';
 import {
   TokenDetailModal,
   TokenDetailModalParams,
 } from './components/TokenDetailModal';
-import { DashboardIntro } from './sections/DashboardIntro';
 
-const DynamicDashboardMain = dynamic(() => import('./sections/DashboardMain'));
+const DynamicDashboardMain = dynamic(() => import('./DashboardMain'));
 
 const DashboardPage = () => {
   const { session } = useSession();
