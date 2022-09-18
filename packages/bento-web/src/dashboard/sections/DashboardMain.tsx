@@ -142,7 +142,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           <SectionTitle
             style={{ marginBottom: 12, display: 'flex', alignItems: 'center' }}
           >
-            <span>Assets</span>
+            <span className="title">Assets</span>
             <InlineBadge>
               {renderedTokenBalances.length > 0
                 ? renderedTokenBalances.length.toLocaleString()
@@ -282,7 +282,7 @@ const SectionTitleContainer = styled.div`
 const SectionTitle = styled.h3`
   /* FIXME: !important */
   &,
-  & > span {
+  & > span.title {
     font-family: 'Raleway', ${systemFontStack} !important;
   }
 

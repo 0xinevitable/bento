@@ -43,7 +43,8 @@ export const WalletList: React.FC<WalletListProps> = ({ wallets }) => {
         <div />
         <div>
           <span>
-            Wallets Connected <span className="total">{wallets.length}</span>
+            Wallets Connected&nbsp;&nbsp;
+            <span className="total">{wallets.length}</span>
           </span>
         </div>
       </Footer>
