@@ -1,4 +1,8 @@
-import { Store, iNotification } from 'react-notifications-component';
+import {
+  ReactNotifications,
+  Store,
+  iNotification,
+} from 'react-notifications-component';
 
 export type ToastProps = Partial<
   Omit<Omit<iNotification, 'message'>, 'type'>
@@ -30,3 +34,5 @@ export const toast = ({
       onScreen: true,
     },
   });
+
+export const ToastProvider = ReactNotifications;

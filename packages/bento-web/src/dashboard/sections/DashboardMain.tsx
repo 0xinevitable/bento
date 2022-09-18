@@ -1,4 +1,5 @@
 import { Badge } from '@bento/client/components/Badge';
+import { Button } from '@bento/client/components/Button';
 import { Checkbox } from '@bento/client/components/Checkbox';
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
 import { WalletBalance } from '@bento/client/dashboard/types/WalletBalance';
@@ -6,10 +7,10 @@ import { useNFTBalances } from '@bento/client/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@bento/client/dashboard/utils/useWalletBalances';
 import { useLocalStorage } from '@bento/client/hooks/useLocalStorage';
 import { useWindowSize } from '@bento/client/hooks/useWindowSize';
+import { Colors } from '@bento/client/styles/colors';
+import { systemFontStack } from '@bento/client/styles/fonts';
 import { Analytics } from '@bento/client/utils/analytics';
 import { Wallet } from '@bento/common';
-import { Icon } from '@iconify/react';
-import clsx from 'clsx';
 import groupBy from 'lodash.groupby';
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
@@ -17,7 +18,7 @@ import styled from 'styled-components';
 import { TokenBalanceItem } from '../components/TokenBalanceItem';
 import { TokenDetailModalParams } from '../components/TokenDetailModal';
 import { WalletList } from '../components/WalletList';
-import { AssetRatioSection } from './AssetRatioSection';
+import { AssetRatioCard } from './AssetRatioCard';
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -111,124 +112,92 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
   return (
     <React.Fragment>
-      <TopSummaryContainer>
-        <Card>
-          <CardTitle>Net Worth</CardTitle>
-          <span className="mt-2 text-3xl font-bold text-slate-50">{`$${netWorthInUSD.toLocaleString()}`}</span>
-          <AssetRatioSection
+      <div style={{ width: '100%', height: 32 }} />
+
+      <DashboardContent>
+        <TopSummaryContainer>
+          <AssetRatioCard
             netWorthInUSD={netWorthInUSD}
             tokenBalances={tokenBalances}
           />
-        </Card>
-        <Card className="max-w-[400px]">
-          <div
-            className={clsx(
-              'w-full flex justify-between items-center',
-              isMobile && 'cursor-pointer select-none',
-            )}
-            onClick={() => {
-              setWalletListOpen((prev) => {
-                if (prev === false) {
-                  // opening
-                  Analytics.logEvent(
-                    'click_dashboard_main_show_wallet_list',
-                    undefined,
-                  );
-                } else {
-                  // closing
-                  Analytics.logEvent(
-                    'click_dashboard_main_hide_wallet_list',
-                    undefined,
-                  );
-                }
-                return !prev;
-              });
-            }}
-          >
-            <PlainCardTitle>
-              <span>Wallets</span>
-              <InlineBadge>
-                {wallets.length > 0 //
-                  ? wallets.length.toLocaleString()
-                  : '-'}
-              </InlineBadge>
-            </PlainCardTitle>
 
-            {isMobile && (
-              <IconButton
-                className={isWalletListOpen ? 'open' : 'closed'}
-                onClick={() => setWalletListOpen((prev) => !prev)}
+          <div className="flex-1 flex flex-col relative">
+            <SectionTitleContainer>
+              <SectionTitle>Wallets</SectionTitle>
+            </SectionTitleContainer>
+
+            <WalletList wallets={wallets} />
+
+            <div className="mt-[10px] flex justify-center">
+              <AddWalletButton
+                onClick={() => setAddWalletModalVisible((prev) => !prev)}
               >
-                <Icon icon="fa-solid:chevron-down" width={12} height={12} />
-              </IconButton>
-            )}
+                Add Another
+              </AddWalletButton>
+            </div>
           </div>
+        </TopSummaryContainer>
 
-          {(isMobile ? isWalletListOpen : true) && wallets.length > 0 && (
-            <WalletList
-              wallets={wallets}
-              className="mt-2"
-              onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-            />
-          )}
-        </Card>
-      </TopSummaryContainer>
-
-      <Card className="mt-12" style={{ flex: 0 }}>
-        <CardTitle>
-          <span>Assets</span>
-          <InlineBadge>
-            {renderedTokenBalances.length > 0
-              ? renderedTokenBalances.length.toLocaleString()
-              : '-'}
-          </InlineBadge>
-        </CardTitle>
-
-        <div className="mt-3 w-full flex items-center">
-          <div
-            className="flex items-center cursor-pointer select-none"
-            onClick={() => {
-              if (!isNFTsShown) {
-                // showing
-                Analytics.logEvent('click_show_nfts', undefined);
-              } else {
-                // hiding
-                Analytics.logEvent('click_hide_nfts', undefined);
-              }
-              setNFTsShown(!isNFTsShown);
-            }}
+        <div>
+          <SectionTitle
+            style={{ marginBottom: 12, display: 'flex', alignItems: 'center' }}
           >
-            <Checkbox checked={isNFTsShown ?? false} readOnly />
-            <span className="ml-[6px] text-white/80 text-sm">Show NFTs</span>
-          </div>
-        </div>
+            <span className="title">Assets</span>
+            <InlineBadge>
+              {renderedTokenBalances.length > 0
+                ? renderedTokenBalances.length.toLocaleString()
+                : '-'}
+            </InlineBadge>
+          </SectionTitle>
 
-        {renderedTokenBalances.length > 0 && (
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {renderedTokenBalances.map((item) => {
-              const key = `${item.symbol ?? item.name}-${
-                'tokenAddress' in item ? item.tokenAddress : 'native'
-              }`;
-              return (
-                <TokenBalanceItem
-                  key={key}
-                  tokenBalance={item}
-                  onClick={() => {
-                    Analytics.logEvent('click_balance_item', {
-                      name: item.name,
-                      symbol: item.symbol ?? undefined,
-                      platform: item.platform,
-                      address: item.tokenAddress ?? undefined,
-                    });
-                    setTokenDetailModalVisible((prev) => !prev);
-                    setTokenDetailModalParams({ tokenBalance: item });
-                  }}
-                />
-              );
-            })}
-          </ul>
-        )}
-      </Card>
+          <div className="mb-4 w-full flex items-center">
+            <div
+              className="flex items-center cursor-pointer select-none"
+              onClick={() => {
+                if (!isNFTsShown) {
+                  // showing
+                  Analytics.logEvent('click_show_nfts', undefined);
+                } else {
+                  // hiding
+                  Analytics.logEvent('click_hide_nfts', undefined);
+                }
+                setNFTsShown(!isNFTsShown);
+              }}
+            >
+              <Checkbox checked={isNFTsShown ?? false} readOnly />
+              <span className="ml-[6px] text-white/80 text-sm">Show NFTs</span>
+            </div>
+          </div>
+
+          <AssetListCard>
+            {renderedTokenBalances.length > 0 && (
+              <ul>
+                {renderedTokenBalances.map((item) => {
+                  const key = `${item.symbol ?? item.name}-${
+                    'tokenAddress' in item ? item.tokenAddress : 'native'
+                  }`;
+                  return (
+                    <TokenBalanceItem
+                      key={key}
+                      tokenBalance={item}
+                      onClick={() => {
+                        Analytics.logEvent('click_balance_item', {
+                          name: item.name,
+                          symbol: item.symbol ?? undefined,
+                          platform: item.platform,
+                          address: item.tokenAddress ?? undefined,
+                        });
+                        setTokenDetailModalVisible((prev) => !prev);
+                        setTokenDetailModalParams({ tokenBalance: item });
+                      }}
+                    />
+                  );
+                })}
+              </ul>
+            )}
+          </AssetListCard>
+        </div>
+      </DashboardContent>
 
       <div className="w-full h-24" />
     </React.Fragment>
@@ -237,47 +206,51 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
 export default DashboardMain;
 
+const DashboardContent = styled.div`
+  padding: 27px 33px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  background: ${Colors.black};
+  border: 1px solid ${Colors.gray700};
+  border-radius: 16px;
+
+  @media screen and (max-width: 940px) {
+    padding: 0;
+    border: 0;
+  }
+`;
 const TopSummaryContainer = styled.div`
-  margin-top: 24px;
   display: flex;
   width: 100%;
-  gap: 24px;
-
-  @media screen and (max-width: 1180px) {
-    gap: 16px;
-  }
+  gap: 32px;
 
   @media screen and (max-width: 940px) {
     flex-direction: column;
-
-    & section {
-      /* && { */
-      max-width: unset;
-      width: 100%;
-      /* } */
-    }
   }
 `;
 
-const Card = styled.section`
-  padding: 24px;
+const AssetListCard = styled.section`
+  padding: 16px;
   height: fit-content;
 
   flex: 1;
   display: flex;
   flex-direction: column;
 
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: rgba(30, 29, 34, 0.44);
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1), 0 2px 8px #191722;
+  background: ${Colors.gray850};
+  border-radius: 8px;
 
   @media screen and (max-width: 400px) {
-    padding: 20px;
+    padding: 12px;
   }
 
-  @media screen and (max-width: 340px) {
-    padding: 16px;
+  & > ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
   }
 `;
 const CardTitle = styled.h2`
@@ -292,42 +265,57 @@ const CardTitle = styled.h2`
   display: flex;
   align-items: center;
 `;
-const PlainCardTitle = styled(CardTitle)`
-  margin-bottom: 0;
+
+const SectionTitleContainer = styled.div`
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+
+  background-image: linear-gradient(
+    to bottom,
+    ${Colors.black} 40%,
+    transparent
+  );
 `;
-const IconButton = styled.button`
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.65);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.8);
+const SectionTitle = styled.h3`
+  /* FIXME: !important */
+  &,
+  & > span.title {
+    font-family: 'Raleway', ${systemFontStack} !important;
   }
 
-  &:active {
-    background-color: rgba(255, 255, 255, 0.9);
-  }
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: -0.5px;
+  color: ${Colors.gray400};
+`;
 
-  &.open {
-    transform: rotate(180deg);
+// FIXME: Design component
+const AddWalletButton = styled(Button)`
+  && {
+    height: unset;
+    padding: 12px 18px;
 
-    & > svg {
-      margin-top: 2px;
-    }
+    /* FIXME: !important */
+    font-family: 'Raleway', ${systemFontStack} !important;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    color: ${Colors.white};
   }
 `;
 
 const InlineBadge = styled(Badge)`
-  margin-left: 8px;
-  padding: 6px;
-  display: inline-flex;
-  font-size: 13px;
-  backdrop-filter: none;
+  && {
+    margin-left: 8px;
+    padding: 6px;
+    display: inline-flex;
+    font-size: 13px;
+    backdrop-filter: none;
+  }
 `;

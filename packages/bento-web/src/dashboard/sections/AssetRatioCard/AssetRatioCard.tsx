@@ -1,0 +1,398 @@
+import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
+import { Colors } from '@bento/client/styles/colors';
+import { systemFontStack } from '@bento/client/styles/fonts';
+import groupBy from 'lodash.groupby';
+import { useMemo } from 'react';
+import styled from 'styled-components';
+
+import { PLATFORM_LOGOS, displayName } from '@/dashboard/constants/platform';
+
+import { AssetRatioChart } from './AssetRatioChart';
+
+type AssetRatioCardProps = {
+  netWorthInUSD: number;
+  tokenBalances: DashboardTokenBalance[];
+};
+export const AssetRatioCard: React.FC<AssetRatioCardProps> = ({
+  tokenBalances,
+  netWorthInUSD,
+}) => {
+  const assetRatioByPlatform = useMemo(() => {
+    const groups = groupBy(tokenBalances, 'platform');
+    const items = Object.entries(groups).map(([platform, assets]) => {
+      const netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
+      return {
+        platform,
+        netWorth,
+        name: displayName(platform),
+        ratio: (netWorth / netWorthInUSD) * 100,
+      };
+    });
+    // maximum length is 3
+    return items.slice(0, 3);
+  }, [netWorthInUSD]);
+
+  return (
+    <Container>
+      <Illust />
+
+      <Information>
+        <Field>Net Worth</Field>
+        <Title>{`$${netWorthInUSD.toLocaleString()}`}</Title>
+      </Information>
+
+      <div>
+        <AssetRatioChart
+          tokenBalances={tokenBalances}
+          netWorthInUSD={netWorthInUSD}
+        />
+      </div>
+
+      <BadgeList>
+        {assetRatioByPlatform.map((item) => (
+          <Badge key={item.platform}>
+            <img
+              src={PLATFORM_LOGOS[item.platform as keyof typeof PLATFORM_LOGOS]}
+              alt={item.name}
+            />
+            <span>
+              {`${item.ratio.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}%`}
+            </span>
+          </Badge>
+        ))}
+      </BadgeList>
+    </Container>
+  );
+};
+
+const Container = styled.div`
+  max-width: 378px;
+  padding: 28px 24px;
+  gap: 24px;
+  flex: 1;
+  z-index: 0;
+
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border-radius: 36px;
+  background: linear-gradient(180deg, #14191e 0%, #0f1214 100%);
+
+  @media screen and (max-width: 940px) {
+    max-width: 100%;
+    width: 100%;
+    flex: unset;
+  }
+`;
+
+const Information = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+const Field = styled.span`
+  /* FIXME: !important */
+  font-family: 'Raleway', ${systemFontStack} !important;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  color: ${Colors.gray100};
+`;
+const Title = styled.h2`
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 100%;
+  color: ${Colors.gray050};
+`;
+
+const BadgeList = styled.ul`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+`;
+const Badge = styled.li`
+  padding: 6px 12px 6px 8px;
+  gap: 6px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border-radius: 30px;
+  background: ${Colors.gray600};
+
+  /* shadow-default */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.18);
+
+  & > img {
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    user-select: none;
+  }
+
+  & > span {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    text-align: center;
+    color: ${Colors.gray100};
+  }
+`;
+
+const Illust = () => (
+  <svg
+    width="229"
+    height="382"
+    viewBox="0 0 229 382"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      filter: 'saturate(120%)',
+      zIndex: -1,
+    }}
+  >
+    <g clip-path="url(#clip0_199_1955)">
+      <g filter="url(#filter0_d_199_1955)">
+        <rect
+          x="135"
+          y="37"
+          width="254"
+          height="254"
+          rx="127"
+          fill="url(#paint0_radial_199_1955)"
+          shape-rendering="crispEdges"
+        />
+        <rect
+          x="136.814"
+          y="38.8143"
+          width="250.371"
+          height="250.371"
+          rx="125.186"
+          stroke="url(#paint1_linear_199_1955)"
+          stroke-width="3.62857"
+          shape-rendering="crispEdges"
+        />
+      </g>
+      <g filter="url(#filter1_d_199_1955)">
+        <rect
+          x="213.022"
+          y="-103"
+          width="254"
+          height="254"
+          rx="127"
+          transform="rotate(57 213.022 -103)"
+          fill="url(#paint2_radial_199_1955)"
+          shape-rendering="crispEdges"
+        />
+        <rect
+          x="212.489"
+          y="-100.49"
+          width="250.371"
+          height="250.371"
+          rx="125.186"
+          transform="rotate(57 212.489 -100.49)"
+          stroke="url(#paint3_linear_199_1955)"
+          stroke-width="3.62857"
+          shape-rendering="crispEdges"
+        />
+      </g>
+      <g filter="url(#filter2_d_199_1955)">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M407.578 174.735C380.153 132.84 329.221 109.461 277.033 119.605C208.182 132.988 163.216 199.653 176.599 268.504C183.635 304.698 205.394 334.292 234.454 352.278L236.324 349.167C208.113 331.693 186.992 302.955 180.161 267.812C167.16 200.928 210.841 136.168 277.725 123.167C325.614 113.858 372.413 133.607 399.905 170.125L407.578 174.735Z"
+          fill="url(#paint4_linear_199_1955)"
+          shape-rendering="crispEdges"
+        />
+      </g>
+    </g>
+    <defs>
+      <filter
+        id="filter0_d_199_1955"
+        x="123"
+        y="33"
+        width="278"
+        height="278"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="8" />
+        <feGaussianBlur stdDeviation="6" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_199_1955"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_199_1955"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter1_d_199_1955"
+        x="36.6654"
+        y="-58.3346"
+        width="278.03"
+        height="278.03"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="8" />
+        <feGaussianBlur stdDeviation="6" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_199_1955"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_199_1955"
+          result="shape"
+        />
+      </filter>
+      <filter
+        id="filter2_d_199_1955"
+        x="162.242"
+        y="113.248"
+        width="257.335"
+        height="259.03"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset dy="8" />
+        <feGaussianBlur stdDeviation="6" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_199_1955"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow_199_1955"
+          result="shape"
+        />
+      </filter>
+      <radialGradient
+        id="paint0_radial_199_1955"
+        cx="0"
+        cy="0"
+        r="1"
+        gradientUnits="userSpaceOnUse"
+        gradientTransform="translate(368 51) rotate(147.832) scale(261.079 359.639)"
+      >
+        <stop stop-color="#280807" />
+        <stop offset="0.328125" stop-color="#280807" stop-opacity="0.666667" />
+        <stop offset="1" stop-color="#280807" stop-opacity="0" />
+      </radialGradient>
+      <linearGradient
+        id="paint1_linear_199_1955"
+        x1="250"
+        y1="37"
+        x2="206.5"
+        y2="297.5"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#FF3856" />
+        <stop offset="0.651042" stop-color="#C60126" />
+        <stop offset="1" stop-color="#8A283B" stop-opacity="0.27" />
+      </linearGradient>
+      <radialGradient
+        id="paint2_radial_199_1955"
+        cx="0"
+        cy="0"
+        r="1"
+        gradientUnits="userSpaceOnUse"
+        gradientTransform="translate(446.022 -89) rotate(147.832) scale(261.079 359.639)"
+      >
+        <stop stop-color="#280807" />
+        <stop offset="0.328125" stop-color="#280807" stop-opacity="0.666667" />
+        <stop offset="1" stop-color="#280807" stop-opacity="0" />
+      </radialGradient>
+      <linearGradient
+        id="paint3_linear_199_1955"
+        x1="373.042"
+        y1="-82.68"
+        x2="223.32"
+        y2="61.8181"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#FF3856" />
+        <stop offset="0.447917" stop-color="#C60126" />
+        <stop offset="0.765625" stop-color="#8A283B" stop-opacity="0.27" />
+        <stop offset="1" stop-color="#8A283B" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient
+        id="paint4_linear_199_1955"
+        x1="236.5"
+        y1="348"
+        x2="177.461"
+        y2="183.423"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#FF3856" />
+        <stop offset="0.477161" stop-color="#C60126" />
+        <stop offset="0.6114" stop-color="#9A1E35" />
+        <stop offset="0.782341" stop-color="#8A283B" stop-opacity="0.53" />
+        <stop offset="1" stop-color="#8A283B" stop-opacity="0" />
+      </linearGradient>
+      <clipPath id="clip0_199_1955">
+        <rect
+          width="414.089"
+          height="484.612"
+          fill="white"
+          transform="translate(-1.52588e-05 -103)"
+        />
+      </clipPath>
+    </defs>
+  </svg>
+);

@@ -1,41 +1,18 @@
-import { NETWORKS } from '@bento/client/constants/networks';
-import { useRevalidateWallets } from '@bento/client/hooks/useWallets';
+import { Colors } from '@bento/client/styles/colors';
 import { Analytics } from '@bento/client/utils/analytics';
 import { copyToClipboard } from '@bento/client/utils/clipboard';
 import { toast } from '@bento/client/utils/toast';
-import {
-  CosmosSDKBasedNetworks,
-  EVMBasedNetworks,
-  WALLET_TYPES,
-  Wallet,
-} from '@bento/common';
-import { shortenAddress } from '@bento/common';
-import { Icon } from '@iconify/react';
-import axios from 'axios';
-import clsx from 'clsx';
-import React, { useCallback, useMemo, useState } from 'react';
+import { Wallet } from '@bento/common';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
+import { WalletListItem } from './WalletListItem';
+
 type WalletListProps = {
-  className?: string;
   wallets: Wallet[];
-  onClickConnect?: () => void;
 };
 
-export const WalletList: React.FC<WalletListProps> = ({
-  className,
-  wallets,
-  onClickConnect,
-}) => {
-  const [collapsed, setCollapsed] = useState<boolean>(true);
-  const revalidateWallets = useRevalidateWallets();
-
-  const renderedWallets = useMemo(
-    () => (collapsed ? wallets.slice(0, 3) : wallets),
-    [collapsed, wallets],
-  );
-  const hasCollapseEffect = wallets.length > 3;
-
+export const WalletList: React.FC<WalletListProps> = ({ wallets }) => {
   const onClickCopy = useCallback(
     (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
       Analytics.logEvent('click_copy_wallet_address', {
@@ -52,157 +29,88 @@ export const WalletList: React.FC<WalletListProps> = ({
   );
 
   return (
-    <React.Fragment>
-      <ul className={clsx('flex flex-col', className)}>
-        {renderedWallets.map((wallet) => (
-          <li className="py-2 flex items-center" key={wallet.address}>
-            <img
-              className="w-10 min-w-[40px] h-10 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25 select-none"
-              src={WALLET_TYPES[wallet.type].logo}
-            />
-            <div className="ml-2 flex flex-col flex-1">
-              <div className="flex items-center">
-                <span className="text-white/60 text-lg">
-                  {shortenAddress(wallet.address)}
-                </span>
-                <button
-                  className="ml-1 text-white focus:opacity-40"
-                  onClick={() => onClickCopy(wallet.address, wallet.type)}
-                >
-                  <Icon icon="eva:copy-fill" />
-                </button>
-
-                <button
-                  className="ml-auto text-white/25"
-                  onClick={async () => {
-                    let walletAddress = wallet.address;
-                    try {
-                      await axios.post(`/api/profile/delete-wallet`, {
-                        walletAddress,
-                      });
-                      await revalidateWallets();
-
-                      toast({
-                        type: 'success',
-                        title: 'Deleted Wallet',
-                        description: `Removed wallet ${shortenAddress(
-                          walletAddress,
-                        )}`,
-                      });
-                    } catch (error: any) {
-                      toast({
-                        type: 'error',
-                        title: 'Server Error',
-                        description: error.message || 'Something went wrong',
-                      });
-                    }
-                  }}
-                >
-                  <Icon icon="entypo:cross" width={20} height={20} />
-                </button>
-              </div>
-
-              <div>
-                {wallet.type !== 'solana' ? (
-                  wallet.networks.map(
-                    (network: EVMBasedNetworks | CosmosSDKBasedNetworks) => (
-                      <span
-                        key={network}
-                        className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60"
-                      >
-                        {NETWORKS.find((v) => v.id === network)?.name}
-                      </span>
-                    ),
-                  )
-                ) : (
-                  <span className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60">
-                    Solana
-                  </span>
-                )}
-              </div>
-            </div>
-          </li>
+    <Container>
+      <WalletItemList>
+        {wallets.map((wallet) => (
+          <WalletListItem
+            key={wallet.address}
+            {...wallet}
+            onClickCopy={onClickCopy}
+          />
         ))}
-      </ul>
-
-      {(hasCollapseEffect || !!onClickConnect) && (
-        <ButtonList>
-          {hasCollapseEffect && (
-            <ShowAllButton
-              onClick={() =>
-                setCollapsed((prev) => {
-                  if (!prev) {
-                    // currently not collapsed
-                    // collapsing(closing)
-                    Analytics.logEvent('click_show_less_wallets', undefined);
-                  } else {
-                    // currently collapsed
-                    // opening(show all)
-                    Analytics.logEvent('click_show_all_wallets', undefined);
-                  }
-                  return !prev;
-                })
-              }
-            >
-              {collapsed ? 'Show All' : 'Show Less'}
-            </ShowAllButton>
-          )}
-          {!!onClickConnect && (
-            <Button onClick={onClickConnect}>Add Another</Button>
-          )}
-        </ButtonList>
-      )}
-    </React.Fragment>
+      </WalletItemList>
+      <Footer>
+        <div />
+        <div>
+          <span>
+            Wallets Connected&nbsp;&nbsp;
+            <span className="total">{wallets.length}</span>
+          </span>
+        </div>
+      </Footer>
+    </Container>
   );
 };
 
-const ButtonList = styled.div`
-  margin-top: 12px;
-  width: 100%;
+const Container = styled.div`
   display: flex;
-  justify-content: center;
+  position: relative;
+  margin-top: -40px;
 `;
-const ShowAllButton = styled.button`
-  padding: 8px 20px;
-  background: #121a32;
-  border: 1px solid #020322;
-  border-radius: 8px;
-  user-select: none;
+const WalletItemList = styled.ul`
+  padding-top: 40px;
+  padding-bottom: ${(88 * 2) / 3}px;
+  width: 100%;
+  max-height: 322px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
 
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 100%;
-  color: rgba(255, 255, 255, 0.65);
-
-  &:not(:last-of-type) {
-    margin-right: 8px;
-  }
-
-  &:active {
-    opacity: 0.45;
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
+const Footer = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 86px;
 
-const Button = styled.button`
-  padding: 8px 20px;
-  width: fit-content;
-  cursor: pointer;
-  user-select: none;
+  display: flex;
+  flex-direction: column;
 
-  border-radius: 8px;
-  border: 1px solid rgba(255, 165, 165, 0.4);
-  background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
-  filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
-  transition: all 0.2s ease-in-out;
+  & > div:first-of-type {
+    width: 100%;
+    height: 64px;
 
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 22%,
+      ${Colors.black} 97%
+    );
+  }
 
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
+  & > div:last-of-type {
+    background-color: ${Colors.black};
+    flex: 1;
 
-  &:active {
-    opacity: 0.45;
+    display: flex;
+    justify-content: center;
+
+    span {
+      font-family: 'Poppins';
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 100%;
+      text-align: center;
+      letter-spacing: -0.05em;
+      color: #ffffff;
+
+      &.total {
+        color: ${Colors.brand400};
+      }
+    }
   }
 `;

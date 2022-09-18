@@ -8,7 +8,7 @@ export const PageContainer: React.FC<PageContainerProps> = ({
   ...props
 }) => {
   return (
-    <Wrapper className={`px-4 pt-6 flex ${className}`} {...props}>
+    <Wrapper className={className} {...props}>
       <div className="w-full max-w-[1100px] mx-auto relative z-0 flex flex-col">
         {children}
       </div>
@@ -17,6 +17,9 @@ export const PageContainer: React.FC<PageContainerProps> = ({
 };
 
 const Wrapper = styled.div`
+  padding: 24px 16px 0;
   min-height: 100vh;
   min-height: calc(100vh - 64px);
+
+  display: flex;
 `;
