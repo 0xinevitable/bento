@@ -1,11 +1,13 @@
 import { Badge } from '@bento/client/components/Badge';
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
 import { Colors } from '@bento/client/styles/colors';
-import clsx from 'clsx';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { PLATFORM_LOGOS } from '../constants/platform';
+
+const capitalize = (value: string) =>
+  value.charAt(0).toUpperCase() + value.slice(1);
 
 type TokenBalanceItemProps = {
   tokenBalance: DashboardTokenBalance;
@@ -23,10 +25,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
 
   return (
     <Container
-      className={clsx(
-        'py-3 p-3 h-fit rounded-md drop-shadow-2xl',
-        'flex flex-col cursor-pointer',
-      )}
+      className="py-3 p-3 h-fit rounded-md flex flex-col cursor-pointer"
       onClick={onClick}
     >
       <div className="flex items-center">
@@ -36,10 +35,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
             src={info.logo}
             alt={info.name}
           />
-          <img
-            className="w-6 h-6 absolute bottom-[-8px] left-[-8px] rounded-full ring-2 ring-black/20"
-            src={platformURL}
-          />
+          <PlatformBadge alt={capitalize(info.platform)} src={platformURL} />
         </div>
         <div className="ml-4 min-w-0 flex flex-col flex-1">
           <span className="text-sm text-slate-400/40 flex items-center">
@@ -81,6 +77,17 @@ const Container = styled.li`
   img {
     user-select: none;
   }
+`;
+
+const PlatformBadge = styled.img`
+  position: absolute;
+  left: -8px;
+  bottom: -8px;
+
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  outline: 2px solid ${Colors.gray900};
 `;
 
 const InlineBadge = styled(Badge)`
