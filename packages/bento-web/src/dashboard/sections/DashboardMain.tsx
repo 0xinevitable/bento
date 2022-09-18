@@ -1,4 +1,5 @@
 import { Badge } from '@bento/client/components/Badge';
+import { Button } from '@bento/client/components/Button';
 import { Checkbox } from '@bento/client/components/Checkbox';
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
 import { WalletBalance } from '@bento/client/dashboard/types/WalletBalance';
@@ -6,6 +7,8 @@ import { useNFTBalances } from '@bento/client/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@bento/client/dashboard/utils/useWalletBalances';
 import { useLocalStorage } from '@bento/client/hooks/useLocalStorage';
 import { useWindowSize } from '@bento/client/hooks/useWindowSize';
+import { Colors } from '@bento/client/styles/colors';
+import { systemFontStack } from '@bento/client/styles/fonts';
 import { Analytics } from '@bento/client/utils/analytics';
 import { Wallet } from '@bento/common';
 import { Icon } from '@iconify/react';
@@ -117,58 +120,19 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           tokenBalances={tokenBalances}
         />
 
-        <Card className="max-w-[400px]">
-          <div
-            className={clsx(
-              'w-full flex justify-between items-center',
-              isMobile && 'cursor-pointer select-none',
-            )}
-            onClick={() => {
-              setWalletListOpen((prev) => {
-                if (prev === false) {
-                  // opening
-                  Analytics.logEvent(
-                    'click_dashboard_main_show_wallet_list',
-                    undefined,
-                  );
-                } else {
-                  // closing
-                  Analytics.logEvent(
-                    'click_dashboard_main_hide_wallet_list',
-                    undefined,
-                  );
-                }
-                return !prev;
-              });
-            }}
-          >
-            <PlainCardTitle>
-              <span>Wallets</span>
-              <InlineBadge>
-                {wallets.length > 0 //
-                  ? wallets.length.toLocaleString()
-                  : '-'}
-              </InlineBadge>
-            </PlainCardTitle>
+        <div className="flex-1 flex flex-col">
+          <SectionTitle>Wallets</SectionTitle>
 
-            {isMobile && (
-              <IconButton
-                className={isWalletListOpen ? 'open' : 'closed'}
-                onClick={() => setWalletListOpen((prev) => !prev)}
-              >
-                <Icon icon="fa-solid:chevron-down" width={12} height={12} />
-              </IconButton>
-            )}
+          <WalletList
+            wallets={wallets}
+            className="mt-2"
+            onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
+          />
+
+          <div className="mt-[10px] flex justify-center">
+            <Button>Add Another</Button>
           </div>
-
-          {(isMobile ? isWalletListOpen : true) && wallets.length > 0 && (
-            <WalletList
-              wallets={wallets}
-              className="mt-2"
-              onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-            />
-          )}
-        </Card>
+        </div>
       </TopSummaryContainer>
 
       <Card className="mt-12" style={{ flex: 0 }}>
@@ -289,36 +253,15 @@ const CardTitle = styled.h2`
   display: flex;
   align-items: center;
 `;
-const PlainCardTitle = styled(CardTitle)`
-  margin-bottom: 0;
-`;
-const IconButton = styled.button`
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.65);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-
-  &:active {
-    background-color: rgba(255, 255, 255, 0.9);
-  }
-
-  &.open {
-    transform: rotate(180deg);
-
-    & > svg {
-      margin-top: 2px;
-    }
-  }
+const SectionTitle = styled.h3`
+  /* FIXME: !important */
+  font-family: 'Raleway', ${systemFontStack} !important;
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: -0.5px;
+  color: ${Colors.gray400};
 `;
 
 const InlineBadge = styled(Badge)`

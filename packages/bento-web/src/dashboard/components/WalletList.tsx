@@ -1,5 +1,6 @@
 import { NETWORKS } from '@bento/client/constants/networks';
 import { useRevalidateWallets } from '@bento/client/hooks/useWallets';
+import { Colors } from '@bento/client/styles/colors';
 import { Analytics } from '@bento/client/utils/analytics';
 import { copyToClipboard } from '@bento/client/utils/clipboard';
 import { toast } from '@bento/client/utils/toast';
@@ -16,6 +17,8 @@ import clsx from 'clsx';
 import React, { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import { WalletListItem } from './WalletListItem';
+
 type WalletListProps = {
   className?: string;
   wallets: Wallet[];
@@ -27,15 +30,6 @@ export const WalletList: React.FC<WalletListProps> = ({
   wallets,
   onClickConnect,
 }) => {
-  const [collapsed, setCollapsed] = useState<boolean>(true);
-  const revalidateWallets = useRevalidateWallets();
-
-  const renderedWallets = useMemo(
-    () => (collapsed ? wallets.slice(0, 3) : wallets),
-    [collapsed, wallets],
-  );
-  const hasCollapseEffect = wallets.length > 3;
-
   const onClickCopy = useCallback(
     (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
       Analytics.logEvent('click_copy_wallet_address', {
@@ -52,109 +46,85 @@ export const WalletList: React.FC<WalletListProps> = ({
   );
 
   return (
-    <React.Fragment>
-      <ul className={clsx('flex flex-col', className)}>
-        {renderedWallets.map((wallet) => (
-          <li className="py-2 flex items-center" key={wallet.address}>
-            <img
-              className="w-10 min-w-[40px] h-10 rounded-full overflow-hidden shadow-md ring-1 ring-slate-100/25 select-none"
-              src={WALLET_TYPES[wallet.type].logo}
-            />
-            <div className="ml-2 flex flex-col flex-1">
-              <div className="flex items-center">
-                <span className="text-white/60 text-lg">
-                  {shortenAddress(wallet.address)}
-                </span>
-                <button
-                  className="ml-1 text-white focus:opacity-40"
-                  onClick={() => onClickCopy(wallet.address, wallet.type)}
-                >
-                  <Icon icon="eva:copy-fill" />
-                </button>
-
-                <button
-                  className="ml-auto text-white/25"
-                  onClick={async () => {
-                    let walletAddress = wallet.address;
-                    try {
-                      await axios.post(`/api/profile/delete-wallet`, {
-                        walletAddress,
-                      });
-                      await revalidateWallets();
-
-                      toast({
-                        type: 'success',
-                        title: 'Deleted Wallet',
-                        description: `Removed wallet ${shortenAddress(
-                          walletAddress,
-                        )}`,
-                      });
-                    } catch (error: any) {
-                      toast({
-                        type: 'error',
-                        title: 'Server Error',
-                        description: error.message || 'Something went wrong',
-                      });
-                    }
-                  }}
-                >
-                  <Icon icon="entypo:cross" width={20} height={20} />
-                </button>
-              </div>
-
-              <div>
-                {wallet.type !== 'solana' ? (
-                  wallet.networks.map(
-                    (network: EVMBasedNetworks | CosmosSDKBasedNetworks) => (
-                      <span
-                        key={network}
-                        className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60"
-                      >
-                        {NETWORKS.find((v) => v.id === network)?.name}
-                      </span>
-                    ),
-                  )
-                ) : (
-                  <span className="mr-1 p-[2px] px-[3px] text-xs rounded bg-slate-100/25 text-slate-100/60">
-                    Solana
-                  </span>
-                )}
-              </div>
-            </div>
-          </li>
+    <Container>
+      <WalletItemList>
+        {wallets.map((wallet) => (
+          <WalletListItem
+            key={wallet.address}
+            {...wallet}
+            onClickCopy={onClickCopy}
+          />
         ))}
-      </ul>
-
-      {(hasCollapseEffect || !!onClickConnect) && (
-        <ButtonList>
-          {hasCollapseEffect && (
-            <ShowAllButton
-              onClick={() =>
-                setCollapsed((prev) => {
-                  if (!prev) {
-                    // currently not collapsed
-                    // collapsing(closing)
-                    Analytics.logEvent('click_show_less_wallets', undefined);
-                  } else {
-                    // currently collapsed
-                    // opening(show all)
-                    Analytics.logEvent('click_show_all_wallets', undefined);
-                  }
-                  return !prev;
-                })
-              }
-            >
-              {collapsed ? 'Show All' : 'Show Less'}
-            </ShowAllButton>
-          )}
-          {!!onClickConnect && (
-            <Button onClick={onClickConnect}>Add Another</Button>
-          )}
-        </ButtonList>
-      )}
-    </React.Fragment>
+      </WalletItemList>
+      <Footer>
+        <div />
+        <div>
+          <span>
+            Wallets Connected <span className="total">{wallets.length}</span>
+          </span>
+        </div>
+      </Footer>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  height: 322px;
+  position: relative;
+`;
+const WalletItemList = styled.ul`
+  padding-bottom: 88px;
+  width: 100%;
+  height: 322px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+`;
+const Footer = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 86px;
+
+  display: flex;
+  flex-direction: column;
+
+  & > div:first-of-type {
+    width: 100%;
+    height: 64px;
+
+    background: linear-gradient(
+      to bottom,
+      transparent 22%,
+      ${Colors.black} 97%
+    );
+  }
+
+  & > div:last-of-type {
+    background-color: ${Colors.black};
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+
+    span {
+      font-family: 'Poppins';
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 100%;
+      text-align: center;
+      letter-spacing: -0.05em;
+      color: #ffffff;
+
+      &.total {
+        color: ${Colors.brand400};
+      }
+    }
+  }
+`;
 
 const ButtonList = styled.div`
   margin-top: 12px;
