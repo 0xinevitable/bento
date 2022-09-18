@@ -281,7 +281,11 @@ const SectionTitleContainer = styled.div`
 `;
 const SectionTitle = styled.h3`
   /* FIXME: !important */
-  font-family: 'Raleway', ${systemFontStack} !important;
+  &,
+  & > span {
+    font-family: 'Raleway', ${systemFontStack} !important;
+  }
+
   margin-bottom: 16px;
   font-weight: 700;
   font-size: 24px;
@@ -307,9 +311,11 @@ const AddWalletButton = styled(Button)`
 `;
 
 const InlineBadge = styled(Badge)`
-  margin-left: 8px;
-  padding: 6px;
-  display: inline-flex;
-  font-size: 13px;
-  backdrop-filter: none;
+  && {
+    margin-left: 8px;
+    padding: 6px;
+    display: inline-flex;
+    font-size: 13px;
+    backdrop-filter: none;
+  }
 `;

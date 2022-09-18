@@ -91,10 +91,12 @@ const PlatformBadge = styled.img`
 `;
 
 const InlineBadge = styled(Badge)`
-  margin-left: 8px;
-  padding: 4px;
-  padding-bottom: 3px;
-  display: inline-flex;
-  font-size: 10px;
-  backdrop-filter: none;
+  && {
+    margin-left: 8px;
+    padding: 4px;
+    padding-bottom: 3px;
+    display: inline-flex;
+    font-size: 10px;
+    backdrop-filter: none;
+  }
 `;
