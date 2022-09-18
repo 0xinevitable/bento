@@ -9,11 +9,11 @@ import { PLATFORM_LOGOS, displayName } from '@/dashboard/constants/platform';
 
 import { AssetRatioChart } from './AssetRatioChart';
 
-type AssetRatioCardProps = {
+type AssetRatioSectionProps = {
   netWorthInUSD: number;
   tokenBalances: DashboardTokenBalance[];
 };
-export const AssetRatioCard: React.FC<AssetRatioCardProps> = ({
+export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
   netWorthInUSD,
 }) => {

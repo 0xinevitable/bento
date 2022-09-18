@@ -18,7 +18,7 @@ import styled from 'styled-components';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { WalletList } from './components/WalletList';
-import { AssetRatioCard } from './sections/AssetRatioCard';
+import { AssetRatioSection } from './sections/AssetRatioSection';
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -116,7 +116,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
       <DashboardContent>
         <TopSummaryContainer>
-          <AssetRatioCard
+          <AssetRatioSection
             netWorthInUSD={netWorthInUSD}
             tokenBalances={tokenBalances}
           />
