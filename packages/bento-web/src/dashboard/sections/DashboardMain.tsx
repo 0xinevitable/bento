@@ -125,14 +125,14 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             <SectionTitle>Wallets</SectionTitle>
           </SectionTitleContainer>
 
-          <WalletList
-            wallets={wallets}
-            className="mt-2"
-            onClickConnect={() => setAddWalletModalVisible((prev) => !prev)}
-          />
+          <WalletList wallets={wallets} />
 
           <div className="mt-[10px] flex justify-center">
-            <Button>Add Another</Button>
+            <AddWalletButton
+              onClick={() => setAddWalletModalVisible((prev) => !prev)}
+            >
+              Add Another
+            </AddWalletButton>
           </div>
         </div>
       </TopSummaryContainer>
@@ -278,6 +278,22 @@ const SectionTitle = styled.h3`
   line-height: 100%;
   letter-spacing: -0.5px;
   color: ${Colors.gray400};
+`;
+
+// FIXME: Design component
+const AddWalletButton = styled(Button)`
+  && {
+    height: unset;
+    padding: 12px 18px;
+
+    /* FIXME: !important */
+    font-family: 'Raleway', ${systemFontStack} !important;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    color: ${Colors.white};
+  }
 `;
 
 const InlineBadge = styled(Badge)`
