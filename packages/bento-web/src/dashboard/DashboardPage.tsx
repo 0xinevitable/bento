@@ -14,7 +14,7 @@ import {
   TokenDetailModal,
   TokenDetailModalParams,
 } from './components/TokenDetailModal';
-import { IntroSection } from './sections/IntroSection';
+import { DashboardIntro } from './sections/DashboardIntro';
 
 const DynamicDashboardMain = dynamic(() => import('./sections/DashboardMain'));
 
@@ -62,7 +62,7 @@ const DashboardPage = () => {
       <Black />
       <PageContainer className="pt-0 z-10">
         {!pageLoaded ? null : !hasWallet ? (
-          <IntroSection
+          <DashboardIntro
             onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
           />
         ) : (

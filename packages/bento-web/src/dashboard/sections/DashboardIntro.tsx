@@ -10,10 +10,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-type IntroSectionProps = {
+type DashboardIntroProps = {
   onConnectWallet?: () => void;
 };
-export const IntroSection: React.FC<IntroSectionProps> = ({
+export const DashboardIntro: React.FC<DashboardIntroProps> = ({
   onConnectWallet,
 }) => {
   const { session } = useSession();
