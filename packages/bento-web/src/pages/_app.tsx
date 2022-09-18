@@ -1,5 +1,5 @@
+import { ToastProvider } from '@bento/client/utils/toast';
 import React, { useEffect } from 'react';
-import { ReactNotifications } from 'react-notifications-component';
 
 import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       </Head>
 
       <GlobalStyle />
-      <ReactNotifications />
+      <ToastProvider />
       <SessionManager />
       <RevalidateWalletsProvider>
         <Container>
