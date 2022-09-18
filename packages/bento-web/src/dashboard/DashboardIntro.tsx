@@ -6,7 +6,6 @@ import { Supabase } from '@bento/client/utils/Supabase';
 import { Analytics } from '@bento/client/utils/analytics';
 import { FixedLoginNudge } from '@bento/private/profile/components/LoginNudge';
 import { Icon } from '@iconify/react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 

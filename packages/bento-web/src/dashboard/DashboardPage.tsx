@@ -98,28 +98,3 @@ const Black = styled.div`
   height: 64px;
   background-color: rgba(0, 0, 0, 0.5);
 `;
-
-const TOP_LEFT_BLUR = 262.9;
-const TopLeftBlur = styled.img`
-  position: absolute;
-  top: 360px;
-  left: 63px;
-
-  margin: ${-TOP_LEFT_BLUR}px;
-  width: ${280.42 + TOP_LEFT_BLUR * 2}px;
-  height: ${280.42 + TOP_LEFT_BLUR * 2}px;
-  z-index: -1;
-  user-select: none;
-`;
-const TOP_RIGHT_BLUR = 256;
-const TopRightBlur = styled.img`
-  position: absolute;
-  top: -35px;
-  right: 64.48px;
-
-  margin: ${-TOP_RIGHT_BLUR}px;
-  width: ${402 + TOP_RIGHT_BLUR * 2}px;
-  height: ${47 + TOP_RIGHT_BLUR * 2}px;
-  z-index: -1;
-  user-select: none;
-`;
