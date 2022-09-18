@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 
-import { Analytics, AnalyticsEvent } from '../utils/analytics';
+import { Analytics, AnalyticsEvent } from '../utils';
 
 type RefForwardedSectionProps = React.HTMLAttributes<HTMLElement> & {
   forwardedRef?: React.ForwardedRef<HTMLElement>;

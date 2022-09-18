@@ -1,7 +1,6 @@
 import { Badge } from '@bento/client/components/Badge';
 import { Button } from '@bento/client/components/Button';
-import { Colors } from '@bento/client/styles/colors';
-import { systemFontStack } from '@bento/client/styles/fonts';
+import { Colors, systemFontStack } from '@bento/client/styles';
 import { Wallet } from '@bento/common';
 import styled from 'styled-components';
 

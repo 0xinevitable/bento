@@ -3,7 +3,7 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@bento/client/components/TrackedSection';
-import { Analytics } from '@bento/client/utils/analytics';
+import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import Image from 'next/image';
 import Link from 'next/link';

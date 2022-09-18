@@ -1,4 +1,4 @@
-import { Supabase } from '@bento/client/utils/Supabase';
+import { Supabase } from '@bento/client/utils';
 import { Base64 } from '@bento/common';
 import { StdSignDoc, serializeSignDoc } from '@cosmjs/amino';
 import { Secp256k1, Secp256k1Signature, sha256 } from '@cosmjs/crypto';

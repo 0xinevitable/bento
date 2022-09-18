@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 
 import { sessionAtom } from '../recoil/session';
 import { walletsAtom } from '../recoil/wallets';
-import { Supabase } from '../utils/Supabase';
+import { Supabase } from '../utils';
 
 export const useSignOut = () => {
   const setWallets = useSetAtom(walletsAtom);

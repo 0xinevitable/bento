@@ -1,6 +1,6 @@
 import { MetaHead } from '@bento/client/components/MetaHead';
-import { systemFontStack } from '@bento/client/styles/fonts';
-import { Analytics } from '@bento/client/utils/analytics';
+import { systemFontStack } from '@bento/client/styles';
+import { Analytics } from '@bento/client/utils';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';

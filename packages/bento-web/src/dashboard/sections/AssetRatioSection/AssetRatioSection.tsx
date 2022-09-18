@@ -1,6 +1,5 @@
 import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
-import { Colors } from '@bento/client/styles/colors';
-import { systemFontStack } from '@bento/client/styles/fonts';
+import { Colors, systemFontStack } from '@bento/client/styles';
 import groupBy from 'lodash.groupby';
 import { useMemo } from 'react';
 import styled from 'styled-components';

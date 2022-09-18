@@ -1,7 +1,7 @@
 import { MetaHead } from '@bento/client/components/MetaHead';
 import { useSession } from '@bento/client/hooks/useSession';
 import { walletsAtom } from '@bento/client/recoil/wallets';
-import { Analytics } from '@bento/client/utils/analytics';
+import { Analytics } from '@bento/client/utils';
 import { useAtomValue } from 'jotai';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useRef, useState } from 'react';

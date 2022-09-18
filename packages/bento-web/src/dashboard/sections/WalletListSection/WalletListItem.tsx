@@ -1,4 +1,4 @@
-import { Colors } from '@bento/client/styles/colors';
+import { Colors } from '@bento/client/styles';
 import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import styled from 'styled-components';

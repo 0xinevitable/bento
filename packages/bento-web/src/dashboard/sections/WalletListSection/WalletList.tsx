@@ -1,7 +1,5 @@
-import { Colors } from '@bento/client/styles/colors';
-import { Analytics } from '@bento/client/utils/analytics';
-import { copyToClipboard } from '@bento/client/utils/clipboard';
-import { toast } from '@bento/client/utils/toast';
+import { Colors } from '@bento/client/styles';
+import { Analytics, copyToClipboard, toast } from '@bento/client/utils';
 import { Wallet } from '@bento/common';
 import React, { useCallback } from 'react';
 import styled from 'styled-components';

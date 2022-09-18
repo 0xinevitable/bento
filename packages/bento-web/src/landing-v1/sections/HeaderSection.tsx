@@ -3,7 +3,7 @@ import {
   TrackedSectionOptions,
 } from '@bento/client/components/TrackedSection';
 import { useWindowSize } from '@bento/client/hooks/useWindowSize';
-import { Analytics } from '@bento/client/utils/analytics';
+import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
