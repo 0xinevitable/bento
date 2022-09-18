@@ -120,8 +120,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           tokenBalances={tokenBalances}
         />
 
-        <div className="flex-1 flex flex-col">
-          <SectionTitle>Wallets</SectionTitle>
+        <div className="flex-1 flex flex-col relative">
+          <SectionTitleContainer>
+            <SectionTitle>Wallets</SectionTitle>
+          </SectionTitleContainer>
 
           <WalletList
             wallets={wallets}
@@ -252,6 +254,20 @@ const CardTitle = styled.h2`
 
   display: flex;
   align-items: center;
+`;
+
+const SectionTitleContainer = styled.div`
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+
+  background-image: linear-gradient(
+    to bottom,
+    ${Colors.black} 40%,
+    transparent
+  );
 `;
 const SectionTitle = styled.h3`
   /* FIXME: !important */

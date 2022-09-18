@@ -70,13 +70,14 @@ export const WalletList: React.FC<WalletListProps> = ({
 
 const Container = styled.div`
   display: flex;
-  height: 322px;
   position: relative;
+  margin-top: -40px;
 `;
 const WalletItemList = styled.ul`
-  padding-bottom: 88px;
+  padding-top: 40px;
+  padding-bottom: ${(88 * 2) / 3}px;
   width: 100%;
-  height: 322px;
+  max-height: 322px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -123,56 +124,5 @@ const Footer = styled.div`
         color: ${Colors.brand400};
       }
     }
-  }
-`;
-
-const ButtonList = styled.div`
-  margin-top: 12px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-const ShowAllButton = styled.button`
-  padding: 8px 20px;
-  background: #121a32;
-  border: 1px solid #020322;
-  border-radius: 8px;
-  user-select: none;
-
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 100%;
-  color: rgba(255, 255, 255, 0.65);
-
-  &:not(:last-of-type) {
-    margin-right: 8px;
-  }
-
-  &:active {
-    opacity: 0.45;
-  }
-`;
-
-const Button = styled.button`
-  padding: 8px 20px;
-  width: fit-content;
-  cursor: pointer;
-  user-select: none;
-
-  border-radius: 8px;
-  border: 1px solid rgba(255, 165, 165, 0.4);
-  background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
-  filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
-  transition: all 0.2s ease-in-out;
-
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 100%;
-
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
-
-  &:active {
-    opacity: 0.45;
   }
 `;
