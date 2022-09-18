@@ -2,7 +2,7 @@ import { Modal } from '@bento/client/components/Modal';
 import { NETWORKS, Network } from '@bento/client/constants/networks';
 import { useSession } from '@bento/client/hooks/useSession';
 import { useRevalidateWallets } from '@bento/client/hooks/useWallets';
-import { walletsAtom } from '@bento/client/recoil/wallets';
+import { walletsAtom } from '@bento/client/jotai/wallets';
 import { Analytics, Supabase } from '@bento/client/utils';
 import { Bech32Address } from '@bento/core/address';
 import { FieldInput } from '@bento/private/profile/components/FieldInput';
