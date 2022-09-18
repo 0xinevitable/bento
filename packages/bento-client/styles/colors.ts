@@ -10,6 +10,7 @@ export const Colors = {
   brand400: '#FF3856',
   brand200: '#EC6471',
   brand100: '#EF9AA2',
+  black: '#000',
   gray900: '#030303',
   gray850: '#0F1214',
   gray800: '#14191E',
@@ -21,4 +22,5 @@ export const Colors = {
   gray100: '#CDD0D9',
   gray050: '#FAFAFA',
   gray000: '#FAFAFA',
+  white: '#FFF',
 };
