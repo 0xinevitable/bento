@@ -22,7 +22,11 @@ export const SessionManager: React.FC = () => {
   const [currentSession, setCurrentSession] = useAtom(sessionAtom);
 
   useEffect(() => {
-    setCurrentSession(Supabase.auth.session());
+    const session = Supabase.auth.session();
+    setCurrentSession(session);
+    if (!!session) {
+      handleAuthChange('SIGNED_IN', session);
+    }
 
     Supabase.auth.onAuthStateChange((event, session) => {
       handleAuthChange(event, session);
