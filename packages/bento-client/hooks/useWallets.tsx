@@ -46,6 +46,15 @@ export const RevalidateWalletsProvider: React.FC<React.PropsWithChildren> = ({
   }, [wallets, revalidateWallets]);
 
   useEffect(() => {
+    const session = Supabase.auth.session();
+    if (!!session) {
+      revalidateWallets().then((wallets) => {
+        if (!wallets || wallets.length === 0) {
+          setWalletEmpty(true);
+        }
+      });
+    }
+
     Supabase.auth.onAuthStateChange((event, _session) => {
       if (event == 'SIGNED_IN') {
         revalidateWallets().then((wallets) => {
