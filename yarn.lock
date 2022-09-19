@@ -10940,6 +10940,7 @@ __metadata:
     "@bento/client": "workspace:^"
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
+    "@supabase/supabase-js": ^1.35.6
     "@types/dedent": ^0.7.0
     "@types/node": ^17.0.42
     "@types/prettier": ^2.6.3

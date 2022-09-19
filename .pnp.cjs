@@ -14145,6 +14145,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/client", "workspace:packages/bento-client"],\
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
+            ["@supabase/supabase-js", "npm:1.35.6"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/node", "npm:17.0.42"],\
             ["@types/prettier", "npm:2.6.3"],\
