@@ -2,6 +2,7 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@bento/client/components';
+import { Colors } from '@bento/client/styles';
 import styled from 'styled-components';
 
 import { SectionBadge } from '../components/SectionBadge';
@@ -102,7 +103,11 @@ const Wrapper = styled.div`
     left: 0;
     right: 0;
 
-    background-image: linear-gradient(to top, black, rgba(0, 0, 0, 0));
+    background-image: linear-gradient(
+      to top,
+      ${Colors.gray900},
+      rgba(0, 0, 0, 0)
+    );
   }
 `;
 const SectionContainer = styled.div`
@@ -110,7 +115,7 @@ const SectionContainer = styled.div`
   width: 100%;
 
   display: flex;
-  background-color: black;
+  background-color: ${Colors.gray900};
 `;
 const Section = styled(TrackedSection)`
   margin: 0 auto;

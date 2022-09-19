@@ -3,6 +3,7 @@ import {
   TrackedSectionOptions,
 } from '@bento/client/components';
 import { useWindowSize } from '@bento/client/hooks/useWindowSize';
+import { Colors } from '@bento/client/styles';
 import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
@@ -132,7 +133,7 @@ const Wrapper = styled.div`
     right: 0;
     width: 100%;
     height: 200px;
-    background: linear-gradient(180deg, black, rgba(0, 0, 0, 0));
+    background: linear-gradient(180deg, ${Colors.gray900}, rgba(0, 0, 0, 0));
     z-index: 0;
   }
 `;

@@ -3,6 +3,7 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@bento/client/components';
+import { Colors } from '@bento/client/styles';
 import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import Image from 'next/image';
@@ -141,7 +142,11 @@ const Wrapper = styled.div`
     left: 0;
     right: 0;
 
-    background-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0));
+    background-image: linear-gradient(
+      to bottom,
+      ${Colors.gray900},
+      rgba(0, 0, 0, 0)
+    );
   }
 
   @media (max-width: 1235px) {

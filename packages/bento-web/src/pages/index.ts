@@ -1,1 +1,1 @@
-export { LandingPage as default } from '@bento/private/landing';
+export { default } from '@/landing-v1/LandingPage';

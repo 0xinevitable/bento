@@ -3,6 +3,7 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@bento/client/components';
+import { Colors } from '@bento/client/styles';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import styled from 'styled-components';
@@ -50,7 +51,8 @@ export const ProfileBanner: React.FC<Props> = ({ onClickBanner, ...props }) => {
 
 const BannerWrapper = styled(TrackedSection)`
   padding: 0 16px;
-  padding-top: ${82 + 234}px;
+  /* padding-top: ${82 + 234}px; */
+  padding-top: 234px;
   position: relative;
   z-index: 1;
 
@@ -63,7 +65,11 @@ const BannerWrapper = styled(TrackedSection)`
     z-index: -1;
     width: 100%;
     height: 500px;
-    background: linear-gradient(180deg, black 30%, rgba(0, 0, 0, 0));
+    background: linear-gradient(
+      180deg,
+      ${Colors.gray900} 30%,
+      rgba(0, 0, 0, 0)
+    );
   }
 
   @media screen and (max-width: 580px) {

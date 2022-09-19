@@ -1,6 +1,7 @@
 import { MetaHead } from '@bento/client/components';
 import { systemFontStack } from '@bento/client/styles';
 import { Analytics } from '@bento/client/utils';
+import { HeaderSection as PrivateHeaderSection } from '@bento/private/landing/sections/HeaderSection';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
@@ -27,6 +28,8 @@ const LandingPage: React.FC = () => {
   return (
     <Container>
       <MetaHead />
+
+      <PrivateHeaderSection />
 
       <ProfileBanner
         id="profile-nudge"
