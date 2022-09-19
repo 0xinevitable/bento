@@ -131,34 +131,30 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
 
     web3Modal.clearCachedProvider();
 
-    try {
-      const instance = await web3Modal.connect();
-      const provider = new Web3Provider(instance);
+    const instance = await web3Modal.connect();
+    const provider = new Web3Provider(instance);
 
-      const signer = provider.getSigner();
-      const walletAddress = await signer.getAddress();
-      const signature = await signer.signMessage(messageToBeSigned);
+    const signer = provider.getSigner();
+    const walletAddress = await signer.getAddress();
+    const signature = await signer.signMessage(messageToBeSigned);
 
-      const walletType = 'web3';
-      await validateAndSaveWallet({
-        networks,
-        walletType,
-        walletAddress,
-        signature,
-        nonce: messageToBeSigned,
-        signOut,
-      }).then(() => {
-        Analytics.logEvent('connect_wallet', {
-          type: 'metamask-or-walletconnect',
-          networks: networks.map((v) => v.id) as any[],
-          address: walletAddress,
-        });
+    const walletType = 'web3';
+    await validateAndSaveWallet({
+      networks,
+      walletType,
+      walletAddress,
+      signature,
+      nonce: messageToBeSigned,
+      signOut,
+    }).then(() => {
+      Analytics.logEvent('connect_wallet', {
+        type: 'metamask-or-walletconnect',
+        networks: networks.map((v) => v.id) as any[],
+        address: walletAddress,
       });
+    });
 
-      onSave?.();
-    } catch (error) {
-      console.error(error);
-    }
+    onSave?.();
   }, [onSave]);
 
   const connectKeplr = useCallback(async () => {
@@ -178,42 +174,37 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       return;
     }
 
-    try {
-      const chainId = 'cosmoshub-4';
-      await window.keplr.enable(chainId);
+    const chainId = 'cosmoshub-4';
+    await window.keplr.enable(chainId);
 
-      const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
-      const accounts = await offlineSigner.getAccounts();
-      const walletAddress = accounts[0].address;
+    const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
+    const accounts = await offlineSigner.getAccounts();
+    const walletAddress = accounts[0].address;
 
-      const { pub_key: publicKey, signature } =
-        await window.keplr.signArbitrary(
-          chainId,
-          walletAddress,
-          messageToBeSigned,
-        );
+    const { pub_key: publicKey, signature } = await window.keplr.signArbitrary(
+      chainId,
+      walletAddress,
+      messageToBeSigned,
+    );
 
-      const walletType = 'keplr';
-      await validateAndSaveWallet({
-        networks,
-        walletType,
-        walletAddress,
-        signature,
-        nonce: messageToBeSigned,
-        publicKeyValue: publicKey.value,
-        signOut,
-      }).then(() => {
-        Analytics.logEvent('connect_wallet', {
-          type: 'keplr',
-          networks: networks.map((v) => v.id) as any[],
-          address: walletAddress,
-        });
+    const walletType = 'keplr';
+    await validateAndSaveWallet({
+      networks,
+      walletType,
+      walletAddress,
+      signature,
+      nonce: messageToBeSigned,
+      publicKeyValue: publicKey.value,
+      signOut,
+    }).then(() => {
+      Analytics.logEvent('connect_wallet', {
+        type: 'keplr',
+        networks: networks.map((v) => v.id) as any[],
+        address: walletAddress,
       });
+    });
 
-      onSave?.();
-    } catch (error) {
-      console.error(error);
-    }
+    onSave?.();
   }, [onSave]);
 
   const connectKaikas = useCallback(async () => {
@@ -233,38 +224,34 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       return;
     }
 
-    try {
-      const provider = window.klaytn;
-      const accounts = await provider.enable();
-      const walletAddress = accounts[0];
+    const provider = window.klaytn;
+    const accounts = await provider.enable();
+    const walletAddress = accounts[0];
 
-      const Caver = await import('caver-js');
-      const caver = new Caver.default(provider);
-      const signature = await caver.rpc.klay.sign(
-        walletAddress,
-        messageToBeSigned,
-      );
-      const walletType = 'kaikas';
+    const Caver = await import('caver-js');
+    const caver = new Caver.default(provider);
+    const signature = await caver.rpc.klay.sign(
+      walletAddress,
+      messageToBeSigned,
+    );
+    const walletType = 'kaikas';
 
-      await validateAndSaveWallet({
-        networks,
-        walletType,
-        walletAddress,
-        signature,
-        nonce: messageToBeSigned,
-        signOut,
-      }).then(() => {
-        Analytics.logEvent('connect_wallet', {
-          type: 'kaikas',
-          networks: networks.map((v) => v.id) as any[],
-          address: walletAddress,
-        });
+    await validateAndSaveWallet({
+      networks,
+      walletType,
+      walletAddress,
+      signature,
+      nonce: messageToBeSigned,
+      signOut,
+    }).then(() => {
+      Analytics.logEvent('connect_wallet', {
+        type: 'kaikas',
+        networks: networks.map((v) => v.id) as any[],
+        address: walletAddress,
       });
+    });
 
-      onSave?.();
-    } catch (error) {
-      console.error(error);
-    }
+    onSave?.();
   }, [onSave]);
 
   const connectPhantom = useCallback(async () => {
@@ -314,6 +301,15 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     onSave?.();
   }, [onSave]);
 
+  const handleError = useCallback((error: any) => {
+    console.error(error);
+    toast({
+      type: 'error',
+      title: 'Ownership Verification Failed',
+      description: error?.message ?? undefined,
+    });
+  }, []);
+
   return (
     <div className="flex gap-2">
       <Button
@@ -321,7 +317,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           'p-4 text-slate-800 font-bold bg-slate-300',
           firstNetwork !== 'evm' && 'opacity-20 cursor-not-allowed',
         )}
-        onClick={firstNetwork === 'evm' ? connectMetaMask : undefined}
+        onClick={
+          firstNetwork === 'evm'
+            ? () => connectMetaMask().catch(handleError)
+            : undefined
+        }
       >
         <IconList>
           <img src={WALLETS.metamask} alt="Metamask" />
@@ -335,7 +335,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           'p-4 text-slate-800 font-bold bg-slate-300',
           firstNetwork !== 'evm' && 'opacity-20 cursor-not-allowed',
         )}
-        onClick={firstNetwork === 'evm' ? connectKaikas : undefined}
+        onClick={
+          firstNetwork === 'evm'
+            ? () => connectKaikas().catch(handleError)
+            : undefined
+        }
       >
         <IconList>
           <img src={WALLETS.kaikas} alt="Kaikas" />
@@ -348,7 +352,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           'p-4 text-slate-800 font-bold bg-slate-300',
           firstNetwork !== 'cosmos-sdk' && 'opacity-20 cursor-not-allowed',
         )}
-        onClick={firstNetwork === 'cosmos-sdk' ? connectKeplr : undefined}
+        onClick={
+          firstNetwork === 'cosmos-sdk'
+            ? () => connectKeplr().catch(handleError)
+            : undefined
+        }
       >
         <IconList>
           <img src={WALLETS.keplr} alt="Keplr" />
@@ -361,7 +369,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           'p-4 text-slate-800 font-bold bg-slate-300',
           firstNetwork !== 'solana' && 'opacity-20 cursor-not-allowed',
         )}
-        onClick={firstNetwork === 'solana' ? connectPhantom : undefined}
+        onClick={
+          firstNetwork === 'solana'
+            ? () => connectPhantom().catch(handleError)
+            : undefined
+        }
       >
         <IconList>
           <img src={WALLETS.phantom} alt="Phantom" />
