@@ -100,13 +100,15 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
           {NETWORKS.map((network) => (
             <li key={network.id}>
               <AnimatedToolTip label={network.name}>
-                <Image
-                  className="cursor-pointer"
-                  alt={network.name}
-                  src={network.logo}
-                  width={56}
-                  height={56}
-                />
+                <ProtocolImageWrapper>
+                  <Image
+                    className="cursor-pointer"
+                    alt={network.name}
+                    src={network.logo}
+                    width={56}
+                    height={56}
+                  />
+                </ProtocolImageWrapper>
               </AnimatedToolTip>
             </li>
           ))}
@@ -196,6 +198,11 @@ const ProtocolList = styled.ul`
     border: 1px solid rgba(255, 255, 255, 0.05);
     user-select: none;
   }
+`;
+const ProtocolImageWrapper = styled.span`
+  width: fit-content;
+  height: fit-content;
+  display: flex;
 `;
 
 const FixedAccessoryRow = styled.div`
