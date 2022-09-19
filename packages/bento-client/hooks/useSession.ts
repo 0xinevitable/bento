@@ -3,7 +3,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { sessionAtom } from '../jotai';
+import { sessionAtom } from '../states';
 import { Analytics, Supabase, toast } from '../utils';
 
 const handleAuthChange = async (

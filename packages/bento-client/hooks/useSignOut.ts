@@ -1,7 +1,7 @@
 import { useSetAtom } from 'jotai';
 import { useCallback } from 'react';
 
-import { sessionAtom, walletsAtom } from '../jotai';
+import { sessionAtom, walletsAtom } from '../states';
 import { Supabase } from '../utils';
 
 export const useSignOut = () => {

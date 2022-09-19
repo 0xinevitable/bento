@@ -2,7 +2,7 @@ import { Wallet } from '@bento/common';
 import { useAtom, useSetAtom } from 'jotai';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
-import { walletsAtom } from '../jotai';
+import { walletsAtom } from '../states';
 import { Supabase } from '../utils';
 import { useSession } from './useSession';
 

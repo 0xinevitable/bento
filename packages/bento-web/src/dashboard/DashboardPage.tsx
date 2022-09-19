@@ -1,6 +1,6 @@
 import { MetaHead } from '@bento/client/components';
 import { useSession } from '@bento/client/hooks/useSession';
-import { walletsAtom } from '@bento/client/jotai';
+import { walletsAtom } from '@bento/client/states';
 import { Analytics } from '@bento/client/utils';
 import { useAtomValue } from 'jotai';
 import dynamic from 'next/dynamic';
