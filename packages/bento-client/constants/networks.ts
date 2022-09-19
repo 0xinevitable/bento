@@ -53,9 +53,9 @@ export const NETWORKS: Network[] = [
     logo: '/assets/icons/opensea.png',
   },
   {
-    id: 'cosmos',
+    id: 'cosmos-hub',
     type: 'cosmos-sdk',
-    name: 'Cosmos',
+    name: 'Cosmos Hub',
     logo: '/assets/icons/cosmos-hub.png',
   },
   {
