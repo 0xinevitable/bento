@@ -22,7 +22,7 @@ const LandingPage: React.FC = () => {
 
   const onClickBanner = useCallback(async () => {
     await Analytics.logEvent('click_dashboard_profile_nudge', undefined);
-    router.push('/profile/landing');
+    router.push('/profile/intro');
   }, [router]);
 
   return (

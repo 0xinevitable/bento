@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return {
         redirect: {
           permanent: false,
-          destination: '/profile/landing',
+          destination: '/profile/intro',
         },
       };
     } else {
@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     redirect: {
       permanent: false,
-      destination: '/profile/landing',
+      destination: '/profile/intro',
     },
   };
 };
