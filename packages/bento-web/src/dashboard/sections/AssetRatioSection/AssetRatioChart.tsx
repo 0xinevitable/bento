@@ -70,42 +70,44 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
 
   return (
     <ChartContainer>
-      <ResponsiveContainer width={CHART_SIZE} height={CHART_SIZE}>
-        <PieChart>
-          <Pie
-            data={data}
-            innerRadius={CHART_SIZE * 0.5 - PIE_WIDTH}
-            outerRadius={CHART_SIZE * 0.5}
-            cornerRadius={4}
-            paddingAngle={4}
-            startAngle={90}
-            endAngle={90 + 360}
-            dataKey="value"
-            minAngle={PIE_WIDTH - 2}
-          >
-            {data.map((_, index) => (
-              <Cell
-                key={index}
-                fill={AVAILABLE_COLORS[index] ?? '#5b739b'}
-                stroke="transparent"
-              />
-            ))}
-          </Pie>
-          <Tooltip
-            content={({ payload }) => {
-              const first = payload?.[0]?.payload;
-              return (
-                <TooltipContent
-                  label={first?.label ?? ''}
-                  value={first?.value ?? 0}
-                  logo={first?.logo}
+      <div style={{ width: CHART_SIZE, height: CHART_SIZE }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              innerRadius={CHART_SIZE * 0.5 - PIE_WIDTH}
+              outerRadius={CHART_SIZE * 0.5}
+              cornerRadius={4}
+              paddingAngle={4}
+              startAngle={90}
+              endAngle={90 + 360}
+              dataKey="value"
+              minAngle={PIE_WIDTH - 2}
+            >
+              {data.map((_, index) => (
+                <Cell
+                  key={index}
+                  fill={AVAILABLE_COLORS[index] ?? '#5b739b'}
+                  stroke="transparent"
                 />
-              );
-            }}
-            wrapperStyle={tooltipWrapperStyle}
-          />
-        </PieChart>
-      </ResponsiveContainer>
+              ))}
+            </Pie>
+            <Tooltip
+              content={({ payload }) => {
+                const first = payload?.[0]?.payload;
+                return (
+                  <TooltipContent
+                    label={first?.label ?? ''}
+                    value={first?.value ?? 0}
+                    logo={first?.logo}
+                  />
+                );
+              }}
+              wrapperStyle={tooltipWrapperStyle}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
 
       <AvatarContainer>
         {/* <Avatar src="/assets/avatar.png" /> */}
