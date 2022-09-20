@@ -284,6 +284,9 @@ const OverlayWrapper = styled(Modal)`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
   }
 `;
 
