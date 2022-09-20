@@ -1,5 +1,6 @@
 import { SessionManager } from '@bento/client/hooks/useSession';
 import { RevalidateWalletsProvider } from '@bento/client/hooks/useWallets';
+import { StateProvider } from '@bento/client/states';
 import { Analytics, ToastProvider } from '@bento/client/utils';
 import React, { useEffect } from 'react';
 
@@ -42,18 +43,20 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
       <GlobalStyle />
       <ToastProvider />
-      <SessionManager />
-      <RevalidateWalletsProvider>
-        <Container>
-          <NavigationBar />
+      <StateProvider>
+        <SessionManager />
+        <RevalidateWalletsProvider>
+          <Container>
+            <NavigationBar />
 
-          <Component {...pageProps} />
-        </Container>
+            <Component {...pageProps} />
+          </Container>
 
-        <div id="portal" />
-        <div id="mobile-menu" />
-        <div id="landing-background" />
-      </RevalidateWalletsProvider>
+          <div id="portal" />
+          <div id="mobile-menu" />
+          <div id="landing-background" />
+        </RevalidateWalletsProvider>
+      </StateProvider>
     </React.Fragment>
   );
 }

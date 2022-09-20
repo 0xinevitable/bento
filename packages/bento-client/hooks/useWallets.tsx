@@ -1,5 +1,5 @@
 import { Wallet } from '@bento/common';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import { walletsAtom } from '../states';
@@ -14,7 +14,7 @@ export const RevalidateWalletsProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { session } = useSession();
-  const setWallets = useSetAtom(walletsAtom);
+  const [wallets, setWallets] = useAtom(walletsAtom);
 
   const revalidateWallets = useCallback(async () => {
     if (!session || !session.user) {
@@ -32,7 +32,6 @@ export const RevalidateWalletsProvider: React.FC<React.PropsWithChildren> = ({
     return wallets;
   }, [JSON.stringify(session), setWallets]);
 
-  const [wallets] = useAtom(walletsAtom);
   const [isWalletEmpty, setWalletEmpty] = useState<boolean>(false);
 
   useEffect(() => {

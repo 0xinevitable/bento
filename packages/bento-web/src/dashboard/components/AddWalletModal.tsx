@@ -194,7 +194,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
                 onSave={() => {
                   onDismiss?.();
                   setNetworks([]);
-                  revalidateWallets?.();
+                  revalidateWallets();
                 }}
               />
             </section>
