@@ -2,7 +2,6 @@ import { Modal } from '@bento/client/components';
 import { NETWORKS, Network } from '@bento/client/constants/networks';
 import { useSession } from '@bento/client/hooks/useSession';
 import { useWalletContext } from '@bento/client/hooks/useWalletContext';
-import { walletsAtom } from '@bento/client/states';
 import { Analytics, Supabase } from '@bento/client/utils';
 import { Bech32Address } from '@bento/core/address';
 import { FieldInput } from '@bento/private/profile/components/FieldInput';
@@ -10,7 +9,6 @@ import { getAddress, isAddress } from '@ethersproject/address';
 import { PublicKey } from '@solana/web3.js';
 import clsx from 'clsx';
 import produce from 'immer';
-import { useImmerAtom } from 'jotai/immer';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -103,7 +101,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   }, [draftWalletAddress]);
 
   // Add wallet without session
-  const [, setWallets] = useImmerAtom(walletsAtom);
+  const { setWallets } = useWalletContext();
   const onClickAddWallet = useCallback(() => {
     const walletDraft = {
       type: draftWalletType as any,
