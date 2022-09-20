@@ -43,7 +43,7 @@ export const NavigationBar = () => {
   const router = useRouter();
   const currentPath = useMemo(() => {
     if (router.route.startsWith('/profile')) {
-      // e.g. /profile/landing
+      // e.g. /profile/intro
       return '/profile';
     }
     if (router.route.startsWith('/u/')) {
