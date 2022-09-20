@@ -114,7 +114,6 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           />
 
           <WalletListSection
-            wallets={wallets}
             onClickAddWallet={() => setAddWalletModalVisible((prev) => !prev)}
           />
         </TopSummaryContainer>

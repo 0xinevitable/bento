@@ -1,20 +1,24 @@
 import { Wallet } from '@bento/common';
-import { useAtom, useSetAtom } from 'jotai';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
-import { walletsAtom } from '../states';
 import { Supabase } from '../utils';
 import { useSession } from './useSession';
 
-const RevalidateWalletsContext = React.createContext<
-  () => Promise<Wallet[] | undefined>
->(async () => undefined);
+const WalletsContext = React.createContext<{
+  wallets: Wallet[];
+  setWallets: React.Dispatch<React.SetStateAction<Wallet[]>>;
+  revalidateWallets: () => Promise<Wallet[] | undefined>;
+}>({
+  wallets: [],
+  setWallets: () => {},
+  revalidateWallets: async () => undefined,
+});
 
-export const RevalidateWalletsProvider: React.FC<React.PropsWithChildren> = ({
+export const WalletsProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
   const { session } = useSession();
-  const setWallets = useSetAtom(walletsAtom);
+  const [wallets, setWallets] = useState<Wallet[]>([]);
 
   const revalidateWallets = useCallback(async () => {
     if (!session || !session.user) {
@@ -25,14 +29,10 @@ export const RevalidateWalletsProvider: React.FC<React.PropsWithChildren> = ({
       .eq('user_id', session.user.id);
     const wallets: Wallet[] = walletQuery.data ?? [];
 
-    if (wallets.length > 0) {
-      setWallets(wallets);
-    }
-
+    setWallets(wallets);
     return wallets;
   }, [JSON.stringify(session), setWallets]);
 
-  const [wallets] = useAtom(walletsAtom);
   const [isWalletEmpty, setWalletEmpty] = useState<boolean>(false);
 
   useEffect(() => {
@@ -67,10 +67,10 @@ export const RevalidateWalletsProvider: React.FC<React.PropsWithChildren> = ({
   }, [revalidateWallets]);
 
   return (
-    <RevalidateWalletsContext.Provider value={revalidateWallets}>
+    <WalletsContext.Provider value={{ wallets, setWallets, revalidateWallets }}>
       {children}
-    </RevalidateWalletsContext.Provider>
+    </WalletsContext.Provider>
   );
 };
 
-export const useRevalidateWallets = () => useContext(RevalidateWalletsContext);
+export const useWalletContext = () => useContext(WalletsContext);

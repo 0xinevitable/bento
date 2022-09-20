@@ -1,14 +1,16 @@
-import { Colors } from '@bento/client/styles';
+import { Colors, systemFontStack } from '@bento/client/styles';
 import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import styled from 'styled-components';
 
 export type WalletListItemProps = Wallet & {
+  onClickDelete: (walletAddress: string) => void;
   onClickCopy: (address: string, type: 'evm' | 'cosmos-sdk' | 'solana') => void;
 };
 
 export const WalletListItem: React.FC<WalletListItemProps> = ({
   onClickCopy,
+  onClickDelete,
   ...wallet
 }) => {
   return (
@@ -40,6 +42,10 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
           )}
         </PlatformList>
       </Information>
+      <ButtonList>
+        {/* <button>Edit</button> */}
+        <button onClick={() => onClickDelete(wallet.address)}>Delete</button>
+      </ButtonList>
     </Container>
   );
 };
@@ -119,5 +125,43 @@ const PlatformListItem = styled.li`
     background: url(image.png);
     outline: 1px solid rgba(0, 0, 0, 0.25);
     outline-offset: -1px;
+  }
+`;
+
+const ButtonList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  & > button {
+    padding: 5px 12px;
+    border-radius: 8px;
+
+    /* FIXME: */
+    && {
+      font-family: 'Raleway', ${systemFontStack};
+    }
+
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 100%;
+    text-align: center;
+    letter-spacing: -0.05em;
+
+    &:first-of-type {
+      color: ${Colors.gray700};
+      background: ${Colors.gray400};
+    }
+
+    &:last-of-type {
+      color: ${Colors.gray500};
+      background: ${Colors.gray700};
+    }
+
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+      opacity: 0.75;
+    }
   }
 `;

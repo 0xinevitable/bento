@@ -72,6 +72,13 @@ const Container = styled.li`
   img {
     user-select: none;
   }
+
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+
+  &:hover {
+    background: ${Colors.gray800};
+    border: 1px solid ${Colors.gray700};
+  }
 `;
 
 const PlatformBadge = styled.img`

@@ -1,26 +1,21 @@
 import { Badge, Button } from '@bento/client/components';
 import { Colors, systemFontStack } from '@bento/client/styles';
-import { Wallet } from '@bento/common';
 import styled from 'styled-components';
 
 import { WalletList } from './WalletList';
 
 type Props = {
-  wallets: Wallet[];
   onClickAddWallet: () => void;
 };
 
-export const WalletListSection: React.FC<Props> = ({
-  wallets,
-  onClickAddWallet,
-}) => {
+export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
   return (
     <div className="flex-1 flex flex-col relative">
       <SectionTitleContainer>
         <SectionTitle>Wallets</SectionTitle>
       </SectionTitleContainer>
 
-      <WalletList wallets={wallets} />
+      <WalletList />
 
       <div className="mt-[10px] flex justify-center">
         <AddWalletButton onClick={onClickAddWallet}>

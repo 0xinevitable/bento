@@ -1,8 +1,7 @@
 import { MetaHead } from '@bento/client/components';
 import { useSession } from '@bento/client/hooks/useSession';
-import { walletsAtom } from '@bento/client/states';
+import { useWalletContext } from '@bento/client/hooks/useWalletContext';
 import { Analytics } from '@bento/client/utils';
-import { useAtomValue } from 'jotai';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -22,7 +21,7 @@ const DynamicTokenDetailModal = dynamic(
 
 const DashboardPage = () => {
   const { session } = useSession();
-  const wallets = useAtomValue(walletsAtom);
+  const { wallets } = useWalletContext();
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);

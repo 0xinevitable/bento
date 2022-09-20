@@ -1,11 +1,12 @@
 import { useSetAtom } from 'jotai';
 import { useCallback } from 'react';
 
-import { sessionAtom, walletsAtom } from '../states';
+import { sessionAtom } from '../states';
 import { Supabase } from '../utils';
+import { useWalletContext } from './useWalletContext';
 
 export const useSignOut = () => {
-  const setWallets = useSetAtom(walletsAtom);
+  const { setWallets } = useWalletContext();
   const setCurrentSession = useSetAtom(sessionAtom);
 
   const signOut = useCallback(async () => {
