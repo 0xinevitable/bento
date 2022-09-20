@@ -159,7 +159,10 @@ export const NavigationBar = () => {
                     }}
                   >
                     <Link href={item.href} passHref>
-                      <a className="h-full flex gap-2 items-center">
+                      <a
+                        className="h-full flex gap-2 items-center"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
                         <Iconify className="text-xl" icon={item.icon} />
                         <span className="text-2xl font-medium leading-none">
                           {item.title}
