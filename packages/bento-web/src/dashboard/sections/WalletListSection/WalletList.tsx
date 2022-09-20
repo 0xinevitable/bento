@@ -1,16 +1,16 @@
+import { useWalletContext } from '@bento/client/hooks/useWalletContext';
 import { Colors } from '@bento/client/styles';
 import { Analytics, copyToClipboard, toast } from '@bento/client/utils';
-import { Wallet } from '@bento/common';
+import { Wallet, shortenAddress } from '@bento/common';
+import axios from 'axios';
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { WalletListItem } from './WalletListItem';
 
-type WalletListProps = {
-  wallets: Wallet[];
-};
+export const WalletList: React.FC = () => {
+  const { wallets, revalidateWallets } = useWalletContext();
 
-export const WalletList: React.FC<WalletListProps> = ({ wallets }) => {
   const onClickCopy = useCallback(
     (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
       Analytics.logEvent('click_copy_wallet_address', {
@@ -26,6 +26,30 @@ export const WalletList: React.FC<WalletListProps> = ({ wallets }) => {
     [],
   );
 
+  const onClickDelete = useCallback(
+    async (walletAddress: string) => {
+      try {
+        await axios.post(`/api/profile/delete-wallet`, {
+          walletAddress,
+        });
+        toast({
+          type: 'success',
+          title: 'Deleted Wallet',
+          description: `Removed wallet ${shortenAddress(walletAddress)}`,
+        });
+      } catch (error: any) {
+        toast({
+          type: 'error',
+          title: 'Server Error',
+          description: error.message || 'Something went wrong',
+        });
+      } finally {
+        await revalidateWallets();
+      }
+    },
+    [revalidateWallets],
+  );
+
   return (
     <Container>
       <WalletItemList>
@@ -33,6 +57,7 @@ export const WalletList: React.FC<WalletListProps> = ({ wallets }) => {
           <WalletListItem
             key={wallet.address}
             {...wallet}
+            onClickDelete={onClickDelete}
             onClickCopy={onClickCopy}
           />
         ))}

@@ -1,7 +1,7 @@
 import { Modal } from '@bento/client/components';
 import { NETWORKS, Network } from '@bento/client/constants/networks';
 import { useSession } from '@bento/client/hooks/useSession';
-import { useRevalidateWallets } from '@bento/client/hooks/useWallets';
+import { useWalletContext } from '@bento/client/hooks/useWalletContext';
 import { walletsAtom } from '@bento/client/states';
 import { Analytics, Supabase } from '@bento/client/utils';
 import { Bech32Address } from '@bento/core/address';
@@ -89,7 +89,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     console.log({ user, session, error });
   }, []);
 
-  const revalidateWallets = useRevalidateWallets();
+  const { revalidateWallets } = useWalletContext();
 
   const [draftWalletAddress, setDraftWalletAddress] = useState<string>('');
   const [draftWalletType, setDraftWalletType] = useState<string | null>(null);
