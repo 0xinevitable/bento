@@ -1,3 +1,4 @@
+import { Supabase } from '@bento/client/utils';
 import { Base64 } from '@bento/common';
 import { StdSignDoc, serializeSignDoc } from '@cosmjs/amino';
 import { Secp256k1, Secp256k1Signature, sha256 } from '@cosmjs/crypto';
@@ -7,8 +8,6 @@ import { PostgrestError } from '@supabase/supabase-js';
 import Caver from 'caver-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nacl from 'tweetnacl';
-
-import { Supabase } from '@/utils/Supabase';
 
 type APIRequest = NextApiRequest &
   (

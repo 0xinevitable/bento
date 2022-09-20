@@ -1,3 +1,7 @@
+import { Icon, NoSSR, Portal } from '@bento/client/components';
+import { useSession } from '@bento/client/hooks/useSession';
+import { useSignOut } from '@bento/client/hooks/useSignOut';
+import { Analytics, FeatureFlags } from '@bento/client/utils';
 import { Icon as Iconify } from '@iconify/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
@@ -7,14 +11,6 @@ import styled, { css } from 'styled-components';
 
 import GithubIcon from '@/assets/icons/ic-github.svg';
 import TwitterIcon from '@/assets/icons/ic-twitter.svg';
-import { useSession } from '@/hooks/useSession';
-import { useSignOut } from '@/hooks/useSignOut';
-import { FeatureFlags } from '@/utils/FeatureFlag';
-import { Analytics } from '@/utils/analytics';
-
-import { Icon } from './Icon';
-import { NoSSR } from './NoSSR';
-import { Portal } from './Portal';
 
 const Breakpoints = {
   Mobile: 512,
@@ -47,7 +43,7 @@ export const NavigationBar = () => {
   const router = useRouter();
   const currentPath = useMemo(() => {
     if (router.route.startsWith('/profile')) {
-      // e.g. /profile/landing
+      // e.g. /profile/intro
       return '/profile';
     }
     if (router.route.startsWith('/u/')) {
@@ -163,7 +159,10 @@ export const NavigationBar = () => {
                     }}
                   >
                     <Link href={item.href} passHref>
-                      <a className="h-full flex gap-2 items-center">
+                      <a
+                        className="h-full flex gap-2 items-center"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
                         <Iconify className="text-xl" icon={item.icon} />
                         <span className="text-2xl font-medium leading-none">
                           {item.title}

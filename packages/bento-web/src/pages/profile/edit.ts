@@ -1,4 +1,4 @@
 export {
   default,
   getServerSideProps,
-} from '@/profile/ProfileEditPage/ProfileEditPage';
+} from '@bento/private/profile/ProfileEditPage/ProfileEditPage';

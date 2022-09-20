@@ -1,14 +1,12 @@
+import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
 import { useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled from 'styled-components';
 
-import { PLATFORM_LOGOS } from '@/dashboard/constants/platform';
-import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
 
-const CHART_SIZE = 240;
-const PIE_WIDTH = CHART_SIZE * 0.1;
+const CHART_SIZE = 184;
+const PIE_WIDTH = 18;
 const AVAILABLE_COLORS = [
   '#FF214A',
   '#f72585',
@@ -44,7 +42,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
       items.push({
         label: 'OpenSea NFTs',
         value: !percentage || isNaN(percentage) ? 0 : percentage,
-        logo: PLATFORM_LOGOS.opensea,
+        logo: '/assets/icons/opensea.png',
       });
     }
 
@@ -72,42 +70,44 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
 
   return (
     <ChartContainer>
-      <ResponsiveContainer width={CHART_SIZE} height={CHART_SIZE}>
-        <PieChart>
-          <Pie
-            data={data}
-            innerRadius={CHART_SIZE * 0.5 - PIE_WIDTH}
-            outerRadius={CHART_SIZE * 0.5}
-            cornerRadius={4}
-            paddingAngle={4}
-            startAngle={90}
-            endAngle={90 + 360}
-            dataKey="value"
-            minAngle={PIE_WIDTH - 2}
-          >
-            {data.map((_, index) => (
-              <Cell
-                key={index}
-                fill={AVAILABLE_COLORS[index] ?? '#5b739b'}
-                stroke="transparent"
-              />
-            ))}
-          </Pie>
-          <Tooltip
-            content={({ payload }) => {
-              const first = payload?.[0]?.payload;
-              return (
-                <TooltipContent
-                  label={first?.label ?? ''}
-                  value={first?.value ?? 0}
-                  logo={first?.logo}
+      <div style={{ width: CHART_SIZE, height: CHART_SIZE }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              innerRadius={CHART_SIZE * 0.5 - PIE_WIDTH}
+              outerRadius={CHART_SIZE * 0.5}
+              cornerRadius={4}
+              paddingAngle={4}
+              startAngle={90}
+              endAngle={90 + 360}
+              dataKey="value"
+              minAngle={PIE_WIDTH - 2}
+            >
+              {data.map((_, index) => (
+                <Cell
+                  key={index}
+                  fill={AVAILABLE_COLORS[index] ?? '#5b739b'}
+                  stroke="transparent"
                 />
-              );
-            }}
-            wrapperStyle={tooltipWrapperStyle}
-          />
-        </PieChart>
-      </ResponsiveContainer>
+              ))}
+            </Pie>
+            <Tooltip
+              content={({ payload }) => {
+                const first = payload?.[0]?.payload;
+                return (
+                  <TooltipContent
+                    label={first?.label ?? ''}
+                    value={first?.value ?? 0}
+                    logo={first?.logo}
+                  />
+                );
+              }}
+              wrapperStyle={tooltipWrapperStyle}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
 
       <AvatarContainer>
         {/* <Avatar src="/assets/avatar.png" /> */}
@@ -147,7 +147,7 @@ const AvatarContainer = styled.div`
 const BentoZapImage = styled.img.attrs({
   src: '/assets/illusts/bento-zap.png',
 })`
-  width: 160px;
-  height: 160px;
+  width: 115px;
+  height: 115px;
   user-select: none;
 `;

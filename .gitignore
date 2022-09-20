@@ -3,6 +3,7 @@ dist
 build
 lib
 .DS_Store
+*.tsbuildinfo
 
 ## Yarn
 .yarn/*

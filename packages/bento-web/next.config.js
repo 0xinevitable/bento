@@ -33,6 +33,15 @@ module.exports = withPlugins(
       };
       return config;
     },
+    async redirects() {
+      return [
+        {
+          source: '/profile/intro',
+          destination: '/profile/intro',
+          permanent: false,
+        },
+      ];
+    },
   },
   [
     withSvgr,

@@ -1,13 +1,11 @@
 import { OpenSeaAsset, cachedAxios } from '@bento/client';
+import { Badge, Modal } from '@bento/client/components';
+import { WalletBalance } from '@bento/client/dashboard/types/WalletBalance';
 import { shortenAddress } from '@bento/common';
 import clsx from 'clsx';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
-import { Badge } from '@/components/Badge';
-import { Modal } from '@/components/Modal';
-
-import { WalletBalance } from '../types/WalletBalance';
 import { AssetMedia } from './AssetMedia';
 
 const capitalize = (value: string) =>
@@ -253,6 +251,8 @@ export const TokenDetailModal: React.FC<Props> = ({
     </OverlayWrapper>
   );
 };
+
+export default TokenDetailModal;
 
 const OverlayWrapper = styled(Modal)`
   .modal-container {

@@ -5,11 +5,9 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/bentoinevitable.svg?style=social&label=Follow%20%40bentoinevitable)](https://twitter.com/bentoinevitable)
 
-[![Bento Profiles](https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/profile/og-image.png)](https://bento.finance/profile/landing)
-
-[![Cover Artwork](https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/og-image-v3.png)](https://bento.finance)
-
-[![Dashboard Preview](https://raw.githubusercontent.com/inevitable-changes/bento/main/docs/images/dashboard-preview.png?)](https://bento.finance/home)
+|                                                                                                    Bento Profiles                                                                                                     |                                                                                           Cover Artwork                                                                                            |                                                                                      Dashboard Preview                                                                                       |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <a href="https://bento.finance/profile/intro"><img width="500" alt="Bento Profiles" src="https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/profile/og-image.png"/></a> | <a href="https://bento.finance"><img width="500" alt="Cover Artwork" src="https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/og-image-v3.png" /></a> | <a href="https://bento.finance/home"><img width="500" alt="Dashboard Preview" src="https://raw.githubusercontent.com/inevitable-changes/bento/main/docs/images/dashboard-preview.png" /></a> |
 
 ## The Status Quo
 
@@ -35,22 +33,25 @@
 ```bash
 git clone https://github.com/inevitable-changes/bento
 cd bento
+git submodule update --init --recursive
 yarn install
 ```
 
 - First, clone this repo.
+- Install private submodules(We'll soon make the project buildable for external users without access).
 - Since we're using [Zero-Install](https://yarnpkg.com/features/zero-installs) through Yarn Berry's Plug'n'Play, the repository's initial clone size might be significantly larger than you think.
 
-```js
-{
-  "CMC_PRO_API_KEYS": [""],
-  "COVALENT_API_KEYS": [""],
-  "RPC_URL": { ... },
-  "STORAGE": { ... }
-}
+```env
+ENVIRONMENT=development
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+NEXT_PUBLIC_SLACK_NEW_PROFILE_WEBHOOK=
+NEXT_PUBLIC_OPENSEA_API_KEYS=
+NEXT_PUBLIC_COVALENT_API_KEYS=ckey_xxx:,ckey_xxx:
+NEXT_PUBLIC_CMC_PRO_API_KEYS=
 ```
 
-- Copy `src/config/secrets.example.json` inside `@bento/common` to `src/config/secrets.json` and fill in the contents.
+- Copy `.env.example` inside `@bento/web` to `.env.debug.local`/`.env.development.local` and fill in the contents.
 
 ```bash
 yarn workspace @bento/common build
@@ -66,6 +67,14 @@ yarn workspace @bento/web dev
 ```
 
 - Finally, we start the development server. By default, the port is set to `3000`.
+
+## Production Deployment
+
+Since this project uses [`vercel-submodules`](https://github.com/junhoyeo/vercel-submodules), we have our custom `Install Command` set in Vercel:
+
+```bash
+npx vercel-submodules --paths packages/bento-private packages/linky-profile-engine && yarn install
+```
 
 ## 🏛️ Licensing
 

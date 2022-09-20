@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "es5",
+    "module": "esnext",
     "moduleResolution": "node",
     "sourceMap": true,
     "strict": true,
@@ -15,7 +16,8 @@
     "outDir": "lib",
     "declaration": true,
     "rootDir": ".",
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
-  "include": ["**/*"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "lib"]
 }
