@@ -18,7 +18,7 @@ export type AnalyticsEvent = {
 
   click_dashboard_profile_nudge: undefined;
   click_dashboard_landing_link: {
-    medium: 'landing';
+    medium: 'landing' | 'landing-globe';
   };
   click_app_link: {
     medium: 'landing' | 'dashboard_landing';
