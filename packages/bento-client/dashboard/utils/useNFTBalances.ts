@@ -91,14 +91,16 @@ export const useNFTBalances = ({ wallets }: Options) => {
                     const first = assets[0];
                     const collection = first.collection;
 
-                    const { floor_price: floorPrice } =
-                      await OpenSea.getCollectionStats(collectionSlug).catch(
-                        (error) => {
-                          console.error(error);
-                          // FIXME: Error handling
-                          return { floor_price: 0 };
-                        },
-                      );
+                    const {
+                      floor_price: floorPrice,
+                      total_volume: totalVolume,
+                    } = await OpenSea.getCollectionStats(collectionSlug).catch(
+                      (error) => {
+                        console.error(error);
+                        // FIXME: Error handling
+                        return { floor_price: 0, total_volume: 0 };
+                      },
+                    );
 
                     return {
                       symbol: first.asset_contract.symbol || null,
@@ -107,6 +109,7 @@ export const useNFTBalances = ({ wallets }: Options) => {
                       balance: groupByCollection[collectionSlug].length,
                       logo: collection.image_url,
                       price: ethereumPrice * floorPrice,
+                      totalVolume,
                       type: 'nft' as const,
                       platform: 'opensea',
                       assets,
@@ -115,7 +118,9 @@ export const useNFTBalances = ({ wallets }: Options) => {
                 ),
             ),
           )
-        ).flat();
+        )
+          .flat()
+          .filter((v) => v.totalVolume > 0);
 
         return balances;
       }),
