@@ -5,7 +5,7 @@ import {
 } from '@bento/client/components';
 import { Colors } from '@bento/client/styles';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import styled from 'styled-components';
 
 type Props = TrackedSectionOptions & {

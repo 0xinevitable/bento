@@ -2,8 +2,7 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@bento/client/components';
-import dedent from 'dedent';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import styled, { css } from 'styled-components';
 
 import { SectionBadge } from '../components/SectionBadge';
@@ -54,13 +53,13 @@ export const StatusQuoSection: React.FC<TrackedSectionOptions> = ({
           <IllustContainer>
             <ChessKingIllustWrapper>
               <ChessKingIllustContainer>
-                <ChessKingIllust src={ASSETS.KING} />
+                <ChessKingIllust alt="" src={ASSETS.KING} />
               </ChessKingIllustContainer>
             </ChessKingIllustWrapper>
             <InequalSymbol src="/assets/landing/inequal.svg" />
             <WalletIllustWrapper>
               <WalletIllustContainer>
-                <WalletIllust src={ASSETS.WALLET} />
+                <WalletIllust alt="" src={ASSETS.WALLET} />
               </WalletIllustContainer>
             </WalletIllustWrapper>
 

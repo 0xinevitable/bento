@@ -3,7 +3,7 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@bento/client/components';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import styled from 'styled-components';
 
 import { SectionBadge } from '../components/SectionBadge';
@@ -56,7 +56,7 @@ export const IdentitySection: React.FC<TrackedSectionOptions> = ({
             <BackgroundContent>
               <BackgroundMargin>
                 <BackgroundImageContainer>
-                  <Background src={ASSETS.BACKGROUND} />
+                  <Background alt="" src={ASSETS.BACKGROUND} />
                 </BackgroundImageContainer>
               </BackgroundMargin>
             </BackgroundContent>
@@ -66,7 +66,7 @@ export const IdentitySection: React.FC<TrackedSectionOptions> = ({
         <IllustWrapper>
           <IllustContainer>
             <IllustImageContainer>
-              <Illust src={ASSETS.DIAGRAM} />
+              <Illust alt="" src={ASSETS.DIAGRAM} />
             </IllustImageContainer>
           </IllustContainer>
         </IllustWrapper>

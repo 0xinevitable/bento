@@ -7,7 +7,7 @@ import { Colors } from '@bento/client/styles';
 import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
@@ -58,7 +58,7 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
           <IllustContainer>
             <MainIllust>
               <IllustImageContainer>
-                <Illust src={ASSETS.ILLUST} />
+                <Illust alt="" src={ASSETS.ILLUST} />
               </IllustImageContainer>
 
               <PawnImageContainer
@@ -71,7 +71,7 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
                   duration: 2,
                 }}
               >
-                <Pawn src={ASSETS.PAWN} />
+                <Pawn alt="" src={ASSETS.PAWN} />
               </PawnImageContainer>
             </MainIllust>
 
