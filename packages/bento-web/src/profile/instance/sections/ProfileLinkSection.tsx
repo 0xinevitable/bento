@@ -1,10 +1,10 @@
-import { Block } from '@linky/profile-engine';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
 import { Skeleton } from '@/components/system';
 
+import { Block } from '@/profile/blocks';
 import { FeatureFlags } from '@/utils';
 
 import { LinkBlockItem } from '../../blocks/LinkBlockItem';

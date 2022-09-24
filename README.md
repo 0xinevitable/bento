@@ -67,14 +67,6 @@ yarn workspace @bento/web dev
 
 - Finally, we start the development server. By default, the port is set to `3000`.
 
-## Production Deployment
-
-Since this project uses [`vercel-submodules`](https://github.com/junhoyeo/vercel-submodules), we have our custom `Install Command` set in Vercel:
-
-```bash
-npx vercel-submodules --paths packages/bento-private packages/linky-profile-engine && yarn install
-```
-
 ## 🏛️ Licensing
 
 <img align="right" src="http://opensource.org/trademarks/opensource/OSI-Approved-License-100x137.png">

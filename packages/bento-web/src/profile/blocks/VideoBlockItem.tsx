@@ -1,7 +1,8 @@
-import { VideoBlock } from '@linky/profile-engine';
 import React, { useMemo } from 'react';
 import YouTube from 'react-youtube';
 import styled from 'styled-components';
+
+import { VideoBlock } from '@/profile/blocks';
 
 type Props = VideoBlock & {};
 

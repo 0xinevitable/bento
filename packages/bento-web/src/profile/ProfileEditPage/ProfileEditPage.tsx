@@ -1,4 +1,3 @@
-import { LinkBlock } from '@linky/profile-engine';
 import axios, { AxiosError } from 'axios';
 import { GetServerSideProps } from 'next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -7,6 +6,7 @@ import styled from 'styled-components';
 import { Button, Checkbox, MetaHead } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 
+import { LinkBlock } from '@/profile/blocks';
 import { FeatureFlags, toast } from '@/utils';
 
 // import { Modal } from '@/components/system';
