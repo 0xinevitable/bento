@@ -3,13 +3,14 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@bento/client/components';
+import { useInViewport } from '@bento/client/hooks/useInViewport';
 import { Colors } from '@bento/client/styles';
 import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import styled from 'styled-components';
 
 import { SectionBadge } from '../components/SectionBadge';
@@ -49,6 +50,9 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
 }) => {
   const router = useRouter();
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const isRendered = useInViewport(sectionRef);
+
   const onClickLearnMore = useCallback(async () => {
     await Analytics.logEvent('click_dashboard_landing_link', {
       medium: 'landing',
@@ -58,68 +62,72 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
 
   return (
     <Wrapper>
-      <Section {...trackedSectionOptions}>
-        <Information>
-          <SectionBadge>Dashboard for all L1s</SectionBadge>
-          <SectionTitle>
-            View Your <br />
-            Entire Portfolio
-          </SectionTitle>
-          <Paragraph>
-            Bento is an open-source web3 dashboard in that users can add
-            multiple wallets and group their crypto assets into one.
-            <br />
-            Investing in DeFi? View not only balances but your stakes for
-            various protocols as well.
-          </Paragraph>
-          <LearnMore onClick={onClickLearnMore}>
-            <span>Learn More</span>
-            <LearnMoreChevron />
-          </LearnMore>
+      <Section ref={sectionRef} {...trackedSectionOptions}>
+        {isRendered && (
+          <>
+            <Information>
+              <SectionBadge>Dashboard for all L1s</SectionBadge>
+              <SectionTitle>
+                View Your <br />
+                Entire Portfolio
+              </SectionTitle>
+              <Paragraph>
+                Bento is an open-source web3 dashboard in that users can add
+                multiple wallets and group their crypto assets into one.
+                <br />
+                Investing in DeFi? View not only balances but your stakes for
+                various protocols as well.
+              </Paragraph>
+              <LearnMore onClick={onClickLearnMore}>
+                <span>Learn More</span>
+                <LearnMoreChevron />
+              </LearnMore>
 
-          <ChainLogoList>
-            {CHAINS.map((chain) => (
-              <AnimatedToolTip key={chain.src} label={chain.name}>
-                <ChainLogoContainer>
-                  <ChainLogo
-                    src={chain.src}
-                    alt={chain.name}
-                    width="64"
-                    height="64"
-                  />
-                </ChainLogoContainer>
-              </AnimatedToolTip>
-            ))}
-          </ChainLogoList>
-        </Information>
+              <ChainLogoList>
+                {CHAINS.map((chain) => (
+                  <AnimatedToolTip key={chain.src} label={chain.name}>
+                    <ChainLogoContainer>
+                      <ChainLogo
+                        src={chain.src}
+                        alt={chain.name}
+                        width="64"
+                        height="64"
+                      />
+                    </ChainLogoContainer>
+                  </AnimatedToolTip>
+                ))}
+              </ChainLogoList>
+            </Information>
 
-        <IllustWrapper>
-          <IllustContainer>
-            <Illust
-              src={ASSETS.ILLUST[0]}
-              srcSet={dedent`
+            <IllustWrapper>
+              <IllustContainer>
+                <Illust
+                  src={ASSETS.ILLUST[0]}
+                  srcSet={dedent`
                 ${ASSETS.ILLUST[0]} 1x,
                 ${ASSETS.ILLUST[1]} 2x
               `}
-            />
+                />
 
-            <EthereumCardContainer>
-              <EthereumCard {...cardSources('ethereum')} />
-            </EthereumCardContainer>
-            <CloneXCardContainer>
-              <CloneXCard {...cardSources('clonex')} />
-            </CloneXCardContainer>
-            <DaiCardContainer>
-              <DaiCard {...cardSources('dai')} />
-            </DaiCardContainer>
-            <OsmosisCardContainer>
-              <OsmosisCard {...cardSources('osmosis')} />
-            </OsmosisCardContainer>
-            <TetherCardContainer>
-              <TetherCard {...cardSources('tether')} />
-            </TetherCardContainer>
-          </IllustContainer>
-        </IllustWrapper>
+                <EthereumCardContainer>
+                  <EthereumCard {...cardSources('ethereum')} />
+                </EthereumCardContainer>
+                <CloneXCardContainer>
+                  <CloneXCard {...cardSources('clonex')} />
+                </CloneXCardContainer>
+                <DaiCardContainer>
+                  <DaiCard {...cardSources('dai')} />
+                </DaiCardContainer>
+                <OsmosisCardContainer>
+                  <OsmosisCard {...cardSources('osmosis')} />
+                </OsmosisCardContainer>
+                <TetherCardContainer>
+                  <TetherCard {...cardSources('tether')} />
+                </TetherCardContainer>
+              </IllustContainer>
+            </IllustWrapper>
+          </>
+        )}
       </Section>
     </Wrapper>
   );
