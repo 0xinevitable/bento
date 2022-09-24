@@ -421,8 +421,8 @@ const IllustImageContainer = styled.div`
   height: ${413.74 + ILLUST_BLUR_BOTTOM}px;
 `;
 const Illust = styled(Image).attrs({
-  width: 662 * 2,
-  height: 413.74 * 2,
+  width: 662,
+  height: 413.74,
 })``;
 
 const PawnImageContainer = styled(motion.div)`
@@ -435,6 +435,6 @@ const PawnImageContainer = styled(motion.div)`
   bottom: 0;
 `;
 const Pawn = styled(Image).attrs({
-  width: 413.74 * 2,
-  height: 413.74 * 2,
+  width: 413.74,
+  height: 413.74,
 })``;

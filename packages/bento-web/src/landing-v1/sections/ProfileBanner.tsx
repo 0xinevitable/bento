@@ -223,8 +223,8 @@ const BannerImageContainer = styled.div`
 const BannerImage = styled(Image).attrs({
   alt: 'Bento Profiles',
   src: '/assets/profile/profile-nudge.png',
-  width: 491.62 * 1.5,
-  height: 496 * 1.5,
+  width: 491.62,
+  height: 496,
   quality: 100,
 })``;
 const DefineYourselfStickerContainer = styled.div`

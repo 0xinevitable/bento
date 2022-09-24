@@ -86,12 +86,7 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
                 {CHAINS.map((chain) => (
                   <AnimatedToolTip key={chain.src} label={chain.name}>
                     <ChainLogoContainer>
-                      <ChainLogo
-                        src={chain.src}
-                        alt={chain.name}
-                        width="64"
-                        height="64"
-                      />
+                      <ChainLogo src={chain.src} alt={chain.name} />
                     </ChainLogoContainer>
                   </AnimatedToolTip>
                 ))}
@@ -103,9 +98,9 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
                 <Illust
                   src={ASSETS.ILLUST[0]}
                   srcSet={dedent`
-                ${ASSETS.ILLUST[0]} 1x,
-                ${ASSETS.ILLUST[1]} 2x
-              `}
+                    ${ASSETS.ILLUST[0]} 1x,
+                    ${ASSETS.ILLUST[1]} 2x
+                  `}
                 />
 
                 <EthereumCardContainer>
@@ -232,7 +227,7 @@ const ChainLogoContainer = styled.div`
   overflow: hidden;
   cursor: pointer;
 `;
-const ChainLogo = styled(Image)`
+const ChainLogo = styled(Image).attrs({ width: 36, height: 36 })`
   object-fit: cover;
 `;
 

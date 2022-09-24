@@ -179,8 +179,8 @@ const ChessKingIllustContainer = styled.div`
   margin-bottom: ${-CHESS_KING_BLUR_BOTTOM}px;
 `;
 const ChessKingIllust = styled(Image).attrs({
-  width: 443.09 * 2,
-  height: 455.76 * 2,
+  width: 443.09 + CHESS_KING_BLUR_TOP + CHESS_KING_BLUR_BOTTOM,
+  height: 455.76 + CHESS_KING_BLUR_LEFT + CHESS_KING_BLUR_RIGHT,
   objectFit: 'contain',
 })``;
 
@@ -204,8 +204,8 @@ const WalletIllustContainer = styled.div`
   z-index: 0;
 `;
 const WalletIllust = styled(Image).attrs({
-  width: 355.5 * 2,
-  height: 345 * 2,
+  width: 355.5 + WALLET_ILLUST_BLUR_RIGHT,
+  height: 345 + WALLET_ILLUST_BLUR_TOP,
   objectFit: 'contain',
 })``;
 
