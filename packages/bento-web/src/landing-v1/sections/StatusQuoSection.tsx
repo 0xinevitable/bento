@@ -179,8 +179,9 @@ const ChessKingIllustContainer = styled.div`
 const ChessKingIllust = styled(Image).attrs({
   width: 443.09 + CHESS_KING_BLUR_TOP + CHESS_KING_BLUR_BOTTOM,
   height: 455.76 + CHESS_KING_BLUR_LEFT + CHESS_KING_BLUR_RIGHT,
-  objectFit: 'contain',
-})``;
+})`
+  object-fit: contain;
+`;
 
 const WALLET_ILLUST_BLUR_TOP = 140 - 98.51;
 const WALLET_ILLUST_BLUR_RIGHT = 140 - 30.28;
@@ -204,8 +205,9 @@ const WalletIllustContainer = styled.div`
 const WalletIllust = styled(Image).attrs({
   width: 355.5 + WALLET_ILLUST_BLUR_RIGHT,
   height: 345 + WALLET_ILLUST_BLUR_TOP,
-  objectFit: 'contain',
-})``;
+})`
+  object-fit: contain;
+`;
 
 const InequalSymbol = styled.img`
   width: 141px;

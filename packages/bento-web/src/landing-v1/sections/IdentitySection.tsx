@@ -208,5 +208,6 @@ const IllustImageContainer = styled.div`
 const Illust = styled(Image).attrs({
   width: 861.03,
   height: 749,
-  objectFit: 'contain',
-})``;
+})`
+  object-fit: contain;
+`;

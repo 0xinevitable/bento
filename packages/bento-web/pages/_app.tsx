@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { SessionManager } from '@/hooks/useSession';
 import { WalletsProvider } from '@/hooks/useWalletContext';
@@ -10,8 +10,10 @@ import '@/styles/tailwind.css';
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+import { LoadingProgress } from '@/components/LoadingProgress';
 import { NavigationBar } from '@/components/NavigationBar';
 import { GlobalStyle } from '@/styles/GlobalStyle';
 
@@ -23,6 +25,40 @@ type MyAppProps = AppProps & {
 };
 
 function MyApp({ Component, pageProps }: MyAppProps) {
+  const router = useRouter();
+
+  const [loadingState, setLoadingState] = useState({
+    isRouteChanging: false,
+    loadingKey: 0,
+  });
+
+  useEffect(() => {
+    const handleRouteChangeStart = () => {
+      setLoadingState((prevState) => ({
+        ...prevState,
+        isRouteChanging: true,
+        loadingKey: prevState.loadingKey ^ 1,
+      }));
+    };
+
+    const handleRouteChangeEnd = () => {
+      setLoadingState((prevState) => ({
+        ...prevState,
+        isRouteChanging: false,
+      }));
+    };
+
+    router.events.on('routeChangeStart', handleRouteChangeStart);
+    router.events.on('routeChangeComplete', handleRouteChangeEnd);
+    router.events.on('routeChangeError', handleRouteChangeEnd);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChangeStart);
+      router.events.off('routeChangeComplete', handleRouteChangeEnd);
+      router.events.off('routeChangeError', handleRouteChangeEnd);
+    };
+  }, [router.events]);
+
   useEffect(() => {
     document.querySelector('body')?.classList.remove('preload');
   }, []);
@@ -48,6 +84,10 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       <SessionManager />
       <WalletsProvider>
         <Container>
+          <LoadingProgress
+            isRouteChanging={loadingState.isRouteChanging}
+            key={loadingState.loadingKey}
+          />
           <NavigationBar />
 
           <Component {...pageProps} />

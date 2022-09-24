@@ -1387,7 +1387,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.3.4, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.19.0, @babel/runtime@npm:^7.3.4, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.4":
   version: 7.19.0
   resolution: "@babel/runtime@npm:7.19.0"
   dependencies:
@@ -1480,6 +1480,7 @@ __metadata:
     "@react-spring/web": ^9.5.4
     "@solana/web3.js": ^1.63.1
     "@supabase/supabase-js": ^1.35.7
+    "@tanem/react-nprogress": ^5.0.14
     "@types/amplitude-js": ^8.16.2
     "@types/dedent": ^0.7.0
     "@types/lodash.chunk": ^4.2.7
@@ -3202,6 +3203,19 @@ __metadata:
   dependencies:
     tslib: ^2.4.0
   checksum: 736857d524b41a8a4db81094e9b027f554004e0fa3e86325d85bdb38f7e6459ce022db079edb6c61ba0f46fe8583b3e663e95f7acbd13e51b8da6c34e45bba2e
+  languageName: node
+  linkType: hard
+
+"@tanem/react-nprogress@npm:^5.0.14":
+  version: 5.0.14
+  resolution: "@tanem/react-nprogress@npm:5.0.14"
+  dependencies:
+    "@babel/runtime": ^7.19.0
+    hoist-non-react-statics: ^3.3.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 69c435c1ef3f19a1e0ce9f9085410361e6df2ca2d5abb4a790c6236dbf1d40d9da1bbcd8034ae1b8f214348ef3ff05377e3117ca18d687cca1319e678e278a3c
   languageName: node
   linkType: hard
 
@@ -6796,7 +6810,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.0.0, hoist-non-react-statics@npm:^3.3.0":
+"hoist-non-react-statics@npm:^3.0.0, hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:

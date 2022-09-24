@@ -2603,6 +2603,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@react-spring/web", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.5.4"],\
             ["@solana/web3.js", "npm:1.63.1"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
+            ["@tanem/react-nprogress", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:5.0.14"],\
             ["@types/amplitude-js", "npm:8.16.2"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.chunk", "npm:4.2.7"],\
@@ -4688,6 +4689,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@swc/helpers", "npm:0.4.11"],\
             ["tslib", "npm:2.4.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@tanem/react-nprogress", [\
+        ["npm:5.0.14", {\
+          "packageLocation": "./.yarn/cache/@tanem-react-nprogress-npm-5.0.14-a1621763c8-69c435c1ef.zip/node_modules/@tanem/react-nprogress/",\
+          "packageDependencies": [\
+            ["@tanem/react-nprogress", "npm:5.0.14"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:5.0.14", {\
+          "packageLocation": "./.yarn/__virtual__/@tanem-react-nprogress-virtual-244e3966dd/0/cache/@tanem-react-nprogress-npm-5.0.14-a1621763c8-69c435c1ef.zip/node_modules/@tanem/react-nprogress/",\
+          "packageDependencies": [\
+            ["@tanem/react-nprogress", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:5.0.14"],\
+            ["@babel/runtime", "npm:7.19.0"],\
+            ["@types/react", "npm:18.0.21"],\
+            ["@types/react-dom", "npm:18.0.6"],\
+            ["hoist-non-react-statics", "npm:3.3.2"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
