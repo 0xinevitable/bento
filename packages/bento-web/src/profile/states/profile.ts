@@ -1,0 +1,12 @@
+import { storage } from '@bento/client/states';
+import { atomWithStorage } from 'jotai/utils';
+
+import { UserProfile } from '../types/UserProfile';
+
+const key = '@profile_v1';
+export const profileAtom = atomWithStorage<UserProfile | null>(
+  key,
+  null,
+  // @ts-ignore FIXME:
+  storage,
+);
