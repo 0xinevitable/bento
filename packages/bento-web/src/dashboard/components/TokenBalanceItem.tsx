@@ -1,7 +1,9 @@
-import { Badge } from '@bento/client/components';
-import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
-import { Colors } from '@bento/client/styles';
 import styled from 'styled-components';
+
+import { Badge } from '@/components/system';
+
+import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
+import { Colors } from '@/styles';
 
 const capitalize = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);

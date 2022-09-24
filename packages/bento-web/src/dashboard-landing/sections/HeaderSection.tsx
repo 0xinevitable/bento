@@ -1,11 +1,13 @@
+import React from 'react';
+import styled from 'styled-components';
+
 import {
   Badge,
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components';
-import { Analytics } from '@bento/client/utils';
-import React from 'react';
-import styled from 'styled-components';
+} from '@/components/system';
+
+import { Analytics } from '@/utils';
 
 import { onMobile, onTablet } from '../utils/breakpoints';
 

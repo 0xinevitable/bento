@@ -1,9 +1,7 @@
-import {
-  TrackedSection,
-  TrackedSectionOptions,
-} from '@bento/client/components';
 import React from 'react';
 import styled from 'styled-components';
+
+import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 
 import { onMobile, onTablet } from '../utils/breakpoints';
 

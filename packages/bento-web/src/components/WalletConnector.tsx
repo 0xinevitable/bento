@@ -1,13 +1,15 @@
-import { cachedAxios } from '@bento/client';
-import { Network } from '@bento/client/constants/networks';
-import { WALLETS } from '@bento/client/constants/wallets';
-import { useSignOut } from '@bento/client/hooks/useSignOut';
-import { Analytics, toast } from '@bento/client/utils';
 import { Base64 } from '@bento/common';
+import { cachedAxios } from '@bento/core';
 import { AxiosError } from 'axios';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
+
+import { useSignOut } from '@/hooks/useSignOut';
+
+import { Network } from '@/constants/networks';
+import { WALLETS } from '@/constants/wallets';
+import { Analytics, toast } from '@/utils';
 
 declare global {
   interface Window {

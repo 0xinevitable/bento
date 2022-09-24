@@ -1,6 +1,7 @@
-import { systemFontStack } from '@bento/client/styles';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+
+import { systemFontStack } from '@/styles';
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}

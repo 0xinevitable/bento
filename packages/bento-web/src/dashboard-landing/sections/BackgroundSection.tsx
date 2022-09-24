@@ -1,9 +1,10 @@
+import styled from 'styled-components';
+
 import {
   Badge,
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components';
-import styled from 'styled-components';
+} from '@/components/system';
 
 import { onMobile, onTablet } from '../utils/breakpoints';
 

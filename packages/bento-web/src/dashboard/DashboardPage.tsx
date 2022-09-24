@@ -1,12 +1,13 @@
-import { MetaHead } from '@bento/client/components';
-import { useSession } from '@bento/client/hooks/useSession';
-import { useWalletContext } from '@bento/client/hooks/useWalletContext';
-import { Analytics } from '@bento/client/utils';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
+import { MetaHead } from '@/components/system';
+import { useSession } from '@/hooks/useSession';
+import { useWalletContext } from '@/hooks/useWalletContext';
+
+import { Analytics } from '@/utils';
 
 import { DashboardIntro } from './DashboardIntro';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
