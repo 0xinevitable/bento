@@ -37,7 +37,7 @@ module.exports = withPlugins(
     async redirects() {
       return [
         {
-          source: '/profile/intro',
+          source: '/profile/landing',
           destination: '/profile/intro',
           permanent: false,
         },
