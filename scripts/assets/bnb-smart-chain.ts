@@ -1,7 +1,7 @@
-import { cachedAxios } from '@bento/client';
 import { safePromiseAll } from '@bento/common';
 import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
 import { TokenInput } from '@bento/core/lib/tokens';
+import axios from 'axios';
 import { promises as fs } from 'fs';
 import path from 'path';
 import prettier from 'prettier';
@@ -23,8 +23,8 @@ export const update = async () => {
         }[];
       };
     }>([
-      cachedAxios.get('https://tokens.pancakeswap.finance/cmc.json'),
-      cachedAxios.get('https://tokens.pancakeswap.finance/coingecko.json'),
+      axios.get('https://tokens.pancakeswap.finance/cmc.json'),
+      axios.get('https://tokens.pancakeswap.finance/coingecko.json'),
     ])
   ).map((v) => v.data.tokens);
 

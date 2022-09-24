@@ -1,9 +1,7 @@
-import {
-  TrackedSection,
-  TrackedSectionOptions,
-} from '@bento/client/components';
 import Image from 'next/future/image';
 import styled, { css } from 'styled-components';
+
+import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';

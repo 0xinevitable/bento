@@ -1,12 +1,14 @@
+import { motion } from 'framer-motion';
+import Image from 'next/future/image';
+import styled from 'styled-components';
+
 import {
   Button,
   TrackedSection,
   TrackedSectionOptions,
-} from '@bento/client/components';
-import { Colors } from '@bento/client/styles';
-import { motion } from 'framer-motion';
-import Image from 'next/future/image';
-import styled from 'styled-components';
+} from '@/components/system';
+
+import { Colors } from '@/styles';
 
 type Props = TrackedSectionOptions & {
   onClickBanner: () => void;

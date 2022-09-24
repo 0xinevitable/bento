@@ -1,10 +1,12 @@
-import { useWalletContext } from '@bento/client/hooks/useWalletContext';
-import { Colors } from '@bento/client/styles';
-import { Analytics, copyToClipboard, toast } from '@bento/client/utils';
-import { Wallet, shortenAddress } from '@bento/common';
+import { shortenAddress } from '@bento/common';
 import axios from 'axios';
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
+
+import { useWalletContext } from '@/hooks/useWalletContext';
+
+import { Colors } from '@/styles';
+import { Analytics, copyToClipboard, toast } from '@/utils';
 
 import { WalletListItem } from './WalletListItem';
 

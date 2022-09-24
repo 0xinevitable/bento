@@ -1,6 +1,6 @@
-import { cachedAxios } from '@bento/client';
 import { Base64 } from '@bento/common';
 import { TokenInput } from '@bento/core/lib/tokens';
+import axios from 'axios';
 import { promises as fs } from 'fs';
 import path from 'path';
 import prettier from 'prettier';
@@ -344,7 +344,7 @@ export const update = async () => {
   for (const token of tokens) {
     if (!!token.coinGeckoId) {
       try {
-        const { data } = await cachedAxios.get(
+        const { data } = await axios.get(
           `https://api.coingecko.com/api/v3/coins/${token.coinGeckoId}`,
         );
         token.logo = data?.image?.large ?? data?.image?.small ?? undefined;

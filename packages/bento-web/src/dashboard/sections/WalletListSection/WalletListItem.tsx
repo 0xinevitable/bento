@@ -1,7 +1,8 @@
-import { Colors, systemFontStack } from '@bento/client/styles';
 import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import styled from 'styled-components';
+
+import { Colors, systemFontStack } from '@/styles';
 
 export type WalletListItemProps = Wallet & {
   onClickDelete: (walletAddress: string) => void;

@@ -1,16 +1,18 @@
-import {
-  AnimatedToolTip,
-  TrackedSection,
-  TrackedSectionOptions,
-} from '@bento/client/components';
-import { useInViewport } from '@bento/client/hooks/useInViewport';
-import { Colors } from '@bento/client/styles';
-import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import { useCallback, useRef } from 'react';
 import styled from 'styled-components';
+
+import {
+  AnimatedToolTip,
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/system';
+import { useInViewport } from '@/hooks/useInViewport';
+
+import { Colors } from '@/styles';
+import { Analytics } from '@/utils';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';

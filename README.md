@@ -55,7 +55,6 @@ NEXT_PUBLIC_CMC_PRO_API_KEYS=
 
 ```bash
 yarn workspace @bento/common build
-yarn workspace @bento/client build
 yarn workspace @bento/core build
 ```
 
@@ -67,14 +66,6 @@ yarn workspace @bento/web dev
 ```
 
 - Finally, we start the development server. By default, the port is set to `3000`.
-
-## Production Deployment
-
-Since this project uses [`vercel-submodules`](https://github.com/junhoyeo/vercel-submodules), we have our custom `Install Command` set in Vercel:
-
-```bash
-npx vercel-submodules --paths packages/bento-private packages/linky-profile-engine && yarn install
-```
 
 ## 🏛️ Licensing
 
