@@ -1450,7 +1450,7 @@ __metadata:
   resolution: "@bento/core@workspace:packages/bento-core"
   dependencies:
     "@bento/common": "workspace:^"
-    "@ethersproject/providers": ^5.6.8
+    "@ethersproject/providers": ^5.7.1
     "@solana/web3.js": ^1.63.1
     "@types/node": ^18.7.19
     axios: ^0.27.2
@@ -2118,7 +2118,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/providers@npm:^5.6.8, @ethersproject/providers@npm:^5.7.1":
+"@ethersproject/providers@npm:^5.7.1":
   version: 5.7.1
   resolution: "@ethersproject/providers@npm:5.7.1"
   dependencies:

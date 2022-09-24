@@ -2621,7 +2621,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cobe", "npm:0.6.2"],\
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
-            ["env-cmd", "npm:10.1.0"],\
+            ["env-cmd", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:10.1.0"],\
             ["framer-motion", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:6.5.1"],\
             ["immer", "npm:9.0.15"],\
             ["javascript-time-ago", "npm:2.5.7"],\
@@ -7815,9 +7815,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["npm:10.1.0", {\
           "packageLocation": "./.yarn/cache/env-cmd-npm-10.1.0-85470635d6-efef550742.zip/node_modules/env-cmd/",\
           "packageDependencies": [\
-            ["env-cmd", "npm:10.1.0"],\
+            ["env-cmd", "npm:10.1.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:10.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/env-cmd-virtual-89d1942d54/0/cache/env-cmd-npm-10.1.0-85470635d6-efef550742.zip/node_modules/env-cmd/",\
+          "packageDependencies": [\
+            ["env-cmd", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:10.1.0"],\
+            ["@types/cross-spawn", null],\
             ["commander", "npm:4.1.1"],\
             ["cross-spawn", "npm:7.0.3"]\
+          ],\
+          "packagePeers": [\
+            "@types/cross-spawn"\
           ],\
           "linkType": "HARD"\
         }]\
