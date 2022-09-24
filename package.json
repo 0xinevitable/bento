@@ -23,5 +23,5 @@
     "bignumber.js": "9.0.2",
     "recharts": "2.1.12"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.3"
 }
