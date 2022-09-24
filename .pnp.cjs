@@ -2577,7 +2577,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:0.27.2"],\
             ["axios-cache-adapter", "virtual:6d8370b0b9d5687de445b701d0af6a7232182d44355f2604042530b40f03f99c9a91845c0e4828fd8d27f63902d20ec57ae89282e4d7d1d220055b456285fd67#npm:2.7.3"],\
             ["bech32", "npm:2.0.0"],\
-            ["caver-js", "npm:1.8.2"],\
+            ["caver-js", "npm:1.9.0"],\
             ["query-string", "npm:7.1.1"],\
             ["ts-node", "virtual:6d8370b0b9d5687de445b701d0af6a7232182d44355f2604042530b40f03f99c9a91845c0e4828fd8d27f63902d20ec57ae89282e4d7d1d220055b456285fd67#npm:10.9.1"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"]\
@@ -2592,8 +2592,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/web", "workspace:packages/bento-web"],\
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
-            ["@cosmjs/amino", "npm:0.28.13"],\
-            ["@cosmjs/crypto", "npm:0.28.10"],\
+            ["@cosmjs/amino", "npm:0.29.0"],\
+            ["@cosmjs/crypto", "npm:0.29.0"],\
             ["@ethersproject/address", "npm:5.7.0"],\
             ["@ethersproject/providers", "npm:5.7.1"],\
             ["@ethersproject/wallet", "npm:5.7.0"],\
@@ -2655,40 +2655,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@cosmjs/amino", [\
-        ["npm:0.28.13", {\
-          "packageLocation": "./.yarn/cache/@cosmjs-amino-npm-0.28.13-69d9e45801-74430f9757.zip/node_modules/@cosmjs/amino/",\
+        ["npm:0.29.0", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-amino-npm-0.29.0-6844ffbe00-372e3ef9a5.zip/node_modules/@cosmjs/amino/",\
           "packageDependencies": [\
-            ["@cosmjs/amino", "npm:0.28.13"],\
-            ["@cosmjs/crypto", "npm:0.28.13"],\
-            ["@cosmjs/encoding", "npm:0.28.13"],\
-            ["@cosmjs/math", "npm:0.28.13"],\
-            ["@cosmjs/utils", "npm:0.28.13"]\
+            ["@cosmjs/amino", "npm:0.29.0"],\
+            ["@cosmjs/crypto", "npm:0.29.0"],\
+            ["@cosmjs/encoding", "npm:0.29.0"],\
+            ["@cosmjs/math", "npm:0.29.0"],\
+            ["@cosmjs/utils", "npm:0.29.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@cosmjs/crypto", [\
-        ["npm:0.28.10", {\
-          "packageLocation": "./.yarn/cache/@cosmjs-crypto-npm-0.28.10-aca5261be5-58596108f1.zip/node_modules/@cosmjs/crypto/",\
+        ["npm:0.29.0", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-crypto-npm-0.29.0-aa375b78ca-d6f32d3e91.zip/node_modules/@cosmjs/crypto/",\
           "packageDependencies": [\
-            ["@cosmjs/crypto", "npm:0.28.10"],\
-            ["@cosmjs/encoding", "npm:0.28.10"],\
-            ["@cosmjs/math", "npm:0.28.10"],\
-            ["@cosmjs/utils", "npm:0.28.10"],\
-            ["@noble/hashes", "npm:1.1.2"],\
-            ["bn.js", "npm:5.2.1"],\
-            ["elliptic", "npm:6.5.4"],\
-            ["libsodium-wrappers", "npm:0.7.10"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["npm:0.28.13", {\
-          "packageLocation": "./.yarn/cache/@cosmjs-crypto-npm-0.28.13-339bbe35b5-c22d13df72.zip/node_modules/@cosmjs/crypto/",\
-          "packageDependencies": [\
-            ["@cosmjs/crypto", "npm:0.28.13"],\
-            ["@cosmjs/encoding", "npm:0.28.13"],\
-            ["@cosmjs/math", "npm:0.28.13"],\
-            ["@cosmjs/utils", "npm:0.28.13"],\
+            ["@cosmjs/crypto", "npm:0.29.0"],\
+            ["@cosmjs/encoding", "npm:0.29.0"],\
+            ["@cosmjs/math", "npm:0.29.0"],\
+            ["@cosmjs/utils", "npm:0.29.0"],\
             ["@noble/hashes", "npm:1.1.2"],\
             ["bn.js", "npm:5.2.1"],\
             ["elliptic", "npm:6.5.4"],\
@@ -2698,20 +2684,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@cosmjs/encoding", [\
-        ["npm:0.28.10", {\
-          "packageLocation": "./.yarn/cache/@cosmjs-encoding-npm-0.28.10-fcfeb7e7d9-687f341740.zip/node_modules/@cosmjs/encoding/",\
+        ["npm:0.29.0", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-encoding-npm-0.29.0-75026f1167-70e9458eda.zip/node_modules/@cosmjs/encoding/",\
           "packageDependencies": [\
-            ["@cosmjs/encoding", "npm:0.28.10"],\
-            ["base64-js", "npm:1.5.1"],\
-            ["bech32", "npm:1.1.4"],\
-            ["readonly-date", "npm:1.0.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["npm:0.28.13", {\
-          "packageLocation": "./.yarn/cache/@cosmjs-encoding-npm-0.28.13-5c4fa993dd-681c4673ed.zip/node_modules/@cosmjs/encoding/",\
-          "packageDependencies": [\
-            ["@cosmjs/encoding", "npm:0.28.13"],\
+            ["@cosmjs/encoding", "npm:0.29.0"],\
             ["base64-js", "npm:1.5.1"],\
             ["bech32", "npm:1.1.4"],\
             ["readonly-date", "npm:1.0.0"]\
@@ -2720,35 +2696,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@cosmjs/math", [\
-        ["npm:0.28.10", {\
-          "packageLocation": "./.yarn/cache/@cosmjs-math-npm-0.28.10-69df1f81ee-7919d7ba6d.zip/node_modules/@cosmjs/math/",\
+        ["npm:0.29.0", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-math-npm-0.29.0-536187b13e-b420a5f4e0.zip/node_modules/@cosmjs/math/",\
           "packageDependencies": [\
-            ["@cosmjs/math", "npm:0.28.10"],\
-            ["bn.js", "npm:5.2.1"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["npm:0.28.13", {\
-          "packageLocation": "./.yarn/cache/@cosmjs-math-npm-0.28.13-a41b22baa2-42b16e7d53.zip/node_modules/@cosmjs/math/",\
-          "packageDependencies": [\
-            ["@cosmjs/math", "npm:0.28.13"],\
+            ["@cosmjs/math", "npm:0.29.0"],\
             ["bn.js", "npm:5.2.1"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@cosmjs/utils", [\
-        ["npm:0.28.10", {\
-          "packageLocation": "./.yarn/cache/@cosmjs-utils-npm-0.28.10-12ca5e2cd4-7b2f55f480.zip/node_modules/@cosmjs/utils/",\
+        ["npm:0.29.0", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-utils-npm-0.29.0-44f2a2db59-580cc28c9c.zip/node_modules/@cosmjs/utils/",\
           "packageDependencies": [\
-            ["@cosmjs/utils", "npm:0.28.10"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["npm:0.28.13", {\
-          "packageLocation": "./.yarn/cache/@cosmjs-utils-npm-0.28.13-3045d3c1c3-4db0ad8120.zip/node_modules/@cosmjs/utils/",\
-          "packageDependencies": [\
-            ["@cosmjs/utils", "npm:0.28.13"]\
+            ["@cosmjs/utils", "npm:0.29.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4898,13 +4859,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:17.0.45", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-17.0.45-fdb38d1624-aa04366b91.zip/node_modules/@types/node/",\
-          "packageDependencies": [\
-            ["@types/node", "npm:17.0.45"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:18.7.19", {\
           "packageLocation": "./.yarn/cache/@types-node-npm-18.7.19-7d2784ef0e-879366b379.zip/node_modules/@types/node/",\
           "packageDependencies": [\
@@ -6721,40 +6675,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["caver-js", [\
-        ["npm:1.8.2", {\
-          "packageLocation": "./.yarn/cache/caver-js-npm-1.8.2-b38478ab25-95185f791c.zip/node_modules/caver-js/",\
-          "packageDependencies": [\
-            ["caver-js", "npm:1.8.2"],\
-            ["@babel/runtime", "npm:7.3.1"],\
-            ["@ethersproject/abi", "npm:5.0.7"],\
-            ["any-promise", "npm:1.3.0"],\
-            ["bignumber.js", "npm:9.0.2"],\
-            ["bn.js", "npm:5.2.1"],\
-            ["constants-browserify", "npm:1.0.0"],\
-            ["crypto-browserify", "npm:3.12.0"],\
-            ["elliptic", "npm:6.5.4"],\
-            ["eth-lib", "npm:0.2.8"],\
-            ["ethers", "npm:5.4.1"],\
-            ["ethjs-unit", "npm:0.1.6"],\
-            ["eventemitter3", "npm:4.0.0"],\
-            ["http", "npm:0.0.1-security"],\
-            ["https", "npm:1.0.0"],\
-            ["ipfs-http-client", "npm:49.0.4"],\
-            ["lodash", "npm:4.17.21"],\
-            ["multihashes", "npm:4.0.2"],\
-            ["number-to-bn", "npm:1.7.0"],\
-            ["oboe", "npm:2.1.3"],\
-            ["os", "npm:0.1.2"],\
-            ["scrypt-js", "npm:3.0.1"],\
-            ["stream-browserify", "npm:3.0.0"],\
-            ["stream-http", "npm:3.2.0"],\
-            ["utf8", "npm:2.1.1"],\
-            ["uuid", "npm:8.3.2"],\
-            ["websocket", "npm:1.0.31"],\
-            ["xhr2-cookies", "npm:1.1.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:1.9.0", {\
           "packageLocation": "./.yarn/cache/caver-js-npm-1.9.0-738865f156-a5ba224bda.zip/node_modules/caver-js/",\
           "packageDependencies": [\
@@ -13126,7 +13046,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@types/dedent", "npm:0.7.0"],\
-            ["@types/node", "npm:17.0.45"],\
+            ["@types/node", "npm:18.7.19"],\
             ["@types/prettier", "npm:2.7.1"],\
             ["axios", "npm:0.27.2"],\
             ["dedent", "npm:0.7.0"],\

@@ -1440,8 +1440,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@bento/common@workspace:packages/bento-common"
   dependencies:
-    "@types/node": ^18.0.3
-    typescript: ^4.7.4
+    "@types/node": ^18.7.19
+    typescript: ^4.8.3
   languageName: unknown
   linkType: soft
 
@@ -1451,15 +1451,15 @@ __metadata:
   dependencies:
     "@bento/common": "workspace:^"
     "@ethersproject/providers": ^5.6.8
-    "@solana/web3.js": ^1.47.3
-    "@types/node": ^18.0.3
+    "@solana/web3.js": ^1.63.1
+    "@types/node": ^18.7.19
     axios: ^0.27.2
     axios-cache-adapter: ^2.7.3
     bech32: ^2.0.0
-    caver-js: 1.8.2
+    caver-js: ^1.9.0
     query-string: ^7.1.1
     ts-node: ^10.8.2
-    typescript: ^4.7.4
+    typescript: ^4.8.3
   languageName: unknown
   linkType: soft
 
@@ -1469,47 +1469,47 @@ __metadata:
   dependencies:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
-    "@cosmjs/amino": ^0.28.10
-    "@cosmjs/crypto": 0.28.10
-    "@ethersproject/address": ^5.6.1
-    "@ethersproject/providers": ^5.6.8
-    "@ethersproject/wallet": ^5.6.2
+    "@cosmjs/amino": ^0.29.0
+    "@cosmjs/crypto": 0.29.0
+    "@ethersproject/address": ^5.7.0
+    "@ethersproject/providers": ^5.7.1
+    "@ethersproject/wallet": ^5.7.0
     "@floating-ui/react-dom-interactions": ^0.10.1
     "@iconify/react": ^3.2.2
-    "@next/bundle-analyzer": ^12.2.2
+    "@next/bundle-analyzer": ^12.3.1
     "@react-spring/web": ^9.5.4
-    "@solana/web3.js": ^1.47.3
-    "@supabase/supabase-js": ^1.35.4
+    "@solana/web3.js": ^1.63.1
+    "@supabase/supabase-js": ^1.35.7
     "@types/amplitude-js": ^8.16.2
     "@types/dedent": ^0.7.0
     "@types/lodash.chunk": ^4.2.7
     "@types/lodash.groupby": ^4.6.7
-    "@types/node": ^18.0.3
+    "@types/node": ^18.7.19
     "@types/react": ^18.0.21
     "@types/react-dom": ^18.0.6
-    "@types/styled-components": ^5.1.25
+    "@types/styled-components": ^5.1.26
     "@walletconnect/encoding": ^1.0.1
-    "@walletconnect/web3-provider": ^1.7.8
+    "@walletconnect/web3-provider": ^1.8.0
     amplitude-js: ^8.21.1
-    autoprefixer: ^10.4.7
+    autoprefixer: ^10.4.12
     axios: ^0.27.2
-    caver-js: ^1.8.2
+    caver-js: ^1.9.0
     clsx: ^1.2.1
     cobe: ^0.6.2
-    date-fns: ^2.28.0
+    date-fns: ^2.29.3
     dedent: ^0.7.0
     env-cmd: ^10.1.0
-    framer-motion: ^6.4.3
+    framer-motion: ^6.5.1
     immer: ^9.0.15
     javascript-time-ago: ^2.5.7
-    jotai: ^1.8.3
+    jotai: ^1.8.4
     lodash.chunk: ^4.2.0
     lodash.groupby: ^4.6.0
     next: ^12.3.1
     next-composed-plugins: ^1.0.1
     next-intercept-stdout: ^1.0.1
-    next-plugin-svgr: ^1.1.1
-    postcss: ^8.4.14
+    next-plugin-svgr: ^1.1.2
+    postcss: ^8.4.16
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -1522,107 +1522,65 @@ __metadata:
     styled-components: ^5.3.5
     styled-reset: ^4.4.2
     swr: ^1.3.0
-    tailwindcss: ^3.1.5
+    tailwindcss: ^3.1.8
     tslib: ^2.4.0
     tweetnacl: ^1.0.3
-    typescript: ^4.7.4
-    web3modal: ^1.9.8
+    typescript: ^4.8.3
+    web3modal: ^1.9.9
   languageName: unknown
   linkType: soft
 
-"@cosmjs/amino@npm:^0.28.10":
-  version: 0.28.13
-  resolution: "@cosmjs/amino@npm:0.28.13"
+"@cosmjs/amino@npm:^0.29.0":
+  version: 0.29.0
+  resolution: "@cosmjs/amino@npm:0.29.0"
   dependencies:
-    "@cosmjs/crypto": 0.28.13
-    "@cosmjs/encoding": 0.28.13
-    "@cosmjs/math": 0.28.13
-    "@cosmjs/utils": 0.28.13
-  checksum: 74430f975725beed9928913fb8834b6798515702bf2bf14c4ef9ec68ac1326a32959fb023c4398a48f9e0715cb03b10e7782bab38389f73aa9feb9a48f26dd67
+    "@cosmjs/crypto": ^0.29.0
+    "@cosmjs/encoding": ^0.29.0
+    "@cosmjs/math": ^0.29.0
+    "@cosmjs/utils": ^0.29.0
+  checksum: 372e3ef9a5a338d609410ffe31e65a06f92b9f67e1ecdf8a2be3cfa0ac3f5d7c92efacfed35694a650bdacebb4f13aa97a8be207277579a1af6536f4d6394e5a
   languageName: node
   linkType: hard
 
-"@cosmjs/crypto@npm:0.28.10":
-  version: 0.28.10
-  resolution: "@cosmjs/crypto@npm:0.28.10"
+"@cosmjs/crypto@npm:0.29.0, @cosmjs/crypto@npm:^0.29.0":
+  version: 0.29.0
+  resolution: "@cosmjs/crypto@npm:0.29.0"
   dependencies:
-    "@cosmjs/encoding": 0.28.10
-    "@cosmjs/math": 0.28.10
-    "@cosmjs/utils": 0.28.10
+    "@cosmjs/encoding": ^0.29.0
+    "@cosmjs/math": ^0.29.0
+    "@cosmjs/utils": ^0.29.0
     "@noble/hashes": ^1
     bn.js: ^5.2.0
     elliptic: ^6.5.3
     libsodium-wrappers: ^0.7.6
-  checksum: 58596108f1caf2991011ed3a9876e72005f687379496d9e85bae32de2f84154bb93b8d39b5f1934d9490c0d133f96678deb2efe1c73e499fba1ca404ec151765
+  checksum: d6f32d3e91884a7eddb797f524115bb07d5fbf88ea2c8e4c340fca948be29620fca5a5bd426f61e9c8334b54c77ba2e15434a96ef94761af42e536a1d596588b
   languageName: node
   linkType: hard
 
-"@cosmjs/crypto@npm:0.28.13":
-  version: 0.28.13
-  resolution: "@cosmjs/crypto@npm:0.28.13"
-  dependencies:
-    "@cosmjs/encoding": 0.28.13
-    "@cosmjs/math": 0.28.13
-    "@cosmjs/utils": 0.28.13
-    "@noble/hashes": ^1
-    bn.js: ^5.2.0
-    elliptic: ^6.5.3
-    libsodium-wrappers: ^0.7.6
-  checksum: c22d13df721399263230dff71953c0802662a395cb67645fccbdf04aa3d0b1f83736d429644f9314d74df614d63f499145a68308a27e0e3a1ae9fdcfaa933bfa
-  languageName: node
-  linkType: hard
-
-"@cosmjs/encoding@npm:0.28.10":
-  version: 0.28.10
-  resolution: "@cosmjs/encoding@npm:0.28.10"
+"@cosmjs/encoding@npm:^0.29.0":
+  version: 0.29.0
+  resolution: "@cosmjs/encoding@npm:0.29.0"
   dependencies:
     base64-js: ^1.3.0
     bech32: ^1.1.4
     readonly-date: ^1.0.0
-  checksum: 687f3417404eb684b5d19cc7f8cdef7a53ddc0e8747e6e2e92f7c87a71a2be2cad9873f6e63ab695abff44ff24dd82cd66d00b9f4378e9a4dbcb8a27f9ab3f76
+  checksum: 70e9458edaa3da132012a473d60e86de656c84afc8eeedf98cb42a6ff2dcb3fd1c0c19a53c22c646a46b338b27f29ad872ce1a780357df752fc31ce90b6998f2
   languageName: node
   linkType: hard
 
-"@cosmjs/encoding@npm:0.28.13":
-  version: 0.28.13
-  resolution: "@cosmjs/encoding@npm:0.28.13"
-  dependencies:
-    base64-js: ^1.3.0
-    bech32: ^1.1.4
-    readonly-date: ^1.0.0
-  checksum: 681c4673edb36af3bb11cec360c3a076e6a9e56b43def6509e17e4db6d3e781c90f4e229bd664d58fbce4891f4493546178213e43a04c6a53962d34b5e00ef8b
-  languageName: node
-  linkType: hard
-
-"@cosmjs/math@npm:0.28.10":
-  version: 0.28.10
-  resolution: "@cosmjs/math@npm:0.28.10"
+"@cosmjs/math@npm:^0.29.0":
+  version: 0.29.0
+  resolution: "@cosmjs/math@npm:0.29.0"
   dependencies:
     bn.js: ^5.2.0
-  checksum: 7919d7ba6dec64e6b94f1a08ebf15da77920851c06ae80a85f7c4eaf2d1f0f78a28d382b34a0d907129f9d346f71b3c6a50f2a4114232e975711cedf418b0bea
+  checksum: b420a5f4e00fe25ef256ae9fb89d01007e06947f393377a41db4fd689928eb1548d8cd00f01c351ec51683c66a73006fe1c1a8a533b1f22e3308942a11d455fe
   languageName: node
   linkType: hard
 
-"@cosmjs/math@npm:0.28.13":
-  version: 0.28.13
-  resolution: "@cosmjs/math@npm:0.28.13"
-  dependencies:
-    bn.js: ^5.2.0
-  checksum: 42b16e7d533b3985130380081ca83aab69797234d59e8851cf92ad95810e80cf7504547501020c7edad7b381a616b1b9fde298cc65bf12566d088c0f2e6f5b21
-  languageName: node
-  linkType: hard
-
-"@cosmjs/utils@npm:0.28.10":
-  version: 0.28.10
-  resolution: "@cosmjs/utils@npm:0.28.10"
-  checksum: 7b2f55f48087946b56e861b9883ca3ff33d5fe32ee2156b49ac82a1cc5d7975e9daa3bbee0fc5b5b922a02f2b2576455e6164d8bddf9e845e8779544a5b3162f
-  languageName: node
-  linkType: hard
-
-"@cosmjs/utils@npm:0.28.13":
-  version: 0.28.13
-  resolution: "@cosmjs/utils@npm:0.28.13"
-  checksum: 4db0ad8120ce9715f043985f0003c5efb1ca162a85c7a8cce7293cbd15dcf02852dee2e1ebd3a7670da943090e054ef64ed4bba7c6cd2e5c8b7cda47481c3c2c
+"@cosmjs/utils@npm:^0.29.0":
+  version: 0.29.0
+  resolution: "@cosmjs/utils@npm:0.29.0"
+  checksum: 580cc28c9c2b28e4e5a1da8462e40e504352c54bf9dd28fa0da296941d5ef7d9ad33de8b38179f0cd4ce96fdee004b33bc7e2f1604ec832b84562c112c8693af
   languageName: node
   linkType: hard
 
@@ -1801,7 +1759,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/address@npm:^5.0.4, @ethersproject/address@npm:^5.4.0, @ethersproject/address@npm:^5.6.1, @ethersproject/address@npm:^5.7.0":
+"@ethersproject/address@npm:^5.0.4, @ethersproject/address@npm:^5.4.0, @ethersproject/address@npm:^5.7.0":
   version: 5.7.0
   resolution: "@ethersproject/address@npm:5.7.0"
   dependencies:
@@ -2160,7 +2118,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/providers@npm:^5.6.8":
+"@ethersproject/providers@npm:^5.6.8, @ethersproject/providers@npm:^5.7.1":
   version: 5.7.1
   resolution: "@ethersproject/providers@npm:5.7.1"
   dependencies:
@@ -2381,7 +2339,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ethersproject/wallet@npm:^5.6.2":
+"@ethersproject/wallet@npm:^5.7.0":
   version: 5.7.0
   resolution: "@ethersproject/wallet@npm:5.7.0"
   dependencies:
@@ -2671,7 +2629,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^12.2.2":
+"@next/bundle-analyzer@npm:^12.3.1":
   version: 12.3.1
   resolution: "@next/bundle-analyzer@npm:12.3.1"
   dependencies:
@@ -3002,7 +2960,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/web3.js@npm:^1.47.3":
+"@solana/web3.js@npm:^1.63.1":
   version: 1.63.1
   resolution: "@solana/web3.js@npm:1.63.1"
   dependencies:
@@ -3071,7 +3029,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^1.35.4, @supabase/supabase-js@npm:^1.35.6":
+"@supabase/supabase-js@npm:^1.35.7":
   version: 1.35.7
   resolution: "@supabase/supabase-js@npm:1.35.7"
   dependencies:
@@ -3377,7 +3335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=13.7.0, @types/node@npm:^18.0.3":
+"@types/node@npm:*, @types/node@npm:>=13.7.0, @types/node@npm:^18.7.19":
   version: 18.7.19
   resolution: "@types/node@npm:18.7.19"
   checksum: 879366b379599cd0e06bff86973c82497de57d23b113967d20cac94994acdf2c47b6fc5cb92d007a9ff1939bd037257a5f3965e7bbda70cfa6b949a40e4e14a8
@@ -3388,13 +3346,6 @@ __metadata:
   version: 12.20.55
   resolution: "@types/node@npm:12.20.55"
   checksum: e4f86785f4092706e0d3b0edff8dca5a13b45627e4b36700acd8dfe6ad53db71928c8dee914d4276c7fd3b6ccd829aa919811c9eb708a2c8e4c6eb3701178c37
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^17.0.42":
-  version: 17.0.45
-  resolution: "@types/node@npm:17.0.45"
-  checksum: aa04366b9103b7d6cfd6b2ef64182e0eaa7d4462c3f817618486ea0422984c51fc69fd0d436eae6c9e696ddfdbec9ccaa27a917f7c2e8c75c5d57827fe3d95e8
   languageName: node
   linkType: hard
 
@@ -3471,7 +3422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/styled-components@npm:^5.1.25":
+"@types/styled-components@npm:^5.1.26":
   version: 5.1.26
   resolution: "@types/styled-components@npm:5.1.26"
   dependencies:
@@ -3671,7 +3622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@walletconnect/web3-provider@npm:^1.7.8":
+"@walletconnect/web3-provider@npm:^1.8.0":
   version: 1.8.0
   resolution: "@walletconnect/web3-provider@npm:1.8.0"
   dependencies:
@@ -4090,7 +4041,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.4.7":
+"autoprefixer@npm:^10.4.12":
   version: 10.4.12
   resolution: "autoprefixer@npm:10.4.12"
   dependencies:
@@ -4278,9 +4229,9 @@ __metadata:
   resolution: "bento@workspace:."
   dependencies:
     "@ianvs/prettier-plugin-sort-imports": ^3.4.2
-    "@types/node": ^18.0.3
+    "@types/node": ^18.7.19
     prettier: ^2.7.1
-    typescript: ^4.7.4
+    typescript: ^4.8.3
   languageName: unknown
   linkType: soft
 
@@ -4731,42 +4682,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caver-js@npm:1.8.2":
-  version: 1.8.2
-  resolution: "caver-js@npm:1.8.2"
-  dependencies:
-    "@babel/runtime": 7.3.1
-    "@ethersproject/abi": 5.0.7
-    any-promise: 1.3.0
-    bignumber.js: 8.0.2
-    bn.js: 4.11.6
-    constants-browserify: ^1.0.0
-    crypto-browserify: ^3.12.0
-    elliptic: 6.5.4
-    eth-lib: 0.2.8
-    ethers: 5.4.1
-    ethjs-unit: 0.1.6
-    eventemitter3: 4.0.0
-    http: 0.0.1-security
-    https: ^1.0.0
-    ipfs-http-client: ^49.0.4
-    lodash: 4.17.21
-    multihashes: 4.0.2
-    number-to-bn: 1.7.0
-    oboe: 2.1.3
-    os: ^0.1.2
-    scrypt-js: 3.0.1
-    stream-browserify: ^3.0.0
-    stream-http: ^3.2.0
-    utf8: 2.1.1
-    uuid: 8.3.2
-    websocket: 1.0.31
-    xhr2-cookies: 1.1.0
-  checksum: 95185f791cc434cfc1d7adef1c956274658311ad4878861fd2b3670bed9442393abec4b312daf2a7dbfe52c60246fed78e8e27014a6af37b638e099b67588195
-  languageName: node
-  linkType: hard
-
-"caver-js@npm:^1.8.2":
+"caver-js@npm:^1.9.0":
   version: 1.9.0
   resolution: "caver-js@npm:1.9.0"
   dependencies:
@@ -5381,7 +5297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.28.0":
+"date-fns@npm:^2.29.3":
   version: 2.29.3
   resolution: "date-fns@npm:2.29.3"
   checksum: e01cf5b62af04e05dfff921bb9c9933310ed0e1ae9a81eb8653452e64dc841acf7f6e01e1a5ae5644d0337e9a7f936175fd2cb6819dc122fdd9c5e86c56be484
@@ -6527,7 +6443,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^6.4.3":
+"framer-motion@npm:^6.5.1":
   version: 6.5.1
   resolution: "framer-motion@npm:6.5.1"
   dependencies:
@@ -7703,7 +7619,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:^1.8.3":
+"jotai@npm:^1.8.4":
   version: 1.8.4
   resolution: "jotai@npm:1.8.4"
   peerDependencies:
@@ -8685,7 +8601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-plugin-svgr@npm:^1.1.1":
+"next-plugin-svgr@npm:^1.1.2":
   version: 1.1.2
   resolution: "next-plugin-svgr@npm:1.1.2"
   dependencies:
@@ -9314,7 +9230,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.14":
+"postcss@npm:^8.4.14, postcss@npm:^8.4.16":
   version: 8.4.16
   resolution: "postcss@npm:8.4.16"
   dependencies:
@@ -9339,7 +9255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.6.2, prettier@npm:^2.7.1":
+"prettier@npm:^2.7.1":
   version: 2.7.1
   resolution: "prettier@npm:2.7.1"
   bin:
@@ -10205,16 +10121,16 @@ __metadata:
   dependencies:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
-    "@supabase/supabase-js": ^1.35.6
+    "@supabase/supabase-js": ^1.35.7
     "@types/dedent": ^0.7.0
-    "@types/node": ^17.0.42
+    "@types/node": ^18.7.19
     "@types/prettier": ^2.6.3
     axios: ^0.27.2
     dedent: ^0.7.0
     find-yarn-workspace-root: ^2.0.0
-    prettier: ^2.6.2
+    prettier: ^2.7.1
     ttypescript: ^1.5.13
-    typescript: ^4.7.3
+    typescript: ^4.8.3
     typescript-json: ^2.1.6
   languageName: unknown
   linkType: soft
@@ -10747,7 +10663,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.1.5":
+"tailwindcss@npm:^3.1.8":
   version: 3.1.8
   resolution: "tailwindcss@npm:3.1.8"
   dependencies:
@@ -11006,7 +10922,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.7.3, typescript@npm:^4.7.4":
+"typescript@npm:^4.8.3":
   version: 4.8.3
   resolution: "typescript@npm:4.8.3"
   bin:
@@ -11016,7 +10932,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.7.3#~builtin<compat/typescript>, typescript@patch:typescript@^4.7.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.8.3#~builtin<compat/typescript>":
   version: 4.8.3
   resolution: "typescript@patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"
   bin:
@@ -11296,7 +11212,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3modal@npm:^1.9.8":
+"web3modal@npm:^1.9.9":
   version: 1.9.9
   resolution: "web3modal@npm:1.9.9"
   dependencies:
