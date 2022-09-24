@@ -2604,7 +2604,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@solana/web3.js", "npm:1.63.1"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@types/amplitude-js", "npm:8.16.2"],\
-            ["@types/date-fns", "npm:2.6.0"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.chunk", "npm:4.2.7"],\
             ["@types/lodash.groupby", "npm:4.6.7"],\
@@ -4811,16 +4810,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@types/connect", "npm:3.4.35"],\
             ["@types/node", "npm:18.7.19"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@types/date-fns", [\
-        ["npm:2.6.0", {\
-          "packageLocation": "./.yarn/cache/@types-date-fns-npm-2.6.0-516bcda282-6839db1d12.zip/node_modules/@types/date-fns/",\
-          "packageDependencies": [\
-            ["@types/date-fns", "npm:2.6.0"],\
-            ["date-fns", "npm:2.29.3"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -56,7 +56,6 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^12.2.2",
     "@types/amplitude-js": "^8.16.2",
-    "@types/date-fns": "^2.6.0",
     "@types/dedent": "^0.7.0",
     "@types/lodash.chunk": "^4.2.7",
     "@types/lodash.groupby": "^4.6.7",
