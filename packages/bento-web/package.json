@@ -21,6 +21,7 @@
     "@react-spring/web": "^9.5.4",
     "@solana/web3.js": "^1.63.1",
     "@supabase/supabase-js": "^1.35.7",
+    "@tanem/react-nprogress": "^5.0.14",
     "@walletconnect/encoding": "^1.0.1",
     "@walletconnect/web3-provider": "^1.8.0",
     "amplitude-js": "^8.21.1",
