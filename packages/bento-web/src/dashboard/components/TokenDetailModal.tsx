@@ -91,7 +91,7 @@ export const TokenDetailModal: React.FC<Props> = ({
 
     const url = `https://api.coingecko.com/api/v3/coins/${tokenBalance.coinGeckoId}?tickers=false&market_data=true&community_data=false&developer_data=false`;
 
-    cachedAxios.get(url).then(({ data }) => {
+    cachedAxios.get(url).then(({ data }: any) => {
       setTVL(data.market_data?.total_value_locked?.usd ?? null);
       setPriceChange(data.market_data?.price_change_percentage_24h ?? null);
     });

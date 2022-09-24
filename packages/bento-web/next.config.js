@@ -18,6 +18,7 @@ const pick = (obj, keys) =>
 module.exports = withPlugins(
   {
     reactStrictMode: true,
+    swcMinify: true,
     compiler: {
       styledComponents: true,
     },
@@ -36,7 +37,7 @@ module.exports = withPlugins(
     async redirects() {
       return [
         {
-          source: '/profile/intro',
+          source: '/profile/landing',
           destination: '/profile/intro',
           permanent: false,
         },

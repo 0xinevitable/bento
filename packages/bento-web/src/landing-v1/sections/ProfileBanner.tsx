@@ -5,7 +5,7 @@ import {
 } from '@bento/client/components';
 import { Colors } from '@bento/client/styles';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import styled from 'styled-components';
 
 type Props = TrackedSectionOptions & {
@@ -223,8 +223,8 @@ const BannerImageContainer = styled.div`
 const BannerImage = styled(Image).attrs({
   alt: 'Bento Profiles',
   src: '/assets/profile/profile-nudge.png',
-  width: 491.62 * 1.5,
-  height: 496 * 1.5,
+  width: 491.62,
+  height: 496,
   quality: 100,
 })``;
 const DefineYourselfStickerContainer = styled.div`
