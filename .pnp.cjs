@@ -2575,7 +2575,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@solana/web3.js", "npm:1.63.1"],\
             ["@types/node", "npm:18.7.19"],\
             ["axios", "npm:0.27.2"],\
-            ["axios-cache-adapter", "virtual:6d8370b0b9d5687de445b701d0af6a7232182d44355f2604042530b40f03f99c9a91845c0e4828fd8d27f63902d20ec57ae89282e4d7d1d220055b456285fd67#npm:2.7.3"],\
+            ["axios-cache-interceptor", "npm:0.10.7"],\
             ["bech32", "npm:2.0.0"],\
             ["caver-js", "npm:1.9.0"],\
             ["query-string", "npm:7.1.1"],\
@@ -5885,26 +5885,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["axios-cache-adapter", [\
-        ["npm:2.7.3", {\
-          "packageLocation": "./.yarn/cache/axios-cache-adapter-npm-2.7.3-26c357b785-ff44bee6a2.zip/node_modules/axios-cache-adapter/",\
+      ["axios-cache-interceptor", [\
+        ["npm:0.10.7", {\
+          "packageLocation": "./.yarn/cache/axios-cache-interceptor-npm-0.10.7-effa1eec84-e792710187.zip/node_modules/axios-cache-interceptor/",\
           "packageDependencies": [\
-            ["axios-cache-adapter", "npm:2.7.3"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:6d8370b0b9d5687de445b701d0af6a7232182d44355f2604042530b40f03f99c9a91845c0e4828fd8d27f63902d20ec57ae89282e4d7d1d220055b456285fd67#npm:2.7.3", {\
-          "packageLocation": "./.yarn/__virtual__/axios-cache-adapter-virtual-da456748bb/0/cache/axios-cache-adapter-npm-2.7.3-26c357b785-ff44bee6a2.zip/node_modules/axios-cache-adapter/",\
-          "packageDependencies": [\
-            ["axios-cache-adapter", "virtual:6d8370b0b9d5687de445b701d0af6a7232182d44355f2604042530b40f03f99c9a91845c0e4828fd8d27f63902d20ec57ae89282e4d7d1d220055b456285fd67#npm:2.7.3"],\
-            ["@types/axios", null],\
-            ["axios", "npm:0.27.2"],\
-            ["cache-control-esm", "npm:1.0.0"],\
-            ["md5", "npm:2.3.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/axios",\
-            "axios"\
+            ["axios-cache-interceptor", "npm:0.10.7"],\
+            ["cache-parser", "npm:1.2.4"],\
+            ["fast-defer", "npm:1.1.7"],\
+            ["object-code", "npm:1.2.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6593,11 +6581,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["cache-control-esm", [\
-        ["npm:1.0.0", {\
-          "packageLocation": "./.yarn/cache/cache-control-esm-npm-1.0.0-ee383a8c40-4f8c8399f2.zip/node_modules/cache-control-esm/",\
+      ["cache-parser", [\
+        ["npm:1.2.4", {\
+          "packageLocation": "./.yarn/cache/cache-parser-npm-1.2.4-c34ebb8614-de9fc4ab7a.zip/node_modules/cache-parser/",\
           "packageDependencies": [\
-            ["cache-control-esm", "npm:1.0.0"]\
+            ["cache-parser", "npm:1.2.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6729,15 +6717,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["chalk", "npm:4.1.2"],\
             ["ansi-styles", "npm:4.3.0"],\
             ["supports-color", "npm:7.2.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["charenc", [\
-        ["npm:0.0.2", {\
-          "packageLocation": "./.yarn/cache/charenc-npm-0.0.2-aca0c2f207-81dcadbe57.zip/node_modules/charenc/",\
-          "packageDependencies": [\
-            ["charenc", "npm:0.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7124,15 +7103,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["path-key", "npm:3.1.1"],\
             ["shebang-command", "npm:2.0.0"],\
             ["which", "npm:2.0.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["crypt", [\
-        ["npm:0.0.2", {\
-          "packageLocation": "./.yarn/cache/crypt-npm-0.0.2-033627d94f-baf4c7bbe0.zip/node_modules/crypt/",\
-          "packageDependencies": [\
-            ["crypt", "npm:0.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8457,6 +8427,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["fast-defer", [\
+        ["npm:1.1.7", {\
+          "packageLocation": "./.yarn/cache/fast-defer-npm-1.1.7-4db6da3617-c0f816fe3f.zip/node_modules/fast-defer/",\
+          "packageDependencies": [\
+            ["fast-defer", "npm:1.1.7"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["fast-equals", [\
         ["npm:2.0.4", {\
           "packageLocation": "./.yarn/cache/fast-equals-npm-2.0.4-4807826768-1aac8a2e16.zip/node_modules/fast-equals/",\
@@ -9547,15 +9526,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["is-boolean-object", "npm:1.1.2"],\
             ["call-bind", "npm:1.0.2"],\
             ["has-tostringtag", "npm:1.0.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["is-buffer", [\
-        ["npm:1.1.6", {\
-          "packageLocation": "./.yarn/cache/is-buffer-npm-1.1.6-08199d9ccc-4a186d995d.zip/node_modules/is-buffer/",\
-          "packageDependencies": [\
-            ["is-buffer", "npm:1.1.6"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10679,18 +10649,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["md5", [\
-        ["npm:2.3.0", {\
-          "packageLocation": "./.yarn/cache/md5-npm-2.3.0-86c49d3915-a63cacf401.zip/node_modules/md5/",\
-          "packageDependencies": [\
-            ["md5", "npm:2.3.0"],\
-            ["charenc", "npm:0.0.2"],\
-            ["crypt", "npm:0.0.2"],\
-            ["is-buffer", "npm:1.1.6"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["md5.js", [\
         ["npm:1.3.5", {\
           "packageLocation": "./.yarn/cache/md5.js-npm-1.3.5-130901125a-098494d885.zip/node_modules/md5.js/",\
@@ -11449,6 +11407,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/object-assign-npm-4.1.1-1004ad6dec-fcc6e4ea8c.zip/node_modules/object-assign/",\
           "packageDependencies": [\
             ["object-assign", "npm:4.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["object-code", [\
+        ["npm:1.2.4", {\
+          "packageLocation": "./.yarn/cache/object-code-npm-1.2.4-4d2917d02c-b5dd65c817.zip/node_modules/object-code/",\
+          "packageDependencies": [\
+            ["object-code", "npm:1.2.4"]\
           ],\
           "linkType": "HARD"\
         }]\
