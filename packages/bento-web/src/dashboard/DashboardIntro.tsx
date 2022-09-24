@@ -4,7 +4,7 @@ import { useSession } from '@bento/client/hooks/useSession';
 import { Analytics, Supabase } from '@bento/client/utils';
 import { FixedLoginNudge } from '@bento/private/profile/components/LoginNudge';
 import { Icon } from '@iconify/react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
