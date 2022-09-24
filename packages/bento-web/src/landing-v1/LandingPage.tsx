@@ -1,11 +1,12 @@
-import { MetaHead } from '@bento/client/components';
-import { systemFontStack } from '@bento/client/styles';
-import { Analytics } from '@bento/client/utils';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 
+import { MetaHead } from '@/components/system';
+
 import { HeaderSection as PrivateHeaderSection } from '@/landing-v2/sections/HeaderSection';
+import { systemFontStack } from '@/styles';
+import { Analytics } from '@/utils';
 
 import { DashboardSection } from './sections/DashboardSection';
 import { HeaderSection } from './sections/HeaderSection';

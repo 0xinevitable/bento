@@ -1,8 +1,3 @@
-import { Modal } from '@bento/client/components';
-import { NETWORKS, Network } from '@bento/client/constants/networks';
-import { useSession } from '@bento/client/hooks/useSession';
-import { useWalletContext } from '@bento/client/hooks/useWalletContext';
-import { Analytics, Supabase } from '@bento/client/utils';
 import { Bech32Address } from '@bento/core/address';
 import { getAddress, isAddress } from '@ethersproject/address';
 import { PublicKey } from '@solana/web3.js';
@@ -12,8 +7,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { WalletConnector } from '@/components/WalletConnector';
+import { Modal } from '@/components/system';
+import { useSession } from '@/hooks/useSession';
+import { useWalletContext } from '@/hooks/useWalletContext';
 
+import { NETWORKS, Network } from '@/constants/networks';
 import { FieldInput } from '@/profile/components/FieldInput';
+import { Analytics, Supabase } from '@/utils';
 
 const identifyWalletAddress = (value: string) => {
   if (value.length < 32) {

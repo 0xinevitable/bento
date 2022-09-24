@@ -1,9 +1,4 @@
 import {
-  CosmosSDKWalletBalance,
-  EVMWalletBalance,
-  SolanaWalletBalance,
-} from '@bento/client/dashboard/types/WalletBalance';
-import {
   CosmosSDKBasedNetworks,
   EVMBasedNetworks,
   Wallet,
@@ -12,6 +7,12 @@ import { pricesFromCoinGecko } from '@bento/core/pricings/CoinGecko';
 import produce from 'immer';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { SWRResponse } from 'swr';
+
+import {
+  CosmosSDKWalletBalance,
+  EVMWalletBalance,
+  SolanaWalletBalance,
+} from '@/dashboard/types/WalletBalance';
 
 import { useAxiosSWR } from '../../hooks/useAxiosSWR';
 import { useInterval } from '../../hooks/useInterval';
@@ -101,7 +102,7 @@ export const useWalletBalances = ({ wallets }: Options) => {
   const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
 
   const coinGeckoIds = useMemo<string[]>(() => {
-    if (result.some((v) => v.isLoading)) {
+    if (result.some((v) => /* isLoading */ !v.error && !v.data)) {
       return [];
     }
     return balances

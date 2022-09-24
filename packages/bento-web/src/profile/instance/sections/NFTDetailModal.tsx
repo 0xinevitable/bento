@@ -1,7 +1,8 @@
-import { OpenSeaAsset } from '@bento/client';
-import { AnimatedToolTip, AssetMedia, Modal } from '@bento/client/components';
+import { OpenSeaAsset } from '@bento/core/nfts';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
+
+import { AnimatedToolTip, AssetMedia, Modal } from '@/components/system';
 
 export type NFTDetailModalParams = {
   asset: OpenSeaAsset | null;

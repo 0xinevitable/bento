@@ -1,10 +1,12 @@
-import { useWindowSize } from '@bento/client/hooks/useWindowSize';
-import { Colors } from '@bento/client/styles';
-import { Analytics } from '@bento/client/utils';
 import createGlobe from 'cobe';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+
+import { useWindowSize } from '@/hooks/useWindowSize';
+
+import { Colors } from '@/styles';
+import { Analytics } from '@/utils';
 
 export const HeaderSection: React.FC = () => {
   const router = useRouter();

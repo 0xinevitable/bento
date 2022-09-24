@@ -1,7 +1,8 @@
-import { Skeleton } from '@bento/client/components';
 import dedent from 'dedent';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
+
+import { Skeleton } from '@/components/system';
 
 import { usePalette } from '../../hooks/usePalette';
 import { UserProfile } from '../../types/UserProfile';

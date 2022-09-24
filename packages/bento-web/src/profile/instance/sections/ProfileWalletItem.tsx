@@ -1,7 +1,8 @@
-import { Colors } from '@bento/client/styles';
 import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import styled from 'styled-components';
+
+import { Colors } from '@/styles';
 
 export type WalletListItemProps = Wallet & {
   onClickCopy?: (

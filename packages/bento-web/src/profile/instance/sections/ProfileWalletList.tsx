@@ -1,8 +1,9 @@
-import { Analytics, copyToClipboard, toast } from '@bento/client/utils';
 import { Wallet } from '@bento/common';
 import clsx from 'clsx';
 import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
+
+import { Analytics, copyToClipboard, toast } from '@/utils';
 
 import { Empty } from './Empty';
 import { WalletListItem } from './ProfileWalletItem';

@@ -1,5 +1,6 @@
-import { useLocalStorage } from '@bento/client/hooks/useLocalStorage';
 import styled from 'styled-components';
+
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 import { QuestionUITexts } from '../../constants/Questions';
 

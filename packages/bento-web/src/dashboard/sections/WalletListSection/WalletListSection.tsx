@@ -1,6 +1,8 @@
-import { Badge, Button } from '@bento/client/components';
-import { Colors, systemFontStack } from '@bento/client/styles';
 import styled from 'styled-components';
+
+import { Badge, Button } from '@/components/system';
+
+import { Colors, systemFontStack } from '@/styles';
 
 import { WalletList } from './WalletList';
 

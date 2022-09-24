@@ -1,11 +1,13 @@
-import { NoSSR } from '@bento/client/components';
-import { useSession } from '@bento/client/hooks/useSession';
-import { FeatureFlags, Supabase } from '@bento/client/utils';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+
+import { NoSSR } from '@/components/system';
+import { useSession } from '@/hooks/useSession';
+
+import { FeatureFlags, Supabase } from '@/utils';
 
 import { useProfile } from '../../profile/hooks/useProfile';
 import { ProfileInstance } from '../../profile/instance';

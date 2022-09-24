@@ -55,7 +55,6 @@ NEXT_PUBLIC_CMC_PRO_API_KEYS=
 
 ```bash
 yarn workspace @bento/common build
-yarn workspace @bento/client build
 yarn workspace @bento/core build
 ```
 

@@ -1,6 +1,7 @@
-import { NoSSR } from '@bento/client/components';
 import React from 'react';
 import styled from 'styled-components';
+
+import { NoSSR } from '@/components/system';
 
 import { ProfileInstance } from '../../instance';
 import { UserProfile } from '../../types/UserProfile';

@@ -1,6 +1,7 @@
-import { Button } from '@bento/client/components';
 import { useCallback } from 'react';
 import styled from 'styled-components';
+
+import { Button } from '@/components/system';
 
 import { FieldInput } from '../components/FieldInput';
 import { FieldTextArea } from '../components/FieldTextArea';

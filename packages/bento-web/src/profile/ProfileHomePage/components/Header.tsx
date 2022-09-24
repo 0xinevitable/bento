@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
-// import { Analytics } from '@bento/client/utils';
+// import { Analytics } from '@/utils';
 import { ExampleUserProfile } from '@/profile/constants/ExampleUserProfile';
 
 export const Header = () => {

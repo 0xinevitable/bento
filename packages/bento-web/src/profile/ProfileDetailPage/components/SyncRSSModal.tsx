@@ -1,7 +1,8 @@
-import { Button, Modal } from '@bento/client/components';
 import axios from 'axios';
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+
+import { Button, Modal } from '@/components/system';
 
 import { LinkBlockItem } from '../../blocks/LinkBlockItem';
 import { FieldInput } from '../../components/FieldInput';

@@ -1,10 +1,10 @@
-import { Config, Supabase } from '@bento/client/utils';
 import { PostgrestError, PostgrestResponse, User } from '@supabase/supabase-js';
 import axios from 'axios';
 import { format } from 'date-fns';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { UserProfile } from '@/profile/types/UserProfile';
+import { Config, Supabase } from '@/utils';
 
 const MATCH_RULE = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,37}$/;
 

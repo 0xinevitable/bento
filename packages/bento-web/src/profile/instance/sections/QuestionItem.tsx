@@ -1,11 +1,12 @@
-import { useTimeAgo } from '@bento/client/hooks/useTimeAgo';
-import { throttle } from '@bento/client/utils';
 import { format } from 'date-fns';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import React, { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import HorizontalDotsIcon from '@/assets/icons/ic-dots-horizontal.svg';
+import { useTimeAgo } from '@/hooks/useTimeAgo';
+
+import { throttle } from '@/utils';
 
 import { QuestionUITexts } from '../../constants/Questions';
 import { UserQuestion } from '../../types/UserProfile';

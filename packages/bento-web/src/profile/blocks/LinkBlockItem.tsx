@@ -1,7 +1,8 @@
-import { shimmer } from '@bento/client/components/Skeleton';
 import { LinkBlock } from '@linky/profile-engine';
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+
+import { shimmer } from '@/components/system/Skeleton';
 
 import { ShadowedImage } from '../components/ShadowedImage';
 

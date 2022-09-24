@@ -1,10 +1,3 @@
-import {
-  TrackedSection,
-  TrackedSectionOptions,
-} from '@bento/client/components';
-import { useWindowSize } from '@bento/client/hooks/useWindowSize';
-import { Colors } from '@bento/client/styles';
-import { Analytics } from '@bento/client/utils';
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
 import Image from 'next/future/image';
@@ -12,6 +5,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styled from 'styled-components';
+
+import { TrackedSection, TrackedSectionOptions } from '@/components/system';
+import { useWindowSize } from '@/hooks/useWindowSize';
+
+import { Colors } from '@/styles';
+import { Analytics } from '@/utils';
 
 const ASSETS = {
   ILLUST: '/assets/landing/header-illust.png',

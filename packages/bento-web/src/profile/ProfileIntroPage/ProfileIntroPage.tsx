@@ -1,10 +1,12 @@
-import { Button, MetaHead, Modal, NoSSR } from '@bento/client/components';
-import { useSession } from '@bento/client/hooks/useSession';
-import { Analytics, toast } from '@bento/client/utils';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import { Button, MetaHead, Modal, NoSSR } from '@/components/system';
+import { useSession } from '@/hooks/useSession';
+
+import { Analytics, toast } from '@/utils';
 
 import { FixedLoginNudge } from '../components/LoginNudge';
 import { PageContainer } from '../components/PageContainer';

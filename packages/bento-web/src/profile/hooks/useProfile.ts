@@ -1,7 +1,9 @@
-import { useSession } from '@bento/client/hooks/useSession';
-import { Supabase } from '@bento/client/utils';
 import { useAtom } from 'jotai';
 import { useCallback, useEffect } from 'react';
+
+import { useSession } from '@/hooks/useSession';
+
+import { Supabase } from '@/utils';
 
 import { profileAtom } from '../states';
 import { UserProfile } from '../types/UserProfile';

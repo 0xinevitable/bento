@@ -1,9 +1,11 @@
-import { OpenSeaAsset } from '@bento/client';
-import { AssetMedia } from '@bento/client/components';
-import { Colors } from '@bento/client/styles';
-import { Analytics } from '@bento/client/utils';
+import { OpenSeaAsset } from '@bento/core/nfts';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import { AssetMedia } from '@/components/system';
+
+import { Colors } from '@/styles';
+import { Analytics } from '@/utils';
 
 import { UserProfile } from '../../types/UserProfile';
 import { Empty } from './Empty';

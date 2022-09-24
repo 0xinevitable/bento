@@ -1,19 +1,5 @@
-import { OpenSeaAsset } from '@bento/client';
-import { Modal } from '@bento/client/components';
-import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
-import { WalletBalance } from '@bento/client/dashboard/types/WalletBalance';
-import { useNFTBalances } from '@bento/client/dashboard/utils/useNFTBalances';
-import { useWalletBalances } from '@bento/client/dashboard/utils/useWalletBalances';
-import { useWalletContext } from '@bento/client/hooks/useWalletContext';
-import { Colors } from '@bento/client/styles';
-import {
-  Analytics,
-  FeatureFlags,
-  Supabase,
-  copyToClipboard,
-  toast,
-} from '@bento/client/utils';
 import { Wallet } from '@bento/common';
+import { OpenSeaAsset } from '@bento/core/nfts';
 import axios, { AxiosError } from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
@@ -27,6 +13,22 @@ import React, {
   useState,
 } from 'react';
 import styled, { css } from 'styled-components';
+
+import { Modal } from '@/components/system';
+import { useWalletContext } from '@/hooks/useWalletContext';
+
+import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
+import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
+import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
+import { Colors } from '@/styles';
+import {
+  Analytics,
+  FeatureFlags,
+  Supabase,
+  copyToClipboard,
+  toast,
+} from '@/utils';
 
 import {
   ProfileEditor,

@@ -1,5 +1,6 @@
-import { Button } from '@bento/client/components';
 import styled from 'styled-components';
+
+import { Button } from '@/components/system';
 
 type FixedFooterProps = {
   onClickShare: () => void;

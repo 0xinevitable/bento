@@ -1,8 +1,10 @@
-import { Badge, Skeleton } from '@bento/client/components';
-import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
-import { Colors } from '@bento/client/styles';
 import React from 'react';
 import styled from 'styled-components';
+
+import { Badge, Skeleton } from '@/components/system';
+
+import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
+import { Colors } from '@/styles';
 
 import { Empty } from './Empty';
 

@@ -1,7 +1,8 @@
-import { Skeleton } from '@bento/client/components';
 import dedent from 'dedent';
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+
+import { Skeleton } from '@/components/system';
 
 type ProfileImageType = React.HTMLAttributes<HTMLDivElement> & {
   source?: string;

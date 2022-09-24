@@ -1,5 +1,6 @@
-import { Supabase } from '@bento/client/utils';
 import { NextApiResponse } from 'next';
+
+import { Supabase } from '@/utils';
 
 export default function handler(
   req: { method: 'GET' | 'POST' },

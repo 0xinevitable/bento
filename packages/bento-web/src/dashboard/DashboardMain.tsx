@@ -1,15 +1,17 @@
-import { Badge, Checkbox } from '@bento/client/components';
-import { DashboardTokenBalance } from '@bento/client/dashboard/types/TokenBalance';
-import { WalletBalance } from '@bento/client/dashboard/types/WalletBalance';
-import { useNFTBalances } from '@bento/client/dashboard/utils/useNFTBalances';
-import { useWalletBalances } from '@bento/client/dashboard/utils/useWalletBalances';
-import { useLocalStorage } from '@bento/client/hooks/useLocalStorage';
-import { Colors, systemFontStack } from '@bento/client/styles';
-import { Analytics } from '@bento/client/utils';
 import { Wallet } from '@bento/common';
 import groupBy from 'lodash.groupby';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
+
+import { Badge, Checkbox } from '@/components/system';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+
+import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
+import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
+import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
+import { Colors, systemFontStack } from '@/styles';
+import { Analytics } from '@/utils';
 
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';

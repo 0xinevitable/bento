@@ -1,9 +1,11 @@
-import { MetaHead } from '@bento/client/components';
-import { useHiddenBodyOverflow } from '@bento/client/hooks/useHiddenBodyOverflow';
-import { useSession } from '@bento/client/hooks/useSession';
-import { FeatureFlags } from '@bento/client/utils';
 import { GetServerSideProps } from 'next';
 import React from 'react';
+
+import { MetaHead } from '@/components/system';
+import { useHiddenBodyOverflow } from '@/hooks/useHiddenBodyOverflow';
+import { useSession } from '@/hooks/useSession';
+
+import { FeatureFlags } from '@/utils';
 
 import { FixedLoginNudge } from '../components/LoginNudge';
 import { PageContainer } from '../components/PageContainer';

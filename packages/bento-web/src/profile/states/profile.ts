@@ -1,5 +1,6 @@
-import { storage } from '@bento/client/states';
 import { atomWithStorage } from 'jotai/utils';
+
+import { storage } from '@/states';
 
 import { UserProfile } from '../types/UserProfile';
 

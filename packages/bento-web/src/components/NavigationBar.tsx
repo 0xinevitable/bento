@@ -1,7 +1,3 @@
-import { Icon, NoSSR, Portal } from '@bento/client/components';
-import { useSession } from '@bento/client/hooks/useSession';
-import { useSignOut } from '@bento/client/hooks/useSignOut';
-import { Analytics, FeatureFlags } from '@bento/client/utils';
 import { Icon as Iconify } from '@iconify/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
@@ -11,6 +7,11 @@ import styled, { css } from 'styled-components';
 
 import GithubIcon from '@/assets/icons/ic-github.svg';
 import TwitterIcon from '@/assets/icons/ic-twitter.svg';
+import { Icon, NoSSR, Portal } from '@/components/system';
+import { useSession } from '@/hooks/useSession';
+import { useSignOut } from '@/hooks/useSignOut';
+
+import { Analytics, FeatureFlags } from '@/utils';
 
 const Breakpoints = {
   Mobile: 512,

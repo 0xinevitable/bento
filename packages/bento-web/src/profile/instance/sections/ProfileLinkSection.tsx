@@ -1,9 +1,11 @@
-import { Skeleton } from '@bento/client/components';
-import { FeatureFlags } from '@bento/client/utils';
 import { Block } from '@linky/profile-engine';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
+
+import { Skeleton } from '@/components/system';
+
+import { FeatureFlags } from '@/utils';
 
 import { LinkBlockItem } from '../../blocks/LinkBlockItem';
 import { TextBlockItem } from '../../blocks/TextBlockItem';

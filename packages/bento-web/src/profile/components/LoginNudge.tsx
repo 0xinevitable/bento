@@ -1,9 +1,11 @@
-import { Modal } from '@bento/client/components';
-import { Colors } from '@bento/client/styles';
-import { FeatureFlags, Supabase } from '@bento/client/utils';
 import { Icon } from '@iconify/react';
 import { useCallback } from 'react';
 import styled from 'styled-components';
+
+import { Modal } from '@/components/system';
+
+import { Colors } from '@/styles';
+import { FeatureFlags, Supabase } from '@/utils';
 
 type LoginNudgeProps = {
   className?: string;

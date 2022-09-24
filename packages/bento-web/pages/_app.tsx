@@ -1,7 +1,9 @@
-import { SessionManager } from '@bento/client/hooks/useSession';
-import { WalletsProvider } from '@bento/client/hooks/useWalletContext';
-import { Analytics, ToastProvider } from '@bento/client/utils';
 import React, { useEffect } from 'react';
+
+import { SessionManager } from '@/hooks/useSession';
+import { WalletsProvider } from '@/hooks/useWalletContext';
+
+import { Analytics, ToastProvider } from '@/utils';
 
 import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';

@@ -1,6 +1,7 @@
-import { Modal } from '@bento/client/components';
 import React from 'react';
 import styled from 'styled-components';
+
+import { Modal } from '@/components/system';
 
 type Props = {
   isVisible?: boolean;
