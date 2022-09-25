@@ -227,6 +227,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     if (!isEditing) {
       Analytics.logEvent('click_edit_my_profile', {
         title: 'Edit Profile',
+        medium: 'profile',
       });
       setDraft({
         username: profile?.username ?? '',
