@@ -1,29 +1,53 @@
 import styled from 'styled-components';
 
-import { Badge, Button } from '@/components/system';
+import { Button } from '@/components/system';
+import { useWalletContext } from '@/hooks/useWalletContext';
 
 import { Colors, systemFontStack } from '@/styles';
 
-import { WalletList } from './WalletList';
+import { WalletList, walletCountStyle } from './WalletList';
 
 type Props = {
   onClickAddWallet: () => void;
 };
 
 export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
+  const { wallets, revalidateWallets } = useWalletContext();
+
   return (
     <div className="flex-1 flex flex-col relative">
       <SectionTitleContainer>
         <SectionTitle>Wallets</SectionTitle>
       </SectionTitleContainer>
 
-      <WalletList />
+      {wallets.length > 0 ? (
+        <>
+          <WalletList wallets={wallets} revalidateWallets={revalidateWallets} />
+          <ButtonContainer>
+            <AddWalletButton onClick={onClickAddWallet}>
+              Add Another
+            </AddWalletButton>
+          </ButtonContainer>
+        </>
+      ) : (
+        <>
+          <Illust src="/assets/illusts/wallet.png" />
+          <EmptyContainer>
+            <div>
+              <span>
+                Wallets Connected&nbsp;&nbsp;
+                <span className="total">{wallets.length}</span>
+              </span>
+            </div>
+          </EmptyContainer>
 
-      <div className="mt-[10px] flex justify-center">
-        <AddWalletButton onClick={onClickAddWallet}>
-          Add Another
-        </AddWalletButton>
-      </div>
+          <ButtonContainer>
+            <AddWalletButton onClick={onClickAddWallet}>
+              Connect Wallet
+            </AddWalletButton>
+          </ButtonContainer>
+        </>
+      )}
     </div>
   );
 };
@@ -56,6 +80,12 @@ const SectionTitle = styled.h3`
   color: ${Colors.gray400};
 `;
 
+const ButtonContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+`;
+
 // FIXME: Design component
 const AddWalletButton = styled(Button)`
   && {
@@ -72,12 +102,11 @@ const AddWalletButton = styled(Button)`
   }
 `;
 
-const InlineBadge = styled(Badge)`
-  && {
-    margin-left: 8px;
-    padding: 6px;
-    display: inline-flex;
-    font-size: 13px;
-    backdrop-filter: none;
-  }
+const Illust = styled.img`
+  margin: 24px auto;
+  width: 128px;
+  height: 128px;
+`;
+const EmptyContainer = styled.div`
+  ${walletCountStyle}
 `;

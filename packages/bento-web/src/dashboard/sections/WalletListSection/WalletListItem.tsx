@@ -123,7 +123,6 @@ const PlatformListItem = styled.li`
     height: 20px;
     border-radius: 50%;
 
-    background: url(image.png);
     outline: 1px solid rgba(0, 0, 0, 0.25);
     outline-offset: -1px;
   }
