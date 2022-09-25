@@ -18,30 +18,23 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
   onClick,
 }) => {
   return (
-    <Container
-      className="py-3 p-3 h-fit rounded-md flex flex-col cursor-pointer"
-      onClick={onClick}
-    >
+    <Container onClick={onClick}>
       <div className="flex items-center">
         <div className="relative">
-          <img
-            className="w-16 h-16 rounded-full object-cover"
-            src={info.logo}
-            alt={info.name}
-          />
+          <Logo src={info.logo} alt={info.name} />
           <PlatformBadge
             alt={capitalize(info.platform)}
             src={`/assets/icons/${info.platform}.png`}
           />
         </div>
-        <div className="ml-4 min-w-0 flex flex-col flex-1">
-          <span className="text-sm text-slate-400/40 flex items-center">
+        <div className="ml-2 min-w-0 flex flex-col flex-1">
+          <span className="text-xs text-slate-400/40 flex items-center">
             <span className="truncate text-slate-400">
               {info.type === 'nft' ? info.name : info.symbol}
             </span>
             <InlineBadge>{info.amount.toLocaleString()}</InlineBadge>
           </span>
-          <span className="text-xl font-bold text-slate-50/90">
+          <span className="text-lg font-bold text-slate-50/90">
             {`$${info.netWorth.toLocaleString()}`}
 
             {info.amount !== 1 && (
@@ -58,16 +51,30 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
 
 const Container = styled.li`
   width: calc((100% - 8px) / 3);
+  height: fit-content;
+  padding: 10px;
 
   background: ${Colors.gray900};
   border: 1px solid ${Colors.gray800};
   border-radius: 8px;
 
-  @media screen and (max-width: 797px) {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  @media screen and (max-width: 1100px) {
     width: calc((100% - 4px) / 2);
   }
 
-  @media screen and (max-width: 537px) {
+  @media screen and (max-width: 880px) {
+    width: calc((100% - 8px) / 3);
+  }
+
+  @media screen and (max-width: 720px) {
+    width: calc((100% - 8px) / 2);
+  }
+
+  @media screen and (max-width: 540px) {
     width: 100%;
   }
 
@@ -83,15 +90,22 @@ const Container = styled.li`
   }
 `;
 
+const Logo = styled.img`
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+`;
+
 const PlatformBadge = styled.img`
   position: absolute;
-  left: -8px;
-  bottom: -8px;
+  left: -10px;
+  bottom: -10px;
 
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  outline: 2px solid ${Colors.gray900};
+  outline: 1px solid ${Colors.gray900};
 `;
 
 const InlineBadge = styled(Badge)`

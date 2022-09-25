@@ -51,9 +51,6 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
     if (!session || !hasLoggedLoginViewEvent.current) {
       Analytics.logEvent('view_dashboard_login', undefined);
       hasLoggedLoginViewEvent.current = true;
-    } else if (!hasLoggedConnectWalletViewEvent.current) {
-      Analytics.logEvent('view_dashboard_connect_wallet', undefined);
-      hasLoggedConnectWalletViewEvent.current = true;
     }
   }, [JSON.stringify(session)]);
 

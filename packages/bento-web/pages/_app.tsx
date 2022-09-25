@@ -94,6 +94,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         </Container>
 
         <div id="portal" />
+        <div id="profile-edit" />
         <div id="mobile-menu" />
         <div id="landing-background" />
       </WalletsProvider>

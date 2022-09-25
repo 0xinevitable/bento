@@ -16,6 +16,7 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
         <br />
         Your Wallets
       </Title>
+
       <WalletIllustWrapper>
         <WalletIllust src="/assets/dashboard-landing/illusts/wallet.png" />
       </WalletIllustWrapper>
@@ -98,6 +99,7 @@ const WalletIllust = styled.img`
   width: ${525.31 + 151.68}px;
   height: ${525.31 + 50}px;
   object-fit: contain;
+  user-select: none;
 `;
 
 const WALLETS = [

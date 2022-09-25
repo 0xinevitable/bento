@@ -1,18 +1,19 @@
-import { shortenAddress } from '@bento/common';
+import { Wallet, shortenAddress } from '@bento/common';
 import axios from 'axios';
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
-
-import { useWalletContext } from '@/hooks/useWalletContext';
+import styled, { css } from 'styled-components';
 
 import { Colors } from '@/styles';
 import { Analytics, copyToClipboard, toast } from '@/utils';
 
 import { WalletListItem } from './WalletListItem';
 
-export const WalletList: React.FC = () => {
-  const { wallets, revalidateWallets } = useWalletContext();
+type Props = {
+  wallets: Wallet[];
+  revalidateWallets: () => Promise<Wallet[] | undefined>;
+};
 
+export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
   const onClickCopy = useCallback(
     (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
       Analytics.logEvent('click_copy_wallet_address', {
@@ -64,6 +65,7 @@ export const WalletList: React.FC = () => {
           />
         ))}
       </WalletItemList>
+
       <Footer>
         <div />
         <div>
@@ -95,6 +97,41 @@ const WalletItemList = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  & > div:first-of-type {
+    width: 100%;
+    height: 64px;
+
+    background: linear-gradient(
+      to bottom,
+      transparent 22%,
+      ${Colors.black} 97%
+    );
+  }
+`;
+
+export const walletCountStyle = css`
+  & > div:last-of-type {
+    background-color: ${Colors.black};
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+
+    span {
+      font-family: 'Poppins';
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 100%;
+      text-align: center;
+      letter-spacing: -0.05em;
+      color: #ffffff;
+
+      &.total {
+        color: ${Colors.brand400};
+      }
+    }
+  }
 `;
 const Footer = styled.div`
   position: absolute;
@@ -117,25 +154,5 @@ const Footer = styled.div`
     );
   }
 
-  & > div:last-of-type {
-    background-color: ${Colors.black};
-    flex: 1;
-
-    display: flex;
-    justify-content: center;
-
-    span {
-      font-family: 'Poppins';
-      font-weight: 600;
-      font-size: 18px;
-      line-height: 100%;
-      text-align: center;
-      letter-spacing: -0.05em;
-      color: #ffffff;
-
-      &.total {
-        color: ${Colors.brand400};
-      }
-    }
-  }
+  ${walletCountStyle}
 `;
