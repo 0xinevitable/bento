@@ -79,7 +79,7 @@ const Container = styled.div`
   border-radius: 36px;
   background: linear-gradient(180deg, #14191e 0%, #0f1214 100%);
 
-  @media screen and (max-width: 940px) {
+  @media screen and (max-width: 1110px) {
     max-width: 100%;
     width: 100%;
     flex: unset;
