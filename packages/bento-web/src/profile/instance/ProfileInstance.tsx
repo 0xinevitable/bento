@@ -214,7 +214,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
   const palette = usePalette(data.color);
   const profileImageURL =
-    profile?.images?.[0] ?? '/assets/mockups/profile-default.png';
+    profile?.images?.[0] || '/assets/mockups/profile-default.png';
 
   const [isEditing, setEditing] = useState<boolean>(false);
 

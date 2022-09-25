@@ -5,7 +5,8 @@ import { Colors } from '@/styles';
 
 export const ProfileSummarySection: React.FC = () => {
   const { profile } = useProfile();
-  const profileImageURL = profile?.images?.[0];
+  const profileImageURL =
+    profile?.images?.[0] || '/assets/mockups/profile-default.png';
 
   return (
     <BorderWrapper>
@@ -13,9 +14,11 @@ export const ProfileSummarySection: React.FC = () => {
         <Foreground>
           <ProfileImage src={profileImageURL} />
           <Information>
-            <Name>{profile?.display_name}</Name>
-            <Username>{profile?.username}</Username>
-            <Bio>{profile?.bio}</Bio>
+            {!!profile?.display_name && <Name>{profile?.display_name}</Name>}
+            {!!profile?.username && (
+              <Username>{`@${profile?.username}`}</Username>
+            )}
+            {!!profile?.bio && <Bio>{profile?.bio}</Bio>}
           </Information>
         </Foreground>
       </Container>
@@ -127,4 +130,9 @@ const Bio = styled.p`
   line-height: 120%;
   text-align: center;
   color: ${Colors.gray200};
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
