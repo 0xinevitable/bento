@@ -14,6 +14,7 @@ import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors, systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
+import { EmptyBalance } from './components/EmptyBalance';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { AssetRatioSection } from './sections/AssetRatioSection';
@@ -165,7 +166,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             </div>
 
             <AssetListCard>
-              {renderedTokenBalances.length > 0 && (
+              {renderedTokenBalances.length > 0 ? (
                 <ul>
                   {renderedTokenBalances.map((item) => {
                     const key = `${item.symbol ?? item.name}-${
@@ -189,6 +190,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                     );
                   })}
                 </ul>
+              ) : (
+                <EmptyBalance />
               )}
             </AssetListCard>
           </div>
