@@ -1,12 +1,13 @@
-import { cachedAxios } from '@bento/core';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/system';
+
 import { LinkBlock } from '@/profile/blocks';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
 import { useProfile } from '@/profile/hooks/useProfile';
-import { Colors } from '@/styles';
+import { Colors, systemFontStack } from '@/styles';
 
 export const ProfileSummarySection: React.FC = () => {
   const { profile } = useProfile();
@@ -30,11 +31,21 @@ export const ProfileSummarySection: React.FC = () => {
           <Foreground>
             <ProfileImage src={profileImageURL} />
             <Information>
-              {!!profile?.display_name && <Name>{profile?.display_name}</Name>}
-              {!!profile?.username && (
-                <Username>{`@${profile?.username}`}</Username>
+              {!profile?.username ? (
+                <>
+                  <EmptyText>Update your Profile</EmptyText>
+                  <Username>{`@unknown`}</Username>
+                  <AddProfileButton>Setup Now</AddProfileButton>
+                </>
+              ) : (
+                <>
+                  {!!profile?.display_name && (
+                    <Name>{profile?.display_name}</Name>
+                  )}
+                  <Username>{`@${profile?.username}`}</Username>
+                  {!!profile?.bio && <Bio>{profile?.bio}</Bio>}
+                </>
               )}
-              {!!profile?.bio && <Bio>{profile?.bio}</Bio>}
             </Information>
           </Foreground>
         </Container>
@@ -148,11 +159,12 @@ const Name = styled.h3`
 `;
 const Username = styled.h4`
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 120%;
   text-align: center;
   color: #ff3856;
   color: ${Colors.brand400};
+  letter-spacing: -0.05em;
 `;
 const Bio = styled.p`
   margin: 0 24px;
@@ -166,4 +178,30 @@ const Bio = styled.p`
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+`;
+
+const EmptyText = styled.span`
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.05em;
+  color: #ffffff;
+`;
+
+// FIXME: Design component
+const AddProfileButton = styled(Button)`
+  && {
+    height: unset;
+    padding: 12px 18px;
+
+    /* FIXME: !important */
+    font-family: 'Raleway', ${systemFontStack} !important;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 100%;
+    text-align: center;
+    color: ${Colors.white};
+  }
 `;
