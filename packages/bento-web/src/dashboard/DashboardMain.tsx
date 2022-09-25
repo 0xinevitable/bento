@@ -10,7 +10,6 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
-import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors, systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
