@@ -100,6 +100,7 @@ const ProfileImage = styled.img`
   width: 128px;
   height: 128px;
   border-radius: 50%;
+  user-select: none;
 `;
 
 const Information = styled.div`
