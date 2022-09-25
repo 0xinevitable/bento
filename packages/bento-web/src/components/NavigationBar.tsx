@@ -209,7 +209,7 @@ const Wrapper = styled.header`
   }
 `;
 const Container = styled.div`
-  max-width: 1100px;
+  max-width: 1328px;
   width: 100%;
   height: 100%;
 
@@ -348,7 +348,7 @@ const MobileMenuContainer = styled.div`
 const MobileMenuContent = styled(motion.ul)`
   margin: 0 auto;
   padding: ${64 + 16}px 20px 0;
-  max-width: 1100px;
+  max-width: 1328px;
 
   display: flex;
   flex-direction: column;

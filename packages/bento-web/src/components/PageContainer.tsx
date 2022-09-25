@@ -9,7 +9,7 @@ export const PageContainer: React.FC<PageContainerProps> = ({
 }) => {
   return (
     <Wrapper className={className} {...props}>
-      <div className="w-full max-w-[1100px] mx-auto relative z-0 flex flex-col">
+      <div className="w-full max-w-[1328px] mx-auto relative z-0 flex flex-col">
         {children}
       </div>
     </Wrapper>
