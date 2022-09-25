@@ -112,7 +112,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
       <DashboardWrapper>
         <ProfileContainer>
-          <ProfileSummarySection />
+          <div className="sticky">
+            <ProfileSummarySection />
+          </div>
         </ProfileContainer>
 
         <DashboardContent>
@@ -217,25 +219,37 @@ const DashboardWrapper = styled.div`
     gap: 24px;
   }
 
-  @media screen and (max-width: 770px) {
+  @media screen and (max-width: 880px) {
     flex-direction: column;
     gap: 32px;
   }
 `;
 const ProfileContainer = styled.div`
-  width: 400px;
+  &,
+  & > div.sticky {
+    width: 400px;
 
-  @media screen and (max-width: 1200px) {
-    width: 360px;
+    @media screen and (max-width: 1200px) {
+      width: 360px;
+    }
   }
 
-  @media screen and (max-width: 770px) {
+  @media screen and (max-width: 880px) {
     width: 100%;
 
-    & > div {
+    & > div.sticky > div {
       height: 360px;
       aspect-ratio: unset;
       padding-bottom: unset;
+    }
+  }
+
+  & > div.sticky {
+    position: fixed;
+
+    @media screen and (max-width: 880px) {
+      position: static;
+      width: unset;
     }
   }
 `;
