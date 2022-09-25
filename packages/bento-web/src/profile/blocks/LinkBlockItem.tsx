@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { shimmer } from '@/components/system/Skeleton';
 
 import { LinkBlock } from '@/profile/blocks';
+import { Colors } from '@/styles';
 
 import { ShadowedImage } from '../components/ShadowedImage';
 
@@ -76,7 +77,7 @@ const Container = styled.div<ContainerProps>`
   padding: 12px;
 
   border-radius: 8px;
-  background-color: #262b34;
+  background-color: ${Colors.gray800};
   display: flex;
 
   --width: 100%;
@@ -103,7 +104,7 @@ const Container = styled.div<ContainerProps>`
     height: 0;
 
     border-radius: 100%;
-    background: #d9d4cb;
+    background-color: ${Colors.gray600};
     transform: translate(-50%, -50%);
     transition: width var(--time), padding-top var(--time);
   }
@@ -120,11 +121,11 @@ const Container = styled.div<ContainerProps>`
 
   &:hover .information {
     .title {
-      color: black;
+      color: ${Colors.white};
     }
 
     .description {
-      color: rgba(0, 0, 0, 0.8);
+      color: ${Colors.gray200};
     }
   }
 
@@ -192,8 +193,6 @@ const Information = styled.div`
   flex-direction: column;
   justify-content: center;
   z-index: 3;
-
-  color: white;
   transition: color 0.2s ease-in-out;
 `;
 
@@ -212,6 +211,7 @@ const Title = styled.h3`
   line-height: 1.2;
   letter-spacing: -0.3px;
   word-break: keep-all;
+  color: ${Colors.gray050};
 
   ${secondLineClamp}
 `;
@@ -222,7 +222,7 @@ const Description = styled.p`
   font-size: 15px;
   line-height: 1.2;
   letter-spacing: -0.5px;
-  color: rgba(255, 255, 255, 0.8);
+  color: ${Colors.gray400};
 
   ${secondLineClamp}
 `;

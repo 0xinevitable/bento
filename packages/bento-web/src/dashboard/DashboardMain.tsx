@@ -237,7 +237,7 @@ const ProfileContainer = styled.div`
   @media screen and (max-width: 880px) {
     width: 100%;
 
-    & > div.sticky > div {
+    & div.profile-summary {
       height: 360px;
       aspect-ratio: unset;
       padding-bottom: unset;

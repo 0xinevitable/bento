@@ -1,30 +1,60 @@
+import { cachedAxios } from '@bento/core';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { LinkBlock } from '@/profile/blocks';
+import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
 import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
 
 export const ProfileSummarySection: React.FC = () => {
   const { profile } = useProfile();
+
   const profileImageURL =
     profile?.images?.[0] || '/assets/mockups/profile-default.png';
 
+  const [blocks, setBlocks] = useState<LinkBlock[]>([]);
+
+  useEffect(() => {
+    axios
+      .get('/api/profile/blocks')
+      .then(({ data }) => setBlocks(data))
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
-    <BorderWrapper>
-      <Container src={profileImageURL}>
-        <Foreground>
-          <ProfileImage src={profileImageURL} />
-          <Information>
-            {!!profile?.display_name && <Name>{profile?.display_name}</Name>}
-            {!!profile?.username && (
-              <Username>{`@${profile?.username}`}</Username>
-            )}
-            {!!profile?.bio && <Bio>{profile?.bio}</Bio>}
-          </Information>
-        </Foreground>
-      </Container>
-    </BorderWrapper>
+    <Wrapper>
+      <BorderWrapper className="profile-summary">
+        <Container src={profileImageURL}>
+          <Foreground>
+            <ProfileImage src={profileImageURL} />
+            <Information>
+              {!!profile?.display_name && <Name>{profile?.display_name}</Name>}
+              {!!profile?.username && (
+                <Username>{`@${profile?.username}`}</Username>
+              )}
+              {!!profile?.bio && <Bio>{profile?.bio}</Bio>}
+            </Information>
+          </Foreground>
+        </Container>
+      </BorderWrapper>
+
+      <ul>
+        {blocks.map((block) => (
+          <LinkBlockItem key={block.url} {...block} />
+        ))}
+      </ul>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
 
 const BorderWrapper = styled.div`
   width: 100%;
