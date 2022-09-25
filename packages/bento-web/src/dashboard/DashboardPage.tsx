@@ -62,7 +62,7 @@ const DashboardPage = () => {
     <>
       <MetaHead />
       <Black />
-      <PageContainer className="pt-0 z-10">
+      <PageContainer style={{ paddingTop: 0 }}>
         {!pageLoaded ? null : !session ? (
           <DashboardIntro
             onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
