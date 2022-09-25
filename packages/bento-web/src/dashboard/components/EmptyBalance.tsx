@@ -1,3 +1,4 @@
+import Image from 'next/future/image';
 import styled from 'styled-components';
 
 import { Colors } from '@/styles';
@@ -7,7 +8,14 @@ type Props = React.HTMLAttributes<HTMLDivElement>;
 export const EmptyBalance: React.FC<Props> = ({ className, ...props }) => {
   return (
     <Container {...props}>
-      <Illust src="/assets/illusts/bitcoin.png" />
+      <Image
+        alt=""
+        src="/assets/illusts/bitcoin.png"
+        width={128}
+        height={128}
+        quality={100}
+        style={{ filter: 'saturate(120%)' }}
+      />
       <Message>Assets will show up here</Message>
     </Container>
   );
@@ -19,12 +27,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Illust = styled.img`
-  width: 128px;
-  height: 128px;
-  user-select: none;
 `;
 
 const Message = styled.span`

@@ -1,3 +1,4 @@
+import Image from 'next/future/image';
 import styled from 'styled-components';
 
 import { Button } from '@/components/system';
@@ -31,7 +32,13 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
         </>
       ) : (
         <>
-          <Illust src="/assets/illusts/wallet.png" />
+          <Illust
+            alt=""
+            src="/assets/illusts/wallet.png"
+            width={128}
+            height={128}
+            quality={100}
+          />
           <EmptyContainer>
             <div>
               <span>
@@ -102,10 +109,9 @@ const AddWalletButton = styled(Button)`
   }
 `;
 
-const Illust = styled.img`
+const Illust = styled(Image)`
   margin: 24px auto;
-  width: 128px;
-  height: 128px;
+  filter: saturate(120%);
 `;
 const EmptyContainer = styled.div`
   ${walletCountStyle}
