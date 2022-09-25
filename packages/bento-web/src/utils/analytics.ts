@@ -129,6 +129,7 @@ export type AnalyticsEvent = {
   };
   click_edit_my_profile: {
     title: string;
+    medium: 'dashboard_main' | 'profile';
   };
   click_share_my_profile: {
     title: string;

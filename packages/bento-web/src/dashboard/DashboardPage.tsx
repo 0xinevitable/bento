@@ -50,7 +50,7 @@ const DashboardPage = () => {
       return;
     }
 
-    if (!hasWallet) {
+    if (!session) {
       return;
     } else {
       Analytics.logEvent('view_dashboard_main', undefined);
@@ -62,8 +62,8 @@ const DashboardPage = () => {
     <>
       <MetaHead />
       <Black />
-      <PageContainer className="pt-0 z-10">
-        {!pageLoaded ? null : !hasWallet ? (
+      <PageContainer style={{ paddingTop: 0 }}>
+        {!pageLoaded ? null : !session ? (
           <DashboardIntro
             onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
           />

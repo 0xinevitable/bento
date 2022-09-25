@@ -19,7 +19,7 @@ export const Modal: React.FC<ModalProps> = ({
   const [disabled, setDisabled] = useState<boolean>(false);
 
   return (
-    <Portal>
+    <Portal id="profile-edit">
       <AnimatePresence>
         {visible && (
           <FixedContainer className={className} disabled={disabled}>

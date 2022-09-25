@@ -14,7 +14,7 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
 }) => {
   return (
     <Container>
-      <img className="w-10 h-10 rounded-full" src={logo} />
+      {!!logo && <Logo src={logo} alt={label} />}
 
       <Information>
         <ProtocolName>{label}</ProtocolName>
@@ -37,6 +37,12 @@ const Container = styled.div`
   * {
     user-select: none;
   }
+`;
+
+const Logo = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 `;
 
 const Information = styled.div`

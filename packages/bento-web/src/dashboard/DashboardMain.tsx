@@ -10,10 +10,10 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
-import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors, systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
+import { EmptyBalance } from './components/EmptyBalance';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { AssetRatioSection } from './sections/AssetRatioSection';
@@ -112,7 +112,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
       <DashboardWrapper>
         <ProfileContainer>
-          <ProfileSummarySection />
+          <div className="sticky">
+            <ProfileSummarySection />
+          </div>
         </ProfileContainer>
 
         <DashboardContent>
@@ -165,7 +167,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             </div>
 
             <AssetListCard>
-              {renderedTokenBalances.length > 0 && (
+              {renderedTokenBalances.length > 0 ? (
                 <ul>
                   {renderedTokenBalances.map((item) => {
                     const key = `${item.symbol ?? item.name}-${
@@ -189,6 +191,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                     );
                   })}
                 </ul>
+              ) : (
+                <EmptyBalance />
               )}
             </AssetListCard>
           </div>
@@ -215,25 +219,37 @@ const DashboardWrapper = styled.div`
     gap: 24px;
   }
 
-  @media screen and (max-width: 770px) {
+  @media screen and (max-width: 880px) {
     flex-direction: column;
     gap: 32px;
   }
 `;
 const ProfileContainer = styled.div`
-  width: 400px;
+  &,
+  & > div.sticky {
+    width: 400px;
 
-  @media screen and (max-width: 1200px) {
-    width: 360px;
+    @media screen and (max-width: 1200px) {
+      width: 360px;
+    }
   }
 
-  @media screen and (max-width: 770px) {
+  @media screen and (max-width: 880px) {
     width: 100%;
 
-    & > div {
+    & div.profile-summary {
       height: 360px;
       aspect-ratio: unset;
       padding-bottom: unset;
+    }
+  }
+
+  & > div.sticky {
+    position: fixed;
+
+    @media screen and (max-width: 880px) {
+      position: static;
+      width: unset;
     }
   }
 `;
