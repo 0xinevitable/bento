@@ -10,12 +10,14 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
+import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors, systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { AssetRatioSection } from './sections/AssetRatioSection';
+import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
 
 const walletBalanceReducer =
@@ -108,78 +110,90 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
 
-      <DashboardContent>
-        <TopSummaryContainer>
-          <AssetRatioSection
-            netWorthInUSD={netWorthInUSD}
-            tokenBalances={tokenBalances}
-          />
+      <DashboardWrapper>
+        <ProfileContainer>
+          <ProfileSummarySection />
+        </ProfileContainer>
 
-          <WalletListSection
-            onClickAddWallet={() => setAddWalletModalVisible((prev) => !prev)}
-          />
-        </TopSummaryContainer>
+        <DashboardContent>
+          <TopSummaryContainer>
+            <AssetRatioSection
+              netWorthInUSD={netWorthInUSD}
+              tokenBalances={tokenBalances}
+            />
 
-        <div>
-          <SectionTitle
-            style={{ marginBottom: 12, display: 'flex', alignItems: 'center' }}
-          >
-            <span className="title">Assets</span>
-            <InlineBadge>
-              {renderedTokenBalances.length > 0
-                ? renderedTokenBalances.length.toLocaleString()
-                : '-'}
-            </InlineBadge>
-          </SectionTitle>
+            <WalletListSection
+              onClickAddWallet={() => setAddWalletModalVisible((prev) => !prev)}
+            />
+          </TopSummaryContainer>
 
-          <div className="mb-4 w-full flex items-center">
-            <div
-              className="flex items-center cursor-pointer select-none"
-              onClick={() => {
-                if (!isNFTsShown) {
-                  // showing
-                  Analytics.logEvent('click_show_nfts', undefined);
-                } else {
-                  // hiding
-                  Analytics.logEvent('click_hide_nfts', undefined);
-                }
-                setNFTsShown(!isNFTsShown);
+          <div>
+            <SectionTitle
+              style={{
+                marginBottom: 12,
+                display: 'flex',
+                alignItems: 'center',
               }}
             >
-              <Checkbox checked={isNFTsShown ?? false} readOnly />
-              <span className="ml-[6px] text-white/80 text-sm">Show NFTs</span>
-            </div>
-          </div>
+              <span className="title">Assets</span>
+              <InlineBadge>
+                {renderedTokenBalances.length > 0
+                  ? renderedTokenBalances.length.toLocaleString()
+                  : '-'}
+              </InlineBadge>
+            </SectionTitle>
 
-          <AssetListCard>
-            {renderedTokenBalances.length > 0 && (
-              <ul>
-                {renderedTokenBalances.map((item) => {
-                  const key = `${item.symbol ?? item.name}-${
-                    'tokenAddress' in item ? item.tokenAddress : 'native'
-                  }`;
-                  return (
-                    <TokenBalanceItem
-                      key={key}
-                      tokenBalance={item}
-                      onClick={() => {
-                        Analytics.logEvent('click_balance_item', {
-                          name: item.name,
-                          symbol: item.symbol ?? undefined,
-                          platform: item.platform,
-                          address: item.tokenAddress ?? undefined,
-                        });
-                        setTokenDetailModalVisible((prev) => !prev);
-                        setTokenDetailModalParams({ tokenBalance: item });
-                      }}
-                    />
-                  );
-                })}
-              </ul>
-            )}
-          </AssetListCard>
-        </div>
-      </DashboardContent>
+            <div className="mb-4 w-full flex items-center">
+              <div
+                className="flex items-center cursor-pointer select-none"
+                onClick={() => {
+                  if (!isNFTsShown) {
+                    // showing
+                    Analytics.logEvent('click_show_nfts', undefined);
+                  } else {
+                    // hiding
+                    Analytics.logEvent('click_hide_nfts', undefined);
+                  }
+                  setNFTsShown(!isNFTsShown);
+                }}
+              >
+                <Checkbox checked={isNFTsShown ?? false} readOnly />
+                <span className="ml-[6px] text-white/80 text-sm">
+                  Show NFTs
+                </span>
+              </div>
+            </div>
+
+            <AssetListCard>
+              {renderedTokenBalances.length > 0 && (
+                <ul>
+                  {renderedTokenBalances.map((item) => {
+                    const key = `${item.symbol ?? item.name}-${
+                      'tokenAddress' in item ? item.tokenAddress : 'native'
+                    }`;
+                    return (
+                      <TokenBalanceItem
+                        key={key}
+                        tokenBalance={item}
+                        onClick={() => {
+                          Analytics.logEvent('click_balance_item', {
+                            name: item.name,
+                            symbol: item.symbol ?? undefined,
+                            platform: item.platform,
+                            address: item.tokenAddress ?? undefined,
+                          });
+                          setTokenDetailModalVisible((prev) => !prev);
+                          setTokenDetailModalParams({ tokenBalance: item });
+                        }}
+                      />
+                    );
+                  })}
+                </ul>
+              )}
+            </AssetListCard>
+          </div>
+        </DashboardContent>
+      </DashboardWrapper>
 
       <div className="w-full h-24" />
     </React.Fragment>
@@ -188,17 +202,53 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
 export default DashboardMain;
 
+const DashboardWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 32px;
+
+  @media screen and (max-width: 1300px) {
+    gap: 28px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    gap: 24px;
+  }
+
+  @media screen and (max-width: 770px) {
+    flex-direction: column;
+    gap: 32px;
+  }
+`;
+const ProfileContainer = styled.div`
+  width: 400px;
+
+  @media screen and (max-width: 1200px) {
+    width: 360px;
+  }
+
+  @media screen and (max-width: 770px) {
+    width: 100%;
+
+    & > div {
+      height: 360px;
+      aspect-ratio: unset;
+      padding-bottom: unset;
+    }
+  }
+`;
 const DashboardContent = styled.div`
   padding: 27px 33px;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  flex: 1;
 
   background: ${Colors.black};
-  border: 1px solid ${Colors.gray700};
+  border: 2px solid ${Colors.gray700};
   border-radius: 16px;
 
-  @media screen and (max-width: 940px) {
+  @media screen and (max-width: 1240px) {
     padding: 0;
     border: 0;
   }
@@ -208,8 +258,17 @@ const TopSummaryContainer = styled.div`
   width: 100%;
   gap: 32px;
 
-  @media screen and (max-width: 940px) {
+  @media screen and (max-width: 1300px) {
+    gap: 24px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    gap: 20px;
+  }
+
+  @media screen and (max-width: 1110px) {
     flex-direction: column;
+    gap: 32px;
   }
 `;
 
