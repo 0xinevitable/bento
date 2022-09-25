@@ -62,11 +62,19 @@ const Container = styled.li`
   flex-direction: column;
   cursor: pointer;
 
-  @media screen and (max-width: 797px) {
+  @media screen and (max-width: 1100px) {
     width: calc((100% - 4px) / 2);
   }
 
-  @media screen and (max-width: 537px) {
+  @media screen and (max-width: 880px) {
+    width: calc((100% - 8px) / 3);
+  }
+
+  @media screen and (max-width: 720px) {
+    width: calc((100% - 8px) / 2);
+  }
+
+  @media screen and (max-width: 540px) {
     width: 100%;
   }
 
