@@ -10,29 +10,32 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const provider = user.app_metadata.provider as
-    | 'github'
-    | 'twitter'
-    | undefined;
-  const username = user.user_metadata.user_name;
+  const identities = user.identities;
 
   const blocks: Block[] = [];
-  if (provider && username) {
-    let title = '';
-    let url = '';
+  identities?.forEach((loginIdentity) => {
+    const provider = loginIdentity.provider;
+    const username =
+      (loginIdentity.identity_data.user_name as string | undefined) ||
+      (user.user_metadata.user_name as string | undefined);
 
-    if (provider === 'github') {
-      title = 'GitHub';
-      url = `https://github.com/${username}`;
+    if (provider && username) {
+      let title = '';
+      let url = '';
+
+      if (provider === 'github') {
+        title = 'GitHub';
+        url = `https://github.com/${username}`;
+      }
+      if (provider === 'twitter') {
+        title = 'Twitter';
+        url = `https://twitter.com/${username}`;
+      }
+
+      const description = `@${username}`;
+
+      blocks.push({ type: 'link', title, description, url });
     }
-    if (provider === 'twitter') {
-      title = 'Twitter';
-      url = `https://twitter.com/${username}`;
-    }
-
-    const description = `@${username}`;
-
-    blocks.push({ type: 'link', title, description, url });
-  }
+  });
   return res.status(200).json(blocks);
 };

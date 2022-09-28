@@ -1,8 +1,10 @@
+import { cachedAxios } from '@bento/core';
 import axios, { AxiosError } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Modal } from '@/components/system';
+import { useSession } from '@/hooks/useSession';
 
 import { LinkBlock } from '@/profile/blocks';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
@@ -22,6 +24,7 @@ type ErrorResponse =
   | undefined;
 
 export const ProfileSummarySection: React.FC = () => {
+  const { session } = useSession();
   const { profile, revaildateProfile } = useProfile();
 
   const profileImageURL =
@@ -30,11 +33,20 @@ export const ProfileSummarySection: React.FC = () => {
   const [blocks, setBlocks] = useState<LinkBlock[]>([]);
 
   useEffect(() => {
-    axios
-      .get('/api/profile/blocks')
-      .then(({ data }) => setBlocks(data))
-      .catch((err) => console.error(err));
-  }, []);
+    if (!session) {
+      return;
+    }
+    const fetchProfile = async () => {
+      try {
+        const data = await (await fetch('/api/profile/blocks')).json();
+        setBlocks(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchProfile();
+  }, [JSON.stringify(session)]);
 
   const [isEditing, setEditing] = useState<boolean>(false);
   const [draft, setDraft] = useState<UserInformationDraft>({
