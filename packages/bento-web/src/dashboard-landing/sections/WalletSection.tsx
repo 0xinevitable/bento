@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 
+import { WALLETS } from '@/constants/wallets';
+
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const WalletSection: React.FC<TrackedSectionOptions> = ({
@@ -22,9 +24,9 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
       </WalletIllustWrapper>
 
       <WalletList>
-        {WALLETS.map((walletSrc) => (
-          <li key={walletSrc}>
-            <WalletIcon src={walletSrc} />
+        {Object.entries(WALLETS).map(([alt, src]) => (
+          <li key={src}>
+            <WalletIcon alt={alt} src={src} />
           </li>
         ))}
       </WalletList>
@@ -101,14 +103,6 @@ const WalletIllust = styled.img`
   object-fit: contain;
   user-select: none;
 `;
-
-const WALLETS = [
-  '/assets/wallets/metamask.png',
-  '/assets/wallets/walletconnect.png',
-  '/assets/wallets/keplr.png',
-  '/assets/wallets/kaikas.png',
-  '/assets/wallets/phantom.png',
-];
 
 const WalletList = styled.ul`
   margin: 0;
