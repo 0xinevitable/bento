@@ -118,7 +118,7 @@ export const ProfileSummarySection: React.FC = () => {
             <Information>
               {!profile?.username ? (
                 <>
-                  <EmptyText>Upda!profile?.usernamete your Profile</EmptyText>
+                  <EmptyText>Update your Profile</EmptyText>
                   <Username>{`@unknown`}</Username>
                 </>
               ) : (
