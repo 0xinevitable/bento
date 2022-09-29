@@ -312,12 +312,6 @@ const AssetListCard = styled.section`
 `;
 
 const SectionTitle = styled.h3`
-  /* FIXME: !important */
-  &,
-  & > span.title {
-    font-family: 'Raleway', ${systemFontStack} !important;
-  }
-
   margin-bottom: 16px;
   font-weight: 700;
   font-size: 24px;

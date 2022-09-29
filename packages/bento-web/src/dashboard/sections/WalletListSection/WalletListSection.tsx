@@ -73,12 +73,6 @@ const SectionTitleContainer = styled.div`
   );
 `;
 const SectionTitle = styled.h3`
-  /* FIXME: !important */
-  &,
-  & > span.title {
-    font-family: 'Raleway', ${systemFontStack} !important;
-  }
-
   margin-bottom: 16px;
   font-weight: 700;
   font-size: 24px;
@@ -99,8 +93,6 @@ const AddWalletButton = styled(Button)`
     height: unset;
     padding: 12px 18px;
 
-    /* FIXME: !important */
-    font-family: 'Raleway', ${systemFontStack} !important;
     font-weight: 800;
     font-size: 14px;
     line-height: 100%;

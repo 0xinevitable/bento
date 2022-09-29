@@ -137,11 +137,6 @@ const ButtonList = styled.div`
     padding: 5px 12px;
     border-radius: 8px;
 
-    /* FIXME: */
-    && {
-      font-family: 'Raleway', ${systemFontStack};
-    }
-
     font-weight: 600;
     font-size: 12px;
     line-height: 100%;

@@ -68,13 +68,6 @@ const Container = styled.div`
   flex-direction: column;
 
   section * {
-    /*
-      FIXME: reset.css가 두번(Tailwind의 reset 스타일과 styled-reset) 들어가면서
-      font-family가 우선순위 밀리는 문제 이렇게 해결.
-      Tailwind 걷어내고 !important 없애기
-    */
-    font-family: 'Raleway', ${systemFontStack} !important;
-
     &:not(h1, h1 span) {
       transition: all 0.2s ease-in-out;
     }

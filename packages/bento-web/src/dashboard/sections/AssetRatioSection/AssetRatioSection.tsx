@@ -92,8 +92,6 @@ const Information = styled.div`
   gap: 6px;
 `;
 const Field = styled.span`
-  /* FIXME: !important */
-  font-family: 'Raleway', ${systemFontStack} !important;
   font-weight: 700;
   font-size: 24px;
   line-height: 100%;
