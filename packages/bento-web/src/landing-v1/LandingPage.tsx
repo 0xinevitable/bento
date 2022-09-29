@@ -42,12 +42,6 @@ const LandingPage: React.FC = () => {
 
       <PrivateHeaderSection />
 
-      <ProfileBanner
-        id="profile-nudge"
-        event="view_landing_section"
-        onClickBanner={onClickBanner}
-      />
-
       <HeaderSection id="header" event="view_landing_section" />
       <DashboardSection id="dashboard" event="view_landing_section" />
       <StatusQuoSection id="status-quo" event="view_landing_section" />

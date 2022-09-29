@@ -89,14 +89,6 @@ const Header = styled.div`
   flex-direction: column;
   align-items: center;
   z-index: 0;
-
-  @media screen and (max-width: 768px) {
-    margin-bottom: -32px;
-  }
-
-  @media screen and (max-width: 560px) {
-    margin-bottom: -100px;
-  }
 `;
 const GlobeWrapper = styled.div`
   width: 100%;

@@ -132,8 +132,7 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 200px 32px 0;
-  margin-top: -200px;
+  padding: 0 32px 0;
 
   background-image: url('/assets/landing/header-background.jpg');
   background-size: 100% 100%;
@@ -142,7 +141,7 @@ const Wrapper = styled.div`
   z-index: 0;
 
   @media screen and (max-width: 620px) {
-    padding: 200px 20px 0;
+    padding: 0 20px 0;
   }
 
   &:before {
