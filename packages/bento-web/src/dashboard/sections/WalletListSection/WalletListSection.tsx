@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Button } from '@/components/system';
 import { useWalletContext } from '@/hooks/useWalletContext';
 
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 
 import { WalletList, walletCountStyle } from './WalletList';
 

@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { MetaHead } from '@/components/system';
 
 import { HeaderSection as PrivateHeaderSection } from '@/landing-v2/sections/HeaderSection';
-import { systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
 import { DashboardSection } from './sections/DashboardSection';

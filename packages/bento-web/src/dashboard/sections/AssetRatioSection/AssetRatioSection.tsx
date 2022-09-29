@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { displayName } from '@/dashboard/constants/platform';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 
 import { AssetRatioChart } from './AssetRatioChart';
 

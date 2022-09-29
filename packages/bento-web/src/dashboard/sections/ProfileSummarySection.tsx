@@ -13,7 +13,7 @@ import {
   UserInformationDraft,
 } from '@/profile/components/ProfileEditor';
 import { useProfile } from '@/profile/hooks/useProfile';
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 import { Analytics, toast } from '@/utils';
 
 type ErrorResponse =
