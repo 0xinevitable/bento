@@ -174,11 +174,19 @@ const Title = styled.h1`
     font-family: ${systemFontStack} !important;
   }
 
+  &:lang(ko) {
+    font-size: 64px;
+  }
+
   color: ${Colors.gray000};
   text-shadow: 0px 2px 24px ${Colors.black};
 
   @media screen and (max-width: 768px) {
     font-size: 54px;
+
+    &:lang(ko) {
+      font-size: 48px;
+    }
   }
 
   @media screen and (max-width: 560px) {
