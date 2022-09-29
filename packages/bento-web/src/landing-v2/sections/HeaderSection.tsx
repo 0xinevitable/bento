@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { useWindowSize } from '@/hooks/useWindowSize';
 
-import { Colors } from '@/styles';
+import { Colors, systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
 export const HeaderSection: React.FC = () => {
@@ -162,11 +162,17 @@ const Content = styled.div`
 `;
 
 const Title = styled.h1`
-  font-weight: 700;
+  font-weight: 900;
   font-size: 72px;
   line-height: 120%;
   text-align: center;
   letter-spacing: -0.02em;
+
+  /* FIXME: Tailwind */
+  &,
+  & * {
+    font-family: ${systemFontStack} !important;
+  }
 
   color: ${Colors.gray000};
   text-shadow: 0px 2px 24px ${Colors.black};
@@ -205,6 +211,12 @@ const Description = styled.p`
 
   @media screen and (max-width: 560px) {
     max-width: 90vw;
+  }
+
+  /* FIXME: Tailwind */
+  &,
+  & * {
+    font-family: ${systemFontStack} !important;
   }
 `;
 

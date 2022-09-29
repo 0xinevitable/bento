@@ -95,7 +95,7 @@ const Information = styled.div`
   gap: 6px;
 `;
 const WalletAddress = styled.span`
-  font-family: ${systemFontStack};
+  font-family: ${systemFontStack} !important;
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;

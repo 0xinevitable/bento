@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { displayName } from '@/dashboard/constants/platform';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { Colors } from '@/styles';
+import { Colors, systemFontStack } from '@/styles';
 
 import { AssetRatioChart } from './AssetRatioChart';
 
@@ -102,6 +102,11 @@ const Title = styled.h2`
   font-size: 40px;
   line-height: 100%;
   color: ${Colors.gray050};
+
+  /* FIXME: Tailwind */
+  & {
+    font-family: ${systemFontStack} !important;
+  }
 `;
 
 const BadgeList = styled.ul`
