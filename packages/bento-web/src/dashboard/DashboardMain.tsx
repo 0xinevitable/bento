@@ -199,7 +199,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
         </DashboardContent>
       </DashboardWrapper>
 
-      <div className="w-full h-24" />
+      <div style={{ width: '100%', height: 96 }} />
     </React.Fragment>
   );
 };

@@ -16,7 +16,7 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
   const { wallets, revalidateWallets } = useWalletContext();
 
   return (
-    <div className="flex-1 flex flex-col relative">
+    <Container>
       <SectionTitleContainer>
         <SectionTitle>Wallets</SectionTitle>
       </SectionTitleContainer>
@@ -55,9 +55,16 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
           </ButtonContainer>
         </>
       )}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
 
 const SectionTitleContainer = styled.div`
   position: sticky;
