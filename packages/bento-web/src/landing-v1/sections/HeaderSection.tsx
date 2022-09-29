@@ -44,11 +44,13 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
     router.push('/home');
   }, []);
 
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
+
   return (
     <Wrapper>
       <Section {...trackedSectionOptions}>
         <Title>
-          {i18n.resolvedLanguage === 'en' && (
+          {currentLanguage === 'en' && (
             <>
               <span>
                 The{' '}
@@ -59,7 +61,7 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
             </>
           )}
 
-          {i18n.resolvedLanguage === 'ko' && (
+          {currentLanguage === 'ko' && (
             <>
               <span>넓은 블록체인 세상 속에서</span>
               {`\n`}
