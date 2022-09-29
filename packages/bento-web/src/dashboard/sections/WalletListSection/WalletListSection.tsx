@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Button } from '@/components/system';
 import { useWalletContext } from '@/hooks/useWalletContext';
 
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 
 import { WalletList, walletCountStyle } from './WalletList';
 
@@ -16,7 +16,7 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
   const { wallets, revalidateWallets } = useWalletContext();
 
   return (
-    <div className="flex-1 flex flex-col relative">
+    <Container>
       <SectionTitleContainer>
         <SectionTitle>Wallets</SectionTitle>
       </SectionTitleContainer>
@@ -55,9 +55,16 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
           </ButtonContainer>
         </>
       )}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
 
 const SectionTitleContainer = styled.div`
   position: sticky;
@@ -73,12 +80,6 @@ const SectionTitleContainer = styled.div`
   );
 `;
 const SectionTitle = styled.h3`
-  /* FIXME: !important */
-  &,
-  & > span.title {
-    font-family: 'Raleway', ${systemFontStack} !important;
-  }
-
   margin-bottom: 16px;
   font-weight: 700;
   font-size: 24px;
@@ -99,8 +100,6 @@ const AddWalletButton = styled(Button)`
     height: unset;
     padding: 12px 18px;
 
-    /* FIXME: !important */
-    font-family: 'Raleway', ${systemFontStack} !important;
     font-weight: 800;
     font-size: 14px;
     line-height: 100%;

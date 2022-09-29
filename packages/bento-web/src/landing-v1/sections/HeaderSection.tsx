@@ -1,5 +1,6 @@
 import dedent from 'dedent';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -31,6 +32,7 @@ const float = (y: number, reverse: boolean = false) => ({
 export const HeaderSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
 }) => {
+  const { t, i18n } = useTranslation('landing');
   const router = useRouter();
   const { width: screenWidth } = useWindowSize();
   const isMobileView = screenWidth <= 665;
@@ -42,15 +44,30 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
     router.push('/home');
   }, []);
 
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
+
   return (
     <Wrapper>
       <Section {...trackedSectionOptions}>
         <Title>
-          <span>
-            The <span style={{ display: 'inline-block' }}>blockchain is</span>
-          </span>
-          {`\n`}
-          <span>{` a pretty big space.`}</span>
+          {currentLanguage === 'en' && (
+            <>
+              <span>
+                The{' '}
+                <span style={{ display: 'inline-block' }}>blockchain is</span>
+              </span>
+              {`\n`}
+              <span>{` a pretty big space.`}</span>
+            </>
+          )}
+
+          {currentLanguage === 'ko' && (
+            <>
+              <span>넓은 블록체인 세상 속에서</span>
+              {`\n`}
+              <span>흩어진 것들을 모읍니다.</span>
+            </>
+          )}
         </Title>
 
         <IllustWrapper>
@@ -87,18 +104,22 @@ export const HeaderSection: React.FC<TrackedSectionOptions> = ({
                       })
                     }
                   >
-                    <TwitterButton>FOLLOW US ON TWITTER</TwitterButton>
+                    <TwitterButton>{t('FOLLOW US ON TWITTER')}</TwitterButton>
                   </a>
-                  <TwitterHelp {...float(2, true)}>Talk with us</TwitterHelp>
+                  <TwitterHelp {...float(2, true)}>
+                    {t('Talk with us')}
+                  </TwitterHelp>
                 </TwitterContainer>
               </TwitterAbsoluteContainer>
             )}
 
             <CTAAbsoluteContainer {...float(!isMobileView ? 18 : 8)}>
               <CTAContainer>
-                <CTAButton onClick={onClickApp}>Find your Identity</CTAButton>
+                <CTAButton onClick={onClickApp}>
+                  {t('Find your Identity')}
+                </CTAButton>
                 <CTAHelp {...float(!isMobileView ? 8 : 4)}>
-                  Merge your wallets into one
+                  {t('Merge your wallets into one')}
                 </CTAHelp>
               </CTAContainer>
             </CTAAbsoluteContainer>
@@ -150,7 +171,7 @@ const Section = styled(TrackedSection)`
     height: fit-content;
   }
 `;
-const Title = styled.h1`
+const Title = styled.h2`
   width: fit-content;
   margin: 0 auto;
 
@@ -176,8 +197,18 @@ const Title = styled.h1`
     }
   }
 
+  &:lang(ko) {
+    line-height: 100%;
+    font-size: 52px;
+  }
+
   @media screen and (max-width: 620px) {
     font-size: 48px;
+
+    &:lang(ko) {
+      line-height: 100%;
+      font-size: 32px;
+    }
 
     & > span:last-of-type {
       margin-left: 0;

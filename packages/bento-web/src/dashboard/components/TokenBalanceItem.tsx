@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Badge } from '@/components/system';
 
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { Colors } from '@/styles';
+import { Colors, systemFontStack } from '@/styles';
 
 const capitalize = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);
@@ -19,8 +19,8 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
 }) => {
   return (
     <Container onClick={onClick}>
-      <div className="flex items-center">
-        <div className="relative">
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ position: 'relative' }}>
           <Logo src={info.logo} alt={info.name} />
           <PlatformBadge
             alt={capitalize(info.platform)}
@@ -34,15 +34,13 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
             </span>
             <InlineBadge>{info.amount.toLocaleString()}</InlineBadge>
           </span>
-          <span className="text-lg font-bold text-slate-50/90">
+          <NetWorth>
             {`$${info.netWorth.toLocaleString()}`}
 
             {info.amount !== 1 && (
-              <span className="ml-1 text-sm font-medium text-slate-400/40">
-                {`$${info.price.toLocaleString()}`}
-              </span>
+              <Price>{`$${info.price.toLocaleString()}`}</Price>
             )}
-          </span>
+          </NetWorth>
         </div>
       </div>
     </Container>
@@ -117,4 +115,24 @@ const InlineBadge = styled(Badge)`
     font-size: 10px;
     backdrop-filter: none;
   }
+`;
+
+const NetWorth = styled.span`
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: bold;
+  color: ${Colors.gray050};
+
+  /* FIXME: Tailwind */
+  &,
+  & * {
+    font-family: ${systemFontStack} !important;
+  }
+`;
+const Price = styled.span`
+  margin-left: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: ${Colors.gray400};
 `;

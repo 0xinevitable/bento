@@ -1,3 +1,5 @@
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
@@ -5,7 +7,6 @@ import styled from 'styled-components';
 import { MetaHead } from '@/components/system';
 
 import { HeaderSection as PrivateHeaderSection } from '@/landing-v2/sections/HeaderSection';
-import { systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
 import { DashboardSection } from './sections/DashboardSection';
@@ -14,6 +15,14 @@ import { IdentitySection } from './sections/IdentitySection';
 import { ProfileBanner } from './sections/ProfileBanner';
 // import { RoadmapSection } from './sections/RoadmapSection';
 import { StatusQuoSection } from './sections/StatusQuoSection';
+
+export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['landing'])),
+    },
+  };
+};
 
 const LandingPage: React.FC = () => {
   const router = useRouter();
@@ -58,13 +67,6 @@ const Container = styled.div`
   flex-direction: column;
 
   section * {
-    /*
-      FIXME: reset.css가 두번(Tailwind의 reset 스타일과 styled-reset) 들어가면서
-      font-family가 우선순위 밀리는 문제 이렇게 해결.
-      Tailwind 걷어내고 !important 없애기
-    */
-    font-family: 'Raleway', ${systemFontStack} !important;
-
     &:not(h1, h1 span) {
       transition: all 0.2s ease-in-out;
     }

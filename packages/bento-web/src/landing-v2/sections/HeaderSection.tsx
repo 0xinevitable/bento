@@ -1,15 +1,17 @@
 import createGlobe from 'cobe';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { useWindowSize } from '@/hooks/useWindowSize';
 
-import { Colors } from '@/styles';
+import { Colors, systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
 export const HeaderSection: React.FC = () => {
   const router = useRouter();
+  const { t } = useTranslation('landing');
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { width: screenWidth } = useWindowSize();
 
@@ -57,10 +59,11 @@ export const HeaderSection: React.FC = () => {
       </GlobeWrapper>
 
       <Content>
-        <Title>Show who you are.</Title>
+        <Title>{t('Show who you are.')}</Title>
         <Description>
-          Bento aggregates your identity <br />
-          from the 2nd/3rd web
+          {t('Bento aggregates your identity ')}
+          <br />
+          {t('from the 2nd/3rd web')}
         </Description>
         <Button
           onClick={async () => {
@@ -70,7 +73,7 @@ export const HeaderSection: React.FC = () => {
             router.push('/home');
           }}
         >
-          Start Now
+          {t('Start Now')}
         </Button>
       </Content>
     </Header>
@@ -159,17 +162,31 @@ const Content = styled.div`
 `;
 
 const Title = styled.h1`
-  font-weight: 700;
+  font-weight: 900;
   font-size: 72px;
   line-height: 120%;
   text-align: center;
   letter-spacing: -0.02em;
+
+  /* FIXME: Tailwind */
+  &,
+  & * {
+    font-family: ${systemFontStack} !important;
+  }
+
+  &:lang(ko) {
+    font-size: 64px;
+  }
 
   color: ${Colors.gray000};
   text-shadow: 0px 2px 24px ${Colors.black};
 
   @media screen and (max-width: 768px) {
     font-size: 54px;
+
+    &:lang(ko) {
+      font-size: 48px;
+    }
   }
 
   @media screen and (max-width: 560px) {
@@ -202,6 +219,12 @@ const Description = styled.p`
 
   @media screen and (max-width: 560px) {
     max-width: 90vw;
+  }
+
+  /* FIXME: Tailwind */
+  &,
+  & * {
+    font-family: ${systemFontStack} !important;
   }
 `;
 
