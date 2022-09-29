@@ -8,6 +8,7 @@ import { Analytics, ToastProvider } from '@/utils';
 
 import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
+import '@/styles/fonts.css';
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
