@@ -1,3 +1,4 @@
+import { appWithTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
 import { SessionManager } from '@/hooks/useSession';
@@ -19,12 +20,7 @@ import { GlobalStyle } from '@/styles/GlobalStyle';
 
 Analytics.initialize();
 
-type MyAppProps = AppProps & {
-  // FIXME: Type mismatch here
-  Component: any;
-};
-
-function MyApp({ Component, pageProps }: MyAppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
   const [loadingState, setLoadingState] = useState({
@@ -100,9 +96,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
       </WalletsProvider>
     </React.Fragment>
   );
-}
+};
 
-export default MyApp;
+export default appWithTranslation(App);
 
 const Container = styled.div`
   width: 100vw;
