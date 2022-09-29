@@ -1,4 +1,5 @@
 import dedent from 'dedent';
+import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import { useRouter } from 'next/router';
 import { useCallback, useRef } from 'react';
@@ -49,6 +50,7 @@ const cardSources = (name: string) => ({
 export const DashboardSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
 }) => {
+  const { t } = useTranslation('landing');
   const router = useRouter();
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -67,10 +69,11 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
         {isRendered && (
           <>
             <Information>
-              <SectionBadge>Dashboard for all L1s</SectionBadge>
+              <SectionBadge>{t('Dashboard for all L1s')}</SectionBadge>
               <SectionTitle>
-                View Your <br />
-                Entire Portfolio
+                {t('View Your ')}
+                <br />
+                {t('Entire Portfolio')}
               </SectionTitle>
               <Paragraph>
                 Bento is an open-source web3 dashboard in that users can add
@@ -80,7 +83,7 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
                 various protocols as well.
               </Paragraph>
               <LearnMore onClick={onClickLearnMore}>
-                <span>Learn More</span>
+                <span>{t('Learn More')}</span>
                 <LearnMoreChevron />
               </LearnMore>
 

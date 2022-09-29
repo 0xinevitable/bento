@@ -1,1 +1,1 @@
-export { default } from '@/landing-v1/LandingPage';
+export { default, getStaticProps } from '@/landing-v1/LandingPage';

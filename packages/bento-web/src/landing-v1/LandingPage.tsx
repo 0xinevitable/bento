@@ -1,3 +1,5 @@
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
@@ -14,6 +16,14 @@ import { IdentitySection } from './sections/IdentitySection';
 import { ProfileBanner } from './sections/ProfileBanner';
 // import { RoadmapSection } from './sections/RoadmapSection';
 import { StatusQuoSection } from './sections/StatusQuoSection';
+
+export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['landing'])),
+    },
+  };
+};
 
 const LandingPage: React.FC = () => {
   const router = useRouter();
