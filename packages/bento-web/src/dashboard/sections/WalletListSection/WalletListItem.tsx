@@ -97,8 +97,7 @@ const Information = styled.div`
   gap: 6px;
 `;
 const WalletAddress = styled.span`
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Helvetica, Arial, sans-serif;
+  font-family: ${systemFontStack};
   font-weight: 700;
   font-size: 18px;
   line-height: 100%;
@@ -136,11 +135,6 @@ const ButtonList = styled.div`
   & > button {
     padding: 5px 12px;
     border-radius: 8px;
-
-    /* FIXME: */
-    && {
-      font-family: 'Raleway', ${systemFontStack};
-    }
 
     font-weight: 600;
     font-size: 12px;

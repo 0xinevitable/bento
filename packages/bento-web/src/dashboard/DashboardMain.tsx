@@ -10,7 +10,7 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
 import { EmptyBalance } from './components/EmptyBalance';
@@ -199,7 +199,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
         </DashboardContent>
       </DashboardWrapper>
 
-      <div className="w-full h-24" />
+      <div style={{ width: '100%', height: 96 }} />
     </React.Fragment>
   );
 };
@@ -312,12 +312,6 @@ const AssetListCard = styled.section`
 `;
 
 const SectionTitle = styled.h3`
-  /* FIXME: !important */
-  &,
-  & > span.title {
-    font-family: 'Raleway', ${systemFontStack} !important;
-  }
-
   margin-bottom: 16px;
   font-weight: 700;
   font-size: 24px;

@@ -313,7 +313,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
   }, []);
 
   return (
-    <div className="flex gap-2">
+    <div style={{ display: 'flex', gap: 8 }}>
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',

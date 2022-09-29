@@ -8,6 +8,7 @@ import { Analytics, ToastProvider } from '@/utils';
 
 import 'react-notifications-component/dist/theme.css';
 import '@/styles/tailwind.css';
+import '@/styles/fonts.css';
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -69,7 +70,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Raleway:wght@400;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;800;900&display=swap"
           rel="stylesheet"
         />
       </Head>

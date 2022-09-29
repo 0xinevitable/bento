@@ -13,7 +13,7 @@ import {
   UserInformationDraft,
 } from '@/profile/components/ProfileEditor';
 import { useProfile } from '@/profile/hooks/useProfile';
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 import { Analytics, toast } from '@/utils';
 
 type ErrorResponse =
@@ -290,7 +290,6 @@ const Bio = styled.p`
 `;
 
 const EmptyText = styled.span`
-  font-family: 'Poppins';
   font-weight: 600;
   font-size: 18px;
   line-height: 100%;
@@ -307,8 +306,6 @@ const AddProfileButton = styled(Button)`
     height: unset;
     padding: 12px 18px;
 
-    /* FIXME: !important */
-    font-family: 'Raleway', ${systemFontStack} !important;
     font-weight: 800;
     font-size: 14px;
     line-height: 100%;

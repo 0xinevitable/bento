@@ -92,8 +92,6 @@ const Information = styled.div`
   gap: 6px;
 `;
 const Field = styled.span`
-  /* FIXME: !important */
-  font-family: 'Raleway', ${systemFontStack} !important;
   font-weight: 700;
   font-size: 24px;
   line-height: 100%;
@@ -104,6 +102,11 @@ const Title = styled.h2`
   font-size: 40px;
   line-height: 100%;
   color: ${Colors.gray050};
+
+  /* FIXME: Tailwind */
+  & {
+    font-family: ${systemFontStack} !important;
+  }
 `;
 
 const BadgeList = styled.ul`

@@ -11,6 +11,7 @@ import { Icon, NoSSR, Portal } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
 
+import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
 
 const Breakpoints = {
@@ -85,11 +86,9 @@ export const NavigationBar = () => {
                 active={currentPath === item.href}
               >
                 <Link href={item.href} passHref>
-                  <a className="h-full flex gap-2 justify-center items-center">
-                    <Iconify className="text-xl" icon={item.icon} />
-                    <span className="text-sm font-medium leading-none">
-                      {item.title}
-                    </span>
+                  <a>
+                    <Iconify icon={item.icon} style={{ fontSize: 20 }} />
+                    <span className="title">{item.title}</span>
                   </a>
                 </Link>
               </NavigationItem>
@@ -99,10 +98,7 @@ export const NavigationBar = () => {
 
         <SocialIconList>
           {!!session && (
-            <button
-              className="h-8 text-white text-sm mr-4 hover:text-white/70 transition-colors"
-              onClick={onClickLogout}
-            >
+            <button className="logout" onClick={onClickLogout}>
               Logout
             </button>
           )}
@@ -265,6 +261,18 @@ const NavigationItem = styled.li<NavigationItemProps>`
 
   & > a {
     padding: 4px 16px;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    & > span.title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+    }
   }
 
   &::after {
@@ -300,6 +308,25 @@ const NavigationItem = styled.li<NavigationItemProps>`
 
 const SocialIconList = styled.div`
   gap: 12px;
+
+  & > button.logout {
+    /* h-8 text-white text-sm mr-4 hover:text-white/70 transition-colors
+     */
+    margin-right: 16px;
+    height: 32px;
+
+    font-size: 14px;
+    line-height: 20px;
+    color: ${Colors.gray000};
+
+    transition-property: color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+
+    &:hover {
+      color: ${Colors.gray200};
+    }
+  }
 
   &,
   & > a {

@@ -9,9 +9,7 @@ export const PageContainer: React.FC<PageContainerProps> = ({
 }) => {
   return (
     <Wrapper className={className} {...props}>
-      <div className="w-full max-w-[1328px] mx-auto relative z-0 flex flex-col">
-        {children}
-      </div>
+      <div>{children}</div>
     </Wrapper>
   );
 };
@@ -22,4 +20,16 @@ const Wrapper = styled.div`
   min-height: calc(100vh - 64px);
 
   display: flex;
+
+  & > div {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1328px;
+
+    position: relative;
+    z-index: 0;
+
+    display: flex;
+    flex-direction: column;
+  }
 `;

@@ -171,7 +171,7 @@ const Section = styled(TrackedSection)`
     height: fit-content;
   }
 `;
-const Title = styled.h1`
+const Title = styled.h2`
   width: fit-content;
   margin: 0 auto;
 
@@ -197,8 +197,18 @@ const Title = styled.h1`
     }
   }
 
+  &:lang(ko) {
+    line-height: 100%;
+    font-size: 52px;
+  }
+
   @media screen and (max-width: 620px) {
     font-size: 48px;
+
+    &:lang(ko) {
+      line-height: 100%;
+      font-size: 32px;
+    }
 
     & > span:last-of-type {
       margin-left: 0;
