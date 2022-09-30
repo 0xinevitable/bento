@@ -1,6 +1,9 @@
 import { useTranslation } from 'next-i18next';
+import Image from 'next/future/image';
 import styled from 'styled-components';
 
+import bitcoinIllust from '@/assets/illusts/bitcoin.png';
+import ethereumIllust from '@/assets/illusts/ethereum.png';
 import {
   Badge,
   TrackedSection,
@@ -34,11 +37,16 @@ export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
         </Description>
 
         <BitcoinIllustContainer>
-          <Illust src="/assets/dashboard-landing/illusts/bitcoin.png" />
+          <Illust alt="" src={bitcoinIllust} sizes="512px" placeholder="blur" />
           <IllustShadow style={{ left: 30, bottom: 29 }} />
         </BitcoinIllustContainer>
         <EthereumIllustContainer>
-          <Illust src="/assets/dashboard-landing/illusts/ethereum.png" />
+          <Illust
+            alt=""
+            src={ethereumIllust}
+            sizes="512px"
+            placeholder="blur"
+          />
           <IllustShadow style={{ top: 69, left: 62 }} />
         </EthereumIllustContainer>
       </Container>
@@ -183,10 +191,11 @@ const EthereumIllustContainer = styled.div`
     right: -120px;
   }
 `;
-const Illust = styled.img`
+const Illust = styled(Image)`
   width: 100%;
   height: 100%;
   z-index: 1;
+  filter: saturate(150%);
 `;
 const IllustShadow = styled.div`
   width: 160px;
