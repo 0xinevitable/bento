@@ -84,7 +84,7 @@ const Container = styled.div`
   position: relative;
   margin-top: -40px;
 `;
-const WalletItemList = styled.ul`
+export const WalletItemList = styled.ul`
   padding-top: 40px;
   padding-bottom: ${(88 * 2) / 3}px;
   width: 100%;

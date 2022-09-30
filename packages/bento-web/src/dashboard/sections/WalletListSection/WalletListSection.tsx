@@ -88,14 +88,14 @@ const SectionTitle = styled.h3`
   color: ${Colors.gray400};
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   margin-top: 10px;
   display: flex;
   justify-content: center;
 `;
 
 // FIXME: Design component
-const AddWalletButton = styled(Button)`
+export const AddWalletButton = styled(Button)`
   && {
     height: unset;
     padding: 12px 18px;

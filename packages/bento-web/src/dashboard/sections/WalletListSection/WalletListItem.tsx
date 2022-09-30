@@ -5,8 +5,11 @@ import styled from 'styled-components';
 import { Colors, systemFontStack } from '@/styles';
 
 export type WalletListItemProps = Wallet & {
-  onClickDelete: (walletAddress: string) => void;
-  onClickCopy: (address: string, type: 'evm' | 'cosmos-sdk' | 'solana') => void;
+  onClickDelete?: (walletAddress: string) => void;
+  onClickCopy?: (
+    address: string,
+    type: 'evm' | 'cosmos-sdk' | 'solana',
+  ) => void;
 };
 
 export const WalletListItem: React.FC<WalletListItemProps> = ({
@@ -24,7 +27,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
         <WalletAddress>
           {shortenAddress(wallet.address)}
 
-          <button onClick={() => onClickCopy(wallet.address, wallet.type)}>
+          <button onClick={() => onClickCopy?.(wallet.address, wallet.type)}>
             <Icon icon="eva:copy-fill" />
           </button>
         </WalletAddress>
@@ -45,7 +48,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
       </Information>
       <ButtonList>
         {/* <button>Edit</button> */}
-        <button onClick={() => onClickDelete(wallet.address)}>Delete</button>
+        <button onClick={() => onClickDelete?.(wallet.address)}>Delete</button>
       </ButtonList>
     </Container>
   );
