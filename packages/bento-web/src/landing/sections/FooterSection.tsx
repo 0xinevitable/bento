@@ -398,7 +398,7 @@ const CTAHelp = styled(motion.span)`
 const IllustWrapper = styled.div`
   position: absolute;
   margin: auto;
-  top: 171px;
+  top: 182px;
   left: 0;
   right: 0;
 
@@ -431,6 +431,9 @@ const IllustContainer = styled.div`
   }
 `;
 const MainIllust = styled.div`
+  display: flex;
+  justify-content: center;
+
   @media screen and (max-width: 665px) {
     margin-left: -8%;
     position: relative;
@@ -443,7 +446,7 @@ const ILLUST_BLUR_LEFT = 80;
 const ILLUST_BLUR_RIGHT = 32;
 const ILLUST_BLUR_BOTTOM = 80 - 61.74;
 const IllustImageContainer = styled.div`
-  margin-left: ${-ILLUST_BLUR_LEFT}px;
+  margin-left: -32px;
   margin-right: ${-ILLUST_BLUR_RIGHT}px;
   margin-bottom: ${-ILLUST_BLUR_BOTTOM}px;
   width: ${662 + ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
