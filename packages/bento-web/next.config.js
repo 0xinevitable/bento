@@ -43,6 +43,11 @@ module.exports = withPlugins(
           destination: '/profile/intro',
           permanent: false,
         },
+        {
+          source: '/dashboard',
+          destination: '/',
+          permanent: false,
+        },
       ];
     },
   },

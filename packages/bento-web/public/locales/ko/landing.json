@@ -1,7 +1,6 @@
 {
-  "Show who you are.": "당신을 표현하세요.",
-  "Bento aggregates your identity ": "벤토는 인터넷과 블록체인 위의 정보를 하나로 모아, ",
-  "from the 2nd/3rd web": "여러분의 인격을 나타내 줍니다.",
+  "Discover Your ⚡Web3 World": "당신의 ⚡웹3 세계를 발견하세요.",
+  "Bento aggregates your identity from the 2nd/3rd web": "벤토는 인터넷과 블록체인 위의 정보를 하나로 모아, 여러분을 나타내 줍니다.",
   "Start Now": "지금 시작하기",
   "FOLLOW US ON TWITTER": "트위터 팔로우하기",
   "Talk with us": "팀과 이야기 나누어요",
@@ -11,5 +10,11 @@
   "Dashboard for all L1s": "모든 L1을 위한 대시보드",
   "View Your ": "여러분의 모든",
   "Entire Portfolio": "포트폴리오를 한눈에",
-  "Learn More": "더 알아보기"
+  "Learn More": "더 알아보기",
+
+  "Dashboards That are Made Right.": "제대로 만들어진 대시보드",
+
+  "Connect All Wallets": "모든 지갑을 연결하다",
+  "Manage and Share ": "보유한 지갑을 한번에",
+  "Your Wallets": "관리하고 공유하기"
 }

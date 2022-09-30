@@ -1,3 +1,5 @@
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -19,6 +21,14 @@ const DynmaicAddWalletModal = dynamic(
 const DynamicTokenDetailModal = dynamic(
   () => import('./components/TokenDetailModal'),
 );
+
+export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+};
 
 const DashboardPage = () => {
   const { session } = useSession();

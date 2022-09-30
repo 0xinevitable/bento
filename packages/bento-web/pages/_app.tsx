@@ -70,7 +70,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
       </Head>
