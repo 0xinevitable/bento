@@ -48,6 +48,13 @@ export const HeaderSection: React.FC = () => {
 
     setTimeout(() => (canvasRef.current!.style.opacity = '1'));
 
+    window.onbeforeunload = () => {
+      if (canvasRef.current) {
+        canvasRef.current.style.transition = 'opacity 0.2s ease';
+        canvasRef.current.style.opacity = '0';
+      }
+    };
+
     return () => {
       globe.destroy();
     };
