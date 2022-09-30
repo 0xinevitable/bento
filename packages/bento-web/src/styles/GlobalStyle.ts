@@ -58,9 +58,10 @@ export const GlobalStyle = createGlobalStyle`
     background: #222;
     color: white;
     pointer-events: none;
-    border-radius: 6px;
-    padding: 4px 6px;
-    font-size: 14px;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 18px;
+    z-index: 2;
   }
 
   .web3modal-modal-lightbox,
