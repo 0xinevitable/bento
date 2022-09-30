@@ -326,9 +326,15 @@ const NavigationItem = styled.li<NavigationItemProps>`
 `;
 
 const RightContent = styled.div`
+  height: 100%;
   display: flex;
   align-items: center;
   gap: 32px;
+
+  @media screen and (max-width: 680px) {
+    margin-left: auto;
+    margin-right: 20px;
+  }
 `;
 
 const SocialIconList = styled.div`
@@ -371,11 +377,14 @@ const SocialIconList = styled.div`
 `;
 
 const LanguageSelector = styled.div`
+  height: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
 
   & > button {
+    height: 100%;
+    padding: 0 6px;
     font-weight: 900;
     font-size: 20px;
     line-height: 120%;
