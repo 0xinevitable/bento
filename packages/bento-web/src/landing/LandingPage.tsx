@@ -22,7 +22,7 @@ import { WalletSection } from './sections/WalletSection';
 export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['landing'])),
+      ...(await serverSideTranslations(locale, ['common', 'landing'])),
     },
   };
 };

@@ -3,33 +3,40 @@ import Image from 'next/future/image';
 import React from 'react';
 import styled from 'styled-components';
 
-import { TrackedSection, TrackedSectionOptions } from '@/components/system';
+import {
+  AnimatedToolTip,
+  TrackedSection,
+  TrackedSectionOptions,
+} from '@/components/system';
 
 import { WALLETS } from '@/constants/wallets';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
-import { onMobile, onTablet } from '../utils/breakpoints';
+import { onMobile } from '../utils/breakpoints';
 
 export const WalletSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
 }) => {
   const { t } = useTranslation('landing');
+  const { t: tc } = useTranslation('common');
 
   return (
     <Wrapper>
       <Container {...trackedSectionOptions}>
-        <SectionBadge>{t('Wallets')}</SectionBadge>
+        <SectionBadge>{t('Connect All Wallets')}</SectionBadge>
         <SectionTitle>
-          Manage and Share
+          {t('Manage and Share ')}
           <br />
-          Your Wallets
+          {t('Your Wallets')}
         </SectionTitle>
 
         <WalletList>
           {Object.entries(WALLETS).map(([alt, src]) => (
             <li key={src}>
-              <WalletIcon alt={alt} src={src} />
+              <AnimatedToolTip placement="bottom" label={tc(alt)}>
+                <WalletIcon alt={tc(alt)} src={src} />
+              </AnimatedToolTip>
             </li>
           ))}
         </WalletList>
@@ -110,6 +117,7 @@ const WalletIllustWrapper = styled.div`
   display: flex;
   width: fit-content;
   height: fit-content;
+  pointer-events: none;
 `;
 const WALLET_TOP_BLUR_SIZE = 50;
 const WALLET_RIGHT_BLUR_SIZE = 152.68;
