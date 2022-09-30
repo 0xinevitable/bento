@@ -40,12 +40,9 @@ const LandingPage: React.FC = () => {
 
       <HeaderSection />
 
-      <BackgroundSection
-        id="dashboard-background"
-        event="view_landing_section"
-      />
+      <BackgroundSection id="background" event="view_landing_section" />
       <DashboardSection id="dashboard" event="view_landing_section" />
-      <WalletSection id="dashboard-wallets" event="view_landing_section" />
+      <WalletSection id="wallets" event="view_landing_section" />
 
       <OurMissionContainer>
         <OurMissionTypography />
