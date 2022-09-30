@@ -5,6 +5,8 @@ import { WALLETS } from '../constants/wallets';
 
 const isBrowser = typeof window !== 'undefined';
 
+type WalletType = Lowercase<keyof typeof WALLETS>;
+
 export type AnalyticsEvent = {
   view_landing: undefined;
   view_landing_section: {
@@ -49,10 +51,10 @@ export type AnalyticsEvent = {
     type: keyof typeof KEYS_BY_NETWORK;
   };
   click_connect_wallet_select_wallet: {
-    type: keyof typeof WALLETS | 'metamask-or-walletconnect';
+    type: WalletType | 'metamask-or-walletconnect';
   };
   connect_wallet: {
-    type: keyof typeof WALLETS | 'metamask-or-walletconnect';
+    type: WalletType | 'metamask-or-walletconnect';
     networks: (keyof typeof KEYS_BY_NETWORK)[];
     address: string;
   };
