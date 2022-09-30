@@ -1,5 +1,6 @@
 import { Icon as Iconify } from '@iconify/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -66,6 +67,9 @@ export const NavigationBar = () => {
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
+  const { i18n } = useTranslation('common');
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
+
   return (
     <Wrapper>
       <Container>
@@ -96,37 +100,52 @@ export const NavigationBar = () => {
           </NavigationList>
         </NoSSR>
 
-        <SocialIconList>
-          {!!session && (
-            <button className="logout" onClick={onClickLogout}>
-              Logout
-            </button>
-          )}
-          <a
-            href="https://twitter.com/bentoinevitable"
-            target="_blank"
-            onClick={() =>
-              Analytics.logEvent('click_social_link', {
-                type: 'twitter',
-                medium: 'gnb',
-              })
-            }
-          >
-            <TwitterIcon />
-          </a>
-          <a
-            href="https://github.com/inevitable-changes/bento"
-            target="_blank"
-            onClick={() =>
-              Analytics.logEvent('click_social_link', {
-                type: 'github',
-                medium: 'gnb',
-              })
-            }
-          >
-            <GithubIcon />
-          </a>
-        </SocialIconList>
+        <RightContent>
+          <SocialIconList>
+            {!!session && (
+              <button className="logout" onClick={onClickLogout}>
+                Logout
+              </button>
+            )}
+            <a
+              href="https://twitter.com/bentoinevitable"
+              target="_blank"
+              onClick={() =>
+                Analytics.logEvent('click_social_link', {
+                  type: 'twitter',
+                  medium: 'gnb',
+                })
+              }
+            >
+              <TwitterIcon />
+            </a>
+            <a
+              href="https://github.com/inevitable-changes/bento"
+              target="_blank"
+              onClick={() =>
+                Analytics.logEvent('click_social_link', {
+                  type: 'github',
+                  medium: 'gnb',
+                })
+              }
+            >
+              <GithubIcon />
+            </a>
+          </SocialIconList>
+
+          <LanguageSelector>
+            <Link href={router.asPath} locale="en">
+              <button className={currentLanguage === 'en' ? 'selected' : ''}>
+                EN
+              </button>
+            </Link>
+            <Link href={router.asPath} locale="ko">
+              <button className={currentLanguage === 'ko' ? 'selected' : ''}>
+                KO
+              </button>
+            </Link>
+          </LanguageSelector>
+        </RightContent>
 
         <MobileMenuButton onClick={() => setMobileMenuOpen((prev) => !prev)}>
           <Icon
@@ -306,6 +325,12 @@ const NavigationItem = styled.li<NavigationItemProps>`
     `};
 `;
 
+const RightContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 32px;
+`;
+
 const SocialIconList = styled.div`
   gap: 12px;
 
@@ -342,6 +367,42 @@ const SocialIconList = styled.div`
 
   @media screen and (max-width: 680px) {
     display: none;
+  }
+`;
+
+const LanguageSelector = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  & > button {
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: ${Colors.gray500};
+
+    &.selected {
+      color: #ffcff2;
+      background: linear-gradient(
+          89.93deg,
+          #ffffff 5.39%,
+          #e4f7ff 15.3%,
+          #cef0ff 41.06%,
+          #b4c4ff 48.06%,
+          #ffcff2 54.44%,
+          #ffffff 62.86%,
+          #d2d2d2 81.2%,
+          #ffd7d7 91.6%,
+          #d5d5d5 100.52%
+        ),
+        #4a5162;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
   }
 `;
 
