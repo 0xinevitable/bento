@@ -93,12 +93,9 @@ const Title = styled.h2`
 
   text-align: center;
   letter-spacing: 0.01em;
-
   color: rgba(255, 255, 255, 0.85);
 
-  @media screen and (max-width: 1040px) {
-    z-index: 1;
-  }
+  z-index: 1;
 
   ${onTablet} {
     font-size: 42px;
@@ -121,12 +118,9 @@ const Description = styled.p`
   text-align: center;
   letter-spacing: 0.01em;
   white-space: break-spaces;
-
   color: rgba(255, 255, 255, 0.66);
 
-  @media screen and (max-width: 1040px) {
-    z-index: 1;
-  }
+  z-index: 1;
 
   ${onTablet} {
     font-size: 15px;
@@ -143,28 +137,25 @@ const BitcoinIllustContainer = styled.div`
 
   position: absolute;
   top: 89px;
-  left: ${-380 + 36}px;
+  left: ${-380 + 75}px;
   z-index: 0;
 
-  @media screen and (max-width: 1040px) {
+  @media screen and (max-width: 1240px) {
     left: -240px;
+    top: 64px;
   }
 
   ${onTablet} {
-    top: 160px;
-    left: -180px;
+    left: -130px;
   }
 
   ${onMobile} {
-    top: 260px;
     left: -120px;
   }
 
   @media screen and (max-width: 400px) {
     width: 280px;
     height: 280px;
-
-    top: 380px;
   }
 `;
 const EthereumIllustContainer = styled.div`
@@ -176,7 +167,7 @@ const EthereumIllustContainer = styled.div`
   right: ${-380 + 75}px;
   z-index: 0;
 
-  @media screen and (max-width: 1040px) {
+  @media screen and (max-width: 1240px) {
     right: -240px;
   }
 

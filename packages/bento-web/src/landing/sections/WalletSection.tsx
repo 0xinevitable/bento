@@ -13,7 +13,7 @@ import { WALLETS } from '@/constants/wallets';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
-import { onMobile } from '../utils/breakpoints';
+import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const WalletSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
@@ -83,7 +83,6 @@ const WalletList = styled.ul`
   }
 
   ${onMobile} {
-    margin-top: 0;
     gap: 4px;
   }
 `;
@@ -115,9 +114,32 @@ const WalletIcon = styled.img`
 const WalletIllustWrapper = styled.div`
   margin-top: -108px;
   display: flex;
-  width: fit-content;
-  height: fit-content;
+  justify-content: center;
+  align-items: center;
+  width: 526px;
+  height: 526px;
   pointer-events: none;
+
+  ${onTablet} {
+    margin: -84px -32px 0;
+    width: ${526 * 0.85}px;
+    height: ${526 * 0.85}px;
+
+    & > img {
+      transform: scale(0.85);
+    }
+  }
+
+  ${onMobile} {
+    margin: -48px -32px 0;
+
+    width: ${526 * 0.65}px;
+    height: ${526 * 0.65}px;
+
+    & > img {
+      transform: scale(0.65);
+    }
+  }
 `;
 const WALLET_TOP_BLUR_SIZE = 50;
 const WALLET_RIGHT_BLUR_SIZE = 152.68;
