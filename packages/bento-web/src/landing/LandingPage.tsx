@@ -41,8 +41,8 @@ const LandingPage: React.FC = () => {
       <HeaderSection />
 
       <BackgroundSection id="background" event="view_landing_section" />
-      <DashboardSection id="dashboard" event="view_landing_section" />
       <WalletSection id="wallets" event="view_landing_section" />
+      <DashboardSection id="dashboard" event="view_landing_section" />
 
       <OurMissionContainer>
         <OurMissionTypography />
