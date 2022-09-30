@@ -144,13 +144,12 @@ const BitcoinIllustContainer = styled.div`
   height: 380px;
 
   position: absolute;
-  top: 89px;
+  bottom: -192px;
   left: ${-380 + 75}px;
   z-index: 0;
 
   @media screen and (max-width: 1240px) {
     left: -240px;
-    top: 64px;
   }
 
   ${onTablet} {
