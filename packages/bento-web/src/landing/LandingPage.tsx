@@ -85,6 +85,7 @@ const Container = styled.div`
 
 const OurMissionContainer = styled.div`
   width: 100%;
+  margin-top: 64px;
   padding: 40px 0;
   background-color: ${Colors.brand500};
 

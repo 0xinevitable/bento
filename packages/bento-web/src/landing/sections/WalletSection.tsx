@@ -1,3 +1,5 @@
+import { useTranslation } from 'next-i18next';
+import Image from 'next/future/image';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -5,123 +7,69 @@ import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 
 import { WALLETS } from '@/constants/wallets';
 
+import { SectionBadge } from '../components/SectionBadge';
+import { SectionTitle } from '../components/SectionTitle';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const WalletSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
 }) => {
+  const { t } = useTranslation('landing');
+
   return (
-    <Container {...trackedSectionOptions}>
-      <Subtitle>Dashboard</Subtitle>
-      <Title>
-        Manage and Share
-        <br />
-        Your Wallets
-      </Title>
+    <Wrapper>
+      <Container {...trackedSectionOptions}>
+        <SectionBadge>{t('Wallets')}</SectionBadge>
+        <SectionTitle>
+          Manage and Share
+          <br />
+          Your Wallets
+        </SectionTitle>
 
-      <WalletIllustWrapper>
-        <WalletIllust src="/assets/dashboard-landing/illusts/wallet.png" />
-      </WalletIllustWrapper>
+        <WalletList>
+          {Object.entries(WALLETS).map(([alt, src]) => (
+            <li key={src}>
+              <WalletIcon alt={alt} src={src} />
+            </li>
+          ))}
+        </WalletList>
 
-      <WalletList>
-        {Object.entries(WALLETS).map(([alt, src]) => (
-          <li key={src}>
-            <WalletIcon alt={alt} src={src} />
-          </li>
-        ))}
-      </WalletList>
-    </Container>
+        <WalletIllustWrapper>
+          <WalletIllust
+            alt=""
+            width={526}
+            height={526}
+            src="/assets/dashboard-landing/illusts/wallet.png"
+          />
+        </WalletIllustWrapper>
+      </Container>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  padding: 130px 32px 0;
+  width: 100%;
+  display: flex;
+
+  @media (max-width: 1235px) {
+    padding-top: 64px;
+  }
+`;
 const Container = styled(TrackedSection)`
-  margin-top: 292px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  ${onMobile} {
-    padding: 0 20px;
-  }
-`;
-
-const Subtitle = styled.span`
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 36px;
-
-  background: linear-gradient(
-    180deg,
-    #ddccd3 24.6%,
-    #a97e8f 52.47%,
-    #bc4e79 73.02%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
-`;
-
-const Title = styled.h2`
-  margin: 0;
-  margin-top: 12px;
-
-  font-weight: 900;
-  font-size: 54px;
-  line-height: 120%;
-  text-align: center;
-  color: rgba(221, 204, 211, 0.88);
-
-  ${onTablet} {
-    font-size: 42px;
-  }
-
-  ${onMobile} {
-    font-size: 38px;
-  }
-`;
-
-const WalletIllustWrapper = styled.div`
-  margin-top: 16px;
-  display: flex;
-
-  ${onTablet} {
-    margin: -30px 0;
-    transform: scale(0.85);
-  }
-
-  ${onMobile} {
-    margin: -12% 0;
-    transform: scale(0.68);
-  }
-`;
-const WalletIllust = styled.img`
-  margin-top: ${-50}px;
-  margin-right: ${-151.68}px;
-  width: ${525.31 + 151.68}px;
-  height: ${525.31 + 50}px;
-  object-fit: contain;
-  user-select: none;
+  margin: 0 auto;
+  max-width: 1180px;
+  width: 100%;
+  position: relative;
 `;
 
 const WalletList = styled.ul`
-  margin: 0;
-  margin-top: 52px;
+  margin: 24px 0 0;
   padding: 0;
   list-style-type: none;
 
   display: flex;
-  justify-content: center;
-  gap: 16px;
-
-  @media screen and (max-width: 800px) {
-    gap: 12px;
-  }
-
-  ${onTablet} {
-    gap: 8px;
-    margin-top: 24px;
-  }
+  gap: 8px;
 
   @media screen and (max-width: 600px) {
     gap: 6px;
@@ -133,8 +81,8 @@ const WalletList = styled.ul`
   }
 `;
 const WalletIcon = styled.img`
-  width: 131px;
-  height: 131px;
+  width: 128px;
+  height: 128px;
 
   @media screen and (max-width: 800px) {
     width: 100px;
@@ -155,4 +103,22 @@ const WalletIcon = styled.img`
     width: 56px;
     height: 56px;
   }
+`;
+
+const WalletIllustWrapper = styled.div`
+  margin-top: -108px;
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+`;
+const WALLET_TOP_BLUR_SIZE = 50;
+const WALLET_RIGHT_BLUR_SIZE = 152.68;
+const WalletIllust = styled(Image)`
+  margin-top: ${-WALLET_TOP_BLUR_SIZE}px;
+  margin-right: ${-WALLET_RIGHT_BLUR_SIZE}px;
+  width: ${526 + WALLET_RIGHT_BLUR_SIZE}px;
+  height: ${526 + WALLET_TOP_BLUR_SIZE}px;
+  object-fit: contain;
+  user-select: none;
+  filter: saturate(120%);
 `;
