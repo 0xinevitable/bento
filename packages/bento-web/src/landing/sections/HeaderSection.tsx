@@ -46,6 +46,15 @@ export const HeaderSection: React.FC = () => {
       },
     });
 
+    setTimeout(() => (canvasRef.current!.style.opacity = '1'));
+
+    window.onbeforeunload = () => {
+      if (canvasRef.current) {
+        canvasRef.current.style.transition = 'opacity 0.2s ease';
+        canvasRef.current.style.opacity = '0';
+      }
+    };
+
     return () => {
       globe.destroy();
     };
@@ -54,7 +63,13 @@ export const HeaderSection: React.FC = () => {
   return (
     <Header>
       <GlobeWrapper>
-        <canvas ref={canvasRef} />
+        <canvas
+          ref={canvasRef}
+          style={{
+            opacity: 0,
+            transition: 'opacity 1s ease',
+          }}
+        />
         <div className="overlay" />
       </GlobeWrapper>
 
