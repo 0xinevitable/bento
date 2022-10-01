@@ -21,7 +21,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
   wallet,
   ...motionProps
 }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslation('common');
 
   return (
     <Container {...motionProps}>

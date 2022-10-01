@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslation('common');
 
   const { wallets, revalidateWallets } = useWalletContext();
 

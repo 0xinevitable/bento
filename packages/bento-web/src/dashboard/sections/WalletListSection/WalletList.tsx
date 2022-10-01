@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslation('common');
 
   const onClickCopy = useCallback(
     (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
