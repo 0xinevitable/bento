@@ -1,4 +1,4 @@
-import { Variants, motion } from 'framer-motion';
+import { MotionProps, motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled from 'styled-components';
@@ -6,20 +6,17 @@ import styled from 'styled-components';
 import ferrariImageOne from '@/assets/illusts/animation-ferrari-1.png';
 import ferrariImageTwo from '@/assets/illusts/animation-ferrari-2.png';
 
-const ITEM_LIST: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-      ease: 'circInOut',
-      duration: 0.8,
-    },
+const generateAnimation = (startY: number): MotionProps => ({
+  variants: {
+    hidden: { opacity: 0, y: startY },
+    show: { opacity: 1, y: 0 },
   },
-};
-
-const generateItemVariant = (startY: number): Variants => ({
-  hidden: { opacity: 0, y: startY },
-  show: { opacity: 1, y: 0 },
+  transition: {
+    ease: 'circInOut',
+    duration: 0.2,
+  },
+  initial: 'hidden',
+  whileInView: 'show',
 });
 
 export const AnimationCard: React.FC = () => {
@@ -37,15 +34,11 @@ export const AnimationCard: React.FC = () => {
               넣는 애니메이션
             </CardTitleKO>
           )}
-          <AnimatedBlockList
-            variants={ITEM_LIST}
-            initial="hidden"
-            whileInView="show"
-          >
-            <AnimatedBlockItem variants={generateItemVariant(-54)}>
+          <AnimatedBlockList>
+            <AnimatedBlockItem {...generateAnimation(-54)}>
               <BlockItem alt="" src={ferrariImageOne} />
             </AnimatedBlockItem>
-            <AnimatedBlockItem variants={generateItemVariant(54)}>
+            <AnimatedBlockItem {...generateAnimation(54)}>
               <BlockItem alt="" src={ferrariImageTwo} />
             </AnimatedBlockItem>
           </AnimatedBlockList>
