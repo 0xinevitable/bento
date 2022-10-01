@@ -19,7 +19,9 @@ export const ProfileSection: React.FC<TrackedSectionOptions> = ({
   return (
     <Wrapper>
       <Section ref={sectionRef} {...trackedSectionOptions}>
-        {isRendered && (
+        {!isRendered ? (
+          <Placeholder />
+        ) : (
           <>
             <TitleTypography />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 42 }}>
@@ -72,6 +74,11 @@ const Section = styled(TrackedSection)`
   width: 100%;
   position: relative;
 `;
+const Placeholder = styled.div`
+  width: 100%;
+  height: 800px;
+`;
+
 const _TitleTypography: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     width="627"
