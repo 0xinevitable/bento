@@ -10,7 +10,21 @@ import background from '@/assets/illusts/link-in-bio-background.png';
 import { HiddenCardTitle } from '../components/HiddenCardTitle';
 import { DefaultLinkBlock, ImageLinkBlock } from '../components/LinkBlock';
 
-const generateAnimation = (delay: number) => ({
+const generateBlockAnimation = (delay: number) => ({
+  variants: {
+    hidden: { opacity: 0, x: 64 },
+    show: { opacity: 1, x: 0 },
+  },
+  transition: {
+    ease: 'easeInOut',
+    duration: 0.4,
+    delay,
+  },
+  initial: 'hidden',
+  whileInView: 'show',
+});
+
+const generateImageAnimation = (delay: number) => ({
   variants: {
     hidden: { opacity: 0, y: 80 },
     show: { opacity: 1, y: 0 },
@@ -56,23 +70,26 @@ export const LinkInBioCard: React.FC = () => {
             title="Where I get my clothes!"
             description="I love this store, they have the best clothes!"
             style={{ position: 'absolute', top: 142, left: -48 }}
+            {...generateBlockAnimation(0.4)}
           />
           <DefaultLinkBlock
             title="Where I get my clothes!"
             description="I love this store, they have the best clothes!"
             style={{ position: 'absolute', top: 236, left: -24 }}
+            {...generateBlockAnimation(0.6)}
           />
           <ImageLinkBlock
             title="Shop in NYC"
             description="Random"
             style={{ position: 'absolute', left: 164, bottom: -18 }}
+            {...generateBlockAnimation(0.8)}
           />
 
           <Content style={{ overflow: 'hidden' }}>
-            <ImageTwoWrapper {...generateAnimation(0.3)}>
+            <ImageTwoWrapper {...generateImageAnimation(0.3)}>
               <ImageTwo alt="" src={illustTwo} />
             </ImageTwoWrapper>
-            <ImageOneWrapper {...generateAnimation(0)}>
+            <ImageOneWrapper {...generateImageAnimation(0)}>
               <ImageOne alt="" src={illustOne} />
             </ImageOneWrapper>
           </Content>

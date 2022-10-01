@@ -1,9 +1,10 @@
+import { HTMLMotionProps, motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import { ShadowedImage } from '@/profile/components/ShadowedImage';
 import { Colors } from '@/styles';
 
-type Props = React.HTMLAttributes<HTMLDivElement> & {
+type Props = HTMLMotionProps<'div'> & {
   title: string;
   description: string;
 };
@@ -24,7 +25,7 @@ export const DefaultLinkBlock: React.FC<Props> = ({
   );
 };
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   padding: 16px;
   width: 343px;
 
