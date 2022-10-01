@@ -68,12 +68,14 @@ export const LinkInBioCard: React.FC = () => {
             style={{ position: 'absolute', left: 164, bottom: -18 }}
           />
 
-          <ImageTwoWrapper {...generateAnimation(0.3)}>
-            <ImageTwo alt="" src={illustTwo} />
-          </ImageTwoWrapper>
-          <ImageOneWrapper {...generateAnimation(0)}>
-            <ImageOne alt="" src={illustOne} />
-          </ImageOneWrapper>
+          <Content style={{ overflow: 'hidden' }}>
+            <ImageTwoWrapper {...generateAnimation(0.3)}>
+              <ImageTwo alt="" src={illustTwo} />
+            </ImageTwoWrapper>
+            <ImageOneWrapper {...generateAnimation(0)}>
+              <ImageOne alt="" src={illustOne} />
+            </ImageOneWrapper>
+          </Content>
         </Content>
       </Card>
     </Wrapper>
@@ -131,7 +133,7 @@ const CardTitleKO = styled.h3`
 const ImageOneWrapper = styled(motion.div)`
   position: absolute;
   right: 240px;
-  bottom: 0;
+  bottom: -2px;
 `;
 const ImageOne = styled(Image)`
   width: 286px;
@@ -142,7 +144,7 @@ const ImageOne = styled(Image)`
 const ImageTwoWrapper = styled(motion.div)`
   position: absolute;
   right: 30px;
-  bottom: 0;
+  bottom: -2px;
 `;
 const ImageTwo = styled(Image)`
   width: 286px;
