@@ -136,12 +136,12 @@ export const NavigationBar = () => {
           <LanguageSelector>
             <Link href={router.asPath} locale="en">
               <button className={currentLanguage === 'en' ? 'selected' : ''}>
-                EN
+                <span>EN</span>
               </button>
             </Link>
             <Link href={router.asPath} locale="ko">
               <button className={currentLanguage === 'ko' ? 'selected' : ''}>
-                KO
+                <span>KO</span>
               </button>
             </Link>
           </LanguageSelector>
@@ -390,23 +390,27 @@ const LanguageSelector = styled.div`
     line-height: 120%;
     text-align: center;
     letter-spacing: 0.01em;
-    color: ${Colors.gray500};
+    user-select: none;
 
-    &.selected {
+    & > span {
+      color: ${Colors.gray500};
+    }
+
+    &.selected > span {
       color: #ffcff2;
       background: linear-gradient(
-          89.93deg,
-          #ffffff 5.39%,
-          #e4f7ff 15.3%,
-          #cef0ff 41.06%,
-          #b4c4ff 48.06%,
-          #ffcff2 54.44%,
-          #ffffff 62.86%,
-          #d2d2d2 81.2%,
-          #ffd7d7 91.6%,
-          #d5d5d5 100.52%
+          to right,
+          #ffffff 5%,
+          #e4f7ff 15%,
+          #cef0ff 41%,
+          #b4c4ff 48%,
+          #ffcff2 54%,
+          #ffffff 62%,
+          #d2d2d2 81%,
+          #ffd7d7 92%,
+          #d5d5d5 100%
         ),
-        #4a5162;
+        #ffcff2;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
