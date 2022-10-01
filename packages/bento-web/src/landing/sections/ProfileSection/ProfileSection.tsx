@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 import { useInViewport } from '@/hooks/useInViewport';
 
-import { AnimationCard } from './AnimationCard';
-import { DisplayNFTsCard } from './DisplayNFTsCard';
-import { LinkInBioCard } from './LinkInBioCard';
-import { ProfileSummaryCard } from './ProfileSummaryCard';
-import { ShowCaseCryptoCard } from './ShowCaseCryptoCard';
+import { AnimationCard } from './cards/AnimationCard';
+import { DisplayNFTsCard } from './cards/DisplayNFTsCard';
+import { LinkInBioCard } from './cards/LinkInBioCard';
+import { ProfileSummaryCard } from './cards/ProfileSummaryCard';
+import { ShowCaseCryptoCard } from './cards/ShowCaseCryptoCard';
 
 export const ProfileSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions

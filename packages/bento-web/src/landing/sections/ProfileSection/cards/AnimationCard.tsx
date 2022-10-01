@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import ferrariImageOne from '@/assets/illusts/animation-ferrari-1.png';
 import ferrariImageTwo from '@/assets/illusts/animation-ferrari-2.png';
 
-import { HiddenCardTitle } from './HiddenCardTitle';
+import { HiddenCardTitle } from '../components/HiddenCardTitle';
 
 const generateAnimation = (startY: number): MotionProps => ({
   variants: {

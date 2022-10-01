@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import illust from '@/assets/illusts/clonex-nft.png';
 
-import { HiddenCardTitle } from './HiddenCardTitle';
+import { HiddenCardTitle } from '../components/HiddenCardTitle';
 
 export const DisplayNFTsCard: React.FC = () => {
   const { i18n } = useTranslation('common');

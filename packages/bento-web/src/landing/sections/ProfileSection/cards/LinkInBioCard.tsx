@@ -7,7 +7,7 @@ import illustOne from '@/assets/illusts/link-in-bio-1.png';
 import illustTwo from '@/assets/illusts/link-in-bio-2.png';
 import background from '@/assets/illusts/link-in-bio-background.png';
 
-import { HiddenCardTitle } from './HiddenCardTitle';
+import { HiddenCardTitle } from '../components/HiddenCardTitle';
 
 const generateAnimation = (delay: number) => ({
   variants: {

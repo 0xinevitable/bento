@@ -7,7 +7,7 @@ import illust from '@/assets/illusts/showcase-crypto.png';
 
 import { Colors } from '@/styles';
 
-import { HiddenCardTitle } from './HiddenCardTitle';
+import { HiddenCardTitle } from '../components/HiddenCardTitle';
 
 export const ShowCaseCryptoCard: React.FC = () => {
   const { i18n } = useTranslation('common');
