@@ -171,7 +171,7 @@ const Wrapper = styled.div`
 `;
 const Container = styled(TrackedSection)`
   margin: 0 auto;
-  max-width: 1180px;
+  max-width: 1328px;
   width: 100%;
   position: relative;
 

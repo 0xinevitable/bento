@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -17,7 +17,7 @@ export const ShowCaseCryptoCard: React.FC = () => {
         alt=""
         src={illust}
         sizes="512px"
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
       />
       {currentLanguage === 'en' && (
         <>
@@ -36,9 +36,9 @@ export const ShowCaseCryptoCard: React.FC = () => {
 };
 
 const Card = styled.div`
-  width: 444px;
-  height: 400px;
-  background: ${Colors.brandgradient};
+  width: calc((100% - 84px) / 3 + 44px);
+  height: 100%;
+  background: ${Colors.brand800};
   border-radius: 48px;
 
   position: relative;

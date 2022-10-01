@@ -6,6 +6,7 @@ import { useInViewport } from '@/hooks/useInViewport';
 
 import { AnimationCard } from './AnimationCard';
 import { DisplayNFTsCard } from './DisplayNFTsCard';
+import { ProfileSummaryCard } from './ProfileSummaryCard';
 import { ShowCaseCryptoCard } from './ShowCaseCryptoCard';
 
 export const ProfileSection: React.FC<TrackedSectionOptions> = ({
@@ -20,8 +21,19 @@ export const ProfileSection: React.FC<TrackedSectionOptions> = ({
         {isRendered && (
           <>
             <TitleTypography />
-            <ShowCaseCryptoCard />
-            <AnimationCard />
+            <div
+              style={{
+                display: 'flex',
+                gap: 42,
+                height: 400,
+                justifyContent: 'space-between',
+                alignItems: 'flex-end',
+              }}
+            >
+              <ShowCaseCryptoCard />
+              <ProfileSummaryCard />
+              <AnimationCard />
+            </div>
             <DisplayNFTsCard />
           </>
         )}
@@ -43,7 +55,7 @@ const Wrapper = styled.div`
 `;
 const Section = styled(TrackedSection)`
   margin: 0 auto;
-  max-width: 1180px;
+  max-width: 1328px;
   width: 100%;
   position: relative;
 `;

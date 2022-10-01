@@ -27,36 +27,42 @@ export const AnimationCard: React.FC = () => {
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
   return (
-    <Card>
-      <Content>
-        {currentLanguage === 'en' && <CardTitleEN />}
-        {currentLanguage === 'ko' && (
-          <CardTitleKO>
-            내 마음대로 <br />
-            넣는 애니메이션
-          </CardTitleKO>
-        )}
-        <AnimatedBlockList
-          variants={ITEM_LIST}
-          initial="hidden"
-          whileInView="show"
-        >
-          <AnimatedBlockItem variants={generateItemVariant(-54)}>
-            <BlockItem alt="" src={ferrariImageOne} />
-          </AnimatedBlockItem>
-          <AnimatedBlockItem variants={generateItemVariant(54)}>
-            <BlockItem alt="" src={ferrariImageTwo} />
-          </AnimatedBlockItem>
-        </AnimatedBlockList>
-        <FramerLogo />
-      </Content>
-    </Card>
+    <Wrapper>
+      <Card>
+        <Content>
+          {currentLanguage === 'en' && <CardTitleEN />}
+          {currentLanguage === 'ko' && (
+            <CardTitleKO>
+              내 마음대로 <br />
+              넣는 애니메이션
+            </CardTitleKO>
+          )}
+          <AnimatedBlockList
+            variants={ITEM_LIST}
+            initial="hidden"
+            whileInView="show"
+          >
+            <AnimatedBlockItem variants={generateItemVariant(-54)}>
+              <BlockItem alt="" src={ferrariImageOne} />
+            </AnimatedBlockItem>
+            <AnimatedBlockItem variants={generateItemVariant(54)}>
+              <BlockItem alt="" src={ferrariImageTwo} />
+            </AnimatedBlockItem>
+          </AnimatedBlockList>
+          <FramerLogo />
+        </Content>
+      </Card>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  width: calc((100% - 84px) / 3);
+  height: calc(100% + 175px);
+`;
 const Card = styled.div`
-  width: 400px;
-  height: 575px;
+  width: 100%;
+  height: 100%;
 
   background: linear-gradient(172.69deg, #9a4133 16.94%, #c8453c 94.32%);
   border-radius: 48px;
