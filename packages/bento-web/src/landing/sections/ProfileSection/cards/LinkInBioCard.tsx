@@ -7,6 +7,7 @@ import illustOne from '@/assets/illusts/link-in-bio-1.png';
 import illustTwo from '@/assets/illusts/link-in-bio-2.png';
 import background from '@/assets/illusts/link-in-bio-background.png';
 
+import { DefaultLinkBlock } from '../components/DefaultLinkBlock';
 import { HiddenCardTitle } from '../components/HiddenCardTitle';
 
 const generateAnimation = (delay: number) => ({
@@ -50,6 +51,9 @@ export const LinkInBioCard: React.FC = () => {
               프로필 링크
             </CardTitleKO>
           )}
+
+          <DefaultLinkBlock />
+          <DefaultLinkBlock />
 
           <ImageTwoWrapper {...generateAnimation(0.3)}>
             <ImageTwo alt="" src={illustTwo} />
