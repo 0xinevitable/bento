@@ -4,6 +4,7 @@ import axios, { AxiosError } from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, {
   useCallback,
@@ -107,6 +108,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   isMyProfile = false,
 }) => {
   const router = useRouter();
+  const { t } = useTranslation('dashboard');
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
 
@@ -309,7 +311,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
         {isMyProfile && !isEditing && (
           <ProfileEditButton onClick={onProfileEdit}>
-            Edit Profile
+            {t('Edit Profile')}
           </ProfileEditButton>
         )}
 

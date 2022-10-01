@@ -1,5 +1,6 @@
 import { Wallet } from '@bento/common';
 import clsx from 'clsx';
+import { useTranslation } from 'next-i18next';
 import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -17,6 +18,8 @@ type ProfileWalletListProps = {
 export const ProfileWalletList: React.FC<ProfileWalletListProps> = ({
   wallets,
 }) => {
+  const { t } = useTranslation('dashboard');
+
   const onClickCopy = useCallback(
     (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
       Analytics.logEvent('click_copy_wallet_address', {
@@ -50,7 +53,7 @@ export const ProfileWalletList: React.FC<ProfileWalletListProps> = ({
           ))}
         </WalletItemList>
       ) : (
-        <Empty>No Wallets Found</Empty>
+        <Empty>{t('No Wallets Found')}</Empty>
       )}
     </React.Fragment>
   );

@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import styled from 'styled-components';
 
 import { Button } from '@/components/system';
@@ -7,9 +8,10 @@ type FixedFooterProps = {
 };
 
 export const FixedFooter: React.FC<FixedFooterProps> = ({ onClickShare }) => {
+  const { t } = useTranslation('common');
   return (
     <Container>
-      <ShareButton onClick={onClickShare}>Share</ShareButton>
+      <ShareButton onClick={onClickShare}>{t('Share')}</ShareButton>
     </Container>
   );
 };
