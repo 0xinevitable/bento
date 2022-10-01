@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled from 'styled-components';
@@ -9,6 +10,8 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@/components/system';
+
+import { float } from '@/styles';
 
 import { onMobile, onTablet } from '../utils/breakpoints';
 
@@ -36,11 +39,11 @@ export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
           Both making them move timid outside their ecosystem.
         </Description>
 
-        <BitcoinIllustContainer>
+        <BitcoinIllustContainer {...float(20, true, 2)}>
           <Illust alt="" src={bitcoinIllust} sizes="512px" placeholder="blur" />
           <IllustShadow style={{ left: 30, bottom: 29 }} />
         </BitcoinIllustContainer>
-        <EthereumIllustContainer>
+        <EthereumIllustContainer {...float(16, false, 2)}>
           <Illust
             alt=""
             src={ethereumIllust}
@@ -139,7 +142,7 @@ const Description = styled.p`
   }
 `;
 
-const BitcoinIllustContainer = styled.div`
+const BitcoinIllustContainer = styled(motion.div)`
   width: 380px;
   height: 380px;
 
@@ -165,7 +168,7 @@ const BitcoinIllustContainer = styled.div`
     height: 280px;
   }
 `;
-const EthereumIllustContainer = styled.div`
+const EthereumIllustContainer = styled(motion.div)`
   width: 380px;
   height: 380px;
 

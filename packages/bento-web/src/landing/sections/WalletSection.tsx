@@ -22,7 +22,7 @@ import {
   AddWalletButton,
   ButtonContainer,
 } from '@/dashboard/sections/WalletListSection/WalletListSection';
-import { Colors } from '@/styles';
+import { Colors, float } from '@/styles';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
@@ -109,7 +109,7 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
             ))}
           </WalletList>
 
-          <WalletIllustWrapper>
+          <WalletIllustWrapper {...float(16, false, 2)}>
             <WalletIllust
               alt=""
               width={526}
@@ -244,7 +244,7 @@ const WalletIcon = styled.img`
   }
 `;
 
-const WalletIllustWrapper = styled.div`
+const WalletIllustWrapper = styled(motion.div)`
   margin-top: -108px;
   display: flex;
   justify-content: center;
