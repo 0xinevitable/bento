@@ -67,7 +67,7 @@ export const NavigationBar = () => {
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
-  const { i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
   return (
@@ -92,7 +92,7 @@ export const NavigationBar = () => {
                 <Link href={item.href} passHref>
                   <a>
                     <Iconify icon={item.icon} style={{ fontSize: 20 }} />
-                    <span className="title">{item.title}</span>
+                    <span className="title">{t(item.title)}</span>
                   </a>
                 </Link>
               </NavigationItem>
@@ -104,7 +104,7 @@ export const NavigationBar = () => {
           <SocialIconList>
             {!!session && (
               <button className="logout" onClick={onClickLogout}>
-                Logout
+                {t('Logout')}
               </button>
             )}
             <a
@@ -181,7 +181,7 @@ export const NavigationBar = () => {
                       >
                         <Iconify className="text-xl" icon={item.icon} />
                         <span className="text-2xl font-medium leading-none">
-                          {item.title}
+                          {t(item.title)}
                         </span>
                       </a>
                     </Link>

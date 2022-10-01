@@ -1,5 +1,5 @@
 {
-  "Discover Your ⚡Web3 World": "당신의 ⚡웹3 세계를 발견하세요.",
+  "Discover Your ⚡Web3 World": "당신의 ⚡웹3 세상을 발견하세요.",
   "Bento aggregates your identity from the 2nd/3rd web": "벤토는 인터넷과 블록체인 위의 정보를 하나로 모아, 여러분을 나타내 줍니다.",
   "Start Now": "지금 시작하기",
   "FOLLOW US ON TWITTER": "트위터 팔로우하기",
@@ -7,14 +7,24 @@
   "Find your Identity": "여러분의 아이덴티티를 찾으세요",
   "Merge your wallets into one": "여러 개의 지갑을 하나로 합쳐보세요",
 
+  "BACKGROUND": "우리가 벤토를 만들게 된 이유",
+  "Dashboards That are Made Right.": "제대로 만들어진 대시보드",
+
+  "Connect All Wallets": "모든 지갑을 연결하다",
+  "Manage and Share ": "보유한 지갑을 한번에",
+  "Your Wallets": "관리하고 공유하기",
+  "Wallets": "지갑 목록",
+  "Wallets Connected": "연결된 지갑",
+  "Add Another": "하나 더 추가하기",
+
   "Dashboard for all L1s": "모든 L1을 위한 대시보드",
   "View Your ": "여러분의 모든",
   "Entire Portfolio": "포트폴리오를 한눈에",
   "Learn More": "더 알아보기",
 
-  "Dashboards That are Made Right.": "제대로 만들어진 대시보드",
+  "Group social links and posts": "소셜 링크들과 포스트들을 하나로",
 
-  "Connect All Wallets": "모든 지갑을 연결하다",
-  "Manage and Share ": "보유한 지갑을 한번에",
-  "Your Wallets": "관리하고 공유하기"
+  "The Status Quo": "개념 자체를 바꾸다",
+  "Users are ": "지갑이라는 개념은 ",
+  "NOT Wallets": "사용자랑은 다르니까"
 }

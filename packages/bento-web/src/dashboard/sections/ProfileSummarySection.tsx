@@ -1,5 +1,5 @@
-import { cachedAxios } from '@bento/core';
 import axios, { AxiosError } from 'axios';
+import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -26,6 +26,7 @@ type ErrorResponse =
 export const ProfileSummarySection: React.FC = () => {
   const { session } = useSession();
   const { profile, revaildateProfile } = useProfile();
+  const { t } = useTranslation('dashboard');
 
   const profileImageURL =
     profile?.images?.[0] || '/assets/mockups/profile-default.png';
@@ -54,6 +55,15 @@ export const ProfileSummarySection: React.FC = () => {
     displayName: profile?.display_name ?? '',
     bio: profile?.bio ?? '',
   });
+
+  useEffect(() => {
+    setDraft({
+      username: profile?.username ?? '',
+      displayName: profile?.display_name ?? '',
+      bio: profile?.bio ?? '',
+    });
+  }, [JSON.stringify(profile)]);
+
   const onProfileEdit = useCallback(async () => {
     if (!isEditing) {
       setDraft({
@@ -118,7 +128,7 @@ export const ProfileSummarySection: React.FC = () => {
             <Information>
               {!profile?.username ? (
                 <>
-                  <EmptyText>Update your Profile</EmptyText>
+                  <EmptyText>{t('Update your Profile')}</EmptyText>
                   <Username>{`@unknown`}</Username>
                 </>
               ) : (
@@ -140,7 +150,7 @@ export const ProfileSummarySection: React.FC = () => {
                   setEditing((prev) => !prev);
                 }}
               >
-                {!profile?.username ? 'Setup Now' : 'Edit Profile'}
+                {t(!profile?.username ? 'Setup Now' : 'Edit Profile')}
               </AddProfileButton>
             </Information>
           </Foreground>

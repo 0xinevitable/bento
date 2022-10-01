@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled from 'styled-components';
@@ -10,6 +11,8 @@ import {
   TrackedSectionOptions,
 } from '@/components/system';
 
+import { float } from '@/styles';
+
 import { onMobile, onTablet } from '../utils/breakpoints';
 
 export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
@@ -20,7 +23,7 @@ export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
   return (
     <Wrapper {...trackedSectionOptions}>
       <Container>
-        <Badge>BACKGROUND</Badge>
+        <Badge>{t('BACKGROUND')}</Badge>
         <Title style={{ marginTop: 26 }}>
           {t('Dashboards That are Made Right.')}
         </Title>
@@ -36,11 +39,11 @@ export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
           Both making them move timid outside their ecosystem.
         </Description>
 
-        <BitcoinIllustContainer>
+        <BitcoinIllustContainer {...float(20, true, 2)}>
           <Illust alt="" src={bitcoinIllust} sizes="512px" placeholder="blur" />
           <IllustShadow style={{ left: 30, bottom: 29 }} />
         </BitcoinIllustContainer>
-        <EthereumIllustContainer>
+        <EthereumIllustContainer {...float(16, false, 2)}>
           <Illust
             alt=""
             src={ethereumIllust}
@@ -139,18 +142,17 @@ const Description = styled.p`
   }
 `;
 
-const BitcoinIllustContainer = styled.div`
+const BitcoinIllustContainer = styled(motion.div)`
   width: 380px;
   height: 380px;
 
   position: absolute;
-  top: 89px;
+  bottom: -192px;
   left: ${-380 + 75}px;
   z-index: 0;
 
   @media screen and (max-width: 1240px) {
     left: -240px;
-    top: 64px;
   }
 
   ${onTablet} {
@@ -166,7 +168,7 @@ const BitcoinIllustContainer = styled.div`
     height: 280px;
   }
 `;
-const EthereumIllustContainer = styled.div`
+const EthereumIllustContainer = styled(motion.div)`
   width: 380px;
   height: 380px;
 
@@ -195,7 +197,7 @@ const Illust = styled(Image)`
   width: 100%;
   height: 100%;
   z-index: 1;
-  filter: saturate(150%);
+  filter: saturate(120%);
 `;
 const IllustShadow = styled.div`
   width: 160px;

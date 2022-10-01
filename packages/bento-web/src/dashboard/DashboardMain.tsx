@@ -1,5 +1,6 @@
 import { Wallet } from '@bento/common';
 import groupBy from 'lodash.groupby';
+import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -40,6 +41,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   setTokenDetailModalVisible,
   setTokenDetailModalParams,
 }) => {
+  const { t } = useTranslation('dashboard');
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: NFTBalances } = useNFTBalances({ wallets });
 
@@ -137,7 +139,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 alignItems: 'center',
               }}
             >
-              <span className="title">Assets</span>
+              <span className="title">{t('Assets')}</span>
               <InlineBadge>
                 {renderedTokenBalances.length > 0
                   ? renderedTokenBalances.length.toLocaleString()
@@ -161,7 +163,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               >
                 <Checkbox checked={isNFTsShown ?? false} readOnly />
                 <span className="ml-[6px] text-white/80 text-sm">
-                  Show NFTs
+                  {t('Show NFTs')}
                 </span>
               </div>
             </div>

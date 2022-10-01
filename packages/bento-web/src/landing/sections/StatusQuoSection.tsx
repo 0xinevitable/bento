@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled, { css } from 'styled-components';
 
@@ -29,14 +30,17 @@ const ASSETS = {
 export const StatusQuoSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
 }) => {
+  const { t } = useTranslation('landing');
+
   return (
     <Wrapper>
       <Section {...trackedSectionOptions}>
         <Information>
           <SectionBadge>The Status Quo</SectionBadge>
           <SectionTitle>
-            Users are <br />
-            NOT Wallets
+            {t('Users are ')}
+            <br />
+            {t('NOT Wallets')}
           </SectionTitle>
           <Paragraph>
             Exactly. Users are entirely different from wallets, <br />
@@ -82,7 +86,7 @@ const Wrapper = styled.div`
 `;
 const Section = styled(TrackedSection)`
   margin: 170px auto 0;
-  max-width: 1180px;
+  max-width: 1328px;
   width: 100%;
   position: relative;
 
