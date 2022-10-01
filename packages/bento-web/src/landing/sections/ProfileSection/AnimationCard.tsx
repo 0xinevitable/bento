@@ -1,9 +1,26 @@
+import { Variants, motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled from 'styled-components';
 
 import ferrariImageOne from '@/assets/illusts/animation-ferrari-1.png';
 import ferrariImageTwo from '@/assets/illusts/animation-ferrari-2.png';
+
+const ITEM_LIST: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.2,
+      ease: 'circInOut',
+      duration: 0.8,
+    },
+  },
+};
+
+const generateItemVariant = (startY: number): Variants => ({
+  hidden: { opacity: 0, y: startY },
+  show: { opacity: 1, y: 0 },
+});
 
 export const AnimationCard: React.FC = () => {
   const { i18n } = useTranslation('common');
@@ -19,10 +36,18 @@ export const AnimationCard: React.FC = () => {
             넣는 애니메이션
           </CardTitleKO>
         )}
-        <BlockList>
-          <BlockItem alt="" src={ferrariImageOne} />
-          <BlockItem alt="" src={ferrariImageTwo} />
-        </BlockList>
+        <AnimatedBlockList
+          variants={ITEM_LIST}
+          initial="hidden"
+          whileInView="show"
+        >
+          <AnimatedBlockItem variants={generateItemVariant(-54)}>
+            <BlockItem alt="" src={ferrariImageOne} />
+          </AnimatedBlockItem>
+          <AnimatedBlockItem variants={generateItemVariant(54)}>
+            <BlockItem alt="" src={ferrariImageTwo} />
+          </AnimatedBlockItem>
+        </AnimatedBlockList>
         <FramerLogo />
       </Content>
     </Card>
@@ -129,22 +154,26 @@ const CardTitleKO = styled.h3`
   text-shadow: 0px 8px 12px rgba(0, 0, 0, 0.18);
 `;
 
-const BlockList = styled.div`
+const AnimatedBlockList = styled(motion.ul)`
   margin: 38px -8px -48px;
   display: flex;
   gap: 10px;
 `;
-const BlockItem = styled(Image)`
+const AnimatedBlockItem = styled(motion.li)`
   width: 50%;
   height: 310px;
-  border-radius: 16px;
-
-  /* shadow-default */
-  filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.18));
 
   &:last-of-type {
     margin-top: 48px;
   }
+`;
+const BlockItem = styled(Image)`
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+
+  /* shadow-default */
+  filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.18));
 `;
 
 const FramerLogo = styled.img.attrs({
