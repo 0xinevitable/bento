@@ -1,8 +1,6 @@
-import dedent from 'dedent';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styled from 'styled-components';
@@ -10,24 +8,13 @@ import styled from 'styled-components';
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 import { useWindowSize } from '@/hooks/useWindowSize';
 
-import { Colors } from '@/styles';
+import { Colors, float } from '@/styles';
 import { Analytics } from '@/utils';
 
 const ASSETS = {
   ILLUST: '/assets/landing/header-illust.png',
   PAWN: '/assets/landing/header-pawn.png',
 };
-
-const float = (y: number, reverse: boolean = false) => ({
-  initial: { transform: `translate3d(0, ${!reverse ? -y : y}px, 0)` },
-  animate: { transform: `translate3d(0, ${!reverse ? y : -y}px, 0)` },
-  transition: {
-    ease: 'linear',
-    repeat: Infinity,
-    repeatType: 'mirror',
-    duration: 2,
-  } as const,
-});
 
 export const FooterSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
