@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
 export const Footer: React.FC = () => {
@@ -25,11 +26,17 @@ const Container = styled.footer`
   margin-top: 120px;
   margin-bottom: 100px;
 
-  font-weight: 700;
+  font-weight: 900;
   font-size: 24px;
   line-height: 120%;
   text-align: center;
   color: rgba(221, 204, 211, 0.88);
+
+  /* FIXME: Tailwind */
+  &,
+  & * {
+    font-family: ${systemFontStack} !important;
+  }
 
   & > a {
     color: unset;
