@@ -34,6 +34,24 @@ const Container = styled.div`
   width: calc((100% - 84px) / 3);
   height: 100%;
 
+  @media screen and (max-width: 1400px) {
+    width: calc((100% - 72px) / 3);
+  }
+
+  @media screen and (max-width: 1280px) {
+    width: calc((100% - 56px) / 3);
+  }
+
+  @media screen and (max-width: 1110px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 735px) {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 500px;
+  }
+
   border-radius: 36px;
   background-size: cover;
   overflow: hidden;

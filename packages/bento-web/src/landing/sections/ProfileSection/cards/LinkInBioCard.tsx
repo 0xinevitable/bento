@@ -81,7 +81,7 @@ export const LinkInBioCard: React.FC = () => {
           <ImageLinkBlock
             title="Shop in NYC"
             description="Random"
-            style={{ position: 'absolute', left: 164, bottom: -18 }}
+            style={{ position: 'absolute', top: 198, left: 164 }}
             {...generateBlockAnimation(0.8)}
           />
 
@@ -101,8 +101,20 @@ export const LinkInBioCard: React.FC = () => {
 
 const Wrapper = styled.div`
   width: 100%;
-  width: calc(100% - 400px);
   height: 100%;
+  flex: 1;
+
+  @media screen and (max-width: 735px) {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 500px;
+
+    &,
+    & > div {
+      min-height: 680px;
+      height: 680px;
+    }
+  }
 `;
 const Card = styled.div`
   width: 100%;
@@ -139,18 +151,31 @@ const _CardTitleEN: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     />
   </svg>
 );
-const CardTitleEN = styled(_CardTitleEN)``;
+const CardTitleEN = styled(_CardTitleEN)`
+  @media screen and (max-width: 1268px) {
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+`;
 const CardTitleKO = styled.h3`
   font-weight: 900;
   font-size: 48px;
   line-height: 100%;
   color: #e73e67;
+
+  @media screen and (max-width: 1268px) {
+    font-size: 40px;
+  }
 `;
 
 const ImageOneWrapper = styled(motion.div)`
   position: absolute;
   right: 240px;
   bottom: -2px;
+
+  @media screen and (max-width: 735px) {
+    right: 180px;
+  }
 `;
 const ImageOne = styled(Image)`
   width: 286px;
@@ -162,6 +187,10 @@ const ImageTwoWrapper = styled(motion.div)`
   position: absolute;
   right: 30px;
   bottom: -2px;
+
+  @media screen and (max-width: 735px) {
+    right: 16px;
+  }
 `;
 const ImageTwo = styled(Image)`
   width: 286px;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 import { useInViewport } from '@/hooks/useInViewport';
+import { useWindowSize } from '@/hooks/useWindowSize';
 
 import { AnimationCard } from './cards/AnimationCard';
 import { DisplayNFTsCard } from './cards/DisplayNFTsCard';
@@ -16,6 +17,9 @@ export const ProfileSection: React.FC<TrackedSectionOptions> = ({
   const sectionRef = useRef<HTMLElement>(null);
   const isRendered = useInViewport(sectionRef);
 
+  const { width: screenWidth } = useWindowSize();
+  const isCollapsed = screenWidth <= 1110;
+
   return (
     <Wrapper>
       <Section ref={sectionRef} {...trackedSectionOptions}>
@@ -24,32 +28,33 @@ export const ProfileSection: React.FC<TrackedSectionOptions> = ({
         ) : (
           <>
             <TitleTypography />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 42 }}>
-              <div
-                style={{
-                  display: 'flex',
-                  gap: 42,
-                  height: 400,
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-end',
-                }}
-              >
-                <ShowCaseCryptoCard />
-                <ProfileSummaryCard />
-                <AnimationCard />
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  gap: 42,
-                  height: 400,
-                  justifyContent: 'space-between',
-                }}
-              >
-                <LinkInBioCard />
-                <DisplayNFTsCard />
-              </div>
-            </div>
+            {!isCollapsed ? (
+              <Column>
+                <Row>
+                  <ShowCaseCryptoCard />
+                  <ProfileSummaryCard />
+                  <AnimationCard />
+                </Row>
+                <Row>
+                  <LinkInBioCard />
+                  <DisplayNFTsCard />
+                </Row>
+              </Column>
+            ) : (
+              <Column>
+                <Row>
+                  <ShowCaseCryptoCard />
+                  <ProfileSummaryCard />
+                </Row>
+                <Row style={{ height: 'fit-content' }}>
+                  <DisplayNFTsCard />
+                  <AnimationCard />
+                </Row>
+                <Row>
+                  <LinkInBioCard />
+                </Row>
+              </Column>
+            )}
           </>
         )}
       </Section>
@@ -96,4 +101,48 @@ const _TitleTypography: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 );
 const TitleTypography = styled(_TitleTypography)`
   margin-bottom: 20px;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+
+  @media screen and (max-width: 1400px) {
+    gap: 36px;
+  }
+
+  @media screen and (max-width: 1280px) {
+    gap: 28px;
+  }
+
+  @media screen and (max-width: 732px) {
+    gap: 20px;
+  }
+`;
+const Row = styled.div`
+  height: 400px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 42px;
+
+  @media screen and (max-width: 1400px) {
+    gap: 36px;
+  }
+
+  @media screen and (max-width: 1280px) {
+    gap: 28px;
+  }
+
+  @media screen and (max-width: 1110px) {
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  @media screen and (max-width: 735px) {
+    flex-direction: column;
+    height: unset;
+  }
 `;

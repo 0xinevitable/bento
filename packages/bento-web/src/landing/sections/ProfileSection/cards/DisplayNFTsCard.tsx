@@ -49,7 +49,28 @@ export const DisplayNFTsCard: React.FC = () => {
 const Card = styled.div`
   width: 100%;
   width: calc((100% - 84px) / 3);
+  max-width: 400px;
   height: 100%;
+
+  @media screen and (max-width: 1400px) {
+    width: calc((100% - 72px) / 3);
+  }
+
+  @media screen and (max-width: 1280px) {
+    width: calc((100% - 56px) / 3);
+  }
+
+  @media screen and (max-width: 1110px) {
+    width: 50%;
+    max-width: unset;
+    height: 400px;
+  }
+
+  @media screen and (max-width: 735px) {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 500px;
+  }
 
   background: linear-gradient(166.78deg, #91a5f5 5.04%, #a1f1fd 90.49%);
   border-radius: 48px;
@@ -163,6 +184,15 @@ const CardTitleEN = styled(_CardTitleEN)`
   position: absolute;
   top: 32px;
   left: 32px;
+
+  @media screen and (max-width: 1268px) {
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+
+  @media screen and (max-width: 735px) {
+    transform: scale(1);
+  }
 `;
 const CardTitleKO = styled.h3`
   position: absolute;
@@ -189,6 +219,14 @@ const CardTitleKO = styled.h3`
   /* shadow-default */
 
   text-shadow: 0px 8px 12px rgba(0, 0, 0, 0.18);
+
+  @media screen and (max-width: 1268px) {
+    font-size: 40px;
+  }
+
+  @media screen and (max-width: 735px) {
+    font-size: 48px;
+  }
 `;
 
 const IllustContainer = styled(motion.div)`
