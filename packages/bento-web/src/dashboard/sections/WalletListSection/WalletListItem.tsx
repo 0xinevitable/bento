@@ -1,10 +1,12 @@
 import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
+import { MotionProps, motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import { Colors, systemFontStack } from '@/styles';
 
-export type WalletListItemProps = Wallet & {
+export type WalletListItemProps = MotionProps & {
+  wallet: Wallet;
   onClickDelete?: (walletAddress: string) => void;
   onClickCopy?: (
     address: string,
@@ -15,10 +17,11 @@ export type WalletListItemProps = Wallet & {
 export const WalletListItem: React.FC<WalletListItemProps> = ({
   onClickCopy,
   onClickDelete,
-  ...wallet
+  wallet,
+  ...motionProps
 }) => {
   return (
-    <Container>
+    <Container {...motionProps}>
       <WalletArchIcon
         className={wallet.type}
         src={`/assets/icons/ic-arch-${wallet.type}.svg`}
@@ -54,7 +57,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
   );
 };
 
-const Container = styled.li`
+const Container = styled(motion.li)`
   display: flex;
   flex-direction: row;
   align-items: flex-start;

@@ -1,5 +1,6 @@
 import { Wallet, shortenAddress } from '@bento/common';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -59,7 +60,7 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
         {wallets.map((wallet) => (
           <WalletListItem
             key={wallet.address}
-            {...wallet}
+            wallet={wallet}
             onClickDelete={onClickDelete}
             onClickCopy={onClickCopy}
           />
@@ -84,7 +85,7 @@ const Container = styled.div`
   position: relative;
   margin-top: -40px;
 `;
-export const WalletItemList = styled.ul`
+export const WalletItemList = styled(motion.ul)`
   padding-top: 40px;
   padding-bottom: ${(88 * 2) / 3}px;
   width: 100%;

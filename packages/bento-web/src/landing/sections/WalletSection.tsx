@@ -1,4 +1,5 @@
 import { Wallet } from '@bento/common';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import React, { useEffect, useRef } from 'react';
@@ -26,6 +27,47 @@ import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
+const CARD = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 1.2,
+    },
+  },
+};
+const WALLET_ICON_LIST = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+const WALLET_ITEM_LIST = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 1.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0 },
+};
+
 const MOCKED_WALLET: Wallet = {
   type: 'evm',
   address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
@@ -49,13 +91,17 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
             {t('Your Wallets')}
           </SectionTitle>
 
-          <WalletList>
+          <WalletList
+            variants={WALLET_ICON_LIST}
+            initial="hidden"
+            whileInView="show"
+          >
             {Object.entries(WALLETS).map(([alt, src]) => (
-              <li key={src}>
+              <motion.li key={src} variants={item}>
                 <AnimatedToolTip placement="bottom" label={tc(alt)}>
                   <WalletIcon alt={tc(alt)} src={src} />
                 </AnimatedToolTip>
-              </li>
+              </motion.li>
             ))}
           </WalletList>
 
@@ -69,7 +115,7 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
           </WalletIllustWrapper>
         </Content>
 
-        <CardBorder>
+        <CardBorder variants={CARD} initial="hidden" whileInView="show">
           <Card>
             <span className="title">{t('Wallets')}</span>
 
@@ -82,18 +128,21 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
                   top: 0,
                   overflow: 'visible',
                 }}
+                variants={WALLET_ITEM_LIST}
+                initial="hidden"
+                whileInView="show"
               >
-                <WalletListItem {...MOCKED_WALLET} />
-                <WalletListItem {...MOCKED_WALLET} />
-                <WalletListItem {...MOCKED_WALLET} />
-                <WalletListItem {...MOCKED_WALLET} />
+                <WalletListItem wallet={MOCKED_WALLET} variants={item} />
+                <WalletListItem wallet={MOCKED_WALLET} variants={item} />
+                <WalletListItem wallet={MOCKED_WALLET} variants={item} />
+                <WalletListItem wallet={MOCKED_WALLET} variants={item} />
               </WalletItemList>
               <CardFooter>
                 <div />
                 <div>
                   <span>
                     {t('Wallets Connected')}&nbsp;&nbsp;
-                    <span className="total">24</span>
+                    <span className="total">4</span>
                   </span>
                 </div>
               </CardFooter>
@@ -134,7 +183,7 @@ const Content = styled.div`
   flex: 1;
 `;
 
-const WalletList = styled.ul`
+const WalletList = styled(motion.ul)`
   margin: 24px 0 0;
   padding: 0;
   list-style-type: none;
@@ -217,11 +266,11 @@ const WalletIllust = styled(Image)`
   filter: saturate(120%);
 `;
 
-const CardBorder = styled.div`
+const CardBorder = styled(motion.div)`
   margin-top: 16px;
   margin-left: 62px;
-  max-width: 568px;
-  width: 100%;
+  width: 568px;
+  min-width: 568px;
   height: fit-content;
 
   padding: 1px;
