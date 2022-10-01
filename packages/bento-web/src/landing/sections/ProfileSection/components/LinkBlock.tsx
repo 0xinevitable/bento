@@ -3,15 +3,22 @@ import styled from 'styled-components';
 import { ShadowedImage } from '@/profile/components/ShadowedImage';
 import { Colors } from '@/styles';
 
-type Props = React.HTMLAttributes<HTMLDivElement>;
+type Props = React.HTMLAttributes<HTMLDivElement> & {
+  title: string;
+  description: string;
+};
 
-export const DefaultLinkBlock: React.FC<Props> = (props) => {
+export const DefaultLinkBlock: React.FC<Props> = ({
+  title,
+  description,
+  ...props
+}) => {
   return (
     <Container {...props}>
-      <LinkImage src="/assets/landing/link-in-bio-image.png" />
+      <LinkImage className="img" src="/assets/landing/link-in-bio-image.png" />
       <Information>
-        <Title>Where I get my clothes!</Title>
-        <Description>30% Discount</Description>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
       </Information>
     </Container>
   );
@@ -32,6 +39,7 @@ const Container = styled.div`
 `;
 
 const LinkImage = styled(ShadowedImage)`
+  min-width: 86px;
   width: 86px;
   height: 86px;
 `;
@@ -41,6 +49,13 @@ const Information = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 4px;
+
+  & > span {
+    max-width: calc(100% - 64px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 `;
 const Title = styled.span`
   font-weight: 800;
@@ -55,4 +70,23 @@ const Description = styled.span`
   line-height: 120%;
   letter-spacing: -0.3px;
   color: rgba(255, 255, 255, 0.8);
+`;
+
+export const ImageLinkBlock = styled(DefaultLinkBlock)`
+  width: fit-content;
+  gap: 12px;
+  flex-direction: column;
+  align-items: center;
+
+  div.img,
+  img {
+    width: 162px;
+    height: 162px;
+  }
+
+  span {
+    text-align: center;
+
+    max-width: 162px;
+  }
 `;

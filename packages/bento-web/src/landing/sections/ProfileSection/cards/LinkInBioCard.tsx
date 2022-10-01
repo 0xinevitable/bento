@@ -7,8 +7,8 @@ import illustOne from '@/assets/illusts/link-in-bio-1.png';
 import illustTwo from '@/assets/illusts/link-in-bio-2.png';
 import background from '@/assets/illusts/link-in-bio-background.png';
 
-import { DefaultLinkBlock } from '../components/DefaultLinkBlock';
 import { HiddenCardTitle } from '../components/HiddenCardTitle';
+import { DefaultLinkBlock, ImageLinkBlock } from '../components/LinkBlock';
 
 const generateAnimation = (delay: number) => ({
   variants: {
@@ -35,7 +35,7 @@ export const LinkInBioCard: React.FC = () => {
           alt=""
           src={background}
           sizes="800px"
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: '100%', height: '100%', borderRadius: 48 }}
         />
 
         <Content>
@@ -52,8 +52,21 @@ export const LinkInBioCard: React.FC = () => {
             </CardTitleKO>
           )}
 
-          <DefaultLinkBlock />
-          <DefaultLinkBlock />
+          <DefaultLinkBlock
+            title="Where I get my clothes!"
+            description="I love this store, they have the best clothes!"
+            style={{ position: 'absolute', top: 142, left: -48 }}
+          />
+          <DefaultLinkBlock
+            title="Where I get my clothes!"
+            description="I love this store, they have the best clothes!"
+            style={{ position: 'absolute', top: 236, left: -24 }}
+          />
+          <ImageLinkBlock
+            title="Shop in NYC"
+            description="Random"
+            style={{ position: 'absolute', left: 164, bottom: -18 }}
+          />
 
           <ImageTwoWrapper {...generateAnimation(0.3)}>
             <ImageTwo alt="" src={illustTwo} />
@@ -79,7 +92,6 @@ const Card = styled.div`
   background: linear-gradient(172.69deg, #9a4133 16.94%, #c8453c 94.32%);
   border-radius: 48px;
   position: relative;
-  overflow: hidden;
   filter: saturate(120%);
 `;
 const Content = styled.div`
