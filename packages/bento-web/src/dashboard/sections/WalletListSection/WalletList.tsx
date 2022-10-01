@@ -1,6 +1,7 @@
 import { Wallet, shortenAddress } from '@bento/common';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -15,6 +16,8 @@ type Props = {
 };
 
 export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
+  const { t } = useTranslation('dashboard');
+
   const onClickCopy = useCallback(
     (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
       Analytics.logEvent('click_copy_wallet_address', {
@@ -71,7 +74,7 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
         <div />
         <div>
           <span>
-            Wallets Connected&nbsp;&nbsp;
+            {t('Wallets Connected')}&nbsp;&nbsp;
             <span className="total">{wallets.length}</span>
           </span>
         </div>

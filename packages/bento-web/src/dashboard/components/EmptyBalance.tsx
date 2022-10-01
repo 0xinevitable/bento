@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled from 'styled-components';
 
@@ -6,6 +7,8 @@ import { Colors } from '@/styles';
 type Props = React.HTMLAttributes<HTMLDivElement>;
 
 export const EmptyBalance: React.FC<Props> = ({ className, ...props }) => {
+  const { t } = useTranslation('dashboard');
+
   return (
     <Container {...props}>
       <Image
@@ -16,7 +19,7 @@ export const EmptyBalance: React.FC<Props> = ({ className, ...props }) => {
         quality={100}
         style={{ filter: 'saturate(120%)' }}
       />
-      <Message>Assets will show up here</Message>
+      <Message>{t('Assets will show up here')}</Message>
     </Container>
   );
 };

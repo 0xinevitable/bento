@@ -20,7 +20,7 @@ export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
   return (
     <Wrapper {...trackedSectionOptions}>
       <Container>
-        <Badge>BACKGROUND</Badge>
+        <Badge>{t('BACKGROUND')}</Badge>
         <Title style={{ marginTop: 26 }}>
           {t('Dashboards That are Made Right.')}
         </Title>

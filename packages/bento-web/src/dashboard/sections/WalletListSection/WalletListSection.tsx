@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled from 'styled-components';
 
@@ -13,12 +14,14 @@ type Props = {
 };
 
 export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
+  const { t } = useTranslation('dashboard');
+
   const { wallets, revalidateWallets } = useWalletContext();
 
   return (
     <Container>
       <SectionTitleContainer>
-        <SectionTitle>Wallets</SectionTitle>
+        <SectionTitle>{t('Wallets')}</SectionTitle>
       </SectionTitleContainer>
 
       {wallets.length > 0 ? (
@@ -26,7 +29,7 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
           <WalletList wallets={wallets} revalidateWallets={revalidateWallets} />
           <ButtonContainer>
             <AddWalletButton onClick={onClickAddWallet}>
-              Add Another
+              {t('Add Another')}
             </AddWalletButton>
           </ButtonContainer>
         </>
@@ -42,7 +45,7 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
           <EmptyContainer>
             <div>
               <span>
-                Wallets Connected&nbsp;&nbsp;
+                {t('Wallets Connected')}&nbsp;&nbsp;
                 <span className="total">{wallets.length}</span>
               </span>
             </div>
@@ -50,7 +53,7 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
 
           <ButtonContainer>
             <AddWalletButton onClick={onClickAddWallet}>
-              Connect Wallet
+              {t('Connect Wallet')}
             </AddWalletButton>
           </ButtonContainer>
         </>

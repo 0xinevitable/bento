@@ -1,4 +1,5 @@
 import groupBy from 'lodash.groupby';
+import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -16,6 +17,8 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
   netWorthInUSD,
 }) => {
+  const { t } = useTranslation('dashboard');
+
   const assetRatioByPlatform = useMemo(() => {
     const groups = groupBy(tokenBalances, 'platform');
     const items = Object.entries(groups).map(([platform, assets]) => {
@@ -36,7 +39,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       <Illust />
 
       <Information>
-        <Field>Net Worth</Field>
+        <Field>{t('Net Worth')}</Field>
         <Title>{`$${netWorthInUSD.toLocaleString()}`}</Title>
       </Information>
 

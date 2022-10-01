@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { useCallback } from 'react';
 import styled from 'styled-components';
 
@@ -23,6 +24,8 @@ export const ProfileEditor: React.FC<Props> = ({
   setDraft,
   onSubmit,
 }) => {
+  const { t } = useTranslation('dashboard');
+
   const onKeyDown = useCallback<
     React.KeyboardEventHandler<HTMLInputElement | HTMLTextAreaElement>
   >(
@@ -39,7 +42,7 @@ export const ProfileEditor: React.FC<Props> = ({
   return (
     <Container>
       <FieldInput
-        field="Name"
+        field={t('Name')}
         placeholder="e.g., Junho Yeo"
         defaultValue={draft.displayName}
         onKeyDown={onKeyDown}
@@ -48,21 +51,21 @@ export const ProfileEditor: React.FC<Props> = ({
         }
       />
       <FieldInput
-        field="Username"
-        placeholder="username (will be shown after @)"
+        field={t('Username')}
+        placeholder={t('username (will be shown after @)')}
         defaultValue={draft.username}
         onKeyDown={onKeyDown}
         onChange={(e) => setDraft((v) => ({ ...v, username: e.target.value }))}
       />
       <FieldTextArea
-        field="Description"
+        field={t('Description')}
         placeholder="e.g., 19 y.o. Builder from Seoul"
         defaultValue={draft.bio}
         onKeyDown={onKeyDown}
         onChange={(e) => setDraft((v) => ({ ...v, bio: e.target.value }))}
         rows={5}
       />
-      <SaveButton onClick={onSubmit}>Save</SaveButton>
+      <SaveButton onClick={onSubmit}>{t('Save')}</SaveButton>
     </Container>
   );
 };

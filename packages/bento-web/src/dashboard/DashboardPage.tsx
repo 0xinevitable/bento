@@ -25,7 +25,7 @@ const DynamicTokenDetailModal = dynamic(
 export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(locale, ['common', 'dashboard'])),
     },
   };
 };

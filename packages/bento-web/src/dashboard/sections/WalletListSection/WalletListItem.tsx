@@ -1,6 +1,7 @@
 import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import { MotionProps, motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import styled from 'styled-components';
 
 import { Colors, systemFontStack } from '@/styles';
@@ -20,6 +21,8 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
   wallet,
   ...motionProps
 }) => {
+  const { t } = useTranslation('dashboard');
+
   return (
     <Container {...motionProps}>
       <WalletArchIcon
@@ -51,7 +54,9 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
       </Information>
       <ButtonList>
         {/* <button>Edit</button> */}
-        <button onClick={() => onClickDelete?.(wallet.address)}>Delete</button>
+        <button onClick={() => onClickDelete?.(wallet.address)}>
+          {t('Delete')}
+        </button>
       </ButtonList>
     </Container>
   );
