@@ -1,4 +1,4 @@
-import { Variants, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled from 'styled-components';
@@ -7,20 +7,18 @@ import illustOne from '@/assets/illusts/link-in-bio-1.png';
 import illustTwo from '@/assets/illusts/link-in-bio-2.png';
 import background from '@/assets/illusts/link-in-bio-background.png';
 
-const ITEM_LIST: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-      ease: 'circInOut',
-      duration: 0.8,
-    },
+const generateAnimation = (delay: number) => ({
+  variants: {
+    hidden: { opacity: 0, y: 80 },
+    show: { opacity: 1, y: 0 },
   },
-};
-
-const generateItemVariant = (startY: number): Variants => ({
-  hidden: { opacity: 0, y: startY },
-  show: { opacity: 1, y: 0 },
+  transition: {
+    ease: 'linear',
+    duration: 0.2,
+    delay,
+  },
+  initial: 'hidden',
+  whileInView: 'show',
 });
 
 export const LinkInBioCard: React.FC = () => {
@@ -46,8 +44,12 @@ export const LinkInBioCard: React.FC = () => {
             </CardTitleKO>
           )}
 
-          <ImageTwo alt="" src={illustTwo} />
-          <ImageOne alt="" src={illustOne} />
+          <ImageTwoWrapper {...generateAnimation(0.3)}>
+            <ImageTwo alt="" src={illustTwo} />
+          </ImageTwoWrapper>
+          <ImageOneWrapper {...generateAnimation(0)}>
+            <ImageOne alt="" src={illustOne} />
+          </ImageOneWrapper>
         </Content>
       </Card>
     </Wrapper>
@@ -103,22 +105,24 @@ const CardTitleKO = styled.h3`
   color: #e73e67;
 `;
 
+const ImageOneWrapper = styled(motion.div)`
+  position: absolute;
+  right: 240px;
+  bottom: 0;
+`;
 const ImageOne = styled(Image)`
   width: 286px;
   height: 398px;
   object-fit: contain;
   object-position: bottom;
-
+`;
+const ImageTwoWrapper = styled(motion.div)`
   position: absolute;
-  right: 240px;
+  right: 30px;
   bottom: 0;
 `;
 const ImageTwo = styled(Image)`
   width: 286px;
   object-fit: contain;
   object-position: bottom;
-
-  position: absolute;
-  right: 30px;
-  bottom: 0;
 `;
