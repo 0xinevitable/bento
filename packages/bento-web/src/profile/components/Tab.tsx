@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -22,6 +23,7 @@ export const Tab = <T extends string>({
   shadowColor = 'rgba(255, 169, 39, 0.85)',
   ...containerProps
 }: TabProps<T>) => {
+  const { t } = useTranslation('dashboard');
   const tabIndex = useMemo(() => items.indexOf(selected), [items, selected]);
   const [left, setLeft] = useState<number>(0);
 
@@ -41,7 +43,7 @@ export const Tab = <T extends string>({
             onClick={() => onChange?.(item)}
             primaryColor={primaryColor}
           >
-            <TabItemText>{item}</TabItemText>
+            <TabItemText>{t(item)}</TabItemText>
           </TabItem>
         );
       })}

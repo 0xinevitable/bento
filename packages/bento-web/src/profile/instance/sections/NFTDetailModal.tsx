@@ -1,4 +1,5 @@
 import { OpenSeaAsset } from '@bento/core/nfts';
+import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -21,6 +22,7 @@ export const NFTDetailModal: React.FC<Props> = ({
   isMyProfile,
   onClickSetAsProfile,
 }) => {
+  const { t } = useTranslation('dashboard');
   const [isVideo, imageURL] = useMemo(
     () => [
       !!asset?.animation_url ||
@@ -60,7 +62,7 @@ export const NFTDetailModal: React.FC<Props> = ({
             </TokenHeader>
 
             {!!imageURL && isMyProfile && (
-              <AnimatedToolTip label="Set as profile">
+              <AnimatedToolTip label={t('Set as profile')}>
                 <SetProfileImageButton
                   onClick={() => {
                     onClickSetAsProfile(imageURL);

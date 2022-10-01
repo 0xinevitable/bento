@@ -1,4 +1,6 @@
 import axios, { AxiosError } from 'axios';
+import { GetStaticProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -36,6 +38,14 @@ const EMPTY_DRAFT: UserInformationDraft = {
 const CTA_TITLE = {
   CREATE_YOUR_PROFILE: 'Create Your Profile',
   GOTO_YOUT_PROFILE: 'Go to your profile',
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common', 'dashboard'])),
+    },
+  };
 };
 
 export default function ProfileIntroPage() {

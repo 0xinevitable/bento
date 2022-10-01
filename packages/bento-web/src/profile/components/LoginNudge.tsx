@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styled from 'styled-components';
 
@@ -18,9 +19,12 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({
   accessory,
   redirectTo = 'current',
 }) => {
+  const router = useRouter();
+
   const onClickLogin = useCallback(
     async (provider: 'twitter' | 'github') => {
       console.log({ redirectTo });
+      const localePrefix = router.locale === 'en' ? '' : `/${router.locale}`;
       const { user, session, error } = await Supabase.auth.signIn(
         { provider },
         {
@@ -28,8 +32,8 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({
             redirectTo === 'current'
               ? window.location.href
               : redirectTo === 'home'
-              ? `${window.location.origin}/home`
-              : `${window.location.origin}/${redirectTo}`,
+              ? `${window.location.origin}${localePrefix}/home`
+              : `${window.location.origin}${localePrefix}/${redirectTo}`,
         },
       );
       console.log({ user, session, error });
