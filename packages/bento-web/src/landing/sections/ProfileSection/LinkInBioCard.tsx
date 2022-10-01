@@ -7,6 +7,8 @@ import illustOne from '@/assets/illusts/link-in-bio-1.png';
 import illustTwo from '@/assets/illusts/link-in-bio-2.png';
 import background from '@/assets/illusts/link-in-bio-background.png';
 
+import { HiddenCardTitle } from './HiddenCardTitle';
+
 const generateAnimation = (delay: number) => ({
   variants: {
     hidden: { opacity: 0, y: 80 },
@@ -36,7 +38,12 @@ export const LinkInBioCard: React.FC = () => {
         />
 
         <Content>
-          {currentLanguage === 'en' && <CardTitleEN />}
+          {currentLanguage === 'en' && (
+            <>
+              <CardTitleEN />
+              <HiddenCardTitle>Most Advanced Link in Bio</HiddenCardTitle>
+            </>
+          )}
           {currentLanguage === 'ko' && (
             <CardTitleKO>
               최고의 <br />

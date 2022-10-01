@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import illust from '@/assets/illusts/clonex-nft.png';
 
+import { HiddenCardTitle } from './HiddenCardTitle';
+
 export const DisplayNFTsCard: React.FC = () => {
   const { i18n } = useTranslation('common');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
@@ -176,9 +178,6 @@ const CardTitleKO = styled.h3`
   /* shadow-default */
 
   text-shadow: 0px 8px 12px rgba(0, 0, 0, 0.18);
-`;
-const HiddenCardTitle = styled.h3`
-  display: none;
 `;
 
 const IllustContainer = styled.div`

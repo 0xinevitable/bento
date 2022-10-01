@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import ferrariImageOne from '@/assets/illusts/animation-ferrari-1.png';
 import ferrariImageTwo from '@/assets/illusts/animation-ferrari-2.png';
 
+import { HiddenCardTitle } from './HiddenCardTitle';
+
 const generateAnimation = (startY: number): MotionProps => ({
   variants: {
     hidden: { opacity: 0, y: startY },
@@ -27,7 +29,12 @@ export const AnimationCard: React.FC = () => {
     <Wrapper>
       <Card>
         <Content>
-          {currentLanguage === 'en' && <CardTitleEN />}
+          {currentLanguage === 'en' && (
+            <>
+              <CardTitleEN />
+              <HiddenCardTitle>Animated Like Magic</HiddenCardTitle>
+            </>
+          )}
           {currentLanguage === 'ko' && (
             <CardTitleKO>
               내 마음대로 <br />

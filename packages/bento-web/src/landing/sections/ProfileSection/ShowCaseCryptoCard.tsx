@@ -7,6 +7,8 @@ import illust from '@/assets/illusts/showcase-crypto.png';
 
 import { Colors } from '@/styles';
 
+import { HiddenCardTitle } from './HiddenCardTitle';
+
 export const ShowCaseCryptoCard: React.FC = () => {
   const { i18n } = useTranslation('common');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
@@ -113,7 +115,4 @@ const CardTitleKO = styled.h3`
   line-height: 100%;
   color: #ff4e4e;
   text-shadow: -4px 4px 32px rgba(0, 0, 0, 0.88);
-`;
-const HiddenCardTitle = styled.h3`
-  display: none;
 `;
