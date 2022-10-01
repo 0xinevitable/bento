@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import React from 'react';
@@ -27,7 +28,16 @@ export const DisplayNFTsCard: React.FC = () => {
           </CardTitleKO>
         )}
 
-        <IllustContainer>
+        <IllustContainer
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.1 }}
+          transition={{
+            ease: 'linear',
+            repeat: Infinity,
+            repeatType: 'mirror',
+            duration: 2,
+          }}
+        >
           <AvatarNFT alt="" src={illust} sizes="512px" />
           <CollectionName />
         </IllustContainer>
@@ -180,7 +190,7 @@ const CardTitleKO = styled.h3`
   text-shadow: 0px 8px 12px rgba(0, 0, 0, 0.18);
 `;
 
-const IllustContainer = styled.div`
+const IllustContainer = styled(motion.div)`
   position: absolute;
   top: 118px;
   left: 0;
