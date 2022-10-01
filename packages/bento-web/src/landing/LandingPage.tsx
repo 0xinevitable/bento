@@ -15,6 +15,7 @@ import { Footer } from './sections/Footer';
 import { FooterSection } from './sections/FooterSection';
 import { HeaderSection } from './sections/HeaderSection';
 import { IdentitySection } from './sections/IdentitySection';
+import { ProfileSection } from './sections/ProfileSection';
 // import { RoadmapSection } from './sections/RoadmapSection';
 import { StatusQuoSection } from './sections/StatusQuoSection';
 import { WalletSection } from './sections/WalletSection';
@@ -43,6 +44,7 @@ const LandingPage: React.FC = () => {
       <BackgroundSection id="background" event="view_landing_section" />
       <WalletSection id="wallets" event="view_landing_section" />
       <DashboardSection id="dashboard" event="view_landing_section" />
+      <ProfileSection id="profiles" event="view_landing_section" />
 
       <OurMissionContainer>
         <OurMissionTypography />
