@@ -6,6 +6,7 @@ import { useInViewport } from '@/hooks/useInViewport';
 
 import { AnimationCard } from './AnimationCard';
 import { DisplayNFTsCard } from './DisplayNFTsCard';
+import { LinkInBioCard } from './LinkInBioCard';
 import { ProfileSummaryCard } from './ProfileSummaryCard';
 import { ShowCaseCryptoCard } from './ShowCaseCryptoCard';
 
@@ -21,20 +22,32 @@ export const ProfileSection: React.FC<TrackedSectionOptions> = ({
         {isRendered && (
           <>
             <TitleTypography />
-            <div
-              style={{
-                display: 'flex',
-                gap: 42,
-                height: 400,
-                justifyContent: 'space-between',
-                alignItems: 'flex-end',
-              }}
-            >
-              <ShowCaseCryptoCard />
-              <ProfileSummaryCard />
-              <AnimationCard />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 42 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 42,
+                  height: 400,
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-end',
+                }}
+              >
+                <ShowCaseCryptoCard />
+                <ProfileSummaryCard />
+                <AnimationCard />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 42,
+                  height: 400,
+                  justifyContent: 'space-between',
+                }}
+              >
+                <LinkInBioCard />
+                <DisplayNFTsCard />
+              </div>
             </div>
-            <DisplayNFTsCard />
           </>
         )}
       </Section>

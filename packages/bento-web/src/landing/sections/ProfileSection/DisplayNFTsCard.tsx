@@ -35,8 +35,9 @@ export const DisplayNFTsCard: React.FC = () => {
 };
 
 const Card = styled.div`
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  width: calc((100% - 84px) / 3);
+  height: 100%;
 
   background: linear-gradient(166.78deg, #91a5f5 5.04%, #a1f1fd 90.49%);
   border-radius: 48px;
