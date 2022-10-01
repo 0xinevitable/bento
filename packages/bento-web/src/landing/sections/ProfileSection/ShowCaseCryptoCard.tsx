@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
@@ -7,6 +8,9 @@ import illust from '@/assets/illusts/showcase-crypto.png';
 import { Colors } from '@/styles';
 
 export const ShowCaseCryptoCard: React.FC = () => {
+  const { i18n } = useTranslation('common');
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
+
   return (
     <Card>
       <Image
@@ -15,8 +19,18 @@ export const ShowCaseCryptoCard: React.FC = () => {
         sizes="512px"
         style={{ width: '100%', height: '100%' }}
       />
-      <CardTitle />
-      <HiddenCardTitle>Showcase Crypto</HiddenCardTitle>
+      {currentLanguage === 'en' && (
+        <>
+          <CardTitleEN />
+          <HiddenCardTitle>Showcase Crypto</HiddenCardTitle>
+        </>
+      )}
+      {currentLanguage === 'ko' && (
+        <CardTitleKO>
+          블록체인 자산을 <br />
+          모두 표시
+        </CardTitleKO>
+      )}
     </Card>
   );
 };
@@ -30,7 +44,7 @@ const Card = styled.div`
   position: relative;
   overflow: hidden;
 `;
-const _CardTitle: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+const _CardTitleEN: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     width="316"
     height="151"
@@ -84,10 +98,21 @@ const _CardTitle: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     </defs>
   </svg>
 );
-const CardTitle = styled(_CardTitle)`
+const CardTitleEN = styled(_CardTitleEN)`
   position: absolute;
   left: 0;
   bottom: 0;
+`;
+const CardTitleKO = styled.h3`
+  position: absolute;
+  left: 32px;
+  bottom: 32px;
+
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 100%;
+  color: #ff4e4e;
+  text-shadow: -4px 4px 32px rgba(0, 0, 0, 0.88);
 `;
 const HiddenCardTitle = styled.h3`
   display: none;
