@@ -43,7 +43,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     return {
       redirect: {
         permanent: false,
-        destination: '/profile/intro',
+        destination:
+          (context.locale === 'en' ? '' : `/${context.locale}`) +
+          `/profile/intro`,
       },
     };
   }

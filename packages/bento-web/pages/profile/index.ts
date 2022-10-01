@@ -31,7 +31,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return {
         redirect: {
           permanent: false,
-          destination: '/profile/intro',
+          destination:
+            (context.locale === 'en' ? '' : `/${context.locale}`) +
+            `/profile/intro`,
         },
       };
     } else {
@@ -39,7 +41,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return {
         redirect: {
           permanent: false,
-          destination: `/u/${profile.username}`,
+          destination:
+            (context.locale === 'en' ? '' : `/${context.locale}`) +
+            `/u/${profile.username}`,
         },
       };
     }
@@ -49,7 +53,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     redirect: {
       permanent: false,
-      destination: '/profile/intro',
+      destination:
+        (context.locale === 'en' ? '' : `/${context.locale}`) +
+        '/profile/intro',
     },
   };
 };
