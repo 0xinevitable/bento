@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -64,6 +65,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
             ? 'MY_PROFILE'
             : 'USER_PROFILE',
         profile,
+        ...(await serverSideTranslations(context.locale || 'en', [
+          'common',
+          'dashboard',
+        ])),
       },
     };
   }
