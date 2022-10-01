@@ -5,6 +5,7 @@ import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 import { useInViewport } from '@/hooks/useInViewport';
 
 import { AnimationCard } from './AnimationCard';
+import { DisplayNFTsCard } from './DisplayNFTsCard';
 import { ShowCaseCryptoCard } from './ShowCaseCryptoCard';
 
 export const ProfileSection: React.FC<TrackedSectionOptions> = ({
@@ -21,6 +22,7 @@ export const ProfileSection: React.FC<TrackedSectionOptions> = ({
             <TitleTypography />
             <ShowCaseCryptoCard />
             <AnimationCard />
+            <DisplayNFTsCard />
           </>
         )}
       </Section>
