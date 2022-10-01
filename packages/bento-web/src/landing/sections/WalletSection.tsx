@@ -2,7 +2,7 @@ import { Wallet } from '@bento/common';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -10,6 +10,7 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@/components/system';
+import { useInViewport } from '@/hooks/useInViewport';
 
 import { WALLETS } from '@/constants/wallets';
 import {
@@ -27,19 +28,6 @@ import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
 import { onMobile, onTablet } from '../utils/breakpoints';
 
-const CARD = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 1.2,
-    },
-  },
-};
 const WALLET_ICON_LIST = {
   hidden: {
     opacity: 0,
@@ -53,17 +41,30 @@ const WALLET_ICON_LIST = {
     },
   },
 };
-const WALLET_ITEM_LIST = {
+
+const CARD = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.65,
+    },
+  },
+};
+const CARD_WALLET_LIST = {
   hidden: {},
   show: {
     transition: {
       staggerChildren: 0.2,
-      delayChildren: 1.2,
+      delayChildren: 1,
     },
   },
 };
-
-const item = {
+const CARD_WALLET_ITEM = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0 },
 };
@@ -80,9 +81,12 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
   const { t } = useTranslation('landing');
   const { t: tc } = useTranslation('common');
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInViewport(sectionRef);
+
   return (
     <Wrapper>
-      <Container {...trackedSectionOptions}>
+      <Container ref={sectionRef} {...trackedSectionOptions}>
         <Content>
           <SectionBadge>{t('Connect All Wallets')}</SectionBadge>
           <SectionTitle>
@@ -97,7 +101,7 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
             whileInView="show"
           >
             {Object.entries(WALLETS).map(([alt, src]) => (
-              <motion.li key={src} variants={item}>
+              <motion.li key={src} variants={CARD_WALLET_ITEM}>
                 <AnimatedToolTip placement="bottom" label={tc(alt)}>
                   <WalletIcon alt={tc(alt)} src={src} />
                 </AnimatedToolTip>
@@ -115,7 +119,11 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
           </WalletIllustWrapper>
         </Content>
 
-        <CardBorder variants={CARD} initial="hidden" whileInView="show">
+        <CardBorder
+          variants={CARD}
+          initial="hidden"
+          animate={isInView ? 'show' : 'hidden'}
+        >
           <Card>
             <span className="title">{t('Wallets')}</span>
 
@@ -128,14 +136,26 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
                   top: 0,
                   overflow: 'visible',
                 }}
-                variants={WALLET_ITEM_LIST}
+                variants={CARD_WALLET_LIST}
                 initial="hidden"
-                whileInView="show"
+                animate={isInView ? 'show' : 'hidden'}
               >
-                <WalletListItem wallet={MOCKED_WALLET} variants={item} />
-                <WalletListItem wallet={MOCKED_WALLET} variants={item} />
-                <WalletListItem wallet={MOCKED_WALLET} variants={item} />
-                <WalletListItem wallet={MOCKED_WALLET} variants={item} />
+                <WalletListItem
+                  wallet={MOCKED_WALLET}
+                  variants={CARD_WALLET_ITEM}
+                />
+                <WalletListItem
+                  wallet={MOCKED_WALLET}
+                  variants={CARD_WALLET_ITEM}
+                />
+                <WalletListItem
+                  wallet={MOCKED_WALLET}
+                  variants={CARD_WALLET_ITEM}
+                />
+                <WalletListItem
+                  wallet={MOCKED_WALLET}
+                  variants={CARD_WALLET_ITEM}
+                />
               </WalletItemList>
               <CardFooter>
                 <div />
