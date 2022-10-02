@@ -70,10 +70,13 @@ export const NavigationBar = () => {
   const { t, i18n } = useTranslation('common');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
-  const onChangeLocale = useCallback(() => {
-    console.log(currentLanguage);
-    i18n.changeLanguage(currentLanguage === 'en' ? 'ko' : 'en');
-  }, [i18n, currentLanguage]);
+  const onChangeLocale = useCallback(
+    () =>
+      router.push(router.asPath, router.asPath, {
+        locale: currentLanguage === 'en' ? 'ko' : 'en',
+      }),
+    [i18n, currentLanguage],
+  );
 
   return (
     <Wrapper>
