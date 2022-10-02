@@ -109,14 +109,9 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
 
 const Wrapper = styled.div`
   padding: 0 32px;
-  padding-top: 135.26px;
   width: 100%;
   display: flex;
   position: relative;
-
-  @media (max-width: 1235px) {
-    padding-top: 64px;
-  }
 `;
 const Section = styled(TrackedSection)`
   margin: 0 auto;

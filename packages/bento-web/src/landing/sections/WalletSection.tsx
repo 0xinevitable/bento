@@ -181,13 +181,9 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
 };
 
 const Wrapper = styled.div`
-  padding: 130px 32px 0;
+  padding: 0 32px;
   width: 100%;
   display: flex;
-
-  @media (max-width: 1235px) {
-    padding-top: 64px;
-  }
 `;
 const Container = styled(TrackedSection)`
   margin: 0 auto;
