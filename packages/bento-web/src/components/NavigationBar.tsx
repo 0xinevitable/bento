@@ -70,6 +70,11 @@ export const NavigationBar = () => {
   const { t, i18n } = useTranslation('common');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
+  const onChangeLocale = useCallback(() => {
+    console.log(currentLanguage);
+    i18n.changeLanguage(currentLanguage === 'en' ? 'ko' : 'en');
+  }, [i18n, currentLanguage]);
+
   return (
     <Wrapper>
       <Container>
@@ -134,16 +139,18 @@ export const NavigationBar = () => {
           </SocialIconList>
 
           <LanguageSelector>
-            <Link href={router.asPath} locale="en">
-              <button className={currentLanguage === 'en' ? 'selected' : ''}>
-                <span>EN</span>
-              </button>
-            </Link>
-            <Link href={router.asPath} locale="ko">
-              <button className={currentLanguage === 'ko' ? 'selected' : ''}>
-                <span>KO</span>
-              </button>
-            </Link>
+            <button
+              className={currentLanguage === 'en' ? 'selected' : ''}
+              onClick={onChangeLocale}
+            >
+              <span>EN</span>
+            </button>
+            <button
+              className={currentLanguage === 'ko' ? 'selected' : ''}
+              onClick={onChangeLocale}
+            >
+              <span>KO</span>
+            </button>
           </LanguageSelector>
         </RightContent>
 
@@ -330,6 +337,9 @@ const RightContent = styled.div`
   display: flex;
   align-items: center;
   gap: 32px;
+
+  position: relative;
+  z-index: 10;
 
   @media screen and (max-width: 680px) {
     margin-left: auto;
