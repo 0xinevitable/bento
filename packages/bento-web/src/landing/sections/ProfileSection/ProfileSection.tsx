@@ -1,8 +1,10 @@
+import { useTranslation } from 'next-i18next';
 import { useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 import { useInViewport } from '@/hooks/useInViewport';
+import { useWindowSize } from '@/hooks/useWindowSize';
 
 import { AnimationCard } from './cards/AnimationCard';
 import { DisplayNFTsCard } from './cards/DisplayNFTsCard';
@@ -13,8 +15,14 @@ import { ShowCaseCryptoCard } from './cards/ShowCaseCryptoCard';
 export const ProfileSection: React.FC<TrackedSectionOptions> = ({
   ...trackedSectionOptions
 }) => {
+  const { i18n } = useTranslation('common');
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
+
   const sectionRef = useRef<HTMLElement>(null);
   const isRendered = useInViewport(sectionRef);
+
+  const { width: screenWidth } = useWindowSize();
+  const isCollapsed = screenWidth <= 1110;
 
   return (
     <Wrapper>
@@ -23,33 +31,35 @@ export const ProfileSection: React.FC<TrackedSectionOptions> = ({
           <Placeholder />
         ) : (
           <>
-            <TitleTypography />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 42 }}>
-              <div
-                style={{
-                  display: 'flex',
-                  gap: 42,
-                  height: 400,
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-end',
-                }}
-              >
-                <ShowCaseCryptoCard />
-                <ProfileSummaryCard />
-                <AnimationCard />
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  gap: 42,
-                  height: 400,
-                  justifyContent: 'space-between',
-                }}
-              >
-                <LinkInBioCard />
-                <DisplayNFTsCard />
-              </div>
-            </div>
+            {currentLanguage === 'en' && <TitleTypographyEN />}
+            {currentLanguage === 'ko' && <TitleTypographyKO />}
+            {!isCollapsed ? (
+              <Column>
+                <Row>
+                  <ShowCaseCryptoCard />
+                  <ProfileSummaryCard />
+                  <AnimationCard />
+                </Row>
+                <Row>
+                  <LinkInBioCard />
+                  <DisplayNFTsCard />
+                </Row>
+              </Column>
+            ) : (
+              <Column>
+                <Row>
+                  <ShowCaseCryptoCard />
+                  <ProfileSummaryCard />
+                </Row>
+                <Row style={{ height: 'fit-content' }}>
+                  <DisplayNFTsCard />
+                  <AnimationCard />
+                </Row>
+                <Row>
+                  <LinkInBioCard />
+                </Row>
+              </Column>
+            )}
           </>
         )}
       </Section>
@@ -67,6 +77,10 @@ const Wrapper = styled.div`
   @media (max-width: 1235px) {
     padding-top: 64px;
   }
+
+  @media screen and (max-width: 480px) {
+    padding: 0 16px;
+  }
 `;
 const Section = styled(TrackedSection)`
   margin: 0 auto;
@@ -79,7 +93,21 @@ const Placeholder = styled.div`
   height: 800px;
 `;
 
-const _TitleTypography: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+const titleTypographyStyles = css`
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 700px) {
+    margin-top: -20px;
+    margin-bottom: 36px;
+    transform: scale(0.6);
+    transform-origin: bottom left;
+  }
+
+  @media screen and (max-width: 440px) {
+    transform: scale(0.45);
+  }
+`;
+const _TitleTypographyEN: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     width="627"
     height="102"
@@ -94,6 +122,68 @@ const _TitleTypography: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     />
   </svg>
 );
-const TitleTypography = styled(_TitleTypography)`
-  margin-bottom: 20px;
+const TitleTypographyEN = styled(_TitleTypographyEN)`
+  ${titleTypographyStyles}
+`;
+const _TitleTypographyKO: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    width="612"
+    height="127"
+    viewBox="0 0 612 127"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M116.262 69.3867H0.871094V86.8867H24.9336V126.535H47.3555V86.8867H69.0938V126.535H91.3789V86.8867H116.262V69.3867ZM11.3984 33.0195C11.3301 50.1777 30.6758 61.1836 58.1562 61.1836C85.6367 61.1836 105.256 50.1777 105.324 33.0195C105.256 15.3145 85.6367 3.83008 58.1562 3.89844C30.6758 3.83008 11.3301 15.3145 11.3984 33.0195ZM33.957 33.0195C33.8887 24.9531 42.9805 21.2617 58.1562 21.2617C73.6055 21.2617 82.4922 24.9531 82.4922 33.0195C82.4922 40.4707 73.6055 43.957 58.1562 44.0938C42.9805 43.957 33.8887 40.4707 33.957 33.0195ZM227.212 0.0703125H205.063V43H185.786V60.6367H205.063V126.945H227.212V0.0703125ZM116.47 86.75L129.458 104.113C143.882 97.209 153.042 84.4258 158.237 68.7715C163.432 83.332 172.456 95.0215 186.743 101.516L199.595 84.2891C176.762 74.6504 169.448 51.8867 169.243 29.1914H193.852V11.8281H122.212V29.1914H146.821C146.548 52.9121 139.302 76.4961 116.47 86.75ZM380.479 94.9531H264.952V112.863H380.479V94.9531ZM273.291 27.5508H289.151V62.0039H273.975V79.2305H371.045V62.0039H355.459V27.5508H371.729V10.1875H273.291V27.5508ZM311.026 62.0039V27.5508H333.721V62.0039H311.026ZM498.675 95.7734H451.644V79.6406H489.105V62.0039H417.737V51.8867H486.234V7.58984H395.589V25.0898H464.495V34.9336H395.726V79.6406H429.905V95.7734H383.148V113.547H498.675V95.7734ZM608.395 0.0703125H586.383V64.6016H608.395V0.0703125ZM503.395 46.5547L505.582 63.3711C527.32 63.3711 555.484 62.8926 580.504 58.5859L579.547 43C575.309 43.5469 571.002 43.957 566.559 44.3672V23.8594H575.582V7.45312H506.676V23.8594H515.289V46.418C511.119 46.4863 507.154 46.4863 503.395 46.5547ZM520.484 85.6562H586.793V89.4844H520.621V125.988H611.129V109.035H542.359V104.934H608.395V68.8398H520.484V85.6562ZM536.207 46.0078V23.8594H545.641V45.666C542.496 45.8027 539.352 45.8711 536.207 46.0078Z"
+      fill="#212830"
+    />
+  </svg>
+);
+const TitleTypographyKO = styled(_TitleTypographyKO)`
+  ${titleTypographyStyles}
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+
+  @media screen and (max-width: 1400px) {
+    gap: 36px;
+  }
+
+  @media screen and (max-width: 1280px) {
+    gap: 28px;
+  }
+
+  @media screen and (max-width: 732px) {
+    gap: 20px;
+  }
+`;
+const Row = styled.div`
+  height: 400px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 42px;
+
+  @media screen and (max-width: 1400px) {
+    gap: 36px;
+  }
+
+  @media screen and (max-width: 1280px) {
+    gap: 28px;
+  }
+
+  @media screen and (max-width: 1110px) {
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  @media screen and (max-width: 735px) {
+    flex-direction: column;
+    height: unset;
+  }
 `;

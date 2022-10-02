@@ -36,10 +36,7 @@ export const AnimationCard: React.FC = () => {
             </>
           )}
           {currentLanguage === 'ko' && (
-            <CardTitleKO>
-              내 마음대로 <br />
-              넣는 애니메이션
-            </CardTitleKO>
+            <CardTitleKO>{`내 마음대로 \n넣는 애니메이션`}</CardTitleKO>
           )}
           <AnimatedBlockList>
             <AnimatedBlockItem {...generateAnimation(-54)}>
@@ -58,7 +55,26 @@ export const AnimationCard: React.FC = () => {
 
 const Wrapper = styled.div`
   width: calc((100% - 84px) / 3);
-  height: calc(100% + 175px);
+  height: fit-content;
+
+  @media screen and (max-width: 1400px) {
+    width: calc((100% - 72px) / 3);
+  }
+
+  @media screen and (max-width: 1280px) {
+    width: calc((100% - 56px) / 3);
+  }
+
+  @media screen and (max-width: 1110px) {
+    width: 50%;
+    max-width: unset;
+  }
+
+  @media screen and (max-width: 735px) {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 500px;
+  }
 `;
 const Card = styled.div`
   width: 100%;
@@ -87,16 +103,11 @@ const Card = styled.div`
 `;
 const Content = styled.div`
   padding: 32px;
+  position: relative;
+  z-index: 2;
 
   display: flex;
   flex-direction: column;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
 `;
 const _CardTitleEN: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -135,6 +146,22 @@ const _CardTitleEN: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
 const CardTitleEN = styled(_CardTitleEN)`
   margin: 0 -8px;
   filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.18));
+
+  @media screen and (max-width: 1268px) {
+    margin-bottom: -20px;
+    transform: scale(0.85);
+    transform-origin: top left;
+  }
+
+  @media screen and (max-width: 735px) {
+    margin-bottom: 0;
+    transform: scale(1);
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-bottom: -20px;
+    transform: scale(0.85);
+  }
 `;
 const CardTitleKO = styled.h3`
   font-weight: 900;
@@ -155,19 +182,43 @@ const CardTitleKO = styled.h3`
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
+  white-space: break-spaces;
 
   /* shadow-default */
   text-shadow: 0px 8px 12px rgba(0, 0, 0, 0.18);
+
+  @media screen and (max-width: 1268px) {
+    font-size: 40px;
+    white-space: normal;
+  }
+
+  @media screen and (max-width: 1110px) {
+    white-space: break-spaces;
+  }
+
+  @media screen and (max-width: 735px) {
+    font-size: 48px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 40px;
+    white-space: normal;
+  }
 `;
 
 const AnimatedBlockList = styled(motion.ul)`
-  margin: 38px -8px -48px;
+  margin: 38px -8px;
   display: flex;
+  flex: 1;
   gap: 10px;
+
+  @media screen and (max-width: 480px) {
+    margin-top: 24px;
+  }
 `;
 const AnimatedBlockItem = styled(motion.li)`
   width: 50%;
-  height: 310px;
+  height: 100%;
 
   &:last-of-type {
     margin-top: 48px;
@@ -177,6 +228,7 @@ const BlockItem = styled(Image)`
   width: 100%;
   height: 100%;
   border-radius: 16px;
+  object-fit: cover;
 
   /* shadow-default */
   filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.18));
@@ -185,7 +237,7 @@ const BlockItem = styled(Image)`
 const FramerLogo = styled.img.attrs({
   src: '/assets/landing/framer-logo.svg',
 })`
-  margin-top: 28px;
+  margin-top: -40px;
   width: 138.92px;
   height: 38px;
 `;
