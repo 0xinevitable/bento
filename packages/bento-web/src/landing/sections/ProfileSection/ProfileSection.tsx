@@ -69,14 +69,9 @@ export const ProfileSection: React.FC<TrackedSectionOptions> = ({
 
 const Wrapper = styled.div`
   padding: 0 32px;
-  padding-top: 135.26px;
   width: 100%;
   display: flex;
   position: relative;
-
-  @media (max-width: 1235px) {
-    padding-top: 64px;
-  }
 
   @media screen and (max-width: 480px) {
     padding: 0 16px;

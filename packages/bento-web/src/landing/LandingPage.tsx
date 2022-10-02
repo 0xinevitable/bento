@@ -36,29 +36,30 @@ const LandingPage: React.FC = () => {
   }, []);
 
   return (
-    <Container>
+    <>
       <MetaHead />
+      <Container>
+        <HeaderSection />
 
-      <HeaderSection />
+        <BackgroundSection id="background" event="view_landing_section" />
+        <WalletSection id="wallets" event="view_landing_section" />
+        <DashboardSection id="dashboard" event="view_landing_section" />
+        <ProfileSection id="profiles" event="view_landing_section" />
 
-      <BackgroundSection id="background" event="view_landing_section" />
-      <WalletSection id="wallets" event="view_landing_section" />
-      <DashboardSection id="dashboard" event="view_landing_section" />
-      <ProfileSection id="profiles" event="view_landing_section" />
+        <OurMissionContainer>
+          <OurMissionTypography />
+        </OurMissionContainer>
 
-      <OurMissionContainer>
-        <OurMissionTypography />
-      </OurMissionContainer>
+        <StatusQuoSection id="status-quo" event="view_landing_section" />
+        <IdentitySection id="identity" event="view_landing_section" />
 
-      <StatusQuoSection id="status-quo" event="view_landing_section" />
-      <IdentitySection id="identity" event="view_landing_section" />
+        <FooterSection id="footer" event="view_landing_section" />
 
-      <FooterSection id="footer" event="view_landing_section" />
+        {/* <RoadmapSection id="roadmap" event="view_landing_section" /> */}
 
-      {/* <RoadmapSection id="roadmap" event="view_landing_section" /> */}
-
-      <Footer />
-    </Container>
+        <Footer />
+      </Container>
+    </>
   );
 };
 
@@ -70,6 +71,7 @@ const Container = styled.div`
 
   display: flex;
   flex-direction: column;
+  gap: 200px;
 
   section * {
     &:not(h1, h1 span) {
@@ -80,11 +82,14 @@ const Container = styled.div`
   & img {
     user-select: none;
   }
+
+  @media (max-width: 768px) {
+    gap: 160px;
+  }
 `;
 
 const OurMissionContainer = styled.div`
   width: 100%;
-  margin-top: 64px;
   padding: 40px 0;
   background-color: ${Colors.brand500};
 

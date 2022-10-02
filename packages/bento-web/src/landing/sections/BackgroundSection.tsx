@@ -59,7 +59,6 @@ export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
 
 const Wrapper = styled(TrackedSection)`
   margin: 0 auto;
-  padding: 95px 0;
   width: 100%;
   max-width: 1728px;
 
