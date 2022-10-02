@@ -24,7 +24,8 @@ module.exports = withPlugins(
       styledComponents: true,
     },
     experimental: {
-      externalDir: true,
+      // NOTE: Disabled because of transpilation performance issues
+      externalDir: false,
     },
     i18n,
     publicRuntimeConfig: pick(process.env, ['ENVIRONMENT']),

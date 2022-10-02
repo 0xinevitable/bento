@@ -1,5 +1,5 @@
 import { safePromiseAll } from '@bento/common';
-import { SolanaChain } from '@bento/core/chains';
+import { SolanaChain } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface APIRequest extends NextApiRequest {
