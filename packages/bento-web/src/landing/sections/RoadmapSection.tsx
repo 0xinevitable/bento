@@ -164,7 +164,7 @@ const RoadmapItem = styled.li`
     background-color: black;
   }
 
-  @media screen and (max-width: 840px) {
+  @media (max-width: 840px) {
     &:before {
       top: 12px;
     }
@@ -175,7 +175,7 @@ const RoadmapTitle = styled.h3`
   font-weight: bold;
   font-size: 24px;
 
-  @media screen and (max-width: 840px) {
+  @media (max-width: 840px) {
     font-size: 18px;
   }
 `;
@@ -184,7 +184,7 @@ const RoadmapDate = styled.span`
   font-weight: bold;
   font-size: 18px;
 
-  @media screen and (max-width: 840px) {
+  @media (max-width: 840px) {
     font-size: 16px;
   }
 `;

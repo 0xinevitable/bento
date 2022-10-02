@@ -74,7 +74,7 @@ const BannerWrapper = styled(TrackedSection)`
     );
   }
 
-  @media screen and (max-width: 580px) {
+  @media (max-width: 580px) {
     padding-top: ${82 + 146}px;
     margin-bottom: -48px;
   }
@@ -94,7 +94,7 @@ const Banner = styled(motion.div)`
   border: 1px solid #3d3d3d;
   border-radius: 24px;
 
-  @media screen and (max-width: 950px) {
+  @media (max-width: 950px) {
     &:after {
       content: '';
       position: absolute;
@@ -109,7 +109,7 @@ const Banner = styled(motion.div)`
     }
   }
 
-  @media screen and (max-width: 400px) {
+  @media (max-width: 400px) {
     &:after {
       height: 280px;
     }
@@ -126,7 +126,7 @@ const BannerContent = styled.div`
   flex-direction: column;
   z-index: 4;
 
-  @media screen and (max-width: 580px) {
+  @media (max-width: 580px) {
     top: unset;
     left: 22px;
     right: 22px;
@@ -141,7 +141,7 @@ const BannerTitle = styled.h2`
   color: #ffffff;
   text-shadow: 0px 4px 12px #000000;
 
-  @media screen and (max-width: 580px) {
+  @media (max-width: 580px) {
     font-size: 24px;
   }
 `;
@@ -152,7 +152,7 @@ const SoWhatButtonContainer = styled.div`
   height: 56px;
   position: relative;
 
-  @media screen and (max-width: 580px) {
+  @media (max-width: 580px) {
     &,
     & > button {
       width: 100%;
@@ -190,7 +190,7 @@ const CTABadge = styled.span`
 
   color: #ff214a;
 
-  @media screen and (max-width: 580px) {
+  @media (max-width: 580px) {
     right: -10px;
   }
 `;
@@ -205,15 +205,15 @@ const BannerImageContainer = styled.div`
   height: 496px;
   filter: saturate(120%);
 
-  @media screen and (max-width: 950px) {
+  @media (max-width: 950px) {
     right: 0;
   }
 
-  @media screen and (max-width: 800px) {
+  @media (max-width: 800px) {
     right: -30px;
   }
 
-  @media screen and (max-width: 580px) {
+  @media (max-width: 580px) {
     width: 301px;
     height: 303.68px;
     right: -15px;
@@ -239,17 +239,17 @@ const DefineYourselfStickerContainer = styled.div`
   transform: rotate(12.5deg);
   filter: drop-shadow(0px 3.79416px 3.79416px rgba(0, 0, 0, 0.25));
 
-  @media screen and (max-width: 800px) {
+  @media (max-width: 800px) {
     top: -140px;
   }
 
-  @media screen and (max-width: 580px) {
+  @media (max-width: 580px) {
     top: 48px;
     width: 265.35px;
     height: 29.33px;
   }
 
-  @media screen and (max-width: 400px) {
+  @media (max-width: 400px) {
     width: 180.84px;
     height: 19.99px;
 
@@ -273,7 +273,7 @@ const TapeContainer = styled.div`
   z-index: 2;
   filter: saturate(140%);
 
-  @media screen and (max-width: 950px) {
+  @media (max-width: 950px) {
     display: none;
   }
 `;

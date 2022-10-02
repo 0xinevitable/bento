@@ -115,7 +115,7 @@ const AssetListItem = styled.li`
 
   width: calc((100% - 24px) / 3);
 
-  @media screen and (max-width: 32rem) {
+  @media (max-width: 32rem) {
     width: calc((100% - 12px) / 2);
   }
 `;

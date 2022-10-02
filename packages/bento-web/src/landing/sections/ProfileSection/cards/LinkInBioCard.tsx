@@ -106,7 +106,7 @@ const Wrapper = styled.div`
   height: 100%;
   flex: 1;
 
-  @media screen and (max-width: 735px) {
+  @media (max-width: 735px) {
     width: 100%;
     margin: 0 auto;
     max-width: 500px;
@@ -118,7 +118,7 @@ const Wrapper = styled.div`
     }
   }
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     &,
     & > div {
       min-height: 380px;
@@ -137,7 +137,7 @@ const Card = styled.div`
 `;
 
 const LinkBlocksContainer = styled.div`
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     display: none;
   }
 `;
@@ -169,12 +169,12 @@ const _CardTitleEN: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 const CardTitleEN = styled(_CardTitleEN)`
-  @media screen and (max-width: 1268px) {
+  @media (max-width: 1268px) {
     transform: scale(0.85);
     transform-origin: top left;
   }
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     transform: scale(0.8);
   }
 `;
@@ -184,7 +184,7 @@ const CardTitleKO = styled.h3`
   line-height: 100%;
   color: #e73e67;
 
-  @media screen and (max-width: 1268px) {
+  @media (max-width: 1268px) {
     font-size: 40px;
   }
 `;
@@ -194,11 +194,11 @@ const ImageOneWrapper = styled(motion.div)`
   right: 240px;
   bottom: -2px;
 
-  @media screen and (max-width: 735px) {
+  @media (max-width: 735px) {
     right: 180px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     right: 100px;
   }
 `;
@@ -208,7 +208,7 @@ const ImageOne = styled(Image)`
   object-fit: contain;
   object-position: bottom;
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     width: 180px;
     height: unset;
   }
@@ -218,11 +218,11 @@ const ImageTwoWrapper = styled(motion.div)`
   right: 30px;
   bottom: -2px;
 
-  @media screen and (max-width: 735px) {
+  @media (max-width: 735px) {
     right: 16px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     right: -32px;
   }
 `;
@@ -231,7 +231,7 @@ const ImageTwo = styled(Image)`
   object-fit: contain;
   object-position: bottom;
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     width: 180px;
   }
 `;

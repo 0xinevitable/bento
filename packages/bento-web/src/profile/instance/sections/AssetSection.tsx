@@ -156,7 +156,7 @@ const TokenAmount = styled.span`
   letter-spacing: -0.5px;
   color: rgba(255, 255, 255, 0.45);
 
-  @media screen and (max-width: 400px) {
+  @media (max-width: 400px) {
     span.symbol {
       display: none;
     }

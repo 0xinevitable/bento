@@ -193,7 +193,7 @@ const Container = styled(TrackedSection)`
 
   display: flex;
 
-  @media screen and (max-width: 900px) {
+  @media (max-width: 900px) {
     flex-direction: column;
   }
 `;
@@ -211,11 +211,11 @@ const WalletList = styled(motion.ul)`
   display: flex;
   gap: 8px;
 
-  @media screen and (max-width: 900px) {
+  @media (max-width: 900px) {
     justify-content: center;
   }
 
-  @media screen and (max-width: 600px) {
+  @media (max-width: 600px) {
     gap: 6px;
   }
 
@@ -227,12 +227,12 @@ const WalletIcon = styled.img`
   width: 128px;
   height: 128px;
 
-  @media screen and (max-width: 800px) {
+  @media (max-width: 800px) {
     width: 100px;
     height: 100px;
   }
 
-  @media screen and (max-width: 600px) {
+  @media (max-width: 600px) {
     width: 86px;
     height: 86px;
   }
@@ -242,7 +242,7 @@ const WalletIcon = styled.img`
     height: 64px;
   }
 
-  @media screen and (max-width: 368px) {
+  @media (max-width: 368px) {
     width: 56px;
     height: 56px;
   }
@@ -328,18 +328,18 @@ const CardBorder = styled(motion.div)`
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
   }
 
-  @media screen and (max-width: 1100px) {
+  @media (max-width: 1100px) {
     margin-left: -200px;
     z-index: -1;
   }
 
-  @media screen and (max-width: 900px) {
+  @media (max-width: 900px) {
     margin-left: auto;
     margin-right: auto;
     margin-top: -120px;
   }
 
-  @media screen and (max-width: 620px) {
+  @media (max-width: 620px) {
     width: 420px;
     min-width: 420px;
 
@@ -352,7 +352,7 @@ const CardBorder = styled(motion.div)`
     }
   }
 
-  @media screen and (max-width: 462px) {
+  @media (max-width: 462px) {
     width: 360px;
     min-width: 360px;
   }

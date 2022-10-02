@@ -269,7 +269,7 @@ const Title = styled.h1`
     width: fit-content;
   }
 
-  @media screen and (max-width: 620px) {
+  @media (max-width: 620px) {
     font-size: 48px;
   }
 `;
@@ -330,7 +330,7 @@ const Paragraph = styled.p`
 
   color: #a8a8a8;
 
-  @media screen and (max-width: 420px) {
+  @media (max-width: 420px) {
     white-space: normal;
   }
 

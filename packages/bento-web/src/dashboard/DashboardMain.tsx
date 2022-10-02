@@ -213,15 +213,15 @@ const DashboardWrapper = styled.div`
   width: 100%;
   gap: 32px;
 
-  @media screen and (max-width: 1300px) {
+  @media (max-width: 1300px) {
     gap: 28px;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media (max-width: 1200px) {
     gap: 24px;
   }
 
-  @media screen and (max-width: 880px) {
+  @media (max-width: 880px) {
     flex-direction: column;
     gap: 32px;
   }
@@ -231,12 +231,12 @@ const ProfileContainer = styled.div`
   & > div.sticky {
     width: 400px;
 
-    @media screen and (max-width: 1200px) {
+    @media (max-width: 1200px) {
       width: 360px;
     }
   }
 
-  @media screen and (max-width: 880px) {
+  @media (max-width: 880px) {
     width: 100%;
 
     & div.profile-summary {
@@ -249,7 +249,7 @@ const ProfileContainer = styled.div`
   & > div.sticky {
     position: fixed;
 
-    @media screen and (max-width: 880px) {
+    @media (max-width: 880px) {
       position: static;
       width: unset;
     }
@@ -266,7 +266,7 @@ const DashboardContent = styled.div`
   border: 2px solid ${Colors.gray700};
   border-radius: 16px;
 
-  @media screen and (max-width: 1240px) {
+  @media (max-width: 1240px) {
     padding: 0;
     border: 0;
   }
@@ -276,15 +276,15 @@ const TopSummaryContainer = styled.div`
   width: 100%;
   gap: 32px;
 
-  @media screen and (max-width: 1300px) {
+  @media (max-width: 1300px) {
     gap: 24px;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media (max-width: 1200px) {
     gap: 20px;
   }
 
-  @media screen and (max-width: 1110px) {
+  @media (max-width: 1110px) {
     flex-direction: column;
     gap: 32px;
   }
@@ -301,7 +301,7 @@ const AssetListCard = styled.section`
   background: ${Colors.gray850};
   border-radius: 8px;
 
-  @media screen and (max-width: 400px) {
+  @media (max-width: 400px) {
     padding: 12px;
   }
 

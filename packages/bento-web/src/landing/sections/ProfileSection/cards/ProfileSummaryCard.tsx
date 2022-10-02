@@ -35,19 +35,19 @@ const Container = styled.div`
   height: 100%;
   min-height: 400px;
 
-  @media screen and (max-width: 1400px) {
+  @media (max-width: 1400px) {
     width: calc((100% - 72px) / 3);
   }
 
-  @media screen and (max-width: 1280px) {
+  @media (max-width: 1280px) {
     width: calc((100% - 56px) / 3);
   }
 
-  @media screen and (max-width: 1110px) {
+  @media (max-width: 1110px) {
     width: 50%;
   }
 
-  @media screen and (max-width: 735px) {
+  @media (max-width: 735px) {
     width: 100%;
     margin: 0 auto;
     max-width: 500px;

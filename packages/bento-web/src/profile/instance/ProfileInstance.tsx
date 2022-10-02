@@ -511,12 +511,12 @@ const EarlyBentoBadge = styled.img`
   user-select: none;
   transition: all 0.2s ease-in-out;
 
-  @media screen and (max-width: 32rem) {
+  @media (max-width: 32rem) {
     width: 100px;
     height: 100px;
   }
 
-  @media screen and (max-width: 320px) {
+  @media (max-width: 320px) {
     top: 16px;
     right: 16px;
     width: 84px;

@@ -9,7 +9,7 @@ export const SectionTitle = styled.h2`
   letter-spacing: 0.01em;
   color: #ffffff;
 
-  @media screen and (max-width: 600px) {
+  @media (max-width: 600px) {
     font-size: 36px;
   }
 `;
