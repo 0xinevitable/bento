@@ -144,7 +144,7 @@ const GlobeWrapper = styled.div`
     }
   }
 
-  @media screen and (max-width: 560px) {
+  @media (max-width: 560px) {
     height: 280px;
 
     & > canvas,
@@ -189,17 +189,17 @@ const Title = styled.h1`
   color: ${Colors.gray000};
   text-shadow: 0px 2px 24px ${Colors.black};
 
-  @media screen and (max-width: 900px) {
+  @media (max-width: 900px) {
     font-size: 58px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     &:lang(ko) {
       font-size: 48px;
     }
   }
 
-  @media screen and (max-width: 512px) {
+  @media (max-width: 512px) {
     font-size: 48px;
   }
 `;
@@ -216,12 +216,12 @@ const Description = styled.p`
   color: ${Colors.gray200};
   text-shadow: 0px 2px 24px ${Colors.black};
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     font-weight: 500;
     font-size: 18px;
   }
 
-  @media screen and (max-width: 582px) {
+  @media (max-width: 582px) {
     max-width: 380px;
   }
 
@@ -256,7 +256,7 @@ const Button = styled.button`
   /* shadow-default */
   text-shadow: 0px 8px 12px rgba(0, 0, 0, 0.18);
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     padding: 18px 32px;
     font-size: 24px;
     font-weight: 600;

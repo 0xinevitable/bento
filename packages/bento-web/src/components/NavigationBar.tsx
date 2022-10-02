@@ -22,8 +22,8 @@ const Breakpoints = {
   Desktop: 1440,
 };
 
-const onMobile = `@media screen and (max-width: ${Breakpoints.Mobile}px)`;
-const onTablet = `@media screen and (max-width: ${Breakpoints.Tablet}px)`;
+const onMobile = `@media (max-width: ${Breakpoints.Mobile}px)`;
+const onTablet = `@media (max-width: ${Breakpoints.Tablet}px)`;
 
 const NAVIGATION_ITEMS = [
   {
@@ -268,7 +268,7 @@ const LogoImage = styled.img`
 const NavigationList = styled.ul`
   display: flex;
 
-  @media screen and (max-width: 680px) {
+  @media (max-width: 680px) {
     display: none;
   }
 `;
@@ -341,7 +341,7 @@ const RightContent = styled.div`
   position: relative;
   z-index: 10;
 
-  @media screen and (max-width: 680px) {
+  @media (max-width: 680px) {
     margin-left: auto;
     margin-right: 20px;
   }
@@ -381,7 +381,7 @@ const SocialIconList = styled.div`
     opacity: 0.45;
   }
 
-  @media screen and (max-width: 680px) {
+  @media (max-width: 680px) {
     display: none;
   }
 `;
@@ -441,7 +441,7 @@ const MobileMenuButton = styled.button`
 
   display: none;
 
-  @media screen and (max-width: 680px) {
+  @media (max-width: 680px) {
     display: flex;
   }
 `;

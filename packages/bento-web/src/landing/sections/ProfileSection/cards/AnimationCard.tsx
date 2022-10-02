@@ -57,20 +57,20 @@ const Wrapper = styled.div`
   width: calc((100% - 84px) / 3);
   height: fit-content;
 
-  @media screen and (max-width: 1400px) {
+  @media (max-width: 1400px) {
     width: calc((100% - 72px) / 3);
   }
 
-  @media screen and (max-width: 1280px) {
+  @media (max-width: 1280px) {
     width: calc((100% - 56px) / 3);
   }
 
-  @media screen and (max-width: 1110px) {
+  @media (max-width: 1110px) {
     width: 50%;
     max-width: unset;
   }
 
-  @media screen and (max-width: 735px) {
+  @media (max-width: 735px) {
     width: 100%;
     margin: 0 auto;
     max-width: 500px;
@@ -147,18 +147,18 @@ const CardTitleEN = styled(_CardTitleEN)`
   margin: 0 -8px;
   filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.18));
 
-  @media screen and (max-width: 1268px) {
+  @media (max-width: 1268px) {
     margin-bottom: -20px;
     transform: scale(0.85);
     transform-origin: top left;
   }
 
-  @media screen and (max-width: 735px) {
+  @media (max-width: 735px) {
     margin-bottom: 0;
     transform: scale(1);
   }
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     margin-bottom: -20px;
     transform: scale(0.85);
   }
@@ -187,20 +187,20 @@ const CardTitleKO = styled.h3`
   /* shadow-default */
   text-shadow: 0px 8px 12px rgba(0, 0, 0, 0.18);
 
-  @media screen and (max-width: 1268px) {
+  @media (max-width: 1268px) {
     font-size: 40px;
     white-space: normal;
   }
 
-  @media screen and (max-width: 1110px) {
+  @media (max-width: 1110px) {
     white-space: break-spaces;
   }
 
-  @media screen and (max-width: 735px) {
+  @media (max-width: 735px) {
     font-size: 48px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     font-size: 40px;
     white-space: normal;
   }
@@ -212,7 +212,7 @@ const AnimatedBlockList = styled(motion.ul)`
   flex: 1;
   gap: 10px;
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     margin-top: 24px;
   }
 `;

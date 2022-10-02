@@ -174,7 +174,7 @@ const IllustWrapper = styled.div`
     }
   }
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     margin: -40px 0;
   }
 `;
@@ -188,19 +188,19 @@ const IllustContainer = styled.div`
     object-fit: cover;
   }
 
-  @media screen and (max-width: 800px) {
+  @media (max-width: 800px) {
     transform: scale(0.9);
   }
 
-  @media screen and (max-width: 695px) {
+  @media (max-width: 695px) {
     transform: scale(0.85);
   }
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     transform: scale(0.8);
   }
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     transform: scale(0.7);
   }
 `;

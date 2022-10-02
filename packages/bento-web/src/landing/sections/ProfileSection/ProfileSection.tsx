@@ -73,7 +73,7 @@ const Wrapper = styled.div`
   display: flex;
   position: relative;
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     padding: 0 16px;
   }
 `;
@@ -91,14 +91,14 @@ const Placeholder = styled.div`
 const titleTypographyStyles = css`
   margin-bottom: 20px;
 
-  @media screen and (max-width: 700px) {
+  @media (max-width: 700px) {
     margin-top: -20px;
     margin-bottom: 36px;
     transform: scale(0.6);
     transform-origin: bottom left;
   }
 
-  @media screen and (max-width: 440px) {
+  @media (max-width: 440px) {
     transform: scale(0.45);
   }
 `;
@@ -144,15 +144,15 @@ const Column = styled.div`
   flex-direction: column;
   gap: 42px;
 
-  @media screen and (max-width: 1400px) {
+  @media (max-width: 1400px) {
     gap: 36px;
   }
 
-  @media screen and (max-width: 1280px) {
+  @media (max-width: 1280px) {
     gap: 28px;
   }
 
-  @media screen and (max-width: 732px) {
+  @media (max-width: 732px) {
     gap: 20px;
   }
 `;
@@ -164,20 +164,20 @@ const Row = styled.div`
   align-items: flex-end;
   gap: 42px;
 
-  @media screen and (max-width: 1400px) {
+  @media (max-width: 1400px) {
     gap: 36px;
   }
 
-  @media screen and (max-width: 1280px) {
+  @media (max-width: 1280px) {
     gap: 28px;
   }
 
-  @media screen and (max-width: 1110px) {
+  @media (max-width: 1110px) {
     justify-content: center;
     align-items: flex-start;
   }
 
-  @media screen and (max-width: 735px) {
+  @media (max-width: 735px) {
     flex-direction: column;
     height: unset;
   }

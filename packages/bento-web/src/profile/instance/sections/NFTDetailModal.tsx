@@ -108,7 +108,7 @@ const Content = styled.div`
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.45);
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     flex-direction: column;
   }
 `;
@@ -119,7 +119,7 @@ const AssetListItem = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     width: 100%;
   }
 `;
@@ -133,7 +133,7 @@ const TokenHeader = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     margin-left: 0;
     padding-left: 0;
     border-left: none;
@@ -158,7 +158,7 @@ const TokenName = styled.h2`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     margin-top: 0;
   }
 `;

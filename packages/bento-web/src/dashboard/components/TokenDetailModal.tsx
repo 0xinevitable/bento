@@ -335,11 +335,11 @@ const AssetListItem = styled.li`
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 840px) {
+  @media (max-width: 840px) {
     width: calc(33% - 6px);
   }
 
-  @media screen and (max-width: 664px) {
+  @media (max-width: 664px) {
     width: calc(50% - 6px);
   }
 `;
@@ -366,7 +366,7 @@ const FungibleTokenInfo = styled.div`
     margin-right: 32px;
   }
 
-  @media screen and (max-width: 600px) {
+  @media (max-width: 600px) {
     flex-direction: column;
 
     & > div:first-of-type {

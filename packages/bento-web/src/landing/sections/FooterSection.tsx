@@ -127,7 +127,7 @@ const Wrapper = styled.div`
   position: relative;
   z-index: 0;
 
-  @media screen and (max-width: 620px) {
+  @media (max-width: 620px) {
     padding: 0 20px 0;
   }
 
@@ -153,7 +153,7 @@ const Section = styled(TrackedSection)`
     user-select: none;
   }
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     height: fit-content;
   }
 `;
@@ -188,7 +188,7 @@ const Title = styled.h2`
     font-size: 52px;
   }
 
-  @media screen and (max-width: 620px) {
+  @media (max-width: 620px) {
     font-size: 48px;
 
     &:lang(ko) {
@@ -210,12 +210,12 @@ const TwitterAbsoluteContainer = styled(AbsoluteContainer)`
   top: 152px;
   left: -42px;
 
-  @media screen and (max-width: 840px) {
+  @media (max-width: 840px) {
     top: 107px;
     left: 44px;
   }
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     display: none;
   }
 `;
@@ -276,16 +276,16 @@ const CTAAbsoluteContainer = styled(AbsoluteContainer)`
   top: 220px;
   right: -107px;
 
-  @media screen and (max-width: 840px) {
+  @media (max-width: 840px) {
     top: 201px;
     right: -33px;
   }
 
-  @media screen and (max-width: 712px) {
+  @media (max-width: 712px) {
     right: -15px;
   }
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     top: -29px;
     right: 0;
     left: 0;
@@ -299,12 +299,12 @@ const CTAContainer = styled.div`
   height: 136.46px;
   position: relative;
 
-  @media screen and (max-width: 840px) {
+  @media (max-width: 840px) {
     width: 272px;
     height: 140px;
   }
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     width: 208px;
     height: 49px;
   }
@@ -338,7 +338,7 @@ const CTAButton = styled.button`
     filter: opacity(0.66);
   }
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     width: 208px;
     height: 49px;
     padding: 0;
@@ -368,14 +368,14 @@ const CTAHelp = styled(motion.span)`
   text-align: center;
   color: #ff214a;
 
-  @media screen and (max-width: 840px) {
+  @media (max-width: 840px) {
     top: unset;
     left: unset;
     right: 0;
     bottom: 0;
   }
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     width: unset;
     bottom: -19px;
     right: -70px;
@@ -393,12 +393,12 @@ const IllustWrapper = styled.div`
   display: flex;
   justify-content: center;
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     position: static;
     margin-left: -10%;
   }
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     margin-left: 0;
     margin-top: ${28 + 20}px;
   }
@@ -409,7 +409,7 @@ const IllustContainer = styled.div`
   width: 662px;
   height: 413.74px;
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     min-width: unset;
     width: 100%;
 
@@ -421,7 +421,7 @@ const MainIllust = styled.div`
   display: flex;
   justify-content: center;
 
-  @media screen and (max-width: 665px) {
+  @media (max-width: 665px) {
     margin-left: -8%;
     position: relative;
     width: 662px;

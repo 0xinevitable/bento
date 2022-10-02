@@ -87,7 +87,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: 1040px) {
+  @media (max-width: 1040px) {
     & > span.badge {
       z-index: 1;
     }
@@ -150,7 +150,7 @@ const BitcoinIllustContainer = styled(motion.div)`
   left: ${-380 + 75}px;
   z-index: 0;
 
-  @media screen and (max-width: 1240px) {
+  @media (max-width: 1240px) {
     left: -240px;
   }
 
@@ -162,7 +162,7 @@ const BitcoinIllustContainer = styled(motion.div)`
     left: -120px;
   }
 
-  @media screen and (max-width: 400px) {
+  @media (max-width: 400px) {
     width: 280px;
     height: 280px;
   }
@@ -176,7 +176,7 @@ const EthereumIllustContainer = styled(motion.div)`
   right: ${-380 + 75}px;
   z-index: 0;
 
-  @media screen and (max-width: 1240px) {
+  @media (max-width: 1240px) {
     right: -240px;
   }
 
@@ -185,7 +185,7 @@ const EthereumIllustContainer = styled(motion.div)`
     right: -130px;
   }
 
-  @media screen and (max-width: 400px) {
+  @media (max-width: 400px) {
     width: 280px;
     height: 280px;
 

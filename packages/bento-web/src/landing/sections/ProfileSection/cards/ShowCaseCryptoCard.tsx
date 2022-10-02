@@ -46,19 +46,19 @@ const Card = styled.div`
   position: relative;
   overflow: hidden;
 
-  @media screen and (max-width: 1400px) {
+  @media (max-width: 1400px) {
     width: calc((100% - 72px) / 3 + 44px);
   }
 
-  @media screen and (max-width: 1280px) {
+  @media (max-width: 1280px) {
     width: calc((100% - 56px) / 3 + 44px);
   }
 
-  @media screen and (max-width: 1110px) {
+  @media (max-width: 1110px) {
     width: 50%;
   }
 
-  @media screen and (max-width: 735px) {
+  @media (max-width: 735px) {
     width: 100%;
     margin: 0 auto;
     max-width: 500px;
@@ -123,7 +123,7 @@ const CardTitleEN = styled(_CardTitleEN)`
   left: 0;
   bottom: 0;
 
-  @media screen and (max-width: 1268px) {
+  @media (max-width: 1268px) {
     transform: scale(0.85);
     transform-origin: left bottom;
   }
@@ -139,11 +139,11 @@ const CardTitleKO = styled.h3`
   color: #ff4e4e;
   text-shadow: -4px 4px 32px rgba(0, 0, 0, 0.88);
 
-  @media screen and (max-width: 1268px) {
+  @media (max-width: 1268px) {
     font-size: 40px;
   }
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 480px) {
     font-size: 32px;
   }
 `;
