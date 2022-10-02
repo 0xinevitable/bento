@@ -11,7 +11,6 @@ import '@/styles/tailwind.css';
 import '@/styles/fonts.css';
 
 import { AppProps } from 'next/app';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -62,19 +61,6 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <React.Fragment>
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-
       <GlobalStyle />
       <ToastProvider />
 
