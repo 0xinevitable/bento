@@ -7,4 +7,4 @@ export {
   priceFromCoinMarketCap,
   pricesFromCoinMarketCap,
 } from './CoinMarketCap';
-export { Currency } from './Currency';
+export type { Currency } from './Currency';
