@@ -196,6 +196,10 @@ const Container = styled(TrackedSection)`
   position: relative;
 
   display: flex;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 const Content = styled.div`
   display: flex;
@@ -210,6 +214,10 @@ const WalletList = styled(motion.ul)`
 
   display: flex;
   gap: 8px;
+
+  @media screen and (max-width: 900px) {
+    justify-content: center;
+  }
 
   @media screen and (max-width: 600px) {
     gap: 6px;
@@ -322,6 +330,35 @@ const CardBorder = styled(motion.div)`
     right: 0;
     bottom: 0;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+  }
+
+  @media screen and (max-width: 1100px) {
+    margin-left: -200px;
+    z-index: -1;
+  }
+
+  @media screen and (max-width: 900px) {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -120px;
+  }
+
+  @media screen and (max-width: 620px) {
+    width: 420px;
+    min-width: 420px;
+
+    && .title {
+      font-size: 28px;
+    }
+
+    && > div {
+      padding: 28px 20px 48px;
+    }
+  }
+
+  @media screen and (max-width: 462px) {
+    width: 360px;
+    min-width: 360px;
   }
 `;
 const Card = styled.div`
