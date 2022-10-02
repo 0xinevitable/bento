@@ -3,7 +3,7 @@ import {
   EVMBasedNetworks,
   Wallet,
 } from '@bento/common';
-import { pricesFromCoinGecko } from '@bento/core/pricings/CoinGecko';
+import { pricesFromCoinGecko } from '@bento/core';
 import produce from 'immer';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { SWRResponse } from 'swr';

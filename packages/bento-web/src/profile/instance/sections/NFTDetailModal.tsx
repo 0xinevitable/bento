@@ -1,4 +1,5 @@
-import { OpenSeaAsset } from '@bento/core/nfts';
+import { OpenSeaAsset } from '@bento/core';
+import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -21,6 +22,7 @@ export const NFTDetailModal: React.FC<Props> = ({
   isMyProfile,
   onClickSetAsProfile,
 }) => {
+  const { t } = useTranslation('dashboard');
   const [isVideo, imageURL] = useMemo(
     () => [
       !!asset?.animation_url ||
@@ -60,7 +62,7 @@ export const NFTDetailModal: React.FC<Props> = ({
             </TokenHeader>
 
             {!!imageURL && isMyProfile && (
-              <AnimatedToolTip label="Set as profile">
+              <AnimatedToolTip label={t('Set as profile')}>
                 <SetProfileImageButton
                   onClick={() => {
                     onClickSetAsProfile(imageURL);
@@ -106,7 +108,7 @@ const Content = styled.div`
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.45);
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     flex-direction: column;
   }
 `;
@@ -117,7 +119,7 @@ const AssetListItem = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     width: 100%;
   }
 `;
@@ -131,7 +133,7 @@ const TokenHeader = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     margin-left: 0;
     padding-left: 0;
     border-left: none;
@@ -156,7 +158,7 @@ const TokenName = styled.h2`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @media screen and (max-width: 500px) {
+  @media (max-width: 500px) {
     margin-top: 0;
   }
 `;

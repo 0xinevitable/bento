@@ -1,10 +1,11 @@
+import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled from 'styled-components';
 
 import { Button } from '@/components/system';
 import { useWalletContext } from '@/hooks/useWalletContext';
 
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 
 import { WalletList, walletCountStyle } from './WalletList';
 
@@ -13,12 +14,14 @@ type Props = {
 };
 
 export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
+  const { t } = useTranslation('common');
+
   const { wallets, revalidateWallets } = useWalletContext();
 
   return (
-    <div className="flex-1 flex flex-col relative">
+    <Container>
       <SectionTitleContainer>
-        <SectionTitle>Wallets</SectionTitle>
+        <SectionTitle>{t('Wallets')}</SectionTitle>
       </SectionTitleContainer>
 
       {wallets.length > 0 ? (
@@ -26,7 +29,7 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
           <WalletList wallets={wallets} revalidateWallets={revalidateWallets} />
           <ButtonContainer>
             <AddWalletButton onClick={onClickAddWallet}>
-              Add Another
+              {t('Add Another')}
             </AddWalletButton>
           </ButtonContainer>
         </>
@@ -42,7 +45,7 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
           <EmptyContainer>
             <div>
               <span>
-                Wallets Connected&nbsp;&nbsp;
+                {t('Wallets Connected')}&nbsp;&nbsp;
                 <span className="total">{wallets.length}</span>
               </span>
             </div>
@@ -50,14 +53,21 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
 
           <ButtonContainer>
             <AddWalletButton onClick={onClickAddWallet}>
-              Connect Wallet
+              {t('Connect Wallet')}
             </AddWalletButton>
           </ButtonContainer>
         </>
       )}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
 
 const SectionTitleContainer = styled.div`
   position: sticky;
@@ -73,12 +83,6 @@ const SectionTitleContainer = styled.div`
   );
 `;
 const SectionTitle = styled.h3`
-  /* FIXME: !important */
-  &,
-  & > span.title {
-    font-family: 'Raleway', ${systemFontStack} !important;
-  }
-
   margin-bottom: 16px;
   font-weight: 700;
   font-size: 24px;
@@ -87,20 +91,18 @@ const SectionTitle = styled.h3`
   color: ${Colors.gray400};
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   margin-top: 10px;
   display: flex;
   justify-content: center;
 `;
 
 // FIXME: Design component
-const AddWalletButton = styled(Button)`
+export const AddWalletButton = styled(Button)`
   && {
     height: unset;
     padding: 12px 18px;
 
-    /* FIXME: !important */
-    font-family: 'Raleway', ${systemFontStack} !important;
     font-weight: 800;
     font-size: 14px;
     line-height: 100%;

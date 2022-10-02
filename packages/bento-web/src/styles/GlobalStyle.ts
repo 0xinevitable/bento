@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-import { systemFontStack } from '@/styles';
+import { ralewayFontStack, systemFontStack } from '@/styles';
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -15,7 +15,14 @@ export const GlobalStyle = createGlobalStyle`
       font-family가 우선순위 밀리는 문제 이렇게 해결.
       Tailwind 걷어내고 !important 없애기
     */
-    font-family: ${systemFontStack} !important;
+
+    &:lang(en) {
+      font-family: ${ralewayFontStack} !important;
+    }
+
+    &:lang(ko) {
+      font-family: ${systemFontStack}  !important;
+    }
   }
 
   html {
@@ -51,9 +58,10 @@ export const GlobalStyle = createGlobalStyle`
     background: #222;
     color: white;
     pointer-events: none;
-    border-radius: 6px;
-    padding: 4px 6px;
-    font-size: 14px;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 18px;
+    z-index: 2;
   }
 
   .web3modal-modal-lightbox,

@@ -1,4 +1,5 @@
-import { OpenSeaAsset } from '@bento/core/nfts';
+import { OpenSeaAsset } from '@bento/core';
+import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -26,6 +27,7 @@ export const NFTSection: React.FC<Props> = ({
   isMyProfile,
   onClickSetAsProfile,
 }) => {
+  const { t } = useTranslation('dashboard');
   const [selectedNFT, setSelectedNFT] = useState<OpenSeaAsset | null>(null);
 
   useEffect(() => {
@@ -72,7 +74,7 @@ export const NFTSection: React.FC<Props> = ({
           );
         })
       ) : (
-        <Empty>No NFTs Found</Empty>
+        <Empty>{t('No NFTs Found')}</Empty>
       )}
 
       {selected && (
@@ -113,7 +115,7 @@ const AssetListItem = styled.li`
 
   width: calc((100% - 24px) / 3);
 
-  @media screen and (max-width: 32rem) {
+  @media (max-width: 32rem) {
     width: calc((100% - 12px) / 2);
   }
 `;

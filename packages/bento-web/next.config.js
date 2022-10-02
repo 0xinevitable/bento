@@ -1,6 +1,7 @@
 const withSvgr = require('next-plugin-svgr');
 const withInterceptStdout = require('next-intercept-stdout');
 const { withPlugins } = require('next-composed-plugins');
+const { i18n } = require('./next-i18next.config');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -23,8 +24,10 @@ module.exports = withPlugins(
       styledComponents: true,
     },
     experimental: {
-      externalDir: true,
+      // NOTE: Disabled because of transpilation performance issues
+      externalDir: false,
     },
+    i18n,
     publicRuntimeConfig: pick(process.env, ['ENVIRONMENT']),
     webpack: (config) => {
       config.resolve.fallback = {
@@ -39,6 +42,11 @@ module.exports = withPlugins(
         {
           source: '/profile/landing',
           destination: '/profile/intro',
+          permanent: false,
+        },
+        {
+          source: '/dashboard',
+          destination: '/',
           permanent: false,
         },
       ];

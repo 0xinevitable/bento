@@ -2,7 +2,7 @@ import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import styled from 'styled-components';
 
-import { Colors } from '@/styles';
+import { Colors, systemFontStack } from '@/styles';
 
 export type WalletListItemProps = Wallet & {
   onClickCopy?: (
@@ -95,8 +95,7 @@ const Information = styled.div`
   gap: 6px;
 `;
 const WalletAddress = styled.span`
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Helvetica, Arial, sans-serif;
+  font-family: ${systemFontStack} !important;
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;

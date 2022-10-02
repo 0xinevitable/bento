@@ -313,7 +313,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
   }, []);
 
   return (
-    <div className="flex gap-2">
+    <div style={{ display: 'flex', gap: 8 }}>
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
@@ -326,8 +326,8 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         }
       >
         <IconList>
-          <img src={WALLETS.metamask} alt="Metamask" />
-          <img src={WALLETS.walletconnect} alt="WalletConnect" />
+          <img src={WALLETS.MetaMask} alt="MetaMask" />
+          <img src={WALLETS.WalletConnect} alt="WalletConnect" />
         </IconList>
         MetaMask or WalletConnect
       </Button>
@@ -344,7 +344,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         }
       >
         <IconList>
-          <img src={WALLETS.kaikas} alt="Kaikas" />
+          <img src={WALLETS.Kaikas} alt="Kaikas" />
         </IconList>
         Kaikas
       </Button>
@@ -361,7 +361,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         }
       >
         <IconList>
-          <img src={WALLETS.keplr} alt="Keplr" />
+          <img src={WALLETS.Keplr} alt="Keplr" />
         </IconList>
         Keplr
       </Button>
@@ -378,7 +378,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         }
       >
         <IconList>
-          <img src={WALLETS.phantom} alt="Phantom" />
+          <img src={WALLETS.Phantom} alt="Phantom" />
         </IconList>
         Phantom
       </Button>

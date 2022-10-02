@@ -1,21 +1,30 @@
 import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
+import { MotionProps, motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import styled from 'styled-components';
 
 import { Colors, systemFontStack } from '@/styles';
 
-export type WalletListItemProps = Wallet & {
-  onClickDelete: (walletAddress: string) => void;
-  onClickCopy: (address: string, type: 'evm' | 'cosmos-sdk' | 'solana') => void;
+export type WalletListItemProps = MotionProps & {
+  wallet: Wallet;
+  onClickDelete?: (walletAddress: string) => void;
+  onClickCopy?: (
+    address: string,
+    type: 'evm' | 'cosmos-sdk' | 'solana',
+  ) => void;
 };
 
 export const WalletListItem: React.FC<WalletListItemProps> = ({
   onClickCopy,
   onClickDelete,
-  ...wallet
+  wallet,
+  ...motionProps
 }) => {
+  const { t } = useTranslation('common');
+
   return (
-    <Container>
+    <Container {...motionProps}>
       <WalletArchIcon
         className={wallet.type}
         src={`/assets/icons/ic-arch-${wallet.type}.svg`}
@@ -24,7 +33,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
         <WalletAddress>
           {shortenAddress(wallet.address)}
 
-          <button onClick={() => onClickCopy(wallet.address, wallet.type)}>
+          <button onClick={() => onClickCopy?.(wallet.address, wallet.type)}>
             <Icon icon="eva:copy-fill" />
           </button>
         </WalletAddress>
@@ -45,13 +54,15 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
       </Information>
       <ButtonList>
         {/* <button>Edit</button> */}
-        <button onClick={() => onClickDelete(wallet.address)}>Delete</button>
+        <button onClick={() => onClickDelete?.(wallet.address)}>
+          {t('Delete')}
+        </button>
       </ButtonList>
     </Container>
   );
 };
 
-const Container = styled.li`
+const Container = styled(motion.li)`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -97,8 +108,7 @@ const Information = styled.div`
   gap: 6px;
 `;
 const WalletAddress = styled.span`
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Helvetica, Arial, sans-serif;
+  font-family: ${systemFontStack};
   font-weight: 700;
   font-size: 18px;
   line-height: 100%;
@@ -136,11 +146,6 @@ const ButtonList = styled.div`
   & > button {
     padding: 5px 12px;
     border-radius: 8px;
-
-    /* FIXME: */
-    && {
-      font-family: 'Raleway', ${systemFontStack};
-    }
 
     font-weight: 600;
     font-size: 12px;

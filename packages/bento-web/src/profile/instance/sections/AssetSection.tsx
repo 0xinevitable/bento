@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -13,6 +14,8 @@ type Props = {
 };
 
 export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
+  const { t } = useTranslation('dashboard');
+
   return (
     <ul>
       {tokenBalances.length > 0 ? (
@@ -48,7 +51,7 @@ export const AssetSection: React.FC<Props> = ({ tokenBalances }) => {
           })}
         </>
       ) : (
-        <Empty>No Assets Found</Empty>
+        <Empty>{t('No Assets Found')}</Empty>
       )}
     </ul>
   );
@@ -153,7 +156,7 @@ const TokenAmount = styled.span`
   letter-spacing: -0.5px;
   color: rgba(255, 255, 255, 0.45);
 
-  @media screen and (max-width: 400px) {
+  @media (max-width: 400px) {
     span.symbol {
       display: none;
     }

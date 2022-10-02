@@ -1,5 +1,6 @@
 import { Icon as Iconify } from '@iconify/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useMemo, useState } from 'react';
@@ -11,6 +12,7 @@ import { Icon, NoSSR, Portal } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
 
+import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
 
 const Breakpoints = {
@@ -20,8 +22,8 @@ const Breakpoints = {
   Desktop: 1440,
 };
 
-const onMobile = `@media screen and (max-width: ${Breakpoints.Mobile}px)`;
-const onTablet = `@media screen and (max-width: ${Breakpoints.Tablet}px)`;
+const onMobile = `@media (max-width: ${Breakpoints.Mobile}px)`;
+const onTablet = `@media (max-width: ${Breakpoints.Tablet}px)`;
 
 const NAVIGATION_ITEMS = [
   {
@@ -65,6 +67,14 @@ export const NavigationBar = () => {
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
+  const { t, i18n } = useTranslation('common');
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
+
+  const onChangeLocale = useCallback(() => {
+    console.log(currentLanguage);
+    i18n.changeLanguage(currentLanguage === 'en' ? 'ko' : 'en');
+  }, [i18n, currentLanguage]);
+
   return (
     <Wrapper>
       <Container>
@@ -85,11 +95,9 @@ export const NavigationBar = () => {
                 active={currentPath === item.href}
               >
                 <Link href={item.href} passHref>
-                  <a className="h-full flex gap-2 justify-center items-center">
-                    <Iconify className="text-xl" icon={item.icon} />
-                    <span className="text-sm font-medium leading-none">
-                      {item.title}
-                    </span>
+                  <a>
+                    <Iconify icon={item.icon} style={{ fontSize: 20 }} />
+                    <span className="title">{t(item.title)}</span>
                   </a>
                 </Link>
               </NavigationItem>
@@ -97,40 +105,54 @@ export const NavigationBar = () => {
           </NavigationList>
         </NoSSR>
 
-        <SocialIconList>
-          {!!session && (
-            <button
-              className="h-8 text-white text-sm mr-4 hover:text-white/70 transition-colors"
-              onClick={onClickLogout}
+        <RightContent>
+          <SocialIconList>
+            {!!session && (
+              <button className="logout" onClick={onClickLogout}>
+                {t('Logout')}
+              </button>
+            )}
+            <a
+              href="https://twitter.com/bentoinevitable"
+              target="_blank"
+              onClick={() =>
+                Analytics.logEvent('click_social_link', {
+                  type: 'twitter',
+                  medium: 'gnb',
+                })
+              }
             >
-              Logout
+              <TwitterIcon />
+            </a>
+            <a
+              href="https://github.com/inevitable-changes/bento"
+              target="_blank"
+              onClick={() =>
+                Analytics.logEvent('click_social_link', {
+                  type: 'github',
+                  medium: 'gnb',
+                })
+              }
+            >
+              <GithubIcon />
+            </a>
+          </SocialIconList>
+
+          <LanguageSelector>
+            <button
+              className={currentLanguage === 'en' ? 'selected' : ''}
+              onClick={onChangeLocale}
+            >
+              <span>EN</span>
             </button>
-          )}
-          <a
-            href="https://twitter.com/bentoinevitable"
-            target="_blank"
-            onClick={() =>
-              Analytics.logEvent('click_social_link', {
-                type: 'twitter',
-                medium: 'gnb',
-              })
-            }
-          >
-            <TwitterIcon />
-          </a>
-          <a
-            href="https://github.com/inevitable-changes/bento"
-            target="_blank"
-            onClick={() =>
-              Analytics.logEvent('click_social_link', {
-                type: 'github',
-                medium: 'gnb',
-              })
-            }
-          >
-            <GithubIcon />
-          </a>
-        </SocialIconList>
+            <button
+              className={currentLanguage === 'ko' ? 'selected' : ''}
+              onClick={onChangeLocale}
+            >
+              <span>KO</span>
+            </button>
+          </LanguageSelector>
+        </RightContent>
 
         <MobileMenuButton onClick={() => setMobileMenuOpen((prev) => !prev)}>
           <Icon
@@ -166,7 +188,7 @@ export const NavigationBar = () => {
                       >
                         <Iconify className="text-xl" icon={item.icon} />
                         <span className="text-2xl font-medium leading-none">
-                          {item.title}
+                          {t(item.title)}
                         </span>
                       </a>
                     </Link>
@@ -246,7 +268,7 @@ const LogoImage = styled.img`
 const NavigationList = styled.ul`
   display: flex;
 
-  @media screen and (max-width: 680px) {
+  @media (max-width: 680px) {
     display: none;
   }
 `;
@@ -265,6 +287,18 @@ const NavigationItem = styled.li<NavigationItemProps>`
 
   & > a {
     padding: 4px 16px;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    & > span.title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+    }
   }
 
   &::after {
@@ -298,8 +332,42 @@ const NavigationItem = styled.li<NavigationItemProps>`
     `};
 `;
 
+const RightContent = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+
+  position: relative;
+  z-index: 10;
+
+  @media (max-width: 680px) {
+    margin-left: auto;
+    margin-right: 20px;
+  }
+`;
+
 const SocialIconList = styled.div`
   gap: 12px;
+
+  & > button.logout {
+    /* h-8 text-white text-sm mr-4 hover:text-white/70 transition-colors
+     */
+    margin-right: 16px;
+    height: 32px;
+
+    font-size: 14px;
+    line-height: 20px;
+    color: ${Colors.gray000};
+
+    transition-property: color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+
+    &:hover {
+      color: ${Colors.gray200};
+    }
+  }
 
   &,
   & > a {
@@ -313,8 +381,51 @@ const SocialIconList = styled.div`
     opacity: 0.45;
   }
 
-  @media screen and (max-width: 680px) {
+  @media (max-width: 680px) {
     display: none;
+  }
+`;
+
+const LanguageSelector = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0;
+
+  & > button {
+    height: 100%;
+    padding: 0 6px;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 120%;
+    text-align: center;
+    letter-spacing: 0.01em;
+    user-select: none;
+
+    & > span {
+      color: ${Colors.gray500};
+    }
+
+    &.selected > span {
+      color: #ffcff2;
+      background: linear-gradient(
+          to right,
+          #ffffff 5%,
+          #e4f7ff 15%,
+          #cef0ff 41%,
+          #b4c4ff 48%,
+          #ffcff2 54%,
+          #ffffff 62%,
+          #d2d2d2 81%,
+          #ffd7d7 92%,
+          #d5d5d5 100%
+        ),
+        #ffcff2;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
   }
 `;
 
@@ -330,7 +441,7 @@ const MobileMenuButton = styled.button`
 
   display: none;
 
-  @media screen and (max-width: 680px) {
+  @media (max-width: 680px) {
     display: flex;
   }
 `;

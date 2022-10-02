@@ -4,20 +4,24 @@ import queryString from 'query-string';
 import { withCache } from '../cache';
 import { Currency } from './Currency';
 
+type CoinGeckoPricesResponse = {
+  result: { [coinGeckoId: string]: number };
+};
+
 export const priceFromCoinGecko = withCache(
   async (
     coinGeckoId: string,
     vsCurrency: Currency = 'usd',
   ): Promise<number> => {
     const url = queryString.stringifyUrl({
-      url: 'https://api.coingecko.com/api/v3/simple/price',
+      url: 'https://bentoapi.io/externals/coingecko/prices',
       query: {
-        ids: coinGeckoId,
-        vs_currencies: vsCurrency,
+        coinIds: coinGeckoId,
+        vsCurrency,
       },
     });
-    const { data } = await axios.get(url);
-    return data[coinGeckoId][vsCurrency];
+    const { data } = await axios.get<CoinGeckoPricesResponse>(url);
+    return data.result[coinGeckoId];
   },
 );
 
@@ -26,20 +30,18 @@ export const pricesFromCoinGecko = async (
   vsCurrency: Currency = 'usd',
 ): Promise<Record<string, number>> => {
   const url = queryString.stringifyUrl({
-    url: 'https://api.coingecko.com/api/v3/simple/price',
+    url: 'https://bentoapi.io/externals/coingecko/prices',
     query: {
-      ids: coinGeckoIds.join(','),
-      vs_currencies: vsCurrency,
+      coinIds: coinGeckoIds.join(','),
+      vsCurrency,
     },
   });
-  const { data } = await axios.get<{
-    [coinGeckoId: string]: { [vsCurrency: string]: number };
-  }>(url);
+  const { data } = await axios.get<CoinGeckoPricesResponse>(url);
 
-  return Object.entries(data).reduce(
+  return Object.entries(data.result).reduce(
     (acc, [coinGeckoId, price]) => ({
       ...acc,
-      [coinGeckoId]: price[vsCurrency],
+      [coinGeckoId]: price,
     }),
     {},
   );

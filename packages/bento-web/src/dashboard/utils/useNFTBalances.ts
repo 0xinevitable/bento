@@ -1,6 +1,6 @@
 import { Wallet, safePromiseAll } from '@bento/common';
-import { OpenSea, OpenSeaAsset } from '@bento/core/nfts';
-import { priceFromCoinGecko } from '@bento/core/pricings/CoinGecko';
+import { OpenSea, OpenSeaAsset } from '@bento/core';
+import { priceFromCoinGecko } from '@bento/core';
 import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
 import { useEffect, useState } from 'react';

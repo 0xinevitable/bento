@@ -1,4 +1,5 @@
 import groupBy from 'lodash.groupby';
+import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -16,6 +17,8 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
   netWorthInUSD,
 }) => {
+  const { t } = useTranslation('dashboard');
+
   const assetRatioByPlatform = useMemo(() => {
     const groups = groupBy(tokenBalances, 'platform');
     const items = Object.entries(groups).map(([platform, assets]) => {
@@ -36,7 +39,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       <Illust />
 
       <Information>
-        <Field>Net Worth</Field>
+        <Field>{t('Net Worth')}</Field>
         <Title>{`$${netWorthInUSD.toLocaleString()}`}</Title>
       </Information>
 
@@ -79,7 +82,7 @@ const Container = styled.div`
   border-radius: 36px;
   background: linear-gradient(180deg, #14191e 0%, #0f1214 100%);
 
-  @media screen and (max-width: 1110px) {
+  @media (max-width: 1110px) {
     max-width: 100%;
     width: 100%;
     flex: unset;
@@ -92,8 +95,6 @@ const Information = styled.div`
   gap: 6px;
 `;
 const Field = styled.span`
-  /* FIXME: !important */
-  font-family: 'Raleway', ${systemFontStack} !important;
   font-weight: 700;
   font-size: 24px;
   line-height: 100%;
@@ -104,6 +105,11 @@ const Title = styled.h2`
   font-size: 40px;
   line-height: 100%;
   color: ${Colors.gray050};
+
+  /* FIXME: Tailwind */
+  & {
+    font-family: ${systemFontStack} !important;
+  }
 `;
 
 const BadgeList = styled.ul`

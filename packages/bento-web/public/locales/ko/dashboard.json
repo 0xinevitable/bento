@@ -1,0 +1,26 @@
+{
+  "Update your Profile": "프로필을 설정해보세요.",
+  "Setup Now": "지금 하기",
+  "Edit Profile": "프로필 고치기",
+
+  "Net Worth": "총 자산 가치",
+  "Token Net Worth": "총 토큰 가치",
+
+  "Assets": "자산 목록",
+  "Show NFTs": "NFT도 같이보기",
+  "Assets will show up here": "토큰들이 여기에 나타날 거예요.",
+
+  "Name": "표시될 이름",
+  "Username": "사용자 이름",
+  "username (will be shown after @)": "@ 뒤에 붙어 표시될 영문 아이디",
+  "Description": "한 줄 소개",
+  "Save": "저장하기",
+
+  "Wallets": "연결된 지갑들",
+  "NFTs": "NFT 목록",
+  "No Wallets Found": "연결된 지갑이 없어요.",
+  "No Assets Found": "자산 목록이 비어 있어요.",
+  "No NFTs Found": "NFT 목록이 비어 있어요.",
+
+  "Set as profile": "프로필 사진으로 설정하기"
+}

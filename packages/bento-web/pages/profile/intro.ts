@@ -1,4 +1,4 @@
 export {
   default,
-  // getServerSideProps,
+  getStaticProps,
 } from '@/profile/ProfileIntroPage/ProfileIntroPage';

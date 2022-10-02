@@ -1,5 +1,7 @@
 import { Wallet, shortenAddress } from '@bento/common';
 import axios from 'axios';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -14,6 +16,8 @@ type Props = {
 };
 
 export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
+  const { t } = useTranslation('common');
+
   const onClickCopy = useCallback(
     (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
       Analytics.logEvent('click_copy_wallet_address', {
@@ -59,7 +63,7 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
         {wallets.map((wallet) => (
           <WalletListItem
             key={wallet.address}
-            {...wallet}
+            wallet={wallet}
             onClickDelete={onClickDelete}
             onClickCopy={onClickCopy}
           />
@@ -70,7 +74,7 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
         <div />
         <div>
           <span>
-            Wallets Connected&nbsp;&nbsp;
+            {t('Wallets Connected')}&nbsp;&nbsp;
             <span className="total">{wallets.length}</span>
           </span>
         </div>
@@ -84,7 +88,7 @@ const Container = styled.div`
   position: relative;
   margin-top: -40px;
 `;
-const WalletItemList = styled.ul`
+export const WalletItemList = styled(motion.ul)`
   padding-top: 40px;
   padding-bottom: ${(88 * 2) / 3}px;
   width: 100%;
@@ -119,7 +123,6 @@ export const walletCountStyle = css`
     justify-content: center;
 
     span {
-      font-family: 'Poppins';
       font-weight: 600;
       font-size: 18px;
       line-height: 100%;

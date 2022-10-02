@@ -1,9 +1,10 @@
 import { Wallet } from '@bento/common';
-import { OpenSeaAsset } from '@bento/core/nfts';
+import { OpenSeaAsset } from '@bento/core';
 import axios, { AxiosError } from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import groupBy from 'lodash.groupby';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, {
   useCallback,
@@ -107,6 +108,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   isMyProfile = false,
 }) => {
   const router = useRouter();
+  const { t } = useTranslation('dashboard');
   const [isProfileImageModalVisible, setProfileImageModalVisible] =
     useState<boolean>(false);
 
@@ -309,7 +311,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
         {isMyProfile && !isEditing && (
           <ProfileEditButton onClick={onProfileEdit}>
-            Edit Profile
+            {t('Edit Profile')}
           </ProfileEditButton>
         )}
 
@@ -509,12 +511,12 @@ const EarlyBentoBadge = styled.img`
   user-select: none;
   transition: all 0.2s ease-in-out;
 
-  @media screen and (max-width: 32rem) {
+  @media (max-width: 32rem) {
     width: 100px;
     height: 100px;
   }
 
-  @media screen and (max-width: 320px) {
+  @media (max-width: 320px) {
     top: 16px;
     right: 16px;
     width: 84px;

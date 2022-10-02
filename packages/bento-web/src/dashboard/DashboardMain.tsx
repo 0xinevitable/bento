@@ -1,5 +1,6 @@
 import { Wallet } from '@bento/common';
 import groupBy from 'lodash.groupby';
+import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -10,7 +11,7 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
 import { EmptyBalance } from './components/EmptyBalance';
@@ -40,6 +41,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   setTokenDetailModalVisible,
   setTokenDetailModalParams,
 }) => {
+  const { t } = useTranslation('dashboard');
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: NFTBalances } = useNFTBalances({ wallets });
 
@@ -137,7 +139,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 alignItems: 'center',
               }}
             >
-              <span className="title">Assets</span>
+              <span className="title">{t('Assets')}</span>
               <InlineBadge>
                 {renderedTokenBalances.length > 0
                   ? renderedTokenBalances.length.toLocaleString()
@@ -161,7 +163,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               >
                 <Checkbox checked={isNFTsShown ?? false} readOnly />
                 <span className="ml-[6px] text-white/80 text-sm">
-                  Show NFTs
+                  {t('Show NFTs')}
                 </span>
               </div>
             </div>
@@ -199,7 +201,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
         </DashboardContent>
       </DashboardWrapper>
 
-      <div className="w-full h-24" />
+      <div style={{ width: '100%', height: 96 }} />
     </React.Fragment>
   );
 };
@@ -211,15 +213,15 @@ const DashboardWrapper = styled.div`
   width: 100%;
   gap: 32px;
 
-  @media screen and (max-width: 1300px) {
+  @media (max-width: 1300px) {
     gap: 28px;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media (max-width: 1200px) {
     gap: 24px;
   }
 
-  @media screen and (max-width: 880px) {
+  @media (max-width: 880px) {
     flex-direction: column;
     gap: 32px;
   }
@@ -229,12 +231,12 @@ const ProfileContainer = styled.div`
   & > div.sticky {
     width: 400px;
 
-    @media screen and (max-width: 1200px) {
+    @media (max-width: 1200px) {
       width: 360px;
     }
   }
 
-  @media screen and (max-width: 880px) {
+  @media (max-width: 880px) {
     width: 100%;
 
     & div.profile-summary {
@@ -247,7 +249,7 @@ const ProfileContainer = styled.div`
   & > div.sticky {
     position: fixed;
 
-    @media screen and (max-width: 880px) {
+    @media (max-width: 880px) {
       position: static;
       width: unset;
     }
@@ -264,7 +266,7 @@ const DashboardContent = styled.div`
   border: 2px solid ${Colors.gray700};
   border-radius: 16px;
 
-  @media screen and (max-width: 1240px) {
+  @media (max-width: 1240px) {
     padding: 0;
     border: 0;
   }
@@ -274,15 +276,15 @@ const TopSummaryContainer = styled.div`
   width: 100%;
   gap: 32px;
 
-  @media screen and (max-width: 1300px) {
+  @media (max-width: 1300px) {
     gap: 24px;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media (max-width: 1200px) {
     gap: 20px;
   }
 
-  @media screen and (max-width: 1110px) {
+  @media (max-width: 1110px) {
     flex-direction: column;
     gap: 32px;
   }
@@ -299,7 +301,7 @@ const AssetListCard = styled.section`
   background: ${Colors.gray850};
   border-radius: 8px;
 
-  @media screen and (max-width: 400px) {
+  @media (max-width: 400px) {
     padding: 12px;
   }
 
@@ -312,12 +314,6 @@ const AssetListCard = styled.section`
 `;
 
 const SectionTitle = styled.h3`
-  /* FIXME: !important */
-  &,
-  & > span.title {
-    font-family: 'Raleway', ${systemFontStack} !important;
-  }
-
   margin-bottom: 16px;
   font-weight: 700;
   font-size: 24px;
