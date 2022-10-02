@@ -1,6 +1,6 @@
 import { shortenAddress } from '@bento/common';
 import { cachedAxios } from '@bento/core';
-import { OpenSeaAsset } from '@bento/core/nfts';
+import { OpenSeaAsset } from '@bento/core';
 import clsx from 'clsx';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';

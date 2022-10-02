@@ -1,4 +1,4 @@
-import { OpenSeaAsset } from '@bento/core/nfts';
+import { OpenSeaAsset } from '@bento/core';
 import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';

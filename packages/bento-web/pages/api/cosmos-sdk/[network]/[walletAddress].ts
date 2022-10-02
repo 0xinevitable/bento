@@ -1,12 +1,12 @@
 import { CosmosSDKBasedNetworks } from '@bento/common';
 import { safePromiseAll } from '@bento/common';
-import { Bech32Address } from '@bento/core/address';
+import { Bech32Address } from '@bento/core';
 import {
   CosmosHubChain,
   CosmosSDKBasedChain,
   OsmosisChain,
   TokenBalance,
-} from '@bento/core/chains';
+} from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface APIRequest extends NextApiRequest {
