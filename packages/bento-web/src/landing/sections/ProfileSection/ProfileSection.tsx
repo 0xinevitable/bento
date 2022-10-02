@@ -77,6 +77,10 @@ const Wrapper = styled.div`
   @media (max-width: 1235px) {
     padding-top: 64px;
   }
+
+  @media screen and (max-width: 480px) {
+    padding: 0 16px;
+  }
 `;
 const Section = styled(TrackedSection)`
   margin: 0 auto;

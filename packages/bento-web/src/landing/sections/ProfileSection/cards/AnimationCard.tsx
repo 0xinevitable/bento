@@ -157,6 +157,11 @@ const CardTitleEN = styled(_CardTitleEN)`
     margin-bottom: 0;
     transform: scale(1);
   }
+
+  @media screen and (max-width: 480px) {
+    margin-bottom: -20px;
+    transform: scale(0.85);
+  }
 `;
 const CardTitleKO = styled.h3`
   font-weight: 900;
@@ -188,11 +193,16 @@ const CardTitleKO = styled.h3`
   }
 
   @media screen and (max-width: 1110px) {
-    white-space: normal;
+    white-space: break-spaces;
   }
 
   @media screen and (max-width: 735px) {
     font-size: 48px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 40px;
+    white-space: normal;
   }
 `;
 
@@ -201,6 +211,10 @@ const AnimatedBlockList = styled(motion.ul)`
   display: flex;
   flex: 1;
   gap: 10px;
+
+  @media screen and (max-width: 480px) {
+    margin-top: 24px;
+  }
 `;
 const AnimatedBlockItem = styled(motion.li)`
   width: 50%;

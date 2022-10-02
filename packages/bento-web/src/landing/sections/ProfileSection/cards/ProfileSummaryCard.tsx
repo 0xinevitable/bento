@@ -14,7 +14,7 @@ export const ProfileSummaryCard: React.FC = () => {
         alt=""
         src={mockedProfileBackground}
         sizes="512px"
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '100%', minHeight: 400 }}
       />
 
       <Foreground>
@@ -33,6 +33,7 @@ const Container = styled.div`
   width: 100%;
   width: calc((100% - 84px) / 3);
   height: 100%;
+  min-height: 400px;
 
   @media screen and (max-width: 1400px) {
     width: calc((100% - 72px) / 3);
@@ -58,10 +59,7 @@ const Container = styled.div`
   z-index: 0;
   position: relative;
 
-  &::before,
-  &::after,
   & > div {
-    content: '';
     position: absolute;
     top: 0;
     left: 0;

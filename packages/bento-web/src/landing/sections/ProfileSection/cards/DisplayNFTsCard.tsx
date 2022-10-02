@@ -193,6 +193,10 @@ const CardTitleEN = styled(_CardTitleEN)`
   @media screen and (max-width: 735px) {
     transform: scale(1);
   }
+
+  @media screen and (max-width: 480px) {
+    transform: scale(0.85);
+  }
 `;
 const CardTitleKO = styled.h3`
   position: absolute;
@@ -226,6 +230,10 @@ const CardTitleKO = styled.h3`
 
   @media screen and (max-width: 735px) {
     font-size: 48px;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 40px;
   }
 `;
 

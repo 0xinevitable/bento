@@ -142,4 +142,8 @@ const CardTitleKO = styled.h3`
   @media screen and (max-width: 1268px) {
     font-size: 40px;
   }
+
+  @media screen and (max-width: 480px) {
+    font-size: 32px;
+  }
 `;
