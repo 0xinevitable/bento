@@ -28,7 +28,9 @@ export const Config: Secrets = {
   SLACK_NEW_PROFILE_WEBHOOK:
     process.env.NEXT_PUBLIC_SLACK_NEW_PROFILE_WEBHOOK || '',
   OPENSEA_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_OPENSEA_API_KEYS),
-  COVALENT_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_COVALENT_API_KEYS),
+  COVALENT_API_KEYS: splitAPIKeys(
+    process.env.NEXT_PUBLIC_COVALENT_API_KEYS,
+  ).map((v) => v.replace(':', '')),
   CMC_PRO_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_CMC_PRO_API_KEYS),
   ...HARDCODED_SECRETS,
 };
