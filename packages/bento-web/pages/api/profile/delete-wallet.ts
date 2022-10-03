@@ -1,6 +1,8 @@
 import { PostgrestError, PostgrestResponse } from '@supabase/supabase-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { withCORS } from '@/utils/middlewares/withCORS';
+
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Supabase } from '@/utils';
 
@@ -10,7 +12,7 @@ type APIRequest = NextApiRequest & {
 
 // FIXME: Soft delete next time
 
-export default async (req: APIRequest, res: NextApiResponse) => {
+const handler = async (req: APIRequest, res: NextApiResponse) => {
   let {
     body: { walletAddress: _walletAddress },
   } = req;
@@ -49,3 +51,5 @@ export default async (req: APIRequest, res: NextApiResponse) => {
 
   return res.status(200).json(data);
 };
+
+export default withCORS(handler);

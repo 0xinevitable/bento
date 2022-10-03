@@ -12,6 +12,7 @@ import { pricesFromCoinMarketCap } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';
+import { withCORS } from '@/utils/middlewares/withCORS';
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -40,7 +41,7 @@ const parseWallets = (mixedQuery: string) => {
   return query.split(',');
 };
 
-export default async (req: APIRequest, res: NextApiResponse) => {
+const handler = async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
   const network = (req.query.network ?? '').toLowerCase() as EVMBasedNetworks;
 
@@ -138,3 +139,5 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   await redisClient.disconnect();
   res.status(200).json(result);
 };
+
+export default withCORS(handler);

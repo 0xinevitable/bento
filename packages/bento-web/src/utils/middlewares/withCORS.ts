@@ -3,7 +3,7 @@ import { NextApiResponse } from 'next';
 type APIHandler = <T extends NextApiResponse = NextApiResponse>(
   req: any,
   res: T,
-) => Promise<void>;
+) => void | Promise<void>;
 
 const ALLOWED_ORIGINS = ['https://bento.finance', 'http://localhost:3000'];
 

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { withCORS } from '@/utils/middlewares/withCORS';
+
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Config, Supabase } from '@/utils';
 
@@ -45,7 +47,7 @@ const notifySlack = async (user: User, profile: UserProfile) => {
     });
 };
 
-export default async (req: APIRequest, res: NextApiResponse) => {
+const handler = async (req: APIRequest, res: NextApiResponse) => {
   let { body: profile } = req;
   profile.username = (profile?.username || '').toLowerCase();
 
@@ -138,3 +140,5 @@ export default async (req: APIRequest, res: NextApiResponse) => {
 
   return res.status(200).json(data);
 };
+
+export default withCORS(handler);

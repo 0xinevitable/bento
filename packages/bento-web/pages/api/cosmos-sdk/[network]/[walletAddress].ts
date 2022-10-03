@@ -9,6 +9,8 @@ import {
 } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { withCORS } from '@/utils/middlewares/withCORS';
+
 interface APIRequest extends NextApiRequest {
   query: {
     network?: CosmosSDKBasedNetworks;
@@ -29,7 +31,7 @@ const parseWallets = (mixedQuery: string) => {
   return query.split(',');
 };
 
-export default async (req: APIRequest, res: NextApiResponse) => {
+const handler = async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
   const network = (
     req.query.network ?? ''
@@ -88,3 +90,5 @@ export default async (req: APIRequest, res: NextApiResponse) => {
 
   res.status(200).json(result);
 };
+
+export default withCORS(handler);
