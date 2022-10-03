@@ -5,6 +5,7 @@ type EnvironmentSecrets = {
   OPENSEA_API_KEYS: string[];
   COVALENT_API_KEYS: string[];
   CMC_PRO_API_KEYS: string[];
+  REDIS_URL: string;
 };
 
 const HARDCODED_SECRETS = {
@@ -32,6 +33,7 @@ export const Config: Secrets = {
     process.env.NEXT_PUBLIC_COVALENT_API_KEYS,
   ).map((v) => v.replace(':', '')),
   CMC_PRO_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_CMC_PRO_API_KEYS),
+  REDIS_URL: process.env.NEXT_PUBLIC_REDIS_URL || '',
   ...HARDCODED_SECRETS,
 };
 
