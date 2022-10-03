@@ -9,7 +9,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     Supabase.auth.api.setAuthCookie(req, res);
     res.status(200).send(200);
   } else {
-    res.setHeader('Allow', ['POST']);
     res.status(405).json({
       message: `Method ${req.method} not allowed`,
     });
