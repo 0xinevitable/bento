@@ -8,6 +8,8 @@ import Caver from 'caver-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nacl from 'tweetnacl';
 
+import { withCORS } from '@/utils/middlewares/withCORS';
+
 import { Supabase } from '@/utils';
 
 type APIRequest = NextApiRequest &
@@ -39,7 +41,7 @@ type APIRequest = NextApiRequest &
 
 const caver = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
 
-export default async (req: APIRequest, res: NextApiResponse) => {
+const handler = async (req: APIRequest, res: NextApiResponse) => {
   const { walletType } = req.query;
   const { signature, nonce, ...optionalParams } = req.body;
   let walletAddress = optionalParams.walletAddress;
@@ -173,6 +175,8 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     isValid,
   });
 };
+
+export default withCORS(handler);
 
 // https://github.com/chainapsis/keplr-wallet/blob/dd487d2a041e2a0ebff99b1cc633bc84a9eef916/packages/cosmos/src/adr-36/amino.ts#L87
 function makeADR36AminoSignDoc(
