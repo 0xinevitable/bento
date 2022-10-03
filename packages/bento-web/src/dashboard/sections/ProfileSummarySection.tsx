@@ -40,7 +40,9 @@ export const ProfileSummarySection: React.FC = () => {
     const fetchProfile = async () => {
       try {
         const data = await (await fetch('/api/profile/blocks')).json();
-        setBlocks(data);
+        if (Array.isArray(data)) {
+          setBlocks(data);
+        }
       } catch (error) {
         console.error(error);
       }
