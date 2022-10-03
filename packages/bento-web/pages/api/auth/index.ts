@@ -4,7 +4,7 @@ import { withCORS } from '@/utils/middlewares/withCORS';
 
 import { Supabase } from '@/utils';
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     Supabase.auth.api.setAuthCookie(req, res);
     res.status(200).send(200);
