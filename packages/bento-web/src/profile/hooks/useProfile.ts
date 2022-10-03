@@ -13,7 +13,7 @@ export type ProfileOptions = {
   preloadedProfile?: UserProfile | null;
 };
 
-export const useProfile: (options?: ProfileOptions) => {
+export const useProfile: (options: ProfileOptions) => {
   profile: UserProfile | null;
   revaildateProfile: () => Promise<void>;
 } = (options) => {
@@ -24,16 +24,19 @@ export const useProfile: (options?: ProfileOptions) => {
     if (
       !session ||
       !session.user ||
-      (options?.type === 'USER_PROFILE' && !options?.preloadedProfile)
+      (options.type === 'USER_PROFILE' && !options.preloadedProfile)
     ) {
       setProfile(null);
       return;
     }
 
     const userId =
-      !options || options.type === 'MY_PROFILE'
+      options.type === 'MY_PROFILE'
         ? session.user.id
         : options.preloadedProfile?.user_id;
+    if (!userId) {
+      return;
+    }
     const query = Supabase.from('profile') //
       .select('*')
       .eq('user_id', userId);
@@ -54,7 +57,7 @@ export const useProfile: (options?: ProfileOptions) => {
   }, [revaildateProfile]);
 
   return {
-    profile: profile || (options?.preloadedProfile ?? null),
+    profile: profile || (options.preloadedProfile ?? null),
     revaildateProfile,
   };
 };

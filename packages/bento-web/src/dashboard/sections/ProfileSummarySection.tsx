@@ -25,7 +25,7 @@ type ErrorResponse =
 
 export const ProfileSummarySection: React.FC = () => {
   const { session } = useSession();
-  const { profile, revaildateProfile } = useProfile();
+  const { profile, revaildateProfile } = useProfile({ type: 'MY_PROFILE' });
   const { t } = useTranslation('dashboard');
 
   const profileImageURL =
