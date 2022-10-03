@@ -1,4 +1,4 @@
-import { EVMBasedNetworks } from '@bento/common';
+import { Config, EVMBasedNetworks, randomOf } from '@bento/common';
 import { safePromiseAll } from '@bento/common';
 import {
   AvalancheChain,
@@ -10,6 +10,9 @@ import {
 } from '@bento/core';
 import { pricesFromCoinMarketCap } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
+
+import { createRedisClient } from '@/utils/Redis';
+import { withCORS } from '@/utils/middlewares/withCORS';
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -38,12 +41,12 @@ const parseWallets = (mixedQuery: string) => {
   return query.split(',');
 };
 
-export default async (req: APIRequest, res: NextApiResponse) => {
-  // 지갑 목록을 가져온다.
+const handler = async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
-
-  // 네트워크 주소를 가져온다.
   const network = (req.query.network ?? '').toLowerCase() as EVMBasedNetworks;
+
+  const redisClient = createRedisClient();
+  await redisClient.connect();
 
   const result: {
     walletAddress: string;
@@ -55,15 +58,39 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     balance: number;
     price?: number;
   }[] = (
-    await safePromiseAll(
+    await Promise.all(
       wallets.map(async (walletAddress) => {
         if (SUPPORTED_CHAINS.includes(network)) {
           const chain = chains[network]!;
-
-          const getTokenBalances = async (): Promise<TokenBalance[]> =>
-            'getTokenBalances' in chain
-              ? chain.getTokenBalances(walletAddress)
-              : [];
+          const getTokenBalances = async (): Promise<TokenBalance[]> => {
+            try {
+              const items =
+                'getTokenBalances' in chain
+                  ? await chain.getTokenBalances(walletAddress)
+                  : [];
+              await redisClient
+                .set(
+                  `token-balances:${network}:${walletAddress}`,
+                  JSON.stringify(items),
+                )
+                .catch((err) => console.error(err));
+              return items;
+            } catch (error) {
+              console.error(
+                'Error occurred while fetching token balances (likely Covalent API error)',
+                error,
+              );
+              const out = await redisClient
+                .get(`token-balances:${network}:${walletAddress}`)
+                .catch((err) => {
+                  console.error(err);
+                });
+              if (out) {
+                return JSON.parse(out);
+              }
+              return [];
+            }
+          };
 
           const [balance, tokenBalances] = await Promise.all([
             chain.getBalance(walletAddress).catch(() => 0),
@@ -108,5 +135,9 @@ export default async (req: APIRequest, res: NextApiResponse) => {
       }
     }
   });
+
+  await redisClient.disconnect();
   res.status(200).json(result);
 };
+
+export default withCORS(handler);

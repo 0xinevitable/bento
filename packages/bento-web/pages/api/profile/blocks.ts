@@ -1,9 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { withCORS } from '@/utils/middlewares/withCORS';
+
 import { Block } from '@/profile/blocks';
 import { Supabase } from '@/utils';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { user } = await Supabase.auth.api.getUserByCookie(req);
   if (!user) {
     res.status(401).json({ message: 'Unauthorized' });
@@ -39,3 +41,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });
   return res.status(200).json(blocks);
 };
+
+export default withCORS(handler);
