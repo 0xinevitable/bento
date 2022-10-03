@@ -1,6 +1,8 @@
 import { safePromiseAll } from '@bento/common';
-import { SolanaChain } from '@bento/core';
+import { SolanaChain, TokenBalance } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
+
+import { createRedisClient } from '@/utils/Redis';
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -18,12 +20,11 @@ const parseWallets = (query: string) => {
 };
 
 export default async (req: APIRequest, res: NextApiResponse) => {
-  // 지갑 목록을 가져온다.
   const wallets = parseWallets(req.query.walletAddress ?? '');
-
-  // 네트워크 주소를 가져온다.
-  // const network = (req.query.network ?? '').toLowerCase() as EVMBasedNetworks; // Assuming this is Mainnet (Beta)
   const chain = new SolanaChain();
+
+  const redisClient = createRedisClient();
+  await redisClient.connect();
 
   const result: {
     walletAddress: string;
@@ -37,9 +38,39 @@ export default async (req: APIRequest, res: NextApiResponse) => {
   }[] = (
     await safePromiseAll(
       wallets.map(async (walletAddress) => {
+        const getTokenBalances = async (): Promise<TokenBalance[]> => {
+          try {
+            const items =
+              'getTokenBalances' in chain
+                ? await chain.getTokenBalances(walletAddress)
+                : [];
+            await redisClient
+              .set(
+                `token-balances:solana:${walletAddress}`,
+                JSON.stringify(items),
+              )
+              .catch((err) => console.error(err));
+            return items;
+          } catch (error) {
+            console.error(
+              'Error occurred while fetching token balances (likely Covalent API error)',
+              error,
+            );
+            const out = await redisClient
+              .get(`token-balances:solana:${walletAddress}`)
+              .catch((err) => {
+                console.error(err);
+              });
+            if (out) {
+              return JSON.parse(out);
+            }
+            return [];
+          }
+        };
+
         const [balance, tokenBalances] = await Promise.all([
           chain.getBalance(walletAddress).catch(() => 0),
-          chain.getTokenBalances(walletAddress).catch(() => []),
+          getTokenBalances().catch(() => []),
           [],
         ]);
 
@@ -61,5 +92,6 @@ export default async (req: APIRequest, res: NextApiResponse) => {
     )
   ).flat();
 
+  await redisClient.disconnect();
   res.status(200).json(result);
 };
