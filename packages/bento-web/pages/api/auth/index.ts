@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { withCORS } from '@/utils/middlewares/withCORS';
-
 import { Supabase } from '@/utils';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -15,4 +13,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default withCORS(handler);
+export default handler;

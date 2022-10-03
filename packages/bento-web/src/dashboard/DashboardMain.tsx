@@ -241,7 +241,6 @@ const ProfileContainer = styled.div`
 
     & div.profile-summary {
       height: 360px;
-      aspect-ratio: unset;
       padding-bottom: unset;
     }
   }

@@ -190,7 +190,6 @@ const Wrapper = styled.div`
 
 const BorderWrapper = styled.div`
   width: 100%;
-  aspect-ratio: 1;
   padding-bottom: 100%;
 
   position: relative;
