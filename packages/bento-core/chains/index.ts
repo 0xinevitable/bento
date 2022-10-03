@@ -1,5 +1,5 @@
-import { Base64, safePromiseAll } from '@bento/common';
-import { Config, randomOf } from '@bento/common';
+import { safePromiseAll } from '@bento/common';
+import { Config } from '@bento/common';
 import { JsonRpcProvider } from '@ethersproject/providers';
 import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
@@ -19,6 +19,7 @@ import {
   TokenInput,
 } from '../tokens';
 import { MinimalABIs } from './abi';
+import { getTokenBalancesFromCovalent } from './indexers/Covalent';
 import { Chain, TokenBalance } from './interfaces';
 
 export type { Chain, TokenBalance };
@@ -42,23 +43,12 @@ export class EthereumChain implements Chain {
   };
 
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
-    const { data } = await axios
-      .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
-        {
-          headers: {
-            Authorization: `Basic ${Base64.encode(API_KEY)}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      .catch((error) => {
-        console.error(error);
-        return { data: { data: { items: [] } } };
-      });
+    const items = await getTokenBalancesFromCovalent({
+      chainId: this.chainId,
+      walletAddress,
+    });
 
-    const promises = data.data.items.flatMap(async (token) => {
+    const promises = items.flatMap(async (token) => {
       if (token.type === 'nft') {
         return [];
       }
@@ -128,23 +118,12 @@ export class BNBChain implements Chain {
   };
 
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
-    const { data } = await axios
-      .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
-        {
-          headers: {
-            Authorization: `Basic ${Base64.encode(API_KEY)}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      .catch((error) => {
-        console.error(error);
-        return { data: { data: { items: [] } } };
-      });
+    const items = await getTokenBalancesFromCovalent({
+      chainId: this.chainId,
+      walletAddress,
+    });
 
-    const promises = data.data.items.flatMap(async (token) => {
+    const promises = items.flatMap(async (token) => {
       if (token.type === 'nft') {
         return [];
       }
@@ -214,23 +193,12 @@ export class PolygonChain implements Chain {
   };
 
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
-    const { data } = await axios
-      .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
-        {
-          headers: {
-            Authorization: `Basic ${Base64.encode(API_KEY)}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      .catch((error) => {
-        console.error(error);
-        return { data: { data: { items: [] } } };
-      });
+    const items = await getTokenBalancesFromCovalent({
+      chainId: this.chainId,
+      walletAddress,
+    });
 
-    const promises = data.data.items.flatMap(async (token) => {
+    const promises = items.flatMap(async (token) => {
       if (token.type === 'nft') {
         return [];
       }
@@ -300,23 +268,12 @@ export class AvalancheChain implements Chain {
   };
 
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
-    const { data } = await axios
-      .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
-        {
-          headers: {
-            Authorization: `Basic ${Base64.encode(API_KEY)}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      .catch((error) => {
-        console.error(error);
-        return { data: { data: { items: [] } } };
-      });
+    const items = await getTokenBalancesFromCovalent({
+      chainId: this.chainId,
+      walletAddress,
+    });
 
-    const promises = data.data.items.flatMap(async (token) => {
+    const promises = items.flatMap(async (token) => {
       if (token.type === 'nft') {
         return [];
       }
@@ -366,39 +323,6 @@ export class AvalancheChain implements Chain {
     return safePromiseAll(promises);
   };
 }
-
-export type TokenBalancesResponse = {
-  data: {
-    address: string;
-    updated_at: string;
-    next_update_at: string;
-    quote_currency: string;
-    chain_id: number;
-    items: [
-      {
-        contract_decimals: number;
-        contract_name: string;
-        contract_ticker_symbol: string;
-        contract_address: string;
-        supports_erc: null;
-        logo_url: string;
-        last_transferred_at: null;
-        type: 'cryptocurrency' | 'nft';
-        balance: string;
-        balance_24h: null;
-        quote_rate: number;
-        quote_rate_24h: number;
-        quote: number | null;
-        quote_24h: number | null;
-        // nft_data: NFTData[] | null;
-      },
-    ];
-    pagination: null;
-  };
-  error: false;
-  error_message: null;
-  error_code: null;
-};
 
 export class KlaytnChain implements Chain {
   currency = {
@@ -458,23 +382,12 @@ export class KlaytnChain implements Chain {
   };
 
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
-    const { data } = await axios
-      .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
-        {
-          headers: {
-            Authorization: `Basic ${Base64.encode(API_KEY)}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      .catch((error) => {
-        console.error(error);
-        return { data: { data: { items: [] } } };
-      });
+    const items = await getTokenBalancesFromCovalent({
+      chainId: this.chainId,
+      walletAddress,
+    });
 
-    const promises = data.data.items.flatMap(async (token) => {
+    const promises = items.flatMap(async (token) => {
       if (token.type === 'nft') {
         return [];
       }
@@ -567,23 +480,12 @@ export class SolanaChain implements Chain {
   };
 
   getTokenBalances = async (walletAddress: string) => {
-    const API_KEY = randomOf(Config.COVALENT_API_KEYS);
-    const { data } = await axios
-      .get<TokenBalancesResponse>(
-        `https://api.covalenthq.com/v1/${this.chainId}/address/${walletAddress}/balances_v2/`,
-        {
-          headers: {
-            Authorization: `Basic ${Base64.encode(API_KEY)}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-      .catch((error) => {
-        console.error(error);
-        return { data: { data: { items: [] } } };
-      });
+    const items = await getTokenBalancesFromCovalent({
+      chainId: this.chainId,
+      walletAddress,
+    });
 
-    const promises = data.data.items.flatMap(async (token) => {
+    const promises = items.flatMap(async (token) => {
       if (token.type === 'nft') {
         return [];
       }
