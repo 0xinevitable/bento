@@ -10,7 +10,7 @@ const ALLOWED_ORIGINS = ['https://bento.finance', 'http://localhost:3000'];
 export const withCORS =
   (apiHandler: APIHandler): APIHandler =>
   async (req, res) => {
-    const origin = req.headers.origin;
+    const origin = req.headers.origin || '';
     if (
       ALLOWED_ORIGINS.includes(origin) ||
       origin.endsWith('bento.finance') ||
