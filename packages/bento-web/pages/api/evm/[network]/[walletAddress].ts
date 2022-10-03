@@ -1,4 +1,4 @@
-import { Config, EVMBasedNetworks, randomOf } from '@bento/common';
+import { EVMBasedNetworks } from '@bento/common';
 import { safePromiseAll } from '@bento/common';
 import {
   AvalancheChain,
@@ -58,7 +58,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     balance: number;
     price?: number;
   }[] = (
-    await Promise.all(
+    await safePromiseAll(
       wallets.map(async (walletAddress) => {
         if (SUPPORTED_CHAINS.includes(network)) {
           const chain = chains[network]!;
