@@ -10,12 +10,16 @@ const handleAuthChange = async (
   event: AuthChangeEvent,
   session: Session | null,
 ) => {
-  await fetch('/api/auth', {
-    method: 'POST',
-    headers: new Headers({ 'Content-Type': 'application/json' }),
-    credentials: 'same-origin',
-    body: JSON.stringify({ event, session }),
-  });
+  try {
+    await fetch('/api/auth', {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      credentials: 'same-origin',
+      body: JSON.stringify({ event, session }),
+    });
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const SessionManager: React.FC = () => {
