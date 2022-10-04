@@ -1,7 +1,7 @@
 import { Wallet } from '@bento/common';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { Badge, Checkbox } from '@/components/system';
@@ -15,11 +15,14 @@ import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
 import { EmptyBalance } from './components/EmptyBalance';
+import { Tab } from './components/Tab';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
+
+const TAB_ITEMS = ['Crypto', 'NFTs', 'Badges'] as const;
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -108,6 +111,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     [tokenBalances],
   );
 
+  const [currentTab, setCurrentTab] = useState<typeof TAB_ITEMS[number]>(
+    TAB_ITEMS[0],
+  );
+
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
@@ -119,86 +126,103 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           </div>
         </ProfileContainer>
 
-        <DashboardContent>
-          <TopSummaryContainer>
-            <AssetRatioSection
-              netWorthInUSD={netWorthInUSD}
-              tokenBalances={tokenBalances}
-            />
+        <DashboardContentWrapper>
+          <Tab
+            current={currentTab}
+            onChange={setCurrentTab}
+            items={TAB_ITEMS}
+          />
+          <DashboardContent>
+            {currentTab === 'Crypto' && (
+              <>
+                <TopSummaryContainer>
+                  <AssetRatioSection
+                    netWorthInUSD={netWorthInUSD}
+                    tokenBalances={tokenBalances}
+                  />
 
-            <WalletListSection
-              onClickAddWallet={() => setAddWalletModalVisible((prev) => !prev)}
-            />
-          </TopSummaryContainer>
+                  <WalletListSection
+                    onClickAddWallet={() =>
+                      setAddWalletModalVisible((prev) => !prev)
+                    }
+                  />
+                </TopSummaryContainer>
 
-          <div>
-            <SectionTitle
-              style={{
-                marginBottom: 12,
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <span className="title">{t('Assets')}</span>
-              <InlineBadge>
-                {renderedTokenBalances.length > 0
-                  ? renderedTokenBalances.length.toLocaleString()
-                  : '-'}
-              </InlineBadge>
-            </SectionTitle>
+                <div>
+                  <SectionTitle
+                    style={{
+                      marginBottom: 12,
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <span className="title">{t('Assets')}</span>
+                    <InlineBadge>
+                      {renderedTokenBalances.length > 0
+                        ? renderedTokenBalances.length.toLocaleString()
+                        : '-'}
+                    </InlineBadge>
+                  </SectionTitle>
 
-            <div className="mb-4 w-full flex items-center">
-              <div
-                className="flex items-center cursor-pointer select-none"
-                onClick={() => {
-                  if (!isNFTsShown) {
-                    // showing
-                    Analytics.logEvent('click_show_nfts', undefined);
-                  } else {
-                    // hiding
-                    Analytics.logEvent('click_hide_nfts', undefined);
-                  }
-                  setNFTsShown(!isNFTsShown);
-                }}
-              >
-                <Checkbox checked={isNFTsShown ?? false} readOnly />
-                <span className="ml-[6px] text-white/80 text-sm">
-                  {t('Show NFTs')}
-                </span>
-              </div>
-            </div>
+                  <div className="mb-4 w-full flex items-center">
+                    <div
+                      className="flex items-center cursor-pointer select-none"
+                      onClick={() => {
+                        if (!isNFTsShown) {
+                          // showing
+                          Analytics.logEvent('click_show_nfts', undefined);
+                        } else {
+                          // hiding
+                          Analytics.logEvent('click_hide_nfts', undefined);
+                        }
+                        setNFTsShown(!isNFTsShown);
+                      }}
+                    >
+                      <Checkbox checked={isNFTsShown ?? false} readOnly />
+                      <span className="ml-[6px] text-white/80 text-sm">
+                        {t('Show NFTs')}
+                      </span>
+                    </div>
+                  </div>
 
-            <AssetListCard>
-              {renderedTokenBalances.length > 0 ? (
-                <ul>
-                  {renderedTokenBalances.map((item) => {
-                    const key = `${item.symbol ?? item.name}-${
-                      'tokenAddress' in item ? item.tokenAddress : 'native'
-                    }`;
-                    return (
-                      <TokenBalanceItem
-                        key={key}
-                        tokenBalance={item}
-                        onClick={() => {
-                          Analytics.logEvent('click_balance_item', {
-                            name: item.name,
-                            symbol: item.symbol ?? undefined,
-                            platform: item.platform,
-                            address: item.tokenAddress ?? undefined,
-                          });
-                          setTokenDetailModalVisible((prev) => !prev);
-                          setTokenDetailModalParams({ tokenBalance: item });
-                        }}
-                      />
-                    );
-                  })}
-                </ul>
-              ) : (
-                <EmptyBalance />
-              )}
-            </AssetListCard>
-          </div>
-        </DashboardContent>
+                  <AssetListCard>
+                    {renderedTokenBalances.length > 0 ? (
+                      <ul>
+                        {renderedTokenBalances.map((item) => {
+                          const key = `${item.symbol ?? item.name}-${
+                            'tokenAddress' in item
+                              ? item.tokenAddress
+                              : 'native'
+                          }`;
+                          return (
+                            <TokenBalanceItem
+                              key={key}
+                              tokenBalance={item}
+                              onClick={() => {
+                                Analytics.logEvent('click_balance_item', {
+                                  name: item.name,
+                                  symbol: item.symbol ?? undefined,
+                                  platform: item.platform,
+                                  address: item.tokenAddress ?? undefined,
+                                });
+                                setTokenDetailModalVisible((prev) => !prev);
+                                setTokenDetailModalParams({
+                                  tokenBalance: item,
+                                });
+                              }}
+                            />
+                          );
+                        })}
+                      </ul>
+                    ) : (
+                      <EmptyBalance />
+                    )}
+                  </AssetListCard>
+                </div>
+              </>
+            )}
+          </DashboardContent>
+        </DashboardContentWrapper>
       </DashboardWrapper>
 
       <div style={{ width: '100%', height: 96 }} />
@@ -253,6 +277,11 @@ const ProfileContainer = styled.div`
       width: unset;
     }
   }
+`;
+const DashboardContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 const DashboardContent = styled.div`
   padding: 27px 33px;
