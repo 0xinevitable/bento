@@ -87,7 +87,7 @@ const PROFILE_TABS = [
 
 type ProfileInstanceProps = {
   profile: UserProfile | null;
-  revaildateProfile?: () => Promise<void>;
+  revalidateProfile?: () => Promise<void>;
   isMyProfile?: boolean;
 };
 
@@ -105,7 +105,7 @@ const fetchWallets = async (userId: string): Promise<Wallet[]> => {
 
 export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   profile,
-  revaildateProfile,
+  revalidateProfile,
   isMyProfile = false,
 }) => {
   const router = useRouter();
@@ -265,7 +265,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       if (createdProfile.username !== profile?.username) {
         router.push(`/u/${createdProfile.username}`);
       } else {
-        revaildateProfile?.();
+        revalidateProfile?.();
       }
     } catch (e) {
       if (e instanceof AxiosError) {
@@ -382,7 +382,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
                     display_name: profile?.display_name,
                     images: [assetImage],
                   });
-                  revaildateProfile?.();
+                  revalidateProfile?.();
 
                   setTimeout(() => {
                     toast({

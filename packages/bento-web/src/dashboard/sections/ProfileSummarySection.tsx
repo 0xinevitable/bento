@@ -12,7 +12,7 @@ import {
   ProfileEditor,
   UserInformationDraft,
 } from '@/profile/components/ProfileEditor';
-import { useProfile } from '@/profile/hooks/useProfile';
+import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics, toast } from '@/utils';
 
@@ -23,9 +23,16 @@ type ErrorResponse =
     }
   | undefined;
 
-export const ProfileSummarySection: React.FC = () => {
+type Props = {
+  profile: UserProfile | null;
+  revalidateProfile: () => void;
+};
+
+export const ProfileSummarySection: React.FC<Props> = ({
+  profile,
+  revalidateProfile,
+}) => {
   const { session } = useSession();
-  const { profile, revaildateProfile } = useProfile({ type: 'MY_PROFILE' });
   const { t } = useTranslation('dashboard');
 
   const profileImageURL =
@@ -89,7 +96,7 @@ export const ProfileSummarySection: React.FC = () => {
       console.log(data);
 
       setEditing(false);
-      revaildateProfile?.();
+      revalidateProfile?.();
 
       toast({
         type: 'success',

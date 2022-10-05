@@ -49,7 +49,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   setTokenDetailModalParams,
 }) => {
   const { t } = useTranslation('dashboard');
-  const { profile } = useProfile({ type: 'MY_PROFILE' });
+  const { profile, revalidateProfile } = useProfile({ type: 'MY_PROFILE' });
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: NFTBalances } = useNFTBalances({ wallets });
 
@@ -134,7 +134,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       <DashboardWrapper>
         <ProfileContainer>
           <div className="sticky">
-            <ProfileSummarySection />
+            <ProfileSummarySection
+              profile={profile}
+              revalidateProfile={revalidateProfile}
+            />
           </div>
         </ProfileContainer>
 
@@ -236,6 +239,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 selected={currentTab === 'NFTs'}
                 isMyProfile={true}
                 profile={profile}
+                revalidateProfile={revalidateProfile}
               />
             </AnimatedTab>
 
