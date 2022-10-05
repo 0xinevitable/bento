@@ -42,6 +42,7 @@ export const NFTSection: React.FC<Props> = ({
       token_network: 'ethereum',
       token_contract: selectedNFT.asset_contract.address,
       token_id: selectedNFT.token_id,
+      medium: 'profile',
     });
   }, [selectedNFT, isMyProfile, profile]);
 
@@ -94,6 +95,7 @@ export const NFTSection: React.FC<Props> = ({
               token_network: 'ethereum',
               token_contract: selectedNFT.asset_contract.address,
               token_id: selectedNFT.token_id,
+              medium: 'profile',
             });
             onClickSetAsProfile(assetImage);
           }}
