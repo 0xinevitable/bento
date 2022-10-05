@@ -70,10 +70,11 @@ export const useWalletBalances = ({ wallets }: Options) => {
     );
   }, [wallets]);
 
-  const { responses: result } =
+  const { responses: result, refetch } =
     useMultipleRequests<
       (EVMWalletBalance | CosmosSDKWalletBalance | SolanaWalletBalance)[]
     >(calculatedRequests);
+  useInterval(refetch, 60 * 1_000);
 
   const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
 

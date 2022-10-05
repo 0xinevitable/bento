@@ -13,36 +13,39 @@ export const useMultipleRequests = <T extends any>(
     >
   >({});
 
-  const retrieveResponse = useCallback(async (requestKey: RequestKey) => {
-    setResponses(
-      produce(responses, (draft) => {
-        draft[requestKey] = { ...draft[requestKey], isLoading: true };
-      }),
-    );
+  const retrieveResponse = useCallback(
+    async (requestKey: RequestKey) => {
+      setResponses(
+        produce(responses, (draft) => {
+          draft[requestKey] = { ...draft[requestKey], isLoading: true };
+        }),
+      );
 
-    try {
-      const response = await axios.get<T>(requestKey);
-      setResponses(
-        produce(responses, (draft) => {
-          draft[requestKey] = {
-            data: response.data as Draft<T>,
-            error: null,
-            isLoading: false,
-          };
-        }),
-      );
-    } catch (error: any) {
-      setResponses(
-        produce(responses, (draft) => {
-          draft[requestKey] = {
-            ...draft[requestKey],
-            error,
-            isLoading: false,
-          };
-        }),
-      );
-    }
-  }, []);
+      try {
+        const response = await axios.get<T>(requestKey);
+        setResponses(
+          produce(responses, (draft) => {
+            draft[requestKey] = {
+              data: response.data as Draft<T>,
+              error: null,
+              isLoading: false,
+            };
+          }),
+        );
+      } catch (error: any) {
+        setResponses(
+          produce(responses, (draft) => {
+            draft[requestKey] = {
+              ...draft[requestKey],
+              error,
+              isLoading: false,
+            };
+          }),
+        );
+      }
+    },
+    [responses],
+  );
 
   useEffect(() => {
     requests.forEach((requestKey) => {
