@@ -15,12 +15,12 @@ export type ProfileOptions = {
 
 export const useProfile: (options: ProfileOptions) => {
   profile: UserProfile | null;
-  revaildateProfile: () => Promise<void>;
+  revalidateProfile: () => Promise<void>;
 } = (options) => {
   const { session } = useSession();
   const [profile, setProfile] = useAtom(profileAtom);
 
-  const revaildateProfile = useCallback(async () => {
+  const revalidateProfile = useCallback(async () => {
     if (
       !session ||
       !session.user ||
@@ -53,11 +53,11 @@ export const useProfile: (options: ProfileOptions) => {
   }, [JSON.stringify(session), JSON.stringify(options), setProfile]);
 
   useEffect(() => {
-    revaildateProfile();
-  }, [revaildateProfile]);
+    revalidateProfile();
+  }, [revalidateProfile]);
 
   return {
     profile: profile || (options.preloadedProfile ?? null),
-    revaildateProfile,
+    revalidateProfile,
   };
 };
