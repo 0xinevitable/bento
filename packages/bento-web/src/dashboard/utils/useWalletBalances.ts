@@ -103,7 +103,7 @@ export const useWalletBalances = ({ wallets }: Options) => {
   useEffect(() => {
     fetchPrices();
   }, [fetchPrices]);
-  useInterval(fetchPrices, 15_000);
+  useInterval(fetchPrices, 60 * 1_000);
 
   const balancesWithPrices = useMemo(
     () =>
