@@ -120,6 +120,7 @@ export type AnalyticsEvent = {
     token_network: 'ethereum';
     token_contract: string;
     token_id: string;
+    medium: 'dashboard_main' | 'profile';
   };
   set_nft_as_profile: {
     user_id: string;
@@ -128,6 +129,7 @@ export type AnalyticsEvent = {
     token_network: 'ethereum';
     token_contract: string;
     token_id: string;
+    medium: 'dashboard_main' | 'profile';
   };
   click_edit_my_profile: {
     title: string;

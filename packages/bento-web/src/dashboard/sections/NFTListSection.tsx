@@ -1,34 +1,43 @@
 import { OpenSeaAsset } from '@bento/core';
+import axios, { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { AssetMedia } from '@/components/system';
 
+import { useProfile } from '@/profile/hooks/useProfile';
+import { NFTDetailModal } from '@/profile/instance/sections/NFTDetailModal';
+import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { Analytics } from '@/utils';
+import { Analytics, toast } from '@/utils';
 
-import { UserProfile } from '../../types/UserProfile';
-import { Empty } from './Empty';
-import { NFTDetailModal } from './NFTDetailModal';
+import { EmptyBalance } from '../components/EmptyBalance';
+
+// FIXME: Duplicated type declaration
+type ErrorResponse =
+  | {
+      code: 'USERNAME_UNUSABLE' | 'VALUE_REQUIRED' | string;
+      message: string;
+    }
+  | undefined;
 
 type Props = {
   selected: boolean;
   nftAssets: OpenSeaAsset[];
   profile: UserProfile | null;
   isMyProfile: boolean;
-  onClickSetAsProfile: (assetImage: string) => void;
 };
 
-export const NFTSection: React.FC<Props> = ({
-  nftAssets,
-  selected,
-  profile,
-  isMyProfile,
-  onClickSetAsProfile,
-}) => {
+export const NFTListSection: React.FC<Props> = ({ nftAssets, selected }) => {
   const { t } = useTranslation('dashboard');
   const [selectedNFT, setSelectedNFT] = useState<OpenSeaAsset | null>(null);
+
+  // FIXME:
+  const isMyProfile = true;
+  const { profile, revaildateProfile } = useProfile({
+    type: isMyProfile ? 'MY_PROFILE' : 'USER_PROFILE',
+  });
 
   useEffect(() => {
     if (!selectedNFT || !profile) {
@@ -42,9 +51,51 @@ export const NFTSection: React.FC<Props> = ({
       token_network: 'ethereum',
       token_contract: selectedNFT.asset_contract.address,
       token_id: selectedNFT.token_id,
-      medium: 'profile',
+      medium: 'dashboard_main',
     });
   }, [selectedNFT, isMyProfile, profile]);
+
+  const onClickSetAsProfile = useCallback(async (assetImage: string) => {
+    try {
+      await axios.post(`/api/profile`, {
+        images: [assetImage],
+      });
+      revaildateProfile?.();
+
+      setTimeout(() => {
+        toast({
+          type: 'success',
+          title: 'Changes Saved',
+        });
+
+        document.body.scrollIntoView({
+          behavior: 'smooth',
+        });
+      });
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        const errorResponse = e.response?.data as ErrorResponse;
+        if (errorResponse?.code === 'USERNAME_UNUSABLE') {
+          toast({
+            type: 'error',
+            title: errorResponse.message,
+            description: 'Please choose another username',
+          });
+        } else if (errorResponse?.code === 'VALUE_REQUIRED') {
+          toast({
+            type: 'error',
+            title: errorResponse.message,
+          });
+        } else {
+          toast({
+            type: 'error',
+            title: 'Server Error',
+            description: errorResponse?.message || 'Something went wrong',
+          });
+        }
+      }
+    }
+  }, []);
 
   return (
     <AssetList>
@@ -75,7 +126,8 @@ export const NFTSection: React.FC<Props> = ({
           );
         })
       ) : (
-        <Empty>{t('No NFTs Found')}</Empty>
+        // TODO: Change this for NFTs
+        <EmptyBalance />
       )}
 
       {selected && (
@@ -95,7 +147,7 @@ export const NFTSection: React.FC<Props> = ({
               token_network: 'ethereum',
               token_contract: selectedNFT.asset_contract.address,
               token_id: selectedNFT.token_id,
-              medium: 'profile',
+              medium: 'dashboard_main',
             });
             onClickSetAsProfile(assetImage);
           }}
@@ -111,14 +163,24 @@ const AssetList = styled.ul`
   flex-wrap: wrap;
   gap: 12px;
 `;
+const getWidth = (count: number) =>
+  `calc((100% - ${12 * (count - 1)}px) / ${count})`;
 const AssetListItem = styled.li`
   display: flex;
   flex-direction: column;
 
-  width: calc((100% - 24px) / 3);
+  width: ${getWidth(5)};
 
-  @media (max-width: 32rem) {
-    width: calc((100% - 12px) / 2);
+  @media (max-width: 1100px) {
+    width: ${getWidth(4)};
+  }
+
+  @media (max-width: 600px) {
+    width: ${getWidth(3)};
+  }
+
+  @media (max-width: 420px) {
+    width: ${getWidth(2)};
   }
 `;
 const AssetName = styled.span`

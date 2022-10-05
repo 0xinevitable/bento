@@ -15,6 +15,7 @@ import React, {
 } from 'react';
 import styled, { css } from 'styled-components';
 
+import { AnimatedTab } from '@/components/AnimatedTab';
 import { Modal } from '@/components/system';
 import { useWalletContext } from '@/hooks/useWalletContext';
 
@@ -350,25 +351,25 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
       <AnimatePresence initial={false}>
         <TabContent palette={palette}>
           {FeatureFlags.isProfileLinksEnabled && (
-            <AnimatedTab selected={selectedTab === ProfileTab.Links}>
+            <StyledAnimatedTab selected={selectedTab === ProfileTab.Links}>
               <ProfileLinkSection
                 isMyProfile={isMyProfile}
                 blocks={profile?.links ?? null}
               />
-            </AnimatedTab>
+            </StyledAnimatedTab>
           )}
 
-          {/* <AnimatedTab selected={selectedTab === ProfileTab.Questions}>
+          {/* <StyledAnimatedTab selected={selectedTab === ProfileTab.Questions}>
             <QuestionSection />
-          </AnimatedTab> */}
+          </StyledAnimatedTab> */}
 
-          <AnimatedTab selected={selectedTab === ProfileTab.Wallets}>
+          <StyledAnimatedTab selected={selectedTab === ProfileTab.Wallets}>
             <ProfileWalletList wallets={wallets} />
-          </AnimatedTab>
-          <AnimatedTab selected={selectedTab === ProfileTab.Assets}>
+          </StyledAnimatedTab>
+          <StyledAnimatedTab selected={selectedTab === ProfileTab.Assets}>
             <AssetSection tokenBalances={tokenBalances} />
-          </AnimatedTab>
-          <AnimatedTab selected={selectedTab === ProfileTab.NFTs}>
+          </StyledAnimatedTab>
+          <StyledAnimatedTab selected={selectedTab === ProfileTab.NFTs}>
             <NFTSection
               nftAssets={nftAssets}
               selected={selectedTab === ProfileTab.NFTs}
@@ -420,7 +421,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
                 }
               }}
             />
-          </AnimatedTab>
+          </StyledAnimatedTab>
         </TabContent>
       </AnimatePresence>
 
@@ -587,25 +588,9 @@ const TabContent = styled.div<TabContentProps>`
   }
 `;
 
-type AnimatedTabProps = {
-  selected: boolean;
-};
-const AnimatedTab = (props: AnimatedTabProps & HTMLMotionProps<'div'>) => (
-  <motion.div
-    animate={
-      !props.selected
-        ? { opacity: 0, transform: 'scale(0.9)' }
-        : { opacity: 1, transform: 'scale(1)' }
-    }
-    style={{
-      originY: 0,
-      paddingBottom: 220,
-      display: !props.selected ? 'none' : 'block',
-    }}
-    transition={{ duration: 0.35 }}
-    {...props}
-  />
-);
+const StyledAnimatedTab = styled(AnimatedTab)`
+  padding-bottom: 220px;
+`;
 
 const ProfileEditModal = styled(Modal)`
   .modal-container {
