@@ -69,6 +69,8 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     return res.status(400).json({
       error: 'Invalid nonce',
     });
+  } else {
+    await redisClient.del(`add-wallet-nonce:${nonceId}`);
   }
   await redisClient.disconnect();
 
