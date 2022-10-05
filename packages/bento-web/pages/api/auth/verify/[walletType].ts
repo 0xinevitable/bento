@@ -8,6 +8,7 @@ import Caver from 'caver-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nacl from 'tweetnacl';
 
+import { createRedisClient } from '@/utils/Redis';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 import { Supabase } from '@/utils';
@@ -57,6 +58,19 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
   let isValid: boolean = false;
   const signedMessage = Base64.decode(nonce);
+  const nonceId = signedMessage.split('Nonce: ')[1].trim();
+
+  const redisClient = createRedisClient();
+  await redisClient.connect();
+  const nonceData = await redisClient.get(`add-wallet-nonce:${nonceId}`);
+  const walletAddressFromNonce = nonceData?.split('///')?.[0];
+  // TODO: Check expiration
+  if (walletAddressFromNonce !== walletAddress.toLowerCase()) {
+    return res.status(400).json({
+      error: 'Invalid nonce',
+    });
+  }
+  await redisClient.disconnect();
 
   if (walletType === 'web3') {
     const recovered = verifyMessage(signedMessage, signature);

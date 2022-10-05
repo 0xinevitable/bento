@@ -1,6 +1,6 @@
 import { Base64 } from '@bento/common';
 import { cachedAxios } from '@bento/core';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import clsx from 'clsx';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
@@ -18,6 +18,23 @@ declare global {
     solana: any;
   }
 }
+
+const getMessagedToBeSigned = async (walletAddress: string) => {
+  try {
+    const {
+      data: { nonce: messageToBeSigned },
+    } = await axios.get<{ nonce: string }>(
+      `/auth/nonce/${walletAddress.toLowerCase()}`,
+    );
+    return messageToBeSigned;
+  } catch (error) {
+    console.error(error);
+    toast({
+      type: 'error',
+      title: 'Failed to get nonce',
+    });
+  }
+};
 
 const validateAndSaveWallet = async (
   params: (
@@ -78,11 +95,6 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     return networks[0].type;
   }, [networks]);
 
-  const messageToBeSigned = useMemo(
-    () => 'Sign this message to add your wallet',
-    [],
-  ); // TODO: Add username and more
-
   const { signOut } = useSignOut();
 
   const connectMetaMask = useCallback(async () => {
@@ -138,6 +150,10 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
 
     const signer = provider.getSigner();
     const walletAddress = await signer.getAddress();
+    const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+    if (!messageToBeSigned) {
+      return;
+    }
     const signature = await signer.signMessage(messageToBeSigned);
 
     const walletType = 'web3';
@@ -182,6 +198,10 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
     const accounts = await offlineSigner.getAccounts();
     const walletAddress = accounts[0].address;
+    const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+    if (!messageToBeSigned) {
+      return;
+    }
 
     const { pub_key: publicKey, signature } = await window.keplr.signArbitrary(
       chainId,
@@ -229,6 +249,10 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
     const provider = window.klaytn;
     const accounts = await provider.enable();
     const walletAddress = accounts[0];
+    const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+    if (!messageToBeSigned) {
+      return;
+    }
 
     const Caver = await import('caver-js');
     const caver = new Caver.default(provider);
@@ -275,6 +299,10 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
 
     const resp = await window.solana.connect();
     const walletAddress = resp.publicKey.toString();
+    const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+    if (!messageToBeSigned) {
+      return;
+    }
 
     const encodedMessage = new TextEncoder().encode(messageToBeSigned);
     const signedMessage = await window.solana.signMessage(
