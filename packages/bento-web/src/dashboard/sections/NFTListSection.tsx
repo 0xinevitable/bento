@@ -12,6 +12,8 @@ import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics, toast } from '@/utils';
 
+import { EmptyBalance } from '../components/EmptyBalance';
+
 // FIXME: Duplicated type declaration
 type ErrorResponse =
   | {
@@ -97,34 +99,36 @@ export const NFTListSection: React.FC<Props> = ({ nftAssets, selected }) => {
 
   return (
     <AssetList>
-      {nftAssets.length > 0
-        ? nftAssets.map((asset, index) => {
-            const isVideo =
-              !!asset.animation_url ||
-              asset.image_url?.toLowerCase()?.endsWith('.mp4') ||
-              false;
+      {nftAssets.length > 0 ? (
+        nftAssets.map((asset, index) => {
+          const isVideo =
+            !!asset.animation_url ||
+            asset.image_url?.toLowerCase()?.endsWith('.mp4') ||
+            false;
 
-            return (
-              <AssetListItem key={index} onClick={() => setSelectedNFT(asset)}>
-                <AssetMedia
-                  src={
-                    !isVideo
-                      ? asset.image_url || asset.collection.image_url
-                      : asset.animation_url
-                  }
-                  poster={
-                    asset.image_url ||
-                    asset.image_preview_url ||
-                    asset.collection.image_url
-                  }
-                  isVideo={isVideo}
-                />
-                <AssetName>{asset.name || `#${asset.token_id}`}</AssetName>
-              </AssetListItem>
-            );
-          })
-        : // <Empty>{t('No NFTs Found')}</Empty>
-          null}
+          return (
+            <AssetListItem key={index} onClick={() => setSelectedNFT(asset)}>
+              <AssetMedia
+                src={
+                  !isVideo
+                    ? asset.image_url || asset.collection.image_url
+                    : asset.animation_url
+                }
+                poster={
+                  asset.image_url ||
+                  asset.image_preview_url ||
+                  asset.collection.image_url
+                }
+                isVideo={isVideo}
+              />
+              <AssetName>{asset.name || `#${asset.token_id}`}</AssetName>
+            </AssetListItem>
+          );
+        })
+      ) : (
+        // TODO: Change this for NFTs
+        <EmptyBalance />
+      )}
 
       {selected && (
         <NFTDetailModal

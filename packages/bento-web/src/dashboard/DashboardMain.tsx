@@ -238,6 +238,12 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 profile={profile}
               />
             </AnimatedTab>
+
+            <AnimatedTab selected={currentTab === 'Badges'}>
+              <span className="my-8 text-center text-white/90 font-bold">
+                Coming Soon!
+              </span>
+            </AnimatedTab>
           </DashboardContent>
         </DashboardContentWrapper>
       </DashboardWrapper>
