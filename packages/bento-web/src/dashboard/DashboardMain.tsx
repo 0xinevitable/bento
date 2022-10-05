@@ -14,7 +14,6 @@ import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { useProfile } from '@/profile/hooks/useProfile';
-import { NFTSection } from '@/profile/instance/sections/NFTSection';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
@@ -23,6 +22,7 @@ import { Tab } from './components/Tab';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { AssetRatioSection } from './sections/AssetRatioSection';
+import { NFTListSection } from './sections/NFTListSection';
 import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
 
@@ -231,14 +231,11 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === 'NFTs'}>
-              <NFTSection
+              <NFTListSection
                 nftAssets={nftAssets}
                 selected={currentTab === 'NFTs'}
                 isMyProfile={true}
                 profile={profile}
-                onClickSetAsProfile={async (assetImage) => {
-                  //  TODO:
-                }}
               />
             </AnimatedTab>
           </DashboardContent>
@@ -315,7 +312,7 @@ const DashboardContent = styled.div`
   border-radius: 16px;
 
   @media (max-width: 1240px) {
-    padding: 0;
+    padding: 24px 0 0;
     border: 0;
   }
 `;
