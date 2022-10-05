@@ -1,55 +1,46 @@
 import axios from 'axios';
 import produce, { Draft } from 'immer';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 type RequestKey = string;
 export const useMultipleRequests = <T extends any>(
   requests: (RequestKey | null)[],
 ) => {
-  const [responses, setResponses] = useState<
+  const responsesRef = useRef<
     Record<
       RequestKey,
       { data: T | null; error: Error | null; isLoading: boolean }
     >
   >({});
 
-  const retrieveResponse = useCallback(
-    async (requestKey: RequestKey) => {
-      setResponses(
-        produce(responses, (draft) => {
-          draft[requestKey] = { ...draft[requestKey], isLoading: true };
-        }),
-      );
+  const retrieveResponse = useCallback(async (requestKey: RequestKey) => {
+    responsesRef.current = produce(responsesRef.current, (draft) => {
+      draft[requestKey] = { ...draft[requestKey], isLoading: true };
+    });
 
-      try {
-        const response = await axios.get<T>(requestKey);
-        setResponses(
-          produce(responses, (draft) => {
-            draft[requestKey] = {
-              data: response.data as Draft<T>,
-              error: null,
-              isLoading: false,
-            };
-          }),
-        );
-      } catch (error: any) {
-        setResponses(
-          produce(responses, (draft) => {
-            draft[requestKey] = {
-              ...draft[requestKey],
-              error,
-              isLoading: false,
-            };
-          }),
-        );
-      }
-    },
-    [responses],
-  );
+    try {
+      const response = await axios.get<T>(requestKey);
+      responsesRef.current = produce(responsesRef.current, (draft) => {
+        draft[requestKey] = {
+          data: response.data as Draft<T>,
+          error: null,
+          isLoading: false,
+        };
+      });
+    } catch (error: any) {
+      responsesRef.current = produce(responsesRef.current, (draft) => {
+        draft[requestKey] = {
+          ...draft[requestKey],
+          error,
+          isLoading: false,
+        };
+      });
+    }
+  }, []);
 
   useEffect(() => {
     requests.forEach((requestKey) => {
-      if (requestKey && !responses[requestKey]) {
+      if (requestKey && !responsesRef.current[requestKey]) {
         retrieveResponse(requestKey);
       }
     });
@@ -63,7 +54,5 @@ export const useMultipleRequests = <T extends any>(
     });
   }, [requests]);
 
-  const items = useMemo(() => Object.values(responses), [responses]);
-
-  return { responses: items, refetch };
+  return { responses: Object.values(responsesRef.current), refetch };
 };
