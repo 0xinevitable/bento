@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 import { AssetMedia } from '@/components/system';
 
-import { useProfile } from '@/profile/hooks/useProfile';
 import { NFTDetailModal } from '@/profile/instance/sections/NFTDetailModal';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
@@ -26,18 +25,19 @@ type Props = {
   selected: boolean;
   nftAssets: OpenSeaAsset[];
   profile: UserProfile | null;
+  revalidateProfile: () => void;
   isMyProfile: boolean;
 };
 
-export const NFTListSection: React.FC<Props> = ({ nftAssets, selected }) => {
+export const NFTListSection: React.FC<Props> = ({
+  nftAssets,
+  selected,
+  profile,
+  revalidateProfile,
+  isMyProfile,
+}) => {
   const { t } = useTranslation('dashboard');
   const [selectedNFT, setSelectedNFT] = useState<OpenSeaAsset | null>(null);
-
-  // FIXME:
-  const isMyProfile = true;
-  const { profile, revaildateProfile } = useProfile({
-    type: isMyProfile ? 'MY_PROFILE' : 'USER_PROFILE',
-  });
 
   useEffect(() => {
     if (!selectedNFT || !profile) {
@@ -60,7 +60,7 @@ export const NFTListSection: React.FC<Props> = ({ nftAssets, selected }) => {
       await axios.post(`/api/profile`, {
         images: [assetImage],
       });
-      revaildateProfile?.();
+      revalidateProfile?.();
 
       setTimeout(() => {
         toast({

@@ -94,7 +94,7 @@ const ProfileDetailPage = (props: Props) => {
   }, [session, props.profile]);
 
   // FIXME: Divide `useMyProfile` / `useUserProfile` if needed
-  const { profile, revaildateProfile } = useProfile({
+  const { profile, revalidateProfile } = useProfile({
     type: 'USER_PROFILE',
     preloadedProfile: props.profile,
   });
@@ -187,7 +187,7 @@ const ProfileDetailPage = (props: Props) => {
         <NoSSR>
           <ProfileInstance
             profile={profile}
-            revaildateProfile={revaildateProfile}
+            revalidateProfile={revalidateProfile}
             isMyProfile={profileType === 'MY_PROFILE'}
           />
         </NoSSR>
