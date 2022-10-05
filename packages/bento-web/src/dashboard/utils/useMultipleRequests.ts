@@ -1,6 +1,6 @@
 import axios from 'axios';
 import produce, { Draft } from 'immer';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 type RequestKey = string;
 export const useMultipleRequests = <T extends any>(
@@ -60,5 +60,7 @@ export const useMultipleRequests = <T extends any>(
     });
   }, [requests]);
 
-  return { responses, refetch };
+  const items = useMemo(() => Object.values(responses), [responses]);
+
+  return { responses: items, refetch };
 };

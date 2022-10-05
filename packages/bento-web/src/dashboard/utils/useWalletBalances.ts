@@ -75,16 +75,15 @@ export const useWalletBalances = ({ wallets }: Options) => {
       (EVMWalletBalance | CosmosSDKWalletBalance | SolanaWalletBalance)[]
     >(calculatedRequests);
 
-  const balances = useMemo(
-    () => Object.values(result).flatMap((v) => v.data ?? []),
+  const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
+
+  const coinGeckoIds = useMemo<string[]>(
+    () =>
+      balances
+        .flatMap((x) => x.coinGeckoId || [])
+        .filter((x, i, a) => a.indexOf(x) === i),
     [result],
   );
-
-  const coinGeckoIds = useMemo<string[]>(() => {
-    return balances
-      .flatMap((x) => x.coinGeckoId || [])
-      .filter((x, i, a) => a.indexOf(x) === i);
-  }, [result]);
 
   const [coinGeckoPricesByIds, setCoinGeckoPricesByIds] = useState<
     Record<string, number | undefined>
