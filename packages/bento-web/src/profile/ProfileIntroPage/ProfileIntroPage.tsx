@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
 export default function ProfileIntroPage() {
   const router = useRouter();
   const { session } = useSession();
-  const { profile, revaildateProfile } = useProfile({ type: 'MY_PROFILE' });
+  const { profile, revalidateProfile } = useProfile({ type: 'MY_PROFILE' });
   const [isLoginRequired, setLoginRequired] = useState<boolean>(false);
 
   useEffect(() => {
@@ -87,7 +87,7 @@ export default function ProfileIntroPage() {
 
       setEditing(false);
       setDraft(EMPTY_DRAFT);
-      revaildateProfile?.();
+      revalidateProfile?.();
 
       toast({
         type: 'success',
