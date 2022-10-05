@@ -7,12 +7,12 @@ const importAndUpdate = async (path: string) => {
 
 const main = async () =>
   safePromiseAll([
-    importAndUpdate('./ethereum'),
-    importAndUpdate('./polygon'),
-    // // importAndUpdate('./bnb-smart-chain'),
-    importAndUpdate('./avalanche'),
-    importAndUpdate('./solana'),
-    // importAndUpdate('./klaytn')
+    // importAndUpdate('./ethereum'),
+    // importAndUpdate('./polygon'),
+    importAndUpdate('./bnb-smart-chain'),
+    // importAndUpdate('./avalanche'),
+    // importAndUpdate('./solana'),
+    // importAndUpdate('./klaytn'),
   ]);
 
 main() //

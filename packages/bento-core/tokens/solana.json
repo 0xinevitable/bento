@@ -1,10 +1,9 @@
 [
   {
     "symbol": "AKRO",
-    "name": "Akropolis (Wormhole)",
+    "name": "Akropolis (Portal)",
     "decimals": 8,
     "address": "12uHjozDVgyGWeLqQ8DMCRbig8amW5VmvZu3FdMMdcaG",
-    "coinGeckoId": "akro-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/12uHjozDVgyGWeLqQ8DMCRbig8amW5VmvZu3FdMMdcaG/logo.png"
   },
   {
@@ -17,10 +16,9 @@
   },
   {
     "symbol": "HGET",
-    "name": "Hedget (Wormhole)",
+    "name": "Hedget (Portal)",
     "decimals": 6,
     "address": "2ueY1bLcPHfuFzEJq7yN1V2Wrpu8nkun9xG2TVCE1mhD",
-    "coinGeckoId": "hedget-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/2ueY1bLcPHfuFzEJq7yN1V2Wrpu8nkun9xG2TVCE1mhD/logo.png"
   },
   {
@@ -33,26 +31,23 @@
   },
   {
     "symbol": "BUSDet",
-    "name": "Binance USD (Wormhole)",
+    "name": "Binance USD (Portal from Ethereum)",
     "decimals": 8,
     "address": "33fsBLA8djQm82RpHmE3SuVrPGtZBWNYExsEUeKX1HXX",
-    "coinGeckoId": "binance-usd-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/33fsBLA8djQm82RpHmE3SuVrPGtZBWNYExsEUeKX1HXX/logo.png"
   },
   {
     "symbol": "SXP",
-    "name": "Swipe (Wormhole)",
+    "name": "Swipe (Portal)",
     "decimals": 8,
     "address": "3CyiEDRehaGufzkpXJitCP5tvh7cNhRqd9rPBxZrgK5z",
-    "coinGeckoId": "swipe-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/3CyiEDRehaGufzkpXJitCP5tvh7cNhRqd9rPBxZrgK5z/logo.png"
   },
   {
     "symbol": "TOKE",
-    "name": "Tokemak (Wormhole)",
+    "name": "Tokemak (Portal)",
     "decimals": 8,
     "address": "3EQ6LqLkiFcoxTeGEsHMFpSLWNVPe9yT7XPX2HYSFyxX",
-    "coinGeckoId": "tokemak-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/3EQ6LqLkiFcoxTeGEsHMFpSLWNVPe9yT7XPX2HYSFyxX/logo.png"
   },
   {
@@ -64,26 +59,23 @@
   },
   {
     "symbol": "WBTC",
-    "name": "Wrapped BTC (Wormhole)",
+    "name": "Wrapped BTC (Portal)",
     "decimals": 8,
     "address": "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh",
-    "coinGeckoId": "wrapped-btc-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh/logo.png"
   },
   {
     "symbol": "ALEPH",
-    "name": "Aleph.im (Wormhole)",
+    "name": "Aleph.im (Portal)",
     "decimals": 8,
     "address": "3UCMiSnkcnkPE1pgQ5ggPCBv6dXgVUy16TmMUe1WpG9x",
-    "coinGeckoId": "aleph-im-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/3UCMiSnkcnkPE1pgQ5ggPCBv6dXgVUy16TmMUe1WpG9x/logo.png"
   },
   {
     "symbol": "KP3R",
-    "name": "Keep3rV1 (Wormhole)",
+    "name": "Keep3rV1 (Portal)",
     "decimals": 8,
     "address": "3a2VW9t5N6p4baMW3M6yLH1UJ9imMt7VsyUk6ouXPVLq",
-    "coinGeckoId": "keep3rv1-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/3a2VW9t5N6p4baMW3M6yLH1UJ9imMt7VsyUk6ouXPVLq/logo.png"
   },
   {
@@ -118,10 +110,9 @@
   },
   {
     "symbol": "USDK",
-    "name": "USDK (Wormhole)",
+    "name": "USDK (Portal)",
     "decimals": 8,
     "address": "43m2ewFV5nDepieFjT9EmAQnc1HRtAF247RBpLGFem5F",
-    "coinGeckoId": "usdk-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/43m2ewFV5nDepieFjT9EmAQnc1HRtAF247RBpLGFem5F/logo.png"
   },
   {
@@ -141,10 +132,9 @@
   },
   {
     "symbol": "DAIpo",
-    "name": "Dai Stablecoin (Wormhole)",
+    "name": "DAI (Portal from Polygon)",
     "decimals": 8,
     "address": "4Fo67MYQpVhZj9R7jQTd63FPAnWbPpaafAUxsMGX2geP",
-    "coinGeckoId": "dai-stablecoin-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/4Fo67MYQpVhZj9R7jQTd63FPAnWbPpaafAUxsMGX2geP/logo.png"
   },
   {
@@ -157,7 +147,7 @@
   },
   {
     "symbol": "CAVE",
-    "name": "Crypto Cavemen",
+    "name": "CaveWorld",
     "decimals": 6,
     "address": "4SZjjNABoqhbd4hnapbvoEPEqT8mnNkfbEoAwALf1V8t",
     "coinGeckoId": "cave",
@@ -173,10 +163,9 @@
   },
   {
     "symbol": "SLP",
-    "name": "Smooth Love Potion (Wormhole)",
+    "name": "Smooth Love Potion (Portal)",
     "decimals": 0,
     "address": "4hpngEp1v3CXpeKB81Gw4sv7YvwUVRKvY3SGag9ND8Q4",
-    "coinGeckoId": "smooth-love-potion-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/4hpngEp1v3CXpeKB81Gw4sv7YvwUVRKvY3SGag9ND8Q4/logo.png"
   },
   {
@@ -197,26 +186,23 @@
   },
   {
     "symbol": "BUSDbs",
-    "name": "Binance USD (Wormhole from BSC)",
+    "name": "Binance USD (Portal from BSC)",
     "decimals": 8,
     "address": "5RpUwQ8wtdPCZHhu6MERp2RGrpobsbZ6MH5dDHkUjs2",
-    "coinGeckoId": "binance-usd-wormhole-from-bsc",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/5RpUwQ8wtdPCZHhu6MERp2RGrpobsbZ6MH5dDHkUjs2/logo.png"
   },
   {
     "symbol": "CHZ",
-    "name": "Chiliz (Wormhole)",
+    "name": "Chiliz (Portal)",
     "decimals": 8,
     "address": "5TtSKAamFq88grN1QGrEaZ1AjjyciqnCya1aiMhAgFvG",
-    "coinGeckoId": "chiliz-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/5TtSKAamFq88grN1QGrEaZ1AjjyciqnCya1aiMhAgFvG/logo.png"
   },
   {
     "symbol": "LUA",
-    "name": "LuaToken (Wormhole)",
+    "name": "LuaSwap (Portal)",
     "decimals": 8,
     "address": "5Wc4U1ZoQRzF4tPdqKQzBwRSjYe8vEf3EvZMuXgtKUW6",
-    "coinGeckoId": "luatoken-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/5Wc4U1ZoQRzF4tPdqKQzBwRSjYe8vEf3EvZMuXgtKUW6/logo.png"
   },
   {
@@ -229,10 +215,9 @@
   },
   {
     "symbol": "SWAG",
-    "name": "SWAG Finance (Wormhole)",
+    "name": "SWAG Finance (Portal)",
     "decimals": 8,
     "address": "5hcdG6NjQwiNhVa9bcyaaDsCyA1muPQ6WRzQwHfgeeKo",
-    "coinGeckoId": "swag-finance-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/5hcdG6NjQwiNhVa9bcyaaDsCyA1muPQ6WRzQwHfgeeKo/logo.png"
   },
   {
@@ -244,10 +229,9 @@
   },
   {
     "symbol": "KEEP",
-    "name": "Keep Network (Wormhole)",
+    "name": "Keep Network (Portal)",
     "decimals": 8,
     "address": "64L6o4G2H7Ln1vN7AHZsUMW4pbFciHyuwn4wUdSbcFxh",
-    "coinGeckoId": "keep-network-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/64L6o4G2H7Ln1vN7AHZsUMW4pbFciHyuwn4wUdSbcFxh/logo.png"
   },
   {
@@ -260,10 +244,9 @@
   },
   {
     "symbol": "SOS",
-    "name": "OpenDAO (Wormhole)",
+    "name": "OpenDAO (Portal)",
     "decimals": 8,
     "address": "6Q5fvsJ6kgAFmisgDqqyaFd9FURYzHf8MCUbpAUaGZnE",
-    "coinGeckoId": "opendao-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/6Q5fvsJ6kgAFmisgDqqyaFd9FURYzHf8MCUbpAUaGZnE/logo.png"
   },
   {
@@ -276,18 +259,16 @@
   },
   {
     "symbol": "HUSD",
-    "name": "HUSD Stablecoin (Wormhole)",
+    "name": "HUSD Stablecoin (Portal)",
     "decimals": 8,
     "address": "7VQo3HFLNH5QqGtM8eC3XQbPkJUu7nS9LeGWjerRh5Sw",
-    "coinGeckoId": "husd-stablecoin-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/7VQo3HFLNH5QqGtM8eC3XQbPkJUu7nS9LeGWjerRh5Sw/logo.png"
   },
   {
     "symbol": "HBTC",
-    "name": "Huobi BTC (Wormhole)",
+    "name": "Huobi BTC (Portal)",
     "decimals": 8,
     "address": "7dVH61ChzgmN9BwG4PkzwRP8PbYwPJ7ZPNF2vamKT2H8",
-    "coinGeckoId": "huobi-btc-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/7dVH61ChzgmN9BwG4PkzwRP8PbYwPJ7ZPNF2vamKT2H8/logo.png"
   },
   {
@@ -300,10 +281,9 @@
   },
   {
     "symbol": "CRV",
-    "name": "Curve DAO Token (Wormhole)",
+    "name": "Curve DAO Token (Portal)",
     "decimals": 8,
     "address": "7gjNiPun3AzEazTZoFEjZgcBMeuaXdpjHq2raZTmTrfs",
-    "coinGeckoId": "curve-dao-token-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/7gjNiPun3AzEazTZoFEjZgcBMeuaXdpjHq2raZTmTrfs/logo.png"
   },
   {
@@ -355,50 +335,44 @@
   },
   {
     "symbol": "ILV",
-    "name": "Illuvium (Wormhole)",
+    "name": "Illuvium (Portal)",
     "decimals": 8,
     "address": "8UJbtpsEubDVkY53rk7d61hNYKkvouicczB2XmuwiG4g",
-    "coinGeckoId": "illuvium-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/8UJbtpsEubDVkY53rk7d61hNYKkvouicczB2XmuwiG4g/logo.png"
   },
   {
     "symbol": "SNX",
-    "name": "Synthetix Network Token (Wormhole)",
+    "name": "Synthetix Network Token (Portal)",
     "decimals": 8,
     "address": "8cTNUtcV2ueC3royJ642uRnvTxorJAWLZc58gxAo7y56",
-    "coinGeckoId": "synthetix-network-token-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/8cTNUtcV2ueC3royJ642uRnvTxorJAWLZc58gxAo7y56/logo.png"
   },
   {
     "symbol": "FTMet",
-    "name": "Fantom Token (Wormhole)",
+    "name": "Fantom (Portal from Ethereum)",
     "decimals": 8,
     "address": "8gC27rQF4NEDYfyf5aS8ZmQJUum5gufowKGYRRba4ENN",
-    "coinGeckoId": "fantom-token-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/8gC27rQF4NEDYfyf5aS8ZmQJUum5gufowKGYRRba4ENN/logo.png"
   },
   {
     "symbol": "USDTbs",
-    "name": "Tether USD (Wormhole from BSC)",
+    "name": "Tether USD (Portal from BSC)",
     "decimals": 8,
     "address": "8qJSyQprMC57TWKaYEmetUR3UUiTP2M3hXdcvFhkZdmv",
-    "coinGeckoId": "tether-usd-wormhole-from-bsc",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/8qJSyQprMC57TWKaYEmetUR3UUiTP2M3hXdcvFhkZdmv/logo.png"
   },
   {
     "symbol": "ALICE",
-    "name": "My Neighbor Alice (Wormhole)",
+    "name": "My Neighbor Alice (Portal)",
     "decimals": 6,
     "address": "9ARQsBfAn65q522cEqSJuse3cLhA31jgWDBGQHeiq7Mg",
-    "coinGeckoId": "my-neighbor-alice-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/9ARQsBfAn65q522cEqSJuse3cLhA31jgWDBGQHeiq7Mg/logo.png"
   },
   {
     "symbol": "PERP",
-    "name": "Perpetual (Wormhole)",
+    "name": "Perpetual Protocol (Portal)",
     "decimals": 8,
     "address": "9BsnSWDPfbusseZfnXyZ3un14CyPMZYvsKjWY3Y8Gbqn",
-    "coinGeckoId": "perpetual-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/9BsnSWDPfbusseZfnXyZ3un14CyPMZYvsKjWY3Y8Gbqn/logo.png"
   },
   {
@@ -450,10 +424,9 @@
   },
   {
     "symbol": "FRONT",
-    "name": "Frontier Token (Wormhole)",
+    "name": "Frontier (Portal)",
     "decimals": 8,
     "address": "A9ik2NrpKRRG2snyTjofZQcTuav9yH3mNVHLsLiDQmYt",
-    "coinGeckoId": "frontier-token-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/A9ik2NrpKRRG2snyTjofZQcTuav9yH3mNVHLsLiDQmYt/logo.png"
   },
   {
@@ -466,10 +439,9 @@
   },
   {
     "symbol": "GT",
-    "name": "GateChain (Wormhole)",
+    "name": "GateToken (Portal)",
     "decimals": 8,
     "address": "ABAq2R9gSpDDGguQxBk4u13s4ZYW6zbwKVBx15mCMG8",
-    "coinGeckoId": "gatechain-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/ABAq2R9gSpDDGguQxBk4u13s4ZYW6zbwKVBx15mCMG8/logo.png"
   },
   {
@@ -497,10 +469,9 @@
   },
   {
     "symbol": "RGT",
-    "name": "Rari Governance Token (Wormhole)",
+    "name": "Rari Governance Token (Portal)",
     "decimals": 8,
     "address": "ASk8bss7PoxfFVJfXnSJepj9KupTX15QaRnhdjs6DdYe",
-    "coinGeckoId": "rari-governance-token-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/ASk8bss7PoxfFVJfXnSJepj9KupTX15QaRnhdjs6DdYe/logo.png"
   },
   {
@@ -521,34 +492,30 @@
   },
   {
     "symbol": "1INCH",
-    "name": "1INCH (Wormhole)",
+    "name": "1INCH Token (Portal)",
     "decimals": 8,
     "address": "AjkPkq3nsyDe1yKcbyZT7N4aK4Evv9om9tzhQD3wsRC",
-    "coinGeckoId": "1inch-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/AjkPkq3nsyDe1yKcbyZT7N4aK4Evv9om9tzhQD3wsRC/logo.png"
   },
   {
     "symbol": "NXM",
-    "name": "Nexus Mutual (Wormhole)",
+    "name": "Nexus Mutual (Portal)",
     "decimals": 8,
     "address": "Aqs5ydqKXEK2cjotDXxHmk8N9PknqQ5q4ZED4ymY1eeh",
-    "coinGeckoId": "nexus-mutual-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/Aqs5ydqKXEK2cjotDXxHmk8N9PknqQ5q4ZED4ymY1eeh/logo.png"
   },
   {
     "symbol": "GALA",
-    "name": "Gala (Wormhole)",
+    "name": "Gala (Portal)",
     "decimals": 8,
     "address": "AuGz22orMknxQHTVGwAu7e3dJikTJKgcjFwMNDikEKmF",
-    "coinGeckoId": "gala-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/AuGz22orMknxQHTVGwAu7e3dJikTJKgcjFwMNDikEKmF/logo.png"
   },
   {
     "symbol": "COMP",
-    "name": "Compound (Wormhole)",
+    "name": "Compound (Portal)",
     "decimals": 8,
     "address": "AwEauVaTMQRB71WeDnwf1DWSBxaMKjEPuxyLr1uixFom",
-    "coinGeckoId": "compound-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/AwEauVaTMQRB71WeDnwf1DWSBxaMKjEPuxyLr1uixFom/logo.png"
   },
   {
@@ -560,18 +527,16 @@
   },
   {
     "symbol": "SPELL",
-    "name": "Spell Token (Wormhole)",
+    "name": "Spell Token (Portal)",
     "decimals": 8,
     "address": "BCsFXYm81iqXyYmrLKgAp3AePcgLHnirb8FjTs6sjM7U",
-    "coinGeckoId": "spell-token-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/BCsFXYm81iqXyYmrLKgAp3AePcgLHnirb8FjTs6sjM7U/logo.png"
   },
   {
     "symbol": "CVX",
-    "name": "Convex Finance (Wormhole)",
+    "name": "Convex Finance (Portal)",
     "decimals": 8,
     "address": "BLvmrccP4g1B6SpiVvmQrLUDya1nZ4B2D1nm9jzKF7sz",
-    "coinGeckoId": "convex-finance-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/BLvmrccP4g1B6SpiVvmQrLUDya1nZ4B2D1nm9jzKF7sz/logo.png"
   },
   {
@@ -590,18 +555,16 @@
   },
   {
     "symbol": "YFI",
-    "name": "yearn.finance (Wormhole)",
+    "name": "yearn.finance (Portal)",
     "decimals": 8,
     "address": "BXZX2JRJFjvKazM1ibeDFxgAngKExb74MRXzXKvgikxX",
-    "coinGeckoId": "yearn-finance-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/BXZX2JRJFjvKazM1ibeDFxgAngKExb74MRXzXKvgikxX/logo.png"
   },
   {
     "symbol": "ibBTC",
-    "name": "Interest Bearing Bitcoin (Wormhole)",
+    "name": "Interest Bearing Bitcoin (Portal)",
     "decimals": 8,
     "address": "Bzq68gAVedKqQkQbsM28yQ4LYpc2VComDUD9wJBywdTi",
-    "coinGeckoId": "interest-bearing-bitcoin-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/Bzq68gAVedKqQkQbsM28yQ4LYpc2VComDUD9wJBywdTi/logo.png"
   },
   {
@@ -614,10 +577,9 @@
   },
   {
     "symbol": "MATICet",
-    "name": "Matic (Wormhole from Ethereum)",
+    "name": "MATIC (Portal from Ethereum)",
     "decimals": 8,
     "address": "C7NNPWuZCNjZBfW5p6JvGsR8pUdsRpEdP1ZAhnoDwj7h",
-    "coinGeckoId": "matic-wormhole-from-ethereum",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/C7NNPWuZCNjZBfW5p6JvGsR8pUdsRpEdP1ZAhnoDwj7h/logo.png"
   },
   {
@@ -629,10 +591,9 @@
   },
   {
     "symbol": "MATH",
-    "name": "MATH Token (Wormhole)",
+    "name": "MATH Token (Portal)",
     "decimals": 8,
     "address": "CaGa7pddFXS65Gznqwp42kBhkJQdceoFVT7AQYo8Jr8Q",
-    "coinGeckoId": "math-token-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/CaGa7pddFXS65Gznqwp42kBhkJQdceoFVT7AQYo8Jr8Q/logo.png"
   },
   {
@@ -669,10 +630,9 @@
   },
   {
     "symbol": "JOE",
-    "name": "JOE (Wormhole)",
+    "name": "JoeToken (Portal)",
     "decimals": 8,
     "address": "CriXdFS9iRAYbGEQiTcUqbWwG9RBmYt5B6LwTnoJ61Sm",
-    "coinGeckoId": "joe-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/CriXdFS9iRAYbGEQiTcUqbWwG9RBmYt5B6LwTnoJ61Sm/logo.png"
   },
   {
@@ -684,10 +644,9 @@
   },
   {
     "symbol": "AMP",
-    "name": "Amp (Wormhole)",
+    "name": "Amp (Portal)",
     "decimals": 8,
     "address": "D559HwgjYGDYsXpmFUKxhFTEwutvS9sya1kXiyCVogCV",
-    "coinGeckoId": "amp-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/D559HwgjYGDYsXpmFUKxhFTEwutvS9sya1kXiyCVogCV/logo.png"
   },
   {
@@ -708,26 +667,23 @@
   },
   {
     "symbol": "TRIBE",
-    "name": "Tribe (Wormhole)",
+    "name": "Tribe (Portal)",
     "decimals": 8,
     "address": "DPgNKZJAG2w1S6vfYHDBT62R4qrWWH5f45CnxtbQduZE",
-    "coinGeckoId": "tribe-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/DPgNKZJAG2w1S6vfYHDBT62R4qrWWH5f45CnxtbQduZE/logo.png"
   },
   {
     "symbol": "ICE",
-    "name": "Ice (Wormhole)",
+    "name": "PopsicleToken (Portal)",
     "decimals": 8,
     "address": "DiJut4U3CU8b3bRgwfyqtJMJ4wjzJHaX6hudamjH46Km",
-    "coinGeckoId": "ice-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/DiJut4U3CU8b3bRgwfyqtJMJ4wjzJHaX6hudamjH46Km/logo.png"
   },
   {
     "symbol": "RSR",
-    "name": "Reserve Rights (Wormhole)",
+    "name": "Reserve Rights (Portal)",
     "decimals": 8,
     "address": "DkbE8U4gSRuGHcVMA1LwyZPYUjYbfEbjW8DMR3iSXBzr",
-    "coinGeckoId": "reserve-rights-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/DkbE8U4gSRuGHcVMA1LwyZPYUjYbfEbjW8DMR3iSXBzr/logo.png"
   },
   {
@@ -740,10 +696,9 @@
   },
   {
     "symbol": "CRO",
-    "name": "Cronos (Wormhole)",
+    "name": "Crypto.com Coin (Portal)",
     "decimals": 8,
     "address": "DvjMYMVeXgKxaixGKpzQThLoG98nc7HSU7eanzsdCboA",
-    "coinGeckoId": "cronos-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/DvjMYMVeXgKxaixGKpzQThLoG98nc7HSU7eanzsdCboA/logo.png"
   },
   {
@@ -764,26 +719,23 @@
   },
   {
     "symbol": "BNT",
-    "name": "Bancor (Wormhole)",
+    "name": "Bancor Network Token (Portal)",
     "decimals": 8,
     "address": "EDVVEYW4fPJ6vKw5LZXRGUSPzxoHrv6eWvTqhCr8oShs",
-    "coinGeckoId": "bancor-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/EDVVEYW4fPJ6vKw5LZXRGUSPzxoHrv6eWvTqhCr8oShs/logo.png"
   },
   {
     "symbol": "AMPL",
-    "name": "Ampleforth (Wormhole)",
+    "name": "Ampleforth (Portal)",
     "decimals": 8,
     "address": "EHKQvJGu48ydKA4d3RivrkNyTJTkSdoS32UafxSX1yak",
-    "coinGeckoId": "ampleforth-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/EHKQvJGu48ydKA4d3RivrkNyTJTkSdoS32UafxSX1yak/logo.png"
   },
   {
     "symbol": "BAT",
-    "name": "Basic Attention Token (Wormhole)",
+    "name": "Basic Attention Token (Portal)",
     "decimals": 8,
     "address": "EPeUFDgHRxs9xxEPVaL6kfGQvCon7jmAWKVUHuux1Tpz",
-    "coinGeckoId": "basic-attention-token-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/EPeUFDgHRxs9xxEPVaL6kfGQvCon7jmAWKVUHuux1Tpz/logo.png"
   },
   {
@@ -804,10 +756,9 @@
   },
   {
     "symbol": "ENJ",
-    "name": "Enjin (Wormhole)",
+    "name": "EnjinCoin (Portal)",
     "decimals": 8,
     "address": "EXExWvT6VyYxEjFzF5BrUxt5GZMPVZnd48y3iWrRefMq",
-    "coinGeckoId": "enjin-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/EXExWvT6VyYxEjFzF5BrUxt5GZMPVZnd48y3iWrRefMq/logo.png"
   },
   {
@@ -820,10 +771,9 @@
   },
   {
     "symbol": "DAI",
-    "name": "DAI (Wormhole)",
+    "name": "DAI (Portal)",
     "decimals": 8,
     "address": "EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o",
-    "coinGeckoId": "dai-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/EjmyN6qEC1Tf1JxiG1ae7UTJhUxSwk1TCWNWqxWV4J6o/logo.png"
   },
   {
@@ -836,10 +786,9 @@
   },
   {
     "symbol": "YGG",
-    "name": "Yield Guild Games (Wormhole)",
+    "name": "Yield Guild Games (Portal)",
     "decimals": 8,
     "address": "EzZp7LRN1xwu3QsB2RJRrWwEGjJGsuWzuMCeQDB3NSPK",
-    "coinGeckoId": "yield-guild-games-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/EzZp7LRN1xwu3QsB2RJRrWwEGjJGsuWzuMCeQDB3NSPK/logo.png"
   },
   {
@@ -860,10 +809,9 @@
   },
   {
     "symbol": "USDCbs",
-    "name": "USD Coin (Wormhole from BSC)",
+    "name": "USD Coin (Portal from BSC)",
     "decimals": 8,
     "address": "FCqfQSujuPxy6V42UvafBhsysWtEq1vhjfMN1PUbgaxA",
-    "coinGeckoId": "usd-coin-wormhole-from-bsc",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/FCqfQSujuPxy6V42UvafBhsysWtEq1vhjfMN1PUbgaxA/logo.png"
   },
   {
@@ -876,18 +824,16 @@
   },
   {
     "symbol": "UBXT",
-    "name": "UpBots (Wormhole)",
+    "name": "UpBots (Portal)",
     "decimals": 8,
     "address": "FTtXEUosNn6EKG2SQtfbGuYB4rBttreQQcoWn1YDsuTq",
-    "coinGeckoId": "upbots-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/FTtXEUosNn6EKG2SQtfbGuYB4rBttreQQcoWn1YDsuTq/logo.png"
   },
   {
     "symbol": "gOHM",
-    "name": "Governance OHM (Wormhole)",
+    "name": "Governance OHM (Portal)",
     "decimals": 8,
     "address": "FUGsN8H74WjRBBMfQWcf9Kk32gebA9VnNaGxqwcVvUW7",
-    "coinGeckoId": "governance-ohm-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/FUGsN8H74WjRBBMfQWcf9Kk32gebA9VnNaGxqwcVvUW7/logo.png"
   },
   {
@@ -923,18 +869,16 @@
   },
   {
     "symbol": "ZRX",
-    "name": "0x (Wormhole)",
+    "name": "0x (Portal)",
     "decimals": 8,
     "address": "GJa1VeEYLTRoHbaeqcxfzHmjGCGtZGF3CUqxv9znZZAY",
-    "coinGeckoId": "0x-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/GJa1VeEYLTRoHbaeqcxfzHmjGCGtZGF3CUqxv9znZZAY/logo.png"
   },
   {
     "symbol": "UFO",
-    "name": "UFO Gaming (Wormhole)",
+    "name": "UFO Gaming (Portal)",
     "decimals": 8,
     "address": "GWdkYFnXnSJAsCBvmsqFLiPPe2tpvXynZcJdxf11Fu3U",
-    "coinGeckoId": "ufo-gaming-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/GWdkYFnXnSJAsCBvmsqFLiPPe2tpvXynZcJdxf11Fu3U/logo.png"
   },
   {
@@ -946,10 +890,9 @@
   },
   {
     "symbol": "ANKR",
-    "name": "Ankr Network (Wormhole)",
+    "name": "Ankr (Portal)",
     "decimals": 8,
     "address": "Gq2norJ1kBemBp3mPfkgAUMhMMmnFmY4zEyi26tRcxFB",
-    "coinGeckoId": "ankr-network-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/Gq2norJ1kBemBp3mPfkgAUMhMMmnFmY4zEyi26tRcxFB/logo.png"
   },
   {
@@ -962,18 +905,16 @@
   },
   {
     "symbol": "stETH",
-    "name": "Lido Staked Ether (Wormhole)",
+    "name": "Lido Staked Ether (Portal)",
     "decimals": 8,
     "address": "H2mf9QNdU2Niq6QR7367Ua2trBsvscLyX5bz7R3Pw5sE",
-    "coinGeckoId": "lido-staked-ether-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/H2mf9QNdU2Niq6QR7367Ua2trBsvscLyX5bz7R3Pw5sE/logo.png"
   },
   {
     "symbol": "LRC",
-    "name": "LoopringCoin V2 (Wormhole)",
+    "name": "Loopring (Portal)",
     "decimals": 8,
     "address": "HCTVFTzHL21a1dPzKxAUeWwqbE8QMUyvgChFDL4XYoi1",
-    "coinGeckoId": "loopringcoin-v2-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/HCTVFTzHL21a1dPzKxAUeWwqbE8QMUyvgChFDL4XYoi1/logo.png"
   },
   {
@@ -993,18 +934,16 @@
   },
   {
     "symbol": "MIMet",
-    "name": "Magic Internet Money (Wormhole)",
+    "name": "Magic Internet Money (Portal from Ethereum)",
     "decimals": 8,
     "address": "HRQke5DKdDo3jV7wnomyiM8AA3EzkVnxMDdo2FQ5XUe1",
-    "coinGeckoId": "magic-internet-money-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/HRQke5DKdDo3jV7wnomyiM8AA3EzkVnxMDdo2FQ5XUe1/logo.png"
   },
   {
     "symbol": "RPL",
-    "name": "Rocket Pool (Wormhole)",
+    "name": "Rocket Pool (Portal)",
     "decimals": 8,
     "address": "HUCyuyqESEUV4YWTKFvvB4JiQLqoovscTBpRXfGzW4Wx",
-    "coinGeckoId": "rocket-pool-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/HUCyuyqESEUV4YWTKFvvB4JiQLqoovscTBpRXfGzW4Wx/logo.png"
   },
   {
@@ -1024,10 +963,9 @@
   },
   {
     "symbol": "CREAM",
-    "name": "Cream (Wormhole)",
+    "name": "Cream (Portal)",
     "decimals": 8,
     "address": "HihxL2iM6L6P1oqoSeiixdJ3PhPYNxvSKH9A2dDqLVDH",
-    "coinGeckoId": "cream-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/HihxL2iM6L6P1oqoSeiixdJ3PhPYNxvSKH9A2dDqLVDH/logo.png"
   },
   {
@@ -1048,10 +986,9 @@
   },
   {
     "symbol": "CAKE",
-    "name": "PancakeSwap (Wormhole)",
+    "name": "PancakeSwap Token (Portal)",
     "decimals": 8,
     "address": "J8LKx7pr9Zxh9nMhhT7X3EBmj5RzuhFrHKyJAe2F2i9S",
-    "coinGeckoId": "pancakeswap-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/J8LKx7pr9Zxh9nMhhT7X3EBmj5RzuhFrHKyJAe2F2i9S/logo.png"
   },
   {
@@ -1096,10 +1033,9 @@
   },
   {
     "symbol": "ROSE",
-    "name": "ROSE (Wormhole)",
+    "name": "ROSE (Portal)",
     "decimals": 8,
     "address": "S3SQfD6RheMXQ3EEYn1Z5sJsbtwfXdt7tSAVXPQFtYo",
-    "coinGeckoId": "rose-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/S3SQfD6RheMXQ3EEYn1Z5sJsbtwfXdt7tSAVXPQFtYo/logo.png"
   },
   {
@@ -1152,10 +1088,9 @@
   },
   {
     "symbol": "CEL",
-    "name": "Celsius (Wormhole)",
+    "name": "Celsius (Portal)",
     "decimals": 4,
     "address": "nRtfwU9G82CSHhHGJNxFhtn7FLvWP2rqvQvje1WtL69",
-    "coinGeckoId": "celsius-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/nRtfwU9G82CSHhHGJNxFhtn7FLvWP2rqvQvje1WtL69/logo.png"
   },
   {
