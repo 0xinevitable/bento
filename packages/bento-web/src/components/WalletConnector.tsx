@@ -24,7 +24,7 @@ const getMessagedToBeSigned = async (walletAddress: string) => {
     const {
       data: { nonce: messageToBeSigned },
     } = await axios.get<{ nonce: string }>(
-      `/auth/nonce/${walletAddress.toLowerCase()}`,
+      `/api/auth/nonce/${walletAddress.toLowerCase()}`,
     );
     return messageToBeSigned;
   } catch (error) {
