@@ -690,7 +690,7 @@
   },
   {
     "symbol": "RAMP",
-    "name": "RAMP",
+    "name": "RAMP [OLD]",
     "decimals": 18,
     "address": "0x33D0568941C0C64ff7e0FB4fbA0B11BD37deEd9f",
     "coinGeckoId": "ramp",
@@ -698,7 +698,7 @@
   },
   {
     "symbol": "OM",
-    "name": "MANTRA DAO",
+    "name": "MANTRA",
     "decimals": 18,
     "address": "0x3593D125a4f7849a1B059E64F4517A86Dd60c95d",
     "coinGeckoId": "mantra-dao",
@@ -858,7 +858,7 @@
   },
   {
     "symbol": "MCB",
-    "name": "MCDEX",
+    "name": "MUX Protocol",
     "decimals": 18,
     "address": "0x4e352cF164E64ADCBad318C3a1e222E9EBa4Ce42",
     "coinGeckoId": "mcdex",
@@ -1306,7 +1306,6 @@
     "name": "Dego Finance",
     "decimals": 18,
     "address": "0x88EF27e69108B2633F8E1C184CC37940A075cC02",
-    "coinGeckoId": "dego-finance",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x88EF27e69108B2633F8E1C184CC37940A075cC02/logo.png"
   },
   {
@@ -1464,7 +1463,6 @@
     "name": "Shopping.io",
     "decimals": 18,
     "address": "0x9B02dD390a603Add5c07f9fd9175b7DABE8D63B7",
-    "coinGeckoId": "shopping-io",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9B02dD390a603Add5c07f9fd9175b7DABE8D63B7/logo.png"
   },
   {
@@ -1938,10 +1936,10 @@
   },
   {
     "symbol": "TVK",
-    "name": "Terra Virtua Kolect",
+    "name": "The Virtua Kolect",
     "decimals": 18,
     "address": "0xd084B83C305daFD76AE3E1b4E1F1fe2eCcCb3988",
-    "coinGeckoId": "terra-virtua-kolect",
+    "coinGeckoId": "the-virtua-kolect",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xd084B83C305daFD76AE3E1b4E1F1fe2eCcCb3988/logo.png"
   },
   {
@@ -2207,7 +2205,7 @@
   },
   {
     "symbol": "PUSH",
-    "name": "Ethereum Push Notification Service - EPNS",
+    "name": "Push Protocol",
     "decimals": 18,
     "address": "0xf418588522d5dd018b425E472991E52EBBeEEEEE",
     "coinGeckoId": "ethereum-push-notification-service",
@@ -2255,7 +2253,7 @@
   },
   {
     "symbol": "YLD",
-    "name": "YIELD App",
+    "name": "Yield App",
     "decimals": 18,
     "address": "0xF94b5C5651c888d928439aB6514B93944eEE6F48",
     "coinGeckoId": "yield-app",
@@ -2295,10 +2293,10 @@
   },
   {
     "symbol": "REEF",
-    "name": "Reef Finance",
+    "name": "Reef",
     "decimals": 18,
     "address": "0xFE3E6a25e6b192A42a44ecDDCd13796471735ACf",
-    "coinGeckoId": "reef-finance",
+    "coinGeckoId": "reef",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xFE3E6a25e6b192A42a44ecDDCd13796471735ACf/logo.png"
   },
   {

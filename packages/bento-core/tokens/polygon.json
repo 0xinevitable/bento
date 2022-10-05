@@ -98,6 +98,7 @@
     "name": "SpaceRat",
     "decimals": 9,
     "address": "0x1132f58810Ee9fF13E97aECCd8DDa688Cc5eb8F4",
+    "coinGeckoId": "spacerat",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x1132f58810Ee9fF13E97aECCd8DDa688Cc5eb8F4/logo.png"
   },
   {
@@ -128,7 +129,6 @@
     "name": "Daily COP",
     "decimals": 18,
     "address": "0x1659fFb2d40DfB1671Ac226A0D9Dcc95A774521A",
-    "coinGeckoId": "daily-cop",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x1659fFb2d40DfB1671Ac226A0D9Dcc95A774521A/logo.png"
   },
   {
@@ -250,10 +250,9 @@
   },
   {
     "symbol": "USDCso",
-    "name": "USD Coin (Wormhole)",
+    "name": "USD Coin (Portal from Solana)",
     "decimals": 6,
     "address": "0x576Cf361711cd940CD9C397BB98C4C896cBd38De",
-    "coinGeckoId": "usd-coin-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x576Cf361711cd940CD9C397BB98C4C896cBd38De/logo.png"
   },
   {
@@ -273,10 +272,9 @@
   },
   {
     "symbol": "WBTC",
-    "name": "Wrapped BTC (Wormhole)",
+    "name": "Wrapped BTC (Portal)",
     "decimals": 8,
     "address": "0x5D49c278340655B56609FdF8976eb0612aF3a0C3",
-    "coinGeckoId": "wrapped-btc-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x5D49c278340655B56609FdF8976eb0612aF3a0C3/logo.png"
   },
   {
@@ -340,6 +338,7 @@
     "name": "Gravity Finance",
     "decimals": 18,
     "address": "0x874e178A2f3f3F9d34db862453Cd756E7eAb0381",
+    "coinGeckoId": "gravity-finance",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x874e178A2f3f3F9d34db862453Cd756E7eAb0381/logo.png"
   },
   {
@@ -423,10 +422,9 @@
   },
   {
     "symbol": "BUSDbs",
-    "name": "Binance USD (Wormhole from BSC)",
+    "name": "Binance USD (Portal from BSC)",
     "decimals": 18,
     "address": "0xA8D394fE7380b8cE6145d5f85E6aC22d4E91ACDe",
-    "coinGeckoId": "binance-usd-wormhole-from-bsc",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xA8D394fE7380b8cE6145d5f85E6aC22d4E91ACDe/logo.png"
   },
   {
@@ -494,7 +492,6 @@
     "name": "DEI",
     "decimals": 18,
     "address": "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3",
-    "coinGeckoId": "dei-token",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3/logo.png"
   },
   {
@@ -517,7 +514,6 @@
     "name": "CherryPick",
     "decimals": 18,
     "address": "0xE33dC9d2D7D64c1e23467aC7eD7F8eF56d0a8d66",
-    "coinGeckoId": "cherrypick",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xE33dC9d2D7D64c1e23467aC7eD7F8eF56d0a8d66/logo.png"
   },
   {
@@ -674,6 +670,7 @@
     "name": "Ambire Wallet",
     "decimals": 18,
     "address": "0x564906ec1DF8399F00e4ad32c0eCAC0404a27A1c",
+    "coinGeckoId": "ambire-wallet",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x564906ec1DF8399F00e4ad32c0eCAC0404a27A1c/logo.png"
   },
   {
@@ -698,5 +695,21 @@
     "address": "0xFbdd194376de19a88118e84E279b977f165d01b8",
     "coinGeckoId": "beefy-finance",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xFbdd194376de19a88118e84E279b977f165d01b8/logo.png"
+  },
+  {
+    "symbol": "BOB",
+    "name": "BOB",
+    "decimals": 18,
+    "address": "0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B",
+    "coinGeckoId": "bob",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B/logo.png"
+  },
+  {
+    "symbol": "RVLT",
+    "name": "Revolt 2 Earn",
+    "decimals": 18,
+    "address": "0xf0f9D895aCa5c8678f706FB8216fa22957685A13",
+    "coinGeckoId": "revolt-2-earn",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xf0f9D895aCa5c8678f706FB8216fa22957685A13/logo.png"
   }
 ]

@@ -1,9 +1,11 @@
 import { Wallet } from '@bento/common';
+import { OpenSeaAsset } from '@bento/core';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import { AnimatedTab } from '@/components/AnimatedTab';
 import { Badge, Checkbox } from '@/components/system';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
@@ -11,15 +13,20 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
+import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
 import { EmptyBalance } from './components/EmptyBalance';
+import { Tab } from './components/Tab';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { AssetRatioSection } from './sections/AssetRatioSection';
+import { NFTListSection } from './sections/NFTListSection';
 import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
+
+const TAB_ITEMS = ['Crypto', 'NFTs', 'Badges'] as const;
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -42,8 +49,16 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   setTokenDetailModalParams,
 }) => {
   const { t } = useTranslation('dashboard');
+  const { profile } = useProfile({ type: 'MY_PROFILE' });
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: NFTBalances } = useNFTBalances({ wallets });
+
+  const nftAssets = useMemo<OpenSeaAsset[]>(
+    () =>
+      NFTBalances?.flatMap((item) => ('assets' in item ? item.assets : [])) ??
+      [],
+    [NFTBalances],
+  );
 
   const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
@@ -108,6 +123,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     [tokenBalances],
   );
 
+  const [currentTab, setCurrentTab] = useState<typeof TAB_ITEMS[number]>(
+    TAB_ITEMS[0],
+  );
+
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
@@ -119,86 +138,114 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           </div>
         </ProfileContainer>
 
-        <DashboardContent>
-          <TopSummaryContainer>
-            <AssetRatioSection
-              netWorthInUSD={netWorthInUSD}
-              tokenBalances={tokenBalances}
-            />
+        <DashboardContentWrapper>
+          <Tab
+            current={currentTab}
+            onChange={setCurrentTab}
+            items={TAB_ITEMS}
+          />
+          <DashboardContent>
+            <AnimatedTab selected={currentTab === 'Crypto'}>
+              <TopSummaryContainer>
+                <AssetRatioSection
+                  netWorthInUSD={netWorthInUSD}
+                  tokenBalances={tokenBalances}
+                />
 
-            <WalletListSection
-              onClickAddWallet={() => setAddWalletModalVisible((prev) => !prev)}
-            />
-          </TopSummaryContainer>
-
-          <div>
-            <SectionTitle
-              style={{
-                marginBottom: 12,
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <span className="title">{t('Assets')}</span>
-              <InlineBadge>
-                {renderedTokenBalances.length > 0
-                  ? renderedTokenBalances.length.toLocaleString()
-                  : '-'}
-              </InlineBadge>
-            </SectionTitle>
-
-            <div className="mb-4 w-full flex items-center">
-              <div
-                className="flex items-center cursor-pointer select-none"
-                onClick={() => {
-                  if (!isNFTsShown) {
-                    // showing
-                    Analytics.logEvent('click_show_nfts', undefined);
-                  } else {
-                    // hiding
-                    Analytics.logEvent('click_hide_nfts', undefined);
+                <WalletListSection
+                  onClickAddWallet={() =>
+                    setAddWalletModalVisible((prev) => !prev)
                   }
-                  setNFTsShown(!isNFTsShown);
-                }}
-              >
-                <Checkbox checked={isNFTsShown ?? false} readOnly />
-                <span className="ml-[6px] text-white/80 text-sm">
-                  {t('Show NFTs')}
-                </span>
-              </div>
-            </div>
+                />
+              </TopSummaryContainer>
 
-            <AssetListCard>
-              {renderedTokenBalances.length > 0 ? (
-                <ul>
-                  {renderedTokenBalances.map((item) => {
-                    const key = `${item.symbol ?? item.name}-${
-                      'tokenAddress' in item ? item.tokenAddress : 'native'
-                    }`;
-                    return (
-                      <TokenBalanceItem
-                        key={key}
-                        tokenBalance={item}
-                        onClick={() => {
-                          Analytics.logEvent('click_balance_item', {
-                            name: item.name,
-                            symbol: item.symbol ?? undefined,
-                            platform: item.platform,
-                            address: item.tokenAddress ?? undefined,
-                          });
-                          setTokenDetailModalVisible((prev) => !prev);
-                          setTokenDetailModalParams({ tokenBalance: item });
-                        }}
-                      />
-                    );
-                  })}
-                </ul>
-              ) : (
-                <EmptyBalance />
-              )}
-            </AssetListCard>
-          </div>
-        </DashboardContent>
+              <div>
+                <SectionTitle
+                  style={{
+                    marginBottom: 12,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <span className="title">{t('Assets')}</span>
+                  <InlineBadge>
+                    {renderedTokenBalances.length > 0
+                      ? renderedTokenBalances.length.toLocaleString()
+                      : '-'}
+                  </InlineBadge>
+                </SectionTitle>
+
+                <div className="mb-4 w-full flex items-center">
+                  <div
+                    className="flex items-center cursor-pointer select-none"
+                    onClick={() => {
+                      if (!isNFTsShown) {
+                        // showing
+                        Analytics.logEvent('click_show_nfts', undefined);
+                      } else {
+                        // hiding
+                        Analytics.logEvent('click_hide_nfts', undefined);
+                      }
+                      setNFTsShown(!isNFTsShown);
+                    }}
+                  >
+                    <Checkbox checked={isNFTsShown ?? false} readOnly />
+                    <span className="ml-[6px] text-white/80 text-sm">
+                      {t('Show NFTs')}
+                    </span>
+                  </div>
+                </div>
+
+                <AssetListCard>
+                  {renderedTokenBalances.length > 0 ? (
+                    <ul>
+                      {renderedTokenBalances.map((item) => {
+                        const key = `${item.symbol ?? item.name}-${
+                          'tokenAddress' in item ? item.tokenAddress : 'native'
+                        }`;
+                        return (
+                          <TokenBalanceItem
+                            key={key}
+                            tokenBalance={item}
+                            onClick={() => {
+                              Analytics.logEvent('click_balance_item', {
+                                name: item.name,
+                                symbol: item.symbol ?? undefined,
+                                platform: item.platform,
+                                address: item.tokenAddress ?? undefined,
+                              });
+                              setTokenDetailModalVisible((prev) => !prev);
+                              setTokenDetailModalParams({
+                                tokenBalance: item,
+                              });
+                            }}
+                          />
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <EmptyBalance />
+                  )}
+                </AssetListCard>
+              </div>
+            </AnimatedTab>
+
+            <AnimatedTab selected={currentTab === 'NFTs'}>
+              <NFTListSection
+                nftAssets={nftAssets}
+                selected={currentTab === 'NFTs'}
+                isMyProfile={true}
+                profile={profile}
+              />
+            </AnimatedTab>
+
+            <AnimatedTab selected={currentTab === 'Badges'}>
+              <span className="my-8 text-center text-white/90 font-bold">
+                Coming Soon!
+              </span>
+            </AnimatedTab>
+          </DashboardContent>
+        </DashboardContentWrapper>
       </DashboardWrapper>
 
       <div style={{ width: '100%', height: 96 }} />
@@ -254,6 +301,11 @@ const ProfileContainer = styled.div`
     }
   }
 `;
+const DashboardContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
 const DashboardContent = styled.div`
   padding: 27px 33px;
   display: flex;
@@ -266,7 +318,7 @@ const DashboardContent = styled.div`
   border-radius: 16px;
 
   @media (max-width: 1240px) {
-    padding: 0;
+    padding: 24px 0 0;
     border: 0;
   }
 `;
