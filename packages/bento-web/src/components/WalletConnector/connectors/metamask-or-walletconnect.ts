@@ -4,7 +4,7 @@ import { ConnectorProps } from '../types';
 import { getMessagedToBeSigned } from '../utils/getMessagedToBeSigned';
 import { validateAndSaveWallet } from '../utils/validateAndSaveWallet';
 
-export const connectWeb3 = async ({
+export const connectMetaMaskOrWalletConnect = async ({
   networks,
   signOut,
   onSave,

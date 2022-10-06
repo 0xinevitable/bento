@@ -1,4 +1,3 @@
-import axios from 'axios';
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
@@ -11,8 +10,8 @@ import { toast } from '@/utils';
 import {
   connectKaikas,
   connectKeplr,
+  connectMetaMaskOrWalletConnect,
   connectPhantom,
-  connectWeb3,
 } from './connectors';
 import { NetworkDraft } from './types';
 
@@ -58,8 +57,8 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         };
 
         switch (firstNetwork) {
-          case 'web3':
-            connectWeb3(props);
+          case 'evm':
+            connectMetaMaskOrWalletConnect(props);
             break;
           case 'keplr':
             connectKeplr(props);
