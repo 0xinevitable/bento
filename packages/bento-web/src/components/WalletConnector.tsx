@@ -2,7 +2,7 @@ import { Base64 } from '@bento/common';
 import { cachedAxios } from '@bento/core';
 import axios, { AxiosError } from 'axios';
 import clsx from 'clsx';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { useSignOut } from '@/hooks/useSignOut';
@@ -97,259 +97,292 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
 
   const { signOut } = useSignOut();
 
-  const connectMetaMask = useCallback(async () => {
-    if (!networks) {
-      return;
-    }
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const onClickConnect = useCallback(
+    (firstNetwork: string) => {
+      if (isLoading) {
+        return;
+      }
 
-    Analytics.logEvent('click_connect_wallet_select_wallet', {
-      type: 'metamask-or-walletconnect',
-    });
+      const connectWeb3 = async () => {
+        if (!networks) {
+          return;
+        }
 
-    const [
-      { default: Web3Modal },
-      { default: WalletConnectProvider },
-      { Web3Provider },
-    ] = await Promise.all([
-      import('web3modal'),
-      import('@walletconnect/web3-provider'),
-      import('@ethersproject/providers'),
-    ]);
+        Analytics.logEvent('click_connect_wallet_select_wallet', {
+          type: 'metamask-or-walletconnect',
+        });
 
-    const providerOptions = {
-      injected: {
-        display: {
-          name: 'Metamask',
-          description: 'Connect with MetaMask',
-        },
-        package: null,
-      },
-      walletconnect: {
-        display: {
-          name: 'WalletConnect',
-          description: 'Connect with WalletConnect',
-        },
-        package: WalletConnectProvider,
-        options: {
-          infuraId: 'fcb656a7b4d14c9f9b0803a5d7475877',
-        },
-      },
-    };
+        const [
+          { default: Web3Modal },
+          { default: WalletConnectProvider },
+          { Web3Provider },
+        ] = await Promise.all([
+          import('web3modal'),
+          import('@walletconnect/web3-provider'),
+          import('@ethersproject/providers'),
+        ]);
 
-    const web3Modal = new Web3Modal({
-      network: 'mainnet',
-      cacheProvider: true,
-      providerOptions,
-      theme: 'dark',
-    });
+        const providerOptions = {
+          injected: {
+            display: {
+              name: 'Metamask',
+              description: 'Connect with MetaMask',
+            },
+            package: null,
+          },
+          walletconnect: {
+            display: {
+              name: 'WalletConnect',
+              description: 'Connect with WalletConnect',
+            },
+            package: WalletConnectProvider,
+            options: {
+              infuraId: 'fcb656a7b4d14c9f9b0803a5d7475877',
+            },
+          },
+        };
 
-    web3Modal.clearCachedProvider();
+        const web3Modal = new Web3Modal({
+          network: 'mainnet',
+          cacheProvider: true,
+          providerOptions,
+          theme: 'dark',
+        });
 
-    const instance = await web3Modal.connect();
-    const provider = new Web3Provider(instance);
+        web3Modal.clearCachedProvider();
 
-    const signer = provider.getSigner();
-    const walletAddress = await signer.getAddress();
-    const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
-    if (!messageToBeSigned) {
-      return;
-    }
-    const signature = await signer.signMessage(messageToBeSigned);
+        const instance = await web3Modal.connect();
+        const provider = new Web3Provider(instance);
 
-    const walletType = 'web3';
-    await validateAndSaveWallet({
-      networks,
-      walletType,
-      walletAddress,
-      signature,
-      nonce: messageToBeSigned,
-      signOut,
-    }).then(() => {
-      Analytics.logEvent('connect_wallet', {
-        type: 'metamask-or-walletconnect',
-        networks: networks.map((v) => v.id) as any[],
-        address: walletAddress,
-      });
-    });
+        const signer = provider.getSigner();
+        const walletAddress = await signer.getAddress();
+        const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+        if (!messageToBeSigned) {
+          return;
+        }
+        const signature = await signer.signMessage(messageToBeSigned);
 
-    onSave?.();
-  }, [onSave]);
+        const walletType = 'web3';
+        await validateAndSaveWallet({
+          networks,
+          walletType,
+          walletAddress,
+          signature,
+          nonce: messageToBeSigned,
+          signOut,
+        }).then(() => {
+          Analytics.logEvent('connect_wallet', {
+            type: 'metamask-or-walletconnect',
+            networks: networks.map((v) => v.id) as any[],
+            address: walletAddress,
+          });
+        });
 
-  const connectKeplr = useCallback(async () => {
-    if (!networks) {
-      return;
-    }
+        onSave?.();
+      };
 
-    Analytics.logEvent('click_connect_wallet_select_wallet', {
-      type: 'keplr',
-    });
+      const connectKeplr = async () => {
+        if (!networks) {
+          return;
+        }
 
-    if (typeof window.keplr === 'undefined') {
-      toast({
-        type: 'error',
-        title: 'Please install keplr extension',
-      });
-      return;
-    }
+        Analytics.logEvent('click_connect_wallet_select_wallet', {
+          type: 'keplr',
+        });
 
-    const chainId = 'cosmoshub-4';
-    await window.keplr.enable(chainId);
+        if (typeof window.keplr === 'undefined') {
+          toast({
+            type: 'error',
+            title: 'Please install keplr extension',
+          });
+          return;
+        }
 
-    const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
-    const accounts = await offlineSigner.getAccounts();
-    const walletAddress = accounts[0].address;
-    const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
-    if (!messageToBeSigned) {
-      return;
-    }
+        const chainId = 'cosmoshub-4';
+        await window.keplr.enable(chainId);
 
-    const { pub_key: publicKey, signature } = await window.keplr.signArbitrary(
-      chainId,
-      walletAddress,
-      messageToBeSigned,
-    );
+        const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
+        const accounts = await offlineSigner.getAccounts();
+        const walletAddress = accounts[0].address;
+        const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+        if (!messageToBeSigned) {
+          return;
+        }
 
-    const walletType = 'keplr';
-    await validateAndSaveWallet({
-      networks,
-      walletType,
-      walletAddress,
-      signature,
-      nonce: messageToBeSigned,
-      publicKeyValue: publicKey.value,
-      signOut,
-    }).then(() => {
-      Analytics.logEvent('connect_wallet', {
-        type: 'keplr',
-        networks: networks.map((v) => v.id) as any[],
-        address: walletAddress,
-      });
-    });
+        const { pub_key: publicKey, signature } =
+          await window.keplr.signArbitrary(
+            chainId,
+            walletAddress,
+            messageToBeSigned,
+          );
 
-    onSave?.();
-  }, [onSave]);
+        const walletType = 'keplr';
+        await validateAndSaveWallet({
+          networks,
+          walletType,
+          walletAddress,
+          signature,
+          nonce: messageToBeSigned,
+          publicKeyValue: publicKey.value,
+          signOut,
+        }).then(() => {
+          Analytics.logEvent('connect_wallet', {
+            type: 'keplr',
+            networks: networks.map((v) => v.id) as any[],
+            address: walletAddress,
+          });
+        });
 
-  const connectKaikas = useCallback(async () => {
-    if (!networks) {
-      return;
-    }
+        onSave?.();
+      };
 
-    Analytics.logEvent('click_connect_wallet_select_wallet', {
-      type: 'kaikas',
-    });
+      const connectKaikas = async () => {
+        if (!networks) {
+          return;
+        }
 
-    if (typeof window.klaytn === 'undefined') {
-      toast({
-        type: 'error',
-        title: 'Please install kaikas extension',
-      });
-      return;
-    }
+        Analytics.logEvent('click_connect_wallet_select_wallet', {
+          type: 'kaikas',
+        });
 
-    const provider = window.klaytn;
-    const accounts = await provider.enable();
-    const walletAddress = accounts[0];
-    const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
-    if (!messageToBeSigned) {
-      return;
-    }
+        if (typeof window.klaytn === 'undefined') {
+          toast({
+            type: 'error',
+            title: 'Please install kaikas extension',
+          });
+          return;
+        }
 
-    const Caver = await import('caver-js');
-    const caver = new Caver.default(provider);
-    const signature = await caver.rpc.klay.sign(
-      walletAddress,
-      messageToBeSigned,
-    );
-    const walletType = 'kaikas';
+        const provider = window.klaytn;
+        const accounts = await provider.enable();
+        const walletAddress = accounts[0];
+        const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+        if (!messageToBeSigned) {
+          return;
+        }
 
-    await validateAndSaveWallet({
-      networks,
-      walletType,
-      walletAddress,
-      signature,
-      nonce: messageToBeSigned,
-      signOut,
-    }).then(() => {
-      Analytics.logEvent('connect_wallet', {
-        type: 'kaikas',
-        networks: networks.map((v) => v.id) as any[],
-        address: walletAddress,
-      });
-    });
+        const Caver = await import('caver-js');
+        const caver = new Caver.default(provider);
+        const signature = await caver.rpc.klay.sign(
+          walletAddress,
+          messageToBeSigned,
+        );
+        const walletType = 'kaikas';
 
-    onSave?.();
-  }, [onSave]);
+        await validateAndSaveWallet({
+          networks,
+          walletType,
+          walletAddress,
+          signature,
+          nonce: messageToBeSigned,
+          signOut,
+        }).then(() => {
+          Analytics.logEvent('connect_wallet', {
+            type: 'kaikas',
+            networks: networks.map((v) => v.id) as any[],
+            address: walletAddress,
+          });
+        });
 
-  const connectPhantom = useCallback(async () => {
-    if (!networks) {
-      return;
-    }
+        onSave?.();
+      };
 
-    Analytics.logEvent('click_connect_wallet_select_wallet', {
-      type: 'phantom',
-    });
+      const connectPhantom = async () => {
+        if (!networks) {
+          return;
+        }
 
-    if (typeof window.solana === 'undefined') {
-      toast({
-        type: 'error',
-        title: 'Please install phantom extension',
-      });
-      return;
-    }
+        Analytics.logEvent('click_connect_wallet_select_wallet', {
+          type: 'phantom',
+        });
 
-    const resp = await window.solana.connect();
-    const walletAddress = resp.publicKey.toString();
-    const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
-    if (!messageToBeSigned) {
-      return;
-    }
+        if (typeof window.solana === 'undefined') {
+          toast({
+            type: 'error',
+            title: 'Please install phantom extension',
+          });
+          return;
+        }
 
-    const encodedMessage = new TextEncoder().encode(messageToBeSigned);
-    const signedMessage = await window.solana.signMessage(
-      encodedMessage,
-      'utf8',
-    );
+        const resp = await window.solana.connect();
+        const walletAddress = resp.publicKey.toString();
+        const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+        if (!messageToBeSigned) {
+          return;
+        }
 
-    const signature = Buffer.from(signedMessage.signature).toString('hex');
+        const encodedMessage = new TextEncoder().encode(messageToBeSigned);
+        const signedMessage = await window.solana.signMessage(
+          encodedMessage,
+          'utf8',
+        );
 
-    const walletType = 'phantom';
-    await validateAndSaveWallet({
-      networks,
-      walletType,
-      walletAddress,
-      signature,
-      nonce: messageToBeSigned,
-      signOut,
-    }).then(() => {
-      Analytics.logEvent('connect_wallet', {
-        type: 'phantom',
-        networks: networks.map((v) => v.id) as any[],
-        address: walletAddress,
-      });
-    });
+        const signature = Buffer.from(signedMessage.signature).toString('hex');
 
-    onSave?.();
-  }, [onSave]);
+        const walletType = 'phantom';
+        await validateAndSaveWallet({
+          networks,
+          walletType,
+          walletAddress,
+          signature,
+          nonce: messageToBeSigned,
+          signOut,
+        }).then(() => {
+          Analytics.logEvent('connect_wallet', {
+            type: 'phantom',
+            networks: networks.map((v) => v.id) as any[],
+            address: walletAddress,
+          });
+        });
 
-  const handleError = useCallback((error: any) => {
-    console.error(error);
-    toast({
-      type: 'error',
-      title: 'Ownership Verification Failed',
-      description: error?.message ?? undefined,
-    });
-  }, []);
+        onSave?.();
+      };
+
+      setLoading(true);
+
+      try {
+        switch (firstNetwork) {
+          case 'web3':
+            connectWeb3();
+            break;
+          case 'keplr':
+            connectKeplr();
+            break;
+          case 'kaikas':
+            connectKaikas();
+            break;
+          case 'phantom':
+            connectPhantom();
+            break;
+          default:
+            break;
+        }
+      } catch (error: any) {
+        const typedError = error as Error;
+        console.error(typedError);
+        toast({
+          type: 'error',
+          title: 'Ownership Verification Failed',
+          description: typedError?.message ?? undefined,
+        });
+      }
+      setLoading(false);
+    },
+    [onSave],
+  );
 
   return (
     <div style={{ display: 'flex', gap: 8 }}>
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          firstNetwork !== 'evm' && 'opacity-20 cursor-not-allowed',
+          (firstNetwork !== 'evm' || isLoading) &&
+            'opacity-20 cursor-not-allowed',
         )}
         onClick={
-          firstNetwork === 'evm'
-            ? () => connectMetaMask().catch(handleError)
+          firstNetwork === 'evm' && !isLoading
+            ? () => onClickConnect(firstNetwork)
             : undefined
         }
       >
@@ -363,11 +396,12 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          firstNetwork !== 'evm' && 'opacity-20 cursor-not-allowed',
+          (firstNetwork !== 'evm' || isLoading) &&
+            'opacity-20 cursor-not-allowed',
         )}
         onClick={
-          firstNetwork === 'evm'
-            ? () => connectKaikas().catch(handleError)
+          firstNetwork === 'evm' && !isLoading
+            ? () => onClickConnect(firstNetwork)
             : undefined
         }
       >
@@ -380,11 +414,12 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          firstNetwork !== 'cosmos-sdk' && 'opacity-20 cursor-not-allowed',
+          (firstNetwork !== 'cosmos-sdk' || isLoading) &&
+            'opacity-20 cursor-not-allowed',
         )}
         onClick={
-          firstNetwork === 'cosmos-sdk'
-            ? () => connectKeplr().catch(handleError)
+          firstNetwork === 'cosmos-sdk' && !isLoading
+            ? () => onClickConnect(firstNetwork)
             : undefined
         }
       >
@@ -397,11 +432,12 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       <Button
         className={clsx(
           'p-4 text-slate-800 font-bold bg-slate-300',
-          firstNetwork !== 'solana' && 'opacity-20 cursor-not-allowed',
+          (firstNetwork !== 'solana' || isLoading) &&
+            'opacity-20 cursor-not-allowed',
         )}
         onClick={
-          firstNetwork === 'solana'
-            ? () => connectPhantom().catch(handleError)
+          firstNetwork === 'solana' && !isLoading
+            ? () => onClickConnect(firstNetwork)
             : undefined
         }
       >
