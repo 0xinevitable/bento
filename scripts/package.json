@@ -5,19 +5,22 @@
   "scripts": {
     "generate-assets": "ttsc && node build/assets",
     "generate-release-notes": "ttsc && node build/release-notes",
-    "m": "ttsc && node build/migrations/20220920-wallets-cosmos-sdk"
+    "generate-defi": "ttsc && node build/defi"
   },
   "dependencies": {
     "@bento/common": "workspace:^",
     "@bento/core": "workspace:^",
     "@supabase/supabase-js": "^1.35.7",
     "axios": "^0.27.2",
+    "bn.js": "^5.2.1",
+    "caver-js": "^1.9.0",
     "dedent": "^0.7.0",
     "find-yarn-workspace-root": "^2.0.0",
     "prettier": "^2.7.1",
     "typescript-json": "^2.1.6"
   },
   "devDependencies": {
+    "@types/bn.js": "^5.1.1",
     "@types/dedent": "^0.7.0",
     "@types/node": "^18.7.19",
     "@types/prettier": "^2.6.3",

@@ -3346,6 +3346,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/bn.js@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "@types/bn.js@npm:5.1.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: e50ed2dd3abe997e047caf90e0352c71e54fc388679735217978b4ceb7e336e51477791b715f49fd77195ac26dd296c7bad08a3be9750e235f9b2e1edb1b51c2
+  languageName: node
+  linkType: hard
+
 "@types/connect@npm:^3.4.33":
   version: 3.4.35
   resolution: "@types/connect@npm:3.4.35"
@@ -10300,10 +10309,13 @@ __metadata:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
     "@supabase/supabase-js": ^1.35.7
+    "@types/bn.js": ^5.1.1
     "@types/dedent": ^0.7.0
     "@types/node": ^18.7.19
     "@types/prettier": ^2.6.3
     axios: ^0.27.2
+    bn.js: ^5.2.1
+    caver-js: ^1.9.0
     dedent: ^0.7.0
     find-yarn-workspace-root: ^2.0.0
     prettier: ^2.7.1

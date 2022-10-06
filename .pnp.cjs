@@ -4928,6 +4928,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.7.19"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:5.1.1", {\
+          "packageLocation": "./.yarn/cache/@types-bn.js-npm-5.1.1-346449981b-e50ed2dd3a.zip/node_modules/@types/bn.js/",\
+          "packageDependencies": [\
+            ["@types/bn.js", "npm:5.1.1"],\
+            ["@types/node", "npm:18.7.19"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@types/connect", [\
@@ -13337,10 +13345,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
+            ["@types/bn.js", "npm:5.1.1"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/node", "npm:18.7.19"],\
             ["@types/prettier", "npm:2.7.1"],\
             ["axios", "npm:0.27.2"],\
+            ["bn.js", "npm:5.2.1"],\
+            ["caver-js", "npm:1.9.0"],\
             ["dedent", "npm:0.7.0"],\
             ["find-yarn-workspace-root", "npm:2.0.0"],\
             ["prettier", "npm:2.7.1"],\
