@@ -1,3 +1,3 @@
-import { getPools } from './klayswap';
+// import { getPools } from './klayswap/lp';
 
-getPools();
+// getPools();
