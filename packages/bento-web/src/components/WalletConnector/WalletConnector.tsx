@@ -23,6 +23,8 @@ declare global {
   }
 }
 
+type WalletType = 'metamask-or-walletconnect' | 'kaikas' | 'keplr' | 'phantom';
+
 type WalletSelectorProps = {
   networks?: NetworkDraft[];
   onSave?: () => void;
@@ -42,7 +44,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
 
   const [isLoading, setLoading] = useState<boolean>(false);
   const onClickConnect = useCallback(
-    (firstNetwork: string) => {
+    async (walletType: WalletType) => {
       if (!networks || isLoading) {
         return;
       }
@@ -56,18 +58,18 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           onSave,
         };
 
-        switch (firstNetwork) {
-          case 'evm':
-            connectMetaMaskOrWalletConnect(props);
-            break;
-          case 'keplr':
-            connectKeplr(props);
+        switch (walletType) {
+          case 'metamask-or-walletconnect':
+            await connectMetaMaskOrWalletConnect(props);
             break;
           case 'kaikas':
-            connectKaikas(props);
+            await connectKaikas(props);
+            break;
+          case 'keplr':
+            await connectKeplr(props);
             break;
           case 'phantom':
-            connectPhantom(props);
+            await connectPhantom(props);
             break;
           default:
             break;
@@ -97,7 +99,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         )}
         onClick={
           firstNetwork === 'evm' && !isLoading
-            ? () => onClickConnect(firstNetwork)
+            ? () => onClickConnect('metamask-or-walletconnect')
             : undefined
         }
       >
@@ -116,7 +118,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         )}
         onClick={
           firstNetwork === 'evm' && !isLoading
-            ? () => onClickConnect(firstNetwork)
+            ? () => onClickConnect('kaikas')
             : undefined
         }
       >
@@ -134,7 +136,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         )}
         onClick={
           firstNetwork === 'cosmos-sdk' && !isLoading
-            ? () => onClickConnect(firstNetwork)
+            ? () => onClickConnect('keplr')
             : undefined
         }
       >
@@ -152,7 +154,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         )}
         onClick={
           firstNetwork === 'solana' && !isLoading
-            ? () => onClickConnect(firstNetwork)
+            ? () => onClickConnect('phantom')
             : undefined
         }
       >
