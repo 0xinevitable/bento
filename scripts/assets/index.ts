@@ -9,10 +9,10 @@ const main = async () =>
   safePromiseAll([
     // importAndUpdate('./ethereum'),
     // importAndUpdate('./polygon'),
-    importAndUpdate('./bnb-smart-chain'),
+    // importAndUpdate('./bnb-smart-chain'),
     // importAndUpdate('./avalanche'),
     // importAndUpdate('./solana'),
-    // importAndUpdate('./klaytn'),
+    importAndUpdate('./klaytn'),
   ]);
 
 main() //

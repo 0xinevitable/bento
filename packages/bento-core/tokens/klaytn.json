@@ -12,15 +12,15 @@
     "name": "Orbit Bridge Klaytn USD Tether",
     "decimals": 6,
     "address": "0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167",
-    "coinGeckoId": "tether",
+    "coinGeckoId": "orbit-bridge-klaytn-usd-tether",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
   },
   {
     "symbol": "oUSDC",
-    "name": "Orbit Bridge Klaytn USD Coin",
+    "name": "Orbit Bridge Klaytn USDC",
     "decimals": 6,
     "address": "0x754288077d0ff82af7a5317c7cb8c444d421d103",
-    "coinGeckoId": "usd-coin",
+    "coinGeckoId": "orbit-bridge-klaytn-usdc",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
   },
   {
@@ -28,12 +28,12 @@
     "name": "Orbit Bridge Klaytn Ethereum",
     "decimals": 18,
     "address": "0x34d21b1e550d73cee41151c77f3c73359527a396",
-    "coinGeckoId": "ethereum",
+    "coinGeckoId": "orbit-bridge-klaytn-ethereum",
     "logo": "/assets/icons/oeth.svg"
   },
   {
     "symbol": "WEMIX",
-    "name": "WEMIX TOKEN",
+    "name": "WEMIX",
     "decimals": 18,
     "address": "0x5096db80b21ef45230c9e423c373f1fc9c0198dd",
     "coinGeckoId": "wemix-token",
@@ -44,6 +44,7 @@
     "name": "Klaytn Dai",
     "decimals": 18,
     "address": "0x5c74070fdea071359b86082bd9f9b3deaafbe32b",
+    "coinGeckoId": "klaytn-dai",
     "logo": "/assets/icons/kdai.png"
   },
   {
@@ -51,7 +52,7 @@
     "name": "Orbit Bridge Klaytn Ripple",
     "decimals": 6,
     "address": "0x9eaefb09fe4aabfbe6b1ca316a3c36afc83a393f",
-    "coinGeckoId": "ripple",
+    "coinGeckoId": "orbit-bridge-klaytn-ripple",
     "logo": "/assets/icons/oxrp.svg"
   },
   {
@@ -67,7 +68,7 @@
     "name": "Orbit Bridge Klaytn Wrapped BTC",
     "decimals": 8,
     "address": "0x16d0e1fbd024c600ca0380a4c5d57ee7a2ecbf9c",
-    "coinGeckoId": "wrapped-bitcoin",
+    "coinGeckoId": "orbit-bridge-klaytn-wrapped-btc",
     "logo": "/assets/icons/owbtc.svg"
   },
   {
@@ -102,7 +103,7 @@
   },
   {
     "symbol": "MBX",
-    "name": "MARBLEX",
+    "name": "Marblex",
     "decimals": 18,
     "address": "0xd068c52d81f4409b9502da926ace3301cc41f623",
     "coinGeckoId": "marblex",
@@ -119,15 +120,15 @@
   },
   {
     "symbol": "KRNO",
-    "name": "Kronos DAO",
+    "name": "Kronos",
     "decimals": 9,
     "address": "0xd676e57ca65b827feb112ad81ff738e7b6c1048d",
     "coinMarketCapId": 15546,
     "logo": "/assets/icons/kronos-dao.png"
   },
   {
-    "symbol": "KRNO",
-    "name": "Kronos DAO",
+    "symbol": "sKRNO",
+    "name": "Staked Kronos",
     "decimals": 9,
     "address": "0x6555f93f608980526b5ca79b3be2d4edadb5c562",
     "coinMarketCapId": 15546,
@@ -135,14 +136,8 @@
     "staking": true
   },
   {
-    "symbol": "KLAY",
-    "name": "KLAY",
-    "decimals": 18,
-    "address": "0x0000000000000000000000000000000000000000"
-  },
-  {
     "symbol": "SKLAY",
-    "name": "sKlay",
+    "name": "sKLAY",
     "decimals": 18,
     "address": "0xa323d7386b671e8799dca3582d6658fdcdcd940a",
     "coinGeckoId": "sklay",
@@ -153,7 +148,6 @@
     "name": "Orbit Bridge Klaytn Orbit Chain",
     "decimals": 18,
     "address": "0xfe41102f325deaa9f303fdd9484eb5911a7ba557",
-    "coinGeckoId": "orbit-chain",
     "logo": "https://dexata.kr/images/token/korc.svg"
   },
   {
@@ -165,7 +159,7 @@
   },
   {
     "symbol": "WIKEN",
-    "name": "ProjectWITH",
+    "name": "Project WITH",
     "decimals": 18,
     "address": "0x275f942985503d8ce9558f8377cc526a3aba3566",
     "coinGeckoId": "project-with",
@@ -173,9 +167,10 @@
   },
   {
     "symbol": "SSX",
-    "name": "Somesing Exchange",
+    "name": "SOMESING",
     "decimals": 18,
     "address": "0xdcd62c57182e780e23d2313c4782709da85b9d6c",
+    "coinGeckoId": "somesing",
     "logo": "https://dexata.kr/images/token/ssx.svg"
   },
   {
@@ -187,9 +182,10 @@
   },
   {
     "symbol": "REDi",
-    "name": "REDiToken",
+    "name": "REDi",
     "decimals": 18,
     "address": "0x1cd3828a2b62648dbe98d6f5748a6b1df08ac7bb",
+    "coinGeckoId": "redi",
     "logo": "https://dexata.kr/images/token/redi.svg"
   },
   {
@@ -208,7 +204,7 @@
   },
   {
     "symbol": "BBC",
-    "name": "BLUEBAIKAL",
+    "name": "Blue Baikal",
     "decimals": 18,
     "address": "0x321bc0b63efb1e4af08ec6d20c85d5e94ddaaa18",
     "coinGeckoId": "blue-baikal",
@@ -219,12 +215,11 @@
     "name": "Orbit Bridge Klaytn TriumphX",
     "decimals": 18,
     "address": "0x0c1d7ce4982fd63b1bc77044be1da05c995e4463",
-    "coinGeckoId": "triumphx",
     "logo": "https://dexata.kr/images/token/ktrix.svg"
   },
   {
     "symbol": "PIB",
-    "name": "Pibble Token",
+    "name": "Pibble",
     "decimals": 18,
     "address": "0xafde910130c335fa5bd5fe991053e3e0a49dce7b",
     "coinGeckoId": "pibble",
@@ -242,7 +237,6 @@
     "name": "Orbit Bridge Klaytn Handy Token",
     "decimals": 18,
     "address": "0x3f34671fba493ab39fbf4ecac2943ee62b654a88",
-    "coinGeckoId": "handy",
     "logo": "https://dexata.kr/images/token/khandy.svg"
   },
   {
@@ -250,6 +244,7 @@
     "name": "Mineral",
     "decimals": 6,
     "address": "0x27dcd181459bcddc63c37bab1e404a313c0dfd79",
+    "coinGeckoId": "mineral",
     "logo": "https://dexata.kr/images/token/mnr.svg"
   },
   {
@@ -257,6 +252,7 @@
     "name": "Treecle",
     "decimals": 18,
     "address": "0x4b91c67a89d4c4b2a4ed9fcde6130d7495330972",
+    "coinGeckoId": "treecle",
     "logo": "https://dexata.kr/images/token/trcl.svg"
   },
   {
@@ -264,7 +260,6 @@
     "name": "Orbit Bridge Klaytn DUCATO Protocol Token",
     "decimals": 18,
     "address": "0x91e0d7b228a33072d9b3209cf507f78a4bd835f2",
-    "coinGeckoId": "ducato-finance",
     "logo": "https://dexata.kr/images/token/kducato.png"
   },
   {
@@ -276,7 +271,7 @@
   },
   {
     "symbol": "HIBS",
-    "name": "HiblocksToken",
+    "name": "Hiblocks",
     "decimals": 18,
     "address": "0xe06b40df899b9717b4e6b50711e1dc72d08184cf",
     "coinGeckoId": "hiblocks",
@@ -287,7 +282,6 @@
     "name": "Orbit Bridge Klaytn BELT Token",
     "decimals": 18,
     "address": "0xdfe180e288158231ffa5faf183eca3301344a51f",
-    "coinGeckoId": "belt",
     "logo": "https://dexata.kr/images/token/kbelt.svg"
   },
   {
@@ -295,7 +289,7 @@
     "name": "Orbit Bridge Klaytn Binance Coin",
     "decimals": 18,
     "address": "0x574e9c26bda8b95d7329505b4657103710eb32ea",
-    "coinGeckoId": "binancecoin",
+    "coinGeckoId": "orbit-bridge-klaytn-binance-coin",
     "logo": "https://dexata.kr/images/token/kbnb.svg"
   },
   {
@@ -303,7 +297,6 @@
     "name": "Orbit Bridge Klaytn QBEE",
     "decimals": 18,
     "address": "0x507efa4e365fd5def42cb05ae3ecb51a30321588",
-    "coinGeckoId": "queenbee",
     "logo": "https://dexata.kr/images/token/kqbz.png"
   },
   {
@@ -311,7 +304,6 @@
     "name": "Orbit Bridge Klaytn Stream Protocol",
     "decimals": 18,
     "address": "0x49a767b188b9d782d7b0efcd485ca3796390198e",
-    "coinGeckoId": "stream-protocol",
     "logo": "https://dexata.kr/images/token/kstpl.png"
   },
   {
@@ -319,7 +311,6 @@
     "name": "Orbit Bridge Klaytn AUTOv2",
     "decimals": 18,
     "address": "0x8583063110b5d29036eced4db1cc147e78a86a77",
-    "coinGeckoId": "auto",
     "logo": "https://dexata.kr/images/token/kauto.svg"
   },
   {
@@ -327,7 +318,6 @@
     "name": "Orbit Bridge Klaytn Tokamak Network Token",
     "decimals": 18,
     "address": "0x100bc15ae8b489c771d9740ea0bb1aea945a1f67",
-    "coinGeckoId": "tokamak-network",
     "logo": "https://dexata.kr/images/token/kton.png"
   },
   {
@@ -363,22 +353,20 @@
     "name": "Orbit Bridge Klaytn Rai.Finance",
     "decimals": 18,
     "address": "0xb40178be0fcf89d0051682e5512a8bab56b9ec3e",
-    "coinGeckoId": "rai-finance",
-    "logo": "https://dexata.kr/images/token/krai.png"
+    "logo": "/assets/icons/klaytn/0xb40178be0fcf89d0051682e5512a8bab56b9ec3e.png"
   },
   {
     "symbol": "TURK",
     "name": "Turtle King",
     "decimals": 18,
     "address": "0x8c783809332be7734fa782eb5139861721f77b33",
-    "logo": "https://dexata.kr/images/token/turk.png"
+    "logo": "/assets/icons/klaytn/0x8c783809332be7734fa782eb5139861721f77b33.png"
   },
   {
     "symbol": "oRUSH",
     "name": "Orbit Bridge Klaytn Rush coin",
     "decimals": 18,
     "address": "0x2fade69ba4dcb112c530c48fdf41fc071685cede",
-    "coinGeckoId": "rushcoin",
     "logo": "https://dexata.kr/images/token/krush.png"
   },
   {
@@ -392,7 +380,6 @@
     "name": "Orbit Bridge Klaytn ISTARDUST",
     "decimals": 18,
     "address": "0x1c1187ff22bb50a2cdcb1e1d683fcb5e8a42915f",
-    "coinGeckoId": "istardust",
     "logo": "https://assets.coingecko.com/coins/images/12568/large/istardust.png?1600840530"
   },
   {
@@ -407,12 +394,11 @@
     "name": "PER Project",
     "decimals": 18,
     "address": "0x7eee60a000986e9efe7f5c90340738558c24317b",
-    "coinGeckoId": "per-project",
     "logo": "https://dexata.kr/images/token/per.png"
   },
   {
     "symbol": "KFI",
-    "name": "KlayFi",
+    "name": "KlayFi Finance",
     "decimals": 18,
     "address": "0xdb116e2dc96b4e69e3544f41b50550436579979a",
     "coinGeckoId": "klayfi-finance",
@@ -423,7 +409,6 @@
     "name": "Orbit Bridge Klaytn ICON",
     "decimals": 18,
     "address": "0x8ef60f0a5a2db984431934f8659058e87cd5c70a",
-    "coinGeckoId": "icon",
     "logo": "https://dexata.kr/images/token/kicx.png"
   },
   {
@@ -438,7 +423,6 @@
     "name": "Klaymore Stakehouse",
     "decimals": 18,
     "address": "0x158beff8c8cdebd64654add5f6a1d9937e73536c",
-    "coinGeckoId": "klaymore-stakehouse",
     "logo": "https://dexata.kr/images/token/house.png"
   },
   {
@@ -467,7 +451,6 @@
     "name": "Orbit Bridge Klaytn Talken",
     "decimals": 18,
     "address": "0xa6e559f2954c7e2c017bbbea85d8513f34d03d75",
-    "coinGeckoId": "talken",
     "logo": "https://assets.coingecko.com/coins/images/18146/large/4NNLx3BF_400x400.jpg?1630675291"
   },
   {
@@ -512,8 +495,7 @@
     "name": "Orbit Bridge Klaytn Aergo",
     "decimals": 18,
     "address": "0x292725810ab3dde0a01e19acd4e8e9d6c073773b",
-    "coinGeckoId": "aergo",
-    "logo": "https://dexata.kr/images/token/kaergo.png"
+    "logo": "/assets/icons/klaytn/0x292725810ab3dde0a01e19acd4e8e9d6c073773b.png"
   },
   {
     "symbol": "MM",
@@ -608,7 +590,7 @@
   },
   {
     "symbol": "KOKOA",
-    "name": "Kokoa",
+    "name": "Kokoa Finance",
     "decimals": 18,
     "address": "0xb15183d0d4d5e86ba702ce9bb7b633376e7db29f",
     "coinGeckoId": "kokoa-finance",
@@ -627,13 +609,14 @@
     "name": "TURNUP",
     "decimals": 8,
     "address": "0xd742b1a5af898bcb4b6aff5027e6ab9adee97412",
-    "logo": "https://dexata.kr/images/token/turnup.png"
+    "logo": "/assets/icons/klaytn/0xd742b1a5af898bcb4b6aff5027e6ab9adee97412.png"
   },
   {
     "symbol": "MIX",
     "name": "DSC Mix",
     "decimals": 18,
     "address": "0xdd483a970a7a7fef2b223c3510fac852799a88bf",
+    "coinGeckoId": "dsc-mix",
     "logo": "https://dexata.kr/images/token/mix.png"
   },
   {
@@ -689,7 +672,6 @@
     "name": "Orbit Bridge Klaytn Qubit Token",
     "decimals": 18,
     "address": "0xfe4cd053f1e9200e784b7d60b54e6aa16e09406a",
-    "coinGeckoId": "qubit",
     "logo": "https://dexata.kr/images/token/kqbt.png"
   },
   {
@@ -697,7 +679,6 @@
     "name": "Orbit Bridge Klaytn CRYPTO BANK",
     "decimals": 18,
     "address": "0x52f4c436c9aab5b5d0dd31fb3fb8f253fd6cb285",
-    "coinGeckoId": "crypto-bank",
     "logo": "https://dexata.kr/images/token/kcbank.png"
   },
   {
@@ -705,7 +686,6 @@
     "name": "Orbit Bridge Klaytn DeFine Art",
     "decimals": 18,
     "address": "0x11dc950ef29594cc19eb573811339df20c86c800",
-    "coinGeckoId": "define",
     "logo": "https://dexata.kr/images/token/kdfa.svg"
   },
   {
@@ -755,7 +735,6 @@
     "name": "Orbit Bridge Klaytn BioPassport Coin",
     "decimals": 9,
     "address": "0x8ff0586b6eea63a35e73d09237b4a58b3056f274",
-    "coinGeckoId": "biopassport",
     "logo": "https://dexata.kr/images/token/kbiot.png"
   },
   {
@@ -763,7 +742,6 @@
     "name": "Orbit Bridge Klaytn TOM",
     "decimals": 18,
     "address": "0x3886df0cb94f4bf7e0ac3dfe2d1db40d2ee2293b",
-    "coinGeckoId": "tom-finance",
     "logo": "https://assets.coingecko.com/coins/images/13173/large/TOM_logo.png?1605857896"
   },
   {
@@ -784,7 +762,6 @@
     "name": "Klaymeta Token",
     "decimals": 18,
     "address": "0xe815a060b9279eba642f8c889fab7afc0d0aca63",
-    "coinGeckoId": "klaymeta",
     "logo": "https://dexata.kr/images/token/meta.svg"
   },
   {
@@ -806,14 +783,13 @@
     "name": "Empower Token",
     "decimals": 18,
     "address": "0xad27ace6f0f6cef2c192a3c8f0f3fa2611154eb3",
-    "logo": "https://dexata.kr/images/token/mpwr.png"
+    "logo": "/assets/icons/klaytn/0xad27ace6f0f6cef2c192a3c8f0f3fa2611154eb3.png"
   },
   {
     "symbol": "oXVS",
     "name": "Orbit Bridge Klaytn Venus",
     "decimals": 18,
     "address": "0x735106530578fb0227422de25bb32c9adfb5ea2e",
-    "coinGeckoId": "venus",
     "logo": "https://dexata.kr/images/token/kxvs.svg"
   },
   {
@@ -821,7 +797,6 @@
     "name": "Orbit Bridge Klaytn BUSD Token",
     "decimals": 18,
     "address": "0x210bc03f49052169d5588a52c317f71cf2078b85",
-    "coinGeckoId": "binance-usd",
     "logo": "https://dexata.kr/images/token/kbusd.png"
   },
   {
@@ -829,7 +804,6 @@
     "name": "Orbit Bridge Klaytn PancakeSwap Token",
     "decimals": 18,
     "address": "0x36e5ea82a099e8188bd5af5709b23628076de822",
-    "coinGeckoId": "pancakeswap-token",
     "logo": "https://dexata.kr/images/token/kcake.svg"
   },
   {
@@ -844,7 +818,6 @@
     "name": "Orbit Bridge Klaytn Cyclub Coin",
     "decimals": 9,
     "address": "0xf1ec6fc5b9f280ed43b45d2ba60874a77f343c60",
-    "coinGeckoId": "mci-coin",
     "logo": "https://dexata.kr/images/token/kcyclub.png"
   },
   {
@@ -858,12 +831,11 @@
     "name": "Orbit Bridge Klaytn Gala",
     "decimals": 8,
     "address": "0x2842a6d0c182e3f1cf4556311c48a7706d7ba6ad",
-    "coinGeckoId": "gala",
     "logo": "https://dexata.kr/images/token/kgala.png"
   },
   {
     "symbol": "MON",
-    "name": "Monstock Token",
+    "name": "Monstock",
     "decimals": 10,
     "address": "0x648fd38efefb4f97cf2df3ff93eff70e94da0691",
     "coinGeckoId": "monstock",
@@ -874,7 +846,6 @@
     "name": "Orbit Bridge Klaytn TrustVerse",
     "decimals": 18,
     "address": "0xa23e07f7a61ce663b9ca6d6683acaaa28ec3070f",
-    "coinGeckoId": "trustverse",
     "logo": "https://dexata.kr/images/token/ktrv.png"
   },
   {
@@ -895,7 +866,6 @@
     "name": "Orbit Bridge Klaytn Metis",
     "decimals": 18,
     "address": "0x4e8975380f04ec53adfdef8f5f8246c4e04291f7",
-    "coinGeckoId": "metis",
     "logo": "https://assets.coingecko.com/coins/images/13218/large/1Vd_NuQU_400x400.jpg?1606292031"
   },
   {
@@ -942,10 +912,11 @@
   },
   {
     "symbol": "KLEVA",
-    "name": "Kleva Token",
+    "name": "Kleva",
     "decimals": 18,
     "address": "0x5fff3a6c16c2208103f318f4713d4d90601a7313",
-    "logo": "https://dexata.kr/images/token/kleva.svg"
+    "coinGeckoId": "kleva",
+    "logo": "/assets/icons/klaytn/0x5fff3a6c16c2208103f318f4713d4d90601a7313.png"
   },
   {
     "symbol": "JUNC",
@@ -969,7 +940,7 @@
   },
   {
     "symbol": "GOLF",
-    "name": "GOLFROCHAIN",
+    "name": "Golfrochain",
     "decimals": 18,
     "address": "0x83c3b5a9a9d1f1438f2505ba972366eecfc4488e",
     "coinGeckoId": "golfrochain",
@@ -1006,7 +977,6 @@
     "name": "Orbit Bridge Klaytn sobacoin",
     "decimals": 18,
     "address": "0xc5523901990c8977e34802347e8e2d7fac0437eb",
-    "coinGeckoId": "soba-token",
     "logo": "https://assets.coingecko.com/coins/images/14673/large/soba-logo-black.png?1617680379"
   },
   {
@@ -1055,7 +1025,6 @@
     "name": "Orbit Bridge Klaytn Dream Car",
     "decimals": 18,
     "address": "0x923ff99c3ca96c77e4c111d80b71d2504c364f7a",
-    "coinGeckoId": "deracoin",
     "logo": "https://dexata.kr/images/token/kdrc.svg"
   },
   {
@@ -1120,7 +1089,7 @@
   },
   {
     "symbol": "MKC",
-    "name": "MEKONG COIN",
+    "name": "Meta Kongz",
     "decimals": 18,
     "address": "0x119883ee408aa5b9625c5d09a79fa8be9f9f6017",
     "coinGeckoId": "meta-kongz",
@@ -1185,11 +1154,11 @@
   },
   {
     "symbol": "ducato ",
-    "name": "DUCATO FINANCE TOKEN",
+    "name": "Ducato Finance",
     "decimals": 18,
     "address": "0xb7ab8c205dc282f83d0511b1dcd22a3ed4739597",
     "coinGeckoId": "ducato-finance",
-    "logo": "https://assets.coingecko.com/coins/images/12550/large/ducato.png?1653216425"
+    "logo": "/assets/icons/klaytn/0xb7ab8c205dc282f83d0511b1dcd22a3ed4739597.png"
   },
   {
     "symbol": "SALT",
@@ -1216,6 +1185,7 @@
     "name": "Fandom",
     "decimals": 16,
     "address": "0xb1834e4e773a180168f2292e036ca8e17f86196f",
+    "coinGeckoId": "fandom",
     "logo": "https://dexata.kr/images/token/fdm.png"
   },
   {
@@ -1275,7 +1245,7 @@
     "name": "Klaybi Protocol",
     "decimals": 18,
     "address": "0xfe16c99551fb4125cb6162e81048c0650db44266",
-    "logo": "https://dexata.kr/images/token/kbi.png"
+    "logo": "/assets/icons/klaytn/0xfe16c99551fb4125cb6162e81048c0650db44266.png"
   },
   {
     "symbol": "STF",
@@ -1288,14 +1258,13 @@
     "name": "Legal Block",
     "decimals": 18,
     "address": "0xdcd9c56af7c05194d3a8c4187262130759e91320",
-    "logo": "https://dexata.kr/images/token/LBK_logo_80x80.png"
+    "logo": "/assets/icons/klaytn/0xdcd9c56af7c05194d3a8c4187262130759e91320.png"
   },
   {
     "symbol": "RHEA",
     "name": "Rhea",
     "decimals": 9,
     "address": "0x0758fb651282581f86316514e8f5021493e9ed83",
-    "coinGeckoId": "rhea-dao",
     "logo": "https://assets.coingecko.com/coins/images/24272/large/rheadao-logo-200-by-200.png?1647176817"
   },
   {
@@ -1316,7 +1285,7 @@
     "name": "KlayStar",
     "decimals": 18,
     "address": "0x07ffbdba745f3a98ec462385aedcdcd973021671",
-    "logo": "https://dexata.kr/images/token/kstar.png"
+    "logo": "/assets/icons/klaytn/0x07ffbdba745f3a98ec462385aedcdcd973021671.png"
   },
   {
     "symbol": "MTF",
@@ -1347,25 +1316,25 @@
     "name": "Ground Coin",
     "decimals": 18,
     "address": "0x0facf2288dd04707c8c9ae2353a5d92a220a0812",
-    "logo": "https://dexata.kr/images/token/GRD_logo_80x80.png"
+    "logo": "/assets/icons/klaytn/0x0facf2288dd04707c8c9ae2353a5d92a220a0812.png"
   },
   {
     "symbol": "GAIA",
     "name": "GAIA",
     "decimals": 18,
     "address": "0xe2541f0c54202fcdad60523fab8bfaa2d2540115",
-    "logo": "https://dexata.kr/images/token/GAIA_logo_80x80.png"
+    "logo": "/assets/icons/klaytn/0xe2541f0c54202fcdad60523fab8bfaa2d2540115.png"
   },
   {
     "symbol": "GATO",
     "name": "GATO",
     "decimals": 18,
     "address": "0xc4edcfed08a169342b479578b01c77efe32630ec",
-    "logo": "https://dexata.kr/images/token/GATO_logo_80x80.png"
+    "logo": "/assets/icons/klaytn/0xc4edcfed08a169342b479578b01c77efe32630ec.png"
   },
   {
     "symbol": "ORB",
-    "name": "KlayCity",
+    "name": "KlayCity ORB",
     "decimals": 18,
     "address": "0x01ad62e0ff6dcaa72889fca155c7036c78ca1783",
     "coinGeckoId": "klaycity-orb",
@@ -1376,7 +1345,6 @@
     "name": "LAY007",
     "decimals": 18,
     "address": "0x1223baf4f5fb9c9002a2154262440b9ed09d01a7",
-    "coinGeckoId": "klaycity-lay007",
     "logo": "https://assets.coingecko.com/coins/images/24762/large/download_%2821%29.png?1648813394"
   },
   {
@@ -1384,7 +1352,7 @@
     "name": "WAR Relief Supplies",
     "decimals": 18,
     "address": "0xfa86afa48e9306826010bc11977cfdb827c727dd",
-    "logo": "https://dexata.kr/images/token/wrs.png"
+    "logo": "/assets/icons/klaytn/0xfa86afa48e9306826010bc11977cfdb827c727dd.png"
   },
   {
     "symbol": "SST",
@@ -1443,11 +1411,11 @@
   },
   {
     "symbol": "oMATIC",
-    "name": "Orbit Bridge Klaytn Matic Token",
+    "name": "Orbit Bridge Klaytn MATIC",
     "decimals": 18,
     "address": "0xa006ba407cfc6584c90bac24ed971261885a0fd6",
-    "coinGeckoId": "matic-network",
-    "logo": "https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png?1624446912"
+    "coinGeckoId": "orbit-bridge-klaytn-matic",
+    "logo": "/assets/icons/klaytn/0xa006ba407cfc6584c90bac24ed971261885a0fd6.png"
   },
   {
     "symbol": "BGL",
@@ -1785,14 +1753,14 @@
     "name": "Pomeranian",
     "decimals": 18,
     "address": "0x9a943f3f84afa673d2a7cf053b8192e372600f57",
-    "logo": "https://dexata.kr/images/token/pom.png"
+    "logo": "/assets/icons/klaytn/0x9a943f3f84afa673d2a7cf053b8192e372600f57.png"
   },
   {
     "symbol": "AOA",
     "name": "Aurora",
     "decimals": 18,
     "address": "0x8a14d0bde789e924ad255a82041c7f761d1c0029",
-    "logo": "https://dexata.kr/images/token/aoa.png"
+    "logo": "/assets/icons/klaytn/0x8a14d0bde789e924ad255a82041c7f761d1c0029.png"
   },
   {
     "symbol": "KORN",
@@ -1812,8 +1780,7 @@
     "name": "Orbit Bridge Klaytn dKargo",
     "decimals": 18,
     "address": "0xd01d650a5920fc714b2f8ed9d53e3ffc663302e9",
-    "coinGeckoId": "dkargo",
-    "logo": "https://dexata.kr/images/token/odka.png"
+    "logo": "/assets/icons/klaytn/0xd01d650a5920fc714b2f8ed9d53e3ffc663302e9.png"
   },
   {
     "symbol": "USDF",
@@ -1838,7 +1805,7 @@
     "name": "Orbit Bridge Klaytn POLARIS SHARE",
     "decimals": 18,
     "address": "0x2bf4d89453deb5781fccc656a4cac60710af766d",
-    "coinGeckoId": "polaris-share"
+    "logo": "/assets/icons/klaytn/0x2bf4d89453deb5781fccc656a4cac60710af766d.png"
   },
   {
     "symbol": "MD",
@@ -1925,15 +1892,15 @@
     "symbol": "KONE",
     "name": "Klayone",
     "decimals": 18,
-    "address": "0xcd65df1a138f0a4e989336ca64b0498f5d26777c"
+    "address": "0xcd65df1a138f0a4e989336ca64b0498f5d26777c",
+    "logo": "/assets/icons/klaytn/0xcd65df1a138f0a4e989336ca64b0498f5d26777c.png"
   },
   {
     "symbol": "oMESH",
     "name": "Orbit Bridge Klaytn Meshswap Protocol",
     "decimals": 18,
     "address": "0x127a75b751ba810e459121af6207d83841c586b7",
-    "coinGeckoId": "meshswap-protocol",
-    "logo": "https://dexata.kr/images/token/mesh.png"
+    "logo": "/assets/icons/klaytn/0x127a75b751ba810e459121af6207d83841c586b7.png"
   },
   {
     "symbol": "kpEKL",
@@ -2013,7 +1980,7 @@
     "name": "nice",
     "decimals": 18,
     "address": "0x23b40267e0c526fe4279e507e78d4aa7760d53e6",
-    "logo": "https://dexata.kr/images/token/nice.png"
+    "logo": "/assets/icons/klaytn/0x23b40267e0c526fe4279e507e78d4aa7760d53e6.png"
   },
   {
     "symbol": "KIRI",
@@ -2075,7 +2042,7 @@
     "name": "Orbit Bridge Klaytn XDT Token",
     "decimals": 18,
     "address": "0xaeeca95c899660dc74886168d0ffdebf3669179d",
-    "logo": "https://dexata.kr/images/token/oxdt.png"
+    "logo": "/assets/icons/klaytn/0xaeeca95c899660dc74886168d0ffdebf3669179d.png"
   },
   {
     "symbol": "ENRG",
@@ -2088,14 +2055,14 @@
     "name": "KlayStar Reward",
     "decimals": 18,
     "address": "0xe5f59ea8b7c9806dc84e8f0862e0f6176f2f9cf2",
-    "logo": "https://dexata.kr/images/token/rstar.png"
+    "logo": "/assets/icons/klaytn/0xe5f59ea8b7c9806dc84e8f0862e0f6176f2f9cf2.png"
   },
   {
     "symbol": "JAMBA",
     "name": "JAMBA JAMBA",
     "decimals": 18,
     "address": "0xaf89ca6f4ee85ff31dbe4df6bc50a2779f6ba820",
-    "logo": "https://dexata.kr/images/token/jamba.png"
+    "logo": "/assets/icons/klaytn/0xaf89ca6f4ee85ff31dbe4df6bc50a2779f6ba820.png"
   },
   {
     "symbol": "cKINGSKINGS",
@@ -2120,14 +2087,14 @@
     "name": "DoctorB",
     "decimals": 18,
     "address": "0x945f68b51cc51709f771e7104990b3f8a3c3ec79",
-    "logo": "https://dexata.kr/images/token/drb.png"
+    "logo": "/assets/icons/klaytn/0x945f68b51cc51709f771e7104990b3f8a3c3ec79.png"
   },
   {
     "symbol": "MINT",
     "name": "MusicN Token",
     "decimals": 18,
     "address": "0xf092acc2412742f4d5a457799dea57155ed42f9c",
-    "logo": "https://dexata.kr/images/token/mint.png"
+    "logo": "/assets/icons/klaytn/0xf092acc2412742f4d5a457799dea57155ed42f9c.png"
   },
   {
     "symbol": "VRS",
@@ -2196,7 +2163,7 @@
     "name": "Sigma",
     "decimals": 18,
     "address": "0x94a2a6308c0a3782d83ad590d82ff0ffcc515312",
-    "logo": "https://dexata.kr/images/token/sig.png"
+    "logo": "/assets/icons/klaytn/0x94a2a6308c0a3782d83ad590d82ff0ffcc515312.png"
   },
   {
     "symbol": "ASD",
@@ -2209,7 +2176,7 @@
     "name": "NoA",
     "decimals": 18,
     "address": "0x5d344cb62452fb1c01587ff85af9ffe7179397dc",
-    "logo": "https://dexata.kr/images/token/noa.png"
+    "logo": "/assets/icons/klaytn/0x5d344cb62452fb1c01587ff85af9ffe7179397dc.png"
   },
   {
     "symbol": "KEYS",
@@ -2228,7 +2195,7 @@
     "name": "ICT Token",
     "decimals": 18,
     "address": "0x2b5065d6049099295c68f5fcb97b8b0d3c354df7",
-    "logo": "https://dexata.kr/images/token/ict.png"
+    "logo": "/assets/icons/klaytn/0x2b5065d6049099295c68f5fcb97b8b0d3c354df7.png"
   },
   {
     "symbol": "BLOOD",
@@ -2279,7 +2246,8 @@
     "symbol": "sigKSP",
     "name": "sigKSP: Tokenized vKSP",
     "decimals": 18,
-    "address": "0x6026c432c420dce0e7bc5f84b9df1637b9ce953b"
+    "address": "0x6026c432c420dce0e7bc5f84b9df1637b9ce953b",
+    "logo": "/assets/icons/klaytn/0x6026c432c420dce0e7bc5f84b9df1637b9ce953b.png"
   },
   {
     "symbol": "vvCLA",
@@ -2292,7 +2260,8 @@
     "symbol": "USDC",
     "name": "USD Coin",
     "decimals": 6,
-    "address": "0x6270b58be569a7c0b8f47594f191631ae5b2c86c"
+    "address": "0x6270b58be569a7c0b8f47594f191631ae5b2c86c",
+    "coinGeckoId": "usd-coin"
   },
   {
     "symbol": "SIDO",
@@ -2305,7 +2274,7 @@
     "name": "MON",
     "decimals": 18,
     "address": "0xa8598d1d1e6e5ecf03fc236df3561d276038c174",
-    "logo": "https://dexata.kr/images/token/mon.png"
+    "logo": "/assets/icons/klaytn/0xa8598d1d1e6e5ecf03fc236df3561d276038c174.png"
   },
   {
     "symbol": "cMAC",
@@ -2324,7 +2293,8 @@
     "symbol": "MAG",
     "name": "MAGUNI COIN",
     "decimals": 18,
-    "address": "0x3a4019bbbca9e4dd4e5a2c522e77619f79497a05"
+    "address": "0x3a4019bbbca9e4dd4e5a2c522e77619f79497a05",
+    "logo": "/assets/icons/klaytn/0x3a4019bbbca9e4dd4e5a2c522e77619f79497a05.png"
   },
   {
     "symbol": "ABTO",
@@ -2355,5 +2325,484 @@
     "name": "Joystick Token",
     "decimals": 18,
     "address": "0xec47f42260438666cc88ce6ef770283f2d19d39b"
+  },
+  {
+    "symbol": "BEE",
+    "name": "KLAYFarm Token",
+    "decimals": 18,
+    "address": "0xa128e62cfb454ab5b580a7385de2f228ad7b69d1"
+  },
+  {
+    "symbol": "KSLO",
+    "name": "KSPHOLD",
+    "decimals": 8,
+    "address": "0xf7689072554d1e85fa9d96151f528764277d7db2"
+  },
+  {
+    "symbol": "KSVE",
+    "name": "KSPLOVE",
+    "decimals": 8,
+    "address": "0x065a9ddbbdd48c4189984e2f7aeda3834bd1eac7"
+  },
+  {
+    "symbol": "TESTTTT",
+    "name": "TESTTTT",
+    "decimals": 18,
+    "address": "0xcab47614b96b85538f2423bda52342bdca7742b6"
+  },
+  {
+    "symbol": "TESTAAA",
+    "name": "TESTAAA",
+    "decimals": 18,
+    "address": "0x6dd78dc9fcb235284e7a02cab57ea4dd06f568e4"
+  },
+  {
+    "symbol": "DONT1BUY",
+    "name": "DONT1BUY",
+    "decimals": 18,
+    "address": "0x6499b23434d61a31c9da5af808fc0b9ee0c76b55"
+  },
+  {
+    "symbol": "TESTTOKEN",
+    "name": "Test Token",
+    "decimals": 18,
+    "address": "0x63d8693539533b86d92c9099997b3bd8bf451b14"
+  },
+  {
+    "symbol": "TESTSTABLE",
+    "name": "Test Stable",
+    "decimals": 18,
+    "address": "0xcdc259f7ce752b3cadce3b4fea3016e7cdc23ebf"
+  },
+  {
+    "symbol": "ICEAMERICANO",
+    "name": "ICEAMERICANO",
+    "decimals": 18,
+    "address": "0xfed6892d9bcbfe37fa021f6a019a224598c7f2ab"
+  },
+  {
+    "symbol": "!!@#",
+    "name": "!!@#",
+    "decimals": 18,
+    "address": "0x47cc74d34b6832105c2eb240059f8c16ed29c75f"
+  },
+  {
+    "symbol": "TOKEN-20210927",
+    "name": "TOKEN-20210927",
+    "decimals": 18,
+    "address": "0x2327aec15eb69fbf5050630e011e95408260cdc5"
+  },
+  {
+    "symbol": "ksFarm",
+    "name": "Kai Farm",
+    "decimals": 18,
+    "address": "0xef8245fdc4087adef6e861140138c4443d8d6b5d"
+  },
+  {
+    "symbol": "ksFarm",
+    "name": "Kai Farm",
+    "decimals": 18,
+    "address": "0x1e249cb961814c6d31062f6b705d18341da43802"
+  },
+  {
+    "symbol": "tAVELK",
+    "name": "Avelk Test Token",
+    "decimals": 18,
+    "address": "0x0b430ad7bf84eb307e221f0e66216205502f835d"
+  },
+  {
+    "symbol": "TnT",
+    "name": "Talent",
+    "decimals": 18,
+    "address": "0x17d30e878ba5a546c76fada32d7a30c876fadb49"
+  },
+  {
+    "symbol": "Ksh",
+    "name": "Korsh",
+    "decimals": 18,
+    "address": "0xbfd4542524a426b26caa9ad11c1755b1087a5737"
+  },
+  {
+    "symbol": "KONGZ",
+    "name": "Kongz Coin",
+    "decimals": 18,
+    "address": "0x2cacf8eb48f609d7dce06a4e4f9ff4c22563eb62"
+  },
+  {
+    "symbol": "BANANA",
+    "name": "Banana Coin",
+    "decimals": 18,
+    "address": "0xf6a6fc906b38eab8c9eb3a0ba9606262704af091"
+  },
+  {
+    "symbol": "test_h",
+    "name": "test_h",
+    "decimals": 9,
+    "address": "0x03abbd3d662ff73e7a53d6d71b16436756acad9d"
+  },
+  {
+    "symbol": "UKIKI",
+    "name": "Ukiki Coin",
+    "decimals": 18,
+    "address": "0x6903c62861c687e2e41c06a68193adfba5b97254"
+  },
+  {
+    "symbol": "TOP",
+    "name": "Binance Token",
+    "decimals": 18,
+    "address": "0x27cf1333e3e6ec8b518fb84a5ff7aea8cf790f3d"
+  },
+  {
+    "symbol": "TOP2",
+    "name": "Zinance Token",
+    "decimals": 18,
+    "address": "0x6d2b550f3d86c378627478a8882ae9842471c266"
+  },
+  {
+    "symbol": "BTIS",
+    "name": "Bti Swap",
+    "decimals": 8,
+    "address": "0xa31b5c5027e4b3f4e7b63e5bec2e598d8bf870c2"
+  },
+  {
+    "symbol": "busB",
+    "name": "busB",
+    "decimals": 18,
+    "address": "0x730c261202adc5f30cf9b892f665f35c095b81a6"
+  },
+  {
+    "symbol": "Nolze",
+    "name": "Nolze",
+    "decimals": 18,
+    "address": "0x3788871fd2c57a34335e5d7d1273e85f66e2fd5e"
+  },
+  {
+    "symbol": "SYL_TEST",
+    "name": "SYLTokenTest",
+    "decimals": 18,
+    "address": "0x050d0e98aeb9a133552409ed01cc1affa7cb3b99"
+  },
+  {
+    "symbol": "NolzeBoost",
+    "name": "NolzeBoost",
+    "decimals": 18,
+    "address": "0xb83d3643837f343139575abe0bed708b1050eec8"
+  },
+  {
+    "symbol": "MetaBusBoost",
+    "name": "MetaBusBoost",
+    "decimals": 18,
+    "address": "0x19e8364fd51895eb9e0a9f3cfecc676326705588"
+  },
+  {
+    "symbol": "wsKRNO",
+    "name": "Wrapped sKRNO",
+    "decimals": 18,
+    "address": "0xe944134903694ebdbb56aadcfbdf400fb52ea487"
+  },
+  {
+    "symbol": "SPRX",
+    "name": "SuperX",
+    "decimals": 18,
+    "address": "0xa749a5fc259a95e81d8579ed37ab5fe14aa39c35"
+  },
+  {
+    "symbol": "MITX",
+    "name": "Mobist",
+    "decimals": 18,
+    "address": "0x448829e85c430477a715400d4a61aa808d3c900f",
+    "coinGeckoId": "mobist"
+  },
+  {
+    "symbol": "DAI",
+    "name": "Dai Stablecoin",
+    "decimals": 18,
+    "address": "0x5fac6bcdc22e40906346c5a64be3a6dbec9207fa"
+  },
+  {
+    "symbol": "TINDER",
+    "name": "Ignite TINDER Token",
+    "decimals": 9,
+    "address": "0x1afc3aab714f778bb9b7d37a414b84d428fa1fb4"
+  },
+  {
+    "symbol": "KCLNK",
+    "name": "Orbit Bridge Klaytn Clank",
+    "decimals": 18,
+    "address": "0xfbe0862f1591b2197bbb40970d99b8d20a57f8d5",
+    "logo": "/assets/icons/klaytn/0xfbe0862f1591b2197bbb40970d99b8d20a57f8d5.png"
+  },
+  {
+    "symbol": "MSP",
+    "name": "MEATSWAPPER",
+    "decimals": 18,
+    "address": "0x922584e0f30883c467d6aed91dc65697664a7878"
+  },
+  {
+    "symbol": "MEAT",
+    "name": "MEATSWAPPER",
+    "decimals": 18,
+    "address": "0x9f60e3b785b698758542f9a137141fdcb52eb6b2"
+  },
+  {
+    "symbol": "BBT",
+    "name": "BLUE BOTTLE TOKEN",
+    "decimals": 18,
+    "address": "0x450afb14016c338145ece2d6080cf1ae563d8cee"
+  },
+  {
+    "symbol": "SBT",
+    "name": "STARBUCKS TOKEN",
+    "decimals": 18,
+    "address": "0x54736bf96b0d8e87cc1893b07a06b8ae96380223"
+  },
+  {
+    "symbol": "TAT",
+    "name": "TEST ALICE TOKEN",
+    "decimals": 18,
+    "address": "0x3a9aaa06e25d56610f3e4685d413bedc3bb77731"
+  },
+  {
+    "symbol": "TBT",
+    "name": "TEST BOB TOKEN",
+    "decimals": 18,
+    "address": "0xed0aec25f955f2ab1fbaa684d8c77d71ab456b0f"
+  },
+  {
+    "symbol": "Hodoo",
+    "name": "Hodoo",
+    "decimals": 18,
+    "address": "0x868db0c72fd98d1e069008a9d84ac4df671588c3"
+  },
+  {
+    "symbol": "TEST ENTER",
+    "name": "TEST CENTER",
+    "decimals": 18,
+    "address": "0x8ed5e65ba1e48ee1362432e2c161f59cc75284e2"
+  },
+  {
+    "symbol": "ZEMIT",
+    "name": "ZEMIT",
+    "decimals": 18,
+    "address": "0x9d52704cd67d586ed2870d810b0cef2cc168ae42"
+  },
+  {
+    "symbol": "MOOI",
+    "name": "MOOI",
+    "decimals": 18,
+    "address": "0x4b734a4d5bf19d89456ab975dfb75f02762dda1d"
+  },
+  {
+    "symbol": "WALK",
+    "name": "Walk Token",
+    "decimals": 18,
+    "address": "0x976232eb7eb92287ff06c5d145bd0d1c033eca58"
+  },
+  {
+    "symbol": "MT",
+    "name": "MyToken",
+    "decimals": 18,
+    "address": "0x593e493421ac12685b2dfccff27b62a2718bfec8"
+  },
+  {
+    "symbol": "amKSP",
+    "name": "amKSP: Tokenized vKSP",
+    "decimals": 18,
+    "address": "0x533c42dc2f9339320dae82a44facf00efc60a68c"
+  },
+  {
+    "symbol": "Satto",
+    "name": "Satto",
+    "decimals": 18,
+    "address": "0xcb9ae19efc475047f57444bf0fa36fa6c09babc9"
+  },
+  {
+    "symbol": "jjapgu",
+    "name": "JJAPGU",
+    "decimals": 18,
+    "address": "0xd02b0dae067fca36a31c15c799e30b65a84b2f75"
+  },
+  {
+    "symbol": "TCT",
+    "name": "TEST CAROL TOKEN",
+    "decimals": 18,
+    "address": "0xaa77961a7f4277ea173b07b5dd8148deb5998c84"
+  },
+  {
+    "symbol": "Princess",
+    "name": "Princess",
+    "decimals": 18,
+    "address": "0x9393b50fcf78d2de394729545a1dee27f772c753",
+    "logo": "/assets/icons/klaytn/0x9393b50fcf78d2de394729545a1dee27f772c753.png"
+  },
+  {
+    "symbol": "TUS2",
+    "name": "TEST USD 2",
+    "decimals": 6,
+    "address": "0xe9a05840e4a3151d87ffb411047300fea5275063"
+  },
+  {
+    "symbol": "TUS1",
+    "name": "TEST USD 1",
+    "decimals": 6,
+    "address": "0x830da923252ea03574ea95d65d4e077a207594da"
+  },
+  {
+    "symbol": "TUS3",
+    "name": "TEST USD 3",
+    "decimals": 6,
+    "address": "0x164e95f74dde8bb7cb0172f06a6296df5694dc59"
+  },
+  {
+    "symbol": "KLD",
+    "name": "Klaylend Finance",
+    "decimals": 18,
+    "address": "0xb8c460ad6ac97797a57bdb08d7187b4710b4fdf8"
+  },
+  {
+    "symbol": "AAA",
+    "name": "AAA",
+    "decimals": 18,
+    "address": "0x74bfd9a4a26202720f9427c950b54d68ff554dfa"
+  },
+  {
+    "symbol": "BBB",
+    "name": "BBB",
+    "decimals": 18,
+    "address": "0x193588afcdd58cbaa6da7137ffa2fbc296bb8843"
+  },
+  {
+    "symbol": "Dec18",
+    "name": "Dec18",
+    "decimals": 18,
+    "address": "0x700eca9fac6c69826ad3930bdf089a6d12ba1087"
+  },
+  {
+    "symbol": "Dec6",
+    "name": "Dec6",
+    "decimals": 6,
+    "address": "0x3e2c6f10bc38ee5665d05bd60b72efe0ad17e979"
+  },
+  {
+    "symbol": "Dec18",
+    "name": "Dec18",
+    "decimals": 18,
+    "address": "0xf5d3619d584ffa8ce15337ac98ce14a10a1541d7"
+  },
+  {
+    "symbol": "Dec6",
+    "name": "Dec6",
+    "decimals": 6,
+    "address": "0x79481d193f7db98823d48271b0789bae6eed68c3"
+  },
+  {
+    "symbol": "SKZ",
+    "name": "SKZ",
+    "decimals": 18,
+    "address": "0x9a6469aac7cd70385bdca6fa9e9356acec9c5b16",
+    "logo": "/assets/icons/klaytn/0x9a6469aac7cd70385bdca6fa9e9356acec9c5b16.png"
+  },
+  {
+    "symbol": "GRND",
+    "name": "SuperWalk",
+    "decimals": 18,
+    "address": "0x84f8c3c8d6ee30a559d73ec570d574f671e82647",
+    "coinGeckoId": "superwalk"
+  },
+  {
+    "symbol": "ARA",
+    "name": "Aurora klay ",
+    "decimals": 18,
+    "address": "0x15fb4a7408f63defc599ac364d824a5044ff2ecd",
+    "logo": "/assets/icons/klaytn/0x15fb4a7408f63defc599ac364d824a5044ff2ecd.png"
+  },
+  {
+    "symbol": "LCG",
+    "name": "LCG Token",
+    "decimals": 18,
+    "address": "0xef632e070df56371ad33a85148de398104ec55ab"
+  },
+  {
+    "symbol": "BTS",
+    "name": "BATTLE SINGER",
+    "decimals": 18,
+    "address": "0x8116e335dd735d38bc64dcf2676582785bf8deac"
+  },
+  {
+    "symbol": "KPOP",
+    "name": "Korean POP",
+    "decimals": 18,
+    "address": "0xb6a5805a0a0cc072f6c2c5ef72317a8ba172bbd3"
+  },
+  {
+    "symbol": "APM",
+    "name": "apM Coin",
+    "decimals": 18,
+    "address": "0x4ec5e1c092f9c40d1e9be5744feddb23935232e9"
+  },
+  {
+    "symbol": "VICE",
+    "name": "vic_education",
+    "decimals": 18,
+    "address": "0x170a6b46fd7db6e42208ae222475e8cc9a83dd9d"
+  },
+  {
+    "symbol": "MOON",
+    "name": "Dinosaur Moon",
+    "decimals": 18,
+    "address": "0x3c244f452a3c178e8b117926acd127aadcf231ed",
+    "logo": "/assets/icons/klaytn/0x3c244f452a3c178e8b117926acd127aadcf231ed.png"
+  },
+  {
+    "symbol": "ASAN",
+    "name": "ASAN Token",
+    "decimals": 18,
+    "address": "0x27b33131a0b02879d63830292931281b1b83000f",
+    "logo": "/assets/icons/klaytn/0x27b33131a0b02879d63830292931281b1b83000f.png"
+  },
+  {
+    "symbol": "STAR",
+    "name": "Star",
+    "decimals": 6,
+    "address": "0x99e5ec3775bbb0bc92c08ca423c54b0478b2f6d8"
+  },
+  {
+    "symbol": "oETHW",
+    "name": "Orbit Bridge Klaytn EthereumPoW",
+    "decimals": 18,
+    "address": "0x5a36597fb14c8f28ea3c3163754f8149ef1d45a8",
+    "logo": "/assets/icons/klaytn/0x5a36597fb14c8f28ea3c3163754f8149ef1d45a8.png"
+  },
+  {
+    "symbol": "oETF",
+    "name": "Orbit Bridge Klaytn EthereumFair",
+    "decimals": 18,
+    "address": "0xcd8ffbb3725a1b3234dbeb024f7172a75435e638",
+    "logo": "/assets/icons/klaytn/0xcd8ffbb3725a1b3234dbeb024f7172a75435e638.png"
+  },
+  {
+    "symbol": "ISK",
+    "name": "ISKRA Token",
+    "decimals": 18,
+    "address": "0x17d2628d30f8e9e966c9ba831c9b9b01ea8ea75c",
+    "coinGeckoId": "iskra-token"
+  },
+  {
+    "symbol": "K4U",
+    "name": "Klaytn_For_You",
+    "decimals": 18,
+    "address": "0x31a26ea6df12940a2623907d032de87cd090450f"
+  },
+  {
+    "symbol": "AME",
+    "name": "Ice Americano",
+    "decimals": 18,
+    "address": "0x124c6f438a05074cb4a1d22b70f95d3b1d709a34"
+  },
+  {
+    "symbol": "MK",
+    "name": "MILK",
+    "decimals": 18,
+    "address": "0xf774d79322bdc919bf58871bcdbcc65912b17bab"
   }
 ]
