@@ -79,10 +79,7 @@ export const useWalletBalances = ({ wallets }: Options) => {
   const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
 
   const coinGeckoIds = useMemo<string[]>(
-    () =>
-      balances
-        .flatMap((x) => x.coinGeckoId || [])
-        .filter((x, i, a) => a.indexOf(x) === i),
+    () => balances.flatMap((v) => v.coinGeckoId || []),
     [balances],
   );
 
