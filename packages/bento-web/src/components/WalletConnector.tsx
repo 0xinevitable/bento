@@ -369,7 +369,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       }
       setLoading(false);
     },
-    [onSave],
+    [networks, onSave],
   );
 
   return (
