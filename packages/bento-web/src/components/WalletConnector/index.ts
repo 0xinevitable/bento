@@ -1,0 +1,1 @@
+export { WalletConnector } from './WalletConnector';
