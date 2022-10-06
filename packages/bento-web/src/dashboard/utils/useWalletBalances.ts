@@ -83,7 +83,7 @@ export const useWalletBalances = ({ wallets }: Options) => {
       balances
         .flatMap((x) => x.coinGeckoId || [])
         .filter((x, i, a) => a.indexOf(x) === i),
-    [result],
+    [balances],
   );
 
   const [coinGeckoPricesByIds, setCoinGeckoPricesByIds] = useState<
@@ -97,7 +97,9 @@ export const useWalletBalances = ({ wallets }: Options) => {
 
     pricesFromCoinGecko(coinGeckoIds)
       .then(setCoinGeckoPricesByIds)
-      .catch(() => {});
+      .catch((error) => {
+        console.error(error);
+      });
   }, [JSON.stringify(coinGeckoIds)]);
 
   useEffect(() => {
