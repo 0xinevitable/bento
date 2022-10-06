@@ -209,7 +209,7 @@ export const TokenDetailModal: React.FC<Props> = ({
                         0,
                       );
                       return (
-                        <li>
+                        <li key={position}>
                           <AllocationSectionTitle>
                             <InlineBadge>{capitalize(position)}</InlineBadge>
 
@@ -222,7 +222,13 @@ export const TokenDetailModal: React.FC<Props> = ({
                           </AllocationSectionTitle>
                           <AllocationWalletList>
                             {walletsByPosition[position].map((wallet) => (
-                              <li className="w-full justify-between flex items-center">
+                              <li
+                                className="w-full justify-between flex items-center"
+                                key={`${
+                                  tokenBalance.tokenAddress ||
+                                  tokenBalance.symbol
+                                }-${wallet.address}`}
+                              >
                                 <span className="flex items-center gap-2 font-semibold text-lg">
                                   <TokenIcon src={tokenBalance.logo} />
                                   {wallet.amount.toLocaleString(undefined, {
