@@ -5,9 +5,10 @@ import BigNumber from 'bn.js';
 
 import KLAYSwapSingleLeveragePool from '../abis/KLAYSwapSingleLeveragePool.json';
 
-const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 const klaytnChain = new KlaytnChain();
 const provider = klaytnChain._provider;
+
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 // export const getEcopotPoolList = async () => {
 //   const { data } = await axios.get<KLAYswap.PoolVotingDataResponse>(

@@ -1,12 +1,13 @@
+import { KlaytnChain } from '@bento/core/lib/chains';
 import { KLAYTN_TOKENS, TokenInput } from '@bento/core/lib/tokens';
 import axios from 'axios';
 import BigNumber from 'bn.js';
-import Caver from 'caver-js';
 
 import IERC20 from '../abis/IERC20.json';
 import IKSLP from '../abis/IKSLP.json';
 
-const provider = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
+const klaytnChain = new KlaytnChain();
+const provider = klaytnChain._provider;
 
 const DENYLIST: string[] = [];
 
