@@ -600,6 +600,7 @@ export class CosmosHubChain implements CosmosSDKBasedChain {
   };
   _provider: Axios = axios.create({
     baseURL: 'https://api.cosmos.network',
+    timeout: 4_000,
   });
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
@@ -649,6 +650,7 @@ export class OsmosisChain implements CosmosSDKBasedChain {
   };
   _provider: Axios = axios.create({
     baseURL: 'https://osmosis.stakesystems.io',
+    timeout: 4_000,
   });
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
