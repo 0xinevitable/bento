@@ -29,12 +29,25 @@ const downloadImage = (url: string, imagePath: string) =>
 
 export const update = async () => {
   const tokenInfoFromKLAYswap = await getKLAYswapTokenInfo();
+  const tokenInfoFromKokonutSwap = await getKokonutSwapTokenInfo();
+  const addrs = [
+    ...tokenInfoFromKokonutSwap.map((v) => v.address),
+    ...tokenInfoFromKLAYswap.map((v) => v.address),
+  ];
+
   const previousTokens = JSON.parse(
     await fs.promises.readFile(CHAIN_OUTPUT_PATH, 'utf8'),
   ) as TokenInput[];
 
   const tokens: TokenInput[] = await safePromiseAll(
-    tokenInfoFromKLAYswap.map(async (token) => {
+    addrs.map(async (address) => {
+      const tokenFromKLAYswap = tokenInfoFromKLAYswap.find(
+        (v) => v.address === address,
+      );
+      const tokenFromKokonutSwap = tokenInfoFromKokonutSwap.find(
+        (v) => v.address === address,
+      );
+      const token = tokenFromKokonutSwap || tokenFromKLAYswap!;
       const coinGeckoToken = coingeckoTokenList.find(
         (v) =>
           v.platforms['klay-token']?.toLowerCase() ===
@@ -49,7 +62,9 @@ export const update = async () => {
         `./packages/bento-web/public/assets/icons/klaytn/${token.address}.png`,
       );
 
-      const iconRemoteURL = `https://s.klayswap.com/data/img/token/${token.address}/icon.png`;
+      const iconRemoteURL = !!tokenFromKokonutSwap?.iconPath
+        ? `https://kokonutswap.finance${tokenFromKokonutSwap.iconPath}`
+        : `https://s.klayswap.com/data/img/token/${token.address}/icon.png`;
       let iconURL:
         | string
         | undefined = `/assets/icons/klaytn/${token.address}.png`;
@@ -58,7 +73,7 @@ export const update = async () => {
         await downloadImage(iconRemoteURL, ICON_OUTPUT_PATH);
       } catch (err) {
         console.log(
-          `[Warning] Failed to download image for ${token.address} (${name})`,
+          `[Warning] Failed to download image for ${token.address} (${name}) / ${iconRemoteURL}`,
         );
         if (prevData?.logo) {
           iconURL = prevData.logo;
@@ -94,9 +109,7 @@ export const update = async () => {
     }),
   );
 
-  console.log(JSON.stringify(tokens));
-
-  const newTokens = tokens.reduce((acc, token) => {
+  let newTokens = tokens.reduce((acc, token) => {
     const prev = acc.find(
       (v) => v.address?.toLowerCase() === token.address?.toLowerCase(),
     );
@@ -117,6 +130,23 @@ export const update = async () => {
   );
 };
 
+type KLAYswapTokenInfo = {
+  id: number;
+  address: string;
+  symbol: string;
+  name: string;
+  chain: 'KLAYTN';
+  decimal: number;
+  img: string;
+  grade: string;
+  contractGrade: string;
+  isDrops: true;
+  isStable: false;
+  amount: string;
+  volume: string;
+  oraclePrice: string;
+  price: string;
+};
 const getKLAYswapTokenInfo = async () => {
   const { data: rawTokens } = await axios.get<any[]>(
     'https://s.klayswap.com/stat/tokenInfo.min.json',
@@ -141,20 +171,34 @@ const getKLAYswapTokenInfo = async () => {
 
   return tokens;
 };
-type KLAYswapTokenInfo = {
-  id: number;
-  address: string;
-  symbol: string;
-  name: string;
-  chain: 'KLAYTN';
-  decimal: number;
-  img: string;
-  grade: string;
-  contractGrade: string;
-  isDrops: true;
-  isStable: false;
-  amount: string;
-  volume: string;
-  oraclePrice: string;
-  price: string;
+
+const getKokonutSwapTokenInfo = async () => {
+  const {
+    data: { coins: tokens },
+  } = await axios.get<KokonutSwapCoinsResponse>(
+    'https://prod.kokonut-api.com/coins',
+  );
+
+  return tokens.flatMap((token) => {
+    const address = token.address.toLowerCase();
+    if (
+      token.isLpToken ||
+      !token.isSwapAvailable ||
+      address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
+    ) {
+      return [];
+    }
+    return { ...token, address };
+  });
+};
+type KokonutSwapCoinsResponse = {
+  coins: {
+    address: string;
+    symbol: string;
+    name: string;
+    decimal: number;
+    isLpToken: boolean;
+    isSwapAvailable: boolean;
+    iconPath: string;
+  }[];
 };

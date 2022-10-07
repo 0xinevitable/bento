@@ -31,18 +31,6 @@ export const getLeveragePoolList = async () => {
   return pools;
 };
 
-export const getPools = async () => {
-  // const pools = await getEcopotPoolList();
-  const pools = await getLeveragePoolList();
-  for (const pool of pools) {
-    const balances = await getSinglePoolBalance(
-      pool,
-      '0x7777777141f111cf9f0308a63dbd9d0cad3010c4',
-    );
-    console.log(balances);
-  }
-};
-
 type Token = Partial<TokenInput> & {
   balance: number;
 };
