@@ -1,6 +1,8 @@
 // import { getLPPoolBalance, getLPPoolList } from './kokonutswap/lp';
+import { getNodeStakes } from './klaystation/staking';
 
 const main = async () => {
+  await getNodeStakes();
   // const kokonutswapPools = await getLPPoolList();
   // for (const pool of kokonutswapPools) {
   //   const balance = await getLPPoolBalance(
