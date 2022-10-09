@@ -2,11 +2,11 @@ import { Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTab } from '@/components/AnimatedTab';
-import { Badge, Checkbox } from '@/components/system';
+import { Badge, Checkbox, Skeleton } from '@/components/system';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
@@ -129,6 +129,13 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     TAB_ITEMS[0],
   );
 
+  const [isNFTsInitialized, setNFTsInitialized] = useState<boolean>(false);
+  useEffect(() => {
+    if (currentTab === TAB_ITEMS[1]) {
+      setNFTsInitialized(true);
+    }
+  }, [currentTab]);
+
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
@@ -239,13 +246,23 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === 'NFTs'}>
-              <NFTListSection
-                nftAssets={nftAssets}
-                selected={currentTab === 'NFTs'}
-                isMyProfile={true}
-                profile={profile}
-                revalidateProfile={revalidateProfile}
-              />
+              {!isNFTsInitialized ? (
+                <Skeleton
+                  style={{
+                    width: '100%',
+                    height: '300px',
+                    borderRadius: '8px',
+                  }}
+                />
+              ) : (
+                <NFTListSection
+                  nftAssets={nftAssets}
+                  selected={currentTab === 'NFTs'}
+                  isMyProfile={true}
+                  profile={profile}
+                  revalidateProfile={revalidateProfile}
+                />
+              )}
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === 'Badges'}>
