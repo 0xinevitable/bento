@@ -2,11 +2,11 @@ import { Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTab } from '@/components/AnimatedTab';
-import { Badge, Checkbox } from '@/components/system';
+import { Badge, Checkbox, Skeleton } from '@/components/system';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
@@ -26,7 +26,12 @@ import { NFTListSection } from './sections/NFTListSection';
 import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
 
-const TAB_ITEMS = ['Crypto', 'NFTs', 'Badges'] as const;
+enum DashboardTabType {
+  Crypto = 'Crypto',
+  NFTs = 'NFTs',
+  Badges = 'Badges',
+}
+const DASHBOARD_TAB_ITEMS = Object.values(DashboardTabType);
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -110,26 +115,31 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   }, [walletBalancesJSONKey, nftBalancesJSONKey]);
   const tokenBalancesJSONKey = JSON.stringify(tokenBalances);
 
-  const [isNFTsShown, setNFTsShown] = useLocalStorage<boolean>(
-    '@is-nfts-shown-v1',
-    true,
-  );
+  const [isNFTBalancesIncluded, setNFTBalancesIncluded] =
+    useLocalStorage<boolean>('@is-nfts-shown-v1', true);
 
   const renderedTokenBalances = useMemo(() => {
-    if (isNFTsShown) {
+    if (isNFTBalancesIncluded) {
       return tokenBalances;
     }
     return tokenBalances.filter((v) => v.type !== 'nft');
-  }, [isNFTsShown, tokenBalancesJSONKey]);
+  }, [isNFTBalancesIncluded, tokenBalancesJSONKey]);
 
   const netWorthInUSD = useMemo(
     () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
     [tokenBalancesJSONKey],
   );
 
-  const [currentTab, setCurrentTab] = useState<typeof TAB_ITEMS[number]>(
-    TAB_ITEMS[0],
+  const [currentTab, setCurrentTab] = useState<DashboardTabType>(
+    DashboardTabType.Crypto,
   );
+
+  const [isNFTsInitialized, setNFTsInitialized] = useState<boolean>(false);
+  useEffect(() => {
+    if (currentTab === DashboardTabType.NFTs) {
+      setNFTsInitialized(true);
+    }
+  }, [currentTab]);
 
   return (
     <React.Fragment>
@@ -149,10 +159,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           <Tab
             current={currentTab}
             onChange={setCurrentTab}
-            items={TAB_ITEMS}
+            items={DASHBOARD_TAB_ITEMS}
           />
           <DashboardContent>
-            <AnimatedTab selected={currentTab === 'Crypto'}>
+            <AnimatedTab selected={currentTab === DashboardTabType.Crypto}>
               <TopSummaryContainer>
                 <AssetRatioSection
                   netWorthInUSD={netWorthInUSD}
@@ -186,17 +196,20 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                   <div
                     className="flex items-center cursor-pointer select-none"
                     onClick={() => {
-                      if (!isNFTsShown) {
+                      if (!isNFTBalancesIncluded) {
                         // showing
                         Analytics.logEvent('click_show_nfts', undefined);
                       } else {
                         // hiding
                         Analytics.logEvent('click_hide_nfts', undefined);
                       }
-                      setNFTsShown(!isNFTsShown);
+                      setNFTBalancesIncluded(!isNFTBalancesIncluded);
                     }}
                   >
-                    <Checkbox checked={isNFTsShown ?? false} readOnly />
+                    <Checkbox
+                      checked={isNFTBalancesIncluded ?? false}
+                      readOnly
+                    />
                     <span className="ml-[6px] text-white/80 text-sm">
                       {t('Show NFTs')}
                     </span>
@@ -237,17 +250,27 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               </div>
             </AnimatedTab>
 
-            <AnimatedTab selected={currentTab === 'NFTs'}>
-              <NFTListSection
-                nftAssets={nftAssets}
-                selected={currentTab === 'NFTs'}
-                isMyProfile={true}
-                profile={profile}
-                revalidateProfile={revalidateProfile}
-              />
+            <AnimatedTab selected={currentTab === DashboardTabType.NFTs}>
+              {!isNFTsInitialized ? (
+                <Skeleton
+                  style={{
+                    width: '100%',
+                    height: '300px',
+                    borderRadius: '8px',
+                  }}
+                />
+              ) : (
+                <NFTListSection
+                  nftAssets={nftAssets}
+                  selected={currentTab === DashboardTabType.NFTs}
+                  isMyProfile={true}
+                  profile={profile}
+                  revalidateProfile={revalidateProfile}
+                />
+              )}
             </AnimatedTab>
 
-            <AnimatedTab selected={currentTab === 'Badges'}>
+            <AnimatedTab selected={currentTab === DashboardTabType.Badges}>
               <span className="my-8 text-center text-white/90 font-bold">
                 Coming Soon!
               </span>
