@@ -19,10 +19,11 @@ export enum KlaytnDeFiType {
 
 export type DeFiType = KlaytnDeFiType | OsmosisDeFiType;
 
+type ContractAddressOrDenom = string;
 export type AmountWithOptionalValue = {
   value?: number | null;
   lpAmount?: number | null;
-  tokenAmounts?: Record<string, number | undefined> | null;
+  tokenAmounts?: Record<ContractAddressOrDenom, number | undefined> | null;
 };
 
 type NativeInput = Omit<TokenInput, 'address'>;
