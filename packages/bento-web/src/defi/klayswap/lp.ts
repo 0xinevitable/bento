@@ -65,7 +65,7 @@ export const getLPPoolBalance = async (
   return [tokenA, tokenB];
 };
 
-declare module KLAYswap {
+export declare module KLAYswap {
   export interface Common {
     factoryMined: string;
     singlePoolTotalMined: string;

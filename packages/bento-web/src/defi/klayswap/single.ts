@@ -65,7 +65,7 @@ export const getSinglePoolBalance = async (
   return token;
 };
 
-declare module KLAYswap {
+export declare module KLAYswap {
   export interface SingleLeveragePool {
     id: number;
     address: string;
