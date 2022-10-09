@@ -1,5 +1,5 @@
 import { safePromiseAll } from '@bento/common';
-import { TokenInput } from '@bento/core/lib/tokens';
+import { EEEE_ADDRESS, TokenInput, ZERO_ADDRESS } from '@bento/core';
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
@@ -181,11 +181,7 @@ const getKokonutSwapTokenInfo = async () => {
 
   return tokens.flatMap((token) => {
     const address = token.address.toLowerCase();
-    if (
-      token.isLpToken ||
-      !token.isSwapAvailable ||
-      address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
-    ) {
+    if (token.isLpToken || !token.isSwapAvailable || address === EEEE_ADDRESS) {
       return [];
     }
     return { ...token, address };
