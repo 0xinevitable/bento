@@ -2605,6 +2605,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@tanem/react-nprogress", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:5.0.14"],\
             ["@types/amplitude-js", "npm:8.16.2"],\
+            ["@types/bn.js", "npm:5.1.1"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.chunk", "npm:4.2.7"],\
             ["@types/lodash.groupby", "npm:4.6.7"],\
@@ -2618,6 +2619,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["amplitude-js", "npm:8.21.1"],\
             ["autoprefixer", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:10.4.12"],\
             ["axios", "npm:0.27.2"],\
+            ["bn.js", "npm:5.2.1"],\
             ["caver-js", "npm:1.9.0"],\
             ["clsx", "npm:1.2.1"],\
             ["cobe", "npm:0.6.2"],\
@@ -13345,13 +13347,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
-            ["@types/bn.js", "npm:5.1.1"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/node", "npm:18.7.19"],\
             ["@types/prettier", "npm:2.7.1"],\
             ["axios", "npm:0.27.2"],\
-            ["bn.js", "npm:5.2.1"],\
-            ["caver-js", "npm:1.9.0"],\
             ["dedent", "npm:0.7.0"],\
             ["find-yarn-workspace-root", "npm:2.0.0"],\
             ["prettier", "npm:2.7.1"],\

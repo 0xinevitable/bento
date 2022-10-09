@@ -1482,6 +1482,7 @@ __metadata:
     "@supabase/supabase-js": ^1.35.7
     "@tanem/react-nprogress": ^5.0.14
     "@types/amplitude-js": ^8.16.2
+    "@types/bn.js": ^5.1.1
     "@types/dedent": ^0.7.0
     "@types/lodash.chunk": ^4.2.7
     "@types/lodash.groupby": ^4.6.7
@@ -1495,6 +1496,7 @@ __metadata:
     amplitude-js: ^8.21.1
     autoprefixer: ^10.4.12
     axios: ^0.27.2
+    bn.js: ^5.2.1
     caver-js: ^1.9.0
     clsx: ^1.2.1
     cobe: ^0.6.2
@@ -10309,13 +10311,10 @@ __metadata:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
     "@supabase/supabase-js": ^1.35.7
-    "@types/bn.js": ^5.1.1
     "@types/dedent": ^0.7.0
     "@types/node": ^18.7.19
     "@types/prettier": ^2.6.3
     axios: ^0.27.2
-    bn.js: ^5.2.1
-    caver-js: ^1.9.0
     dedent: ^0.7.0
     find-yarn-workspace-root: ^2.0.0
     prettier: ^2.7.1
