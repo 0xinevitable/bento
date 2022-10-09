@@ -1,4 +1,4 @@
-import { CosmosSDKBasedNetworks, safePromiseAll } from '@bento/common';
+import { CosmosSDKBasedNetworks, safeAsyncFlatMap } from '@bento/common';
 import {
   Bech32Address,
   CosmosHubChain,
@@ -45,47 +45,43 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     coinMarketCapId?: number;
     balance: number;
     price?: number;
-  }[] = (
-    await safePromiseAll(
-      wallets.flatMap(async (walletAddress) => {
-        const bech32Address = Bech32Address.fromBech32(walletAddress);
+  }[] = await safeAsyncFlatMap(wallets, async (walletAddress) => {
+    const bech32Address = Bech32Address.fromBech32(walletAddress);
 
-        if (['cosmos-hub', 'osmosis'].includes(network)) {
-          const chain = chains[network];
-          const chainBech32Address = bech32Address.toBech32(
-            chain.bech32Config.prefix,
-          );
+    if (['cosmos-hub', 'osmosis'].includes(network)) {
+      const chain = chains[network];
+      const chainBech32Address = bech32Address.toBech32(
+        chain.bech32Config.prefix,
+      );
 
-          const getTokenBalances = async (): Promise<TokenBalance[]> =>
-            'getTokenBalances' in chain
-              ? chain.getTokenBalances?.(chainBech32Address) ?? []
-              : [];
-          const [balance, delegations, tokenBalances] = await Promise.all([
-            chain.getBalance(chainBech32Address).catch(() => 0),
-            chain.getDelegations(chainBech32Address).catch(() => 0),
-            getTokenBalances(),
-          ]);
+      const getTokenBalances = async (): Promise<TokenBalance[]> =>
+        'getTokenBalances' in chain
+          ? chain.getTokenBalances?.(chainBech32Address) ?? []
+          : [];
+      const [balance, delegations, tokenBalances] = await Promise.all([
+        chain.getBalance(chainBech32Address).catch(() => 0),
+        chain.getDelegations(chainBech32Address).catch(() => 0),
+        getTokenBalances(),
+      ]);
 
-          return [
-            {
-              walletAddress: chainBech32Address,
-              platform: network,
+      return [
+        {
+          walletAddress: chainBech32Address,
+          platform: network,
 
-              symbol: chain.currency.symbol,
-              name: chain.currency.name,
-              logo: chain.currency.logo,
-              coinGeckoId: chain.currency.coinGeckoId,
-              balance,
-              delegations,
-              price: undefined,
-            },
-            ...tokenBalances,
-          ];
-        }
-        return [];
-      }),
-    )
-  ).flat();
+          symbol: chain.currency.symbol,
+          name: chain.currency.name,
+          logo: chain.currency.logo,
+          coinGeckoId: chain.currency.coinGeckoId,
+          balance,
+          delegations,
+          price: undefined,
+        },
+        ...tokenBalances,
+      ];
+    }
+    return [];
+  });
 
   res.status(200).json(result);
 };

@@ -1,4 +1,4 @@
-import { EVMBasedNetworks, safePromiseAll } from '@bento/common';
+import { EVMBasedNetworks, safeAsyncFlatMap } from '@bento/common';
 import {
   AvalancheChain,
   BNBChain,
@@ -56,65 +56,61 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     coinMarketCapId?: number;
     balance: number;
     price?: number;
-  }[] = (
-    await safePromiseAll(
-      wallets.map(async (walletAddress) => {
-        if (SUPPORTED_CHAINS.includes(network)) {
-          const chain = chains[network]!;
-          const getTokenBalances = async (): Promise<TokenBalance[]> => {
-            try {
-              const items =
-                'getTokenBalances' in chain
-                  ? await chain.getTokenBalances(walletAddress)
-                  : [];
-              await redisClient
-                .set(
-                  `token-balances:${network}:${walletAddress}`,
-                  JSON.stringify(items),
-                )
-                .catch((err) => console.error(err));
-              return items;
-            } catch (error) {
-              console.error(
-                'Error occurred while fetching token balances (likely Covalent API error)',
-                error,
-              );
-              const out = await redisClient
-                .get(`token-balances:${network}:${walletAddress}`)
-                .catch((err) => {
-                  console.error(err);
-                });
-              if (out) {
-                return JSON.parse(out);
-              }
-              return [];
-            }
-          };
-
-          const [balance, tokenBalances] = await Promise.all([
-            chain.getBalance(walletAddress).catch(() => 0),
-            getTokenBalances().catch(() => []),
-          ]);
-
-          return [
-            {
-              walletAddress,
-              platform: network,
-
-              symbol: chain.currency.symbol,
-              name: chain.currency.name,
-              logo: chain.currency.logo,
-              coinGeckoId: chain.currency.coinGeckoId,
-              balance,
-              // price: currencyPrice,
-            },
-            ...tokenBalances,
-          ];
+  }[] = await safeAsyncFlatMap(wallets, async (walletAddress) => {
+    if (SUPPORTED_CHAINS.includes(network)) {
+      const chain = chains[network]!;
+      const getTokenBalances = async (): Promise<TokenBalance[]> => {
+        try {
+          const items =
+            'getTokenBalances' in chain
+              ? await chain.getTokenBalances(walletAddress)
+              : [];
+          await redisClient
+            .set(
+              `token-balances:${network}:${walletAddress}`,
+              JSON.stringify(items),
+            )
+            .catch((err) => console.error(err));
+          return items;
+        } catch (error) {
+          console.error(
+            'Error occurred while fetching token balances (likely Covalent API error)',
+            error,
+          );
+          const out = await redisClient
+            .get(`token-balances:${network}:${walletAddress}`)
+            .catch((err) => {
+              console.error(err);
+            });
+          if (out) {
+            return JSON.parse(out);
+          }
+          return [];
         }
-        return [];
-      }),
-    )
-  ).flat();
+      };
+
+      const [balance, tokenBalances] = await Promise.all([
+        chain.getBalance(walletAddress).catch(() => 0),
+        getTokenBalances().catch(() => []),
+      ]);
+
+      return [
+        {
+          walletAddress,
+          platform: network,
+
+          symbol: chain.currency.symbol,
+          name: chain.currency.name,
+          logo: chain.currency.logo,
+          coinGeckoId: chain.currency.coinGeckoId,
+          balance,
+          // price: currencyPrice,
+        },
+        ...tokenBalances,
+      ];
+    }
+    return [];
+  });
 
   const coinMarketCapIds = result
     .flatMap((x) => (!!x.coinMarketCapId ? x.coinMarketCapId : []))

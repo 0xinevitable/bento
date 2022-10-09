@@ -1,4 +1,4 @@
-import { safeAsyncFlatMap } from '@bento/common';
+import { safeAsyncFlatMap, safePromiseAll } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -115,7 +115,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const promisesForDelegations = KlayStation.getDelegations(walletAddress);
 
   const stakings = (
-    await Promise.all([
+    await safePromiseAll([
       promisesForStakings.catch(handleError),
       promisesForDelegations.catch(handleError),
     ])
