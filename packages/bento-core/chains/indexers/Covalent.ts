@@ -1,6 +1,5 @@
 import { Config, randomOf } from '@bento/common';
-
-import { cachedAxios } from '../../cachedAxios';
+import axios from 'axios';
 
 type Options = {
   chainId: number;
@@ -10,19 +9,18 @@ type Options = {
 export const getTokenBalancesFromCovalent = async ({
   chainId,
   walletAddress,
-}: Options) => {
+}: Options): Promise<TokenBalanceItem[]> => {
   const API_KEY = randomOf(Config.COVALENT_API_KEYS);
   const API_URL = `https://api.covalenthq.com/v1/${chainId}/address/${walletAddress}/balances_v2/?key=${API_KEY.replace(
     ':',
     '',
   )}`;
 
-  const response = await cachedAxios.get<TokenBalancesResponse>(API_URL, {
+  const response = await axios.get<TokenBalancesResponse>(API_URL, {
     timeout: 4_000,
   });
 
-  const items: TokenBalanceItem[] = response.data.data.items;
-  return items;
+  return response.data.data.items;
 };
 
 export type TokenBalanceItem = {

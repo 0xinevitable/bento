@@ -34,11 +34,14 @@ export const getLeveragePoolList = async () => {
 
 type Token = Partial<TokenInput> & {
   balance: number;
+  rewards: number;
 };
 export const getSinglePoolBalance = async (
-  pool: KLAYswap.SingleLeveragePool,
   account: string,
+  pool: KLAYswap.SingleLeveragePool,
+  _dynamicPool: KLAYswap.SingleLeveragePool | undefined,
 ): Promise<Token> => {
+  const dynamicPool = _dynamicPool || pool;
   const iToken = new provider.klay.Contract(
     KLAYSwapSingleLeveragePool as any[],
     pool.address,
@@ -46,9 +49,9 @@ export const getSinglePoolBalance = async (
 
   const tokenBalance = await iToken.methods.balanceOf(account).call();
   // const tokenTotalSupply = await iToken.methods.totalSupply().call();
-  const tokenTotalSupply = pool.totalSupply;
+  const tokenTotalSupply = dynamicPool.totalSupply;
   // const totalDeposit = ... // TODO: how do we get `totalDeposit`?
-  const totalDeposit = pool.totalDeposit;
+  const totalDeposit = dynamicPool.totalDeposit;
 
   let rawBalanceA = new BigNumber.BN(tokenBalance)
     .mul(new BigNumber.BN(totalDeposit))
@@ -61,7 +64,7 @@ export const getSinglePoolBalance = async (
       ? klaytnChain.currency
       : KLAYTN_TOKENS.find((v) => v.address === pool.token);
   const balance = Number(rawBalanceA) / 10 ** (tokenInfo?.decimals || 18);
-  const token = { ...tokenInfo, balance: balance };
+  const token = { ...tokenInfo, balance: balance, rewards };
   return token;
 };
 

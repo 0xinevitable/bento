@@ -1,6 +1,6 @@
 import { KlaytnChain } from '@bento/core/lib/chains';
 import { KLAYTN_TOKENS, TokenInput } from '@bento/core/lib/tokens';
-import axios from 'axios';
+// import axios from 'axios';
 import BigNumber from 'bn.js';
 
 import IERC20 from '../abis/IERC20.json';
@@ -9,35 +9,35 @@ import IKSLP from '../abis/IKSLP.json';
 const klaytnChain = new KlaytnChain();
 const provider = klaytnChain._provider;
 
-const DENYLIST: string[] = [];
+// const DENYLIST: string[] = [];
 
-export const getLPPoolList = async () => {
-  const { data } = await axios.get<KLAYswap.RecentPoolInfo>(
-    'https://s.klayswap.com/stat/recentPoolInfo.min.json',
-  );
+// export const getLPPoolList = async () => {
+//   const { data } = await axios.get<KLAYswap.RecentPoolInfo>(
+//     'https://s.klayswap.com/stat/recentPoolInfo.min.json',
+//   );
 
-  const fields = data.recentPool[0] as string[];
-  const pools = data.recentPool.slice(1).flatMap((pool) => {
-    let poolObj: any = {};
-    fields.forEach((field, index) => {
-      poolObj[field] = pool[index];
-    });
+//   const fields = data.recentPool[0] as string[];
+//   const pools = data.recentPool.slice(1).flatMap((pool) => {
+//     let poolObj: any = {};
+//     fields.forEach((field, index) => {
+//       poolObj[field] = pool[index];
+//     });
 
-    if (DENYLIST.includes(poolObj.exchange_address)) {
-      return [];
-    }
-    return poolObj as KLAYswap.Pool;
-  });
+//     if (DENYLIST.includes(poolObj.exchange_address)) {
+//       return [];
+//     }
+//     return poolObj as KLAYswap.Pool;
+//   });
 
-  return pools;
-};
+//   return pools;
+// };
 
 type Token = Partial<TokenInput> & {
   balance: number;
 };
 export const getLPPoolBalance = async (
-  pool: KLAYswap.Pool,
   account: string,
+  pool: KLAYswap.Pool,
 ): Promise<Token[]> => {
   const kslp = new provider.klay.Contract(
     [...IKSLP, ...IERC20] as any[],
@@ -117,7 +117,7 @@ export declare module KLAYswap {
     dailyMining: string;
     miningRate: string;
     kspRewardRate: string;
-    airdropRewardRate: [];
+    airdropRewardRate: any[];
     feeRewardRate: string;
   }
 
