@@ -159,7 +159,7 @@ const getKLAYswapTokenInfo = async () => {
       tokenObj[field] = token[index];
     });
 
-    if (tokenObj.address === '0x0000000000000000000000000000000000000000') {
+    if (tokenObj.address === ZERO_ADDRESS) {
       return [];
     }
 

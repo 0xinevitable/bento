@@ -5,6 +5,7 @@ import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
 
+import { EEEE_ADDRESS } from '../address';
 import { withCache } from '../cache';
 import { priceFromCoinGecko } from '../pricings/CoinGecko';
 import { Currency } from '../pricings/Currency';
@@ -53,7 +54,7 @@ export class EthereumChain implements Chain {
         return [];
       }
       if (
-        token.contract_address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' // Klaytn
+        token.contract_address === EEEE_ADDRESS // Klaytn
       ) {
         return [];
       }
@@ -128,7 +129,7 @@ export class BNBChain implements Chain {
         return [];
       }
       if (
-        token.contract_address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' // Klaytn
+        token.contract_address === EEEE_ADDRESS // Klaytn
       ) {
         return [];
       }
@@ -203,7 +204,7 @@ export class PolygonChain implements Chain {
         return [];
       }
       if (
-        token.contract_address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' // Klaytn
+        token.contract_address === EEEE_ADDRESS // Klaytn
       ) {
         return [];
       }
@@ -278,7 +279,7 @@ export class AvalancheChain implements Chain {
         return [];
       }
       if (
-        token.contract_address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' // Klaytn
+        token.contract_address === EEEE_ADDRESS // Klaytn
       ) {
         return [];
       }
@@ -392,7 +393,7 @@ export class KlaytnChain implements Chain {
         return [];
       }
       if (
-        token.contract_address === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee' // Klaytn
+        token.contract_address === EEEE_ADDRESS // Klaytn
       ) {
         return [];
       }
