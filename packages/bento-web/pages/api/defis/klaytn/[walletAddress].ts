@@ -13,6 +13,7 @@ import {
 import { KlayStation } from '@/defi/klaystation';
 import { KlaySwap } from '@/defi/klayswap';
 import { KokonutSwap } from '@/defi/kokonutswap';
+import { DeFiStaking } from '@/defi/types/staking';
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -42,6 +43,21 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
   // TODO: Enumerate for all wallets
   const walletAddress = wallets[0];
+
+  const stakings = await getDeFiStakingsByWalletAddress(walletAddress);
+  res.status(200).json(stakings);
+};
+
+export default withCORS(handler);
+
+const handleError = (error: any) => {
+  console.error(error);
+  return [];
+};
+
+const getDeFiStakingsByWalletAddress = async (
+  walletAddress: string,
+): Promise<DeFiStaking[]> => {
   const [tokenBalances, dynamicLeveragePools] = await Promise.all([
     getTokenBalancesFromCovalent({
       chainId: klaytnChain.chainId,
@@ -121,12 +137,5 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     ])
   ).flat();
 
-  res.status(200).json(stakings);
-};
-
-export default withCORS(handler);
-
-const handleError = (error: any) => {
-  console.error(error);
-  return [];
+  return stakings;
 };
