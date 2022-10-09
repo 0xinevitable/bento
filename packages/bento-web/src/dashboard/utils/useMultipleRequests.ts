@@ -6,6 +6,8 @@ type RequestKey = string;
 export const useMultipleRequests = <T extends any>(
   requests: (RequestKey | null)[],
 ) => {
+  const requestsJSONKey = JSON.stringify(requests);
+
   const responsesRef = useRef<
     Record<
       RequestKey,
@@ -44,7 +46,7 @@ export const useMultipleRequests = <T extends any>(
         retrieveResponse(requestKey);
       }
     });
-  }, [requests]);
+  }, [requestsJSONKey]);
 
   const refetch = useCallback(() => {
     requests.forEach((requestKey) => {
@@ -52,7 +54,7 @@ export const useMultipleRequests = <T extends any>(
         retrieveResponse(requestKey);
       }
     });
-  }, [requests]);
+  }, [requestsJSONKey]);
 
   return { responses: Object.values(responsesRef.current), refetch };
 };

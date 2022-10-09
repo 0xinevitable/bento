@@ -64,7 +64,7 @@ export const useNFTBalances = ({ wallets }: Options) => {
 
     main();
     priceFromCoinGecko('ethereum').then(setEthereumPrice);
-  }, [wallets]);
+  }, [JSON.stringify(wallets)]);
 
   useEffect(() => {
     const flattedAssets = Object.values(fetchedAssets)
@@ -126,7 +126,10 @@ export const useNFTBalances = ({ wallets }: Options) => {
         return balances;
       }),
     ).then((v) => setOpenSeaNFTBalance(v.flat()));
-  }, [fetchedAssets]);
+  }, [JSON.stringify(fetchedAssets)]);
 
-  return { balances: openSeaNFTBalance };
+  return {
+    balances: openSeaNFTBalance,
+    jsonKey: JSON.stringify(openSeaNFTBalance),
+  };
 };

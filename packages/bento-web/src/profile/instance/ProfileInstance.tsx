@@ -159,7 +159,8 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     }
   }, [profile?.user_id]);
 
-  const { balances: walletBalances } = useWalletBalances({ wallets });
+  const { balances: walletBalances, jsonKey: walletBalancesJSONKey } =
+    useWalletBalances({ wallets });
   const { balances: nftBalances } = useNFTBalances({ wallets });
 
   const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
@@ -206,13 +207,13 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
     return tokens.filter((v) => v.netWorth > MINIMAL_NET_WORTH);
-  }, [walletBalances]);
+  }, [walletBalancesJSONKey]);
 
   const nftAssets = useMemo<OpenSeaAsset[]>(
     () =>
       nftBalances?.flatMap((item) => ('assets' in item ? item.assets : [])) ??
       [],
-    [nftBalances],
+    [JSON.stringify(nftBalances)],
   );
 
   const palette = usePalette(data.color);

@@ -50,14 +50,17 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 }) => {
   const { t } = useTranslation('dashboard');
   const { profile, revalidateProfile } = useProfile({ type: 'MY_PROFILE' });
-  const { balances: walletBalances } = useWalletBalances({ wallets });
-  const { balances: NFTBalances } = useNFTBalances({ wallets });
+  const { balances: walletBalances, jsonKey: walletBalancesJSONKey } =
+    useWalletBalances({ wallets });
+  const { balances: NFTBalances, jsonKey: NFTBalancesJSONKey } = useNFTBalances(
+    { wallets },
+  );
 
   const nftAssets = useMemo<OpenSeaAsset[]>(
     () =>
       NFTBalances?.flatMap((item) => ('assets' in item ? item.assets : [])) ??
       [],
-    [NFTBalances],
+    [NFTBalancesJSONKey],
   );
 
   const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
@@ -104,7 +107,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
     return tokens.filter((v) => v.netWorth > 0);
-  }, [walletBalances, NFTBalances]);
+  }, [walletBalancesJSONKey, NFTBalancesJSONKey]);
+  const tokenBalancesJSONKey = JSON.stringify(tokenBalances);
 
   const [isNFTsShown, setNFTsShown] = useLocalStorage<boolean>(
     '@is-nfts-shown-v1',
@@ -116,11 +120,11 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       return tokenBalances;
     }
     return tokenBalances.filter((v) => v.type !== 'nft');
-  }, [isNFTsShown, tokenBalances]);
+  }, [isNFTsShown, tokenBalancesJSONKey]);
 
   const netWorthInUSD = useMemo(
     () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
-    [tokenBalances],
+    [tokenBalancesJSONKey],
   );
 
   const [currentTab, setCurrentTab] = useState<typeof TAB_ITEMS[number]>(
