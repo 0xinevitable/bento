@@ -1,5 +1,5 @@
-import { EEEE_ADDRESS } from '@bento/core';
-import { KLAYTN_TOKENS, TokenInput } from '@bento/core/lib/tokens';
+import { EEEE_ADDRESS, TokenInput } from '@bento/core';
+import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import axios from 'axios';
 
 import { klaytnChain } from '../constants';

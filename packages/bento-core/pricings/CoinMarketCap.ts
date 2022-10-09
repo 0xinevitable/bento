@@ -1,5 +1,4 @@
-import { safePromiseAll } from '@bento/common';
-import { Config, randomOf } from '@bento/common';
+import { Config, randomOf, safePromiseAll } from '@bento/common';
 import axios from 'axios';
 import queryString from 'query-string';
 

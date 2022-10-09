@@ -1,4 +1,4 @@
-import { TokenInput } from '@bento/core/lib/tokens';
+import { TokenInput } from '@bento/core';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import TSON from 'typescript-json';
 
