@@ -1,10 +1,11 @@
 import { KlaytnChain } from '@bento/core/lib/chains';
-import { KLAYTN_TOKENS, TokenInput } from '@bento/core/lib/tokens';
+import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 // import axios from 'axios';
 import BigNumber from 'bn.js';
 
 import IERC20 from '../abis/IERC20.json';
 import IKSLP from '../abis/IKSLP.json';
+import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
 
 const klaytnChain = new KlaytnChain();
 const provider = klaytnChain._provider;
@@ -32,19 +33,17 @@ const provider = klaytnChain._provider;
 //   return pools;
 // };
 
-type Token = Partial<TokenInput> & {
-  balance: number;
-};
 export const getLPPoolBalance = async (
-  account: string,
+  _account: string,
+  lpTokenBalance: string,
   pool: KLAYswap.Pool,
-): Promise<Token[]> => {
+): Promise<DeFiStaking> => {
   const kslp = new provider.klay.Contract(
     [...IKSLP, ...IERC20] as any[],
     pool.exchange_address,
   );
 
-  const liquidity = await kslp.methods.balanceOf(account).call();
+  const liquidity = new BigNumber(lpTokenBalance);
   const totalLiquidity = await kslp.methods.totalSupply().call();
   const { 0: poolA, 1: poolB } = await kslp.methods.getCurrentPool().call();
 
@@ -57,12 +56,30 @@ export const getLPPoolBalance = async (
 
   const tokenInfoA = KLAYTN_TOKENS.find((v) => v.address === pool.tokenA);
   const balanceA = Number(rawBalanceA) / 10 ** (tokenInfoA?.decimals || 18);
-  const tokenA = { ...tokenInfoA, balance: balanceA };
   const tokenInfoB = KLAYTN_TOKENS.find((v) => v.address === pool.tokenB);
   const balanceB = Number(rawBalanceB) / 10 ** (tokenInfoB?.decimals || 18);
-  const tokenB = { ...tokenInfoB, balance: balanceB };
 
-  return [tokenA, tokenB];
+  let tokenAmounts: Record<string, number | undefined> = {};
+  if (tokenInfoA) {
+    tokenAmounts[tokenInfoA.address] = balanceA;
+  }
+  if (tokenInfoB) {
+    tokenAmounts[tokenInfoB.address] = balanceB;
+  }
+
+  return {
+    type: KlaytnDeFiType.KLAYSWAP_LP,
+    address: pool.exchange_address,
+    tokens: [tokenInfoA || null, tokenInfoB || null],
+    wallet: null,
+    staked: {
+      lpAmount: Number(liquidity) / 10 ** 18,
+      tokenAmounts,
+    },
+    // TODO:
+    rewards: 'unavailable',
+    unstake: null,
+  };
 };
 
 export declare module KLAYswap {

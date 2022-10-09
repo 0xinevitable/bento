@@ -20,33 +20,42 @@ export enum KlaytnDeFiType {
 export type DeFiType = KlaytnDeFiType | OsmosisDeFiType;
 
 export type AmountWithOptionalValue = {
-  amount: number;
   value?: number | null;
+  lpAmount?: number | null;
+  tokenAmounts?: Record<string, number | undefined> | null;
 };
+
+type NativeInput = Omit<TokenInput, 'address'>;
 
 export type DeFiStaking = {
   type: DeFiType;
-  name: string;
-  tokens: (TokenInput | null)[];
-  wallet: AmountWithOptionalValue | null;
+
+  // representative contract address
+  address: string;
+  tokens: (TokenInput | NativeInput | null)[];
+
+  wallet: AmountWithOptionalValue | null | 'unavailable';
   staked: AmountWithOptionalValue;
   rewards: AmountWithOptionalValue | null | 'unavailable';
-  unstake: {
-    claimable: AmountWithOptionalValue;
-    pending: AmountWithOptionalValue;
-  } | null;
+  unstake:
+    | {
+        claimable: AmountWithOptionalValue;
+        pending: AmountWithOptionalValue;
+      }
+    | null
+    | 'unavailable';
 };
 
 export const Examples: Record<string, DeFiStaking> = {
   LP: {
     type: KlaytnDeFiType.KLAYSWAP_LP,
-    name: 'KLAYswap LP',
+    address: '',
     tokens: [],
     wallet: {
-      amount: 0.005,
+      lpAmount: 0.005,
     }, // 0.005 LP tokens have not been staked, but exist in wallet
     staked: {
-      amount: 1000,
+      lpAmount: 1000,
       value: null,
     },
     rewards: 'unavailable', // Rewards are not catched by us
@@ -54,10 +63,10 @@ export const Examples: Record<string, DeFiStaking> = {
   },
   MINIMAL: {
     type: KlaytnDeFiType.KLAYSWAP_LP,
-    name: 'KLAYswap LP',
+    address: '0x00',
     tokens: [],
     wallet: null, // LP tokens cannot exist in wallet unstaked
-    staked: { amount: 1000 },
+    staked: { tokenAmounts: { '0x00': 1000 } },
     rewards: null, // Rewards are not distributed
     unstake: null, // Unstaking period does not exist
   },

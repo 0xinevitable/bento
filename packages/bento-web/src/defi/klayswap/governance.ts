@@ -1,33 +1,23 @@
-import { KlaytnChain } from '@bento/core/lib/chains';
-import { KLAYTN_TOKENS, TokenInput } from '@bento/core/lib/tokens';
+import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
+import { KSP_TOKEN_INFO, VOTING_KSP_ADDRESS } from './constants';
 
-const klaytnChain = new KlaytnChain();
-const provider = klaytnChain._provider;
-
-export const KSP_ADDRESS = '0xc6a2ad8cc6e4a7e08fc37cc5954be07d499e7654';
-export const VOTING_KSP_ADDRESS = '0x2f3713f388bc4b8b364a7a2d8d57c5ff4e054830';
-type Token = Partial<TokenInput> & {
-  balance: number;
-};
-export const getGovernanceStake = async (account: string): Promise<Token> => {
-  const votingKSPToken = new provider.klay.Contract(
-    [
-      {
-        inputs: [{ internalType: 'address', name: 'who', type: 'address' }],
-        name: 'balanceOf',
-        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-        type: 'function',
+export const getGovernanceStake = async (
+  account: string,
+  rawStakedBalance: string,
+): Promise<DeFiStaking> => {
+  const balance = Number(rawStakedBalance) / 10 ** KSP_TOKEN_INFO.decimals;
+  return {
+    type: KlaytnDeFiType.KLAYSWAP_GOVERNANCE,
+    address: VOTING_KSP_ADDRESS,
+    tokens: [KSP_TOKEN_INFO],
+    wallet: null,
+    staked: {
+      tokenAmounts: {
+        [KSP_TOKEN_INFO.address]: balance,
       },
-    ],
-    VOTING_KSP_ADDRESS,
-  );
-
-  const rawStakedBalance = await votingKSPToken.methods
-    .balanceOf(account)
-    .call();
-
-  const kspTokenInfo = KLAYTN_TOKENS.find((v) => v.address === KSP_ADDRESS);
-  const balance =
-    Number(rawStakedBalance) / 10 ** (kspTokenInfo?.decimals || 18);
-  return { ...kspTokenInfo, balance };
+    },
+    // TODO:
+    rewards: 'unavailable',
+    unstake: null,
+  };
 };

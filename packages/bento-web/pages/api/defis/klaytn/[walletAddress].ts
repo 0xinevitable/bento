@@ -8,6 +8,7 @@ import KLAYSWAP_LP_POOLS from '@/defi/constants/klayswap-lp-pools.json';
 import KOKONUTSWAP_LP_POOLS from '@/defi/constants/kokonutswap-lp-pools.json';
 import { KlaySwap } from '@/defi/klayswap';
 import { KokonutSwap } from '@/defi/kokonutswap';
+import { DeFiStaking } from '@/defi/types/staking';
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -24,7 +25,12 @@ const parseWallets = (mixedQuery: string) => {
 };
 
 const isSameAddress = (a: string, b: string): boolean => {
-  return a.toLowerCase() === b.toLowerCase();
+  try {
+    return a.toLowerCase() === b.toLowerCase();
+  } catch (err) {
+    console.error(err, { a, b });
+    return false;
+  }
 };
 
 const klaytnChain = new KlaytnChain();
@@ -39,10 +45,12 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
       chainId: klaytnChain.chainId,
       walletAddress,
     }),
-    KlaySwap.getLeveragePoolList(),
+    KlaySwap.getLeveragePoolList().catch(() => undefined),
   ]);
 
-  console.log('=');
+  console.log(tokenBalances);
+
+  let stakings: DeFiStaking[] = [];
   for (const token of tokenBalances) {
     if (token.balance === null) {
       // Indexed at least once
@@ -54,12 +62,13 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
       isSameAddress(v.exchange_address, token.contract_address),
     );
     if (!!klayswapLPPool) {
-      console.log('klayswapLPPool');
-      const balance = await KlaySwap.getLPPoolBalance(
+      const staking = await KlaySwap.getLPPoolBalance(
         walletAddress,
+        token.balance,
         klayswapLPPool,
       );
-      console.log(balance);
+      console.log({ staking });
+      stakings.push(staking);
       continue;
     }
 
@@ -69,14 +78,28 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     );
     if (!!klayswapLeveragePool) {
       console.log('klayswapLeveragePool');
-      const balance = await KlaySwap.getSinglePoolBalance(
+      const staking = await KlaySwap.getSinglePoolBalance(
         walletAddress,
+        token.balance,
         klayswapLeveragePool,
-        dynamicLeveragePools.find(
+        dynamicLeveragePools?.find(
           (v) => v.address === klayswapLeveragePool.address,
         ),
       );
-      console.log(balance);
+      console.log({ staking });
+      stakings.push(staking);
+      continue;
+    }
+
+    // KLAYswap Governance
+    if (isSameAddress(token.contract_address, KlaySwap.VOTING_KSP_ADDRESS)) {
+      console.log('klayswapGovernance');
+      const staking = await KlaySwap.getGovernanceStake(
+        walletAddress,
+        token.balance,
+      );
+      console.log({ staking });
+      stakings.push(staking);
       continue;
     }
 
@@ -109,7 +132,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     }
   }
 
-  res.status(200).json(tokenBalances);
+  res.status(200).json(stakings);
 };
 
 export default withCORS(handler);

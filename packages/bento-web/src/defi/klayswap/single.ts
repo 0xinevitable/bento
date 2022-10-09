@@ -4,6 +4,8 @@ import axios from 'axios';
 import BigNumber from 'bn.js';
 
 import KLAYSwapSingleLeveragePool from '../abis/KLAYSwapSingleLeveragePool.json';
+import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
+import { KSP_TOKEN_INFO } from './constants';
 
 const klaytnChain = new KlaytnChain();
 const provider = klaytnChain._provider;
@@ -32,40 +34,52 @@ export const getLeveragePoolList = async () => {
   return pools;
 };
 
-type Token = Partial<TokenInput> & {
-  balance: number;
-  rewards: number;
-};
 export const getSinglePoolBalance = async (
   account: string,
+  tokenBalance: string,
   pool: KLAYswap.SingleLeveragePool,
   _dynamicPool: KLAYswap.SingleLeveragePool | undefined,
-): Promise<Token> => {
+): Promise<DeFiStaking> => {
   const dynamicPool = _dynamicPool || pool;
   const iToken = new provider.klay.Contract(
     KLAYSwapSingleLeveragePool as any[],
     pool.address,
   );
 
-  const tokenBalance = await iToken.methods.balanceOf(account).call();
   // const tokenTotalSupply = await iToken.methods.totalSupply().call();
   const tokenTotalSupply = dynamicPool.totalSupply;
   // const totalDeposit = ... // TODO: how do we get `totalDeposit`?
   const totalDeposit = dynamicPool.totalDeposit;
 
-  let rawBalanceA = new BigNumber.BN(tokenBalance)
+  const rawBalance = new BigNumber.BN(tokenBalance)
     .mul(new BigNumber.BN(totalDeposit))
     .div(new BigNumber.BN(tokenTotalSupply));
+  const rawRewards: string = await iToken.methods.userRewardSum(account).call();
 
-  const rewards = await iToken.methods.userRewardSum(account).call();
+  // NOTE: Rewarding token is KSP
+  const rewards = Number(rawRewards) / 10 ** KSP_TOKEN_INFO.decimals;
 
   const tokenInfo =
     pool.token === ZERO_ADDRESS
       ? klaytnChain.currency
       : KLAYTN_TOKENS.find((v) => v.address === pool.token);
-  const balance = Number(rawBalanceA) / 10 ** (tokenInfo?.decimals || 18);
-  const token = { ...tokenInfo, balance: balance, rewards };
-  return token;
+  const balance = Number(rawBalance) / 10 ** (tokenInfo?.decimals || 18);
+
+  return {
+    type: KlaytnDeFiType.KLAYSWAP_LEVERAGE_SINGLE,
+    address: pool.address,
+    wallet: null,
+    tokens: [tokenInfo || null],
+    staked: {
+      lpAmount: balance,
+    },
+    rewards: {
+      tokenAmounts: {
+        [KSP_TOKEN_INFO.address]: rewards,
+      },
+    },
+    unstake: null,
+  };
 };
 
 export declare module KLAYswap {
