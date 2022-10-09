@@ -1,7 +1,10 @@
 import { safeAsyncFlatMap, safePromiseAll } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
+import { getAddress, isAddress } from '@ethersproject/address';
+import CompressedJSON from 'compressed-json';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { createRedisClient } from '@/utils/Redis';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 import {
@@ -13,6 +16,7 @@ import {
 import { KlayStation } from '@/defi/klaystation';
 import { KlaySwap } from '@/defi/klayswap';
 import { KokonutSwap } from '@/defi/kokonutswap';
+import { DeFiStaking } from '@/defi/types/staking';
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -37,11 +41,108 @@ const isSameAddress = (a: string, b: string): boolean => {
   }
 };
 
+const isEthereumAddress = (addr: string): boolean => {
+  if (!addr.startsWith('0x')) {
+    return false;
+  }
+  try {
+    const addressWithChecksum = getAddress(addr);
+    if (isAddress(addressWithChecksum)) {
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+};
+
+type DeFiStakingCacheDTO = {
+  t: number;
+  v: DeFiStaking[];
+};
+const getCached = async <T extends any>(
+  __key: string,
+  __redisClient: ReturnType<typeof createRedisClient>,
+) => {
+  const cachedRawValue = await __redisClient.get(__key);
+  if (!cachedRawValue) {
+    return null;
+  }
+  return CompressedJSON.decompress.fromString<T>(cachedRawValue);
+};
+
+const MINUTES = 1_000 * 60;
+const CACHED_TIME = 1 * MINUTES;
+
 const handler = async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
 
   // TODO: Enumerate for all wallets
   const walletAddress = wallets[0];
+  if (!isEthereumAddress(walletAddress)) {
+    res.status(400).json({ error: 'Invalid wallet address' });
+    return;
+  }
+
+  const redisClient = createRedisClient();
+  await redisClient.connect();
+
+  let hasError: boolean = false;
+  let stakings: DeFiStaking[] = [];
+  let cachedTime = 0;
+
+  const cached = await getCached<DeFiStakingCacheDTO>(
+    `defis:klaytn:${walletAddress}`,
+    redisClient,
+  );
+  if (cached && cached.t >= Date.now() - CACHED_TIME) {
+    // Use cached value if not expired
+    stakings = cached.v;
+    cachedTime = cached.t;
+  } else {
+    try {
+      stakings = await getDeFiStakingsByWalletAddress(walletAddress);
+      cachedTime = new Date().getTime();
+      await redisClient.set(
+        `defis:klaytn:${walletAddress}`,
+        CompressedJSON.compress.toString<DeFiStakingCacheDTO>({
+          v: stakings,
+          t: cachedTime,
+        }),
+      );
+    } catch (err) {
+      console.error(err);
+
+      if (!cached) {
+        hasError = true;
+      } else {
+        // Use cached value if available
+        stakings = cached.v;
+        cachedTime = cached.t;
+      }
+    }
+  }
+
+  await redisClient.disconnect();
+
+  if (hasError) {
+    res.status(500).json({ error: 'Internal server error' });
+    return;
+  }
+
+  res.status(200).json({ stakings, cachedTime });
+};
+
+export default withCORS(handler);
+
+const handleError = (error: any) => {
+  console.error(error);
+  return [];
+};
+
+const getDeFiStakingsByWalletAddress = async (
+  walletAddress: string,
+): Promise<DeFiStaking[]> => {
   const [tokenBalances, dynamicLeveragePools] = await Promise.all([
     getTokenBalancesFromCovalent({
       chainId: klaytnChain.chainId,
@@ -121,12 +222,5 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     ])
   ).flat();
 
-  res.status(200).json(stakings);
-};
-
-export default withCORS(handler);
-
-const handleError = (error: any) => {
-  console.error(error);
-  return [];
+  return stakings;
 };
