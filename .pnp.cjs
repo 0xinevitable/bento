@@ -2623,6 +2623,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["caver-js", "npm:1.9.0"],\
             ["clsx", "npm:1.2.1"],\
             ["cobe", "npm:0.6.2"],\
+            ["compressed-json", "npm:1.0.16"],\
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
             ["env-cmd", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:10.1.0"],\
@@ -7120,6 +7121,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/commander-npm-7.2.0-19178180f8-53501cbeee.zip/node_modules/commander/",\
           "packageDependencies": [\
             ["commander", "npm:7.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["compressed-json", [\
+        ["npm:1.0.16", {\
+          "packageLocation": "./.yarn/cache/compressed-json-npm-1.0.16-ca065623db-ef3823d278.zip/node_modules/compressed-json/",\
+          "packageDependencies": [\
+            ["compressed-json", "npm:1.0.16"]\
           ],\
           "linkType": "HARD"\
         }]\

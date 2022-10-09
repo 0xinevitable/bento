@@ -1,8 +1,10 @@
 import { safeAsyncFlatMap, safePromiseAll } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
 import { getAddress, isAddress } from '@ethersproject/address';
+import CompressedJSON from 'compressed-json';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { createRedisClient } from '@/utils/Redis';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 import {
@@ -64,7 +66,31 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     return;
   }
 
-  const stakings = await getDeFiStakingsByWalletAddress(walletAddress);
+  const redisClient = createRedisClient();
+  await redisClient.connect();
+
+  let stakings: DeFiStaking[] = [];
+  try {
+    stakings = await getDeFiStakingsByWalletAddress(walletAddress);
+    await redisClient.set(
+      `defis:klaytn:${walletAddress}`,
+      CompressedJSON.compress.toString(stakings),
+    );
+  } catch (err) {
+    console.error(err);
+    const cachedStakings = await redisClient.get(
+      `defis:klaytn:${walletAddress}`,
+    );
+    if (!cachedStakings) {
+      res.status(500).json({ error: 'Internal server error' });
+      return;
+    }
+    stakings =
+      CompressedJSON.decompress.fromString<DeFiStaking[]>(cachedStakings);
+  }
+
+  await redisClient.disconnect();
+
   res.status(200).json(stakings);
 };
 
