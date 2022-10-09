@@ -1,5 +1,6 @@
 import { safeAsyncFlatMap, safePromiseAll } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
+import { getAddress, isAddress } from '@ethersproject/address';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withCORS } from '@/utils/middlewares/withCORS';
@@ -38,11 +39,30 @@ const isSameAddress = (a: string, b: string): boolean => {
   }
 };
 
+const isEthereumAddress = (addr: string): boolean => {
+  if (!addr.startsWith('0x')) {
+    return false;
+  }
+  try {
+    const addressWithChecksum = getAddress(addr);
+    if (isAddress(addressWithChecksum)) {
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+};
+
 const handler = async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
 
   // TODO: Enumerate for all wallets
   const walletAddress = wallets[0];
+  if (!isEthereumAddress(walletAddress)) {
+    res.status(400).json({ error: 'Invalid wallet address' });
+    return;
+  }
 
   const stakings = await getDeFiStakingsByWalletAddress(walletAddress);
   res.status(200).json(stakings);
