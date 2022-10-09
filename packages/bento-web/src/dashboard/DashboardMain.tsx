@@ -27,9 +27,9 @@ import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
 
 enum DashboardTabType {
-  Crypto = 'c',
-  NFTs = 'n',
-  Badges = 'b',
+  Crypto = 'Crypto',
+  NFTs = 'NFTs',
+  Badges = 'Badges',
 }
 const DASHBOARD_TAB_ITEMS = Object.values(DashboardTabType);
 
