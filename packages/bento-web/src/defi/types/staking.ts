@@ -1,7 +1,7 @@
 import { TokenInput } from '@bento/core';
 
 export enum OsmosisDeFiType {
-  ION_Governance = 'ion_g',
+  ION_GOVERNANCE = 'ion_g',
   // ION_IBC = 'ion_ibc',
 }
 
