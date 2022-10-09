@@ -5,6 +5,11 @@ export enum OsmosisDeFiType {
   // ION_IBC = 'ion_ibc',
 }
 
+export enum KlayStationNodes {
+  KLAYSTATION_NODE_HASHED_AND_OZYS = 'kstn_n_hno',
+  KLAYSTATION_NODE_KED = 'kstn_n_ked',
+  KLAYSTATION_NODE_FSN = 'kstn_n_fsn',
+}
 export enum KlaytnDeFiType {
   // KlaySwap(KLAYswap)
   KLAYSWAP_LP = 'ks_lp',
@@ -15,6 +20,11 @@ export enum KlaytnDeFiType {
   // KokonutSwap
   KOKONUTSWAP_LP = 'kks_lp',
   KOKONUTSWAP_GOVERNANCE = 'kks_g',
+
+  // KlayStation Node Delegation
+  KLAYSTATION_NODE_HASHED_AND_OZYS = 'kstn_n_hno',
+  KLAYSTATION_NODE_KED = 'kstn_n_ked',
+  KLAYSTATION_NODE_FSN = 'kstn_n_fsn',
 }
 
 export type DeFiType = KlaytnDeFiType | OsmosisDeFiType;
@@ -26,7 +36,7 @@ export type AmountWithOptionalValue = {
   tokenAmounts?: Record<ContractAddressOrDenom, number | undefined> | null;
 };
 
-type NativeInput = Omit<TokenInput, 'address'>;
+export type NativeInput = Omit<TokenInput, 'address'>;
 
 export type DeFiStaking = {
   type: DeFiType;
@@ -40,8 +50,8 @@ export type DeFiStaking = {
   rewards: AmountWithOptionalValue | null | 'unavailable';
   unstake:
     | {
-        claimable: AmountWithOptionalValue;
-        pending: AmountWithOptionalValue;
+        claimable: AmountWithOptionalValue | null | 'unavailable';
+        pending: AmountWithOptionalValue | null | 'unavailable';
       }
     | null
     | 'unavailable';

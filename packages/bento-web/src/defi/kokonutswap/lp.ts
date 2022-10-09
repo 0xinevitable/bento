@@ -1,13 +1,15 @@
-import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
+import { KLAYTN_TOKENS, TokenInput } from '@bento/core/lib/tokens';
 import axios from 'axios';
 
 import { klaytnChain } from '../constants';
-import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
+import { DeFiStaking, KlaytnDeFiType, NativeInput } from '../types/staking';
 import { KSD_ADDRESS } from './constants';
 
-const getTokenInfo = (loweredAddress: string) => {
+const getTokenInfo = (
+  loweredAddress: string,
+): NativeInput | TokenInput | null => {
   if (loweredAddress === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') {
-    return { ...klaytnChain.currency, address: loweredAddress };
+    return klaytnChain.currency;
   }
   const tokenInfo = KLAYTN_TOKENS.find((k) => k.address === loweredAddress);
   if (tokenInfo) {
