@@ -12,10 +12,10 @@ import {
   KLAYSWAP_LP_POOLS,
   KOKONUTSWAP_LP_POOLS,
   klaytnChain,
-} from '@/defi/constants';
-import { KlayStation } from '@/defi/klaystation';
-import { KlaySwap } from '@/defi/klayswap';
-import { KokonutSwap } from '@/defi/kokonutswap';
+} from '@/defi/klaytn/constants';
+import { KlayStation } from '@/defi/klaytn/klaystation';
+import { KlaySwap } from '@/defi/klaytn/klayswap';
+import { KokonutSwap } from '@/defi/klaytn/kokonutswap';
 import { DeFiStaking } from '@/defi/types/staking';
 
 interface APIRequest extends NextApiRequest {

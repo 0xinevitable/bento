@@ -1,6 +1,6 @@
+import { DeFiStaking, KlaytnDeFiType } from '@/defi/types/staking';
 import { axios } from '@/utils';
 
-import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
 import {
   KOKOS_TOKEN_INFO,
   KSD_ADDRESS,

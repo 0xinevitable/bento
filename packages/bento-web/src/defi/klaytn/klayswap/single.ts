@@ -2,11 +2,11 @@ import { ZERO_ADDRESS } from '@bento/core';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import BigNumber from 'bn.js';
 
+import { DeFiStaking, KlaytnDeFiType } from '@/defi/types/staking';
 import { axios } from '@/utils';
 
 import KLAYSwapSingleLeveragePool from '../abis/KLAYSwapSingleLeveragePool.json';
 import { klaytnChain } from '../constants';
-import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
 import { KSP_TOKEN_INFO } from './constants';
 
 const provider = klaytnChain._provider;

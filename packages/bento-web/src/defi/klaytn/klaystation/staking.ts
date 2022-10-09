@@ -1,5 +1,6 @@
+import { DeFiStaking } from '@/defi/types/staking';
+
 import { klaytnChain } from '../constants';
-import { DeFiStaking } from '../types/staking';
 import {
   NODE_TYPE__BY_CONTRACT_ADDRESS,
   PROTOCOL_ABI,

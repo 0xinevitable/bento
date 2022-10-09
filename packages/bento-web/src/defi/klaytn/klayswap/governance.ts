@@ -1,4 +1,5 @@
-import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
+import { DeFiStaking, KlaytnDeFiType } from '@/defi/types/staking';
+
 import { KSP_TOKEN_INFO, VOTING_KSP_ADDRESS } from './constants';
 
 export const getGovernanceStake = async (
