@@ -52,7 +52,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const { profile, revalidateProfile } = useProfile({ type: 'MY_PROFILE' });
   const { balances: walletBalances, jsonKey: walletBalancesJSONKey } =
     useWalletBalances({ wallets });
-  const { balances: NFTBalances, jsonKey: NFTBalancesJSONKey } = useNFTBalances(
+  const { balances: NFTBalances, jsonKey: nftBalancesJSONKey } = useNFTBalances(
     { wallets },
   );
 
@@ -60,7 +60,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     () =>
       NFTBalances?.flatMap((item) => ('assets' in item ? item.assets : [])) ??
       [],
-    [NFTBalancesJSONKey],
+    [nftBalancesJSONKey],
   );
 
   const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
@@ -107,7 +107,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
     return tokens.filter((v) => v.netWorth > 0);
-  }, [walletBalancesJSONKey, NFTBalancesJSONKey]);
+  }, [walletBalancesJSONKey, nftBalancesJSONKey]);
   const tokenBalancesJSONKey = JSON.stringify(tokenBalances);
 
   const [isNFTsShown, setNFTsShown] = useLocalStorage<boolean>(

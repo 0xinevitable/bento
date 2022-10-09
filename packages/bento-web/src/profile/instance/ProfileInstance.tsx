@@ -161,7 +161,9 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
 
   const { balances: walletBalances, jsonKey: walletBalancesJSONKey } =
     useWalletBalances({ wallets });
-  const { balances: nftBalances } = useNFTBalances({ wallets });
+  const { balances: nftBalances, jsonKey: nftBalancesJSONKey } = useNFTBalances(
+    { wallets },
+  );
 
   const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
@@ -213,7 +215,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     () =>
       nftBalances?.flatMap((item) => ('assets' in item ? item.assets : [])) ??
       [],
-    [JSON.stringify(nftBalances)],
+    [nftBalancesJSONKey],
   );
 
   const palette = usePalette(data.color);
