@@ -1,3 +1,5 @@
+import { KlaytnChain } from '@bento/core';
+import { getTokenBalancesFromCovalent } from '@bento/core/lib/chains/indexers/Covalent';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withCORS } from '@/utils/middlewares/withCORS';
@@ -16,10 +18,20 @@ const parseWallets = (mixedQuery: string) => {
   return query.split(',');
 };
 
+const klaytnChain = new KlaytnChain();
+
 const handler = async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
 
-  res.status(200).json({});
+  // TODO: Enumerate for all wallets
+  const walletAddress = wallets[0];
+  const tokenBalances = await getTokenBalancesFromCovalent({
+    chainId: klaytnChain.chainId,
+    walletAddress,
+  });
+
+  console.log(tokenBalances);
+  res.status(200).json(tokenBalances);
 };
 
 export default withCORS(handler);
