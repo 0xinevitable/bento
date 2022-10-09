@@ -18,6 +18,7 @@ import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
+import { DeFiStakingItem } from './components/DeFiStakingItem';
 import { EmptyBalance } from './components/EmptyBalance';
 import { Tab } from './components/Tab';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
@@ -269,14 +270,16 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 </InlineBadge>
               </SectionTitle>
 
-              {defis.map((defiProtocol) => {
-                return (
-                  <li style={{ color: 'white' }} key={defiProtocol.address}>
-                    <h3>{defiProtocol.type}</h3>
-                    {JSON.stringify(defiProtocol)}
-                  </li>
-                );
-              })}
+              <AssetListCard>
+                <ul>
+                  {defis.map((defiProtocol) => (
+                    <DeFiStakingItem
+                      key={defiProtocol.address}
+                      protocol={defiProtocol}
+                    />
+                  ))}
+                </ul>
+              </AssetListCard>
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === DashboardTabType.NFTs}>
