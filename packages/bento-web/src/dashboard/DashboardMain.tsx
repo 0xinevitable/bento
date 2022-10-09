@@ -110,17 +110,15 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   }, [walletBalancesJSONKey, nftBalancesJSONKey]);
   const tokenBalancesJSONKey = JSON.stringify(tokenBalances);
 
-  const [isNFTsShown, setNFTsShown] = useLocalStorage<boolean>(
-    '@is-nfts-shown-v1',
-    true,
-  );
+  const [isNFTBalancesIncluded, setNFTBalancesIncluded] =
+    useLocalStorage<boolean>('@is-nfts-shown-v1', true);
 
   const renderedTokenBalances = useMemo(() => {
-    if (isNFTsShown) {
+    if (isNFTBalancesIncluded) {
       return tokenBalances;
     }
     return tokenBalances.filter((v) => v.type !== 'nft');
-  }, [isNFTsShown, tokenBalancesJSONKey]);
+  }, [isNFTBalancesIncluded, tokenBalancesJSONKey]);
 
   const netWorthInUSD = useMemo(
     () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
@@ -186,17 +184,20 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                   <div
                     className="flex items-center cursor-pointer select-none"
                     onClick={() => {
-                      if (!isNFTsShown) {
+                      if (!isNFTBalancesIncluded) {
                         // showing
                         Analytics.logEvent('click_show_nfts', undefined);
                       } else {
                         // hiding
                         Analytics.logEvent('click_hide_nfts', undefined);
                       }
-                      setNFTsShown(!isNFTsShown);
+                      setNFTBalancesIncluded(!isNFTBalancesIncluded);
                     }}
                   >
-                    <Checkbox checked={isNFTsShown ?? false} readOnly />
+                    <Checkbox
+                      checked={isNFTBalancesIncluded ?? false}
+                      readOnly
+                    />
                     <span className="ml-[6px] text-white/80 text-sm">
                       {t('Show NFTs')}
                     </span>
