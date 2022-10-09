@@ -1,6 +1,5 @@
-import { KlaytnChain } from '@bento/core/lib/chains';
+import { klaytnChain } from '../constants';
 
-const klaytnChain = new KlaytnChain();
 const provider = klaytnChain._provider;
 const PROTOCOL = '0x03Ef42272dc34d5EF78a21F8D6781182C67b82A0';
 

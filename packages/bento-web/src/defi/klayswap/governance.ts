@@ -2,7 +2,7 @@ import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
 import { KSP_TOKEN_INFO, VOTING_KSP_ADDRESS } from './constants';
 
 export const getGovernanceStake = async (
-  account: string,
+  _account: string,
   rawStakedBalance: string,
 ): Promise<DeFiStaking> => {
   const balance = Number(rawStakedBalance) / 10 ** KSP_TOKEN_INFO.decimals;

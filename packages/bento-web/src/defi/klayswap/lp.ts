@@ -1,12 +1,10 @@
-import { KlaytnChain } from '@bento/core/lib/chains';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import BigNumber from 'bn.js';
 
-import IERC20 from '../abis/IERC20.json';
 import IKSLP from '../abis/IKSLP.json';
+import { klaytnChain } from '../constants';
 import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
 
-const klaytnChain = new KlaytnChain();
 const provider = klaytnChain._provider;
 
 export const getLPPoolBalance = async (
@@ -15,13 +13,23 @@ export const getLPPoolBalance = async (
   pool: KLAYswap.Pool,
 ): Promise<DeFiStaking> => {
   const kslp = new provider.klay.Contract(
-    [...IKSLP, ...IERC20] as any[],
+    [
+      ...IKSLP,
+      {
+        inputs: [],
+        name: 'totalSupply',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        type: 'function',
+      },
+    ] as any[],
     pool.exchange_address,
   );
 
   const liquidity = new BigNumber(lpTokenBalance);
-  const totalLiquidity = await kslp.methods.totalSupply().call();
-  const { 0: poolA, 1: poolB } = await kslp.methods.getCurrentPool().call();
+  const [totalLiquidity, { 0: poolA, 1: poolB }] = await Promise.all([
+    kslp.methods.totalSupply().call(),
+    kslp.methods.getCurrentPool().call(),
+  ]);
 
   let rawBalanceA = new BigNumber.BN(poolA)
     .mul(new BigNumber.BN(liquidity))
