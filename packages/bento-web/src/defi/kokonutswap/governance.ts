@@ -1,9 +1,13 @@
 import axios from 'axios';
 
 import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
-import { KOKOS_TOKEN_INFO, STAKED_KOKOS_ADDRESS } from './constants';
+import {
+  KOKOS_TOKEN_INFO,
+  KSD_ADDRESS,
+  STAKED_KOKOS_ADDRESS,
+} from './constants';
 
-// FIXME:
+// NOTE: Rewards are in KSD
 export const getGovernanceStake = async (
   account: string,
   rawStakedBalance: string,
@@ -31,7 +35,7 @@ export const getGovernanceStake = async (
     // TODO:
     rewards: {
       tokenAmounts: {
-        [KOKOS_TOKEN_INFO.address]: Number(data?.ksdReward || 0),
+        [KSD_ADDRESS]: Number(data?.ksdReward || 0),
       },
     },
     unstake: {

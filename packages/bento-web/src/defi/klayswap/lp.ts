@@ -1,6 +1,5 @@
 import { KlaytnChain } from '@bento/core/lib/chains';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
-// import axios from 'axios';
 import BigNumber from 'bn.js';
 
 import IERC20 from '../abis/IERC20.json';
@@ -9,29 +8,6 @@ import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
 
 const klaytnChain = new KlaytnChain();
 const provider = klaytnChain._provider;
-
-// const DENYLIST: string[] = [];
-
-// export const getLPPoolList = async () => {
-//   const { data } = await axios.get<KLAYswap.RecentPoolInfo>(
-//     'https://s.klayswap.com/stat/recentPoolInfo.min.json',
-//   );
-
-//   const fields = data.recentPool[0] as string[];
-//   const pools = data.recentPool.slice(1).flatMap((pool) => {
-//     let poolObj: any = {};
-//     fields.forEach((field, index) => {
-//       poolObj[field] = pool[index];
-//     });
-
-//     if (DENYLIST.includes(poolObj.exchange_address)) {
-//       return [];
-//     }
-//     return poolObj as KLAYswap.Pool;
-//   });
-
-//   return pools;
-// };
 
 export const getLPPoolBalance = async (
   _account: string,

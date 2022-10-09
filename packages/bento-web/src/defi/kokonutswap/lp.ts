@@ -3,7 +3,7 @@ import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import axios from 'axios';
 
 import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
-import { KOKOS_ADDRESS } from './constants';
+import { KOKOS_ADDRESS, KSD_ADDRESS } from './constants';
 
 const klaytnChain = new KlaytnChain();
 
@@ -26,7 +26,7 @@ export const getLPPoolList = async () => {
 };
 
 export const getLPPoolBalance = async (
-  account: string,
+  _account: string,
   lpTokenBalance: string,
   pool: KokonutSwap.Pool,
   pools: KokonutSwap.Pool[],
@@ -50,7 +50,7 @@ export const getLPPoolBalance = async (
   if (isNaN(lpBalanceInWalletValue)) {
     lpBalanceInWalletValue = 0;
   }
-  const claimableRewardsInKOKOS = Number(farm?.user.claimableReward || 0);
+  const claimableRewardsInKSD = Number(farm?.user.claimableReward || 0);
 
   const tokenInfos = pool.coins.flatMap((coinAddr) => {
     const address = coinAddr.toLowerCase();
@@ -81,7 +81,7 @@ export const getLPPoolBalance = async (
     },
     rewards: {
       tokenAmounts: {
-        [KOKOS_ADDRESS]: claimableRewardsInKOKOS,
+        [KSD_ADDRESS]: claimableRewardsInKSD,
       },
     },
     unstake: null,
