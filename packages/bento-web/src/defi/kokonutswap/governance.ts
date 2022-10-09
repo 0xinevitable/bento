@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axios } from '@/utils';
 
 import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
 import {

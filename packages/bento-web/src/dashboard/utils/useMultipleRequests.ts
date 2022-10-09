@@ -1,6 +1,7 @@
-import axios from 'axios';
 import produce, { Draft } from 'immer';
 import { useCallback, useEffect, useRef } from 'react';
+
+import { axios } from '@/utils';
 
 type RequestKey = string;
 export const useMultipleRequests = <T extends any>(
