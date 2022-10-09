@@ -109,12 +109,14 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     );
     if (!!kokonutswapLPPool) {
       console.log('kokonutswapLPPool');
-      const balance = await KokonutSwap.getLPPoolBalance(
+      const staking = await KokonutSwap.getLPPoolBalance(
         walletAddress,
+        token.balance,
         kokonutswapLPPool,
         KOKONUTSWAP_LP_POOLS,
       );
-      console.log(balance);
+      console.log({ staking });
+      stakings.push(staking);
       continue;
     }
 
@@ -125,9 +127,10 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
       console.log('kokonutswapGovernance');
       const staking = await KokonutSwap.getGovernanceStake(
         walletAddress,
-        Number(token.balance),
+        token.balance,
       );
-      console.log(staking);
+      console.log({ staking });
+      stakings.push(staking);
       continue;
     }
   }

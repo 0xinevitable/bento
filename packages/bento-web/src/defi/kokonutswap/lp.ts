@@ -1,6 +1,9 @@
 import { KlaytnChain } from '@bento/core/lib/chains';
-import { KLAYTN_TOKENS, TokenInput } from '@bento/core/lib/tokens';
+import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import axios from 'axios';
+
+import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
+import { KOKOS_ADDRESS } from './constants';
 
 const klaytnChain = new KlaytnChain();
 
@@ -22,38 +25,18 @@ export const getLPPoolList = async () => {
   return data.pools;
 };
 
-type LPBalance = {
-  name: string;
-  tokens: (TokenInput | null)[];
-  wallet: number;
-  walletValue: number;
-  staked: number;
-  stakedValue: number;
-  rewards: number;
-};
 export const getLPPoolBalance = async (
   account: string,
+  lpTokenBalance: string,
   pool: KokonutSwap.Pool,
   pools: KokonutSwap.Pool[],
-): Promise<LPBalance> => {
+): Promise<DeFiStaking> => {
   const poolAddress = pool.address.toLowerCase();
-  const [
-    {
-      data: { balances },
-    },
-    {
-      data: { farmPools },
-    },
-  ] = await Promise.all([
-    // FIXME: use `cachedAxios`
-    axios.get<KokonutSwap.UserBalancesResponse>(
-      `https://prod.kokonut-api.com/users/${account}`,
-    ),
-    axios.get<KokonutSwap.FarmPoolsResponse>(
-      `https://prod.kokonut-api.com/farm/pools?address=${poolAddress}`,
-    ),
-  ]);
-  const lpBalanceInWallet = Number(balances[pool.lpTokenAddress]);
+  const {
+    data: { farmPools },
+  } = await axios.get<KokonutSwap.FarmPoolsResponse>(
+    `https://prod.kokonut-api.com/farm/pools?address=${poolAddress}`,
+  );
   const farm = farmPools.find(
     (v) => v.poolAddress.toLowerCase() === poolAddress,
   );
@@ -62,11 +45,12 @@ export const getLPPoolBalance = async (
 
   // get price with lpStaked, lpValue
   const lpPrice = lpValue / lpStaked;
+  const lpBalanceInWallet = Number(lpTokenBalance);
   let lpBalanceInWalletValue = lpBalanceInWallet * lpPrice;
   if (isNaN(lpBalanceInWalletValue)) {
     lpBalanceInWalletValue = 0;
   }
-  const claimableRewards = Number(farm?.user.claimableReward || 0);
+  const claimableRewardsInKOKOS = Number(farm?.user.claimableReward || 0);
 
   const tokenInfos = pool.coins.flatMap((coinAddr) => {
     const address = coinAddr.toLowerCase();
@@ -84,13 +68,23 @@ export const getLPPoolBalance = async (
   });
 
   return {
-    name: farm?.lpDisplaySymbol || pool.symbol,
+    type: KlaytnDeFiType.KOKONUTSWAP_LP,
+    address: pool.lpTokenAddress,
     tokens: tokenInfos,
-    wallet: lpBalanceInWallet,
-    walletValue: lpBalanceInWalletValue,
-    staked: lpStaked,
-    stakedValue: lpValue,
-    rewards: claimableRewards,
+    wallet: {
+      value: lpBalanceInWalletValue,
+      lpAmount: lpBalanceInWallet,
+    },
+    staked: {
+      value: lpValue,
+      lpAmount: lpStaked,
+    },
+    rewards: {
+      tokenAmounts: {
+        [KOKOS_ADDRESS]: claimableRewardsInKOKOS,
+      },
+    },
+    unstake: null,
   };
 };
 
