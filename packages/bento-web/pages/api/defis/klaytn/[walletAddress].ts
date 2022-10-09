@@ -12,15 +12,7 @@ import {
 import { KlayStation } from '@/defi/klaystation';
 import { KlaySwap } from '@/defi/klayswap';
 import { KokonutSwap } from '@/defi/kokonutswap';
-import { DeFiStaking } from '@/defi/types/staking';
-
-const asyncFlatMap = async <T extends any, U extends any>(
-  array: T[],
-  callback: (value: T, index: number, array: T[]) => Promise<[] | U | U[]>,
-): Promise<U[]> => {
-  const result = await Promise.all(array.map(callback));
-  return result.flat() as U[];
-};
+import { asyncFlatMap } from '@/utils';
 
 interface APIRequest extends NextApiRequest {
   query: {
