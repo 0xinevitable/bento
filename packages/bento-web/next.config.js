@@ -28,7 +28,10 @@ module.exports = withPlugins(
       externalDir: false,
     },
     i18n,
-    publicRuntimeConfig: pick(process.env, ['ENVIRONMENT']),
+    publicRuntimeConfig: pick(process.env, [
+      'ENVIRONMENT',
+      'MAIN_API_BASE_URL',
+    ]),
     webpack: (config) => {
       config.resolve.fallback = {
         ...config.resolve.fallback,

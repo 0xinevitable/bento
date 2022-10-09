@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Modal } from '@/components/system';
+
+import { axios } from '@/utils';
 
 import { LinkBlockItem } from '../../blocks/LinkBlockItem';
 import { FieldInput } from '../../components/FieldInput';

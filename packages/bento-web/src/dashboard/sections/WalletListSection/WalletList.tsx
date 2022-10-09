@@ -1,11 +1,11 @@
 import { Wallet, shortenAddress } from '@bento/common';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Colors } from '@/styles';
+import { axios } from '@/utils';
 import { Analytics, copyToClipboard, toast } from '@/utils';
 
 import { WalletListItem } from './WalletListItem';
