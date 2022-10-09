@@ -1,3 +1,4 @@
+import { safeAsyncFlatMap } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -12,7 +13,6 @@ import {
 import { KlayStation } from '@/defi/klaystation';
 import { KlaySwap } from '@/defi/klayswap';
 import { KokonutSwap } from '@/defi/kokonutswap';
-import { asyncFlatMap } from '@/utils';
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -50,7 +50,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     KlaySwap.getLeveragePoolList().catch(() => undefined),
   ]);
 
-  const promisesForStakings = asyncFlatMap(tokenBalances, async (token) => {
+  const promisesForStakings = safeAsyncFlatMap(tokenBalances, async (token) => {
     if (token.balance === null) {
       // Indexed at least once
       return [];

@@ -1,4 +1,9 @@
-export const asyncFlatMap = async <T extends any, U extends any>(
+export const safePromiseAll = async <T extends any>(promises: Promise<T>[]) =>
+  (await Promise.allSettled(promises)).flatMap((res) =>
+    res.status === 'fulfilled' ? res.value : [],
+  );
+
+export const safeAsyncFlatMap = async <T extends any, U extends any>(
   array: T[],
   callback: (value: T, index: number, array: T[]) => Promise<[] | U | U[]>,
 ): Promise<U[]> => {

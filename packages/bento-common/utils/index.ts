@@ -1,3 +1,3 @@
 export { Base64 } from './Base64';
-export { safePromiseAll } from './safePromiseAll';
+export { safePromiseAll, safeAsyncFlatMap } from './safer-promises';
 export { shortenAddress } from './shortenAddress';
