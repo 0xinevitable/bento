@@ -1,4 +1,4 @@
-import { Wallet, safePromiseAll } from '@bento/common';
+import { Wallet, safeAsyncFlatMap, safePromiseAll } from '@bento/common';
 import { OpenSea, OpenSeaAsset } from '@bento/core';
 import { priceFromCoinGecko } from '@bento/core';
 import chunk from 'lodash.chunk';
@@ -72,8 +72,9 @@ export const useNFTBalances = ({ wallets }: Options) => {
       .flat(3);
     const groupedByWalletAddress = groupBy(flattedAssets, 'walletAddress');
 
-    safePromiseAll(
-      Object.keys(groupedByWalletAddress).map(async (walletAddress) => {
+    safeAsyncFlatMap(
+      Object.keys(groupedByWalletAddress),
+      async (walletAddress) => {
         const groupByCollection: Record<
           string,
           (OpenSeaAsset & { walletAddress: string })[]
@@ -83,49 +84,21 @@ export const useNFTBalances = ({ wallets }: Options) => {
         );
 
         const balances: NFTWalletBalance[] = (
-          await safePromiseAll(
-            chunk(Object.keys(groupByCollection), CHUNK_SIZE).map(
-              async (chunckedCollectionSlugs) =>
-                safePromiseAll(
-                  chunckedCollectionSlugs.map(async (collectionSlug) => {
-                    const assets = groupByCollection[collectionSlug];
-                    const first = assets[0];
-                    const collection = first.collection;
-
-                    const {
-                      floor_price: floorPrice,
-                      total_volume: totalVolume,
-                    } = await OpenSea.getCollectionStats(collectionSlug).catch(
-                      (error) => {
-                        console.error(error);
-                        // FIXME: Error handling
-                        return { floor_price: 0, total_volume: 0 };
-                      },
-                    );
-
-                    return {
-                      symbol: first.asset_contract.symbol || null,
-                      name: collection.name,
-                      walletAddress,
-                      balance: groupByCollection[collectionSlug].length,
-                      logo: collection.image_url,
-                      price: ethereumPrice * floorPrice,
-                      totalVolume,
-                      type: 'nft' as const,
-                      platform: 'opensea',
-                      assets,
-                    };
-                  }),
-                ),
-            ),
+          await safeAsyncFlatMap(
+            chunk(Object.keys(groupByCollection), CHUNK_SIZE),
+            async (chunckedCollectionSlugs) =>
+              getNFTBalancesFromSlugs({
+                slugs: chunckedCollectionSlugs,
+                walletAddress,
+                ethereumPrice,
+                groupByCollection,
+              }),
           )
-        )
-          .flat()
-          .filter((v) => v.totalVolume > 0);
+        ).filter((v) => v.totalVolume > 0);
 
         return balances;
-      }),
-    ).then((v) => setOpenSeaNFTBalance(v.flat()));
+      },
+    ).then(setOpenSeaNFTBalance);
   }, [JSON.stringify(fetchedAssets)]);
 
   return {
@@ -133,3 +106,48 @@ export const useNFTBalances = ({ wallets }: Options) => {
     jsonKey: JSON.stringify(openSeaNFTBalance),
   };
 };
+
+type Props = {
+  slugs: string[];
+  walletAddress: string;
+  ethereumPrice: number;
+  groupByCollection: Record<
+    string,
+    (OpenSeaAsset & {
+      walletAddress: string;
+    })[]
+  >;
+};
+const getNFTBalancesFromSlugs = ({
+  slugs,
+  walletAddress,
+  ethereumPrice,
+  groupByCollection,
+}: Props) =>
+  safePromiseAll(
+    slugs.map(async (collectionSlug) => {
+      const assets = groupByCollection[collectionSlug];
+      const first = assets[0];
+      const collection = first.collection;
+
+      const { floor_price: floorPrice, total_volume: totalVolume } =
+        await OpenSea.getCollectionStats(collectionSlug).catch((error) => {
+          console.error(error);
+          // FIXME: Error handling
+          return { floor_price: 0, total_volume: 0 };
+        });
+
+      return {
+        symbol: first.asset_contract.symbol || null,
+        name: collection.name,
+        walletAddress,
+        balance: groupByCollection[collectionSlug].length,
+        logo: collection.image_url,
+        price: ethereumPrice * floorPrice,
+        totalVolume,
+        type: 'nft' as const,
+        platform: 'opensea',
+        assets,
+      };
+    }),
+  );

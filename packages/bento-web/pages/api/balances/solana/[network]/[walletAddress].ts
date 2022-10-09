@@ -1,4 +1,4 @@
-import { safePromiseAll } from '@bento/common';
+import { safeAsyncFlatMap } from '@bento/common';
 import { SolanaChain, TokenBalance } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -36,62 +36,55 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     coinMarketCapId?: number;
     balance: number;
     price?: number;
-  }[] = (
-    await safePromiseAll(
-      wallets.map(async (walletAddress) => {
-        const getTokenBalances = async (): Promise<TokenBalance[]> => {
-          try {
-            const items =
-              'getTokenBalances' in chain
-                ? await chain.getTokenBalances(walletAddress)
-                : [];
-            await redisClient
-              .set(
-                `token-balances:solana:${walletAddress}`,
-                JSON.stringify(items),
-              )
-              .catch((err) => console.error(err));
-            return items;
-          } catch (error) {
-            console.error(
-              'Error occurred while fetching token balances (likely Covalent API error)',
-              error,
-            );
-            const out = await redisClient
-              .get(`token-balances:solana:${walletAddress}`)
-              .catch((err) => {
-                console.error(err);
-              });
-            if (out) {
-              return JSON.parse(out);
-            }
-            return [];
-          }
-        };
+  }[] = await safeAsyncFlatMap(wallets, async (walletAddress) => {
+    const getTokenBalances = async (): Promise<TokenBalance[]> => {
+      try {
+        const items =
+          'getTokenBalances' in chain
+            ? await chain.getTokenBalances(walletAddress)
+            : [];
+        await redisClient
+          .set(`token-balances:solana:${walletAddress}`, JSON.stringify(items))
+          .catch((err) => console.error(err));
+        return items;
+      } catch (error) {
+        console.error(
+          'Error occurred while fetching token balances (likely Covalent API error)',
+          error,
+        );
+        const out = await redisClient
+          .get(`token-balances:solana:${walletAddress}`)
+          .catch((err) => {
+            console.error(err);
+          });
+        if (out) {
+          return JSON.parse(out);
+        }
+        return [];
+      }
+    };
 
-        const [balance, tokenBalances] = await Promise.all([
-          chain.getBalance(walletAddress).catch(() => 0),
-          getTokenBalances().catch(() => []),
-          [],
-        ]);
+    const [balance, tokenBalances] = await Promise.all([
+      chain.getBalance(walletAddress).catch(() => 0),
+      getTokenBalances().catch(() => []),
+      [],
+    ]);
 
-        return [
-          {
-            walletAddress,
-            platform: 'solana',
+    return [
+      {
+        walletAddress,
+        platform: 'solana',
 
-            symbol: chain.currency.symbol,
-            name: chain.currency.name,
-            logo: chain.currency.logo,
-            coinGeckoId: chain.currency.coinGeckoId,
-            balance,
-            price: undefined,
-          },
-          ...tokenBalances,
-        ];
-      }),
-    )
-  ).flat();
+        symbol: chain.currency.symbol,
+        name: chain.currency.name,
+        logo: chain.currency.logo,
+        coinGeckoId: chain.currency.coinGeckoId,
+        balance,
+        price: undefined,
+      },
+      ...tokenBalances,
+    ];
+  });
 
   await redisClient.disconnect();
   res.status(200).json(result);

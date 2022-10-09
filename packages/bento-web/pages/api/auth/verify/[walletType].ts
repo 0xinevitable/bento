@@ -135,9 +135,9 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     .select('id, address, networks, user_id')
     .eq('address', walletAddress)
     .eq('user_id', user.id);
-  const previousNetworks = (prevNetworkQuery.data ?? [])
-    .map((v) => v.networks)
-    .flat();
+  const previousNetworks = (prevNetworkQuery.data ?? []).flatMap(
+    (v) => v.networks,
+  );
   const mergedNetworks = Array.from(
     new Set([...previousNetworks, ...networks]),
   );

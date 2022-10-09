@@ -1,3 +1,4 @@
+import { safeAsyncFlatMap, safePromiseAll } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -12,15 +13,6 @@ import {
 import { KlayStation } from '@/defi/klaystation';
 import { KlaySwap } from '@/defi/klayswap';
 import { KokonutSwap } from '@/defi/kokonutswap';
-import { DeFiStaking } from '@/defi/types/staking';
-
-const asyncFlatMap = async <T extends any, U extends any>(
-  array: T[],
-  callback: (value: T, index: number, array: T[]) => Promise<[] | U | U[]>,
-): Promise<U[]> => {
-  const result = await Promise.all(array.map(callback));
-  return result.flat() as U[];
-};
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -58,7 +50,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     KlaySwap.getLeveragePoolList().catch(() => undefined),
   ]);
 
-  const promisesForStakings = asyncFlatMap(tokenBalances, async (token) => {
+  const promisesForStakings = safeAsyncFlatMap(tokenBalances, async (token) => {
     if (token.balance === null) {
       // Indexed at least once
       return [];
@@ -123,7 +115,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const promisesForDelegations = KlayStation.getDelegations(walletAddress);
 
   const stakings = (
-    await Promise.all([
+    await safePromiseAll([
       promisesForStakings.catch(handleError),
       promisesForDelegations.catch(handleError),
     ])
