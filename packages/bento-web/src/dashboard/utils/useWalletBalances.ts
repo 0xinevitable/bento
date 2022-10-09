@@ -3,6 +3,7 @@ import { pricesFromCoinGecko } from '@bento/core';
 import produce from 'immer';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { KEYS_BY_NETWORK } from '@/constants/networks';
 import {
   CosmosSDKWalletBalance,
   EVMWalletBalance,
@@ -14,17 +15,6 @@ import { useMultipleRequests } from './useMultipleRequests';
 
 type Key = string;
 type Address = string;
-
-export const KEYS_BY_NETWORK = {
-  ethereum: '/api/evm/ethereum',
-  bnb: '/api/evm/bnb',
-  avalanche: '/api/evm/avalanche',
-  polygon: '/api/evm/polygon',
-  klaytn: '/api/evm/klaytn',
-  'cosmos-hub': '/api/cosmos-sdk/cosmos-hub',
-  osmosis: '/api/cosmos-sdk/osmosis',
-  solana: '/api/solana/mainnet',
-} as const;
 
 type PartialRecord<K extends keyof any, T> = {
   [P in K]?: T;
