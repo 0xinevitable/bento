@@ -1,12 +1,12 @@
 export const KEYS_BY_NETWORK = {
-  ethereum: '/api/evm/ethereum',
-  bnb: '/api/evm/bnb',
-  avalanche: '/api/evm/avalanche',
-  polygon: '/api/evm/polygon',
-  klaytn: '/api/evm/klaytn',
-  'cosmos-hub': '/api/cosmos-sdk/cosmos-hub',
-  osmosis: '/api/cosmos-sdk/osmosis',
-  solana: '/api/solana/mainnet',
+  ethereum: '/api/balances/evm/ethereum',
+  bnb: '/api/balances/evm/bnb',
+  avalanche: '/api/balances/evm/avalanche',
+  polygon: '/api/balances/evm/polygon',
+  klaytn: '/api/balances/evm/klaytn',
+  'cosmos-hub': '/api/balances/cosmos-sdk/cosmos-hub',
+  osmosis: '/api/balances/cosmos-sdk/osmosis',
+  solana: '/api/balances/solana/mainnet',
 } as const;
 
 export type Network = {
