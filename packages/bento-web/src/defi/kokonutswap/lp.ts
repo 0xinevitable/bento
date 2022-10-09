@@ -1,4 +1,5 @@
-import { KLAYTN_TOKENS, TokenInput } from '@bento/core/lib/tokens';
+import { EEEE_ADDRESS, TokenInput } from '@bento/core';
+import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import axios from 'axios';
 
 import { klaytnChain } from '../constants';
@@ -8,7 +9,7 @@ import { KSD_ADDRESS } from './constants';
 const getTokenInfo = (
   loweredAddress: string,
 ): NativeInput | TokenInput | null => {
-  if (loweredAddress === '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') {
+  if (loweredAddress === EEEE_ADDRESS) {
     return klaytnChain.currency;
   }
   const tokenInfo = KLAYTN_TOKENS.find((k) => k.address === loweredAddress);

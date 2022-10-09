@@ -1,5 +1,4 @@
-import { EVMBasedNetworks } from '@bento/common';
-import { safePromiseAll } from '@bento/common';
+import { EVMBasedNetworks, safePromiseAll } from '@bento/common';
 import {
   AvalancheChain,
   BNBChain,
@@ -7,8 +6,8 @@ import {
   KlaytnChain,
   PolygonChain,
   TokenBalance,
+  pricesFromCoinMarketCap,
 } from '@bento/core';
-import { pricesFromCoinMarketCap } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';

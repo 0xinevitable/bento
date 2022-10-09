@@ -1,6 +1,6 @@
 import { safePromiseAll } from '@bento/common';
-import { pricesFromCoinGecko } from '@bento/core/lib/pricings/CoinGecko';
-import { TokenInput } from '@bento/core/lib/tokens';
+import { TokenInput } from '@bento/core';
+import { pricesFromCoinGecko } from '@bento/core';
 import axios from 'axios';
 import { promises as fs } from 'fs';
 import path from 'path';

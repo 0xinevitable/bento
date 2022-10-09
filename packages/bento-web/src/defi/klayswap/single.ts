@@ -1,3 +1,4 @@
+import { ZERO_ADDRESS } from '@bento/core';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import axios from 'axios';
 import BigNumber from 'bn.js';
@@ -8,7 +9,6 @@ import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
 import { KSP_TOKEN_INFO } from './constants';
 
 const provider = klaytnChain._provider;
-const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 // TODO: Someday
 // export const getEcopotPoolList = async () => {
@@ -29,7 +29,7 @@ export const getLeveragePoolList = async () => {
     pool.forEach((value, index) => {
       poolObj[fields[index]] = value;
     });
-    return poolObj as KLAYswap.SingleLeveragePool;
+    return poolObj as SingleLeveragePool;
   });
   return pools;
 };
@@ -37,8 +37,8 @@ export const getLeveragePoolList = async () => {
 export const getSinglePoolBalance = async (
   account: string,
   tokenBalance: string,
-  pool: KLAYswap.SingleLeveragePool,
-  _dynamicPool: KLAYswap.SingleLeveragePool | undefined,
+  pool: SingleLeveragePool,
+  _dynamicPool: SingleLeveragePool | undefined,
 ): Promise<DeFiStaking> => {
   const dynamicPool = _dynamicPool || pool;
   const iToken = new provider.klay.Contract(
@@ -82,31 +82,29 @@ export const getSinglePoolBalance = async (
   };
 };
 
-export declare module KLAYswap {
-  export interface SingleLeveragePool {
-    id: number;
-    address: string;
-    token: string;
-    amount: string;
-    totalDeposit: string;
-    totalDepositVol: string;
-    totalSupply: string;
-    miningRate: string;
-    dailyMining: string;
-    miningIndex: string;
-    borrowIndex: string;
-    lastMined: string;
-    totalBorrow: string;
-    totalReserve: string;
-    totalReserveVol: string;
-    burnKSP: string;
-    burnKSPVol: string;
-    isDeposit: boolean;
-    isWithdraw: boolean;
-    reserveFactor: string;
-    kspRewardRate: string;
-    supplyRate: string;
-    totalRewardRate: string;
-    undefined: null;
-  }
+export interface SingleLeveragePool {
+  id: number;
+  address: string;
+  token: string;
+  amount: string;
+  totalDeposit: string;
+  totalDepositVol: string;
+  totalSupply: string;
+  miningRate: string;
+  dailyMining: string;
+  miningIndex: string;
+  borrowIndex: string;
+  lastMined: string;
+  totalBorrow: string;
+  totalReserve: string;
+  totalReserveVol: string;
+  burnKSP: string;
+  burnKSPVol: string;
+  isDeposit: boolean;
+  isWithdraw: boolean;
+  reserveFactor: string;
+  kspRewardRate: string;
+  supplyRate: string;
+  totalRewardRate: string;
+  undefined: null;
 }

@@ -1,5 +1,5 @@
 import { safePromiseAll } from '@bento/common';
-import { TokenInput } from '@bento/core/lib/tokens';
+import { TokenInput } from '@bento/core';
 import { promises as fs } from 'fs';
 import path from 'path';
 import prettier from 'prettier';
