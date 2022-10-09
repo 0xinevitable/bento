@@ -7,6 +7,7 @@ import KLAYSWAP_LEVERAGE_POOLS from '@/defi/constants/klayswap-leverage-pools.js
 import KLAYSWAP_LP_POOLS from '@/defi/constants/klayswap-lp-pools.json';
 import KOKONUTSWAP_LP_POOLS from '@/defi/constants/kokonutswap-lp-pools.json';
 import { KlaySwap } from '@/defi/klayswap';
+import { KokonutSwap } from '@/defi/kokonutswap';
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -84,6 +85,25 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     );
     if (!!kokonutswapLPPool) {
       console.log('kokonutswapLPPool');
+      const balance = await KokonutSwap.getLPPoolBalance(
+        walletAddress,
+        kokonutswapLPPool,
+        KOKONUTSWAP_LP_POOLS,
+      );
+      console.log(balance);
+      continue;
+    }
+
+    // Kokonutswap Governance
+    if (
+      isSameAddress(token.contract_address, KokonutSwap.STAKED_KOKOS_ADDRESS)
+    ) {
+      console.log('kokonutswapGovernance');
+      const staking = await KokonutSwap.getGovernanceStake(
+        walletAddress,
+        Number(token.balance),
+      );
+      console.log(staking);
       continue;
     }
   }

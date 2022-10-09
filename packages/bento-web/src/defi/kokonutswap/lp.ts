@@ -32,9 +32,9 @@ type LPBalance = {
   rewards: number;
 };
 export const getLPPoolBalance = async (
+  account: string,
   pool: KokonutSwap.Pool,
   pools: KokonutSwap.Pool[],
-  account: string,
 ): Promise<LPBalance> => {
   const poolAddress = pool.address.toLowerCase();
   const [
@@ -105,12 +105,12 @@ declare module KokonutSwap {
     symbol: string;
     poolType: string;
     lpTokenAddress: string;
-    stakingPoolAddress: string;
-    managerAddress: string;
+    stakingPoolAddress?: string;
+    managerAddress?: string;
     coins: string[];
     coinsUnderlying: string[];
-    adminFee: string;
-    swapFee: string;
+    adminFee?: string;
+    swapFee?: string;
     deprecated: boolean;
     liquidity: Liquidity[];
     tvl: string;
@@ -121,14 +121,14 @@ declare module KokonutSwap {
     volume24hrOnlySwap: string;
     rewardFee24hr: string;
     baseApr: string;
-    stakingApr: string;
-    user: User;
-    swapMidFee: string;
-    swapOutFee: string;
-    priceOracle: string;
-    priceScale: string;
-    extendedContractAddress: string;
-    aklayApr: string;
+    stakingApr?: string;
+    user: User | null;
+    swapMidFee?: string;
+    swapOutFee?: string;
+    priceOracle?: string;
+    priceScale?: string;
+    extendedContractAddress?: string;
+    aklayApr?: string;
   }
 
   export interface User {

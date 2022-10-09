@@ -846,10 +846,7 @@
     "rewardFee24hr": "0.000000000000000000",
     "baseApr": "0.00",
     "stakingApr": "0.00",
-    "user": {
-      "balance": "0.000000000000000000",
-      "value": "0.000000000000000000"
-    }
+    "user": null
   },
   {
     "address": "0x44ACE4b2C239F3A34866bB7e6149E6bA9eb4110E",
@@ -876,10 +873,7 @@
     "rewardFee24hr": "0.000272774603937343",
     "baseApr": "0.00",
     "stakingApr": "0.00",
-    "user": {
-      "balance": "0.000000000000000000",
-      "value": "0.000000000000000000"
-    }
+    "user": null
   },
   {
     "address": "0x048915901421F8C0ac9eDA93A086F2D90Df6cb0B",
@@ -905,9 +899,6 @@
     "volume24hrOnlySwap": "0.000000000000000000",
     "rewardFee24hr": "0.000000000000000000",
     "baseApr": "0.00",
-    "user": {
-      "balance": "0.000000000000000000",
-      "value": "0.000000000000000000"
-    }
+    "user": null
   }
 ]
