@@ -44,7 +44,8 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
   console.log('=');
   for (const token of tokenBalances) {
-    if (Number(token.balance) <= 0) {
+    if (token.balance === null) {
+      // Indexed at least once
       continue;
     }
 
