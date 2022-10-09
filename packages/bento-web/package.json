@@ -26,6 +26,7 @@
     "@walletconnect/web3-provider": "^1.8.0",
     "amplitude-js": "^8.21.1",
     "axios": "^0.27.2",
+    "bn.js": "^5.2.1",
     "caver-js": "^1.9.0",
     "clsx": "^1.2.1",
     "cobe": "^0.6.2",
@@ -60,6 +61,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^12.3.1",
     "@types/amplitude-js": "^8.16.2",
+    "@types/bn.js": "^5.1.1",
     "@types/dedent": "^0.7.0",
     "@types/lodash.chunk": "^4.2.7",
     "@types/lodash.groupby": "^4.6.7",

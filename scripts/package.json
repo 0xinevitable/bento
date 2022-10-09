@@ -5,7 +5,7 @@
   "scripts": {
     "generate-assets": "ttsc && node build/assets",
     "generate-release-notes": "ttsc && node build/release-notes",
-    "m": "ttsc && node build/migrations/20220920-wallets-cosmos-sdk"
+    "generate-defi": "ttsc && node build/defi"
   },
   "dependencies": {
     "@bento/common": "workspace:^",

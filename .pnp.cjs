@@ -2605,6 +2605,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@tanem/react-nprogress", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:5.0.14"],\
             ["@types/amplitude-js", "npm:8.16.2"],\
+            ["@types/bn.js", "npm:5.1.1"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.chunk", "npm:4.2.7"],\
             ["@types/lodash.groupby", "npm:4.6.7"],\
@@ -2618,6 +2619,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["amplitude-js", "npm:8.21.1"],\
             ["autoprefixer", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:10.4.12"],\
             ["axios", "npm:0.27.2"],\
+            ["bn.js", "npm:5.2.1"],\
             ["caver-js", "npm:1.9.0"],\
             ["clsx", "npm:1.2.1"],\
             ["cobe", "npm:0.6.2"],\
@@ -4925,6 +4927,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-bn.js-npm-4.11.6-85f0d125f5-7f66f2c7b7.zip/node_modules/@types/bn.js/",\
           "packageDependencies": [\
             ["@types/bn.js", "npm:4.11.6"],\
+            ["@types/node", "npm:18.7.19"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:5.1.1", {\
+          "packageLocation": "./.yarn/cache/@types-bn.js-npm-5.1.1-346449981b-e50ed2dd3a.zip/node_modules/@types/bn.js/",\
+          "packageDependencies": [\
+            ["@types/bn.js", "npm:5.1.1"],\
             ["@types/node", "npm:18.7.19"]\
           ],\
           "linkType": "HARD"\

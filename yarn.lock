@@ -1482,6 +1482,7 @@ __metadata:
     "@supabase/supabase-js": ^1.35.7
     "@tanem/react-nprogress": ^5.0.14
     "@types/amplitude-js": ^8.16.2
+    "@types/bn.js": ^5.1.1
     "@types/dedent": ^0.7.0
     "@types/lodash.chunk": ^4.2.7
     "@types/lodash.groupby": ^4.6.7
@@ -1495,6 +1496,7 @@ __metadata:
     amplitude-js: ^8.21.1
     autoprefixer: ^10.4.12
     axios: ^0.27.2
+    bn.js: ^5.2.1
     caver-js: ^1.9.0
     clsx: ^1.2.1
     cobe: ^0.6.2
@@ -3343,6 +3345,15 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 7f66f2c7b7b9303b3205a57184261974b114495736b77853af5b18d857c0b33e82ce7146911e86e87a87837de8acae28986716fd381ac7c301fd6e8d8b6c811f
+  languageName: node
+  linkType: hard
+
+"@types/bn.js@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "@types/bn.js@npm:5.1.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: e50ed2dd3abe997e047caf90e0352c71e54fc388679735217978b4ceb7e336e51477791b715f49fd77195ac26dd296c7bad08a3be9750e235f9b2e1edb1b51c2
   languageName: node
   linkType: hard
 
