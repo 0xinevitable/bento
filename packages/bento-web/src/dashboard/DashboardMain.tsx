@@ -26,7 +26,12 @@ import { NFTListSection } from './sections/NFTListSection';
 import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
 
-const TAB_ITEMS = ['Crypto', 'NFTs', 'Badges'] as const;
+enum DashboardTabType {
+  Crypto = 'c',
+  NFTs = 'n',
+  Badges = 'b',
+}
+const DASHBOARD_TAB_ITEMS = Object.values(DashboardTabType);
 
 const walletBalanceReducer =
   (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
@@ -125,13 +130,13 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     [tokenBalancesJSONKey],
   );
 
-  const [currentTab, setCurrentTab] = useState<typeof TAB_ITEMS[number]>(
-    TAB_ITEMS[0],
+  const [currentTab, setCurrentTab] = useState<DashboardTabType>(
+    DashboardTabType.Crypto,
   );
 
   const [isNFTsInitialized, setNFTsInitialized] = useState<boolean>(false);
   useEffect(() => {
-    if (currentTab === TAB_ITEMS[1]) {
+    if (currentTab === DashboardTabType.NFTs) {
       setNFTsInitialized(true);
     }
   }, [currentTab]);
@@ -154,10 +159,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           <Tab
             current={currentTab}
             onChange={setCurrentTab}
-            items={TAB_ITEMS}
+            items={DASHBOARD_TAB_ITEMS}
           />
           <DashboardContent>
-            <AnimatedTab selected={currentTab === 'Crypto'}>
+            <AnimatedTab selected={currentTab === DashboardTabType.Crypto}>
               <TopSummaryContainer>
                 <AssetRatioSection
                   netWorthInUSD={netWorthInUSD}
@@ -245,7 +250,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               </div>
             </AnimatedTab>
 
-            <AnimatedTab selected={currentTab === 'NFTs'}>
+            <AnimatedTab selected={currentTab === DashboardTabType.NFTs}>
               {!isNFTsInitialized ? (
                 <Skeleton
                   style={{
@@ -257,7 +262,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               ) : (
                 <NFTListSection
                   nftAssets={nftAssets}
-                  selected={currentTab === 'NFTs'}
+                  selected={currentTab === DashboardTabType.NFTs}
                   isMyProfile={true}
                   profile={profile}
                   revalidateProfile={revalidateProfile}
@@ -265,7 +270,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               )}
             </AnimatedTab>
 
-            <AnimatedTab selected={currentTab === 'Badges'}>
+            <AnimatedTab selected={currentTab === DashboardTabType.Badges}>
               <span className="my-8 text-center text-white/90 font-bold">
                 Coming Soon!
               </span>
