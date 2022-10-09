@@ -33,12 +33,14 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
   networks,
   onSave,
 }) => {
+  const networksJSONKey = JSON.stringify(networks);
+
   const firstNetwork = useMemo(() => {
     if (!networks || networks.length === 0) {
       return undefined;
     }
     return networks[0].type;
-  }, [networks]);
+  }, [networksJSONKey]);
 
   const { signOut } = useSignOut();
 
@@ -86,7 +88,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
 
       setLoading(false);
     },
-    [isLoading, networks, signOut, onSave],
+    [isLoading, networksJSONKey, signOut, onSave],
   );
 
   return (
