@@ -56,6 +56,24 @@ const isEthereumAddress = (addr: string): boolean => {
   }
 };
 
+type DeFiStakingCacheDTO = {
+  t: number;
+  v: DeFiStaking[];
+};
+const getCached = async <T extends any>(
+  __key: string,
+  __redisClient: ReturnType<typeof createRedisClient>,
+) => {
+  const cachedRawValue = await __redisClient.get(__key);
+  if (!cachedRawValue) {
+    return null;
+  }
+  return CompressedJSON.decompress.fromString<T>(cachedRawValue);
+};
+
+const MINUTES = 1_000 * 60;
+const CACHED_TIME = 1 * MINUTES;
+
 const handler = async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
 
@@ -69,29 +87,50 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const redisClient = createRedisClient();
   await redisClient.connect();
 
+  let hasError: boolean = false;
   let stakings: DeFiStaking[] = [];
-  try {
-    stakings = await getDeFiStakingsByWalletAddress(walletAddress);
-    await redisClient.set(
-      `defis:klaytn:${walletAddress}`,
-      CompressedJSON.compress.toString(stakings),
-    );
-  } catch (err) {
-    console.error(err);
-    const cachedStakings = await redisClient.get(
-      `defis:klaytn:${walletAddress}`,
-    );
-    if (!cachedStakings) {
-      res.status(500).json({ error: 'Internal server error' });
-      return;
+  let cachedTime = 0;
+
+  const cached = await getCached<DeFiStakingCacheDTO>(
+    `defis:klaytn:${walletAddress}`,
+    redisClient,
+  );
+  if (cached && cached.t >= Date.now() - CACHED_TIME) {
+    // Use cached value if not expired
+    stakings = cached.v;
+    cachedTime = cached.t;
+  } else {
+    try {
+      stakings = await getDeFiStakingsByWalletAddress(walletAddress);
+      cachedTime = new Date().getTime();
+      await redisClient.set(
+        `defis:klaytn:${walletAddress}`,
+        CompressedJSON.compress.toString<DeFiStakingCacheDTO>({
+          v: stakings,
+          t: cachedTime,
+        }),
+      );
+    } catch (err) {
+      console.error(err);
+
+      if (!cached) {
+        hasError = true;
+      } else {
+        // Use cached value if available
+        stakings = cached.v;
+        cachedTime = cached.t;
+      }
     }
-    stakings =
-      CompressedJSON.decompress.fromString<DeFiStaking[]>(cachedStakings);
   }
 
   await redisClient.disconnect();
 
-  res.status(200).json(stakings);
+  if (hasError) {
+    res.status(500).json({ error: 'Internal server error' });
+    return;
+  }
+
+  res.status(200).json({ stakings, cachedTime });
 };
 
 export default withCORS(handler);
