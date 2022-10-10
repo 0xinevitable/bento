@@ -4,6 +4,7 @@ export enum KlaytnDeFiProtocolType {
   KLAYSTATION = 'kstn',
   KLAYSWAP = 'ks',
   KOKONUTSWAP = 'kks',
+  SWAPSCANNER = 'scnr',
 }
 export enum OsmosisDeFiProtocolType {
   ION = 'o_ion',
@@ -30,6 +31,10 @@ export enum KlaytnDeFiType {
   KLAYSTATION_NODE_HASHED_AND_OZYS = 'kstn_n_hno',
   KLAYSTATION_NODE_KED = 'kstn_n_ked',
   KLAYSTATION_NODE_FSN = 'kstn_n_fsn',
+
+  // Swapscanner
+  SWAPSCANNER_GOVERNANCE = 'scnr_g',
+  SWAPSCANNER_LP = 'scnr_lp',
 }
 
 export enum OsmosisDeFiType {
@@ -51,6 +56,7 @@ export type NativeInput = Omit<TokenInput, 'address'>;
 export type DeFiStaking = {
   protocol: DeFiProtocolType;
   type: DeFiType;
+  prefix?: string;
 
   // representative contract address
   address: string;

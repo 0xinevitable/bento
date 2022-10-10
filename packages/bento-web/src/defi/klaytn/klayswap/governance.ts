@@ -14,6 +14,7 @@ export const getGovernanceStake = async (
   return {
     protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_GOVERNANCE,
+    prefix: KSP_TOKEN_INFO.symbol,
     address: VOTING_KSP_ADDRESS,
     tokens: [KSP_TOKEN_INFO],
     wallet: null,
