@@ -1,5 +1,5 @@
 import { klaytnChain } from '../constants';
-import { DeFiStaking } from '../types/staking';
+import { DeFiStaking, KlaytnDeFiProtocolType } from '../types/staking';
 import {
   NODE_TYPE__BY_CONTRACT_ADDRESS,
   PROTOCOL_ABI,
@@ -29,6 +29,7 @@ export const getDelegations = async (
     const delegated = (deposit / sklayTotalSupply) * totalStaking;
 
     return {
+      protocol: KlaytnDeFiProtocolType.KLAYSTATION,
       type: nodeType,
       address: stakingInfo.delegation,
       tokens: [klaytnChain.currency],

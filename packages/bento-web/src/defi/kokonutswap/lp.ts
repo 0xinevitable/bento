@@ -4,7 +4,12 @@ import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import { axios } from '@/utils';
 
 import { klaytnChain } from '../constants';
-import { DeFiStaking, KlaytnDeFiType, NativeInput } from '../types/staking';
+import {
+  DeFiStaking,
+  KlaytnDeFiProtocolType,
+  KlaytnDeFiType,
+  NativeInput,
+} from '../types/staking';
 import { KSD_ADDRESS } from './constants';
 
 const getTokenInfo = (
@@ -70,6 +75,7 @@ export const getLPPoolBalance = async (
   });
 
   return {
+    protocol: KlaytnDeFiProtocolType.KOKONUTSWAP,
     type: KlaytnDeFiType.KOKONUTSWAP_LP,
     address: pool.lpTokenAddress,
     tokens: tokenInfos,
