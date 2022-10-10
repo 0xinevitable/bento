@@ -96,7 +96,6 @@ export const HeaderSection: React.FC = () => {
 const Header = styled.div`
   width: 100%;
   height: 494px;
-  background: ${Colors.gray900};
 
   display: flex;
   flex-direction: column;

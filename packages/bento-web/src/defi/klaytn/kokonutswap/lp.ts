@@ -1,24 +1,12 @@
-import { EEEE_ADDRESS, TokenInput } from '@bento/core';
-import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
-
+import {
+  DeFiStaking,
+  KlaytnDeFiProtocolType,
+  KlaytnDeFiType,
+} from '@/defi/types/staking';
+import { getTokenInfo } from '@/defi/utils/getTokenInfo';
 import { axios } from '@/utils';
 
-import { klaytnChain } from '../constants';
-import { DeFiStaking, KlaytnDeFiType, NativeInput } from '../types/staking';
-import { KSD_ADDRESS } from './constants';
-
-const getTokenInfo = (
-  loweredAddress: string,
-): NativeInput | TokenInput | null => {
-  if (loweredAddress === EEEE_ADDRESS) {
-    return klaytnChain.currency;
-  }
-  const tokenInfo = KLAYTN_TOKENS.find((k) => k.address === loweredAddress);
-  if (tokenInfo) {
-    return tokenInfo;
-  }
-  return null;
-};
+import { KSD_ADDRESS, KSD_TOKEN_INFO } from './constants';
 
 export const getLPPoolList = async () => {
   const { data } = await axios.get<KokonutSwap.PoolListResponse>(
@@ -70,9 +58,11 @@ export const getLPPoolBalance = async (
   });
 
   return {
+    protocol: KlaytnDeFiProtocolType.KOKONUTSWAP,
     type: KlaytnDeFiType.KOKONUTSWAP_LP,
     address: pool.lpTokenAddress,
     tokens: tokenInfos,
+    relatedTokens: [KSD_TOKEN_INFO],
     wallet: {
       value: lpBalanceInWalletValue,
       lpAmount: lpBalanceInWallet,
