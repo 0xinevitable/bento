@@ -11,13 +11,17 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { useDeFis } from '@/dashboard/utils/useDeFis';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
-import { Analytics } from '@/utils';
+import { Analytics, FeatureFlags } from '@/utils';
 
+import { CollapsePanel } from './components/CollapsePanel';
+import { DeFiStakingItem } from './components/DeFiStakingItem';
 import { EmptyBalance } from './components/EmptyBalance';
+import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
@@ -141,6 +145,12 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     }
   }, [currentTab]);
 
+  const { defis, defisJSONKey } = useDeFis(wallets);
+  const defiStakesByProtocol = useMemo(
+    () => groupBy(defis, 'protocol'),
+    [defisJSONKey],
+  );
+
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
@@ -251,6 +261,52 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                   )}
                 </AssetListCard>
               </div>
+
+              {FeatureFlags.isKlaytnDeFiEnabled && (
+                <div>
+                  <SectionTitle
+                    style={{
+                      marginTop: 12,
+                      marginBottom: 12,
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <span className="title">{t('DeFi Staking')}</span>
+                    <InlineBadge>
+                      {defis.length > 0 ? defis.length.toLocaleString() : '-'}
+                    </InlineBadge>
+                  </SectionTitle>
+
+                  <AssetListCard>
+                    {defis.length > 0 ? (
+                      <Collapse>
+                        {Object.entries(defiStakesByProtocol).map(
+                          ([protocol, defiProtocols]) => (
+                            <CollapsePanel
+                              title={t(`protocol-${protocol}`)}
+                              count={defiProtocols.length}
+                              key={protocol}
+                            >
+                              <ul>
+                                {defiProtocols.map((item) => (
+                                  <DeFiStakingItem
+                                    // FIXME: group stats with different wallets...
+                                    key={`${item.type}-${item.address}-${item.walletAddress}`}
+                                    protocol={item}
+                                  />
+                                ))}
+                              </ul>
+                            </CollapsePanel>
+                          ),
+                        )}
+                      </Collapse>
+                    ) : (
+                      <EmptyBalance />
+                    )}
+                  </AssetListCard>
+                </div>
+              )}
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === DashboardTabType.NFTs}>
@@ -400,6 +456,11 @@ const AssetListCard = styled.section`
     gap: 4px;
   }
 `;
+const Collapse = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
 
 const SectionTitle = styled.h3`
   margin-bottom: 16px;
@@ -408,14 +469,4 @@ const SectionTitle = styled.h3`
   line-height: 100%;
   letter-spacing: -0.5px;
   color: ${Colors.gray400};
-`;
-
-const InlineBadge = styled(Badge)`
-  && {
-    margin-left: 8px;
-    padding: 6px;
-    display: inline-flex;
-    font-size: 13px;
-    backdrop-filter: none;
-  }
 `;

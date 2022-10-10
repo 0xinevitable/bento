@@ -1,4 +1,3 @@
-import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import BigNumber from 'bn.js';
 
 import {
@@ -9,6 +8,7 @@ import {
 
 import IKSLP from '../abis/IKSLP.json';
 import { klaytnChain } from '../constants';
+import { getTokenInfo } from '../utils/getTokenInfo';
 
 const provider = klaytnChain._provider;
 
@@ -43,9 +43,9 @@ export const getLPPoolBalance = async (
     .mul(new BigNumber.BN(liquidity))
     .div(new BigNumber.BN(totalLiquidity));
 
-  const tokenInfoA = KLAYTN_TOKENS.find((v) => v.address === pool.tokenA);
+  const tokenInfoA = getTokenInfo(pool.tokenA.toLowerCase());
   const balanceA = Number(rawBalanceA) / 10 ** (tokenInfoA?.decimals || 18);
-  const tokenInfoB = KLAYTN_TOKENS.find((v) => v.address === pool.tokenB);
+  const tokenInfoB = getTokenInfo(pool.tokenB.toLowerCase());
   const balanceB = Number(rawBalanceB) / 10 ** (tokenInfoB?.decimals || 18);
 
   let tokenAmounts: Record<string, number | undefined> = {};
@@ -56,11 +56,14 @@ export const getLPPoolBalance = async (
     tokenAmounts[tokenInfoB.address] = balanceB;
   }
 
+  const tokens = [tokenInfoA || null, tokenInfoB || null];
+
   return {
     protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
-    address: pool.exchange_address,
-    tokens: [tokenInfoA || null, tokenInfoB || null],
+    prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
+    address: pool.exchange_address.toLowerCase(),
+    tokens,
     wallet: null,
     staked: {
       lpAmount: Number(liquidity) / 10 ** 18,

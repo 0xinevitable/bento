@@ -16,6 +16,8 @@ import {
 import { KlayStation } from '@/defi/klaytn/klaystation';
 import { KlaySwap } from '@/defi/klaytn/klayswap';
 import { KokonutSwap } from '@/defi/klaytn/kokonutswap';
+import { Swapscanner } from '@/defi/klaytn/swapscanner';
+import { SCNR_ADDRESS } from '@/defi/klaytn/swapscanner/constants';
 import { DeFiStaking } from '@/defi/types/staking';
 
 interface APIRequest extends NextApiRequest {
@@ -130,7 +132,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     return;
   }
 
-  res.status(200).json({ stakings, cachedTime });
+  res.status(200).json({ walletAddress, stakings, cachedTime });
 };
 
 export default withCORS(handler);
@@ -207,6 +209,11 @@ const getDeFiStakingsByWalletAddress = async (
       isSameAddress(token.contract_address, KokonutSwap.STAKED_KOKOS_ADDRESS)
     ) {
       return KokonutSwap.getGovernanceStake(walletAddress, token.balance);
+    }
+
+    // Swapscanner Governance
+    if (isSameAddress(token.contract_address, SCNR_ADDRESS)) {
+      return Swapscanner.getGovernanceStake(walletAddress);
     }
 
     return [];
