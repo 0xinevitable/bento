@@ -474,8 +474,33 @@ const InlineBadge = styled(Badge)`
 const mockedDeFis = {
   stakings: [
     {
+      protocol: 'scnr',
+      type: 'scnr_g',
+      prefix: 'SCNR',
+      address: '0x7c59930d1613ca2813e5793da72b324712f6899d',
+      tokens: [
+        {
+          symbol: 'SCNR',
+          name: 'Swapscanner',
+          decimals: 25,
+          address: '0x8888888888885b073f3c81258c27e83db228d5f3',
+          logo: 'https://api.swapscanner.io/api/tokens/0x8888888888885b073f3c81258c27e83db228d5f3/icon',
+        },
+      ],
+      wallet: null,
+      staked: {
+        value: 170.70233085800234,
+        tokenAmounts: {
+          '0x8888888888885b073f3c81258c27e83db228d5f3': 121.88285143451247,
+        },
+      },
+      rewards: 'unavailable',
+      unstake: 'unavailable',
+    },
+    {
       protocol: 'kks',
       type: 'kks_lp',
+      prefix: 'KLAY-KSP',
       address: '0x1cE54D1DE574C620838a19294fef1aC70fC612a3',
       tokens: [
         {
@@ -523,6 +548,7 @@ const mockedDeFis = {
     {
       protocol: 'kks',
       type: 'kks_lp',
+      prefix: '4NUTS',
       address: '0x22e3aC1e6595B64266e0b062E01faE31d9cdD578',
       tokens: [
         {
@@ -586,6 +612,7 @@ const mockedDeFis = {
     {
       protocol: 'ks',
       type: 'ks_g',
+      prefix: 'KSP',
       address: '0x2f3713f388bc4b8b364a7a2d8d57c5ff4e054830',
       tokens: [
         {
@@ -622,7 +649,7 @@ const mockedDeFis = {
         },
       ],
       staked: {
-        lpAmount: 3.000357,
+        lpAmount: 3.000387,
       },
       rewards: {
         tokenAmounts: {
@@ -634,6 +661,7 @@ const mockedDeFis = {
     {
       protocol: 'ks',
       type: 'ks_lp',
+      prefix: 'oUSDT + KDAI',
       address: '0xc320066b25b731a11767834839fe57f9b2186f84',
       tokens: [
         {
@@ -657,8 +685,8 @@ const mockedDeFis = {
       staked: {
         lpAmount: 1.9774791e-11,
         tokenAmounts: {
-          '0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167': 19.931956,
-          '0x5c74070fdea071359b86082bd9f9b3deaafbe32b': 19.992743665811453,
+          '0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167': 19.935012,
+          '0x5c74070fdea071359b86082bd9f9b3deaafbe32b': 19.98967894578597,
         },
       },
       rewards: 'unavailable',
@@ -667,6 +695,7 @@ const mockedDeFis = {
     {
       protocol: 'kks',
       type: 'kks_g',
+      prefix: 'KOKOS',
       address: '0xc75456755d68058bf182bcd41c6d9650db4ce89e',
       tokens: [
         {
@@ -691,12 +720,12 @@ const mockedDeFis = {
       wallet: null,
       staked: {
         tokenAmounts: {
-          '0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560': 3.006818920767778,
+          '0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560': 3.007296771527708,
         },
       },
       rewards: {
         tokenAmounts: {
-          '0x4fa62f1f404188ce860c8f0041d6ac3765a72e67': 0.000119897892664235,
+          '0x4fa62f1f404188ce860c8f0041d6ac3765a72e67': 0.00028063767617247,
         },
       },
       unstake: {
@@ -728,7 +757,7 @@ const mockedDeFis = {
         },
       ],
       staked: {
-        lpAmount: 20.001327288226857,
+        lpAmount: 20.001407133173302,
       },
       rewards: {
         tokenAmounts: {
@@ -754,7 +783,7 @@ const mockedDeFis = {
       wallet: null,
       staked: {
         tokenAmounts: {
-          '0x0000000000000000000000000000000000000000': 0.40022226327670285,
+          '0x0000000000000000000000000000000000000000': 0.4002376865421628,
         },
       },
       rewards: 'unavailable',
@@ -784,7 +813,7 @@ const mockedDeFis = {
       wallet: null,
       staked: {
         tokenAmounts: {
-          '0x0000000000000000000000000000000000000000': 0.5002329031022612,
+          '0x0000000000000000000000000000000000000000': 0.5002544983424083,
         },
       },
       rewards: 'unavailable',
@@ -814,7 +843,7 @@ const mockedDeFis = {
       wallet: null,
       staked: {
         tokenAmounts: {
-          '0x0000000000000000000000000000000000000000': 2.501206386500177,
+          '0x0000000000000000000000000000000000000000': 2.501314975134333,
         },
       },
       rewards: 'unavailable',
@@ -828,7 +857,7 @@ const mockedDeFis = {
       },
     },
   ],
-  cachedTime: 1665382032943,
+  cachedTime: 1665402609766,
 } as any as {
   stakings: DeFiStaking[];
   cachedTime: number;

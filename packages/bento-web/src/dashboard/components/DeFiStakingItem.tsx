@@ -33,6 +33,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
         </TokenLogoList>
 
         <Name>
+          {!!protocol.prefix && `${protocol.prefix} `}
           <Trans
             t={t}
             i18nKey={`defi-type-${protocol.type}`}
