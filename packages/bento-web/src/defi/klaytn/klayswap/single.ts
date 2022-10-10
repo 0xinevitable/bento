@@ -69,6 +69,7 @@ export const getSinglePoolBalance = async (
   return {
     protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LEVERAGE_SINGLE,
+    prefix: tokenInfo?.symbol,
     address: pool.address,
     wallet: null,
     tokens: [tokenInfo || null],
