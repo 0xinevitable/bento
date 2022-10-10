@@ -44,9 +44,9 @@ export const getLPPoolBalance = async (
     .mul(new BigNumber.BN(liquidity))
     .div(new BigNumber.BN(totalLiquidity));
 
-  const tokenInfoA = getTokenInfo(pool.tokenA);
+  const tokenInfoA = getTokenInfo(pool.tokenA.toLowerCase());
   const balanceA = Number(rawBalanceA) / 10 ** (tokenInfoA?.decimals || 18);
-  const tokenInfoB = getTokenInfo(pool.tokenB);
+  const tokenInfoB = getTokenInfo(pool.tokenB.toLowerCase());
   const balanceB = Number(rawBalanceB) / 10 ** (tokenInfoB?.decimals || 18);
 
   let tokenAmounts: Record<string, number | undefined> = {};
@@ -63,7 +63,7 @@ export const getLPPoolBalance = async (
     protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
     prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
-    address: pool.exchange_address,
+    address: pool.exchange_address.toLowerCase(),
     tokens,
     wallet: null,
     staked: {
