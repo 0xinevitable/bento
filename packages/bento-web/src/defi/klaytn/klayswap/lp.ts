@@ -1,9 +1,14 @@
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import BigNumber from 'bn.js';
 
+import {
+  DeFiStaking,
+  KlaytnDeFiProtocolType,
+  KlaytnDeFiType,
+} from '@/defi/types/staking';
+
 import IKSLP from '../abis/IKSLP.json';
 import { klaytnChain } from '../constants';
-import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
 
 const provider = klaytnChain._provider;
 
@@ -52,6 +57,7 @@ export const getLPPoolBalance = async (
   }
 
   return {
+    protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
     address: pool.exchange_address,
     tokens: [tokenInfoA || null, tokenInfoB || null],

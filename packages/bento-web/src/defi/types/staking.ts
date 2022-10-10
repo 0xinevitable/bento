@@ -1,9 +1,14 @@
 import { TokenInput } from '@bento/core';
 
-export enum OsmosisDeFiType {
-  ION_Governance = 'ion_g',
-  // ION_IBC = 'ion_ibc',
+export enum KlaytnDeFiProtocolType {
+  KLAYSTATION = 'kstn',
+  KLAYSWAP = 'ks',
+  KOKONUTSWAP = 'kks',
 }
+export enum OsmosisDeFiProtocolType {
+  ION = 'o_ion',
+}
+export type DeFiProtocolType = KlaytnDeFiProtocolType | OsmosisDeFiProtocolType;
 
 export enum KlayStationNodes {
   KLAYSTATION_NODE_HASHED_AND_OZYS = 'kstn_n_hno',
@@ -27,6 +32,11 @@ export enum KlaytnDeFiType {
   KLAYSTATION_NODE_FSN = 'kstn_n_fsn',
 }
 
+export enum OsmosisDeFiType {
+  ION_GOVERNANCE = 'ion_g',
+  // ION_IBC = 'ion_ibc',
+}
+
 export type DeFiType = KlaytnDeFiType | OsmosisDeFiType;
 
 type ContractAddressOrDenom = string;
@@ -39,11 +49,13 @@ export type AmountWithOptionalValue = {
 export type NativeInput = Omit<TokenInput, 'address'>;
 
 export type DeFiStaking = {
+  protocol: DeFiProtocolType;
   type: DeFiType;
 
   // representative contract address
   address: string;
   tokens: (TokenInput | NativeInput | null)[];
+  relatedTokens?: (TokenInput | NativeInput | null)[];
 
   wallet: AmountWithOptionalValue | null | 'unavailable';
   staked: AmountWithOptionalValue;
@@ -59,6 +71,7 @@ export type DeFiStaking = {
 
 export const Examples: Record<string, DeFiStaking> = {
   LP: {
+    protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
     address: '',
     tokens: [],
@@ -73,6 +86,7 @@ export const Examples: Record<string, DeFiStaking> = {
     unstake: null, // Unstaking period does not exist
   },
   MINIMAL: {
+    protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
     address: '0x00',
     tokens: [],
