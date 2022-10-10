@@ -4,16 +4,16 @@
   "protocol-kks": "코코넛스왑",
   "protocol-o_ion": "ION DAO",
 
-  "defi-type-ks_g": "KSP 거버넌스",
+  "defi-type-ks_g": "거버넌스",
   "defi-type-ks_lp": "페어 예치",
   "defi-type-ks_l_s": "단일 예치",
 
   "defi-type-kks_lp": "크립토 풀",
   "defi-type-kks_g": "거버넌스",
 
-  "defi-type-kstn_n_hno": "Hashed-Ozys",
-  "defi-type-kstn_n_ked": "The Korea Economic Daily",
-  "defi-type-kstn_n_fsn": "FSN",
+  "defi-type-kstn_n_hno": "거버넌스 카운슬 스테이킹 <validator>해시드-오지스</validator>",
+  "defi-type-kstn_n_ked": "거버넌스 카운슬 스테이킹 <validator>한국경제신문</validator>",
+  "defi-type-kstn_n_fsn": "거버넌스 카운슬 스테이킹 <validator>FSN</validator>",
 
   "Update your Profile": "프로필을 설정해보세요.",
   "Setup Now": "지금 하기",
