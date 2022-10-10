@@ -9,6 +9,7 @@ import {
 
 import IKSLP from '../abis/IKSLP.json';
 import { klaytnChain } from '../constants';
+import { getTokenInfo } from '../utils/getTokenInfo';
 
 const provider = klaytnChain._provider;
 
@@ -43,9 +44,9 @@ export const getLPPoolBalance = async (
     .mul(new BigNumber.BN(liquidity))
     .div(new BigNumber.BN(totalLiquidity));
 
-  const tokenInfoA = KLAYTN_TOKENS.find((v) => v.address === pool.tokenA);
+  const tokenInfoA = getTokenInfo(pool.tokenA);
   const balanceA = Number(rawBalanceA) / 10 ** (tokenInfoA?.decimals || 18);
-  const tokenInfoB = KLAYTN_TOKENS.find((v) => v.address === pool.tokenB);
+  const tokenInfoB = getTokenInfo(pool.tokenB);
   const balanceB = Number(rawBalanceB) / 10 ** (tokenInfoB?.decimals || 18);
 
   let tokenAmounts: Record<string, number | undefined> = {};
