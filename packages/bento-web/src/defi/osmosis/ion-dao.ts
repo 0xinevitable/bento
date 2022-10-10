@@ -2,7 +2,11 @@ import { safePromiseAll } from '@bento/common';
 import { OSMOSIS_MAINNET_ASSETLIST, TokenInput } from '@bento/core';
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 
-import { DeFiStaking, OsmosisDeFiType } from '../types/staking';
+import {
+  DeFiStaking,
+  OsmosisDeFiProtocolType,
+  OsmosisDeFiType,
+} from '../types/staking';
 
 const ION_DENOM = 'ion';
 const ION_ASSET = OSMOSIS_MAINNET_ASSETLIST.assets.find(
@@ -54,6 +58,7 @@ export const IONDAO = {
     );
 
     return {
+      protocol: OsmosisDeFiProtocolType.ION,
       type: OsmosisDeFiType.ION_GOVERNANCE,
       address: STAKING_ADDRESS,
       tokens: [ION_TOKEN_INFO],

@@ -1,4 +1,8 @@
-import { DeFiStaking, KlaytnDeFiType } from '@/defi/types/staking';
+import {
+  DeFiStaking,
+  KlaytnDeFiProtocolType,
+  KlaytnDeFiType,
+} from '@/defi/types/staking';
 import { axios } from '@/utils';
 
 import {
@@ -23,6 +27,7 @@ export const getGovernanceStake = async (
   const balance = Number(rawStakedBalance) / 10 ** KOKOS_TOKEN_INFO.decimals;
 
   return {
+    protocol: KlaytnDeFiProtocolType.KOKONUTSWAP,
     type: KlaytnDeFiType.KOKONUTSWAP_GOVERNANCE,
     address: STAKED_KOKOS_ADDRESS,
     tokens: [KOKOS_TOKEN_INFO],

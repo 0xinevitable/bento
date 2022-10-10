@@ -2,7 +2,11 @@ import { ZERO_ADDRESS } from '@bento/core';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import BigNumber from 'bn.js';
 
-import { DeFiStaking, KlaytnDeFiType } from '@/defi/types/staking';
+import {
+  DeFiStaking,
+  KlaytnDeFiProtocolType,
+  KlaytnDeFiType,
+} from '@/defi/types/staking';
 import { axios } from '@/utils';
 
 import KLAYSwapSingleLeveragePool from '../abis/KLAYSwapSingleLeveragePool.json';
@@ -67,6 +71,7 @@ export const getSinglePoolBalance = async (
   const balance = Number(rawBalance) / 10 ** (tokenInfo?.decimals || 18);
 
   return {
+    protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LEVERAGE_SINGLE,
     address: pool.address,
     wallet: null,
