@@ -3,13 +3,17 @@ import styled from 'styled-components';
 
 import { Colors } from '@/styles';
 
+import { InlineBadge } from './InlineBadge';
+
 type CollapsePanelProps = {
   title: string;
+  count?: number;
   children?: React.ReactNode;
 };
 
 export const CollapsePanel: React.FC<CollapsePanelProps> = ({
   title,
+  count,
   children,
 }) => {
   const { getCollapseProps, getToggleProps } = useCollapse({
@@ -18,7 +22,12 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
 
   return (
     <Container>
-      <Header {...getToggleProps()}>{title}</Header>
+      <Header {...getToggleProps()}>
+        <span>{title}</span>
+        {typeof count !== 'undefined' && (
+          <InlineBadge>{count.toLocaleString()}</InlineBadge>
+        )}
+      </Header>
       <Content {...getCollapseProps()}>{children}</Content>
     </Container>
   );
@@ -35,11 +44,15 @@ const Container = styled.div`
 `;
 
 const Header = styled.button`
-  color: ${Colors.gray100};
+  padding: 16px 14px;
+
   display: flex;
+  align-items: center;
+  gap: 2px;
+
   font-size: 18px;
   font-weight: bold;
-  padding: 16px 14px;
+  color: ${Colors.gray100};
 `;
 const Content = styled.div`
   padding: 8px 8px 12px;

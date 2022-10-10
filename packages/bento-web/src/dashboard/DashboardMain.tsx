@@ -21,6 +21,7 @@ import { Analytics } from '@/utils';
 import { CollapsePanel } from './components/CollapsePanel';
 import { DeFiStakingItem } from './components/DeFiStakingItem';
 import { EmptyBalance } from './components/EmptyBalance';
+import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
@@ -149,6 +150,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     () => groupBy(defis, 'protocol'),
     [defisJSONKey],
   );
+
+  console.log(defiStakesByProtocol);
 
   return (
     <React.Fragment>
@@ -283,12 +286,13 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                         ([protocol, defiProtocols]) => (
                           <CollapsePanel
                             title={t(`protocol-${protocol}`)}
+                            count={defiProtocols.length}
                             key={protocol}
                           >
                             <ul>
                               {defiProtocols.map((item) => (
                                 <DeFiStakingItem
-                                  key={item.address}
+                                  key={`${item.type}-${item.address}`}
                                   protocol={item}
                                 />
                               ))}
@@ -464,14 +468,4 @@ const SectionTitle = styled.h3`
   line-height: 100%;
   letter-spacing: -0.5px;
   color: ${Colors.gray400};
-`;
-
-const InlineBadge = styled(Badge)`
-  && {
-    margin-left: 8px;
-    padding: 6px;
-    display: inline-flex;
-    font-size: 13px;
-    backdrop-filter: none;
-  }
 `;
