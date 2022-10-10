@@ -11,9 +11,9 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { useDeFis } from '@/dashboard/utils/useDeFis';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
-import { DeFiStaking } from '@/defi/types/staking';
 import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
@@ -144,8 +144,11 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     }
   }, [currentTab]);
 
-  const defis = mockedDeFis;
-  const defiStakesByProtocol = groupBy(defis.stakings, 'protocol');
+  const { defis, defisJSONKey } = useDeFis(wallets);
+  const defiStakesByProtocol = useMemo(
+    () => groupBy(defis, 'protocol'),
+    [defisJSONKey],
+  );
 
   return (
     <React.Fragment>
@@ -269,32 +272,34 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 >
                   <span className="title">{t('DeFi Staking')}</span>
                   <InlineBadge>
-                    {defis.stakings.length > 0
-                      ? defis.stakings.length.toLocaleString()
-                      : '-'}
+                    {defis.length > 0 ? defis.length.toLocaleString() : '-'}
                   </InlineBadge>
                 </SectionTitle>
 
                 <AssetListCard>
-                  <Collapse>
-                    {Object.entries(defiStakesByProtocol).map(
-                      ([protocol, defiProtocols]) => (
-                        <CollapsePanel
-                          title={t(`protocol-${protocol}`)}
-                          key={protocol}
-                        >
-                          <ul>
-                            {defiProtocols.map((item) => (
-                              <DeFiStakingItem
-                                key={item.address}
-                                protocol={item}
-                              />
-                            ))}
-                          </ul>
-                        </CollapsePanel>
-                      ),
-                    )}
-                  </Collapse>
+                  {defis.length > 0 ? (
+                    <Collapse>
+                      {Object.entries(defiStakesByProtocol).map(
+                        ([protocol, defiProtocols]) => (
+                          <CollapsePanel
+                            title={t(`protocol-${protocol}`)}
+                            key={protocol}
+                          >
+                            <ul>
+                              {defiProtocols.map((item) => (
+                                <DeFiStakingItem
+                                  key={item.address}
+                                  protocol={item}
+                                />
+                              ))}
+                            </ul>
+                          </CollapsePanel>
+                        ),
+                      )}
+                    </Collapse>
+                  ) : (
+                    <EmptyBalance />
+                  )}
                 </AssetListCard>
               </div>
             </AnimatedTab>
@@ -470,395 +475,3 @@ const InlineBadge = styled(Badge)`
     backdrop-filter: none;
   }
 `;
-
-const mockedDeFis = {
-  stakings: [
-    {
-      protocol: 'scnr',
-      type: 'scnr_g',
-      prefix: 'SCNR',
-      address: '0x7c59930d1613ca2813e5793da72b324712f6899d',
-      tokens: [
-        {
-          symbol: 'SCNR',
-          name: 'Swapscanner',
-          decimals: 25,
-          address: '0x8888888888885b073f3c81258c27e83db228d5f3',
-          logo: 'https://api.swapscanner.io/api/tokens/0x8888888888885b073f3c81258c27e83db228d5f3/icon',
-        },
-      ],
-      wallet: null,
-      staked: {
-        value: 170.83407608543766,
-        tokenAmounts: {
-          '0x8888888888885b073f3c81258c27e83db228d5f3': 121.88285143451247,
-        },
-      },
-      rewards: 'unavailable',
-      unstake: 'unavailable',
-    },
-    {
-      protocol: 'kks',
-      type: 'kks_lp',
-      prefix: 'KLAY-KSP',
-      address: '0x1cE54D1DE574C620838a19294fef1aC70fC612a3',
-      tokens: [
-        {
-          symbol: 'KLAY',
-          decimals: 18,
-          name: 'Klaytn',
-          logo: '/assets/icons/klaytn.png',
-          coinGeckoId: 'klay-token',
-          address: '0x0000000000000000000000000000000000000000',
-        },
-        {
-          symbol: 'KSP',
-          name: 'KlaySwap Protocol',
-          decimals: 18,
-          address: '0xc6a2ad8cc6e4a7e08fc37cc5954be07d499e7654',
-          coinGeckoId: 'klayswap-protocol',
-          logo: '/assets/icons/klaytn/0xc6a2ad8cc6e4a7e08fc37cc5954be07d499e7654.png',
-        },
-      ],
-      relatedTokens: [
-        {
-          symbol: 'KSD',
-          name: 'Kokoa Stable Dollar',
-          decimals: 18,
-          address: '0x4fa62f1f404188ce860c8f0041d6ac3765a72e67',
-          coinGeckoId: 'kokoa-stable-dollar',
-          logo: '/assets/icons/klaytn/0x4fa62f1f404188ce860c8f0041d6ac3765a72e67.png',
-        },
-      ],
-      wallet: {
-        value: 0,
-        lpAmount: 0.1134314736491477,
-      },
-      staked: {
-        value: 0,
-        lpAmount: 0,
-      },
-      rewards: {
-        tokenAmounts: {
-          '0x4fa62f1f404188ce860c8f0041d6ac3765a72e67': 0,
-        },
-      },
-      unstake: null,
-    },
-    {
-      protocol: 'kks',
-      type: 'kks_lp',
-      prefix: '4NUTS',
-      address: '0x22e3aC1e6595B64266e0b062E01faE31d9cdD578',
-      tokens: [
-        {
-          symbol: 'KSD',
-          name: 'Kokoa Stable Dollar',
-          decimals: 18,
-          address: '0x4fa62f1f404188ce860c8f0041d6ac3765a72e67',
-          coinGeckoId: 'kokoa-stable-dollar',
-          logo: '/assets/icons/klaytn/0x4fa62f1f404188ce860c8f0041d6ac3765a72e67.png',
-        },
-        {
-          symbol: 'KDAI',
-          name: 'Klaytn Dai',
-          decimals: 18,
-          address: '0x5c74070fdea071359b86082bd9f9b3deaafbe32b',
-          coinGeckoId: 'klaytn-dai',
-          logo: '/assets/icons/klaytn/0x5c74070fdea071359b86082bd9f9b3deaafbe32b.png',
-        },
-        {
-          symbol: 'oUSDC',
-          name: 'Orbit Bridge Klaytn USDC',
-          decimals: 6,
-          address: '0x754288077d0ff82af7a5317c7cb8c444d421d103',
-          coinGeckoId: 'orbit-bridge-klaytn-usdc',
-          logo: '/assets/icons/klaytn/0x754288077d0ff82af7a5317c7cb8c444d421d103.png',
-        },
-        {
-          symbol: 'oUSDT',
-          name: 'Orbit Bridge Klaytn USD Tether',
-          decimals: 6,
-          address: '0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167',
-          coinGeckoId: 'orbit-bridge-klaytn-usd-tether',
-          logo: '/assets/icons/klaytn/0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167.png',
-        },
-      ],
-      relatedTokens: [
-        {
-          symbol: 'KSD',
-          name: 'Kokoa Stable Dollar',
-          decimals: 18,
-          address: '0x4fa62f1f404188ce860c8f0041d6ac3765a72e67',
-          coinGeckoId: 'kokoa-stable-dollar',
-          logo: '/assets/icons/klaytn/0x4fa62f1f404188ce860c8f0041d6ac3765a72e67.png',
-        },
-      ],
-      wallet: {
-        value: 0,
-        lpAmount: 5.428217695786448,
-      },
-      staked: {
-        value: 0,
-        lpAmount: 0,
-      },
-      rewards: {
-        tokenAmounts: {
-          '0x4fa62f1f404188ce860c8f0041d6ac3765a72e67': 0,
-        },
-      },
-      unstake: null,
-    },
-    {
-      protocol: 'ks',
-      type: 'ks_g',
-      prefix: 'KSP',
-      address: '0x2f3713f388bc4b8b364a7a2d8d57c5ff4e054830',
-      tokens: [
-        {
-          symbol: 'KSP',
-          name: 'KlaySwap Protocol',
-          decimals: 18,
-          address: '0xc6a2ad8cc6e4a7e08fc37cc5954be07d499e7654',
-          coinGeckoId: 'klayswap-protocol',
-          logo: '/assets/icons/klaytn/0xc6a2ad8cc6e4a7e08fc37cc5954be07d499e7654.png',
-        },
-      ],
-      wallet: null,
-      staked: {
-        tokenAmounts: {
-          '0xc6a2ad8cc6e4a7e08fc37cc5954be07d499e7654': 1,
-        },
-      },
-      rewards: 'unavailable',
-      unstake: null,
-    },
-    {
-      protocol: 'ks',
-      type: 'ks_l_s',
-      address: '0x4b419986e15018e6dc1c9dab1fa4824d8e2e06b5',
-      wallet: null,
-      tokens: [
-        {
-          symbol: 'oUSDT',
-          name: 'Orbit Bridge Klaytn USD Tether',
-          decimals: 6,
-          address: '0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167',
-          coinGeckoId: 'orbit-bridge-klaytn-usd-tether',
-          logo: '/assets/icons/klaytn/0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167.png',
-        },
-      ],
-      staked: {
-        lpAmount: 3.000387,
-      },
-      rewards: {
-        tokenAmounts: {
-          '0xc6a2ad8cc6e4a7e08fc37cc5954be07d499e7654': 0,
-        },
-      },
-      unstake: null,
-    },
-    {
-      protocol: 'ks',
-      type: 'ks_lp',
-      prefix: 'oUSDT + KDAI',
-      address: '0xc320066b25b731a11767834839fe57f9b2186f84',
-      tokens: [
-        {
-          symbol: 'oUSDT',
-          name: 'Orbit Bridge Klaytn USD Tether',
-          decimals: 6,
-          address: '0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167',
-          coinGeckoId: 'orbit-bridge-klaytn-usd-tether',
-          logo: '/assets/icons/klaytn/0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167.png',
-        },
-        {
-          symbol: 'KDAI',
-          name: 'Klaytn Dai',
-          decimals: 18,
-          address: '0x5c74070fdea071359b86082bd9f9b3deaafbe32b',
-          coinGeckoId: 'klaytn-dai',
-          logo: '/assets/icons/klaytn/0x5c74070fdea071359b86082bd9f9b3deaafbe32b.png',
-        },
-      ],
-      wallet: null,
-      staked: {
-        lpAmount: 1.9774791e-11,
-        tokenAmounts: {
-          '0xcee8faf64bb97a73bb51e115aa89c17ffa8dd167': 19.935012,
-          '0x5c74070fdea071359b86082bd9f9b3deaafbe32b': 19.98967894578597,
-        },
-      },
-      rewards: 'unavailable',
-      unstake: null,
-    },
-    {
-      protocol: 'kks',
-      type: 'kks_g',
-      prefix: 'KOKOS',
-      address: '0xc75456755d68058bf182bcd41c6d9650db4ce89e',
-      tokens: [
-        {
-          symbol: 'KOKOS',
-          name: 'i4i Finance',
-          decimals: 18,
-          address: '0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560',
-          coinGeckoId: 'i4i-finance',
-          logo: '/assets/icons/klaytn/0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560.png',
-        },
-      ],
-      relatedTokens: [
-        {
-          symbol: 'KSD',
-          name: 'Kokoa Stable Dollar',
-          decimals: 18,
-          address: '0x4fa62f1f404188ce860c8f0041d6ac3765a72e67',
-          coinGeckoId: 'kokoa-stable-dollar',
-          logo: '/assets/icons/klaytn/0x4fa62f1f404188ce860c8f0041d6ac3765a72e67.png',
-        },
-      ],
-      wallet: null,
-      staked: {
-        tokenAmounts: {
-          '0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560': 3.0073131905077917,
-        },
-      },
-      rewards: {
-        tokenAmounts: {
-          '0x4fa62f1f404188ce860c8f0041d6ac3765a72e67': 0.00028063767617247,
-        },
-      },
-      unstake: {
-        claimable: {
-          tokenAmounts: {
-            '0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560': 0,
-          },
-        },
-        pending: {
-          tokenAmounts: {
-            '0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560': 1,
-          },
-        },
-      },
-    },
-    {
-      protocol: 'ks',
-      type: 'ks_l_s',
-      address: '0xe4c3f5454a752bddda18ccd239bb1e00ca42d371',
-      wallet: null,
-      tokens: [
-        {
-          symbol: 'KLAY',
-          decimals: 18,
-          name: 'Klaytn',
-          logo: '/assets/icons/klaytn.png',
-          coinGeckoId: 'klay-token',
-          address: '0x0000000000000000000000000000000000000000',
-        },
-      ],
-      staked: {
-        lpAmount: 20.001407133173302,
-      },
-      rewards: {
-        tokenAmounts: {
-          '0xc6a2ad8cc6e4a7e08fc37cc5954be07d499e7654': 0,
-        },
-      },
-      unstake: null,
-    },
-    {
-      protocol: 'kstn',
-      type: 'kstn_n_hno',
-      address: '0xE33337cb6FbB68954fe1c3fDe2b21F56586632cD',
-      tokens: [
-        {
-          symbol: 'KLAY',
-          decimals: 18,
-          name: 'Klaytn',
-          logo: '/assets/icons/klaytn.png',
-          coinGeckoId: 'klay-token',
-          address: '0x0000000000000000000000000000000000000000',
-        },
-      ],
-      wallet: null,
-      staked: {
-        tokenAmounts: {
-          '0x0000000000000000000000000000000000000000': 0.40023821153258626,
-        },
-      },
-      rewards: 'unavailable',
-      unstake: {
-        claimable: 'unavailable',
-        pending: {
-          tokenAmounts: {
-            '0x0000000000000000000000000000000000000000': 1.2,
-          },
-        },
-      },
-    },
-    {
-      protocol: 'kstn',
-      type: 'kstn_n_ked',
-      address: '0xeFFa404DaC6ba720002974C54d57B20E89B22862',
-      tokens: [
-        {
-          symbol: 'KLAY',
-          decimals: 18,
-          name: 'Klaytn',
-          logo: '/assets/icons/klaytn.png',
-          coinGeckoId: 'klay-token',
-          address: '0x0000000000000000000000000000000000000000',
-        },
-      ],
-      wallet: null,
-      staked: {
-        tokenAmounts: {
-          '0x0000000000000000000000000000000000000000': 0.5002552681913378,
-        },
-      },
-      rewards: 'unavailable',
-      unstake: {
-        claimable: 'unavailable',
-        pending: {
-          tokenAmounts: {
-            '0x0000000000000000000000000000000000000000': 0,
-          },
-        },
-      },
-    },
-    {
-      protocol: 'kstn',
-      type: 'kstn_n_fsn',
-      address: '0x962CDB28e662B026dF276E5EE7FDf13a06341d68',
-      tokens: [
-        {
-          symbol: 'KLAY',
-          decimals: 18,
-          name: 'Klaytn',
-          logo: '/assets/icons/klaytn.png',
-          coinGeckoId: 'klay-token',
-          address: '0x0000000000000000000000000000000000000000',
-        },
-      ],
-      wallet: null,
-      staked: {
-        tokenAmounts: {
-          '0x0000000000000000000000000000000000000000': 2.5013186653252535,
-        },
-      },
-      rewards: 'unavailable',
-      unstake: {
-        claimable: 'unavailable',
-        pending: {
-          tokenAmounts: {
-            '0x0000000000000000000000000000000000000000': 0,
-          },
-        },
-      },
-    },
-  ],
-  cachedTime: 1665403316567,
-} as any as {
-  stakings: DeFiStaking[];
-  cachedTime: number;
-};

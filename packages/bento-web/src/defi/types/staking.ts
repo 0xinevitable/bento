@@ -75,6 +75,11 @@ export type DeFiStaking = {
     | 'unavailable';
 };
 
+export type DeFiStakingResponse = {
+  stakings: DeFiStaking[];
+  cachedTime: number;
+};
+
 export const Examples: Record<string, DeFiStaking> = {
   LP: {
     protocol: KlaytnDeFiProtocolType.KLAYSWAP,
