@@ -132,7 +132,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     return;
   }
 
-  res.status(200).json({ stakings, cachedTime });
+  res.status(200).json({ walletAddress, stakings, cachedTime });
 };
 
 export default withCORS(handler);
