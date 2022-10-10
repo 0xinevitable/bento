@@ -368,18 +368,6 @@ export class KlaytnChain implements Chain {
     const exchangeRatio = amountOfKLAYStaked / amountOfSCNRStaked;
     return exchangeRatio * klayPrice;
   });
-  _SCNR_ADDRESS = '0x8888888888885b073f3c81258c27e83db228d5f3';
-  _SCNR_STAKING = '0x7c59930d1613ca2813e5793da72b324712f6899d';
-  getStakedSCNRInGovernance = async (address: string) => {
-    const staking = new this._provider.klay.Contract(
-      MinimalABIs.Staking,
-      this._SCNR_STAKING,
-    );
-    const stakedBalance = await staking.methods
-      .stakedBalanceOf(address, this._SCNR_ADDRESS)
-      .call();
-    return stakedBalance / 10 ** 25;
-  };
 
   getTokenBalances = async (walletAddress: string) => {
     const items = await getTokenBalancesFromCovalent({
@@ -401,9 +389,8 @@ export class KlaytnChain implements Chain {
           ? Number(token.balance) / 10 ** token.contract_decimals
           : 0;
       const symbol = token.contract_ticker_symbol;
-      const STAKING_ENABLED = ['SCNR']; // stakable tokens can be indexed with balance 0
 
-      if (balance <= 0 && !STAKING_ENABLED.includes(symbol)) {
+      if (balance <= 0) {
         return [];
       }
       const tokenInfo = KLAYTN_TOKENS.find(
@@ -419,11 +406,14 @@ export class KlaytnChain implements Chain {
           // );
           return undefined;
         }
+
+        // FIXME: Remove hardcoded
         if (symbol === 'SCNR') {
           return this._getSCNRTokenPrice().catch(() => 0);
         }
         return 0;
       };
+
       const price = await getPrice();
       const balanceInfo = {
         walletAddress,
@@ -435,24 +425,9 @@ export class KlaytnChain implements Chain {
         logo: tokenInfo?.logo,
         coinGeckoId: tokenInfo?.coinGeckoId,
         coinMarketCapId: tokenInfo?.coinMarketCapId,
-        staking: tokenInfo?.staking,
         balance,
         price,
       };
-      if (symbol === 'SCNR') {
-        const staked = await this.getStakedSCNRInGovernance(
-          walletAddress,
-        ).catch((error) => {
-          console.error(error);
-          // FIXME: Proper error handling
-          return 0;
-        });
-
-        return [
-          balanceInfo,
-          { ...balanceInfo, balance: staked, staking: true },
-        ];
-      }
       return balanceInfo;
     }) as Promise<TokenBalance>[];
     return safePromiseAll(promises);
