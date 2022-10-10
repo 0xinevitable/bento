@@ -15,9 +15,11 @@ export const getLPPoolList = async () => {
   return data.pools;
 };
 
+const LP_TOKEN_DECIMALS = 18;
+
 export const getLPPoolBalance = async (
   _account: string,
-  lpTokenBalance: string,
+  lpTokenRawBalance: string,
   pool: KokonutSwap.Pool,
   pools: KokonutSwap.Pool[],
 ): Promise<DeFiStaking> => {
@@ -30,12 +32,12 @@ export const getLPPoolBalance = async (
   const farm = farmPools.find(
     (v) => v.poolAddress.toLowerCase() === poolAddress,
   );
-  const lpStaked = Number(farm?.user.stakedAmount || 0);
-  const lpValue = Number(farm?.user.stakedValue || 0);
+  const lpStaked = Number(farm?.user.stakedAmount || 0); // formatted with decimals
+  const lpValue = Number(farm?.user.stakedValue || 0); // formatted with decimals
 
   // get price with lpStaked, lpValue
   const lpPrice = lpValue / lpStaked;
-  const lpBalanceInWallet = Number(lpTokenBalance);
+  const lpBalanceInWallet = Number(lpTokenRawBalance) / 10 ** LP_TOKEN_DECIMALS;
   let lpBalanceInWalletValue = lpBalanceInWallet * lpPrice;
   if (isNaN(lpBalanceInWalletValue)) {
     lpBalanceInWalletValue = 0;
