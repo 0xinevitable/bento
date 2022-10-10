@@ -6,7 +6,7 @@ import {
   DeFiStaking,
   OsmosisDeFiProtocolType,
   OsmosisDeFiType,
-} from '../types/staking';
+} from '@/defi/types/staking';
 
 const ION_DENOM = 'ion';
 const ION_ASSET = OSMOSIS_MAINNET_ASSETLIST.assets.find(

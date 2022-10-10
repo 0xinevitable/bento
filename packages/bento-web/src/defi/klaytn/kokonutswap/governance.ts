@@ -8,6 +8,7 @@ import { axios } from '@/utils';
 import {
   KOKOS_TOKEN_INFO,
   KSD_ADDRESS,
+  KSD_TOKEN_INFO,
   STAKED_KOKOS_ADDRESS,
 } from './constants';
 
@@ -31,6 +32,7 @@ export const getGovernanceStake = async (
     type: KlaytnDeFiType.KOKONUTSWAP_GOVERNANCE,
     address: STAKED_KOKOS_ADDRESS,
     tokens: [KOKOS_TOKEN_INFO],
+    relatedTokens: [KSD_TOKEN_INFO],
     wallet: null,
     staked: {
       tokenAmounts: {
