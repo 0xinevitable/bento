@@ -1,15 +1,15 @@
 import { EEEE_ADDRESS, TokenInput } from '@bento/core';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 
-import { axios } from '@/utils';
-
-import { klaytnChain } from '../constants';
 import {
   DeFiStaking,
   KlaytnDeFiProtocolType,
   KlaytnDeFiType,
   NativeInput,
-} from '../types/staking';
+} from '@/defi/types/staking';
+import { axios } from '@/utils';
+
+import { klaytnChain } from '../constants';
 import { KSD_ADDRESS } from './constants';
 
 const getTokenInfo = (

@@ -1,10 +1,10 @@
-import { axios } from '@/utils';
-
 import {
   DeFiStaking,
   KlaytnDeFiProtocolType,
   KlaytnDeFiType,
-} from '../types/staking';
+} from '@/defi/types/staking';
+import { axios } from '@/utils';
+
 import {
   KOKOS_TOKEN_INFO,
   KSD_ADDRESS,

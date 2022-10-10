@@ -1,13 +1,14 @@
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import BigNumber from 'bn.js';
 
-import IKSLP from '../abis/IKSLP.json';
-import { klaytnChain } from '../constants';
 import {
   DeFiStaking,
   KlaytnDeFiProtocolType,
   KlaytnDeFiType,
-} from '../types/staking';
+} from '@/defi/types/staking';
+
+import IKSLP from '../abis/IKSLP.json';
+import { klaytnChain } from '../constants';
 
 const provider = klaytnChain._provider;
 

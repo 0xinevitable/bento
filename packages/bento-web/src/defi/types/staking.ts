@@ -31,8 +31,9 @@ export enum KlaytnDeFiType {
   KLAYSTATION_NODE_KED = 'kstn_n_ked',
   KLAYSTATION_NODE_FSN = 'kstn_n_fsn',
 }
+
 export enum OsmosisDeFiType {
-  ION_Governance = 'ion_g',
+  ION_GOVERNANCE = 'ion_g',
   // ION_IBC = 'ion_ibc',
 }
 

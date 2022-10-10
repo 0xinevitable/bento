@@ -1,5 +1,8 @@
+import { ZERO_ADDRESS } from '@bento/core';
+
+import { DeFiStaking, KlaytnDeFiProtocolType } from '@/defi/types/staking';
+
 import { klaytnChain } from '../constants';
-import { DeFiStaking, KlaytnDeFiProtocolType } from '../types/staking';
 import {
   NODE_TYPE__BY_CONTRACT_ADDRESS,
   PROTOCOL_ABI,
@@ -7,7 +10,6 @@ import {
 } from './constants';
 
 const provider = klaytnChain._provider;
-const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 export const getDelegations = async (
   account: string,
