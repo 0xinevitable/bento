@@ -63,7 +63,7 @@ export const getLPPoolBalance = async (
     type: KlaytnDeFiType.KLAYSWAP_LP,
     prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
     address: pool.exchange_address,
-    tokens: [tokenInfoA || null, tokenInfoB || null],
+    tokens,
     wallet: null,
     staked: {
       lpAmount: Number(liquidity) / 10 ** 18,
