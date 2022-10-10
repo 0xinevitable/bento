@@ -2641,6 +2641,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next-plugin-svgr", "npm:1.1.2"],\
             ["postcss", "npm:8.4.17"],\
             ["prop-types", "npm:15.8.1"],\
+            ["rc-collapse", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.4.2"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:18.2.0"],\
             ["react-intersection-observer", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:9.4.0"],\
@@ -12726,6 +12727,95 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["randomfill", "npm:1.0.4"],\
             ["randombytes", "npm:2.1.0"],\
             ["safe-buffer", "npm:5.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["rc-collapse", [\
+        ["npm:3.4.2", {\
+          "packageLocation": "./.yarn/cache/rc-collapse-npm-3.4.2-61d54db8c3-617409c4ca.zip/node_modules/rc-collapse/",\
+          "packageDependencies": [\
+            ["rc-collapse", "npm:3.4.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.4.2", {\
+          "packageLocation": "./.yarn/__virtual__/rc-collapse-virtual-67c422ea17/0/cache/rc-collapse-npm-3.4.2-61d54db8c3-617409c4ca.zip/node_modules/rc-collapse/",\
+          "packageDependencies": [\
+            ["rc-collapse", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.4.2"],\
+            ["@babel/runtime", "npm:7.19.0"],\
+            ["@types/react", "npm:18.0.21"],\
+            ["@types/react-dom", "npm:18.0.6"],\
+            ["classnames", "npm:2.3.2"],\
+            ["rc-motion", "virtual:67c422ea17d46c497e0bca4fad73679d38ce910ce40c9b444c850a85f86f9e09affcbbad5746fb1565e143404a8bee39cedcf2365e785135e8c952a7e06ccb33#npm:2.6.2"],\
+            ["rc-util", "virtual:67c422ea17d46c497e0bca4fad73679d38ce910ce40c9b444c850a85f86f9e09affcbbad5746fb1565e143404a8bee39cedcf2365e785135e8c952a7e06ccb33#npm:5.24.4"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:18.2.0"],\
+            ["shallowequal", "npm:1.1.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["rc-motion", [\
+        ["npm:2.6.2", {\
+          "packageLocation": "./.yarn/cache/rc-motion-npm-2.6.2-2bd280dd0a-e91ec8a9f8.zip/node_modules/rc-motion/",\
+          "packageDependencies": [\
+            ["rc-motion", "npm:2.6.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:67c422ea17d46c497e0bca4fad73679d38ce910ce40c9b444c850a85f86f9e09affcbbad5746fb1565e143404a8bee39cedcf2365e785135e8c952a7e06ccb33#npm:2.6.2", {\
+          "packageLocation": "./.yarn/__virtual__/rc-motion-virtual-e7676cd5a6/0/cache/rc-motion-npm-2.6.2-2bd280dd0a-e91ec8a9f8.zip/node_modules/rc-motion/",\
+          "packageDependencies": [\
+            ["rc-motion", "virtual:67c422ea17d46c497e0bca4fad73679d38ce910ce40c9b444c850a85f86f9e09affcbbad5746fb1565e143404a8bee39cedcf2365e785135e8c952a7e06ccb33#npm:2.6.2"],\
+            ["@babel/runtime", "npm:7.19.0"],\
+            ["@types/react", "npm:18.0.21"],\
+            ["@types/react-dom", "npm:18.0.6"],\
+            ["classnames", "npm:2.3.2"],\
+            ["rc-util", "virtual:67c422ea17d46c497e0bca4fad73679d38ce910ce40c9b444c850a85f86f9e09affcbbad5746fb1565e143404a8bee39cedcf2365e785135e8c952a7e06ccb33#npm:5.24.4"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["rc-util", [\
+        ["npm:5.24.4", {\
+          "packageLocation": "./.yarn/cache/rc-util-npm-5.24.4-34e576185f-efda306dcf.zip/node_modules/rc-util/",\
+          "packageDependencies": [\
+            ["rc-util", "npm:5.24.4"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:67c422ea17d46c497e0bca4fad73679d38ce910ce40c9b444c850a85f86f9e09affcbbad5746fb1565e143404a8bee39cedcf2365e785135e8c952a7e06ccb33#npm:5.24.4", {\
+          "packageLocation": "./.yarn/__virtual__/rc-util-virtual-d64636417e/0/cache/rc-util-npm-5.24.4-34e576185f-efda306dcf.zip/node_modules/rc-util/",\
+          "packageDependencies": [\
+            ["rc-util", "virtual:67c422ea17d46c497e0bca4fad73679d38ce910ce40c9b444c850a85f86f9e09affcbbad5746fb1565e143404a8bee39cedcf2365e785135e8c952a7e06ccb33#npm:5.24.4"],\
+            ["@babel/runtime", "npm:7.19.0"],\
+            ["@types/react", "npm:18.0.21"],\
+            ["@types/react-dom", "npm:18.0.6"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:18.2.0"],\
+            ["react-is", "npm:16.13.1"],\
+            ["shallowequal", "npm:1.1.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
