@@ -42,6 +42,12 @@ const Header = styled.button`
   padding: 16px 14px;
 `;
 const Content = styled.div`
-  padding: 4px 14px 14px;
+  padding: 8px 8px 12px;
   border-top: 1px solid ${Colors.gray600};
+
+  & > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
 `;

@@ -1,8 +1,14 @@
+import { shortenAddress } from '@bento/common';
 import { Trans, useTranslation } from 'next-i18next';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { DeFiStaking } from '@/defi/types/staking';
 import { Colors } from '@/styles';
+
+const formatNumber = (value: number | null | undefined): string =>
+  (value || 0).toLocaleString(undefined, {
+    maximumSignificantDigits: 6,
+  });
 
 type DeFiStakingItemProps = {
   protocol: DeFiStaking;
@@ -13,18 +19,19 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   const { t } = useTranslation('dashboard');
 
   return (
-    <Container style={{ color: 'white' }}>
+    <Container>
       <Header>
         <TokenLogoList>
           {protocol.tokens.map((token, index) => (
-            <TokenLogo
-              key={`token-${index}`}
-              alt={token?.name || token?.symbol || 'Unknown'}
-              src={token?.logo}
-            />
+            <TokenLogoWrapper key={`token-${index}`}>
+              <TokenLogo
+                alt={token?.name || token?.symbol || 'Unknown'}
+                src={token?.logo}
+              />
+            </TokenLogoWrapper>
           ))}
         </TokenLogoList>
-        {/* <Name>{t(`defi-type-${protocol.type}`)}</Name> */}
+
         <Name>
           <Trans
             t={t}
@@ -36,64 +43,175 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
         </Name>
       </Header>
 
-      <span>wallet</span>
-      {!protocol.wallet ? null : protocol.wallet === 'unavailable' ? (
-        t('unavailable')
-      ) : (
-        <span style={{ color: 'white', display: 'flex' }}>
-          {protocol.wallet.lpAmount} LP ({`$${protocol.wallet.value || '?'}`})
-          <br />
-          {!!protocol.wallet.tokenAmounts &&
-            Object.entries(protocol.wallet.tokenAmounts).map(
-              ([tokenContract, tokenAmount]) => {
-                const token = protocol.tokens.find(
-                  (token) =>
-                    !!token &&
-                    'address' in token &&
-                    token.address === tokenContract,
-                );
-                return (
-                  <span key={`token-${tokenContract}`}>
-                    {`${tokenAmount || 0} ${token?.symbol}`}
-                    &nbsp;
-                  </span>
-                );
-              },
-            )}
-        </span>
-      )}
+      <RepresentativeContractAddress>
+        {shortenAddress(protocol.address)}
+      </RepresentativeContractAddress>
 
-      <span>staked</span>
-      <span style={{ color: 'white', display: 'flex' }}>
-        {protocol.staked.lpAmount} LP ({`$${protocol.staked.value || '?'}`})
-        <br />
-        {!!protocol.staked.tokenAmounts &&
-          Object.entries(protocol.staked.tokenAmounts).map(
-            ([tokenContract, tokenAmount]) => {
-              const token = protocol.tokens.find(
-                (token) =>
-                  !!token &&
-                  'address' in token &&
-                  token.address === tokenContract,
-              );
-              return (
-                <span key={`token-${tokenContract}`}>
-                  {`${tokenAmount || 0} ${token?.symbol}`}
-                  &nbsp;
-                </span>
-              );
-            },
-          )}
-      </span>
+      <InfoList>
+        {!!protocol.wallet && (
+          <InfoItem>
+            <span>wallet</span>
+            {protocol.wallet === 'unavailable' ? (
+              t('unavailable')
+            ) : (
+              <span>
+                {formatNumber(protocol.wallet.lpAmount)} LP (
+                {`$${protocol.wallet.value || '?'}`})
+                <br />
+                {!!protocol.wallet.tokenAmounts &&
+                  Object.entries(protocol.wallet.tokenAmounts).map(
+                    ([tokenContract, tokenAmount]) => {
+                      const token = protocol.tokens.find(
+                        (token) =>
+                          !!token &&
+                          'address' in token &&
+                          token.address === tokenContract,
+                      );
+                      return (
+                        <span key={`token-${tokenContract}`}>
+                          {`${formatNumber(tokenAmount)} ${token?.symbol}`}
+                          &nbsp;
+                        </span>
+                      );
+                    },
+                  )}
+              </span>
+            )}
+          </InfoItem>
+        )}
+
+        <InfoItem>
+          <span>staked</span>
+          <span>
+            {formatNumber(protocol.staked.lpAmount)} LP (
+            {`$${formatNumber(protocol.staked.value) || '?'}`})
+            <br />
+            {!!protocol.staked.tokenAmounts &&
+              Object.entries(protocol.staked.tokenAmounts).map(
+                ([tokenContract, tokenAmount]) => {
+                  const token = protocol.tokens.find(
+                    (token) =>
+                      !!token &&
+                      'address' in token &&
+                      token.address === tokenContract,
+                  );
+                  return (
+                    <span key={`token-${tokenContract}`}>
+                      {`${formatNumber(tokenAmount)} ${token?.symbol}`}
+                      &nbsp;
+                    </span>
+                  );
+                },
+              )}
+          </span>
+        </InfoItem>
+
+        {!!protocol.unstake && (
+          <InfoItem>
+            <span>unstake</span>
+            {protocol.unstake === 'unavailable' ? (
+              t('unavailable')
+            ) : (
+              <>
+                {!!protocol.unstake.claimable && (
+                  <>
+                    <span>claimable</span>
+                    <span>
+                      {protocol.unstake.claimable === 'unavailable' ? (
+                        t('unavailable')
+                      ) : (
+                        <>
+                          {formatNumber(protocol.unstake.claimable.lpAmount)} LP
+                          (
+                          {`$${
+                            formatNumber(protocol.unstake.claimable.value) ||
+                            '?'
+                          }`}
+                          )
+                          <br />
+                          {!!protocol.unstake.claimable.tokenAmounts &&
+                            Object.entries(
+                              protocol.unstake.claimable.tokenAmounts,
+                            ).map(([tokenContract, tokenAmount]) => {
+                              const token = protocol.tokens.find(
+                                (token) =>
+                                  !!token &&
+                                  'address' in token &&
+                                  token.address === tokenContract,
+                              );
+                              return (
+                                <span key={`token-${tokenContract}`}>
+                                  {`${formatNumber(tokenAmount)} ${
+                                    token?.symbol
+                                  }`}
+                                  &nbsp;
+                                </span>
+                              );
+                            })}
+                        </>
+                      )}
+                    </span>
+                  </>
+                )}
+
+                {!!protocol.unstake.pending && (
+                  <>
+                    <span>pending</span>
+                    <span>
+                      {protocol.unstake.pending === 'unavailable' ? (
+                        t('unavailable')
+                      ) : (
+                        <>
+                          {formatNumber(protocol.unstake.pending.lpAmount)} LP (
+                          {`$${
+                            formatNumber(protocol.unstake.pending.value) || '?'
+                          }`}
+                          )
+                          <br />
+                          {!!protocol.unstake.pending.tokenAmounts &&
+                            Object.entries(
+                              protocol.unstake.pending.tokenAmounts,
+                            ).map(([tokenContract, tokenAmount]) => {
+                              const token = protocol.tokens.find(
+                                (token) =>
+                                  !!token &&
+                                  'address' in token &&
+                                  token.address === tokenContract,
+                              );
+                              return (
+                                <span key={`token-${tokenContract}`}>
+                                  {`${formatNumber(tokenAmount)} ${
+                                    token?.symbol
+                                  }`}
+                                  &nbsp;
+                                </span>
+                              );
+                            })}
+                        </>
+                      )}
+                    </span>
+                  </>
+                )}
+              </>
+            )}
+          </InfoItem>
+        )}
+      </InfoList>
     </Container>
   );
 };
 
 const Container = styled.li`
+  padding: 8px 12px;
   width: 100%;
+
   display: flex;
   flex-direction: column;
-  padding: 8px 0;
+  gap: 6px;
+
+  border-radius: 8px;
+  border: 1px solid ${Colors.gray700};
+  background-color: ${Colors.gray850};
 `;
 const Header = styled.div`
   display: flex;
@@ -106,8 +224,9 @@ const Name = styled.h5`
   gap: 6px;
 
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
+  letter-spacing: -0.8px;
 `;
 const ValidatorBadge = styled.span`
   width: fit-content;
@@ -134,14 +253,48 @@ const ValidatorBadge = styled.span`
 const TokenLogoList = styled.div`
   display: flex;
 `;
-const TokenLogo = styled.img`
-  width: 32px;
-  min-width: 32px;
-  height: 32px;
-  border: 1px solid rgba(0, 0, 0, 0.45);
+const fixedSize = (size: string) => css`
+  width: ${size};
+  min-width: ${size};
+  max-width: ${size};
+  height: ${size};
+  max-height: ${size};
+  max-height: ${size};
+`;
+const TokenLogoWrapper = styled.div`
+  ${fixedSize('40px')}
+  padding: 1px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.45);
   border-radius: 50%;
 
   &:not(:first-of-type) {
     margin-left: -8px;
   }
+`;
+const TokenLogo = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const RepresentativeContractAddress = styled.span`
+  color: ${Colors.gray200};
+`;
+
+const InfoList = styled.ul`
+  width: 100%;
+  display: flex;
+  gap: 8px;
+`;
+const InfoItem = styled.li`
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  border-radius: 8px;
+  background-color: ${Colors.gray800};
+  color: ${Colors.gray400};
 `;
