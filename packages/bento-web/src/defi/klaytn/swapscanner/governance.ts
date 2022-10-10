@@ -1,3 +1,5 @@
+import { safePromiseAll } from '@bento/common';
+
 import {
   DeFiStaking,
   KlaytnDeFiProtocolType,
@@ -10,6 +12,7 @@ import {
   SCNR_STAKING_ADDRESS,
   SCNR_TOKEN_INFO,
 } from './constants';
+import { getSCNRTokenPrice } from './lp';
 
 const provider = klaytnChain._provider;
 export const getGovernanceStake = async (
@@ -19,9 +22,13 @@ export const getGovernanceStake = async (
     MINIMAL_ABIS.Staking,
     SCNR_STAKING_ADDRESS,
   );
-  const stakedBalance = await staking.methods
-    .stakedBalanceOf(account, SCNR_TOKEN_INFO.address)
-    .call();
+  const [stakedRawBalance, tokenPrice] = (await safePromiseAll([
+    staking.methods.stakedBalanceOf(account, SCNR_TOKEN_INFO.address).call(),
+    getSCNRTokenPrice(),
+  ])) as [any, number];
+
+  const stakedBalance =
+    Number(stakedRawBalance) / 10 ** SCNR_TOKEN_INFO.decimals;
 
   return {
     protocol: KlaytnDeFiProtocolType.SWAPSCANNER,
@@ -31,6 +38,7 @@ export const getGovernanceStake = async (
     tokens: [SCNR_TOKEN_INFO],
     wallet: null,
     staked: {
+      value: stakedBalance * tokenPrice,
       tokenAmounts: {
         [SCNR_TOKEN_INFO.address]: stakedBalance,
       },
