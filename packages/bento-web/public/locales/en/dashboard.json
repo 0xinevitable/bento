@@ -1,1 +1,17 @@
-{}
+{
+  "protocol-kstn": "KLAYSTATION",
+  "protocol-ks": "KLAYswap",
+  "protocol-kks": "KokonutSwap",
+  "protocol-o_ion": "ION DAO",
+
+  "defi-type-ks_g": "KSP Governance",
+  "defi-type-ks_lp": "Pair Deposit",
+  "defi-type-ks_l_s": "Single-side Deposit",
+
+  "defi-type-kks_lp": "Crypto Pool",
+  "defi-type-kks_g": "Governance",
+
+  "defi-type-kstn_n_hno": "Hashed-Ozys",
+  "defi-type-kstn_n_ked": "The Korea Economic Daily",
+  "defi-type-kstn_n_fsn": "FSN"
+}

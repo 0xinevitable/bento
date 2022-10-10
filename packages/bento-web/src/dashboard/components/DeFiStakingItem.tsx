@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import styled from 'styled-components';
 
 import { DeFiStaking } from '@/defi/types/staking';
@@ -8,9 +9,11 @@ type DeFiStakingItemProps = {
 export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   protocol,
 }) => {
+  const { t } = useTranslation('dashboard');
+
   return (
     <Container>
-      <Name>{protocol.type}</Name>
+      <Name>{t(`defi-type-${protocol.type}`)}</Name>
       <TokenLogoList>
         {protocol.tokens.map((token, index) => (
           <TokenLogo

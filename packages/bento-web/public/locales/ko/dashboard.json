@@ -1,4 +1,20 @@
 {
+  "protocol-kstn": "클레이스테이션",
+  "protocol-ks": "클레이스왑",
+  "protocol-kks": "코코넛 스왑",
+  "protocol-o_ion": "ION DAO",
+
+  "defi-type-ks_g": "KSP 거버넌스",
+  "defi-type-ks_lp": "페어 예치",
+  "defi-type-ks_l_s": "단일 예치",
+
+  "defi-type-kks_lp": "크립토 풀",
+  "defi-type-kks_g": "거버넌스",
+
+  "defi-type-kstn_n_hno": "Hashed-Ozys",
+  "defi-type-kstn_n_ked": "The Korea Economic Daily",
+  "defi-type-kstn_n_fsn": "FSN",
+
   "Update your Profile": "프로필을 설정해보세요.",
   "Setup Now": "지금 하기",
   "Edit Profile": "프로필 고치기",
