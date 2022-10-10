@@ -73,6 +73,8 @@ const Container = styled.div`
   flex-direction: column;
   gap: 200px;
 
+  background-color: ${Colors.gray900};
+
   section * {
     &:not(h1, h1 span) {
       transition: all 0.2s ease-in-out;
