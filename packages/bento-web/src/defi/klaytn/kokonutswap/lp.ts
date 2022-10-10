@@ -3,9 +3,9 @@ import {
   KlaytnDeFiProtocolType,
   KlaytnDeFiType,
 } from '@/defi/types/staking';
-import { getTokenInfo } from '@/defi/utils/getTokenInfo';
 import { axios } from '@/utils';
 
+import { getTokenInfo } from '../utils/getTokenInfo';
 import { KSD_ADDRESS, KSD_TOKEN_INFO } from './constants';
 
 export const getLPPoolList = async () => {
