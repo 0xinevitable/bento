@@ -1,5 +1,3 @@
-import { ZERO_ADDRESS } from '@bento/core';
-import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import BigNumber from 'bn.js';
 
 import { axios } from '@/utils';
@@ -7,6 +5,7 @@ import { axios } from '@/utils';
 import KLAYSwapSingleLeveragePool from '../abis/KLAYSwapSingleLeveragePool.json';
 import { klaytnChain } from '../constants';
 import { DeFiStaking, KlaytnDeFiType } from '../types/staking';
+import { getTokenInfo } from '../utils/getTokenInfo';
 import { KSP_TOKEN_INFO } from './constants';
 
 const provider = klaytnChain._provider;
@@ -60,10 +59,7 @@ export const getSinglePoolBalance = async (
   // NOTE: Rewarding token is KSP
   const rewards = Number(rawRewards) / 10 ** KSP_TOKEN_INFO.decimals;
 
-  const tokenInfo =
-    pool.token === ZERO_ADDRESS
-      ? klaytnChain.currency
-      : KLAYTN_TOKENS.find((v) => v.address === pool.token);
+  const tokenInfo = getTokenInfo(pool.token);
   const balance = Number(rawBalance) / 10 ** (tokenInfo?.decimals || 18);
 
   return {

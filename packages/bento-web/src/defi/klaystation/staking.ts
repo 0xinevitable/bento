@@ -31,7 +31,7 @@ export const getDelegations = async (
     return {
       type: nodeType,
       address: stakingInfo.delegation,
-      tokens: [klaytnChain.currency],
+      tokens: [{ ...klaytnChain.currency, address: ZERO_ADDRESS }],
       wallet: null,
       staked: {
         tokenAmounts: {

@@ -44,6 +44,7 @@ export type DeFiStaking = {
   // representative contract address
   address: string;
   tokens: (TokenInput | NativeInput | null)[];
+  relatedTokens?: (TokenInput | NativeInput | null)[];
 
   wallet: AmountWithOptionalValue | null | 'unavailable';
   staked: AmountWithOptionalValue;
