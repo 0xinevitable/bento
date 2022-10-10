@@ -1,4 +1,3 @@
-import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
 import BigNumber from 'bn.js';
 
 import {
