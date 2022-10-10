@@ -16,7 +16,7 @@ import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
-import { Analytics } from '@/utils';
+import { Analytics, FeatureFlags } from '@/utils';
 
 import { CollapsePanel } from './components/CollapsePanel';
 import { DeFiStakingItem } from './components/DeFiStakingItem';
@@ -151,8 +151,6 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     [defisJSONKey],
   );
 
-  console.log(defiStakesByProtocol);
-
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
@@ -264,49 +262,51 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 </AssetListCard>
               </div>
 
-              <div>
-                <SectionTitle
-                  style={{
-                    marginTop: 12,
-                    marginBottom: 12,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <span className="title">{t('DeFi Staking')}</span>
-                  <InlineBadge>
-                    {defis.length > 0 ? defis.length.toLocaleString() : '-'}
-                  </InlineBadge>
-                </SectionTitle>
+              {FeatureFlags.isKlaytnDeFiEnabled && (
+                <div>
+                  <SectionTitle
+                    style={{
+                      marginTop: 12,
+                      marginBottom: 12,
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <span className="title">{t('DeFi Staking')}</span>
+                    <InlineBadge>
+                      {defis.length > 0 ? defis.length.toLocaleString() : '-'}
+                    </InlineBadge>
+                  </SectionTitle>
 
-                <AssetListCard>
-                  {defis.length > 0 ? (
-                    <Collapse>
-                      {Object.entries(defiStakesByProtocol).map(
-                        ([protocol, defiProtocols]) => (
-                          <CollapsePanel
-                            title={t(`protocol-${protocol}`)}
-                            count={defiProtocols.length}
-                            key={protocol}
-                          >
-                            <ul>
-                              {defiProtocols.map((item) => (
-                                <DeFiStakingItem
-                                  // FIXME: group stats with different wallets...
-                                  key={`${item.type}-${item.address}-${item.walletAddress}`}
-                                  protocol={item}
-                                />
-                              ))}
-                            </ul>
-                          </CollapsePanel>
-                        ),
-                      )}
-                    </Collapse>
-                  ) : (
-                    <EmptyBalance />
-                  )}
-                </AssetListCard>
-              </div>
+                  <AssetListCard>
+                    {defis.length > 0 ? (
+                      <Collapse>
+                        {Object.entries(defiStakesByProtocol).map(
+                          ([protocol, defiProtocols]) => (
+                            <CollapsePanel
+                              title={t(`protocol-${protocol}`)}
+                              count={defiProtocols.length}
+                              key={protocol}
+                            >
+                              <ul>
+                                {defiProtocols.map((item) => (
+                                  <DeFiStakingItem
+                                    // FIXME: group stats with different wallets...
+                                    key={`${item.type}-${item.address}-${item.walletAddress}`}
+                                    protocol={item}
+                                  />
+                                ))}
+                              </ul>
+                            </CollapsePanel>
+                          ),
+                        )}
+                      </Collapse>
+                    ) : (
+                      <EmptyBalance />
+                    )}
+                  </AssetListCard>
+                </div>
+              )}
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === DashboardTabType.NFTs}>

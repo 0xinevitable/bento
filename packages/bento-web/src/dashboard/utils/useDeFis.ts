@@ -2,6 +2,7 @@ import { Wallet } from '@bento/common';
 import { useMemo } from 'react';
 
 import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
+import { FeatureFlags } from '@/utils';
 
 import { useMultipleRequests } from './useMultipleRequests';
 
@@ -12,11 +13,13 @@ type DeFiStakingForWalletAddress = DeFiStaking & {
 export const useDeFis = (wallets: Wallet[]) => {
   const calculatedRequests = useMemo(
     () =>
-      wallets.flatMap((wallet) =>
-        wallet.type === 'evm' && wallet.networks.includes('klaytn')
-          ? `/api/defis/klaytn/${wallet.address}`
-          : [],
-      ),
+      !FeatureFlags.isKlaytnDeFiEnabled
+        ? []
+        : wallets.flatMap((wallet) =>
+            wallet.type === 'evm' && wallet.networks.includes('klaytn')
+              ? `/api/defis/klaytn/${wallet.address}`
+              : [],
+          ),
     [JSON.stringify(wallets)],
   );
 
