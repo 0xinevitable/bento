@@ -1,9 +1,13 @@
 import { Wallet } from '@bento/common';
 import { useMemo } from 'react';
 
-import { DeFiStakingResponse } from '@/defi/types/staking';
+import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
 
 import { useMultipleRequests } from './useMultipleRequests';
+
+type DeFiStakingForWalletAddress = DeFiStaking & {
+  walletAddress: string;
+};
 
 export const useDeFis = (wallets: Wallet[]) => {
   const calculatedRequests = useMemo(
@@ -19,8 +23,15 @@ export const useDeFis = (wallets: Wallet[]) => {
   // FIXME: Refetch rule
   const { responses: result, refetch } =
     useMultipleRequests<DeFiStakingResponse>(calculatedRequests);
-  const defis = useMemo(
-    () => result.flatMap((r) => r.data?.stakings || []),
+  const defis = useMemo<DeFiStakingForWalletAddress[]>(
+    () =>
+      result.flatMap(
+        (r) =>
+          r.data?.stakings?.map((v) => ({
+            ...v,
+            walletAddress: r.data?.walletAddress!,
+          })) || [],
+      ),
     [JSON.stringify(result)],
   );
   return { defis, defisJSONKey: JSON.stringify(defis) };
