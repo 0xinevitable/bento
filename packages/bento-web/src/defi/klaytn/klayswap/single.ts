@@ -5,11 +5,11 @@ import {
   KlaytnDeFiProtocolType,
   KlaytnDeFiType,
 } from '@/defi/types/staking';
-import { getTokenInfo } from '@/defi/utils/getTokenInfo';
 import { axios } from '@/utils';
 
 import KLAYSwapSingleLeveragePool from '../abis/KLAYSwapSingleLeveragePool.json';
 import { klaytnChain } from '../constants';
+import { getTokenInfo } from '../utils/getTokenInfo';
 import { KSP_TOKEN_INFO } from './constants';
 
 const provider = klaytnChain._provider;
