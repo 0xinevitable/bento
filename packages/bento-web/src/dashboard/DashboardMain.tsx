@@ -489,7 +489,7 @@ const mockedDeFis = {
       ],
       wallet: null,
       staked: {
-        value: 170.70233085800234,
+        value: 170.83444869128255,
         tokenAmounts: {
           '0x8888888888885b073f3c81258c27e83db228d5f3': 121.88285143451247,
         },
@@ -636,6 +636,7 @@ const mockedDeFis = {
     {
       protocol: 'ks',
       type: 'ks_l_s',
+      prefix: 'oUSDT',
       address: '0x4b419986e15018e6dc1c9dab1fa4824d8e2e06b5',
       wallet: null,
       tokens: [
@@ -720,7 +721,7 @@ const mockedDeFis = {
       wallet: null,
       staked: {
         tokenAmounts: {
-          '0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560': 3.007296771527708,
+          '0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560': 3.0073096837666426,
         },
       },
       rewards: {
@@ -744,6 +745,7 @@ const mockedDeFis = {
     {
       protocol: 'ks',
       type: 'ks_l_s',
+      prefix: 'KLAY',
       address: '0xe4c3f5454a752bddda18ccd239bb1e00ca42d371',
       wallet: null,
       tokens: [
@@ -783,7 +785,7 @@ const mockedDeFis = {
       wallet: null,
       staked: {
         tokenAmounts: {
-          '0x0000000000000000000000000000000000000000': 0.4002376865421628,
+          '0x0000000000000000000000000000000000000000': 0.40023810843000673,
         },
       },
       rewards: 'unavailable',
@@ -813,7 +815,7 @@ const mockedDeFis = {
       wallet: null,
       staked: {
         tokenAmounts: {
-          '0x0000000000000000000000000000000000000000': 0.5002544983424083,
+          '0x0000000000000000000000000000000000000000': 0.5002550932542361,
         },
       },
       rewards: 'unavailable',
@@ -843,7 +845,7 @@ const mockedDeFis = {
       wallet: null,
       staked: {
         tokenAmounts: {
-          '0x0000000000000000000000000000000000000000': 2.501314975134333,
+          '0x0000000000000000000000000000000000000000': 2.5013180066662835,
         },
       },
       rewards: 'unavailable',
@@ -857,7 +859,7 @@ const mockedDeFis = {
       },
     },
   ],
-  cachedTime: 1665402609766,
+  cachedTime: 1665403165312,
 } as any as {
   stakings: DeFiStaking[];
   cachedTime: number;
