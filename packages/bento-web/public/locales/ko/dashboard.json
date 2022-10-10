@@ -2,6 +2,7 @@
   "protocol-kstn": "클레이스테이션",
   "protocol-ks": "클레이스왑",
   "protocol-kks": "코코넛스왑",
+  "protocol-scnr": "스왑스캐너",
   "protocol-o_ion": "ION DAO",
 
   "defi-type-ks_g": "거버넌스",
@@ -14,6 +15,8 @@
   "defi-type-kstn_n_hno": "거버넌스 카운슬 스테이킹 <validator>해시드-오지스</validator>",
   "defi-type-kstn_n_ked": "거버넌스 카운슬 스테이킹 <validator>한국경제신문</validator>",
   "defi-type-kstn_n_fsn": "거버넌스 카운슬 스테이킹 <validator>FSN</validator>",
+
+  "defi-type-scnr_g": "단일 예치",
 
   "Update your Profile": "프로필을 설정해보세요.",
   "Setup Now": "지금 하기",

@@ -2,6 +2,7 @@
   "protocol-kstn": "KLAYSTATION",
   "protocol-ks": "KLAYswap",
   "protocol-kks": "KokonutSwap",
+  "protocol-scnr": "Swapscanner",
   "protocol-o_ion": "ION DAO",
 
   "defi-type-ks_g": "Governance",
@@ -13,5 +14,7 @@
 
   "defi-type-kstn_n_hno": "GC Staking <validator>Hashed-Ozys</validator>",
   "defi-type-kstn_n_ked": "GC Staking <validator>The Korea Economic Daily</validator>",
-  "defi-type-kstn_n_fsn": "GC Staking <validator>FSN</validator>"
+  "defi-type-kstn_n_fsn": "GC Staking <validator>FSN</validator>",
+
+  "defi-type-scnr_g": "Staking"
 }
