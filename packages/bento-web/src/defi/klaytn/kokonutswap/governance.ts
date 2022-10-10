@@ -30,6 +30,7 @@ export const getGovernanceStake = async (
   return {
     protocol: KlaytnDeFiProtocolType.KOKONUTSWAP,
     type: KlaytnDeFiType.KOKONUTSWAP_GOVERNANCE,
+    prefix: KOKOS_TOKEN_INFO.symbol,
     address: STAKED_KOKOS_ADDRESS,
     tokens: [KOKOS_TOKEN_INFO],
     relatedTokens: [KSD_TOKEN_INFO],

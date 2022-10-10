@@ -60,6 +60,7 @@ export const IONDAO = {
     return {
       protocol: OsmosisDeFiProtocolType.ION,
       type: OsmosisDeFiType.ION_GOVERNANCE,
+      prefix: ION_TOKEN_INFO.symbol,
       address: STAKING_ADDRESS,
       tokens: [ION_TOKEN_INFO],
       wallet: null,

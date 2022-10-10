@@ -51,6 +51,7 @@ export type NativeInput = Omit<TokenInput, 'address'>;
 export type DeFiStaking = {
   protocol: DeFiProtocolType;
   type: DeFiType;
+  prefix?: string;
 
   // representative contract address
   address: string;
