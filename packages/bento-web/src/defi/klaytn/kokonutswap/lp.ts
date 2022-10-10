@@ -60,6 +60,7 @@ export const getLPPoolBalance = async (
   return {
     protocol: KlaytnDeFiProtocolType.KOKONUTSWAP,
     type: KlaytnDeFiType.KOKONUTSWAP_LP,
+    prefix: pool.symbol,
     address: pool.lpTokenAddress,
     tokens: tokenInfos,
     relatedTokens: [KSD_TOKEN_INFO],

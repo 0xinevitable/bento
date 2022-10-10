@@ -56,9 +56,12 @@ export const getLPPoolBalance = async (
     tokenAmounts[tokenInfoB.address] = balanceB;
   }
 
+  const tokens = [tokenInfoA || null, tokenInfoB || null];
+
   return {
     protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
+    prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
     address: pool.exchange_address,
     tokens: [tokenInfoA || null, tokenInfoB || null],
     wallet: null,
