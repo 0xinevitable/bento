@@ -13,7 +13,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
   children,
 }) => {
   const { getCollapseProps, getToggleProps } = useCollapse({
-    defaultExpanded: false,
+    defaultExpanded: true,
   });
 
   return (
