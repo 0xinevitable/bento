@@ -162,7 +162,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             items={DASHBOARD_TAB_ITEMS}
           />
           <DashboardContent>
-            <AnimatedTab selected={currentTab === DashboardTabType.Crypto}>
+            <AnimatedTab
+              className="tab-crypto"
+              selected={currentTab === DashboardTabType.Crypto}
+            >
               <TopSummaryContainer>
                 <AssetRatioSection
                   netWorthInUSD={netWorthInUSD}
@@ -341,7 +344,6 @@ const DashboardContent = styled.div`
   padding: 27px 33px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
   flex: 1;
 
   background: ${Colors.black};
@@ -351,6 +353,10 @@ const DashboardContent = styled.div`
   @media (max-width: 1240px) {
     padding: 24px 0 0;
     border: 0;
+  }
+
+  & .tab-crypto {
+    gap: 32px;
   }
 `;
 const TopSummaryContainer = styled.div`

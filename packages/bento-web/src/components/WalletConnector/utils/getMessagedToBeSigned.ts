@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import { axios } from '@/utils';
 import { toast } from '@/utils';
 
 export const getMessagedToBeSigned = async (walletAddress: string) => {

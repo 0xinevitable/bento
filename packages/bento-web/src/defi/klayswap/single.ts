@@ -1,7 +1,8 @@
 import { ZERO_ADDRESS } from '@bento/core';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
-import axios from 'axios';
 import BigNumber from 'bn.js';
+
+import { axios } from '@/utils';
 
 import KLAYSwapSingleLeveragePool from '../abis/KLAYSwapSingleLeveragePool.json';
 import { klaytnChain } from '../constants';

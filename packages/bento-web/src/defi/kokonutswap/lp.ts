@@ -1,6 +1,7 @@
 import { EEEE_ADDRESS, TokenInput } from '@bento/core';
 import { KLAYTN_TOKENS } from '@bento/core/lib/tokens';
-import axios from 'axios';
+
+import { axios } from '@/utils';
 
 import { klaytnChain } from '../constants';
 import { DeFiStaking, KlaytnDeFiType, NativeInput } from '../types/staking';

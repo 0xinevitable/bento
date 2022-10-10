@@ -131,16 +131,27 @@ const Wrapper = styled.div`
     padding: 0 20px 0;
   }
 
-  &:before {
+  &:before,
+  &:after {
     content: '';
     position: absolute;
-    top: 0;
     left: 0;
     right: 0;
     width: 100%;
-    height: 200px;
+  }
+
+  &:before {
+    top: 0;
+    height: 300px;
     background: linear-gradient(180deg, ${Colors.gray900}, rgba(0, 0, 0, 0));
     z-index: 0;
+  }
+
+  &:after {
+    bottom: 0;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), ${Colors.gray900});
+    z-index: -1;
   }
 `;
 const Section = styled(TrackedSection)`
