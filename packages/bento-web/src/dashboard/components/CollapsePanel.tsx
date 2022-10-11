@@ -93,9 +93,10 @@ const ProtocolInfo = styled.span`
 `;
 const ProtocolLogo = styled.img`
   margin-right: 8px;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 const Paragraph = styled.p`
   margin-top: 8px;

@@ -225,9 +225,12 @@ const Name = styled.h5`
   gap: 6px;
 
   color: white;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.8px;
+  font-size: 18px;
+  font-weight: 600;
+
+  &:lang(ko) {
+    letter-spacing: -0.8px;
+  }
 `;
 const ValidatorBadge = styled.span`
   width: fit-content;
@@ -263,7 +266,7 @@ const fixedSize = (size: string) => css`
   max-height: ${size};
 `;
 const TokenLogoWrapper = styled.div`
-  ${fixedSize('40px')}
+  ${fixedSize('34px')}
   padding: 1px;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.45);
