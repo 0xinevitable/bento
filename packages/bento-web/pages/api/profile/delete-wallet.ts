@@ -1,10 +1,10 @@
 import { PostgrestError, PostgrestResponse } from '@supabase/supabase-js';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { ServerSupabase as Supabase } from '@/utils/ServerSupabase';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 import { UserProfile } from '@/profile/types/UserProfile';
-import { Supabase } from '@/utils';
 
 type APIRequest = NextApiRequest & {
   body: UserProfile;

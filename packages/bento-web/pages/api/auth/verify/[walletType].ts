@@ -9,9 +9,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import nacl from 'tweetnacl';
 
 import { createRedisClient } from '@/utils/Redis';
+import { ServerSupabase as Supabase } from '@/utils/ServerSupabase';
 import { withCORS } from '@/utils/middlewares/withCORS';
-
-import { Supabase } from '@/utils';
 
 type APIRequest = NextApiRequest &
   (
