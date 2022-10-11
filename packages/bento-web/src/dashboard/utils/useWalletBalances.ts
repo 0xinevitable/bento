@@ -2,7 +2,7 @@ import { Wallet } from '@bento/common';
 import produce from 'immer';
 import { useMemo } from 'react';
 
-import { usePricings } from '@/hooks/pricings';
+import { useCachedPricings } from '@/hooks/pricings';
 
 import { KEYS_BY_NETWORK } from '@/constants/networks';
 import {
@@ -26,7 +26,7 @@ type Options = {
 };
 
 export const useWalletBalances = ({ wallets }: Options) => {
-  const { getPrice } = usePricings();
+  const { getCachedPrice } = useCachedPricings();
 
   const calculatedRequests = useMemo(() => {
     // TODO: Clean this thing up
@@ -76,14 +76,14 @@ export const useWalletBalances = ({ wallets }: Options) => {
         draft.forEach((token) => {
           if (typeof token.price === 'undefined') {
             if (!!token.coinGeckoId) {
-              token.price = getPrice(token.coinGeckoId);
+              token.price = getCachedPrice(token.coinGeckoId);
             } else {
               token.price = 0;
             }
           }
         });
       }),
-    [balances, getPrice],
+    [balances, getCachedPrice],
   );
 
   return {

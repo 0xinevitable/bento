@@ -4,7 +4,7 @@ import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
 import { useEffect, useState } from 'react';
 
-import { usePricings } from '@/hooks/pricings';
+import { useCachedPricings } from '@/hooks/pricings';
 
 import { NFTWalletBalance } from '@/dashboard/types/WalletBalance';
 
@@ -15,7 +15,7 @@ type Options = {
 };
 
 export const useNFTBalances = ({ wallets }: Options) => {
-  const { getPrice } = usePricings();
+  const { getCachedPrice } = useCachedPricings();
   const [openSeaNFTBalance, setOpenSeaNFTBalance] = useState<
     NFTWalletBalance[]
   >([]);
@@ -65,8 +65,8 @@ export const useNFTBalances = ({ wallets }: Options) => {
     };
 
     main();
-    setEthereumPrice(getPrice('ethereum'));
-  }, [getPrice, JSON.stringify(wallets)]);
+    setEthereumPrice(getCachedPrice('ethereum'));
+  }, [getCachedPrice, JSON.stringify(wallets)]);
 
   useEffect(() => {
     const flattedAssets = Object.values(fetchedAssets)

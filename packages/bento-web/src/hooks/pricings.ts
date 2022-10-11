@@ -108,11 +108,11 @@ interface GetPrice {
   (coinGeckoId: string): number;
   (coinGeckoIds: string[]): number[];
 }
-export const usePricings = () => {
+export const useCachedPricings = () => {
   const [prices] = useAtom(pricingsAtom);
   const setCoinGeckoIds = useSetAtom(coinGeckoIdsAtom);
 
-  const getPrice = useCallback(
+  const getCachedPrice = useCallback(
     (coinGeckoId: string | string[]) => {
       const ids = Array.isArray(coinGeckoId) ? coinGeckoId : [coinGeckoId];
 
@@ -127,7 +127,7 @@ export const usePricings = () => {
     [JSON.stringify(prices)],
   ) as GetPrice;
 
-  return { getPrice };
+  return { getCachedPrice };
 };
 
 // import { NextPage } from 'next';
