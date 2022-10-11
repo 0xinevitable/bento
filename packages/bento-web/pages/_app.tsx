@@ -16,6 +16,7 @@ import styled from 'styled-components';
 
 import { LoadingProgress } from '@/components/LoadingProgress';
 import { NavigationBar } from '@/components/NavigationBar';
+import { PricingsProvider } from '@/hooks/pricings';
 import { GlobalStyle } from '@/styles/GlobalStyle';
 
 Analytics.initialize();
@@ -65,6 +66,8 @@ const App = ({ Component, pageProps }: AppProps) => {
       <ToastProvider />
 
       <SessionManager />
+      <PricingsProvider />
+
       <WalletsProvider>
         <Container>
           <LoadingProgress

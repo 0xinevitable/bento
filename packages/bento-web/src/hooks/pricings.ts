@@ -104,6 +104,10 @@ export const PricingsProvider: React.FC = () => {
   return null;
 };
 
+interface GetPrice {
+  (coinGeckoId: string): number;
+  (coinGeckoIds: string[]): number[];
+}
 export const usePricings = () => {
   const [prices] = useAtom(pricingsAtom);
   const setCoinGeckoIds = useSetAtom(coinGeckoIdsAtom);
@@ -121,7 +125,7 @@ export const usePricings = () => {
       });
     },
     [JSON.stringify(prices)],
-  );
+  ) as GetPrice;
 
   return { getPrice };
 };
