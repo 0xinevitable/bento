@@ -18,6 +18,7 @@ import { KlaySwap } from '@/defi/klaytn/klayswap';
 import { KokonutSwap } from '@/defi/klaytn/kokonutswap';
 import { Swapscanner } from '@/defi/klaytn/swapscanner';
 import { SCNR_ADDRESS } from '@/defi/klaytn/swapscanner/constants';
+import { withoutEmptyDeFiStaking } from '@/defi/klaytn/utils/withoutEmptyDeFiStaking';
 import { DeFiStaking } from '@/defi/types/staking';
 
 interface APIRequest extends NextApiRequest {
@@ -229,5 +230,5 @@ const getDeFiStakingsByWalletAddress = async (
     ])
   ).flat();
 
-  return stakings;
+  return stakings.filter(withoutEmptyDeFiStaking);
 };
