@@ -25,7 +25,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
 }) => {
   const lang = currentLanguage === 'ko' ? 'ko' : 'en';
   const { getCollapseProps, getToggleProps } = useCollapse({
-    defaultExpanded: true,
+    defaultExpanded: false,
   });
 
   return (
