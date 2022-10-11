@@ -1,11 +1,8 @@
 type EnvironmentSecrets = {
   SUPABASE_ANON_KEY: string;
   SUPABASE_URL: string;
-  SLACK_NEW_PROFILE_WEBHOOK: string;
   OPENSEA_API_KEYS: string[];
-  COVALENT_API_KEYS: string[];
   CMC_PRO_API_KEYS: string[];
-  REDIS_URL: string;
 };
 
 const HARDCODED_SECRETS = {
@@ -21,17 +18,14 @@ const HARDCODED_SECRETS = {
 
 export type Secrets = EnvironmentSecrets & typeof HARDCODED_SECRETS;
 
-const splitAPIKeys = (value: string | undefined) => value?.split(',') || [];
+export const splitAPIKeys = (value: string | undefined) =>
+  value?.split(',') || [];
 
 export const Config: Secrets = {
   SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
   SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  SLACK_NEW_PROFILE_WEBHOOK:
-    process.env.NEXT_PUBLIC_SLACK_NEW_PROFILE_WEBHOOK || '',
   OPENSEA_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_OPENSEA_API_KEYS),
-  COVALENT_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_COVALENT_API_KEYS),
   CMC_PRO_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_CMC_PRO_API_KEYS),
-  REDIS_URL: process.env.NEXT_PUBLIC_REDIS_URL || '',
   ...HARDCODED_SECRETS,
 };
 
