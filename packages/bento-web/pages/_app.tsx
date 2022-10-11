@@ -66,24 +66,24 @@ const App = ({ Component, pageProps }: AppProps) => {
       <ToastProvider />
 
       <SessionManager />
-      <PricingsProvider />
+      <PricingsProvider>
+        <WalletsProvider>
+          <Container>
+            <LoadingProgress
+              isRouteChanging={loadingState.isRouteChanging}
+              key={loadingState.loadingKey}
+            />
+            <NavigationBar />
 
-      <WalletsProvider>
-        <Container>
-          <LoadingProgress
-            isRouteChanging={loadingState.isRouteChanging}
-            key={loadingState.loadingKey}
-          />
-          <NavigationBar />
+            <Component {...pageProps} />
+          </Container>
 
-          <Component {...pageProps} />
-        </Container>
-
-        <div id="portal" />
-        <div id="profile-edit" />
-        <div id="mobile-menu" />
-        <div id="landing-background" />
-      </WalletsProvider>
+          <div id="portal" />
+          <div id="profile-edit" />
+          <div id="mobile-menu" />
+          <div id="landing-background" />
+        </WalletsProvider>
+      </PricingsProvider>
     </React.Fragment>
   );
 };

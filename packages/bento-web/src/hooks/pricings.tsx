@@ -1,7 +1,7 @@
 import { safePromiseAll } from '@bento/common';
 import { pricesFromCoinGecko } from '@bento/core';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { useInterval } from '@/hooks/useInterval';
 
@@ -93,64 +93,46 @@ const useCoinGeckoPrices = () => {
   return prices;
 };
 
-export const PricingsProvider: React.FC = () => {
-  useCoinGeckoPrices();
-  return null;
-};
-
-interface GetPrice {
+interface GetCachedPrice {
   (coinGeckoId: string): number;
   (coinGeckoIds: string[]): number[];
 }
-export const useCachedPricings = () => {
+const GetCachedPriceContext = React.createContext<GetCachedPrice>(((
+  v: string | string[],
+) => (typeof v === 'string' ? 0 : [0])) as GetCachedPrice);
+
+export const PricingsProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
+  useCoinGeckoPrices();
+
   const [prices] = useAtom(pricingsAtom);
   const setCoinGeckoIds = useSetAtom(coinGeckoIdsAtom);
 
   const getCachedPrice = useCallback(
     (coinGeckoId: string | string[]) => {
-      const ids = Array.isArray(coinGeckoId) ? coinGeckoId : [coinGeckoId];
-
-      return ids.map((id) => {
+      const single = typeof coinGeckoId === 'string';
+      const ids = single ? [coinGeckoId] : coinGeckoId;
+      const res = ids.map((id) => {
         if (id in prices) {
           return prices[id];
         }
         setCoinGeckoIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
         return 0;
       });
+      return single ? res[0] : res;
     },
-    [JSON.stringify(prices)],
-  ) as GetPrice;
+    [prices],
+  ) as GetCachedPrice;
 
-  return { getCachedPrice };
+  return (
+    <GetCachedPriceContext.Provider value={getCachedPrice}>
+      {children}
+    </GetCachedPriceContext.Provider>
+  );
 };
 
-// import { NextPage } from 'next';
-// import { useState } from 'react';
-
-// import { PricingsProvider, usePricings } from '@/utils/pricings';
-
-// const Playground: NextPage = () => {
-//   const { getPrice } = usePricings();
-//   const [cosmos, setCosmos] = useState(false);
-//   return (
-//     <div
-//       className="w-full h-full flex items-center justify-center text-white"
-//       style={{ minHeight: '100vh' }}
-//     >
-//       <PricingsProvider />
-//       {JSON.stringify(getPrice(['ethereum', 'bitcoin']))}
-//       {cosmos ? getPrice('cosmos')[0] : null}
-//       <button
-//         onClick={() => {
-//           getPrice('cosmos');
-//           console.log(getPrice('ethereum'));
-//           setCosmos(true);
-//         }}
-//       >
-//         Add ETH
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default Playground;
+export const useCachedPricings = () => {
+  const getCachedPrice = React.useContext(GetCachedPriceContext);
+  return { getCachedPrice };
+};
