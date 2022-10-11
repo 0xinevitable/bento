@@ -11,6 +11,7 @@ type CollapsePanelProps = {
   metadata: Metadata | undefined;
   count?: number;
   children?: React.ReactNode;
+  currentLanguage: string;
 };
 
 export const CollapsePanel: React.FC<CollapsePanelProps> = ({
@@ -18,7 +19,9 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
   metadata,
   count,
   children,
+  currentLanguage,
 }) => {
+  const lang = currentLanguage === 'ko' ? 'ko' : 'en';
   const { getCollapseProps, getToggleProps } = useCollapse({
     defaultExpanded: true,
   });
@@ -33,7 +36,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
             <InlineBadge>{count.toLocaleString()}</InlineBadge>
           )}
         </HeaderTitleRow>
-        <Paragraph>{metadata?.description.ko}</Paragraph>
+        <Paragraph>{metadata?.description[lang]}</Paragraph>
       </Header>
       <Content {...getCollapseProps()}>{children}</Content>
     </Container>

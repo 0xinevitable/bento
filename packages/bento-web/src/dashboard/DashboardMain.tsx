@@ -59,7 +59,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   setTokenDetailModalVisible,
   setTokenDetailModalParams,
 }) => {
-  const { t } = useTranslation('dashboard');
+  const { t, i18n } = useTranslation('dashboard');
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
+
   const { profile, revalidateProfile } = useProfile({ type: 'MY_PROFILE' });
   const { balances: walletBalances, jsonKey: walletBalancesJSONKey } =
     useWalletBalances({ wallets });
@@ -303,6 +305,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                               metadata={defiMetadata?.[protocol]}
                               count={defiProtocols.length}
                               key={protocol}
+                              currentLanguage={currentLanguage}
                             >
                               <ul>
                                 {defiProtocols.map((item) => (
