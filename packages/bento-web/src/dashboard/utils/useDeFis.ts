@@ -1,13 +1,15 @@
 import { Wallet } from '@bento/common';
 import { useMemo } from 'react';
 
+import { getDeFiStakingValue } from '@/defi/klaytn/utils/getDeFiStakingValue';
 import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
 import { FeatureFlags } from '@/utils';
 
 import { useMultipleRequests } from './useMultipleRequests';
 
-type DeFiStakingForWalletAddress = DeFiStaking & {
+type DeFiStakingWithClientData = DeFiStaking & {
   walletAddress: string;
+  valuation: number;
 };
 
 export const useDeFis = (wallets: Wallet[]) => {
@@ -26,15 +28,18 @@ export const useDeFis = (wallets: Wallet[]) => {
   // FIXME: Refetch rule
   const { responses: result, refetch } =
     useMultipleRequests<DeFiStakingResponse>(calculatedRequests);
-  const defis = useMemo<DeFiStakingForWalletAddress[]>(
+  const defis = useMemo<DeFiStakingWithClientData[]>(
     () =>
-      result.flatMap(
-        (r) =>
-          r.data?.stakings?.map((v) => ({
-            ...v,
-            walletAddress: r.data?.walletAddress!,
-          })) || [],
-      ),
+      result.flatMap((item) => {
+        if (!item.data?.stakings) {
+          return [];
+        }
+        return item.data.stakings.map((staking) => ({
+          ...staking,
+          walletAddress: item.data?.walletAddress!,
+          valuation: getDeFiStakingValue(staking),
+        }));
+      }),
     [result],
   );
   return { defis, defisJSONKey: JSON.stringify(defis) };
