@@ -1,6 +1,7 @@
 import { Bech32Address } from '@bento/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { withoutEmptyDeFiStaking } from '@/defi/klaytn/utils/withoutEmptyDeFiStaking';
 import { IONDAO } from '@/defi/osmosis/ion-dao';
 import { DeFiStaking } from '@/defi/types/staking';
 
@@ -26,6 +27,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
   let stakings: DeFiStaking[];
   stakings = await getDeFiStakingsByWalletAddress(walletAddress);
+  stakings = stakings.filter(withoutEmptyDeFiStaking);
 
   res.status(200).json(stakings);
 };

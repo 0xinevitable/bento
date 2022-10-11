@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { ServerSupabase as Supabase } from '@/utils/ServerSupabase';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 import { Block } from '@/profile/blocks';
-import { Supabase } from '@/utils';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { user } = await Supabase.auth.api.getUserByCookie(req);
