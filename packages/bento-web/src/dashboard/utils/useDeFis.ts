@@ -35,7 +35,7 @@ export const useDeFis = (wallets: Wallet[]) => {
             walletAddress: r.data?.walletAddress!,
           })) || [],
       ),
-    [JSON.stringify(result)],
+    [result],
   );
   return { defis, defisJSONKey: JSON.stringify(defis) };
 };

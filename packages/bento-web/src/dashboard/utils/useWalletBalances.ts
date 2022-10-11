@@ -67,11 +67,10 @@ export const useWalletBalances = ({ wallets }: Options) => {
   useInterval(refetch, 60 * 1_000);
 
   const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
-  const balancesKey = JSON.stringify(balances);
 
   const coinGeckoIds = useMemo<string[]>(
     () => balances.flatMap((v) => v.coinGeckoId || []),
-    [balancesKey],
+    [balances],
   );
 
   const [coinGeckoPricesByIds, setCoinGeckoPricesByIds] = useState<
@@ -108,7 +107,7 @@ export const useWalletBalances = ({ wallets }: Options) => {
           }
         });
       }),
-    [balancesKey, JSON.stringify(coinGeckoPricesByIds)],
+    [balances, JSON.stringify(coinGeckoPricesByIds)],
   );
 
   return {
