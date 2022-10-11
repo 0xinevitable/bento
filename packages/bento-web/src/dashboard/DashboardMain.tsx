@@ -14,6 +14,8 @@ import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useDeFis } from '@/dashboard/utils/useDeFis';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
+import { Metadata } from '@/defi/klaytn/constants/metadata';
+import { KlaytnDeFiProtocolType } from '@/defi/types/staking';
 import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
@@ -151,6 +153,19 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     [defisJSONKey],
   );
 
+  const [defiMetadata, setDefiMetadata] = useState<Record<
+    string,
+    Metadata
+  > | null>(null);
+  useEffect(() => {
+    if (!!defiMetadata) {
+      return;
+    }
+    import('../defi/klaytn/constants/metadata').then((v) =>
+      setDefiMetadata(v.KLAYTN_DEFI_METADATA),
+    );
+  }, [defiStakesByProtocol]);
+
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
@@ -285,6 +300,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                           ([protocol, defiProtocols]) => (
                             <CollapsePanel
                               title={t(`protocol-${protocol}`)}
+                              metadata={defiMetadata?.[protocol]}
                               count={defiProtocols.length}
                               key={protocol}
                             >
