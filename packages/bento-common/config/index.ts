@@ -1,6 +1,5 @@
 type EnvironmentSecrets = {
   SUPABASE_ANON_KEY: string;
-  SUPABASE_SERVICE_KEY: string;
   SUPABASE_URL: string;
   SLACK_NEW_PROFILE_WEBHOOK: string;
   OPENSEA_API_KEYS: string[];
@@ -26,7 +25,6 @@ const splitAPIKeys = (value: string | undefined) => value?.split(',') || [];
 
 export const Config: Secrets = {
   SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-  SUPABASE_SERVICE_KEY: process.env.NEXT_PUBLIC_SUPABASE_SERVICE_KEY || '',
   SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || '',
   SLACK_NEW_PROFILE_WEBHOOK:
     process.env.NEXT_PUBLIC_SLACK_NEW_PROFILE_WEBHOOK || '',
