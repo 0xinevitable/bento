@@ -14,6 +14,8 @@ import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { useDeFis } from '@/dashboard/utils/useDeFis';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
+import { Metadata } from '@/defi/klaytn/constants/metadata';
+import { KlaytnDeFiProtocolType } from '@/defi/types/staking';
 import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
@@ -57,7 +59,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   setTokenDetailModalVisible,
   setTokenDetailModalParams,
 }) => {
-  const { t } = useTranslation('dashboard');
+  const { t, i18n } = useTranslation('dashboard');
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
+
   const { profile, revalidateProfile } = useProfile({ type: 'MY_PROFILE' });
   const { balances: walletBalances, jsonKey: walletBalancesJSONKey } =
     useWalletBalances({ wallets });
@@ -150,6 +154,19 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     () => groupBy(defis, 'protocol'),
     [defisJSONKey],
   );
+
+  const [defiMetadata, setDefiMetadata] = useState<Record<
+    string,
+    Metadata
+  > | null>(null);
+  useEffect(() => {
+    if (!!defiMetadata) {
+      return;
+    }
+    import('../defi/klaytn/constants/metadata').then((v) =>
+      setDefiMetadata(v.KLAYTN_DEFI_METADATA),
+    );
+  }, [defiStakesByProtocol]);
 
   return (
     <React.Fragment>
@@ -285,8 +302,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                           ([protocol, defiProtocols]) => (
                             <CollapsePanel
                               title={t(`protocol-${protocol}`)}
+                              metadata={defiMetadata?.[protocol]}
                               count={defiProtocols.length}
                               key={protocol}
+                              currentLanguage={currentLanguage}
                             >
                               <ul>
                                 {defiProtocols.map((item) => (
