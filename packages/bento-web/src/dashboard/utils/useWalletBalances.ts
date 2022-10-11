@@ -1,6 +1,6 @@
 import { Wallet } from '@bento/common';
 import produce from 'immer';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useCachedPricings } from '@/hooks/pricings';
 
@@ -70,21 +70,24 @@ export const useWalletBalances = ({ wallets }: Options) => {
   useInterval(refetch, 60 * 1_000);
 
   const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
-  const balancesWithPrices = useMemo(
-    () =>
-      produce(balances, (draft) => {
-        draft.forEach((token) => {
-          if (typeof token.price === 'undefined') {
-            if (!!token.coinGeckoId) {
-              token.price = getCachedPrice(token.coinGeckoId);
-            } else {
-              token.price = 0;
-            }
+  const [balancesWithPrices, setBalancesWithPrices] = useState<
+    (EVMWalletBalance | CosmosSDKWalletBalance | SolanaWalletBalance)[]
+  >([]);
+
+  useEffect(() => {
+    const result = produce(balances, (draft) => {
+      draft.forEach((token) => {
+        if (typeof token.price === 'undefined') {
+          if (!!token.coinGeckoId) {
+            token.price = getCachedPrice(token.coinGeckoId);
+          } else {
+            token.price = 0;
           }
-        });
-      }),
-    [balances, getCachedPrice],
-  );
+        }
+      });
+    });
+    setBalancesWithPrices(result);
+  }, [balances, getCachedPrice]);
 
   return {
     balances: balancesWithPrices,
