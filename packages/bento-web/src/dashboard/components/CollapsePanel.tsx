@@ -11,6 +11,7 @@ type CollapsePanelProps = {
   metadata: Metadata | undefined;
   count?: number;
   children?: React.ReactNode;
+  valuation: number;
   currentLanguage: string;
 };
 
@@ -19,22 +20,31 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
   metadata,
   count,
   children,
+  valuation,
   currentLanguage,
 }) => {
   const lang = currentLanguage === 'ko' ? 'ko' : 'en';
   const { getCollapseProps, getToggleProps } = useCollapse({
-    defaultExpanded: true,
+    defaultExpanded: false,
   });
 
   return (
     <Container>
       <Header {...getToggleProps()}>
         <HeaderTitleRow>
-          <ProtocolLogo alt={title} src={metadata?.logo} />
-          <span>{title}</span>
-          {typeof count !== 'undefined' && (
-            <InlineBadge>{count.toLocaleString()}</InlineBadge>
-          )}
+          <ProtocolInfo>
+            <ProtocolLogo alt={title} src={metadata?.logo} />
+            <span>{title}</span>
+            {typeof count !== 'undefined' && (
+              <InlineBadge>{count.toLocaleString()}</InlineBadge>
+            )}
+          </ProtocolInfo>
+
+          <Valuation>
+            {`$${valuation.toLocaleString(undefined, {
+              maximumFractionDigits: 6,
+            })}`}
+          </Valuation>
         </HeaderTitleRow>
         <Paragraph>{metadata?.description[lang]}</Paragraph>
       </Header>
@@ -71,16 +81,22 @@ const Header = styled.div`
 const HeaderTitleRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   font-size: 18px;
   font-weight: bold;
   color: ${Colors.gray100};
 `;
+const ProtocolInfo = styled.span`
+  display: flex;
+  align-items: center;
+`;
 const ProtocolLogo = styled.img`
   margin-right: 8px;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 const Paragraph = styled.p`
   margin-top: 8px;
@@ -98,4 +114,11 @@ const Content = styled.div`
     flex-direction: column;
     gap: 6px;
   }
+`;
+const Valuation = styled.span`
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: bold;
+  color: ${Colors.gray050};
 `;

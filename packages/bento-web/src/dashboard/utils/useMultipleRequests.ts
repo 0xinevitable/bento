@@ -57,10 +57,10 @@ export const useMultipleRequests = <T extends any>(
     });
   }, [requests]);
 
-  const responses = useMemo(
-    () => Object.values(responsesRef.current),
-    [responsesRef.current, count],
-  );
+  const responses = useMemo(() => {
+    count;
+    return Object.values(responsesRef.current);
+  }, [responsesRef.current, count]);
 
   return { responses, refetch };
 };

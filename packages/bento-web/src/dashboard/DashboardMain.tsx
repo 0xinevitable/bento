@@ -6,7 +6,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedTab } from '@/components/AnimatedTab';
-import { Badge, Checkbox, Skeleton } from '@/components/system';
+import { Checkbox, Skeleton } from '@/components/system';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
@@ -15,7 +15,6 @@ import { useDeFis } from '@/dashboard/utils/useDeFis';
 import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { Metadata } from '@/defi/klaytn/constants/metadata';
-import { KlaytnDeFiProtocolType } from '@/defi/types/staking';
 import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
@@ -299,25 +298,32 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                     {defis.length > 0 ? (
                       <Collapse>
                         {Object.entries(defiStakesByProtocol).map(
-                          ([protocol, defiProtocols]) => (
-                            <CollapsePanel
-                              title={t(`protocol-${protocol}`)}
-                              metadata={defiMetadata?.[protocol]}
-                              count={defiProtocols.length}
-                              key={protocol}
-                              currentLanguage={currentLanguage}
-                            >
-                              <ul>
-                                {defiProtocols.map((item) => (
-                                  <DeFiStakingItem
-                                    // FIXME: group stats with different wallets...
-                                    key={`${item.type}-${item.address}-${item.walletAddress}`}
-                                    protocol={item}
-                                  />
-                                ))}
-                              </ul>
-                            </CollapsePanel>
-                          ),
+                          ([protocol, defiProtocols]) => {
+                            const valuation = defiProtocols.reduce(
+                              (acc, v) => acc + v.valuation,
+                              0,
+                            );
+                            return (
+                              <CollapsePanel
+                                title={t(`protocol-${protocol}`)}
+                                metadata={defiMetadata?.[protocol]}
+                                count={defiProtocols.length}
+                                key={protocol}
+                                valuation={valuation}
+                                currentLanguage={currentLanguage}
+                              >
+                                <ul>
+                                  {defiProtocols.map((item) => (
+                                    <DeFiStakingItem
+                                      // FIXME: group stats with different wallets...
+                                      key={`${item.type}-${item.address}-${item.walletAddress}`}
+                                      protocol={item}
+                                    />
+                                  ))}
+                                </ul>
+                              </CollapsePanel>
+                            );
+                          },
                         )}
                       </Collapse>
                     ) : (

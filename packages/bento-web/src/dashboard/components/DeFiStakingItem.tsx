@@ -2,6 +2,7 @@ import { shortenAddress } from '@bento/common';
 import { Trans, useTranslation } from 'next-i18next';
 import styled, { css } from 'styled-components';
 
+import { getAmountValue } from '@/defi/klaytn/utils/getDeFiStakingValue';
 import { DeFiStaking } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
@@ -56,7 +57,8 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
               t('unavailable')
             ) : (
               <span>
-                {formatNumber(protocol.wallet.lpAmount)} LP (
+                {getAmountValue(protocol.wallet)}
+                {/* {formatNumber(protocol.wallet.lpAmount)} LP (
                 {`$${protocol.wallet.value || '?'}`})
                 <br />
                 {!!protocol.wallet.tokenAmounts &&
@@ -75,7 +77,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                         </span>
                       );
                     },
-                  )}
+                  )} */}
               </span>
             )}
           </InfoItem>
@@ -83,28 +85,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
         <InfoItem>
           <span>staked</span>
-          <span>
-            {formatNumber(protocol.staked.lpAmount)} LP (
-            {`$${formatNumber(protocol.staked.value) || '?'}`})
-            <br />
-            {!!protocol.staked.tokenAmounts &&
-              Object.entries(protocol.staked.tokenAmounts).map(
-                ([tokenContract, tokenAmount]) => {
-                  const token = protocol.tokens.find(
-                    (token) =>
-                      !!token &&
-                      'address' in token &&
-                      token.address === tokenContract,
-                  );
-                  return (
-                    <span key={`token-${tokenContract}`}>
-                      {`${formatNumber(tokenAmount)} ${token?.symbol}`}
-                      &nbsp;
-                    </span>
-                  );
-                },
-              )}
-          </span>
+          <span>{getAmountValue(protocol.staked)}</span>
         </InfoItem>
 
         {!!protocol.unstake && (
@@ -114,85 +95,15 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
               t('unavailable')
             ) : (
               <>
-                {!!protocol.unstake.claimable && (
-                  <>
-                    <span>claimable</span>
-                    <span>
-                      {protocol.unstake.claimable === 'unavailable' ? (
-                        t('unavailable')
-                      ) : (
-                        <>
-                          {formatNumber(protocol.unstake.claimable.lpAmount)} LP
-                          (
-                          {`$${
-                            formatNumber(protocol.unstake.claimable.value) ||
-                            '?'
-                          }`}
-                          )
-                          <br />
-                          {!!protocol.unstake.claimable.tokenAmounts &&
-                            Object.entries(
-                              protocol.unstake.claimable.tokenAmounts,
-                            ).map(([tokenContract, tokenAmount]) => {
-                              const token = protocol.tokens.find(
-                                (token) =>
-                                  !!token &&
-                                  'address' in token &&
-                                  token.address === tokenContract,
-                              );
-                              return (
-                                <span key={`token-${tokenContract}`}>
-                                  {`${formatNumber(tokenAmount)} ${
-                                    token?.symbol
-                                  }`}
-                                  &nbsp;
-                                </span>
-                              );
-                            })}
-                        </>
-                      )}
-                    </span>
-                  </>
-                )}
+                <span>
+                  {!!protocol.unstake.claimable &&
+                    getAmountValue(protocol.unstake.claimable)}
+                </span>
 
-                {!!protocol.unstake.pending && (
-                  <>
-                    <span>pending</span>
-                    <span>
-                      {protocol.unstake.pending === 'unavailable' ? (
-                        t('unavailable')
-                      ) : (
-                        <>
-                          {formatNumber(protocol.unstake.pending.lpAmount)} LP (
-                          {`$${
-                            formatNumber(protocol.unstake.pending.value) || '?'
-                          }`}
-                          )
-                          <br />
-                          {!!protocol.unstake.pending.tokenAmounts &&
-                            Object.entries(
-                              protocol.unstake.pending.tokenAmounts,
-                            ).map(([tokenContract, tokenAmount]) => {
-                              const token = protocol.tokens.find(
-                                (token) =>
-                                  !!token &&
-                                  'address' in token &&
-                                  token.address === tokenContract,
-                              );
-                              return (
-                                <span key={`token-${tokenContract}`}>
-                                  {`${formatNumber(tokenAmount)} ${
-                                    token?.symbol
-                                  }`}
-                                  &nbsp;
-                                </span>
-                              );
-                            })}
-                        </>
-                      )}
-                    </span>
-                  </>
-                )}
+                <span>
+                  {!!protocol.unstake.pending &&
+                    getAmountValue(protocol.unstake.pending)}
+                </span>
               </>
             )}
           </InfoItem>
@@ -225,9 +136,12 @@ const Name = styled.h5`
   gap: 6px;
 
   color: white;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.8px;
+  font-size: 18px;
+  font-weight: 600;
+
+  &:lang(ko) {
+    letter-spacing: -0.8px;
+  }
 `;
 const ValidatorBadge = styled.span`
   width: fit-content;
@@ -263,7 +177,7 @@ const fixedSize = (size: string) => css`
   max-height: ${size};
 `;
 const TokenLogoWrapper = styled.div`
-  ${fixedSize('40px')}
+  ${fixedSize('34px')}
   padding: 1px;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.45);
