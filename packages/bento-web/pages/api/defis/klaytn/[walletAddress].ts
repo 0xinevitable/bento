@@ -18,7 +18,7 @@ import { KlaySwap } from '@/defi/klaytn/klayswap';
 import { KokonutSwap } from '@/defi/klaytn/kokonutswap';
 import { Swapscanner } from '@/defi/klaytn/swapscanner';
 import { SCNR_ADDRESS } from '@/defi/klaytn/swapscanner/constants';
-import { DeFiStaking } from '@/defi/types/staking';
+import { AmountWithOptionalValue, DeFiStaking } from '@/defi/types/staking';
 
 interface APIRequest extends NextApiRequest {
   query: {
@@ -229,5 +229,35 @@ const getDeFiStakingsByWalletAddress = async (
     ])
   ).flat();
 
-  return stakings;
+  return stakings.filter((staking) => {
+    if (isAmountExist(staking.staked) || isAmountExist(staking.rewards)) {
+      return true;
+    }
+    if (!!staking.unstake && staking.unstake !== 'unavailable') {
+      if (
+        isAmountExist(staking.unstake.claimable) ||
+        isAmountExist(staking.unstake.pending)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
+};
+
+const isAmountExist = (
+  value: AmountWithOptionalValue | 'unavailable' | null,
+) => {
+  if (!!value && value !== 'unavailable') {
+    if ((value.lpAmount || 0) > 0) {
+      return true;
+    }
+    if (
+      !!value.tokenAmounts &&
+      Object.values(value.tokenAmounts).some((v) => (v || 0) > 0)
+    ) {
+      return true;
+    }
+  }
+  return false;
 };
