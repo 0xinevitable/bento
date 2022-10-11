@@ -1,7 +1,11 @@
 import { AmountWithOptionalValue, DeFiStaking } from '@/defi/types/staking';
 
 export const withoutEmptyDeFiStaking = (staking: DeFiStaking) => {
-  if (isAmountExist(staking.staked) || isAmountExist(staking.rewards)) {
+  if (
+    isAmountExist(staking.wallet) ||
+    isAmountExist(staking.staked) ||
+    isAmountExist(staking.rewards)
+  ) {
     return true;
   }
   if (!!staking.unstake && staking.unstake !== 'unavailable') {
