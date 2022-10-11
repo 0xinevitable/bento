@@ -11,6 +11,7 @@ type CollapsePanelProps = {
   metadata: Metadata | undefined;
   count?: number;
   children?: React.ReactNode;
+  valuation: number;
   currentLanguage: string;
 };
 
@@ -19,6 +20,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
   metadata,
   count,
   children,
+  valuation,
   currentLanguage,
 }) => {
   const lang = currentLanguage === 'ko' ? 'ko' : 'en';
@@ -37,6 +39,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
           )}
         </HeaderTitleRow>
         <Paragraph>{metadata?.description[lang]}</Paragraph>
+        <Valuation>{`$${valuation}`}</Valuation>
       </Header>
       <Content {...getCollapseProps()}>{children}</Content>
     </Container>
@@ -98,4 +101,8 @@ const Content = styled.div`
     flex-direction: column;
     gap: 6px;
   }
+`;
+const Valuation = styled.span`
+  font-weight: bold;
+  color: white;
 `;

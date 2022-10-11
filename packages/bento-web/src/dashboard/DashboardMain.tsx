@@ -299,25 +299,32 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                     {defis.length > 0 ? (
                       <Collapse>
                         {Object.entries(defiStakesByProtocol).map(
-                          ([protocol, defiProtocols]) => (
-                            <CollapsePanel
-                              title={t(`protocol-${protocol}`)}
-                              metadata={defiMetadata?.[protocol]}
-                              count={defiProtocols.length}
-                              key={protocol}
-                              currentLanguage={currentLanguage}
-                            >
-                              <ul>
-                                {defiProtocols.map((item) => (
-                                  <DeFiStakingItem
-                                    // FIXME: group stats with different wallets...
-                                    key={`${item.type}-${item.address}-${item.walletAddress}`}
-                                    protocol={item}
-                                  />
-                                ))}
-                              </ul>
-                            </CollapsePanel>
-                          ),
+                          ([protocol, defiProtocols]) => {
+                            const valuation = defiProtocols.reduce(
+                              (acc, v) => acc + v.valuation,
+                              0,
+                            );
+                            return (
+                              <CollapsePanel
+                                title={t(`protocol-${protocol}`)}
+                                metadata={defiMetadata?.[protocol]}
+                                count={defiProtocols.length}
+                                key={protocol}
+                                valuation={valuation}
+                                currentLanguage={currentLanguage}
+                              >
+                                <ul>
+                                  {defiProtocols.map((item) => (
+                                    <DeFiStakingItem
+                                      // FIXME: group stats with different wallets...
+                                      key={`${item.type}-${item.address}-${item.walletAddress}`}
+                                      protocol={item}
+                                    />
+                                  ))}
+                                </ul>
+                              </CollapsePanel>
+                            );
+                          },
                         )}
                       </Collapse>
                     ) : (
