@@ -62,12 +62,12 @@ const useCoinGeckoPrices = () => {
     }
 
     const cachedIdsSet = new Set(cachedIds);
-    const notCachedIds = coinGeckoIds.filter((id) => !cachedIdsSet.has(id));
+    const uncachedIds = coinGeckoIds.filter((id) => !cachedIdsSet.has(id));
 
     const fetchedPrices =
-      notCachedIds.length === 0
+      uncachedIds.length === 0
         ? []
-        : await pricesFromCoinGecko(notCachedIds).then((prices) =>
+        : await pricesFromCoinGecko(uncachedIds).then((prices) =>
             Object.entries(prices),
           );
     await safePromiseAll(
