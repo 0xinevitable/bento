@@ -32,14 +32,21 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
     <Container>
       <Header {...getToggleProps()}>
         <HeaderTitleRow>
-          <ProtocolLogo alt={title} src={metadata?.logo} />
-          <span>{title}</span>
-          {typeof count !== 'undefined' && (
-            <InlineBadge>{count.toLocaleString()}</InlineBadge>
-          )}
+          <ProtocolInfo>
+            <ProtocolLogo alt={title} src={metadata?.logo} />
+            <span>{title}</span>
+            {typeof count !== 'undefined' && (
+              <InlineBadge>{count.toLocaleString()}</InlineBadge>
+            )}
+          </ProtocolInfo>
+
+          <Valuation>
+            {`$${valuation.toLocaleString(undefined, {
+              maximumFractionDigits: 6,
+            })}`}
+          </Valuation>
         </HeaderTitleRow>
         <Paragraph>{metadata?.description[lang]}</Paragraph>
-        <Valuation>{`$${valuation}`}</Valuation>
       </Header>
       <Content {...getCollapseProps()}>{children}</Content>
     </Container>
@@ -74,10 +81,15 @@ const Header = styled.div`
 const HeaderTitleRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   font-size: 18px;
   font-weight: bold;
   color: ${Colors.gray100};
+`;
+const ProtocolInfo = styled.span`
+  display: flex;
+  align-items: center;
 `;
 const ProtocolLogo = styled.img`
   margin-right: 8px;
@@ -104,5 +116,8 @@ const Content = styled.div`
 `;
 const Valuation = styled.span`
   font-weight: bold;
-  color: white;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: bold;
+  color: ${Colors.gray050};
 `;
