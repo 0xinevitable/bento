@@ -40,7 +40,7 @@ export const useDeFis = (wallets: Wallet[]) => {
           valuation: getDeFiStakingValue(staking),
         }));
       }),
-    [JSON.stringify(result)],
+    [result],
   );
   return { defis, defisJSONKey: JSON.stringify(defis) };
 };
