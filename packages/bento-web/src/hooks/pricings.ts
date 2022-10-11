@@ -1,7 +1,7 @@
 import { safePromiseAll } from '@bento/common';
 import { pricesFromCoinGecko } from '@bento/core';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useInterval } from '@/hooks/useInterval';
 
@@ -30,8 +30,6 @@ export const pricingsAtom = atom<PricingMap>({});
 export const coinGeckoIdsAtom = atom<string[]>([]);
 
 const useCoinGeckoPrices = () => {
-  const isInitialFetch = useRef<boolean>(true);
-
   const coinGeckoIds = useAtomValue(coinGeckoIdsAtom);
   const [prices, setPrices] = useAtom(pricingsAtom);
 
@@ -49,13 +47,9 @@ const useCoinGeckoPrices = () => {
         }
         const [value, cachedAt] = cachedValue as ValueVO;
 
-        if (!isInitialFetch.current) {
-          if (cachedAt >= Date.now() - CACHE_TIME) {
-            cachedIds.push(coinGeckoId);
-            return [coinGeckoId, value];
-          }
-        } else {
-          isInitialFetch.current = false;
+        if (cachedAt >= Date.now() - CACHE_TIME) {
+          cachedIds.push(coinGeckoId);
+          return [coinGeckoId, value];
         }
 
         return [coinGeckoId, 0];
