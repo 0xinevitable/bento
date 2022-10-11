@@ -45,11 +45,13 @@ yarn install
 ENVIRONMENT=development
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
-NEXT_PUBLIC_SLACK_NEW_PROFILE_WEBHOOK=
 NEXT_PUBLIC_OPENSEA_API_KEYS=
-NEXT_PUBLIC_COVALENT_API_KEYS=ckey_xxx,ckey_xxx
 NEXT_PUBLIC_CMC_PRO_API_KEYS=
-NEXT_PUBLIC_REDIS_URL=
+
+COVALENT_API_KEYS=ckey_xxx,ckey_xxx
+SLACK_NEW_PROFILE_WEBHOOK=
+SUPABASE_SERVICE_KEY=
+REDIS_URL=
 ```
 
 - Copy `.env.example` inside `@bento/web` to `.env.debug.local`/`.env.development.local` and fill in the contents.

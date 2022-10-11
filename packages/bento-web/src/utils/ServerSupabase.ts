@@ -4,5 +4,5 @@ import { Config } from './Config';
 
 export const ServerSupabase = createClient(
   Config.SUPABASE_URL,
-  Config.SUPABASE_SERVICE_KEY,
+  process.env.SUPABASE_SERVICE_KEY || '',
 );

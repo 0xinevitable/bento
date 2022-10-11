@@ -6,7 +6,7 @@ import { withCORS } from '@/utils/middlewares/withCORS';
 
 import { UserProfile } from '@/profile/types/UserProfile';
 import { axios } from '@/utils';
-import { Config, Supabase } from '@/utils';
+import { Supabase } from '@/utils';
 
 const MATCH_RULE = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,37}$/;
 
@@ -25,13 +25,13 @@ const capitalize = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);
 
 const notifySlack = async (user: User, profile: UserProfile) => {
-  if (!Config.SLACK_NEW_PROFILE_WEBHOOK) {
+  if (!process.env.SLACK_NEW_PROFILE_WEBHOOK) {
     // disabled
     return;
   }
   const provider = user.app_metadata.provider;
   await axios
-    .post(Config.SLACK_NEW_PROFILE_WEBHOOK, {
+    .post(process.env.SLACK_NEW_PROFILE_WEBHOOK, {
       provider: capitalize(provider || 'none'),
       social_url: !provider
         ? 'No social link available'
