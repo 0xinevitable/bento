@@ -7,7 +7,6 @@ import { WalletsProvider } from '@/hooks/useWalletContext';
 import { Analytics, ToastProvider } from '@/utils';
 
 import 'react-notifications-component/dist/theme.css';
-import '@/styles/tailwind.css';
 import '@/styles/fonts.css';
 
 import { AppProps } from 'next/app';
