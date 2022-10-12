@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 import { Colors } from '@/styles';
 
 import { DeFiStakingWithClientData } from '../utils/useDeFis';
+import { InlineBadge } from './InlineBadge';
 
 const formatNumber = (value: number | null | undefined): string =>
   (value || 0).toLocaleString(undefined, {
@@ -49,50 +50,70 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
         <Valuation>{`$${formatNumber(protocol.valuation.total)}`}</Valuation>
       </Header>
 
-      <RepresentativeContractAddress>
-        {shortenAddress(protocol.address)}
-      </RepresentativeContractAddress>
+      <AccountInfo>
+        <AccountItem>
+          <span className="field">{t('Account')}</span>
+          <InlineBadge>{shortenAddress(protocol.walletAddress)}</InlineBadge>
+        </AccountItem>
+        <AccountItem>
+          <span className="field">{t('Rep Contract')}</span>
+          <InlineBadge>{shortenAddress(protocol.address)}</InlineBadge>
+        </AccountItem>
+      </AccountInfo>
 
       <InfoList>
         {!!protocol.wallet && (
           <InfoItem>
-            <span>Wallet</span>
+            <span className="field">{t('LPs without Farming')}</span>
             {protocol.wallet === 'unavailable' ? (
-              t('unavailable')
+              <InfoValuation>{t('Unavailable')}</InfoValuation>
             ) : (
-              <Valuation>
+              <InfoValuation>
                 {`$${formatNumber(protocol.valuation.wallet)}`}
-              </Valuation>
+              </InfoValuation>
             )}
           </InfoItem>
         )}
 
         <InfoItem>
-          <span>Staking</span>
-          <Valuation>
+          <span className="field">{t('Staking')}</span>
+          <InfoValuation>
             {`$${formatNumber(protocol.valuation.staking)}`}
-          </Valuation>
+          </InfoValuation>
         </InfoItem>
+
+        {!!protocol.rewards && (
+          <InfoItem>
+            <span className="field">{t('Rewards')}</span>
+            {protocol.rewards === 'unavailable' ? (
+              <InfoValuation>{t('Unavailable')}</InfoValuation>
+            ) : (
+              <InfoValuation>
+                {`$${formatNumber(protocol.valuation.rewards)}`}
+              </InfoValuation>
+            )}
+          </InfoItem>
+        )}
 
         {!!protocol.unstake && (
           <InfoItem>
-            <span>Unstaking</span>
+            <span className="field">{t('Unstaking')}</span>
             {protocol.unstake === 'unavailable' ? (
-              t('unavailable')
+              <InfoValuation>{t('Unavailable')}</InfoValuation>
             ) : (
               <>
-                <span>
-                  <span>Claimable</span>
-                  <Valuation>
+                <span className="item">
+                  <span className="title">{t('Claimable')}</span>
+                  <InfoValuation>
                     {`$${formatNumber(protocol.valuation.claimable)}`}
-                  </Valuation>
+                  </InfoValuation>
                 </span>
 
-                <span>
-                  <span>Pending</span>
-                  <Valuation>
+                <span className="item">
+                  <span className="title">{t('Pending')}</span>
+                  <InfoValuation>
                     {`$${formatNumber(protocol.valuation.pending)}`}
-                  </Valuation>
+                  </InfoValuation>
                 </span>
               </>
             )}
@@ -196,8 +217,22 @@ const Valuation = styled.span`
   color: ${Colors.gray200};
 `;
 
-const RepresentativeContractAddress = styled.span`
-  color: ${Colors.gray200};
+const AccountInfo = styled.div`
+  margin-top: 2px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+const AccountItem = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14.5px;
+
+  & > span.field {
+    color: ${Colors.gray200};
+    font-weight: 500;
+  }
 `;
 
 const InfoList = styled.ul`
@@ -214,5 +249,24 @@ const InfoItem = styled.li`
 
   border-radius: 8px;
   background-color: ${Colors.gray800};
-  color: ${Colors.gray400};
+
+  span.field {
+    font-weight: 600;
+    color: ${Colors.gray200};
+    margin-bottom: 6px;
+  }
+
+  span.item {
+    &:not(:last-of-type) {
+      margin-bottom: 4px;
+    }
+  }
+
+  span.title {
+    margin-right: 8px;
+    color: ${Colors.gray400};
+  }
+`;
+const InfoValuation = styled(Valuation)`
+  color: ${Colors.gray100};
 `;
