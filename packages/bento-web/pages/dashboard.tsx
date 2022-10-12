@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         redirect: {
           permanent: false,
           destination:
-            (context.locale === 'en' ? '' : `/${context.locale}`) + `/`,
+            (context.locale === 'en' ? '' : `/${context.locale}`) + `/home`,
         },
       };
     } else {
@@ -55,7 +55,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     redirect: {
       permanent: false,
-      destination: (context.locale === 'en' ? '' : `/${context.locale}`) + '/',
+      destination:
+        (context.locale === 'en' ? '' : `/${context.locale}`) + `/home`,
     },
   };
 };

@@ -52,11 +52,6 @@ module.exports = withPlugins(
           destination: '/',
           permanent: false,
         },
-        {
-          source: '/dashboard',
-          destination: '/',
-          permanent: false,
-        },
       ];
     },
   },

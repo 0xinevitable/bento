@@ -1,1 +1,1 @@
-export { default, getServerSideProps } from '@/dashboard/DashboardPage';
+export { default, getStaticProps } from '@/dashboard/DashboardIntroPage';
