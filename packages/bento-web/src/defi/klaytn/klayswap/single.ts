@@ -65,6 +65,12 @@ export const getSinglePoolBalance = async (
 
   const tokenInfo = getTokenInfo(pool.token);
   const balance = Number(rawBalance) / 10 ** (tokenInfo?.decimals || 18);
+  let tokenAmounts: Record<string, number | undefined> | undefined = undefined;
+  if (tokenInfo) {
+    tokenAmounts = {
+      [tokenInfo.symbol]: balance,
+    };
+  }
 
   return {
     protocol: KlaytnDeFiProtocolType.KLAYSWAP,
@@ -75,6 +81,7 @@ export const getSinglePoolBalance = async (
     tokens: [tokenInfo || null],
     staked: {
       lpAmount: balance,
+      tokenAmounts,
     },
     rewards: {
       tokenAmounts: {

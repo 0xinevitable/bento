@@ -2,8 +2,10 @@ import { shortenAddress } from '@bento/common';
 import { Trans, useTranslation } from 'next-i18next';
 import styled, { css } from 'styled-components';
 
-import { DeFiStaking } from '@/defi/types/staking';
 import { Colors } from '@/styles';
+
+import { DeFiStakingWithClientData } from '../utils/useDeFis';
+import { InlineBadge } from './InlineBadge';
 
 const formatNumber = (value: number | null | undefined): string =>
   (value || 0).toLocaleString(undefined, {
@@ -11,7 +13,7 @@ const formatNumber = (value: number | null | undefined): string =>
   });
 
 type DeFiStakingItemProps = {
-  protocol: DeFiStaking;
+  protocol: DeFiStakingWithClientData;
 };
 export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   protocol,
@@ -21,178 +23,98 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   return (
     <Container>
       <Header>
-        <TokenLogoList>
-          {protocol.tokens.map((token, index) => (
-            <TokenLogoWrapper key={`token-${index}`}>
-              <TokenLogo
-                alt={token?.name || token?.symbol || 'Unknown'}
-                src={token?.logo}
-              />
-            </TokenLogoWrapper>
-          ))}
-        </TokenLogoList>
+        <HeaderTitle>
+          <TokenLogoList>
+            {protocol.tokens.map((token, index) => (
+              <TokenLogoWrapper key={`token-${index}`}>
+                <TokenLogo
+                  alt={token?.name || token?.symbol || 'Unknown'}
+                  src={token?.logo}
+                />
+              </TokenLogoWrapper>
+            ))}
+          </TokenLogoList>
 
-        <Name>
-          {!!protocol.prefix && `${protocol.prefix} `}
-          <Trans
-            t={t}
-            i18nKey={`defi-type-${protocol.type}`}
-            components={{
-              validator: <ValidatorBadge />,
-            }}
-          />
-        </Name>
+          <Name>
+            {!!protocol.prefix && `${protocol.prefix} `}
+            <Trans
+              t={t}
+              i18nKey={`defi-type-${protocol.type}`}
+              components={{
+                validator: <ValidatorBadge />,
+              }}
+            />
+          </Name>
+        </HeaderTitle>
+
+        <Valuation>{`$${formatNumber(protocol.valuation.total)}`}</Valuation>
       </Header>
 
-      <RepresentativeContractAddress>
-        {shortenAddress(protocol.address)}
-      </RepresentativeContractAddress>
+      <AccountInfo>
+        <AccountItem>
+          <span className="field">{t('Account')}</span>
+          <InlineBadge>{shortenAddress(protocol.walletAddress)}</InlineBadge>
+        </AccountItem>
+        <AccountItem>
+          <span className="field">{t('Rep Contract')}</span>
+          <InlineBadge>{shortenAddress(protocol.address)}</InlineBadge>
+        </AccountItem>
+      </AccountInfo>
 
       <InfoList>
         {!!protocol.wallet && (
           <InfoItem>
-            <span>wallet</span>
+            <span className="field">{t('LPs without Farming')}</span>
             {protocol.wallet === 'unavailable' ? (
-              t('unavailable')
+              <InfoValuation>{t('Unavailable')}</InfoValuation>
             ) : (
-              <span>
-                {formatNumber(protocol.wallet.lpAmount)} LP (
-                {`$${protocol.wallet.value || '?'}`})
-                <br />
-                {!!protocol.wallet.tokenAmounts &&
-                  Object.entries(protocol.wallet.tokenAmounts).map(
-                    ([tokenContract, tokenAmount]) => {
-                      const token = protocol.tokens.find(
-                        (token) =>
-                          !!token &&
-                          'address' in token &&
-                          token.address === tokenContract,
-                      );
-                      return (
-                        <span key={`token-${tokenContract}`}>
-                          {`${formatNumber(tokenAmount)} ${token?.symbol}`}
-                          &nbsp;
-                        </span>
-                      );
-                    },
-                  )}
-              </span>
+              <InfoValuation>
+                {`$${formatNumber(protocol.valuation.wallet)}`}
+              </InfoValuation>
             )}
           </InfoItem>
         )}
 
         <InfoItem>
-          <span>staked</span>
-          <span>
-            {formatNumber(protocol.staked.lpAmount)} LP (
-            {`$${formatNumber(protocol.staked.value) || '?'}`})
-            <br />
-            {!!protocol.staked.tokenAmounts &&
-              Object.entries(protocol.staked.tokenAmounts).map(
-                ([tokenContract, tokenAmount]) => {
-                  const token = protocol.tokens.find(
-                    (token) =>
-                      !!token &&
-                      'address' in token &&
-                      token.address === tokenContract,
-                  );
-                  return (
-                    <span key={`token-${tokenContract}`}>
-                      {`${formatNumber(tokenAmount)} ${token?.symbol}`}
-                      &nbsp;
-                    </span>
-                  );
-                },
-              )}
-          </span>
+          <span className="field">{t('Staking')}</span>
+          <InfoValuation>
+            {`$${formatNumber(protocol.valuation.staking)}`}
+          </InfoValuation>
         </InfoItem>
+
+        {!!protocol.rewards && (
+          <InfoItem>
+            <span className="field">{t('Rewards')}</span>
+            {protocol.rewards === 'unavailable' ? (
+              <InfoValuation>{t('Unavailable')}</InfoValuation>
+            ) : (
+              <InfoValuation>
+                {`$${formatNumber(protocol.valuation.rewards)}`}
+              </InfoValuation>
+            )}
+          </InfoItem>
+        )}
 
         {!!protocol.unstake && (
           <InfoItem>
-            <span>unstake</span>
+            <span className="field">{t('Unstaking')}</span>
             {protocol.unstake === 'unavailable' ? (
-              t('unavailable')
+              <InfoValuation>{t('Unavailable')}</InfoValuation>
             ) : (
               <>
-                {!!protocol.unstake.claimable && (
-                  <>
-                    <span>claimable</span>
-                    <span>
-                      {protocol.unstake.claimable === 'unavailable' ? (
-                        t('unavailable')
-                      ) : (
-                        <>
-                          {formatNumber(protocol.unstake.claimable.lpAmount)} LP
-                          (
-                          {`$${
-                            formatNumber(protocol.unstake.claimable.value) ||
-                            '?'
-                          }`}
-                          )
-                          <br />
-                          {!!protocol.unstake.claimable.tokenAmounts &&
-                            Object.entries(
-                              protocol.unstake.claimable.tokenAmounts,
-                            ).map(([tokenContract, tokenAmount]) => {
-                              const token = protocol.tokens.find(
-                                (token) =>
-                                  !!token &&
-                                  'address' in token &&
-                                  token.address === tokenContract,
-                              );
-                              return (
-                                <span key={`token-${tokenContract}`}>
-                                  {`${formatNumber(tokenAmount)} ${
-                                    token?.symbol
-                                  }`}
-                                  &nbsp;
-                                </span>
-                              );
-                            })}
-                        </>
-                      )}
-                    </span>
-                  </>
-                )}
+                <span className="item">
+                  <span className="title">{t('Claimable')}</span>
+                  <InfoValuation>
+                    {`$${formatNumber(protocol.valuation.claimable)}`}
+                  </InfoValuation>
+                </span>
 
-                {!!protocol.unstake.pending && (
-                  <>
-                    <span>pending</span>
-                    <span>
-                      {protocol.unstake.pending === 'unavailable' ? (
-                        t('unavailable')
-                      ) : (
-                        <>
-                          {formatNumber(protocol.unstake.pending.lpAmount)} LP (
-                          {`$${
-                            formatNumber(protocol.unstake.pending.value) || '?'
-                          }`}
-                          )
-                          <br />
-                          {!!protocol.unstake.pending.tokenAmounts &&
-                            Object.entries(
-                              protocol.unstake.pending.tokenAmounts,
-                            ).map(([tokenContract, tokenAmount]) => {
-                              const token = protocol.tokens.find(
-                                (token) =>
-                                  !!token &&
-                                  'address' in token &&
-                                  token.address === tokenContract,
-                              );
-                              return (
-                                <span key={`token-${tokenContract}`}>
-                                  {`${formatNumber(tokenAmount)} ${
-                                    token?.symbol
-                                  }`}
-                                  &nbsp;
-                                </span>
-                              );
-                            })}
-                        </>
-                      )}
-                    </span>
-                  </>
-                )}
+                <span className="item">
+                  <span className="title">{t('Pending')}</span>
+                  <InfoValuation>
+                    {`$${formatNumber(protocol.valuation.pending)}`}
+                  </InfoValuation>
+                </span>
               </>
             )}
           </InfoItem>
@@ -217,6 +139,11 @@ const Container = styled.li`
 const Header = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+`;
+const HeaderTitle = styled.div`
+  display: flex;
+  align-items: center;
   gap: 8px;
 `;
 const Name = styled.h5`
@@ -225,9 +152,12 @@ const Name = styled.h5`
   gap: 6px;
 
   color: white;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: -0.8px;
+  font-size: 18px;
+  font-weight: 600;
+
+  &:lang(ko) {
+    letter-spacing: -0.8px;
+  }
 `;
 const ValidatorBadge = styled.span`
   width: fit-content;
@@ -263,7 +193,7 @@ const fixedSize = (size: string) => css`
   max-height: ${size};
 `;
 const TokenLogoWrapper = styled.div`
-  ${fixedSize('40px')}
+  ${fixedSize('34px')}
   padding: 1px;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.45);
@@ -279,8 +209,30 @@ const TokenLogo = styled.img`
   object-fit: cover;
 `;
 
-const RepresentativeContractAddress = styled.span`
+const Valuation = styled.span`
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: bold;
   color: ${Colors.gray200};
+`;
+
+const AccountInfo = styled.div`
+  margin-top: 2px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+const AccountItem = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14.5px;
+
+  & > span.field {
+    color: ${Colors.gray200};
+    font-weight: 500;
+  }
 `;
 
 const InfoList = styled.ul`
@@ -297,5 +249,24 @@ const InfoItem = styled.li`
 
   border-radius: 8px;
   background-color: ${Colors.gray800};
-  color: ${Colors.gray400};
+
+  span.field {
+    font-weight: 600;
+    color: ${Colors.gray200};
+    margin-bottom: 6px;
+  }
+
+  span.item {
+    &:not(:last-of-type) {
+      margin-bottom: 4px;
+    }
+  }
+
+  span.title {
+    margin-right: 8px;
+    color: ${Colors.gray400};
+  }
+`;
+const InfoValuation = styled(Valuation)`
+  color: ${Colors.gray100};
 `;

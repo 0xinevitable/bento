@@ -1,5 +1,4 @@
-import produce, { Draft } from 'immer';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { axios } from '@/utils';
 
@@ -7,8 +6,6 @@ type RequestKey = string;
 export const useMultipleRequests = <T extends any>(
   requests: (RequestKey | null)[],
 ) => {
-  const requestsJSONKey = JSON.stringify(requests);
-
   const responsesRef = useRef<
     Record<
       RequestKey,
@@ -16,29 +13,31 @@ export const useMultipleRequests = <T extends any>(
     >
   >({});
 
-  const retrieveResponse = useCallback(async (requestKey: RequestKey) => {
-    responsesRef.current = produce(responsesRef.current, (draft) => {
-      draft[requestKey] = { ...draft[requestKey], isLoading: true };
-    });
+  const [count, setCount] = useState<number>(0);
+  const retrieveResponse = useCallback((requestKey: RequestKey) => {
+    responsesRef.current[requestKey] = {
+      ...responsesRef.current[requestKey],
+      isLoading: true,
+    };
 
-    try {
-      const response = await axios.get<T>(requestKey);
-      responsesRef.current = produce(responsesRef.current, (draft) => {
-        draft[requestKey] = {
-          data: response.data as Draft<T>,
+    axios
+      .get<T>(requestKey)
+      .then(({ data }) => {
+        responsesRef.current[requestKey] = {
+          data,
           error: null,
           isLoading: false,
         };
-      });
-    } catch (error: any) {
-      responsesRef.current = produce(responsesRef.current, (draft) => {
-        draft[requestKey] = {
-          ...draft[requestKey],
+        setCount((prev) => prev + 1);
+      })
+      .catch((error: any) => {
+        responsesRef.current[requestKey] = {
+          ...responsesRef.current[requestKey],
           error,
           isLoading: false,
         };
+        setCount((prev) => prev + 1);
       });
-    }
   }, []);
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export const useMultipleRequests = <T extends any>(
         retrieveResponse(requestKey);
       }
     });
-  }, [requestsJSONKey]);
+  }, [requests]);
 
   const refetch = useCallback(() => {
     requests.forEach((requestKey) => {
@@ -55,7 +54,12 @@ export const useMultipleRequests = <T extends any>(
         retrieveResponse(requestKey);
       }
     });
-  }, [requestsJSONKey]);
+  }, [requests]);
 
-  return { responses: Object.values(responsesRef.current), refetch };
+  const responses = useMemo(() => {
+    count;
+    return Object.values(responsesRef.current);
+  }, [responsesRef.current, count]);
+
+  return { responses, refetch };
 };
