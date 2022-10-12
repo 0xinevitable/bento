@@ -1,27 +1,18 @@
 import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
 
 import { ralewayFontStack, systemFontStack } from '@/styles';
 
 export const GlobalStyle = createGlobalStyle`
-  ${reset}
-
   * {
     box-sizing: border-box;
     word-break: keep-all;
 
-    /*
-      FIXME: reset.css가 두번(Tailwind의 reset 스타일과 styled-reset) 들어가면서
-      font-family가 우선순위 밀리는 문제 이렇게 해결.
-      Tailwind 걷어내고 !important 없애기
-    */
-
     &:lang(en) {
-      font-family: ${ralewayFontStack} !important;
+      font-family: ${ralewayFontStack};
     }
 
     &:lang(ko) {
-      font-family: ${systemFontStack}  !important;
+      font-family: ${systemFontStack};
     }
   }
 
@@ -46,12 +37,19 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   button {
+    outline: 0;
     cursor: pointer;
   }
 
   ::selection {
     color: rgba(255, 255, 255, 0.65);
     background-color: rgba(152, 24, 35, 0.65);
+  }
+
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .Tooltip {

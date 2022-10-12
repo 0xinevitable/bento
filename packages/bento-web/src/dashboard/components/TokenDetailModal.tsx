@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Badge, Modal } from '@/components/system';
 
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { Colors } from '@/styles';
 
 import { AssetMedia } from './AssetMedia';
 
@@ -112,7 +113,7 @@ export const TokenDetailModal: React.FC<Props> = ({
             <TokenInformation>
               <TokenName>{tokenBalance.name}</TokenName>
               {tokenBalance.symbol !== null && (
-                <TokenSymbol className="text-gray-400">
+                <TokenSymbol style={{ color: Colors.gray400 }}>
                   {`$${tokenBalance.symbol}`}
                 </TokenSymbol>
               )}
