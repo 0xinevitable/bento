@@ -16,6 +16,7 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { Metadata } from '@/defi/klaytn/constants/metadata';
 import { useProfile } from '@/profile/hooks/useProfile';
+import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
 
@@ -46,6 +47,8 @@ const walletBalanceReducer =
 
 type DashboardMainProps = {
   wallets: Wallet[];
+  profile: UserProfile;
+  revalidateProfile: () => Promise<void>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setTokenDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setTokenDetailModalParams: React.Dispatch<
@@ -55,6 +58,8 @@ type DashboardMainProps = {
 
 export const DashboardMain: React.FC<DashboardMainProps> = ({
   wallets,
+  profile,
+  revalidateProfile,
   setAddWalletModalVisible,
   setTokenDetailModalVisible,
   setTokenDetailModalParams,
@@ -62,7 +67,6 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
-  const { profile, revalidateProfile } = useProfile({ type: 'MY_PROFILE' });
   const { balances: walletBalances, jsonKey: walletBalancesJSONKey } =
     useWalletBalances({ wallets });
   const { balances: NFTBalances, jsonKey: nftBalancesJSONKey } = useNFTBalances(

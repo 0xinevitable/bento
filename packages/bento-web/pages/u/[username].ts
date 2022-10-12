@@ -1,4 +1,1 @@
-export {
-  default,
-  getServerSideProps,
-} from '@/profile/ProfileDetailPage/ProfileDetailPage';
+export { default, getServerSideProps } from '@/dashboard/DashboardPage';
