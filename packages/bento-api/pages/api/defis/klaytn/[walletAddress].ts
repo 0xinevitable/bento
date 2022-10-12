@@ -224,7 +224,7 @@ const getDeFiStakingsByWalletAddress = async (
   const promisesForDelegations = KlayStation.getDelegations(walletAddress);
 
   const stakings = (
-    await Promise.all([
+    await safePromiseAllV1([
       promisesForStakings.catch(handleError),
       promisesForDelegations.catch(handleError),
     ])
