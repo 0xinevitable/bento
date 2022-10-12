@@ -1,37 +1,39 @@
-import { AuthChangeEvent, Session } from '@supabase/supabase-js';
+import { Session } from '@supabase/supabase-js';
+import { deleteCookie } from 'cookies-next';
 import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { sessionAtom } from '../states';
-import { Analytics, Supabase, axios, toast } from '../utils';
+import { Analytics, Config, Supabase, axios, toast } from '../utils';
 
-const handleAuthChange = async (
-  event: AuthChangeEvent,
-  session: Session | null,
-) => {
-  try {
-    if (session) {
-      axios.interceptors.request.use((config) => {
-        return {
-          ...config,
-          headers: {
-            ...config.headers,
-            'X-Supabase-Auth': session.access_token,
-          },
-        };
-      });
+const registerAccessToken = (session: Session | null) => {
+  axios.interceptors.request.use((config) => {
+    return {
+      ...config,
+      headers: {
+        ...config.headers,
+        'x-supabase-auth': session?.access_token,
+      },
+    };
+  });
 
-      const expireDate = session.expires_at
-        ? new Date(session.expires_at)
-        : new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  if (session) {
+    document.cookie = `supabase_auth_token=${session.access_token};max-age=${
+      (session.expires_in || 60 * 60 * 24) * 1_000
+    };secure;samesite=lax;path=/`;
 
-      document.cookie = `supabase.auth.token=${
-        session.access_token
-      }; Path=/; Expires=${expireDate.toUTCString()}; Secure; SameSite=Lax`;
+    if (Config.ENVIRONMENT !== 'production') {
+      console.log('Access token saved to Cookie');
     }
-  } catch (err) {
-    console.error(err);
+  } else {
+    deleteCookie('supabase_auth_token', {
+      path: '/',
+    });
+
+    if (Config.ENVIRONMENT !== 'production') {
+      console.log('Access token removed from Cookie');
+    }
   }
 };
 
@@ -41,12 +43,10 @@ export const SessionManager: React.FC = () => {
   useEffect(() => {
     const session = Supabase.auth.session();
     setCurrentSession(session);
-    if (!!session) {
-      handleAuthChange('SIGNED_IN', session);
-    }
+    registerAccessToken(session);
 
     Supabase.auth.onAuthStateChange((event, session) => {
-      handleAuthChange(event, session);
+      registerAccessToken(session);
 
       if (event == 'SIGNED_IN') {
         if (currentSession?.user?.id !== session?.user?.id) {

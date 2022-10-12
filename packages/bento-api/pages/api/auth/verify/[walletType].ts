@@ -49,7 +49,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     walletAddress = walletAddress.toLowerCase();
   }
 
-  const accessToken = (req.headers['X-Supabase-Auth'] as string) || '';
+  const accessToken = (req.headers['x-supabase-auth'] as string) || '';
   const { user } = await Supabase.auth.api.getUser(accessToken);
   if (!user) {
     res.status(401).json({ message: 'Unauthorized' });
