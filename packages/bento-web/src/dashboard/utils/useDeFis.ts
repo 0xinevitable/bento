@@ -1,5 +1,7 @@
 import { Wallet } from '@bento/common';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
+import { useCachedPricings } from '@/hooks/pricings';
 
 import { getDeFiStakingValue } from '@/defi/klaytn/utils/getDeFiStakingValue';
 import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
@@ -28,19 +30,24 @@ export const useDeFis = (wallets: Wallet[]) => {
   // FIXME: Refetch rule
   const { responses: result, refetch } =
     useMultipleRequests<DeFiStakingResponse>(calculatedRequests);
-  const defis = useMemo<DeFiStakingWithClientData[]>(
-    () =>
-      result.flatMap((item) => {
-        if (!item.data?.stakings) {
-          return [];
-        }
-        return item.data.stakings.map((staking) => ({
-          ...staking,
-          walletAddress: item.data?.walletAddress!,
-          valuation: getDeFiStakingValue(staking),
-        }));
-      }),
-    [result],
-  );
+  const { getCachedPrice } = useCachedPricings();
+
+  const [defis, setDefis] = useState<DeFiStakingWithClientData[]>([]);
+
+  useEffect(() => {
+    const items = result.flatMap((item) => {
+      if (!item.data?.stakings) {
+        return [];
+      }
+      return item.data.stakings.map((staking) => ({
+        ...staking,
+        walletAddress: item.data?.walletAddress!,
+        valuation: getDeFiStakingValue(staking, getCachedPrice),
+      }));
+    });
+
+    setDefis(items);
+  }, [result, getCachedPrice]);
+
   return { defis, defisJSONKey: JSON.stringify(defis) };
 };

@@ -57,7 +57,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
               t('unavailable')
             ) : (
               <span>
-                {getAmountValue(protocol.wallet)}
+                {/* {getAmountValue(protocol.wallet)} */}
                 {/* {formatNumber(protocol.wallet.lpAmount)} LP (
                 {`$${protocol.wallet.value || '?'}`})
                 <br />
@@ -85,7 +85,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
         <InfoItem>
           <span>staked</span>
-          <span>{getAmountValue(protocol.staked)}</span>
+          {/* <span>{getAmountValue(protocol.staked)}</span> */}
         </InfoItem>
 
         {!!protocol.unstake && (
@@ -96,13 +96,13 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
             ) : (
               <>
                 <span>
-                  {!!protocol.unstake.claimable &&
-                    getAmountValue(protocol.unstake.claimable)}
+                  {/* {!!protocol.unstake.claimable &&
+                    getAmountValue(protocol.unstake.claimable)} */}
                 </span>
 
                 <span>
-                  {!!protocol.unstake.pending &&
-                    getAmountValue(protocol.unstake.pending)}
+                  {/* {!!protocol.unstake.pending &&
+                    getAmountValue(protocol.unstake.pending)} */}
                 </span>
               </>
             )}
