@@ -39,7 +39,7 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
           <span
             style={{
               fontSize: 12,
-              lineHeight: 16,
+              lineHeight: '16px',
               color: Colors.gray600,
               display: 'flex',
               alignItems: 'center',

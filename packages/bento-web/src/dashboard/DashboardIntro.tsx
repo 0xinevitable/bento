@@ -135,7 +135,7 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
               <AnimatedToolTip label={network.name}>
                 <ProtocolImageWrapper>
                   <Image
-                    className="cursor-pointer"
+                    style={{ cursor: 'pointer' }}
                     alt={network.name}
                     src={network.logo}
                     width={56}

@@ -260,7 +260,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                         marginLeft: 6,
                         color: Colors.gray200,
                         fontSize: 14,
-                        lineHeight: 20,
+                        lineHeight: '20px',
                       }}
                     >
                       {t('Show NFTs')}
@@ -378,9 +378,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === DashboardTabType.Badges}>
-              <span className="my-8 text-center text-white/90 font-bold">
+              {/* <span className="my-8 text-center text-white/90 font-bold">
                 Coming Soon!
-              </span>
+              </span> */}
             </AnimatedTab>
           </DashboardContent>
         </DashboardContentWrapper>
