@@ -1,12 +1,13 @@
 import { safePromiseAll } from '@bento/common';
 import { pricesFromCoinGecko } from '@bento/core';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { useInterval } from '@/hooks/useInterval';
 
-import { Config, isServer } from '@/utils';
+import { Config } from '@/utils';
 
+import { useClientCallback } from './useClientCallback';
 import { useLazyEffect } from './useLazyEffect';
 
 const SECONDS = 1_000;
@@ -38,63 +39,66 @@ const useCoinGeckoPrices = () => {
   const coinGeckoIds = useAtomValue(coinGeckoIdsAtom);
   const [prices, setPrices] = useAtom(pricingsAtom);
 
-  const fetchPrices = useCallback(async () => {
-    if (isServer()) {
-      return;
-    }
-    if (!coinGeckoIds.length) {
-      return;
-    }
+  const fetchPrices = useClientCallback(
+    async () => {
+      if (!coinGeckoIds.length) {
+        return;
+      }
 
-    if (Config.ENVIRONMENT !== 'production') {
-      console.log('hit');
-    }
+      if (Config.ENVIRONMENT !== 'production') {
+        console.log('hit');
+      }
 
-    const cachedIds: string[] = [];
-    const cachedPrices = await safePromiseAll(
-      coinGeckoIds.map(async (coinGeckoId) => {
-        const cachedValue = await CacheStore.get(coinGeckoId).catch(() => null);
-        if (!cachedValue) {
-          return [coinGeckoId, 0];
-        }
-        const [value, cachedAt] = cachedValue as ValueVO;
-
-        if (cachedAt >= Date.now() - CACHE_TIME) {
-          cachedIds.push(coinGeckoId);
-          return [coinGeckoId, value];
-        }
-
-        return [coinGeckoId, 0];
-      }),
-    );
-    let cachedPricesObject: PricingMap | null = null;
-    if (cachedPrices.length > 0) {
-      cachedPricesObject = Object.fromEntries(cachedPrices);
-      setPrices(cachedPricesObject as PricingMap);
-    }
-
-    const cachedIdsSet = new Set(cachedIds);
-    const uncachedIds = coinGeckoIds.filter((id) => !cachedIdsSet.has(id));
-
-    const fetchedPrices =
-      uncachedIds.length === 0
-        ? []
-        : await pricesFromCoinGecko(uncachedIds).then((prices) =>
-            Object.entries(prices),
+      const cachedIds: string[] = [];
+      const cachedPrices = await safePromiseAll(
+        coinGeckoIds.map(async (coinGeckoId) => {
+          const cachedValue = await CacheStore.get(coinGeckoId).catch(
+            () => null,
           );
-    await safePromiseAll(
-      fetchedPrices.map(([key, price]) =>
-        CacheStore.set(key, [price, Date.now()]),
-      ),
-    );
+          if (!cachedValue) {
+            return [coinGeckoId, 0];
+          }
+          const [value, cachedAt] = cachedValue as ValueVO;
 
-    const fetchedPricesObject = Object.fromEntries(fetchedPrices);
+          if (cachedAt >= Date.now() - CACHE_TIME) {
+            cachedIds.push(coinGeckoId);
+            return [coinGeckoId, value];
+          }
 
-    setPrices({
-      ...cachedPricesObject,
-      ...fetchedPricesObject,
-    });
-  }, [JSON.stringify(coinGeckoIds)]);
+          return [coinGeckoId, 0];
+        }),
+      );
+      let cachedPricesObject: PricingMap | null = null;
+      if (cachedPrices.length > 0) {
+        cachedPricesObject = Object.fromEntries(cachedPrices);
+        setPrices(cachedPricesObject as PricingMap);
+      }
+
+      const cachedIdsSet = new Set(cachedIds);
+      const uncachedIds = coinGeckoIds.filter((id) => !cachedIdsSet.has(id));
+
+      const fetchedPrices =
+        uncachedIds.length === 0
+          ? []
+          : await pricesFromCoinGecko(uncachedIds).then((prices) =>
+              Object.entries(prices),
+            );
+      await safePromiseAll(
+        fetchedPrices.map(([key, price]) =>
+          CacheStore.set(key, [price, Date.now()]),
+        ),
+      );
+
+      const fetchedPricesObject = Object.fromEntries(fetchedPrices);
+
+      setPrices({
+        ...cachedPricesObject,
+        ...fetchedPricesObject,
+      });
+    },
+    [JSON.stringify(coinGeckoIds)],
+    () => {},
+  );
 
   useLazyEffect(
     () => {
@@ -125,11 +129,8 @@ export const PricingsProvider: React.FC<React.PropsWithChildren> = ({
   const [prices] = useAtom(pricingsAtom);
   const setCoinGeckoIds = useSetAtom(coinGeckoIdsAtom);
 
-  const getCachedPrice = useCallback(
+  const getCachedPrice = useClientCallback(
     (coinGeckoId: string | string[]) => {
-      if (isServer()) {
-        return 0;
-      }
       const single = typeof coinGeckoId === 'string';
       const ids = single ? [coinGeckoId] : coinGeckoId;
       const res = ids.map((id) => {
@@ -142,6 +143,7 @@ export const PricingsProvider: React.FC<React.PropsWithChildren> = ({
       return single ? res[0] : res;
     },
     [prices],
+    () => 0,
   ) as GetCachedPrice;
 
   return (

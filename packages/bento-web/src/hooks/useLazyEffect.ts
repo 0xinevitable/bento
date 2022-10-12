@@ -8,6 +8,8 @@ import {
 
 import { debounce } from '@/utils/debounce';
 
+import { useClientCallback } from './useClientCallback';
+
 export function useLazyEffect(
   effect: EffectCallback,
   deps: DependencyList = [],
@@ -15,10 +17,11 @@ export function useLazyEffect(
 ) {
   const cleanUp = useRef<void | (() => void)>();
   const effectRef = useRef<EffectCallback>();
-  effectRef.current = useCallback(effect, deps);
-  const lazyEffect = useCallback(
+  effectRef.current = useClientCallback(effect, deps, () => {});
+  const lazyEffect = useClientCallback(
     debounce(() => (cleanUp.current = effectRef.current?.()), wait),
     [],
+    () => {},
   );
   useEffect(lazyEffect, deps);
   useEffect(() => {
