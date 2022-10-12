@@ -1,7 +1,8 @@
 import { Base64 } from '@bento/common';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 import { Network } from '@/constants/networks';
+import { axios } from '@/utils';
 
 export const validateAndSaveWallet = async (
   params: (
