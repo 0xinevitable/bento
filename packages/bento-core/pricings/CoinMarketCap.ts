@@ -1,4 +1,4 @@
-import { Config, randomOf, safePromiseAll } from '@bento/common';
+import { Config, randomOf, safePromiseAllV1 } from '@bento/common';
 import axios from 'axios';
 import queryString from 'query-string';
 
@@ -48,7 +48,7 @@ export const priceFromCoinMarketCap = withCache(
 
 export const pricesFromCoinMarketCap = async (coinMarketCapIds: number[]) =>
   (
-    await safePromiseAll(
+    await safePromiseAllV1(
       coinMarketCapIds.map(async (coinMarketCapId) => {
         const price = await priceFromCoinMarketCap(coinMarketCapId).catch(
           () => 0,
