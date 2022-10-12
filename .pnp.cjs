@@ -2641,7 +2641,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@cosmjs/amino", "npm:0.29.0"],\
-            ["@cosmjs/cosmwasm-stargate", "npm:0.29.1"],\
             ["@cosmjs/crypto", "npm:0.29.0"],\
             ["@ethersproject/address", "npm:5.7.0"],\
             ["@ethersproject/providers", "npm:5.7.1"],\
