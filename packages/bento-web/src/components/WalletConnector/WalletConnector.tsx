@@ -1,10 +1,11 @@
 import clsx from 'clsx';
 import { useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { useSignOut } from '@/hooks/useSignOut';
 
 import { WALLETS } from '@/constants/wallets';
+import { Colors } from '@/styles';
 import { toast } from '@/utils';
 
 import {
@@ -94,11 +95,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
   return (
     <div style={{ display: 'flex', gap: 8 }}>
       <Button
-        className={clsx(
-          'p-4 text-slate-800 font-bold bg-slate-300',
-          (firstNetwork !== 'evm' || isLoading) &&
-            'opacity-20 cursor-not-allowed',
-        )}
+        disabled={firstNetwork !== 'evm' || isLoading}
         onClick={
           firstNetwork === 'evm' && !isLoading
             ? () => onClickConnect('metamask-or-walletconnect')
@@ -109,15 +106,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           <img src={WALLETS.MetaMask} alt="MetaMask" />
           <img src={WALLETS.WalletConnect} alt="WalletConnect" />
         </IconList>
-        MetaMask or WalletConnect
+        <span className="title">MetaMask or WalletConnect</span>
       </Button>
 
       <Button
-        className={clsx(
-          'p-4 text-slate-800 font-bold bg-slate-300',
-          (firstNetwork !== 'evm' || isLoading) &&
-            'opacity-20 cursor-not-allowed',
-        )}
+        disabled={firstNetwork !== 'evm' || isLoading}
         onClick={
           firstNetwork === 'evm' && !isLoading
             ? () => onClickConnect('kaikas')
@@ -127,15 +120,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         <IconList>
           <img src={WALLETS.Kaikas} alt="Kaikas" />
         </IconList>
-        Kaikas
+        <span className="title">Kaikas</span>
       </Button>
 
       <Button
-        className={clsx(
-          'p-4 text-slate-800 font-bold bg-slate-300',
-          (firstNetwork !== 'cosmos-sdk' || isLoading) &&
-            'opacity-20 cursor-not-allowed',
-        )}
+        disabled={firstNetwork !== 'cosmos-sdk' || isLoading}
         onClick={
           firstNetwork === 'cosmos-sdk' && !isLoading
             ? () => onClickConnect('keplr')
@@ -145,15 +134,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         <IconList>
           <img src={WALLETS.Keplr} alt="Keplr" />
         </IconList>
-        Keplr
+        <span className="title">Keplr</span>
       </Button>
 
       <Button
-        className={clsx(
-          'p-4 text-slate-800 font-bold bg-slate-300',
-          (firstNetwork !== 'solana' || isLoading) &&
-            'opacity-20 cursor-not-allowed',
-        )}
+        disabled={firstNetwork !== 'solana' || isLoading}
         onClick={
           firstNetwork === 'solana' && !isLoading
             ? () => onClickConnect('phantom')
@@ -163,25 +148,64 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         <IconList>
           <img src={WALLETS.Phantom} alt="Phantom" />
         </IconList>
-        Phantom
+        <span className="title">Phantom</span>
       </Button>
     </div>
   );
 };
 
-const Button = styled.button`
+type ButtonProps = {
+  disabled?: boolean;
+};
+const Button = styled.button<ButtonProps>`
+  padding: 16px;
+
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 8px;
-  flex: 1;
   justify-content: center;
+  transition: all 0.2s ease-in-out;
+
+  border-radius: 8px;
+  background-color: ${Colors.gray600};
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 20%;
+      cursor: not-allowed;
+    `};
 
   &:first-of-type {
     min-width: 240px;
   }
+
+  * {
+    transition: all 0.4s ease;
+  }
+
+  & > .title {
+    font-weight: bold;
+    color: ${Colors.gray200};
+  }
+
+  &:hover {
+    background-color: ${Colors.gray500};
+
+    & > .icon-list {
+      transform: translateY(-2px);
+    }
+
+    & > .title {
+      transform: translateY(2px);
+      color: ${Colors.white};
+    }
+  }
 `;
-const IconList = styled.div`
+const IconList = styled.div.attrs({
+  className: 'icon-list',
+})`
   margin-bottom: 8px;
   gap: 8px;
   display: flex;
