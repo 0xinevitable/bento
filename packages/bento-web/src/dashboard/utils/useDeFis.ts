@@ -3,15 +3,18 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { useCachedPricings } from '@/hooks/pricings';
 
-import { getDeFiStakingValue } from '@/defi/klaytn/utils/getDeFiStakingValue';
+import {
+  Valuation,
+  getDeFiStakingValue,
+} from '@/defi/klaytn/utils/getDeFiStakingValue';
 import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
 import { FeatureFlags } from '@/utils';
 
 import { useMultipleRequests } from './useMultipleRequests';
 
-type DeFiStakingWithClientData = DeFiStaking & {
+export type DeFiStakingWithClientData = DeFiStaking & {
   walletAddress: string;
-  valuation: number;
+  valuation: Valuation;
 };
 
 export const useDeFis = (wallets: Wallet[]) => {

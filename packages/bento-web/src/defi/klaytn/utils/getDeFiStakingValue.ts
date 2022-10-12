@@ -8,25 +8,36 @@ import {
   NativeInput,
 } from '@/defi/types/staking';
 
+export type Valuation = {
+  wallet: number;
+  staking: number;
+  rewards: number;
+  claimable: number | null;
+  pending: number | null;
+  total: number;
+};
 export const getDeFiStakingValue = (
   staking: DeFiStaking,
   getCachedPrice: GetCachedPrice,
-) => {
-  const { staked, rewards } = staking;
-  let value =
-    getAmountValue(staked, staking, getCachedPrice) +
-    getAmountValue(rewards, staking, getCachedPrice);
+): Valuation => {
+  let valuation: Partial<Valuation> = {
+    staking: getAmountValue(staking.staked, staking, getCachedPrice),
+    rewards: getAmountValue(staking.rewards, staking, getCachedPrice),
+  };
 
-  if (staking.unstake !== 'unavailable') {
-    value += getAmountValue(
-      staking.unstake?.claimable,
-      staking,
-      getCachedPrice,
-    );
-    value += getAmountValue(staking.unstake?.pending, staking, getCachedPrice);
-  }
+  valuation.claimable =
+    staking.unstake !== 'unavailable'
+      ? getAmountValue(staking.unstake?.claimable, staking, getCachedPrice)
+      : null;
+  valuation.pending =
+    staking.unstake !== 'unavailable'
+      ? getAmountValue(staking.unstake?.pending, staking, getCachedPrice)
+      : null;
 
-  return value;
+  return {
+    ...valuation,
+    total: Object.values(valuation).reduce<number>((a, b) => a + (b || 0), 0),
+  } as Valuation;
 };
 
 export const getAmountValue = (

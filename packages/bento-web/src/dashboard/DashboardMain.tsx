@@ -300,7 +300,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                         {Object.entries(defiStakesByProtocol).map(
                           ([protocol, defiProtocols]) => {
                             const valuation = defiProtocols.reduce(
-                              (acc, v) => acc + v.valuation,
+                              (acc, v) => acc + v.valuation.total,
                               0,
                             );
                             return (
