@@ -2,9 +2,10 @@ import { shortenAddress } from '@bento/common';
 import { Trans, useTranslation } from 'next-i18next';
 import styled, { css } from 'styled-components';
 
-import { getAmountValue } from '@/defi/klaytn/utils/getDeFiStakingValue';
-import { DeFiStaking } from '@/defi/types/staking';
 import { Colors } from '@/styles';
+
+import { DeFiStakingWithClientData } from '../utils/useDeFis';
+import { InlineBadge } from './InlineBadge';
 
 const formatNumber = (value: number | null | undefined): string =>
   (value || 0).toLocaleString(undefined, {
@@ -12,7 +13,7 @@ const formatNumber = (value: number | null | undefined): string =>
   });
 
 type DeFiStakingItemProps = {
-  protocol: DeFiStaking;
+  protocol: DeFiStakingWithClientData;
 };
 export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   protocol,
@@ -22,87 +23,97 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   return (
     <Container>
       <Header>
-        <TokenLogoList>
-          {protocol.tokens.map((token, index) => (
-            <TokenLogoWrapper key={`token-${index}`}>
-              <TokenLogo
-                alt={token?.name || token?.symbol || 'Unknown'}
-                src={token?.logo}
-              />
-            </TokenLogoWrapper>
-          ))}
-        </TokenLogoList>
+        <HeaderTitle>
+          <TokenLogoList>
+            {protocol.tokens.map((token, index) => (
+              <TokenLogoWrapper key={`token-${index}`}>
+                <TokenLogo
+                  alt={token?.name || token?.symbol || 'Unknown'}
+                  src={token?.logo}
+                />
+              </TokenLogoWrapper>
+            ))}
+          </TokenLogoList>
 
-        <Name>
-          {!!protocol.prefix && `${protocol.prefix} `}
-          <Trans
-            t={t}
-            i18nKey={`defi-type-${protocol.type}`}
-            components={{
-              validator: <ValidatorBadge />,
-            }}
-          />
-        </Name>
+          <Name>
+            {!!protocol.prefix && `${protocol.prefix} `}
+            <Trans
+              t={t}
+              i18nKey={`defi-type-${protocol.type}`}
+              components={{
+                validator: <ValidatorBadge />,
+              }}
+            />
+          </Name>
+        </HeaderTitle>
+
+        <Valuation>{`$${formatNumber(protocol.valuation.total)}`}</Valuation>
       </Header>
 
-      <RepresentativeContractAddress>
-        {shortenAddress(protocol.address)}
-      </RepresentativeContractAddress>
+      <AccountInfo>
+        <AccountItem>
+          <span className="field">{t('Account')}</span>
+          <InlineBadge>{shortenAddress(protocol.walletAddress)}</InlineBadge>
+        </AccountItem>
+        <AccountItem>
+          <span className="field">{t('Rep Contract')}</span>
+          <InlineBadge>{shortenAddress(protocol.address)}</InlineBadge>
+        </AccountItem>
+      </AccountInfo>
 
       <InfoList>
         {!!protocol.wallet && (
           <InfoItem>
-            <span>wallet</span>
+            <span className="field">{t('LPs without Farming')}</span>
             {protocol.wallet === 'unavailable' ? (
-              t('unavailable')
+              <InfoValuation>{t('Unavailable')}</InfoValuation>
             ) : (
-              <span>
-                {getAmountValue(protocol.wallet)}
-                {/* {formatNumber(protocol.wallet.lpAmount)} LP (
-                {`$${protocol.wallet.value || '?'}`})
-                <br />
-                {!!protocol.wallet.tokenAmounts &&
-                  Object.entries(protocol.wallet.tokenAmounts).map(
-                    ([tokenContract, tokenAmount]) => {
-                      const token = protocol.tokens.find(
-                        (token) =>
-                          !!token &&
-                          'address' in token &&
-                          token.address === tokenContract,
-                      );
-                      return (
-                        <span key={`token-${tokenContract}`}>
-                          {`${formatNumber(tokenAmount)} ${token?.symbol}`}
-                          &nbsp;
-                        </span>
-                      );
-                    },
-                  )} */}
-              </span>
+              <InfoValuation>
+                {`$${formatNumber(protocol.valuation.wallet)}`}
+              </InfoValuation>
             )}
           </InfoItem>
         )}
 
         <InfoItem>
-          <span>staked</span>
-          <span>{getAmountValue(protocol.staked)}</span>
+          <span className="field">{t('Staking')}</span>
+          <InfoValuation>
+            {`$${formatNumber(protocol.valuation.staking)}`}
+          </InfoValuation>
         </InfoItem>
+
+        {!!protocol.rewards && (
+          <InfoItem>
+            <span className="field">{t('Rewards')}</span>
+            {protocol.rewards === 'unavailable' ? (
+              <InfoValuation>{t('Unavailable')}</InfoValuation>
+            ) : (
+              <InfoValuation>
+                {`$${formatNumber(protocol.valuation.rewards)}`}
+              </InfoValuation>
+            )}
+          </InfoItem>
+        )}
 
         {!!protocol.unstake && (
           <InfoItem>
-            <span>unstake</span>
+            <span className="field">{t('Unstaking')}</span>
             {protocol.unstake === 'unavailable' ? (
-              t('unavailable')
+              <InfoValuation>{t('Unavailable')}</InfoValuation>
             ) : (
               <>
-                <span>
-                  {!!protocol.unstake.claimable &&
-                    getAmountValue(protocol.unstake.claimable)}
+                <span className="item">
+                  <span className="title">{t('Claimable')}</span>
+                  <InfoValuation>
+                    {`$${formatNumber(protocol.valuation.claimable)}`}
+                  </InfoValuation>
                 </span>
 
-                <span>
-                  {!!protocol.unstake.pending &&
-                    getAmountValue(protocol.unstake.pending)}
+                <span className="item">
+                  <span className="title">{t('Pending')}</span>
+                  <InfoValuation>
+                    {`$${formatNumber(protocol.valuation.pending)}`}
+                  </InfoValuation>
                 </span>
               </>
             )}
@@ -126,6 +137,11 @@ const Container = styled.li`
   background-color: ${Colors.gray850};
 `;
 const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const HeaderTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -193,8 +209,30 @@ const TokenLogo = styled.img`
   object-fit: cover;
 `;
 
-const RepresentativeContractAddress = styled.span`
+const Valuation = styled.span`
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: bold;
   color: ${Colors.gray200};
+`;
+
+const AccountInfo = styled.div`
+  margin-top: 2px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+const AccountItem = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14.5px;
+
+  & > span.field {
+    color: ${Colors.gray200};
+    font-weight: 500;
+  }
 `;
 
 const InfoList = styled.ul`
@@ -211,5 +249,24 @@ const InfoItem = styled.li`
 
   border-radius: 8px;
   background-color: ${Colors.gray800};
-  color: ${Colors.gray400};
+
+  span.field {
+    font-weight: 600;
+    color: ${Colors.gray200};
+    margin-bottom: 6px;
+  }
+
+  span.item {
+    &:not(:last-of-type) {
+      margin-bottom: 4px;
+    }
+  }
+
+  span.title {
+    margin-right: 8px;
+    color: ${Colors.gray400};
+  }
+`;
+const InfoValuation = styled(Valuation)`
+  color: ${Colors.gray100};
 `;

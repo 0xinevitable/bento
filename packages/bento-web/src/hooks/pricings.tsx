@@ -105,7 +105,7 @@ const useCoinGeckoPrices = () => {
   return prices;
 };
 
-interface GetCachedPrice {
+export interface GetCachedPrice {
   (coinGeckoId: string): number;
   (coinGeckoIds: string[]): number[];
 }
