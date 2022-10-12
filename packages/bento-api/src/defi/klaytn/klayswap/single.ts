@@ -1,11 +1,12 @@
 import BigNumber from 'bn.js';
 
+import { axios } from '@/utils/axios';
+
 import {
   DeFiStaking,
   KlaytnDeFiProtocolType,
   KlaytnDeFiType,
 } from '@/defi/types/staking';
-import { axios } from '@/utils';
 
 import KLAYSwapSingleLeveragePool from '../abis/KLAYSwapSingleLeveragePool.json';
 import { klaytnChain } from '../constants';
