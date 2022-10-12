@@ -111,14 +111,13 @@ export const NFTListSection: React.FC<Props> = ({
         nftAssets.map((asset, index) => {
           const isVideo =
             asset.image_url?.toLowerCase()?.endsWith('.mp4') || false;
-
           return (
             <AssetListItem key={index} onClick={() => setSelectedNFT(asset)}>
               <AssetMedia
                 src={
                   (!isVideo
                     ? asset.image_url || asset.collection.image_url
-                    : asset.animation_url) || undefined
+                    : asset.image_url) || undefined
                 }
                 poster={
                   asset.image_url ||
