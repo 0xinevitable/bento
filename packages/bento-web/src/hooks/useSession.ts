@@ -11,7 +11,25 @@ const handleAuthChange = async (
   session: Session | null,
 ) => {
   try {
-    await axios.post('/api/auth', { event, session }, {});
+    if (session) {
+      axios.interceptors.request.use((config) => {
+        return {
+          ...config,
+          headers: {
+            ...config.headers,
+            'X-Supabase-Auth': session.access_token,
+          },
+        };
+      });
+
+      const expireDate = session.expires_at
+        ? new Date(session.expires_at)
+        : new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+      document.cookie = `supabase.auth.token=${
+        session.access_token
+      }; Path=/; Expires=${expireDate.toUTCString()}; Secure; SameSite=Lax`;
+    }
   } catch (err) {
     console.error(err);
   }

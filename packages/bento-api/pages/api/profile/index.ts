@@ -2,7 +2,7 @@ import { PostgrestError, PostgrestResponse, User } from '@supabase/supabase-js';
 import { format } from 'date-fns';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { ServerSupabase } from '@/utils/ServerSupabase';
+import { ServerSupabase as Supabase } from '@/utils/ServerSupabase';
 import { axios } from '@/utils/axios';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
@@ -51,7 +51,8 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   let { body: profile } = req;
   profile.username = (profile?.username || '').toLowerCase();
 
-  const { user } = await ServerSupabase.auth.api.getUserByCookie(req);
+  const accessToken = (req.headers['X-Supabase-Auth'] as string) || '';
+  const { user } = await Supabase.auth.api.getUser(accessToken);
   if (!user) {
     res.status(401).json({ message: 'Unauthorized' });
     return;
@@ -89,7 +90,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     return;
   }
 
-  const prevProfileQuery = await ServerSupabase.from('profile') //
+  const prevProfileQuery = await Supabase.from('profile') //
     .select('*')
     .eq('user_id', user.id);
   const previousProfiles = prevProfileQuery.data ?? [];
@@ -99,7 +100,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   let error: PostgrestError | null = null;
 
   // check for duplicated username here
-  const duplicatedUsernameQuery = await ServerSupabase.from('profile') //
+  const duplicatedUsernameQuery = await Supabase.from('profile') //
     .select('*')
     .eq('username', profile.username);
   const [profileWithDuplicatedUsername] = (duplicatedUsernameQuery.data ??
@@ -116,7 +117,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   }
 
   if (!hasProfile) {
-    data = await ServerSupabase.from('profile').upsert({
+    data = await Supabase.from('profile').upsert({
       user_id: user.id,
       ...profile,
     });
@@ -124,7 +125,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
     await notifySlack(user, profile);
   } else {
-    data = await ServerSupabase.from('profile')
+    data = await Supabase.from('profile')
       .update({
         user_id: user.id,
         ...profile,

@@ -6,7 +6,8 @@ import { withCORS } from '@/utils/middlewares/withCORS';
 import { Block } from '@/profile/blocks';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { user } = await Supabase.auth.api.getUserByCookie(req);
+  const accessToken = (req.headers['X-Supabase-Auth'] as string) || '';
+  const { user } = await Supabase.auth.api.getUser(accessToken);
   if (!user) {
     res.status(401).json({ message: 'Unauthorized' });
     return;
