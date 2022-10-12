@@ -2,11 +2,11 @@ import { PostgrestError, PostgrestResponse, User } from '@supabase/supabase-js';
 import { format } from 'date-fns';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { ServerSupabase } from '@/utils/ServerSupabase';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 import { UserProfile } from '@/profile/types/UserProfile';
 import { axios } from '@/utils';
-import { Supabase } from '@/utils';
 
 const MATCH_RULE = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,37}$/;
 
@@ -51,7 +51,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   let { body: profile } = req;
   profile.username = (profile?.username || '').toLowerCase();
 
-  const { user } = await Supabase.auth.api.getUserByCookie(req);
+  const { user } = await ServerSupabase.auth.api.getUserByCookie(req);
   if (!user) {
     res.status(401).json({ message: 'Unauthorized' });
     return;
@@ -89,7 +89,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     return;
   }
 
-  const prevProfileQuery = await Supabase.from('profile') //
+  const prevProfileQuery = await ServerSupabase.from('profile') //
     .select('*')
     .eq('user_id', user.id);
   const previousProfiles = prevProfileQuery.data ?? [];
@@ -99,7 +99,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   let error: PostgrestError | null = null;
 
   // check for duplicated username here
-  const duplicatedUsernameQuery = await Supabase.from('profile') //
+  const duplicatedUsernameQuery = await ServerSupabase.from('profile') //
     .select('*')
     .eq('username', profile.username);
   const [profileWithDuplicatedUsername] = (duplicatedUsernameQuery.data ??
@@ -116,7 +116,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   }
 
   if (!hasProfile) {
-    data = await Supabase.from('profile').upsert({
+    data = await ServerSupabase.from('profile').upsert({
       user_id: user.id,
       ...profile,
     });
@@ -124,7 +124,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
     await notifySlack(user, profile);
   } else {
-    data = await Supabase.from('profile')
+    data = await ServerSupabase.from('profile')
       .update({
         user_id: user.id,
         ...profile,
