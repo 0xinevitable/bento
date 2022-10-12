@@ -93,8 +93,8 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
   );
 
   return (
-    <div style={{ display: 'flex', gap: 8 }}>
-      <Button
+    <WalletList>
+      <WalletButton
         disabled={firstNetwork !== 'evm' || isLoading}
         onClick={
           firstNetwork === 'evm' && !isLoading
@@ -107,9 +107,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           <img src={WALLETS.WalletConnect} alt="WalletConnect" />
         </IconList>
         <span className="title">MetaMask or WalletConnect</span>
-      </Button>
+      </WalletButton>
 
-      <Button
+      <WalletButton
         disabled={firstNetwork !== 'evm' || isLoading}
         onClick={
           firstNetwork === 'evm' && !isLoading
@@ -121,9 +121,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           <img src={WALLETS.Kaikas} alt="Kaikas" />
         </IconList>
         <span className="title">Kaikas</span>
-      </Button>
+      </WalletButton>
 
-      <Button
+      <WalletButton
         disabled={firstNetwork !== 'cosmos-sdk' || isLoading}
         onClick={
           firstNetwork === 'cosmos-sdk' && !isLoading
@@ -135,9 +135,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           <img src={WALLETS.Keplr} alt="Keplr" />
         </IconList>
         <span className="title">Keplr</span>
-      </Button>
+      </WalletButton>
 
-      <Button
+      <WalletButton
         disabled={firstNetwork !== 'solana' || isLoading}
         onClick={
           firstNetwork === 'solana' && !isLoading
@@ -149,15 +149,22 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           <img src={WALLETS.Phantom} alt="Phantom" />
         </IconList>
         <span className="title">Phantom</span>
-      </Button>
-    </div>
+      </WalletButton>
+    </WalletList>
   );
 };
 
-type ButtonProps = {
+const WalletList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
+
+type WalletButtonProps = {
   disabled?: boolean;
 };
-const Button = styled.button<ButtonProps>`
+const WalletButton = styled.button<WalletButtonProps>`
   padding: 16px;
 
   flex: 1;

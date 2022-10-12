@@ -1,8 +1,3 @@
-import { Bech32Address } from '@bento/core';
-import { getAddress, isAddress } from '@ethersproject/address';
-import { PublicKey } from '@solana/web3.js';
-import clsx from 'clsx';
-import produce from 'immer';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -13,39 +8,7 @@ import { useWalletContext } from '@/hooks/useWalletContext';
 
 import { NETWORKS, Network } from '@/constants/networks';
 import { Colors } from '@/styles';
-import { Analytics, Supabase } from '@/utils';
-
-const identifyWalletAddress = (value: string) => {
-  if (value.length < 32) {
-    // minimal length of a valid address(solana)
-    return null;
-  }
-  if (value.startsWith('0x')) {
-    try {
-      const addressWithChecksum = getAddress(value.toLowerCase());
-      if (isAddress(addressWithChecksum)) {
-        return 'evm';
-      }
-      return null;
-    } catch {
-      return null;
-    }
-  }
-  try {
-    if (!!Bech32Address.fromBech32(value)) {
-      return 'cosmos-sdk';
-    }
-  } catch {
-    try {
-      if (PublicKey.isOnCurve(new PublicKey(value))) {
-        return 'solana';
-      }
-    } catch {
-      return null;
-    }
-  }
-  return null;
-};
+import { Analytics } from '@/utils';
 
 type AddWalletModalProps = {
   visible?: boolean;
@@ -80,58 +43,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     );
   }, []);
 
-  const onClickSignIn = useCallback(async (provider: 'twitter' | 'github') => {
-    const { user, session, error } = await Supabase.auth.signIn(
-      { provider },
-      { redirectTo: window.location.href },
-    );
-    console.log({ user, session, error });
-  }, []);
-
   const { revalidateWallets } = useWalletContext();
-
-  const [draftWalletAddress, setDraftWalletAddress] = useState<string>('');
-  const [draftWalletType, setDraftWalletType] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!draftWalletAddress) {
-      return;
-    }
-    const _walletType = identifyWalletAddress(draftWalletAddress);
-    setDraftWalletType(_walletType);
-  }, [draftWalletAddress]);
-
-  // Add wallet without session
-  const { setWallets } = useWalletContext();
-  const onClickAddWallet = useCallback(() => {
-    const walletDraft = {
-      type: draftWalletType as any,
-      address: draftWalletAddress,
-      networks: networks.map((v) => v.id),
-    };
-
-    setWallets((prev) =>
-      produce(prev, (walletsDraft) => {
-        const index = walletsDraft.findIndex(
-          (v) => v.address === walletDraft.address,
-        );
-        if (index === -1) {
-          walletsDraft.push(walletDraft);
-        } else {
-          // update only chain if existing wallet
-          const wallet = walletsDraft[index];
-          if (wallet.type === 'solana') {
-            return;
-          }
-          wallet.networks = Array.from(
-            new Set([...walletDraft.networks, ...wallet.networks]),
-          ) as any[];
-        }
-      }),
-    );
-
-    onDismiss?.();
-  }, [draftWalletType, draftWalletAddress, networks, setWallets, onDismiss]);
 
   return (
     <OverlayWrapper
@@ -198,9 +110,13 @@ const Title = styled.h3`
 
 const OverlayWrapper = styled(Modal)`
   .modal-container {
+    margin: 0 16px;
     padding: 16px;
     height: fit-content;
     overflow: hidden;
+
+    max-height: calc(100vh - 64px - 84px);
+    overflow: scroll;
 
     display: flex;
     flex-direction: column;
@@ -281,6 +197,7 @@ const NetworkItem = styled.div<NetworkItemProps>`
     align-items: center;
     justify-content: center;
   }
+
   .name {
     margin-top: 4px;
     font-size: 12px;
