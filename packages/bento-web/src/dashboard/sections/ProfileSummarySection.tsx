@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -14,6 +14,7 @@ import {
 } from '@/profile/components/ProfileEditor';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
+import { axios } from '@/utils';
 import { Analytics, toast } from '@/utils';
 
 type ErrorResponse =
@@ -46,7 +47,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
     }
     const fetchProfile = async () => {
       try {
-        const data = await (await fetch('/api/profile/blocks')).json();
+        const { data } = await axios.get('/api/profile/blocks');
         if (Array.isArray(data)) {
           setBlocks(data);
         }
