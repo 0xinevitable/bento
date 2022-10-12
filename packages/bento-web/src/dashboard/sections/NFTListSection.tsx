@@ -12,6 +12,7 @@ import { Colors } from '@/styles';
 import { Analytics, toast } from '@/utils';
 
 import { EmptyBalance } from '../components/EmptyBalance';
+import { KlaytnNFTAsset } from '../hooks/useKlaytnNFTs';
 
 // FIXME: Duplicated type declaration
 type ErrorResponse =
@@ -23,7 +24,7 @@ type ErrorResponse =
 
 type Props = {
   selected: boolean;
-  nftAssets: OpenSeaAsset[];
+  nftAssets: (OpenSeaAsset | KlaytnNFTAsset)[];
   profile: UserProfile | null;
   revalidateProfile: () => void;
   isMyProfile: boolean;
@@ -37,7 +38,9 @@ export const NFTListSection: React.FC<Props> = ({
   isMyProfile,
 }) => {
   const { t } = useTranslation('dashboard');
-  const [selectedNFT, setSelectedNFT] = useState<OpenSeaAsset | null>(null);
+  const [selectedNFT, setSelectedNFT] = useState<
+    OpenSeaAsset | KlaytnNFTAsset | null
+  >(null);
 
   useEffect(() => {
     if (!selectedNFT || !profile) {
@@ -107,22 +110,20 @@ export const NFTListSection: React.FC<Props> = ({
       {nftAssets.length > 0 ? (
         nftAssets.map((asset, index) => {
           const isVideo =
-            !!asset.animation_url ||
-            asset.image_url?.toLowerCase()?.endsWith('.mp4') ||
-            false;
-
+            asset.image_url?.toLowerCase()?.endsWith('.mp4') || false;
           return (
             <AssetListItem key={index} onClick={() => setSelectedNFT(asset)}>
               <AssetMedia
                 src={
-                  !isVideo
+                  (!isVideo
                     ? asset.image_url || asset.collection.image_url
-                    : asset.animation_url
+                    : asset.image_url) || undefined
                 }
                 poster={
                   asset.image_url ||
                   asset.image_preview_url ||
-                  asset.collection.image_url
+                  asset.collection.image_url ||
+                  undefined
                 }
                 isVideo={isVideo}
               />

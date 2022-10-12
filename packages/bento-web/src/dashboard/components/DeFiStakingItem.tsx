@@ -2,9 +2,9 @@ import { shortenAddress } from '@bento/common';
 import { Trans, useTranslation } from 'next-i18next';
 import styled, { css } from 'styled-components';
 
+import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { Colors } from '@/styles';
 
-import { DeFiStakingWithClientData } from '../utils/useDeFis';
 import { InlineBadge } from './InlineBadge';
 
 const formatNumber = (value: number | null | undefined): string =>
