@@ -8,17 +8,17 @@ import { sessionAtom } from '../states';
 import { Analytics, Config, Supabase, axios, toast } from '../utils';
 
 const registerAccessToken = (session: Session | null) => {
-  axios.interceptors.request.use((config) => {
-    return {
-      ...config,
-      headers: {
-        ...config.headers,
-        'x-supabase-auth': session?.access_token,
-      },
-    };
-  });
-
   if (session) {
+    axios.interceptors.request.use((config) => {
+      return {
+        ...config,
+        headers: {
+          ...config.headers,
+          'x-supabase-auth': session.access_token,
+        },
+      };
+    });
+
     document.cookie = `supabase_auth_token=${session.access_token};max-age=${
       (session.expires_in || 60 * 60 * 24) * 1_000
     };secure;samesite=lax;path=/`;
