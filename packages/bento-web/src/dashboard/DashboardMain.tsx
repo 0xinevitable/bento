@@ -26,6 +26,7 @@ import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
+import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { NFTListSection } from './sections/NFTListSection';
 import { ProfileSummarySection } from './sections/ProfileSummarySection';
@@ -67,13 +68,16 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const { balances: NFTBalances, jsonKey: nftBalancesJSONKey } = useNFTBalances(
     { wallets },
   );
+  const { klaytnNFTs } = useKlaytnNFTs(wallets);
 
-  const nftAssets = useMemo<OpenSeaAsset[]>(
-    () =>
-      NFTBalances?.flatMap((item) => ('assets' in item ? item.assets : [])) ??
-      [],
-    [nftBalancesJSONKey],
-  );
+  const nftAssets = useMemo<(OpenSeaAsset | KlaytnNFTAsset)[]>(() => {
+    return [
+      ...klaytnNFTs,
+      ...(NFTBalances?.flatMap((item) =>
+        'assets' in item ? item.assets : [],
+      ) ?? []),
+    ];
+  }, [nftBalancesJSONKey, klaytnNFTs]);
 
   const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.

@@ -5,8 +5,10 @@ import styled from 'styled-components';
 
 import { AnimatedToolTip, AssetMedia, Modal } from '@/components/system';
 
+import { KlaytnNFTAsset } from '@/dashboard/hooks/useKlaytnNFTs';
+
 export type NFTDetailModalParams = {
-  asset: OpenSeaAsset | null;
+  asset: OpenSeaAsset | KlaytnNFTAsset | null;
   isMyProfile: boolean;
   onClickSetAsProfile: (assetImage: string) => void;
 };
@@ -46,8 +48,8 @@ export const NFTDetailModal: React.FC<Props> = ({
           <>
             <AssetListItem key={asset.id}>
               <AssetMedia
-                src={!isVideo ? imageURL : asset.animation_url}
-                poster={imageURL}
+                src={(!isVideo ? imageURL : asset.animation_url) || undefined}
+                poster={imageURL || undefined}
                 isVideo={isVideo}
               />
             </AssetListItem>
@@ -56,7 +58,9 @@ export const NFTDetailModal: React.FC<Props> = ({
               <TokenName>{asset.name || `#${asset.token_id}`}</TokenName>
 
               <CollectionRow>
-                <CollectionImage src={asset.collection.image_url} />
+                {!!asset.collection.image_url && (
+                  <CollectionImage src={asset.collection.image_url} />
+                )}
                 <CollectionName>{asset.collection.name}</CollectionName>
               </CollectionRow>
             </TokenHeader>
