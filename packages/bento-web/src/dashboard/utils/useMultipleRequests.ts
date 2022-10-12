@@ -19,7 +19,6 @@ export const useMultipleRequests = <T extends any>(
       ...responsesRef.current[requestKey],
       isLoading: true,
     };
-    setCount((prev) => prev + 1);
 
     axios
       .get<T>(requestKey)

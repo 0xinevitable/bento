@@ -1,7 +1,7 @@
 import { Wallet } from '@bento/common';
 import { useEffect, useMemo, useState } from 'react';
 
-import { useCachedPricings } from '@/hooks/pricings';
+import { useCachedPricings } from '@/hooks/useCachedPricings';
 
 import {
   Valuation,

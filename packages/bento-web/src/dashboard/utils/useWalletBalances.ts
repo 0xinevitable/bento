@@ -1,7 +1,8 @@
 import { Wallet } from '@bento/common';
-import { pricesFromCoinGecko } from '@bento/core';
 import produce from 'immer';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
+import { useCachedPricings } from '@/hooks/useCachedPricings';
 
 import { KEYS_BY_NETWORK } from '@/constants/networks';
 import {
@@ -25,6 +26,8 @@ type Options = {
 };
 
 export const useWalletBalances = ({ wallets }: Options) => {
+  const { getCachedPrice } = useCachedPricings();
+
   const calculatedRequests = useMemo(() => {
     // TODO: Clean this thing up
     const data: PartialRecord<keyof typeof KEYS_BY_NETWORK, [Key, Address[]]> =
@@ -67,48 +70,24 @@ export const useWalletBalances = ({ wallets }: Options) => {
   useInterval(refetch, 60 * 1_000);
 
   const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
-
-  const coinGeckoIds = useMemo<string[]>(
-    () => balances.flatMap((v) => v.coinGeckoId || []),
-    [balances],
-  );
-
-  const [coinGeckoPricesByIds, setCoinGeckoPricesByIds] = useState<
-    Record<string, number | undefined>
-  >({});
-
-  const fetchPrices = useCallback(() => {
-    if (!coinGeckoIds.length) {
-      return;
-    }
-
-    pricesFromCoinGecko(coinGeckoIds)
-      .then(setCoinGeckoPricesByIds)
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [JSON.stringify(coinGeckoIds)]);
+  const [balancesWithPrices, setBalancesWithPrices] = useState<
+    (EVMWalletBalance | CosmosSDKWalletBalance | SolanaWalletBalance)[]
+  >([]);
 
   useEffect(() => {
-    fetchPrices();
-  }, [fetchPrices]);
-  useInterval(fetchPrices, 60 * 1_000);
-
-  const balancesWithPrices = useMemo(
-    () =>
-      produce(balances, (draft) => {
-        draft.forEach((token) => {
-          if (typeof token.price === 'undefined') {
-            if (!!token.coinGeckoId) {
-              token.price = coinGeckoPricesByIds[token.coinGeckoId] ?? 0;
-            } else {
-              token.price = 0;
-            }
+    const result = produce(balances, (draft) => {
+      draft.forEach((token) => {
+        if (typeof token.price === 'undefined') {
+          if (!!token.coinGeckoId) {
+            token.price = getCachedPrice(token.coinGeckoId);
+          } else {
+            token.price = 0;
           }
-        });
-      }),
-    [balances, JSON.stringify(coinGeckoPricesByIds)],
-  );
+        }
+      });
+    });
+    setBalancesWithPrices(result);
+  }, [balances, getCachedPrice]);
 
   return {
     balances: balancesWithPrices,

@@ -1,6 +1,6 @@
 import { TokenInput } from '@bento/core';
 
-import { GetCachedPrice } from '@/hooks/pricings';
+import { GetCachedPrice } from '@/hooks/useCachedPricings';
 
 import {
   AmountWithOptionalValue,
