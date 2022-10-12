@@ -95,7 +95,7 @@ export class EthereumChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises);
+    return safePromiseAll(promises).then((items) => items.flat());
   };
 }
 
@@ -170,7 +170,7 @@ export class BNBChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises);
+    return safePromiseAll(promises).then((items) => items.flat());
   };
 }
 
@@ -245,7 +245,7 @@ export class PolygonChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises);
+    return safePromiseAll(promises).then((items) => items.flat());
   };
 }
 
@@ -320,7 +320,7 @@ export class AvalancheChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises);
+    return safePromiseAll(promises).then((items) => items.flat());
   };
 }
 
@@ -430,7 +430,7 @@ export class KlaytnChain implements Chain {
       };
       return balanceInfo;
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises);
+    return safePromiseAll(promises).then((items) => items.flat());
   };
 }
 
@@ -507,7 +507,7 @@ export class SolanaChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises);
+    return safePromiseAll(promises).then((items) => items.flat());
   };
 }
 
