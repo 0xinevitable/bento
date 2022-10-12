@@ -252,7 +252,8 @@ const Container = styled.div`
     z-index: 2;
 
     background-image: url('/assets/profile/noise.png');
-    background-size: cover;
+    background-size: 120px;
+    background-repeat: repeat;
     opacity: 0.3;
   }
 `;
