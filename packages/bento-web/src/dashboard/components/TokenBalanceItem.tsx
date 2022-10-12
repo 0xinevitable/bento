@@ -27,9 +27,25 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
             src={`/assets/icons/${info.platform}.png`}
           />
         </div>
-        <div className="ml-2 min-w-0 flex flex-col flex-1">
-          <span className="text-xs text-slate-400/40 flex items-center">
-            <span className="truncate text-slate-400">
+        <div
+          style={{
+            marginLeft: 8,
+            minWidth: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+          }}
+        >
+          <span
+            style={{
+              fontSize: 12,
+              lineHeight: 16,
+              color: Colors.gray600,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <span className="truncate" style={{ color: Colors.gray400 }}>
               {info.type === 'nft' ? info.name : info.symbol}
             </span>
             <InlineBadge>{info.amount.toLocaleString()}</InlineBadge>

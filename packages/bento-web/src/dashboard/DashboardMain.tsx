@@ -225,9 +225,21 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                   </InlineBadge>
                 </SectionTitle>
 
-                <div className="mb-4 w-full flex items-center">
+                <div
+                  style={{
+                    marginBottom: 16,
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
                   <div
-                    className="flex items-center cursor-pointer select-none"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      userSelect: 'none',
+                    }}
                     onClick={() => {
                       if (!isNFTBalancesIncluded) {
                         // showing
@@ -243,7 +255,14 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                       checked={isNFTBalancesIncluded ?? false}
                       readOnly
                     />
-                    <span className="ml-[6px] text-white/80 text-sm">
+                    <span
+                      style={{
+                        marginLeft: 6,
+                        color: Colors.gray200,
+                        fontSize: 14,
+                        lineHeight: 20,
+                      }}
+                    >
                       {t('Show NFTs')}
                     </span>
                   </div>

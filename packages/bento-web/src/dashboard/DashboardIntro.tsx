@@ -8,6 +8,7 @@ import { useSession } from '@/hooks/useSession';
 
 import { NETWORKS } from '@/constants/networks';
 import { FixedLoginNudge } from '@/profile/components/LoginNudge';
+import { Colors } from '@/styles';
 import { Analytics, Supabase } from '@/utils';
 
 type DashboardIntroProps = {
@@ -56,15 +57,38 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
 
   return (
     <div>
-      <div className="mt-[64px] flex flex-col items-center">
+      <div
+        style={{
+          marginTop: 64,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <Badge>⚡ Bento.Finance</Badge>
-        <h1 className="mt-4 text-white text-5xl font-black leading-[120%] text-center">
+        <h1
+          style={{
+            marginTop: 16,
+            color: Colors.white,
+            fontSize: 42,
+            fontWeight: 900,
+            lineHeight: 1.2,
+            textAlign: 'center',
+          }}
+        >
           Group Identity
           <br />
           From Web3 Finance
         </h1>
 
-        <div className="mt-6 flex flex-col gap-2">
+        <div
+          style={{
+            marginTop: 24,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 8,
+          }}
+        >
           <Button
             onClick={
               !session //
@@ -76,7 +100,17 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
           </Button>
           <a
             title="About"
-            className="mt-2 text-white/50 text-sm flex items-center gap-1 mx-auto"
+            style={{
+              marginTop: 8,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              color: Colors.gray400,
+              fontSize: 14,
+              lineHeight: 1,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+            }}
             href="/"
             onClick={() => {
               Analytics.logEvent('click_landing_link', {
@@ -87,7 +121,7 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
               });
             }}
           >
-            <span className="leading-none mt-[1.5px]">About</span>
+            <span style={{ marginTop: 1.5 }}>About</span>
             <Icon icon="heroicons-solid:external-link" />
           </a>
         </div>

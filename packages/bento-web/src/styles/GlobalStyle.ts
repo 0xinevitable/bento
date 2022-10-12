@@ -54,6 +54,12 @@ export const GlobalStyle = createGlobalStyle`
     background-color: rgba(152, 24, 35, 0.65);
   }
 
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .Tooltip {
     background: #222;
     color: white;
