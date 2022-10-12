@@ -17,7 +17,7 @@ const handleAuthChange = async (
           ...config,
           headers: {
             ...config.headers,
-            'X-Supabase-Auth': session.access_token,
+            'x-supabase-auth': session.access_token,
           },
         };
       });
