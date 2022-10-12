@@ -1,52 +1,32 @@
 import useCollapse from 'react-collapsed';
 import styled from 'styled-components';
 
-import { Metadata } from '@/defi/klaytn/constants/metadata';
 import { Colors } from '@/styles';
 
 import { InlineBadge } from './InlineBadge';
 
 type CollapsePanelProps = {
   title: string;
-  metadata: Metadata | undefined;
   count?: number;
   children?: React.ReactNode;
-  valuation: number;
-  currentLanguage: string;
 };
 
 export const CollapsePanel: React.FC<CollapsePanelProps> = ({
   title,
-  metadata,
   count,
   children,
-  valuation,
-  currentLanguage,
 }) => {
-  const lang = currentLanguage === 'ko' ? 'ko' : 'en';
   const { getCollapseProps, getToggleProps } = useCollapse({
-    defaultExpanded: false,
+    defaultExpanded: true,
   });
 
   return (
     <Container>
       <Header {...getToggleProps()}>
-        <HeaderTitleRow>
-          <ProtocolInfo>
-            <ProtocolLogo alt={title} src={metadata?.logo} />
-            <span>{title}</span>
-            {typeof count !== 'undefined' && (
-              <InlineBadge>{count.toLocaleString()}</InlineBadge>
-            )}
-          </ProtocolInfo>
-
-          <Valuation>
-            {`$${valuation.toLocaleString(undefined, {
-              maximumFractionDigits: 6,
-            })}`}
-          </Valuation>
-        </HeaderTitleRow>
-        <Paragraph>{metadata?.description[lang]}</Paragraph>
+        <span>{title}</span>
+        {typeof count !== 'undefined' && (
+          <InlineBadge>{count.toLocaleString()}</InlineBadge>
+        )}
       </Header>
       <Content {...getCollapseProps()}>{children}</Content>
     </Container>
@@ -61,50 +41,19 @@ const Container = styled.div`
   background: ${Colors.gray800};
   border: 1px solid ${Colors.gray600};
   border-radius: 8px;
-  overflow: hidden;
 `;
 
-const Header = styled.div`
+const Header = styled.button`
   padding: 16px 14px;
 
   display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    background: ${Colors.gray700};
-  }
-`;
-
-const HeaderTitleRow = styled.div`
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 2px;
 
   font-size: 18px;
   font-weight: bold;
   color: ${Colors.gray100};
 `;
-const ProtocolInfo = styled.span`
-  display: flex;
-  align-items: center;
-`;
-const ProtocolLogo = styled.img`
-  margin-right: 8px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-`;
-const Paragraph = styled.p`
-  margin-top: 8px;
-  font-size: 14px;
-  color: ${Colors.gray400};
-  line-height: 1.2;
-`;
-
 const Content = styled.div`
   padding: 8px 8px 12px;
   border-top: 1px solid ${Colors.gray600};
@@ -114,11 +63,4 @@ const Content = styled.div`
     flex-direction: column;
     gap: 6px;
   }
-`;
-const Valuation = styled.span`
-  font-weight: bold;
-  font-size: 22px;
-  line-height: 28px;
-  font-weight: bold;
-  color: ${Colors.gray050};
 `;

@@ -1,10 +1,9 @@
 import { Wallet, safeAsyncFlatMap, safePromiseAll } from '@bento/common';
 import { OpenSea, OpenSeaAsset } from '@bento/core';
+import { priceFromCoinGecko } from '@bento/core';
 import chunk from 'lodash.chunk';
 import groupBy from 'lodash.groupby';
 import { useEffect, useState } from 'react';
-
-import { useCachedPricings } from '@/hooks/pricings';
 
 import { NFTWalletBalance } from '@/dashboard/types/WalletBalance';
 
@@ -15,7 +14,6 @@ type Options = {
 };
 
 export const useNFTBalances = ({ wallets }: Options) => {
-  const { getCachedPrice } = useCachedPricings();
   const [openSeaNFTBalance, setOpenSeaNFTBalance] = useState<
     NFTWalletBalance[]
   >([]);
@@ -65,8 +63,8 @@ export const useNFTBalances = ({ wallets }: Options) => {
     };
 
     main();
-    setEthereumPrice(getCachedPrice('ethereum'));
-  }, [getCachedPrice, JSON.stringify(wallets)]);
+    priceFromCoinGecko('ethereum').then(setEthereumPrice);
+  }, [JSON.stringify(wallets)]);
 
   useEffect(() => {
     const flattedAssets = Object.values(fetchedAssets)

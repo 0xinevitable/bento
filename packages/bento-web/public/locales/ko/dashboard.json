@@ -18,16 +18,6 @@
 
   "defi-type-scnr_g": "단일 예치",
 
-  "Account": "계정",
-  "Rep Contract": "대표 컨트랙트 주소",
-  "LPs without Farming": "스테이킹 중이 아닌 LP",
-  "Unavailable": "연동 준비중",
-  "Rewards": "수령 가능한 보상",
-  "Staking": "스테이킹 중",
-  "Unstaking": "언스테이킹 중",
-  "Claimable": "바로 수령 가능",
-  "Pending": "대기 중",
-
   "Update your Profile": "프로필을 설정해보세요.",
   "Setup Now": "지금 하기",
   "Edit Profile": "프로필 고치기",
