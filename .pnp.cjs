@@ -2671,7 +2671,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["caver-js", "npm:1.9.0"],\
             ["clsx", "npm:1.2.1"],\
             ["cobe", "npm:0.6.2"],\
-            ["compressed-json", "npm:1.0.16"],\
             ["cookies-next", "npm:2.1.1"],\
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
