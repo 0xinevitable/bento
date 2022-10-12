@@ -1,9 +1,13 @@
 import { safePromiseAll } from '@bento/common';
 import { pricesFromCoinGecko } from '@bento/core';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 
 import { useInterval } from '@/hooks/useInterval';
+
+import { Config } from '@/utils';
+
+import { useLazyEffect } from './useLazyEffect';
 
 const SECONDS = 1_000;
 const CACHE_TIME = 60 * SECONDS;
@@ -36,6 +40,10 @@ const useCoinGeckoPrices = () => {
   const fetchPrices = useCallback(async () => {
     if (!coinGeckoIds.length) {
       return;
+    }
+
+    if (Config.ENVIRONMENT !== 'production') {
+      console.log('hit');
     }
 
     const cachedIds: string[] = [];
@@ -84,9 +92,13 @@ const useCoinGeckoPrices = () => {
     });
   }, [JSON.stringify(coinGeckoIds)]);
 
-  useEffect(() => {
-    fetchPrices();
-  }, [fetchPrices]);
+  useLazyEffect(
+    () => {
+      fetchPrices();
+    },
+    [fetchPrices],
+    2_000,
+  );
 
   useInterval(fetchPrices, CACHE_TIME);
 
