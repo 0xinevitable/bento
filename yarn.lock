@@ -1552,6 +1552,7 @@ __metadata:
     jotai: ^1.8.4
     lodash.chunk: ^4.2.0
     lodash.groupby: ^4.6.0
+    minireset.css: ^0.0.7
     next: canary
     next-composed-plugins: ^1.0.1
     next-i18next: ^12.1.0
@@ -1568,7 +1569,6 @@ __metadata:
     react-youtube: ^10.0.0
     recharts: ^2.1.14
     styled-components: ^5.3.6
-    styled-reset: ^4.4.2
     swr: ^1.3.0
     tslib: ^2.4.0
     tweetnacl: ^1.0.3
@@ -8500,6 +8500,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minireset.css@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "minireset.css@npm:0.0.7"
+  checksum: f37dfa119c68eb9682ad1932a048b1d00680e6dec0fe6de6519c58d929f5e2f82cc36fe53b30944e218ab12c1c11281878ce8b0db896f9d617b603f918e6f168
+  languageName: node
+  linkType: hard
+
 "minizlib@npm:^2.1.1, minizlib@npm:^2.1.2":
   version: 2.1.2
   resolution: "minizlib@npm:2.1.2"
@@ -10677,15 +10684,6 @@ __metadata:
     babel-plugin-macros:
       optional: true
   checksum: 61959993915f4b1662a682dbbefb3512de9399cf6901969bcadd26ba5441d2b5ca5c1021b233bbd573da2541b41efb45d56c6f618dbc8d88a381ebc62461fefe
-  languageName: node
-  linkType: hard
-
-"styled-reset@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "styled-reset@npm:4.4.2"
-  peerDependencies:
-    styled-components: ">=4.0.0 || >=5.0.0"
-  checksum: 1ee15f63911795d612548d9c77840c0b055ddb168199fb2b6147ab15a5e1a7ce67df573b224c4cabd98f303c61fd05100f9c3653ac011098f7d09b8118226183
   languageName: node
   linkType: hard
 
