@@ -9,11 +9,11 @@ import { AnimatedTab } from '@/components/AnimatedTab';
 import { Checkbox, Skeleton } from '@/components/system';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
+import { useDeFis } from '@/dashboard/hooks/useDeFis';
+import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
+import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
-import { useDeFis } from '@/dashboard/utils/useDeFis';
-import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
-import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { Metadata } from '@/defi/klaytn/constants/metadata';
 import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
