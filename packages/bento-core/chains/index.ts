@@ -1,4 +1,4 @@
-import { Config, safePromiseAll } from '@bento/common';
+import { Config, safePromiseAllV1 } from '@bento/common';
 import { JsonRpcProvider } from '@ethersproject/providers';
 import * as web3 from '@solana/web3.js';
 import axios, { Axios } from 'axios';
@@ -95,7 +95,7 @@ export class EthereumChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises).then((items) => items.flat());
+    return safePromiseAllV1(promises);
   };
 }
 
@@ -170,7 +170,7 @@ export class BNBChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises).then((items) => items.flat());
+    return safePromiseAllV1(promises);
   };
 }
 
@@ -245,7 +245,7 @@ export class PolygonChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises).then((items) => items.flat());
+    return safePromiseAllV1(promises);
   };
 }
 
@@ -320,7 +320,7 @@ export class AvalancheChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises).then((items) => items.flat());
+    return safePromiseAllV1(promises);
   };
 }
 
@@ -430,7 +430,7 @@ export class KlaytnChain implements Chain {
       };
       return balanceInfo;
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises).then((items) => items.flat());
+    return safePromiseAllV1(promises);
   };
 }
 
@@ -507,7 +507,7 @@ export class SolanaChain implements Chain {
         price,
       };
     }) as Promise<TokenBalance>[];
-    return safePromiseAll(promises).then((items) => items.flat());
+    return safePromiseAllV1(promises);
   };
 }
 

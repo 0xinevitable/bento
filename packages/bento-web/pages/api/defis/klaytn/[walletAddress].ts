@@ -1,4 +1,4 @@
-import { safeAsyncFlatMap, safePromiseAll } from '@bento/common';
+import { safeAsyncFlatMap, safePromiseAllV1 } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
 import { getAddress, isAddress } from '@ethersproject/address';
 import CompressedJSON from 'compressed-json';
@@ -224,7 +224,7 @@ const getDeFiStakingsByWalletAddress = async (
   const promisesForDelegations = KlayStation.getDelegations(walletAddress);
 
   const stakings = (
-    await Promise.all([
+    await safePromiseAllV1([
       promisesForStakings.catch(handleError),
       promisesForDelegations.catch(handleError),
     ])
