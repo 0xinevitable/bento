@@ -19,10 +19,10 @@ import { AnimatedTab } from '@/components/AnimatedTab';
 import { Modal } from '@/components/system';
 import { useWalletContext } from '@/hooks/useWalletContext';
 
+import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
+import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
-import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
-import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { Colors } from '@/styles';
 import {
   Analytics,

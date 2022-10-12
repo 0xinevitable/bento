@@ -32,9 +32,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     return { notFound: true };
   }
 
-  const { user: userFromCookie } = await Supabase.auth.api.getUserByCookie(
-    context.req,
-  );
+  const accessToken =
+    (context.req.cookies['supabase.auth.token'] as string) || '';
+  const { user: userFromCookie } = await Supabase.auth.api.getUser(accessToken);
 
   const username = context.query.username as string | undefined;
 

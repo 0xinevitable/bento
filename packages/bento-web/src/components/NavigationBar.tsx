@@ -186,13 +186,16 @@ export const NavigationBar = () => {
                   >
                     <Link href={item.href} passHref>
                       <a
-                        className="h-full flex gap-2 items-center"
                         onClick={() => setMobileMenuOpen(false)}
+                        style={{
+                          height: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 8,
+                        }}
                       >
-                        <Iconify className="text-xl" icon={item.icon} />
-                        <span className="text-2xl font-medium leading-none">
-                          {t(item.title)}
-                        </span>
+                        <Iconify icon={item.icon} />
+                        <span className="title">{t(item.title)}</span>
                       </a>
                     </Link>
                   </MobileMenuItem>
@@ -471,4 +474,10 @@ const MobileMenuContent = styled(motion.ul)`
 `;
 const MobileMenuItem = styled.li`
   padding: 16px 0;
+  font-size: 24px;
+
+  span.title {
+    line-height: 100%;
+    font-weight: 500;
+  }
 `;

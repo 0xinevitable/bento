@@ -5,8 +5,11 @@ import { withCORS } from '@/utils/middlewares/withCORS';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
-    const cookie = Supabase.auth.api.getAuthCookieString(req, res);
-    res.setHeader('Set-Cookie', cookie);
+    const cookies = Supabase.auth.api.getAuthCookieString(req, res);
+    res.setHeader(
+      'Set-Cookie',
+      cookies.map((cookie) => `${cookie}; Domain=bento.finance`),
+    );
     res.status(200).json({ message: 'ok' });
   } else {
     res.status(405).json({

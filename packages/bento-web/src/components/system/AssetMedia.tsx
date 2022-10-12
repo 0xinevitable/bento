@@ -19,11 +19,16 @@ export const AssetMedia: React.FC<AssetMediaProps> = ({
   const [loaded, setLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!isVideo || !poster) {
+    if (isVideo) {
+      setLoaded(true);
+      return;
+    }
+    if (!poster) {
       return;
     }
     const img = new Image();
     img.src = poster;
+    img.referrerPolicy = 'no-referrer';
     img.onload = () => setLoaded(true);
   }, [isVideo, poster]);
 

@@ -9,11 +9,11 @@ import { AnimatedTab } from '@/components/AnimatedTab';
 import { Checkbox, Skeleton } from '@/components/system';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
+import { useDeFis } from '@/dashboard/hooks/useDeFis';
+import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
+import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
-import { useDeFis } from '@/dashboard/utils/useDeFis';
-import { useNFTBalances } from '@/dashboard/utils/useNFTBalances';
-import { useWalletBalances } from '@/dashboard/utils/useWalletBalances';
 import { Metadata } from '@/defi/klaytn/constants/metadata';
 import { useProfile } from '@/profile/hooks/useProfile';
 import { Colors } from '@/styles';
@@ -26,6 +26,7 @@ import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
+import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { NFTListSection } from './sections/NFTListSection';
 import { ProfileSummarySection } from './sections/ProfileSummarySection';
@@ -67,13 +68,16 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const { balances: NFTBalances, jsonKey: nftBalancesJSONKey } = useNFTBalances(
     { wallets },
   );
+  const { klaytnNFTs } = useKlaytnNFTs(wallets);
 
-  const nftAssets = useMemo<OpenSeaAsset[]>(
-    () =>
-      NFTBalances?.flatMap((item) => ('assets' in item ? item.assets : [])) ??
-      [],
-    [nftBalancesJSONKey],
-  );
+  const nftAssets = useMemo<(OpenSeaAsset | KlaytnNFTAsset)[]>(() => {
+    return [
+      ...klaytnNFTs,
+      ...(NFTBalances?.flatMap((item) =>
+        'assets' in item ? item.assets : [],
+      ) ?? []),
+    ];
+  }, [nftBalancesJSONKey, klaytnNFTs]);
 
   const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
@@ -221,9 +225,21 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                   </InlineBadge>
                 </SectionTitle>
 
-                <div className="mb-4 w-full flex items-center">
+                <div
+                  style={{
+                    marginBottom: 16,
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
                   <div
-                    className="flex items-center cursor-pointer select-none"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      userSelect: 'none',
+                    }}
                     onClick={() => {
                       if (!isNFTBalancesIncluded) {
                         // showing
@@ -239,7 +255,14 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                       checked={isNFTBalancesIncluded ?? false}
                       readOnly
                     />
-                    <span className="ml-[6px] text-white/80 text-sm">
+                    <span
+                      style={{
+                        marginLeft: 6,
+                        color: Colors.gray200,
+                        fontSize: 14,
+                        lineHeight: '20px',
+                      }}
+                    >
                       {t('Show NFTs')}
                     </span>
                   </div>
@@ -355,9 +378,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === DashboardTabType.Badges}>
-              <span className="my-8 text-center text-white/90 font-bold">
+              {/* <span className="my-8 text-center text-white/90 font-bold">
                 Coming Soon!
-              </span>
+              </span> */}
             </AnimatedTab>
           </DashboardContent>
         </DashboardContentWrapper>

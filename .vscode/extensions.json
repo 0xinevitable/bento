@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "arcanis.vscode-zipfs",
-    "bradlc.vscode-tailwindcss",
-    "esbenp.prettier-vscode"
-  ]
+  "recommendations": ["arcanis.vscode-zipfs", "esbenp.prettier-vscode"]
 }

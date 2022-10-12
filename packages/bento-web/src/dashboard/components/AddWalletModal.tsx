@@ -1,8 +1,3 @@
-import { Bech32Address } from '@bento/core';
-import { getAddress, isAddress } from '@ethersproject/address';
-import { PublicKey } from '@solana/web3.js';
-import clsx from 'clsx';
-import produce from 'immer';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -12,40 +7,8 @@ import { useSession } from '@/hooks/useSession';
 import { useWalletContext } from '@/hooks/useWalletContext';
 
 import { NETWORKS, Network } from '@/constants/networks';
-import { FieldInput } from '@/profile/components/FieldInput';
-import { Analytics, Supabase } from '@/utils';
-
-const identifyWalletAddress = (value: string) => {
-  if (value.length < 32) {
-    // minimal length of a valid address(solana)
-    return null;
-  }
-  if (value.startsWith('0x')) {
-    try {
-      const addressWithChecksum = getAddress(value.toLowerCase());
-      if (isAddress(addressWithChecksum)) {
-        return 'evm';
-      }
-      return null;
-    } catch {
-      return null;
-    }
-  }
-  try {
-    if (!!Bech32Address.fromBech32(value)) {
-      return 'cosmos-sdk';
-    }
-  } catch {
-    try {
-      if (PublicKey.isOnCurve(new PublicKey(value))) {
-        return 'solana';
-      }
-    } catch {
-      return null;
-    }
-  }
-  return null;
-};
+import { Colors } from '@/styles';
+import { Analytics } from '@/utils';
 
 type AddWalletModalProps = {
   visible?: boolean;
@@ -80,58 +43,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
     );
   }, []);
 
-  const onClickSignIn = useCallback(async (provider: 'twitter' | 'github') => {
-    const { user, session, error } = await Supabase.auth.signIn(
-      { provider },
-      { redirectTo: window.location.href },
-    );
-    console.log({ user, session, error });
-  }, []);
-
   const { revalidateWallets } = useWalletContext();
-
-  const [draftWalletAddress, setDraftWalletAddress] = useState<string>('');
-  const [draftWalletType, setDraftWalletType] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!draftWalletAddress) {
-      return;
-    }
-    const _walletType = identifyWalletAddress(draftWalletAddress);
-    setDraftWalletType(_walletType);
-  }, [draftWalletAddress]);
-
-  // Add wallet without session
-  const { setWallets } = useWalletContext();
-  const onClickAddWallet = useCallback(() => {
-    const walletDraft = {
-      type: draftWalletType as any,
-      address: draftWalletAddress,
-      networks: networks.map((v) => v.id),
-    };
-
-    setWallets((prev) =>
-      produce(prev, (walletsDraft) => {
-        const index = walletsDraft.findIndex(
-          (v) => v.address === walletDraft.address,
-        );
-        if (index === -1) {
-          walletsDraft.push(walletDraft);
-        } else {
-          // update only chain if existing wallet
-          const wallet = walletsDraft[index];
-          if (wallet.type === 'solana') {
-            return;
-          }
-          wallet.networks = Array.from(
-            new Set([...walletDraft.networks, ...wallet.networks]),
-          ) as any[];
-        }
-      }),
-    );
-
-    onDismiss?.();
-  }, [draftWalletType, draftWalletAddress, networks, setWallets, onDismiss]);
 
   return (
     <OverlayWrapper
@@ -139,191 +51,158 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
       onDismiss={onDismiss}
       transition={{ ease: 'linear' }}
     >
-      <div
-        className={clsx(
-          'p-4 h-fit overflow-hidden',
-          'flex flex-col gap-8',
-          'border border-slate-800 rounded-md drop-shadow-2xl',
-          'bg-slate-800/5 backdrop-blur-md flex flex-col cursor-pointer',
-        )}
-      >
-        {isLoggedIn ? (
-          <>
-            <section>
-              <h3 className="mb-3 font-bold text-white">Choose Chains</h3>
-              <div className="flex flex-wrap">
-                {NETWORKS.map((network) => {
-                  const selected = !!networks.find((v) => v.id === network.id);
-                  const disabled =
-                    typeof firstNetwork !== 'undefined' &&
-                    firstNetwork.type !== network.type;
+      {isLoggedIn && (
+        <>
+          <section>
+            <Title>Choose Chains</Title>
+            <NetworkList>
+              {NETWORKS.map((network) => {
+                const selected = !!networks.find((v) => v.id === network.id);
+                const disabled =
+                  typeof firstNetwork !== 'undefined' &&
+                  firstNetwork.type !== network.type;
 
-                  return (
-                    <NetworkItem
-                      key={network.id}
-                      className={clsx(
-                        'p-2 m-1 rounded-md',
-                        disabled && 'opacity-10 cursor-not-allowed',
-                      )}
-                      selected={selected}
-                      onClick={
-                        !disabled //
-                          ? () => onSelectNetwork(network)
-                          : undefined
-                      }
-                    >
-                      <img
-                        className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
-                        src={network.logo}
-                        alt={network.name}
-                      />
-                      <span className="mt-1 text-white text-xs">
-                        {network.name}
-                      </span>
-                    </NetworkItem>
-                  );
-                })}
-              </div>
-            </section>
+                return (
+                  <NetworkItem
+                    key={network.id}
+                    selected={selected}
+                    disabled={disabled}
+                    onClick={
+                      !disabled //
+                        ? () => onSelectNetwork(network)
+                        : undefined
+                    }
+                  >
+                    <img src={network.logo} alt={network.name} />
+                    <div className="name-container">
+                      <span className="name">{network.name}</span>
+                    </div>
+                  </NetworkItem>
+                );
+              })}
+            </NetworkList>
+          </section>
 
-            <section>
-              <h3 className="mb-3 font-bold text-white">Sign with Wallet</h3>
-              <WalletConnector
-                networks={networks}
-                onSave={() => {
-                  onDismiss?.();
-                  setNetworks([]);
-                  revalidateWallets();
-                }}
-              />
-            </section>
-          </>
-        ) : (
-          <>
-            <section>
-              <h3 className="mb-3 font-bold text-white">
-                1. Sign in to save and verify; else it'll be per-device
-              </h3>
-              <div>
-                <button
-                  className="m-1 p-2 bg-slate-200"
-                  onClick={() => onClickSignIn('twitter')}
-                >
-                  Twitter
-                </button>
-                <button
-                  className="m-1 p-2 bg-slate-200"
-                  onClick={() => onClickSignIn('github')}
-                >
-                  GitHub
-                </button>
-              </div>
-            </section>
-
-            <section>
-              <h3 className="mb-3 font-bold text-white">2. Input Address</h3>
-
-              <FieldInput
-                field="Address"
-                value={draftWalletAddress}
-                onChange={(e) => setDraftWalletAddress(e.target.value)}
-              />
-            </section>
-
-            <section>
-              <h3 className="mb-3 font-bold text-white">3. Choose Chains</h3>
-              <div className="flex flex-wrap">
-                {NETWORKS.map((network) => {
-                  const selected = !!networks.find((v) => v.id === network.id);
-                  const disabled =
-                    (typeof firstNetwork !== 'undefined' &&
-                      firstNetwork.type !== network.type) ||
-                    draftWalletType !== network.type;
-
-                  return (
-                    <NetworkItem
-                      key={network.id}
-                      className={clsx(
-                        'p-2 m-1 rounded-md',
-                        disabled && 'opacity-10 cursor-not-allowed',
-                      )}
-                      selected={selected}
-                      onClick={
-                        !disabled //
-                          ? () => onSelectNetwork(network)
-                          : undefined
-                      }
-                    >
-                      <img
-                        className="w-12 h-12 rounded-full object-contain ring-1 ring-slate-100/25"
-                        src={network.logo}
-                        alt={network.name}
-                      />
-                      <span className="mt-1 text-white text-xs">
-                        {network.name}
-                      </span>
-                    </NetworkItem>
-                  );
-                })}
-              </div>
-            </section>
-
-            <Button onClick={onClickAddWallet}>Add Button</Button>
-          </>
-        )}
-      </div>
+          <section>
+            <Title>Sign with Wallet</Title>
+            <WalletConnector
+              networks={networks}
+              onSave={() => {
+                onDismiss?.();
+                setNetworks([]);
+                revalidateWallets();
+              }}
+            />
+          </section>
+        </>
+      )}
     </OverlayWrapper>
   );
 };
 
 export default AddWalletModal;
 
+const Title = styled.h3`
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: ${Colors.white};
+`;
+
 const OverlayWrapper = styled(Modal)`
   .modal-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0 16px;
+    padding: 16px;
+    height: fit-content;
+    overflow: hidden;
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    max-height: calc(100vh - 64px - 84px);
+    overflow: scroll;
+
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    border: 1px solid ${Colors.gray600};
     border-radius: 8px;
+    box-shadow: 0 4px 24px ${Colors.black};
+    background-color: ${Colors.gray900};
+    cursor: pointer;
   }
+`;
+
+const NetworkList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 type NetworkItemProps = {
   selected?: boolean;
+  disabled?: boolean;
 };
 const NetworkItem = styled.div<NetworkItemProps>`
+  margin: 2px;
+  padding: 8px;
+
+  border-radius: 12px;
+  border: 2px solid ${Colors.gray850};
+  background-color: ${Colors.gray850};
+  user-select: none;
+  cursor: pointer;
+
+  flex: 1;
   display: flex;
   flex-direction: column;
-  flex: 1;
   align-items: center;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  user-select: none;
+
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    border: 2px solid ${Colors.gray800};
+
+    & > img {
+      transform: scale(1.08);
+    }
+  }
 
   ${({ selected }) =>
     selected &&
     css`
-      border-color: rgb(168 85 247 / var(--tw-border-opacity));
+      border-color: rgba(168, 85, 247, 0.65);
+      background-color: rgba(168, 85, 247, 0.25);
+
+      &:hover {
+        border-color: rgba(168, 85, 247, 0.65);
+      }
     `};
-`;
 
-const Button = styled.button`
-  padding: 20px 80px;
-  cursor: pointer;
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 20%;
+      cursor: not-allowed;
+    `};
 
-  border-radius: 8px;
-  border: 1px solid rgba(255, 165, 165, 0.66);
-  background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
-  filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
+  & > img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: contain;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+  }
 
-  font-weight: 700;
-  font-size: 21.3946px;
+  .name-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-  line-height: 100%;
-  text-align: center;
-  letter-spacing: -0.05em;
-
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
+  .name {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.2;
+    color: ${Colors.white};
+    text-align: center;
+  }
 `;
