@@ -2673,6 +2673,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["clsx", "npm:1.2.1"],\
             ["cobe", "npm:0.6.2"],\
             ["compressed-json", "npm:1.0.16"],\
+            ["cookies-next", "npm:2.1.1"],\
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
             ["env-cmd", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:10.1.0"],\
@@ -5145,6 +5146,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/cookie", [\
+        ["npm:0.4.1", {\
+          "packageLocation": "./.yarn/cache/@types-cookie-npm-0.4.1-274a704dc6-3275534ed6.zip/node_modules/@types/cookie/",\
+          "packageDependencies": [\
+            ["@types/cookie", "npm:0.4.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/dedent", [\
         ["npm:0.7.0", {\
           "packageLocation": "./.yarn/cache/@types-dedent-npm-0.7.0-6255895dfd-b9b7f0c42d.zip/node_modules/@types/dedent/",\
@@ -5226,6 +5236,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-node-npm-12.20.55-88487587a4-e4f86785f4.zip/node_modules/@types/node/",\
           "packageDependencies": [\
             ["@types/node", "npm:12.20.55"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:16.11.65", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-16.11.65-1ab60ac4e7-81d84cb1e7.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:16.11.65"]\
           ],\
           "linkType": "HARD"\
         }],\
@@ -7294,11 +7311,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["cookie", [\
+        ["npm:0.4.2", {\
+          "packageLocation": "./.yarn/cache/cookie-npm-0.4.2-7761894d5f-a00833c998.zip/node_modules/cookie/",\
+          "packageDependencies": [\
+            ["cookie", "npm:0.4.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["cookiejar", [\
         ["npm:2.1.3", {\
           "packageLocation": "./.yarn/cache/cookiejar-npm-2.1.3-ec18b65dd0-88259983eb.zip/node_modules/cookiejar/",\
           "packageDependencies": [\
             ["cookiejar", "npm:2.1.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["cookies-next", [\
+        ["npm:2.1.1", {\
+          "packageLocation": "./.yarn/cache/cookies-next-npm-2.1.1-b220fa0499-c5fc2c72cf.zip/node_modules/cookies-next/",\
+          "packageDependencies": [\
+            ["cookies-next", "npm:2.1.1"],\
+            ["@types/cookie", "npm:0.4.1"],\
+            ["@types/node", "npm:16.11.65"],\
+            ["cookie", "npm:0.4.2"]\
           ],\
           "linkType": "HARD"\
         }]\

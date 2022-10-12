@@ -1,3 +1,4 @@
+import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
 
 import { UserProfile } from '@/profile/types/UserProfile';
@@ -9,8 +10,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { notFound: true };
   }
 
-  const accessToken =
-    (context.req.cookies['supabase.auth.token'] as string) || '';
+  const accessToken: string =
+    (getCookie('supabase_auth_token', {
+      req: context.req,
+      res: context.res,
+    }) as string) || '';
   const { user: userFromCookie } = await Supabase.auth.api.getUser(accessToken);
   const loggedIn = !!userFromCookie;
 
