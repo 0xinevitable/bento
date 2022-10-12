@@ -1,3 +1,4 @@
+import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
@@ -32,8 +33,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     return { notFound: true };
   }
 
-  const accessToken =
-    (context.req.cookies['supabase.auth.token'] as string) || '';
+  const accessToken: string =
+    (getCookie('supabase.auth.token', {
+      req: context.req,
+      res: context.res,
+    }) as string) || '';
   const { user: userFromCookie } = await Supabase.auth.api.getUser(accessToken);
 
   const username = context.query.username as string | undefined;
