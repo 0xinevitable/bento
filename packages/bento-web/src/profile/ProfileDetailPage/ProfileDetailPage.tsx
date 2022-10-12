@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   }
 
   const accessToken: string =
-    (getCookie('supabase.auth.token', {
+    (getCookie('supabase_auth_token', {
       req: context.req,
       res: context.res,
     }) as string) || '';

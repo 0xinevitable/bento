@@ -1,5 +1,5 @@
 import { Session } from '@supabase/supabase-js';
-import { deleteCookie, getCookie, setCookie } from 'cookies-next';
+import { deleteCookie } from 'cookies-next';
 import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -19,31 +19,20 @@ const registerAccessToken = (session: Session | null) => {
   });
 
   if (session) {
-    const expireDate = session?.expires_at
-      ? new Date(session.expires_at)
-      : new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-
-    setCookie('supabase.auth.token', session.access_token, {
-      path: '/',
-      expires: expireDate,
-      secure: true,
-      sameSite: 'lax',
-    });
+    document.cookie = `supabase_auth_token=${session.access_token};max-age=${
+      (session.expires_in || 60 * 60 * 24) * 1_000
+    };secure;samesite=lax;path=/`;
 
     if (Config.ENVIRONMENT !== 'production') {
-      console.log(
-        'Access token registered in Cookie' + getCookie('supabase.auth.token'),
-      );
+      console.log('Access token saved to Cookie');
     }
   } else {
-    deleteCookie('supabase.auth.token', {
+    deleteCookie('supabase_auth_token', {
       path: '/',
     });
 
     if (Config.ENVIRONMENT !== 'production') {
-      console.log(
-        'Access token removed from Cookie' + getCookie('supabase.auth.token'),
-      );
+      console.log('Access token removed from Cookie');
     }
   }
 };

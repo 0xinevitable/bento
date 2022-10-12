@@ -110,11 +110,14 @@ export const NavigationBar = () => {
 
         <RightContent>
           <SocialIconList>
-            {!!session && (
-              <button className="logout" onClick={onClickLogout}>
-                {t('Logout')}
-              </button>
-            )}
+            <NoSSR>
+              {!!session && (
+                <button className="logout" onClick={onClickLogout}>
+                  {t('Logout')}
+                </button>
+              )}
+            </NoSSR>
+
             <a
               href="https://twitter.com/bentoinevitable"
               target="_blank"
