@@ -1453,8 +1453,6 @@ __metadata:
     "@supabase/supabase-js": ^1.35.7
     "@types/bn.js": ^5.1.1
     "@types/dedent": ^0.7.0
-    "@types/lodash.chunk": ^4.2.7
-    "@types/lodash.groupby": ^4.6.7
     "@types/node": ^18.7.19
     "@types/react": ^18.0.21
     "@types/react-dom": ^18.0.6
@@ -1466,10 +1464,6 @@ __metadata:
     date-fns: ^2.29.3
     dedent: ^0.7.0
     env-cmd: ^10.1.0
-    immer: ^9.0.15
-    javascript-time-ago: ^2.5.7
-    lodash.chunk: ^4.2.0
-    lodash.groupby: ^4.6.0
     next: canary
     prop-types: ^15.8.1
     react: ^18.2.0

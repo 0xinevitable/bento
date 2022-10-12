@@ -2577,8 +2577,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@types/bn.js", "npm:5.1.1"],\
             ["@types/dedent", "npm:0.7.0"],\
-            ["@types/lodash.chunk", "npm:4.2.7"],\
-            ["@types/lodash.groupby", "npm:4.6.7"],\
             ["@types/node", "npm:18.7.19"],\
             ["@types/react", "npm:18.0.21"],\
             ["@types/react-dom", "npm:18.0.6"],\
@@ -2590,10 +2588,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
             ["env-cmd", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:10.1.0"],\
-            ["immer", "npm:9.0.15"],\
-            ["javascript-time-ago", "npm:2.5.7"],\
-            ["lodash.chunk", "npm:4.2.0"],\
-            ["lodash.groupby", "npm:4.6.0"],\
             ["next", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:12.3.2-canary.25"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
