@@ -159,10 +159,12 @@ const DashboardPage = ({ profile, ...props }: Props) => {
     }
   }, [hasWallet]);
 
-  const isMyProfile = useMemo(
-    () => props.type === 'MY_PROFILE' || session?.user?.id === profile.user_id,
-    [props, session, profile],
+  const [isMyProfile, setMyProfile] = useState<boolean>(
+    props.type === 'MY_PROFILE',
   );
+  useEffect(() => {
+    setMyProfile(session?.user?.id === profile.user_id);
+  }, [JSON.stringify(session)]);
 
   return (
     <>
