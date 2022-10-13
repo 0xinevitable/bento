@@ -1,4 +1,5 @@
 import BigNumber from 'bn.js';
+import { Multicall } from 'klaytn-multicall';
 
 import {
   DeFiStaking,
@@ -8,7 +9,6 @@ import {
 
 import IKSLP from '../abis/IKSLP.json';
 import { klaytnChain } from '../constants';
-import { Multicall } from '../utils/Multicall';
 import { getTokenInfo } from '../utils/getTokenInfo';
 
 const provider = klaytnChain._provider;

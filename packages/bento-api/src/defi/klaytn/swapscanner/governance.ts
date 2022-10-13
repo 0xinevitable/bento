@@ -1,4 +1,4 @@
-import { safePromiseAll } from '@bento/common';
+import { Multicall } from 'klaytn-multicall';
 
 import {
   DeFiStaking,
@@ -7,7 +7,6 @@ import {
 } from '@/defi/types/staking';
 
 import { klaytnChain } from '../constants';
-import { Multicall } from '../utils/Multicall';
 import {
   MINIMAL_ABIS,
   SCNR_STAKING_ADDRESS,

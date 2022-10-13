@@ -2,6 +2,7 @@ import { safeAsyncFlatMap, safePromiseAllV1 } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
 import { getAddress, isAddress } from '@ethersproject/address';
 import CompressedJSON from 'compressed-json';
+import { Multicall } from 'klaytn-multicall';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';
@@ -18,7 +19,6 @@ import { KlaySwap } from '@/defi/klaytn/klayswap';
 import { KokonutSwap } from '@/defi/klaytn/kokonutswap';
 import { Swapscanner } from '@/defi/klaytn/swapscanner';
 import { SCNR_ADDRESS } from '@/defi/klaytn/swapscanner/constants';
-import { Multicall } from '@/defi/klaytn/utils/Multicall';
 import { withoutEmptyDeFiStaking } from '@/defi/klaytn/utils/withoutEmptyDeFiStaking';
 import { DeFiStaking } from '@/defi/types/staking';
 
