@@ -25,15 +25,10 @@ export const getGovernanceStake = async (
     SCNR_STAKING_ADDRESS,
   );
 
-  let calls: any[] = [];
-  try {
-    calls = [
-      staking.methods.stakedBalanceOf(account, SCNR_TOKEN_INFO.address),
-      staking.methods.withdrawableRewardOf(account, SCNR_TOKEN_INFO.address),
-    ];
-  } catch (error) {
-    console.error(error);
-  }
+  const calls = [
+    staking.methods.stakedBalanceOf(account, SCNR_TOKEN_INFO.address),
+    staking.methods.withdrawableRewardOf(account, SCNR_TOKEN_INFO.address),
+  ];
 
   const [multicallResults, tokenPrice] = (await Promise.all([
     multicall.aggregate(calls),

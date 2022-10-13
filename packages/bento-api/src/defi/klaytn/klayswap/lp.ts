@@ -8,6 +8,7 @@ import {
 
 import IKSLP from '../abis/IKSLP.json';
 import { klaytnChain } from '../constants';
+import { Multicall } from '../utils/Multicall';
 import { getTokenInfo } from '../utils/getTokenInfo';
 
 const provider = klaytnChain._provider;
@@ -16,6 +17,7 @@ export const getLPPoolBalance = async (
   _account: string,
   lpTokenBalance: string,
   pool: KLAYswap.Pool,
+  multicall: Multicall,
 ): Promise<DeFiStaking> => {
   const kslp = new provider.klay.Contract(
     [
@@ -31,10 +33,14 @@ export const getLPPoolBalance = async (
   );
 
   const liquidity = new BigNumber(lpTokenBalance);
-  const [totalLiquidity, { 0: poolA, 1: poolB }] = await Promise.all([
-    kslp.methods.totalSupply().call(),
-    kslp.methods.getCurrentPool().call(),
-  ]);
+  const calls = [kslp.methods.totalSupply(), kslp.methods.getCurrentPool()];
+  const multicallResults = (await multicall.aggregate(calls)) as [
+    [string],
+    [string, string],
+  ];
+  const totalLiquidity = multicallResults?.[0]?.[0] || '0';
+  const poolA = multicallResults?.[1]?.[0] || '0';
+  const poolB = multicallResults?.[1]?.[1] || '0';
 
   let rawBalanceA = new BigNumber.BN(poolA)
     .mul(new BigNumber.BN(liquidity))

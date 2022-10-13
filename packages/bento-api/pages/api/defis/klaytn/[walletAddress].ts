@@ -28,6 +28,8 @@ interface APIRequest extends NextApiRequest {
   };
 }
 
+const multicall = new Multicall({ provider: klaytnChain._provider });
+
 const parseWallets = (mixedQuery: string) => {
   const query = mixedQuery.toLowerCase();
   if (query.indexOf(',') === -1) {
@@ -171,11 +173,16 @@ const getDeFiStakingsByWalletAddress = async (
       isSameAddress(v.exchange_address, token.contract_address),
     );
     if (!!klayswapLPPool) {
-      return KlaySwap.getLPPoolBalance(
-        walletAddress,
-        token.balance,
-        klayswapLPPool,
-      );
+      try {
+        return KlaySwap.getLPPoolBalance(
+          walletAddress,
+          token.balance,
+          klayswapLPPool,
+          multicall,
+        );
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     // KLAYswap Leverage Pool (Single Staking)
@@ -221,7 +228,6 @@ const getDeFiStakingsByWalletAddress = async (
     // Swapscanner Governance
     if (isSameAddress(token.contract_address, SCNR_ADDRESS)) {
       try {
-        const multicall = new Multicall({ provider: klaytnChain._provider });
         return Swapscanner.getGovernanceStake(walletAddress, multicall);
       } catch (error) {
         console.error(error);
