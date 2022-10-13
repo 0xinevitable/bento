@@ -1,4 +1,5 @@
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
@@ -8,7 +9,16 @@ import { useSession } from '@/hooks/useSession';
 import { DashboardIntro } from './DashboardIntro';
 
 const DashboardIntroPage = () => {
+  const router = useRouter();
   const { session } = useSession();
+
+  useEffect(() => {
+    if (!session || !session.user) {
+      return;
+    }
+
+    router.push(`/u/${session.user?.id}`);
+  }, [router, JSON.stringify(session)]);
 
   return (
     <>

@@ -46,6 +46,26 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 
   const username = context.query.username as string | undefined;
 
+  if (username && username.length >= 36) {
+    const userId = username;
+    const query = Supabase.from('profile')
+      .select('*')
+      .eq('user_id', userId.toLowerCase());
+    const profiles: UserProfile[] = (await query).data ?? [];
+    const profile = profiles[0];
+    if (!profile) {
+      return {
+        notFound: true,
+      };
+    }
+    return {
+      redirect: {
+        destination: `/u/${profile.username}`,
+        permanent: false,
+      },
+    };
+  }
+
   // username should not be empty
   if (!username) {
     return {
