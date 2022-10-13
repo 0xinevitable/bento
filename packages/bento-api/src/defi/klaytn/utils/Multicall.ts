@@ -9,7 +9,6 @@ const MULTICALL_ABI: any[] = [
           { internalType: 'address', name: 'target', type: 'address' },
           { internalType: 'bytes', name: 'callData', type: 'bytes' },
         ],
-        internalType: 'struct Multicall2.Call[]',
         name: 'calls',
         type: 'tuple[]',
       },
@@ -19,7 +18,6 @@ const MULTICALL_ABI: any[] = [
       { internalType: 'uint256', name: 'blockNumber', type: 'uint256' },
       { internalType: 'bytes[]', name: 'returnData', type: 'bytes[]' },
     ],
-    stateMutability: 'nonpayable',
     type: 'function',
   },
 ];
@@ -63,7 +61,7 @@ export class Multicall {
         o.internalType !== o.type && o.internalType !== undefined ? o : o.type,
       );
 
-      const result = Caver.abi.decodeParameters(types, hex);
+      const result = this.provider.abi.decodeParameters(types, hex);
       return Object.values(result);
     });
 

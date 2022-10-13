@@ -162,11 +162,6 @@ const getDeFiStakingsByWalletAddress = async (
       // Indexed at least once
       return [];
     }
-    console.log(
-      token.balance,
-      token.contract_address,
-      token.contract_ticker_symbol,
-    );
 
     // KLAYswap LP
     const klayswapLPPool = KLAYSWAP_LP_POOLS.find((v) =>
