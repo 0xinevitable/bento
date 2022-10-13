@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Modal } from '@/components/system';
-import { useSession } from '@/hooks/useSession';
 
 import { LinkBlock } from '@/profile/blocks';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
@@ -33,7 +32,6 @@ export const ProfileSummarySection: React.FC<Props> = ({
   profile,
   revalidateProfile,
 }) => {
-  const { session } = useSession();
   const { t } = useTranslation('dashboard');
 
   const profileImageURL =
@@ -42,12 +40,14 @@ export const ProfileSummarySection: React.FC<Props> = ({
   const [blocks, setBlocks] = useState<LinkBlock[]>([]);
 
   useEffect(() => {
-    if (!session) {
+    if (!profile) {
       return;
     }
     const fetchProfile = async () => {
       try {
-        const { data } = await axios.get('/api/profile/blocks');
+        const { data } = await axios.get(
+          `/api/profile/blocks/${profile.username}`,
+        );
         if (Array.isArray(data)) {
           setBlocks(data);
         }
@@ -57,7 +57,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
     };
 
     fetchProfile();
-  }, [JSON.stringify(session)]);
+  }, [profile]);
 
   const [isEditing, setEditing] = useState<boolean>(false);
   const [draft, setDraft] = useState<UserInformationDraft>({

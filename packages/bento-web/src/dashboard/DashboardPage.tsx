@@ -14,7 +14,6 @@ import { useWalletContext } from '@/hooks/useWalletContext';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Analytics, Supabase } from '@/utils';
 
-import { DashboardIntro } from './DashboardIntro';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
 
 const DynamicDashboardMain = dynamic(() => import('./DashboardMain'));
@@ -120,9 +119,6 @@ const DashboardPage = ({ profile, ...props }: Props) => {
   const [tokenDetailModalParams, setTokenDetailModalParams] =
     useState<TokenDetailModalParams>({});
 
-  const [pageLoaded, setPageLoaded] = useState<boolean>(false);
-  useEffect(() => setPageLoaded(true), []);
-
   const hasWallet = !!session && wallets.length > 0;
 
   const hasLoggedTabViewEvent = useRef<boolean>(false);
@@ -135,37 +131,27 @@ const DashboardPage = ({ profile, ...props }: Props) => {
 
   const hasLoggedViewEvent = useRef<boolean>(false);
   useEffect(() => {
-    if (!pageLoaded || hasLoggedViewEvent.current) {
-      return;
-    }
-
     if (!session) {
       return;
     } else {
       Analytics.logEvent('view_dashboard_main', undefined);
       hasLoggedViewEvent.current = true;
     }
-  }, [pageLoaded, hasWallet]);
+  }, [hasWallet]);
 
   return (
     <>
       <MetaHead />
       <Black />
       <PageContainer style={{ paddingTop: 0 }}>
-        {!pageLoaded ? null : !session ? (
-          <DashboardIntro
-            onConnectWallet={() => setAddWalletModalVisible((prev) => !prev)}
-          />
-        ) : (
-          <DynamicDashboardMain
-            wallets={wallets}
-            profile={profile}
-            revalidateProfile={async () => {}}
-            setAddWalletModalVisible={setAddWalletModalVisible}
-            setTokenDetailModalVisible={setTokenDetailModalVisible}
-            setTokenDetailModalParams={setTokenDetailModalParams}
-          />
-        )}
+        <DynamicDashboardMain
+          wallets={wallets}
+          profile={profile}
+          revalidateProfile={async () => {}}
+          setAddWalletModalVisible={setAddWalletModalVisible}
+          setTokenDetailModalVisible={setTokenDetailModalVisible}
+          setTokenDetailModalParams={setTokenDetailModalParams}
+        />
 
         <DynmaicAddWalletModal
           visible={isAddWalletModalVisible}
