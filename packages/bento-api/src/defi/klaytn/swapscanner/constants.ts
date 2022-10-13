@@ -54,12 +54,25 @@ export const MINIMAL_ABIS = {
       inputs: [
         { internalType: 'address', name: '', type: 'address' },
         {
-          internalType: 'contract IERC20Upgradeable',
+          internalType: 'address',
           name: '',
           type: 'address',
         },
       ],
       name: 'stakedBalanceOf',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      type: 'function',
+    },
+    {
+      inputs: [
+        { internalType: 'address', name: '', type: 'address' },
+        {
+          internalType: 'address',
+          name: '',
+          type: 'address',
+        },
+      ],
+      name: 'withdrawableRewardOf',
       outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
       type: 'function',
     },
