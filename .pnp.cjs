@@ -2588,6 +2588,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
             ["env-cmd", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:10.1.0"],\
+            ["klaytn-multicall", "npm:1.0.2"],\
             ["next", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:12.3.2-canary.25"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
@@ -2641,7 +2642,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@cosmjs/amino", "npm:0.29.0"],\
-            ["@cosmjs/cosmwasm-stargate", "npm:0.29.1"],\
             ["@cosmjs/crypto", "npm:0.29.0"],\
             ["@ethersproject/address", "npm:5.7.0"],\
             ["@ethersproject/providers", "npm:5.7.1"],\
@@ -2672,7 +2672,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["caver-js", "npm:1.9.0"],\
             ["clsx", "npm:1.2.1"],\
             ["cobe", "npm:0.6.2"],\
-            ["compressed-json", "npm:1.0.16"],\
             ["cookies-next", "npm:2.1.1"],\
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
@@ -10612,6 +10611,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/keyvaluestorage-interface-npm-1.0.0-d6fc8e29c6-e20530e71b.zip/node_modules/keyvaluestorage-interface/",\
           "packageDependencies": [\
             ["keyvaluestorage-interface", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["klaytn-multicall", [\
+        ["npm:1.0.2", {\
+          "packageLocation": "./.yarn/cache/klaytn-multicall-npm-1.0.2-328c593734-2cf53d93d4.zip/node_modules/klaytn-multicall/",\
+          "packageDependencies": [\
+            ["klaytn-multicall", "npm:1.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -2,6 +2,7 @@ import { safeAsyncFlatMap, safePromiseAllV1 } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
 import { getAddress, isAddress } from '@ethersproject/address';
 import CompressedJSON from 'compressed-json';
+import { Multicall } from 'klaytn-multicall';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';
@@ -26,6 +27,8 @@ interface APIRequest extends NextApiRequest {
     walletAddress?: string;
   };
 }
+
+const multicall = new Multicall({ provider: klaytnChain._provider });
 
 const parseWallets = (mixedQuery: string) => {
   const query = mixedQuery.toLowerCase();
@@ -165,11 +168,16 @@ const getDeFiStakingsByWalletAddress = async (
       isSameAddress(v.exchange_address, token.contract_address),
     );
     if (!!klayswapLPPool) {
-      return KlaySwap.getLPPoolBalance(
-        walletAddress,
-        token.balance,
-        klayswapLPPool,
-      );
+      try {
+        return KlaySwap.getLPPoolBalance(
+          walletAddress,
+          token.balance,
+          klayswapLPPool,
+          multicall,
+        );
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     // KLAYswap Leverage Pool (Single Staking)
@@ -214,7 +222,11 @@ const getDeFiStakingsByWalletAddress = async (
 
     // Swapscanner Governance
     if (isSameAddress(token.contract_address, SCNR_ADDRESS)) {
-      return Swapscanner.getGovernanceStake(walletAddress);
+      try {
+        return Swapscanner.getGovernanceStake(walletAddress, multicall);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     return [];

@@ -66,10 +66,17 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     return;
   }
 
-  if (profile.username.length > 38) {
+  if (profile.username.length <= 4) {
     res.status(400).json({
       code: 'USERNAME_UNUSABLE',
-      message: `Username can't be longer than 38 characters`,
+      message: `Username is too short`,
+    });
+    return;
+  }
+  if (profile.username.length > 30) {
+    res.status(400).json({
+      code: 'USERNAME_UNUSABLE',
+      message: `Username can't be longer than 30 characters`,
     });
     return;
   }

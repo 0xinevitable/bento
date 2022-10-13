@@ -1464,6 +1464,7 @@ __metadata:
     date-fns: ^2.29.3
     dedent: ^0.7.0
     env-cmd: ^10.1.0
+    klaytn-multicall: ^1.0.2
     next: canary
     prop-types: ^15.8.1
     react: ^18.2.0
@@ -1511,7 +1512,6 @@ __metadata:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
     "@cosmjs/amino": ^0.29.0
-    "@cosmjs/cosmwasm-stargate": ^0.29.1
     "@cosmjs/crypto": 0.29.0
     "@ethersproject/address": ^5.7.0
     "@ethersproject/providers": ^5.7.1
@@ -1542,7 +1542,6 @@ __metadata:
     caver-js: ^1.9.0
     clsx: ^1.2.1
     cobe: ^0.6.2
-    compressed-json: ^1.0.16
     cookies-next: ^2.1.1
     date-fns: ^2.29.3
     dedent: ^0.7.0
@@ -8024,6 +8023,13 @@ __metadata:
   version: 1.0.0
   resolution: "keyvaluestorage-interface@npm:1.0.0"
   checksum: e20530e71b738dc094ad170a91a98d4b9bdc772dd9044b23cdaaa102aafa8997b1ac867550a1e66ba1d64fcaa949214df31aed18413b4bac31e5fe1f2c76c9de
+  languageName: node
+  linkType: hard
+
+"klaytn-multicall@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "klaytn-multicall@npm:1.0.2"
+  checksum: 2cf53d93d461148239c5eb92ff856b6c691b08e6eaa26a417fed0ee70e581cf8cc7ea668a8b68e97165f7fcfcce46261453785f86d6f1aaada3d395b074e3835
   languageName: node
   linkType: hard
 

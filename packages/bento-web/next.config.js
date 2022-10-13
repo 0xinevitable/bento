@@ -44,11 +44,11 @@ module.exports = withPlugins(
       return [
         {
           source: '/profile/landing',
-          destination: '/profile/intro',
+          destination: '/',
           permanent: false,
         },
         {
-          source: '/dashboard',
+          source: '/profile/intro',
           destination: '/',
           permanent: false,
         },
