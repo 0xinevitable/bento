@@ -6,14 +6,17 @@ import { Supabase } from '../utils';
 import { useWalletContext } from './useWalletContext';
 
 export const useSignOut = () => {
-  const { setWallets } = useWalletContext();
+  // const { setWallets } = useWalletContext();
   const setCurrentSession = useSetAtom(sessionAtom);
 
   const signOut = useCallback(async () => {
-    setWallets([]);
+    // setWallets([]);
     setCurrentSession(null);
     await Supabase.auth.signOut();
-  }, [setWallets, setCurrentSession]);
+  }, [
+    // setWallets,
+    setCurrentSession,
+  ]);
 
   return { signOut };
 };

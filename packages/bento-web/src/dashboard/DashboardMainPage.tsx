@@ -3,13 +3,12 @@ import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { MetaHead } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
-import { useWalletContext } from '@/hooks/useWalletContext';
 
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Analytics, Supabase } from '@/utils';
@@ -117,18 +116,21 @@ const fetchWallets = async (userId: string): Promise<Wallet[]> => {
 
 const DashboardPage = ({ profile, ...props }: Props) => {
   const { session } = useSession();
-  // const { wallets } = useWalletContext();
 
-  const { wallets, setWallets } = useWalletContext();
-  useEffect(() => {
-    if (!!profile?.user_id) {
-      fetchWallets(profile.user_id)
-        .then(setWallets)
-        .catch(() => {
-          setWallets([]);
-        });
+  const [wallets, setWallets] = useState<Wallet[]>([]);
+  const revalidateWallets = useCallback(async () => {
+    try {
+      const wallets = await fetchWallets(profile.user_id);
+      setWallets(wallets);
+    } catch {
+      setWallets([]);
     }
-  }, [profile?.user_id]);
+    return wallets;
+  }, [profile.user_id]);
+
+  useEffect(() => {
+    revalidateWallets();
+  }, [revalidateWallets]);
 
   console.log({ wallets });
 
@@ -176,6 +178,7 @@ const DashboardPage = ({ profile, ...props }: Props) => {
           wallets={wallets}
           profile={profile}
           revalidateProfile={async () => {}}
+          revalidateWallets={revalidateWallets}
           setAddWalletModalVisible={setAddWalletModalVisible}
           setTokenDetailModalVisible={setTokenDetailModalVisible}
           setTokenDetailModalParams={setTokenDetailModalParams}
@@ -184,6 +187,7 @@ const DashboardPage = ({ profile, ...props }: Props) => {
         <DynmaicAddWalletModal
           visible={isAddWalletModalVisible}
           onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
+          revalidateWallets={revalidateWallets}
         />
         <DynamicTokenDetailModal
           visible={isTokenDetailModalVisible}
