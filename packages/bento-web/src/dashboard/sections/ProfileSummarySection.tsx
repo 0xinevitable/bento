@@ -46,7 +46,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
     const fetchProfile = async () => {
       try {
         const { data } = await axios.get(
-          `/api/profile/blocks/${profile.username}`,
+          `/api/profile/blocks/${profile.user_id}`,
         );
         if (Array.isArray(data)) {
           setBlocks(data);
