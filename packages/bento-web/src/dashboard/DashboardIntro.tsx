@@ -1,10 +1,10 @@
 import { Icon } from '@iconify/react';
+import { Session } from '@supabase/supabase-js';
 import Image from 'next/future/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { AnimatedToolTip, Badge } from '@/components/system';
-import { useSession } from '@/hooks/useSession';
 
 import { NETWORKS } from '@/constants/networks';
 import { FixedLoginNudge } from '@/profile/components/LoginNudge';
@@ -12,12 +12,10 @@ import { Colors } from '@/styles';
 import { Analytics, Supabase } from '@/utils';
 
 type DashboardIntroProps = {
-  onConnectWallet?: () => void;
+  session: Session | null;
 };
-export const DashboardIntro: React.FC<DashboardIntroProps> = ({
-  onConnectWallet,
-}) => {
-  const { session } = useSession();
+
+export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
   const [isFixedLoginNudgeVisible, setFixedLoginNudgeVisible] =
     useState<boolean>(false);
 
@@ -38,20 +36,9 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
     setFixedLoginNudgeVisible(true);
   }, [login]);
 
-  const onClickConnectWallet = useCallback(() => {
-    Analytics.logEvent('click_dashboard_connect_wallet', {
-      title: 'Connect Wallet',
-    });
-    onConnectWallet?.();
-  }, [onConnectWallet]);
-
-  const hasLoggedLoginViewEvent = useRef<boolean>(false);
-  const hasLoggedConnectWalletViewEvent = useRef<boolean>(false);
-
   useEffect(() => {
-    if (!session || !hasLoggedLoginViewEvent.current) {
+    if (!session) {
       Analytics.logEvent('view_dashboard_login', undefined);
-      hasLoggedLoginViewEvent.current = true;
     }
   }, [JSON.stringify(session)]);
 
@@ -89,15 +76,7 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({
             gap: 8,
           }}
         >
-          <Button
-            onClick={
-              !session //
-                ? onClickLogin
-                : onClickConnectWallet
-            }
-          >
-            {!session ? 'View your Dashboard' : 'Connect Wallet'}
-          </Button>
+          <Button onClick={onClickLogin}>{'View your Dashboard'}</Button>
           <a
             title="About"
             style={{

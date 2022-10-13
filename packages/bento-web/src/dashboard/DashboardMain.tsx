@@ -16,6 +16,7 @@ import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { Metadata } from '@/defi/klaytn/constants/metadata';
 import { useProfile } from '@/profile/hooks/useProfile';
+import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
 
@@ -45,7 +46,10 @@ const walletBalanceReducer =
     (balance.symbol ?? balance.name) === key ? callback(acc, balance) : acc;
 
 type DashboardMainProps = {
+  isMyProfile: boolean;
   wallets: Wallet[];
+  profile: UserProfile;
+  revalidateProfile: () => Promise<void>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setTokenDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setTokenDetailModalParams: React.Dispatch<
@@ -54,7 +58,10 @@ type DashboardMainProps = {
 };
 
 export const DashboardMain: React.FC<DashboardMainProps> = ({
+  isMyProfile,
   wallets,
+  profile,
+  revalidateProfile,
   setAddWalletModalVisible,
   setTokenDetailModalVisible,
   setTokenDetailModalParams,
@@ -62,7 +69,6 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
-  const { profile, revalidateProfile } = useProfile({ type: 'MY_PROFILE' });
   const { balances: walletBalances, jsonKey: walletBalancesJSONKey } =
     useWalletBalances({ wallets });
   const { balances: NFTBalances, jsonKey: nftBalancesJSONKey } = useNFTBalances(
@@ -181,6 +187,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             <ProfileSummarySection
               profile={profile}
               revalidateProfile={revalidateProfile}
+              isMyProfile={isMyProfile}
             />
           </div>
         </ProfileContainer>
@@ -203,6 +210,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 />
 
                 <WalletListSection
+                  isMyProfile={isMyProfile}
                   onClickAddWallet={() =>
                     setAddWalletModalVisible((prev) => !prev)
                   }
@@ -370,7 +378,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 <NFTListSection
                   nftAssets={nftAssets}
                   selected={currentTab === DashboardTabType.NFTs}
-                  isMyProfile={true}
+                  isMyProfile={isMyProfile}
                   profile={profile}
                   revalidateProfile={revalidateProfile}
                 />

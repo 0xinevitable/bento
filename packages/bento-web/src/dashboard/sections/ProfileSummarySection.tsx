@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Modal } from '@/components/system';
-import { useSession } from '@/hooks/useSession';
 
 import { LinkBlock } from '@/profile/blocks';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
@@ -25,15 +24,16 @@ type ErrorResponse =
   | undefined;
 
 type Props = {
+  isMyProfile: boolean;
   profile: UserProfile | null;
   revalidateProfile: () => void;
 };
 
 export const ProfileSummarySection: React.FC<Props> = ({
+  isMyProfile,
   profile,
   revalidateProfile,
 }) => {
-  const { session } = useSession();
   const { t } = useTranslation('dashboard');
 
   const profileImageURL =
@@ -42,12 +42,14 @@ export const ProfileSummarySection: React.FC<Props> = ({
   const [blocks, setBlocks] = useState<LinkBlock[]>([]);
 
   useEffect(() => {
-    if (!session) {
+    if (!profile) {
       return;
     }
     const fetchProfile = async () => {
       try {
-        const { data } = await axios.get('/api/profile/blocks');
+        const { data } = await axios.get(
+          `/api/profile/blocks/${profile.user_id}`,
+        );
         if (Array.isArray(data)) {
           setBlocks(data);
         }
@@ -57,7 +59,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
     };
 
     fetchProfile();
-  }, [JSON.stringify(session)]);
+  }, [profile]);
 
   const [isEditing, setEditing] = useState<boolean>(false);
   const [draft, setDraft] = useState<UserInformationDraft>({
@@ -151,25 +153,27 @@ export const ProfileSummarySection: React.FC<Props> = ({
                 </>
               )}
 
-              <AddProfileButton
-                onClick={() => {
-                  Analytics.logEvent('click_edit_my_profile', {
-                    title: 'Setup Now',
-                    medium: 'dashboard_main',
-                  });
-                  setEditing((prev) => !prev);
-                }}
-              >
-                {t(!profile?.username ? 'Setup Now' : 'Edit Profile')}
-              </AddProfileButton>
+              {isMyProfile && (
+                <AddProfileButton
+                  onClick={() => {
+                    Analytics.logEvent('click_edit_my_profile', {
+                      title: 'Setup Now',
+                      medium: 'dashboard_main',
+                    });
+                    setEditing((prev) => !prev);
+                  }}
+                >
+                  {t(!profile?.username ? 'Setup Now' : 'Edit Profile')}
+                </AddProfileButton>
+              )}
             </Information>
           </Foreground>
         </Container>
       </BorderWrapper>
 
       <ul>
-        {blocks.map((block) => (
-          <LinkBlockItem key={block.url} {...block} />
+        {blocks.map((block, index) => (
+          <LinkBlockItem key={index} {...block} />
         ))}
       </ul>
 

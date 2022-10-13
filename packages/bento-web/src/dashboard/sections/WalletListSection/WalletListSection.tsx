@@ -10,10 +10,14 @@ import { Colors } from '@/styles';
 import { WalletList, walletCountStyle } from './WalletList';
 
 type Props = {
+  isMyProfile: boolean;
   onClickAddWallet: () => void;
 };
 
-export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
+export const WalletListSection: React.FC<Props> = ({
+  isMyProfile,
+  onClickAddWallet,
+}) => {
   const { t } = useTranslation('common');
 
   const { wallets, revalidateWallets } = useWalletContext();
@@ -28,9 +32,11 @@ export const WalletListSection: React.FC<Props> = ({ onClickAddWallet }) => {
         <>
           <WalletList wallets={wallets} revalidateWallets={revalidateWallets} />
           <ButtonContainer>
-            <AddWalletButton onClick={onClickAddWallet}>
-              {t('Add Another')}
-            </AddWalletButton>
+            {isMyProfile && (
+              <AddWalletButton onClick={onClickAddWallet}>
+                {t('Add Another')}
+              </AddWalletButton>
+            )}
           </ButtonContainer>
         </>
       ) : (
