@@ -18,6 +18,7 @@ import { KlaySwap } from '@/defi/klaytn/klayswap';
 import { KokonutSwap } from '@/defi/klaytn/kokonutswap';
 import { Swapscanner } from '@/defi/klaytn/swapscanner';
 import { SCNR_ADDRESS } from '@/defi/klaytn/swapscanner/constants';
+import { Multicall } from '@/defi/klaytn/utils/Multicall';
 import { withoutEmptyDeFiStaking } from '@/defi/klaytn/utils/withoutEmptyDeFiStaking';
 import { DeFiStaking } from '@/defi/types/staking';
 
@@ -159,6 +160,11 @@ const getDeFiStakingsByWalletAddress = async (
       // Indexed at least once
       return [];
     }
+    console.log(
+      token.balance,
+      token.contract_address,
+      token.contract_ticker_symbol,
+    );
 
     // KLAYswap LP
     const klayswapLPPool = KLAYSWAP_LP_POOLS.find((v) =>
@@ -214,7 +220,12 @@ const getDeFiStakingsByWalletAddress = async (
 
     // Swapscanner Governance
     if (isSameAddress(token.contract_address, SCNR_ADDRESS)) {
-      return Swapscanner.getGovernanceStake(walletAddress);
+      try {
+        const multicall = new Multicall({ provider: klaytnChain._provider });
+        return Swapscanner.getGovernanceStake(walletAddress, multicall);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     return [];
