@@ -1,26 +1,28 @@
+import { Wallet } from '@bento/common';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import styled from 'styled-components';
 
 import { Button } from '@/components/system';
-import { useWalletContext } from '@/hooks/useWalletContext';
 
 import { Colors } from '@/styles';
 
 import { WalletList, walletCountStyle } from './WalletList';
 
 type Props = {
+  wallets: Wallet[];
   isMyProfile: boolean;
   onClickAddWallet: () => void;
+  revalidateWallets: () => Promise<Wallet[] | undefined>;
 };
 
 export const WalletListSection: React.FC<Props> = ({
+  wallets,
   isMyProfile,
   onClickAddWallet,
+  revalidateWallets,
 }) => {
   const { t } = useTranslation('common');
-
-  const { wallets, revalidateWallets } = useWalletContext();
 
   return (
     <Container>

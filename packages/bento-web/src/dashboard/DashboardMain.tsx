@@ -50,6 +50,7 @@ type DashboardMainProps = {
   wallets: Wallet[];
   profile: UserProfile;
   revalidateProfile: () => Promise<void>;
+  revalidateWallets: () => Promise<Wallet[] | undefined>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setTokenDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setTokenDetailModalParams: React.Dispatch<
@@ -62,6 +63,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   wallets,
   profile,
   revalidateProfile,
+  revalidateWallets,
   setAddWalletModalVisible,
   setTokenDetailModalVisible,
   setTokenDetailModalParams,
@@ -211,6 +213,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
                 <WalletListSection
                   isMyProfile={isMyProfile}
+                  wallets={wallets}
+                  revalidateWallets={revalidateWallets}
                   onClickAddWallet={() =>
                     setAddWalletModalVisible((prev) => !prev)
                   }

@@ -1,10 +1,10 @@
+import { Wallet } from '@bento/common';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { WalletConnector } from '@/components/WalletConnector';
 import { Modal } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
-import { useWalletContext } from '@/hooks/useWalletContext';
 
 import { NETWORKS, Network } from '@/constants/networks';
 import { Colors } from '@/styles';
@@ -13,11 +13,13 @@ import { Analytics } from '@/utils';
 type AddWalletModalProps = {
   visible?: boolean;
   onDismiss?: () => void;
+  revalidateWallets: () => Promise<Wallet[] | undefined>;
 };
 
 export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   visible: isVisible = false,
   onDismiss,
+  revalidateWallets,
 }) => {
   const { session } = useSession();
   const isLoggedIn = !!session;
@@ -42,8 +44,6 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
         : prev.filter((v) => v.id !== network.id),
     );
   }, []);
-
-  const { revalidateWallets } = useWalletContext();
 
   return (
     <OverlayWrapper
