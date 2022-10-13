@@ -24,11 +24,13 @@ type ErrorResponse =
   | undefined;
 
 type Props = {
+  isMyProfile: boolean;
   profile: UserProfile | null;
   revalidateProfile: () => void;
 };
 
 export const ProfileSummarySection: React.FC<Props> = ({
+  isMyProfile,
   profile,
   revalidateProfile,
 }) => {
@@ -151,25 +153,27 @@ export const ProfileSummarySection: React.FC<Props> = ({
                 </>
               )}
 
-              <AddProfileButton
-                onClick={() => {
-                  Analytics.logEvent('click_edit_my_profile', {
-                    title: 'Setup Now',
-                    medium: 'dashboard_main',
-                  });
-                  setEditing((prev) => !prev);
-                }}
-              >
-                {t(!profile?.username ? 'Setup Now' : 'Edit Profile')}
-              </AddProfileButton>
+              {isMyProfile && (
+                <AddProfileButton
+                  onClick={() => {
+                    Analytics.logEvent('click_edit_my_profile', {
+                      title: 'Setup Now',
+                      medium: 'dashboard_main',
+                    });
+                    setEditing((prev) => !prev);
+                  }}
+                >
+                  {t(!profile?.username ? 'Setup Now' : 'Edit Profile')}
+                </AddProfileButton>
+              )}
             </Information>
           </Foreground>
         </Container>
       </BorderWrapper>
 
       <ul>
-        {blocks.map((block) => (
-          <LinkBlockItem key={block.url} {...block} />
+        {blocks.map((block, index) => (
+          <LinkBlockItem key={index} {...block} />
         ))}
       </ul>
 

@@ -46,6 +46,7 @@ const walletBalanceReducer =
     (balance.symbol ?? balance.name) === key ? callback(acc, balance) : acc;
 
 type DashboardMainProps = {
+  isMyProfile: boolean;
   wallets: Wallet[];
   profile: UserProfile;
   revalidateProfile: () => Promise<void>;
@@ -57,6 +58,7 @@ type DashboardMainProps = {
 };
 
 export const DashboardMain: React.FC<DashboardMainProps> = ({
+  isMyProfile,
   wallets,
   profile,
   revalidateProfile,
@@ -185,6 +187,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             <ProfileSummarySection
               profile={profile}
               revalidateProfile={revalidateProfile}
+              isMyProfile={isMyProfile}
             />
           </div>
         </ProfileContainer>
@@ -207,6 +210,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 />
 
                 <WalletListSection
+                  isMyProfile={isMyProfile}
                   onClickAddWallet={() =>
                     setAddWalletModalVisible((prev) => !prev)
                   }
@@ -374,7 +378,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 <NFTListSection
                   nftAssets={nftAssets}
                   selected={currentTab === DashboardTabType.NFTs}
-                  isMyProfile={true}
+                  isMyProfile={isMyProfile}
                   profile={profile}
                   revalidateProfile={revalidateProfile}
                 />

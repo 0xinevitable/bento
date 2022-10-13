@@ -31,26 +31,14 @@ const NAVIGATION_ITEMS = [
     href: '/home',
     icon: 'ic:round-space-dashboard',
   },
-  ...(FeatureFlags.isProfileEnabled
-    ? [
-        {
-          title: 'Profile',
-          href: '/profile',
-          icon: 'carbon:user-avatar-filled',
-        },
-      ]
-    : []),
 ];
 
 export const NavigationBar = () => {
   const router = useRouter();
   const currentPath = useMemo(() => {
-    if (router.route.startsWith('/profile')) {
-      // e.g. /profile/intro
-      return '/profile';
-    }
     if (router.route.startsWith('/u/')) {
-      return '/profile';
+      // e.g. /profile/intro
+      return '/home';
     }
     return router.route;
   }, [router]);

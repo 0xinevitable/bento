@@ -3,7 +3,7 @@ import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
@@ -139,12 +139,18 @@ const DashboardPage = ({ profile, ...props }: Props) => {
     }
   }, [hasWallet]);
 
+  const isMyProfile = useMemo(
+    () => props.type === 'MY_PROFILE' || session?.user?.id === profile.user_id,
+    [props, session, profile],
+  );
+
   return (
     <>
       <MetaHead />
       <Black />
       <PageContainer style={{ paddingTop: 0 }}>
         <DynamicDashboardMain
+          isMyProfile={isMyProfile}
           wallets={wallets}
           profile={profile}
           revalidateProfile={async () => {}}
