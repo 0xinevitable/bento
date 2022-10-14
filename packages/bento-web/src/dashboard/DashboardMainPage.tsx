@@ -2,6 +2,7 @@ import { Wallet } from '@bento/common';
 import { User } from '@supabase/supabase-js';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
+import { format } from 'date-fns';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
@@ -86,6 +87,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     const profiles: UserProfile[] = (await query).data ?? [];
     const profile = profiles[0];
     if (!profile) {
+      const { data: user } = await Supabase.auth.api.getUserById(userId);
+      if (!user) {
+        return {
+          redirect: {
+            destination: `/`,
+            permanent: false,
+          },
+        };
+      }
+
       const data = await Supabase.from('profile').upsert({
         user_id: userId,
         username: userId,
@@ -104,10 +115,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       }
 
       try {
-        const { data: user } = await Supabase.auth.api.getUserById(userId);
-        if (user) {
-          await notifySlack(user, profile);
-        }
+        await notifySlack(user, profile);
       } catch (error) {
         console.error(error);
       }
