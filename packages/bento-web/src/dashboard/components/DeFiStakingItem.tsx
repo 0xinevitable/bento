@@ -1,5 +1,6 @@
 import { shortenAddress } from '@bento/common';
 import { Trans, useTranslation } from 'next-i18next';
+import { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
@@ -19,6 +20,11 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   protocol,
 }) => {
   const { t } = useTranslation('dashboard');
+
+  const protocolTokens = useMemo(
+    () => [...protocol.tokens, ...(protocol.relatedTokens || [])],
+    [protocol],
+  );
 
   return (
     <Container>
@@ -70,6 +76,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
             ) : (
               <InfoValuation>
                 {`$${formatNumber(protocol.valuation.wallet)}`}
+                {typeof protocol.wallet.lpAmount === 'number' && (
+                  <>
+                    <br />
+                    <SmallAmountInfo>
+                      {`${formatNumber(protocol.wallet.lpAmount)} LP`}
+                    </SmallAmountInfo>
+                  </>
+                )}
               </InfoValuation>
             )}
           </InfoItem>
@@ -79,6 +93,33 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           <span className="field">{t('Staking')}</span>
           <InfoValuation>
             {`$${formatNumber(protocol.valuation.staking)}`}
+            {typeof protocol.staked.lpAmount === 'number' && (
+              <>
+                <br />
+                <SmallAmountInfo>
+                  {`${formatNumber(protocol.staked.lpAmount)} LP`}
+                </SmallAmountInfo>
+              </>
+            )}
+
+            {!!protocol.staked.tokenAmounts && (
+              <>
+                <br />
+                <SmallAmountInfo>
+                  {Object.entries(protocol.staked.tokenAmounts).map(
+                    ([tokenAddress, amount], index, arr) => {
+                      const token = protocolTokens.find(
+                        // @ts-ignore
+                        (token) => token?.address === tokenAddress,
+                      );
+                      return `${formatNumber(amount)} ${
+                        token?.symbol || '???'
+                      } ${index < arr.length - 1 ? ' + ' : ''}`;
+                    },
+                  )}
+                </SmallAmountInfo>
+              </>
+            )}
           </InfoValuation>
         </InfoItem>
 
@@ -90,6 +131,24 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
             ) : (
               <InfoValuation>
                 {`$${formatNumber(protocol.valuation.rewards)}`}
+                {!!protocol.rewards.tokenAmounts && (
+                  <>
+                    <br />
+                    <SmallAmountInfo>
+                      {Object.entries(protocol.rewards.tokenAmounts).map(
+                        ([tokenAddress, amount], index, arr) => {
+                          const token = protocolTokens.find(
+                            // @ts-ignore
+                            (token) => token?.address === tokenAddress,
+                          );
+                          return `${formatNumber(amount)} ${
+                            token?.symbol || '???'
+                          } ${index < arr.length - 1 ? ' + ' : ''}`;
+                        },
+                      )}
+                    </SmallAmountInfo>
+                  </>
+                )}
               </InfoValuation>
             )}
           </InfoItem>
@@ -106,6 +165,26 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                   <span className="title">{t('Claimable')}</span>
                   <InfoValuation>
                     {`$${formatNumber(protocol.valuation.claimable)}`}
+
+                    {protocol.unstake.claimable !== 'unavailable' &&
+                      protocol.unstake.claimable?.tokenAmounts && (
+                        <>
+                          <br />
+                          <SmallAmountInfo>
+                            {Object.entries(
+                              protocol.unstake.claimable.tokenAmounts,
+                            ).map(([tokenAddress, amount], index, arr) => {
+                              const token = protocolTokens.find(
+                                // @ts-ignore
+                                (token) => token?.address === tokenAddress,
+                              );
+                              return `${formatNumber(amount)} ${
+                                token?.symbol || '???'
+                              } ${index < arr.length - 1 ? ' + ' : ''}`;
+                            })}
+                          </SmallAmountInfo>
+                        </>
+                      )}
                   </InfoValuation>
                 </span>
 
@@ -113,6 +192,26 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                   <span className="title">{t('Pending')}</span>
                   <InfoValuation>
                     {`$${formatNumber(protocol.valuation.pending)}`}
+
+                    {protocol.unstake.pending !== 'unavailable' &&
+                      protocol.unstake.pending?.tokenAmounts && (
+                        <>
+                          <br />
+                          <SmallAmountInfo>
+                            {Object.entries(
+                              protocol.unstake.pending.tokenAmounts,
+                            ).map(([tokenAddress, amount], index, arr) => {
+                              const token = protocolTokens.find(
+                                // @ts-ignore
+                                (token) => token?.address === tokenAddress,
+                              );
+                              return `${formatNumber(amount)} ${
+                                token?.symbol || '???'
+                              } ${index < arr.length - 1 ? ' + ' : ''}`;
+                            })}
+                          </SmallAmountInfo>
+                        </>
+                      )}
                   </InfoValuation>
                 </span>
               </>
@@ -269,4 +368,9 @@ const InfoItem = styled.li`
 `;
 const InfoValuation = styled(Valuation)`
   color: ${Colors.gray100};
+`;
+const SmallAmountInfo = styled.span`
+  color: ${Colors.gray500};
+  font-weight: 500;
+  font-size: 16px;
 `;
