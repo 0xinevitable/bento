@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { useWindowSize } from '@/hooks/useWindowSize';
 
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
 export const HeaderSection: React.FC = () => {
@@ -74,8 +74,8 @@ export const HeaderSection: React.FC = () => {
       </GlobeWrapper>
 
       <Content>
-        <Title>{t('Discover Your ⚡Web3 World')}</Title>
-        <Description>
+        <Title className="sys">{t('Discover Your ⚡Web3 World')}</Title>
+        <Description className="sys">
           {t('Bento aggregates your identity from the 2nd/3rd web')}
         </Description>
         <Button
@@ -175,12 +175,6 @@ const Title = styled.h1`
   text-align: center;
   letter-spacing: -0.06em;
 
-  /* FIXME: Tailwind */
-  &&,
-  & * {
-    font-family: ${systemFontStack} !important;
-  }
-
   &:lang(ko) {
     font-size: 58px;
   }
@@ -222,12 +216,6 @@ const Description = styled.p`
 
   @media (max-width: 582px) {
     max-width: 380px;
-  }
-
-  /* FIXME: Tailwind */
-  &,
-  & * {
-    font-family: ${systemFontStack} !important;
   }
 `;
 

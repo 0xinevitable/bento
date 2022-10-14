@@ -16,6 +16,10 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .sys, .sys * {
+    font-family: ${systemFontStack};
+  }
+
   html {
     background-color: black;
     scroll-behavior: smooth;

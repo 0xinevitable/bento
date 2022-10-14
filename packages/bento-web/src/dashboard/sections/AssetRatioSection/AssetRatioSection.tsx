@@ -6,25 +6,40 @@ import styled from 'styled-components';
 import { AnimatedToolTip } from '@/components/system';
 
 import { displayName } from '@/dashboard/constants/platform';
+import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 
 import { AssetRatioChart } from './AssetRatioChart';
 
 type AssetRatioSectionProps = {
   netWorthInUSD: number;
+  netWorthInUSDOnlyDeFi: number;
   tokenBalances: DashboardTokenBalance[];
+  defiStakesByProtocol: Record<string, DeFiStakingWithClientData[]>;
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
-  netWorthInUSD,
+  netWorthInUSDOnlyDeFi,
+  // FIXME: dirty code here
+  netWorthInUSD: netWorthInUSDOnlyWallet,
+  defiStakesByProtocol,
 }) => {
   const { t } = useTranslation('dashboard');
 
+  const netWorthInUSD = useMemo(
+    () => netWorthInUSDOnlyWallet + netWorthInUSDOnlyDeFi,
+    [netWorthInUSDOnlyWallet, netWorthInUSDOnlyDeFi],
+  );
+
   const assetRatioByPlatform = useMemo(() => {
     const groups = groupBy(tokenBalances, 'platform');
+
     const items = Object.entries(groups).map(([platform, assets]) => {
-      const netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
+      let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
+      defiStakesByProtocol[platform]?.forEach((defiStake) => {
+        netWorth += defiStake.valuation.total;
+      });
       return {
         platform,
         netWorth,
@@ -32,9 +47,10 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
         ratio: (netWorth / netWorthInUSD) * 100,
       };
     });
+
     // maximum length is 3
     return items.slice(0, 3);
-  }, [netWorthInUSD]);
+  }, [netWorthInUSD, defiStakesByProtocol]);
 
   return (
     <Container>
@@ -42,13 +58,14 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 
       <Information>
         <Field>{t('Net Worth')}</Field>
-        <Title>{`$${netWorthInUSD.toLocaleString()}`}</Title>
+        <Title className="sys">{`$${netWorthInUSD.toLocaleString()}`}</Title>
       </Information>
 
       <div>
         <AssetRatioChart
           tokenBalances={tokenBalances}
           netWorthInUSD={netWorthInUSD}
+          netWorthInUSDOnlyDeFi={netWorthInUSDOnlyDeFi}
         />
       </div>
 
@@ -60,7 +77,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
               maximumFractionDigits: 2,
             })}`}
           >
-            <Badge style={{ cursor: 'pointer' }}>
+            <Badge className="sys" style={{ cursor: 'pointer' }}>
               <img src={`/assets/icons/${item.platform}.png`} alt={item.name} />
               <span>
                 {`${item.ratio.toLocaleString(undefined, {
@@ -114,11 +131,6 @@ const Title = styled.h2`
   font-size: 40px;
   line-height: 100%;
   color: ${Colors.gray050};
-
-  /* FIXME: Tailwind */
-  & {
-    font-family: ${systemFontStack} !important;
-  }
 `;
 
 const BadgeList = styled.ul`

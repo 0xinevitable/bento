@@ -15,7 +15,6 @@ import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { Metadata } from '@/defi/klaytn/constants/metadata';
-import { useProfile } from '@/profile/hooks/useProfile';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
@@ -180,6 +179,24 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     );
   }, [defiStakesByProtocol]);
 
+  const netWorthInUSDOnlyDeFi = useMemo(
+    () =>
+      Object.values(defiStakesByProtocol).reduce(
+        (acc, stakes) =>
+          acc + stakes.reduce((a, v) => a + v.valuation.total, 0),
+        0,
+      ),
+    [defiStakesByProtocol],
+  );
+
+  const CRYPTO_FEEDS: ('DEFI' | 'WALLET')[] = useMemo(
+    () =>
+      netWorthInUSDOnlyDeFi > netWorthInUSD
+        ? ['DEFI', 'WALLET']
+        : ['WALLET', 'DEFI'],
+    [netWorthInUSDOnlyDeFi, netWorthInUSD],
+  );
+
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
@@ -209,7 +226,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               <TopSummaryContainer>
                 <AssetRatioSection
                   netWorthInUSD={netWorthInUSD}
+                  netWorthInUSDOnlyDeFi={netWorthInUSDOnlyDeFi}
                   tokenBalances={tokenBalances}
+                  defiStakesByProtocol={defiStakesByProtocol}
                 />
 
                 <WalletListSection
@@ -222,152 +241,162 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 />
               </TopSummaryContainer>
 
-              <div>
-                <SectionTitle
-                  style={{
-                    marginBottom: 12,
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <span className="title">{t('Assets')}</span>
-                  <InlineBadge>
-                    {renderedTokenBalances.length > 0
-                      ? renderedTokenBalances.length.toLocaleString()
-                      : '-'}
-                  </InlineBadge>
-                </SectionTitle>
+              {CRYPTO_FEEDS.map((feedItem) => {
+                if (feedItem === 'WALLET') {
+                  return (
+                    <div key={feedItem}>
+                      <SectionTitle
+                        style={{
+                          marginBottom: 12,
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <span className="title">{t('Assets')}</span>
+                        <InlineBadge>
+                          {renderedTokenBalances.length > 0
+                            ? renderedTokenBalances.length.toLocaleString()
+                            : '-'}
+                        </InlineBadge>
+                      </SectionTitle>
 
-                <div
-                  style={{
-                    marginBottom: 16,
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      cursor: 'pointer',
-                      userSelect: 'none',
-                    }}
-                    onClick={() => {
-                      if (!isNFTBalancesIncluded) {
-                        // showing
-                        Analytics.logEvent('click_show_nfts', undefined);
-                      } else {
-                        // hiding
-                        Analytics.logEvent('click_hide_nfts', undefined);
-                      }
-                      setNFTBalancesIncluded(!isNFTBalancesIncluded);
-                    }}
-                  >
-                    <Checkbox
-                      checked={isNFTBalancesIncluded ?? false}
-                      readOnly
-                    />
-                    <span
-                      style={{
-                        marginLeft: 6,
-                        color: Colors.gray200,
-                        fontSize: 14,
-                        lineHeight: '20px',
-                      }}
-                    >
-                      {t('Show NFTs')}
-                    </span>
-                  </div>
-                </div>
-
-                <AssetListCard>
-                  {renderedTokenBalances.length > 0 ? (
-                    <ul>
-                      {renderedTokenBalances.map((item) => {
-                        const key = `${item.symbol ?? item.name}-${
-                          'tokenAddress' in item ? item.tokenAddress : 'native'
-                        }`;
-                        return (
-                          <TokenBalanceItem
-                            key={key}
-                            tokenBalance={item}
-                            onClick={() => {
-                              Analytics.logEvent('click_balance_item', {
-                                name: item.name,
-                                symbol: item.symbol ?? undefined,
-                                platform: item.platform,
-                                address: item.tokenAddress ?? undefined,
-                              });
-                              setTokenDetailModalVisible((prev) => !prev);
-                              setTokenDetailModalParams({
-                                tokenBalance: item,
-                              });
-                            }}
+                      <div
+                        style={{
+                          marginBottom: 16,
+                          width: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                            userSelect: 'none',
+                          }}
+                          onClick={() => {
+                            if (!isNFTBalancesIncluded) {
+                              // showing
+                              Analytics.logEvent('click_show_nfts', undefined);
+                            } else {
+                              // hiding
+                              Analytics.logEvent('click_hide_nfts', undefined);
+                            }
+                            setNFTBalancesIncluded(!isNFTBalancesIncluded);
+                          }}
+                        >
+                          <Checkbox
+                            checked={isNFTBalancesIncluded ?? false}
+                            readOnly
                           />
-                        );
-                      })}
-                    </ul>
-                  ) : (
-                    <EmptyBalance />
-                  )}
-                </AssetListCard>
-              </div>
+                          <span
+                            style={{
+                              marginLeft: 6,
+                              color: Colors.gray200,
+                              fontSize: 14,
+                              lineHeight: '20px',
+                            }}
+                          >
+                            {t('Show NFTs')}
+                          </span>
+                        </div>
+                      </div>
 
-              {FeatureFlags.isKlaytnDeFiEnabled && (
-                <div>
-                  <SectionTitle
-                    style={{
-                      marginTop: 12,
-                      marginBottom: 12,
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <span className="title">{t('DeFi Staking')}</span>
-                    <InlineBadge>
-                      {defis.length > 0 ? defis.length.toLocaleString() : '-'}
-                    </InlineBadge>
-                  </SectionTitle>
-
-                  <AssetListCard>
-                    {defis.length > 0 ? (
-                      <Collapse>
-                        {Object.entries(defiStakesByProtocol).map(
-                          ([protocol, defiProtocols]) => {
-                            const valuation = defiProtocols.reduce(
-                              (acc, v) => acc + v.valuation.total,
-                              0,
-                            );
-                            return (
-                              <CollapsePanel
-                                title={t(`protocol-${protocol}`)}
-                                metadata={defiMetadata?.[protocol]}
-                                count={defiProtocols.length}
-                                key={protocol}
-                                valuation={valuation}
-                                currentLanguage={currentLanguage}
-                              >
-                                <ul>
-                                  {defiProtocols.map((item) => (
-                                    <DeFiStakingItem
-                                      // FIXME: group stats with different wallets...
-                                      key={`${item.type}-${item.address}-${item.walletAddress}`}
-                                      protocol={item}
-                                    />
-                                  ))}
-                                </ul>
-                              </CollapsePanel>
-                            );
-                          },
+                      <AssetListCard>
+                        {renderedTokenBalances.length > 0 ? (
+                          <ul>
+                            {renderedTokenBalances.map((item) => {
+                              const key = `${item.symbol ?? item.name}-${
+                                'tokenAddress' in item
+                                  ? item.tokenAddress
+                                  : 'native'
+                              }`;
+                              return (
+                                <TokenBalanceItem
+                                  key={key}
+                                  tokenBalance={item}
+                                  onClick={() => {
+                                    Analytics.logEvent('click_balance_item', {
+                                      name: item.name,
+                                      symbol: item.symbol ?? undefined,
+                                      platform: item.platform,
+                                      address: item.tokenAddress ?? undefined,
+                                    });
+                                    setTokenDetailModalVisible((prev) => !prev);
+                                    setTokenDetailModalParams({
+                                      tokenBalance: item,
+                                    });
+                                  }}
+                                />
+                              );
+                            })}
+                          </ul>
+                        ) : (
+                          <EmptyBalance />
                         )}
-                      </Collapse>
-                    ) : (
-                      <EmptyBalance />
-                    )}
-                  </AssetListCard>
-                </div>
-              )}
+                      </AssetListCard>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div key={feedItem}>
+                      <SectionTitle
+                        style={{
+                          marginTop: 12,
+                          marginBottom: 12,
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <span className="title">{t('DeFi Staking')}</span>
+                        <InlineBadge>
+                          {defis.length > 0
+                            ? defis.length.toLocaleString()
+                            : '-'}
+                        </InlineBadge>
+                      </SectionTitle>
+
+                      <AssetListCard>
+                        {defis.length > 0 ? (
+                          <Collapse>
+                            {Object.entries(defiStakesByProtocol).map(
+                              ([protocol, defiProtocols]) => {
+                                const valuation = defiProtocols.reduce(
+                                  (acc, v) => acc + v.valuation.total,
+                                  0,
+                                );
+                                return (
+                                  <CollapsePanel
+                                    title={t(`protocol-${protocol}`)}
+                                    metadata={defiMetadata?.[protocol]}
+                                    count={defiProtocols.length}
+                                    key={protocol}
+                                    valuation={valuation}
+                                    currentLanguage={currentLanguage}
+                                  >
+                                    <ul>
+                                      {defiProtocols.map((item) => (
+                                        <DeFiStakingItem
+                                          // FIXME: group stats with different wallets...
+                                          key={`${item.type}-${item.address}-${item.walletAddress}`}
+                                          protocol={item}
+                                        />
+                                      ))}
+                                    </ul>
+                                  </CollapsePanel>
+                                );
+                              },
+                            )}
+                          </Collapse>
+                        ) : (
+                          <EmptyBalance />
+                        )}
+                      </AssetListCard>
+                    </div>
+                  );
+                }
+              })}
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === DashboardTabType.NFTs}>

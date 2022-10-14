@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Badge } from '@/components/system';
 
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 
 const capitalize = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);
@@ -48,9 +48,11 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
             <span className="truncate" style={{ color: Colors.gray400 }}>
               {info.type === 'nft' ? info.name : info.symbol}
             </span>
-            <InlineBadge>{info.amount.toLocaleString()}</InlineBadge>
+            <span className="sys">
+              <InlineBadge>{info.amount.toLocaleString()}</InlineBadge>
+            </span>
           </span>
-          <NetWorth>
+          <NetWorth className="sys">
             {`$${info.netWorth.toLocaleString()}`}
 
             {info.amount !== 1 && (
@@ -138,12 +140,6 @@ const NetWorth = styled.span`
   line-height: 28px;
   font-weight: bold;
   color: ${Colors.gray050};
-
-  /* FIXME: Tailwind */
-  &,
-  & * {
-    font-family: ${systemFontStack} !important;
-  }
 `;
 const Price = styled.span`
   margin-left: 4px;
