@@ -39,7 +39,7 @@ export const BadgeListSection: React.FC = () => {
                   : undefined),
               }}
             >
-              <motion.div {...float(4, false, 1.5)}>
+              <motion.div {...float(4, false, 1.5)} key="og-1-float">
                 <Image
                   className="img-1"
                   alt="2020 OG Early Bento"
@@ -61,11 +61,13 @@ export const BadgeListSection: React.FC = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
+                key="animated-opacity"
               >
                 <BadgeBackground />
                 <motion.div
                   {...float(4, false, 1.5)}
                   style={{ width: '100%', position: 'absolute', left: 0 }}
+                  key="og-2-float"
                 >
                   <Image
                     className="img-2"
