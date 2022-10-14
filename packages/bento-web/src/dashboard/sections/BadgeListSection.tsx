@@ -9,6 +9,7 @@ import { debounce } from '@/utils/debounce';
 
 import { Colors, float } from '@/styles';
 
+import { BadgeModal } from '../components/BadgeModal';
 import { KLAYswapBadge, SwapscannerBadge } from './Badges';
 
 export const BadgeListSection: React.FC = () => {
@@ -22,6 +23,10 @@ export const BadgeListSection: React.FC = () => {
     debounce(() => setHovered(false), 100),
     [],
   );
+
+  const [badgeModalVisible, setBadgeModalVisible] = useState<
+    'ksp' | 'scnr' | null
+  >(null);
 
   return (
     <Section>
@@ -89,9 +94,15 @@ export const BadgeListSection: React.FC = () => {
             )}
           </AnimatePresence>
         </BadgeItem>
-        <KLAYswapBadge />
-        <SwapscannerBadge />
+        <KLAYswapBadge onClick={() => setBadgeModalVisible('ksp')} />
+        <SwapscannerBadge onClick={() => setBadgeModalVisible('scnr')} />
       </ul>
+
+      <BadgeModal
+        mode={badgeModalVisible}
+        visible={!!badgeModalVisible}
+        onDismiss={() => setBadgeModalVisible(null)}
+      />
     </Section>
   );
 };

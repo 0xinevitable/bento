@@ -8,9 +8,10 @@ import { debounce } from '@/utils/debounce';
 
 import { Colors, float } from '@/styles';
 
-export const KLAYswapBadge: React.FC = () => {
+type Props = { onClick: () => void };
+export const KLAYswapBadge: React.FC<Props> = ({ onClick }) => {
   return (
-    <BadgeItem className="klayswap">
+    <BadgeItem className="klayswap" onClick={onClick}>
       <div
         style={{
           display: 'flex',
@@ -42,9 +43,9 @@ export const KLAYswapBadge: React.FC = () => {
     </BadgeItem>
   );
 };
-export const SwapscannerBadge: React.FC = () => {
+export const SwapscannerBadge: React.FC<Props> = ({ onClick }) => {
   return (
-    <BadgeItem className="swapscanner">
+    <BadgeItem className="swapscanner" onClick={onClick}>
       <div
         style={{
           display: 'flex',
