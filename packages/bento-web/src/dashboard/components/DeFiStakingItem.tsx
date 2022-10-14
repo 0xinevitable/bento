@@ -21,13 +21,8 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 }) => {
   const { t } = useTranslation('dashboard');
 
-  const [numberOfStakedTokens, protocolTokens] = useMemo(
-    () => [
-      !protocol.staked.tokenAmounts
-        ? 0
-        : Object.values(protocol.staked.tokenAmounts).length,
-      [...protocol.tokens, ...(protocol.relatedTokens || [])],
-    ],
+  const protocolTokens = useMemo(
+    () => [...protocol.tokens, ...(protocol.relatedTokens || [])],
     [protocol],
   );
 
@@ -112,14 +107,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                 <br />
                 <SmallAmountInfo>
                   {Object.entries(protocol.staked.tokenAmounts).map(
-                    ([tokenAddress, amount], index) => {
+                    ([tokenAddress, amount], index, arr) => {
                       const token = protocolTokens.find(
                         // @ts-ignore
                         (token) => token?.address === tokenAddress,
                       );
                       return `${formatNumber(amount)} ${
                         token?.symbol || '???'
-                      } ${index < numberOfStakedTokens - 1 ? ' + ' : ''}`;
+                      } ${index < arr.length - 1 ? ' + ' : ''}`;
                     },
                   )}
                 </SmallAmountInfo>
@@ -141,14 +136,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                     <br />
                     <SmallAmountInfo>
                       {Object.entries(protocol.rewards.tokenAmounts).map(
-                        ([tokenAddress, amount], index) => {
+                        ([tokenAddress, amount], index, arr) => {
                           const token = protocolTokens.find(
                             // @ts-ignore
                             (token) => token?.address === tokenAddress,
                           );
                           return `${formatNumber(amount)} ${
                             token?.symbol || '???'
-                          } ${index < numberOfStakedTokens - 1 ? ' + ' : ''}`;
+                          } ${index < arr.length - 1 ? ' + ' : ''}`;
                         },
                       )}
                     </SmallAmountInfo>
