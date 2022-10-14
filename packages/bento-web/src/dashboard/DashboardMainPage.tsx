@@ -77,14 +77,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     };
   }
 
-  console.log({ username });
-
   let profile: UserProfile | null = null;
   const query = Supabase.from('profile') //
     .select('*')
     .eq('username', username.toLowerCase());
   const profiles: UserProfile[] = (await query).data ?? [];
-  console.log({ profiles });
   if (profiles.length > 0) {
     profile = profiles[0];
   }
@@ -131,8 +128,6 @@ const DashboardPage = ({ profile, ...props }: Props) => {
   useEffect(() => {
     revalidateWallets();
   }, [revalidateWallets]);
-
-  console.log({ wallets });
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);

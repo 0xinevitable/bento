@@ -19,6 +19,8 @@ import { NavigationBar } from '@/components/NavigationBar';
 import { PricingsProvider } from '@/hooks/pricings';
 import { GlobalStyle } from '@/styles/GlobalStyle';
 
+import nextI18nextConfig from '../next-i18next.config';
+
 Analytics.initialize();
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -88,7 +90,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default appWithTranslation(App);
+export default appWithTranslation(App, nextI18nextConfig);
 
 const Container = styled.div`
   width: 100vw;
