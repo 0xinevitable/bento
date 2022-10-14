@@ -4,7 +4,7 @@ import { MotionProps, motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import styled from 'styled-components';
 
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 
 export type WalletListItemProps = MotionProps & {
   wallet: Wallet;
@@ -30,7 +30,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
         src={`/assets/icons/ic-arch-${wallet.type}.svg`}
       />
       <Information>
-        <WalletAddress>
+        <WalletAddress className="sys">
           {shortenAddress(wallet.address)}
 
           <button onClick={() => onClickCopy?.(wallet.address, wallet.type)}>
@@ -108,7 +108,6 @@ const Information = styled.div`
   gap: 6px;
 `;
 const WalletAddress = styled.span`
-  font-family: ${systemFontStack};
   font-weight: 700;
   font-size: 18px;
   line-height: 100%;

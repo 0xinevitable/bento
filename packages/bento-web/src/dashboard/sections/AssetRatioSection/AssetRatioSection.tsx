@@ -8,7 +8,7 @@ import { AnimatedToolTip } from '@/components/system';
 import { displayName } from '@/dashboard/constants/platform';
 import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 
 import { AssetRatioChart } from './AssetRatioChart';
 
@@ -65,7 +65,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 
       <Information>
         <Field>{t('Net Worth')}</Field>
-        <Title>{`$${netWorthInUSD.toLocaleString()}`}</Title>
+        <Title className="sys">{`$${netWorthInUSD.toLocaleString()}`}</Title>
       </Information>
 
       <div>
@@ -84,7 +84,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
               maximumFractionDigits: 2,
             })}`}
           >
-            <Badge style={{ cursor: 'pointer' }}>
+            <Badge className="sys" style={{ cursor: 'pointer' }}>
               <img src={`/assets/icons/${item.platform}.png`} alt={item.name} />
               <span>
                 {`${item.ratio.toLocaleString(undefined, {
@@ -138,11 +138,6 @@ const Title = styled.h2`
   font-size: 40px;
   line-height: 100%;
   color: ${Colors.gray050};
-
-  /* FIXME: Tailwind */
-  & {
-    font-family: ${systemFontStack} !important;
-  }
 `;
 
 const BadgeList = styled.ul`

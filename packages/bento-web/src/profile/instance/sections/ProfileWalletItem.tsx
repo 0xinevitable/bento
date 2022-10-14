@@ -2,7 +2,7 @@ import { Wallet, shortenAddress } from '@bento/common';
 import { Icon } from '@iconify/react';
 import styled from 'styled-components';
 
-import { Colors, systemFontStack } from '@/styles';
+import { Colors } from '@/styles';
 
 export type WalletListItemProps = Wallet & {
   onClickCopy?: (
@@ -23,7 +23,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
         src={`/assets/icons/ic-arch-${wallet.type}.svg`}
       />
       <Information>
-        <WalletAddress>
+        <WalletAddress className="sys">
           {shortenAddress(wallet.address)}
 
           {!!onClickCopy && (
@@ -95,7 +95,6 @@ const Information = styled.div`
   gap: 6px;
 `;
 const WalletAddress = styled.span`
-  font-family: ${systemFontStack} !important;
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;

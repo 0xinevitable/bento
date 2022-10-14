@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
-import { systemFontStack } from '@/styles';
 import { Analytics } from '@/utils';
 
 export const Footer: React.FC = () => {
   return (
-    <Container>
+    <Container className="sys">
       <a
         title="INEVITABLE"
         href="https://inevitable.team"
@@ -30,12 +29,6 @@ const Container = styled.footer`
   line-height: 120%;
   text-align: center;
   color: rgba(221, 204, 211, 0.88);
-
-  /* FIXME: Tailwind */
-  &,
-  & * {
-    font-family: ${systemFontStack} !important;
-  }
 
   & > a {
     color: unset;

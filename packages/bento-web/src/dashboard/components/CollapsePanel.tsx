@@ -36,11 +36,13 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
             <ProtocolLogo alt={title} src={metadata?.logo} />
             <span>{title}</span>
             {typeof count !== 'undefined' && (
-              <InlineBadge>{count.toLocaleString()}</InlineBadge>
+              <span className="sys">
+                <InlineBadge>{count.toLocaleString()}</InlineBadge>
+              </span>
             )}
           </ProtocolInfo>
 
-          <Valuation>
+          <Valuation className="sys">
             {`$${valuation.toLocaleString(undefined, {
               maximumFractionDigits: 6,
             })}`}

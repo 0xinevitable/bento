@@ -53,17 +53,23 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           </Name>
         </HeaderTitle>
 
-        <Valuation>{`$${formatNumber(protocol.valuation.total)}`}</Valuation>
+        <Valuation className="sys">
+          {`$${formatNumber(protocol.valuation.total)}`}
+        </Valuation>
       </Header>
 
       <AccountInfo>
         <AccountItem>
           <span className="field">{t('Account')}</span>
-          <InlineBadge>{shortenAddress(protocol.walletAddress)}</InlineBadge>
+          <span className="sys">
+            <InlineBadge>{shortenAddress(protocol.walletAddress)}</InlineBadge>
+          </span>
         </AccountItem>
         <AccountItem>
           <span className="field">{t('Rep Contract')}</span>
-          <InlineBadge>{shortenAddress(protocol.address)}</InlineBadge>
+          <span className="sys">
+            <InlineBadge>{shortenAddress(protocol.address)}</InlineBadge>
+          </span>
         </AccountItem>
       </AccountInfo>
 
@@ -72,14 +78,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           <InfoItem>
             <span className="field">{t('LPs without Farming')}</span>
             {protocol.wallet === 'unavailable' ? (
-              <InfoValuation>{t('Unavailable')}</InfoValuation>
+              <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
             ) : (
-              <InfoValuation>
+              <InfoValuation className="sys">
                 {`$${formatNumber(protocol.valuation.wallet)}`}
                 {typeof protocol.wallet.lpAmount === 'number' && (
                   <>
                     <br />
-                    <SmallAmountInfo>
+                    <SmallAmountInfo className="sys">
                       {`${formatNumber(protocol.wallet.lpAmount)} LP`}
                     </SmallAmountInfo>
                   </>
@@ -91,12 +97,12 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
         <InfoItem>
           <span className="field">{t('Staking')}</span>
-          <InfoValuation>
+          <InfoValuation className="sys">
             {`$${formatNumber(protocol.valuation.staking)}`}
             {typeof protocol.staked.lpAmount === 'number' && (
               <>
                 <br />
-                <SmallAmountInfo>
+                <SmallAmountInfo className="sys">
                   {`${formatNumber(protocol.staked.lpAmount)} LP`}
                 </SmallAmountInfo>
               </>
@@ -105,7 +111,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
             {!!protocol.staked.tokenAmounts && (
               <>
                 <br />
-                <SmallAmountInfo>
+                <SmallAmountInfo className="sys">
                   {Object.entries(protocol.staked.tokenAmounts).map(
                     ([tokenAddress, amount], index, arr) => {
                       const token = protocolTokens.find(
@@ -127,14 +133,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           <InfoItem>
             <span className="field">{t('Rewards')}</span>
             {protocol.rewards === 'unavailable' ? (
-              <InfoValuation>{t('Unavailable')}</InfoValuation>
+              <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
             ) : (
-              <InfoValuation>
+              <InfoValuation className="sys">
                 {`$${formatNumber(protocol.valuation.rewards)}`}
                 {!!protocol.rewards.tokenAmounts && (
                   <>
                     <br />
-                    <SmallAmountInfo>
+                    <SmallAmountInfo className="sys">
                       {Object.entries(protocol.rewards.tokenAmounts).map(
                         ([tokenAddress, amount], index, arr) => {
                           const token = protocolTokens.find(
@@ -158,19 +164,19 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           <InfoItem>
             <span className="field">{t('Unstaking')}</span>
             {protocol.unstake === 'unavailable' ? (
-              <InfoValuation>{t('Unavailable')}</InfoValuation>
+              <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
             ) : (
               <>
                 <span className="item">
                   <span className="title">{t('Claimable')}</span>
-                  <InfoValuation>
+                  <InfoValuation className="sys">
                     {`$${formatNumber(protocol.valuation.claimable)}`}
 
                     {protocol.unstake.claimable !== 'unavailable' &&
                       protocol.unstake.claimable?.tokenAmounts && (
                         <>
                           <br />
-                          <SmallAmountInfo>
+                          <SmallAmountInfo className="sys">
                             {Object.entries(
                               protocol.unstake.claimable.tokenAmounts,
                             ).map(([tokenAddress, amount], index, arr) => {
@@ -190,14 +196,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
                 <span className="item">
                   <span className="title">{t('Pending')}</span>
-                  <InfoValuation>
+                  <InfoValuation className="sys">
                     {`$${formatNumber(protocol.valuation.pending)}`}
 
                     {protocol.unstake.pending !== 'unavailable' &&
                       protocol.unstake.pending?.tokenAmounts && (
                         <>
                           <br />
-                          <SmallAmountInfo>
+                          <SmallAmountInfo className="sys">
                             {Object.entries(
                               protocol.unstake.pending.tokenAmounts,
                             ).map(([tokenAddress, amount], index, arr) => {

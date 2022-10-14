@@ -100,7 +100,7 @@ export const NavigationBar = () => {
           <SocialIconList>
             <NoSSR>
               {!!session && (
-                <button className="logout" onClick={onClickLogout}>
+                <button className="sys logout" onClick={onClickLogout}>
                   {t('Logout')}
                 </button>
               )}
@@ -348,12 +348,11 @@ const SocialIconList = styled.div`
   gap: 12px;
 
   & > button.logout {
-    /* h-8 text-white text-sm mr-4 hover:text-white/70 transition-colors
-     */
     margin-right: 16px;
     height: 32px;
 
     font-size: 14px;
+    font-weight: 500;
     line-height: 20px;
     color: ${Colors.gray000};
 
