@@ -37,9 +37,11 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 
     const items = Object.entries(groups).map(([platform, assets]) => {
       let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
-      defiStakesByProtocol[platform]?.forEach((defiStake) => {
-        netWorth += defiStake.valuation.total;
-      });
+
+      // FIXME: Hardcoded here
+      if (platform === 'klaytn') {
+        netWorth += netWorthInUSDOnlyDeFi;
+      }
       return {
         platform,
         netWorth,
@@ -50,7 +52,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 
     // maximum length is 3
     return items.slice(0, 3);
-  }, [netWorthInUSD, defiStakesByProtocol]);
+  }, [netWorthInUSD]);
 
   return (
     <Container>
