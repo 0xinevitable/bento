@@ -23,12 +23,11 @@ import { WalletSection } from './sections/WalletSection';
 export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
-      ...(await serverSideTranslations(
-        context.locale || 'en',
-        ['common', 'landing'],
-        null,
-        ['en', 'ko'],
-      )),
+      ...(await serverSideTranslations(context.locale || 'en', [
+        'common',
+        'landing',
+        'dashboard',
+      ])),
     },
   };
 };

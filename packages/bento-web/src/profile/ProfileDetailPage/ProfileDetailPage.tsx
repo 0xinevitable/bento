@@ -71,12 +71,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
             ? 'MY_PROFILE'
             : 'USER_PROFILE',
         profile,
-        ...(await serverSideTranslations(
-          context.locale || 'en',
-          ['common', 'dashboard'],
-          null,
-          ['en', 'ko'],
-        )),
+        ...(await serverSideTranslations(context.locale || 'en', [
+          'common',
+          'dashboard',
+        ])),
       },
     };
   }
