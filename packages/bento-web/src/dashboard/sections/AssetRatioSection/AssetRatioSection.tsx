@@ -14,26 +14,19 @@ import { AssetRatioChart } from './AssetRatioChart';
 
 type AssetRatioSectionProps = {
   netWorthInUSD: number;
+  netWorthInUSDOnlyDeFi: number;
   tokenBalances: DashboardTokenBalance[];
   defiStakesByProtocol: Record<string, DeFiStakingWithClientData[]>;
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
+  netWorthInUSDOnlyDeFi,
   // FIXME: dirty code here
   netWorthInUSD: netWorthInUSDOnlyWallet,
   defiStakesByProtocol,
 }) => {
   const { t } = useTranslation('dashboard');
 
-  const netWorthInUSDOnlyDeFi = useMemo(
-    () =>
-      Object.values(defiStakesByProtocol).reduce(
-        (acc, stakes) =>
-          acc + stakes.reduce((a, v) => a + v.valuation.total, 0),
-        0,
-      ),
-    [defiStakesByProtocol],
-  );
   const netWorthInUSD = useMemo(
     () => netWorthInUSDOnlyWallet + netWorthInUSDOnlyDeFi,
     [netWorthInUSDOnlyWallet, netWorthInUSDOnlyDeFi],
