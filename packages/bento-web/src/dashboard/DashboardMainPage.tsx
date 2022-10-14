@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import { PageContainer } from '@/components/PageContainer';
 import { MetaHead } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
+import { getServerSupabase } from '@/utils/ServerSupabase';
 
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Analytics, Supabase } from '@/utils';
@@ -51,6 +52,7 @@ const notifySlack = async (user: User, profile: UserProfile) => {
     // disabled
     return;
   }
+
   const provider = user.app_metadata.provider;
   await axios
     .post(process.env.SLACK_NEW_PROFILE_WEBHOOK, {
@@ -72,6 +74,7 @@ const notifySlack = async (user: User, profile: UserProfile) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context,
 ) => {
+  const Supabase = getServerSupabase();
   const accessToken: string =
     (getCookie('supabase_auth_token', {
       req: context.req,
@@ -86,51 +89,76 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       .eq('user_id', userId.toLowerCase());
     const profiles: UserProfile[] = (await query).data ?? [];
     const profile = profiles[0];
+
     if (!profile) {
-      const { data: user } = await Supabase.auth.api.getUserById(userId);
+      const { data: user, error: e } = await Supabase.auth.api.getUserById(
+        userId,
+      );
       if (!user) {
         return {
           redirect: {
-            destination: `/`,
+            destination: '/',
             permanent: false,
           },
         };
       }
 
+      const displayName =
+        user.identities?.[0]?.identity_data?.user_name ||
+        user.user_metadata.user_name ||
+        '';
+
       const data = await Supabase.from('profile').upsert({
         user_id: userId,
         username: userId,
-        display_name: '',
+        display_name: displayName,
         bio: '',
       });
-      const error = data.error;
 
-      if (error) {
+      if (!!data.error) {
+        console.log({ error: data.error });
         return {
           redirect: {
-            destination: `/`,
+            destination: '/',
             permanent: false,
           },
         };
       }
 
       try {
-        await notifySlack(user, profile);
+        await notifySlack(user, {
+          user_id: userId,
+          username: userId,
+          display_name: displayName,
+          bio: '',
+          images: [],
+          verified: false,
+          tabs: [],
+          links: [],
+        });
       } catch (error) {
         console.error(error);
       }
 
       return {
-        redirect: {
-          destination: `/u/${userId}`,
-          permanent: false,
+        props: {
+          type: 'USER_PROFILE',
+          profile,
+          ...(await serverSideTranslations(context.locale || 'en', [
+            'common',
+            'dashboard',
+          ])),
         },
       };
     }
     return {
-      redirect: {
-        destination: `/u/${profile.username}`,
-        permanent: false,
+      props: {
+        type: 'USER_PROFILE',
+        profile,
+        ...(await serverSideTranslations(context.locale || 'en', [
+          'common',
+          'dashboard',
+        ])),
       },
     };
   }
