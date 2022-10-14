@@ -1,6 +1,7 @@
 import { Wallet } from '@bento/common';
 import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -162,6 +163,13 @@ const DashboardPage = ({ profile, ...props }: Props) => {
   useEffect(() => {
     setMyProfile(session?.user?.id === profile.user_id);
   }, [JSON.stringify(session)]);
+
+  const { t, i18n } = useTranslation(['common', 'dashboard'], {
+    bindI18n: 'languageChanged loaded',
+  });
+  useEffect(() => {
+    i18n.reloadResources(i18n.resolvedLanguage, ['common', 'dashboard']);
+  }, []);
 
   return (
     <>
