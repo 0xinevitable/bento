@@ -35,7 +35,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   const assetRatioByPlatform = useMemo(() => {
     const groups = groupBy(tokenBalances, 'platform');
 
-    const items = Object.entries(groups).map(([platform, assets]) => {
+    let items = Object.entries(groups).map(([platform, assets]) => {
       let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
 
       // FIXME: Hardcoded here
@@ -51,7 +51,8 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
     });
 
     // maximum length is 3
-    return items.slice(0, 3);
+    items = items.slice(0, 3);
+    return items.sort((a, b) => b.ratio - a.ratio);
   }, [netWorthInUSD]);
 
   return (
