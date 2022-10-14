@@ -3,6 +3,8 @@ import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
+import { AnimatedToolTip } from '@/components/system';
+
 import { displayName } from '@/dashboard/constants/platform';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { Colors, systemFontStack } from '@/styles';
@@ -52,14 +54,21 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 
       <BadgeList>
         {assetRatioByPlatform.map((item) => (
-          <Badge key={item.platform}>
-            <img src={`/assets/icons/${item.platform}.png`} alt={item.name} />
-            <span>
-              {`${item.ratio.toLocaleString(undefined, {
-                maximumFractionDigits: 2,
-              })}%`}
-            </span>
-          </Badge>
+          <AnimatedToolTip
+            key={item.platform}
+            label={`$${item.netWorth.toLocaleString(undefined, {
+              maximumFractionDigits: 2,
+            })}`}
+          >
+            <Badge style={{ cursor: 'pointer' }}>
+              <img src={`/assets/icons/${item.platform}.png`} alt={item.name} />
+              <span>
+                {`${item.ratio.toLocaleString(undefined, {
+                  maximumFractionDigits: 2,
+                })}%`}
+              </span>
+            </Badge>
+          </AnimatedToolTip>
         ))}
       </BadgeList>
     </Container>

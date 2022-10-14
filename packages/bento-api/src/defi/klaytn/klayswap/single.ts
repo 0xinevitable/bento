@@ -69,7 +69,7 @@ export const getSinglePoolBalance = async (
   let tokenAmounts: Record<string, number | undefined> | undefined = undefined;
   if (tokenInfo) {
     tokenAmounts = {
-      [tokenInfo.symbol]: balance,
+      [tokenInfo.address]: balance,
     };
   }
 
@@ -80,8 +80,8 @@ export const getSinglePoolBalance = async (
     address: pool.address,
     wallet: null,
     tokens: [tokenInfo || null],
+    relatedTokens: [KSP_TOKEN_INFO],
     staked: {
-      lpAmount: balance,
       tokenAmounts,
     },
     rewards: {
