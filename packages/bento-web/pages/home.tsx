@@ -36,12 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       // user have no profile created
       return {
         props: {
-          ...(await serverSideTranslations(
-            locale,
-            ['common', 'dashboard'],
-            null,
-            ['en', 'ko'],
-          )),
+          ...(await serverSideTranslations(locale, ['common', 'dashboard'])),
         },
       };
     } else {
