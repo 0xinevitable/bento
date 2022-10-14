@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import styled from 'styled-components';
 
+import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
@@ -21,11 +22,13 @@ const AVAILABLE_COLORS = [
 type AssetRatioChartProps = {
   tokenBalances: DashboardTokenBalance[];
   netWorthInUSD: number;
+  netWorthInUSDOnlyDeFi: number;
 };
 
 export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
   tokenBalances,
   netWorthInUSD,
+  netWorthInUSDOnlyDeFi,
 }) => {
   const data = useMemo(() => {
     if (tokenBalances.length < 1) {
@@ -44,6 +47,16 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
         label: 'OpenSea NFTs',
         value: !percentage || isNaN(percentage) ? 0 : percentage,
         logo: '/assets/icons/opensea.png',
+      });
+    }
+
+    if (netWorthInUSDOnlyDeFi > 0) {
+      const percentage = (netWorthInUSDOnlyDeFi / netWorthInUSD) * 100;
+      items.push({
+        label: 'DeFi',
+        value: !percentage || isNaN(percentage) ? 0 : percentage,
+        // FIXME:
+        logo: 'https://www.bento.finance/android-chrome-512x512.png',
       });
     }
 
@@ -67,7 +80,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
     );
 
     return items;
-  }, [tokenBalances]);
+  }, [tokenBalances, netWorthInUSDOnlyDeFi]);
 
   return (
     <ChartContainer>

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { AnimatedToolTip } from '@/components/system';
 
 import { displayName } from '@/dashboard/constants/platform';
+import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { Colors, systemFontStack } from '@/styles';
 
@@ -14,17 +15,38 @@ import { AssetRatioChart } from './AssetRatioChart';
 type AssetRatioSectionProps = {
   netWorthInUSD: number;
   tokenBalances: DashboardTokenBalance[];
+  defiStakesByProtocol: Record<string, DeFiStakingWithClientData[]>;
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
-  netWorthInUSD,
+  // FIXME: dirty code here
+  netWorthInUSD: netWorthInUSDOnlyWallet,
+  defiStakesByProtocol,
 }) => {
   const { t } = useTranslation('dashboard');
 
+  const netWorthInUSDOnlyDeFi = useMemo(
+    () =>
+      Object.values(defiStakesByProtocol).reduce(
+        (acc, stakes) =>
+          acc + stakes.reduce((a, v) => a + v.valuation.total, 0),
+        0,
+      ),
+    [defiStakesByProtocol],
+  );
+  const netWorthInUSD = useMemo(
+    () => netWorthInUSDOnlyWallet + netWorthInUSDOnlyDeFi,
+    [netWorthInUSDOnlyWallet, netWorthInUSDOnlyDeFi],
+  );
+
   const assetRatioByPlatform = useMemo(() => {
     const groups = groupBy(tokenBalances, 'platform');
+
     const items = Object.entries(groups).map(([platform, assets]) => {
-      const netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
+      let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
+      defiStakesByProtocol[platform]?.forEach((defiStake) => {
+        netWorth += defiStake.valuation.total;
+      });
       return {
         platform,
         netWorth,
@@ -32,9 +54,10 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
         ratio: (netWorth / netWorthInUSD) * 100,
       };
     });
+
     // maximum length is 3
     return items.slice(0, 3);
-  }, [netWorthInUSD]);
+  }, [netWorthInUSD, defiStakesByProtocol]);
 
   return (
     <Container>
@@ -49,6 +72,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
         <AssetRatioChart
           tokenBalances={tokenBalances}
           netWorthInUSD={netWorthInUSD}
+          netWorthInUSDOnlyDeFi={netWorthInUSDOnlyDeFi}
         />
       </div>
 
