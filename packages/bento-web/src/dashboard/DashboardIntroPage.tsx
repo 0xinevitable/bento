@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
@@ -19,6 +20,13 @@ const DashboardIntroPage = () => {
 
     router.push(`/u/${session.user?.id}`);
   }, [router, JSON.stringify(session)]);
+
+  const { t, i18n } = useTranslation(['common', 'dashboard'], {
+    bindI18n: 'languageChanged loaded',
+  });
+  useEffect(() => {
+    i18n.reloadResources(i18n.resolvedLanguage, ['common', 'dashboard']);
+  }, []);
 
   return (
     <>
