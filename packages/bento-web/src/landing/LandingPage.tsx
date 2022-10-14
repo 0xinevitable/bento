@@ -20,10 +20,15 @@ import { ProfileSection } from './sections/ProfileSection';
 import { StatusQuoSection } from './sections/StatusQuoSection';
 import { WalletSection } from './sections/WalletSection';
 
-export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'landing'])),
+      ...(await serverSideTranslations(
+        context.locale || 'en',
+        ['common', 'landing'],
+        null,
+        ['en', 'ko'],
+      )),
     },
   };
 };
