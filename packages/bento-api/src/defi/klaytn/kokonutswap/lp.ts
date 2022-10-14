@@ -37,7 +37,7 @@ export const getLPPoolBalance = async (
   const lpValue = Number(farm?.user.stakedValue || 0); // formatted with decimals
 
   // get price with lpStaked, lpValue
-  const lpPrice = lpValue / lpStaked;
+  const lpPrice = Number(pool.lpTokenRealPrice || 0); // formatted with decimals
   const lpBalanceInWallet = Number(lpTokenRawBalance) / 10 ** LP_TOKEN_DECIMALS;
   let lpBalanceInWalletValue = lpBalanceInWallet * lpPrice;
   if (isNaN(lpBalanceInWalletValue)) {
