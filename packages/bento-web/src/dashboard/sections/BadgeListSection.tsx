@@ -41,6 +41,7 @@ export const BadgeListSection: React.FC = () => {
             >
               <motion.div {...float(4, false, 1.5)}>
                 <Image
+                  className="img-1"
                   alt="2020 OG Early Bento"
                   src={ogBadgeIllust1}
                   width={227.79}
@@ -67,6 +68,7 @@ export const BadgeListSection: React.FC = () => {
                   style={{ width: '100%', position: 'absolute', left: 0 }}
                 >
                   <Image
+                    className="img-2"
                     alt="2020 OG Early Bento"
                     src={ogBadgeIllust2}
                     width={209.47}
@@ -97,7 +99,7 @@ const Section = styled.section`
   }
 `;
 
-const BadgeItem = styled.div`
+const BadgeItem = styled.li`
   position: relative;
   display: flex;
   width: 240px;
@@ -107,6 +109,21 @@ const BadgeItem = styled.div`
   background: ${Colors.gray800};
   border-radius: 24px;
   filter: saturate(120%);
+
+  @media screen and (max-width: 526px) {
+    width: 160px;
+    height: 160px;
+
+    .img-1 {
+      width: 151.86px;
+      height: 183.5px;
+    }
+
+    .img-2 {
+      width: 139.65px;
+      height: 173.5px;
+    }
+  }
 `;
 const BadgeBackground = styled(motion.div)`
   position: absolute;
