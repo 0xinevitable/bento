@@ -1,5 +1,5 @@
 import { OpenSeaAsset } from '@bento/core';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -9,7 +9,7 @@ import { AssetMedia } from '@/components/system';
 import { NFTDetailModal } from '@/profile/instance/sections/NFTDetailModal';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { Analytics, toast } from '@/utils';
+import { Analytics, axios, toast } from '@/utils';
 
 import { EmptyBalance } from '../components/EmptyBalance';
 import { KlaytnNFTAsset } from '../hooks/useKlaytnNFTs';
