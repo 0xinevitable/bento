@@ -9,6 +9,8 @@ import { debounce } from '@/utils/debounce';
 
 import { Colors, float } from '@/styles';
 
+import { KLAYswapBadge, SwapscannerBadge } from './Badges';
+
 export const BadgeListSection: React.FC = () => {
   const [isHovered, setHovered] = useState<boolean>(false);
 
@@ -87,6 +89,8 @@ export const BadgeListSection: React.FC = () => {
             )}
           </AnimatePresence>
         </BadgeItem>
+        <KLAYswapBadge />
+        <SwapscannerBadge />
       </ul>
     </Section>
   );
@@ -98,6 +102,10 @@ const Section = styled.section`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+  }
+
+  ul {
+    gap: 16px;
   }
 `;
 
