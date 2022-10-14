@@ -31,6 +31,11 @@ const NAVIGATION_ITEMS = [
     href: '/home',
     icon: 'ic:round-space-dashboard',
   },
+  {
+    title: 'Community',
+    href: '/community',
+    icon: 'codicon:heart-filled',
+  },
 ];
 
 export const NavigationBar = () => {
