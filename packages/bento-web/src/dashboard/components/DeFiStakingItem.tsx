@@ -165,6 +165,26 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                   <span className="title">{t('Claimable')}</span>
                   <InfoValuation>
                     {`$${formatNumber(protocol.valuation.claimable)}`}
+
+                    {protocol.unstake.claimable !== 'unavailable' &&
+                      protocol.unstake.claimable?.tokenAmounts && (
+                        <>
+                          <br />
+                          <SmallAmountInfo>
+                            {Object.entries(
+                              protocol.unstake.claimable.tokenAmounts,
+                            ).map(([tokenAddress, amount], index, arr) => {
+                              const token = protocolTokens.find(
+                                // @ts-ignore
+                                (token) => token?.address === tokenAddress,
+                              );
+                              return `${formatNumber(amount)} ${
+                                token?.symbol || '???'
+                              } ${index < arr.length - 1 ? ' + ' : ''}`;
+                            })}
+                          </SmallAmountInfo>
+                        </>
+                      )}
                   </InfoValuation>
                 </span>
 
@@ -172,6 +192,26 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                   <span className="title">{t('Pending')}</span>
                   <InfoValuation>
                     {`$${formatNumber(protocol.valuation.pending)}`}
+
+                    {protocol.unstake.pending !== 'unavailable' &&
+                      protocol.unstake.pending?.tokenAmounts && (
+                        <>
+                          <br />
+                          <SmallAmountInfo>
+                            {Object.entries(
+                              protocol.unstake.pending.tokenAmounts,
+                            ).map(([tokenAddress, amount], index, arr) => {
+                              const token = protocolTokens.find(
+                                // @ts-ignore
+                                (token) => token?.address === tokenAddress,
+                              );
+                              return `${formatNumber(amount)} ${
+                                token?.symbol || '???'
+                              } ${index < arr.length - 1 ? ' + ' : ''}`;
+                            })}
+                          </SmallAmountInfo>
+                        </>
+                      )}
                   </InfoValuation>
                 </span>
               </>
