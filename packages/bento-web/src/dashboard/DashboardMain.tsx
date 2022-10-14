@@ -29,6 +29,7 @@ import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
+import { BadgeListSection } from './sections/BadgeListSection';
 import { NFTListSection } from './sections/NFTListSection';
 import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
@@ -390,9 +391,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === DashboardTabType.Badges}>
-              {/* <span className="my-8 text-center text-white/90 font-bold">
-                Coming Soon!
-              </span> */}
+              <BadgeListSection />
             </AnimatedTab>
           </DashboardContent>
         </DashboardContentWrapper>
