@@ -26,6 +26,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       ...(await serverSideTranslations(context.locale || 'en', [
         'common',
         'landing',
+        'dashboard',
       ])),
     },
   };

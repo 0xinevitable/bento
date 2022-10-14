@@ -1,6 +1,5 @@
 import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { UserProfile } from '@/profile/types/UserProfile';
 import { FeatureFlags, Supabase } from '@/utils';
@@ -40,12 +39,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             (context.locale === 'en' ? '' : `/${context.locale}`) +
             `/profile/intro`,
         },
-        props: {
-          ...(await serverSideTranslations(context.locale || 'en', [
-            'common',
-            'dashboard',
-          ])),
-        },
       };
     } else {
       // user have profile
@@ -55,12 +48,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           destination:
             (context.locale === 'en' ? '' : `/${context.locale}`) +
             `/u/${profile.username}`,
-        },
-        props: {
-          ...(await serverSideTranslations(context.locale || 'en', [
-            'common',
-            'dashboard',
-          ])),
         },
       };
     }

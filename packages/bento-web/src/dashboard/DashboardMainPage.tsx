@@ -62,12 +62,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
         destination: `/u/${profile.username}`,
         permanent: false,
       },
-      props: {
-        ...(await serverSideTranslations(context.locale || 'en', [
-          'common',
-          'dashboard',
-        ])),
-      },
     };
   }
 
@@ -79,12 +73,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
         destination:
           (context.locale === 'en' ? '' : `/${context.locale}`) +
           `/profile/intro`,
-      },
-      props: {
-        ...(await serverSideTranslations(context.locale || 'en', [
-          'common',
-          'dashboard',
-        ])),
       },
     };
   }
