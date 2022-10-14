@@ -1,4 +1,6 @@
 import { Wallet } from '@bento/common';
+import { User } from '@supabase/supabase-js';
+import axios from 'axios';
 import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -33,6 +35,39 @@ type Props =
       profile: UserProfile;
     };
 
+const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+const getKoreanTimestring = (timestamp: string) => {
+  const curr = new Date(timestamp);
+  const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+  return format(new Date(utc + KR_TIME_DIFF), 'yyyy-MM-dd HH:mm:ss');
+};
+
+const capitalize = (value: string) =>
+  value.charAt(0).toUpperCase() + value.slice(1);
+
+const notifySlack = async (user: User, profile: UserProfile) => {
+  if (!process.env.SLACK_NEW_PROFILE_WEBHOOK) {
+    // disabled
+    return;
+  }
+  const provider = user.app_metadata.provider;
+  await axios
+    .post(process.env.SLACK_NEW_PROFILE_WEBHOOK, {
+      provider: capitalize(provider || 'none'),
+      social_url: !provider
+        ? 'No social link available'
+        : provider === 'twitter'
+        ? `https://twitter.com/${user.user_metadata.user_name}`
+        : `https://github.com/${user.user_metadata.user_name}`,
+      user_id: user.id,
+      profile_url: `https://www.bento.finance/u/${profile.username}`,
+      joined_at: getKoreanTimestring(user.created_at),
+    })
+    .catch((e) => {
+      console.error('[Slack] Failed to send webhook', e);
+    });
+};
+
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context,
 ) => {
@@ -41,8 +76,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       req: context.req,
       res: context.res,
     }) as string) || '';
-  const { user: userFromCookie } = await Supabase.auth.api.getUser(accessToken);
-
   const username = context.query.username as string | undefined;
 
   if (username && username.length >= 36) {
@@ -53,8 +86,37 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     const profiles: UserProfile[] = (await query).data ?? [];
     const profile = profiles[0];
     if (!profile) {
+      const data = await Supabase.from('profile').upsert({
+        user_id: userId,
+        username: userId,
+        display_name: '',
+        bio: '',
+      });
+      const error = data.error;
+
+      if (error) {
+        return {
+          redirect: {
+            destination: `/`,
+            permanent: false,
+          },
+        };
+      }
+
+      try {
+        const { data: user } = await Supabase.auth.api.getUserById(userId);
+        if (user) {
+          await notifySlack(user, profile);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+
       return {
-        notFound: true,
+        redirect: {
+          destination: `/u/${userId}`,
+          permanent: false,
+        },
       };
     }
     return {
@@ -85,6 +147,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   if (profiles.length > 0) {
     profile = profiles[0];
   }
+
+  const { user: userFromCookie } = await Supabase.auth.api.getUser(accessToken);
 
   if (!!profile) {
     return {
