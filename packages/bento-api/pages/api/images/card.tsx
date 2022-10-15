@@ -1,8 +1,30 @@
 import { ImageResponse } from '@vercel/og';
+import { format } from 'date-fns';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { ServerSupabase as Supabase } from '@/utils/ServerSupabase';
+
+const arrayBufferToHex = (arrayBuffer: ArrayBuffer) => {
+  return Array.prototype.map
+    .call(new Uint8Array(arrayBuffer), (n) => n.toString(16).padStart(2, '0'))
+    .join('');
+};
 
 const fetchFont = (fontPath: string) =>
   fetch(new URL(fontPath, import.meta.url)).then((res) => res.arrayBuffer());
+
+export const formatUsername = (
+  username: string | undefined,
+  prefix: string = '@',
+) => {
+  if (!username) {
+    return prefix + 'unknown';
+  }
+  if (username.length >= 36) {
+    return prefix + username.slice(0, 13);
+  }
+  return prefix + username;
+};
 
 export const config = {
   runtime: 'experimental-edge',
@@ -16,23 +38,23 @@ const key = crypto.subtle.importKey(
   ['sign'],
 );
 
-function toHex(arrayBuffer: ArrayBuffer) {
-  return Array.prototype.map
-    .call(new Uint8Array(arrayBuffer), (n) => n.toString(16).padStart(2, '0'))
-    .join('');
-}
+type UserProfile = {
+  user_id: string;
+  username: string;
+  display_name: string;
+};
 
 export default async function (req: NextRequest, _res: NextResponse) {
   const { searchParams } = req.nextUrl;
 
-  const id = searchParams.get('id');
+  const user_id = searchParams.get('user_id');
   const token = searchParams.get('token');
 
-  const verifyToken = toHex(
+  const verifyToken = arrayBufferToHex(
     await crypto.subtle.sign(
       'HMAC',
       await key,
-      new TextEncoder().encode(JSON.stringify({ id })),
+      new TextEncoder().encode(JSON.stringify({ user_id })),
     ),
   );
 
@@ -40,9 +62,23 @@ export default async function (req: NextRequest, _res: NextResponse) {
     return new Response('Invalid token.', { status: 401 });
   }
 
-  const fontData = await fetchFont(
-    `${req.nextUrl.origin}/assets/Pretendard-Black.otf`,
-  );
+  if (!user_id) {
+    return new Response('Invalid params.', { status: 400 });
+  }
+
+  const [fontData, userQueryRes, profileQueryRes] = await Promise.all([
+    fetchFont(`${req.nextUrl.origin}/assets/Pretendard-Black.otf`),
+    Supabase.auth.api.getUserById(user_id),
+    Supabase.from('profile') //
+      .select('*')
+      .eq('user_id', user_id),
+  ]);
+
+  const user = userQueryRes.data;
+  if (!user) {
+    return new Response('User not found.', { status: 404 });
+  }
+  const profile = profileQueryRes.data?.[0] as UserProfile | undefined;
 
   return new ImageResponse(
     (
@@ -96,7 +132,7 @@ export default async function (req: NextRequest, _res: NextResponse) {
                 color: 'black',
               }}
             >
-              JOINED 16.10.22
+              {`JOINED ${format(new Date(user.created_at), 'yyyy-MM-dd')}`}
             </span>
 
             <div
@@ -164,7 +200,7 @@ export default async function (req: NextRequest, _res: NextResponse) {
                     // maxWidth: '275px',
                   }}
                 >
-                  Elon Reeve Musk FRS
+                  {profile?.display_name || 'Unknown'}
                 </span>
               </div>
               <span
@@ -189,7 +225,7 @@ export default async function (req: NextRequest, _res: NextResponse) {
                   color: '#E1F664',
                 }}
               >
-                @junhoyeo
+                {formatUsername(profile?.display_name)}
               </span>
             </div>
           </div>
