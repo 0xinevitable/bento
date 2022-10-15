@@ -148,6 +148,9 @@ export const ProfileSummarySection: React.FC<Props> = ({
     }
   }, [profile, isEditing, draft, revalidateProfile]);
 
+  const [loading, setLoading] = useState<boolean>(false);
+  const [cardURL, setCardURL] = useState<string>('');
+
   const onClickShareProfile = useCallback(async () => {
     console.log(imageToken);
     if (!profile?.user_id) {
@@ -166,13 +169,35 @@ export const ProfileSummarySection: React.FC<Props> = ({
           JSON.stringify([
             profile?.username,
             profile?.display_name,
-            profileImageURL,
+            profile?.images?.[0],
           ]),
         ),
       },
     });
-    console.log({ imageURL });
-  }, [imageToken, profileImageURL]);
+    setLoading(true);
+
+    const img = new Image();
+    img.src = imageURL;
+    img.onload = () => {
+      setLoading(false);
+      console.log(imageURL);
+      toast({
+        type: 'success',
+        title: 'Card generated!',
+      });
+      setCardURL(imageURL);
+    };
+    img.onerror = () => {
+      setLoading(false);
+      toast({
+        type: 'error',
+        title: 'Failed to generate the card.',
+        description: 'Sorry for the inconvenience. Please contact to the team.',
+      });
+      setCardURL('');
+      return;
+    };
+  }, [imageToken, profile]);
 
   return (
     <Wrapper>
