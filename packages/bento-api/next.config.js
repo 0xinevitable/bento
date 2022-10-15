@@ -16,7 +16,7 @@ module.exports = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
           {
             key: 'Access-Control-Allow-Methods',
-            value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+            value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT,HEAD',
           },
           {
             key: 'Access-Control-Allow-Headers',
