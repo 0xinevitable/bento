@@ -125,17 +125,18 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
         };
       }
 
+      const newProfile = {
+        user_id: userId,
+        username: userId,
+        display_name: displayName,
+        bio: '',
+        images: [],
+        verified: false,
+        tabs: [],
+        links: [],
+      };
       try {
-        await notifySlack(user, {
-          user_id: userId,
-          username: userId,
-          display_name: displayName,
-          bio: '',
-          images: [],
-          verified: false,
-          tabs: [],
-          links: [],
-        });
+        await notifySlack(user, newProfile);
       } catch (error) {
         console.error(error);
       }
@@ -143,7 +144,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       return {
         props: {
           type: 'USER_PROFILE',
-          profile,
+          profile: newProfile,
           ...(await serverSideTranslations(context.locale || 'en', [
             'common',
             'dashboard',

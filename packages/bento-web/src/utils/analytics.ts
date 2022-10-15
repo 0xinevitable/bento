@@ -79,12 +79,19 @@ export type AnalyticsEvent = {
     address: string | undefined;
   };
 
+  view_community: undefined;
+
   click_logout: {
     medium: 'gnb';
   };
   click_social_link: {
-    type: 'github' | 'twitter';
-    medium: 'gnb' | 'landing_header';
+    type:
+      | 'telegram-notice'
+      | 'telegram-community'
+      | 'twitter'
+      | 'discord'
+      | 'github';
+    medium: 'gnb' | 'landing_header' | 'community';
   };
   click_landing_link: {
     title: string;
