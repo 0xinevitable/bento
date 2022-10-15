@@ -19,6 +19,7 @@
     "@ethersproject/wallet": "^5.7.0",
     "@solana/web3.js": "^1.63.1",
     "@supabase/supabase-js": "^1.35.7",
+    "@vercel/og": "^0.0.18",
     "axios": "^0.27.2",
     "bn.js": "^5.2.1",
     "caver-js": "^1.9.0",

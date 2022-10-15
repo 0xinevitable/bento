@@ -53,5 +53,10 @@
   "No Assets Found": "자산 목록이 비어 있어요.",
   "No NFTs Found": "NFT 목록이 비어 있어요.",
 
-  "Set as profile": "프로필 사진으로 설정하기"
+  "Set as profile": "프로필 사진으로 설정하기",
+
+  "Share Profile Card": "프로필 카드 공유하기",
+  "Download Image": "이미지 다운로드",
+  "Copy URL": "URL 복사",
+  "Generating...": "생성 중..."
 }

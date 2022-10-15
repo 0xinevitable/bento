@@ -1,9 +1,11 @@
 import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
+import queryString from 'query-string';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Modal } from '@/components/system';
+import { formatUsername } from '@/utils/format';
 
 import { LinkBlock } from '@/profile/blocks';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
@@ -13,8 +15,24 @@ import {
 } from '@/profile/components/ProfileEditor';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { axios } from '@/utils';
+import { Config, axios } from '@/utils';
 import { Analytics, toast } from '@/utils';
+
+import { MinimalButton } from '../components/MinimalButton';
+import { ProfileShareModal } from '../components/ProfileShareModal';
+
+const hashCode = (value: string) => {
+  let hash: number = 0,
+    i: number,
+    chr: number;
+  if (value.length === 0) return hash;
+  for (i = 0; i < value.length; i++) {
+    chr = value.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
 
 type ErrorResponse =
   | {
@@ -25,6 +43,7 @@ type ErrorResponse =
 
 type Props = {
   isMyProfile: boolean;
+  imageToken: string;
   profile: UserProfile | null;
   revalidateProfile: () => void;
 };
@@ -32,6 +51,7 @@ type Props = {
 export const ProfileSummarySection: React.FC<Props> = ({
   isMyProfile,
   profile,
+  imageToken,
   revalidateProfile,
 }) => {
   const { t } = useTranslation('dashboard');
@@ -129,7 +149,62 @@ export const ProfileSummarySection: React.FC<Props> = ({
         }
       }
     }
-  }, [profile, isEditing, draft]);
+  }, [profile, isEditing, draft, revalidateProfile]);
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [cardURL, setCardURL] = useState<string>('');
+  const [isCardModalOpen, setCardModalOpen] = useState<boolean>(false);
+
+  const onClickShareProfile = useCallback(async () => {
+    console.log(imageToken);
+    if (!profile?.user_id) {
+      toast({
+        type: 'error',
+        title: 'Profile ID is invalid.',
+        description: 'Sorry for the inconvenience. Please contact to the team.',
+      });
+    }
+    const imageURL = queryString.stringifyUrl({
+      url: `${Config.MAIN_API_BASE_URL}/api/images/card`,
+      query: {
+        token: imageToken,
+        user_id: profile?.user_id,
+        hash: hashCode(
+          JSON.stringify([
+            profile?.username,
+            profile?.display_name,
+            profile?.images?.[0],
+          ]),
+        ),
+      },
+    });
+    setCardModalOpen(true);
+    setLoading(true);
+
+    const img = new Image();
+    img.src = imageURL;
+    img.onload = () => {
+      setLoading(false);
+      console.log(imageURL);
+      toast({
+        type: 'success',
+        title: 'Card generated!',
+      });
+      setCardModalOpen(true);
+      setCardURL(imageURL);
+    };
+    img.onerror = () => {
+      setLoading(false);
+      toast({
+        type: 'error',
+        title: 'Failed to generate the card.',
+        description: 'Sorry for the inconvenience. Please contact to the team.',
+      });
+      setCardURL('');
+      setCardModalOpen(false);
+      return;
+    };
+  }, [imageToken, profile]);
 
   return (
     <Wrapper>
@@ -141,20 +216,21 @@ export const ProfileSummarySection: React.FC<Props> = ({
               {!profile?.username ? (
                 <>
                   <EmptyText>{t('Update your Profile')}</EmptyText>
-                  <Username>{`@unknown`}</Username>
+                  <Username>{formatUsername(profile?.username)}</Username>
                 </>
               ) : (
                 <>
                   {!!profile?.display_name && (
                     <Name>{profile?.display_name}</Name>
                   )}
-                  <Username>{`@${profile?.username}`}</Username>
+                  <Username>{formatUsername(profile.username)}</Username>
                   {!!profile?.bio && <Bio>{profile?.bio}</Bio>}
                 </>
               )}
 
               {isMyProfile && (
-                <AddProfileButton
+                <MinimalButton
+                  className="yellow"
                   onClick={() => {
                     Analytics.logEvent('click_edit_my_profile', {
                       title: 'Setup Now',
@@ -164,12 +240,18 @@ export const ProfileSummarySection: React.FC<Props> = ({
                   }}
                 >
                   {t(!profile?.username ? 'Setup Now' : 'Edit Profile')}
-                </AddProfileButton>
+                </MinimalButton>
               )}
             </Information>
           </Foreground>
         </Container>
       </BorderWrapper>
+
+      {isMyProfile && (
+        <Button style={{ marginTop: 8 }} onClick={onClickShareProfile}>
+          {t('Share Profile Card')}
+        </Button>
+      )}
 
       <ul>
         {blocks.map((block, index) => (
@@ -189,6 +271,14 @@ export const ProfileSummarySection: React.FC<Props> = ({
           />
         </ProfileEditContainer>
       </ProfileEditModal>
+
+      <ProfileShareModal
+        profile={profile}
+        cardURL={cardURL}
+        loading={loading}
+        visible={isCardModalOpen}
+        onDismiss={() => setCardModalOpen((prev) => !prev)}
+      />
     </Wrapper>
   );
 };
@@ -320,22 +410,6 @@ const EmptyText = styled.span`
   text-align: center;
   letter-spacing: -0.05em;
   color: #ffffff;
-`;
-
-// FIXME: Design component
-const AddProfileButton = styled(Button)`
-  && {
-    margin: 8px auto 0;
-    width: fit-content;
-    height: unset;
-    padding: 12px 18px;
-
-    font-weight: 800;
-    font-size: 14px;
-    line-height: 100%;
-    text-align: center;
-    color: ${Colors.white};
-  }
 `;
 
 // Duplicated

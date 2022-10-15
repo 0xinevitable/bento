@@ -2,6 +2,7 @@ import { Wallet } from '@bento/common';
 import { User } from '@supabase/supabase-js';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
+import { createHmac } from 'crypto';
 import { format } from 'date-fns';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -30,10 +31,12 @@ const DynamicTokenDetailModal = dynamic(
 type Props =
   | {
       type: 'MY_PROFILE';
+      imageToken: string;
       profile: UserProfile;
     }
   | {
       type: 'USER_PROFILE';
+      imageToken: string;
       profile: UserProfile;
     };
 
@@ -42,6 +45,12 @@ const getKoreanTimestring = (timestamp: string) => {
   const curr = new Date(timestamp);
   const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
   return format(new Date(utc + KR_TIME_DIFF), 'yyyy-MM-dd HH:mm:ss');
+};
+
+const getImageTokenFromUserId = (userId: string) => {
+  const hmac = createHmac('sha256', 'my_secret');
+  hmac.update(JSON.stringify({ user_id: userId }));
+  return hmac.digest('hex');
 };
 
 const capitalize = (value: string) =>
@@ -145,6 +154,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
         props: {
           type: 'USER_PROFILE',
           profile: newProfile,
+          imageToken: getImageTokenFromUserId(userId),
           ...(await serverSideTranslations(context.locale || 'en', [
             'common',
             'dashboard',
@@ -156,6 +166,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       props: {
         type: 'USER_PROFILE',
         profile,
+        imageToken: getImageTokenFromUserId(userId),
         ...(await serverSideTranslations(context.locale || 'en', [
           'common',
           'dashboard',
@@ -195,6 +206,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
             ? 'MY_PROFILE'
             : 'USER_PROFILE',
         profile,
+        imageToken: getImageTokenFromUserId(profile.user_id),
         ...(await serverSideTranslations(context.locale || 'en', [
           'common',
           'dashboard',
@@ -212,8 +224,32 @@ const fetchWallets = async (userId: string): Promise<Wallet[]> => {
   return walletQuery.data ?? [];
 };
 
-const DashboardPage = ({ profile, ...props }: Props) => {
+const DashboardPage = ({
+  profile: preloadedProfile,
+  imageToken,
+  ...props
+}: Props) => {
   const { session } = useSession();
+  const [profile, setProfile] = useState<UserProfile>(preloadedProfile);
+  const revalidateProfile = useCallback(async () => {
+    const userId = preloadedProfile?.user_id;
+    if (!userId) {
+      return;
+    }
+    const res = await Supabase.from('profile') //
+      .select('*')
+      .eq('user_id', userId);
+    if (res.error) {
+      console.error(res.error);
+      return;
+    }
+    const profiles: UserProfile[] = res.data ?? [];
+
+    if (profiles.length > 0) {
+      const firstProfile = profiles[0];
+      setProfile(firstProfile);
+    }
+  }, [preloadedProfile]);
 
   const [wallets, setWallets] = useState<Wallet[]>([]);
   const revalidateWallets = useCallback(async () => {
@@ -247,15 +283,16 @@ const DashboardPage = ({ profile, ...props }: Props) => {
     hasLoggedTabViewEvent.current = true;
   }, []);
 
-  const hasLoggedViewEvent = useRef<boolean>(false);
   useEffect(() => {
     if (!session) {
       return;
     } else {
-      Analytics.logEvent('view_dashboard_main', undefined);
-      hasLoggedViewEvent.current = true;
+      Analytics.logEvent('view_dashboard_main', {
+        user_id: profile.user_id,
+        username: profile.username,
+      });
     }
-  }, [hasWallet]);
+  }, [hasWallet, profile?.user_id, profile?.username]);
 
   const [isMyProfile, setMyProfile] = useState<boolean>(
     props.type === 'MY_PROFILE',
@@ -273,7 +310,8 @@ const DashboardPage = ({ profile, ...props }: Props) => {
           isMyProfile={isMyProfile}
           wallets={wallets}
           profile={profile}
-          revalidateProfile={async () => {}}
+          imageToken={imageToken}
+          revalidateProfile={revalidateProfile}
           revalidateWallets={revalidateWallets}
           setAddWalletModalVisible={setAddWalletModalVisible}
           setTokenDetailModalVisible={setTokenDetailModalVisible}

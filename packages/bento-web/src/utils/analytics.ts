@@ -59,7 +59,10 @@ export type AnalyticsEvent = {
     address: string;
   };
 
-  view_dashboard_main: undefined;
+  view_dashboard_main: {
+    user_id: string;
+    username: string;
+  };
   click_dashboard_main_hide_wallet_list: undefined;
   click_dashboard_main_show_wallet_list: undefined;
 
@@ -143,6 +146,9 @@ export type AnalyticsEvent = {
     medium: 'dashboard_main' | 'profile';
   };
   click_share_my_profile: {
+    title: string;
+  };
+  click_download_profile_card: {
     title: string;
   };
   click_copy_profile_link: {
