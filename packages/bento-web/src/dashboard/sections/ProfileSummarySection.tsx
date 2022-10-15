@@ -245,13 +245,17 @@ export const ProfileSummarySection: React.FC<Props> = ({
         </Container>
       </BorderWrapper>
 
+      {isMyProfile && (
+        <Button style={{ marginTop: 8 }} onClick={onClickShareProfile}>
+          Share Profile Card
+        </Button>
+      )}
+
       <ul>
         {blocks.map((block, index) => (
           <LinkBlockItem key={index} {...block} />
         ))}
       </ul>
-
-      <MinimalButton onClick={onClickShareProfile}>Share</MinimalButton>
 
       <ProfileEditModal
         visible={isEditing}
