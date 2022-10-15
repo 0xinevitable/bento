@@ -79,6 +79,8 @@ export type AnalyticsEvent = {
     address: string | undefined;
   };
 
+  view_community: undefined;
+
   click_logout: {
     medium: 'gnb';
   };

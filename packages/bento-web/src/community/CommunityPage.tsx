@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import Image from 'next/future/image';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
@@ -62,6 +63,10 @@ const communities = [
 ] as const;
 
 const CommunityPage: NextPage = () => {
+  useEffect(() => {
+    Analytics.logEvent('view_community', undefined);
+  }, []);
+
   return (
     <>
       <MetaHead />
