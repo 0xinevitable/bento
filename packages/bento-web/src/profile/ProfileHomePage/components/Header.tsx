@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
-import { displayUsername } from '@/utils/format';
+import { formatUsername } from '@/utils/format';
 
 // import { Analytics } from '@/utils';
 import { ExampleUserProfile } from '@/profile/constants/ExampleUserProfile';
@@ -22,7 +22,7 @@ export const Header = () => {
       >
         <Avatar src={ExampleUserProfile.images?.[0] ?? ''} />
         <Title>{ExampleUserProfile.display_name}</Title>
-        <Username>{displayUsername(ExampleUserProfile.username)}</Username>
+        <Username>{formatUsername(ExampleUserProfile.username)}</Username>
       </Profile>
     </Container>
   );

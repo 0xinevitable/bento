@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 import { NoSSR } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
-import { displayUsername } from '@/utils/format';
+import { formatUsername } from '@/utils/format';
 
 import { FeatureFlags, Supabase } from '@/utils';
 
@@ -116,7 +116,7 @@ const ProfileDetailPage = (props: Props) => {
     }
 
     if (profileType === 'USER_PROFILE') {
-      const formattedUsername = displayUsername(
+      const formattedUsername = formatUsername(
         props.profile.username ?? 'unknown',
       );
       const displayName = props.profile.display_name;

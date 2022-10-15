@@ -18,7 +18,7 @@ import styled, { css } from 'styled-components';
 import { AnimatedTab } from '@/components/AnimatedTab';
 import { Modal } from '@/components/system';
 import { useWalletContext } from '@/hooks/useWalletContext';
-import { displayUsername } from '@/utils/format';
+import { formatUsername } from '@/utils/format';
 
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
@@ -444,7 +444,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             copyToClipboard(`${window.location.origin}/u/${profile?.username}`);
             toast({
               title: 'Copied link to clipboard!',
-              description: `Profile ${displayUsername(
+              description: `Profile ${formatUsername(
                 profile?.username || 'unknown',
               )}`,
             });
