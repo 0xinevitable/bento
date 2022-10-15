@@ -76,6 +76,10 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
             <MinimalButton
               className="yellow"
               onClick={() => {
+                Analytics.logEvent('click_download_profile_card', {
+                  title: 'Download Image',
+                });
+
                 axios
                   .get(
                     cardURL.replace(

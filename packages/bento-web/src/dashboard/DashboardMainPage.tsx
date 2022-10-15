@@ -283,15 +283,16 @@ const DashboardPage = ({
     hasLoggedTabViewEvent.current = true;
   }, []);
 
-  const hasLoggedViewEvent = useRef<boolean>(false);
   useEffect(() => {
     if (!session) {
       return;
     } else {
-      Analytics.logEvent('view_dashboard_main', undefined);
-      hasLoggedViewEvent.current = true;
+      Analytics.logEvent('view_dashboard_main', {
+        user_id: profile.user_id,
+        username: profile.username,
+      });
     }
-  }, [hasWallet]);
+  }, [hasWallet, profile?.user_id, profile?.username]);
 
   const [isMyProfile, setMyProfile] = useState<boolean>(
     props.type === 'MY_PROFILE',
