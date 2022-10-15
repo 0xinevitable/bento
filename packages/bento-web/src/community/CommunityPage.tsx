@@ -6,6 +6,7 @@ import { PageContainer } from '@/components/PageContainer';
 import { MetaHead } from '@/components/system';
 
 import { Colors } from '@/styles';
+import { Analytics } from '@/utils';
 
 import discordLogo from './assets/discord.webp';
 import githubLogo from './assets/github.webp';
@@ -24,36 +25,41 @@ const withOpacity = (hex: string, opacity: number) => {
 
 const communities = [
   {
+    type: 'telegram-notice',
     title: 'Official Notice',
     url: 'https://t.me/bentoinevitable',
     icon: telegramLogo,
     color: '#259bd6',
   },
   {
+    type: 'telegram-community',
     title: 'Community',
     url: 'https://t.me/bentocommunity',
     icon: telegramLogo,
     color: '#259bd6',
   },
   {
+    type: 'twitter',
     title: 'Twitter',
     url: 'https://twitter.com/bentoinevitable',
     icon: twitterLogo,
     color: '#1b9aee',
   },
   {
+    type: 'discord',
     title: 'Discord',
     url: 'https://discord.gg/zXmRRBxYqD',
     icon: discordLogo,
     color: '#5762f7',
   },
   {
+    type: 'github',
     title: 'GitHub',
     url: 'https://github.com/inevitable-changes ',
     icon: githubLogo,
     color: '#303c45',
   },
-];
+] as const;
 
 const CommunityPage: NextPage = () => {
   return (
@@ -65,7 +71,17 @@ const CommunityPage: NextPage = () => {
         <List>
           {communities.map((community) => (
             <Item key={community.title}>
-              <a href={community.url} target="_blank" rel="noreferrer">
+              <a
+                href={community.url}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() =>
+                  Analytics.logEvent('click_social_link', {
+                    type: community.type,
+                    medium: 'community',
+                  })
+                }
+              >
                 <IconWrapper
                   style={{
                     padding: 4,
