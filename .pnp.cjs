@@ -2690,6 +2690,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next-intercept-stdout", "npm:1.0.1"],\
             ["next-plugin-svgr", "npm:1.1.2"],\
             ["prop-types", "npm:15.8.1"],\
+            ["query-string", "npm:7.1.1"],\
             ["react", "npm:18.2.0"],\
             ["react-collapsed", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:3.4.0"],\
             ["react-dom", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:18.2.0"],\

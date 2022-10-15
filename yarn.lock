@@ -1560,6 +1560,7 @@ __metadata:
     next-intercept-stdout: ^1.0.1
     next-plugin-svgr: ^1.1.2
     prop-types: ^15.8.1
+    query-string: ^7.1.1
     react: ^18.2.0
     react-collapsed: ^3.4.0
     react-dom: ^18.2.0
