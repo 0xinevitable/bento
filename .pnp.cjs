@@ -2657,6 +2657,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/amplitude-js", "npm:8.16.2"],\
             ["@types/bn.js", "npm:5.1.1"],\
             ["@types/dedent", "npm:0.7.0"],\
+            ["@types/file-saver", "npm:2.0.5"],\
             ["@types/lodash.chunk", "npm:4.2.7"],\
             ["@types/lodash.groupby", "npm:4.6.7"],\
             ["@types/node", "npm:18.7.19"],\
@@ -2677,6 +2678,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
             ["env-cmd", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:10.1.0"],\
+            ["file-saver", "npm:2.0.5"],\
             ["framer-motion", "virtual:19d75cef938ff992f79f7c2df615d8633195dd912a3c652a2d989db30e1123034740e16e4f3a7560d033a43c6ff373e9f7c6b2fac10646a68283eb915d32c6c4#npm:7.5.1"],\
             ["immer", "npm:9.0.15"],\
             ["javascript-time-ago", "npm:2.5.7"],\
@@ -5181,6 +5183,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-dedent-npm-0.7.0-6255895dfd-b9b7f0c42d.zip/node_modules/@types/dedent/",\
           "packageDependencies": [\
             ["@types/dedent", "npm:0.7.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/file-saver", [\
+        ["npm:2.0.5", {\
+          "packageLocation": "./.yarn/cache/@types-file-saver-npm-2.0.5-b1e5b3252c-a31d6ee2ab.zip/node_modules/@types/file-saver/",\
+          "packageDependencies": [\
+            ["@types/file-saver", "npm:2.0.5"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8930,6 +8941,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@types/webpack",\
             "webpack"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["file-saver", [\
+        ["npm:2.0.5", {\
+          "packageLocation": "./.yarn/cache/file-saver-npm-2.0.5-2c3bc40d53-c62d96e5ce.zip/node_modules/file-saver/",\
+          "packageDependencies": [\
+            ["file-saver", "npm:2.0.5"]\
           ],\
           "linkType": "HARD"\
         }]\

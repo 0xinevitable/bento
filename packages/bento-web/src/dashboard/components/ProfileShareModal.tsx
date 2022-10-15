@@ -1,3 +1,4 @@
+import { saveAs } from 'file-saver';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -41,7 +42,7 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <MinimalButton
           onClick={() => {
-            // TODO:
+            saveAs(cardURL, 'image.jpg');
           }}
         >
           Download Image
