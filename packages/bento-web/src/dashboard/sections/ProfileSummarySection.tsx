@@ -130,7 +130,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
         }
       }
     }
-  }, [profile, isEditing, draft]);
+  }, [profile, isEditing, draft, revalidateProfile]);
 
   return (
     <Wrapper>

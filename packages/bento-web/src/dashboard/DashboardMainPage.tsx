@@ -212,8 +212,28 @@ const fetchWallets = async (userId: string): Promise<Wallet[]> => {
   return walletQuery.data ?? [];
 };
 
-const DashboardPage = ({ profile, ...props }: Props) => {
+const DashboardPage = ({ profile: preloadedProfile, ...props }: Props) => {
   const { session } = useSession();
+  const [profile, setProfile] = useState<UserProfile>(preloadedProfile);
+  const revalidateProfile = useCallback(async () => {
+    const userId = preloadedProfile?.user_id;
+    if (!userId) {
+      return;
+    }
+    const res = await Supabase.from('profile') //
+      .select('*')
+      .eq('user_id', userId);
+    if (res.error) {
+      console.error(res.error);
+      return;
+    }
+    const profiles: UserProfile[] = res.data ?? [];
+
+    if (profiles.length > 0) {
+      const firstProfile = profiles[0];
+      setProfile(firstProfile);
+    }
+  }, [preloadedProfile]);
 
   const [wallets, setWallets] = useState<Wallet[]>([]);
   const revalidateWallets = useCallback(async () => {
@@ -273,7 +293,7 @@ const DashboardPage = ({ profile, ...props }: Props) => {
           isMyProfile={isMyProfile}
           wallets={wallets}
           profile={profile}
-          revalidateProfile={async () => {}}
+          revalidateProfile={revalidateProfile}
           revalidateWallets={revalidateWallets}
           setAddWalletModalVisible={setAddWalletModalVisible}
           setTokenDetailModalVisible={setTokenDetailModalVisible}
