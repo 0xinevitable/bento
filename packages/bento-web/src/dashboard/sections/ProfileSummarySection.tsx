@@ -18,6 +18,9 @@ import { Colors } from '@/styles';
 import { Config, axios } from '@/utils';
 import { Analytics, toast } from '@/utils';
 
+import { MinimalButton } from '../components/MinimalButton';
+import { ProfileShareModal } from '../components/ProfileShareModal';
+
 const hashCode = (value: string) => {
   let hash: number = 0,
     i: number,
@@ -150,6 +153,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
 
   const [loading, setLoading] = useState<boolean>(false);
   const [cardURL, setCardURL] = useState<string>('');
+  const [isCardModalOpen, setCardModalOpen] = useState<boolean>(false);
 
   const onClickShareProfile = useCallback(async () => {
     console.log(imageToken);
@@ -185,6 +189,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
         type: 'success',
         title: 'Card generated!',
       });
+      setCardModalOpen(true);
       setCardURL(imageURL);
     };
     img.onerror = () => {
@@ -195,6 +200,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
         description: 'Sorry for the inconvenience. Please contact to the team.',
       });
       setCardURL('');
+      setCardModalOpen(false);
       return;
     };
   }, [imageToken, profile]);
@@ -259,6 +265,13 @@ export const ProfileSummarySection: React.FC<Props> = ({
           />
         </ProfileEditContainer>
       </ProfileEditModal>
+
+      <ProfileShareModal
+        profile={profile}
+        cardURL={cardURL}
+        visible={isCardModalOpen}
+        onDismiss={() => setCardModalOpen((prev) => !prev)}
+      />
     </Wrapper>
   );
 };
@@ -390,22 +403,6 @@ const EmptyText = styled.span`
   text-align: center;
   letter-spacing: -0.05em;
   color: #ffffff;
-`;
-
-// FIXME: Design component
-const MinimalButton = styled(Button)`
-  && {
-    margin: 8px auto 0;
-    width: fit-content;
-    height: unset;
-    padding: 12px 18px;
-
-    font-weight: 800;
-    font-size: 14px;
-    line-height: 100%;
-    text-align: center;
-    color: ${Colors.white};
-  }
 `;
 
 // Duplicated
