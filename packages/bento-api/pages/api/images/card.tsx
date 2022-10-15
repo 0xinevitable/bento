@@ -45,7 +45,7 @@ type UserProfile = {
   images: string[] | null;
 };
 
-export default async function (req: NextRequest, _res: NextResponse) {
+export default async function (req: NextRequest, res: NextResponse) {
   const { searchParams } = req.nextUrl;
 
   const user_id = searchParams.get('user_id');

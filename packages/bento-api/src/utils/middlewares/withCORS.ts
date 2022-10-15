@@ -22,7 +22,7 @@ export const withCORS =
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader(
       'Access-Control-Allow-Methods',
-      'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+      'GET,OPTIONS,PATCH,DELETE,POST,PUT,HEAD',
     );
     res.setHeader(
       'Access-Control-Allow-Headers',

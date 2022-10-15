@@ -1,4 +1,3 @@
-import { saveAs } from 'file-saver';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -7,7 +6,7 @@ import { formatUsername } from '@/utils/format';
 
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { Analytics, copyToClipboard, toast } from '@/utils';
+import { Analytics, axios, copyToClipboard, toast } from '@/utils';
 
 import { MinimalButton } from './MinimalButton';
 
@@ -42,7 +41,40 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <MinimalButton
           onClick={() => {
-            saveAs(cardURL, 'image.jpg');
+            // const anc = document.createElement('a');
+            // anc.href = cardURL;
+            // anc.download = `${filename}.png`;
+            // document.body.appendChild(anc);
+            // anc.click();
+            // document.body.removeChild(anc);
+            // toast({
+            //   title: 'Downloaded image!',
+            //   description: `Profile ${formattedUsername}`,
+            // });
+
+            axios
+              .get(cardURL, {
+                responseType: 'blob',
+              })
+              .then(({ data: blob }) => {
+                console.log(blob);
+                const url = window.URL.createObjectURL(blob);
+                console.log(url);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = `${filename}.png`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+              })
+              .catch((err) => {
+                console.error(err);
+                toast({
+                  title: 'Error downloading image!',
+                  description: `Profile ${formattedUsername}`,
+                });
+              });
           }}
         >
           Download Image
