@@ -444,9 +444,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
             copyToClipboard(`${window.location.origin}/u/${profile?.username}`);
             toast({
               title: 'Copied link to clipboard!',
-              description: `Profile ${formatUsername(
-                profile?.username || 'unknown',
-              )}`,
+              description: `Profile ${formatUsername(profile?.username)}`,
             });
           }}
         />

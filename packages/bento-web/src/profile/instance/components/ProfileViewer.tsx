@@ -45,7 +45,7 @@ export const ProfileViewer: React.FC<Props> = ({ profile }) => {
       )}
       {typeof profile?.username === 'string' ? (
         <Username style={{ color: palette.primary }}>
-          {`@${profile.username || 'unknown'}`}
+          {`@${profile.username}`}
         </Username>
       ) : (
         <DefaultSkeleton

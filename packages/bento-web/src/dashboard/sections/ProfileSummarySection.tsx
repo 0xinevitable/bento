@@ -142,7 +142,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
               {!profile?.username ? (
                 <>
                   <EmptyText>{t('Update your Profile')}</EmptyText>
-                  <Username>{`@unknown`}</Username>
+                  <Username>{formatUsername(profile?.username)}</Username>
                 </>
               ) : (
                 <>

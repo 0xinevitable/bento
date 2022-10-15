@@ -116,9 +116,7 @@ const ProfileDetailPage = (props: Props) => {
     }
 
     if (profileType === 'USER_PROFILE') {
-      const formattedUsername = formatUsername(
-        props.profile.username ?? 'unknown',
-      );
+      const formattedUsername = formatUsername(props.profile.username);
       const displayName = props.profile.display_name;
 
       if (!!displayName) {
