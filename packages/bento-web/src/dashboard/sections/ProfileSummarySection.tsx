@@ -249,7 +249,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
 
       {isMyProfile && (
         <Button style={{ marginTop: 8 }} onClick={onClickShareProfile}>
-          Share Profile Card
+          {t('Share Profile Card')}
         </Button>
       )}
 
