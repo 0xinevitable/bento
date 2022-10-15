@@ -8,6 +8,7 @@ import styled from 'styled-components';
 
 import { NoSSR } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
+import { formatUsername } from '@/utils/format';
 
 import { FeatureFlags, Supabase } from '@/utils';
 
@@ -115,13 +116,13 @@ const ProfileDetailPage = (props: Props) => {
     }
 
     if (profileType === 'USER_PROFILE') {
-      const username = props.profile.username ?? 'unknown';
+      const formattedUsername = formatUsername(props.profile.username);
       const displayName = props.profile.display_name;
 
       if (!!displayName) {
-        _title = `${displayName} (@${username}) | Bento`;
+        _title = `${displayName} (${formattedUsername}) | Bento`;
       } else {
-        _title = `@${username} | Bento`;
+        _title = `${formattedUsername} | Bento`;
       }
 
       _description = props.profile.bio ?? '';
