@@ -41,7 +41,8 @@ const key = crypto.subtle.importKey(
 type UserProfile = {
   user_id: string;
   username: string;
-  display_name: string;
+  display_name: string | null;
+  images: string[] | null;
 };
 
 export default async function (req: NextRequest, _res: NextResponse) {
@@ -49,17 +50,18 @@ export default async function (req: NextRequest, _res: NextResponse) {
 
   const user_id = searchParams.get('user_id');
   const token = searchParams.get('token');
+  if (process.env.NODE_ENV === 'production' || !!token) {
+    const verifyToken = arrayBufferToHex(
+      await crypto.subtle.sign(
+        'HMAC',
+        await key,
+        new TextEncoder().encode(JSON.stringify({ user_id })),
+      ),
+    );
 
-  const verifyToken = arrayBufferToHex(
-    await crypto.subtle.sign(
-      'HMAC',
-      await key,
-      new TextEncoder().encode(JSON.stringify({ user_id })),
-    ),
-  );
-
-  if (token !== verifyToken) {
-    return new Response('Invalid token.', { status: 401 });
+    if (token !== verifyToken) {
+      return new Response('Invalid token.', { status: 401 });
+    }
   }
 
   if (!user_id) {
@@ -143,16 +145,26 @@ export default async function (req: NextRequest, _res: NextResponse) {
                 justifyContent: 'center',
               }}
             >
-              <img
-                style={{
-                  width: 212,
-                  height: 212,
-                  border: '1px solid #E1F664',
-                  borderRadius: 14,
-                  backgroundColor: 'black',
-                }}
-                src={'https://github.com/junhoyeo.png'}
-              />
+              {!!profile?.images?.[0] ? (
+                <img
+                  style={{
+                    width: 212,
+                    height: 212,
+                    border: '1px solid #E1F664',
+                    borderRadius: 14,
+                    backgroundColor: 'black',
+                  }}
+                  src={profile.images[0]}
+                />
+              ) : (
+                <img
+                  style={{
+                    width: 212,
+                    height: 212,
+                  }}
+                  src={`${req.nextUrl.origin}/assets/default-zap.png`}
+                />
+              )}
             </div>
 
             <div
@@ -167,10 +179,11 @@ export default async function (req: NextRequest, _res: NextResponse) {
               <div
                 style={{
                   width: '100%',
-                  paddingLeft: 20,
-                  paddingRight: 20,
+                  // paddingLeft: 20,
+                  // paddingRight: 20,
                   display: 'flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 <svg
@@ -194,10 +207,7 @@ export default async function (req: NextRequest, _res: NextResponse) {
                     lineHeight: '100%',
                     letterSpacing: '-0.5px',
                     color: '#E1F664',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                    maxWidth: '100%',
-                    // maxWidth: '275px',
+                    // textOverflow: 'ellipsis',
                   }}
                 >
                   {profile?.display_name || 'Unknown'}
@@ -225,7 +235,7 @@ export default async function (req: NextRequest, _res: NextResponse) {
                   color: '#E1F664',
                 }}
               >
-                {formatUsername(profile?.display_name)}
+                {formatUsername(profile?.username)}
               </span>
             </div>
           </div>
