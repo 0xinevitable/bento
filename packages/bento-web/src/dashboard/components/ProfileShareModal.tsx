@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -28,6 +29,7 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
   visible: isVisible = false,
   onDismiss,
 }) => {
+  const { t } = useTranslation('dashboard');
   const [formattedUsername, filename] = useMemo(() => {
     const f = formatUsername(profile?.username);
     return [f, f.replace(/@/g, '_')];
@@ -39,7 +41,26 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
       transition={{ ease: 'linear' }}
     >
       {loading ? (
-        <div></div>
+        <div
+          style={{
+            height: 64,
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <span
+            style={{
+              color: 'white',
+              fontSize: 18,
+              fontWeight: 600,
+              textAlign: 'center',
+            }}
+          >
+            {t('Generating...')}
+          </span>
+        </div>
       ) : (
         <>
           <a
@@ -84,7 +105,7 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
                   });
               }}
             >
-              Download Image
+              {t('Download Image')}
             </MinimalButton>
             <MinimalButton
               onClick={() => {
@@ -106,7 +127,7 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
                 });
               }}
             >
-              {BUTTON_TITLE}
+              {t(BUTTON_TITLE)}
             </MinimalButton>
           </ButtonRow>
         </>
