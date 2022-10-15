@@ -1,4 +1,6 @@
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/future/image';
 import { useEffect } from 'react';
 import styled from 'styled-components';
@@ -27,55 +29,63 @@ const withOpacity = (hex: string, opacity: number) => {
 const communities = [
   {
     type: 'telegram-notice',
-    title: 'Official Notice',
     url: 'https://t.me/bentoinevitable',
     icon: telegramLogo,
     color: '#259bd6',
   },
   {
     type: 'telegram-community',
-    title: 'Community',
     url: 'https://t.me/bentocommunity',
     icon: telegramLogo,
     color: '#259bd6',
   },
   {
     type: 'twitter',
-    title: 'Twitter',
     url: 'https://twitter.com/bentoinevitable',
     icon: twitterLogo,
     color: '#1b9aee',
   },
   {
     type: 'discord',
-    title: 'Discord',
     url: 'https://discord.gg/zXmRRBxYqD',
     icon: discordLogo,
     color: '#5762f7',
   },
   {
     type: 'github',
-    title: 'GitHub',
     url: 'https://github.com/inevitable-changes ',
     icon: githubLogo,
     color: '#303c45',
   },
 ] as const;
 
+export const getStaticProps: GetStaticProps = async (context) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(context.locale || 'en', [
+        'common',
+        'community',
+      ])),
+    },
+  };
+};
+
 const CommunityPage: NextPage = () => {
   useEffect(() => {
     Analytics.logEvent('view_community', undefined);
   }, []);
+
+  const { t } = useTranslation(['community']);
 
   return (
     <>
       <MetaHead />
       <Black />
       <PageContainer style={{ paddingBottom: 64 }}>
-        <Title>Community</Title>
+        <Title>{t('Community')}</Title>
         <List>
           {communities.map((community) => (
-            <Item key={community.title}>
+            <Item key={community.type}>
               <a
                 href={community.url}
                 target="_blank"
@@ -100,13 +110,13 @@ const CommunityPage: NextPage = () => {
                   <Image
                     className="icon"
                     src={community.icon}
-                    alt={community.title}
+                    alt={t(community.type)}
                     width={120}
                     height={120}
                     style={{ borderRadius: 26 }}
                   />
                 </IconWrapper>
-                <span className="title">{community.title}</span>
+                <span className="title">{t(community.type)}</span>
               </a>
             </Item>
           ))}
