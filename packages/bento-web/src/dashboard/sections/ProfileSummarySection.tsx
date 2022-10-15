@@ -178,6 +178,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
         ),
       },
     });
+    setCardModalOpen(true);
     setLoading(true);
 
     const img = new Image();
@@ -229,6 +230,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
 
               {isMyProfile && (
                 <MinimalButton
+                  className="yellow"
                   onClick={() => {
                     Analytics.logEvent('click_edit_my_profile', {
                       title: 'Setup Now',
@@ -273,6 +275,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
       <ProfileShareModal
         profile={profile}
         cardURL={cardURL}
+        loading={loading}
         visible={isCardModalOpen}
         onDismiss={() => setCardModalOpen((prev) => !prev)}
       />
