@@ -24,4 +24,14 @@ export const Button = styled.button`
   &:focus {
     filter: opacity(0.66);
   }
+
+  &.yellow {
+    background: linear-gradient(155.97deg, #ffd978 15.42%, #d09600 102.91%);
+    box-shadow: 0px 3.13px 12.53px rgba(250, 209, 105, 0.3);
+    color: #000000;
+
+    &:hover {
+      box-shadow: 0px 4px 24px rgba(250, 209, 105, 0.55);
+    }
+  }
 `;
