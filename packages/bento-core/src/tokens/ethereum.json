@@ -1,0 +1,2422 @@
+[
+  {
+    "symbol": "WETH",
+    "name": "Wrapped Ether",
+    "decimals": 18,
+    "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "coinGeckoId": "weth",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+  },
+  {
+    "symbol": "USDC",
+    "name": "USD Coin",
+    "decimals": 6,
+    "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "coinGeckoId": "usd-coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+  },
+  {
+    "symbol": "USDT",
+    "name": "Tether",
+    "decimals": 6,
+    "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    "coinGeckoId": "tether",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
+  },
+  {
+    "symbol": "BUSD",
+    "name": "Binance USD",
+    "decimals": 18,
+    "address": "0x4Fabb145d64652a948d72533023f6E7A623C7C53",
+    "coinGeckoId": "binance-usd",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4Fabb145d64652a948d72533023f6E7A623C7C53/logo.png"
+  },
+  {
+    "symbol": "WBTC",
+    "name": "Wrapped Bitcoin",
+    "decimals": 8,
+    "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+    "coinGeckoId": "wrapped-bitcoin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png"
+  },
+  {
+    "symbol": "DAI",
+    "name": "Dai",
+    "decimals": 18,
+    "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "coinGeckoId": "dai",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png"
+  },
+  {
+    "symbol": "SHIB",
+    "name": "Shiba Inu",
+    "decimals": 18,
+    "address": "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+    "coinGeckoId": "shiba-inu",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE/logo.png"
+  },
+  {
+    "symbol": "LEO",
+    "name": "LEO Token",
+    "decimals": 18,
+    "address": "0x2af5d2ad76741191d15dfe7bf6ac92d4bd912ca3",
+    "coinGeckoId": "leo-token",
+    "logo": "https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/assets/0x2AF5D2aD76741191D15Dfe7bF6aC92d4Bd912Ca3/logo.png?raw=true"
+  },
+  {
+    "symbol": "MATIC",
+    "name": "Polygon",
+    "decimals": 18,
+    "address": "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
+    "coinGeckoId": "matic-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0/logo.png"
+  },
+  {
+    "symbol": "LINK",
+    "name": "Chainlink",
+    "decimals": 18,
+    "address": "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+    "coinGeckoId": "chainlink",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x514910771AF9Ca656af840dff83E8264EcF986CA/logo.png"
+  },
+  {
+    "symbol": "FTT",
+    "name": "FTX Token",
+    "decimals": 18,
+    "address": "0x50d1c9771902476076ecfc8b2a83ad6b9355a4c9",
+    "coinGeckoId": "ftx-token",
+    "logo": "https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/assets/0x50D1c9771902476076eCFc8B2A83Ad6b9355a4c9/logo.png?raw=true"
+  },
+  {
+    "symbol": "UNI",
+    "name": "Uniswap",
+    "decimals": 18,
+    "address": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+    "coinGeckoId": "uniswap",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984/logo.png"
+  },
+  {
+    "symbol": "APE",
+    "name": "ApeCoin",
+    "decimals": 18,
+    "address": "0x4d224452801ACEd8B2F0aebE155379bb5D594381",
+    "coinGeckoId": "apecoin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4d224452801ACEd8B2F0aebE155379bb5D594381/logo.png"
+  },
+  {
+    "symbol": "SAND",
+    "name": "The Sandbox",
+    "decimals": 18,
+    "address": "0x3845badAde8e6dFF049820680d1F14bD3903a5d0",
+    "coinGeckoId": "the-sandbox",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x3845badAde8e6dFF049820680d1F14bD3903a5d0/logo.png"
+  },
+  {
+    "symbol": "AXS",
+    "name": "Axie Infinity",
+    "decimals": 18,
+    "address": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b",
+    "coinGeckoId": "axie-infinity",
+    "logo": "https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/assets/0xBB0E17EF65F82Ab018d8EDd776e8DD940327B28b/logo.png?raw=true"
+  },
+  {
+    "symbol": "MANA",
+    "name": "Decentraland",
+    "decimals": 18,
+    "address": "0x0F5D2fB29fb7d3CFeE444a200298f468908cC942",
+    "coinGeckoId": "decentraland",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0F5D2fB29fb7d3CFeE444a200298f468908cC942/logo.png"
+  },
+  {
+    "symbol": "cETH",
+    "name": "Compound Ether",
+    "decimals": 8,
+    "address": "0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5",
+    "coinGeckoId": "compound-ether",
+    "logo": "https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/assets/0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5/logo.png?raw=true"
+  },
+  {
+    "symbol": "TUSD",
+    "name": "TrueUSD",
+    "decimals": 18,
+    "address": "0x0000000000085d4780B73119b644AE5ecd22b376",
+    "coinGeckoId": "true-usd",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0000000000085d4780B73119b644AE5ecd22b376/logo.png"
+  },
+  {
+    "symbol": "AAVE",
+    "name": "Aave",
+    "decimals": 18,
+    "address": "0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9",
+    "coinGeckoId": "aave",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9/logo.png"
+  },
+  {
+    "symbol": "cUSDC",
+    "name": "Compound USD Coin",
+    "decimals": 8,
+    "address": "0x39aa39c021dfbae8fac545936693ac917d5e7563",
+    "coinGeckoId": "compound-usd-coin",
+    "logo": "https://github.com/trustwallet/assets/blob/master/blockchains/ethereum/assets/0x39AA39c021dfbaE8faC545936693aC917d5E7563/logo.png?raw=true"
+  },
+  {
+    "symbol": "GRT",
+    "name": "The Graph",
+    "decimals": 18,
+    "address": "0xc944E90C64B2c07662A292be6244BDf05Cda44a7",
+    "coinGeckoId": "the-graph",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xc944E90C64B2c07662A292be6244BDf05Cda44a7/logo.png"
+  },
+  {
+    "symbol": "MKR",
+    "name": "Maker",
+    "decimals": 18,
+    "address": "0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2",
+    "coinGeckoId": "maker",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2/logo.png"
+  },
+  {
+    "symbol": "SUSHI",
+    "name": "Sushi",
+    "decimals": 18,
+    "address": "0x6B3595068778DD592e39A122f4f5a5cF09C90fE2",
+    "coinGeckoId": "sushi",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6B3595068778DD592e39A122f4f5a5cF09C90fE2/logo.png"
+  },
+  {
+    "symbol": "CRV",
+    "name": "Curve DAO",
+    "decimals": 18,
+    "address": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+    "coinGeckoId": "curve-dao-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xD533a949740bb3306d119CC777fa900bA034cd52/logo.png"
+  },
+  {
+    "symbol": "USDP",
+    "name": "Pax Dollar",
+    "decimals": 18,
+    "address": "0x8E870D67F660D95d5be530380D0eC0bd388289E1",
+    "coinGeckoId": "paxos-standard",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8E870D67F660D95d5be530380D0eC0bd388289E1/logo.png"
+  },
+  {
+    "symbol": "UST",
+    "name": "Wrapped USTC",
+    "decimals": 18,
+    "address": "0xa47c8bf37f92aBed4A126BDA807A7b7498661acD",
+    "coinGeckoId": "wrapped-ust",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xa47c8bf37f92aBed4A126BDA807A7b7498661acD/logo.png"
+  },
+  {
+    "symbol": "LON",
+    "name": "Tokenlon",
+    "decimals": 18,
+    "address": "0x0000000000095413afC295d19EDeb1Ad7B71c952",
+    "coinGeckoId": "tokenlon",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0000000000095413afC295d19EDeb1Ad7B71c952/logo.png"
+  },
+  {
+    "symbol": "ALBT",
+    "name": "AllianceBlock",
+    "decimals": 18,
+    "address": "0x00a8b738E453fFd858a7edf03bcCfe20412f0Eb0",
+    "coinGeckoId": "allianceblock",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x00a8b738E453fFd858a7edf03bcCfe20412f0Eb0/logo.png"
+  },
+  {
+    "symbol": "SKL",
+    "name": "SKALE",
+    "decimals": 18,
+    "address": "0x00c83aeCC790e8a4453e5dD3B0B4b3680501a7A7",
+    "coinGeckoId": "skale",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x00c83aeCC790e8a4453e5dD3B0B4b3680501a7A7/logo.png"
+  },
+  {
+    "symbol": "UFT",
+    "name": "UniLend Finance",
+    "decimals": 18,
+    "address": "0x0202Be363B8a4820f3F4DE7FaF5224fF05943AB1",
+    "coinGeckoId": "unlend-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0202Be363B8a4820f3F4DE7FaF5224fF05943AB1/logo.png"
+  },
+  {
+    "symbol": "ORN",
+    "name": "Orion Protocol",
+    "decimals": 8,
+    "address": "0x0258F474786DdFd37ABCE6df6BBb1Dd5dfC4434a",
+    "coinGeckoId": "orion-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0258F474786DdFd37ABCE6df6BBb1Dd5dfC4434a/logo.png"
+  },
+  {
+    "symbol": "RAI",
+    "name": "Rai Reflex Index",
+    "decimals": 18,
+    "address": "0x03ab458634910AaD20eF5f1C8ee96F1D6ac54919",
+    "coinGeckoId": "rai",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x03ab458634910AaD20eF5f1C8ee96F1D6ac54919/logo.png"
+  },
+  {
+    "symbol": "SRK",
+    "name": "SparkPoint",
+    "decimals": 18,
+    "address": "0x0488401c3F535193Fa8Df029d9fFe615A06E74E6",
+    "coinGeckoId": "sparkpoint",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0488401c3F535193Fa8Df029d9fFe615A06E74E6/logo.png"
+  },
+  {
+    "symbol": "UMA",
+    "name": "UMA",
+    "decimals": 18,
+    "address": "0x04Fa0d235C4abf4BcF4787aF4CF447DE572eF828",
+    "coinGeckoId": "uma",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x04Fa0d235C4abf4BcF4787aF4CF447DE572eF828/logo.png"
+  },
+  {
+    "symbol": "Skey",
+    "name": "Skey Network",
+    "decimals": 8,
+    "address": "0x06A01a4d579479Dd5D884EBf61A31727A3d8D442",
+    "coinGeckoId": "skey-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x06A01a4d579479Dd5D884EBf61A31727A3d8D442/logo.png"
+  },
+  {
+    "symbol": "BASE",
+    "name": "Base Protocol",
+    "decimals": 9,
+    "address": "0x07150e919B4De5fD6a63DE1F9384828396f25fDC",
+    "coinGeckoId": "base-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x07150e919B4De5fD6a63DE1F9384828396f25fDC/logo.png"
+  },
+  {
+    "symbol": "MIR",
+    "name": "Mirror Protocol",
+    "decimals": 18,
+    "address": "0x09a3EcAFa817268f77BE1283176B946C4ff2E608",
+    "coinGeckoId": "mirror-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x09a3EcAFa817268f77BE1283176B946C4ff2E608/logo.png"
+  },
+  {
+    "symbol": "GRO",
+    "name": "Growth DeFi",
+    "decimals": 18,
+    "address": "0x09e64c2B61a5f1690Ee6fbeD9baf5D6990F8dFd0",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x09e64c2B61a5f1690Ee6fbeD9baf5D6990F8dFd0/logo.png"
+  },
+  {
+    "symbol": "LGO",
+    "name": "LGO",
+    "decimals": 8,
+    "address": "0x0a50C93c762fDD6E56D86215C24AaAD43aB629aa",
+    "coinGeckoId": "legolas-exchange",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0a50C93c762fDD6E56D86215C24AaAD43aB629aa/logo.png"
+  },
+  {
+    "symbol": "STAKE",
+    "name": "STAKE",
+    "decimals": 18,
+    "address": "0x0Ae055097C6d159879521C384F1D2123D1f195e6",
+    "coinGeckoId": "xdai-stake",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0Ae055097C6d159879521C384F1D2123D1f195e6/logo.png"
+  },
+  {
+    "symbol": "YFI",
+    "name": "yearn.finance",
+    "decimals": 18,
+    "address": "0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e",
+    "coinGeckoId": "yearn-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0bc529c00C6401aEF6D220BE8C6Ea1667F6Ad93e/logo.png"
+  },
+  {
+    "symbol": "BFC",
+    "name": "Bifrost",
+    "decimals": 18,
+    "address": "0x0c7D5ae016f806603CB1782bEa29AC69471CAb9c",
+    "coinGeckoId": "bifrost",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0c7D5ae016f806603CB1782bEa29AC69471CAb9c/logo.png"
+  },
+  {
+    "symbol": "MINT",
+    "name": "Public Mint",
+    "decimals": 18,
+    "address": "0x0CDF9acd87E940837ff21BB40c9fd55F68bba059",
+    "coinGeckoId": "public-mint",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0CDF9acd87E940837ff21BB40c9fd55F68bba059/logo.png"
+  },
+  {
+    "symbol": "POOL",
+    "name": "PoolTogether",
+    "decimals": 18,
+    "address": "0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e",
+    "coinGeckoId": "pooltogether",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0cEC1A9154Ff802e7934Fc916Ed7Ca50bDE6844e/logo.png"
+  },
+  {
+    "symbol": "BAT",
+    "name": "Basic Attention",
+    "decimals": 18,
+    "address": "0x0D8775F648430679A709E98d2b0Cb6250d2887EF",
+    "coinGeckoId": "basic-attention-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0D8775F648430679A709E98d2b0Cb6250d2887EF/logo.png"
+  },
+  {
+    "symbol": "DAO",
+    "name": "DAO Maker",
+    "decimals": 18,
+    "address": "0x0f51bb10119727a7e5eA3538074fb341F56B09Ad",
+    "coinGeckoId": "dao-maker",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0f51bb10119727a7e5eA3538074fb341F56B09Ad/logo.png"
+  },
+  {
+    "symbol": "XIO",
+    "name": "Blockzero Labs",
+    "decimals": 18,
+    "address": "0x0f7F961648aE6Db43C75663aC7E5414Eb79b5704",
+    "coinGeckoId": "xio",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0f7F961648aE6Db43C75663aC7E5414Eb79b5704/logo.png"
+  },
+  {
+    "symbol": "PUNDIX",
+    "name": "Pundi X",
+    "decimals": 18,
+    "address": "0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38",
+    "coinGeckoId": "pundi-x-2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0FD10b9899882a6f2fcb5c371E17e70FdEe00C38/logo.png"
+  },
+  {
+    "symbol": "LAYER",
+    "name": "UniLayer",
+    "decimals": 18,
+    "address": "0x0fF6ffcFDa92c53F615a4A75D982f399C989366b",
+    "coinGeckoId": "unilayer",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x0fF6ffcFDa92c53F615a4A75D982f399C989366b/logo.png"
+  },
+  {
+    "symbol": "UMX",
+    "name": "UniMex Network",
+    "decimals": 18,
+    "address": "0x10Be9a8dAe441d276a5027936c3aADEd2d82bC15",
+    "coinGeckoId": "unimex-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x10Be9a8dAe441d276a5027936c3aADEd2d82bC15/logo.png"
+  },
+  {
+    "symbol": "1INCH",
+    "name": "1inch",
+    "decimals": 18,
+    "address": "0x111111111117dC0aa78b770fA6A738034120C302",
+    "coinGeckoId": "1inch",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x111111111117dC0aa78b770fA6A738034120C302/logo.png"
+  },
+  {
+    "symbol": "ARMOR",
+    "name": "ARMOR",
+    "decimals": 18,
+    "address": "0x1337DEF16F9B486fAEd0293eb623Dc8395dFE46a",
+    "coinGeckoId": "armor",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1337DEF16F9B486fAEd0293eb623Dc8395dFE46a/logo.png"
+  },
+  {
+    "symbol": "arNXM",
+    "name": "Armor NXM",
+    "decimals": 18,
+    "address": "0x1337DEF18C680aF1f9f45cBcab6309562975b1dD",
+    "coinGeckoId": "armor-nxm",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1337DEF18C680aF1f9f45cBcab6309562975b1dD/logo.png"
+  },
+  {
+    "symbol": "DPI",
+    "name": "DeFi Pulse Index",
+    "decimals": 18,
+    "address": "0x1494CA1F11D487c2bBe4543E90080AeBa4BA3C2b",
+    "coinGeckoId": "defipulse-index",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1494CA1F11D487c2bBe4543E90080AeBa4BA3C2b/logo.png"
+  },
+  {
+    "symbol": "DHC",
+    "name": "DeltaHub Community",
+    "decimals": 18,
+    "address": "0x152687Bc4A7FCC89049cF119F9ac3e5aCF2eE7ef",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x152687Bc4A7FCC89049cF119F9ac3e5aCF2eE7ef/logo.png"
+  },
+  {
+    "symbol": "eMax",
+    "name": "EthereumMax",
+    "decimals": 18,
+    "address": "0x15874d65e649880c2614e7a480cb7c9A55787FF6",
+    "coinGeckoId": "ethereummax",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x15874d65e649880c2614e7a480cb7c9A55787FF6/logo.png"
+  },
+  {
+    "symbol": "PAID",
+    "name": "PAID Network",
+    "decimals": 18,
+    "address": "0x1614F18Fc94f47967A3Fbe5FfcD46d4e7Da3D787",
+    "coinGeckoId": "paid-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1614F18Fc94f47967A3Fbe5FfcD46d4e7Da3D787/logo.png"
+  },
+  {
+    "symbol": "KEX",
+    "name": "KIRA Network",
+    "decimals": 6,
+    "address": "0x16980b3B4a3f9D89E33311B5aa8f80303E5ca4F8",
+    "coinGeckoId": "kira-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x16980b3B4a3f9D89E33311B5aa8f80303E5ca4F8/logo.png"
+  },
+  {
+    "symbol": "PMON",
+    "name": "Polychain Monsters",
+    "decimals": 18,
+    "address": "0x1796ae0b0fa4862485106a0de9b654eFE301D0b2",
+    "coinGeckoId": "polychain-monsters",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1796ae0b0fa4862485106a0de9b654eFE301D0b2/logo.png"
+  },
+  {
+    "symbol": "CC10",
+    "name": "Cryptocurrency Top 10 Tokens Index",
+    "decimals": 18,
+    "address": "0x17aC188e09A7890a1844E5E65471fE8b0CcFadF3",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x17aC188e09A7890a1844E5E65471fE8b0CcFadF3/logo.png"
+  },
+  {
+    "symbol": "AUDIO",
+    "name": "Audius",
+    "decimals": 18,
+    "address": "0x18aAA7115705e8be94bfFEBDE57Af9BFc265B998",
+    "coinGeckoId": "audius",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x18aAA7115705e8be94bfFEBDE57Af9BFc265B998/logo.png"
+  },
+  {
+    "symbol": "REP",
+    "name": "Augur",
+    "decimals": 18,
+    "address": "0x1985365e9f78359a9B6AD760e32412f4a445E862",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1985365e9f78359a9B6AD760e32412f4a445E862/logo.png"
+  },
+  {
+    "symbol": "VSP",
+    "name": "Vesper Finance",
+    "decimals": 18,
+    "address": "0x1b40183EFB4Dd766f11bDa7A7c3AD8982e998421",
+    "coinGeckoId": "vesper-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1b40183EFB4Dd766f11bDa7A7c3AD8982e998421/logo.png"
+  },
+  {
+    "symbol": "MATTER",
+    "name": "Antimatter.Finance Governance Token",
+    "decimals": 18,
+    "address": "0x1C9491865a1DE77C5b6e19d2E6a5F1D7a6F2b25F",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1C9491865a1DE77C5b6e19d2E6a5F1D7a6F2b25F/logo.png"
+  },
+  {
+    "symbol": "TOWER",
+    "name": "Tower",
+    "decimals": 18,
+    "address": "0x1C9922314ED1415c95b9FD453c3818fd41867d0B",
+    "coinGeckoId": "tower",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1C9922314ED1415c95b9FD453c3818fd41867d0B/logo.png"
+  },
+  {
+    "symbol": "NFY",
+    "name": "Non-Fungible Yearn",
+    "decimals": 18,
+    "address": "0x1cBb83EbcD552D5EBf8131eF8c9CD9d9BAB342bC",
+    "coinGeckoId": "non-fungible-yearn",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1cBb83EbcD552D5EBf8131eF8c9CD9d9BAB342bC/logo.png"
+  },
+  {
+    "symbol": "KP3R",
+    "name": "Keep3rV1",
+    "decimals": 18,
+    "address": "0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44",
+    "coinGeckoId": "keep3rv1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1cEB5cB57C4D4E2b2433641b95Dd330A33185A44/logo.png"
+  },
+  {
+    "symbol": "LEAD",
+    "name": "Lead",
+    "decimals": 18,
+    "address": "0x1dD80016e3d4ae146Ee2EBB484e8edD92dacC4ce",
+    "coinGeckoId": "lead-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1dD80016e3d4ae146Ee2EBB484e8edD92dacC4ce/logo.png"
+  },
+  {
+    "symbol": "CGG",
+    "name": "Chain Guardians",
+    "decimals": 18,
+    "address": "0x1fE24F25b1Cf609B9c4e7E12D802e3640dFA5e43",
+    "coinGeckoId": "chain-guardians",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1fE24F25b1Cf609B9c4e7E12D802e3640dFA5e43/logo.png"
+  },
+  {
+    "symbol": "OVR",
+    "name": "Ovr",
+    "decimals": 18,
+    "address": "0x21BfBDa47A0B4B5b1248c767Ee49F7caA9B23697",
+    "coinGeckoId": "ovr",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x21BfBDa47A0B4B5b1248c767Ee49F7caA9B23697/logo.png"
+  },
+  {
+    "symbol": "REPv2",
+    "name": "Augur",
+    "decimals": 18,
+    "address": "0x221657776846890989a759BA2973e427DfF5C9bB",
+    "coinGeckoId": "augur",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x221657776846890989a759BA2973e427DfF5C9bB/logo.png"
+  },
+  {
+    "symbol": "UNN",
+    "name": "UNION Protocol Governance",
+    "decimals": 18,
+    "address": "0x226f7b842E0F0120b7E194D05432b3fd14773a9D",
+    "coinGeckoId": "union-protocol-governance-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x226f7b842E0F0120b7E194D05432b3fd14773a9D/logo.png"
+  },
+  {
+    "symbol": "SOCKS",
+    "name": "Unisocks",
+    "decimals": 18,
+    "address": "0x23B608675a2B2fB1890d3ABBd85c5775c51691d5",
+    "coinGeckoId": "unisocks",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x23B608675a2B2fB1890d3ABBd85c5775c51691d5/logo.png"
+  },
+  {
+    "symbol": "BID",
+    "name": "Bidao",
+    "decimals": 18,
+    "address": "0x25e1474170c4c0aA64fa98123bdc8dB49D7802fa",
+    "coinGeckoId": "bidao",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x25e1474170c4c0aA64fa98123bdc8dB49D7802fa/logo.png"
+  },
+  {
+    "symbol": "CELL",
+    "name": "Cellframe",
+    "decimals": 18,
+    "address": "0x26c8AFBBFE1EBaca03C2bB082E69D0476Bffe099",
+    "coinGeckoId": "cellframe",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x26c8AFBBFE1EBaca03C2bB082E69D0476Bffe099/logo.png"
+  },
+  {
+    "symbol": "DGVC",
+    "name": "DegenVC",
+    "decimals": 18,
+    "address": "0x26E43759551333e57F073bb0772F50329A957b30",
+    "coinGeckoId": "degenvc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x26E43759551333e57F073bb0772F50329A957b30/logo.png"
+  },
+  {
+    "symbol": "LEASH",
+    "name": "Doge Killer",
+    "decimals": 18,
+    "address": "0x27C70Cd1946795B66be9d954418546998b546634",
+    "coinGeckoId": "leash",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x27C70Cd1946795B66be9d954418546998b546634/logo.png"
+  },
+  {
+    "symbol": "FROGE",
+    "name": "Froge Finance",
+    "decimals": 9,
+    "address": "0x29502fE4d233EF0b45C3647101Fa1252cE0634BD",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x29502fE4d233EF0b45C3647101Fa1252cE0634BD/logo.png"
+  },
+  {
+    "symbol": "HEX",
+    "name": "HEX",
+    "decimals": 8,
+    "address": "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
+    "coinGeckoId": "hex",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39/logo.png"
+  },
+  {
+    "symbol": "CREAM",
+    "name": "Cream",
+    "decimals": 18,
+    "address": "0x2ba592F78dB6436527729929AAf6c908497cB200",
+    "coinGeckoId": "cream-2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x2ba592F78dB6436527729929AAf6c908497cB200/logo.png"
+  },
+  {
+    "symbol": "MTLX",
+    "name": "Mettalex",
+    "decimals": 18,
+    "address": "0x2e1E15C44Ffe4Df6a0cb7371CD00d5028e571d14",
+    "coinGeckoId": "mettalex",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x2e1E15C44Ffe4Df6a0cb7371CD00d5028e571d14/logo.png"
+  },
+  {
+    "symbol": "YFIM",
+    "name": "Yfi.mobi",
+    "decimals": 18,
+    "address": "0x2e2f3246b6c65CCc4239c9Ee556EC143a7E5DE2c",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x2e2f3246b6c65CCc4239c9Ee556EC143a7E5DE2c/logo.png"
+  },
+  {
+    "symbol": "ZEE",
+    "name": "ZeroSwap",
+    "decimals": 18,
+    "address": "0x2eDf094dB69d6Dcd487f1B3dB9febE2eeC0dd4c5",
+    "coinGeckoId": "zeroswap",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x2eDf094dB69d6Dcd487f1B3dB9febE2eeC0dd4c5/logo.png"
+  },
+  {
+    "symbol": "DEC",
+    "name": "Decentr",
+    "decimals": 18,
+    "address": "0x30f271C9E86D2B7d00a6376Cd96A1cFBD5F0b9b3",
+    "coinGeckoId": "decentr",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x30f271C9E86D2B7d00a6376Cd96A1cFBD5F0b9b3/logo.png"
+  },
+  {
+    "symbol": "RUNE",
+    "name": "THORChain (ERC20)",
+    "decimals": 18,
+    "address": "0x3155BA85D5F96b2d030a4966AF206230e46849cb",
+    "coinGeckoId": "thorchain-erc20",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x3155BA85D5F96b2d030a4966AF206230e46849cb/logo.png"
+  },
+  {
+    "symbol": "AKITA",
+    "name": "Akita Inu",
+    "decimals": 18,
+    "address": "0x3301Ee63Fb29F863f2333Bd4466acb46CD8323E6",
+    "coinGeckoId": "akita-inu",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x3301Ee63Fb29F863f2333Bd4466acb46CD8323E6/logo.png"
+  },
+  {
+    "symbol": "wANATHA",
+    "name": "Wrapped ANATHA",
+    "decimals": 18,
+    "address": "0x3383c5a8969Dc413bfdDc9656Eb80A1408E4bA20",
+    "coinGeckoId": "wrapped-anatha",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x3383c5a8969Dc413bfdDc9656Eb80A1408E4bA20/logo.png"
+  },
+  {
+    "symbol": "RAMP",
+    "name": "RAMP [OLD]",
+    "decimals": 18,
+    "address": "0x33D0568941C0C64ff7e0FB4fbA0B11BD37deEd9f",
+    "coinGeckoId": "ramp",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x33D0568941C0C64ff7e0FB4fbA0B11BD37deEd9f/logo.png"
+  },
+  {
+    "symbol": "OM",
+    "name": "MANTRA",
+    "decimals": 18,
+    "address": "0x3593D125a4f7849a1B059E64F4517A86Dd60c95d",
+    "coinGeckoId": "mantra-dao",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x3593D125a4f7849a1B059E64F4517A86Dd60c95d/logo.png"
+  },
+  {
+    "symbol": "PRQ",
+    "name": "PARSIQ",
+    "decimals": 18,
+    "address": "0x362bc847A3a9637d3af6624EeC853618a43ed7D2",
+    "coinGeckoId": "parsiq",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x362bc847A3a9637d3af6624EeC853618a43ed7D2/logo.png"
+  },
+  {
+    "symbol": "FEGeth",
+    "name": "FEG",
+    "decimals": 9,
+    "address": "0x389999216860AB8E0175387A0c90E5c52522C945",
+    "coinGeckoId": "feg-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x389999216860AB8E0175387A0c90E5c52522C945/logo.png"
+  },
+  {
+    "symbol": "CVP",
+    "name": "PowerPool Concentrated Voting Power",
+    "decimals": 18,
+    "address": "0x38e4adB44ef08F22F5B5b76A8f0c2d0dCbE7DcA1",
+    "coinGeckoId": "concentrated-voting-power",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x38e4adB44ef08F22F5B5b76A8f0c2d0dCbE7DcA1/logo.png"
+  },
+  {
+    "symbol": "DSLA",
+    "name": "DSLA Protocol",
+    "decimals": 18,
+    "address": "0x3aFfCCa64c2A6f4e3B6Bd9c64CD2C969EFd1ECBe",
+    "coinGeckoId": "stacktical",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x3aFfCCa64c2A6f4e3B6Bd9c64CD2C969EFd1ECBe/logo.png"
+  },
+  {
+    "symbol": "VIDYA",
+    "name": "Vidya",
+    "decimals": 18,
+    "address": "0x3D3D35bb9bEC23b06Ca00fe472b50E7A4c692C30",
+    "coinGeckoId": "vidya",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x3D3D35bb9bEC23b06Ca00fe472b50E7A4c692C30/logo.png"
+  },
+  {
+    "symbol": "REN",
+    "name": "REN",
+    "decimals": 18,
+    "address": "0x408e41876cCCDC0F92210600ef50372656052a38",
+    "coinGeckoId": "republic-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x408e41876cCCDC0F92210600ef50372656052a38/logo.png"
+  },
+  {
+    "symbol": "XOR",
+    "name": "Sora",
+    "decimals": 18,
+    "address": "0x40FD72257597aA14C7231A7B1aaa29Fce868F677",
+    "coinGeckoId": "sora",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x40FD72257597aA14C7231A7B1aaa29Fce868F677/logo.png"
+  },
+  {
+    "symbol": "FUN",
+    "name": "FUN",
+    "decimals": 8,
+    "address": "0x419D0d8BdD9aF5e606Ae2232ed285Aff190E711b",
+    "coinGeckoId": "funfair",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x419D0d8BdD9aF5e606Ae2232ed285Aff190E711b/logo.png"
+  },
+  {
+    "symbol": "BLANK",
+    "name": "BlockWallet",
+    "decimals": 18,
+    "address": "0x41A3Dba3D677E573636BA691a70ff2D606c29666",
+    "coinGeckoId": "blank",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x41A3Dba3D677E573636BA691a70ff2D606c29666/logo.png"
+  },
+  {
+    "symbol": "PICKLE",
+    "name": "Pickle Finance",
+    "decimals": 18,
+    "address": "0x429881672B9AE42b8EbA0E26cD9C73711b891Ca5",
+    "coinGeckoId": "pickle-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x429881672B9AE42b8EbA0E26cD9C73711b891Ca5/logo.png"
+  },
+  {
+    "symbol": "DF",
+    "name": "dForce",
+    "decimals": 18,
+    "address": "0x431ad2ff6a9C365805eBaD47Ee021148d6f7DBe0",
+    "coinGeckoId": "dforce-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x431ad2ff6a9C365805eBaD47Ee021148d6f7DBe0/logo.png"
+  },
+  {
+    "symbol": "FLOKI",
+    "name": "Floki Inu",
+    "decimals": 9,
+    "address": "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E",
+    "coinGeckoId": "floki-inu",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E/logo.png"
+  },
+  {
+    "symbol": "OXT",
+    "name": "Orchid Protocol",
+    "decimals": 18,
+    "address": "0x4575f41308EC1483f3d399aa9a2826d74Da13Deb",
+    "coinGeckoId": "orchid-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4575f41308EC1483f3d399aa9a2826d74Da13Deb/logo.png"
+  },
+  {
+    "symbol": "PAXG",
+    "name": "PAX Gold",
+    "decimals": 18,
+    "address": "0x45804880De22913dAFE09f4980848ECE6EcbAf78",
+    "coinGeckoId": "pax-gold",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x45804880De22913dAFE09f4980848ECE6EcbAf78/logo.png"
+  },
+  {
+    "symbol": "WOO",
+    "name": "WOO Network",
+    "decimals": 18,
+    "address": "0x4691937a7508860F876c9c0a2a617E7d9E945D4B",
+    "coinGeckoId": "woo-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4691937a7508860F876c9c0a2a617E7d9E945D4B/logo.png"
+  },
+  {
+    "symbol": "QNT",
+    "name": "Quant",
+    "decimals": 18,
+    "address": "0x4a220E6096B25EADb88358cb44068A3248254675",
+    "coinGeckoId": "quant-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4a220E6096B25EADb88358cb44068A3248254675/logo.png"
+  },
+  {
+    "symbol": "JUP",
+    "name": "Jupiter",
+    "decimals": 18,
+    "address": "0x4B1E80cAC91e2216EEb63e29B957eB91Ae9C2Be8",
+    "coinGeckoId": "jupiter",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4B1E80cAC91e2216EEb63e29B957eB91Ae9C2Be8/logo.png"
+  },
+  {
+    "symbol": "ORAI",
+    "name": "Oraichain",
+    "decimals": 18,
+    "address": "0x4c11249814f11b9346808179Cf06e71ac328c1b5",
+    "coinGeckoId": "oraichain-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4c11249814f11b9346808179Cf06e71ac328c1b5/logo.png"
+  },
+  {
+    "symbol": "TRU",
+    "name": "TrueFi",
+    "decimals": 8,
+    "address": "0x4C19596f5aAfF459fA38B0f7eD92F11AE6543784",
+    "coinGeckoId": "truefi",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4C19596f5aAfF459fA38B0f7eD92F11AE6543784/logo.png"
+  },
+  {
+    "symbol": "MCB",
+    "name": "MUX Protocol",
+    "decimals": 18,
+    "address": "0x4e352cF164E64ADCBad318C3a1e222E9EBa4Ce42",
+    "coinGeckoId": "mcdex",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4e352cF164E64ADCBad318C3a1e222E9EBa4Ce42/logo.png"
+  },
+  {
+    "symbol": "NU",
+    "name": "NuCypher",
+    "decimals": 18,
+    "address": "0x4fE83213D56308330EC302a8BD641f1d0113A4Cc",
+    "coinGeckoId": "nucypher",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4fE83213D56308330EC302a8BD641f1d0113A4Cc/logo.png"
+  },
+  {
+    "symbol": "RAZOR",
+    "name": "Razor Network",
+    "decimals": 18,
+    "address": "0x50DE6856358Cc35f3A9a57eAAA34BD4cB707d2cd",
+    "coinGeckoId": "razor-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x50DE6856358Cc35f3A9a57eAAA34BD4cB707d2cd/logo.png"
+  },
+  {
+    "symbol": "eRSDL",
+    "name": "unFederalReserve",
+    "decimals": 18,
+    "address": "0x5218E472cFCFE0b64A064F055B43b4cdC9EfD3A6",
+    "coinGeckoId": "unfederalreserve",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5218E472cFCFE0b64A064F055B43b4cdC9EfD3A6/logo.png"
+  },
+  {
+    "symbol": "pBTC",
+    "name": "pTokens BTC [OLD]",
+    "decimals": 18,
+    "address": "0x5228a22e72ccC52d415EcFd199F99D0665E7733b",
+    "coinGeckoId": "ptokens-btc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5228a22e72ccC52d415EcFd199F99D0665E7733b/logo.png"
+  },
+  {
+    "symbol": "BART",
+    "name": "BarterTrade",
+    "decimals": 18,
+    "address": "0x54C9EA2E9C9E8eD865Db4A4ce6711C2a0d5063Ba",
+    "coinGeckoId": "bartertrade",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x54C9EA2E9C9E8eD865Db4A4ce6711C2a0d5063Ba/logo.png"
+  },
+  {
+    "symbol": "REVV",
+    "name": "REVV",
+    "decimals": 18,
+    "address": "0x557B933a7C2c45672B610F8954A3deB39a51A8Ca",
+    "coinGeckoId": "revv",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x557B933a7C2c45672B610F8954A3deB39a51A8Ca/logo.png"
+  },
+  {
+    "symbol": "sUSD",
+    "name": "sUSD",
+    "decimals": 18,
+    "address": "0x57Ab1ec28D129707052df4dF418D58a2D46d5f51",
+    "coinGeckoId": "nusd",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x57Ab1ec28D129707052df4dF418D58a2D46d5f51/logo.png"
+  },
+  {
+    "symbol": "HEGIC",
+    "name": "Hegic",
+    "decimals": 18,
+    "address": "0x584bC13c7D411c00c01A62e8019472dE68768430",
+    "coinGeckoId": "hegic",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x584bC13c7D411c00c01A62e8019472dE68768430/logo.png"
+  },
+  {
+    "symbol": "MARSH",
+    "name": "Unmarshal",
+    "decimals": 18,
+    "address": "0x5a666c7d92E5fA7Edcb6390E4efD6d0CDd69cF37",
+    "coinGeckoId": "unmarshal",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5a666c7d92E5fA7Edcb6390E4efD6d0CDd69cF37/logo.png"
+  },
+  {
+    "symbol": "XFI",
+    "name": "Xfinance",
+    "decimals": 18,
+    "address": "0x5BEfBB272290dD5b8521D4a938f6c4757742c430",
+    "coinGeckoId": "xfinance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5BEfBB272290dD5b8521D4a938f6c4757742c430/logo.png"
+  },
+  {
+    "symbol": "DEV",
+    "name": "Dev Protocol",
+    "decimals": 18,
+    "address": "0x5cAf454Ba92e6F2c929DF14667Ee360eD9fD5b26",
+    "coinGeckoId": "dev-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5cAf454Ba92e6F2c929DF14667Ee360eD9fD5b26/logo.png"
+  },
+  {
+    "symbol": "BOND",
+    "name": "BOND",
+    "decimals": 8,
+    "address": "0x5Dc02Ea99285E17656b8350722694c35154DB1E8",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5Dc02Ea99285E17656b8350722694c35154DB1E8/logo.png"
+  },
+  {
+    "symbol": "DEXTF",
+    "name": "Domani Protocol",
+    "decimals": 18,
+    "address": "0x5F64Ab1544D28732F0A24F4713c2C8ec0dA089f0",
+    "coinGeckoId": "dextf",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5F64Ab1544D28732F0A24F4713c2C8ec0dA089f0/logo.png"
+  },
+  {
+    "symbol": "LUSD",
+    "name": "Liquity USD",
+    "decimals": 18,
+    "address": "0x5f98805A4E8be255a32880FDeC7F6728C6568bA0",
+    "coinGeckoId": "liquity-usd",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5f98805A4E8be255a32880FDeC7F6728C6568bA0/logo.png"
+  },
+  {
+    "symbol": "RLC",
+    "name": "iExec RLC",
+    "decimals": 9,
+    "address": "0x607F4C5BB672230e8672085532f7e901544a7375",
+    "coinGeckoId": "iexec-rlc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x607F4C5BB672230e8672085532f7e901544a7375/logo.png"
+  },
+  {
+    "symbol": "LPOOL",
+    "name": "Launchpool",
+    "decimals": 18,
+    "address": "0x6149C26Cd2f7b5CCdb32029aF817123F6E37Df5B",
+    "coinGeckoId": "launchpool",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6149C26Cd2f7b5CCdb32029aF817123F6E37Df5B/logo.png"
+  },
+  {
+    "symbol": "CORE",
+    "name": "cVault.finance",
+    "decimals": 18,
+    "address": "0x62359Ed7505Efc61FF1D56fEF82158CcaffA23D7",
+    "coinGeckoId": "cvault-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x62359Ed7505Efc61FF1D56fEF82158CcaffA23D7/logo.png"
+  },
+  {
+    "symbol": "FLX",
+    "name": "Reflexer Ungovernance",
+    "decimals": 18,
+    "address": "0x6243d8CEA23066d098a15582d81a598b4e8391F4",
+    "coinGeckoId": "reflexer-ungovernance-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6243d8CEA23066d098a15582d81a598b4e8391F4/logo.png"
+  },
+  {
+    "symbol": "AIOZ",
+    "name": "AIOZ Network",
+    "decimals": 18,
+    "address": "0x626E8036dEB333b408Be468F951bdB42433cBF18",
+    "coinGeckoId": "aioz-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x626E8036dEB333b408Be468F951bdB42433cBF18/logo.png"
+  },
+  {
+    "symbol": "CFi",
+    "name": "CyberFi",
+    "decimals": 18,
+    "address": "0x63b4f3e3fa4e438698CE330e365E831F7cCD1eF4",
+    "coinGeckoId": "cyberfi",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x63b4f3e3fa4e438698CE330e365E831F7cCD1eF4/logo.png"
+  },
+  {
+    "symbol": "WISE",
+    "name": "Wise",
+    "decimals": 18,
+    "address": "0x66a0f676479Cee1d7373f3DC2e2952778BfF5bd6",
+    "coinGeckoId": "wise-token11",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x66a0f676479Cee1d7373f3DC2e2952778BfF5bd6/logo.png"
+  },
+  {
+    "symbol": "KYL",
+    "name": "Kylin Network",
+    "decimals": 18,
+    "address": "0x67B6D479c7bB412C54e03dCA8E1Bc6740ce6b99C",
+    "coinGeckoId": "kylin-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x67B6D479c7bB412C54e03dCA8E1Bc6740ce6b99C/logo.png"
+  },
+  {
+    "symbol": "MARK",
+    "name": "Benchmark Protocol",
+    "decimals": 9,
+    "address": "0x67c597624B17b16fb77959217360B7cD18284253",
+    "coinGeckoId": "benchmark-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x67c597624B17b16fb77959217360B7cD18284253/logo.png"
+  },
+  {
+    "symbol": "GNO",
+    "name": "Gnosis",
+    "decimals": 18,
+    "address": "0x6810e776880C02933D47DB1b9fc05908e5386b96",
+    "coinGeckoId": "gnosis",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6810e776880C02933D47DB1b9fc05908e5386b96/logo.png"
+  },
+  {
+    "symbol": "CHADS",
+    "name": "CHADS VC",
+    "decimals": 18,
+    "address": "0x69692D3345010a207b759a7D1af6fc7F38b35c5E",
+    "coinGeckoId": "chads-vc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x69692D3345010a207b759a7D1af6fc7F38b35c5E/logo.png"
+  },
+  {
+    "symbol": "POOLZ",
+    "name": "Poolz Finance",
+    "decimals": 18,
+    "address": "0x69A95185ee2a045CDC4bCd1b1Df10710395e4e23",
+    "coinGeckoId": "poolz-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x69A95185ee2a045CDC4bCd1b1Df10710395e4e23/logo.png"
+  },
+  {
+    "symbol": "MASK",
+    "name": "Mask Network",
+    "decimals": 18,
+    "address": "0x69af81e73A73B40adF4f3d4223Cd9b1ECE623074",
+    "coinGeckoId": "mask-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x69af81e73A73B40adF4f3d4223Cd9b1ECE623074/logo.png"
+  },
+  {
+    "symbol": "FYZ",
+    "name": "Fyooz",
+    "decimals": 18,
+    "address": "0x6BFf2fE249601ed0Db3a87424a2E923118BB0312",
+    "coinGeckoId": "fyooz",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6BFf2fE249601ed0Db3a87424a2E923118BB0312/logo.png"
+  },
+  {
+    "symbol": "HOT",
+    "name": "Holo",
+    "decimals": 18,
+    "address": "0x6c6EE5e31d828De241282B9606C8e98Ea48526E2",
+    "coinGeckoId": "holotoken",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6c6EE5e31d828De241282B9606C8e98Ea48526E2/logo.png"
+  },
+  {
+    "symbol": "QRX",
+    "name": "QuiverX",
+    "decimals": 18,
+    "address": "0x6e0daDE58D2d89eBBe7aFc384e3E4f15b70b14D8",
+    "coinGeckoId": "quiverx",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6e0daDE58D2d89eBBe7aFc384e3E4f15b70b14D8/logo.png"
+  },
+  {
+    "symbol": "TRADE",
+    "name": "Unitrade",
+    "decimals": 18,
+    "address": "0x6F87D756DAf0503d08Eb8993686c7Fc01Dc44fB1",
+    "coinGeckoId": "unitrade",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6F87D756DAf0503d08Eb8993686c7Fc01Dc44fB1/logo.png"
+  },
+  {
+    "symbol": "UMB",
+    "name": "Umbrella Network",
+    "decimals": 18,
+    "address": "0x6fC13EACE26590B80cCCAB1ba5d51890577D83B2",
+    "coinGeckoId": "umbrella-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6fC13EACE26590B80cCCAB1ba5d51890577D83B2/logo.png"
+  },
+  {
+    "symbol": "BIRD",
+    "name": "Bird.Money",
+    "decimals": 18,
+    "address": "0x70401dFD142A16dC7031c56E862Fc88Cb9537Ce0",
+    "coinGeckoId": "bird-money",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x70401dFD142A16dC7031c56E862Fc88Cb9537Ce0/logo.png"
+  },
+  {
+    "symbol": "AXN",
+    "name": "Axion",
+    "decimals": 18,
+    "address": "0x71F85B2E46976bD21302B64329868fd15eb0D127",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x71F85B2E46976bD21302B64329868fd15eb0D127/logo.png"
+  },
+  {
+    "symbol": "BMI",
+    "name": "Bridge Mutual",
+    "decimals": 18,
+    "address": "0x725C263e32c72dDC3A19bEa12C5a0479a81eE688",
+    "coinGeckoId": "bridge-mutual",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x725C263e32c72dDC3A19bEa12C5a0479a81eE688/logo.png"
+  },
+  {
+    "symbol": "EPAN",
+    "name": "Paypolitan",
+    "decimals": 18,
+    "address": "0x72630B1e3B42874bf335020Ba0249e3E9e47Bafc",
+    "coinGeckoId": "paypolitan-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x72630B1e3B42874bf335020Ba0249e3E9e47Bafc/logo.png"
+  },
+  {
+    "symbol": "MVI",
+    "name": "Metaverse Index",
+    "decimals": 18,
+    "address": "0x72e364F2ABdC788b7E918bc238B21f109Cd634D7",
+    "coinGeckoId": "metaverse-index",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x72e364F2ABdC788b7E918bc238B21f109Cd634D7/logo.png"
+  },
+  {
+    "symbol": "SMARTCREDIT",
+    "name": "SmartCredit",
+    "decimals": 18,
+    "address": "0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13",
+    "coinGeckoId": "smartcredit-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x72e9D9038cE484EE986FEa183f8d8Df93f9aDA13/logo.png"
+  },
+  {
+    "symbol": "ELON",
+    "name": "Dogelon Mars",
+    "decimals": 18,
+    "address": "0x761D38e5ddf6ccf6Cf7c55759d5210750B5D60F3",
+    "coinGeckoId": "dogelon-mars",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x761D38e5ddf6ccf6Cf7c55759d5210750B5D60F3/logo.png"
+  },
+  {
+    "symbol": "XCAD",
+    "name": "XCAD Network",
+    "decimals": 18,
+    "address": "0x7659CE147D0e714454073a5dd7003544234b6Aa0",
+    "coinGeckoId": "xcad-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x7659CE147D0e714454073a5dd7003544234b6Aa0/logo.png"
+  },
+  {
+    "symbol": "BBR",
+    "name": "Bitberry",
+    "decimals": 18,
+    "address": "0x7671904eed7f10808B664fc30BB8693FD7237abF",
+    "coinGeckoId": "bitberry-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x7671904eed7f10808B664fc30BB8693FD7237abF/logo.png"
+  },
+  {
+    "symbol": "TORN",
+    "name": "Tornado Cash",
+    "decimals": 18,
+    "address": "0x77777FeDdddFfC19Ff86DB637967013e6C6A116C",
+    "coinGeckoId": "tornado-cash",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x77777FeDdddFfC19Ff86DB637967013e6C6A116C/logo.png"
+  },
+  {
+    "symbol": "WAXE",
+    "name": "WAXE",
+    "decimals": 8,
+    "address": "0x7a2Bc711E19ba6aff6cE8246C546E8c4B4944DFD",
+    "coinGeckoId": "waxe",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x7a2Bc711E19ba6aff6cE8246C546E8c4B4944DFD/logo.png"
+  },
+  {
+    "symbol": "buidl",
+    "name": "dfohub",
+    "decimals": 18,
+    "address": "0x7b123f53421b1bF8533339BFBdc7C98aA94163db",
+    "coinGeckoId": "dfohub",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x7b123f53421b1bF8533339BFBdc7C98aA94163db/logo.png"
+  },
+  {
+    "symbol": "XRT",
+    "name": "Robonomics Network",
+    "decimals": 9,
+    "address": "0x7dE91B204C1C737bcEe6F000AAA6569Cf7061cb7",
+    "coinGeckoId": "robonomics-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x7dE91B204C1C737bcEe6F000AAA6569Cf7061cb7/logo.png"
+  },
+  {
+    "symbol": "XTK",
+    "name": "xToken",
+    "decimals": 18,
+    "address": "0x7F3EDcdD180Dbe4819Bd98FeE8929b5cEdB3AdEB",
+    "coinGeckoId": "xtoken",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x7F3EDcdD180Dbe4819Bd98FeE8929b5cEdB3AdEB/logo.png"
+  },
+  {
+    "symbol": "10SET",
+    "name": "Tenset",
+    "decimals": 18,
+    "address": "0x7FF4169a6B5122b664c51c95727d87750eC07c84",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x7FF4169a6B5122b664c51c95727d87750eC07c84/logo.png"
+  },
+  {
+    "symbol": "OGN",
+    "name": "Origin Protocol",
+    "decimals": 18,
+    "address": "0x8207c1FfC5B6804F6024322CcF34F29c3541Ae26",
+    "coinGeckoId": "origin-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8207c1FfC5B6804F6024322CcF34F29c3541Ae26/logo.png"
+  },
+  {
+    "symbol": "POLS",
+    "name": "Polkastarter",
+    "decimals": 18,
+    "address": "0x83e6f1E41cdd28eAcEB20Cb649155049Fac3D5Aa",
+    "coinGeckoId": "polkastarter",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x83e6f1E41cdd28eAcEB20Cb649155049Fac3D5Aa/logo.png"
+  },
+  {
+    "symbol": "UBT",
+    "name": "Unibright",
+    "decimals": 8,
+    "address": "0x8400D94A5cb0fa0D041a3788e395285d61c9ee5e",
+    "coinGeckoId": "unibright",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8400D94A5cb0fa0D041a3788e395285d61c9ee5e/logo.png"
+  },
+  {
+    "symbol": "DIA",
+    "name": "DIA",
+    "decimals": 18,
+    "address": "0x84cA8bc7997272c7CfB4D0Cd3D55cd942B3c9419",
+    "coinGeckoId": "dia-data",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x84cA8bc7997272c7CfB4D0Cd3D55cd942B3c9419/logo.png"
+  },
+  {
+    "symbol": "FRAX",
+    "name": "Frax",
+    "decimals": 18,
+    "address": "0x853d955aCEf822Db058eb8505911ED77F175b99e",
+    "coinGeckoId": "frax",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x853d955aCEf822Db058eb8505911ED77F175b99e/logo.png"
+  },
+  {
+    "symbol": "KEEP",
+    "name": "Keep Network",
+    "decimals": 18,
+    "address": "0x85Eee30c52B0b379b046Fb0F85F4f3Dc3009aFEC",
+    "coinGeckoId": "keep-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x85Eee30c52B0b379b046Fb0F85F4f3Dc3009aFEC/logo.png"
+  },
+  {
+    "symbol": "MPH",
+    "name": "88mph",
+    "decimals": 18,
+    "address": "0x8888801aF4d980682e47f1A9036e589479e835C5",
+    "coinGeckoId": "88mph",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8888801aF4d980682e47f1A9036e589479e835C5/logo.png"
+  },
+  {
+    "symbol": "⚗️",
+    "name": "Alchemist",
+    "decimals": 18,
+    "address": "0x88ACDd2a6425c3FaAE4Bc9650Fd7E27e0Bebb7aB",
+    "coinGeckoId": "alchemist",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x88ACDd2a6425c3FaAE4Bc9650Fd7E27e0Bebb7aB/logo.png"
+  },
+  {
+    "symbol": "DEGO",
+    "name": "Dego Finance",
+    "decimals": 18,
+    "address": "0x88EF27e69108B2633F8E1C184CC37940A075cC02",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x88EF27e69108B2633F8E1C184CC37940A075cC02/logo.png"
+  },
+  {
+    "symbol": "PNT",
+    "name": "pNetwork",
+    "decimals": 18,
+    "address": "0x89Ab32156e46F46D02ade3FEcbe5Fc4243B9AAeD",
+    "coinGeckoId": "pnetwork",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x89Ab32156e46F46D02ade3FEcbe5Fc4243B9AAeD/logo.png"
+  },
+  {
+    "symbol": "FXF",
+    "name": "FINXFLO",
+    "decimals": 18,
+    "address": "0x8a40c222996f9F3431f63Bf80244C36822060f12",
+    "coinGeckoId": "finxflo",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8a40c222996f9F3431f63Bf80244C36822060f12/logo.png"
+  },
+  {
+    "symbol": "GET",
+    "name": "GET Protocol",
+    "decimals": 18,
+    "address": "0x8a854288a5976036A725879164Ca3e91d30c6A1B",
+    "coinGeckoId": "get-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8a854288a5976036A725879164Ca3e91d30c6A1B/logo.png"
+  },
+  {
+    "symbol": "SAITAMA",
+    "name": "Saitama Inu",
+    "decimals": 9,
+    "address": "0x8B3192f5eEBD8579568A2Ed41E6FEB402f93f73F",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8B3192f5eEBD8579568A2Ed41E6FEB402f93f73F/logo.png"
+  },
+  {
+    "symbol": "PKF",
+    "name": "PolkaFoundry",
+    "decimals": 18,
+    "address": "0x8B39B70E39Aa811b69365398e0aACe9bee238AEb",
+    "coinGeckoId": "polkafoundry",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8B39B70E39Aa811b69365398e0aACe9bee238AEb/logo.png"
+  },
+  {
+    "symbol": "FX",
+    "name": "Function X",
+    "decimals": 18,
+    "address": "0x8c15Ef5b4B21951d50E53E4fbdA8298FFAD25057",
+    "coinGeckoId": "fx-coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8c15Ef5b4B21951d50E53E4fbdA8298FFAD25057/logo.png"
+  },
+  {
+    "symbol": "SXP",
+    "name": "SXP",
+    "decimals": 18,
+    "address": "0x8CE9137d39326AD0cD6491fb5CC0CbA0e089b6A9",
+    "coinGeckoId": "swipe",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8CE9137d39326AD0cD6491fb5CC0CbA0e089b6A9/logo.png"
+  },
+  {
+    "symbol": "TBTC",
+    "name": "tBTC",
+    "decimals": 18,
+    "address": "0x8dAEBADE922dF735c38C80C7eBD708Af50815fAa",
+    "coinGeckoId": "tbtc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8dAEBADE922dF735c38C80C7eBD708Af50815fAa/logo.png"
+  },
+  {
+    "symbol": "AGI",
+    "name": "SingularityNET Token",
+    "decimals": 8,
+    "address": "0x8eB24319393716668D768dCEC29356ae9CfFe285",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8eB24319393716668D768dCEC29356ae9CfFe285/logo.png"
+  },
+  {
+    "symbol": "REQ",
+    "name": "Request",
+    "decimals": 18,
+    "address": "0x8f8221aFbB33998d8584A2B05749bA73c37a938a",
+    "coinGeckoId": "request-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x8f8221aFbB33998d8584A2B05749bA73c37a938a/logo.png"
+  },
+  {
+    "symbol": "WHALE",
+    "name": "WHALE",
+    "decimals": 4,
+    "address": "0x9355372396e3F6daF13359B7b607a3374cc638e0",
+    "coinGeckoId": "whale",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9355372396e3F6daF13359B7b607a3374cc638e0/logo.png"
+  },
+  {
+    "symbol": "PNK",
+    "name": "Kleros",
+    "decimals": 18,
+    "address": "0x93ED3FBe21207Ec2E8f2d3c3de6e058Cb73Bc04d",
+    "coinGeckoId": "kleros",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x93ED3FBe21207Ec2E8f2d3c3de6e058Cb73Bc04d/logo.png"
+  },
+  {
+    "symbol": "RING",
+    "name": "Darwinia Network",
+    "decimals": 18,
+    "address": "0x9469D013805bFfB7D3DEBe5E7839237e535ec483",
+    "coinGeckoId": "darwinia-network-native-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9469D013805bFfB7D3DEBe5E7839237e535ec483/logo.png"
+  },
+  {
+    "symbol": "CARD",
+    "name": "Cardstack",
+    "decimals": 18,
+    "address": "0x954b890704693af242613edEf1B603825afcD708",
+    "coinGeckoId": "cardstack",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x954b890704693af242613edEf1B603825afcD708/logo.png"
+  },
+  {
+    "symbol": "FEI",
+    "name": "Fei USD",
+    "decimals": 18,
+    "address": "0x956F47F50A910163D8BF957Cf5846D573E7f87CA",
+    "coinGeckoId": "fei-usd",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x956F47F50A910163D8BF957Cf5846D573E7f87CA/logo.png"
+  },
+  {
+    "symbol": "APY",
+    "name": "APY.Finance",
+    "decimals": 18,
+    "address": "0x95a4492F028aa1fd432Ea71146b433E7B4446611",
+    "coinGeckoId": "apy-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x95a4492F028aa1fd432Ea71146b433E7B4446611/logo.png"
+  },
+  {
+    "symbol": "DYP",
+    "name": "DeFi Yield Protocol",
+    "decimals": 18,
+    "address": "0x961C8c0B1aaD0c0b10a51FeF6a867E3091BCef17",
+    "coinGeckoId": "defi-yield-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x961C8c0B1aaD0c0b10a51FeF6a867E3091BCef17/logo.png"
+  },
+  {
+    "symbol": "OCEAN",
+    "name": "Ocean Protocol",
+    "decimals": 18,
+    "address": "0x967da4048cD07aB37855c090aAF366e4ce1b9F48",
+    "coinGeckoId": "ocean-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x967da4048cD07aB37855c090aAF366e4ce1b9F48/logo.png"
+  },
+  {
+    "symbol": "STRONG",
+    "name": "Strong",
+    "decimals": 18,
+    "address": "0x990f341946A3fdB507aE7e52d17851B87168017c",
+    "coinGeckoId": "strong",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x990f341946A3fdB507aE7e52d17851B87168017c/logo.png"
+  },
+  {
+    "symbol": "SPI",
+    "name": "Shopping.io",
+    "decimals": 18,
+    "address": "0x9B02dD390a603Add5c07f9fd9175b7DABE8D63B7",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9B02dD390a603Add5c07f9fd9175b7DABE8D63B7/logo.png"
+  },
+  {
+    "symbol": "BBTC",
+    "name": "Binance Wrapped BTC",
+    "decimals": 8,
+    "address": "0x9BE89D2a4cd102D8Fecc6BF9dA793be995C22541",
+    "coinGeckoId": "binance-wrapped-btc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9BE89D2a4cd102D8Fecc6BF9dA793be995C22541/logo.png"
+  },
+  {
+    "symbol": "DOKI",
+    "name": "Doki Doki",
+    "decimals": 18,
+    "address": "0x9cEB84f92A0561fa3Cc4132aB9c0b76A59787544",
+    "coinGeckoId": "doki-doki-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9cEB84f92A0561fa3Cc4132aB9c0b76A59787544/logo.png"
+  },
+  {
+    "symbol": "DELTA",
+    "name": "Delta Financial",
+    "decimals": 18,
+    "address": "0x9EA3b5b4EC044b70375236A281986106457b20EF",
+    "coinGeckoId": "delta-financial",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9EA3b5b4EC044b70375236A281986106457b20EF/logo.png"
+  },
+  {
+    "symbol": "UNISTAKE",
+    "name": "Unistake",
+    "decimals": 18,
+    "address": "0x9Ed8e7C9604790F7Ec589F99b94361d8AAB64E5E",
+    "coinGeckoId": "unistake",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9Ed8e7C9604790F7Ec589F99b94361d8AAB64E5E/logo.png"
+  },
+  {
+    "symbol": "TAD",
+    "name": "Tadpole",
+    "decimals": 18,
+    "address": "0x9f7229aF0c4b9740e207Ea283b9094983f78ba04",
+    "coinGeckoId": "tadpole-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9f7229aF0c4b9740e207Ea283b9094983f78ba04/logo.png"
+  },
+  {
+    "symbol": "GLQ",
+    "name": "GraphLinq Protocol",
+    "decimals": 18,
+    "address": "0x9F9c8ec3534c3cE16F928381372BfbFBFb9F4D24",
+    "coinGeckoId": "graphlinq-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9F9c8ec3534c3cE16F928381372BfbFBFb9F4D24/logo.png"
+  },
+  {
+    "symbol": "FARM",
+    "name": "Harvest Finance",
+    "decimals": 18,
+    "address": "0xa0246c9032bC3A600820415aE600c6388619A14D",
+    "coinGeckoId": "harvest-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xa0246c9032bC3A600820415aE600c6388619A14D/logo.png"
+  },
+  {
+    "symbol": "wCRES",
+    "name": "Wrapped CrescoFin",
+    "decimals": 18,
+    "address": "0xa0afAA285Ce85974c3C881256cB7F225e3A1178a",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xa0afAA285Ce85974c3C881256cB7F225e3A1178a/logo.png"
+  },
+  {
+    "symbol": "ANT",
+    "name": "Aragon",
+    "decimals": 18,
+    "address": "0xa117000000f279D81A1D3cc75430fAA017FA5A2e",
+    "coinGeckoId": "aragon",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xa117000000f279D81A1D3cc75430fAA017FA5A2e/logo.png"
+  },
+  {
+    "symbol": "RFOX",
+    "name": "RFOX",
+    "decimals": 18,
+    "address": "0xa1d6Df714F91DeBF4e0802A542E13067f31b8262",
+    "coinGeckoId": "redfox-labs-2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xa1d6Df714F91DeBF4e0802A542E13067f31b8262/logo.png"
+  },
+  {
+    "symbol": "LTX",
+    "name": "Lattice",
+    "decimals": 8,
+    "address": "0xa393473d64d2F9F026B60b6Df7859A689715d092",
+    "coinGeckoId": "lattice-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xa393473d64d2F9F026B60b6Df7859A689715d092/logo.png"
+  },
+  {
+    "symbol": "MTA",
+    "name": "mStable Governance: Meta",
+    "decimals": 18,
+    "address": "0xa3BeD4E1c75D00fa6f4E5E6922DB7261B5E9AcD2",
+    "coinGeckoId": "meta",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xa3BeD4E1c75D00fa6f4E5E6922DB7261B5E9AcD2/logo.png"
+  },
+  {
+    "symbol": "RBC",
+    "name": "Rubic",
+    "decimals": 18,
+    "address": "0xA4EED63db85311E22dF4473f87CcfC3DaDCFA3E3",
+    "coinGeckoId": "rubic",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xA4EED63db85311E22dF4473f87CcfC3DaDCFA3E3/logo.png"
+  },
+  {
+    "symbol": "LYXe",
+    "name": "LUKSO",
+    "decimals": 18,
+    "address": "0xA8b919680258d369114910511cc87595aec0be6D",
+    "coinGeckoId": "lukso-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xA8b919680258d369114910511cc87595aec0be6D/logo.png"
+  },
+  {
+    "symbol": "NOIA",
+    "name": "Syntropy",
+    "decimals": 18,
+    "address": "0xa8c8CfB141A3bB59FEA1E2ea6B79b5ECBCD7b6ca",
+    "coinGeckoId": "noia-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xa8c8CfB141A3bB59FEA1E2ea6B79b5ECBCD7b6ca/logo.png"
+  },
+  {
+    "symbol": "BEL",
+    "name": "Bella Protocol",
+    "decimals": 18,
+    "address": "0xA91ac63D040dEB1b7A5E4d4134aD23eb0ba07e14",
+    "coinGeckoId": "bella-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xA91ac63D040dEB1b7A5E4d4134aD23eb0ba07e14/logo.png"
+  },
+  {
+    "symbol": "ETH2x-FLI",
+    "name": "Index Coop - ETH 2x Flexible Leverage Index",
+    "decimals": 18,
+    "address": "0xAa6E8127831c9DE45ae56bB1b0d4D4Da6e5665BD",
+    "coinGeckoId": "eth-2x-flexible-leverage-index",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xAa6E8127831c9DE45ae56bB1b0d4D4Da6e5665BD/logo.png"
+  },
+  {
+    "symbol": "TRAC",
+    "name": "OriginTrail",
+    "decimals": 18,
+    "address": "0xaA7a9CA87d3694B5755f213B5D04094b8d0F0A6F",
+    "coinGeckoId": "origintrail",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xaA7a9CA87d3694B5755f213B5D04094b8d0F0A6F/logo.png"
+  },
+  {
+    "symbol": "CEL",
+    "name": "Celsius Network",
+    "decimals": 4,
+    "address": "0xaaAEBE6Fe48E54f431b0C390CfaF0b017d09D42d",
+    "coinGeckoId": "celsius-degree-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xaaAEBE6Fe48E54f431b0C390CfaF0b017d09D42d/logo.png"
+  },
+  {
+    "symbol": "TKN",
+    "name": "Monolith",
+    "decimals": 8,
+    "address": "0xaAAf91D9b90dF800Df4F55c205fd6989c977E73a",
+    "coinGeckoId": "tokencard",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xaAAf91D9b90dF800Df4F55c205fd6989c977E73a/logo.png"
+  },
+  {
+    "symbol": "CWS",
+    "name": "Seascape Crowns",
+    "decimals": 18,
+    "address": "0xaC0104Cca91D167873B8601d2e71EB3D4D8c33e0",
+    "coinGeckoId": "crowns",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xaC0104Cca91D167873B8601d2e71EB3D4D8c33e0/logo.png"
+  },
+  {
+    "symbol": "ROOM",
+    "name": "OptionRoom Token",
+    "decimals": 18,
+    "address": "0xAd4f86a25bbc20FfB751f2FAC312A0B4d8F88c64",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xAd4f86a25bbc20FfB751f2FAC312A0B4d8F88c64/logo.png"
+  },
+  {
+    "symbol": "UNCX",
+    "name": "UniCrypt",
+    "decimals": 18,
+    "address": "0xaDB2437e6F65682B85F814fBc12FeC0508A7B1D0",
+    "coinGeckoId": "unicrypt-2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xaDB2437e6F65682B85F814fBc12FeC0508A7B1D0/logo.png"
+  },
+  {
+    "symbol": "ADX",
+    "name": "Ambire AdEx",
+    "decimals": 18,
+    "address": "0xADE00C28244d5CE17D72E40330B1c318cD12B7c3",
+    "coinGeckoId": "adex",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xADE00C28244d5CE17D72E40330B1c318cD12B7c3/logo.png"
+  },
+  {
+    "symbol": "YOP",
+    "name": "Yield Optimization Platform & Protocol",
+    "decimals": 8,
+    "address": "0xAE1eaAE3F627AAca434127644371b67B18444051",
+    "coinGeckoId": "yield-optimization-platform",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xAE1eaAE3F627AAca434127644371b67B18444051/logo.png"
+  },
+  {
+    "symbol": "LGCY",
+    "name": "LGCY Network",
+    "decimals": 18,
+    "address": "0xaE697F994Fc5eBC000F8e22EbFfeE04612f98A0d",
+    "coinGeckoId": "lgcy-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xaE697F994Fc5eBC000F8e22EbFfeE04612f98A0d/logo.png"
+  },
+  {
+    "symbol": "RFuel",
+    "name": "RioDeFi",
+    "decimals": 18,
+    "address": "0xaf9f549774ecEDbD0966C52f250aCc548D3F36E5",
+    "coinGeckoId": "rio-defi",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xaf9f549774ecEDbD0966C52f250aCc548D3F36E5/logo.png"
+  },
+  {
+    "symbol": "ZEFU",
+    "name": "Zenfuse",
+    "decimals": 18,
+    "address": "0xB1e9157c2Fdcc5a856C8DA8b2d89b6C32b3c1229",
+    "coinGeckoId": "zenfuse",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xB1e9157c2Fdcc5a856C8DA8b2d89b6C32b3c1229/logo.png"
+  },
+  {
+    "symbol": "MINDS",
+    "name": "Minds",
+    "decimals": 18,
+    "address": "0xB26631c6dda06aD89B93C71400D25692de89c068",
+    "coinGeckoId": "minds",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xB26631c6dda06aD89B93C71400D25692de89c068/logo.png"
+  },
+  {
+    "symbol": "MAHA",
+    "name": "MahaDAO",
+    "decimals": 18,
+    "address": "0xB4d930279552397bbA2ee473229f89Ec245bc365",
+    "coinGeckoId": "mahadao",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xB4d930279552397bbA2ee473229f89Ec245bc365/logo.png"
+  },
+  {
+    "symbol": "NEXO",
+    "name": "NEXO",
+    "decimals": 18,
+    "address": "0xB62132e35a6c13ee1EE0f84dC5d40bad8d815206",
+    "coinGeckoId": "nexo",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xB62132e35a6c13ee1EE0f84dC5d40bad8d815206/logo.png"
+  },
+  {
+    "symbol": "SYNC",
+    "name": "Sync Network",
+    "decimals": 18,
+    "address": "0xB6ff96B8A8d214544Ca0dBc9B33f7AD6503eFD32",
+    "coinGeckoId": "sync-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xB6ff96B8A8d214544Ca0dBc9B33f7AD6503eFD32/logo.png"
+  },
+  {
+    "symbol": "SFI",
+    "name": "saffron.finance",
+    "decimals": 18,
+    "address": "0xb753428af26E81097e7fD17f40c88aaA3E04902c",
+    "coinGeckoId": "saffron-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xb753428af26E81097e7fD17f40c88aaA3E04902c/logo.png"
+  },
+  {
+    "symbol": "STBZ",
+    "name": "Stabilize Token",
+    "decimals": 18,
+    "address": "0xB987D48Ed8f2C468D52D6405624EADBa5e76d723",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xB987D48Ed8f2C468D52D6405624EADBa5e76d723/logo.png"
+  },
+  {
+    "symbol": "K21",
+    "name": "K21",
+    "decimals": 18,
+    "address": "0xB9d99C33eA2d86EC5eC6b8A4dD816EBBA64404AF",
+    "coinGeckoId": "k21",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xB9d99C33eA2d86EC5eC6b8A4dD816EBBA64404AF/logo.png"
+  },
+  {
+    "symbol": "ZCN",
+    "name": "0chain",
+    "decimals": 10,
+    "address": "0xb9EF770B6A5e12E45983C5D80545258aA38F3B78",
+    "coinGeckoId": "0chain",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xb9EF770B6A5e12E45983C5D80545258aA38F3B78/logo.png"
+  },
+  {
+    "symbol": "BAL",
+    "name": "Balancer",
+    "decimals": 18,
+    "address": "0xba100000625a3754423978a60c9317c58a424e3D",
+    "coinGeckoId": "balancer",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xba100000625a3754423978a60c9317c58a424e3D/logo.png"
+  },
+  {
+    "symbol": "BAND",
+    "name": "Band Protocol",
+    "decimals": 18,
+    "address": "0xBA11D00c5f74255f56a5E366F4F77f5A186d7f55",
+    "coinGeckoId": "band-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xBA11D00c5f74255f56a5E366F4F77f5A186d7f55/logo.png"
+  },
+  {
+    "symbol": "SWFL",
+    "name": "Swapfolio",
+    "decimals": 18,
+    "address": "0xBa21Ef4c9f433Ede00badEFcC2754B8E74bd538A",
+    "coinGeckoId": "swapfolio",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xBa21Ef4c9f433Ede00badEFcC2754B8E74bd538A/logo.png"
+  },
+  {
+    "symbol": "LRC",
+    "name": "Loopring",
+    "decimals": 18,
+    "address": "0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD",
+    "coinGeckoId": "loopring",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD/logo.png"
+  },
+  {
+    "symbol": "ERN",
+    "name": "Ethernity Chain",
+    "decimals": 18,
+    "address": "0xBBc2AE13b23d715c30720F079fcd9B4a74093505",
+    "coinGeckoId": "ethernity-chain",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xBBc2AE13b23d715c30720F079fcd9B4a74093505/logo.png"
+  },
+  {
+    "symbol": "PERP",
+    "name": "Perpetual Protocol",
+    "decimals": 18,
+    "address": "0xbC396689893D065F41bc2C6EcbeE5e0085233447",
+    "coinGeckoId": "perpetual-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xbC396689893D065F41bc2C6EcbeE5e0085233447/logo.png"
+  },
+  {
+    "symbol": "STMX",
+    "name": "StormX",
+    "decimals": 18,
+    "address": "0xbE9375C6a420D2eEB258962efB95551A5b722803",
+    "coinGeckoId": "storm",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xbE9375C6a420D2eEB258962efB95551A5b722803/logo.png"
+  },
+  {
+    "symbol": "GYSR",
+    "name": "Geyser",
+    "decimals": 18,
+    "address": "0xbEa98c05eEAe2f3bC8c3565Db7551Eb738c8CCAb",
+    "coinGeckoId": "geyser",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xbEa98c05eEAe2f3bC8c3565Db7551Eb738c8CCAb/logo.png"
+  },
+  {
+    "symbol": "WORLD",
+    "name": "World",
+    "decimals": 18,
+    "address": "0xBF494F02EE3FdE1F20BEE6242bCe2d1ED0c15e47",
+    "coinGeckoId": "world-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xBF494F02EE3FdE1F20BEE6242bCe2d1ED0c15e47/logo.png"
+  },
+  {
+    "symbol": "COMP",
+    "name": "Compound",
+    "decimals": 18,
+    "address": "0xc00e94Cb662C3520282E6f5717214004A7f26888",
+    "coinGeckoId": "compound-governance-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xc00e94Cb662C3520282E6f5717214004A7f26888/logo.png"
+  },
+  {
+    "symbol": "SNX",
+    "name": "Synthetix Network",
+    "decimals": 18,
+    "address": "0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F",
+    "coinGeckoId": "havven",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets//logo.png"
+  },
+  {
+    "symbol": "DUCK",
+    "name": "DLP Duck",
+    "decimals": 18,
+    "address": "0xC0bA369c8Db6eB3924965e5c4FD0b4C1B91e305F",
+    "coinGeckoId": "dlp-duck-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xC0bA369c8Db6eB3924965e5c4FD0b4C1B91e305F/logo.png"
+  },
+  {
+    "symbol": "ENS",
+    "name": "Ethereum Name Service",
+    "decimals": 18,
+    "address": "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72",
+    "coinGeckoId": "ethereum-name-service",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72/logo.png"
+  },
+  {
+    "symbol": "CHAIN",
+    "name": "Chain Games",
+    "decimals": 18,
+    "address": "0xC4C2614E694cF534D407Ee49F8E44D125E4681c4",
+    "coinGeckoId": "chain-games",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xC4C2614E694cF534D407Ee49F8E44D125E4681c4/logo.png"
+  },
+  {
+    "symbol": "ZCX",
+    "name": "Unizen",
+    "decimals": 18,
+    "address": "0xC52C326331E9Ce41F04484d3B5E5648158028804",
+    "coinGeckoId": "unizen",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xC52C326331E9Ce41F04484d3B5E5648158028804/logo.png"
+  },
+  {
+    "symbol": "PTF",
+    "name": "PowerTrade Fuel",
+    "decimals": 18,
+    "address": "0xC57d533c50bC22247d49a368880fb49a1caA39F7",
+    "coinGeckoId": "powertrade-fuel",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xC57d533c50bC22247d49a368880fb49a1caA39F7/logo.png"
+  },
+  {
+    "symbol": "DIP",
+    "name": "Etherisc DIP",
+    "decimals": 18,
+    "address": "0xc719d010B63E5bbF2C0551872CD5316ED26AcD83",
+    "coinGeckoId": "etherisc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xc719d010B63E5bbF2C0551872CD5316ED26AcD83/logo.png"
+  },
+  {
+    "symbol": "TRIBE",
+    "name": "Tribe",
+    "decimals": 18,
+    "address": "0xc7283b66Eb1EB5FB86327f08e1B5816b0720212B",
+    "coinGeckoId": "tribe-2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xc7283b66Eb1EB5FB86327f08e1B5816b0720212B/logo.png"
+  },
+  {
+    "symbol": "CONV",
+    "name": "Convergence",
+    "decimals": 18,
+    "address": "0xc834Fa996fA3BeC7aAD3693af486ae53D8aA8B50",
+    "coinGeckoId": "convergence",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xc834Fa996fA3BeC7aAD3693af486ae53D8aA8B50/logo.png"
+  },
+  {
+    "symbol": "ROOT",
+    "name": "Rootkit",
+    "decimals": 18,
+    "address": "0xCb5f72d37685C3D5aD0bB5F982443BC8FcdF570E",
+    "coinGeckoId": "rootkit",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xCb5f72d37685C3D5aD0bB5F982443BC8FcdF570E/logo.png"
+  },
+  {
+    "symbol": "KINE",
+    "name": "Kine Protocol",
+    "decimals": 18,
+    "address": "0xCbfef8fdd706cde6F208460f2Bf39Aa9c785F05D",
+    "coinGeckoId": "kine-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xCbfef8fdd706cde6F208460f2Bf39Aa9c785F05D/logo.png"
+  },
+  {
+    "symbol": "SWAP",
+    "name": "Trustswap",
+    "decimals": 18,
+    "address": "0xCC4304A31d09258b0029eA7FE63d032f52e44EFe",
+    "coinGeckoId": "trustswap",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xCC4304A31d09258b0029eA7FE63d032f52e44EFe/logo.png"
+  },
+  {
+    "symbol": "BEPRO",
+    "name": "BEPRO Network",
+    "decimals": 18,
+    "address": "0xCF3C8Be2e2C42331Da80EF210e9B1b307C03d36A",
+    "coinGeckoId": "bepro-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xCF3C8Be2e2C42331Da80EF210e9B1b307C03d36A/logo.png"
+  },
+  {
+    "symbol": "TVK",
+    "name": "The Virtua Kolect",
+    "decimals": 18,
+    "address": "0xd084B83C305daFD76AE3E1b4E1F1fe2eCcCb3988",
+    "coinGeckoId": "the-virtua-kolect",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xd084B83C305daFD76AE3E1b4E1F1fe2eCcCb3988/logo.png"
+  },
+  {
+    "symbol": "SI",
+    "name": "Siren",
+    "decimals": 18,
+    "address": "0xD23Ac27148aF6A2f339BD82D0e3CFF380b5093de",
+    "coinGeckoId": "siren",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xD23Ac27148aF6A2f339BD82D0e3CFF380b5093de/logo.png"
+  },
+  {
+    "symbol": "OMG",
+    "name": "OMG Network",
+    "decimals": 18,
+    "address": "0xd26114cd6EE289AccF82350c8d8487fedB8A0C07",
+    "coinGeckoId": "omisego",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets//logo.png"
+  },
+  {
+    "symbol": "LUNA",
+    "name": "Wrapped Terra Classic",
+    "decimals": 18,
+    "address": "0xd2877702675e6cEb975b4A1dFf9fb7BAF4C91ea9",
+    "coinGeckoId": "wrapped-terra",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xd2877702675e6cEb975b4A1dFf9fb7BAF4C91ea9/logo.png"
+  },
+  {
+    "symbol": "DETS",
+    "name": "Dextrust",
+    "decimals": 18,
+    "address": "0xd379700999F4805Ce80aa32DB46A94dF64561108",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xd379700999F4805Ce80aa32DB46A94dF64561108/logo.png"
+  },
+  {
+    "symbol": "AMPL",
+    "name": "Ampleforth",
+    "decimals": 9,
+    "address": "0xD46bA6D942050d489DBd938a2C909A5d5039A161",
+    "coinGeckoId": "ampleforth",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets//logo.png"
+  },
+  {
+    "symbol": "POLK",
+    "name": "Polkamarkets",
+    "decimals": 18,
+    "address": "0xD478161C952357F05f0292B56012Cd8457F1cfbF",
+    "coinGeckoId": "polkamarkets",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xD478161C952357F05f0292B56012Cd8457F1cfbF/logo.png"
+  },
+  {
+    "symbol": "MEME",
+    "name": "Meme",
+    "decimals": 8,
+    "address": "0xD5525D397898e5502075Ea5E830d8914f6F0affe",
+    "coinGeckoId": "degenerator",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xD5525D397898e5502075Ea5E830d8914f6F0affe/logo.png"
+  },
+  {
+    "symbol": "EXNT",
+    "name": "ExNetwork",
+    "decimals": 16,
+    "address": "0xD6c67B93a7b248dF608a653d82a100556144c5DA",
+    "coinGeckoId": "exnetwork-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xD6c67B93a7b248dF608a653d82a100556144c5DA/logo.png"
+  },
+  {
+    "symbol": "ATRI",
+    "name": "Atari",
+    "decimals": 0,
+    "address": "0xdacD69347dE42baBfAEcD09dC88958378780FB62",
+    "coinGeckoId": "atari",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xdacD69347dE42baBfAEcD09dC88958378780FB62/logo.png"
+  },
+  {
+    "symbol": "YLD",
+    "name": "Yield",
+    "decimals": 18,
+    "address": "0xDcB01cc464238396E213a6fDd933E36796eAfF9f",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xDcB01cc464238396E213a6fDd933E36796eAfF9f/logo.png"
+  },
+  {
+    "symbol": "COTI",
+    "name": "COTI",
+    "decimals": 18,
+    "address": "0xDDB3422497E61e13543BeA06989C0789117555c5",
+    "coinGeckoId": "coti",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xDDB3422497E61e13543BeA06989C0789117555c5/logo.png"
+  },
+  {
+    "symbol": "XCUR",
+    "name": "Curate",
+    "decimals": 8,
+    "address": "0xE1c7E30C42C24582888C758984f6e382096786bd",
+    "coinGeckoId": "curate",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xE1c7E30C42C24582888C758984f6e382096786bd/logo.png"
+  },
+  {
+    "symbol": "INJ",
+    "name": "Injective",
+    "decimals": 18,
+    "address": "0xe28b3B32B6c345A34Ff64674606124Dd5Aceca30",
+    "coinGeckoId": "injective-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xe28b3B32B6c345A34Ff64674606124Dd5Aceca30/logo.png"
+  },
+  {
+    "symbol": "PLR",
+    "name": "Pillar",
+    "decimals": 18,
+    "address": "0xe3818504c1B32bF1557b16C238B2E01Fd3149C17",
+    "coinGeckoId": "pillar",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xe3818504c1B32bF1557b16C238B2E01Fd3149C17/logo.png"
+  },
+  {
+    "symbol": "ZRX",
+    "name": "0x",
+    "decimals": 18,
+    "address": "0xE41d2489571d322189246DaFA5ebDe1F4699F498",
+    "coinGeckoId": "0x",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xE41d2489571d322189246DaFA5ebDe1F4699F498/logo.png"
+  },
+  {
+    "symbol": "WCELO",
+    "name": "WCELO",
+    "decimals": 18,
+    "address": "0xE452E6Ea2dDeB012e20dB73bf5d3863A3Ac8d77a",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xE452E6Ea2dDeB012e20dB73bf5d3863A3Ac8d77a/logo.png"
+  },
+  {
+    "symbol": "SUPER",
+    "name": "SuperFarm",
+    "decimals": 18,
+    "address": "0xe53EC727dbDEB9E2d5456c3be40cFF031AB40A55",
+    "coinGeckoId": "superfarm",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xe53EC727dbDEB9E2d5456c3be40cFF031AB40A55/logo.png"
+  },
+  {
+    "symbol": "FRM",
+    "name": "Ferrum Network",
+    "decimals": 6,
+    "address": "0xE5CAeF4Af8780E59Df925470b050Fb23C43CA68C",
+    "coinGeckoId": "ferrum-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xE5CAeF4Af8780E59Df925470b050Fb23C43CA68C/logo.png"
+  },
+  {
+    "symbol": "COIN",
+    "name": "Coin",
+    "decimals": 18,
+    "address": "0xE61fDAF474Fac07063f2234Fb9e60C1163Cfa850",
+    "coinGeckoId": "coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xE61fDAF474Fac07063f2234Fb9e60C1163Cfa850/logo.png"
+  },
+  {
+    "symbol": "aETHc",
+    "name": "Ankr Reward-Bearing Staked ETH",
+    "decimals": 18,
+    "address": "0xE95A203B1a91a908F9B9CE46459d101078c2c3cb",
+    "coinGeckoId": "ankreth",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xE95A203B1a91a908F9B9CE46459d101078c2c3cb/logo.png"
+  },
+  {
+    "symbol": "MOD",
+    "name": "Modefi",
+    "decimals": 18,
+    "address": "0xEA1ea0972fa092dd463f2968F9bB51Cc4c981D71",
+    "coinGeckoId": "modefi",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xEA1ea0972fa092dd463f2968F9bB51Cc4c981D71/logo.png"
+  },
+  {
+    "symbol": "SURF",
+    "name": "Surf.Finance",
+    "decimals": 18,
+    "address": "0xEa319e87Cf06203DAe107Dd8E5672175e3Ee976c",
+    "coinGeckoId": "surf-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xEa319e87Cf06203DAe107Dd8E5672175e3Ee976c/logo.png"
+  },
+  {
+    "symbol": "renBTC",
+    "name": "renBTC",
+    "decimals": 8,
+    "address": "0xEB4C2781e4ebA804CE9a9803C67d0893436bB27D",
+    "coinGeckoId": "renbtc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xEB4C2781e4ebA804CE9a9803C67d0893436bB27D/logo.png"
+  },
+  {
+    "symbol": "ID",
+    "name": "Everest",
+    "decimals": 18,
+    "address": "0xEBd9D99A3982d547C5Bb4DB7E3b1F9F14b67Eb83",
+    "coinGeckoId": "everid",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xEBd9D99A3982d547C5Bb4DB7E3b1F9F14b67Eb83/logo.png"
+  },
+  {
+    "symbol": "DMG",
+    "name": "DMM: Governance",
+    "decimals": 18,
+    "address": "0xEd91879919B71bB6905f23af0A68d231EcF87b14",
+    "coinGeckoId": "dmm-governance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xEd91879919B71bB6905f23af0A68d231EcF87b14/logo.png"
+  },
+  {
+    "symbol": "XED",
+    "name": "Exeedme",
+    "decimals": 18,
+    "address": "0xee573a945B01B788B9287CE062A0CFC15bE9fd86",
+    "coinGeckoId": "exeedme",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xee573a945B01B788B9287CE062A0CFC15bE9fd86/logo.png"
+  },
+  {
+    "symbol": "GOVI",
+    "name": "CVI",
+    "decimals": 18,
+    "address": "0xeEAA40B28A2d1b0B08f6f97bB1DD4B75316c6107",
+    "coinGeckoId": "govi",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xeEAA40B28A2d1b0B08f6f97bB1DD4B75316c6107/logo.png"
+  },
+  {
+    "symbol": "DPX",
+    "name": "Dopex",
+    "decimals": 18,
+    "address": "0xEec2bE5c91ae7f8a338e1e5f3b5DE49d07AfdC81",
+    "coinGeckoId": "dopex",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xEec2bE5c91ae7f8a338e1e5f3b5DE49d07AfdC81/logo.png"
+  },
+  {
+    "symbol": "HEZ",
+    "name": "Hermez Network",
+    "decimals": 18,
+    "address": "0xEEF9f339514298C6A857EfCfC1A762aF84438dEE",
+    "coinGeckoId": "hermez-network-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xEEF9f339514298C6A857EfCfC1A762aF84438dEE/logo.png"
+  },
+  {
+    "symbol": "SALE",
+    "name": "DxSale Network",
+    "decimals": 18,
+    "address": "0xF063fE1aB7a291c5d06a86e14730b00BF24cB589",
+    "coinGeckoId": "dxsale-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xF063fE1aB7a291c5d06a86e14730b00BF24cB589/logo.png"
+  },
+  {
+    "symbol": "RLY",
+    "name": "Rally",
+    "decimals": 18,
+    "address": "0xf1f955016EcbCd7321c7266BccFB96c68ea5E49b",
+    "coinGeckoId": "rally-2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xf1f955016EcbCd7321c7266BccFB96c68ea5E49b/logo.png"
+  },
+  {
+    "symbol": "RIO",
+    "name": "Realio Network",
+    "decimals": 18,
+    "address": "0xf21661D0D1d76d3ECb8e1B9F1c923DBfffAe4097",
+    "coinGeckoId": "realio-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xf21661D0D1d76d3ECb8e1B9F1c923DBfffAe4097/logo.png"
+  },
+  {
+    "symbol": "VRA",
+    "name": "Verasity",
+    "decimals": 18,
+    "address": "0xF411903cbC70a74d22900a5DE66A2dda66507255",
+    "coinGeckoId": "verasity",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xF411903cbC70a74d22900a5DE66A2dda66507255/logo.png"
+  },
+  {
+    "symbol": "PUSH",
+    "name": "Push Protocol",
+    "decimals": 18,
+    "address": "0xf418588522d5dd018b425E472991E52EBBeEEEEE",
+    "coinGeckoId": "ethereum-push-notification-service",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xf418588522d5dd018b425E472991E52EBBeEEEEE/logo.png"
+  },
+  {
+    "symbol": "Yf-DAI",
+    "name": "YfDAI.finance",
+    "decimals": 18,
+    "address": "0xf4CD3d3Fda8d7Fd6C5a500203e38640A70Bf9577",
+    "coinGeckoId": "yfdai-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xf4CD3d3Fda8d7Fd6C5a500203e38640A70Bf9577/logo.png"
+  },
+  {
+    "symbol": "FCL",
+    "name": "Fractal",
+    "decimals": 18,
+    "address": "0xF4d861575ecC9493420A3f5a14F85B13f0b50EB3",
+    "coinGeckoId": "fractal",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xF4d861575ecC9493420A3f5a14F85B13f0b50EB3/logo.png"
+  },
+  {
+    "symbol": "ENJ",
+    "name": "Enjin Coin",
+    "decimals": 18,
+    "address": "0xF629cBd94d3791C9250152BD8dfBDF380E2a3B9c",
+    "coinGeckoId": "enjincoin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xF629cBd94d3791C9250152BD8dfBDF380E2a3B9c/logo.png"
+  },
+  {
+    "symbol": "GIV",
+    "name": "GIV",
+    "decimals": 8,
+    "address": "0xf6537FE0df7F0Cc0985Cf00792CC98249E73EFa0",
+    "coinGeckoId": "givly-coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xf6537FE0df7F0Cc0985Cf00792CC98249E73EFa0/logo.png"
+  },
+  {
+    "symbol": "VISR",
+    "name": "Visor",
+    "decimals": 18,
+    "address": "0xF938424F7210f31dF2Aee3011291b658f872e91e",
+    "coinGeckoId": "visor",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xF938424F7210f31dF2Aee3011291b658f872e91e/logo.png"
+  },
+  {
+    "symbol": "YLD",
+    "name": "Yield App",
+    "decimals": 18,
+    "address": "0xF94b5C5651c888d928439aB6514B93944eEE6F48",
+    "coinGeckoId": "yield-app",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xF94b5C5651c888d928439aB6514B93944eEE6F48/logo.png"
+  },
+  {
+    "symbol": "HOGE",
+    "name": "Hoge Finance",
+    "decimals": 9,
+    "address": "0xfAd45E47083e4607302aa43c65fB3106F1cd7607",
+    "coinGeckoId": "hoge-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xfAd45E47083e4607302aa43c65fB3106F1cd7607/logo.png"
+  },
+  {
+    "symbol": "DDIM",
+    "name": "DuckDaoDime",
+    "decimals": 18,
+    "address": "0xFbEEa1C75E4c4465CB2FCCc9c6d6afe984558E20",
+    "coinGeckoId": "duckdaodime",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xFbEEa1C75E4c4465CB2FCCc9c6d6afe984558E20/logo.png"
+  },
+  {
+    "symbol": "MCO2",
+    "name": "Moss Carbon Credit",
+    "decimals": 18,
+    "address": "0xfC98e825A2264D890F9a1e68ed50E1526abCcacD",
+    "coinGeckoId": "moss-carbon-credit",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xfC98e825A2264D890F9a1e68ed50E1526abCcacD/logo.png"
+  },
+  {
+    "symbol": "RARI",
+    "name": "Rarible",
+    "decimals": 18,
+    "address": "0xFca59Cd816aB1eaD66534D82bc21E7515cE441CF",
+    "coinGeckoId": "rarible",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xFca59Cd816aB1eaD66534D82bc21E7515cE441CF/logo.png"
+  },
+  {
+    "symbol": "REEF",
+    "name": "Reef",
+    "decimals": 18,
+    "address": "0xFE3E6a25e6b192A42a44ecDDCd13796471735ACf",
+    "coinGeckoId": "reef",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xFE3E6a25e6b192A42a44ecDDCd13796471735ACf/logo.png"
+  },
+  {
+    "symbol": "AMP",
+    "name": "Amp",
+    "decimals": 18,
+    "address": "0xfF20817765cB7f73d4bde2e66e067E58D11095C2",
+    "coinGeckoId": "amp-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xfF20817765cB7f73d4bde2e66e067E58D11095C2/logo.png"
+  },
+  {
+    "symbol": "FSW",
+    "name": "Falconswap",
+    "decimals": 18,
+    "address": "0xfffffffFf15AbF397dA76f1dcc1A1604F45126DB",
+    "coinGeckoId": "fsw-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xfffffffFf15AbF397dA76f1dcc1A1604F45126DB/logo.png"
+  },
+  {
+    "symbol": "OHM",
+    "name": "Olympus v1",
+    "decimals": 9,
+    "address": "0x383518188C0C6d7730D91b2c03a03C837814a899",
+    "coinGeckoId": "olympus-v1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x383518188C0C6d7730D91b2c03a03C837814a899/logo.png"
+  },
+  {
+    "symbol": "ILV",
+    "name": "Illuvium",
+    "decimals": 18,
+    "address": "0x767FE9EDC9E0dF98E07454847909b5E959D7ca0E",
+    "coinGeckoId": "illuvium",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x767FE9EDC9E0dF98E07454847909b5E959D7ca0E/logo.png"
+  },
+  {
+    "symbol": "GALA",
+    "name": "Gala",
+    "decimals": 8,
+    "address": "0x15D4c048F83bd7e37d49eA4C83a07267Ec4203dA",
+    "coinGeckoId": "gala",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x15D4c048F83bd7e37d49eA4C83a07267Ec4203dA/logo.png"
+  },
+  {
+    "symbol": "CVX",
+    "name": "Convex Finance",
+    "decimals": 18,
+    "address": "0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B",
+    "coinGeckoId": "convex-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B/logo.png"
+  },
+  {
+    "symbol": "SPELL",
+    "name": "Spell",
+    "decimals": 18,
+    "address": "0x090185f2135308BaD17527004364eBcC2D37e5F6",
+    "coinGeckoId": "spell-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x090185f2135308BaD17527004364eBcC2D37e5F6/logo.png"
+  },
+  {
+    "symbol": "SOS",
+    "name": "OpenDAO",
+    "decimals": 18,
+    "address": "0x3b484b82567a09e2588A13D54D032153f0c0aEe0",
+    "coinGeckoId": "opendao",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x3b484b82567a09e2588A13D54D032153f0c0aEe0/logo.png"
+  },
+  {
+    "symbol": "GAS",
+    "name": "Gas DAO",
+    "decimals": 18,
+    "address": "0x6Bba316c48b49BD1eAc44573c5c871ff02958469",
+    "coinGeckoId": "gas-dao",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x6Bba316c48b49BD1eAc44573c5c871ff02958469/logo.png"
+  },
+  {
+    "symbol": "Metis",
+    "name": "Metis",
+    "decimals": 18,
+    "address": "0x9E32b13ce7f2E80A01932B42553652E053D6ed8e",
+    "coinGeckoId": "metis-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x9E32b13ce7f2E80A01932B42553652E053D6ed8e/logo.png"
+  },
+  {
+    "symbol": "LOOKS",
+    "name": "LooksRare",
+    "decimals": 18,
+    "address": "0xf4d2888d29D722226FafA5d9B24F9164c092421E",
+    "coinGeckoId": "looksrare",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xf4d2888d29D722226FafA5d9B24F9164c092421E/logo.png"
+  },
+  {
+    "symbol": "X2Y2",
+    "name": "X2Y2",
+    "decimals": 18,
+    "address": "0x1E4EDE388cbc9F4b5c79681B7f94d36a11ABEBC9",
+    "coinGeckoId": "x2y2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x1E4EDE388cbc9F4b5c79681B7f94d36a11ABEBC9/logo.png"
+  },
+  {
+    "symbol": "STG",
+    "name": "Stargate Finance",
+    "decimals": 18,
+    "address": "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6",
+    "coinGeckoId": "stargate-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6/logo.png"
+  },
+  {
+    "symbol": "SAITAMA",
+    "name": "Saitama",
+    "decimals": 9,
+    "address": "0xCE3f08e664693ca792caCE4af1364D5e220827B2",
+    "coinGeckoId": "saitama-inu",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xCE3f08e664693ca792caCE4af1364D5e220827B2/logo.png"
+  },
+  {
+    "symbol": "AGIX",
+    "name": "SingularityNET",
+    "decimals": 8,
+    "address": "0x5B7533812759B45C2B44C19e320ba2cD2681b542",
+    "coinGeckoId": "singularitynet",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0x5B7533812759B45C2B44C19e320ba2cD2681b542/logo.png"
+  }
+]

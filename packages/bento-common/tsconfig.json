@@ -9,13 +9,15 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
+    "emitDeclarationOnly": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "baseUrl": ".",
+    "baseUrl": "src",
     "outDir": "lib",
     "declaration": true,
-    "rootDir": ".",
+    "rootDir": "src",
     "jsx": "react"
   },
-  "include": ["**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["lib"]
 }
