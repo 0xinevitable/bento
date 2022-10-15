@@ -5,7 +5,14 @@ export const config = {
   runtime: 'experimental-edge',
 };
 
-export default function (req: NextRequest, _res: NextResponse) {
+const fetchFont = (fontPath: string) =>
+  fetch(new URL(fontPath, import.meta.url)).then((res) => res.arrayBuffer());
+
+export default async function (req: NextRequest, _res: NextResponse) {
+  const fontData = await fetchFont(
+    `${req.nextUrl.origin}/assets/Pretendard-Black.otf`,
+  );
+
   return new ImageResponse(
     (
       <div
@@ -90,19 +97,48 @@ export default function (req: NextRequest, _res: NextResponse) {
                 alignItems: 'center',
               }}
             >
-              <span
+              <div
                 style={{
-                  fontWeight: 900,
-                  fontSize: 32,
-                  lineHeight: '100%',
-                  letterSpacing: '-0.5px',
-                  color: '#E1F664',
+                  width: '100%',
+                  paddingLeft: 20,
+                  paddingRight: 20,
+                  display: 'flex',
+                  alignItems: 'center',
                 }}
               >
-                JUNHO YEO
-              </span>
+                <svg
+                  style={{ marginRight: 8 }}
+                  width="19"
+                  height="33"
+                  viewBox="0 0 19 33"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16.15 0L0.475 2.86738L0 10.5137H4L0.475 18.5L4 20L0.95 32.497L16.15 12.9032L13 11L19 5.73476L16.15 0Z"
+                    fill="#E1F664"
+                  />
+                </svg>
+
+                <span
+                  style={{
+                    fontWeight: 900,
+                    fontSize: 32,
+                    lineHeight: '100%',
+                    letterSpacing: '-0.5px',
+                    color: '#E1F664',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    maxWidth: '100%',
+                    // maxWidth: '275px',
+                  }}
+                >
+                  Elon Reeve Musk FRS
+                </span>
+              </div>
               <span
                 style={{
+                  marginTop: 8,
                   fontWeight: 900,
                   fontSize: 18,
                   lineHeight: '100%',
@@ -114,6 +150,7 @@ export default function (req: NextRequest, _res: NextResponse) {
               </span>
               <span
                 style={{
+                  marginTop: 4,
                   fontWeight: 900,
                   fontSize: 16,
                   lineHeight: '100%',
@@ -131,6 +168,14 @@ export default function (req: NextRequest, _res: NextResponse) {
     {
       width: 620,
       height: 800,
+      fonts: [
+        {
+          name: 'Pretendard',
+          data: fontData,
+          weight: 400,
+          style: 'normal',
+        },
+      ],
     },
   );
 }
