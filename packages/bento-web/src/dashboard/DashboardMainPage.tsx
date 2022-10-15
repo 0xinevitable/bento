@@ -1,5 +1,8 @@
 import { Wallet } from '@bento/common';
+import { User } from '@supabase/supabase-js';
+import axios from 'axios';
 import { getCookie } from 'cookies-next';
+import { format } from 'date-fns';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
@@ -9,6 +12,7 @@ import styled from 'styled-components';
 import { PageContainer } from '@/components/PageContainer';
 import { MetaHead } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
+import { getServerSupabase } from '@/utils/ServerSupabase';
 
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Analytics, Supabase } from '@/utils';
@@ -33,16 +37,49 @@ type Props =
       profile: UserProfile;
     };
 
+const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+const getKoreanTimestring = (timestamp: string) => {
+  const curr = new Date(timestamp);
+  const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+  return format(new Date(utc + KR_TIME_DIFF), 'yyyy-MM-dd HH:mm:ss');
+};
+
+const capitalize = (value: string) =>
+  value.charAt(0).toUpperCase() + value.slice(1);
+
+const notifySlack = async (user: User, profile: UserProfile) => {
+  if (!process.env.SLACK_NEW_PROFILE_WEBHOOK) {
+    // disabled
+    return;
+  }
+
+  const provider = user.app_metadata.provider;
+  await axios
+    .post(process.env.SLACK_NEW_PROFILE_WEBHOOK, {
+      provider: capitalize(provider || 'none'),
+      social_url: !provider
+        ? 'No social link available'
+        : provider === 'twitter'
+        ? `https://twitter.com/${user.user_metadata.user_name}`
+        : `https://github.com/${user.user_metadata.user_name}`,
+      user_id: user.id,
+      profile_url: `https://www.bento.finance/u/${profile.username}`,
+      joined_at: getKoreanTimestring(user.created_at),
+    })
+    .catch((e) => {
+      console.error('[Slack] Failed to send webhook', e);
+    });
+};
+
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context,
 ) => {
+  const Supabase = getServerSupabase();
   const accessToken: string =
     (getCookie('supabase_auth_token', {
       req: context.req,
       res: context.res,
     }) as string) || '';
-  const { user: userFromCookie } = await Supabase.auth.api.getUser(accessToken);
-
   const username = context.query.username as string | undefined;
 
   if (username && username.length >= 36) {
@@ -52,15 +89,76 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       .eq('user_id', userId.toLowerCase());
     const profiles: UserProfile[] = (await query).data ?? [];
     const profile = profiles[0];
+
     if (!profile) {
+      const { data: user, error: e } = await Supabase.auth.api.getUserById(
+        userId,
+      );
+      if (!user) {
+        return {
+          redirect: {
+            destination: '/',
+            permanent: false,
+          },
+        };
+      }
+
+      const displayName =
+        user.identities?.[0]?.identity_data?.user_name ||
+        user.user_metadata.user_name ||
+        '';
+
+      const data = await Supabase.from('profile').upsert({
+        user_id: userId,
+        username: userId,
+        display_name: displayName,
+        bio: '',
+      });
+
+      if (!!data.error) {
+        console.log({ error: data.error });
+        return {
+          redirect: {
+            destination: '/',
+            permanent: false,
+          },
+        };
+      }
+
+      try {
+        await notifySlack(user, {
+          user_id: userId,
+          username: userId,
+          display_name: displayName,
+          bio: '',
+          images: [],
+          verified: false,
+          tabs: [],
+          links: [],
+        });
+      } catch (error) {
+        console.error(error);
+      }
+
       return {
-        notFound: true,
+        props: {
+          type: 'USER_PROFILE',
+          profile,
+          ...(await serverSideTranslations(context.locale || 'en', [
+            'common',
+            'dashboard',
+          ])),
+        },
       };
     }
     return {
-      redirect: {
-        destination: `/u/${profile.username}`,
-        permanent: false,
+      props: {
+        type: 'USER_PROFILE',
+        profile,
+        ...(await serverSideTranslations(context.locale || 'en', [
+          'common',
+          'dashboard',
+        ])),
       },
     };
   }
@@ -85,6 +183,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   if (profiles.length > 0) {
     profile = profiles[0];
   }
+
+  const { user: userFromCookie } = await Supabase.auth.api.getUser(accessToken);
 
   if (!!profile) {
     return {
