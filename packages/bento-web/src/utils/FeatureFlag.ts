@@ -16,6 +16,7 @@ const definedFeatures = {
   isProfileDetailedEditorEnabled: Environment.development,
   isEmailMagicLinkEnabled: Environment.off,
   isKlaytnDeFiEnabled: Environment.production,
+  isBadgeMockupsEnabled: Environment.development,
 };
 
 type FeatureName = keyof typeof definedFeatures;

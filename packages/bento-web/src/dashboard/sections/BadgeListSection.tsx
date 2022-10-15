@@ -8,6 +8,7 @@ import ogBadgeIllust2 from '@/assets/badges/og-2.png';
 import { debounce } from '@/utils/debounce';
 
 import { Colors, float } from '@/styles';
+import { FeatureFlags } from '@/utils';
 
 import { BadgeModal } from '../components/BadgeModal';
 import { KLAYswapBadge, SwapscannerBadge } from './Badges';
@@ -94,8 +95,12 @@ export const BadgeListSection: React.FC = () => {
             )}
           </AnimatePresence>
         </BadgeItem>
-        <KLAYswapBadge onClick={() => setBadgeModalVisible('ksp')} />
-        <SwapscannerBadge onClick={() => setBadgeModalVisible('scnr')} />
+        {FeatureFlags.isBadgeMockupsEnabled && (
+          <>
+            <KLAYswapBadge onClick={() => setBadgeModalVisible('ksp')} />
+            <SwapscannerBadge onClick={() => setBadgeModalVisible('scnr')} />
+          </>
+        )}
       </ul>
 
       <BadgeModal
