@@ -14,7 +14,7 @@ import {
 } from '@/profile/components/ProfileEditor';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { axios } from '@/utils';
+import { Config, axios } from '@/utils';
 import { Analytics, toast } from '@/utils';
 
 type ErrorResponse =
@@ -26,6 +26,7 @@ type ErrorResponse =
 
 type Props = {
   isMyProfile: boolean;
+  imageToken: string;
   profile: UserProfile | null;
   revalidateProfile: () => void;
 };
@@ -33,6 +34,7 @@ type Props = {
 export const ProfileSummarySection: React.FC<Props> = ({
   isMyProfile,
   profile,
+  imageToken,
   revalidateProfile,
 }) => {
   const { t } = useTranslation('dashboard');
@@ -132,6 +134,19 @@ export const ProfileSummarySection: React.FC<Props> = ({
     }
   }, [profile, isEditing, draft, revalidateProfile]);
 
+  const onClickShareProfile = useCallback(async () => {
+    console.log(imageToken);
+    if (!profile?.user_id) {
+      toast({
+        type: 'error',
+        title: 'Profile ID is invalid.',
+        description: 'Sorry for the inconvenience. Please contact to the team.',
+      });
+    }
+    const imageURL = `${Config.MAIN_API_BASE_URL}/api/images/card?token=${imageToken}&user_id=${profile?.user_id}`;
+    console.log({ imageURL });
+  }, [imageToken, profile?.user_id]);
+
   return (
     <Wrapper>
       <BorderWrapper className="profile-summary">
@@ -155,7 +170,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
               )}
 
               {isMyProfile && (
-                <AddProfileButton
+                <MinimalButton
                   onClick={() => {
                     Analytics.logEvent('click_edit_my_profile', {
                       title: 'Setup Now',
@@ -165,7 +180,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
                   }}
                 >
                   {t(!profile?.username ? 'Setup Now' : 'Edit Profile')}
-                </AddProfileButton>
+                </MinimalButton>
               )}
             </Information>
           </Foreground>
@@ -177,6 +192,8 @@ export const ProfileSummarySection: React.FC<Props> = ({
           <LinkBlockItem key={index} {...block} />
         ))}
       </ul>
+
+      <MinimalButton onClick={onClickShareProfile}>Share</MinimalButton>
 
       <ProfileEditModal
         visible={isEditing}
@@ -324,7 +341,7 @@ const EmptyText = styled.span`
 `;
 
 // FIXME: Design component
-const AddProfileButton = styled(Button)`
+const MinimalButton = styled(Button)`
   && {
     margin: 8px auto 0;
     width: fit-content;

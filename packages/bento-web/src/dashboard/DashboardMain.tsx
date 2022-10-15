@@ -49,6 +49,7 @@ type DashboardMainProps = {
   isMyProfile: boolean;
   wallets: Wallet[];
   profile: UserProfile;
+  imageToken: string;
   revalidateProfile: () => Promise<void>;
   revalidateWallets: () => Promise<Wallet[] | undefined>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -62,6 +63,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   isMyProfile,
   wallets,
   profile,
+  imageToken,
   revalidateProfile,
   revalidateWallets,
   setAddWalletModalVisible,
@@ -208,6 +210,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               profile={profile}
               revalidateProfile={revalidateProfile}
               isMyProfile={isMyProfile}
+              imageToken={imageToken}
             />
           </div>
         </ProfileContainer>
