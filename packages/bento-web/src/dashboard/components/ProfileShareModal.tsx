@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -6,7 +7,7 @@ import { formatUsername } from '@/utils/format';
 
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { Analytics, axios, copyToClipboard, toast } from '@/utils';
+import { Analytics, Config, copyToClipboard, toast } from '@/utils';
 
 import { MinimalButton } from './MinimalButton';
 
@@ -35,27 +36,26 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
       onDismiss={onDismiss}
       transition={{ ease: 'linear' }}
     >
-      <a href={cardURL} download={`${filename}.png`}>
+      <a
+        href={cardURL.replace(
+          `${Config.MAIN_API_BASE_URL}/api/images`,
+          '/api/proxy',
+        )}
+        download={`${filename}.png`}
+      >
         <CardImage src={cardURL} />
       </a>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <MinimalButton
           onClick={() => {
-            // const anc = document.createElement('a');
-            // anc.href = cardURL;
-            // anc.download = `${filename}.png`;
-            // document.body.appendChild(anc);
-            // anc.click();
-            // document.body.removeChild(anc);
-            // toast({
-            //   title: 'Downloaded image!',
-            //   description: `Profile ${formattedUsername}`,
-            // });
-
             axios
-              .get(cardURL, {
-                responseType: 'blob',
-              })
+              .get(
+                cardURL.replace(
+                  `${Config.MAIN_API_BASE_URL}/api/images`,
+                  '/api/proxy',
+                ),
+                { responseType: 'blob' },
+              )
               .then(({ data: blob }) => {
                 console.log(blob);
                 const url = window.URL.createObjectURL(blob);
