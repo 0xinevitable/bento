@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button, Modal } from '@/components/system';
+import { displayUsername } from '@/utils/format';
 
 import { LinkBlock } from '@/profile/blocks';
 import { LinkBlockItem } from '@/profile/blocks/LinkBlockItem';
@@ -148,7 +149,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
                   {!!profile?.display_name && (
                     <Name>{profile?.display_name}</Name>
                   )}
-                  <Username>{`@${profile?.username}`}</Username>
+                  <Username>{displayUsername(profile.username)}</Username>
                   {!!profile?.bio && <Bio>{profile?.bio}</Bio>}
                 </>
               )}
