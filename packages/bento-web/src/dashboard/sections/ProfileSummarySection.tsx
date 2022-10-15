@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
+import queryString from 'query-string';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -16,6 +17,19 @@ import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Config, axios } from '@/utils';
 import { Analytics, toast } from '@/utils';
+
+const hashCode = (value: string) => {
+  let hash: number = 0,
+    i: number,
+    chr: number;
+  if (value.length === 0) return hash;
+  for (i = 0; i < value.length; i++) {
+    chr = value.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
 
 type ErrorResponse =
   | {
@@ -143,9 +157,22 @@ export const ProfileSummarySection: React.FC<Props> = ({
         description: 'Sorry for the inconvenience. Please contact to the team.',
       });
     }
-    const imageURL = `${Config.MAIN_API_BASE_URL}/api/images/card?token=${imageToken}&user_id=${profile?.user_id}`;
+    const imageURL = queryString.stringifyUrl({
+      url: `${Config.MAIN_API_BASE_URL}/api/images/card`,
+      query: {
+        token: imageToken,
+        user_id: profile?.user_id,
+        hash: hashCode(
+          JSON.stringify([
+            profile?.username,
+            profile?.display_name,
+            profileImageURL,
+          ]),
+        ),
+      },
+    });
     console.log({ imageURL });
-  }, [imageToken, profile?.user_id]);
+  }, [imageToken, profileImageURL]);
 
   return (
     <Wrapper>
