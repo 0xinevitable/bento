@@ -43,7 +43,7 @@ export const BadgeModal: React.FC<Props> = ({
           {achievements.map((item, index) => (
             <AchievementListItem key={index}>
               <Checkbox />
-              {item}
+              <span dangerouslySetInnerHTML={{ __html: item }} />
             </AchievementListItem>
           ))}
         </AchievementList>

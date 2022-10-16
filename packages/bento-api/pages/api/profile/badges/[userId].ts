@@ -87,13 +87,17 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   );
 
   if (klayswapLPCount > 0) {
-    klayswapAchievements.push(`Staking in ${klayswapLPCount}+ LPs`);
+    klayswapAchievements.push(
+      `Staking in <strong>${klayswapLPCount}+ LPs</strong>`,
+    );
   }
   let thresholds = [20000, 15000, 10000, 1000, 500, 100, 1, 0];
   for (let i = 0; i < thresholds.length; i++) {
     if (klayswapStakedAmount >= thresholds[i]) {
       klayswapAchievements.push(
-        `Staking ${thresholds[i].toLocaleString()}+ KSP in Governance`,
+        `Staking <strong>${thresholds[
+          i
+        ].toLocaleString()}+ KSP</strong> in Governance`,
       );
       break;
     }
@@ -101,7 +105,9 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   for (let i = 0; i < thresholds.length; i++) {
     if (swapscannerStakedAmount >= thresholds[i]) {
       swapscannerAchievements.push(
-        `Staking ${thresholds[i].toLocaleString()}+ SCNR in Governance`,
+        `Staking <strong>${thresholds[
+          i
+        ].toLocaleString()}+ SCNR</strong> in Governance`,
       );
       break;
     }
