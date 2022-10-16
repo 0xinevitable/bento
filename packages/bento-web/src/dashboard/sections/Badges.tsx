@@ -4,11 +4,13 @@ import styled from 'styled-components';
 
 import klayswapIllust from '@/assets/badges/klayswap.png';
 import swapscannerIllust from '@/assets/badges/swapscanner.png';
-import { debounce } from '@/utils/debounce';
 
 import { Colors, float } from '@/styles';
 
-type Props = { onClick: () => void };
+type Props = {
+  onClick: () => void;
+};
+
 export const KLAYswapBadge: React.FC<Props> = ({ onClick }) => {
   return (
     <BadgeItem className="klayswap" onClick={onClick}>

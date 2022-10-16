@@ -1,20 +1,47 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/future/image';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import ogBadgeIllust1 from '@/assets/badges/og-1.png';
 import ogBadgeIllust2 from '@/assets/badges/og-2.png';
 import { debounce } from '@/utils/debounce';
 
+import { KlaytnDeFiProtocolType } from '@/defi/types/staking';
 import { Colors, float } from '@/styles';
-import { FeatureFlags } from '@/utils';
+import { FeatureFlags, axios, toast } from '@/utils';
 
-import { BadgeModal } from '../components/BadgeModal';
+import { BadgeModal, BadgeType } from '../components/BadgeModal';
 import { KLAYswapBadge, SwapscannerBadge } from './Badges';
 
-export const BadgeListSection: React.FC = () => {
+type Badge = {
+  type: BadgeType;
+  achievements: string[];
+};
+
+type Props = {
+  userId: string;
+  selected: boolean;
+};
+
+export const BadgeListSection: React.FC<Props> = ({ userId, selected }) => {
   const [isHovered, setHovered] = useState<boolean>(false);
+  const [badges, setBadges] = useState<Badge[]>([]);
+
+  useEffect(() => {
+    if (selected && !!userId) {
+      axios
+        .get(`/api/profile/badges/${userId}`)
+        .then(({ data }) => {
+          if (Array.isArray(data)) {
+            setBadges(data);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, [userId, selected]);
 
   const onMouseEnter = useCallback(
     debounce(() => setHovered(true), 100),
@@ -25,14 +52,24 @@ export const BadgeListSection: React.FC = () => {
     [],
   );
 
-  const [badgeModalVisible, setBadgeModalVisible] = useState<
-    'ksp' | 'scnr' | null
-  >(null);
+  const [badgeModalVisible, setBadgeModalVisible] = useState<BadgeType | null>(
+    null,
+  );
+  const [badgeAchievements, setBadgeAchievements] = useState<string[]>([]);
 
   return (
     <Section>
       <ul>
-        <BadgeItem onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <BadgeItem
+          onClick={() =>
+            toast({
+              type: 'info',
+              title: 'Coming Soon!',
+            })
+          }
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
           <AnimatePresence>
             <div
               style={{
@@ -97,8 +134,31 @@ export const BadgeListSection: React.FC = () => {
         </BadgeItem>
         {FeatureFlags.isBadgeMockupsEnabled && (
           <>
-            <KLAYswapBadge onClick={() => setBadgeModalVisible('ksp')} />
-            <SwapscannerBadge onClick={() => setBadgeModalVisible('scnr')} />
+            {badges.map((badge, index) => {
+              if (badge.type === KlaytnDeFiProtocolType.KLAYSWAP) {
+                return (
+                  <KLAYswapBadge
+                    key={index}
+                    onClick={() => {
+                      setBadgeModalVisible(badge.type);
+                      setBadgeAchievements(badge.achievements);
+                    }}
+                  />
+                );
+              }
+              if (badge.type === KlaytnDeFiProtocolType.SWAPSCANNER) {
+                return (
+                  <SwapscannerBadge
+                    key={index}
+                    onClick={() => {
+                      setBadgeModalVisible(badge.type);
+                      setBadgeAchievements(badge.achievements);
+                    }}
+                  />
+                );
+              }
+              return null;
+            })}
           </>
         )}
       </ul>
@@ -106,7 +166,11 @@ export const BadgeListSection: React.FC = () => {
       <BadgeModal
         mode={badgeModalVisible}
         visible={!!badgeModalVisible}
-        onDismiss={() => setBadgeModalVisible(null)}
+        achievements={badgeAchievements}
+        onDismiss={() => {
+          setBadgeModalVisible(null);
+          setBadgeAchievements([]);
+        }}
       />
     </Section>
   );
@@ -122,6 +186,7 @@ const Section = styled.section`
 
   ul {
     gap: 16px;
+    user-select: none;
   }
 `;
 

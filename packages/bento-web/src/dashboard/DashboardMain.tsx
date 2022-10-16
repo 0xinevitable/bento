@@ -421,7 +421,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             </AnimatedTab>
 
             <AnimatedTab selected={currentTab === DashboardTabType.Badges}>
-              <BadgeListSection />
+              <BadgeListSection
+                userId={profile.user_id}
+                selected={currentTab === DashboardTabType.Badges}
+              />
             </AnimatedTab>
           </DashboardContent>
         </DashboardContentWrapper>
