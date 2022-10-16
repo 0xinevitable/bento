@@ -2582,7 +2582,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.21"],\
             ["@types/react-dom", "npm:18.0.6"],\
             ["@types/uuid", "npm:8.3.4"],\
-            ["@vercel/og", "npm:0.0.18"],\
             ["axios", "npm:0.27.2"],\
             ["bn.js", "npm:5.2.1"],\
             ["caver-js", "npm:1.9.0"],\
@@ -4755,15 +4754,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@resvg/resvg-wasm", [\
-        ["npm:2.0.0-alpha.4", {\
-          "packageLocation": "./.yarn/cache/@resvg-resvg-wasm-npm-2.0.0-alpha.4-e8c7fbf697-fa2d470d6f.zip/node_modules/@resvg/resvg-wasm/",\
-          "packageDependencies": [\
-            ["@resvg/resvg-wasm", "npm:2.0.0-alpha.4"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@shuding/opentype.js", [\
         ["npm:1.4.0-beta.0", {\
           "packageLocation": "./.yarn/cache/@shuding-opentype.js-npm-1.4.0-beta.0-498d62cde8-af3478c40c.zip/node_modules/@shuding/opentype.js/",\
@@ -5540,18 +5530,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-yoga-layout-npm-1.9.2-3c692aa211-dbc3d6ab99.zip/node_modules/@types/yoga-layout/",\
           "packageDependencies": [\
             ["@types/yoga-layout", "npm:1.9.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@vercel/og", [\
-        ["npm:0.0.18", {\
-          "packageLocation": "./.yarn/cache/@vercel-og-npm-0.0.18-26f14d21fc-fd034cf6a6.zip/node_modules/@vercel/og/",\
-          "packageDependencies": [\
-            ["@vercel/og", "npm:0.0.18"],\
-            ["@resvg/resvg-wasm", "npm:2.0.0-alpha.4"],\
-            ["satori", "npm:0.0.40"],\
-            ["yoga-wasm-web", "npm:0.1.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -13450,19 +13428,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["satori", [\
-        ["npm:0.0.40", {\
-          "packageLocation": "./.yarn/cache/satori-npm-0.0.40-9eb94c1b53-d7017a7b77.zip/node_modules/satori/",\
-          "packageDependencies": [\
-            ["satori", "npm:0.0.40"],\
-            ["@shuding/opentype.js", "npm:1.4.0-beta.0"],\
-            ["css-background-parser", "npm:0.1.0"],\
-            ["css-box-shadow", "npm:1.0.0-3"],\
-            ["css-to-react-native", "npm:3.0.0"],\
-            ["postcss-value-parser", "npm:4.2.0"],\
-            ["yoga-layout-prebuilt", "npm:1.10.0"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:0.0.41", {\
           "packageLocation": "./.yarn/cache/satori-npm-0.0.41-606407e770-9453ae4014.zip/node_modules/satori/",\
           "packageDependencies": [\
@@ -15276,15 +15241,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["yoga-layout-prebuilt", "npm:1.10.0"],\
             ["@types/yoga-layout", "npm:1.9.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["yoga-wasm-web", [\
-        ["npm:0.1.2", {\
-          "packageLocation": "./.yarn/cache/yoga-wasm-web-npm-0.1.2-becc1bcc71-0e7fa70efe.zip/node_modules/yoga-wasm-web/",\
-          "packageDependencies": [\
-            ["yoga-wasm-web", "npm:0.1.2"]\
           ],\
           "linkType": "HARD"\
         }]\
