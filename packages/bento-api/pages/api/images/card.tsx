@@ -7,6 +7,7 @@ import path from 'path';
 import satori from 'satori';
 
 import { ServerSupabase as Supabase } from '@/utils/ServerSupabase';
+import { withCORS } from '@/utils/middlewares/withCORS';
 
 const arrayBufferToHex = (arrayBuffer: ArrayBuffer) => {
   return Array.prototype.map
@@ -51,13 +52,15 @@ export const formatUsername = (
   }
   return prefix + username;
 };
+
 type UserProfile = {
   user_id: string;
   username: string;
   display_name: string | null;
   images: string[] | null;
 };
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const user_id = req.query.user_id as string;
   const token = req.query.token as string;
 
@@ -278,4 +281,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     'public, immutable, no-transform, max-age=31536000',
   );
   res.send(pngBuffer);
-}
+};
+
+export default withCORS(handler);

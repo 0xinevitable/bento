@@ -4,6 +4,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 import satori from 'satori';
 
+import { withCORS } from '@/utils/middlewares/withCORS';
+
 const fileDirectory = path.join(process.cwd(), '_files');
 
 const getFontBuffer = async (filename: string) => {
@@ -36,7 +38,7 @@ export const formatUsername = (
   return prefix + username;
 };
 
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const username = req.query.username as string;
   if (!username) {
     return res.status(400).send('Invalid params.');
@@ -107,4 +109,6 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     'public, immutable, no-transform, max-age=31536000',
   );
   res.send(pngBuffer);
-}
+};
+
+export default withCORS(handler);
