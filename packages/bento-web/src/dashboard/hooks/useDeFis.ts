@@ -52,5 +52,5 @@ export const useDeFis = (wallets: Wallet[]) => {
     setDefis(items);
   }, [result, getCachedPrice]);
 
-  return { defis, defisJSONKey: JSON.stringify(defis) };
+  return { defis };
 };

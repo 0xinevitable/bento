@@ -105,7 +105,6 @@ export const useNFTBalances = ({ wallets }: Options) => {
 
   return {
     balances: openSeaNFTBalance,
-    jsonKey: JSON.stringify(openSeaNFTBalance),
   };
 };
 
