@@ -1,5 +1,6 @@
 import { Icon } from '@iconify/react';
 import { Session } from '@supabase/supabase-js';
+import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -16,6 +17,7 @@ type DashboardIntroProps = {
 };
 
 export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
+  const { t } = useTranslation('intro');
   const [isFixedLoginNudgeVisible, setFixedLoginNudgeVisible] =
     useState<boolean>(false);
 
@@ -63,9 +65,9 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
             textAlign: 'center',
           }}
         >
-          Group Identity
+          {t('Group Identity')}
           <br />
-          From Web3 Finance
+          {t('From Web3 Finance')}
         </h1>
 
         <div
@@ -76,7 +78,7 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
             gap: 8,
           }}
         >
-          <Button onClick={onClickLogin}>{'View your Dashboard'}</Button>
+          <Button onClick={onClickLogin}>{t('View your Dashboard')}</Button>
           <a
             title="About"
             style={{
@@ -100,14 +102,14 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
               });
             }}
           >
-            <span style={{ marginTop: 1.5 }}>About</span>
+            <span style={{ marginTop: 1.5 }}>{t('About')}</span>
             <Icon icon="heroicons-solid:external-link" />
           </a>
         </div>
       </div>
 
       <ProtocolSection>
-        <Subtitle>Your favorite chains and protocols</Subtitle>
+        <Subtitle>{t('Your favorite chains and protocols')}</Subtitle>
         <ProtocolList>
           {NETWORKS.map((network) => (
             <li key={network.id}>

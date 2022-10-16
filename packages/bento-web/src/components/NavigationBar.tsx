@@ -6,12 +6,11 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import GithubIcon from '@/assets/icons/ic-github.svg';
-import TwitterIcon from '@/assets/icons/ic-twitter.svg';
 import { Icon, NoSSR, Portal } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
 
+import { MinimalButton } from '@/dashboard/components/MinimalButton';
 import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
 
@@ -102,40 +101,9 @@ export const NavigationBar = () => {
         </NoSSR>
 
         <RightContent>
-          <SocialIconList>
-            <NoSSR>
-              {!!session && (
-                <button className="sys logout" onClick={onClickLogout}>
-                  {t('Logout')}
-                </button>
-              )}
-            </NoSSR>
-
-            <a
-              href="https://twitter.com/bentoinevitable"
-              target="_blank"
-              onClick={() =>
-                Analytics.logEvent('click_social_link', {
-                  type: 'twitter',
-                  medium: 'gnb',
-                })
-              }
-            >
-              <TwitterIcon />
-            </a>
-            <a
-              href="https://github.com/inevitable-changes/bento"
-              target="_blank"
-              onClick={() =>
-                Analytics.logEvent('click_social_link', {
-                  type: 'github',
-                  medium: 'gnb',
-                })
-              }
-            >
-              <GithubIcon />
-            </a>
-          </SocialIconList>
+          <MinimalButton style={{ marginTop: -32, marginBottom: -32 }}>
+            {t('Log In')}
+          </MinimalButton>
 
           <LanguageSelector>
             <button
@@ -346,44 +314,6 @@ const RightContent = styled.div`
   @media (max-width: 680px) {
     margin-left: auto;
     margin-right: 20px;
-  }
-`;
-
-const SocialIconList = styled.div`
-  gap: 12px;
-
-  & > button.logout {
-    margin-right: 16px;
-    height: 32px;
-
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    color: ${Colors.gray000};
-
-    transition-property: color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-
-    &:hover {
-      color: ${Colors.gray200};
-    }
-  }
-
-  &,
-  & > a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  & > a:focus {
-    transform: scale(0.85);
-    opacity: 0.45;
-  }
-
-  @media (max-width: 680px) {
-    display: none;
   }
 `;
 
