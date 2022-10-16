@@ -12,7 +12,7 @@ import { useSignOut } from '@/hooks/useSignOut';
 
 import { MinimalButton } from '@/dashboard/components/MinimalButton';
 import { Colors } from '@/styles';
-import { Analytics, FeatureFlags } from '@/utils';
+import { Analytics } from '@/utils';
 
 const Breakpoints = {
   Mobile: 512,
@@ -36,6 +36,32 @@ const NAVIGATION_ITEMS = [
     icon: 'codicon:heart-filled',
   },
 ];
+
+type LanguageSelectorProps = {
+  currentLanguage: 'en' | 'ko' | string;
+  onChangeLocale: () => void;
+  isDesktop?: boolean;
+};
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({
+  currentLanguage,
+  onChangeLocale,
+  isDesktop: desktop,
+}) => (
+  <LanguageSelectorContainer desktop={desktop}>
+    <button
+      className={currentLanguage === 'en' ? 'selected' : ''}
+      onClick={onChangeLocale}
+    >
+      <span>EN</span>
+    </button>
+    <button
+      className={currentLanguage === 'ko' ? 'selected' : ''}
+      onClick={onChangeLocale}
+    >
+      <span>KO</span>
+    </button>
+  </LanguageSelectorContainer>
+);
 
 export const NavigationBar = () => {
   const router = useRouter();
@@ -101,24 +127,13 @@ export const NavigationBar = () => {
         </NoSSR>
 
         <RightContent>
-          <MinimalButton style={{ marginTop: -32, marginBottom: -32 }}>
-            {t('Log In')}
-          </MinimalButton>
+          <LoginButton>{t('Log In')}</LoginButton>
 
-          <LanguageSelector>
-            <button
-              className={currentLanguage === 'en' ? 'selected' : ''}
-              onClick={onChangeLocale}
-            >
-              <span>EN</span>
-            </button>
-            <button
-              className={currentLanguage === 'ko' ? 'selected' : ''}
-              onClick={onChangeLocale}
-            >
-              <span>KO</span>
-            </button>
-          </LanguageSelector>
+          <LanguageSelector
+            currentLanguage={currentLanguage}
+            onChangeLocale={onChangeLocale}
+            isDesktop
+          />
         </RightContent>
 
         <MobileMenuButton onClick={() => setMobileMenuOpen((prev) => !prev)}>
@@ -164,6 +179,11 @@ export const NavigationBar = () => {
                     </Link>
                   </MobileMenuItem>
                 ))}
+
+                <LanguageSelector
+                  currentLanguage={currentLanguage}
+                  onChangeLocale={onChangeLocale}
+                />
               </MobileMenuContent>
             )}
           </AnimatePresence>
@@ -316,8 +336,11 @@ const RightContent = styled.div`
     margin-right: 20px;
   }
 `;
+const LoginButton = styled(MinimalButton)`
+  margin: -32px 0;
+`;
 
-const LanguageSelector = styled.div`
+const LanguageSelectorContainer = styled.div<{ desktop?: boolean }>`
   height: 100%;
   display: flex;
   align-items: center;
@@ -358,6 +381,20 @@ const LanguageSelector = styled.div`
       text-fill-color: transparent;
     }
   }
+
+  ${({ desktop }) =>
+    desktop
+      ? css`
+          @media (max-width: 680px) {
+            display: none;
+          }
+        `
+      : css`
+          height: fit-content;
+          margin: auto -8px 80px;
+          transform: scale(1.5);
+          transform-origin: top left;
+        `};
 `;
 
 const MobileMenuButton = styled.button`
