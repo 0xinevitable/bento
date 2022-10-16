@@ -3,11 +3,11 @@ import { OpenSeaAsset } from '@bento/core';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
-import { flushSync } from 'react-dom';
 import styled from 'styled-components';
 
 import { AnimatedTab } from '@/components/AnimatedTab';
 import { Checkbox, Skeleton } from '@/components/system';
+import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 import { useDeFis } from '@/dashboard/hooks/useDeFis';
@@ -18,7 +18,7 @@ import { WalletBalance } from '@/dashboard/types/WalletBalance';
 import { Metadata } from '@/defi/klaytn/constants/metadata';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { Analytics, FeatureFlags } from '@/utils';
+import { Analytics } from '@/utils';
 
 import { CollapsePanel } from './components/CollapsePanel';
 import { DeFiStakingItem } from './components/DeFiStakingItem';
@@ -75,7 +75,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
   const { balances: walletBalances } = useWalletBalances({ wallets });
-  const { balances: NFTBalances } = useNFTBalances({
+  const { balances: nftBalances } = useNFTBalances({
     wallets,
   });
   const { klaytnNFTs } = useKlaytnNFTs(wallets);
@@ -83,22 +83,23 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const nftAssets = useMemo<(OpenSeaAsset | KlaytnNFTAsset)[]>(() => {
     return [
       ...klaytnNFTs,
-      ...(NFTBalances?.flatMap((item) =>
+      ...(nftBalances?.flatMap((item) =>
         'assets' in item ? item.assets : [],
       ) ?? []),
     ];
-  }, [NFTBalances, klaytnNFTs]);
+  }, [nftBalances, klaytnNFTs]);
 
   const [tokenBalances, setTokenBalances] = useState<DashboardTokenBalance[]>(
     [],
   );
-  useEffect(() => {
-    // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
-    flushSync(() => {
+
+  useLazyEffect(
+    () => {
+      // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
       // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
       const balancesByPlatform = Object.entries(
         groupBy<WalletBalance>(
-          [...walletBalances, ...NFTBalances],
+          [...walletBalances, ...nftBalances],
           (balance) => balance.symbol + balance.name,
         ),
       ).map((v) => v[1]);
@@ -137,8 +138,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
       tokens.sort((a, b) => b.netWorth - a.netWorth);
       setTokenBalances(tokens.filter((v) => v.netWorth > 0));
-    });
-  }, [walletBalances, NFTBalances]);
+    },
+    [walletBalances, nftBalances],
+    500,
+  );
 
   const [isNFTBalancesIncluded, setNFTBalancesIncluded] =
     useLocalStorage<boolean>('@is-nfts-shown-v1', true);
