@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react';
 import { Session } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/future/image';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -37,6 +38,17 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
 
     setFixedLoginNudgeVisible(true);
   }, [login]);
+
+  const router = useRouter();
+  useEffect(() => {
+    const isModalOpen = !!router.query.login;
+    if (isModalOpen) {
+      setFixedLoginNudgeVisible(true);
+
+      // remove query param
+      router.replace(router.pathname, router.pathname, { shallow: true });
+    }
+  }, [router.query]);
 
   useEffect(() => {
     if (!session) {

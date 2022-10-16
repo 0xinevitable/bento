@@ -127,7 +127,18 @@ export const NavigationBar = () => {
         </NoSSR>
 
         <RightContent>
-          <LoginButton>{t('Log In')}</LoginButton>
+          <NoSSR>
+            {!session && (
+              <LoginButton onClick={() => router.push('/home?login=open')}>
+                {t('Log In')}
+              </LoginButton>
+            )}
+            {!!session && (
+              <LogoutButton className="sys" onClick={onClickLogout}>
+                {t('Logout')}
+              </LogoutButton>
+            )}
+          </NoSSR>
 
           <LanguageSelector
             currentLanguage={currentLanguage}
@@ -334,6 +345,24 @@ const RightContent = styled.div`
   @media (max-width: 680px) {
     margin-left: auto;
     margin-right: 20px;
+  }
+`;
+
+const LogoutButton = styled.button`
+  margin-right: 16px;
+  height: 32px;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: ${Colors.gray000};
+
+  transition-property: color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+
+  &:hover {
+    color: ${Colors.gray200};
   }
 `;
 const LoginButton = styled(MinimalButton)`
