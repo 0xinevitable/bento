@@ -1449,6 +1449,7 @@ __metadata:
     "@ethersproject/providers": ^5.7.1
     "@ethersproject/wallet": ^5.7.0
     "@next/bundle-analyzer": ^12.3.1
+    "@resvg/resvg-js": ^2.1.0
     "@solana/web3.js": ^1.63.1
     "@supabase/supabase-js": ^1.35.7
     "@types/bn.js": ^5.1.1
@@ -3213,6 +3214,135 @@ __metadata:
   peerDependencies:
     "@redis/client": ^1.0.0
   checksum: 4d11518185dd15f31c5b4a433902e53a3ebc24614a0221080ab12abf4f6fc60b3db00a71a83de7b4b10f11077de611dc1c273274573646d63481d40ca246f82d
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-android-arm-eabi@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-android-arm-eabi@npm:2.1.0"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-android-arm64@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-android-arm64@npm:2.1.0"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-darwin-arm64@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-darwin-arm64@npm:2.1.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-darwin-x64@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-darwin-x64@npm:2.1.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-arm-gnueabihf@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-arm-gnueabihf@npm:2.1.0"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-arm64-gnu@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-arm64-gnu@npm:2.1.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-arm64-musl@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-arm64-musl@npm:2.1.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-x64-gnu@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-x64-gnu@npm:2.1.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-x64-musl@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-x64-musl@npm:2.1.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-win32-arm64-msvc@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-win32-arm64-msvc@npm:2.1.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-win32-ia32-msvc@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-win32-ia32-msvc@npm:2.1.0"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-win32-x64-msvc@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-win32-x64-msvc@npm:2.1.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js@npm:2.1.0"
+  dependencies:
+    "@resvg/resvg-js-android-arm-eabi": 2.1.0
+    "@resvg/resvg-js-android-arm64": 2.1.0
+    "@resvg/resvg-js-darwin-arm64": 2.1.0
+    "@resvg/resvg-js-darwin-x64": 2.1.0
+    "@resvg/resvg-js-linux-arm-gnueabihf": 2.1.0
+    "@resvg/resvg-js-linux-arm64-gnu": 2.1.0
+    "@resvg/resvg-js-linux-arm64-musl": 2.1.0
+    "@resvg/resvg-js-linux-x64-gnu": 2.1.0
+    "@resvg/resvg-js-linux-x64-musl": 2.1.0
+    "@resvg/resvg-js-win32-arm64-msvc": 2.1.0
+    "@resvg/resvg-js-win32-ia32-msvc": 2.1.0
+    "@resvg/resvg-js-win32-x64-msvc": 2.1.0
+  dependenciesMeta:
+    "@resvg/resvg-js-android-arm-eabi":
+      optional: true
+    "@resvg/resvg-js-android-arm64":
+      optional: true
+    "@resvg/resvg-js-darwin-arm64":
+      optional: true
+    "@resvg/resvg-js-darwin-x64":
+      optional: true
+    "@resvg/resvg-js-linux-arm-gnueabihf":
+      optional: true
+    "@resvg/resvg-js-linux-arm64-gnu":
+      optional: true
+    "@resvg/resvg-js-linux-arm64-musl":
+      optional: true
+    "@resvg/resvg-js-linux-x64-gnu":
+      optional: true
+    "@resvg/resvg-js-linux-x64-musl":
+      optional: true
+    "@resvg/resvg-js-win32-arm64-msvc":
+      optional: true
+    "@resvg/resvg-js-win32-ia32-msvc":
+      optional: true
+    "@resvg/resvg-js-win32-x64-msvc":
+      optional: true
+  checksum: e01571fea3eea08a23efdf7d287f2cec5518872080d5a83bdc5e77ec5474d54d83de36aaa8a409ff9caca0a35eaa03c23a701da8980f2c71ad4ab1958f1b2c62
   languageName: node
   linkType: hard
 

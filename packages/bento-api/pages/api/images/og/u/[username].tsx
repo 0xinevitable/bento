@@ -1,3 +1,4 @@
+import { Resvg } from '@resvg/resvg-js';
 import fs from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
@@ -61,7 +62,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
         style={{
           width: '100%',
           position: 'absolute',
-          bottom: 220,
+          bottom: 223,
           left: 0,
           right: 0,
           display: 'flex',
@@ -96,10 +97,14 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     },
   );
 
-  res.setHeader('content-type', 'image/svg+xml');
+  const resvg = new Resvg(svg, {});
+  const pngData = resvg.render();
+  const pngBuffer = pngData.asPng();
+
+  res.setHeader('content-type', 'image/png');
   res.setHeader(
     'cache-control',
     'public, immutable, no-transform, max-age=31536000',
   );
-  res.send(svg);
+  res.send(pngBuffer);
 }

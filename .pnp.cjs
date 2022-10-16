@@ -2573,6 +2573,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/providers", "npm:5.7.1"],\
             ["@ethersproject/wallet", "npm:5.7.0"],\
             ["@next/bundle-analyzer", "npm:12.3.1"],\
+            ["@resvg/resvg-js", "npm:2.1.0"],\
             ["@solana/web3.js", "npm:1.63.1"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@types/bn.js", "npm:5.1.1"],\
@@ -4621,6 +4622,135 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@redis/client",\
             "@types/redis__client"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/cache/@resvg-resvg-js-npm-2.1.0-74568b4da3-e01571fea3.zip/node_modules/@resvg/resvg-js/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js", "npm:2.1.0"],\
+            ["@resvg/resvg-js-android-arm-eabi", "npm:2.1.0"],\
+            ["@resvg/resvg-js-android-arm64", "npm:2.1.0"],\
+            ["@resvg/resvg-js-darwin-arm64", "npm:2.1.0"],\
+            ["@resvg/resvg-js-darwin-x64", "npm:2.1.0"],\
+            ["@resvg/resvg-js-linux-arm-gnueabihf", "npm:2.1.0"],\
+            ["@resvg/resvg-js-linux-arm64-gnu", "npm:2.1.0"],\
+            ["@resvg/resvg-js-linux-arm64-musl", "npm:2.1.0"],\
+            ["@resvg/resvg-js-linux-x64-gnu", "npm:2.1.0"],\
+            ["@resvg/resvg-js-linux-x64-musl", "npm:2.1.0"],\
+            ["@resvg/resvg-js-win32-arm64-msvc", "npm:2.1.0"],\
+            ["@resvg/resvg-js-win32-ia32-msvc", "npm:2.1.0"],\
+            ["@resvg/resvg-js-win32-x64-msvc", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-android-arm-eabi", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-android-arm-eabi-npm-2.1.0-a9c43d5730/node_modules/@resvg/resvg-js-android-arm-eabi/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-android-arm-eabi", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-android-arm64", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-android-arm64-npm-2.1.0-29a8c61808/node_modules/@resvg/resvg-js-android-arm64/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-android-arm64", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-darwin-arm64", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-darwin-arm64-npm-2.1.0-1d4ac67b10/node_modules/@resvg/resvg-js-darwin-arm64/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-darwin-arm64", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-darwin-x64", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-darwin-x64-npm-2.1.0-e269c78516/node_modules/@resvg/resvg-js-darwin-x64/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-darwin-x64", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-linux-arm-gnueabihf", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-linux-arm-gnueabihf-npm-2.1.0-f7737c7bcc/node_modules/@resvg/resvg-js-linux-arm-gnueabihf/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-linux-arm-gnueabihf", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-linux-arm64-gnu", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-linux-arm64-gnu-npm-2.1.0-4e200c3b37/node_modules/@resvg/resvg-js-linux-arm64-gnu/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-linux-arm64-gnu", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-linux-arm64-musl", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-linux-arm64-musl-npm-2.1.0-105c6be401/node_modules/@resvg/resvg-js-linux-arm64-musl/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-linux-arm64-musl", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-linux-x64-gnu", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-linux-x64-gnu-npm-2.1.0-c77a9e0117/node_modules/@resvg/resvg-js-linux-x64-gnu/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-linux-x64-gnu", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-linux-x64-musl", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-linux-x64-musl-npm-2.1.0-145b249087/node_modules/@resvg/resvg-js-linux-x64-musl/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-linux-x64-musl", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-win32-arm64-msvc", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-win32-arm64-msvc-npm-2.1.0-a057eb824e/node_modules/@resvg/resvg-js-win32-arm64-msvc/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-win32-arm64-msvc", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-win32-ia32-msvc", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-win32-ia32-msvc-npm-2.1.0-1d9684af4a/node_modules/@resvg/resvg-js-win32-ia32-msvc/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-win32-ia32-msvc", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@resvg/resvg-js-win32-x64-msvc", [\
+        ["npm:2.1.0", {\
+          "packageLocation": "./.yarn/unplugged/@resvg-resvg-js-win32-x64-msvc-npm-2.1.0-0bdb6d1b06/node_modules/@resvg/resvg-js-win32-x64-msvc/",\
+          "packageDependencies": [\
+            ["@resvg/resvg-js-win32-x64-msvc", "npm:2.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
