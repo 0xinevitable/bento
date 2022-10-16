@@ -1,25 +1,27 @@
-import { Wallet } from '@bento/common';
-import React, { useCallback, useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 
-import { WalletConnector } from '@/components/WalletConnector';
 import { Modal } from '@/components/system';
-import { useSession } from '@/hooks/useSession';
 
-import { NETWORKS, Network } from '@/constants/networks';
+import { KlaytnDeFiProtocolType } from '@/defi/types/staking';
 import { Colors } from '@/styles';
-import { Analytics } from '@/utils';
 
 import { KLAYswapBadge, SwapscannerBadge } from '../sections/Badges';
 
-type AddWalletModalProps = {
-  mode: 'ksp' | 'scnr' | null;
+export type BadgeType =
+  | KlaytnDeFiProtocolType.KLAYSWAP
+  | KlaytnDeFiProtocolType.SWAPSCANNER;
+
+type Props = {
+  mode: BadgeType | null;
+  achievements: string[];
   visible?: boolean;
   onDismiss?: () => void;
 };
 
-export const BadgeModal: React.FC<AddWalletModalProps> = ({
+export const BadgeModal: React.FC<Props> = ({
   mode,
+  achievements,
   visible: isVisible = false,
   onDismiss,
 }) => {
@@ -29,28 +31,22 @@ export const BadgeModal: React.FC<AddWalletModalProps> = ({
       onDismiss={onDismiss}
       transition={{ ease: 'linear' }}
     >
-      {mode === 'ksp' && <KLAYswapBadge onClick={() => {}} />}
-      {mode === 'scnr' && <SwapscannerBadge onClick={() => {}} />}
-
-      {mode === 'ksp' && (
-        <ListList>
-          <ListItem>
-            <Checkbox />
-            Staked more than <strong>3+ LPs</strong>
-          </ListItem>
-        </ListList>
+      {mode === KlaytnDeFiProtocolType.KLAYSWAP && (
+        <KLAYswapBadge onClick={() => {}} />
       )}
-      {mode === 'scnr' && (
-        <ListList>
-          <ListItem>
-            <Checkbox />
-            Participated in <strong>1st Revenue Sharing</strong>
-          </ListItem>
-          <ListItem>
-            <Checkbox />
-            Single-staked more than <strong>10,000 SCNR</strong>
-          </ListItem>
-        </ListList>
+      {mode === KlaytnDeFiProtocolType.SWAPSCANNER && (
+        <SwapscannerBadge onClick={() => {}} />
+      )}
+
+      {!!achievements && (
+        <AchievementList>
+          {achievements.map((item, index) => (
+            <AchievementListItem key={index}>
+              <Checkbox />
+              <span dangerouslySetInnerHTML={{ __html: item }} />
+            </AchievementListItem>
+          ))}
+        </AchievementList>
       )}
     </OverlayWrapper>
   );
@@ -81,14 +77,14 @@ const OverlayWrapper = styled(Modal)`
   }
 `;
 
-const ListList = styled.ul`
+const AchievementList = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 0 12px 24px;
   gap: 8px;
 `;
-const ListItem = styled.li`
+const AchievementListItem = styled.li`
   color: #d9f15c;
   font-weight: 500;
   display: flex;
