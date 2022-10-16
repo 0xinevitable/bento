@@ -1,6 +1,6 @@
 import { Analytics, toast } from '@/utils';
 
-import { ConnectorProps, NetworkDraft } from '../types';
+import { ConnectorProps } from '../types';
 import { getMessagedToBeSigned } from '../utils/getMessagedToBeSigned';
 import { validateAndSaveWallet } from '../utils/validateAndSaveWallet';
 
