@@ -93,17 +93,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 
   if (username && username.length >= 36) {
     const userId = username;
-    const query = Supabase.from('profile')
-      .select('*')
-      .eq('user_id', userId.toLowerCase());
-    const profiles: UserProfile[] = (await query).data ?? [];
+    const [profileQueryRes, userQueryRes] = await Promise.all([
+      Supabase.from('profile').select('*').eq('user_id', userId.toLowerCase()),
+      Supabase.auth.api.getUserById(userId),
+    ]);
+    const profiles: UserProfile[] = profileQueryRes.data ?? [];
     const profile = profiles[0];
 
     if (!profile) {
-      const { data: user, error: e } = await Supabase.auth.api.getUserById(
-        userId,
-      );
-      if (!user) {
+      if (!userQueryRes.data) {
         return {
           redirect: {
             destination: '/',
@@ -111,6 +109,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
           },
         };
       }
+
+      const user = userQueryRes.data;
 
       const displayName =
         user.identities?.[0]?.identity_data?.user_name ||
@@ -188,15 +188,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   }
 
   let profile: UserProfile | null = null;
-  const query = Supabase.from('profile') //
-    .select('*')
-    .eq('username', username.toLowerCase());
-  const profiles: UserProfile[] = (await query).data ?? [];
+  const [usernameQueryRes, { user: userFromCookie }] = await Promise.all([
+    Supabase.from('profile') //
+      .select('*')
+      .eq('username', username.toLowerCase()),
+    Supabase.auth.api.getUser(accessToken),
+  ]);
+  const profiles: UserProfile[] = usernameQueryRes.data ?? [];
   if (profiles.length > 0) {
     profile = profiles[0];
   }
-
-  const { user: userFromCookie } = await Supabase.auth.api.getUser(accessToken);
 
   if (!!profile) {
     return {
