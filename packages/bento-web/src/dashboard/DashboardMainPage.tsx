@@ -7,13 +7,22 @@ import { format } from 'date-fns';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { MetaHead } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { getServerSupabase } from '@/utils/ServerSupabase';
+import { formatUsername } from '@/utils/format';
 
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Analytics, Supabase } from '@/utils';
@@ -230,6 +239,7 @@ const DashboardPage = ({
   imageToken,
   ...props
 }: Props) => {
+  const router = useRouter();
   const { session } = useSession();
   const [profile, setProfile] = useState<UserProfile>(preloadedProfile);
   const revalidateProfile = useCallback(async () => {
@@ -302,9 +312,71 @@ const DashboardPage = ({
     setMyProfile(session?.user?.id === profile.user_id);
   }, [JSON.stringify(session)]);
 
+  const [title, description, images] = useMemo(() => {
+    let _title: string = '';
+    let _description: string = '';
+    let _images: string[] = [];
+
+    const formattedUsername = formatUsername(profile.username);
+    const displayName = profile.display_name;
+
+    if (!!displayName) {
+      _title = `${displayName} (${formattedUsername}) | Bento`;
+    } else {
+      _title = `${formattedUsername} | Bento`;
+    }
+
+    _description = profile.bio ?? '';
+    _images = profile.images ?? [];
+
+    return [_title, _description, _images];
+  }, [profile]);
+
+  const ogImageURL =
+    images[0] || 'https://bento.finance/assets/mockups/profile-default.png';
+
   return (
     <>
-      <MetaHead />
+      <Head>
+        <title>{title}</title>
+        <meta key="title" name="title" content={title} />
+        <meta key="og:title" property="og:title" content={title} />
+        <meta key="twitter:title" name="twitter:title" content={title} />
+
+        <link
+          key="canonical"
+          rel="canonical"
+          href={`https://bento.finance${router.asPath.split('?')[0]}`}
+        />
+
+        {description.length > 0 && (
+          <>
+            <meta key="description" name="description" content={description} />
+            <meta
+              key="og:description"
+              property="og:description"
+              content={description}
+            />
+            <meta
+              key="twitter:description"
+              name="twitter:description"
+              content={description}
+            />
+          </>
+        )}
+
+        {ogImageURL && (
+          <>
+            <meta key="og:image" property="og:image" content={ogImageURL} />
+            <meta
+              key="twitter:image"
+              property="twitter:image"
+              content={ogImageURL}
+            />
+          </>
+        )}
+      </Head>
+
       <Black />
       <PageContainer style={{ paddingTop: 0 }}>
         <DynamicDashboardMain

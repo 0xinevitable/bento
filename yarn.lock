@@ -1449,6 +1449,7 @@ __metadata:
     "@ethersproject/providers": ^5.7.1
     "@ethersproject/wallet": ^5.7.0
     "@next/bundle-analyzer": ^12.3.1
+    "@resvg/resvg-js": ^2.1.0
     "@solana/web3.js": ^1.63.1
     "@supabase/supabase-js": ^1.35.7
     "@types/bn.js": ^5.1.1
@@ -1457,7 +1458,6 @@ __metadata:
     "@types/react": ^18.0.21
     "@types/react-dom": ^18.0.6
     "@types/uuid": ^8.3.4
-    "@vercel/og": ^0.0.18
     axios: ^0.27.2
     bn.js: ^5.2.1
     caver-js: ^1.9.0
@@ -1472,6 +1472,7 @@ __metadata:
     react-dom: ^18.2.0
     react-is: ^18.2.0
     redis: ^4.3.1
+    satori: ^0.0.41
     tslib: ^2.4.0
     tweetnacl: ^1.0.3
     typescript: ^4.8.3
@@ -3215,10 +3216,132 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@resvg/resvg-wasm@npm:2.0.0-alpha.4":
-  version: 2.0.0-alpha.4
-  resolution: "@resvg/resvg-wasm@npm:2.0.0-alpha.4"
-  checksum: fa2d470d6f39c4a57e4500f4bff389683c4d0d97ad20d08c7721df7a66d5b179e243e4f990cdda70615191167d40dd6cc724e620b5f2aa7f46c8b46ff63c37eb
+"@resvg/resvg-js-android-arm-eabi@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-android-arm-eabi@npm:2.1.0"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-android-arm64@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-android-arm64@npm:2.1.0"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-darwin-arm64@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-darwin-arm64@npm:2.1.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-darwin-x64@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-darwin-x64@npm:2.1.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-arm-gnueabihf@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-arm-gnueabihf@npm:2.1.0"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-arm64-gnu@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-arm64-gnu@npm:2.1.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-arm64-musl@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-arm64-musl@npm:2.1.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-x64-gnu@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-x64-gnu@npm:2.1.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-linux-x64-musl@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-linux-x64-musl@npm:2.1.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-win32-arm64-msvc@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-win32-arm64-msvc@npm:2.1.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-win32-ia32-msvc@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-win32-ia32-msvc@npm:2.1.0"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js-win32-x64-msvc@npm:2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js-win32-x64-msvc@npm:2.1.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@resvg/resvg-js@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@resvg/resvg-js@npm:2.1.0"
+  dependencies:
+    "@resvg/resvg-js-android-arm-eabi": 2.1.0
+    "@resvg/resvg-js-android-arm64": 2.1.0
+    "@resvg/resvg-js-darwin-arm64": 2.1.0
+    "@resvg/resvg-js-darwin-x64": 2.1.0
+    "@resvg/resvg-js-linux-arm-gnueabihf": 2.1.0
+    "@resvg/resvg-js-linux-arm64-gnu": 2.1.0
+    "@resvg/resvg-js-linux-arm64-musl": 2.1.0
+    "@resvg/resvg-js-linux-x64-gnu": 2.1.0
+    "@resvg/resvg-js-linux-x64-musl": 2.1.0
+    "@resvg/resvg-js-win32-arm64-msvc": 2.1.0
+    "@resvg/resvg-js-win32-ia32-msvc": 2.1.0
+    "@resvg/resvg-js-win32-x64-msvc": 2.1.0
+  dependenciesMeta:
+    "@resvg/resvg-js-android-arm-eabi":
+      optional: true
+    "@resvg/resvg-js-android-arm64":
+      optional: true
+    "@resvg/resvg-js-darwin-arm64":
+      optional: true
+    "@resvg/resvg-js-darwin-x64":
+      optional: true
+    "@resvg/resvg-js-linux-arm-gnueabihf":
+      optional: true
+    "@resvg/resvg-js-linux-arm64-gnu":
+      optional: true
+    "@resvg/resvg-js-linux-arm64-musl":
+      optional: true
+    "@resvg/resvg-js-linux-x64-gnu":
+      optional: true
+    "@resvg/resvg-js-linux-x64-musl":
+      optional: true
+    "@resvg/resvg-js-win32-arm64-msvc":
+      optional: true
+    "@resvg/resvg-js-win32-ia32-msvc":
+      optional: true
+    "@resvg/resvg-js-win32-x64-msvc":
+      optional: true
+  checksum: e01571fea3eea08a23efdf7d287f2cec5518872080d5a83bdc5e77ec5474d54d83de36aaa8a409ff9caca0a35eaa03c23a701da8980f2c71ad4ab1958f1b2c62
   languageName: node
   linkType: hard
 
@@ -3779,17 +3902,6 @@ __metadata:
   version: 1.9.2
   resolution: "@types/yoga-layout@npm:1.9.2"
   checksum: dbc3d6ab997d50fe1fcca5dd6822982c8fe586145ab648e0e97c3bc4ebc93d0b40c9edd75febaba374d61f60c1379b639f6be652965c776a901bf1068f2eac87
-  languageName: node
-  linkType: hard
-
-"@vercel/og@npm:^0.0.18":
-  version: 0.0.18
-  resolution: "@vercel/og@npm:0.0.18"
-  dependencies:
-    "@resvg/resvg-wasm": 2.0.0-alpha.4
-    satori: 0.0.40
-    yoga-wasm-web: 0.1.2
-  checksum: fd034cf6a696ab19fcd7a27eebe517175571ce572fc671176ae49766f2b382955b77cd5028f6f0a1a35aa8db33f3742aeae729b62748acbf8f9d47d7c775bf6f
   languageName: node
   linkType: hard
 
@@ -10276,9 +10388,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"satori@npm:0.0.40":
-  version: 0.0.40
-  resolution: "satori@npm:0.0.40"
+"satori@npm:^0.0.41":
+  version: 0.0.41
+  resolution: "satori@npm:0.0.41"
   dependencies:
     "@shuding/opentype.js": 1.4.0-beta.0
     css-background-parser: ^0.1.0
@@ -10286,7 +10398,7 @@ __metadata:
     css-to-react-native: ^3.0.0
     postcss-value-parser: ^4.2.0
     yoga-layout-prebuilt: ^1.10.0
-  checksum: d7017a7b776bb046ef2533f12e53882ea7d6e508b52c3d788b889679e2ec183c37d37cfe11e63557ca70e61765861d6b23227af183167c21822fd4a8e2e58f49
+  checksum: 9453ae40149f6911dddb3f57da298cd058d7106b7005ec72b138135d9d7be9fc1c8a0103ce78f7c0ec5b70f87366d601fd199e28648f98a193760bd67847f3ba
   languageName: node
   linkType: hard
 
@@ -11798,13 +11910,6 @@ __metadata:
   dependencies:
     "@types/yoga-layout": 1.9.2
   checksum: 6954c7c7b04c585a1c974391bea4734611adb85702b5e9131549a1d3dc5b94e69bcfea34121cdaeb5e702663bf290fcce5374910128e54d1031503a57c062865
-  languageName: node
-  linkType: hard
-
-"yoga-wasm-web@npm:0.1.2":
-  version: 0.1.2
-  resolution: "yoga-wasm-web@npm:0.1.2"
-  checksum: 0e7fa70efe1cf50888e950a43104545b15df7267e66a3b7b072092d04dec78815966f4ab685db5de83a026318f93a3bd5404d866c42a6b7457f9fdc8533593ef
   languageName: node
   linkType: hard
 
