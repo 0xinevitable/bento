@@ -1,4 +1,5 @@
 import { Wallet } from '@bento/common';
+import { useTranslation } from 'next-i18next';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -21,6 +22,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
   onDismiss,
   revalidateWallets,
 }) => {
+  const { t } = useTranslation('common');
   const { session } = useSession();
   const isLoggedIn = !!session;
 
@@ -54,7 +56,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
       {isLoggedIn && (
         <>
           <section>
-            <Title>Choose Chains</Title>
+            <Title>{t('Choose Chains')}</Title>
+            <Description>{t('wc-1-desc')}</Description>
             <NetworkList>
               {NETWORKS.map((network) => {
                 const selected = !!networks.find((v) => v.id === network.id);
@@ -73,9 +76,9 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
                         : undefined
                     }
                   >
-                    <img src={network.logo} alt={network.name} />
+                    <img src={network.logo} alt={t(network.name)} />
                     <div className="name-container">
-                      <span className="name">{network.name}</span>
+                      <span className="name">{t(network.name)}</span>
                     </div>
                   </NetworkItem>
                 );
@@ -84,7 +87,8 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
           </section>
 
           <section>
-            <Title>Sign with Wallet</Title>
+            <Title>{t('Sign with Wallet')}</Title>
+            <Description>{t('wc-2-desc')}</Description>
             <WalletConnector
               networks={networks}
               onSave={() => {
@@ -103,9 +107,18 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
 export default AddWalletModal;
 
 const Title = styled.h3`
-  margin-bottom: 12px;
   font-weight: bold;
+  font-size: 20px;
   color: ${Colors.white};
+`;
+const Description = styled.p`
+  width: 100%;
+  max-width: 700px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.28;
+  color: ${Colors.gray200};
 `;
 
 const OverlayWrapper = styled(Modal)`

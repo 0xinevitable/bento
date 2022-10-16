@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useTranslation } from 'next-i18next';
 import { useCallback, useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -34,6 +35,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
   networks,
   onSave,
 }) => {
+  const { t } = useTranslation('common');
   const networksJSONKey = JSON.stringify(networks);
 
   const firstNetwork = useMemo(() => {
@@ -103,10 +105,12 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         }
       >
         <IconList>
-          <img src={WALLETS.MetaMask} alt="MetaMask" />
-          <img src={WALLETS.WalletConnect} alt="WalletConnect" />
+          <img src={WALLETS.MetaMask} alt={t('MetaMask')} />
+          <img src={WALLETS.WalletConnect} alt={t('WalletConnect')} />
         </IconList>
-        <span className="title">MetaMask or WalletConnect</span>
+        <span className="title">
+          {`${t('MetaMask')}/${t('WalletConnect')}`}
+        </span>
       </WalletButton>
 
       <WalletButton
@@ -118,9 +122,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         }
       >
         <IconList>
-          <img src={WALLETS.Kaikas} alt="Kaikas" />
+          <img src={WALLETS.Kaikas} alt={t('Kaikas')} />
         </IconList>
-        <span className="title">Kaikas</span>
+        <span className="title">{t('Kaikas')}</span>
       </WalletButton>
 
       <WalletButton
@@ -132,9 +136,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         }
       >
         <IconList>
-          <img src={WALLETS.Keplr} alt="Keplr" />
+          <img src={WALLETS.Keplr} alt={t('Keplr')} />
         </IconList>
-        <span className="title">Keplr</span>
+        <span className="title">{t('Keplr')}</span>
       </WalletButton>
 
       <WalletButton
@@ -146,9 +150,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         }
       >
         <IconList>
-          <img src={WALLETS.Phantom} alt="Phantom" />
+          <img src={WALLETS.Phantom} alt={t('Phantom')} />
         </IconList>
-        <span className="title">Phantom</span>
+        <span className="title">{t('Phantom')}</span>
       </WalletButton>
     </WalletList>
   );

@@ -6,14 +6,13 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import GithubIcon from '@/assets/icons/ic-github.svg';
-import TwitterIcon from '@/assets/icons/ic-twitter.svg';
 import { Icon, NoSSR, Portal } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
 
+import { MinimalButton } from '@/dashboard/components/MinimalButton';
 import { Colors } from '@/styles';
-import { Analytics, FeatureFlags } from '@/utils';
+import { Analytics } from '@/utils';
 
 const Breakpoints = {
   Mobile: 512,
@@ -37,6 +36,32 @@ const NAVIGATION_ITEMS = [
     icon: 'codicon:heart-filled',
   },
 ];
+
+type LanguageSelectorProps = {
+  currentLanguage: 'en' | 'ko' | string;
+  onChangeLocale: () => void;
+  isDesktop?: boolean;
+};
+const LanguageSelector: React.FC<LanguageSelectorProps> = ({
+  currentLanguage,
+  onChangeLocale,
+  isDesktop: desktop,
+}) => (
+  <LanguageSelectorContainer desktop={desktop}>
+    <button
+      className={currentLanguage === 'en' ? 'selected' : ''}
+      onClick={onChangeLocale}
+    >
+      <span>EN</span>
+    </button>
+    <button
+      className={currentLanguage === 'ko' ? 'selected' : ''}
+      onClick={onChangeLocale}
+    >
+      <span>KO</span>
+    </button>
+  </LanguageSelectorContainer>
+);
 
 export const NavigationBar = () => {
   const router = useRouter();
@@ -102,55 +127,24 @@ export const NavigationBar = () => {
         </NoSSR>
 
         <RightContent>
-          <SocialIconList>
-            <NoSSR>
-              {!!session && (
-                <button className="sys logout" onClick={onClickLogout}>
-                  {t('Logout')}
-                </button>
-              )}
-            </NoSSR>
+          <NoSSR>
+            {!session && (
+              <LoginButton onClick={() => router.push('/home?login=open')}>
+                {t('Log In')}
+              </LoginButton>
+            )}
+            {!!session && (
+              <LogoutButton className="sys" onClick={onClickLogout}>
+                {t('Logout')}
+              </LogoutButton>
+            )}
+          </NoSSR>
 
-            <a
-              href="https://twitter.com/bentoinevitable"
-              target="_blank"
-              onClick={() =>
-                Analytics.logEvent('click_social_link', {
-                  type: 'twitter',
-                  medium: 'gnb',
-                })
-              }
-            >
-              <TwitterIcon />
-            </a>
-            <a
-              href="https://github.com/inevitable-changes/bento"
-              target="_blank"
-              onClick={() =>
-                Analytics.logEvent('click_social_link', {
-                  type: 'github',
-                  medium: 'gnb',
-                })
-              }
-            >
-              <GithubIcon />
-            </a>
-          </SocialIconList>
-
-          <LanguageSelector>
-            <button
-              className={currentLanguage === 'en' ? 'selected' : ''}
-              onClick={onChangeLocale}
-            >
-              <span>EN</span>
-            </button>
-            <button
-              className={currentLanguage === 'ko' ? 'selected' : ''}
-              onClick={onChangeLocale}
-            >
-              <span>KO</span>
-            </button>
-          </LanguageSelector>
+          <LanguageSelector
+            currentLanguage={currentLanguage}
+            onChangeLocale={onChangeLocale}
+            isDesktop
+          />
         </RightContent>
 
         <MobileMenuButton onClick={() => setMobileMenuOpen((prev) => !prev)}>
@@ -196,6 +190,11 @@ export const NavigationBar = () => {
                     </Link>
                   </MobileMenuItem>
                 ))}
+
+                <LanguageSelector
+                  currentLanguage={currentLanguage}
+                  onChangeLocale={onChangeLocale}
+                />
               </MobileMenuContent>
             )}
           </AnimatePresence>
@@ -349,45 +348,28 @@ const RightContent = styled.div`
   }
 `;
 
-const SocialIconList = styled.div`
-  gap: 12px;
+const LogoutButton = styled.button`
+  margin-right: 16px;
+  height: 32px;
 
-  & > button.logout {
-    margin-right: 16px;
-    height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: ${Colors.gray000};
 
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    color: ${Colors.gray000};
+  transition-property: color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 
-    transition-property: color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-
-    &:hover {
-      color: ${Colors.gray200};
-    }
-  }
-
-  &,
-  & > a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  & > a:focus {
-    transform: scale(0.85);
-    opacity: 0.45;
-  }
-
-  @media (max-width: 680px) {
-    display: none;
+  &:hover {
+    color: ${Colors.gray200};
   }
 `;
+const LoginButton = styled(MinimalButton)`
+  margin: -32px 0;
+`;
 
-const LanguageSelector = styled.div`
+const LanguageSelectorContainer = styled.div<{ desktop?: boolean }>`
   height: 100%;
   display: flex;
   align-items: center;
@@ -428,6 +410,20 @@ const LanguageSelector = styled.div`
       text-fill-color: transparent;
     }
   }
+
+  ${({ desktop }) =>
+    desktop
+      ? css`
+          @media (max-width: 680px) {
+            display: none;
+          }
+        `
+      : css`
+          height: fit-content;
+          margin: auto -8px 80px;
+          transform: scale(1.5);
+          transform-origin: top left;
+        `};
 `;
 
 const MobileMenuButton = styled.button`

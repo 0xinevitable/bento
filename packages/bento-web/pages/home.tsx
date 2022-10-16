@@ -54,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // else not logged in
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'dashboard'])),
+      ...(await serverSideTranslations(locale, ['common', 'intro'])),
     },
   };
 };

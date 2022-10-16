@@ -1,4 +1,5 @@
-import { Icon } from '@iconify/react';
+// import { Icon } from '@iconify/react';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styled from 'styled-components';
@@ -6,7 +7,10 @@ import styled from 'styled-components';
 import { Modal } from '@/components/system';
 
 import { Colors } from '@/styles';
-import { FeatureFlags, Supabase } from '@/utils';
+import {
+  // FeatureFlags,
+  Supabase,
+} from '@/utils';
 
 type LoginNudgeProps = {
   className?: string;
@@ -20,6 +24,7 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({
   redirectTo = 'current',
 }) => {
   const router = useRouter();
+  const { t } = useTranslation('common');
 
   const onClickLogin = useCallback(
     async (provider: 'twitter' | 'github') => {
@@ -50,19 +55,19 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({
           src="/assets/illusts/lock.png"
           alt=""
         />
-        <Title>Log in to Bento</Title>
+        <Title>{t('Log in to Bento')}</Title>
         <Content>
           <ButtonList>
             <Button className="twitter" onClick={() => onClickLogin('twitter')}>
               <ButtonIcon src="/assets/social/twitter.png" alt="" />
-              Login with Twitter
+              {t('Login with Twitter')}
             </Button>
             <Button className="github" onClick={() => onClickLogin('github')}>
               <ButtonIcon src="/assets/social/github.png" alt="" />
-              Login with GitHub
+              {t('Login with GitHub')}
             </Button>
           </ButtonList>
-          {FeatureFlags.isEmailMagicLinkEnabled && (
+          {/* {FeatureFlags.isEmailMagicLinkEnabled && (
             <>
               <Bar />
               <Button className="default">
@@ -70,7 +75,7 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({
                 <span style={{ marginLeft: 8 }}>Use Magic Email Link</span>
               </Button>
             </>
-          )}
+          )} */}
         </Content>
       </Container>
     </Wrapper>
@@ -160,12 +165,12 @@ const Button = styled.button`
     text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.42);
   }
 
-  &.default {
+  /* &.default {
     background-color: #c1124f;
     color: white;
     text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
     box-shadow: 0px 8px 16px rgba(193, 18, 79, 0.45);
-  }
+  } */
 
   &:hover {
     transform: scale(0.99);
