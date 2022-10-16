@@ -1472,6 +1472,7 @@ __metadata:
     react-dom: ^18.2.0
     react-is: ^18.2.0
     redis: ^4.3.1
+    satori: ^0.0.41
     tslib: ^2.4.0
     tweetnacl: ^1.0.3
     typescript: ^4.8.3
@@ -10287,6 +10288,20 @@ __metadata:
     postcss-value-parser: ^4.2.0
     yoga-layout-prebuilt: ^1.10.0
   checksum: d7017a7b776bb046ef2533f12e53882ea7d6e508b52c3d788b889679e2ec183c37d37cfe11e63557ca70e61765861d6b23227af183167c21822fd4a8e2e58f49
+  languageName: node
+  linkType: hard
+
+"satori@npm:^0.0.41":
+  version: 0.0.41
+  resolution: "satori@npm:0.0.41"
+  dependencies:
+    "@shuding/opentype.js": 1.4.0-beta.0
+    css-background-parser: ^0.1.0
+    css-box-shadow: 1.0.0-3
+    css-to-react-native: ^3.0.0
+    postcss-value-parser: ^4.2.0
+    yoga-layout-prebuilt: ^1.10.0
+  checksum: 9453ae40149f6911dddb3f57da298cd058d7106b7005ec72b138135d9d7be9fc1c8a0103ce78f7c0ec5b70f87366d601fd199e28648f98a193760bd67847f3ba
   languageName: node
   linkType: hard
 

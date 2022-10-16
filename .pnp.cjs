@@ -2596,6 +2596,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:18.2.0"],\
             ["react-is", "npm:18.2.0"],\
             ["redis", "npm:4.3.1"],\
+            ["satori", "npm:0.0.41"],\
             ["tslib", "npm:2.4.0"],\
             ["tweetnacl", "npm:1.0.3"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
@@ -13323,6 +13324,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/satori-npm-0.0.40-9eb94c1b53-d7017a7b77.zip/node_modules/satori/",\
           "packageDependencies": [\
             ["satori", "npm:0.0.40"],\
+            ["@shuding/opentype.js", "npm:1.4.0-beta.0"],\
+            ["css-background-parser", "npm:0.1.0"],\
+            ["css-box-shadow", "npm:1.0.0-3"],\
+            ["css-to-react-native", "npm:3.0.0"],\
+            ["postcss-value-parser", "npm:4.2.0"],\
+            ["yoga-layout-prebuilt", "npm:1.10.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:0.0.41", {\
+          "packageLocation": "./.yarn/cache/satori-npm-0.0.41-606407e770-9453ae4014.zip/node_modules/satori/",\
+          "packageDependencies": [\
+            ["satori", "npm:0.0.41"],\
             ["@shuding/opentype.js", "npm:1.4.0-beta.0"],\
             ["css-background-parser", "npm:0.1.0"],\
             ["css-box-shadow", "npm:1.0.0-3"],\
