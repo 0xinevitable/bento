@@ -18,8 +18,8 @@ const getDataURL = async (
 ): Promise<string> => {
   const jsonDirectory = path.join(process.cwd(), '_files');
 
-  const layerRelativePath = path.join(jsonDirectory, filename);
-  const buffer = await fs.promises.readFile(layerRelativePath);
+  const filePath = path.join(jsonDirectory, filename);
+  const buffer = await fs.promises.readFile(filePath);
   return `data:${mimeType};base64,${buffer.toString('base64')}`;
 };
 
@@ -39,7 +39,7 @@ export const formatUsername = (
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   const username = req.query.username as string;
   if (!username) {
-    return new Response('Invalid params.', { status: 400 });
+    return res.status(400).send('Invalid params.');
   }
 
   const [fontData, dataURL] = await Promise.all([
