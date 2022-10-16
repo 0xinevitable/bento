@@ -3,6 +3,7 @@ import { OpenSeaAsset } from '@bento/core';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
+import { flushSync } from 'react-dom';
 import styled from 'styled-components';
 
 import { AnimatedTab } from '@/components/AnimatedTab';
@@ -88,50 +89,55 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     ];
   }, [NFTBalances, klaytnNFTs]);
 
-  const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
+  const [tokenBalances, setTokenBalances] = useState<DashboardTokenBalance[]>(
+    [],
+  );
+  useEffect(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
-    // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
-    const balancesByPlatform = Object.entries(
-      groupBy<WalletBalance>(
-        [...walletBalances, ...NFTBalances],
-        (balance) => balance.symbol + balance.name,
-      ),
-    ).map((v) => v[1]);
+    flushSync(() => {
+      // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
+      const balancesByPlatform = Object.entries(
+        groupBy<WalletBalance>(
+          [...walletBalances, ...NFTBalances],
+          (balance) => balance.symbol + balance.name,
+        ),
+      ).map((v) => v[1]);
 
-    const tokens = balancesByPlatform
-      .map((balances) => {
-        // NOTE: balances 는 모두 같은 토큰의 정보를 담고 있기에, first 에서만 정보를 꺼내온다.
-        const [first] = balances;
+      const tokens = balancesByPlatform
+        .map((balances) => {
+          // NOTE: balances 는 모두 같은 토큰의 정보를 담고 있기에, first 에서만 정보를 꺼내온다.
+          const [first] = balances;
 
-        const amount = balances.reduce(
-          walletBalanceReducer(
-            first.symbol ?? first.name,
-            (acc, balance) =>
-              acc +
-              balance.balance +
-              ('delegations' in balance ? balance.delegations : 0),
-          ),
-          0,
-        );
+          const amount = balances.reduce(
+            walletBalanceReducer(
+              first.symbol ?? first.name,
+              (acc, balance) =>
+                acc +
+                balance.balance +
+                ('delegations' in balance ? balance.delegations : 0),
+            ),
+            0,
+          );
 
-        return {
-          platform: first.platform,
-          symbol: first.symbol,
-          name: first.name,
-          logo: first.logo,
-          type: 'type' in first ? first.type : undefined,
-          tokenAddress: 'address' in first ? first.address : undefined,
-          balances: balances,
-          netWorth: amount * first.price,
-          amount,
-          price: first.price,
-          coinGeckoId: 'coinGeckoId' in first ? first.coinGeckoId : undefined,
-        };
-      })
-      .flat();
+          return {
+            platform: first.platform,
+            symbol: first.symbol,
+            name: first.name,
+            logo: first.logo,
+            type: 'type' in first ? first.type : undefined,
+            tokenAddress: 'address' in first ? first.address : undefined,
+            balances: balances,
+            netWorth: amount * first.price,
+            amount,
+            price: first.price,
+            coinGeckoId: 'coinGeckoId' in first ? first.coinGeckoId : undefined,
+          };
+        })
+        .flat();
 
-    tokens.sort((a, b) => b.netWorth - a.netWorth);
-    return tokens.filter((v) => v.netWorth > 0);
+      tokens.sort((a, b) => b.netWorth - a.netWorth);
+      setTokenBalances(tokens.filter((v) => v.netWorth > 0));
+    });
   }, [walletBalances, NFTBalances]);
 
   const [isNFTBalancesIncluded, setNFTBalancesIncluded] =
