@@ -11,6 +11,10 @@
   "Community": "커뮤니티",
   "Profile": "프로필",
 
+  "Log in to Bento": "소셜 계정으로 바로 시작하기",
+  "Login with Twitter": "트위터로 로그인",
+  "Login with GitHub": "깃허브로 로그인",
+
   "Wallets": "지갑 목록",
   "Delete": "삭제",
   "Wallets Connected": "연결된 지갑",
