@@ -100,7 +100,9 @@ export const useNFTBalances = ({ wallets }: Options) => {
 
         return balances;
       },
-    ).then(setOpenSeaNFTBalance);
+    ).then((data) => {
+      setOpenSeaNFTBalance(data);
+    });
   }, [JSON.stringify(fetchedAssets)]);
 
   return {
