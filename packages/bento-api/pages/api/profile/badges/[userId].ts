@@ -108,8 +108,14 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   }
 
   const badges = [
-    { type: 'klayswap', achievements: klayswapAchievements },
-    { type: 'swapscanner', achievements: swapscannerAchievements },
+    {
+      type: KlaytnDeFiProtocolType.KLAYSWAP,
+      achievements: klayswapAchievements,
+    },
+    {
+      type: KlaytnDeFiProtocolType.SWAPSCANNER,
+      achievements: swapscannerAchievements,
+    },
   ];
 
   await redisClient.disconnect();
