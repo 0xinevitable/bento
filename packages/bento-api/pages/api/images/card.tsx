@@ -1,5 +1,5 @@
 import { Resvg } from '@resvg/resvg-js';
-import crypto from 'crypto';
+import { createHmac } from 'crypto';
 import { format } from 'date-fns';
 import fs from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -8,19 +8,6 @@ import satori from 'satori';
 
 import { ServerSupabase as Supabase } from '@/utils/ServerSupabase';
 import { withCORS } from '@/utils/middlewares/withCORS';
-
-const arrayBufferToHex = (arrayBuffer: ArrayBuffer) => {
-  return Array.prototype.map
-    .call(new Uint8Array(arrayBuffer), (n) => n.toString(16).padStart(2, '0'))
-    .join('');
-};
-const key = crypto.subtle.importKey(
-  'raw',
-  new TextEncoder().encode('my_secret'),
-  { name: 'HMAC', hash: { name: 'SHA-256' } },
-  false,
-  ['sign'],
-);
 
 const fileDirectory = path.join(process.cwd(), '_files');
 
@@ -65,13 +52,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const token = req.query.token as string;
 
   if (process.env.NODE_ENV === 'production' || !!token) {
-    const verifyToken = arrayBufferToHex(
-      await crypto.subtle.sign(
-        'HMAC',
-        await key,
-        new TextEncoder().encode(JSON.stringify({ user_id })),
-      ),
-    );
+    const hmac = createHmac('sha256', 'my_secret');
+    hmac.update(JSON.stringify({ user_id }));
+    const verifyToken = hmac.digest('hex');
 
     if (token !== verifyToken) {
       return res.status(401).send('Invalid token.');
