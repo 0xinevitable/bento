@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import styled from 'styled-components';
 
 import { Colors } from '@/styles';
@@ -13,6 +14,7 @@ export const Tab = <T extends string>({
   items,
   onChange,
 }: TabProps<T>) => {
+  const { t } = useTranslation('dashboard');
   return (
     <Container>
       {items.map((item) => {
@@ -23,7 +25,7 @@ export const Tab = <T extends string>({
             selected={isSelected}
             onClick={() => onChange(item)}
           >
-            {item}
+            {t(item)}
           </TabItem>
         );
       })}

@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { Modal } from '@/components/system';
+import { AnimatedToolTip, Modal } from '@/components/system';
 import { formatUsername } from '@/utils/format';
 
 import { UserProfile } from '@/profile/types/UserProfile';
@@ -46,8 +46,10 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
             height: 64,
             width: '100%',
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            gap: 4,
           }}
         >
           <span
@@ -60,18 +62,30 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
           >
             {t('Generating...')}
           </span>
+          <span
+            style={{
+              color: Colors.gray200,
+              fontSize: 16,
+              fontWeight: 600,
+              textAlign: 'center',
+            }}
+          >
+            {t('It might take some time...')}
+          </span>
         </div>
       ) : (
         <>
-          <a
-            href={cardURL.replace(
-              `${Config.MAIN_API_BASE_URL}/api/images`,
-              '/api/proxy',
-            )}
-            download={`${filename}.png`}
-          >
-            <CardImage src={cardURL} />
-          </a>
+          <AnimatedToolTip label={t('Click to Download')} placement="top">
+            <a
+              href={cardURL.replace(
+                `${Config.MAIN_API_BASE_URL}/api/images`,
+                '/api/proxy',
+              )}
+              download={`${filename}.png`}
+            >
+              <CardImage src={cardURL} />
+            </a>
+          </AnimatedToolTip>
           <ButtonRow>
             <MinimalButton
               className="yellow"
@@ -175,6 +189,11 @@ const CardImage = styled.img`
   object-fit: cover;
   border-radius: 12px;
   border: 4px solid ${Colors.gray850};
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(0.95);
+  }
 
   @media (max-width: 520px) {
     max-width: 302px;
