@@ -17,6 +17,10 @@ export const withCORS =
       origin.endsWith('inevitable-ch.vercel.app')
     ) {
       res.setHeader('Access-Control-Allow-Origin', origin);
+    } else if (process.env.NODE_ENV !== 'production') {
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    } else {
+      res.setHeader('Access-Control-Allow-Origin', 'https://bento.finance');
     }
 
     res.setHeader('Access-Control-Allow-Credentials', 'true');
