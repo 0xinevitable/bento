@@ -73,11 +73,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
-  const { balances: walletBalances, jsonKey: walletBalancesJSONKey } =
-    useWalletBalances({ wallets });
-  const { balances: NFTBalances, jsonKey: nftBalancesJSONKey } = useNFTBalances(
-    { wallets },
-  );
+  const { balances: walletBalances } = useWalletBalances({ wallets });
+  const { balances: NFTBalances } = useNFTBalances({
+    wallets,
+  });
   const { klaytnNFTs } = useKlaytnNFTs(wallets);
 
   const nftAssets = useMemo<(OpenSeaAsset | KlaytnNFTAsset)[]>(() => {
@@ -87,7 +86,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
         'assets' in item ? item.assets : [],
       ) ?? []),
     ];
-  }, [nftBalancesJSONKey, klaytnNFTs]);
+  }, [NFTBalances, klaytnNFTs]);
 
   const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
@@ -133,8 +132,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
     tokens.sort((a, b) => b.netWorth - a.netWorth);
     return tokens.filter((v) => v.netWorth > 0);
-  }, [walletBalancesJSONKey, nftBalancesJSONKey]);
-  const tokenBalancesJSONKey = JSON.stringify(tokenBalances);
+  }, [walletBalances, NFTBalances]);
 
   const [isNFTBalancesIncluded, setNFTBalancesIncluded] =
     useLocalStorage<boolean>('@is-nfts-shown-v1', true);
@@ -144,11 +142,11 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       return tokenBalances;
     }
     return tokenBalances.filter((v) => v.type !== 'nft');
-  }, [isNFTBalancesIncluded, tokenBalancesJSONKey]);
+  }, [isNFTBalancesIncluded, tokenBalances]);
 
   const netWorthInUSD = useMemo(
     () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
-    [tokenBalancesJSONKey],
+    [tokenBalances],
   );
 
   const [currentTab, setCurrentTab] = useState<DashboardTabType>(
@@ -162,10 +160,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     }
   }, [currentTab]);
 
-  const { defis, defisJSONKey } = useDeFis(wallets);
+  const { defis } = useDeFis(wallets);
   const defiStakesByProtocol = useMemo(
     () => groupBy(defis, 'protocol'),
-    [defisJSONKey],
+    [defis],
   );
 
   const [defiMetadata, setDefiMetadata] = useState<Record<

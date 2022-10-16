@@ -91,6 +91,5 @@ export const useWalletBalances = ({ wallets }: Options) => {
 
   return {
     balances: balancesWithPrices,
-    jsonKey: JSON.stringify(balancesWithPrices),
   };
 };
