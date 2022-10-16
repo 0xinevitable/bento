@@ -46,8 +46,10 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
             height: 64,
             width: '100%',
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            gap: 4,
           }}
         >
           <span
@@ -59,6 +61,16 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
             }}
           >
             {t('Generating...')}
+          </span>
+          <span
+            style={{
+              color: Colors.gray200,
+              fontSize: 16,
+              fontWeight: 600,
+              textAlign: 'center',
+            }}
+          >
+            {t('It might take some time...')}
           </span>
         </div>
       ) : (
