@@ -19,7 +19,6 @@ import React, {
 import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
-import { MetaHead } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { getServerSupabase } from '@/utils/ServerSupabase';
 import { formatUsername } from '@/utils/format';
@@ -312,10 +311,9 @@ const DashboardPage = ({
     setMyProfile(session?.user?.id === profile.user_id);
   }, [JSON.stringify(session)]);
 
-  const [title, description, images] = useMemo(() => {
+  const [title, description, ogImageURL] = useMemo(() => {
     let _title: string = '';
     let _description: string = '';
-    let _images: string[] = [];
 
     const formattedUsername = formatUsername(profile.username);
     const displayName = profile.display_name;
@@ -327,13 +325,15 @@ const DashboardPage = ({
     }
 
     _description = profile.bio ?? '';
-    _images = profile.images ?? [];
 
-    return [_title, _description, _images];
+    return [
+      _title,
+      _description,
+      `https://dev-server.bento.finance/api/images/og/u/${formatUsername(
+        profile.username,
+      )}`,
+    ];
   }, [profile]);
-
-  const ogImageURL =
-    images[0] || 'https://bento.finance/assets/mockups/profile-default.png';
 
   return (
     <>
