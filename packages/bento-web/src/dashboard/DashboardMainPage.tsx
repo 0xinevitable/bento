@@ -331,6 +331,7 @@ const DashboardPage = ({
       _description,
       `https://dev-server.bento.finance/api/images/og/u/${formatUsername(
         profile.username,
+        '',
       )}`,
     ];
   }, [profile]);
