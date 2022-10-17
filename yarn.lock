@@ -1445,6 +1445,7 @@ __metadata:
     "@cosmjs/amino": ^0.29.0
     "@cosmjs/cosmwasm-stargate": ^0.29.1
     "@cosmjs/crypto": 0.29.0
+    "@cosmjs/encoding": ^0.29.2
     "@ethersproject/address": ^5.7.0
     "@ethersproject/providers": ^5.7.1
     "@ethersproject/wallet": ^5.7.0
@@ -1467,6 +1468,7 @@ __metadata:
     env-cmd: ^10.1.0
     klaytn-multicall: ^1.0.2
     next: canary
+    osmojs: ^0.33.0
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -10619,7 +10621,6 @@ __metadata:
   dependencies:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
-    "@cosmjs/encoding": ^0.29.2
     "@supabase/supabase-js": ^1.35.7
     "@types/dedent": ^0.7.0
     "@types/node": ^18.7.19
@@ -10627,7 +10628,6 @@ __metadata:
     axios: ^0.27.2
     dedent: ^0.7.0
     find-yarn-workspace-root: ^2.0.0
-    osmojs: ^0.33.0
     prettier: ^2.7.1
     ttypescript: ^1.5.13
     typescript: ^4.8.3

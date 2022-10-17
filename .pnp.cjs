@@ -2569,6 +2569,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@cosmjs/amino", "npm:0.29.0"],\
             ["@cosmjs/cosmwasm-stargate", "npm:0.29.1"],\
             ["@cosmjs/crypto", "npm:0.29.0"],\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
             ["@ethersproject/address", "npm:5.7.0"],\
             ["@ethersproject/providers", "npm:5.7.1"],\
             ["@ethersproject/wallet", "npm:5.7.0"],\
@@ -2591,6 +2592,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["env-cmd", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:10.1.0"],\
             ["klaytn-multicall", "npm:1.0.2"],\
             ["next", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:12.3.2-canary.25"],\
+            ["osmojs", "npm:0.33.0"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:18.2.0"],\
@@ -13653,7 +13655,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["scripts", "workspace:scripts"],\
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
-            ["@cosmjs/encoding", "npm:0.29.2"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/node", "npm:18.7.19"],\
@@ -13661,7 +13662,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:0.27.2"],\
             ["dedent", "npm:0.7.0"],\
             ["find-yarn-workspace-root", "npm:2.0.0"],\
-            ["osmojs", "npm:0.33.0"],\
             ["prettier", "npm:2.7.1"],\
             ["ttypescript", "virtual:3d037d5e526f3d3d648b34e6f2870741001da83fbe5a06f011f676bb188c06041db8b9f18e1dc28a15d39fd0f2ca8aed5c277ca1e2fd69d4f751809e3cb17f94#npm:1.5.13"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\

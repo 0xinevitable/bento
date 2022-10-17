@@ -1,5 +1,5 @@
 import { safePromiseAll } from '@bento/common';
-import { OSMOSIS_MAINNET_ASSETLIST, TokenInput } from '@bento/core';
+import { OSMOSIS_TOKENS } from '@bento/core';
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 
 import {
@@ -9,17 +9,9 @@ import {
 } from '@/defi/types/staking';
 
 const ION_DENOM = 'ion';
-const ION_ASSET = OSMOSIS_MAINNET_ASSETLIST.assets.find(
-  (v) => v.base === `u${ION_DENOM}`,
+const ION_TOKEN_INFO = OSMOSIS_TOKENS.find(
+  (v) => v.address === `u${ION_DENOM}`,
 )!;
-const ION_TOKEN_INFO: TokenInput = {
-  symbol: ION_ASSET.symbol,
-  name: ION_ASSET.name,
-  address: ION_DENOM,
-  decimals: ION_ASSET.denom_units.find((v) => v.denom === ION_DENOM)?.exponent!,
-  coinGeckoId: ION_ASSET.coingecko_id!,
-  logo: ION_ASSET.logo_URIs.png,
-};
 
 const STAKING_ADDRESS =
   'osmo1yg8930mj8pk288lmkjex0qz85mj8wgtns5uzwyn2hs25pwdnw42sf745wc';

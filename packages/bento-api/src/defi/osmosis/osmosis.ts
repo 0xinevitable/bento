@@ -1,9 +1,5 @@
 import { safePromiseAll } from '@bento/common';
-import {
-  OSMOSIS_MAINNET_ASSETLIST,
-  pricesFromCoinGecko,
-  withCache,
-} from '@bento/core';
+import { OSMOSIS_TOKENS, pricesFromCoinGecko, withCache } from '@bento/core';
 import { osmosis } from 'osmojs';
 
 export interface Coin {
@@ -42,13 +38,12 @@ export interface Pool {
 
 const address = 'osmo15zysaya5j34vy2cqd7y9q8m3drjpy0d2lvmkpa';
 
-const baseURL = 'https://lcd-osmosis.blockapsis.com';
-const { createLCDClient } = osmosis.ClientFactory;
 const main = async () => {
-  const client = await createLCDClient({ restEndpoint: baseURL });
+  const client = await osmosis.ClientFactory.createRPCQueryClient({
+    rpcEndpoint: 'https://rpc-osmosis.blockapsis.com',
+  });
 
   const types = ['locked', 'unlockable', 'unlocking'];
-  //   const o = await client.cosmos.
   type PoolBalanceType = {
     status: 'locked' | 'unlockable' | 'unlocking';
     poolId: string;
@@ -95,23 +90,23 @@ const main = async () => {
       const poolRes = await getPool(poolBalance.poolId);
       const denoms = getDenomsFromPool(poolRes.pool);
       denoms.map((d) => {
-        const tokenInfo = OSMOSIS_MAINNET_ASSETLIST.assets.find(
-          (v) => v.denom_units.findIndex((u) => u.denom === d) !== -1,
+        const tokenInfo = OSMOSIS_TOKENS.find(
+          (v) => v.denomUnits?.findIndex((u) => u.denom === d) !== -1,
         );
-        const allDenoms = tokenInfo?.denom_units.map((v) => v.denom) || [];
+        const allDenoms = tokenInfo?.denomUnits?.map((v) => v.denom) || [];
         for (const denom of allDenoms) {
           if (!(denom in tokenInfoByDenom)) {
             tokenInfoByDenom[denom] = tokenInfo;
           }
-          if (!!tokenInfo?.coingecko_id && !(denom in coinGeckoIdByDenom)) {
-            coinGeckoIdByDenom[denom] = tokenInfo.coingecko_id;
+          if (!!tokenInfo?.coinGeckoId && !(denom in coinGeckoIdByDenom)) {
+            coinGeckoIdByDenom[denom] = tokenInfo.coinGeckoId;
           }
         }
       });
     }),
   );
 
-  const coinGeckoIds = [...new Set(Object.values(coinGeckoIdByDenom))];
+  let coinGeckoIds = [...new Set(Object.values(coinGeckoIdByDenom))];
   const pricesByDenom: Record<string, number> = !!coinGeckoIds.length
     ? await pricesFromCoinGecko(coinGeckoIds)
         .then((data) => {
@@ -150,7 +145,7 @@ const main = async () => {
           baseAssetDenom: assetDenomA,
           quoteAssetDenom: assetDenomB,
         });
-        const spotPriceA = parseFloat(spotPrice.spot_price);
+        const spotPriceA = parseFloat(spotPrice.spotPrice);
         const spotPriceB = 1 / spotPriceA;
         if (assetPriceA === null) {
           assetPriceA = spotPriceA;
@@ -178,4 +173,3 @@ const main = async () => {
   );
   console.log(JSON.stringify({ pools }, null, 2));
 };
-main();
