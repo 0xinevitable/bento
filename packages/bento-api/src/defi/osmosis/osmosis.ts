@@ -36,9 +36,15 @@ export interface Pool {
   }[];
 }
 
-const address = 'osmo15zysaya5j34vy2cqd7y9q8m3drjpy0d2lvmkpa';
+const getDenomsFromPool = (pool: Pool) =>
+  pool.pool_assets.map((poolAsset) => poolAsset.token.denom);
 
-const main = async () => {
+const getPool = (client: any, poolId: string) =>
+  client.osmosis.gamm.v1beta1.pool({
+    poolId: poolId as any,
+  }) as unknown as Promise<{ pool: Pool }>;
+
+export const getGAMMLPs = async (walletAddress: string) => {
   const client = await osmosis.ClientFactory.createRPCQueryClient({
     rpcEndpoint: 'https://rpc-osmosis.blockapsis.com',
   });
@@ -51,16 +57,16 @@ const main = async () => {
     amount: string;
   };
   const poolBalances = (
-    await Promise.all([
-      client.osmosis.lockup.accountLockedCoins({
-        owner: address,
-      }),
-      client.osmosis.lockup.accountUnlockableCoins({
-        owner: address,
-      }),
-      client.osmosis.lockup.accountUnlockingCoins({
-        owner: address,
-      }),
+    await safePromiseAll([
+      client.osmosis.lockup
+        .accountLockedCoins({ owner: walletAddress })
+        .catch(() => ({ coins: [] })),
+      client.osmosis.lockup
+        .accountUnlockableCoins({ owner: walletAddress })
+        .catch(() => ({ coins: [] })),
+      client.osmosis.lockup
+        .accountUnlockingCoins({ owner: walletAddress })
+        .catch(() => ({ coins: [] })),
     ])
   ).flatMap((v, index) =>
     v.coins.map(
@@ -73,22 +79,20 @@ const main = async () => {
     ),
   );
 
-  const getDenomsFromPool = (pool: Pool) =>
-    pool.pool_assets.map((poolAsset) => poolAsset.token.denom);
-
-  const getPool = withCache(
-    (poolId: string) =>
-      client.osmosis.gamm.v1beta1.pool({
-        poolId: poolId as any,
-      }) as unknown as Promise<{ pool: Pool }>,
-  );
-
   let tokenInfoByDenom: Record<string, any> = {};
   let coinGeckoIdByDenom: Record<string, string> = {};
+  let poolInfoByPoolId: Record<string, Pool> = {};
   await safePromiseAll(
     poolBalances.map(async (poolBalance) => {
-      const poolRes = await getPool(poolBalance.poolId);
-      const denoms = getDenomsFromPool(poolRes.pool);
+      let poolInfo: Pool;
+      if (!poolInfoByPoolId[poolBalance.poolId]) {
+        const poolRes = await getPool(client, poolBalance.poolId);
+        poolInfoByPoolId[poolBalance.poolId] = poolRes.pool;
+        poolInfo = poolRes.pool;
+      } else {
+        poolInfo = poolInfoByPoolId[poolBalance.poolId];
+      }
+      const denoms = getDenomsFromPool(poolInfo);
       denoms.map((d) => {
         const tokenInfo = OSMOSIS_TOKENS.find(
           (v) => v.denomUnits?.findIndex((u) => u.denom === d) !== -1,
@@ -161,15 +165,15 @@ const main = async () => {
     }
   });
 
-  const pools = await Promise.all(
+  const pools = await safePromiseAll(
     poolBalances.map(async (poolBalance) => {
-      const poolRes = await getPool(poolBalance.poolId);
+      const pool = poolInfoByPoolId[poolBalance.poolId];
       const prices = await getPrice(
         poolBalance.poolId,
-        getDenomsFromPool(poolRes.pool),
+        getDenomsFromPool(pool),
       );
       return { poolBalance, prices };
     }),
   );
-  console.log(JSON.stringify({ pools }, null, 2));
+  // console.log(JSON.stringify({ pools }, null, 2));
 };
