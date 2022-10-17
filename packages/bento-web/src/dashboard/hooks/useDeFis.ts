@@ -43,7 +43,7 @@ export const useDeFis = (wallets: Wallet[]) => {
   const [defis, setDefis] = useState<DeFiStakingWithClientData[]>([]);
 
   useEffect(() => {
-    const items = result.flatMap((item) => {
+    let items = result.flatMap((item) => {
       if (!item.data?.stakings) {
         return [];
       }
@@ -54,6 +54,7 @@ export const useDeFis = (wallets: Wallet[]) => {
       }));
     });
 
+    items = items.sort((a, b) => b.valuation.total - a.valuation.total);
     setDefis(items);
   }, [result, getCachedPrice]);
 
