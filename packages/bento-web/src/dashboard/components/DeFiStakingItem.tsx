@@ -74,7 +74,11 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                 : t('Rep Contract')}
             </span>
             <span className="sys">
-              <InlineBadge>{shortenAddress(protocol.address)}</InlineBadge>
+              <InlineBadge>
+                {protocol.type === OsmosisDeFiType.OSMOSIS_GAMM_LP
+                  ? protocol.address
+                  : shortenAddress(protocol.address)}
+              </InlineBadge>
             </span>
           </AccountItem>
         )}
