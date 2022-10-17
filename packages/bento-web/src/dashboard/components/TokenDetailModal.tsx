@@ -124,7 +124,14 @@ export const TokenDetailModal: React.FC<Props> = ({
                       }
                       isVideo={isVideo}
                     />
-                    <AssetName className="text-sm text-gray-400">
+                    <AssetName
+                      className="sys"
+                      style={{
+                        color: Colors.gray200,
+                        fontSize: 14,
+                        fontWeight: 600,
+                      }}
+                    >
                       {asset.name || `#${asset.token_id}`}
                     </AssetName>
                   </AssetListItem>
@@ -136,18 +143,19 @@ export const TokenDetailModal: React.FC<Props> = ({
               <FungibleTokenInfo>
                 <FungibleTokenTable>
                   <div>
-                    <span className="field">Price</span>
-                    <span className="value">
+                    <span className="sys field">Price</span>
+                    <span className="sys value">
                       {priceChange !== null && (
                         <span
-                          className={clsx(
-                            'mr-1 text-sm font-semibold',
-                            priceChange === 0
-                              ? 'text-gray-400'
-                              : priceChange < 0
-                              ? 'text-red-400'
-                              : 'text-green-400',
-                          )}
+                          style={{
+                            marginRight: 6,
+                            color:
+                              priceChange === 0
+                                ? Colors.gray400
+                                : priceChange < 0
+                                ? '#ef4444'
+                                : '#22c55e',
+                          }}
                         >
                           {`${
                             priceChange < 0 ? '' : '+'
@@ -157,48 +165,73 @@ export const TokenDetailModal: React.FC<Props> = ({
                         </span>
                       )}
 
-                      {`$${tokenBalance.price.toLocaleString(undefined, {
-                        maximumSignificantDigits: 6,
-                      })}`}
+                      <span>
+                        {`$${tokenBalance.price.toLocaleString(undefined, {
+                          maximumSignificantDigits: 6,
+                        })}`}
+                      </span>
                     </span>
                   </div>
                   {TVL !== null && (
                     <div>
-                      <span className="field">TVL</span>
-                      <span className="value">{`$${TVL.toLocaleString()}`}</span>
+                      <span className="sys field">TVL</span>
+                      <span className="sys value">{`$${TVL.toLocaleString()}`}</span>
                     </div>
                   )}
                   <div>
-                    <span className="field">Type</span>
-                    <span className="value">
+                    <span className="sys field">Type</span>
+                    <span className="sys value">
                       {typeof tokenBalance.tokenAddress === 'undefined'
                         ? 'Native'
                         : 'Token'}
                     </span>
                   </div>
                 </FungibleTokenTable>
-                <AllocationWalletList>
-                  {walletsWithBalance.map((wallet) => {
-                    return (
-                      <li
-                        className="w-full justify-between flex items-center"
-                        key={`${
-                          tokenBalance.tokenAddress || tokenBalance.symbol
-                        }-${wallet.address}`}
-                      >
-                        <span className="flex items-center gap-2 font-semibold text-lg">
-                          <TokenIcon src={tokenBalance.logo} />
-                          {wallet.amount.toLocaleString(undefined, {
-                            maximumFractionDigits: 6,
-                          })}
-                        </span>
-                        <span className="text-gray-400">
-                          {shortenAddress(wallet.address)}
-                        </span>
-                      </li>
-                    );
-                  })}
-                </AllocationWalletList>
+                <AllocationSection>
+                  <AllocationWalletList>
+                    {walletsWithBalance.map((wallet) => {
+                      return (
+                        <li
+                          style={{
+                            width: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                          }}
+                          key={`${
+                            tokenBalance.tokenAddress || tokenBalance.symbol
+                          }-${wallet.address}`}
+                        >
+                          <span
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 8,
+                              fontSize: 17,
+                              fontWeight: 500,
+                            }}
+                          >
+                            <TokenIcon src={tokenBalance.logo} />
+                            <span
+                              className="sys"
+                              style={{ color: Colors.gray100 }}
+                            >
+                              {wallet.amount.toLocaleString(undefined, {
+                                maximumFractionDigits: 6,
+                              })}
+                            </span>
+                          </span>
+                          <span
+                            className="sys"
+                            style={{ color: Colors.gray400, fontWeight: 600 }}
+                          >
+                            {shortenAddress(wallet.address)}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </AllocationWalletList>
+                </AllocationSection>
               </FungibleTokenInfo>
 
               <div className="w-full h-24 flex items-center justify-center">
@@ -340,7 +373,7 @@ const FungibleTokenTable = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 
   & > div {
     width: 100%;
@@ -365,27 +398,7 @@ const AllocationSection = styled.ul`
   flex-direction: column;
   gap: 20px;
 `;
-const AllocationSectionTitle = styled.h4`
-  display: flex;
-  align-items: center;
-`;
-const InlineBadge = styled(Badge)`
-  padding: 6px;
-  padding-bottom: 5px;
-  display: inline-flex;
-  font-size: 18px;
-  backdrop-filter: none;
-`;
-const PositionRatio = styled.span`
-  margin-top: 2px;
-  margin-left: 6px;
-
-  font-size: 22px;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.4);
-`;
 const AllocationWalletList = styled.ul`
-  margin-top: 12px;
   width: 100%;
   padding: 0 6px;
 
