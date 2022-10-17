@@ -1469,7 +1469,6 @@ __metadata:
     env-cmd: ^10.1.0
     klaytn-multicall: ^1.0.2
     lodash.groupby: ^4.6.0
-    long: ^5.2.0
     next: canary
     osmojs: ^0.33.0
     prop-types: ^15.8.1

@@ -96,9 +96,6 @@ export const getGAMMLPs = async (
         } as PoolBalanceType),
     ),
   );
-
-  // console.log({ poolBalances });
-
   const getPool = (poolId: string) =>
     client.osmosis.gamm.v1beta1.pool({
       // poolId: Long.fromString(poolId),
@@ -120,8 +117,6 @@ export const getGAMMLPs = async (
         poolInfoByPoolId[poolBalance.poolId] = poolRes.pool;
         poolInfo = poolRes.pool;
       }
-
-      console.log(poolBalance, JSON.stringify(poolInfo, null, 2));
       const denoms = getDenomsFromPool(poolInfo);
       denoms.map((d) => {
         const tokenInfo = OSMOSIS_TOKENS.find(
@@ -199,16 +194,11 @@ export const getGAMMLPs = async (
     poolBalances.map(async (poolBalance) => {
       const poolId = poolBalance.poolId;
       const pool = poolInfoByPoolId[poolId];
-      console.log(pool);
       const prices = await getPrice(poolId, getDenomsFromPool(pool));
       return { prices, ...poolBalance };
     }),
   );
-  console.log(JSON.stringify({ poolBalancesWithPrices }, null, 2));
-
   const stakings: DeFiStaking[] = [];
-
-  console.log(poolInfoByPoolId);
   const poolBalancesWithPricesByPoolID = groupBy(
     poolBalancesWithPrices,
     'poolId',
@@ -219,7 +209,6 @@ export const getGAMMLPs = async (
         return;
       }
       const poolInfo = poolInfoByPoolId[poolId];
-      console.log({ poolInfo });
 
       const denoms = getDenomsFromPool(poolInfo);
       const [assetDenomA, assetDenomB] = denoms;

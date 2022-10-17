@@ -2593,7 +2593,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["env-cmd", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:10.1.0"],\
             ["klaytn-multicall", "npm:1.0.2"],\
             ["lodash.groupby", "npm:4.6.0"],\
-            ["long", "npm:5.2.0"],\
             ["next", "virtual:e4cb1fa6695fda36f37c695fab5c87d42e2fe943c9019fbc29da04257c847768d4bf387a09b0e129a6cdcdab53df587c731cbc85029f520465702631f1a99353#npm:12.3.2-canary.25"],\
             ["osmojs", "npm:0.33.0"],\
             ["prop-types", "npm:15.8.1"],\
