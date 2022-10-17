@@ -8,6 +8,7 @@ export enum KlaytnDeFiProtocolType {
 }
 export enum OsmosisDeFiProtocolType {
   ION = 'o_ion',
+  OSMOSIS_GAMM_LP = 'o_gamm',
 }
 export type DeFiProtocolType = KlaytnDeFiProtocolType | OsmosisDeFiProtocolType;
 

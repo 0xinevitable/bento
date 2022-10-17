@@ -1,7 +1,6 @@
 import { safeAsyncFlatMap, safePromiseAllV1 } from '@bento/common';
 import { getTokenBalancesFromCovalent } from '@bento/core';
 import { getAddress, isAddress } from '@ethersproject/address';
-import CompressedJSON from 'compressed-json';
 import { Multicall } from 'klaytn-multicall';
 import { NextApiRequest, NextApiResponse } from 'next';
 
