@@ -5,6 +5,7 @@ import { createRedisClient } from '@/utils/Redis';
 
 import { withoutEmptyDeFiStaking } from '@/defi/klaytn/utils/withoutEmptyDeFiStaking';
 import { IONDAO } from '@/defi/osmosis/ion-dao';
+import { getGAMMLPs } from '@/defi/osmosis/osmosis';
 import { DeFiStaking, OsmosisDeFiProtocolType } from '@/defi/types/staking';
 import { withCached } from '@/defi/utils/cache';
 
@@ -28,8 +29,8 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   // TODO: Enumerate for all wallets
   const walletAddress = Bech32Address.fromBech32(wallets[0]).toBech32('osmo');
 
-  const redisClient = createRedisClient();
-  await redisClient.connect();
+  // const redisClient = createRedisClient();
+  // await redisClient.connect();
 
   let stakings: DeFiStaking[] = [];
   // const IONFetcher = await withCached(
@@ -39,7 +40,8 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   //     IONDAO.getGovernanceStake(walletAddress).then((st) => [st]),
   // );
   // return IONFetcher(walletAddress);
-  stakings = stakings.filter(withoutEmptyDeFiStaking);
+  stakings = await getGAMMLPs(walletAddress);
+  // stakings = stakings.filter(withoutEmptyDeFiStaking);
 
   res.status(200).json(stakings);
 };

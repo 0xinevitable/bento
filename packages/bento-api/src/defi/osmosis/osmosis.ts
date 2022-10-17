@@ -1,6 +1,14 @@
 import { safePromiseAll } from '@bento/common';
 import { OSMOSIS_TOKENS, pricesFromCoinGecko, withCache } from '@bento/core';
+import groupBy from 'lodash.groupby';
+// import Long from 'long';
 import { osmosis } from 'osmojs';
+
+import {
+  DeFiStaking,
+  OsmosisDeFiProtocolType,
+  OsmosisDeFiType,
+} from '../types/staking';
 
 export interface Coin {
   denom: string;
@@ -39,14 +47,11 @@ export interface Pool {
 const getDenomsFromPool = (pool: Pool) =>
   pool.pool_assets.map((poolAsset) => poolAsset.token.denom);
 
-const getPool = (client: any, poolId: string) =>
-  client.osmosis.gamm.v1beta1.pool({
-    poolId: poolId as any,
-  }) as unknown as Promise<{ pool: Pool }>;
-
-export const getGAMMLPs = async (walletAddress: string) => {
-  const client = await osmosis.ClientFactory.createRPCQueryClient({
-    rpcEndpoint: 'https://rpc-osmosis.blockapsis.com',
+export const getGAMMLPs = async (
+  walletAddress: string,
+): Promise<DeFiStaking[]> => {
+  const client = await osmosis.ClientFactory.createLCDClient({
+    restEndpoint: 'https://lcd-osmosis.blockapsis.com',
   });
 
   const types = ['locked', 'unlockable', 'unlocking'];
@@ -79,19 +84,31 @@ export const getGAMMLPs = async (walletAddress: string) => {
     ),
   );
 
+  // console.log({ poolBalances });
+
+  const getPool = (poolId: string) =>
+    client.osmosis.gamm.v1beta1.pool({
+      // poolId: Long.fromString(poolId),
+      poolId: poolId as any,
+    }) as unknown as Promise<{ pool: Pool }>;
+
   let tokenInfoByDenom: Record<string, any> = {};
   let coinGeckoIdByDenom: Record<string, string> = {};
   let poolInfoByPoolId: Record<string, Pool> = {};
-  await safePromiseAll(
+  await Promise.all(
     poolBalances.map(async (poolBalance) => {
       let poolInfo: Pool;
-      if (!poolInfoByPoolId[poolBalance.poolId]) {
-        const poolRes = await getPool(client, poolBalance.poolId);
+      if (poolBalance.poolId in poolInfoByPoolId) {
+        poolInfo = poolInfoByPoolId[poolBalance.poolId];
+      } else {
+        const poolRes = await getPool(poolBalance.poolId).catch((err) => {
+          throw err;
+        });
         poolInfoByPoolId[poolBalance.poolId] = poolRes.pool;
         poolInfo = poolRes.pool;
-      } else {
-        poolInfo = poolInfoByPoolId[poolBalance.poolId];
       }
+
+      console.log(poolBalance, JSON.stringify(poolInfo, null, 2));
       const denoms = getDenomsFromPool(poolInfo);
       denoms.map((d) => {
         const tokenInfo = OSMOSIS_TOKENS.find(
@@ -149,7 +166,7 @@ export const getGAMMLPs = async (walletAddress: string) => {
           baseAssetDenom: assetDenomA,
           quoteAssetDenom: assetDenomB,
         });
-        const spotPriceA = parseFloat(spotPrice.spotPrice);
+        const spotPriceA = parseFloat(spotPrice.spot_price);
         const spotPriceB = 1 / spotPriceA;
         if (assetPriceA === null) {
           assetPriceA = spotPriceA;
@@ -165,15 +182,95 @@ export const getGAMMLPs = async (walletAddress: string) => {
     }
   });
 
-  const pools = await safePromiseAll(
+  const poolBalancesWithPrices = await safePromiseAll(
     poolBalances.map(async (poolBalance) => {
-      const pool = poolInfoByPoolId[poolBalance.poolId];
-      const prices = await getPrice(
-        poolBalance.poolId,
-        getDenomsFromPool(pool),
-      );
-      return { poolBalance, prices };
+      const poolId = poolBalance.poolId;
+      const pool = poolInfoByPoolId[poolId];
+      console.log(pool);
+      const prices = await getPrice(poolId, getDenomsFromPool(pool));
+      return { prices, ...poolBalance };
     }),
   );
-  // console.log(JSON.stringify({ pools }, null, 2));
+  console.log(JSON.stringify({ poolBalancesWithPrices }, null, 2));
+
+  const stakings: DeFiStaking[] = [];
+
+  console.log(poolInfoByPoolId);
+  const poolBalancesWithPricesByPoolID = groupBy(
+    poolBalancesWithPrices,
+    'poolId',
+  );
+  Object.entries(poolBalancesWithPricesByPoolID).map(
+    ([poolId, _poolBalancesWithPrices]) => {
+      if (!_poolBalancesWithPrices || _poolBalancesWithPrices.length === 0) {
+        return;
+      }
+      const poolInfo = poolInfoByPoolId[poolId];
+      console.log({ poolInfo });
+
+      const denoms = getDenomsFromPool(poolInfo);
+      const [assetDenomA, assetDenomB] = denoms;
+      const tokenInfoA = tokenInfoByDenom[assetDenomA];
+      const tokenInfoB = tokenInfoByDenom[assetDenomB];
+      const assetPriceA = _poolBalancesWithPrices[0].prices[0] || 0;
+      const assetPriceB = _poolBalancesWithPrices[0].prices[1] || 0;
+
+      const [stakedAmount, claimableAmount, pendingAmount] =
+        _poolBalancesWithPrices.reduce(
+          (acc, v) => {
+            const [staked, claimable, pending] = acc;
+            if (v.status === 'locked') {
+              return [staked + Number(v.amount), claimable, pending];
+            } else if (v.status === 'unlockable') {
+              return [staked, claimable + Number(v.amount), pending];
+            } else if (v.status === 'unlocking') {
+              return [staked, claimable, pending + Number(v.amount)];
+            }
+            return acc;
+          },
+          [0, 0, 0],
+        );
+
+      const tokenALiquidity = Number(
+        poolInfo.pool_assets.find((v) => v.token.denom === assetDenomA)?.token
+          .amount || 0,
+      );
+      const tokenBLiquidity = Number(
+        poolInfo.pool_assets.find((v) => v.token.denom === assetDenomB)?.token
+          .amount || 0,
+      );
+
+      const totalLiquidity = Number(poolInfo.total_shares.amount);
+
+      const fromAmount = (amount: number) => {
+        const poolStakeRatio = amount / totalLiquidity;
+        const tokenAAmount = tokenALiquidity * poolStakeRatio;
+        const tokenBAmount = tokenBLiquidity * poolStakeRatio;
+        return {
+          lpAmount: amount,
+          tokenAmounts: {
+            [tokenInfoA.address]: tokenAAmount,
+            [tokenInfoB.address]: tokenBAmount,
+          },
+          value: tokenAAmount * assetPriceA + tokenBAmount * assetPriceB,
+        };
+      };
+
+      stakings.push({
+        protocol: OsmosisDeFiProtocolType.OSMOSIS,
+        type: OsmosisDeFiType.OSMOSIS_GAMM_LP,
+        address: OsmosisDeFiType.OSMOSIS_GAMM_LP,
+        tokens: [tokenInfoA, tokenInfoB],
+        wallet: 'unavailable',
+        staked: fromAmount(stakedAmount),
+        rewards: 'unavailable',
+        unstake: {
+          claimable: fromAmount(claimableAmount),
+          pending: fromAmount(pendingAmount),
+        },
+      });
+    },
+  );
+
+  return stakings;
 };
