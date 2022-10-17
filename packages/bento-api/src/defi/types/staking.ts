@@ -42,10 +42,7 @@ export enum OsmosisDeFiType {
   ION_GOVERNANCE = 'ion_g',
   // ION_IBC = 'ion_ibc',
   OSMOSIS_GAMM_LP = 'o_glp',
-<<<<<<< HEAD
   OSMOSIS_GOVERNANCE = 'o_g',
-=======
->>>>>>> 301b9dc5c4fbb9194f12b696765a7a16850bbb86
 }
 
 export type DeFiType = KlaytnDeFiType | OsmosisDeFiType;
