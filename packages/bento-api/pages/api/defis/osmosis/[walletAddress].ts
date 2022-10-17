@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { createRedisClient } from '@/utils/Redis';
 
 import { IONDAO } from '@/defi/osmosis/ion-dao';
-import { getGAMMLPs } from '@/defi/osmosis/osmosis';
+import { Osmosis } from '@/defi/osmosis/osmosis';
 import {
   DeFiStaking,
   OsmosisDeFiProtocolType,
@@ -45,7 +45,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const getOsmosisGAMMLPs = withCached(
     `defis:${OsmosisDeFiType.OSMOSIS_GAMM_LP}:${walletAddress}`,
     redisClient,
-    getGAMMLPs,
+    Osmosis.getGAMMLPs,
   );
 
   let stakings: DeFiStaking[] = [];

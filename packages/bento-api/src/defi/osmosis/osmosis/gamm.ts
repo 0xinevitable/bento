@@ -13,7 +13,7 @@ import {
   DeFiStaking,
   OsmosisDeFiProtocolType,
   OsmosisDeFiType,
-} from '../types/staking';
+} from '../../types/staking';
 
 export interface Coin {
   denom: string;
