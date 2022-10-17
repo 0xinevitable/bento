@@ -246,8 +246,10 @@ export const getGAMMLPs = async (
 
       const fromAmount = (amount: number) => {
         const poolStakeRatio = amount / totalLiquidity;
-        const tokenAAmount = tokenALiquidity * poolStakeRatio;
-        const tokenBAmount = tokenBLiquidity * poolStakeRatio;
+        const tokenAAmount =
+          (tokenALiquidity * poolStakeRatio) / 10 ** tokenInfoA.decimals;
+        const tokenBAmount =
+          (tokenBLiquidity * poolStakeRatio) / 10 ** tokenInfoB.decimals;
         return {
           lpAmount: amount,
           tokenAmounts: {
