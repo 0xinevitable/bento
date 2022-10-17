@@ -1,5 +1,10 @@
 import { safePromiseAll } from '@bento/common';
-import { OSMOSIS_TOKENS, pricesFromCoinGecko, withCache } from '@bento/core';
+import {
+  OSMOSIS_TOKENS,
+  TokenInput,
+  pricesFromCoinGecko,
+  withCache,
+} from '@bento/core';
 import groupBy from 'lodash.groupby';
 // import Long from 'long';
 import { osmosis } from 'osmojs';
@@ -43,6 +48,14 @@ export interface Pool {
     token: Coin;
   }[];
 }
+
+const omit = <Obj extends object, OmittedKey extends string>(
+  obj: Obj,
+  key: OmittedKey,
+): Omit<Obj, OmittedKey> => {
+  const { [key]: _omitted, ...rest } = obj;
+  return rest;
+};
 
 const getDenomsFromPool = (pool: Pool) =>
   pool.pool_assets.map((poolAsset) => poolAsset.token.denom);
@@ -92,7 +105,7 @@ export const getGAMMLPs = async (
       poolId: poolId as any,
     }) as unknown as Promise<{ pool: Pool }>;
 
-  let tokenInfoByDenom: Record<string, any> = {};
+  let tokenInfoByDenom: Record<string, TokenInput> = {};
   let coinGeckoIdByDenom: Record<string, string> = {};
   let poolInfoByPoolId: Record<string, Pool> = {};
   await Promise.all(
@@ -116,7 +129,7 @@ export const getGAMMLPs = async (
         );
         const allDenoms = tokenInfo?.denomUnits?.map((v) => v.denom) || [];
         for (const denom of allDenoms) {
-          if (!(denom in tokenInfoByDenom)) {
+          if (!(denom in tokenInfoByDenom) && !!tokenInfo) {
             tokenInfoByDenom[denom] = tokenInfo;
           }
           if (!!tokenInfo?.coinGeckoId && !(denom in coinGeckoIdByDenom)) {
@@ -260,7 +273,10 @@ export const getGAMMLPs = async (
         protocol: OsmosisDeFiProtocolType.OSMOSIS,
         type: OsmosisDeFiType.OSMOSIS_GAMM_LP,
         address: OsmosisDeFiType.OSMOSIS_GAMM_LP,
-        tokens: [tokenInfoA, tokenInfoB],
+        tokens: [
+          omit<TokenInput, 'denomUnits'>(tokenInfoA, 'denomUnits'),
+          omit<TokenInput, 'denomUnits'>(tokenInfoB, 'denomUnits'),
+        ],
         wallet: 'unavailable',
         staked: fromAmount(stakedAmount),
         rewards: 'unavailable',

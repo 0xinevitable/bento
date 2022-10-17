@@ -75,7 +75,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const redisClient = createRedisClient();
   await redisClient.connect();
 
-  const fetcher = await withCached(
+  const fetcher = withCached(
     `defis:klaytn:${walletAddress}`,
     redisClient,
     getDeFiStakingsByWalletAddress,

@@ -22,7 +22,7 @@ const getCached = async <T extends any>(
 const MINUTES = 60 * 1000;
 const CACHE_TIME = 1 * MINUTES;
 
-export const withCached = async <Params extends Array<any>>(
+export const withCached = <Params extends Array<any>>(
   key: string,
   redisClient: ReturnType<typeof createRedisClient>,
   fetcher: (...params: Params) => Promise<DeFiStaking[]>,
