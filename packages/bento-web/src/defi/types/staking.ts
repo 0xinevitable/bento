@@ -8,6 +8,7 @@ export enum KlaytnDeFiProtocolType {
 }
 export enum OsmosisDeFiProtocolType {
   ION = 'o_ion',
+  OSMOSIS = 'o_o',
 }
 export type DeFiProtocolType = KlaytnDeFiProtocolType | OsmosisDeFiProtocolType;
 
@@ -40,6 +41,8 @@ export enum KlaytnDeFiType {
 export enum OsmosisDeFiType {
   ION_GOVERNANCE = 'ion_g',
   // ION_IBC = 'ion_ibc',
+  OSMOSIS_GAMM_LP = 'o_glp',
+  OSMOSIS_GOVERNANCE = 'o_g',
 }
 
 export type DeFiType = KlaytnDeFiType | OsmosisDeFiType;
@@ -59,7 +62,7 @@ export type DeFiStaking = {
   prefix?: string;
 
   // representative contract address
-  address: string;
+  address: string | null;
   tokens: (TokenInput | NativeInput | null)[];
   relatedTokens?: (TokenInput | NativeInput | null)[];
 

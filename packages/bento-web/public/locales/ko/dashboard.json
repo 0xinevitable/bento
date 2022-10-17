@@ -4,6 +4,7 @@
   "protocol-kks": "코코넛스왑",
   "protocol-scnr": "스왑스캐너",
   "protocol-o_ion": "ION DAO",
+  "protocol-o_o": "오스모시스",
 
   "defi-type-ks_g": "거버넌스",
   "defi-type-ks_lp": "페어 예치",
@@ -17,6 +18,10 @@
   "defi-type-kstn_n_fsn": "거버넌스 카운슬 스테이킹 <validator>FSN</validator>",
 
   "defi-type-scnr_g": "단일 예치",
+
+  "defi-type-ion_g": "거버넌스",
+  "defi-type-o_glp": "오스모시스 LP 풀",
+  "defi-type-o_g": "거버넌스 스테이킹",
 
   "Account": "계정",
   "Rep Contract": "대표 컨트랙트 주소",

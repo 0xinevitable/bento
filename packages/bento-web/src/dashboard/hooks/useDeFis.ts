@@ -8,7 +8,6 @@ import {
   getDeFiStakingValue,
 } from '@/defi/klaytn/utils/getDeFiStakingValue';
 import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
-import { FeatureFlags } from '@/utils';
 
 import { useMultipleRequests } from './useMultipleRequests';
 
@@ -20,13 +19,19 @@ export type DeFiStakingWithClientData = DeFiStaking & {
 export const useDeFis = (wallets: Wallet[]) => {
   const calculatedRequests = useMemo(
     () =>
-      !FeatureFlags.isKlaytnDeFiEnabled
-        ? []
-        : wallets.flatMap((wallet) =>
-            wallet.type === 'evm' && wallet.networks.includes('klaytn')
-              ? `/api/defis/klaytn/${wallet.address}`
-              : [],
-          ),
+      wallets.reduce<string[]>((acc, wallet) => {
+        // FIXME: Add more DeFis here
+        if (
+          wallet.type === 'cosmos-sdk' &&
+          wallet.networks.includes('osmosis')
+        ) {
+          return [...acc, `/api/defis/osmosis/${wallet.address}`];
+        }
+        if (wallet.type === 'evm' && wallet.networks.includes('klaytn')) {
+          return [...acc, `/api/defis/klaytn/${wallet.address}`];
+        }
+        return acc;
+      }, []),
     [JSON.stringify(wallets)],
   );
 

@@ -386,7 +386,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                       {defiProtocols.map((item) => (
                                         <DeFiStakingItem
                                           // FIXME: group stats with different wallets...
-                                          key={`${item.type}-${item.address}-${item.walletAddress}`}
+                                          key={`${item.type}-${
+                                            item.address || 'gov'
+                                          }-${item.walletAddress}`}
                                           protocol={item}
                                         />
                                       ))}
