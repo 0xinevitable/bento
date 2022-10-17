@@ -8,10 +8,8 @@ import {
   OsmosisDeFiType,
 } from '@/defi/types/staking';
 
-const ION_DENOM = 'ion';
-const ION_TOKEN_INFO = OSMOSIS_TOKENS.find(
-  (v) => v.address === `u${ION_DENOM}`,
-)!;
+const ION_DENOM = 'uion';
+const ION_TOKEN_INFO = OSMOSIS_TOKENS.find((v) => v.address === ION_DENOM)!;
 
 const STAKING_ADDRESS =
   'osmo1yg8930mj8pk288lmkjex0qz85mj8wgtns5uzwyn2hs25pwdnw42sf745wc';
