@@ -4,6 +4,7 @@
   "protocol-kks": "KokonutSwap",
   "protocol-scnr": "Swapscanner",
   "protocol-o_ion": "ION DAO",
+  "protocol-o_o": "Osmosis",
 
   "defi-type-ks_g": "Governance",
   "defi-type-ks_lp": "Pair Deposit",
@@ -16,5 +17,9 @@
   "defi-type-kstn_n_ked": "GC Staking <validator>The Korea Economic Daily</validator>",
   "defi-type-kstn_n_fsn": "GC Staking <validator>FSN</validator>",
 
-  "defi-type-scnr_g": "Staking"
+  "defi-type-scnr_g": "Staking",
+
+  "defi-type-ion_g": "Governance",
+  "defi-type-o_glp": "Osmosis LPs",
+  "defi-type-o_g": "Osmosis Staking"
 }

@@ -62,7 +62,7 @@ export type DeFiStaking = {
   prefix?: string;
 
   // representative contract address
-  address: string;
+  address: string | null;
   tokens: (TokenInput | NativeInput | null)[];
   relatedTokens?: (TokenInput | NativeInput | null)[];
 

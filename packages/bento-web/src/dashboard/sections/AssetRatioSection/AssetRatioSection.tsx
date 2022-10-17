@@ -8,15 +8,22 @@ import { AnimatedToolTip } from '@/components/system';
 import { displayName } from '@/dashboard/constants/platform';
 import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
+import {
+  KlaytnDeFiProtocolType,
+  OsmosisDeFiProtocolType,
+} from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 import { AssetRatioChart } from './AssetRatioChart';
+
+const KLAYTN_DEFIS = Object.values(KlaytnDeFiProtocolType) as string[];
+const OSMOSIS_DEFIS = Object.keys(OsmosisDeFiProtocolType) as string[];
 
 type AssetRatioSectionProps = {
   netWorthInUSD: number;
   netWorthInUSDOnlyDeFi: number;
   tokenBalances: DashboardTokenBalance[];
-  defiStakesByProtocol: Record<string, DeFiStakingWithClientData[]>;
+  defiStakesByProtocol: [string, DeFiStakingWithClientData[]][];
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
@@ -39,9 +46,21 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
 
       // FIXME: Hardcoded here
-      if (platform === 'klaytn') {
-        netWorth += netWorthInUSDOnlyDeFi;
-      }
+      defiStakesByProtocol.forEach(([defiProtocol, defiStakes]) => {
+        if (platform === 'klaytn' && KLAYTN_DEFIS.includes(defiProtocol)) {
+          netWorth += defiStakes.reduce(
+            (acc, val) => val.valuation.total + acc,
+            0,
+          );
+        }
+        if (platform === 'osmosis' && OSMOSIS_DEFIS.includes(defiProtocol)) {
+          netWorth += defiStakes.reduce(
+            (acc, val) => val.valuation.total + acc,
+            0,
+          );
+        }
+      });
+
       return {
         platform,
         netWorth,
@@ -53,7 +72,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
     // maximum length is 3
     items = items.slice(0, 3);
     return items.sort((a, b) => b.ratio - a.ratio);
-  }, [netWorthInUSD]);
+  }, [netWorthInUSD, defiStakesByProtocol]);
 
   return (
     <Container>

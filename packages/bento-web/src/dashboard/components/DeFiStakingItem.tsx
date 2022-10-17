@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
+import { OsmosisDeFiType } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 import { InlineBadge } from './InlineBadge';
@@ -65,12 +66,18 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
             <InlineBadge>{shortenAddress(protocol.walletAddress)}</InlineBadge>
           </span>
         </AccountItem>
-        <AccountItem>
-          <span className="field">{t('Rep Contract')}</span>
-          <span className="sys">
-            <InlineBadge>{shortenAddress(protocol.address)}</InlineBadge>
-          </span>
-        </AccountItem>
+        {!!protocol.address && (
+          <AccountItem>
+            <span className="field">
+              {protocol.type === OsmosisDeFiType.OSMOSIS_GAMM_LP
+                ? t('Pool ID')
+                : t('Rep Contract')}
+            </span>
+            <span className="sys">
+              <InlineBadge>{shortenAddress(protocol.address)}</InlineBadge>
+            </span>
+          </AccountItem>
+        )}
       </AccountInfo>
 
       <InfoList>

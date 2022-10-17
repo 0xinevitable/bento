@@ -1,4 +1,8 @@
-import { KlaytnDeFiProtocolType } from '@/defi/types/staking';
+import {
+  DeFiProtocolType,
+  KlaytnDeFiProtocolType,
+  OsmosisDeFiProtocolType,
+} from '@/defi/types/staking';
 
 export type Metadata = {
   // TODO: Move translations to name
@@ -10,7 +14,24 @@ export type Metadata = {
   };
 };
 
-export const KLAYTN_DEFI_METADATA: Record<KlaytnDeFiProtocolType, Metadata> = {
+export const KLAYTN_DEFI_METADATA: Record<DeFiProtocolType, Metadata> = {
+  [OsmosisDeFiProtocolType.ION]: {
+    name: 'ION DAO',
+    logo: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png',
+    description: {
+      en: 'ION is the secondary native token on the Osmosis chain. The community are collectively discussing potential use-cases to be developed.',
+      ko: 'ION은 오스모시스의 두번째 네이티브 토큰으로 입니다. ION DAO 커뮤니티에서는 그 잠재적 사용 사례를 공동으로 논의하고 있습니다.',
+    },
+  },
+  [OsmosisDeFiProtocolType.OSMOSIS]: {
+    name: 'Osmosis',
+    logo: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png',
+    description: {
+      en: 'Osmosis is the largest interchain DEX in the Cosmos Ecosystem.',
+      ko: '오스모시스는 코스모스 생태계 최초, 최대의 인터체인 DEX입니다.',
+    },
+  },
+
   [KlaytnDeFiProtocolType.KLAYSTATION]: {
     name: 'KLAYSTATION',
     logo: '/assets/icons/services/klaytn/klaystation.svg',

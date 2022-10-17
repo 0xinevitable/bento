@@ -177,10 +177,10 @@ export const getGAMMLPs = async (
         const spotPriceA = parseFloat(spotPrice.spot_price);
         const spotPriceB = 1 / spotPriceA;
         if (assetPriceA === null) {
-          assetPriceA = spotPriceA;
+          assetPriceA = (assetPriceB || 0) / spotPriceA;
         }
         if (assetPriceB === null) {
-          assetPriceB = spotPriceB;
+          assetPriceB = (assetPriceA || 0) / spotPriceB;
         }
       }
       return [assetPriceA, assetPriceB];
@@ -251,19 +251,22 @@ export const getGAMMLPs = async (
         const tokenBAmount =
           (tokenBLiquidity * poolStakeRatio) / 10 ** tokenInfoB.decimals;
         return {
-          lpAmount: amount,
+          // NOTE: LP decimals are hardcoded to 18
+          lpAmount: amount / 10 ** 18,
           tokenAmounts: {
             [tokenInfoA.address]: tokenAAmount,
             [tokenInfoB.address]: tokenBAmount,
           },
           value: tokenAAmount * assetPriceA + tokenBAmount * assetPriceB,
+          assetPriceA,
+          assetPriceB,
         };
       };
 
       stakings.push({
         protocol: OsmosisDeFiProtocolType.OSMOSIS,
         type: OsmosisDeFiType.OSMOSIS_GAMM_LP,
-        address: OsmosisDeFiType.OSMOSIS_GAMM_LP,
+        address: poolId,
         tokens: [
           omit<TokenInput, 'denomUnits'>(tokenInfoA, 'denomUnits'),
           omit<TokenInput, 'denomUnits'>(tokenInfoB, 'denomUnits'),
