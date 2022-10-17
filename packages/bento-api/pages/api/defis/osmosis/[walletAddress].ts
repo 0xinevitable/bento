@@ -3,6 +3,7 @@ import { Bech32Address } from '@bento/core';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';
+import { withCORS } from '@/utils/middlewares/withCORS';
 
 import { withoutEmptyDeFiStaking } from '@/defi/klaytn/utils/withoutEmptyDeFiStaking';
 import { IONDAO } from '@/defi/osmosis/ion-dao';
@@ -85,4 +86,4 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   res.status(200).json(stakings);
 };
 
-export default handler;
+export default withCORS(handler);
