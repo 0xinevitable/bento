@@ -62,7 +62,7 @@ const isEthereumAddress = (addr: string): boolean => {
   }
 };
 
-type DeFiStakingCacheDTO = {
+type DeFiStakingCacheVO = {
   t: number;
   v: DeFiStaking[];
 };
@@ -97,7 +97,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   let stakings: DeFiStaking[] = [];
   let cachedTime = 0;
 
-  const cached = await getCached<DeFiStakingCacheDTO>(
+  const cached = await getCached<DeFiStakingCacheVO>(
     `defis:klaytn:${walletAddress}`,
     redisClient,
   );
@@ -111,7 +111,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
       cachedTime = new Date().getTime();
       await redisClient.set(
         `defis:klaytn:${walletAddress}`,
-        CompressedJSON.compress.toString<DeFiStakingCacheDTO>({
+        CompressedJSON.compress.toString<DeFiStakingCacheVO>({
           v: stakings,
           t: cachedTime,
         }),
