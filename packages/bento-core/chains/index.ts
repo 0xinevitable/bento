@@ -13,7 +13,7 @@ import {
   BNB_TOKENS,
   ETHEREUM_TOKENS,
   KLAYTN_TOKENS,
-  OSMOSIS_MAINNET_ASSETLIST,
+  OSMOSIS_TOKENS,
   POLYGON_TOKENS,
   SOLANA_TOKENS,
   TokenInput,
@@ -661,16 +661,17 @@ export class OsmosisChain implements CosmosSDKBasedChain {
       if (asset.denom === this.currency.coinMinimalDenom) {
         return [];
       }
-      const knownAsset = OSMOSIS_MAINNET_ASSETLIST.assets.find(
-        (item) => item.base === asset.denom,
+      // const denomUnits = OSMOSIS_TOKENS.flatMap((t) => t.denomUnits || []);
+
+      const tokenInfo = OSMOSIS_TOKENS.find(
+        (tokenInfo) =>
+          !!tokenInfo.denomUnits?.find((v) => v.denom === asset.denom),
       );
-      if (!knownAsset) {
+      if (!tokenInfo) {
         return [];
       }
 
-      const decimals =
-        knownAsset.denom_units.find((v) => v.denom === knownAsset.display)
-          ?.exponent ?? this.currency.decimals;
+      const decimals = tokenInfo.decimals;
       const balance =
         typeof asset.amount === 'string'
           ? Number(asset.amount) / 10 ** decimals
@@ -680,7 +681,7 @@ export class OsmosisChain implements CosmosSDKBasedChain {
       }
 
       const getPrice = () => {
-        if (knownAsset.coingecko_id) {
+        if (tokenInfo.coinGeckoId) {
           return undefined;
         }
         return 0;
@@ -690,11 +691,11 @@ export class OsmosisChain implements CosmosSDKBasedChain {
       return {
         walletAddress,
         platform: 'osmosis',
-        name: knownAsset.name,
-        symbol: knownAsset.symbol,
+        name: tokenInfo.name,
+        symbol: tokenInfo.symbol,
         decimals,
-        logo: knownAsset.logo_URIs.png,
-        coinGeckoId: knownAsset.coingecko_id,
+        logo: tokenInfo.logo,
+        coinGeckoId: tokenInfo.coinGeckoId,
         balance,
         price,
       };
