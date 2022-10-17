@@ -4126,35 +4126,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@keplr-wallet/common", [\
-        ["npm:0.11.10", {\
-          "packageLocation": "./.yarn/cache/@keplr-wallet-common-npm-0.11.10-de073e6ed1-acb4ecd861.zip/node_modules/@keplr-wallet/common/",\
-          "packageDependencies": [\
-            ["@keplr-wallet/common", "npm:0.11.10"],\
-            ["@keplr-wallet/crypto", "npm:0.11.10"],\
-            ["buffer", "npm:6.0.3"],\
-            ["delay", "npm:4.4.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@keplr-wallet/crypto", [\
-        ["npm:0.11.10", {\
-          "packageLocation": "./.yarn/cache/@keplr-wallet-crypto-npm-0.11.10-bdbabc6875-e5825d0448.zip/node_modules/@keplr-wallet/crypto/",\
-          "packageDependencies": [\
-            ["@keplr-wallet/crypto", "npm:0.11.10"],\
-            ["@ethersproject/keccak256", "npm:5.7.0"],\
-            ["bip32", "npm:2.0.6"],\
-            ["bip39", "npm:3.0.4"],\
-            ["bs58check", "npm:2.1.2"],\
-            ["buffer", "npm:6.0.3"],\
-            ["crypto-js", "npm:4.1.1"],\
-            ["elliptic", "npm:6.5.4"],\
-            ["sha.js", "npm:2.4.11"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@metamask/safe-event-emitter", [\
         ["npm:2.0.0", {\
           "packageLocation": "./.yarn/cache/@metamask-safe-event-emitter-npm-2.0.0-0f6c91f887-8b717ac5d5.zip/node_modules/@metamask/safe-event-emitter/",\
@@ -5553,20 +5524,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/node", [\
-        ["npm:10.12.18", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-10.12.18-7c6aeb4e07-333cedae77.zip/node_modules/@types/node/",\
-          "packageDependencies": [\
-            ["@types/node", "npm:10.12.18"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["npm:11.11.6", {\
-          "packageLocation": "./.yarn/cache/@types-node-npm-11.11.6-40abad0842-075f1c011c.zip/node_modules/@types/node/",\
-          "packageDependencies": [\
-            ["@types/node", "npm:11.11.6"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:12.20.55", {\
           "packageLocation": "./.yarn/cache/@types-node-npm-12.20.55-88487587a4-e4f86785f4.zip/node_modules/@types/node/",\
           "packageDependencies": [\
@@ -6898,35 +6855,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["bip32", [\
-        ["npm:2.0.6", {\
-          "packageLocation": "./.yarn/cache/bip32-npm-2.0.6-e2304169e2-1c654a9383.zip/node_modules/bip32/",\
-          "packageDependencies": [\
-            ["bip32", "npm:2.0.6"],\
-            ["@types/node", "npm:10.12.18"],\
-            ["bs58check", "npm:2.1.2"],\
-            ["create-hash", "npm:1.2.0"],\
-            ["create-hmac", "npm:1.1.7"],\
-            ["tiny-secp256k1", "npm:1.1.6"],\
-            ["typeforce", "npm:1.18.0"],\
-            ["wif", "npm:2.0.6"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["bip39", [\
-        ["npm:3.0.4", {\
-          "packageLocation": "./.yarn/cache/bip39-npm-3.0.4-7c69c9182f-79ce1600a0.zip/node_modules/bip39/",\
-          "packageDependencies": [\
-            ["bip39", "npm:3.0.4"],\
-            ["@types/node", "npm:11.11.6"],\
-            ["create-hash", "npm:1.2.0"],\
-            ["pbkdf2", "npm:3.1.2"],\
-            ["randombytes", "npm:2.1.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["bl", [\
         ["npm:4.1.0", {\
           "packageLocation": "./.yarn/cache/bl-npm-4.1.0-7f94cdcf3f-9e8521fa7e.zip/node_modules/bl/",\
@@ -7893,15 +7821,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["crypto-js", [\
-        ["npm:4.1.1", {\
-          "packageLocation": "./.yarn/cache/crypto-js-npm-4.1.1-38a3b8c19d-b3747c12ee.zip/node_modules/crypto-js/",\
-          "packageDependencies": [\
-            ["crypto-js", "npm:4.1.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["css-background-parser", [\
         ["npm:0.1.0", {\
           "packageLocation": "./.yarn/cache/css-background-parser-npm-0.1.0-d1e94221f7-cf53bef8d5.zip/node_modules/css-background-parser/",\
@@ -8245,13 +8164,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["delay", [\
-        ["npm:4.4.1", {\
-          "packageLocation": "./.yarn/cache/delay-npm-4.4.1-43afd2835c-97b001126a.zip/node_modules/delay/",\
-          "packageDependencies": [\
-            ["delay", "npm:4.4.1"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:5.0.0", {\
           "packageLocation": "./.yarn/cache/delay-npm-5.0.0-1d1c758b46-62f151151e.zip/node_modules/delay/",\
           "packageDependencies": [\
@@ -11827,14 +11739,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["node-gyp", "npm:9.1.0"]\
           ],\
           "linkType": "HARD"\
-        }],\
-        ["npm:2.17.0", {\
-          "packageLocation": "./.yarn/unplugged/nan-npm-2.17.0-bf36a21d6f/node_modules/nan/",\
-          "packageDependencies": [\
-            ["nan", "npm:2.17.0"],\
-            ["node-gyp", "npm:9.1.0"]\
-          ],\
-          "linkType": "HARD"\
         }]\
       ]],\
       ["nanoid", [\
@@ -13750,7 +13654,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
             ["@cosmjs/encoding", "npm:0.29.2"],\
-            ["@keplr-wallet/common", "npm:0.11.10"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/node", "npm:18.7.19"],\
@@ -14496,21 +14399,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["tiny-secp256k1", [\
-        ["npm:1.1.6", {\
-          "packageLocation": "./.yarn/unplugged/tiny-secp256k1-npm-1.1.6-00db893e04/node_modules/tiny-secp256k1/",\
-          "packageDependencies": [\
-            ["tiny-secp256k1", "npm:1.1.6"],\
-            ["bindings", "npm:1.5.0"],\
-            ["bn.js", "npm:5.2.1"],\
-            ["create-hmac", "npm:1.1.7"],\
-            ["elliptic", "npm:6.5.4"],\
-            ["nan", "npm:2.17.0"],\
-            ["node-gyp", "npm:9.1.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["tiny-warning", [\
         ["npm:1.0.3", {\
           "packageLocation": "./.yarn/cache/tiny-warning-npm-1.0.3-750b7a07c4-da62c4acac.zip/node_modules/tiny-warning/",\
@@ -14722,15 +14610,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["typedarray-to-buffer", "npm:3.1.5"],\
             ["is-typedarray", "npm:1.0.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["typeforce", [\
-        ["npm:1.18.0", {\
-          "packageLocation": "./.yarn/cache/typeforce-npm-1.18.0-372e34e2a2-e3b21e27e7.zip/node_modules/typeforce/",\
-          "packageDependencies": [\
-            ["typeforce", "npm:1.18.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -15231,16 +15110,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["wide-align", "npm:1.1.5"],\
             ["string-width", "npm:4.2.3"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["wif", [\
-        ["npm:2.0.6", {\
-          "packageLocation": "./.yarn/cache/wif-npm-2.0.6-f351bf025a-8c3147ef98.zip/node_modules/wif/",\
-          "packageDependencies": [\
-            ["wif", "npm:2.0.6"],\
-            ["bs58check", "npm:2.1.2"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -11,7 +11,6 @@
     "@bento/common": "workspace:^",
     "@bento/core": "workspace:^",
     "@cosmjs/encoding": "^0.29.2",
-    "@keplr-wallet/common": "^0.11.10",
     "@supabase/supabase-js": "^1.35.7",
     "axios": "^0.27.2",
     "dedent": "^0.7.0",
