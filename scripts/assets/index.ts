@@ -12,7 +12,8 @@ const main = async () =>
     // importAndUpdate('./bnb-smart-chain'),
     // importAndUpdate('./avalanche'),
     // importAndUpdate('./solana'),
-    importAndUpdate('./klaytn'),
+    // importAndUpdate('./klaytn'),
+    importAndUpdate('./osmosis'),
   ]);
 
 main() //
