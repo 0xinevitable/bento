@@ -11,9 +11,6 @@ import { Colors } from '@/styles';
 
 import { AssetMedia } from './AssetMedia';
 
-const capitalize = (value: string) =>
-  value.charAt(0).toUpperCase() + value.slice(1);
-
 export type TokenDetailModalParams = {
   tokenBalance?: {
     symbol: string | null;
@@ -33,11 +30,7 @@ type Props = TokenDetailModalParams & {
   onDismiss?: () => void;
 };
 
-type WalletPosition = 'wallet' | 'stake' | 'delegation';
-type WalletsByPosition = Record<
-  WalletPosition,
-  { amount: number; address: string }[]
->;
+type WalletsByPosition = { amount: number; address: string };
 
 export const TokenDetailModal: React.FC<Props> = ({
   visible: isVisible = false,
@@ -52,12 +45,8 @@ export const TokenDetailModal: React.FC<Props> = ({
     [tokenBalance],
   );
 
-  const walletsByPosition = useMemo<WalletsByPosition>(() => {
-    let walletsByPosition: WalletsByPosition = {
-      wallet: [],
-      stake: [],
-      delegation: [],
-    };
+  const walletsWithBalance = useMemo<WalletsByPosition[]>(() => {
+    let walletsByPosition: WalletsByPosition[] = [];
 
     if (tokenBalance?.type === 'nft' || !tokenBalance?.balances) {
       return walletsByPosition;
@@ -65,16 +54,8 @@ export const TokenDetailModal: React.FC<Props> = ({
 
     for (let wallet of tokenBalance.balances) {
       if (wallet.balance > 0) {
-        const position =
-          'staking' in wallet && wallet.staking ? 'stake' : 'wallet';
-        walletsByPosition[position].push({
+        walletsByPosition.push({
           amount: wallet.balance,
-          address: wallet.walletAddress,
-        });
-      }
-      if ('delegations' in wallet && wallet.delegations > 0) {
-        walletsByPosition.delegation.push({
-          amount: wallet.delegations,
           address: wallet.walletAddress,
         });
       }
@@ -196,56 +177,28 @@ export const TokenDetailModal: React.FC<Props> = ({
                     </span>
                   </div>
                 </FungibleTokenTable>
-                <AllocationSection>
-                  {(['wallet', 'stake', 'delegation'] as const).map(
-                    (position) => {
-                      const wallets = walletsByPosition[position];
-                      if (!wallets.length) {
-                        return null;
-                      }
-
-                      const total = wallets.reduce(
-                        (acc, wallet) => acc + wallet.amount,
-                        0,
-                      );
-                      return (
-                        <li key={position}>
-                          <AllocationSectionTitle>
-                            <InlineBadge>{capitalize(position)}</InlineBadge>
-
-                            <PositionRatio>
-                              {`${(
-                                (total / tokenBalance.amount) *
-                                100
-                              ).toLocaleString()}%`}
-                            </PositionRatio>
-                          </AllocationSectionTitle>
-                          <AllocationWalletList>
-                            {walletsByPosition[position].map((wallet) => (
-                              <li
-                                className="w-full justify-between flex items-center"
-                                key={`${
-                                  tokenBalance.tokenAddress ||
-                                  tokenBalance.symbol
-                                }-${wallet.address}`}
-                              >
-                                <span className="flex items-center gap-2 font-semibold text-lg">
-                                  <TokenIcon src={tokenBalance.logo} />
-                                  {wallet.amount.toLocaleString(undefined, {
-                                    maximumFractionDigits: 6,
-                                  })}
-                                </span>
-                                <span className="text-gray-400">
-                                  {shortenAddress(wallet.address)}
-                                </span>
-                              </li>
-                            ))}
-                          </AllocationWalletList>
-                        </li>
-                      );
-                    },
-                  )}
-                </AllocationSection>
+                <AllocationWalletList>
+                  {walletsWithBalance.map((wallet) => {
+                    return (
+                      <li
+                        className="w-full justify-between flex items-center"
+                        key={`${
+                          tokenBalance.tokenAddress || tokenBalance.symbol
+                        }-${wallet.address}`}
+                      >
+                        <span className="flex items-center gap-2 font-semibold text-lg">
+                          <TokenIcon src={tokenBalance.logo} />
+                          {wallet.amount.toLocaleString(undefined, {
+                            maximumFractionDigits: 6,
+                          })}
+                        </span>
+                        <span className="text-gray-400">
+                          {shortenAddress(wallet.address)}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </AllocationWalletList>
               </FungibleTokenInfo>
 
               <div className="w-full h-24 flex items-center justify-center">
