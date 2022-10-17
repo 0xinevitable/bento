@@ -58,9 +58,8 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
         'getTokenBalances' in chain
           ? chain.getTokenBalances?.(chainBech32Address) ?? []
           : [];
-      const [balance, delegations, tokenBalances] = await Promise.all([
+      const [balance, tokenBalances] = await Promise.all([
         chain.getBalance(chainBech32Address).catch(() => 0),
-        chain.getDelegations(chainBech32Address).catch(() => 0),
         getTokenBalances(),
       ]);
 
@@ -68,13 +67,11 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
         {
           walletAddress: chainBech32Address,
           platform: network,
-
           symbol: chain.currency.symbol,
           name: chain.currency.name,
           logo: chain.currency.logo,
           coinGeckoId: chain.currency.coinGeckoId,
           balance,
-          delegations,
           price: undefined,
         },
         ...tokenBalances,

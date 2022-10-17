@@ -112,10 +112,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           const amount = balances.reduce(
             walletBalanceReducer(
               first.symbol ?? first.name,
-              (acc, balance) =>
-                acc +
-                balance.balance +
-                ('delegations' in balance ? balance.delegations : 0),
+              (acc, balance) => acc + balance.balance,
             ),
             0,
           );

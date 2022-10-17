@@ -4,8 +4,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';
 
+import { withoutEmptyDeFiStaking } from '@/defi/klaytn/utils/withoutEmptyDeFiStaking';
 import { IONDAO } from '@/defi/osmosis/ion-dao';
-import { getGAMMLPs } from '@/defi/osmosis/osmosis';
+import { Osmosis } from '@/defi/osmosis/osmosis';
 import {
   DeFiStaking,
   OsmosisDeFiProtocolType,
@@ -45,7 +46,13 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const getOsmosisGAMMLPs = withCached(
     `defis:${OsmosisDeFiType.OSMOSIS_GAMM_LP}:${walletAddress}`,
     redisClient,
-    getGAMMLPs,
+    Osmosis.getGAMMLPs,
+  );
+  const getOsmosisDelegations = withCached(
+    `defis:${OsmosisDeFiType.OSMOSIS_GOVERNANCE}:${walletAddress}`,
+    redisClient,
+    async (walletAddress: string) =>
+      Osmosis.getDelegations(walletAddress).then((st) => [st]),
   );
 
   let stakings: DeFiStaking[] = [];
@@ -64,10 +71,16 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
           console.error(err);
           return [];
         }),
+      getOsmosisDelegations(walletAddress)
+        .then((r) => r.data)
+        .catch((err) => {
+          console.error(err);
+          return [];
+        }),
     ])
   ).flat();
 
-  // stakings = stakings.filter(withoutEmptyDeFiStaking);
+  stakings = stakings.filter(withoutEmptyDeFiStaking);
 
   res.status(200).json(stakings);
 };
