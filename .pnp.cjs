@@ -2747,6 +2747,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@cosmjs/utils", "npm:0.29.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-amino-npm-0.29.2-822210cf5e-7d0075d10b.zip/node_modules/@cosmjs/amino/",\
+          "packageDependencies": [\
+            ["@cosmjs/amino", "npm:0.29.2"],\
+            ["@cosmjs/crypto", "npm:0.29.2"],\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
+            ["@cosmjs/math", "npm:0.29.2"],\
+            ["@cosmjs/utils", "npm:0.29.2"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@cosmjs/cosmwasm-stargate", [\
@@ -2797,6 +2808,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["libsodium-wrappers", "npm:0.7.10"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-crypto-npm-0.29.2-c80d335893-40155564f0.zip/node_modules/@cosmjs/crypto/",\
+          "packageDependencies": [\
+            ["@cosmjs/crypto", "npm:0.29.2"],\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
+            ["@cosmjs/math", "npm:0.29.2"],\
+            ["@cosmjs/utils", "npm:0.29.2"],\
+            ["@noble/hashes", "npm:1.1.2"],\
+            ["bn.js", "npm:5.2.1"],\
+            ["elliptic", "npm:6.5.4"],\
+            ["libsodium-wrappers", "npm:0.7.10"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@cosmjs/encoding", [\
@@ -2819,6 +2844,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["readonly-date", "npm:1.0.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-encoding-npm-0.29.2-1d39830def-a344f3a143.zip/node_modules/@cosmjs/encoding/",\
+          "packageDependencies": [\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
+            ["base64-js", "npm:1.5.1"],\
+            ["bech32", "npm:1.1.4"],\
+            ["readonly-date", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@cosmjs/json-rpc", [\
@@ -2827,6 +2862,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@cosmjs/json-rpc", "npm:0.29.1"],\
             ["@cosmjs/stream", "npm:0.29.1"],\
+            ["xstream", "npm:11.14.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-json-rpc-npm-0.29.2-6b99cfbaaa-425b9a34b3.zip/node_modules/@cosmjs/json-rpc/",\
+          "packageDependencies": [\
+            ["@cosmjs/json-rpc", "npm:0.29.2"],\
+            ["@cosmjs/stream", "npm:0.29.2"],\
             ["xstream", "npm:11.14.0"]\
           ],\
           "linkType": "HARD"\
@@ -2848,6 +2892,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bn.js", "npm:5.2.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-math-npm-0.29.2-16b57720c8-447f6152bd.zip/node_modules/@cosmjs/math/",\
+          "packageDependencies": [\
+            ["@cosmjs/math", "npm:0.29.2"],\
+            ["bn.js", "npm:5.2.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@cosmjs/proto-signing", [\
@@ -2864,6 +2916,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["long", "npm:4.0.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-proto-signing-npm-0.29.2-161079f001-33fd0b1dd4.zip/node_modules/@cosmjs/proto-signing/",\
+          "packageDependencies": [\
+            ["@cosmjs/proto-signing", "npm:0.29.2"],\
+            ["@cosmjs/amino", "npm:0.29.2"],\
+            ["@cosmjs/crypto", "npm:0.29.2"],\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
+            ["@cosmjs/math", "npm:0.29.2"],\
+            ["@cosmjs/utils", "npm:0.29.2"],\
+            ["cosmjs-types", "npm:0.5.2"],\
+            ["long", "npm:4.0.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@cosmjs/socket", [\
@@ -2872,6 +2938,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@cosmjs/socket", "npm:0.29.1"],\
             ["@cosmjs/stream", "npm:0.29.1"],\
+            ["isomorphic-ws", "virtual:b56822994779e3a5b99ac07ed128b67fabf3d5aa24d74425ab19252f529abf6e18816056bb339a50cac80fb6db4fea5868fac52a676ea1e5c169284addb593d3#npm:4.0.1"],\
+            ["ws", "virtual:a6092331bab6b91eadca825a684cbfdca8f620e5ae7d4e38f7c0b109533a75ea2aa24e9e734243940ff815f80385374957640be97f47dc937946ede3032e4ac5#npm:7.5.9"],\
+            ["xstream", "npm:11.14.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-socket-npm-0.29.2-eeae4b99b8-de77fdefe3.zip/node_modules/@cosmjs/socket/",\
+          "packageDependencies": [\
+            ["@cosmjs/socket", "npm:0.29.2"],\
+            ["@cosmjs/stream", "npm:0.29.2"],\
             ["isomorphic-ws", "virtual:b56822994779e3a5b99ac07ed128b67fabf3d5aa24d74425ab19252f529abf6e18816056bb339a50cac80fb6db4fea5868fac52a676ea1e5c169284addb593d3#npm:4.0.1"],\
             ["ws", "virtual:a6092331bab6b91eadca825a684cbfdca8f620e5ae7d4e38f7c0b109533a75ea2aa24e9e734243940ff815f80385374957640be97f47dc937946ede3032e4ac5#npm:7.5.9"],\
             ["xstream", "npm:11.14.0"]\
@@ -2898,6 +2975,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["xstream", "npm:11.14.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-stargate-npm-0.29.2-fc4818b869-8ea6b10698.zip/node_modules/@cosmjs/stargate/",\
+          "packageDependencies": [\
+            ["@cosmjs/stargate", "npm:0.29.2"],\
+            ["@confio/ics23", "npm:0.6.8"],\
+            ["@cosmjs/amino", "npm:0.29.2"],\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
+            ["@cosmjs/math", "npm:0.29.2"],\
+            ["@cosmjs/proto-signing", "npm:0.29.2"],\
+            ["@cosmjs/stream", "npm:0.29.2"],\
+            ["@cosmjs/tendermint-rpc", "npm:0.29.2"],\
+            ["@cosmjs/utils", "npm:0.29.2"],\
+            ["cosmjs-types", "npm:0.5.2"],\
+            ["long", "npm:4.0.0"],\
+            ["protobufjs", "npm:6.11.3"],\
+            ["xstream", "npm:11.14.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@cosmjs/stream", [\
@@ -2905,6 +3001,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@cosmjs-stream-npm-0.29.1-559e7cfad4-93d2a08a4f.zip/node_modules/@cosmjs/stream/",\
           "packageDependencies": [\
             ["@cosmjs/stream", "npm:0.29.1"],\
+            ["xstream", "npm:11.14.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-stream-npm-0.29.2-87aff74c53-d671fc64fe.zip/node_modules/@cosmjs/stream/",\
+          "packageDependencies": [\
+            ["@cosmjs/stream", "npm:0.29.2"],\
             ["xstream", "npm:11.14.0"]\
           ],\
           "linkType": "HARD"\
@@ -2927,6 +3031,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["xstream", "npm:11.14.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-tendermint-rpc-npm-0.29.2-56bb56e17e-e4b4a5a224.zip/node_modules/@cosmjs/tendermint-rpc/",\
+          "packageDependencies": [\
+            ["@cosmjs/tendermint-rpc", "npm:0.29.2"],\
+            ["@cosmjs/crypto", "npm:0.29.2"],\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
+            ["@cosmjs/json-rpc", "npm:0.29.2"],\
+            ["@cosmjs/math", "npm:0.29.2"],\
+            ["@cosmjs/socket", "npm:0.29.2"],\
+            ["@cosmjs/stream", "npm:0.29.2"],\
+            ["@cosmjs/utils", "npm:0.29.2"],\
+            ["axios", "npm:0.21.4"],\
+            ["readonly-date", "npm:1.0.0"],\
+            ["xstream", "npm:11.14.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@cosmjs/utils", [\
@@ -2941,6 +3062,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@cosmjs-utils-npm-0.29.1-505034fc92-c2ce233aea.zip/node_modules/@cosmjs/utils/",\
           "packageDependencies": [\
             ["@cosmjs/utils", "npm:0.29.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:0.29.2", {\
+          "packageLocation": "./.yarn/cache/@cosmjs-utils-npm-0.29.2-231a935b98-d572eff107.zip/node_modules/@cosmjs/utils/",\
+          "packageDependencies": [\
+            ["@cosmjs/utils", "npm:0.29.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3998,6 +4126,35 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@keplr-wallet/common", [\
+        ["npm:0.11.10", {\
+          "packageLocation": "./.yarn/cache/@keplr-wallet-common-npm-0.11.10-de073e6ed1-acb4ecd861.zip/node_modules/@keplr-wallet/common/",\
+          "packageDependencies": [\
+            ["@keplr-wallet/common", "npm:0.11.10"],\
+            ["@keplr-wallet/crypto", "npm:0.11.10"],\
+            ["buffer", "npm:6.0.3"],\
+            ["delay", "npm:4.4.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@keplr-wallet/crypto", [\
+        ["npm:0.11.10", {\
+          "packageLocation": "./.yarn/cache/@keplr-wallet-crypto-npm-0.11.10-bdbabc6875-e5825d0448.zip/node_modules/@keplr-wallet/crypto/",\
+          "packageDependencies": [\
+            ["@keplr-wallet/crypto", "npm:0.11.10"],\
+            ["@ethersproject/keccak256", "npm:5.7.0"],\
+            ["bip32", "npm:2.0.6"],\
+            ["bip39", "npm:3.0.4"],\
+            ["bs58check", "npm:2.1.2"],\
+            ["buffer", "npm:6.0.3"],\
+            ["crypto-js", "npm:4.1.1"],\
+            ["elliptic", "npm:6.5.4"],\
+            ["sha.js", "npm:2.4.11"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@metamask/safe-event-emitter", [\
         ["npm:2.0.0", {\
           "packageLocation": "./.yarn/cache/@metamask-safe-event-emitter-npm-2.0.0-0f6c91f887-8b717ac5d5.zip/node_modules/@metamask/safe-event-emitter/",\
@@ -4276,6 +4433,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@npmcli/move-file", "npm:2.0.1"],\
             ["mkdirp", "npm:1.0.4"],\
             ["rimraf", "npm:3.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@osmonauts/lcd", [\
+        ["npm:0.8.0", {\
+          "packageLocation": "./.yarn/cache/@osmonauts-lcd-npm-0.8.0-dfd07d2725-260cfada1b.zip/node_modules/@osmonauts/lcd/",\
+          "packageDependencies": [\
+            ["@osmonauts/lcd", "npm:0.8.0"],\
+            ["@babel/runtime", "npm:7.19.0"],\
+            ["axios", "npm:0.27.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5385,6 +5553,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/node", [\
+        ["npm:10.12.18", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-10.12.18-7c6aeb4e07-333cedae77.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:10.12.18"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:11.11.6", {\
+          "packageLocation": "./.yarn/cache/@types-node-npm-11.11.6-40abad0842-075f1c011c.zip/node_modules/@types/node/",\
+          "packageDependencies": [\
+            ["@types/node", "npm:11.11.6"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:12.20.55", {\
           "packageLocation": "./.yarn/cache/@types-node-npm-12.20.55-88487587a4-e4f86785f4.zip/node_modules/@types/node/",\
           "packageDependencies": [\
@@ -6716,6 +6898,35 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["bip32", [\
+        ["npm:2.0.6", {\
+          "packageLocation": "./.yarn/cache/bip32-npm-2.0.6-e2304169e2-1c654a9383.zip/node_modules/bip32/",\
+          "packageDependencies": [\
+            ["bip32", "npm:2.0.6"],\
+            ["@types/node", "npm:10.12.18"],\
+            ["bs58check", "npm:2.1.2"],\
+            ["create-hash", "npm:1.2.0"],\
+            ["create-hmac", "npm:1.1.7"],\
+            ["tiny-secp256k1", "npm:1.1.6"],\
+            ["typeforce", "npm:1.18.0"],\
+            ["wif", "npm:2.0.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["bip39", [\
+        ["npm:3.0.4", {\
+          "packageLocation": "./.yarn/cache/bip39-npm-3.0.4-7c69c9182f-79ce1600a0.zip/node_modules/bip39/",\
+          "packageDependencies": [\
+            ["bip39", "npm:3.0.4"],\
+            ["@types/node", "npm:11.11.6"],\
+            ["create-hash", "npm:1.2.0"],\
+            ["pbkdf2", "npm:3.1.2"],\
+            ["randombytes", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["bl", [\
         ["npm:4.1.0", {\
           "packageLocation": "./.yarn/cache/bl-npm-4.1.0-7f94cdcf3f-9e8521fa7e.zip/node_modules/bl/",\
@@ -7571,6 +7782,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["protobufjs", "npm:6.11.3"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.5.2", {\
+          "packageLocation": "./.yarn/cache/cosmjs-types-npm-0.5.2-cf7bc203f4-0362cb2136.zip/node_modules/cosmjs-types/",\
+          "packageDependencies": [\
+            ["cosmjs-types", "npm:0.5.2"],\
+            ["long", "npm:4.0.0"],\
+            ["protobufjs", "npm:6.11.3"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["create-ecdh", [\
@@ -7669,6 +7889,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["public-encrypt", "npm:4.0.3"],\
             ["randombytes", "npm:2.1.0"],\
             ["randomfill", "npm:1.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["crypto-js", [\
+        ["npm:4.1.1", {\
+          "packageLocation": "./.yarn/cache/crypto-js-npm-4.1.1-38a3b8c19d-b3747c12ee.zip/node_modules/crypto-js/",\
+          "packageDependencies": [\
+            ["crypto-js", "npm:4.1.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8016,6 +8245,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["delay", [\
+        ["npm:4.4.1", {\
+          "packageLocation": "./.yarn/cache/delay-npm-4.4.1-43afd2835c-97b001126a.zip/node_modules/delay/",\
+          "packageDependencies": [\
+            ["delay", "npm:4.4.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:5.0.0", {\
           "packageLocation": "./.yarn/cache/delay-npm-5.0.0-1d1c758b46-62f151151e.zip/node_modules/delay/",\
           "packageDependencies": [\
@@ -11091,6 +11327,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["long", "npm:4.0.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:5.2.0", {\
+          "packageLocation": "./.yarn/cache/long-npm-5.2.0-bbbd23a9e6-37aa4e67b9.zip/node_modules/long/",\
+          "packageDependencies": [\
+            ["long", "npm:5.2.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["loose-envify", [\
@@ -11584,6 +11827,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["node-gyp", "npm:9.1.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:2.17.0", {\
+          "packageLocation": "./.yarn/unplugged/nan-npm-2.17.0-bf36a21d6f/node_modules/nan/",\
+          "packageDependencies": [\
+            ["nan", "npm:2.17.0"],\
+            ["node-gyp", "npm:9.1.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["nanoid", [\
@@ -12030,6 +12281,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/os-npm-0.1.2-bca6d454c9-dc2d99759e.zip/node_modules/os/",\
           "packageDependencies": [\
             ["os", "npm:0.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["osmojs", [\
+        ["npm:0.33.0", {\
+          "packageLocation": "./.yarn/cache/osmojs-npm-0.33.0-1a1928e47e-ec9524201d.zip/node_modules/osmojs/",\
+          "packageDependencies": [\
+            ["osmojs", "npm:0.33.0"],\
+            ["@babel/runtime", "npm:7.19.0"],\
+            ["@cosmjs/amino", "npm:0.29.2"],\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
+            ["@cosmjs/proto-signing", "npm:0.29.2"],\
+            ["@cosmjs/stargate", "npm:0.29.2"],\
+            ["@cosmjs/tendermint-rpc", "npm:0.29.2"],\
+            ["@osmonauts/lcd", "npm:0.8.0"],\
+            ["long", "npm:5.2.0"],\
+            ["protobufjs", "npm:6.11.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -13480,6 +13749,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["scripts", "workspace:scripts"],\
             ["@bento/common", "workspace:packages/bento-common"],\
             ["@bento/core", "workspace:packages/bento-core"],\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
+            ["@keplr-wallet/common", "npm:0.11.10"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@types/dedent", "npm:0.7.0"],\
             ["@types/node", "npm:18.7.19"],\
@@ -13487,6 +13758,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:0.27.2"],\
             ["dedent", "npm:0.7.0"],\
             ["find-yarn-workspace-root", "npm:2.0.0"],\
+            ["osmojs", "npm:0.33.0"],\
             ["prettier", "npm:2.7.1"],\
             ["ttypescript", "virtual:3d037d5e526f3d3d648b34e6f2870741001da83fbe5a06f011f676bb188c06041db8b9f18e1dc28a15d39fd0f2ca8aed5c277ca1e2fd69d4f751809e3cb17f94#npm:1.5.13"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
@@ -14224,6 +14496,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["tiny-secp256k1", [\
+        ["npm:1.1.6", {\
+          "packageLocation": "./.yarn/unplugged/tiny-secp256k1-npm-1.1.6-00db893e04/node_modules/tiny-secp256k1/",\
+          "packageDependencies": [\
+            ["tiny-secp256k1", "npm:1.1.6"],\
+            ["bindings", "npm:1.5.0"],\
+            ["bn.js", "npm:5.2.1"],\
+            ["create-hmac", "npm:1.1.7"],\
+            ["elliptic", "npm:6.5.4"],\
+            ["nan", "npm:2.17.0"],\
+            ["node-gyp", "npm:9.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["tiny-warning", [\
         ["npm:1.0.3", {\
           "packageLocation": "./.yarn/cache/tiny-warning-npm-1.0.3-750b7a07c4-da62c4acac.zip/node_modules/tiny-warning/",\
@@ -14435,6 +14722,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["typedarray-to-buffer", "npm:3.1.5"],\
             ["is-typedarray", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["typeforce", [\
+        ["npm:1.18.0", {\
+          "packageLocation": "./.yarn/cache/typeforce-npm-1.18.0-372e34e2a2-e3b21e27e7.zip/node_modules/typeforce/",\
+          "packageDependencies": [\
+            ["typeforce", "npm:1.18.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -14935,6 +15231,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["wide-align", "npm:1.1.5"],\
             ["string-width", "npm:4.2.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["wif", [\
+        ["npm:2.0.6", {\
+          "packageLocation": "./.yarn/cache/wif-npm-2.0.6-f351bf025a-8c3147ef98.zip/node_modules/wif/",\
+          "packageDependencies": [\
+            ["wif", "npm:2.0.6"],\
+            ["bs58check", "npm:2.1.2"]\
           ],\
           "linkType": "HARD"\
         }]\

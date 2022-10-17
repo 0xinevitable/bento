@@ -129,7 +129,11 @@ export const NavigationBar = () => {
         <RightContent>
           <NoSSR>
             {!session && (
-              <LoginButton onClick={() => router.push('/home?login=open')}>
+              <LoginButton
+                onClick={() => {
+                  router.push('/home?login=open');
+                }}
+              >
                 {t('Log In')}
               </LoginButton>
             )}
