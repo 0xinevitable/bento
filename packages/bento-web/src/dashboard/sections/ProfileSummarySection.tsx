@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -54,6 +55,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
   imageToken,
   revalidateProfile,
 }) => {
+  const router = useRouter();
   const { t } = useTranslation('dashboard');
 
   const profileImageURL =
@@ -109,10 +111,13 @@ export const ProfileSummarySection: React.FC<Props> = ({
       return;
     }
 
+    const newUsername = draft.username.toLowerCase();
+    const isUsernameChanged = profile?.username !== newUsername;
+
     // FIXME: Duplicated logic
     try {
       const { data } = await axios.post(`/api/profile`, {
-        username: draft.username.toLowerCase(),
+        username: newUsername,
         display_name: draft.displayName,
         bio: draft.bio,
       });
@@ -125,6 +130,10 @@ export const ProfileSummarySection: React.FC<Props> = ({
         type: 'success',
         title: 'Changes Saved',
       });
+
+      if (isUsernameChanged) {
+        router.push(`/u/${newUsername}`);
+      }
     } catch (e) {
       if (e instanceof AxiosError) {
         const errorResponse = e.response?.data as ErrorResponse;
