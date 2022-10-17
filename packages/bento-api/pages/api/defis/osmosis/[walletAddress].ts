@@ -83,7 +83,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
   stakings = stakings.filter(withoutEmptyDeFiStaking);
 
-  res.status(200).json(stakings);
+  res.status(200).json({ walletAddress, stakings });
 };
 
 export default withCORS(handler);
