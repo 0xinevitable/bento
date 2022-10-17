@@ -78,9 +78,8 @@ const main = async () => {
     ),
   );
 
-  const getDenomsFromPool = withCache((pool: Pool) =>
-    pool.pool_assets.map((poolAsset) => poolAsset.token.denom),
-  );
+  const getDenomsFromPool = (pool: Pool) =>
+    pool.pool_assets.map((poolAsset) => poolAsset.token.denom);
 
   const getPool = withCache(
     (poolId: string) =>
@@ -96,7 +95,6 @@ const main = async () => {
       const poolRes = await getPool(poolBalance.poolId);
       const denoms = getDenomsFromPool(poolRes.pool);
       denoms.map((d) => {
-        // console.log(d);
         const tokenInfo = OSMOSIS_MAINNET_ASSETLIST.assets.find(
           (v) => v.denom_units.findIndex((u) => u.denom === d) !== -1,
         );
@@ -131,38 +129,41 @@ const main = async () => {
     : {};
 
   const getPrice = withCache(async (poolId: string, poolDenoms: string[]) => {
-    const [assetDenomA, assetDenomB] = poolDenoms;
-    console.log(assetDenomA, assetDenomB);
-    let assetPriceA: number | null = null;
-    if (assetDenomA in pricesByDenom) {
-      assetPriceA = pricesByDenom[assetDenomA];
-    }
-    let assetPriceB: number | null = null;
-    if (assetDenomB in pricesByDenom) {
-      assetPriceB = pricesByDenom[assetDenomB];
-    }
+    try {
+      const [assetDenomA, assetDenomB] = poolDenoms;
+      let assetPriceA: number | null = null;
+      if (assetDenomA in pricesByDenom) {
+        assetPriceA = pricesByDenom[assetDenomA];
+      }
+      let assetPriceB: number | null = null;
+      if (assetDenomB in pricesByDenom) {
+        assetPriceB = pricesByDenom[assetDenomB];
+      }
 
-    if (assetPriceA === null && assetPriceB === null) {
+      if (assetPriceA === null && assetPriceB === null) {
+        return [null, null];
+      }
+
+      if (assetPriceA === null || assetPriceB === null) {
+        const spotPrice = await client.osmosis.gamm.v1beta1.spotPrice({
+          poolId: poolId as any,
+          baseAssetDenom: assetDenomA,
+          quoteAssetDenom: assetDenomB,
+        });
+        const spotPriceA = parseFloat(spotPrice.spot_price);
+        const spotPriceB = 1 / spotPriceA;
+        if (assetPriceA === null) {
+          assetPriceA = spotPriceA;
+        }
+        if (assetPriceB === null) {
+          assetPriceB = spotPriceB;
+        }
+      }
+      return [assetPriceA, assetPriceB];
+    } catch (err) {
+      console.error(err);
       return [null, null];
     }
-
-    if (assetPriceA === null || assetPriceB === null) {
-      const spotPrice = await client.osmosis.gamm.v1beta1.spotPrice({
-        poolId: poolId as any,
-        baseAssetDenom: assetDenomA,
-        quoteAssetDenom: assetDenomB,
-      });
-      const spotPriceA = parseFloat(spotPrice.spot_price);
-      const spotPriceB = 1 / spotPriceA;
-      if (assetPriceA === null) {
-        assetPriceA = spotPriceA;
-      }
-      if (assetPriceB === null) {
-        assetPriceB = spotPriceB;
-      }
-    }
-
-    return [assetPriceA, assetPriceB];
   });
 
   const pools = await Promise.all(
@@ -172,7 +173,7 @@ const main = async () => {
         poolBalance.poolId,
         getDenomsFromPool(poolRes.pool),
       );
-      return { ...poolRes, prices };
+      return { poolBalance, prices };
     }),
   );
   console.log(JSON.stringify({ pools }, null, 2));
