@@ -258,8 +258,6 @@ export const getGAMMLPs = async (
             [tokenInfoB.address]: tokenBAmount,
           },
           value: tokenAAmount * assetPriceA + tokenBAmount * assetPriceB,
-          assetPriceA,
-          assetPriceB,
         };
       };
 
