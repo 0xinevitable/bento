@@ -1,3 +1,4 @@
+export { ActivityIndicator } from './ActivityIndicator';
 export { AnimatedToolTip } from './AnimatedToolTip';
 export { AssetMedia } from './AssetMedia';
 export { Badge } from './Badge';

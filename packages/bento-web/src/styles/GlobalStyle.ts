@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .sys, .sys * {
-    font-family: ${systemFontStack};
+    font-family: ${systemFontStack} !important;
   }
 
   html {

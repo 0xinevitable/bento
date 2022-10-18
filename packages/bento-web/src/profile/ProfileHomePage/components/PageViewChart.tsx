@@ -1,4 +1,4 @@
-import * as DateFns from 'date-fns';
+import { format, subDays } from 'date-fns';
 import React from 'react';
 import {
   Area,
@@ -22,7 +22,7 @@ const getRandomInteger = (min: number, max: number) => {
 const getWeek = () => {
   const today = new Date();
   return [...Array(7)]
-    .map((_, daysToGoBack) => DateFns.subDays(today, daysToGoBack))
+    .map((_, daysToGoBack) => subDays(today, daysToGoBack))
     .reverse();
 };
 
@@ -36,7 +36,7 @@ const generateExampleData = () => {
       const views = getRandomInteger(56, 100);
       return [
         {
-          name: DateFns.format(date, 'yyyy-MM-dd'),
+          name: format(date, 'yyyy-MM-dd'),
           views: views,
           uniqueViews: getRandomInteger(views / 4, views),
         },

@@ -1,4 +1,5 @@
 import { Icon as Iconify } from '@iconify/react';
+import { deleteCookie } from 'cookies-next';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -129,7 +130,16 @@ export const NavigationBar = () => {
         <RightContent>
           <NoSSR>
             {!session && (
-              <LoginButton onClick={() => router.push('/home?login=open')}>
+              <LoginButton
+                onClick={() => {
+                  deleteCookie('supabase_auth_token', {
+                    path: '/',
+                  });
+                  setTimeout(() => {
+                    router.push('/home?login=open');
+                  });
+                }}
+              >
                 {t('Log In')}
               </LoginButton>
             )}

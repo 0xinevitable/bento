@@ -112,10 +112,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           const amount = balances.reduce(
             walletBalanceReducer(
               first.symbol ?? first.name,
-              (acc, balance) =>
-                acc +
-                balance.balance +
-                ('delegations' in balance ? balance.delegations : 0),
+              (acc, balance) => acc + balance.balance,
             ),
             0,
           );
@@ -170,8 +167,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   }, [currentTab]);
 
   const { defis } = useDeFis(wallets);
+  // Entries
   const defiStakesByProtocol = useMemo(
-    () => groupBy(defis, 'protocol'),
+    () => Object.entries(groupBy(defis, 'protocol')),
     [defis],
   );
 
@@ -190,8 +188,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
   const netWorthInUSDOnlyDeFi = useMemo(
     () =>
-      Object.values(defiStakesByProtocol).reduce(
-        (acc, stakes) =>
+      defiStakesByProtocol.reduce(
+        (acc, [, stakes]) =>
           acc + stakes.reduce((a, v) => a + v.valuation.total, 0),
         0,
       ),
@@ -370,7 +368,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                       <AssetListCard>
                         {defis.length > 0 ? (
                           <Collapse>
-                            {Object.entries(defiStakesByProtocol).map(
+                            {defiStakesByProtocol.map(
                               ([protocol, defiProtocols]) => {
                                 const valuation = defiProtocols.reduce(
                                   (acc, v) => acc + v.valuation.total,
@@ -389,7 +387,9 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                       {defiProtocols.map((item) => (
                                         <DeFiStakingItem
                                           // FIXME: group stats with different wallets...
-                                          key={`${item.type}-${item.address}-${item.walletAddress}`}
+                                          key={`${item.type}-${
+                                            item.address || 'gov'
+                                          }-${item.walletAddress}`}
                                           protocol={item}
                                         />
                                       ))}
