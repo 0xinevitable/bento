@@ -74,7 +74,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
     // maximum length is 3
     items = items.slice(0, 3);
     return items.sort((a, b) => b.ratio - a.ratio);
-  }, [netWorthInUSD, defiStakesByProtocol]);
+  }, [netWorthInUSD, defiStakesByProtocol, tokenBalances]);
 
   return (
     <Container>
