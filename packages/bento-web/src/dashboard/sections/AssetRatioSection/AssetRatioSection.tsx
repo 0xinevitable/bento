@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { AnimatedToolTip } from '@/components/system';
 
+import { NETWORKS } from '@/constants/networks';
 import { displayName } from '@/dashboard/constants/platform';
 import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
@@ -42,7 +43,8 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   const assetRatioByPlatform = useMemo(() => {
     const groups = groupBy(tokenBalances, 'platform');
 
-    let items = Object.entries(groups).map(([platform, assets]) => {
+    let items = NETWORKS.map(({ id: platform }) => {
+      const assets = groups[platform] || [];
       let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
 
       // FIXME: Hardcoded here
