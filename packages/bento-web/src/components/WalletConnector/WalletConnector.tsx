@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import { useCallback, useMemo, useState } from 'react';
 import styled, { css } from 'styled-components';
@@ -9,6 +9,7 @@ import { WALLETS } from '@/constants/wallets';
 import { Colors } from '@/styles';
 import { toast } from '@/utils';
 
+import { ActivityIndicator } from '../system';
 import {
   connectKaikas,
   connectKeplr,
@@ -79,13 +80,22 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           default:
             break;
         }
+
+        toast({
+          type: 'success',
+          title: 'Wallet Connected!',
+        });
       } catch (error: any) {
         const typedError = error as Error;
         console.error(typedError);
+        let errorMessage = typedError?.message || 'Unknown Error';
+        if (errorMessage.length >= 120) {
+          errorMessage = errorMessage.substring(0, 120) + '...';
+        }
         toast({
           type: 'error',
           title: 'Ownership Verification Failed',
-          description: typedError?.message ?? undefined,
+          description: errorMessage,
         });
       }
 
@@ -154,6 +164,21 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
         </IconList>
         <span className="title">{t('Phantom')}</span>
       </WalletButton>
+
+      <AnimatePresence>
+        {isLoading && (
+          <LoadingContainer
+            {...{
+              initial: { opacity: 0 },
+              animate: { opacity: 1 },
+              exit: { opacity: 0 },
+              transition: { ease: 'linear' },
+            }}
+          >
+            <ActivityIndicator size={56} borderSize={8} />
+          </LoadingContainer>
+        )}
+      </AnimatePresence>
     </WalletList>
   );
 };
@@ -224,4 +249,21 @@ const IconList = styled.div.attrs({
   & > img {
     width: 72px;
   }
+`;
+
+const LoadingContainer = styled(motion.div)`
+  background-color: rgba(0, 56, 255, 0.45);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: all;
+  cursor: default;
 `;
