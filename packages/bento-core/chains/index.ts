@@ -1,6 +1,6 @@
 import { Config, safePromiseAllV1 } from '@bento/common';
 import { JsonRpcProvider } from '@ethersproject/providers';
-import * as web3 from '@solana/web3.js';
+import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
 import axios, { Axios } from 'axios';
 import Caver from 'caver-js';
 
@@ -443,13 +443,11 @@ export class SolanaChain implements Chain {
     coinGeckoId: 'solana',
   };
   chainId = 1399811149;
-  _provider = new web3.Connection(web3.clusterApiUrl('mainnet-beta'));
+  _provider = new Connection(clusterApiUrl('mainnet-beta'));
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
   getBalance = async (address: string) => {
-    const rawBalance = await this._provider.getBalance(
-      new web3.PublicKey(address),
-    );
+    const rawBalance = await this._provider.getBalance(new PublicKey(address));
     const balance = rawBalance / 10 ** this.currency.decimals;
     return balance;
   };
