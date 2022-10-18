@@ -88,7 +88,7 @@ export const TokenDetailModal: React.FC<Props> = ({
       transition={{ ease: 'linear' }}
     >
       {!tokenBalance ? null : (
-        <Content>
+        <>
           <TokenHeader>
             <TokenImage src={tokenBalance.logo} />
             <TokenInformation>
@@ -241,7 +241,7 @@ export const TokenDetailModal: React.FC<Props> = ({
               </div>
             </>
           )}
-        </Content>
+        </>
       )}
     </OverlayWrapper>
   );
@@ -251,32 +251,29 @@ export default TokenDetailModal;
 
 const OverlayWrapper = styled(Modal)`
   .modal-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-top: 52px;
+
+    padding: 16px;
+    max-width: 800px;
+    height: fit-content;
+    width: 95vw;
+
+    max-height: calc(100vh - 64px - 84px);
+    overflow: scroll;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid ${Colors.gray600};
+    border-radius: 8px;
+    box-shadow: 0 4px 24px ${Colors.black};
+    background-color: ${Colors.gray900};
 
     &,
     & > * {
       user-select: none;
     }
   }
-`;
-const Content = styled.div`
-  padding: 16px;
-  max-width: 800px;
-  height: 100%;
-  width: 95vw;
-
-  max-height: calc(100vh - 64px - 84px);
-  overflow: scroll;
-
-  display: flex;
-  flex-direction: column;
-
-  border: 1px solid #323232;
-  border-radius: 12px;
-  background-color: rgba(0, 0, 0, 0.45);
 `;
 const TokenHeader = styled.div`
   width: 100%;
