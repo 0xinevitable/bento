@@ -18,7 +18,7 @@ import { Colors } from '@/styles';
 import { AssetRatioChart } from './AssetRatioChart';
 
 const KLAYTN_DEFIS = Object.values(KlaytnDeFiProtocolType) as string[];
-const OSMOSIS_DEFIS = Object.keys(OsmosisDeFiProtocolType) as string[];
+const OSMOSIS_DEFIS = Object.values(OsmosisDeFiProtocolType) as string[];
 
 type AssetRatioSectionProps = {
   netWorthInUSD: number;
@@ -54,14 +54,21 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
             (acc, val) => val.valuation.total + acc,
             0,
           );
-        }
-        if (platform === 'osmosis' && OSMOSIS_DEFIS.includes(defiProtocol)) {
+        } else if (
+          platform === 'osmosis' &&
+          OSMOSIS_DEFIS.includes(defiProtocol)
+        ) {
           netWorth += defiStakes.reduce(
             (acc, val) => val.valuation.total + acc,
             0,
           );
         }
       });
+
+      let ratio = (netWorth / netWorthInUSD) * 100;
+      if (isNaN(ratio)) {
+        ratio = 0;
+      }
 
       return {
         platform,
@@ -72,8 +79,8 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
     });
 
     // maximum length is 3
-    items = items.slice(0, 3);
-    return items.sort((a, b) => b.ratio - a.ratio);
+    items = items.sort((a, b) => b.ratio - a.ratio);
+    return items.slice(0, 3);
   }, [netWorthInUSD, defiStakesByProtocol, tokenBalances]);
 
   return (
