@@ -261,14 +261,17 @@ export const getGAMMLPs = async (
         };
       };
 
+      const tokens = [
+        omit<TokenInput, 'denomUnits'>(tokenInfoA, 'denomUnits'),
+        omit<TokenInput, 'denomUnits'>(tokenInfoB, 'denomUnits'),
+      ];
+
       stakings.push({
         protocol: OsmosisDeFiProtocolType.OSMOSIS,
         type: OsmosisDeFiType.OSMOSIS_GAMM_LP,
         address: poolId,
-        tokens: [
-          omit<TokenInput, 'denomUnits'>(tokenInfoA, 'denomUnits'),
-          omit<TokenInput, 'denomUnits'>(tokenInfoB, 'denomUnits'),
-        ],
+        prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
+        tokens: tokens,
         wallet: 'unavailable',
         staked: fromAmount(stakedAmount),
         rewards: 'unavailable',
