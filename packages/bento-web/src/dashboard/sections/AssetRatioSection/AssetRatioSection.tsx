@@ -74,7 +74,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
         platform,
         netWorth,
         name: displayName(platform),
-        ratio: (netWorth / netWorthInUSD) * 100,
+        ratio,
       };
     });
 
