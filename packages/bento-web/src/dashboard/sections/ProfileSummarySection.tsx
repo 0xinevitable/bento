@@ -16,7 +16,7 @@ import {
 } from '@/profile/components/ProfileEditor';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { Config, axios } from '@/utils';
+import { Config, axiosWithCredentials } from '@/utils';
 import { Analytics, toast } from '@/utils';
 
 import { MinimalButton } from '../components/MinimalButton';
@@ -69,7 +69,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
     }
     const fetchProfile = async () => {
       try {
-        const { data } = await axios.get(
+        const { data } = await axiosWithCredentials.get(
           `/api/profile/blocks/${profile.user_id}`,
         );
         if (Array.isArray(data)) {
@@ -116,7 +116,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
 
     // FIXME: Duplicated logic
     try {
-      const { data } = await axios.post(`/api/profile`, {
+      const { data } = await axiosWithCredentials.post(`/api/profile`, {
         username: newUsername,
         display_name: draft.displayName,
         bio: draft.bio,

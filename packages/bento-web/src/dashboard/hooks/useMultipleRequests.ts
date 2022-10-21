@@ -1,10 +1,12 @@
+import { AxiosInstance } from 'axios';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { axios } from '@/utils';
+import { axiosWithCredentials } from '@/utils';
 
 type RequestKey = string;
 export const useMultipleRequests = <T extends any>(
   requests: (RequestKey | null)[],
+  fetcher: AxiosInstance = axiosWithCredentials,
 ) => {
   const responsesRef = useRef<
     Record<
@@ -20,7 +22,7 @@ export const useMultipleRequests = <T extends any>(
       isLoading: true,
     };
 
-    axios
+    fetcher
       .get<T>(requestKey)
       .then(({ data }) => {
         responsesRef.current[requestKey] = {

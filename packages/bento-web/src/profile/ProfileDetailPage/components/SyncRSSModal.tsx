@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Button, Modal } from '@/components/system';
 
-import { axios } from '@/utils';
+import { axiosWithCredentials } from '@/utils';
 
 import { LinkBlockItem } from '../../blocks/LinkBlockItem';
 import { FieldInput } from '../../components/FieldInput';
@@ -44,7 +44,7 @@ export const SyncRSSModal: React.FC<Props> = ({
 
   const onClickSubscribe = useCallback(async () => {
     setLoading(true);
-    const { data } = await axios.get(
+    const { data } = await axiosWithCredentials.get(
       `https://feed.inevitable.team/api/rss?rssURL=${rssURL}&limit=${RSS_FEED_LIMIT}`,
     );
     setLoading(false);
