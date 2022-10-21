@@ -9,7 +9,7 @@ import { debounce } from '@/utils/debounce';
 
 import { KlaytnDeFiProtocolType } from '@/defi/types/staking';
 import { Colors, float } from '@/styles';
-import { FeatureFlags, axios, toast } from '@/utils';
+import { FeatureFlags, axiosWithCredentials, toast } from '@/utils';
 
 import { BadgeModal, BadgeType } from '../components/BadgeModal';
 import { KLAYswapBadge, SwapscannerBadge } from './Badges';
@@ -30,7 +30,7 @@ export const BadgeListSection: React.FC<Props> = ({ userId, selected }) => {
 
   useEffect(() => {
     if (selected && !!userId) {
-      axios
+      axiosWithCredentials
         .get(`/api/profile/badges/${userId}`)
         .then(({ data }) => {
           if (Array.isArray(data)) {
