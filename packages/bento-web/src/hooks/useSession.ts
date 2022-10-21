@@ -5,11 +5,17 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { sessionAtom } from '../states';
-import { Analytics, Config, Supabase, axios, toast } from '../utils';
+import {
+  Analytics,
+  Config,
+  Supabase,
+  axiosWithCredentials,
+  toast,
+} from '../utils';
 
 const registerAccessToken = (session: Session | null) => {
   if (session) {
-    axios.interceptors.request.use((config) => {
+    axiosWithCredentials.interceptors.request.use((config) => {
       return {
         ...config,
         headers: {

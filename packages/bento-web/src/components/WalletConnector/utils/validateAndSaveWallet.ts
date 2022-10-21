@@ -2,7 +2,7 @@ import { Base64 } from '@bento/common';
 import { AxiosError } from 'axios';
 
 import { Network } from '@/constants/networks';
-import { axios } from '@/utils';
+import { axiosWithCredentials } from '@/utils';
 
 export const validateAndSaveWallet = async (
   params: (
@@ -25,15 +25,18 @@ export const validateAndSaveWallet = async (
 ) => {
   const { walletType, walletAddress, signature, nonce, networks } = params;
   try {
-    const { data } = await axios.post(`/api/auth/verify/${walletType}`, {
-      walletAddress,
-      signature,
-      nonce: Base64.encode(nonce),
-      ...(walletType === 'keplr' && {
-        publicKeyValue: params.publicKeyValue,
-      }),
-      networks: Base64.encode(networks.map((v) => v.id).join(',')),
-    });
+    const { data } = await axiosWithCredentials.post(
+      `/api/auth/verify/${walletType}`,
+      {
+        walletAddress,
+        signature,
+        nonce: Base64.encode(nonce),
+        ...(walletType === 'keplr' && {
+          publicKeyValue: params.publicKeyValue,
+        }),
+        networks: Base64.encode(networks.map((v) => v.id).join(',')),
+      },
+    );
     console.log({ data });
   } catch (error) {
     const maybeAxiosError = error as AxiosError;

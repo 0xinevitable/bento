@@ -5,7 +5,7 @@ import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Colors } from '@/styles';
-import { axios } from '@/utils';
+import { axiosWithCredentials } from '@/utils';
 import { Analytics, copyToClipboard, toast } from '@/utils';
 
 import { WalletListItem } from './WalletListItem';
@@ -36,7 +36,7 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
   const onClickDelete = useCallback(
     async (walletAddress: string) => {
       try {
-        await axios.post(`/api/profile/delete-wallet`, {
+        await axiosWithCredentials.post(`/api/profile/delete-wallet`, {
           walletAddress,
         });
         toast({

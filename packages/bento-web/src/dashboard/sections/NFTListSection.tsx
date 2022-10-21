@@ -9,7 +9,7 @@ import { AssetMedia } from '@/components/system';
 import { NFTDetailModal } from '@/profile/instance/sections/NFTDetailModal';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { Analytics, axios, toast } from '@/utils';
+import { Analytics, axiosWithCredentials, toast } from '@/utils';
 
 import { EmptyBalance } from '../components/EmptyBalance';
 import { KlaytnNFTAsset } from '../hooks/useKlaytnNFTs';
@@ -61,7 +61,7 @@ export const NFTListSection: React.FC<Props> = ({
   const onClickSetAsProfile = useCallback(
     async (assetImage: string) => {
       try {
-        await axios.post(`/api/profile`, {
+        await axiosWithCredentials.post(`/api/profile`, {
           username: profile?.username.toLowerCase(),
           display_name: profile?.display_name,
           images: [assetImage],
