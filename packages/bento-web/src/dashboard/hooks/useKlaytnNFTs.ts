@@ -1,4 +1,5 @@
 import { Wallet } from '@bento/common';
+import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 
 import { FeatureFlags } from '@/utils';
@@ -21,7 +22,7 @@ export const useKlaytnNFTs = (wallets: Wallet[]) => {
 
   // FIXME: Refetch rule
   const { responses: result, refetch } =
-    useMultipleRequests<KlaytnNFTListResponse>(calculatedRequests);
+    useMultipleRequests<KlaytnNFTListResponse>(calculatedRequests, axios);
 
   const [klaytnNFTs, setKlaytnNFTs] = useState<KlaytnNFTAsset[]>([]);
   useEffect(() => {
