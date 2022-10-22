@@ -14,6 +14,47 @@ const formatNumber = (value: number | null | undefined): string =>
     maximumSignificantDigits: 6,
   });
 
+type DecomposeTokenAmountsProps = {
+  tokenAmounts: Record<string, number | undefined> | null | undefined;
+  protocolTokens: any[];
+};
+const DecomposeTokenAmounts: React.FC<DecomposeTokenAmountsProps> = ({
+  tokenAmounts,
+  protocolTokens,
+}) => {
+  const [entries, isEmpty] = useMemo(() => {
+    if (!tokenAmounts) {
+      return [[], true];
+    }
+    const items = Object.entries(tokenAmounts);
+    const isEmpty = items.every(([, value]) => !value);
+    return [items, isEmpty];
+  }, [tokenAmounts]);
+
+  if (!tokenAmounts || isEmpty) {
+    return null;
+  }
+  return (
+    <>
+      <br />
+      <TokenAmountInfo className="sys">
+        {entries.map(([tokenAddress, amount], index, arr) => {
+          const token = protocolTokens.find(
+            (token) => token?.address === tokenAddress,
+          );
+          return (
+            <span style={{ display: 'inline-block' }}>
+              {`${formatNumber(amount)} ${token?.symbol || '???'} ${
+                index < arr.length - 1 ? ' + ' : ''
+              }`}
+            </span>
+          );
+        })}
+      </TokenAmountInfo>
+    </>
+  );
+};
+
 type DeFiStakingItemProps = {
   protocol: DeFiStakingWithClientData;
 };
@@ -101,6 +142,11 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                     </SmallAmountInfo>
                   </>
                 )}
+
+                <DecomposeTokenAmounts
+                  tokenAmounts={protocol.wallet.tokenAmounts}
+                  protocolTokens={protocolTokens}
+                />
               </InfoValuation>
             )}
           </InfoItem>
@@ -119,24 +165,10 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
               </>
             )}
 
-            {!!protocol.staked.tokenAmounts && (
-              <>
-                <br />
-                <SmallAmountInfo className="sys">
-                  {Object.entries(protocol.staked.tokenAmounts).map(
-                    ([tokenAddress, amount], index, arr) => {
-                      const token = protocolTokens.find(
-                        // @ts-ignore
-                        (token) => token?.address === tokenAddress,
-                      );
-                      return `${formatNumber(amount)} ${
-                        token?.symbol || '???'
-                      } ${index < arr.length - 1 ? ' + ' : ''}`;
-                    },
-                  )}
-                </SmallAmountInfo>
-              </>
-            )}
+            <DecomposeTokenAmounts
+              tokenAmounts={protocol.staked.tokenAmounts}
+              protocolTokens={protocolTokens}
+            />
           </InfoValuation>
         </InfoItem>
 
@@ -148,24 +180,11 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
             ) : (
               <InfoValuation className="sys">
                 {`$${formatNumber(protocol.valuation.rewards)}`}
-                {!!protocol.rewards.tokenAmounts && (
-                  <>
-                    <br />
-                    <SmallAmountInfo className="sys">
-                      {Object.entries(protocol.rewards.tokenAmounts).map(
-                        ([tokenAddress, amount], index, arr) => {
-                          const token = protocolTokens.find(
-                            // @ts-ignore
-                            (token) => token?.address === tokenAddress,
-                          );
-                          return `${formatNumber(amount)} ${
-                            token?.symbol || '???'
-                          } ${index < arr.length - 1 ? ' + ' : ''}`;
-                        },
-                      )}
-                    </SmallAmountInfo>
-                  </>
-                )}
+
+                <DecomposeTokenAmounts
+                  tokenAmounts={protocol.rewards.tokenAmounts}
+                  protocolTokens={protocolTokens}
+                />
               </InfoValuation>
             )}
           </InfoItem>
@@ -185,22 +204,10 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
                     {protocol.unstake.claimable !== 'unavailable' &&
                       protocol.unstake.claimable?.tokenAmounts && (
-                        <>
-                          <br />
-                          <SmallAmountInfo className="sys">
-                            {Object.entries(
-                              protocol.unstake.claimable.tokenAmounts,
-                            ).map(([tokenAddress, amount], index, arr) => {
-                              const token = protocolTokens.find(
-                                // @ts-ignore
-                                (token) => token?.address === tokenAddress,
-                              );
-                              return `${formatNumber(amount)} ${
-                                token?.symbol || '???'
-                              } ${index < arr.length - 1 ? ' + ' : ''}`;
-                            })}
-                          </SmallAmountInfo>
-                        </>
+                        <DecomposeTokenAmounts
+                          tokenAmounts={protocol.unstake.claimable.tokenAmounts}
+                          protocolTokens={protocolTokens}
+                        />
                       )}
                   </InfoValuation>
                 </span>
@@ -212,22 +219,10 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
                     {protocol.unstake.pending !== 'unavailable' &&
                       protocol.unstake.pending?.tokenAmounts && (
-                        <>
-                          <br />
-                          <SmallAmountInfo className="sys">
-                            {Object.entries(
-                              protocol.unstake.pending.tokenAmounts,
-                            ).map(([tokenAddress, amount], index, arr) => {
-                              const token = protocolTokens.find(
-                                // @ts-ignore
-                                (token) => token?.address === tokenAddress,
-                              );
-                              return `${formatNumber(amount)} ${
-                                token?.symbol || '???'
-                              } ${index < arr.length - 1 ? ' + ' : ''}`;
-                            })}
-                          </SmallAmountInfo>
-                        </>
+                        <DecomposeTokenAmounts
+                          tokenAmounts={protocol.unstake.pending.tokenAmounts}
+                          protocolTokens={protocolTokens}
+                        />
                       )}
                   </InfoValuation>
                 </span>
@@ -390,4 +385,11 @@ const SmallAmountInfo = styled.span`
   color: ${Colors.gray500};
   font-weight: 500;
   font-size: 16px;
+`;
+const TokenAmountInfo = styled.span`
+  display: block;
+  font-size: 13px;
+  line-height: 145%;
+  color: ${Colors.yellow100};
+  font-weight: 600;
 `;

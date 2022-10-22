@@ -21,6 +21,7 @@ export const getDeFiStakingValue = (
   getCachedPrice: GetCachedPrice,
 ): Valuation => {
   let valuation: Partial<Valuation> = {
+    wallet: getAmountValue(staking.wallet, staking, getCachedPrice),
     staking: getAmountValue(staking.staked, staking, getCachedPrice),
     rewards: getAmountValue(staking.rewards, staking, getCachedPrice),
   };
