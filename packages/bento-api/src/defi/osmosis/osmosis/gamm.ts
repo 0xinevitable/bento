@@ -284,15 +284,25 @@ export const getGAMMLPs = async (
         try {
           const poolStakeRatio = amount / totalLiquidity;
 
+          console.log(
+            assetPrices,
+            poolStakeRatio,
+            tokenLiquidities,
+            totalLiquidity,
+          );
+
           const tokenAmounts: Record<string, number> = {};
           const value = denoms.reduce((acc, denom) => {
             const tokenInfo = tokenInfos[denom];
             const tokenLiquidity = tokenLiquidities[denom];
             const tokenAmount =
               (tokenLiquidity * poolStakeRatio) / 10 ** tokenInfo.decimals;
+            console.log({ tokenAmount, tokenInfo });
             tokenAmounts[tokenInfo.address] = tokenAmount;
             return acc + tokenAmount * assetPrices[denom];
           }, 0);
+
+          console.log(value);
 
           return {
             // NOTE: LP decimals are hardcoded to 18

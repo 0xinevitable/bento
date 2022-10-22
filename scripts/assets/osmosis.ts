@@ -15,7 +15,9 @@ export const update = async () => {
   const tokens: TokenInput[] = OSMOSIS_ASSETLIST.assets.map((asset) => {
     const denomUnits = asset.denom_units;
     const decimals =
-      denomUnits.find((v) => v.denom === asset.display)?.exponent ?? 0;
+      denomUnits.find(
+        (v) => v.denom.toLowerCase() === asset.display.toLowerCase(),
+      )?.exponent ?? 0;
 
     return {
       symbol: asset.symbol,
