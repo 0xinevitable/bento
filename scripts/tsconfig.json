@@ -1,20 +1,26 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "lib": ["ESNext"],
-    "declaration": true,
-    "outDir": "build",
-    "jsx": "react",
-    "strict": true,
+    "target": "es5",
+    "lib": ["esnext"],
+    "allowJs": true,
     "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
     "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "plugins": [
-      {
-        "transform": "typescript-json/lib/transform"
-      }
-    ]
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "incremental": true
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }

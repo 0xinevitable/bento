@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "generate-assets": "ttsc && node build/assets",
-    "generate-release-notes": "ttsc && node build/release-notes",
-    "generate-defi": "ttsc && node build/defi"
+    "generate-assets": "ts-node assets",
+    "generate-release-notes": "ts-node release-notes",
+    "generate-defi": "ts-node defi"
   },
   "dependencies": {
     "@bento/common": "workspace:^",
@@ -21,6 +21,7 @@
     "@types/dedent": "^0.7.0",
     "@types/node": "^18.7.19",
     "@types/prettier": "^2.6.3",
+    "ts-node": "^10.9.1",
     "ttypescript": "^1.5.13",
     "typescript": "^4.8.3"
   }
