@@ -57,6 +57,13 @@ const omit = <Obj extends object, OmittedKey extends string>(
   return rest;
 };
 
+const fallbackLockupQuery = (error: Error) => {
+  console.error(error);
+  return {
+    coins: [],
+  };
+};
+
 const getDenomsFromPool = (pool: Pool) =>
   pool.pool_assets.map((poolAsset) => poolAsset.token.denom);
 
@@ -69,24 +76,31 @@ export const getGAMMLPs = async (
 
   const types = ['locked', 'unlockable', 'unlocking'];
   type PoolBalanceType = {
-    status: 'locked' | 'unlockable' | 'unlocking';
+    status: 'available' | 'locked' | 'unlockable' | 'unlocking';
     poolId: string;
     denom: string;
     amount: string;
   };
-  const poolBalances = (
-    await safePromiseAll([
+
+  const fetchLockupBalances = () =>
+    Promise.all([
       client.osmosis.lockup
         .accountLockedCoins({ owner: walletAddress })
-        .catch(() => ({ coins: [] })),
+        .catch(fallbackLockupQuery),
       client.osmosis.lockup
         .accountUnlockableCoins({ owner: walletAddress })
-        .catch(() => ({ coins: [] })),
+        .catch(fallbackLockupQuery),
       client.osmosis.lockup
         .accountUnlockingCoins({ owner: walletAddress })
-        .catch(() => ({ coins: [] })),
-    ])
-  ).flatMap((v, index) =>
+        .catch(fallbackLockupQuery),
+    ]);
+
+  const walletBalancesResponse = await client.cosmos.bank.v1beta1.allBalances({
+    address: walletAddress,
+  });
+  const lockupBalances = await fetchLockupBalances();
+
+  let poolBalances = lockupBalances.flatMap((v, index) =>
     v.coins.map(
       (coin) =>
         ({
@@ -96,6 +110,18 @@ export const getGAMMLPs = async (
         } as PoolBalanceType),
     ),
   );
+
+  for (const token of walletBalancesResponse.balances) {
+    if (token.denom.startsWith('gamm/pool/')) {
+      poolBalances.push({
+        denom: token.denom,
+        amount: token.amount,
+        poolId: token.denom.replace('gamm/pool/', ''),
+        status: 'available',
+      });
+    }
+  }
+
   const getPool = (poolId: string) =>
     client.osmosis.gamm.v1beta1.pool({
       // poolId: Long.fromString(poolId),
@@ -154,39 +180,43 @@ export const getGAMMLPs = async (
 
   const getPrice = withCache(async (poolId: string, poolDenoms: string[]) => {
     try {
-      const [assetDenomA, assetDenomB] = poolDenoms;
-      let assetPriceA: number | null = null;
-      if (assetDenomA in pricesByDenom) {
-        assetPriceA = pricesByDenom[assetDenomA];
-      }
-      let assetPriceB: number | null = null;
-      if (assetDenomB in pricesByDenom) {
-        assetPriceB = pricesByDenom[assetDenomB];
-      }
+      let baseAssetDenom: string | null = null;
+      let basePrice: number | null = null;
 
-      if (assetPriceA === null && assetPriceB === null) {
-        return [null, null];
-      }
-
-      if (assetPriceA === null || assetPriceB === null) {
-        const spotPrice = await client.osmosis.gamm.v1beta1.spotPrice({
-          poolId: poolId as any,
-          baseAssetDenom: assetDenomA,
-          quoteAssetDenom: assetDenomB,
-        });
-        const spotPriceA = parseFloat(spotPrice.spot_price);
-        const spotPriceB = 1 / spotPriceA;
-        if (assetPriceA === null) {
-          assetPriceA = (assetPriceB || 0) / spotPriceA;
-        }
-        if (assetPriceB === null) {
-          assetPriceB = (assetPriceA || 0) / spotPriceB;
+      for (const denom of poolDenoms) {
+        if (denom in pricesByDenom) {
+          baseAssetDenom = denom;
+          basePrice = pricesByDenom[denom];
+          break;
         }
       }
-      return [assetPriceA, assetPriceB];
+
+      const prices: Record<string, number | null> = {};
+      for (const denom of poolDenoms) {
+        if (denom in pricesByDenom) {
+          prices[denom] = pricesByDenom[denom];
+        } else if (!!baseAssetDenom) {
+          const spotPriceRaw = await client.osmosis.gamm.v1beta1
+            .spotPrice({
+              poolId: poolId as any,
+              baseAssetDenom: baseAssetDenom,
+              quoteAssetDenom: denom,
+            })
+            .catch((err) => {
+              console.error(err);
+              return { spot_price: '0' };
+            });
+          const spotPrice = parseFloat(spotPriceRaw.spot_price);
+          prices[denom] = (basePrice || 0) / spotPrice;
+          pricesByDenom[denom] = (basePrice || 0) / spotPrice;
+        } else {
+          prices[denom] = null;
+        }
+      }
+      return prices;
     } catch (err) {
       console.error(err);
-      return [null, null];
+      return {};
     }
   });
 
@@ -203,68 +233,89 @@ export const getGAMMLPs = async (
     poolBalancesWithPrices,
     'poolId',
   );
+
   Object.entries(poolBalancesWithPricesByPoolID).map(
     ([poolId, _poolBalancesWithPrices]) => {
       if (!_poolBalancesWithPrices || _poolBalancesWithPrices.length === 0) {
         return;
       }
       const poolInfo = poolInfoByPoolId[poolId];
-
       const denoms = getDenomsFromPool(poolInfo);
-      const [assetDenomA, assetDenomB] = denoms;
-      const tokenInfoA = tokenInfoByDenom[assetDenomA];
-      const tokenInfoB = tokenInfoByDenom[assetDenomB];
-      const assetPriceA = _poolBalancesWithPrices[0].prices[0] || 0;
-      const assetPriceB = _poolBalancesWithPrices[0].prices[1] || 0;
 
-      const [stakedAmount, claimableAmount, pendingAmount] =
+      const tokenInfos: Record<string, TokenInput> = {};
+      const tokenLiquidities: Record<string, number> = {};
+      const assetPrices: Record<string, number> = {};
+      for (const denom of denoms) {
+        const tokenInfo = tokenInfoByDenom[denom];
+        const assetPrice = _poolBalancesWithPrices[0].prices?.[denom] || 0;
+        tokenInfos[denom] = tokenInfo;
+        assetPrices[denom] = assetPrice;
+        tokenLiquidities[denom] = Number(
+          poolInfo.pool_assets.find((v) => v.token.denom === denom)?.token
+            .amount || 0,
+        );
+      }
+
+      const [walletAmount, stakedAmount, claimableAmount, pendingAmount] =
         _poolBalancesWithPrices.reduce(
           (acc, v) => {
-            const [staked, claimable, pending] = acc;
+            const [wallet, staked, claimable, pending] = acc;
             if (v.status === 'locked') {
-              return [staked + Number(v.amount), claimable, pending];
+              return [wallet, staked + Number(v.amount), claimable, pending];
             } else if (v.status === 'unlockable') {
-              return [staked, claimable + Number(v.amount), pending];
+              return [wallet, staked, claimable + Number(v.amount), pending];
             } else if (v.status === 'unlocking') {
-              return [staked, claimable, pending + Number(v.amount)];
+              return [wallet, staked, claimable, pending + Number(v.amount)];
+            } else if (v.status === 'available') {
+              return [wallet + Number(v.amount), staked, claimable, pending];
             }
             return acc;
           },
-          [0, 0, 0],
+          [0, 0, 0, 0],
         );
-
-      const tokenALiquidity = Number(
-        poolInfo.pool_assets.find((v) => v.token.denom === assetDenomA)?.token
-          .amount || 0,
-      );
-      const tokenBLiquidity = Number(
-        poolInfo.pool_assets.find((v) => v.token.denom === assetDenomB)?.token
-          .amount || 0,
-      );
 
       const totalLiquidity = Number(poolInfo.total_shares.amount);
 
       const fromAmount = (amount: number) => {
-        const poolStakeRatio = amount / totalLiquidity;
-        const tokenAAmount =
-          (tokenALiquidity * poolStakeRatio) / 10 ** tokenInfoA.decimals;
-        const tokenBAmount =
-          (tokenBLiquidity * poolStakeRatio) / 10 ** tokenInfoB.decimals;
-        return {
-          // NOTE: LP decimals are hardcoded to 18
-          lpAmount: amount / 10 ** 18,
-          tokenAmounts: {
-            [tokenInfoA.address]: tokenAAmount,
-            [tokenInfoB.address]: tokenBAmount,
-          },
-          value: tokenAAmount * assetPriceA + tokenBAmount * assetPriceB,
-        };
+        try {
+          const poolStakeRatio = amount / totalLiquidity;
+
+          const tokenAmounts: Record<string, number> = {};
+          const value = denoms.reduce((acc, denom) => {
+            const tokenInfo = tokenInfos[denom];
+            const tokenLiquidity = tokenLiquidities[denom];
+            const tokenAmount =
+              (tokenLiquidity * poolStakeRatio) / 10 ** tokenInfo.decimals;
+
+            tokenAmounts[tokenInfo.address] = tokenAmount;
+            return acc + tokenAmount * assetPrices[denom];
+          }, 0);
+
+          return {
+            // NOTE: LP decimals are hardcoded to 18
+            lpAmount: amount / 10 ** 18,
+            tokenAmounts,
+            value,
+          };
+        } catch (err) {
+          console.error(err);
+          // return 'unavailable';
+          return {
+            lpAmount: 0,
+            tokenAmounts: {},
+            value: 0,
+          };
+        }
       };
 
-      const tokens = [
-        omit<TokenInput, 'denomUnits'>(tokenInfoA, 'denomUnits'),
-        omit<TokenInput, 'denomUnits'>(tokenInfoB, 'denomUnits'),
-      ];
+      const tokens = denoms.flatMap((denom) => {
+        const tokenInfo = tokenInfos[denom];
+        if (!tokenInfo) {
+          console.warn(`Denom not found: ${denom}`);
+          return [];
+        }
+        return omit<TokenInput, 'denomUnits'>(tokenInfo, 'denomUnits');
+      });
 
       stakings.push({
         protocol: OsmosisDeFiProtocolType.OSMOSIS,
@@ -272,9 +323,9 @@ export const getGAMMLPs = async (
         address: poolId,
         prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
         tokens: tokens,
-        wallet: 'unavailable',
+        wallet: fromAmount(walletAmount),
         staked: fromAmount(stakedAmount),
-        rewards: 'unavailable',
+        rewards: null,
         unstake: {
           claimable: fromAmount(claimableAmount),
           pending: fromAmount(pendingAmount),

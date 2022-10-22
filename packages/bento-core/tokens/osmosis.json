@@ -1274,6 +1274,22 @@
     ]
   },
   {
+    "symbol": "USK",
+    "name": "USK",
+    "decimals": 6,
+    "address": "ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC",
+    "coinGeckoId": "usk",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/usk.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC",
+        "exponent": 0,
+        "aliases": ["uusk"]
+      },
+      { "denom": "usk", "exponent": 6 }
+    ]
+  },
+  {
     "symbol": "HARD",
     "name": "HARD",
     "decimals": 6,
@@ -1749,7 +1765,7 @@
     "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/solar.png",
     "denomUnits": [
       {
-        "denom": "ibc/C2DF5C3949CA835B221C575625991F09BAB4E48FB9C11A4EE357194F736111E3",
+        "denom": "ibc/C3FC4DED273E7D1DD2E7BAA3317EC9A53CD3252B577AA33DC00D9DF2BDF3ED5C",
         "exponent": 0,
         "aliases": [
           "cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse"
@@ -1813,7 +1829,7 @@
     "decimals": 6,
     "address": "ibc/EB7FB9C8B425F289B63703413327C2051030E848CE4EAAEA2E51199D6D39D3EC",
     "coinGeckoId": "",
-    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/tori.svg",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
     "denomUnits": [
       {
         "denom": "ibc/EB7FB9C8B425F289B63703413327C2051030E848CE4EAAEA2E51199D6D39D3EC",
@@ -1836,6 +1852,39 @@
         "aliases": ["stujuno"]
       },
       { "denom": "stjuno", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "LAMB",
+    "name": "LAMB",
+    "decimals": 18,
+    "address": "ibc/80825E8F04B12D914ABEADB1F4D39C04755B12C8402F6876EE3168450C0A90BB",
+    "coinGeckoId": "lambda",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lambda/images/lambda.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/80825E8F04B12D914ABEADB1F4D39C04755B12C8402F6876EE3168450C0A90BB",
+        "exponent": 0,
+        "aliases": ["ulamb"]
+      },
+      { "denom": "lamb", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "MUSE",
+    "name": "MUSE",
+    "decimals": 6,
+    "address": "juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/muse.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/6B982170CE024689E8DD0E7555B129B488005130D4EDA426733D552D10B36D8F",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3"
+        ]
+      },
+      { "denom": "muse", "exponent": 6 }
     ]
   }
 ]
