@@ -552,6 +552,23 @@ type CosmosSDKBasedDelegationsResponse = {
     total: string; // number-like
   };
 };
+type CosmosSDKBasedDelegationRewardsResponse = {
+  rewards: [
+    {
+      validator_address: string;
+      reward: {
+        denom: string;
+        amount: string; // number-like
+      }[];
+    },
+  ];
+  total: [
+    {
+      denom: string;
+      amount: string; // number-like
+    },
+  ];
+};
 
 export interface CosmosSDKBasedChain extends Chain {
   bech32Config: {
@@ -652,6 +669,17 @@ export class OsmosisChain implements CosmosSDKBasedChain {
       0,
     );
     return totalDelegated / 10 ** this.currency.decimals;
+  };
+  getRewards = async (address: string) => {
+    const { data } =
+      await this._provider.get<CosmosSDKBasedDelegationRewardsResponse>(
+        `/cosmos/distribution/v1beta1/delegators/${address}/rewards`,
+      );
+    const osmosisRewards = data.total.find(
+      (v) => v.denom === this.currency.coinMinimalDenom,
+    );
+    const totalRewards = Number(osmosisRewards?.amount ?? 0);
+    return totalRewards / 10 ** this.currency.decimals;
   };
   getTokenBalances = async (walletAddress: string) => {
     const { data } = await this._getBalances(walletAddress);
