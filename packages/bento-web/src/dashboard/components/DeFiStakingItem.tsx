@@ -47,6 +47,7 @@ const DecomposeTokenAmounts: React.FC<DecomposeTokenAmountsProps> = ({
               {`${formatNumber(amount)} ${token?.symbol || '???'} ${
                 index < arr.length - 1 ? ' + ' : ''
               }`}
+              &nbsp;
             </span>
           );
         })}
