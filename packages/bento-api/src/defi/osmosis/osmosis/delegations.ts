@@ -10,8 +10,9 @@ const osmosisChain = new OsmosisChain();
 const osmosis = osmosisChain.currency;
 
 export const getDelegations = async (address: string): Promise<DeFiStaking> => {
-  const [delegations, osmoPrice] = await Promise.all([
+  const [delegations, rewards, osmoPrice] = await Promise.all([
     osmosisChain.getDelegations(address),
+    osmosisChain.getRewards(address),
     osmosisChain.getCurrencyPrice(),
   ]);
 
@@ -28,6 +29,11 @@ export const getDelegations = async (address: string): Promise<DeFiStaking> => {
       value: delegations * osmoPrice,
     },
     unstake: 'unavailable',
-    rewards: 'unavailable',
+    rewards: {
+      tokenAmounts: {
+        [osmosis.coinMinimalDenom]: rewards,
+      },
+      value: rewards * osmoPrice,
+    },
   };
 };
