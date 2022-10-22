@@ -142,6 +142,11 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                     </SmallAmountInfo>
                   </>
                 )}
+
+                <DecomposeTokenAmounts
+                  tokenAmounts={protocol.wallet.tokenAmounts}
+                  protocolTokens={protocolTokens}
+                />
               </InfoValuation>
             )}
           </InfoItem>
