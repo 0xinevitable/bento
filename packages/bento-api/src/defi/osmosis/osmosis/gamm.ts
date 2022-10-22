@@ -325,7 +325,7 @@ export const getGAMMLPs = async (
         tokens: tokens,
         wallet: fromAmount(walletAmount),
         staked: fromAmount(stakedAmount),
-        rewards: 'unavailable',
+        rewards: null,
         unstake: {
           claimable: fromAmount(claimableAmount),
           pending: fromAmount(pendingAmount),
