@@ -99,7 +99,7 @@ export const getGAMMLPs = async (
     address: walletAddress,
   });
   const lockupBalances = await fetchLockupBalances();
-  console.log(walletBalancesResponse);
+
   let poolBalances = lockupBalances.flatMap((v, index) =>
     v.coins.map(
       (coin) =>
@@ -161,8 +161,6 @@ export const getGAMMLPs = async (
     }),
   );
 
-  console.log({ poolInfoByPoolId }, poolInfoByPoolId['828']);
-
   let coinGeckoIds = [...new Set(Object.values(coinGeckoIdByDenom))];
   const pricesByDenom: Record<string, number> = !!coinGeckoIds.length
     ? await pricesFromCoinGecko(coinGeckoIds)
@@ -215,7 +213,6 @@ export const getGAMMLPs = async (
           prices[denom] = null;
         }
       }
-      console.log(poolId, prices);
       return prices;
     } catch (err) {
       console.error(err);
@@ -237,7 +234,6 @@ export const getGAMMLPs = async (
     'poolId',
   );
 
-  console.log({ poolBalancesWithPricesByPoolID });
   Object.entries(poolBalancesWithPricesByPoolID).map(
     ([poolId, _poolBalancesWithPrices]) => {
       if (!_poolBalancesWithPrices || _poolBalancesWithPrices.length === 0) {
@@ -284,25 +280,16 @@ export const getGAMMLPs = async (
         try {
           const poolStakeRatio = amount / totalLiquidity;
 
-          console.log(
-            assetPrices,
-            poolStakeRatio,
-            tokenLiquidities,
-            totalLiquidity,
-          );
-
           const tokenAmounts: Record<string, number> = {};
           const value = denoms.reduce((acc, denom) => {
             const tokenInfo = tokenInfos[denom];
             const tokenLiquidity = tokenLiquidities[denom];
             const tokenAmount =
               (tokenLiquidity * poolStakeRatio) / 10 ** tokenInfo.decimals;
-            console.log({ tokenAmount, tokenInfo });
+
             tokenAmounts[tokenInfo.address] = tokenAmount;
             return acc + tokenAmount * assetPrices[denom];
           }, 0);
-
-          console.log(value);
 
           return {
             // NOTE: LP decimals are hardcoded to 18
