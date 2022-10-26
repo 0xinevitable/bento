@@ -10,7 +10,7 @@ import { WORKSPACE_ROOT_PATH, stringify } from './config';
 
 const CHAIN_OUTPUT_PATH = path.resolve(
   WORKSPACE_ROOT_PATH,
-  './packages/bento-core/tokens/klaytn.json',
+  './packages/core/tokens/klaytn.json',
 );
 
 const downloadImage = (url: string, imagePath: string) =>
