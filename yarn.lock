@@ -1436,9 +1436,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bento/api@workspace:apps/bento-api":
+"@bento/api@workspace:apps/api":
   version: 0.0.0-use.local
-  resolution: "@bento/api@workspace:apps/bento-api"
+  resolution: "@bento/api@workspace:apps/api"
   dependencies:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
@@ -1484,18 +1484,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bento/common@workspace:^, @bento/common@workspace:packages/bento-common":
+"@bento/common@workspace:^, @bento/common@workspace:packages/common":
   version: 0.0.0-use.local
-  resolution: "@bento/common@workspace:packages/bento-common"
+  resolution: "@bento/common@workspace:packages/common"
   dependencies:
     "@types/node": ^18.11.5
     typescript: ^4.8.3
   languageName: unknown
   linkType: soft
 
-"@bento/core@workspace:^, @bento/core@workspace:packages/bento-core":
+"@bento/core@workspace:^, @bento/core@workspace:packages/core":
   version: 0.0.0-use.local
-  resolution: "@bento/core@workspace:packages/bento-core"
+  resolution: "@bento/core@workspace:packages/core"
   dependencies:
     "@bento/common": "workspace:^"
     "@ethersproject/providers": ^5.7.2
@@ -1511,9 +1511,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bento/web@workspace:apps/bento-web":
+"@bento/web@workspace:apps/web":
   version: 0.0.0-use.local
-  resolution: "@bento/web@workspace:apps/bento-web"
+  resolution: "@bento/web@workspace:apps/web"
   dependencies:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
