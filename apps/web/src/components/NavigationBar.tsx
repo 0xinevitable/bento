@@ -101,10 +101,12 @@ export const NavigationBar = () => {
     <Wrapper>
       <Container>
         <Link href="/">
-          <HiddenTitle>Bento</HiddenTitle>
-          <LogoWrapper>
-            <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
-          </LogoWrapper>
+          <div>
+            <HiddenTitle>Bento</HiddenTitle>
+            <LogoWrapper>
+              <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
+            </LogoWrapper>
+          </div>
         </Link>
 
         <NoSSR>
@@ -115,8 +117,10 @@ export const NavigationBar = () => {
                 active={currentPath === item.href}
               >
                 <Link href={item.href}>
-                  <Iconify icon={item.icon} style={{ fontSize: 20 }} />
-                  <span className="title">{t(item.title)}</span>
+                  <Center>
+                    <Iconify icon={item.icon} style={{ fontSize: 20 }} />
+                    <span className="title">{t(item.title)}</span>
+                  </Center>
                 </Link>
               </NavigationItem>
             ))}
@@ -183,15 +187,11 @@ export const NavigationBar = () => {
                     <Link
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      style={{
-                        height: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 8,
-                      }}
                     >
-                      <Iconify icon={item.icon} />
-                      <span className="title">{t(item.title)}</span>
+                      <Center>
+                        <Iconify icon={item.icon} />
+                        <span className="title">{t(item.title)}</span>
+                      </Center>
                     </Link>
                   </MobileMenuItem>
                 ))}
@@ -245,6 +245,12 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const Center = styled.span`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
 const HiddenTitle = styled.span`
   display: none;
 `;
@@ -273,6 +279,7 @@ const LogoImage = styled.img`
 
 const NavigationList = styled.ul`
   display: flex;
+  gap: 16px;
 
   @media (max-width: 680px) {
     display: none;
