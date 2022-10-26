@@ -100,13 +100,11 @@ export const NavigationBar = () => {
   return (
     <Wrapper>
       <Container>
-        <Link href="/" passHref>
-          <a>
-            <HiddenTitle>Bento</HiddenTitle>
-            <LogoWrapper>
-              <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
-            </LogoWrapper>
-          </a>
+        <Link href="/">
+          <HiddenTitle>Bento</HiddenTitle>
+          <LogoWrapper>
+            <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
+          </LogoWrapper>
         </Link>
 
         <NoSSR>
@@ -116,11 +114,9 @@ export const NavigationBar = () => {
                 key={`${item.title}-${item.href}`}
                 active={currentPath === item.href}
               >
-                <Link href={item.href} passHref>
-                  <a>
-                    <Iconify icon={item.icon} style={{ fontSize: 20 }} />
-                    <span className="title">{t(item.title)}</span>
-                  </a>
+                <Link href={item.href}>
+                  <Iconify icon={item.icon} style={{ fontSize: 20 }} />
+                  <span className="title">{t(item.title)}</span>
                 </Link>
               </NavigationItem>
             ))}
@@ -184,19 +180,18 @@ export const NavigationBar = () => {
                       color: currentPath === item.href ? '#ff375c' : 'white',
                     }}
                   >
-                    <Link href={item.href} passHref>
-                      <a
-                        onClick={() => setMobileMenuOpen(false)}
-                        style={{
-                          height: '100%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 8,
-                        }}
-                      >
-                        <Iconify icon={item.icon} />
-                        <span className="title">{t(item.title)}</span>
-                      </a>
+                    <Link
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      style={{
+                        height: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                      }}
+                    >
+                      <Iconify icon={item.icon} />
+                      <span className="title">{t(item.title)}</span>
                     </Link>
                   </MobileMenuItem>
                 ))}
