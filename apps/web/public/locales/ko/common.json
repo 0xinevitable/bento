@@ -1,0 +1,40 @@
+{
+  "MetaMask": "메타마스크",
+  "WalletConnect": "월렛커넥트",
+  "Keplr": "케플러",
+  "Kaikas": "카이카스",
+  "Phantom": "팬텀",
+
+  "Log In": "로그인/가입",
+  "Logout": "로그아웃",
+  "Dashboard": "대시보드",
+  "Community": "커뮤니티",
+  "Profile": "프로필",
+
+  "Log in to Bento": "소셜 계정으로 바로 시작하기",
+  "Login with Twitter": "트위터로 로그인",
+  "Login with GitHub": "깃허브로 로그인",
+
+  "Wallets": "지갑 목록",
+  "Delete": "삭제",
+  "Wallets Connected": "연결된 지갑",
+  "Connect Wallet": "지갑 연결하기",
+  "Add Another": "하나 더 추가하기",
+
+  "Choose Chains": "먼저, 체인을 선택하세요.",
+  "wc-1-desc": "하나의 지갑 주소와 호환되는 체인을 여러 개 추가할 수 있어요. 체인은 아니지만, 지갑에 이더리움 NFT가 있다면 오픈씨도 같이 선택해 주세요! (추후에는 자동으로 인식될 예정)",
+  "Ethereum": "이더리움",
+  "BNB": "BNB",
+  "Avalanche": "아발란체",
+  "Polygon": "폴리곤",
+  "Klaytn": "클레이튼",
+  "Cosmos Hub": "코스모스 허브",
+  "Osmosis": "오스모시스",
+  "OpenSea": "오픈씨",
+  "Solana": "솔라나",
+
+  "Sign with Wallet": "이제 지갑을 선택하고 메시지 서명하면 끝!",
+  "wc-2-desc": "지갑의 소유권을 인증하기 위해 이 과정이 필요해요. 어떠한 권한도 가져가지 않아요.",
+
+  "Share": "공유하기"
+}

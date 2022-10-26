@@ -1,0 +1,904 @@
+[
+  {
+    "address": "0xb0Da0BBE0a13C2c17178aEa2fEC91AA08157F299",
+    "symbol": "4NUTS",
+    "poolType": "BASE_POOL",
+    "lpTokenAddress": "0x22e3aC1e6595B64266e0b062E01faE31d9cdD578",
+    "stakingPoolAddress": "0x05949D8B3ca75714CbD3a825609106e4AE9C626F",
+    "managerAddress": "0xf8fF2caaA06Cc65b714C4056a7368E21aeBc5eC6",
+    "coins": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0x5c74070FDeA071359b86082bd9f9b3dEaafbe32b",
+      "0x754288077D0fF82AF7a5317C7CB8c444D421d103",
+      "0xceE8FAF64bB97a73bb51E115Aa89C17FfA8dD167"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0006000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "8368117.172567861941392825"
+      },
+      {
+        "coin": "0x5c74070FDeA071359b86082bd9f9b3dEaafbe32b",
+        "amount": "2076434.045150033681109970"
+      },
+      {
+        "coin": "0x754288077D0fF82AF7a5317C7CB8c444D421d103",
+        "amount": "1492586.674723"
+      },
+      {
+        "coin": "0xceE8FAF64bB97a73bb51E115Aa89C17FfA8dD167",
+        "amount": "1346749.492058"
+      }
+    ],
+    "tvl": "13249145.238779126421511983",
+    "lpTokenVirtualPrice": "1.010854106552233789",
+    "lpTokenRealPrice": "1.008833906422275696",
+    "lpTokenTotalSupply": "13133128.411361429277362447",
+    "volume24hr": "685802.551653475584967658",
+    "volume24hrOnlySwap": "259561.570205673774889247",
+    "rewardFee24hr": "88.302024709569145026",
+    "baseApr": "0.24",
+    "stakingApr": "3.27",
+    "user": null
+  },
+  {
+    "address": "0x7a5987c8c48F6C82632aCEF383E5fb5DB23C0027",
+    "symbol": "KLAY-KSD",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0xe995b4A0289C33A28A1F14eB7b306387dE71eB0E",
+    "stakingPoolAddress": "0x65Ee8d0BdB899d5222EcD99b1FAF96805703720E",
+    "managerAddress": "0x40b4d1e8aCa3C69125385Cb311479c4aAeF8CD7A",
+    "coins": [
+      "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0025000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        "amount": "11180245.777445882075868685"
+      },
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "2126536.669939212385244851"
+      }
+    ],
+    "tvl": "4218455.190968955902789666",
+    "lpTokenVirtualPrice": "1.014656692477644762",
+    "lpTokenRealPrice": "0.877822329211272852",
+    "lpTokenTotalSupply": "4805591.120881210758274808",
+    "priceOracle": "5.307262243334195009",
+    "priceScale": "5.303199470807530223",
+    "volume24hr": "154791.815848292970836147",
+    "volume24hrOnlySwap": "154789.934658391966320149",
+    "rewardFee24hr": "78.697289926351521840",
+    "baseApr": "0.68",
+    "stakingApr": "14.71",
+    "user": null
+  },
+  {
+    "address": "0x8cc8029AA4020a0C3f6DAbbD9A7CD499321Be917",
+    "symbol": "KSD-USDK",
+    "poolType": "BASE_POOL",
+    "lpTokenAddress": "0x65D5731Ef9FF6C922Dc1Ee3dbfEcc2cd025F8f4F",
+    "stakingPoolAddress": "0x3867BCb006B2c04F47d665bd59D226990094E599",
+    "managerAddress": "0x4D6ed2fBE0111dF6eA7863F7a096FC2379Ab6ac9",
+    "coins": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0xd2137Fdf10bD9e4E850C17539eB24cfe28777753"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0006000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "494752.955032268958653452"
+      },
+      {
+        "coin": "0xd2137Fdf10bD9e4E850C17539eB24cfe28777753",
+        "amount": "3597573.750618943315365775"
+      }
+    ],
+    "tvl": "3806283.771341913585960772",
+    "lpTokenVirtualPrice": "1.001017811086669174",
+    "lpTokenRealPrice": "0.937201033788207247",
+    "lpTokenTotalSupply": "4061331.170279176296894284",
+    "volume24hr": "30932.491208359942831187",
+    "volume24hrOnlySwap": "4518.161120778126863491",
+    "rewardFee24hr": "3.061255042426659212",
+    "baseApr": "0.03",
+    "stakingApr": "30.00",
+    "user": null
+  },
+  {
+    "address": "0xe7acdCc0a917cAB497b0D72F7ec7A9da0100D638",
+    "symbol": "USDK-4NUTS",
+    "poolType": "META_POOL",
+    "lpTokenAddress": "0x0FD58C80fbb9728093c1eA041fCfD3EE723FF696",
+    "stakingPoolAddress": "0xc8Ee294F7fec9970D5Ebf37359eF1816DCb52B8E",
+    "managerAddress": "0xe8b8Ead5E4B977168F2Aa2CC0fd675147321C31c",
+    "extendedContractAddress": "0x9ba7fCb5334FbC694D81133a809F7fe7d41BA438",
+    "coins": [
+      "0xd2137Fdf10bD9e4E850C17539eB24cfe28777753",
+      "0x22e3aC1e6595B64266e0b062E01faE31d9cdD578"
+    ],
+    "coinsUnderlying": [
+      "0xd2137Fdf10bD9e4E850C17539eB24cfe28777753",
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0x5c74070FDeA071359b86082bd9f9b3dEaafbe32b",
+      "0x754288077D0fF82AF7a5317C7CB8c444D421d103",
+      "0xceE8FAF64bB97a73bb51E115Aa89C17FfA8dD167"
+    ],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0006000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0xd2137Fdf10bD9e4E850C17539eB24cfe28777753",
+        "amount": "2962388.903999488063673089"
+      },
+      {
+        "coin": "0x22e3aC1e6595B64266e0b062E01faE31d9cdD578",
+        "amount": "394588.626149311336824039"
+      }
+    ],
+    "tvl": "3126615.287112122153127241",
+    "lpTokenVirtualPrice": "1.002688802041994782",
+    "lpTokenRealPrice": "0.939026581691824786",
+    "lpTokenTotalSupply": "3329634.483274119895057390",
+    "volume24hr": "23151.591781661697499576",
+    "volume24hrOnlySwap": "7205.902847580631929226",
+    "rewardFee24hr": "3.044479527924704318",
+    "baseApr": "0.16",
+    "stakingApr": "19.13",
+    "user": null
+  },
+  {
+    "address": "0x460c2d1E13B88965412962730115341E5234f6F5",
+    "symbol": "KSD-oETH",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0x3Cde65d7B70071bc60aB5f56709e0a00364e5Ba7",
+    "stakingPoolAddress": "0xBD9b6b9A4d72ddbB5Ed816Cc76624A10d784eed1",
+    "managerAddress": "0xbf420dBf0e6bD96B5590A9CFa95Bd26423921E7C",
+    "coins": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0x34d21b1e550D73cee41151c77F3c73359527a396"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0025000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "1415413.393307605078774254"
+      },
+      {
+        "coin": "0x34d21b1e550D73cee41151c77F3c73359527a396",
+        "amount": "1092.109990975076269912"
+      }
+    ],
+    "tvl": "2847506.985037129609459076",
+    "lpTokenVirtualPrice": "1.008171019164380297",
+    "lpTokenRealPrice": "73.006205541066274742",
+    "lpTokenTotalSupply": "39003.629402919671650065",
+    "priceOracle": "1325.163604530517513992",
+    "priceScale": "1351.177160965978137446",
+    "volume24hr": "14775.939903869133461448",
+    "volume24hrOnlySwap": "14732.254638315806174353",
+    "rewardFee24hr": "8.468518612443589482",
+    "baseApr": "0.11",
+    "stakingApr": "15.34",
+    "user": null
+  },
+  {
+    "address": "0x3a15884903a7D4eF82905a608431E677f6E33306",
+    "symbol": "KLAY-AKLAY",
+    "poolType": "BASE_POOL",
+    "lpTokenAddress": "0x2b3b40647aD8B6BA4aaab4642287e7AB6293BA27",
+    "stakingPoolAddress": "0xc4EA21c64Ff28252761042b6dd81768fd59b82d0",
+    "managerAddress": "0x48417A62B29BaDc4055571BF45FfA00d171f8b9A",
+    "coins": [
+      "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "0x74BA03198FEd2b15a51AF242b9c63Faf3C8f4D34"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapFee": "0.0030000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        "amount": "5432494.426217651637913077"
+      },
+      {
+        "coin": "0x74BA03198FEd2b15a51AF242b9c63Faf3C8f4D34",
+        "amount": "7219819.642549867752211041"
+      }
+    ],
+    "tvl": "2369861.526758853341542054",
+    "lpTokenVirtualPrice": "1.059039345018457367",
+    "lpTokenRealPrice": "0.198404608837385623",
+    "lpTokenTotalSupply": "11944589.093195991515316167",
+    "volume24hr": "21370.854008882145421381",
+    "volume24hrOnlySwap": "21364.297881758808934823",
+    "rewardFee24hr": "32.147080321487690545",
+    "baseApr": "0.50",
+    "stakingApr": "0.43",
+    "aklayApr": "4.55",
+    "user": null
+  },
+  {
+    "address": "0x16310cc467D6059f0cCa609aa5b0C1Acd6376Eef",
+    "symbol": "KSD-SYN_3NUTS",
+    "poolType": "META_POOL",
+    "lpTokenAddress": "0x04D85447c2B9e1f65ff759ebD8464d48e30Fe5e0",
+    "managerAddress": "0x556bf6de374cA8605FA8e9DB41E0BBB791a340e1",
+    "extendedContractAddress": "0x06DEd65472a5003a56aeb2bDb7997998A88BbdfE",
+    "coins": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0xc6F08B0E59e59dD2085CE4AbC4Beef81AEc75270"
+    ],
+    "coinsUnderlying": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0x078dB7827a5531359f6CB63f62CFA20183c4F10c",
+      "0x6270B58BE569a7c0b8f47594F191631Ae5b2C86C",
+      "0xd6dAb4CfF47dF175349e6e7eE2BF7c40Bb8C05A3"
+    ],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0010000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "574819.851219081355834286"
+      },
+      {
+        "coin": "0xc6F08B0E59e59dD2085CE4AbC4Beef81AEc75270",
+        "amount": "421989.763181139337697138"
+      }
+    ],
+    "tvl": "994261.015156414048656475",
+    "lpTokenVirtualPrice": "1.001011971148601404",
+    "lpTokenRealPrice": "0.998316821421680406",
+    "lpTokenTotalSupply": "995937.355578672334034092",
+    "volume24hr": "472.872471119230045677",
+    "volume24hrOnlySwap": "267.573058762061101814",
+    "rewardFee24hr": "0.123506218766705246",
+    "baseApr": "0.03",
+    "user": null
+  },
+  {
+    "address": "0x53B9d26dE6A315CB6672fEBab37a5Ac57e8e6316",
+    "symbol": "SYN_3NUTS",
+    "poolType": "BASE_POOL",
+    "lpTokenAddress": "0xc6F08B0E59e59dD2085CE4AbC4Beef81AEc75270",
+    "managerAddress": "0xf6d1eF40a0f9E798EC8d6ebe3AFc10c1a16B5f77",
+    "coins": [
+      "0x078dB7827a5531359f6CB63f62CFA20183c4F10c",
+      "0x6270B58BE569a7c0b8f47594F191631Ae5b2C86C",
+      "0xd6dAb4CfF47dF175349e6e7eE2BF7c40Bb8C05A3"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0006000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x078dB7827a5531359f6CB63f62CFA20183c4F10c",
+        "amount": "189319.411200935234286490"
+      },
+      {
+        "coin": "0x6270B58BE569a7c0b8f47594F191631Ae5b2C86C",
+        "amount": "106329.561820"
+      },
+      {
+        "coin": "0xd6dAb4CfF47dF175349e6e7eE2BF7c40Bb8C05A3",
+        "amount": "126615.317693"
+      }
+    ],
+    "tvl": "421835.035747002077533408",
+    "lpTokenVirtualPrice": "1.000601709027146602",
+    "lpTokenRealPrice": "0.999615858886792200",
+    "lpTokenTotalSupply": "421997.142198976902708731",
+    "volume24hr": "5429.372330288032566859",
+    "volume24hrOnlySwap": "1169.321853758234377387",
+    "rewardFee24hr": "0.641356432021743701",
+    "baseApr": "0.06",
+    "user": null
+  },
+  {
+    "address": "0x6104d141e6676d1b90207921B27BDfd58C20DAf7",
+    "symbol": "KLAY-oETH",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0x29B0A380da9f8d91913367e07c057C6E47cB3950",
+    "stakingPoolAddress": "0x47f41AA7f7dB931824Ee908274fc34999Da7b155",
+    "managerAddress": "0x253cEF46Ea4e913d858695d930d0807c374817c1",
+    "coins": [
+      "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "0x34d21b1e550D73cee41151c77F3c73359527a396"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0025000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        "amount": "531283.021079985099206329"
+      },
+      {
+        "coin": "0x34d21b1e550D73cee41151c77F3c73359527a396",
+        "amount": "74.150314381861090835"
+      }
+    ],
+    "tvl": "197460.045458951477843904",
+    "lpTokenVirtualPrice": "1.003298534730009052",
+    "lpTokenRealPrice": "31.560425225503029858",
+    "lpTokenTotalSupply": "6256.571134516589383258",
+    "priceOracle": "7024.484544124476001587",
+    "priceScale": "6927.290975829375524390",
+    "volume24hr": "532.377222571362386570",
+    "volume24hrOnlySwap": "522.699102871246534848",
+    "rewardFee24hr": "0.305290649322796875",
+    "baseApr": "0.06",
+    "stakingApr": "12.23",
+    "user": null
+  },
+  {
+    "address": "0xc82f3B5EEaab67Be5c7Cb5C682bbEc3574cE494F",
+    "symbol": "KLAY-oXRP",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0xB29E85423b9905C1CCb2A5385c7738DA993870a0",
+    "stakingPoolAddress": "0x90c9cF331C1eedBc8737D2C6Aa914Cb881BD4ba7",
+    "managerAddress": "0x970EF938F726d191afbC0aF63f6CB4Db69E3A241",
+    "coins": [
+      "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "0x9eaeFb09fe4aABFbE6b1ca316a3c36aFC83A393F"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0025000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        "amount": "295709.004228060607925566"
+      },
+      {
+        "coin": "0x9eaeFb09fe4aABFbE6b1ca316a3c36aFC83A393F",
+        "amount": "106383.669575"
+      }
+    ],
+    "tvl": "110538.513074785144732565",
+    "lpTokenVirtualPrice": "1.002512124899834506",
+    "lpTokenRealPrice": "0.624316618679537085",
+    "lpTokenTotalSupply": "177055.214882121814947178",
+    "priceOracle": "2.753019361370834692",
+    "priceScale": "2.245171522552902476",
+    "volume24hr": "1332.787165330559971876",
+    "volume24hrOnlySwap": "1332.787165330559971876",
+    "rewardFee24hr": "0.831729507998804215",
+    "baseApr": "0.27",
+    "stakingApr": "14.58",
+    "user": null
+  },
+  {
+    "address": "0x9bcb0E1d470592d843EE089bF5782C24f55bf8C8",
+    "symbol": "AKLAY-KSD",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0x14a31B0D3b61332E6d97f33Fe607Ab0B6e1E97BD",
+    "managerAddress": "0x758A5025f7a64bBb0F0344c08B5a4DfB1e3f64d0",
+    "coins": [
+      "0x74BA03198FEd2b15a51AF242b9c63Faf3C8f4D34",
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0025000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x74BA03198FEd2b15a51AF242b9c63Faf3C8f4D34",
+        "amount": "270999.773666411752884171"
+      },
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "51236.653401757321655056"
+      }
+    ],
+    "tvl": "101663.343124498751829385",
+    "lpTokenVirtualPrice": "1.007937248043188436",
+    "lpTokenRealPrice": "0.869598225777745241",
+    "lpTokenTotalSupply": "116908.406791623562522809",
+    "priceOracle": "5.326732721358150515",
+    "priceScale": "5.338518036424056001",
+    "volume24hr": "2323.626799604186316533",
+    "volume24hrOnlySwap": "1938.486877553875996222",
+    "rewardFee24hr": "1.004514730840386130",
+    "baseApr": "0.36",
+    "aklayApr": "4.55",
+    "user": null
+  },
+  {
+    "address": "0xea08370B52AEcB09D976f37AB3954F0E82BaeE05",
+    "symbol": "KOKOS-KSD",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0x3C3a73cc8ea3FB7597a5cC1815E3B046fb838Ac5",
+    "stakingPoolAddress": "0x94D2b18d626310a05E993320Bb191E0593Dd3772",
+    "managerAddress": "0x3907402688bD6801ecb27f726D7Da82290eB6Fe3",
+    "coins": [
+      "0xCd670d77f3dCAB82d43DFf9BD2C4b87339FB3560",
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.2000000000",
+    "swapMidFee": "0.0080000000",
+    "swapOutFee": "0.0120000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0xCd670d77f3dCAB82d43DFf9BD2C4b87339FB3560",
+        "amount": "1148814.365693976584386096"
+      },
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "45682.515358611479005785"
+      }
+    ],
+    "tvl": "90953.727338530987953501",
+    "lpTokenVirtualPrice": "1.042456288758385940",
+    "lpTokenRealPrice": "0.413883636441081783",
+    "lpTokenTotalSupply": "219756.760911417826793652",
+    "priceOracle": "25.336021515244502562",
+    "priceScale": "25.256059094021167116",
+    "volume24hr": "318.960426389972821222",
+    "volume24hrOnlySwap": "239.182542301686495291",
+    "rewardFee24hr": "0.785639948719017417",
+    "baseApr": "0.32",
+    "stakingApr": "70.33",
+    "user": null
+  },
+  {
+    "address": "0x672dBfbD3953875f31cCbB8D9da3D3a38c3D191d",
+    "symbol": "KLAY-WEMIX",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0xD0cad737Cf704B2Ddf77E63160a94895bb896562",
+    "stakingPoolAddress": "0xc8D7D3deA6e7fce0087cA6a244228e9107B9d819",
+    "managerAddress": "0x7D4f425B2A9F4e91d0F1cFb274ce8209e36FB04c",
+    "coins": [
+      "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "0x5096dB80B21Ef45230C9E423C373f1FC9C0198dd"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0025000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        "amount": "201941.631652121380069780"
+      },
+      {
+        "coin": "0x5096dB80B21Ef45230C9E423C373f1FC9C0198dd",
+        "amount": "21715.649476768158752193"
+      }
+    ],
+    "tvl": "76537.467490827423269964",
+    "lpTokenVirtualPrice": "1.017688224091353085",
+    "lpTokenRealPrice": "1.176167548839559328",
+    "lpTokenTotalSupply": "65073.609254346020769482",
+    "priceOracle": "9.440553985445897598",
+    "priceScale": "9.492964290685082339",
+    "volume24hr": "9971.514808518525739638",
+    "volume24hrOnlySwap": "9951.286488294293628464",
+    "rewardFee24hr": "5.364086778951565947",
+    "baseApr": "2.56",
+    "stakingApr": "36.04",
+    "user": null
+  },
+  {
+    "address": "0x1509131EaDbE15A6c830b955d401164b641ba67b",
+    "symbol": "KSD-oBUSD",
+    "poolType": "BASE_POOL",
+    "lpTokenAddress": "0x2ED5f3A3F2D84A4691cdf5927bCFE488A5265C3a",
+    "stakingPoolAddress": "0x9a8C279ea74491AB6c3E65103007D26b4d2B74f7",
+    "managerAddress": "0x01291DE3adC3837c23600A622e0881daE922Aed6",
+    "coins": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0x210bC03f49052169D5588A52C317f71cF2078b85"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0006000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "46180.260742089775579107"
+      },
+      {
+        "coin": "0x210bC03f49052169D5588A52C317f71cF2078b85",
+        "amount": "16933.848796103796012624"
+      }
+    ],
+    "tvl": "62978.002351538891611737",
+    "lpTokenVirtualPrice": "1.016996900004593842",
+    "lpTokenRealPrice": "1.015493072992713253",
+    "lpTokenTotalSupply": "62017.165873854065184559",
+    "volume24hr": "14650.364030461818569155",
+    "volume24hrOnlySwap": "14650.364030461818569155",
+    "rewardFee24hr": "2.931831905821871173",
+    "baseApr": "1.70",
+    "stakingApr": "5.04",
+    "user": null
+  },
+  {
+    "address": "0x8B4756D6F79b79f087e29b3671784D4FF3599BA4",
+    "symbol": "oXRP-KSD",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0xc56D91F3f8b554a2FF69fd6ec50a0eEe958B1c5a",
+    "stakingPoolAddress": "0xe101CCaA3310Cd198241B71799ffE2ad5fF62820",
+    "managerAddress": "0xf2223C09A2631B42F6dfC5B5bb2Dc4D9897AdcDb",
+    "coins": [
+      "0x9eaeFb09fe4aABFbE6b1ca316a3c36aFC83A393F",
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0025000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x9eaeFb09fe4aABFbE6b1ca316a3c36aFC83A393F",
+        "amount": "19971.293655"
+      },
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "10511.166504504968941973"
+      }
+    ],
+    "tvl": "20787.989914802904975140",
+    "lpTokenVirtualPrice": "1.006440971149838987",
+    "lpTokenRealPrice": "1.443506322493058185",
+    "lpTokenTotalSupply": "14401.038354234762498766",
+    "priceOracle": "1.929930640037023303",
+    "priceScale": "2.074424935013654762",
+    "volume24hr": "369.226463816409700872",
+    "volume24hrOnlySwap": "335.614421699843921529",
+    "rewardFee24hr": "0.211980393714678766",
+    "baseApr": "0.37",
+    "stakingApr": "29.56",
+    "user": null
+  },
+  {
+    "address": "0x1858f096c9B205B198676605364f423ABEc44d55",
+    "symbol": "KSD-KOKOA",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0xdc2cd392696a17bc0569bD1Bfc9532fd5a286b88",
+    "stakingPoolAddress": "0xF90b771734F5b345f965dfd36D6A0B6fF3EcDE7c",
+    "managerAddress": "0x30c27376A0044384594d767f2db92618E45524d5",
+    "coins": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0xb15183D0d4D5E86ba702cE9bb7b633376e7db29f"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.2000000000",
+    "swapMidFee": "0.0080000000",
+    "swapOutFee": "0.0120000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "9837.454065096670733556"
+      },
+      {
+        "coin": "0xb15183D0d4D5E86ba702cE9bb7b633376e7db29f",
+        "amount": "1596992.948840149899783025"
+      }
+    ],
+    "tvl": "19618.676802523209977103",
+    "lpTokenVirtualPrice": "1.012666343364333965",
+    "lpTokenRealPrice": "0.158503750305914091",
+    "lpTokenTotalSupply": "123774.212059077052604791",
+    "priceOracle": "0.006130608816704596",
+    "priceScale": "0.006298135400794636",
+    "volume24hr": "29.418734911578473561",
+    "volume24hrOnlySwap": "29.418734911578473561",
+    "rewardFee24hr": "0.118103047250574687",
+    "baseApr": "0.22",
+    "stakingApr": "40.94",
+    "user": null
+  },
+  {
+    "address": "0xc5075830CEA2AE5a24edDEba98315863fd0aD3e0",
+    "symbol": "KSD-HOUSE",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0x5720c9F9D51A721b738a80efC9c1358dF394a668",
+    "stakingPoolAddress": "0x93714AD0BBd45b50d3C0c3f2CDAE894403958c2D",
+    "managerAddress": "0xf2CB805a5fE6dA501D31cd8C95ccD2F0d4824B72",
+    "coins": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0x158BeFF8C8cDEbD64654ADD5F6A1d9937e73536c"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.2000000000",
+    "swapMidFee": "0.0080000000",
+    "swapOutFee": "0.0120000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "8335.215213007367922146"
+      },
+      {
+        "coin": "0x158BeFF8C8cDEbD64654ADD5F6A1d9937e73536c",
+        "amount": "1539283.129649976731677002"
+      }
+    ],
+    "tvl": "16617.139828396920136145",
+    "lpTokenVirtualPrice": "1.014916172354751948",
+    "lpTokenRealPrice": "0.148890601595170303",
+    "lpTokenTotalSupply": "111606.371727736676048461",
+    "priceOracle": "0.005380574200442385",
+    "priceScale": "0.005487958118825626",
+    "volume24hr": "3.346912424792757381",
+    "volume24hrOnlySwap": "3.346912424792757381",
+    "rewardFee24hr": "0.011988263721883066",
+    "baseApr": "0.03",
+    "stakingApr": "48.33",
+    "user": null
+  },
+  {
+    "address": "0xf1b4705eD6F9A306188F229065DCd5376c8450D4",
+    "symbol": "KLAY-KSP",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0x1cE54D1DE574C620838a19294fef1aC70fC612a3",
+    "stakingPoolAddress": "0x0BF7e3de3BBf194c855AC52382d5e656704d6f86",
+    "managerAddress": "0x4DAb217686B915B1408B6e1E4484bc8DDf1b7c01",
+    "coins": [
+      "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "0xC6a2Ad8cC6e4A7E08FC37cC5954be07d499E7654"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0025000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+        "amount": "28935.718876069830514682"
+      },
+      {
+        "coin": "0xC6a2Ad8cC6e4A7E08FC37cC5954be07d499E7654",
+        "amount": "8072.277640435303633172"
+      }
+    ],
+    "tvl": "10805.298405915612230531",
+    "lpTokenVirtualPrice": "1.020208343162412602",
+    "lpTokenRealPrice": "0.721272664241446257",
+    "lpTokenTotalSupply": "14980.878857067755306174",
+    "priceOracle": "3.539876993147418854",
+    "priceScale": "3.531727099909621995",
+    "volume24hr": "1038.906048223399911646",
+    "volume24hrOnlySwap": "1038.906048223399911646",
+    "rewardFee24hr": "0.545141974280250268",
+    "baseApr": "1.84",
+    "stakingApr": "19.19",
+    "user": null
+  },
+  {
+    "address": "0x1015Bd592A0370Cf838416f56bB15E4DDaA88D21",
+    "symbol": "KSP-KSD",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0x1a24ACb77D4EC42BF3506417B44EF53510e3C0Fd",
+    "stakingPoolAddress": "0xf10468D62B498c8191ba66F8611d0E25750f51cF",
+    "managerAddress": "0x9f2aE1FC0341a3A3A7AD9D4951bb98182e88004a",
+    "coins": [
+      "0xC6a2Ad8cC6e4A7E08FC37cC5954be07d499E7654",
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0025000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0xC6a2Ad8cC6e4A7E08FC37cC5954be07d499E7654",
+        "amount": "532.658463052747817535"
+      },
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "349.345580401914580269"
+      }
+    ],
+    "tvl": "702.130634941883598534",
+    "lpTokenVirtualPrice": "1.254466281462196889",
+    "lpTokenRealPrice": "2.040503824220538533",
+    "lpTokenTotalSupply": "344.096701318407829113",
+    "priceOracle": "1.511292282312137531",
+    "priceScale": "1.273402469665777954",
+    "volume24hr": "325.546839432134683774",
+    "volume24hrOnlySwap": "5.405491372300382554",
+    "rewardFee24hr": "0.011801971754110974",
+    "baseApr": "0.61",
+    "stakingApr": "85.57",
+    "user": null
+  },
+  {
+    "address": "0xBa80D34C72981DD2358330762c4Ff82d07278dC3",
+    "symbol": "KSD-CELR_3NUTS",
+    "poolType": "META_POOL",
+    "lpTokenAddress": "0x84871F80C8fEdae324EC0FFea842278ACCBdB505",
+    "extendedContractAddress": "0x603E0caD463722722480486532db241D1660B419",
+    "coins": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0xf277F3E43F2a048eD127c43774E8933f52B69979"
+    ],
+    "coinsUnderlying": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0x317F8d18FB16E49a958Becd0EA72f8E153d25654",
+      "0x53bB26dc8C5EFC6c95C37155aCa487d1D043436a",
+      "0x3c790b38f466514ffCB4230e7B2334e52B64c942"
+    ],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0010000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+        "amount": "7.803761756672779925"
+      },
+      {
+        "coin": "0xf277F3E43F2a048eD127c43774E8933f52B69979",
+        "amount": "169.515464280488083192"
+      }
+    ],
+    "tvl": "114.349258883174980415",
+    "lpTokenVirtualPrice": "1.000223090417814371",
+    "lpTokenRealPrice": "0.660059993562280058",
+    "lpTokenTotalSupply": "173.240705388070969628",
+    "volume24hr": "0.000000000000000000",
+    "volume24hrOnlySwap": "0.000000000000000000",
+    "rewardFee24hr": "0.000000000000000000",
+    "baseApr": "0.00",
+    "user": null
+  },
+  {
+    "address": "0x6c78F3F1806eC38afbf3574e65F6780c4c8b678B",
+    "symbol": "CELR_3NUTS",
+    "poolType": "BASE_POOL",
+    "lpTokenAddress": "0xf277F3E43F2a048eD127c43774E8933f52B69979",
+    "coins": [
+      "0x317F8d18FB16E49a958Becd0EA72f8E153d25654",
+      "0x53bB26dc8C5EFC6c95C37155aCa487d1D043436a",
+      "0x3c790b38f466514ffCB4230e7B2334e52B64c942"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0006000000",
+    "deprecated": false,
+    "liquidity": [
+      {
+        "coin": "0x317F8d18FB16E49a958Becd0EA72f8E153d25654",
+        "amount": "28.258718038514460511"
+      },
+      {
+        "coin": "0x53bB26dc8C5EFC6c95C37155aCa487d1D043436a",
+        "amount": "52.298960"
+      },
+      {
+        "coin": "0x3c790b38f466514ffCB4230e7B2334e52B64c942",
+        "amount": "88.988543"
+      }
+    ],
+    "tvl": "106.577896222083876170",
+    "lpTokenVirtualPrice": "1.000057426535427648",
+    "lpTokenRealPrice": "0.628720787654719145",
+    "lpTokenTotalSupply": "169.515464280488083192",
+    "volume24hr": "0.000000000000000000",
+    "volume24hrOnlySwap": "0.000000000000000000",
+    "rewardFee24hr": "0.000000000000000000",
+    "baseApr": "0.00",
+    "user": null
+  },
+  {
+    "address": "0x49cebd5ad40359F5Fa4126419c86B5721a1d7F75",
+    "symbol": "KASH3NUTS",
+    "poolType": "BASE_POOL",
+    "lpTokenAddress": "0x8187b3F5d623B18aCe3951E443A99bCD3dC3eeB1",
+    "stakingPoolAddress": "0x352BA5D409BdF5Ee35264524402313b755f51670",
+    "managerAddress": "0xadBB263a8A2f8E33bB9baBca14115b0e6194378d",
+    "coins": [
+      "0xce40569d65106C32550626822B91565643c07823",
+      "0x5c74070FDeA071359b86082bd9f9b3dEaafbe32b",
+      "0xceE8FAF64bB97a73bb51E115Aa89C17FfA8dD167"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0006000000",
+    "deprecated": true,
+    "liquidity": [],
+    "tvl": "0.000000000000000000",
+    "lpTokenVirtualPrice": "0.000000000000000000",
+    "lpTokenRealPrice": "0.000000000000000000",
+    "lpTokenTotalSupply": "0.000000000000000000",
+    "volume24hr": "0.000000000000000000",
+    "volume24hrOnlySwap": "0.000000000000000000",
+    "rewardFee24hr": "0.000000000000000000",
+    "baseApr": "0.00",
+    "stakingApr": "0.00",
+    "user": null
+  },
+  {
+    "address": "0x44ACE4b2C239F3A34866bB7e6149E6bA9eb4110E",
+    "symbol": "KSD-KASH",
+    "poolType": "BASE_POOL",
+    "lpTokenAddress": "0xBDc4Abb3E4b8DE77c8889318dfB98A8bcd81A8c4",
+    "stakingPoolAddress": "0x72f8246F9Ea937fa332B1c1E69Caa934e7296312",
+    "managerAddress": "0xf8b8e78B05bC10e25ae7e6575D44Ca02Dee7A5ff",
+    "coins": [
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67",
+      "0xce40569d65106C32550626822B91565643c07823"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.6666666666",
+    "swapFee": "0.0006000000",
+    "deprecated": true,
+    "liquidity": [],
+    "tvl": "0.000000000000000000",
+    "lpTokenVirtualPrice": "0.000000000000000000",
+    "lpTokenRealPrice": "0.000000000000000000",
+    "lpTokenTotalSupply": "0.000000000000000000",
+    "volume24hr": "1.363054695602293212",
+    "volume24hrOnlySwap": "1.363054695602293212",
+    "rewardFee24hr": "0.000272774603937343",
+    "baseApr": "0.00",
+    "stakingApr": "0.00",
+    "user": null
+  },
+  {
+    "address": "0x048915901421F8C0ac9eDA93A086F2D90Df6cb0B",
+    "symbol": "oETH-KSD",
+    "poolType": "CRYPTO_POOL",
+    "lpTokenAddress": "0xF631C84c1d2FF368783222AF29F46BF628eb5Cbc",
+    "managerAddress": "0x523C201736f5f3d5b8CF4A2a4D2470DF29bdFFd9",
+    "coins": [
+      "0x34d21b1e550D73cee41151c77F3c73359527a396",
+      "0x4Fa62F1f404188CE860c8f0041d6Ac3765a72E67"
+    ],
+    "coinsUnderlying": [],
+    "adminFee": "0.5000000000",
+    "swapMidFee": "0.0020000000",
+    "swapOutFee": "0.0030000000",
+    "deprecated": true,
+    "liquidity": [],
+    "tvl": "0.000000000000000000",
+    "lpTokenVirtualPrice": "0.000000000000000000",
+    "lpTokenRealPrice": "0.000000000000000000",
+    "lpTokenTotalSupply": "0.000000000000000000",
+    "volume24hr": "0.000000000000000000",
+    "volume24hrOnlySwap": "0.000000000000000000",
+    "rewardFee24hr": "0.000000000000000000",
+    "baseApr": "0.00",
+    "user": null
+  }
+]

@@ -1,0 +1,1890 @@
+[
+  {
+    "symbol": "OSMO",
+    "name": "OSMO",
+    "decimals": 6,
+    "address": "uosmo",
+    "coinGeckoId": "osmosis",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+    "denomUnits": [
+      { "denom": "uosmo", "exponent": 0, "aliases": [] },
+      { "denom": "osmo", "exponent": 6, "aliases": [] }
+    ]
+  },
+  {
+    "symbol": "ION",
+    "name": "ION",
+    "decimals": 6,
+    "address": "uion",
+    "coinGeckoId": "ion",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png",
+    "denomUnits": [
+      { "denom": "uion", "exponent": 0 },
+      { "denom": "ion", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "ATOM",
+    "name": "ATOM",
+    "decimals": 6,
+    "address": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+    "coinGeckoId": "cosmos",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cosmoshub/images/atom.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2",
+        "exponent": 0,
+        "aliases": ["uatom"]
+      },
+      { "denom": "atom", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "AKT",
+    "name": "AKT",
+    "decimals": 6,
+    "address": "ibc/1480B8FD20AD5FCAE81EA87584D269547DD4D436843C1D20F15E00EB64743EF4",
+    "coinGeckoId": "akash-network",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/akash/images/akt.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/1480B8FD20AD5FCAE81EA87584D269547DD4D436843C1D20F15E00EB64743EF4",
+        "exponent": 0,
+        "aliases": ["uakt"]
+      },
+      { "denom": "akt", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "XPRT",
+    "name": "XPRT",
+    "decimals": 6,
+    "address": "ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293",
+    "coinGeckoId": "persistence",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/xprt.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/A0CC0CF735BFB30E730C70019D4218A1244FF383503FF7579C9201AB93CA9293",
+        "exponent": 0,
+        "aliases": ["uxprt"]
+      },
+      { "denom": "xprt", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "PSTAKE",
+    "name": "PSTAKE",
+    "decimals": 18,
+    "address": "ibc/8061A06D3BD4D52C4A28FFECF7150D370393AF0BA661C3776C54FF32836C3961",
+    "coinGeckoId": "pstake-finance",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/persistence/images/pstake.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/8061A06D3BD4D52C4A28FFECF7150D370393AF0BA661C3776C54FF32836C3961",
+        "exponent": 0
+      },
+      { "denom": "pstake", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "IRIS",
+    "name": "IRIS",
+    "decimals": 6,
+    "address": "ibc/7C4D60AA95E5A7558B0A364860979CA34B7FF8AAF255B87AF9E879374470CEC0",
+    "coinGeckoId": "iris-network",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/irisnet/images/iris.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/7C4D60AA95E5A7558B0A364860979CA34B7FF8AAF255B87AF9E879374470CEC0",
+        "exponent": 0,
+        "aliases": ["uiris"]
+      },
+      { "denom": "iris", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "DVPN",
+    "name": "DVPN",
+    "decimals": 6,
+    "address": "ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84",
+    "coinGeckoId": "sentinel",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sentinel/images/dvpn.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/9712DBB13B9631EDFA9BF61B55F1B2D290B2ADB67E3A4EB3A875F3B6081B3B84",
+        "exponent": 0,
+        "aliases": ["udvpn"]
+      },
+      { "denom": "dvpn", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "CRO",
+    "name": "CRO",
+    "decimals": 8,
+    "address": "ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1",
+    "coinGeckoId": "crypto-com-chain",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cryptoorgchain/images/cro.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/E6931F78057F7CC5DA0FD6CEF82FF39373A6E0452BF1FD76910B93292CF356C1",
+        "exponent": 0,
+        "aliases": ["basecro"]
+      },
+      { "denom": "cro", "exponent": 8 }
+    ]
+  },
+  {
+    "symbol": "REGEN",
+    "name": "REGEN",
+    "decimals": 6,
+    "address": "ibc/1DCC8A6CB5689018431323953344A9F6CC4D0BFB261E88C9F7777372C10CD076",
+    "coinGeckoId": "regen",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/regen/images/regen.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/1DCC8A6CB5689018431323953344A9F6CC4D0BFB261E88C9F7777372C10CD076",
+        "exponent": 0,
+        "aliases": ["uregen"]
+      },
+      { "denom": "regen", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "IOV",
+    "name": "IOV",
+    "decimals": 6,
+    "address": "ibc/52B1AA623B34EB78FD767CEA69E8D7FA6C9CFE1FBF49C5406268FD325E2CC2AC",
+    "coinGeckoId": "starname",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/starname/images/iov.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/52B1AA623B34EB78FD767CEA69E8D7FA6C9CFE1FBF49C5406268FD325E2CC2AC",
+        "exponent": 0,
+        "aliases": ["uiov"]
+      },
+      { "denom": "iov", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "TICK",
+    "name": "TICK",
+    "decimals": 6,
+    "address": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
+    "coinGeckoId": "microtick",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/microtick/images/tick.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/655BCEF3CDEBE32863FF281DBBE3B06160339E9897DC9C9C9821932A5F8BA6F8",
+        "exponent": 0,
+        "aliases": ["utick"]
+      },
+      { "denom": "tick", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "NGM",
+    "name": "NGM",
+    "decimals": 6,
+    "address": "ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59",
+    "coinGeckoId": "e-money",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/emoney/images/ngm.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/1DC495FCEFDA068A3820F903EDBD78B942FBD204D7E93D3BA2B432E9669D1A59",
+        "exponent": 0,
+        "aliases": ["ungm"]
+      },
+      { "denom": "ngm", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "EEUR",
+    "name": "EEUR",
+    "decimals": 6,
+    "address": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
+    "coinGeckoId": "e-money-eur",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/emoney/images/eeur.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/5973C068568365FFF40DEDCF1A1CB7582B6116B731CD31A12231AE25E20B871F",
+        "exponent": 0
+      },
+      { "denom": "eeur", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "BCNA",
+    "name": "BCNA",
+    "decimals": 6,
+    "address": "ibc/D805F1DA50D31B96E4282C1D4181EDDFB1A44A598BFF5666F4B43E4B8BEA95A5",
+    "coinGeckoId": "bitcanna",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitcanna/images/bcna.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/D805F1DA50D31B96E4282C1D4181EDDFB1A44A598BFF5666F4B43E4B8BEA95A5",
+        "exponent": 0,
+        "aliases": ["ubcna"]
+      },
+      { "denom": "bcna", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "JUNO",
+    "name": "JUNO",
+    "decimals": 6,
+    "address": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
+    "coinGeckoId": "juno-network",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/juno.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
+        "exponent": 0,
+        "aliases": ["ujuno"]
+      },
+      { "denom": "juno", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "IXO",
+    "name": "IXO",
+    "decimals": 6,
+    "address": "ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B",
+    "coinGeckoId": "ixo",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/impacthub/images/ixo.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/F3FF7A84A73B62921538642F9797C423D2B4C4ACB3C7FCFFCE7F12AA69909C4B",
+        "exponent": 0,
+        "aliases": ["uixo"]
+      },
+      { "denom": "ixo", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "LIKE",
+    "name": "LIKE",
+    "decimals": 9,
+    "address": "ibc/9989AD6CCA39D1131523DB0617B50F6442081162294B4795E26746292467B525",
+    "coinGeckoId": "likecoin",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/likecoin/images/like.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/9989AD6CCA39D1131523DB0617B50F6442081162294B4795E26746292467B525",
+        "exponent": 0,
+        "aliases": ["nanolike"]
+      },
+      { "denom": "like", "exponent": 9 }
+    ]
+  },
+  {
+    "symbol": "LUNC",
+    "name": "LUNC",
+    "decimals": 6,
+    "address": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+    "coinGeckoId": "terra-luna",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/luna.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/0EF15DF2F02480ADE0BB6E85D9EBB5DAEA2836D3860E9F97F9AADE4F57A31AA0",
+        "exponent": 0,
+        "aliases": ["ulunc"]
+      },
+      { "denom": "lunc", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "USTC",
+    "name": "USTC",
+    "decimals": 6,
+    "address": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
+    "coinGeckoId": "terrausd",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/ust.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/BE1BB42D4BE3C30D50B68D7C41DB4DFCE9678E8EF8C539F6E6A9345048894FCC",
+        "exponent": 0,
+        "aliases": ["uust"]
+      },
+      { "denom": "ust", "exponent": 6, "aliases": ["ustc"] }
+    ]
+  },
+  {
+    "symbol": "KRTC",
+    "name": "KRTC",
+    "decimals": 6,
+    "address": "ibc/204A582244FC241613DBB50B04D1D454116C58C4AF7866C186AA0D6EEAD42780",
+    "coinGeckoId": "terra-krw",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra/images/krt.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/204A582244FC241613DBB50B04D1D454116C58C4AF7866C186AA0D6EEAD42780",
+        "exponent": 0,
+        "aliases": ["ukrw"]
+      },
+      { "denom": "krt", "exponent": 6, "aliases": ["krtc"] }
+    ]
+  },
+  {
+    "symbol": "LUNA",
+    "name": "LUNA",
+    "decimals": 6,
+    "address": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9",
+    "coinGeckoId": "terra-luna-2",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/terra2/images/luna.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/785AFEC6B3741100D15E7AF01374E3C4C36F24888E96479B1C33F5C71F364EF9",
+        "exponent": 0,
+        "aliases": ["uluna"]
+      },
+      { "denom": "luna", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "BTSG",
+    "name": "BTSG",
+    "decimals": 6,
+    "address": "ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452",
+    "coinGeckoId": "bitsong",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/btsg.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/4E5444C35610CC76FC94E7F7886B93121175C28262DDFDDE6F84E82BF2425452",
+        "exponent": 0,
+        "aliases": ["ubtsg"]
+      },
+      { "denom": "btsg", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "XKI",
+    "name": "XKI",
+    "decimals": 6,
+    "address": "ibc/B547DC9B897E7C3AA5B824696110B8E3D2C31E3ED3F02FF363DCBAD82457E07E",
+    "coinGeckoId": "ki",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kichain/images/xki.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/B547DC9B897E7C3AA5B824696110B8E3D2C31E3ED3F02FF363DCBAD82457E07E",
+        "exponent": 0,
+        "aliases": ["uxki"]
+      },
+      { "denom": "xki", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "SCRT",
+    "name": "SCRT",
+    "decimals": 6,
+    "address": "ibc/0954E1C28EB7AF5B72D24F3BC2B47BBB2FDF91BDDFD57B74B99E133AED40972A",
+    "coinGeckoId": "secret",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/scrt.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/0954E1C28EB7AF5B72D24F3BC2B47BBB2FDF91BDDFD57B74B99E133AED40972A",
+        "exponent": 0,
+        "aliases": ["uscrt"]
+      },
+      { "denom": "scrt", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "MED",
+    "name": "MED",
+    "decimals": 6,
+    "address": "ibc/3BCCC93AD5DF58D11A6F8A05FA8BC801CBA0BA61A981F57E91B8B598BF8061CB",
+    "coinGeckoId": "medibloc",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/panacea/images/med.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/3BCCC93AD5DF58D11A6F8A05FA8BC801CBA0BA61A981F57E91B8B598BF8061CB",
+        "exponent": 0,
+        "aliases": ["umed"]
+      },
+      { "denom": "med", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "BOOT",
+    "name": "BOOT",
+    "decimals": 0,
+    "address": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4",
+    "coinGeckoId": "bostrom",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bostrom/images/boot.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4",
+        "exponent": 0,
+        "aliases": ["boot"]
+      }
+    ]
+  },
+  {
+    "symbol": "CMDX",
+    "name": "CMDX",
+    "decimals": 6,
+    "address": "ibc/EA3E1640F9B1532AB129A571203A0B9F789A7F14BB66E350DCBFA18E1A1931F0",
+    "coinGeckoId": "comdex",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/comdex/images/cmdx.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/EA3E1640F9B1532AB129A571203A0B9F789A7F14BB66E350DCBFA18E1A1931F0",
+        "exponent": 0,
+        "aliases": ["ucmdx"]
+      },
+      { "denom": "cmdx", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "CHEQ",
+    "name": "CHEQ",
+    "decimals": 9,
+    "address": "ibc/7A08C6F11EF0F59EB841B9F788A87EC9F2361C7D9703157EC13D940DC53031FA",
+    "coinGeckoId": "cheqd-network",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cheqd/images/cheq.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/7A08C6F11EF0F59EB841B9F788A87EC9F2361C7D9703157EC13D940DC53031FA",
+        "exponent": 0,
+        "aliases": ["ncheq"]
+      },
+      { "denom": "cheq", "exponent": 9 }
+    ]
+  },
+  {
+    "symbol": "STARS",
+    "name": "STARS",
+    "decimals": 6,
+    "address": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4",
+    "coinGeckoId": "stargaze",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stargaze/images/stars.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/987C17B11ABC2B20019178ACE62929FE9840202CE79498E29FE8E5CB02B7C0A4",
+        "exponent": 0,
+        "aliases": ["ustars"]
+      },
+      { "denom": "stars", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "LUM",
+    "name": "LUM",
+    "decimals": 6,
+    "address": "ibc/8A34AF0C1943FD0DFCDE9ADBF0B2C9959C45E87E6088EA2FC6ADACD59261B8A2",
+    "coinGeckoId": "lum-network",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumnetwork/images/lum.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/8A34AF0C1943FD0DFCDE9ADBF0B2C9959C45E87E6088EA2FC6ADACD59261B8A2",
+        "exponent": 0,
+        "aliases": ["ulum"]
+      },
+      { "denom": "lum", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "HUAHUA",
+    "name": "HUAHUA",
+    "decimals": 6,
+    "address": "ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228",
+    "coinGeckoId": "chihuahua-token",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/chihuahua/images/huahua.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/B9E0A1A524E98BB407D3CED8720EFEFD186002F90C1B1B7964811DD0CCC12228",
+        "exponent": 0,
+        "aliases": ["uhuahua"]
+      },
+      { "denom": "huahua", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "VDL",
+    "name": "VDL",
+    "decimals": 6,
+    "address": "ibc/E7B35499CFBEB0FF5778127ABA4FB2C4B79A6B8D3D831D4379C4048C238796BD",
+    "coinGeckoId": "vidulum",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/vidulum/images/vdl.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/E7B35499CFBEB0FF5778127ABA4FB2C4B79A6B8D3D831D4379C4048C238796BD",
+        "exponent": 0,
+        "aliases": ["uvdl"]
+      },
+      { "denom": "vdl", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "DSM",
+    "name": "DSM",
+    "decimals": 6,
+    "address": "ibc/EA4C0A9F72E2CEDF10D0E7A9A6A22954DB3444910DB5BE980DF59B05A46DAD1C",
+    "coinGeckoId": "desmos",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/desmos/images/dsm.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/EA4C0A9F72E2CEDF10D0E7A9A6A22954DB3444910DB5BE980DF59B05A46DAD1C",
+        "exponent": 0,
+        "aliases": ["udsm"]
+      },
+      { "denom": "dsm", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "DIG",
+    "name": "DIG",
+    "decimals": 6,
+    "address": "ibc/307E5C96C8F60D1CBEE269A9A86C0834E1DB06F2B3788AE4F716EDB97A48B97D",
+    "coinGeckoId": "dig-chain",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/dig/images/dig.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/307E5C96C8F60D1CBEE269A9A86C0834E1DB06F2B3788AE4F716EDB97A48B97D",
+        "exponent": 0,
+        "aliases": ["udig"]
+      },
+      { "denom": "dig", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "ROWAN",
+    "name": "ROWAN",
+    "decimals": 18,
+    "address": "ibc/8318FD63C42203D16DDCAF49FE10E8590669B3219A3E87676AC9DA50722687FB",
+    "coinGeckoId": "sifchain",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sifchain/images/rowan.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/8318FD63C42203D16DDCAF49FE10E8590669B3219A3E87676AC9DA50722687FB",
+        "exponent": 0
+      },
+      { "denom": "rowan", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "SOMM",
+    "name": "SOMM",
+    "decimals": 6,
+    "address": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E",
+    "coinGeckoId": "sommelier",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sommelier/images/somm.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/9BBA9A1C257E971E38C1422780CE6F0B0686F0A3085E2D61118D904BFE0F5F5E",
+        "exponent": 0,
+        "aliases": ["usomm"]
+      },
+      { "denom": "somm", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "BAND",
+    "name": "BAND",
+    "decimals": 6,
+    "address": "ibc/F867AE2112EFE646EC71A25CD2DFABB8927126AC1E19F1BBF0FF693A4ECA05DE",
+    "coinGeckoId": "band-protocol",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bandchain/images/band.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/F867AE2112EFE646EC71A25CD2DFABB8927126AC1E19F1BBF0FF693A4ECA05DE",
+        "exponent": 0,
+        "aliases": ["uband"]
+      },
+      { "denom": "band", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "DARC",
+    "name": "DARC",
+    "decimals": 6,
+    "address": "ibc/346786EA82F41FE55FAD14BF69AD8BA9B36985406E43F3CB23E6C45A285A9593",
+    "coinGeckoId": "darcmatter-coin",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/konstellation/images/darc.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/346786EA82F41FE55FAD14BF69AD8BA9B36985406E43F3CB23E6C45A285A9593",
+        "exponent": 0,
+        "aliases": ["udarc"]
+      },
+      { "denom": "darc", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "UMEE",
+    "name": "UMEE",
+    "decimals": 6,
+    "address": "ibc/67795E528DF67C5606FC20F824EA39A6EF55BA133F4DC79C90A8C47A0901E17C",
+    "coinGeckoId": "umee",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/umee/images/umee.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/67795E528DF67C5606FC20F824EA39A6EF55BA133F4DC79C90A8C47A0901E17C",
+        "exponent": 0,
+        "aliases": ["uumee"]
+      },
+      { "denom": "umee", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "GRAV",
+    "name": "GRAV",
+    "decimals": 6,
+    "address": "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44",
+    "coinGeckoId": "graviton",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/grav.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/E97634A40119F1898989C2A23224ED83FDD0A57EA46B3A094E287288D1672B44",
+        "exponent": 0,
+        "aliases": ["ugraviton"]
+      },
+      { "denom": "graviton", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "FET",
+    "name": "FET",
+    "decimals": 18,
+    "address": "ibc/5D1F516200EE8C6B2354102143B78A2DEDA25EDE771AC0F8DC3C1837C8FD4447",
+    "coinGeckoId": "fetch-ai",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/fetchhub/images/fet.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/5D1F516200EE8C6B2354102143B78A2DEDA25EDE771AC0F8DC3C1837C8FD4447",
+        "exponent": 0,
+        "aliases": ["afet"]
+      },
+      { "denom": "fet", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "NETA",
+    "name": "NETA",
+    "decimals": 6,
+    "address": "juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr",
+    "coinGeckoId": "neta",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/neta.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/297C64CC42B5A8D8F82FE2EBE208A6FE8F94B86037FA28C4529A23701C228F7A",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno168ctmpyppk90d34p3jjy658zf5a5l3w8wk35wht6ccqj4mr0yv8s4j5awr",
+          "uneta"
+        ]
+      },
+      { "denom": "neta", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "MARBLE",
+    "name": "MARBLE",
+    "decimals": 3,
+    "address": "juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl",
+    "coinGeckoId": "marble",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/marble.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/F6B691D5F7126579DDC87357B09D653B47FDCE0A3383FF33C8D8B544FE29A8A6",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1g2g7ucurum66d42g8k5twk34yegdq8c82858gz0tq2fc75zy7khssgnhjl"
+        ]
+      },
+      { "denom": "marble", "exponent": 3 }
+    ]
+  },
+  {
+    "symbol": "HOPE",
+    "name": "HOPE",
+    "decimals": 6,
+    "address": "juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z",
+    "coinGeckoId": "hope-galaxy",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/hope.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/C2A2E9CA95DDD4828B75124B5E27B8401C7D8493BC48353D418CBFC04565899B",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1re3x67ppxap48ygndmrc7har2cnc7tcxtm9nplcas4v0gc3wnmvs3s807z"
+        ]
+      },
+      { "denom": "hope", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "DEC",
+    "name": "DEC",
+    "decimals": 6,
+    "address": "ibc/9BCB27203424535B6230D594553F1659C77EC173E36D9CF4759E7186EE747E84",
+    "coinGeckoId": "decentr",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/decentr/images/dec.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/9BCB27203424535B6230D594553F1659C77EC173E36D9CF4759E7186EE747E84",
+        "exponent": 0,
+        "aliases": ["udec"]
+      },
+      { "denom": "dec", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "SWTH",
+    "name": "SWTH",
+    "decimals": 8,
+    "address": "ibc/8FEFAE6AECF6E2A255585617F781F35A8D5709A545A804482A261C0C9548A9D3",
+    "coinGeckoId": "switcheo",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/carbon/images/swth.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/8FEFAE6AECF6E2A255585617F781F35A8D5709A545A804482A261C0C9548A9D3",
+        "exponent": 0,
+        "aliases": ["swth"]
+      },
+      { "denom": "dswth", "exponent": 8 }
+    ]
+  },
+  {
+    "symbol": "CRBRUS",
+    "name": "CRBRUS",
+    "decimals": 6,
+    "address": "ibc/41999DF04D9441DAC0DF5D8291DF4333FBCBA810FFD63FDCE34FDF41EF37B6F7",
+    "coinGeckoId": "cerberus-2",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cerberus/images/crbrus.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/41999DF04D9441DAC0DF5D8291DF4333FBCBA810FFD63FDCE34FDF41EF37B6F7",
+        "exponent": 0,
+        "aliases": ["ucrbrus"]
+      },
+      { "denom": "crbrus", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "INJ",
+    "name": "INJ",
+    "decimals": 18,
+    "address": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
+    "coinGeckoId": "injective-protocol",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/injective/images/inj.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/64BA6E31FE887D66C6F8F31C7B1A80C7CA179239677B4088BB55F5EA07DBE273",
+        "exponent": 0,
+        "aliases": ["inj"]
+      },
+      { "denom": "uinj", "exponent": 12 },
+      { "denom": "INJ", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "RAC",
+    "name": "RAC",
+    "decimals": 6,
+    "address": "juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa",
+    "coinGeckoId": "racoon",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/rac.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/6BDB4C8CCD45033F9604E4B93ED395008A753E01EECD6992E7D1EA23D9D3B788",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1r4pzw8f9z0sypct5l9j906d47z998ulwvhvqe5xdwgy8wf84583sxwh0pa"
+        ]
+      },
+      { "denom": "rac", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "DHK",
+    "name": "DHK",
+    "decimals": 0,
+    "address": "juno1tdjwrqmnztn2j3sj2ln9xnyps5hs48q3ddwjrz7jpv6mskappjys5czd49",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/dhk.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/52E12CF5CA2BB903D84F5298B4BFD725D66CAB95E09AA4FC75B2904CA5485FEB",
+        "exponent": 0,
+        "aliases": ["dhk"]
+      }
+    ]
+  },
+  {
+    "symbol": "USDT.axl",
+    "name": "USDT.axl",
+    "decimals": 6,
+    "address": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+    "coinGeckoId": "tether",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/uusdt L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/8242AD24008032E457D2E12D46588FD39FB54FB29680C6C7663D296B383C37C4",
+        "exponent": 0,
+        "aliases": ["uusdt"]
+      },
+      { "denom": "axlusdt", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "USDC.axl",
+    "name": "USDC.axl",
+    "decimals": 6,
+    "address": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858",
+    "coinGeckoId": "usd-coin",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/uausdc L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858",
+        "exponent": 0,
+        "aliases": ["uusdc"]
+      },
+      { "denom": "axlusdc", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "FRAX.axl",
+    "name": "FRAX.axl",
+    "decimals": 18,
+    "address": "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
+    "coinGeckoId": "frax",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/frax-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/0E43EDE2E2A3AFA36D0CD38BDDC0B49FECA64FA426A82E102F304E430ECF46EE",
+        "exponent": 0,
+        "aliases": ["frax-wei"]
+      },
+      { "denom": "axlfrax", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "DAI.axl",
+    "name": "DAI.axl",
+    "decimals": 18,
+    "address": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
+    "coinGeckoId": "dai",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/dai-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/0CD3A0285E1341859B5E86B6AB7682F023D03E97607CCC1DC95706411D866DF7",
+        "exponent": 0,
+        "aliases": ["dai-wei"]
+      },
+      { "denom": "axldai", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "WETH.axl",
+    "name": "WETH.axl",
+    "decimals": 18,
+    "address": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5",
+    "coinGeckoId": "weth",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/weth-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/EA1D43981D5C9A1C4AAEA9C23BB1D4FA126BA9BC7020A25E0AE4AA841EA25DC5",
+        "exponent": 0,
+        "aliases": ["weth-wei"]
+      },
+      { "denom": "axlweth", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "WBTC.axl",
+    "name": "WBTC.axl",
+    "decimals": 8,
+    "address": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F",
+    "coinGeckoId": "wrapped-bitcoin",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/wbtc-satoshi L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/D1542AA8762DB13087D8364F3EA6509FD6F009A34F00426AF9E4F9FA85CBBF1F",
+        "exponent": 0,
+        "aliases": ["wbtc-satoshi"]
+      },
+      { "denom": "axlwbtc", "exponent": 8 }
+    ]
+  },
+  {
+    "symbol": "WETH.grv",
+    "name": "WETH.grv",
+    "decimals": 18,
+    "address": "ibc/65381C5F3FD21442283D56925E62EA524DED8B6927F0FF94E21E0020954C40B5",
+    "coinGeckoId": "weth",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/gweth.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/65381C5F3FD21442283D56925E62EA524DED8B6927F0FF94E21E0020954C40B5",
+        "exponent": 0,
+        "aliases": ["gravity0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"]
+      },
+      { "denom": "gweth", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "WBTC.grv",
+    "name": "WBTC.grv",
+    "decimals": 8,
+    "address": "ibc/C9B0D48FD2C5B91135F118FF2484551888966590D7BDC20F6A87308DBA670796",
+    "coinGeckoId": "wrapped-bitcoin",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/gwbtc.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/C9B0D48FD2C5B91135F118FF2484551888966590D7BDC20F6A87308DBA670796",
+        "exponent": 0,
+        "aliases": ["satoshi"]
+      },
+      { "denom": "gwbtc", "exponent": 8 }
+    ]
+  },
+  {
+    "symbol": "USDC.grv",
+    "name": "USDC.grv",
+    "decimals": 6,
+    "address": "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E",
+    "coinGeckoId": "usd-coin",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/gusdc.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/9F9B07EF9AD291167CF5700628145DE1DEB777C2CFC7907553B24446515F6D0E",
+        "exponent": 0,
+        "aliases": ["gravity0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"]
+      },
+      { "denom": "gusdc", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "DAI.grv",
+    "name": "DAI.grv",
+    "decimals": 18,
+    "address": "ibc/F292A17CF920E3462C816CBE6B042E779F676CAB59096904C4C1C966413E3DF5",
+    "coinGeckoId": "dai",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/gdai.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/F292A17CF920E3462C816CBE6B042E779F676CAB59096904C4C1C966413E3DF5",
+        "exponent": 0,
+        "aliases": ["gravity0x6B175474E89094C44Da98b954EedeAC495271d0F"]
+      },
+      { "denom": "gdai", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "MNTL",
+    "name": "MNTL",
+    "decimals": 6,
+    "address": "ibc/CBA34207E969623D95D057D9B11B0C8B32B89A71F170577D982FDDE623813FFC",
+    "coinGeckoId": "assetmantle",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/assetmantle/images/mntl.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/CBA34207E969623D95D057D9B11B0C8B32B89A71F170577D982FDDE623813FFC",
+        "exponent": 0,
+        "aliases": ["umntl"]
+      },
+      { "denom": "mntl", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "HASH",
+    "name": "HASH",
+    "decimals": 9,
+    "address": "ibc/CE5BFF1D9BADA03BB5CCA5F56939392A761B53A10FBD03B37506669C3218D3B2",
+    "coinGeckoId": "provenance-blockchain",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/provenance/images/hash.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/CE5BFF1D9BADA03BB5CCA5F56939392A761B53A10FBD03B37506669C3218D3B2",
+        "exponent": 0,
+        "aliases": ["nhash"]
+      },
+      { "denom": "hash", "exponent": 9 }
+    ]
+  },
+  {
+    "symbol": "GLX",
+    "name": "GLX",
+    "decimals": 6,
+    "address": "ibc/F49DE040EBA5AB2FAD5F660C2A1DDF98A68470FAE82229818BE775EBF3EE79F2",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/galaxy/images/galaxy.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/F49DE040EBA5AB2FAD5F660C2A1DDF98A68470FAE82229818BE775EBF3EE79F2",
+        "exponent": 0,
+        "aliases": ["uglx"]
+      },
+      { "denom": "glx", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "BLOCK",
+    "name": "BLOCK",
+    "decimals": 6,
+    "address": "juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/block.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/DB9755CB6FE55192948AE074D18FA815E1429D3D374D5BDA8D89623C6CF235C3",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1y9rf7ql6ffwkv02hsgd4yruz23pn4w97p75e2slsnkm0mnamhzysvqnxaq"
+        ]
+      },
+      { "denom": "block", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "RAW",
+    "name": "RAW",
+    "decimals": 6,
+    "address": "juno15u3dt79t6sxxa3x3kpkhzsy56edaa5a66wvt3kxmukqjz2sx0hes5sn38g",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/raw.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/00B6E60AD3D65CBEF5579AC8AF609527C0B57535B6E32D96C80A735344FD9DCC",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno15u3dt79t6sxxa3x3kpkhzsy56edaa5a66wvt3kxmukqjz2sx0hes5sn38g"
+        ]
+      },
+      { "denom": "raw", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "MEME",
+    "name": "MEME",
+    "decimals": 6,
+    "address": "ibc/67C89B8B0A70C08F093C909A4DD996DD10E0494C87E28FD9A551697BF173D4CA",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/meme/images/meme.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/67C89B8B0A70C08F093C909A4DD996DD10E0494C87E28FD9A551697BF173D4CA",
+        "exponent": 0,
+        "aliases": ["umeme"]
+      },
+      { "denom": "meme", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "ASVT",
+    "name": "ASVT",
+    "decimals": 6,
+    "address": "juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/asvt.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/AA1C80225BCA7B32ED1FC6ABF8B8E899BEB48ECDB4B417FD69873C6D715F97E7",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno17wzaxtfdw5em7lc94yed4ylgjme63eh73lm3lutp2rhcxttyvpwsypjm4w"
+        ]
+      },
+      { "denom": "asvt", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "EVMOS",
+    "name": "EVMOS",
+    "decimals": 18,
+    "address": "ibc/6AE98883D4D5D5FF9E50D7130F1305DA2FFA0C652D1DD9C123657C6B4EB2DF8A",
+    "coinGeckoId": "evmos",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/evmos.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/6AE98883D4D5D5FF9E50D7130F1305DA2FFA0C652D1DD9C123657C6B4EB2DF8A",
+        "exponent": 0,
+        "aliases": ["aevmos"]
+      },
+      { "denom": "evmos", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "ECH",
+    "name": "ECH",
+    "decimals": 18,
+    "address": "ibc/49C2B2C444B7C5F0066657A4DBF19D676E0D185FF721CFD3E14FA253BCB9BC04",
+    "coinGeckoId": "echelon",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/echelon/images/logo.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/49C2B2C444B7C5F0066657A4DBF19D676E0D185FF721CFD3E14FA253BCB9BC04",
+        "exponent": 0,
+        "aliases": ["aechelon"]
+      },
+      { "denom": "echelon", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "JOE",
+    "name": "JOE",
+    "decimals": 6,
+    "address": "juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/joe.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/0CB9DB3441D0D50F35699DEE22B9C965487E83FB2D9F483D1CC5CA34E856C484",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1n7n7d5088qlzlj37e9mgmkhx6dfgtvt02hqxq66lcap4dxnzdhwqfmgng3"
+        ]
+      },
+      { "denom": "joe", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "KAVA",
+    "name": "KAVA",
+    "decimals": 6,
+    "address": "ibc/57AA1A70A4BC9769C525EBF6386F7A21536E04A79D62E1981EFCEF9428EBB205",
+    "coinGeckoId": "kava",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/kava.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/57AA1A70A4BC9769C525EBF6386F7A21536E04A79D62E1981EFCEF9428EBB205",
+        "exponent": 0,
+        "aliases": ["ukava"]
+      },
+      { "denom": "kava", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "L1",
+    "name": "L1",
+    "decimals": 18,
+    "address": "ibc/F16FDC11A7662B86BC0B9CE61871CBACF7C20606F95E86260FD38915184B75B4",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/genesisl1/images/l1.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/F16FDC11A7662B86BC0B9CE61871CBACF7C20606F95E86260FD38915184B75B4",
+        "exponent": 0,
+        "aliases": ["el1"]
+      },
+      { "denom": "l1", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "ATOLO",
+    "name": "ATOLO",
+    "decimals": 6,
+    "address": "ibc/2716E3F2E146664BEFA9217F1A03BFCEDBCD5178B3C71CACB1A0D7584451D219",
+    "coinGeckoId": "rizon",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/rizon/images/atolo.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/2716E3F2E146664BEFA9217F1A03BFCEDBCD5178B3C71CACB1A0D7584451D219",
+        "exponent": 0,
+        "aliases": ["uatolo"]
+      },
+      { "denom": "atolo", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "TGD",
+    "name": "TGD",
+    "decimals": 6,
+    "address": "ibc/1E09CB0F506ACF12FDE4683FB6B34DA62FB4BE122641E0D93AAF98A87675676C",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/tgrade/images/tgrade-symbol-gradient.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/1E09CB0F506ACF12FDE4683FB6B34DA62FB4BE122641E0D93AAF98A87675676C",
+        "exponent": 0,
+        "aliases": ["utgd"]
+      },
+      { "denom": "tgd", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "ODIN",
+    "name": "ODIN",
+    "decimals": 6,
+    "address": "ibc/C360EF34A86D334F625E4CBB7DA3223AEA97174B61F35BB3758081A8160F7D9B",
+    "coinGeckoId": "odin-protocol",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/odin.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/C360EF34A86D334F625E4CBB7DA3223AEA97174B61F35BB3758081A8160F7D9B",
+        "exponent": 0,
+        "aliases": ["loki"]
+      },
+      { "denom": "odin", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "GEO",
+    "name": "GEO",
+    "decimals": 6,
+    "address": "ibc/9B6FBABA36BB4A3BF127AE5E96B572A5197FD9F3111D895D8919B07BC290764A",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/geo.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/9B6FBABA36BB4A3BF127AE5E96B572A5197FD9F3111D895D8919B07BC290764A",
+        "exponent": 0,
+        "aliases": ["mGeo"]
+      },
+      { "denom": "geo", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "O9W",
+    "name": "O9W",
+    "decimals": 6,
+    "address": "ibc/0CD46223FEABD2AEAAAF1F057D01E63BCA79B7D4BD6B68F1EB973A987344695D",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/odin/images/o9w.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/0CD46223FEABD2AEAAAF1F057D01E63BCA79B7D4BD6B68F1EB973A987344695D",
+        "exponent": 0,
+        "aliases": ["mO9W"]
+      },
+      { "denom": "O9W", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "CTK",
+    "name": "CTK",
+    "decimals": 6,
+    "address": "ibc/7ED954CFFFC06EE8419387F3FC688837FF64EF264DE14219935F724EEEDBF8D3",
+    "coinGeckoId": "certik",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/shentu/images/ctk.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/7ED954CFFFC06EE8419387F3FC688837FF64EF264DE14219935F724EEEDBF8D3",
+        "exponent": 0,
+        "aliases": ["uctk"]
+      },
+      { "denom": "ctk", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "KUJI",
+    "name": "KUJI",
+    "decimals": 6,
+    "address": "ibc/BB6BCDB515050BAE97516111873CCD7BCF1FD0CCB723CC12F3C4F704D6C646CE",
+    "coinGeckoId": "kujira",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/kuji.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/BB6BCDB515050BAE97516111873CCD7BCF1FD0CCB723CC12F3C4F704D6C646CE",
+        "exponent": 0,
+        "aliases": ["ukuji"]
+      },
+      { "denom": "kuji", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "USK",
+    "name": "USK",
+    "decimals": 6,
+    "address": "ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC",
+    "coinGeckoId": "usk",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kujira/images/usk.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/44492EAB24B72E3FB59B9FA619A22337FB74F95D8808FE6BC78CC0E6C18DC2EC",
+        "exponent": 0,
+        "aliases": ["uusk"]
+      },
+      { "denom": "usk", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "HARD",
+    "name": "HARD",
+    "decimals": 6,
+    "address": "ibc/D6C28E07F7343360AC41E15DDD44D79701DDCA2E0C2C41279739C8D4AE5264BC",
+    "coinGeckoId": "kava-lend",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/hard.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/D6C28E07F7343360AC41E15DDD44D79701DDCA2E0C2C41279739C8D4AE5264BC",
+        "exponent": 0,
+        "aliases": ["hard"]
+      },
+      { "denom": "HARD", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "SWP",
+    "name": "SWP",
+    "decimals": 6,
+    "address": "ibc/70CF1A54E23EA4E480DEDA9E12082D3FD5684C3483CBDCE190C5C807227688C5",
+    "coinGeckoId": "kava-swap",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/swp.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/70CF1A54E23EA4E480DEDA9E12082D3FD5684C3483CBDCE190C5C807227688C5",
+        "exponent": 0,
+        "aliases": ["swp"]
+      },
+      { "denom": "SWP", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "USDX",
+    "name": "USDX",
+    "decimals": 6,
+    "address": "ibc/C78F65E1648A3DFE0BAEB6C4CDA69CC2A75437F1793C0E6386DFDA26393790AE",
+    "coinGeckoId": "usdx",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/usdx.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/C78F65E1648A3DFE0BAEB6C4CDA69CC2A75437F1793C0E6386DFDA26393790AE",
+        "exponent": 0,
+        "aliases": ["usdx"]
+      },
+      { "denom": "USDX", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "USDT.grv",
+    "name": "USDT.grv",
+    "decimals": 6,
+    "address": "ibc/71B441E27F1BBB44DD0891BCD370C2794D404D60A4FFE5AECCD9B1E28BC89805",
+    "coinGeckoId": "usd-coin",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/gravitybridge/images/gusdt.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/71B441E27F1BBB44DD0891BCD370C2794D404D60A4FFE5AECCD9B1E28BC89805",
+        "exponent": 0,
+        "aliases": ["gravity0xdAC17F958D2ee523a2206206994597C13D831ec7"]
+      },
+      { "denom": "gusdt", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "LINK.axl",
+    "name": "LINK.axl",
+    "decimals": 18,
+    "address": "ibc/D3327A763C23F01EC43D1F0DB3CEFEC390C362569B6FD191F40A5192F8960049",
+    "coinGeckoId": "chainlink",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/link-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/D3327A763C23F01EC43D1F0DB3CEFEC390C362569B6FD191F40A5192F8960049",
+        "exponent": 0,
+        "aliases": ["link-wei"]
+      },
+      { "denom": "axllink", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "AAVE.axl",
+    "name": "AAVE.axl",
+    "decimals": 18,
+    "address": "ibc/384E5DD50BDE042E1AAF51F312B55F08F95BC985C503880189258B4D9374CBBE",
+    "coinGeckoId": "aave",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/aave-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/384E5DD50BDE042E1AAF51F312B55F08F95BC985C503880189258B4D9374CBBE",
+        "exponent": 0,
+        "aliases": ["aave-wei"]
+      },
+      { "denom": "axlaave", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "APE.axl",
+    "name": "APE.axl",
+    "decimals": 18,
+    "address": "ibc/F83CC6471DA4D4B508F437244F10B9E4C68975344E551A2DEB6B8617AB08F0D4",
+    "coinGeckoId": "apecoin",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/ape-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/F83CC6471DA4D4B508F437244F10B9E4C68975344E551A2DEB6B8617AB08F0D4",
+        "exponent": 0,
+        "aliases": ["ape-wei"]
+      },
+      { "denom": "axlape", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "AXS.axl",
+    "name": "AXS.axl",
+    "decimals": 18,
+    "address": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
+    "coinGeckoId": "axie-infinity",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/axs-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/6C0CB8653012DC2BC1820FD0B6B3AFF8A07D18630BDAEE066FEFB2D92F477C24",
+        "exponent": 0,
+        "aliases": ["axs-wei"]
+      },
+      { "denom": "axlaxs", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "MKR.axl",
+    "name": "MKR.axl",
+    "decimals": 18,
+    "address": "ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3",
+    "coinGeckoId": "maker",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/mkr-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/D27DDDF34BB47E5D5A570742CC667DE53277867116CCCA341F27785E899A70F3",
+        "exponent": 0,
+        "aliases": ["mkr-wei"]
+      },
+      { "denom": "axlmkr", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "RAI.axl",
+    "name": "RAI.axl",
+    "decimals": 18,
+    "address": "ibc/BD796662F8825327D41C96355DF62045A5BA225BAE31C0A86289B9D88ED3F44E",
+    "coinGeckoId": "rai",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/rai-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/BD796662F8825327D41C96355DF62045A5BA225BAE31C0A86289B9D88ED3F44E",
+        "exponent": 0,
+        "aliases": ["rai-wei"]
+      },
+      { "denom": "axlrai", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "SHIB.axl",
+    "name": "SHIB.axl",
+    "decimals": 18,
+    "address": "ibc/19305E20681911F14D1FB275E538CDE524C3BF88CF9AE5D5F78F4D4DA05E85B2",
+    "coinGeckoId": "shiba-inu",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/shib-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/19305E20681911F14D1FB275E538CDE524C3BF88CF9AE5D5F78F4D4DA05E85B2",
+        "exponent": 0,
+        "aliases": ["shib-wei"]
+      },
+      { "denom": "axlshib", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "UNI.axl",
+    "name": "UNI.axl",
+    "decimals": 18,
+    "address": "ibc/AE2719773D6FCDD05AC17B1ED63F672F5F9D84144A61965F348C86C2A83AD161",
+    "coinGeckoId": "uniswap",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/uni-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/AE2719773D6FCDD05AC17B1ED63F672F5F9D84144A61965F348C86C2A83AD161",
+        "exponent": 0,
+        "aliases": ["uni-wei"]
+      },
+      { "denom": "axluni", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "XCN.axl",
+    "name": "XCN.axl",
+    "decimals": 18,
+    "address": "ibc/B901BEC1B71D0573E6EE874FEC39E2DF4C2BDB1DB74CB3DA0A9CACC4A435B0EC",
+    "coinGeckoId": "chain-2",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/xcn-wei L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/B901BEC1B71D0573E6EE874FEC39E2DF4C2BDB1DB74CB3DA0A9CACC4A435B0EC",
+        "exponent": 0,
+        "aliases": ["xcn-wei"]
+      },
+      { "denom": "axlxcn", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "LVN",
+    "name": "LVN",
+    "decimals": 6,
+    "address": "ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy",
+    "coinGeckoId": "lvn",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kichain/images/lvn.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/AD185F62399F770CCCE8A36A180A77879FF6C26A0398BD3D2A74E087B0BFA121",
+        "exponent": 0,
+        "aliases": [
+          "cw20:ki1dt3lk455ed360pna38fkhqn0p8y44qndsr77qu73ghyaz2zv4whq83mwdy",
+          "ulvn"
+        ]
+      },
+      { "denom": "lvn", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "WGLMR.axl",
+    "name": "WGLMR.axl",
+    "decimals": 18,
+    "address": "ibc/1E26DB0E5122AED464D98462BD384FCCB595732A66B3970AE6CE0B58BAE0FC49",
+    "coinGeckoId": "wrapped-moonbeam",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/wdev-wei.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/1E26DB0E5122AED464D98462BD384FCCB595732A66B3970AE6CE0B58BAE0FC49",
+        "exponent": 0,
+        "aliases": ["wglmr-wei", "0xacc15dc74880c9944775448304b263d191c6077f"]
+      },
+      { "denom": "axlwglmr", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "DOT.axl",
+    "name": "DOT.axl",
+    "decimals": 10,
+    "address": "ibc/3FF92D26B407FD61AE95D975712A7C319CDE28DE4D80BDC9978D935932B991D7",
+    "coinGeckoId": "polkadot",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/axelar/images/dot-planck L@3x.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/3FF92D26B407FD61AE95D975712A7C319CDE28DE4D80BDC9978D935932B991D7",
+        "exponent": 0,
+        "aliases": ["dot-planck", "0xffffffff1fcacbd218edc0eba20fc2308c778080"]
+      },
+      { "denom": "axldot", "exponent": 10 }
+    ]
+  },
+  {
+    "symbol": "GLTO",
+    "name": "GLTO",
+    "decimals": 6,
+    "address": "juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/glto.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/52C57FCA7D6854AA178E7A183DDBE4EF322B904B1D719FC485F6FFBC1F72A19E",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1j0a9ymgngasfn3l5me8qpd53l5zlm9wurfdk7r65s5mg6tkxal3qpgf5se"
+        ]
+      },
+      { "denom": "glto", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "GKEY",
+    "name": "GKEY",
+    "decimals": 6,
+    "address": "juno1gz8cf86zr4vw9cjcyyv432vgdaecvr9n254d3uwwkx9rermekddsxzageh",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/gkey.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/7C781B4C2082CD62129A972D47486D78EC17155C299270E3C89348EA026BEAF8",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1gz8cf86zr4vw9cjcyyv432vgdaecvr9n254d3uwwkx9rermekddsxzageh"
+        ]
+      },
+      { "denom": "gkey", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "CRE",
+    "name": "CRE",
+    "decimals": 6,
+    "address": "ibc/5A7C219BA5F7582B99629BA3B2A01A61BFDA0F6FD1FE95B5366F7334C4BC0580",
+    "coinGeckoId": "crescent-network",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/crescent/images/cre.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/5A7C219BA5F7582B99629BA3B2A01A61BFDA0F6FD1FE95B5366F7334C4BC0580",
+        "exponent": 0,
+        "aliases": ["ucre"]
+      },
+      { "denom": "cre", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "LUMEN",
+    "name": "LUMEN",
+    "decimals": 6,
+    "address": "ibc/FFA652599C77E853F017193E36B5AB2D4D9AFC4B54721A74904F80C9236BF3B7",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lumenx/images/lumen.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/FFA652599C77E853F017193E36B5AB2D4D9AFC4B54721A74904F80C9236BF3B7",
+        "exponent": 0,
+        "aliases": ["ulumen"]
+      },
+      { "denom": "lumen", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "ORAI",
+    "name": "ORAI",
+    "decimals": 6,
+    "address": "ibc/161D7D62BAB3B9C39003334F1671208F43C06B643CC9EDBBE82B64793C857F1D",
+    "coinGeckoId": "oraichain-token",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/oraichain/images/orai-white.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/161D7D62BAB3B9C39003334F1671208F43C06B643CC9EDBBE82B64793C857F1D",
+        "exponent": 0,
+        "aliases": ["orai"]
+      },
+      { "denom": "ORAI", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "BLD",
+    "name": "BLD",
+    "decimals": 6,
+    "address": "ibc/2DA9C149E9AD2BD27FEFA635458FB37093C256C1A940392634A16BEA45262604",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/agoric/images/bld.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/2DA9C149E9AD2BD27FEFA635458FB37093C256C1A940392634A16BEA45262604",
+        "exponent": 0,
+        "aliases": ["ubld"]
+      },
+      { "denom": "bld", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "CUDOS",
+    "name": "CUDOS",
+    "decimals": 18,
+    "address": "ibc/E09ED39F390EC51FA9F3F69BEA08B5BBE6A48B3057B2B1C3467FAAE9E58B021B",
+    "coinGeckoId": "cudos",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/cudos/images/cudos.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/E09ED39F390EC51FA9F3F69BEA08B5BBE6A48B3057B2B1C3467FAAE9E58B021B",
+        "exponent": 0,
+        "aliases": ["acudos"]
+      },
+      { "denom": "cudos", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "USDX",
+    "name": "USDX",
+    "decimals": 6,
+    "address": "ibc/C78F65E1648A3DFE0BAEB6C4CDA69CC2A75437F1793C0E6386DFDA26393790AE",
+    "coinGeckoId": "usdx",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/usdx.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/C78F65E1648A3DFE0BAEB6C4CDA69CC2A75437F1793C0E6386DFDA26393790AE",
+        "exponent": 0,
+        "aliases": ["usdx"]
+      },
+      { "denom": "USDX", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "seJUNO",
+    "name": "seJUNO",
+    "decimals": 6,
+    "address": "juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/sejuno.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/C6B6BFCB6EE49A7CAB1A7E7B021DE35B99D525AC660844952F0F6C78DCB2A57B",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1dd0k0um5rqncfueza62w9sentdfh3ec4nw4aq4lk5hkjl63vljqscth9gv"
+        ]
+      },
+      { "denom": "sejuno", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "bJUNO",
+    "name": "bJUNO",
+    "decimals": 6,
+    "address": "juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/bjuno.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/C2DF5C3949CA835B221C575625991F09BAB4E48FB9C11A4EE357194F736111E3",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1wwnhkagvcd3tjz6f8vsdsw5plqnw8qy2aj3rrhqr2axvktzv9q2qz8jxn3"
+        ]
+      },
+      { "denom": "bjuno", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "STRD",
+    "name": "STRD",
+    "decimals": 6,
+    "address": "ibc/A8CA5EE328FA10C9519DF6057DA1F69682D28F7D0F5CCC7ECB72E3DCA2D157A4",
+    "coinGeckoId": "stride",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/strd.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/A8CA5EE328FA10C9519DF6057DA1F69682D28F7D0F5CCC7ECB72E3DCA2D157A4",
+        "exponent": 0,
+        "aliases": ["ustrd"]
+      },
+      { "denom": "strd", "exponent": 6, "aliases": [] }
+    ]
+  },
+  {
+    "symbol": "stATOM",
+    "name": "stATOM",
+    "decimals": 6,
+    "address": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
+    "coinGeckoId": "stride-staked-atom",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/statom.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/C140AFD542AE77BD7DCC83F13FDD8C5E5BB8C4929785E6EC2F4C636F98F17901",
+        "exponent": 0,
+        "aliases": ["stuatom"]
+      },
+      { "denom": "statom", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "stSTARS",
+    "name": "stSTARS",
+    "decimals": 6,
+    "address": "ibc/5DD1F95ED336014D00CE2520977EC71566D282F9749170ADC83A392E0EA7426A",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/ststars.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/5DD1F95ED336014D00CE2520977EC71566D282F9749170ADC83A392E0EA7426A",
+        "exponent": 0,
+        "aliases": ["stustars"]
+      },
+      { "denom": "ststars", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "SOLAR",
+    "name": "SOLAR",
+    "decimals": 6,
+    "address": "juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/solar.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/C3FC4DED273E7D1DD2E7BAA3317EC9A53CD3252B577AA33DC00D9DF2BDF3ED5C",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno159q8t5g02744lxq8lfmcn6f78qqulq9wn3y9w7lxjgkz4e0a6kvsfvapse"
+        ]
+      },
+      { "denom": "solar", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "SEASY",
+    "name": "SEASY",
+    "decimals": 6,
+    "address": "juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/seasy.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/18A676A074F73B9B42DA4F9DFC8E5AEF334C9A6636DDEC8D34682F52F1DECDF6",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno19rqljkh95gh40s7qdx40ksx3zq5tm4qsmsrdz9smw668x9zdr3lqtg33mf"
+        ]
+      },
+      { "denom": "seasy", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "AXL",
+    "name": "AXL",
+    "decimals": 6,
+    "address": "ibc/903A61A498756EA560B85A85132D3AEE21B5DEDD41213725D22ABF276EA6945E",
+    "coinGeckoId": "axelar",
+    "logo": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/axl.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/903A61A498756EA560B85A85132D3AEE21B5DEDD41213725D22ABF276EA6945E",
+        "exponent": 0,
+        "aliases": ["uaxl"]
+      },
+      { "denom": "axl", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "REBUS",
+    "name": "REBUS",
+    "decimals": 18,
+    "address": "ibc/A1AC7F9EE2F643A68E3A35BCEB22040120BEA4059773BB56985C76BDFEBC71D9",
+    "coinGeckoId": "rebus",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/rebus/images/rebus.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/A1AC7F9EE2F643A68E3A35BCEB22040120BEA4059773BB56985C76BDFEBC71D9",
+        "exponent": 0,
+        "aliases": ["arebus"]
+      },
+      { "denom": "rebus", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "TORI",
+    "name": "TORI",
+    "decimals": 6,
+    "address": "ibc/EB7FB9C8B425F289B63703413327C2051030E848CE4EAAEA2E51199D6D39D3EC",
+    "coinGeckoId": "",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/teritori/images/utori.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/EB7FB9C8B425F289B63703413327C2051030E848CE4EAAEA2E51199D6D39D3EC",
+        "exponent": 0,
+        "aliases": ["utori"]
+      },
+      { "denom": "tori", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "stJUNO",
+    "name": "stJUNO",
+    "decimals": 6,
+    "address": "ibc/84502A75BCA4A5F68D464C00B3F610CE2585847D59B52E5FFB7C3C9D2DDCD3FE",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/stride/images/stjuno.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/84502A75BCA4A5F68D464C00B3F610CE2585847D59B52E5FFB7C3C9D2DDCD3FE",
+        "exponent": 0,
+        "aliases": ["stujuno"]
+      },
+      { "denom": "stjuno", "exponent": 6 }
+    ]
+  },
+  {
+    "symbol": "LAMB",
+    "name": "LAMB",
+    "decimals": 18,
+    "address": "ibc/80825E8F04B12D914ABEADB1F4D39C04755B12C8402F6876EE3168450C0A90BB",
+    "coinGeckoId": "lambda",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/lambda/images/lambda.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/80825E8F04B12D914ABEADB1F4D39C04755B12C8402F6876EE3168450C0A90BB",
+        "exponent": 0,
+        "aliases": ["ulamb"]
+      },
+      { "denom": "lamb", "exponent": 18 }
+    ]
+  },
+  {
+    "symbol": "MUSE",
+    "name": "MUSE",
+    "decimals": 6,
+    "address": "juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3",
+    "logo": "https://raw.githubusercontent.com/cosmos/chain-registry/master/juno/images/muse.png",
+    "denomUnits": [
+      {
+        "denom": "ibc/6B982170CE024689E8DD0E7555B129B488005130D4EDA426733D552D10B36D8F",
+        "exponent": 0,
+        "aliases": [
+          "cw20:juno1p8x807f6h222ur0vssqy3qk6mcpa40gw2pchquz5atl935t7kvyq894ne3"
+        ]
+      },
+      { "denom": "muse", "exponent": 6 }
+    ]
+  }
+]

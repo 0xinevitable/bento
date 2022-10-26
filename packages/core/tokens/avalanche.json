@@ -1,0 +1,450 @@
+[
+  {
+    "symbol": "USDCso",
+    "name": "USD Coin (Portal from Solana)",
+    "decimals": 6,
+    "address": "0x0950Fc1AD509358dAeaD5eB8020a3c7d8b43b9DA",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x0950Fc1AD509358dAeaD5eB8020a3c7d8b43b9DA/logo.png"
+  },
+  {
+    "symbol": "ROSE",
+    "name": "ROSE (Portal)",
+    "decimals": 18,
+    "address": "0x12AF5C1a232675f62F405b5812A80e7a6F75D746",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x12AF5C1a232675f62F405b5812A80e7a6F75D746/logo.png"
+  },
+  {
+    "symbol": "nftRISE",
+    "name": "EverRise NFT Stakes",
+    "decimals": 0,
+    "address": "0x23cD2E6b283754Fd2340a75732f9DdBb5d11807e",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x23cD2E6b283754Fd2340a75732f9DdBb5d11807e/logo.png"
+  },
+  {
+    "symbol": "BNB",
+    "name": "Binance Coin (Wormhole)",
+    "decimals": 18,
+    "address": "0x442F7f22b1EE2c842bEAFf52880d4573E9201158",
+    "coinGeckoId": "binance-coin-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x442F7f22b1EE2c842bEAFf52880d4573E9201158/logo.png"
+  },
+  {
+    "symbol": "USDCpo",
+    "name": "USD Coin (PoS) (Wormhole)",
+    "decimals": 6,
+    "address": "0x543672E9CBEC728CBBa9C3Ccd99ed80aC3607FA8",
+    "coinGeckoId": "usd-coin-pos-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x543672E9CBEC728CBBa9C3Ccd99ed80aC3607FA8/logo.png"
+  },
+  {
+    "symbol": "PNG",
+    "name": "Pangolin",
+    "decimals": 18,
+    "address": "0x60781C2586D68229fde47564546784ab3fACA982",
+    "coinGeckoId": "pangolin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x60781C2586D68229fde47564546784ab3fACA982/logo.png"
+  },
+  {
+    "symbol": "USDCbs",
+    "name": "USD Coin (Portal from BSC)",
+    "decimals": 18,
+    "address": "0x6145E8a910aE937913426BF32De2b26039728ACF",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x6145E8a910aE937913426BF32De2b26039728ACF/logo.png"
+  },
+  {
+    "symbol": "LUNA",
+    "name": "Terra Classic (Wormhole)",
+    "decimals": 6,
+    "address": "0x70928E5B188def72817b7775F0BF6325968e563B",
+    "coinGeckoId": "luna-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x70928E5B188def72817b7775F0BF6325968e563B/logo.png"
+  },
+  {
+    "symbol": "ETH",
+    "name": "Ethereum (Wormhole)",
+    "decimals": 18,
+    "address": "0x8b82A291F83ca07Af22120ABa21632088fC92931",
+    "coinGeckoId": "ethereum-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x8b82A291F83ca07Af22120ABa21632088fC92931/logo.png"
+  },
+  {
+    "symbol": "CAKE",
+    "name": "PancakeSwap Token (Portal)",
+    "decimals": 18,
+    "address": "0x98a4d09036Cc5337810096b1D004109686E56Afc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x98a4d09036Cc5337810096b1D004109686E56Afc/logo.png"
+  },
+  {
+    "symbol": "BUSDbs",
+    "name": "Binance USD (Portal from BSC)",
+    "decimals": 18,
+    "address": "0xA41a6c7E25DdD361343e8Cb8cFa579bbE5eEdb7a",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xA41a6c7E25DdD361343e8Cb8cFa579bbE5eEdb7a/logo.png"
+  },
+  {
+    "symbol": "USDTbs",
+    "name": "Tether USD (Portal from BSC)",
+    "decimals": 18,
+    "address": "0xA67BCC0D06d7d13A13A2AE30bF30f1B434f5a28B",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xA67BCC0D06d7d13A13A2AE30bF30f1B434f5a28B/logo.png"
+  },
+  {
+    "symbol": "ODDZ",
+    "name": "Oddz",
+    "decimals": 18,
+    "address": "0xB0a6e056B587D0a85640b39b1cB44086F7a26A1E",
+    "coinGeckoId": "oddz",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xB0a6e056B587D0a85640b39b1cB44086F7a26A1E/logo.png"
+  },
+  {
+    "symbol": "USDCet",
+    "name": "USD Coin (Wormhole from Ethereum)",
+    "decimals": 6,
+    "address": "0xB24CA28D4e2742907115fECda335b40dbda07a4C",
+    "coinGeckoId": "usd-coin-wormhole-from-ethereum",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xB24CA28D4e2742907115fECda335b40dbda07a4C/logo.png"
+  },
+  {
+    "symbol": "RISE",
+    "name": "EverRise",
+    "decimals": 18,
+    "address": "0xC17c30e98541188614dF99239cABD40280810cA3",
+    "coinGeckoId": "everrise",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xC17c30e98541188614dF99239cABD40280810cA3/logo.png"
+  },
+  {
+    "symbol": "veRISE",
+    "name": "Vote-escrowed EverRise",
+    "decimals": 18,
+    "address": "0xDbA7b24257fC6e397cB7368B4BC922E944072f1b",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xDbA7b24257fC6e397cB7368B4BC922E944072f1b/logo.png"
+  },
+  {
+    "symbol": "USDTso",
+    "name": "Tether USD (Wormhole)",
+    "decimals": 6,
+    "address": "0xF0FF231e3F1A50F83136717f287ADAB862f89431",
+    "coinGeckoId": "tether-usd-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xF0FF231e3F1A50F83136717f287ADAB862f89431/logo.png"
+  },
+  {
+    "symbol": "GG",
+    "name": "Galaxy Goggle",
+    "decimals": 9,
+    "address": "0xF2F7CE610a091B94d41D69f4fF1129434a82E2f0",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xF2F7CE610a091B94d41D69f4fF1129434a82E2f0/logo.png"
+  },
+  {
+    "symbol": "SOL",
+    "name": "SOL (Wormhole)",
+    "decimals": 9,
+    "address": "0xFE6B19286885a4F7F55AdAD09C3Cd1f906D2478F",
+    "coinGeckoId": "sol-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xFE6B19286885a4F7F55AdAD09C3Cd1f906D2478F/logo.png"
+  },
+  {
+    "symbol": "UST",
+    "name": "TerraUSD (Wormhole)",
+    "decimals": 6,
+    "address": "0xb599c3590F42f8F995ECfa0f85D2980B76862fc1",
+    "coinGeckoId": "terrausd-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xb599c3590F42f8F995ECfa0f85D2980B76862fc1/logo.png"
+  },
+  {
+    "symbol": "claimRISE",
+    "name": "EverRise Rewards",
+    "decimals": 18,
+    "address": "0xbBD7B847C6d0d0B5691518a363194D71426475F1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xbBD7B847C6d0d0B5691518a363194D71426475F1/logo.png"
+  },
+  {
+    "symbol": "APE-X",
+    "name": "Ape-X",
+    "decimals": 9,
+    "address": "0xd039C9079ca7F2a87D632A9C0d7cEa0137bAcFB5",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xd039C9079ca7F2a87D632A9C0d7cEa0137bAcFB5/logo.png"
+  },
+  {
+    "symbol": "MATICpo",
+    "name": "MATIC (Wormhole)",
+    "decimals": 18,
+    "address": "0xf2f13f0B7008ab2FA4A2418F4ccC3684E49D20Eb",
+    "coinGeckoId": "matic-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xf2f13f0B7008ab2FA4A2418F4ccC3684E49D20Eb/logo.png"
+  },
+  {
+    "symbol": "SHIB.e",
+    "name": "SHIBA INU",
+    "decimals": 18,
+    "address": "0x02D980A0D7AF3fb7Cf7Df8cB35d9eDBCF355f665",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x02D980A0D7AF3fb7Cf7Df8cB35d9eDBCF355f665/logo.png"
+  },
+  {
+    "symbol": "BUSD.e",
+    "name": "Binance USD",
+    "decimals": 6,
+    "address": "0x19860CCB0A68fd4213aB9D8266F7bBf05A8dDe98",
+    "coinGeckoId": "binance-usd",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x19860CCB0A68fd4213aB9D8266F7bBf05A8dDe98/logo.png"
+  },
+  {
+    "symbol": "TUSD",
+    "name": "TrueUSD",
+    "decimals": 18,
+    "address": "0x1C20E891Bab6b1727d14Da358FAe2984Ed9B59EB",
+    "coinGeckoId": "true-usd",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x1C20E891Bab6b1727d14Da358FAe2984Ed9B59EB/logo.png"
+  },
+  {
+    "symbol": "ALPHA.e",
+    "name": "Alpha Venture DAO",
+    "decimals": 18,
+    "address": "0x2147EFFF675e4A4eE1C2f918d181cDBd7a8E208f",
+    "coinGeckoId": "alpha-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x2147EFFF675e4A4eE1C2f918d181cDBd7a8E208f/logo.png"
+  },
+  {
+    "symbol": "FXS",
+    "name": "Frax Share",
+    "decimals": 18,
+    "address": "0x214DB107654fF987AD859F34125307783fC8e387",
+    "coinGeckoId": "frax-share",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x214DB107654fF987AD859F34125307783fC8e387/logo.png"
+  },
+  {
+    "symbol": "CRV.e",
+    "name": "Curve DAO Token",
+    "decimals": 18,
+    "address": "0x249848BeCA43aC405b8102Ec90Dd5F22CA513c06",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x249848BeCA43aC405b8102Ec90Dd5F22CA513c06/logo.png"
+  },
+  {
+    "symbol": "ORBS",
+    "name": "Orbs",
+    "decimals": 18,
+    "address": "0x340fE1D898ECCAad394e2ba0fC1F93d27c7b717A",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x340fE1D898ECCAad394e2ba0fC1F93d27c7b717A/logo.png"
+  },
+  {
+    "symbol": "SUSHI.e",
+    "name": "Sushi",
+    "decimals": 18,
+    "address": "0x37B608519F91f70F2EeB0e5Ed9AF4061722e4F76",
+    "coinGeckoId": "sushi",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x37B608519F91f70F2EeB0e5Ed9AF4061722e4F76/logo.png"
+  },
+  {
+    "symbol": "KNC",
+    "name": "Kyber Network Crystal",
+    "decimals": 18,
+    "address": "0x39fC9e94Caeacb435842FADeDeCB783589F50f5f",
+    "coinGeckoId": "kyber-network-crystal",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x39fC9e94Caeacb435842FADeDeCB783589F50f5f/logo.png"
+  },
+  {
+    "symbol": "UMA.e",
+    "name": "UMA",
+    "decimals": 18,
+    "address": "0x3Bd2B1c7ED8D396dbb98DED3aEbb41350a5b2339",
+    "coinGeckoId": "uma",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x3Bd2B1c7ED8D396dbb98DED3aEbb41350a5b2339/logo.png"
+  },
+  {
+    "symbol": "WBTC.e",
+    "name": "Wrapped Bitcoin",
+    "decimals": 8,
+    "address": "0x50b7545627a5162F82A992c33b87aDc75187B218",
+    "coinGeckoId": "wrapped-bitcoin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x50b7545627a5162F82A992c33b87aDc75187B218/logo.png"
+  },
+  {
+    "symbol": "xJOE",
+    "name": "JoeBar",
+    "decimals": 18,
+    "address": "0x57319d41F71E81F3c65F2a47CA4e001EbAFd4F33",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x57319d41F71E81F3c65F2a47CA4e001EbAFd4F33/logo.png"
+  },
+  {
+    "symbol": "LINK.e",
+    "name": "Chainlink",
+    "decimals": 18,
+    "address": "0x5947BB275c521040051D82396192181b413227A3",
+    "coinGeckoId": "chainlink",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x5947BB275c521040051D82396192181b413227A3/logo.png"
+  },
+  {
+    "symbol": "ZRX.e",
+    "name": "0x",
+    "decimals": 18,
+    "address": "0x596fA47043f99A4e0F122243B841E55375cdE0d2",
+    "coinGeckoId": "0x",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x596fA47043f99A4e0F122243B841E55375cdE0d2/logo.png"
+  },
+  {
+    "symbol": "SURE",
+    "name": "inSure DeFi",
+    "decimals": 18,
+    "address": "0x5fC17416925789E0852FBFcd81c490ca4abc51F9",
+    "coinGeckoId": "insure",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x5fC17416925789E0852FBFcd81c490ca4abc51F9/logo.png"
+  },
+  {
+    "symbol": "AAVE.e",
+    "name": "Aave",
+    "decimals": 18,
+    "address": "0x63a72806098Bd3D9520cC43356dD78afe5D386D9",
+    "coinGeckoId": "aave",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x63a72806098Bd3D9520cC43356dD78afe5D386D9/logo.png"
+  },
+  {
+    "symbol": "MKR.e",
+    "name": "Maker",
+    "decimals": 18,
+    "address": "0x88128fd4b259552A9A1D457f435a6527AAb72d42",
+    "coinGeckoId": "maker",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x88128fd4b259552A9A1D457f435a6527AAb72d42/logo.png"
+  },
+  {
+    "symbol": "GRT.e",
+    "name": "The Graph",
+    "decimals": 18,
+    "address": "0x8a0cAc13c7da965a312f08ea4229c37869e85cB9",
+    "coinGeckoId": "the-graph",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x8a0cAc13c7da965a312f08ea4229c37869e85cB9/logo.png"
+  },
+  {
+    "symbol": "UNI.e",
+    "name": "Uniswap",
+    "decimals": 18,
+    "address": "0x8eBAf22B6F053dFFeaf46f4Dd9eFA95D89ba8580",
+    "coinGeckoId": "uniswap",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x8eBAf22B6F053dFFeaf46f4Dd9eFA95D89ba8580/logo.png"
+  },
+  {
+    "symbol": "USDt",
+    "name": "Tether",
+    "decimals": 6,
+    "address": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
+    "coinGeckoId": "tether",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7/logo.png"
+  },
+  {
+    "symbol": "BAT.e",
+    "name": "Basic Attention",
+    "decimals": 18,
+    "address": "0x98443B96EA4b0858FDF3219Cd13e98C7A4690588",
+    "coinGeckoId": "basic-attention-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x98443B96EA4b0858FDF3219Cd13e98C7A4690588/logo.png"
+  },
+  {
+    "symbol": "YFI.e",
+    "name": "yearn.finance",
+    "decimals": 18,
+    "address": "0x9eAaC1B23d935365bD7b542Fe22cEEe2922f52dc",
+    "coinGeckoId": "yearn-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x9eAaC1B23d935365bD7b542Fe22cEEe2922f52dc/logo.png"
+  },
+  {
+    "symbol": "USDC.e",
+    "name": "USD Coin Avalanche Bridged (USDC.e)",
+    "decimals": 6,
+    "address": "0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664",
+    "coinGeckoId": "usd-coin-avalanche-bridged-usdc-e",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664/logo.png"
+  },
+  {
+    "symbol": "WAVAX",
+    "name": "Wrapped AVAX",
+    "decimals": 18,
+    "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    "coinGeckoId": "wrapped-avax",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7/logo.png"
+  },
+  {
+    "symbol": "ANY",
+    "name": "Anyswap",
+    "decimals": 18,
+    "address": "0xB44a9B6905aF7c801311e8F4E76932ee959c663C",
+    "coinGeckoId": "anyswap",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xB44a9B6905aF7c801311e8F4E76932ee959c663C/logo.png"
+  },
+  {
+    "symbol": "USDC",
+    "name": "USD Coin",
+    "decimals": 6,
+    "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+    "coinGeckoId": "usd-coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E/logo.png"
+  },
+  {
+    "symbol": "SNX.e",
+    "name": "Synthetix Network",
+    "decimals": 18,
+    "address": "0xBeC243C995409E6520D7C41E404da5dEba4b209B",
+    "coinGeckoId": "havven",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xBeC243C995409E6520D7C41E404da5dEba4b209B/logo.png"
+  },
+  {
+    "symbol": "SPELL",
+    "name": "Spell",
+    "decimals": 18,
+    "address": "0xCE1bFFBD5374Dac86a2893119683F4911a2F7814",
+    "coinGeckoId": "spell-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xCE1bFFBD5374Dac86a2893119683F4911a2F7814/logo.png"
+  },
+  {
+    "symbol": "FRAX",
+    "name": "Frax",
+    "decimals": 18,
+    "address": "0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64",
+    "coinGeckoId": "frax",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64/logo.png"
+  },
+  {
+    "symbol": "COMP.e",
+    "name": "Compound",
+    "decimals": 18,
+    "address": "0xc3048E19E76CB9a3Aa9d77D8C03c29Fc906e2437",
+    "coinGeckoId": "compound-governance-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xc3048E19E76CB9a3Aa9d77D8C03c29Fc906e2437/logo.png"
+  },
+  {
+    "symbol": "USDT.e",
+    "name": "Tether Avalanche Bridged (USDT.e)",
+    "decimals": 6,
+    "address": "0xc7198437980c041c805A1EDcbA50c1Ce5db95118",
+    "coinGeckoId": "tether-avalanche-bridged-usdt-e",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xc7198437980c041c805A1EDcbA50c1Ce5db95118/logo.png"
+  },
+  {
+    "symbol": "USDD",
+    "name": "Decentralized USD",
+    "decimals": 18,
+    "address": "0xcf799767d366d789e8B446981C2D578E241fa25c",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xcf799767d366d789e8B446981C2D578E241fa25c/logo.png"
+  },
+  {
+    "symbol": "1INCH.e",
+    "name": "1inch",
+    "decimals": 18,
+    "address": "0xd501281565bf7789224523144Fe5D98e8B28f267",
+    "coinGeckoId": "1inch",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xd501281565bf7789224523144Fe5D98e8B28f267/logo.png"
+  },
+  {
+    "symbol": "DAI.e",
+    "name": "Dai",
+    "decimals": 18,
+    "address": "0xd586E7F844cEa2F87f50152665BCbc2C279D8d70",
+    "coinGeckoId": "dai",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/logo.png"
+  },
+  {
+    "symbol": "BIFI",
+    "name": "Beefy.Finance",
+    "decimals": 18,
+    "address": "0xd6070ae98b8069de6B494332d1A1a81B6179D960",
+    "coinGeckoId": "beefy-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xd6070ae98b8069de6B494332d1A1a81B6179D960/logo.png"
+  }
+]

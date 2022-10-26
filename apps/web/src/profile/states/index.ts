@@ -1,0 +1,1 @@
+export { profileAtom } from './profile';

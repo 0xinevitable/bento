@@ -16,4 +16,5 @@ lib
 
 # Vercel
 .next
+.turbo
 .vercel

@@ -1,1 +1,0 @@
-export { profileAtom } from './profile';

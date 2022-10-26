@@ -1,1 +1,0 @@
-export { WalletListSection } from './WalletListSection';
