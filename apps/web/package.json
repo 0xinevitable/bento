@@ -1,6 +1,6 @@
 {
   "name": "@bento/web",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "private": true,
   "scripts": {
     "dev": "env-cmd -f .env.debug.local next dev",
