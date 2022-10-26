@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 

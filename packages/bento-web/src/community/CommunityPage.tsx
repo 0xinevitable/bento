@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 

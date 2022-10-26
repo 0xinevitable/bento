@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import { Session } from '@supabase/supabase-js';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
