@@ -8,7 +8,7 @@ import OSMOSIS_ASSETLIST from './raw/osmosis-1.json';
 
 const CHAIN_OUTPUT_PATH = path.resolve(
   WORKSPACE_ROOT_PATH,
-  './packages/bento-core/tokens/osmosis.json',
+  './packages/core/tokens/osmosis.json',
 );
 
 export const update = async () => {

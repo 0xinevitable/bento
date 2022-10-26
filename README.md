@@ -1,80 +1,73 @@
-# 🍱 Bento, The open-source web3 dashboard
+<p align="center">
+  <a href="https://bento.finance">
+    <img alt="Bento" src="https://raw.githubusercontent.com/inevitable-changes/bento/develop/apps/web/public/android-chrome-512x512.png" height="128" />
+  </a>
+  <h1 align="center">
+    Bento, the Open-Source Web3 Dashboard
+  </h1>
+</p>
 
-> **LIVE at [https://bento.finance](https://bento.finance), This product is still under rapid development 🎉**<br />
-> Follow us on [Twitter(@bentoinevitable)](https://twitter.com/bentoinevitable) for updates!
+<p align="center">
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjunhoyeo%2Fparacosm">
+    <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/junhoyeo/paracosm/production?color=%23000000&label=deploy&logo=Vercel&logoColor=white&style=for-the-badge&labelColor=000" />
+  </a>
+  <a href="https://opensource.org/licenses/MPL-2.0">
+    <img alt="License: MPL 2.0" src="https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg?style=for-the-badge&labelColor=000" />
+  </a>
+  <a href="https://twitter.com/bentoinevitable">
+    <img alt="Twitter" src="https://img.shields.io/badge/Follow%20on%20Twitter-1DA1F2.svg?style=for-the-badge&logo=twitter&labelColor=000000&logoWidth=20&logoColor=white" />
+  </a>
+</p>
 
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/bentoinevitable.svg?style=social&label=Follow%20%40bentoinevitable)](https://twitter.com/bentoinevitable)
+> **Note**<br/>
+> LIVE at [bento.finance](https://bento.finance) ⚡️
 
-|                                                                                                    Bento Profiles                                                                                                     |                                                                                           Cover Artwork                                                                                            |                                                                                      Dashboard Preview                                                                                       |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <a href="https://bento.finance/profile/intro"><img width="500" alt="Bento Profiles" src="https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/profile/og-image.png"/></a> | <a href="https://bento.finance"><img width="500" alt="Cover Artwork" src="https://raw.githubusercontent.com/inevitable-changes/bento/main/packages/bento-web/public/assets/og-image-v3.png" /></a> | <a href="https://bento.finance/home"><img width="500" alt="Dashboard Preview" src="https://raw.githubusercontent.com/inevitable-changes/bento/main/docs/images/dashboard-preview.png" /></a> |
-
-## The Status Quo
-
-- All **dashboard services** out there are either:
-  - **Associated with specific Layer-1 chains built by the same team or shared VCs**
-    - Timid movement outside of their current eco
-  - **Maintained as close source software; Development is centralized to the team**
-    - If you want your protocol listed, you have to depend on the team to add support
-
-## Mission
-
-- Make **every user track every asset they own,** regardless of chains and types
-- Make **any builder add support** for their protocol/app freely
-- Provide **social profiles** based on web3
-
-## Community & Contribution
-
-- Add questions via [GitHub Issues](https://github.com/inevitable-changes/bento/issues), or by mentioning our [Twitter](https://twitter.com/bentoinevitable)(we reply quite fast!).
-- Discord community coming soon.
+> **Warning**<br/>
+> This product is still under rapid development 🛠
 
 ## 🚀 Preparing Local Dev Environment
 
 ```bash
 git clone https://github.com/inevitable-changes/bento
 cd bento
-git submodule update --init --recursive
-yarn install
+yarn
 ```
 
-- First, clone this repo.
-- Install private submodules(We'll soon make the project buildable for external users without access).
-- Since we're using [Zero-Install](https://yarnpkg.com/features/zero-installs) through Yarn Berry's Plug'n'Play, the repository's initial clone size might be significantly larger than you think.
+First, clone this repo.
 
 ```env
-ENVIRONMENT=development
+ENVIRONMENT=debug
+MAIN_API_BASE_URL=https://www.bento.finance
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
-NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+SUPABASE_URL=
 NEXT_PUBLIC_OPENSEA_API_KEYS=
 NEXT_PUBLIC_CMC_PRO_API_KEYS=
 
-COVALENT_API_KEYS=ckey_xxx,ckey_xxx
+COVALENT_API_KEYS=
 SLACK_NEW_PROFILE_WEBHOOK=
 SUPABASE_SERVICE_KEY=
 REDIS_URL=
 ```
 
-- Copy `.env.example` inside `@bento/web` to `.env.debug.local`/`.env.development.local` and fill in the contents.
+Copy `.env.example` inside `@bento/api`(`apps/api/.env.*`) and `@bento/web`(`apps/web/.env.*`) and fill in the contents.
 
 ```bash
-yarn workspace @bento/common build
-yarn workspace @bento/core build
+yarn build
 ```
 
-- The Entire project is managed as a monorepo using Yarn Workspaces, so you must build the dependencies first.
-- TIP: You don't have to turn off the `@bento/web` development server when you have modifications to local modules. Just build them right away, and it'll automatically reload. Still, it requires a restart when there are dependency changes.
+We're using [Turborepo](https://turbo.build/repo) with Yarn Workspaces.
 
 ```bash
 yarn workspace @bento/web dev
 ```
 
-- Finally, we start the development server. By default, the port is set to `3000`.
+Finally, we start the development server. By default, the port is set to `3000`.
 
 ## 🏛️ Licensing
 
 <img align="right" src="http://opensource.org/trademarks/opensource/OSI-Approved-License-100x137.png">
 
-- All our branding resources(such as trademarks, assets, and design) are copyright of Inevitable, all rights reserved. Other third-party assets and brand logos included in this repository are the copyright of their rightful owners.
+- All our branding resources(such as trademarks, assets, and design) are copyright of Inevitable, all rights reserved. Other third-party assets and branding elements included in this repository are the copyright of their rightful owners.
 
 - The project is licensed under the [Mozilla Public License Version 2.0](https://opensource.org/licenses/MPL-2.0). You must include this license and copyright notice if you use this work. This also means that you'll have to notify changes and open-source your work(the modified software) in the same license(or, in certain cases, one of the GNU licenses).
 

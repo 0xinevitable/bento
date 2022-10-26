@@ -1,0 +1,737 @@
+[
+  {
+    "symbol": "WETH",
+    "name": "WETH",
+    "decimals": 18,
+    "address": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+    "coinGeckoId": "weth",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619/logo.png"
+  },
+  {
+    "symbol": "WMATIC",
+    "name": "Wrapped Matic",
+    "decimals": 18,
+    "address": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+    "coinGeckoId": "wmatic",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270/logo.png"
+  },
+  {
+    "symbol": "USDC",
+    "name": "USD Coin",
+    "decimals": 6,
+    "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+    "coinGeckoId": "usd-coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174/logo.png"
+  },
+  {
+    "symbol": "USDT",
+    "name": "Tether",
+    "decimals": 6,
+    "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+    "coinGeckoId": "tether",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xc2132D05D31c914a87C6611C10748AEb04B58e8F/logo.png"
+  },
+  {
+    "symbol": "DAI",
+    "name": "Dai",
+    "decimals": 18,
+    "address": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    "coinGeckoId": "dai",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063/logo.png"
+  },
+  {
+    "symbol": "LINK",
+    "name": "Chainlink",
+    "decimals": 18,
+    "address": "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39",
+    "coinGeckoId": "chainlink",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39/logo.png"
+  },
+  {
+    "symbol": "QUICK",
+    "name": "Quickswap [OLD]",
+    "decimals": 18,
+    "address": "0x831753DD7087CaC61aB5644b308642cc1c33Dc13",
+    "coinGeckoId": "quick",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x831753DD7087CaC61aB5644b308642cc1c33Dc13/logo.png"
+  },
+  {
+    "symbol": "AAVE",
+    "name": "Aave",
+    "decimals": 18,
+    "address": "0xD6DF932A45C0f255f85145f286eA0b292B21C90B",
+    "coinGeckoId": "aave",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xD6DF932A45C0f255f85145f286eA0b292B21C90B/logo.png"
+  },
+  {
+    "symbol": "Krill",
+    "name": "Polywhale",
+    "decimals": 18,
+    "address": "0x05089C9EBFFa4F0AcA269e32056b1b36B37ED71b",
+    "coinGeckoId": "polywhale",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x05089C9EBFFa4F0AcA269e32056b1b36B37ED71b/logo.png"
+  },
+  {
+    "symbol": "IDIA",
+    "name": "Impossible Finance",
+    "decimals": 18,
+    "address": "0x0b15Ddf19D47E6a86A56148fb4aFFFc6929BcB89",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x0b15Ddf19D47E6a86A56148fb4aFFFc6929BcB89/logo.png"
+  },
+  {
+    "symbol": "SUSHI",
+    "name": "Sushi",
+    "decimals": 18,
+    "address": "0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a",
+    "coinGeckoId": "sushi",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a/logo.png"
+  },
+  {
+    "symbol": "RISE (old)",
+    "name": "EverRise",
+    "decimals": 18,
+    "address": "0x0cD022ddE27169b20895e0e2B2B8A33B25e63579",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x0cD022ddE27169b20895e0e2B2B8A33B25e63579/logo.png"
+  },
+  {
+    "symbol": "SRAT",
+    "name": "SpaceRat",
+    "decimals": 9,
+    "address": "0x1132f58810Ee9fF13E97aECCd8DDa688Cc5eb8F4",
+    "coinGeckoId": "spacerat",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x1132f58810Ee9fF13E97aECCd8DDa688Cc5eb8F4/logo.png"
+  },
+  {
+    "symbol": "ETH",
+    "name": "Ethereum (Wormhole)",
+    "decimals": 18,
+    "address": "0x11CD37bb86F65419713f30673A480EA33c826872",
+    "coinGeckoId": "ethereum-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x11CD37bb86F65419713f30673A480EA33c826872/logo.png"
+  },
+  {
+    "symbol": "wCCX",
+    "name": "Wrapped CCX",
+    "decimals": 6,
+    "address": "0x137Ee749f0F8c2eD34cA00dE33BB59E3dafA494A",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x137Ee749f0F8c2eD34cA00dE33BB59E3dafA494A/logo.png"
+  },
+  {
+    "symbol": "OVR",
+    "name": "Ovr",
+    "decimals": 18,
+    "address": "0x1631244689EC1fEcbDD22fb5916E920dFC9b8D30",
+    "coinGeckoId": "ovr",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x1631244689EC1fEcbDD22fb5916E920dFC9b8D30/logo.png"
+  },
+  {
+    "symbol": "DLYCOP",
+    "name": "Daily COP",
+    "decimals": 18,
+    "address": "0x1659fFb2d40DfB1671Ac226A0D9Dcc95A774521A",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x1659fFb2d40DfB1671Ac226A0D9Dcc95A774521A/logo.png"
+  },
+  {
+    "symbol": "ROUTE",
+    "name": "Router Protocol",
+    "decimals": 18,
+    "address": "0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4",
+    "coinGeckoId": "route",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4/logo.png"
+  },
+  {
+    "symbol": "CRV",
+    "name": "Curve DAO",
+    "decimals": 18,
+    "address": "0x172370d5Cd63279eFa6d502DAB29171933a610AF",
+    "coinGeckoId": "curve-dao-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x172370d5Cd63279eFa6d502DAB29171933a610AF/logo.png"
+  },
+  {
+    "symbol": "oneBTC",
+    "name": "Stable BTC",
+    "decimals": 18,
+    "address": "0x1f194578e7510A350fb517a9ce63C40Fa1899427",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x1f194578e7510A350fb517a9ce63C40Fa1899427/logo.png"
+  },
+  {
+    "symbol": "BLOK",
+    "name": "Bloktopia",
+    "decimals": 18,
+    "address": "0x229b1b6C23ff8953D663C4cBB519717e323a0a84",
+    "coinGeckoId": "bloktopia",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x229b1b6C23ff8953D663C4cBB519717e323a0a84/logo.png"
+  },
+  {
+    "symbol": "nftRISE",
+    "name": "EverRise NFT Stakes",
+    "decimals": 0,
+    "address": "0x23cD2E6b283754Fd2340a75732f9DdBb5d11807e",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x23cD2E6b283754Fd2340a75732f9DdBb5d11807e/logo.png"
+  },
+  {
+    "symbol": "USDTso",
+    "name": "Tether USD (Wormhole)",
+    "decimals": 6,
+    "address": "0x3553f861dEc0257baDA9F8Ed268bf0D74e45E89C",
+    "coinGeckoId": "tether-usd-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x3553f861dEc0257baDA9F8Ed268bf0D74e45E89C/logo.png"
+  },
+  {
+    "symbol": "FISH",
+    "name": "Polycat Finance",
+    "decimals": 18,
+    "address": "0x3a3Df212b7AA91Aa0402B9035b098891d276572B",
+    "coinGeckoId": "polycat-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x3a3Df212b7AA91Aa0402B9035b098891d276572B/logo.png"
+  },
+  {
+    "symbol": "DATA",
+    "name": "Streamr",
+    "decimals": 18,
+    "address": "0x3a9A81d576d83FF21f26f325066054540720fC34",
+    "coinGeckoId": "streamr",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x3a9A81d576d83FF21f26f325066054540720fC34/logo.png"
+  },
+  {
+    "symbol": "GAMER",
+    "name": "GameStation",
+    "decimals": 18,
+    "address": "0x3f6b3595ecF70735D3f48D69b09C4E4506DB3F47",
+    "coinGeckoId": "gamestation",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x3f6b3595ecF70735D3f48D69b09C4E4506DB3F47/logo.png"
+  },
+  {
+    "symbol": "USDCet",
+    "name": "USD Coin (Wormhole from Ethereum)",
+    "decimals": 6,
+    "address": "0x4318CB63A2b8edf2De971E2F17F77097e499459D",
+    "coinGeckoId": "usd-coin-wormhole-from-ethereum",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x4318CB63A2b8edf2De971E2F17F77097e499459D/logo.png"
+  },
+  {
+    "symbol": "WSPP",
+    "name": "WolfSafePoorPeople Polygon",
+    "decimals": 18,
+    "address": "0x46D502Fac9aEA7c5bC7B13C8Ec9D02378C33D36F",
+    "coinGeckoId": "wolfsafepoorpeople-polygon",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x46D502Fac9aEA7c5bC7B13C8Ec9D02378C33D36F/logo.png"
+  },
+  {
+    "symbol": "FOUR",
+    "name": "4thpillar technologies",
+    "decimals": 18,
+    "address": "0x48cBc913dE09317dF2365e6827Df50dA083701D5",
+    "coinGeckoId": "the-4th-pillar",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x48cBc913dE09317dF2365e6827Df50dA083701D5/logo.png"
+  },
+  {
+    "symbol": "WEXpoly",
+    "name": "WaultSwap Polygon",
+    "decimals": 18,
+    "address": "0x4c4BF319237D98a30A929A96112EfFa8DA3510EB",
+    "coinGeckoId": "waultswap-polygon",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x4c4BF319237D98a30A929A96112EfFa8DA3510EB/logo.png"
+  },
+  {
+    "symbol": "ODDZ",
+    "name": "Oddz",
+    "decimals": 18,
+    "address": "0x4e830F67Ec499E69930867f9017AEb5B3f629c73",
+    "coinGeckoId": "oddz",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x4e830F67Ec499E69930867f9017AEb5B3f629c73/logo.png"
+  },
+  {
+    "symbol": "MM",
+    "name": "Million",
+    "decimals": 18,
+    "address": "0x5647Fe4281F8F6F01E84BCE775AD4b828A7b8927",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x5647Fe4281F8F6F01E84BCE775AD4b828A7b8927/logo.png"
+  },
+  {
+    "symbol": "USDCso",
+    "name": "USD Coin (Portal from Solana)",
+    "decimals": 6,
+    "address": "0x576Cf361711cd940CD9C397BB98C4C896cBd38De",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x576Cf361711cd940CD9C397BB98C4C896cBd38De/logo.png"
+  },
+  {
+    "symbol": "QI",
+    "name": "Qi Dao",
+    "decimals": 18,
+    "address": "0x580A84C73811E1839F75d86d75d88cCa0c241fF4",
+    "coinGeckoId": "qi-dao",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x580A84C73811E1839F75d86d75d88cCa0c241fF4/logo.png"
+  },
+  {
+    "symbol": "HOGE",
+    "name": "Hoge Finance",
+    "decimals": 9,
+    "address": "0x58c1BBb508e96CfEC1787Acf6Afe1C7008A5B064",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x58c1BBb508e96CfEC1787Acf6Afe1C7008A5B064/logo.png"
+  },
+  {
+    "symbol": "WBTC",
+    "name": "Wrapped BTC (Portal)",
+    "decimals": 8,
+    "address": "0x5D49c278340655B56609FdF8976eb0612aF3a0C3",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x5D49c278340655B56609FdF8976eb0612aF3a0C3/logo.png"
+  },
+  {
+    "symbol": "ORION",
+    "name": "Orion Money",
+    "decimals": 18,
+    "address": "0x5E0294Af1732498C77F8dB015a2d52a76298542B",
+    "coinGeckoId": "orion-money",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x5E0294Af1732498C77F8dB015a2d52a76298542B/logo.png"
+  },
+  {
+    "symbol": "PYQ",
+    "name": "PolyQuity",
+    "decimals": 18,
+    "address": "0x5a3064CbDCCF428ae907796cF6aD5a664CD7F3d8",
+    "coinGeckoId": "polyquity",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x5a3064CbDCCF428ae907796cF6aD5a664CD7F3d8/logo.png"
+  },
+  {
+    "symbol": "BANANA",
+    "name": "ApeSwap",
+    "decimals": 18,
+    "address": "0x5d47bAbA0d66083C52009271faF3F50DCc01023C",
+    "coinGeckoId": "apeswap-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x5d47bAbA0d66083C52009271faF3F50DCc01023C/logo.png"
+  },
+  {
+    "symbol": "0xBTC",
+    "name": "0xBitcoin",
+    "decimals": 8,
+    "address": "0x71B821aa52a49F32EEd535fCA6Eb5aa130085978",
+    "coinGeckoId": "oxbitcoin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x71B821aa52a49F32EEd535fCA6Eb5aa130085978/logo.png"
+  },
+  {
+    "symbol": "OMEN",
+    "name": "Augury Finance",
+    "decimals": 18,
+    "address": "0x76e63a3E7Ba1e2E61D3DA86a87479f983dE89a7E",
+    "coinGeckoId": "augury-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x76e63a3E7Ba1e2E61D3DA86a87479f983dE89a7E/logo.png"
+  },
+  {
+    "symbol": "AVAX",
+    "name": "Avalanche (Wormhole)",
+    "decimals": 18,
+    "address": "0x7Bb11E7f8b10E9e571E5d8Eace04735fDFB2358a",
+    "coinGeckoId": "avalanche-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x7Bb11E7f8b10E9e571E5d8Eace04735fDFB2358a/logo.png"
+  },
+  {
+    "symbol": "PAINT",
+    "name": "MurAll",
+    "decimals": 18,
+    "address": "0x7c28F627eA3aEc8B882b51eb1935f66e5b875714",
+    "coinGeckoId": "paint",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x7c28F627eA3aEc8B882b51eb1935f66e5b875714/logo.png"
+  },
+  {
+    "symbol": "GFI",
+    "name": "Gravity Finance",
+    "decimals": 18,
+    "address": "0x874e178A2f3f3F9d34db862453Cd756E7eAb0381",
+    "coinGeckoId": "gravity-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x874e178A2f3f3F9d34db862453Cd756E7eAb0381/logo.png"
+  },
+  {
+    "symbol": "PolyDoge",
+    "name": "PolyDoge",
+    "decimals": 18,
+    "address": "0x8A953CfE442c5E8855cc6c61b1293FA648BAE472",
+    "coinGeckoId": "polydoge",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x8A953CfE442c5E8855cc6c61b1293FA648BAE472/logo.png"
+  },
+  {
+    "symbol": "DHT",
+    "name": "dHEDGE DAO",
+    "decimals": 18,
+    "address": "0x8C92e38eCA8210f4fcBf17F0951b198Dd7668292",
+    "coinGeckoId": "dhedge-dao",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x8C92e38eCA8210f4fcBf17F0951b198Dd7668292/logo.png"
+  },
+  {
+    "symbol": "NSFW",
+    "name": "Pleasure Coin",
+    "decimals": 18,
+    "address": "0x8f006D1e1D9dC6C98996F50a4c810F17a47fBF19",
+    "coinGeckoId": "pleasure-coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x8f006D1e1D9dC6C98996F50a4c810F17a47fBF19/logo.png"
+  },
+  {
+    "symbol": "WOLF",
+    "name": "moonwolf.io",
+    "decimals": 9,
+    "address": "0x8f18dC399594b451EdA8c5da02d0563c0b2d0f16",
+    "coinGeckoId": "moonwolf-io",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x8f18dC399594b451EdA8c5da02d0563c0b2d0f16/logo.png"
+  },
+  {
+    "symbol": "USDTet",
+    "name": "Tether USD (Wormhole from Ethereum)",
+    "decimals": 6,
+    "address": "0x9417669fBF23357D2774e9D421307bd5eA1006d2",
+    "coinGeckoId": "tether-usd-wormhole-from-ethereum",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x9417669fBF23357D2774e9D421307bd5eA1006d2/logo.png"
+  },
+  {
+    "symbol": "maUSDC",
+    "name": "Matic Aave Interest Bearing USDC",
+    "decimals": 6,
+    "address": "0x9719d867A500Ef117cC201206B8ab51e794d3F82",
+    "coinGeckoId": "matic-aave-usdc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x9719d867A500Ef117cC201206B8ab51e794d3F82/logo.png"
+  },
+  {
+    "symbol": "UNCX",
+    "name": "UniCrypt",
+    "decimals": 18,
+    "address": "0x9EECD634c7a934F752aF0EB90DdA9Ecc262F199F",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x9EECD634c7a934F752aF0EB90DdA9Ecc262F199F/logo.png"
+  },
+  {
+    "symbol": "PUSD",
+    "name": "PUSD_Polyquity",
+    "decimals": 18,
+    "address": "0x9aF3b7DC29D3C4B1A5731408B6A9656fA7aC3b72",
+    "coinGeckoId": "pusd",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x9aF3b7DC29D3C4B1A5731408B6A9656fA7aC3b72/logo.png"
+  },
+  {
+    "symbol": "ISLAMI",
+    "name": "ISLAMICOIN",
+    "decimals": 7,
+    "address": "0x9c891326Fd8b1a713974f73bb604677E1E63396D",
+    "coinGeckoId": "islamicoin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x9c891326Fd8b1a713974f73bb604677E1E63396D/logo.png"
+  },
+  {
+    "symbol": "LUNA",
+    "name": "Terra Classic (Wormhole)",
+    "decimals": 6,
+    "address": "0x9cd6746665D9557e1B9a775819625711d0693439",
+    "coinGeckoId": "luna-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x9cd6746665D9557e1B9a775819625711d0693439/logo.png"
+  },
+  {
+    "symbol": "BUSDbs",
+    "name": "Binance USD (Portal from BSC)",
+    "decimals": 18,
+    "address": "0xA8D394fE7380b8cE6145d5f85E6aC22d4E91ACDe",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xA8D394fE7380b8cE6145d5f85E6aC22d4E91ACDe/logo.png"
+  },
+  {
+    "symbol": "CRO",
+    "name": "Crypto.com Coin",
+    "decimals": 8,
+    "address": "0xAdA58DF0F643D959C2A47c9D4d4c1a4deFe3F11C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xAdA58DF0F643D959C2A47c9D4d4c1a4deFe3F11C/logo.png"
+  },
+  {
+    "symbol": "IF",
+    "name": "Impossible Finance",
+    "decimals": 18,
+    "address": "0xB0e1fc65C1a741b4662B813eB787d369b8614Af1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xB0e1fc65C1a741b4662B813eB787d369b8614Af1/logo.png"
+  },
+  {
+    "symbol": "ARDN",
+    "name": "Ariadne",
+    "decimals": 18,
+    "address": "0xB6EBc3ca1741a8f37551E44A51eC00aD417B38CA",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xB6EBc3ca1741a8f37551E44A51eC00aD417B38CA/logo.png"
+  },
+  {
+    "symbol": "AIRT",
+    "name": "AirNFT Token",
+    "decimals": 18,
+    "address": "0xBCD287ca1C614Ecd8c5Ca95bFf3c13c392192df5",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xBCD287ca1C614Ecd8c5Ca95bFf3c13c392192df5/logo.png"
+  },
+  {
+    "symbol": "DFYN",
+    "name": "Dfyn Network",
+    "decimals": 18,
+    "address": "0xC168E40227E4ebD8C1caE80F7a55a4F0e6D66C97",
+    "coinGeckoId": "dfyn-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xC168E40227E4ebD8C1caE80F7a55a4F0e6D66C97/logo.png"
+  },
+  {
+    "symbol": "RISE",
+    "name": "EverRise",
+    "decimals": 18,
+    "address": "0xC17c30e98541188614dF99239cABD40280810cA3",
+    "coinGeckoId": "everrise",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xC17c30e98541188614dF99239cABD40280810cA3/logo.png"
+  },
+  {
+    "symbol": "ROLL",
+    "name": "Polyroll",
+    "decimals": 18,
+    "address": "0xC68e83a305b0FaD69E264A1769a0A070F190D2d6",
+    "coinGeckoId": "polyroll",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xC68e83a305b0FaD69E264A1769a0A070F190D2d6/logo.png"
+  },
+  {
+    "symbol": "IRON",
+    "name": "Iron",
+    "decimals": 18,
+    "address": "0xD86b5923F3AD7b585eD81B448170ae026c65ae9a",
+    "coinGeckoId": "iron-stablecoin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xD86b5923F3AD7b585eD81B448170ae026c65ae9a/logo.png"
+  },
+  {
+    "symbol": "DEI",
+    "name": "DEI",
+    "decimals": 18,
+    "address": "0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xDE12c7959E1a72bbe8a5f7A1dc8f8EeF9Ab011B3/logo.png"
+  },
+  {
+    "symbol": "DEUS",
+    "name": "DEUS Finance",
+    "decimals": 18,
+    "address": "0xDE5ed76E7c05eC5e4572CfC88d1ACEA165109E44",
+    "coinGeckoId": "deus-finance-2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xDE5ed76E7c05eC5e4572CfC88d1ACEA165109E44/logo.png"
+  },
+  {
+    "symbol": "veRISE",
+    "name": "Vote-escrowed EverRise",
+    "decimals": 18,
+    "address": "0xDbA7b24257fC6e397cB7368B4BC922E944072f1b",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xDbA7b24257fC6e397cB7368B4BC922E944072f1b/logo.png"
+  },
+  {
+    "symbol": "pCherry",
+    "name": "CherryPick",
+    "decimals": 18,
+    "address": "0xE33dC9d2D7D64c1e23467aC7eD7F8eF56d0a8d66",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xE33dC9d2D7D64c1e23467aC7eD7F8eF56d0a8d66/logo.png"
+  },
+  {
+    "symbol": "UST",
+    "name": "TerraUSD (Wormhole)",
+    "decimals": 6,
+    "address": "0xE6469Ba6D2fD6130788E0eA9C0a0515900563b59",
+    "coinGeckoId": "terrausd-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xE6469Ba6D2fD6130788E0eA9C0a0515900563b59/logo.png"
+  },
+  {
+    "symbol": "EQZ",
+    "name": "Equalizer",
+    "decimals": 18,
+    "address": "0xEAf631ac57F3CDDDd261770dD47F85066131a156",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xEAf631ac57F3CDDDd261770dD47F85066131a156/logo.png"
+  },
+  {
+    "symbol": "ERR",
+    "name": "Coinerr",
+    "decimals": 9,
+    "address": "0xFB32513135e3267995268E3099d2B6114d20B6eD",
+    "coinGeckoId": "coinerr",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xFB32513135e3267995268E3099d2B6114d20B6eD/logo.png"
+  },
+  {
+    "symbol": "miMATIC",
+    "name": "MAI",
+    "decimals": 18,
+    "address": "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1",
+    "coinGeckoId": "mimatic",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xa3Fa99A148fA48D14Ed51d610c367C61876997F1/logo.png"
+  },
+  {
+    "symbol": "TITAN",
+    "name": "IRON Titanium",
+    "decimals": 18,
+    "address": "0xaAa5B9e6c589642f98a1cDA99B9D024B8407285A",
+    "coinGeckoId": "iron-titanium-token",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xaAa5B9e6c589642f98a1cDA99B9D024B8407285A/logo.png"
+  },
+  {
+    "symbol": "UNI",
+    "name": "Uniswap",
+    "decimals": 18,
+    "address": "0xb33EaAd8d922B1083446DC23f610c2567fB5180f",
+    "coinGeckoId": "uniswap",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xb33EaAd8d922B1083446DC23f610c2567fB5180f/logo.png"
+  },
+  {
+    "symbol": "claimRISE",
+    "name": "EverRise Rewards",
+    "decimals": 18,
+    "address": "0xbBD7B847C6d0d0B5691518a363194D71426475F1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xbBD7B847C6d0d0B5691518a363194D71426475F1/logo.png"
+  },
+  {
+    "symbol": "PGX",
+    "name": "Pegaxy Stone",
+    "decimals": 18,
+    "address": "0xc1c93D475dc82Fe72DBC7074d55f5a734F8cEEAE",
+    "coinGeckoId": "pegaxy-stone",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xc1c93D475dc82Fe72DBC7074d55f5a734F8cEEAE/logo.png"
+  },
+  {
+    "symbol": "ADDY",
+    "name": "Adamant",
+    "decimals": 18,
+    "address": "0xc3FdbadC7c795EF1D6Ba111e06fF8F16A20Ea539",
+    "coinGeckoId": "adamant",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xc3FdbadC7c795EF1D6Ba111e06fF8F16A20Ea539/logo.png"
+  },
+  {
+    "symbol": "GYSR",
+    "name": "Geyser",
+    "decimals": 18,
+    "address": "0xc48F61a288A08F1B80c2edd74652e1276B6A168c",
+    "coinGeckoId": "geyser",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xc48F61a288A08F1B80c2edd74652e1276B6A168c/logo.png"
+  },
+  {
+    "symbol": "PEAR",
+    "name": "Pear",
+    "decimals": 18,
+    "address": "0xc8bcb58caEf1bE972C0B638B1dD8B0748Fdc8A44",
+    "coinGeckoId": "pear",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xc8bcb58caEf1bE972C0B638B1dD8B0748Fdc8A44/logo.png"
+  },
+  {
+    "symbol": "STACK",
+    "name": "Stacker Ventures",
+    "decimals": 18,
+    "address": "0xccBe9B810d6574701d324fD6DbE0A1b68f9d5bf7",
+    "coinGeckoId": "stacker-ventures",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xccBe9B810d6574701d324fD6DbE0A1b68f9d5bf7/logo.png"
+  },
+  {
+    "symbol": "GMEE",
+    "name": "GAMEE",
+    "decimals": 18,
+    "address": "0xcf32822ff397Ef82425153a9dcb726E5fF61DCA7",
+    "coinGeckoId": "gamee",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xcf32822ff397Ef82425153a9dcb726E5fF61DCA7/logo.png"
+  },
+  {
+    "symbol": "SOL",
+    "name": "SOL (Wormhole)",
+    "decimals": 9,
+    "address": "0xd93f7E271cB87c23AaA73edC008A79646d1F9912",
+    "coinGeckoId": "sol-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xd93f7E271cB87c23AaA73edC008A79646d1F9912/logo.png"
+  },
+  {
+    "symbol": "TEL",
+    "name": "Telcoin",
+    "decimals": 2,
+    "address": "0xdF7837DE1F2Fa4631D716CF2502f8b230F1dcc32",
+    "coinGeckoId": "telcoin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xdF7837DE1F2Fa4631D716CF2502f8b230F1dcc32/logo.png"
+  },
+  {
+    "symbol": "PAY",
+    "name": "PayBolt",
+    "decimals": 18,
+    "address": "0xe580074A10360404AF3ABfe2d524D5806D993ea3",
+    "coinGeckoId": "paybolt",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xe580074A10360404AF3ABfe2d524D5806D993ea3/logo.png"
+  },
+  {
+    "symbol": "BNB",
+    "name": "Binance Coin (Wormhole)",
+    "decimals": 18,
+    "address": "0xeCDCB5B88F8e3C15f95c720C51c71c9E2080525d",
+    "coinGeckoId": "binance-coin-wormhole",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xeCDCB5B88F8e3C15f95c720C51c71c9E2080525d/logo.png"
+  },
+  {
+    "symbol": "DG",
+    "name": "Decentral Games",
+    "decimals": 18,
+    "address": "0xef938b6da8576a896f6E0321ef80996F4890f9c4",
+    "coinGeckoId": "decentral-games",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xef938b6da8576a896f6E0321ef80996F4890f9c4/logo.png"
+  },
+  {
+    "symbol": "CPIE",
+    "name": "CremePieSwap",
+    "decimals": 18,
+    "address": "0xfad70FD116559914240faB82b0078c4E82a6a1B8",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xfad70FD116559914240faB82b0078c4E82a6a1B8/logo.png"
+  },
+  {
+    "symbol": "WALLET",
+    "name": "Ambire Wallet",
+    "decimals": 18,
+    "address": "0x564906ec1DF8399F00e4ad32c0eCAC0404a27A1c",
+    "coinGeckoId": "ambire-wallet",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x564906ec1DF8399F00e4ad32c0eCAC0404a27A1c/logo.png"
+  },
+  {
+    "symbol": "MPH",
+    "name": "Morpher Token",
+    "decimals": 18,
+    "address": "0x65C9e3289e5949134759119DBc9F862E8d6F2fBE",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x65C9e3289e5949134759119DBc9F862E8d6F2fBE/logo.png"
+  },
+  {
+    "symbol": "$ZKP",
+    "name": "Panther Protocol",
+    "decimals": 18,
+    "address": "0x9A06Db14D639796B25A6ceC6A1bf614fd98815EC",
+    "coinGeckoId": "panther",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x9A06Db14D639796B25A6ceC6A1bf614fd98815EC/logo.png"
+  },
+  {
+    "symbol": "BIFI",
+    "name": "Beefy.Finance",
+    "decimals": 18,
+    "address": "0xFbdd194376de19a88118e84E279b977f165d01b8",
+    "coinGeckoId": "beefy-finance",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xFbdd194376de19a88118e84E279b977f165d01b8/logo.png"
+  },
+  {
+    "symbol": "BOB",
+    "name": "BOB",
+    "decimals": 18,
+    "address": "0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B",
+    "coinGeckoId": "bob",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xB0B195aEFA3650A6908f15CdaC7D92F8a5791B0B/logo.png"
+  },
+  {
+    "symbol": "RVLT",
+    "name": "Revolt 2 Earn",
+    "decimals": 18,
+    "address": "0xf0f9D895aCa5c8678f706FB8216fa22957685A13",
+    "coinGeckoId": "revolt-2-earn",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xf0f9D895aCa5c8678f706FB8216fa22957685A13/logo.png"
+  },
+  {
+    "symbol": "PAXG",
+    "name": "Pax Gold",
+    "decimals": 18,
+    "address": "0x553d3D295e0f695B9228246232eDF400ed3560B5",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x553d3D295e0f695B9228246232eDF400ed3560B5/logo.png"
+  },
+  {
+    "symbol": "BOMB",
+    "name": "Bombcrypto Coin",
+    "decimals": 18,
+    "address": "0xB2C63830D4478cB331142FAc075A39671a5541dC",
+    "coinGeckoId": "bombcrypto-coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xB2C63830D4478cB331142FAc075A39671a5541dC/logo.png"
+  },
+  {
+    "symbol": "XSGD",
+    "name": "XSGD",
+    "decimals": 6,
+    "address": "0xDC3326e71D45186F113a2F448984CA0e8D201995",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xDC3326e71D45186F113a2F448984CA0e8D201995/logo.png"
+  }
+]
