@@ -70,7 +70,13 @@ export const update = async () => {
         | undefined = `/assets/icons/klaytn/${token.address}.png`;
 
       try {
-        await downloadImage(iconRemoteURL, ICON_OUTPUT_PATH);
+        if (!fs.existsSync(ICON_OUTPUT_PATH)) {
+          await downloadImage(iconRemoteURL, ICON_OUTPUT_PATH);
+        } else {
+          console.log(
+            `[Info] Image exists. Passing... ${token.address} (${name}) / ${iconRemoteURL}`,
+          );
+        }
       } catch (err) {
         console.log(
           `[Warning] Failed to download image for ${token.address} (${name}) / ${iconRemoteURL}`,
