@@ -1436,9 +1436,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bento/api@workspace:packages/bento-api":
+"@bento/api@workspace:apps/bento-api":
   version: 0.0.0-use.local
-  resolution: "@bento/api@workspace:packages/bento-api"
+  resolution: "@bento/api@workspace:apps/bento-api"
   dependencies:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
@@ -1511,9 +1511,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bento/web@workspace:packages/bento-web":
+"@bento/web@workspace:apps/bento-web":
   version: 0.0.0-use.local
-  resolution: "@bento/web@workspace:packages/bento-web"
+  resolution: "@bento/web@workspace:apps/bento-web"
   dependencies:
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"

@@ -9,6 +9,7 @@
     "lint": "prettier --write ."
   },
   "workspaces": [
+    "apps/*",
     "packages/*",
     "scripts"
   ],
