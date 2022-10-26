@@ -100,13 +100,13 @@ export const NavigationBar = () => {
   return (
     <Wrapper>
       <Container>
-        <Link href="/" passHref>
-          <a>
+        <Link href="/">
+          <div>
             <HiddenTitle>Bento</HiddenTitle>
             <LogoWrapper>
               <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
             </LogoWrapper>
-          </a>
+          </div>
         </Link>
 
         <NoSSR>
@@ -116,11 +116,11 @@ export const NavigationBar = () => {
                 key={`${item.title}-${item.href}`}
                 active={currentPath === item.href}
               >
-                <Link href={item.href} passHref>
-                  <a>
+                <Link href={item.href}>
+                  <Center>
                     <Iconify icon={item.icon} style={{ fontSize: 20 }} />
                     <span className="title">{t(item.title)}</span>
-                  </a>
+                  </Center>
                 </Link>
               </NavigationItem>
             ))}
@@ -184,19 +184,14 @@ export const NavigationBar = () => {
                       color: currentPath === item.href ? '#ff375c' : 'white',
                     }}
                   >
-                    <Link href={item.href} passHref>
-                      <a
-                        onClick={() => setMobileMenuOpen(false)}
-                        style={{
-                          height: '100%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 8,
-                        }}
-                      >
+                    <Link
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Center>
                         <Iconify icon={item.icon} />
                         <span className="title">{t(item.title)}</span>
-                      </a>
+                      </Center>
                     </Link>
                   </MobileMenuItem>
                 ))}
@@ -250,6 +245,12 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+const Center = styled.span`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
 const HiddenTitle = styled.span`
   display: none;
 `;
@@ -278,6 +279,7 @@ const LogoImage = styled.img`
 
 const NavigationList = styled.ul`
   display: flex;
+  gap: 16px;
 
   @media (max-width: 680px) {
     display: none;
