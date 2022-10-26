@@ -6,7 +6,10 @@
   "author": "Junho Yeo <i@junho.io>",
   "license": "MPL-2.0",
   "scripts": {
-    "lint": "prettier --write ."
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "format": "prettier --write .",
+    "lint": "turbo run lint"
   },
   "workspaces": [
     "apps/*",
