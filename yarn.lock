@@ -1470,6 +1470,7 @@ __metadata:
     klaytn-multicall: ^1.0.5
     lodash.groupby: ^4.6.0
     next: canary
+    next-transpile-modules: ^9.1.0
     osmojs: ^0.33.0
     prop-types: ^15.8.1
     react: ^18.2.0
@@ -1566,6 +1567,7 @@ __metadata:
     next-i18next: ^12.1.0
     next-intercept-stdout: ^1.0.1
     next-plugin-svgr: ^1.1.2
+    next-transpile-modules: ^9.1.0
     prop-types: ^15.8.1
     query-string: ^7.1.1
     react: ^18.2.0
@@ -6185,6 +6187,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"enhanced-resolve@npm:^5.10.0":
+  version: 5.10.0
+  resolution: "enhanced-resolve@npm:5.10.0"
+  dependencies:
+    graceful-fs: ^4.2.4
+    tapable: ^2.2.0
+  checksum: 0bb9830704db271610f900e8d79d70a740ea16f251263362b0c91af545576d09fe50103496606c1300a05e588372d6f9780a9bc2e30ce8ef9b827ec8f44687ff
+  languageName: node
+  linkType: hard
+
 "entities@npm:^2.0.0":
   version: 2.2.0
   resolution: "entities@npm:2.2.0"
@@ -7184,7 +7196,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.2.6":
+"graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
   version: 4.2.10
   resolution: "graceful-fs@npm:4.2.10"
   checksum: 3f109d70ae123951905d85032ebeae3c2a5a7a997430df00ea30df0e3a6c60cf6689b109654d6fdacd28810a053348c4d14642da1d075049e6be1ba5216218da
@@ -9150,6 +9162,16 @@ __metadata:
   version: 1.1.0
   resolution: "next-tick@npm:1.1.0"
   checksum: 83b5cf36027a53ee6d8b7f9c0782f2ba87f4858d977342bfc3c20c21629290a2111f8374d13a81221179603ffc4364f38374b5655d17b6a8f8a8c77bdea4fe8b
+  languageName: node
+  linkType: hard
+
+"next-transpile-modules@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "next-transpile-modules@npm:9.1.0"
+  dependencies:
+    enhanced-resolve: ^5.10.0
+    escalade: ^3.1.1
+  checksum: 8cc46196db3c2d2063fb29fe5b4d03c21065ab08130085b24d61e4ed512d99c12083d28179771cf02f70f8bf5970db0781a228aacf6cc61662dbdcabaddfc472
   languageName: node
   linkType: hard
 
@@ -11186,6 +11208,13 @@ __metadata:
   version: 2.0.3
   resolution: "symbol-observable@npm:2.0.3"
   checksum: 533dcf7a7925bada60dbaa06d678e7c4966dbf0959ccba7f60c22b0494ba5d9160d6a66f2951d45a80bf20e655a89f8b91c5f0458dd12faef28716b54f91f49c
+  languageName: node
+  linkType: hard
+
+"tapable@npm:^2.2.0":
+  version: 2.2.1
+  resolution: "tapable@npm:2.2.1"
+  checksum: 3b7a1b4d86fa940aad46d9e73d1e8739335efd4c48322cb37d073eb6f80f5281889bf0320c6d8ffcfa1a0dd5bfdbd0f9d037e252ef972aca595330538aac4d51
   languageName: node
   linkType: hard
 

@@ -1,4 +1,9 @@
-module.exports = {
+const withTM = require('next-transpile-modules')([
+  '@bento/common',
+  '@bento/core',
+]);
+
+module.exports = withTM({
   reactStrictMode: true,
   swcMinify: true,
   compiler: {
@@ -7,4 +12,4 @@ module.exports = {
   experimental: {
     externalDir: false,
   },
-};
+});

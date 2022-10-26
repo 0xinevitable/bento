@@ -1,3 +1,8 @@
+const withTM = require('next-transpile-modules')([
+  '@bento/common',
+  '@bento/core',
+]);
+
 const withSvgr = require('next-plugin-svgr');
 const withInterceptStdout = require('next-intercept-stdout');
 const { withPlugins } = require('next-composed-plugins');
@@ -56,6 +61,7 @@ module.exports = withPlugins(
     },
   },
   [
+    withTM,
     withSvgr,
     [
       withInterceptStdout,

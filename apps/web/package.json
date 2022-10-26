@@ -79,6 +79,7 @@
     "next-composed-plugins": "^1.0.1",
     "next-intercept-stdout": "^1.0.1",
     "next-plugin-svgr": "^1.1.2",
+    "next-transpile-modules": "^9.1.0",
     "typescript": "^4.8.3"
   }
 }
