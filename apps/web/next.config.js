@@ -24,7 +24,6 @@ const pick = (obj, keys) =>
 module.exports = withPlugins(
   {
     reactStrictMode: true,
-    swcMinify: true,
     compiler: {
       styledComponents: true,
     },
