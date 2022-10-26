@@ -25,7 +25,7 @@ type TokenItem = {
 
 const CHAIN_OUTPUT_PATH = path.resolve(
   WORKSPACE_ROOT_PATH,
-  './packages/bento-core/tokens/ethereum.json',
+  './packages/core/tokens/ethereum.json',
 );
 
 export const update = async () => {

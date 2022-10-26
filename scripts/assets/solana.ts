@@ -40,7 +40,7 @@ export const update = async () => {
 
   const CHAIN_OUTPUT_PATH = path.resolve(
     WORKSPACE_ROOT_PATH,
-    './packages/bento-core/tokens/solana.json',
+    './packages/core/tokens/solana.json',
   );
 
   let previousTokens: TokenInput[] = [];

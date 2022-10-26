@@ -711,5 +711,27 @@
     "address": "0xf0f9D895aCa5c8678f706FB8216fa22957685A13",
     "coinGeckoId": "revolt-2-earn",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xf0f9D895aCa5c8678f706FB8216fa22957685A13/logo.png"
+  },
+  {
+    "symbol": "PAXG",
+    "name": "Pax Gold",
+    "decimals": 18,
+    "address": "0x553d3D295e0f695B9228246232eDF400ed3560B5",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x553d3D295e0f695B9228246232eDF400ed3560B5/logo.png"
+  },
+  {
+    "symbol": "BOMB",
+    "name": "Bombcrypto Coin",
+    "decimals": 18,
+    "address": "0xB2C63830D4478cB331142FAc075A39671a5541dC",
+    "coinGeckoId": "bombcrypto-coin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xB2C63830D4478cB331142FAc075A39671a5541dC/logo.png"
+  },
+  {
+    "symbol": "XSGD",
+    "name": "XSGD",
+    "decimals": 6,
+    "address": "0xDC3326e71D45186F113a2F448984CA0e8D201995",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xDC3326e71D45186F113a2F448984CA0e8D201995/logo.png"
   }
 ]

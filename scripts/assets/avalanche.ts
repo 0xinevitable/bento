@@ -13,7 +13,7 @@ import {
 
 const CHAIN_OUTPUT_PATH = path.resolve(
   WORKSPACE_ROOT_PATH,
-  './packages/bento-core/tokens/avalanche.json',
+  './packages/core/tokens/avalanche.json',
 );
 
 export const update = async () => {
