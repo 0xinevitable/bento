@@ -73,9 +73,11 @@ export const update = async () => {
   );
 
   const promises = chunks.map(async (chunk) => {
-    const prices = await pricesFromCoinGecko(
-      chunk.map((token) => token.coinGeckoId!),
-    );
+    const coinGeckoIds = chunk.flatMap((token) => token.coinGeckoId!);
+    if (coinGeckoIds.length === 0) {
+      return [];
+    }
+    const prices = await pricesFromCoinGecko(coinGeckoIds);
     return chunk.flatMap((token) => {
       const price = prices[token.coinGeckoId!];
       if (!price || price < 0.1) {
