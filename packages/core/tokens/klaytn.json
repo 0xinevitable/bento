@@ -897,11 +897,11 @@
   },
   {
     "symbol": "RRT",
-    "name": "RoundRobin Protocol Token",
+    "name": "RoundRobin Protocol",
     "decimals": 18,
     "address": "0xe5bbe3aeb87e37a08fd4de05654095d25828f1ea",
     "coinGeckoId": "roundrobin-protocol-token",
-    "logo": "https://dexata.kr/images/token/rrt.svg"
+    "logo": "/assets/icons/klaytn/0xe5bbe3aeb87e37a08fd4de05654095d25828f1ea.png"
   },
   {
     "symbol": "oPACE",
@@ -2734,7 +2734,8 @@
     "symbol": "KPOP",
     "name": "Korean POP",
     "decimals": 18,
-    "address": "0xb6a5805a0a0cc072f6c2c5ef72317a8ba172bbd3"
+    "address": "0xb6a5805a0a0cc072f6c2c5ef72317a8ba172bbd3",
+    "logo": "/assets/icons/klaytn/0xb6a5805a0a0cc072f6c2c5ef72317a8ba172bbd3.png"
   },
   {
     "symbol": "APM",
@@ -2799,7 +2800,8 @@
     "symbol": "AME",
     "name": "Ice Americano",
     "decimals": 18,
-    "address": "0x124c6f438a05074cb4a1d22b70f95d3b1d709a34"
+    "address": "0x124c6f438a05074cb4a1d22b70f95d3b1d709a34",
+    "logo": "/assets/icons/klaytn/0x124c6f438a05074cb4a1d22b70f95d3b1d709a34.png"
   },
   {
     "symbol": "MK",
@@ -2861,5 +2863,61 @@
     "name": "sKOKOA",
     "decimals": 18,
     "address": "0x666e58391280a06a7cb380c1741376e0b3dd7531"
+  },
+  {
+    "symbol": "PTEN",
+    "name": "Protection Of The Environment",
+    "decimals": 18,
+    "address": "0xcc0a311d19b1c6ea6f5a6d6a20ca0f954bdc9463"
+  },
+  {
+    "symbol": "ALBA",
+    "name": "AlbaDeFi",
+    "decimals": 18,
+    "address": "0xbe1a79ac31de3f69c9643fbec19ee54efaa944a5"
+  },
+  {
+    "symbol": "RISU",
+    "name": "Harisu",
+    "decimals": 18,
+    "address": "0x176bae048973767381c532274e8ef2b3e0e8fa3a"
+  },
+  {
+    "symbol": "MCFA",
+    "name": "Meme coin For AirDrop",
+    "decimals": 18,
+    "address": "0x9797e96348ef4763ad2929f385084a1b1e492d15"
+  },
+  {
+    "symbol": "Sword",
+    "name": "Ego Sword",
+    "decimals": 18,
+    "address": "0x37cef61129d9784173507ac1e43b81e3732317f9",
+    "logo": "/assets/icons/klaytn/0x37cef61129d9784173507ac1e43b81e3732317f9.png"
+  },
+  {
+    "symbol": "MFA",
+    "name": "MemeCoin For AirDrop",
+    "decimals": 18,
+    "address": "0xf74ca3da2beefeff204795bb23cac0ebcd988498"
+  },
+  {
+    "symbol": "SKYL",
+    "name": "SKY LOVE",
+    "decimals": 18,
+    "address": "0x1e3c962d8a9ff97497aef1c429c6f3efd1844f2f"
+  },
+  {
+    "symbol": "GXA",
+    "name": "Galaxia",
+    "decimals": 18,
+    "address": "0xa80e96cceb1419f9bd9f1c67f7978f51b534a11b",
+    "coinGeckoId": "galaxia"
+  },
+  {
+    "symbol": "NecroSword",
+    "name": "Necro sword",
+    "decimals": 18,
+    "address": "0xd054b605178d9929c9947fcaeaeb38acbb95c818"
   }
 ]
