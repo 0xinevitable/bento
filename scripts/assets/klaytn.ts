@@ -59,7 +59,7 @@ export const update = async () => {
 
       const ICON_OUTPUT_PATH = path.resolve(
         WORKSPACE_ROOT_PATH,
-        `./packages/bento-web/public/assets/icons/klaytn/${token.address}.png`,
+        `./apps/web/public/assets/icons/klaytn/${token.address}.png`,
       );
 
       const iconRemoteURL = !!tokenFromKokonutSwap?.iconPath
