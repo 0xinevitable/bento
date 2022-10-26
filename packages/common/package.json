@@ -5,11 +5,11 @@
   "repository": "https://github.com/inevitable-changes/dashboard",
   "author": "Junho Yeo <i@junho.io>",
   "license": "MPL-2.0",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./index.ts",
+  "types": "./index.ts",
   "sideEffects": false,
   "scripts": {
-    "build": "rm -rf ./lib && tsc"
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/node": "^18.11.5",
