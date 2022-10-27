@@ -117,9 +117,9 @@ export const NavigationBar = () => {
                 active={currentPath === item.href}
               >
                 <Link href={item.href}>
-                  <Center>
+                  <Center style={{ cursor: 'pointer' }}>
                     <Iconify icon={item.icon} style={{ fontSize: 20 }} />
-                    <span className="title">{t(item.title)}</span>
+                    <span className="sys title">{t(item.title)}</span>
                   </Center>
                 </Link>
               </NavigationItem>
@@ -182,6 +182,7 @@ export const NavigationBar = () => {
                     key={`${item.title}-${item.href}`}
                     style={{
                       color: currentPath === item.href ? '#ff375c' : 'white',
+                      cursor: 'pointer',
                     }}
                   >
                     <Link
