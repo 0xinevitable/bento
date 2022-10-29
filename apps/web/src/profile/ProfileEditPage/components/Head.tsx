@@ -1,4 +1,4 @@
-import { css } from '@emotion/styled';
+import { css } from '@emotion/react';
 import { default as DocumentHead } from 'next/head';
 import React from 'react';
 

@@ -173,7 +173,7 @@ const customSkeletonStyle = css`
   background-image: linear-gradient(to right, #171717, #3b3b3b, #171717);
   background-repeat: no-repeat;
   background-size: 500% 100%;
-  animation: ${() => css`1s ease-in-out infinite forwards running ${shimmer}`};
+  animation: 1s ease-in-out infinite forwards running ${shimmer};
 `;
 const LinkImageSkeleton = styled.div`
   width: 86px;
