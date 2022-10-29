@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
+import { withAttrs } from '@/utils/withAttrs';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
@@ -153,9 +154,9 @@ const IllustImageContainer = styled.div`
   width: 861.03px;
   height: 749px;
 `;
-const Illust = styled(Image).attrs({
-  width: 861.03,
-  height: 749,
-})`
-  object-fit: contain;
-`;
+const Illust = withAttrs(
+  { width: 861.03, height: 749 },
+  styled(Image)`
+    object-fit: contain;
+  `,
+);

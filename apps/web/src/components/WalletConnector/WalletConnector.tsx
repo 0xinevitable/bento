@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { useCallback, useMemo, useState } from 'react';
 
 import { useSignOut } from '@/hooks/useSignOut';
+import { withAttrs } from '@/utils/withAttrs';
 
 import { WALLETS } from '@/constants/wallets';
 import { Colors } from '@/styles';
@@ -240,17 +241,18 @@ const WalletButton = styled.button<WalletButtonProps>`
     }
   }
 `;
-const IconList = styled.div.attrs({
-  className: 'icon-list',
-})`
-  margin-bottom: 8px;
-  gap: 8px;
-  display: flex;
+const IconList = withAttrs(
+  { className: 'icon-list' },
+  styled.div`
+    margin-bottom: 8px;
+    gap: 8px;
+    display: flex;
 
-  & > img {
-    width: 72px;
-  }
-`;
+    & > img {
+      width: 72px;
+    }
+  `,
+);
 
 const LoadingContainer = styled(motion.div)`
   background-color: rgba(0, 56, 255, 0.45);

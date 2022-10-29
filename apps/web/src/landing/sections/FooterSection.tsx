@@ -7,6 +7,7 @@ import { useCallback } from 'react';
 
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 import { useWindowSize } from '@/hooks/useWindowSize';
+import { withAttrs } from '@/utils/withAttrs';
 
 import { Colors, float } from '@/styles';
 import { Analytics } from '@/utils';
@@ -450,10 +451,7 @@ const IllustImageContainer = styled.div`
   width: ${662 + ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
   height: ${413.74 + ILLUST_BLUR_BOTTOM}px;
 `;
-const Illust = styled(Image).attrs({
-  width: 662,
-  height: 413.74,
-})``;
+const Illust = withAttrs({ width: 662, height: 413.74 }, styled(Image)``);
 
 const PawnImageContainer = styled(motion.div)`
   width: ${413.74 + ILLUST_BLUR_BOTTOM}px;
@@ -464,7 +462,4 @@ const PawnImageContainer = styled(motion.div)`
   left: ${173.3 - ILLUST_BLUR_LEFT + ILLUST_BLUR_RIGHT}px;
   bottom: 0;
 `;
-const Pawn = styled(Image).attrs({
-  width: 413.74,
-  height: 413.74,
-})``;
+const Pawn = withAttrs({ width: 413.74, height: 413.74 }, styled(Image)``);

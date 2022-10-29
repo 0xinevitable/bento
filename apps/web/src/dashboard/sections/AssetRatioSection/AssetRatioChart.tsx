@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
+import { withAttrs } from '@/utils/withAttrs';
+
 import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
@@ -158,10 +160,11 @@ const AvatarContainer = styled.div`
   pointer-events: none;
 `;
 
-const BentoZapImage = styled.img.attrs({
-  src: '/assets/illusts/bento-zap.png',
-})`
-  width: 115px;
-  height: 115px;
-  user-select: none;
-`;
+const BentoZapImage = withAttrs(
+  { src: '/assets/illusts/bento-zap.png' },
+  styled.img`
+    width: 115px;
+    height: 115px;
+    user-select: none;
+  `,
+);

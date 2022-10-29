@@ -8,6 +8,7 @@ import {
   TrackedSection,
   TrackedSectionOptions,
 } from '@/components/system';
+import { withAttrs } from '@/utils/withAttrs';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
@@ -154,9 +155,12 @@ const ChainLogoContainer = styled.div`
   overflow: hidden;
   cursor: pointer;
 `;
-const ChainLogo = styled(Image).attrs({ width: 36, height: 36 })`
-  object-fit: cover;
-`;
+const ChainLogo = withAttrs(
+  { width: 36, height: 36 },
+  styled(Image)`
+    object-fit: cover;
+  `,
+);
 
 const IllustWrapper = styled.div`
   position: absolute;
