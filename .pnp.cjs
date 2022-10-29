@@ -2690,7 +2690,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.11.5"],\
             ["@types/react", "npm:18.0.23"],\
             ["@types/react-dom", "npm:18.0.7"],\
-            ["@types/styled-components", "npm:5.1.26"],\
             ["@types/uuid", "npm:8.3.4"],\
             ["@walletconnect/encoding", "npm:1.0.1"],\
             ["@walletconnect/web3-provider", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:1.8.0"],\
@@ -2730,7 +2729,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-notifications-component", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:4.0.1"],\
             ["react-youtube", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:10.0.0"],\
             ["recharts", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:2.1.12"],\
-            ["styled-components", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:5.3.6"],\
             ["swr", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:1.3.0"],\
             ["tslib", "npm:2.4.0"],\
             ["tweetnacl", "npm:1.0.3"],\
@@ -5932,18 +5930,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@types/styled-components", [\
-        ["npm:5.1.26", {\
-          "packageLocation": "./.yarn/cache/@types-styled-components-npm-5.1.26-aabda06611-84f53b3101.zip/node_modules/@types/styled-components/",\
-          "packageDependencies": [\
-            ["@types/styled-components", "npm:5.1.26"],\
-            ["@types/hoist-non-react-statics", "npm:3.3.1"],\
-            ["@types/react", "npm:18.0.21"],\
-            ["csstype", "npm:3.1.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@types/uuid", [\
         ["npm:8.3.4", {\
           "packageLocation": "./.yarn/cache/@types-uuid-npm-8.3.4-7547f4402c-6f11f3ff70.zip/node_modules/@types/uuid/",\
@@ -7013,24 +6999,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["babel-plugin-styled-components", "npm:2.0.7"]\
           ],\
           "linkType": "SOFT"\
-        }],\
-        ["virtual:55e79ee0bfeb8640cd8a02a47b01f6a602c2ae91c24d8a464ab2cfc717dab42ee968ae2cd772f9ac7c221cbc2412c7deee377c4653dcdf5ee91ea260d2832fe5#npm:2.0.7", {\
-          "packageLocation": "./.yarn/__virtual__/babel-plugin-styled-components-virtual-bd3852f757/0/cache/babel-plugin-styled-components-npm-2.0.7-543710bd48-80b06b10db.zip/node_modules/babel-plugin-styled-components/",\
-          "packageDependencies": [\
-            ["babel-plugin-styled-components", "virtual:55e79ee0bfeb8640cd8a02a47b01f6a602c2ae91c24d8a464ab2cfc717dab42ee968ae2cd772f9ac7c221cbc2412c7deee377c4653dcdf5ee91ea260d2832fe5#npm:2.0.7"],\
-            ["@babel/helper-annotate-as-pure", "npm:7.18.6"],\
-            ["@babel/helper-module-imports", "npm:7.18.6"],\
-            ["@types/styled-components", null],\
-            ["babel-plugin-syntax-jsx", "npm:6.18.0"],\
-            ["lodash", "npm:4.17.21"],\
-            ["picomatch", "npm:2.3.1"],\
-            ["styled-components", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:5.3.6"]\
-          ],\
-          "packagePeers": [\
-            "@types/styled-components",\
-            "styled-components"\
-          ],\
-          "linkType": "HARD"\
         }],\
         ["virtual:ce52663addad3e496babb9cfbe61c5ea6cbc459e357b7a3cb08b4bb5dead67971df94b32661faecb1a6927416b113b9c0933858094d1c328b3b6f66334408b0d#npm:2.0.7", {\
           "packageLocation": "./.yarn/__virtual__/babel-plugin-styled-components-virtual-ed45ebabec/0/cache/babel-plugin-styled-components-npm-2.0.7-543710bd48-80b06b10db.zip/node_modules/babel-plugin-styled-components/",\
@@ -14616,48 +14584,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["npm:5.3.6", {\
-          "packageLocation": "./.yarn/unplugged/styled-components-virtual-55e79ee0bf/node_modules/styled-components/",\
-          "packageDependencies": [\
-            ["styled-components", "npm:5.3.6"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:5.3.6", {\
-          "packageLocation": "./.yarn/unplugged/styled-components-virtual-55e79ee0bf/node_modules/styled-components/",\
-          "packageDependencies": [\
-            ["styled-components", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:5.3.6"],\
-            ["@babel/helper-module-imports", "npm:7.18.6"],\
-            ["@babel/traverse", "npm:7.19.1"],\
-            ["@emotion/is-prop-valid", "npm:1.2.0"],\
-            ["@emotion/stylis", "npm:0.8.5"],\
-            ["@emotion/unitless", "npm:0.7.5"],\
-            ["@types/react", "npm:18.0.23"],\
-            ["@types/react-dom", "npm:18.0.7"],\
-            ["@types/react-is", null],\
-            ["@types/tslib", null],\
-            ["babel-plugin-styled-components", "virtual:55e79ee0bfeb8640cd8a02a47b01f6a602c2ae91c24d8a464ab2cfc717dab42ee968ae2cd772f9ac7c221cbc2412c7deee377c4653dcdf5ee91ea260d2832fe5#npm:2.0.7"],\
-            ["css-to-react-native", "npm:3.0.0"],\
-            ["hoist-non-react-statics", "npm:3.3.2"],\
-            ["react", "npm:18.2.0"],\
-            ["react-dom", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:18.2.0"],\
-            ["react-is", "npm:18.2.0"],\
-            ["shallowequal", "npm:1.1.0"],\
-            ["supports-color", "npm:5.5.0"],\
-            ["tslib", "npm:2.4.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/react-dom",\
-            "@types/react-is",\
-            "@types/react",\
-            "@types/tslib",\
-            "react-dom",\
-            "react-is",\
-            "react",\
-            "tslib"\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["virtual:91c483bef567bee74b50d9863d1f852d0826c7dd93174f3987b3fda34f5ab57e2792355c6a723ed9a77200539945360838c3460a630d7cf73bce2f00c6313c8f#npm:5.3.5", {\
           "packageLocation": "./.yarn/unplugged/styled-components-virtual-ce52663add/node_modules/styled-components/",\
           "packageDependencies": [\
@@ -14670,7 +14596,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", null],\
             ["@types/react-dom", null],\
             ["@types/react-is", null],\
-            ["@types/tslib", null],\
             ["babel-plugin-styled-components", "virtual:ce52663addad3e496babb9cfbe61c5ea6cbc459e357b7a3cb08b4bb5dead67971df94b32661faecb1a6927416b113b9c0933858094d1c328b3b6f66334408b0d#npm:2.0.7"],\
             ["css-to-react-native", "npm:3.0.0"],\
             ["hoist-non-react-statics", "npm:3.3.2"],\
@@ -14678,18 +14603,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:91c483bef567bee74b50d9863d1f852d0826c7dd93174f3987b3fda34f5ab57e2792355c6a723ed9a77200539945360838c3460a630d7cf73bce2f00c6313c8f#npm:16.14.0"],\
             ["react-is", null],\
             ["shallowequal", "npm:1.1.0"],\
-            ["supports-color", "npm:5.5.0"],\
-            ["tslib", "npm:1.14.1"]\
+            ["supports-color", "npm:5.5.0"]\
           ],\
           "packagePeers": [\
             "@types/react-dom",\
             "@types/react-is",\
             "@types/react",\
-            "@types/tslib",\
             "react-dom",\
             "react-is",\
-            "react",\
-            "tslib"\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
