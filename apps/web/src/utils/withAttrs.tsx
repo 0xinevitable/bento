@@ -1,4 +1,4 @@
 export const withAttrs =
-  <Props extends {}>(Component: React.FC<Props>, attrs: Props) =>
+  <Props extends {}>(attrs: Props, Component: React.FC<Props>) =>
   (props: Props) =>
     <Component {...attrs} {...props} />;
