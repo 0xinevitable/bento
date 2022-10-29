@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { Icon as Iconify } from '@iconify/react';
 import { deleteCookie } from 'cookies-next';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -5,7 +7,6 @@ import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useMemo, useState } from 'react';
-import styled, { css } from 'styled-components';
 
 import { Icon, NoSSR, Portal } from '@/components/system';
 import { useSession } from '@/hooks/useSession';

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from '@emotion/styled';
 
 export const shimmer = keyframes`
   0% {

@@ -1,10 +1,10 @@
+import styled from '@emotion/styled';
 import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
-import styled from 'styled-components';
 
 import { NoSSR } from '@/components/system';
 import { useSession } from '@/hooks/useSession';

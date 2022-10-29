@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
 import axios from 'axios';
 import { useTranslation } from 'next-i18next';
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
 
 import { AnimatedToolTip, Modal } from '@/components/system';
 import { formatUsername } from '@/utils/format';

@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { format, subDays } from 'date-fns';
 import React from 'react';
 import {
@@ -9,7 +10,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import styled from 'styled-components';
 
 import { TooltipContent, tooltipWrapperStyle } from './Tooltip';
 

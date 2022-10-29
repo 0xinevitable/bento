@@ -1,6 +1,7 @@
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
-import styled, { css } from 'styled-components';
 
 export type TabProps<T extends string> = Omit<
   React.HTMLAttributes<HTMLUListElement>,

@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import { useNProgress } from '@tanem/react-nprogress';
-import styled from 'styled-components';
 
 import { Colors } from '@/styles';
 

@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
-import styled from 'styled-components';
 
 import { Colors } from '@/styles';
 

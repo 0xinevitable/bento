@@ -1,5 +1,7 @@
 import { Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import axios, { AxiosError } from 'axios';
 import dedent from 'dedent';
 import { AnimatePresence } from 'framer-motion';
@@ -13,7 +15,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import styled, { css } from 'styled-components';
 
 import { AnimatedTab } from '@/components/AnimatedTab';
 import { Modal } from '@/components/system';

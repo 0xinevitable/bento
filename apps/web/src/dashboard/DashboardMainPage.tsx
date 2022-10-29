@@ -1,4 +1,5 @@
 import { Wallet } from '@bento/common';
+import styled from '@emotion/styled';
 import { User } from '@supabase/supabase-js';
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
@@ -16,7 +17,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';

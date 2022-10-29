@@ -1,5 +1,5 @@
 // Based from https://stackoverflow.com/questions/68789475/how-can-i-style-checkbox-with-css
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const Checkbox = styled.input.attrs({
   type: 'checkbox',

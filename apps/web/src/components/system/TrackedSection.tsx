@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import React, { useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import styled from 'styled-components';
 
 import { Analytics, AnalyticsEvent } from '@/utils';
 

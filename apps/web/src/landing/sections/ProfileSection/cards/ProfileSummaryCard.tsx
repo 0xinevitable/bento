@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
-import styled from 'styled-components';
 
 import mockedProfileBackground from '@/assets/illusts/mocked-profile-background.png';
 import mockedProfileIllust from '@/assets/illusts/mocked-profile.png';

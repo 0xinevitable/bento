@@ -1,9 +1,9 @@
+import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-import styled from 'styled-components';
 
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 import { useWindowSize } from '@/hooks/useWindowSize';

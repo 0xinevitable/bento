@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import React, { useCallback, useState } from 'react';
-import styled from 'styled-components';
 
 import { ExampleUserQuestions } from '../../constants/ExampleUserProfile';
 import { UserQuestion } from '../../types/UserProfile';

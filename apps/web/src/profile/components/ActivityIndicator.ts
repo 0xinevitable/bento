@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes } from '@emotion/styled';
 
 const rotate = keyframes`
   from { transform: rotate(0deg); }

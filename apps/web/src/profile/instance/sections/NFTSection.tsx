@@ -1,7 +1,7 @@
 import { OpenSeaAsset } from '@bento/core';
+import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 import { AssetMedia } from '@/components/system';
 

@@ -1,6 +1,7 @@
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
-import styled, { css } from 'styled-components';
 
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
 

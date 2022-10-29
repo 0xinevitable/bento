@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import styled from 'styled-components';
 
 import klayswapIllust from '@/assets/badges/klayswap.png';
 import swapscannerIllust from '@/assets/badges/swapscanner.png';

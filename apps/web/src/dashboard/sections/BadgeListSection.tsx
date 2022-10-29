@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 import ogBadgeIllust1 from '@/assets/badges/og-1.png';
 import ogBadgeIllust2 from '@/assets/badges/og-2.png';

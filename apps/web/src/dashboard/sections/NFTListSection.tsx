@@ -1,8 +1,8 @@
 import { OpenSeaAsset } from '@bento/core';
+import styled from '@emotion/styled';
 import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 import { AssetMedia } from '@/components/system';
 

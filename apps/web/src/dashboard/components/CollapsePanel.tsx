@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import useCollapse from 'react-collapsed';
-import styled from 'styled-components';
 
 import { Metadata } from '@/defi/klaytn/constants/metadata';
 import { Colors } from '@/styles';

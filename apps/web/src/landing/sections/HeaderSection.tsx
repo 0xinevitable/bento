@@ -1,8 +1,8 @@
+import styled from '@emotion/styled';
 import createGlobe from 'cobe';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
-import styled from 'styled-components';
 
 import { useWindowSize } from '@/hooks/useWindowSize';
 
