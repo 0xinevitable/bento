@@ -1,6 +1,6 @@
 import { Wallet, shortenAddress } from '@bento/common';
+import styled from '@emotion/styled';
 import { Icon } from '@iconify/react';
-import styled from 'styled-components';
 
 import { Colors } from '@/styles';
 

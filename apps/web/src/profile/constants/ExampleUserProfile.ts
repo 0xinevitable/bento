@@ -92,7 +92,7 @@ export const ExampleUserQuestions: UserQuestions = {
       },
       response: {
         answer:
-          'Next.js with TypeScript, Recoil for state management, Yarn Workspaces for monorepo management. We use `styled-components` for styling.',
+          'Next.js with TypeScript, Recoil for state management, Yarn Workspaces for monorepo management. We use Emotion for styling.',
         createdAt: '2021-04-07T20:03:30.177Z',
       },
     },

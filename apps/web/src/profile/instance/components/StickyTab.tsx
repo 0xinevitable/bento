@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import React, { useCallback, useRef } from 'react';
-import styled from 'styled-components';
 
 import { Tab, TabProps } from '../../components/Tab';
 

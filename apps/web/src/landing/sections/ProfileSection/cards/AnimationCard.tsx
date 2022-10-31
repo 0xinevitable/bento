@@ -1,10 +1,11 @@
+import styled from '@emotion/styled';
 import { MotionProps, motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
-import styled from 'styled-components';
 
 import ferrariImageOne from '@/assets/illusts/animation-ferrari-1.png';
 import ferrariImageTwo from '@/assets/illusts/animation-ferrari-2.png';
+import { withAttrs } from '@/utils/withAttrs';
 
 import { HiddenCardTitle } from '../components/HiddenCardTitle';
 
@@ -234,10 +235,11 @@ const BlockItem = styled(Image)`
   filter: drop-shadow(0px 8px 12px rgba(0, 0, 0, 0.18));
 `;
 
-const FramerLogo = styled.img.attrs({
-  src: '/assets/landing/framer-logo.svg',
-})`
-  margin-top: -40px;
-  width: 138.92px;
-  height: 38px;
-`;
+const FramerLogo = withAttrs(
+  { src: '/assets/landing/framer-logo.svg' },
+  styled.img`
+    margin-top: -40px;
+    width: 138.92px;
+    height: 38px;
+  `,
+);

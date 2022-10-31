@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
-import styled from 'styled-components';
 
 import { Colors } from '@/styles';
 

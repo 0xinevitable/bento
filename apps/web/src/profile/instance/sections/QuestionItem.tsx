@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
 import { format } from 'date-fns';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import React, { useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
 
 import HorizontalDotsIcon from '@/assets/icons/ic-dots-horizontal.svg';
 import { useTimeAgo } from '@/hooks/useTimeAgo';

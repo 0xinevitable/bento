@@ -10,9 +10,9 @@ import 'react-notifications-component/dist/theme.css';
 import '@/styles/fonts.css';
 import '@/styles/tailwind.reset.css';
 
+import styled from '@emotion/styled';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
 
 import { LoadingProgress } from '@/components/LoadingProgress';
 import { NavigationBar } from '@/components/NavigationBar';

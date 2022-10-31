@@ -1,6 +1,7 @@
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import dedent from 'dedent';
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
 
 import { Skeleton } from '@/components/system';
 

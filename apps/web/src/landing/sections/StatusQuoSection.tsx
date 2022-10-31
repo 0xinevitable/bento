@@ -1,8 +1,10 @@
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
-import styled, { css } from 'styled-components';
 
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
+import { withAttrs } from '@/utils/withAttrs';
 
 import { SectionBadge } from '../components/SectionBadge';
 import { SectionTitle } from '../components/SectionTitle';
@@ -176,12 +178,15 @@ const ChessKingIllustContainer = styled.div`
   margin-right: ${-CHESS_KING_BLUR_RIGHT}px;
   margin-bottom: ${-CHESS_KING_BLUR_BOTTOM}px;
 `;
-const ChessKingIllust = styled(Image).attrs({
-  width: 443.09 + CHESS_KING_BLUR_TOP + CHESS_KING_BLUR_BOTTOM,
-  height: 455.76 + CHESS_KING_BLUR_LEFT + CHESS_KING_BLUR_RIGHT,
-})`
-  object-fit: contain;
-`;
+const ChessKingIllust = withAttrs(
+  {
+    width: 443.09 + CHESS_KING_BLUR_TOP + CHESS_KING_BLUR_BOTTOM,
+    height: 455.76 + CHESS_KING_BLUR_LEFT + CHESS_KING_BLUR_RIGHT,
+  },
+  styled.img`
+    object-fit: contain;
+  `,
+);
 
 const WALLET_ILLUST_BLUR_TOP = 140 - 98.51;
 const WALLET_ILLUST_BLUR_RIGHT = 140 - 30.28;
@@ -202,12 +207,15 @@ const WalletIllustContainer = styled.div`
   margin-right: ${-WALLET_ILLUST_BLUR_RIGHT}px;
   z-index: 0;
 `;
-const WalletIllust = styled(Image).attrs({
-  width: 355.5 + WALLET_ILLUST_BLUR_RIGHT,
-  height: 345 + WALLET_ILLUST_BLUR_TOP,
-})`
-  object-fit: contain;
-`;
+const WalletIllust = withAttrs(
+  {
+    width: 355.5 + WALLET_ILLUST_BLUR_RIGHT,
+    height: 345 + WALLET_ILLUST_BLUR_TOP,
+  },
+  styled(Image)`
+    object-fit: contain;
+  `,
+);
 
 const InequalSymbol = styled.img`
   width: 141px;

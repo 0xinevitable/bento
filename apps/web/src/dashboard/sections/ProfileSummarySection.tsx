@@ -1,9 +1,9 @@
+import styled from '@emotion/styled';
 import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 import { Button, Modal } from '@/components/system';
 import { formatUsername } from '@/utils/format';

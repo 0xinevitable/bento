@@ -1,7 +1,8 @@
 import { Wallet } from '@bento/common';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import React, { useCallback, useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
 
 import { WalletConnector } from '@/components/WalletConnector';
 import { Modal } from '@/components/system';

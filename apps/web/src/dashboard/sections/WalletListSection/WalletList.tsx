@@ -1,8 +1,9 @@
 import { Wallet, shortenAddress } from '@bento/common';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import React, { useCallback } from 'react';
-import styled, { css } from 'styled-components';
 
 import { Colors } from '@/styles';
 import { axiosWithCredentials } from '@/utils';

@@ -1,9 +1,9 @@
 import { Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
+import styled from '@emotion/styled';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
-import styled from 'styled-components';
 
 import { AnimatedTab } from '@/components/AnimatedTab';
 import { Checkbox, Skeleton } from '@/components/system';

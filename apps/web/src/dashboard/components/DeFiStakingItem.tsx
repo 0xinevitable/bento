@@ -1,7 +1,8 @@
 import { shortenAddress } from '@bento/common';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { Trans, useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
-import styled, { css } from 'styled-components';
 
 import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { OsmosisDeFiType } from '@/defi/types/staking';

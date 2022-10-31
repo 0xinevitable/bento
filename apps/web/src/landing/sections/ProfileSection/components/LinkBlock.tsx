@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import { HTMLMotionProps, motion } from 'framer-motion';
-import styled from 'styled-components';
 
 import { ShadowedImage } from '@/profile/components/ShadowedImage';
 import { Colors } from '@/styles';

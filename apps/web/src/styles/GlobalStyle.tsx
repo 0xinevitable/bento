@@ -1,8 +1,8 @@
-import { createGlobalStyle } from 'styled-components';
+import { Global, css } from '@emotion/react';
 
 import { ralewayFontStack, systemFontStack } from '@/styles';
 
-export const GlobalStyle = createGlobalStyle`
+const globalStyles = css`
   * {
     box-sizing: border-box;
     word-break: keep-all;
@@ -16,7 +16,8 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-  .sys, .sys * {
+  .sys,
+  .sys * {
     font-family: ${systemFontStack} !important;
   }
 
@@ -35,7 +36,8 @@ export const GlobalStyle = createGlobalStyle`
     max-width: unset;
   }
 
-  input, button {
+  input,
+  button {
     outline: 0;
     background-color: transparent;
   }
@@ -71,3 +73,5 @@ export const GlobalStyle = createGlobalStyle`
     z-index: 90;
   }
 `;
+
+export const GlobalStyle: React.FC = () => <Global styles={globalStyles} />;

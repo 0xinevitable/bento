@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
 import axios, { AxiosError } from 'axios';
 import { GetServerSideProps } from 'next';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import styled from 'styled-components';
 
 import { Button, Checkbox, MetaHead } from '@/components/system';
 import { useSession } from '@/hooks/useSession';

@@ -1,8 +1,8 @@
 // import { Icon } from '@iconify/react';
+import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-import styled from 'styled-components';
 
 import { Modal } from '@/components/system';
 
