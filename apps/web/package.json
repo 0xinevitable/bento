@@ -41,7 +41,7 @@
     "lodash.chunk": "^4.2.0",
     "lodash.groupby": "^4.6.0",
     "minireset.css": "^0.0.7",
-    "next": "canary",
+    "next": "^13.0.1-canary.2",
     "next-i18next": "^12.1.0",
     "prop-types": "^15.8.1",
     "query-string": "^7.1.1",
