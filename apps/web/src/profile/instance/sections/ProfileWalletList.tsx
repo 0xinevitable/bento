@@ -1,8 +1,8 @@
 import { Wallet } from '@bento/common';
+import styled from '@emotion/styled';
 import clsx from 'clsx';
 import { useTranslation } from 'next-i18next';
 import React, { useCallback, useMemo } from 'react';
-import styled from 'styled-components';
 
 import { Analytics, copyToClipboard, toast } from '@/utils';
 

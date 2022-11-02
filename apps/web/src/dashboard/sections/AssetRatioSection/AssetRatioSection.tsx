@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
-import styled from 'styled-components';
 
 import { AnimatedToolTip } from '@/components/system';
 

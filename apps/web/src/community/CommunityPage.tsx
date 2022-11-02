@@ -1,9 +1,9 @@
+import styled from '@emotion/styled';
 import { GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import styled from 'styled-components';
 
 import { PageContainer } from '@/components/PageContainer';
 import { MetaHead } from '@/components/system';

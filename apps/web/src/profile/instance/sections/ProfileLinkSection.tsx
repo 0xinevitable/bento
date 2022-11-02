@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import React from 'react';
-import styled from 'styled-components';
 
 import { Skeleton } from '@/components/system';
 

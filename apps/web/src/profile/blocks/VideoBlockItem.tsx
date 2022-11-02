@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import React, { useMemo } from 'react';
 import YouTube from 'react-youtube';
-import styled from 'styled-components';
 
 import { VideoBlock } from '@/profile/blocks';
 

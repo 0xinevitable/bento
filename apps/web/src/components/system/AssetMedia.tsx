@@ -1,5 +1,6 @@
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
 
 import { Skeleton } from './Skeleton';
 

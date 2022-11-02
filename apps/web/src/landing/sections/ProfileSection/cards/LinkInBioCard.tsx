@@ -1,7 +1,7 @@
+import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
-import styled from 'styled-components';
 
 import illustOne from '@/assets/illusts/link-in-bio-1.png';
 import illustTwo from '@/assets/illusts/link-in-bio-2.png';

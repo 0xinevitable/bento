@@ -1,9 +1,9 @@
 import { Wallet } from '@bento/common';
+import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import React, { useRef } from 'react';
-import styled from 'styled-components';
 
 import {
   AnimatedToolTip,

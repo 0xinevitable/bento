@@ -1,12 +1,13 @@
+import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import styled from 'styled-components';
 
 import {
   Button,
   TrackedSection,
   TrackedSectionOptions,
 } from '@/components/system';
+import { withAttrs } from '@/utils/withAttrs';
 
 import { Colors } from '@/styles';
 
@@ -220,13 +221,17 @@ const BannerImageContainer = styled.div`
     bottom: 104px;
   }
 `;
-const BannerImage = styled(Image).attrs({
-  alt: 'Bento Profiles',
-  src: '/assets/profile/profile-nudge.png',
-  width: 491.62,
-  height: 496,
-  quality: 100,
-})``;
+const BannerImage = withAttrs(
+  {
+    alt: 'Bento Profiles',
+    src: '/assets/profile/profile-nudge.png',
+    width: 491.62,
+    height: 496,
+    quality: 100,
+  },
+  styled(Image)``,
+);
+
 const DefineYourselfStickerContainer = styled.div`
   width: 360.45px;
   height: 39.84px;
@@ -256,12 +261,15 @@ const DefineYourselfStickerContainer = styled.div`
     top: ${-72.68 - 20}px;
   }
 `;
-const DefineYourselfSticker = styled(Image).attrs({
-  alt: 'Define Yourself',
-  src: '/assets/profile/sticker-define-yourself.png',
-  width: 380,
-  height: 42,
-})``;
+const DefineYourselfSticker = withAttrs(
+  {
+    alt: 'Define Yourself',
+    src: '/assets/profile/sticker-define-yourself.png',
+    width: 380,
+    height: 42,
+  },
+  styled(Image)``,
+);
 
 const TapeContainer = styled.div`
   width: 870px;
@@ -277,9 +285,12 @@ const TapeContainer = styled.div`
     display: none;
   }
 `;
-const Tape = styled(Image).attrs({
-  alt: '',
-  src: '/assets/profile/profile-nudge-tape.png',
-  width: 870,
-  height: 370,
-})``;
+const Tape = withAttrs(
+  {
+    alt: '',
+    src: '/assets/profile/profile-nudge-tape.png',
+    width: 870,
+    height: 370,
+  },
+  styled(Image)``,
+);

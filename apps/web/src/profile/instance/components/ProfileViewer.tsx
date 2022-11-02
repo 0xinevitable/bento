@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import dedent from 'dedent';
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
 
 import { Skeleton } from '@/components/system';
 

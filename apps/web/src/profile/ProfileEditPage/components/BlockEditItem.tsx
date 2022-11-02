@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import React from 'react';
-import styled from 'styled-components';
 
 import { LinkBlock } from '@/profile/blocks';
 import { ShadowedImage } from '@/profile/components/ShadowedImage';

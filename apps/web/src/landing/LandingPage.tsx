@@ -1,8 +1,8 @@
+import styled from '@emotion/styled';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import styled from 'styled-components';
 
 import { MetaHead } from '@/components/system';
 

@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import { animated, useSpring } from '@react-spring/web';
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
 import { ShadowedImage } from './ShadowedImage';
 

@@ -25,7 +25,7 @@ module.exports = withPlugins(
   {
     reactStrictMode: true,
     compiler: {
-      styledComponents: true,
+      emotion: true,
     },
     experimental: {
       // NOTE: Disabled because of transpilation performance issues

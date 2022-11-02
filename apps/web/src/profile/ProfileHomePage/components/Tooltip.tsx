@@ -1,10 +1,10 @@
+import styled from '@emotion/styled';
 import React from 'react';
 import {
   NameType,
   ValueType,
 } from 'recharts/types/component/DefaultTooltipContent';
 import { TooltipProps as RechartsTooltipProps } from 'recharts/types/component/Tooltip';
-import styled from 'styled-components';
 
 type TooltipContentProps = RechartsTooltipProps<ValueType, NameType> & {
   colors: string[];

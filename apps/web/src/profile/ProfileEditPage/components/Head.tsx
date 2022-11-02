@@ -1,6 +1,6 @@
+import { css } from '@emotion/react';
 import { default as DocumentHead } from 'next/head';
 import React from 'react';
-import { css } from 'styled-components';
 
 export const Head: React.FC = () => {
   return (
