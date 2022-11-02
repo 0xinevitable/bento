@@ -317,6 +317,18 @@ export const getGAMMLPs = async (
         return omit<TokenInput, 'denomUnits'>(tokenInfo, 'denomUnits');
       });
 
+      // NOTE: Subtract unbonding amount from staked amount (to prevent double-counting)
+      let stakedValue = fromAmount(stakedAmount);
+      let pendingValue = fromAmount(pendingAmount);
+      stakedValue.value -= pendingValue.value;
+      stakedValue.lpAmount -= pendingValue.lpAmount;
+      stakedValue.tokenAmounts = Object.entries(
+        stakedValue.tokenAmounts,
+      ).reduce((acc, [k, v]) => {
+        acc[k] = v - pendingValue.tokenAmounts[k];
+        return acc;
+      }, {} as Record<string, number>);
+
       stakings.push({
         protocol: OsmosisDeFiProtocolType.OSMOSIS,
         type: OsmosisDeFiType.OSMOSIS_GAMM_LP,
@@ -324,11 +336,11 @@ export const getGAMMLPs = async (
         prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
         tokens: tokens,
         wallet: fromAmount(walletAmount),
-        staked: fromAmount(stakedAmount),
+        staked: stakedValue,
         rewards: null,
         unstake: {
           claimable: fromAmount(claimableAmount),
-          pending: fromAmount(pendingAmount),
+          pending: pendingValue,
         },
       });
     },
