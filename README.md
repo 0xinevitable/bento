@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjunhoyeo%2Fparacosm">
-    <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/junhoyeo/paracosm/production?color=%23000000&label=deploy&logo=Vercel&logoColor=white&style=for-the-badge&labelColor=000" />
+  <a href="https://bento.finance">
+    <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/inevitable-changes/bento/production?color=%23000000&label=deploy&logo=Vercel&logoColor=white&style=for-the-badge&labelColor=000" />
   </a>
   <a href="https://opensource.org/licenses/MPL-2.0">
     <img alt="License: MPL 2.0" src="https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg?style=for-the-badge&labelColor=000" />
