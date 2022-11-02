@@ -5,15 +5,6 @@ lib
 .DS_Store
 *.tsbuildinfo
 
-## Yarn
-.yarn/*
-!.yarn/cache
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-
 # Vercel
 .next
 .turbo
