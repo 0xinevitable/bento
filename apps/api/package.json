@@ -30,6 +30,7 @@
     "klaytn-multicall": "^1.0.5",
     "lodash.groupby": "^4.6.0",
     "next": "canary",
+    "node-fetch": "^3.2.10",
     "osmojs": "^0.33.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

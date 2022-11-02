@@ -46,6 +46,7 @@
     "minireset.css": "^0.0.7",
     "next": "^13.0.1-canary.2",
     "next-i18next": "^12.1.0",
+    "node-fetch": "^3.2.10",
     "prop-types": "^15.8.1",
     "query-string": "^7.1.1",
     "react": "^18.2.0",
