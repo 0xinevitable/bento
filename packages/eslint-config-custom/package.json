@@ -1,0 +1,13 @@
+{
+  "name": "eslint-config-custom",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@vercel/style-guide": "^4.0.2",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-config-turbo": "latest",
+    "eslint-plugin-react": "latest"
+  }
+}
