@@ -1396,6 +1396,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.16.7":
+  version: 7.20.1
+  resolution: "@babel/runtime@npm:7.20.1"
+  dependencies:
+    regenerator-runtime: ^0.13.10
+  checksum: 00567a333d3357925742a6f5e39394dcc0af6e6029103fe188158bf7ae8b0b3ee3c6c0f68fccc217f0a6cfa455f6be252298baf56b3f5ff37b34313b170cd9f6
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.18.3":
   version: 7.20.0
   resolution: "@babel/runtime@npm:7.20.0"
@@ -1536,6 +1545,7 @@ __metadata:
     "@ethersproject/providers": ^5.7.2
     "@ethersproject/wallet": ^5.7.0
     "@floating-ui/react-dom-interactions": ^0.10.2
+    "@geist-ui/core": ^2.3.8
     "@iconify/react": ^4.0.0
     "@next/bundle-analyzer": ^13.0.0
     "@react-spring/web": ^9.5.5
@@ -2925,6 +2935,18 @@ __metadata:
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
   checksum: 4059f790e2d07bf3c3ff3e0fec0daa8144fe35c1f6e0111c9921bd32106adaa97a4ab096ad7dab1e28ee6a9060083c4d1a4ada42a7f5f3f7a96b8812e2b757c1
+  languageName: node
+  linkType: hard
+
+"@geist-ui/core@npm:^2.3.8":
+  version: 2.3.8
+  resolution: "@geist-ui/core@npm:2.3.8"
+  dependencies:
+    "@babel/runtime": ^7.16.7
+  peerDependencies:
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  checksum: 47015f5262455bf0397ff141156580d77c24dff3b938a36300b72cc9c7aedbea5d776ba7f5dbac93555f97629fa2ef90c4dfe87de9d0f0f33b603792386714aa
   languageName: node
   linkType: hard
 
