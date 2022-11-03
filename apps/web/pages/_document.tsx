@@ -1,8 +1,34 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document';
+import { CssBaseline } from '@geist-ui/core';
+import Document, {
+  DocumentContext,
+  DocumentInitialProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from 'next/document';
+import { Fragment } from 'react';
 
 import i18nextConfig from '../next-i18next.config';
 
 export default class MyDocument extends Document {
+  static async getInitialProps(
+    ctx: DocumentContext,
+  ): Promise<DocumentInitialProps> {
+    const initialProps = await Document.getInitialProps(ctx);
+    const styles = CssBaseline.flush();
+
+    return {
+      ...initialProps,
+      styles: [
+        <Fragment key="1">
+          {initialProps.styles}
+          {styles}
+        </Fragment>,
+      ],
+    };
+  }
+
   render() {
     const currentLocale =
       this.props.__NEXT_DATA__.locale || i18nextConfig.i18n.defaultLocale;

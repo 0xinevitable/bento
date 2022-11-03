@@ -1,3 +1,4 @@
+import { CssBaseline, GeistProvider } from '@geist-ui/core';
 import { appWithTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
@@ -63,7 +64,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <React.Fragment>
+    <GeistProvider>
+      <CssBaseline />
       <GlobalStyle />
       <ToastProvider />
 
@@ -86,7 +88,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           <div id="landing-background" />
         </WalletsProvider>
       </PricingsProvider>
-    </React.Fragment>
+    </GeistProvider>
   );
 };
 
