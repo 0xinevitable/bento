@@ -64,7 +64,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <GeistProvider>
+    <GeistProvider themeType="dark">
       <CssBaseline />
       <GlobalStyle />
       <ToastProvider />
