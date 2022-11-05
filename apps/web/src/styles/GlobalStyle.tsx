@@ -154,25 +154,6 @@ export const GlobalStyle: React.FC = () => {
             text-decoration: ${theme.expressiveness.linkHoverStyle};
           }
 
-          ul,
-          ol {
-            padding: 0;
-            list-style-type: none;
-            margin: ${theme.layout.gapHalf} ${theme.layout.gapHalf}
-              ${theme.layout.gapHalf} ${theme.layout.gap};
-            color: ${theme.palette.foreground};
-          }
-
-          ol {
-            list-style-type: decimal;
-          }
-
-          li {
-            margin-bottom: 0.625em;
-            font-size: 1em;
-            line-height: 1.625em;
-          }
-
           h1,
           h2,
           h3,
