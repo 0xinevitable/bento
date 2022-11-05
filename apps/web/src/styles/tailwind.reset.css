@@ -17,15 +17,6 @@ hr {
 abbr:where([title]) {
   text-decoration: underline dotted;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
 a {
   color: inherit;
   text-decoration: inherit;
@@ -161,7 +152,6 @@ object {
 }
 img,
 video {
-  max-width: 100%;
   height: auto;
 }
 [hidden] {
