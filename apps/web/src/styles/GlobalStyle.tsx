@@ -4,22 +4,27 @@ import { useTheme } from '@geist-ui/core';
 import { ralewayFontStack, systemFontStack } from '@/styles';
 
 const globalStyles = css`
+  :root {
+    --RalewayFontStack: ${ralewayFontStack};
+    --SystemFontStack: ${systemFontStack};
+  }
+
   * {
     box-sizing: border-box;
     word-break: keep-all;
 
     &:lang(en) {
-      font-family: ${ralewayFontStack};
+      font-family: var(--RalewayFontStack);
     }
 
     &:lang(ko) {
-      font-family: ${systemFontStack};
+      font-family: var(--SystemFontStack);
     }
   }
 
   .sys,
   .sys * {
-    font-family: ${systemFontStack} !important;
+    font-family: var(--SystemFontStack) !important;
   }
 
   img {
@@ -106,7 +111,6 @@ export const GlobalStyle: React.FC = () => {
             font-weight: 400;
             color: inherit;
             letter-spacing: -0.005625em;
-            font-family: ${theme.font.sans};
           }
 
           p {
