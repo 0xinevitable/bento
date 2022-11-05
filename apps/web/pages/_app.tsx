@@ -1,4 +1,4 @@
-import { CssBaseline, GeistProvider } from '@geist-ui/core';
+import { GeistProvider } from '@geist-ui/core';
 import { appWithTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
 
@@ -65,7 +65,6 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <GeistProvider themeType="dark">
-      <CssBaseline />
       <GlobalStyle />
       <ToastProvider />
 
