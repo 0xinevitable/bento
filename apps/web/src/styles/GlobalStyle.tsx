@@ -22,28 +22,16 @@ const globalStyles = css`
     font-family: ${systemFontStack} !important;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
-  a {
-    text-decoration: none;
-    cursor: pointer;
-  }
-
   img {
     -webkit-user-drag: none;
-    max-width: unset;
   }
 
   input,
   button {
-    outline: 0;
     background-color: transparent;
   }
 
   button {
-    outline: 0;
     cursor: pointer;
   }
 
@@ -90,6 +78,7 @@ export const GlobalStyle: React.FC = () => {
 
           html {
             font-size: 16px;
+            scroll-behavior: smooth;
             --geist-icons-background: ${theme.palette.background};
           }
 
@@ -121,13 +110,11 @@ export const GlobalStyle: React.FC = () => {
           }
 
           p {
-            margin: 1em 0;
             font-size: 1em;
             line-height: 1.625em;
           }
 
           small {
-            margin: 0;
             line-height: 1.5;
             font-size: 0.875em;
           }
@@ -148,6 +135,7 @@ export const GlobalStyle: React.FC = () => {
             -webkit-touch-callout: none;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
             -webkit-box-align: center;
+            text-decoration: none;
           }
 
           a:hover {
@@ -161,7 +149,6 @@ export const GlobalStyle: React.FC = () => {
           h5,
           h6 {
             color: inherit;
-            margin: 0 0 0.7rem 0;
           }
 
           h1 {

@@ -5,10 +5,6 @@
   border-width: 0;
   border-style: solid;
 }
-body {
-  margin: 0;
-  line-height: 1;
-}
 hr {
   height: 0;
   color: inherit;
