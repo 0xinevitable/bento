@@ -5,10 +5,6 @@
   border-width: 0;
   border-style: solid;
 }
-body {
-  margin: 0;
-  line-height: 1;
-}
 hr {
   height: 0;
   color: inherit;
@@ -16,15 +12,6 @@ hr {
 }
 abbr:where([title]) {
   text-decoration: underline dotted;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
 }
 a {
   color: inherit;
@@ -161,7 +148,6 @@ object {
 }
 img,
 video {
-  max-width: 100%;
   height: auto;
 }
 [hidden] {

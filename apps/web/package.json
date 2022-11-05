@@ -20,6 +20,7 @@
     "@ethersproject/providers": "^5.7.2",
     "@ethersproject/wallet": "^5.7.0",
     "@floating-ui/react-dom-interactions": "^0.10.2",
+    "@geist-ui/core": "^2.3.8",
     "@iconify/react": "^4.0.0",
     "@react-spring/web": "^9.5.5",
     "@solana/web3.js": "^1.66.2",

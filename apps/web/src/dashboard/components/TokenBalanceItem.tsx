@@ -45,7 +45,10 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
               alignItems: 'center',
             }}
           >
-            <span className="truncate" style={{ color: Colors.gray400 }}>
+            <span
+              className="sys truncate"
+              style={{ color: Colors.gray400, fontWeight: 500 }}
+            >
               {info.type === 'nft' ? info.name : info.symbol}
             </span>
             <span className="sys">
