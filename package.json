@@ -12,6 +12,7 @@
     "lint": "turbo run lint"
   },
   "workspaces": [
+    "adapters",
     "apps/*",
     "packages/*",
     "scripts"

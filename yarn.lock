@@ -1454,6 +1454,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bento/adapters@workspace:adapters":
+  version: 0.0.0-use.local
+  resolution: "@bento/adapters@workspace:adapters"
+  dependencies:
+    "@bento/common": "workspace:^"
+    "@bento/core": "workspace:^"
+    "@cosmjs/cosmwasm-stargate": ^0.29.3
+    "@ethersproject/providers": ^5.7.2
+    "@solana/web3.js": ^1.66.2
+    "@types/bn.js": ^5.1.1
+    "@types/lodash.groupby": ^4.6.7
+    "@types/node": ^18.11.5
+    axios: ^1.1.3
+    axios-cache-interceptor: ^0.10.7
+    bech32: ^2.0.0
+    bn.js: ^5.2.1
+    caver-js: ^1.9.0
+    klaytn-multicall: ^1.0.5
+    lodash.groupby: ^4.6.0
+    osmojs: ^0.35.0
+    query-string: ^7.1.1
+    ts-node: ^10.9.1
+    typescript: ^4.8.3
+  languageName: unknown
+  linkType: soft
+
 "@bento/api@workspace:apps/api":
   version: 0.0.0-use.local
   resolution: "@bento/api@workspace:apps/api"
@@ -9835,6 +9861,22 @@ __metadata:
     long: ^5.2.0
     protobufjs: ^6.11.3
   checksum: ec9524201d80c940e54a729ebf41233762a459fa97c7935f554820b701424872e156c9b124522afc45873fbe7b536981f79997ce87c9424eaf727cdde4d813a6
+  languageName: node
+  linkType: hard
+
+"osmojs@npm:^0.35.0":
+  version: 0.35.0
+  resolution: "osmojs@npm:0.35.0"
+  dependencies:
+    "@babel/runtime": ^7.19.0
+    "@cosmjs/amino": 0.29.2
+    "@cosmjs/proto-signing": 0.29.2
+    "@cosmjs/stargate": 0.29.2
+    "@cosmjs/tendermint-rpc": ^0.29.2
+    "@osmonauts/lcd": ^0.8.0
+    long: ^5.2.0
+    protobufjs: ^6.11.3
+  checksum: 28a79b4334718353a2d94b57d26c4db2012291bb0a232bff8536aa90d1fd54597c24242742860c20d1fffd9057b32f6944a82d198a18404539a1fe3c1b9d2443
   languageName: node
   linkType: hard
 

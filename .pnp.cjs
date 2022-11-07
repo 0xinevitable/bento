@@ -16,6 +16,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:."\
       },\
       {\
+        "name": "@bento/adapters",\
+        "reference": "workspace:adapters"\
+      },\
+      {\
         "name": "@bento/api",\
         "reference": "workspace:apps/api"\
       },\
@@ -39,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
+      ["@bento/adapters", ["workspace:adapters"]],\
       ["@bento/api", ["workspace:apps/api"]],\
       ["@bento/common", ["workspace:packages/common"]],\
       ["@bento/core", ["workspace:packages/core"]],\
@@ -2583,6 +2588,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["to-fast-properties", "npm:2.0.0"]\
           ],\
           "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@bento/adapters", [\
+        ["workspace:adapters", {\
+          "packageLocation": "./adapters/",\
+          "packageDependencies": [\
+            ["@bento/adapters", "workspace:adapters"],\
+            ["@bento/common", "workspace:packages/common"],\
+            ["@bento/core", "workspace:packages/core"],\
+            ["@cosmjs/cosmwasm-stargate", "npm:0.29.3"],\
+            ["@ethersproject/providers", "npm:5.7.2"],\
+            ["@solana/web3.js", "npm:1.66.2"],\
+            ["@types/bn.js", "npm:5.1.1"],\
+            ["@types/lodash.groupby", "npm:4.6.7"],\
+            ["@types/node", "npm:18.11.5"],\
+            ["axios", "npm:1.1.3"],\
+            ["axios-cache-interceptor", "npm:0.10.7"],\
+            ["bech32", "npm:2.0.0"],\
+            ["bn.js", "npm:5.2.1"],\
+            ["caver-js", "npm:1.9.0"],\
+            ["klaytn-multicall", "npm:1.0.5"],\
+            ["lodash.groupby", "npm:4.6.0"],\
+            ["osmojs", "npm:0.35.0"],\
+            ["query-string", "npm:7.1.1"],\
+            ["ts-node", "virtual:01bd07887e346c5ac5c129c1f0c11f41a9f35f213732826f3bd2ebe6fe6638663944788285c0110a430941772729efa99954c2806e5b1458ce448f7f3b506884#npm:10.9.1"],\
+            ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=701156"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["@bento/api", [\
@@ -12645,6 +12678,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/osmojs-npm-0.33.0-1a1928e47e-ec9524201d.zip/node_modules/osmojs/",\
           "packageDependencies": [\
             ["osmojs", "npm:0.33.0"],\
+            ["@babel/runtime", "npm:7.19.0"],\
+            ["@cosmjs/amino", "npm:0.29.2"],\
+            ["@cosmjs/encoding", "npm:0.29.2"],\
+            ["@cosmjs/proto-signing", "npm:0.29.2"],\
+            ["@cosmjs/stargate", "npm:0.29.2"],\
+            ["@cosmjs/tendermint-rpc", "npm:0.29.2"],\
+            ["@osmonauts/lcd", "npm:0.8.0"],\
+            ["long", "npm:5.2.0"],\
+            ["protobufjs", "npm:6.11.3"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:0.35.0", {\
+          "packageLocation": "./.yarn/cache/osmojs-npm-0.35.0-45ce1d538e-28a79b4334.zip/node_modules/osmojs/",\
+          "packageDependencies": [\
+            ["osmojs", "npm:0.35.0"],\
             ["@babel/runtime", "npm:7.19.0"],\
             ["@cosmjs/amino", "npm:0.29.2"],\
             ["@cosmjs/encoding", "npm:0.29.2"],\
