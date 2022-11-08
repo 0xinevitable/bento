@@ -2,7 +2,8 @@
 
 ```bash
 * Osmosis
-/osmosis/index.ts # Osmosis
+/osmosis/index.ts # Osmosis (Chain)
+  /osmosis/osmosis/index.ts # Osmosis (Service)
   /osmosis/osmosis/governance.ts # Osmosis Governance
   /osmosis/osmosis/gamm.ts # Osmosis GAMM
   /osmosis/ion-dao/governance.ts # ION DAO Governance

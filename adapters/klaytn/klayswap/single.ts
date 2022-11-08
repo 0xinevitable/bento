@@ -1,7 +1,7 @@
 import axios from 'axios';
 import BigNumber from 'bn.js';
-import { klaytnChain } from 'klaytn/_chain';
 
+import { klaytnChain } from '..';
 import {
   DeFiStaking,
   KlaytnDeFiProtocolType,

@@ -1471,6 +1471,7 @@ __metadata:
     bech32: ^2.0.0
     bn.js: ^5.2.1
     caver-js: ^1.9.0
+    find-yarn-workspace-root: ^2.0.0
     klaytn-multicall: ^1.0.5
     lodash.groupby: ^4.6.0
     osmojs: ^0.35.0

@@ -9,11 +9,7 @@ import groupBy from 'lodash.groupby';
 // import Long from 'long';
 import { osmosis } from 'osmojs';
 
-import {
-  DeFiStaking,
-  OsmosisDeFiProtocolType,
-  OsmosisDeFiType,
-} from '../_lib/types/staking';
+import { DeFiStaking, OsmosisDeFiType } from '../../_lib/types/staking';
 
 export interface Coin {
   denom: string;
@@ -330,7 +326,6 @@ export const getGAMMLPs = async (
       }, {} as Record<string, number>);
 
       stakings.push({
-        protocol: OsmosisDeFiProtocolType.OSMOSIS,
         type: OsmosisDeFiType.OSMOSIS_GAMM_LP,
         address: poolId,
         prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),

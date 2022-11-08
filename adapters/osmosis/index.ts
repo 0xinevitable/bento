@@ -74,8 +74,6 @@ export class OsmosisChain implements CosmosSDKBasedChain {
       if (asset.denom === this.currency.coinMinimalDenom) {
         return [];
       }
-      // const denomUnits = OSMOSIS_TOKENS.flatMap((t) => t.denomUnits || []);
-
       const tokenInfo = OSMOSIS_TOKENS.find(
         (tokenInfo) =>
           !!tokenInfo.denomUnits?.find((v) => v.denom === asset.denom),

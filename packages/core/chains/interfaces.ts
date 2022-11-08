@@ -8,16 +8,11 @@ export interface TokenBalance extends Omit<TokenInput, 'address'> {
   address?: string;
 }
 
+export type NativeInput = Omit<TokenInput, 'address'>;
+
 export interface Chain {
   // 기반 통화(Native Token)
-  currency: {
-    symbol: string;
-    name: string;
-    logo?: string;
-    decimals: number;
-    coinGeckoId?: string;
-    coinMinimalDenom?: string; // Only for Cosmos SDK based chains
-  };
+  currency: NativeInput;
   chainId?: number;
   _provider?: any;
   getCurrencyPrice: (currency?: Currency) => Promise<number>;

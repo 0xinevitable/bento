@@ -2608,6 +2608,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bech32", "npm:2.0.0"],\
             ["bn.js", "npm:5.2.1"],\
             ["caver-js", "npm:1.9.0"],\
+            ["find-yarn-workspace-root", "npm:2.0.0"],\
             ["klaytn-multicall", "npm:1.0.5"],\
             ["lodash.groupby", "npm:4.6.0"],\
             ["osmojs", "npm:0.35.0"],\

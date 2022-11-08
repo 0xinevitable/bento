@@ -10,7 +10,13 @@ export enum OsmosisDeFiProtocolType {
   ION = 'o_ion',
   OSMOSIS = 'o_o',
 }
-export type DeFiProtocolType = KlaytnDeFiProtocolType | OsmosisDeFiProtocolType;
+export enum CosmosHubDeFiProtocolType {
+  COSMOS_HUB = 'cosmos_hub',
+}
+export type DeFiProtocolType =
+  | KlaytnDeFiProtocolType
+  | OsmosisDeFiProtocolType
+  | CosmosHubDeFiProtocolType;
 
 export enum KlayStationNodes {
   KLAYSTATION_NODE_HASHED_AND_OZYS = 'kstn_n_hno',
@@ -57,9 +63,11 @@ export type AmountWithOptionalValue = {
 export type NativeInput = Omit<TokenInput, 'address'>;
 
 export type DeFiStaking = {
-  protocol: DeFiProtocolType;
-  type: DeFiType;
+  type: string;
   prefix?: string;
+
+  // is native chain
+  native?: boolean;
 
   // representative contract address
   address: string | null;
@@ -86,7 +94,7 @@ export type DeFiStakingResponse = {
 
 export const Examples: Record<string, DeFiStaking> = {
   LP: {
-    protocol: KlaytnDeFiProtocolType.KLAYSWAP,
+    // protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
     address: '',
     tokens: [],
@@ -101,7 +109,7 @@ export const Examples: Record<string, DeFiStaking> = {
     unstake: null, // Unstaking period does not exist
   },
   MINIMAL: {
-    protocol: KlaytnDeFiProtocolType.KLAYSWAP,
+    // protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
     address: '0x00',
     tokens: [],

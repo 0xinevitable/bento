@@ -4,7 +4,7 @@ import {
   TokenInput,
   ZERO_ADDRESS,
 } from '@bento/core';
-import { klaytnChain } from 'klaytn/_chain';
+import { klaytnChain } from 'klaytn';
 
 export const getTokenInfo = (loweredAddress: string): TokenInput | null => {
   if (loweredAddress === EEEE_ADDRESS || loweredAddress === ZERO_ADDRESS) {

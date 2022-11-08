@@ -1,10 +1,6 @@
 import { OsmosisChain } from '@bento/core';
 
-import {
-  DeFiStaking,
-  OsmosisDeFiProtocolType,
-  OsmosisDeFiType,
-} from '../_lib/types/staking';
+import { DeFiStaking } from '../../_lib/types/staking';
 
 const osmosisChain = new OsmosisChain();
 const osmosis = osmosisChain.currency;
@@ -17,8 +13,8 @@ export const getDelegations = async (address: string): Promise<DeFiStaking> => {
   ]);
 
   return {
-    protocol: OsmosisDeFiProtocolType.OSMOSIS,
-    type: OsmosisDeFiType.OSMOSIS_GOVERNANCE,
+    native: true,
+    type: 'governance',
     address: null,
     wallet: null,
     tokens: [{ ...osmosis, address: osmosis.coinMinimalDenom }],

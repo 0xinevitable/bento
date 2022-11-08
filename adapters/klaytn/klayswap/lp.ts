@@ -1,7 +1,7 @@
 import BigNumber from 'bn.js';
 import { Multicall } from 'klaytn-multicall';
-import { klaytnChain } from 'klaytn/_chain';
 
+import { klaytnChain } from '..';
 import {
   DeFiStaking,
   KlaytnDeFiProtocolType,

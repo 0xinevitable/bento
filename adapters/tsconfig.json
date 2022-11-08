@@ -13,10 +13,15 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
-    "outDir": "lib",
+    "outDir": "dist",
     "declaration": true,
     "rootDir": ".",
     "jsx": "react"
   },
-  "include": ["**/*"]
+  "include": ["**/*"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }

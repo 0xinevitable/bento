@@ -1,11 +1,11 @@
 import { Multicall } from 'klaytn-multicall';
-import { klaytnChain } from 'klaytn/_chain';
 
 import {
   DeFiStaking,
   KlaytnDeFiProtocolType,
   KlaytnDeFiType,
 } from '../../_lib/types/staking';
+import { klaytnChain } from '../index';
 import {
   MINIMAL_ABIS,
   SCNR_STAKING_ADDRESS,
