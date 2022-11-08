@@ -5,10 +5,13 @@ import {
   EEEE_ADDRESS,
   POLYGON_TOKENS,
   TokenBalance,
+  ZERO_ADDRESS,
   priceFromCoinGecko,
 } from '@bento/core';
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import { JsonRpcProvider } from '@ethersproject/providers';
+
+import { ChainGetAccount, ChainInfo } from '@/_lib/types';
 
 export class PolygonChain implements Chain {
   currency = {
@@ -17,6 +20,7 @@ export class PolygonChain implements Chain {
     logo: '/assets/icons/polygon.png',
     decimals: 18,
     coinGeckoId: 'matic-network',
+    ind: ZERO_ADDRESS,
   };
   chainId = 137;
   _provider = new JsonRpcProvider(Config.RPC_URL.POLYGON_MAINNET);
@@ -85,4 +89,22 @@ export class PolygonChain implements Chain {
   };
 }
 
-export default PolygonChain;
+const polygonChain = new PolygonChain();
+
+const info: ChainInfo = {
+  name: 'Polygon',
+  type: 'evm',
+};
+export default info;
+
+export const getAccount: ChainGetAccount = async (account) => {
+  return {
+    type: 'chain',
+    tokens: [polygonChain.currency],
+    wallet: {
+      tokenAmounts: {
+        [polygonChain.currency.ind]: await polygonChain.getBalance(account),
+      },
+    },
+  };
+};

@@ -1477,7 +1477,9 @@ __metadata:
     osmojs: ^0.35.0
     query-string: ^7.1.1
     ts-node: ^10.9.1
+    ttypescript: ^1.5.13
     typescript: ^4.8.3
+    typescript-json: ^3.3.22
   languageName: unknown
   linkType: soft
 
@@ -11932,6 +11934,13 @@ __metadata:
     tstl: ^2.5.6
     uuid: ^8.3.2
   checksum: 5859f859877788673561d3a7251ac80f7832e773c295c0d70001ed75c5b4a4a2063d77074d3a42cd7d098fa5d3b377bc6087d80fea0da0039cd98e685d9231f3
+  languageName: node
+  linkType: hard
+
+"typescript-json@npm:^3.3.22":
+  version: 3.3.22
+  resolution: "typescript-json@npm:3.3.22"
+  checksum: 502cf2215d2b3545ff3ea74f8976c7dcb07480ad099e111117dd4c2c33eb11c8252c49bc4a28f5985f7f842bd92a0dc9b00146f437f9424e42881ff003fc519a
   languageName: node
   linkType: hard
 

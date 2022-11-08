@@ -9,6 +9,10 @@ import {
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
 
+import { ChainGetAccount, ChainInfo } from '@/_lib/types';
+
+const SOLANA_ZERO_ADDRESS = '0'.repeat(32);
+
 export class SolanaChain implements Chain {
   currency = {
     symbol: 'SOL',
@@ -16,6 +20,7 @@ export class SolanaChain implements Chain {
     logo: '/assets/icons/solana.png',
     decimals: 9,
     coinGeckoId: 'solana',
+    ind: SOLANA_ZERO_ADDRESS,
   };
   chainId = 1399811149;
   _provider = new Connection(clusterApiUrl('mainnet-beta'));
@@ -83,3 +88,23 @@ export class SolanaChain implements Chain {
     return safePromiseAllV1(promises);
   };
 }
+
+export const solanaChain = new SolanaChain();
+
+const info: ChainInfo = {
+  name: 'Solana',
+  type: 'sealevel',
+};
+export default info;
+
+export const getAccount: ChainGetAccount = async (account) => {
+  return {
+    type: 'chain',
+    tokens: [solanaChain.currency],
+    wallet: {
+      tokenAmounts: {
+        [solanaChain.currency.ind]: await solanaChain.getBalance(account),
+      },
+    },
+  };
+};

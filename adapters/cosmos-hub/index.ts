@@ -1,6 +1,7 @@
 import { Currency, priceFromCoinGecko, withCache } from '@bento/core';
 import axios, { Axios } from 'axios';
 
+import { ChainGetAccount, ChainInfo } from '@/_lib/types';
 import {
   CosmosHubDelegationsResponse,
   CosmosSDKBasedBalanceResponse,
@@ -15,6 +16,7 @@ export class CosmosHubChain implements CosmosSDKBasedChain {
     decimals: 6,
     coinGeckoId: 'cosmos',
     coinMinimalDenom: 'uatom',
+    ind: 'uatom',
   };
   bech32Config = {
     prefix: 'cosmos',
@@ -56,3 +58,23 @@ export class CosmosHubChain implements CosmosSDKBasedChain {
     return [];
   };
 }
+
+export const cosmosHubChain = new CosmosHubChain();
+
+const info: ChainInfo = {
+  name: 'Cosmos Hub',
+  type: 'cosmos-sdk',
+};
+export default info;
+
+export const getAccount: ChainGetAccount = async (account) => {
+  return {
+    type: 'chain',
+    tokens: [cosmosHubChain.currency],
+    wallet: {
+      tokenAmounts: {
+        [cosmosHubChain.currency.ind]: await cosmosHubChain.getBalance(account),
+      },
+    },
+  };
+};

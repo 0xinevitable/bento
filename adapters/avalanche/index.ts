@@ -5,10 +5,13 @@ import {
   Currency,
   EEEE_ADDRESS,
   TokenBalance,
+  ZERO_ADDRESS,
   priceFromCoinGecko,
 } from '@bento/core';
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import { JsonRpcProvider } from '@ethersproject/providers';
+
+import { ChainGetAccount, ChainInfo } from '@/_lib/types';
 
 export class AvalancheChain implements Chain {
   currency = {
@@ -17,6 +20,7 @@ export class AvalancheChain implements Chain {
     logo: '/assets/icons/avalanche.png',
     decimals: 18,
     coinGeckoId: 'avalanche-2',
+    ind: ZERO_ADDRESS,
   };
   chainId = 43114;
   _provider = new JsonRpcProvider(Config.RPC_URL.AVALANCHE_C_MAINNET);
@@ -84,3 +88,23 @@ export class AvalancheChain implements Chain {
     return safePromiseAllV1(promises);
   };
 }
+
+export const avalancheChain = new AvalancheChain();
+
+const info: ChainInfo = {
+  name: 'Avalanche',
+  type: 'evm',
+};
+export default info;
+
+export const getAccount: ChainGetAccount = async (account) => {
+  return {
+    type: 'chain',
+    tokens: [avalancheChain.currency],
+    wallet: {
+      tokenAmounts: {
+        [avalancheChain.currency.ind]: await avalancheChain.getBalance(account),
+      },
+    },
+  };
+};

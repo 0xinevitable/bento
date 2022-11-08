@@ -57,7 +57,7 @@ export type DeFiStaking = {
   relatedTokens?: (TokenInput | NativeInput | null)[];
 
   wallet: AmountWithOptionalValue | null | 'unavailable';
-  staked: AmountWithOptionalValue;
+  staked: AmountWithOptionalValue | null | 'unavailable';
   rewards: AmountWithOptionalValue | null | 'unavailable';
   unstake:
     | {

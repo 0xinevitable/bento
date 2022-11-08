@@ -12,14 +12,13 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "outDir": "dist",
+    "jsx": "react",
     "declaration": true,
+    "outDir": "dist",
     "rootDir": ".",
     "baseUrl": ".",
-    "paths": {
-      "@/*": ["*"]
-    },
-    "jsx": "react"
+    "paths": { "@/*": ["*"] },
+    "plugins": [{ "transform": "typescript-json/lib/transform" }]
   },
   "include": ["**/*"],
   "ts-node": {

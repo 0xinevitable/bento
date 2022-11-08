@@ -6,6 +6,7 @@ import {
 } from '@bento/core';
 import axios, { Axios } from 'axios';
 
+import { ChainGetAccount, ChainInfo } from '@/_lib/types';
 import {
   CosmosSDKBasedBalanceResponse,
   CosmosSDKBasedChain,
@@ -21,6 +22,7 @@ export class OsmosisChain implements CosmosSDKBasedChain {
     decimals: 6,
     coinGeckoId: 'osmosis',
     coinMinimalDenom: 'uosmo',
+    ind: 'uosmo',
   };
   bech32Config = {
     prefix: 'osmo',
@@ -113,3 +115,23 @@ export class OsmosisChain implements CosmosSDKBasedChain {
     });
   };
 }
+
+export const osmosisChain = new OsmosisChain();
+
+const info: ChainInfo = {
+  name: 'Osmosis',
+  type: 'cosmos-sdk',
+};
+export default info;
+
+export const getAccount: ChainGetAccount = async (account) => {
+  return {
+    type: 'chain',
+    tokens: [osmosisChain.currency],
+    wallet: {
+      tokenAmounts: {
+        [osmosisChain.currency.ind]: await osmosisChain.getBalance(account),
+      },
+    },
+  };
+};

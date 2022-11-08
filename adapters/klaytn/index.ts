@@ -6,11 +6,14 @@ import {
   KLAYTN_TOKENS,
   TokenBalance,
   TokenInput,
+  ZERO_ADDRESS,
   priceFromCoinGecko,
   withCache,
 } from '@bento/core';
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import Caver from 'caver-js';
+
+import { ChainGetAccount, ChainInfo } from '@/_lib/types';
 
 export class KlaytnChain implements Chain {
   currency = {
@@ -19,6 +22,7 @@ export class KlaytnChain implements Chain {
     name: 'Klaytn',
     logo: '/assets/icons/klaytn.png',
     coinGeckoId: 'klay-token',
+    ind: ZERO_ADDRESS,
   };
   chainId = 8217;
   _provider = new Caver(Config.RPC_URL.KLAYTN_MAINNET);
@@ -122,8 +126,6 @@ export class KlaytnChain implements Chain {
   };
 }
 
-export default KlaytnChain;
-
 export const klaytnChain = new KlaytnChain();
 
 export const MinimalABIs = {
@@ -165,4 +167,22 @@ export const MinimalABIs = {
       type: 'function',
     },
   ],
+};
+
+const info: ChainInfo = {
+  name: 'Klaytn',
+  type: 'evm',
+};
+export default info;
+
+export const getAccount: ChainGetAccount = async (account) => {
+  return {
+    type: 'chain',
+    tokens: [klaytnChain.currency],
+    wallet: {
+      tokenAmounts: {
+        [klaytnChain.currency.ind]: await klaytnChain.getBalance(account),
+      },
+    },
+  };
 };

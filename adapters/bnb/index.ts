@@ -5,10 +5,13 @@ import {
   Currency,
   EEEE_ADDRESS,
   TokenBalance,
+  ZERO_ADDRESS,
   priceFromCoinGecko,
 } from '@bento/core';
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import { JsonRpcProvider } from '@ethersproject/providers';
+
+import { ChainGetAccount, ChainInfo } from '@/_lib/types';
 
 export class BNBChain implements Chain {
   currency = {
@@ -17,6 +20,7 @@ export class BNBChain implements Chain {
     logo: '/assets/icons/bnb.png',
     decimals: 18,
     coinGeckoId: 'binancecoin',
+    ind: ZERO_ADDRESS,
   };
   chainId = 56;
   _provider = new JsonRpcProvider(Config.RPC_URL.BNB_MAINNET);
@@ -85,4 +89,22 @@ export class BNBChain implements Chain {
   };
 }
 
-export default BNBChain;
+export const bnbChain = new BNBChain();
+
+const info: ChainInfo = {
+  name: 'Binance',
+  type: 'evm',
+};
+export default info;
+
+export const getAccount: ChainGetAccount = async (account) => {
+  return {
+    type: 'chain',
+    tokens: [bnbChain.currency],
+    wallet: {
+      tokenAmounts: {
+        [bnbChain.currency.ind]: await bnbChain.getBalance(account),
+      },
+    },
+  };
+};

@@ -13,19 +13,19 @@
 
 ```ts
 // [chain]/index.ts
-const currency: TokenInput // NULL_ADDRESS(0x0000...) if native token in evm; using denom in cosmos-sdks
+const currency: TokenInput // ind = ZERO_ADDRESS(0x0000...) if native token in evm; using denom in cosmos-sdks
 
 export default {
   name: 'Osmosis',
   type: 'cosmos-sdk' // evm | sealevel | cosmos-sdk
 };
 
-export default async function (account: string) {
+export const getAccount = async (account: string) => {
   return {
     tokens: [currency],
     wallet: {
       tokenAmounts: {
-        [currency.address]: balance,
+        [currency.ind]: balance,
       }
     }
   }
@@ -71,7 +71,7 @@ let token: TokenInput | NativeInput;
 // chain native
 export default {
   native: true,
-  address: null,
+  ind: poolId,
   name: {
     en: 'Osmosis LPs',
     ko: '오스모시스 LP 풀',
@@ -81,7 +81,7 @@ export default {
 // from contract
 export default {
   native: false,
-  address: '0x7777777141f111cf9f0308a63dbd9d0cad3010c4',
+  ind: '0x7777777141f111cf9f0308a63dbd9d0cad3010c4', // contract address
   name: '단일 예치',
 };
 
@@ -92,18 +92,19 @@ export const getAccount = async (account: string) => {
     {
       delegator: 'Manythings', // optional; for validator/node
       tokens: tokens, // tokens used in `tokenAmounts`
+      relatedTokens: [],
       prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '), // optional
       wallet: null,
       staked: {
         tokenAmounts: {
-          [token.address]: delegations,
+          [token.ind]: delegations,
         },
         value: 30001.33, // optional; valuation in USD
       },
       unstake: 'unavailable', // null if unexist / 'unavailable' if query is not implemented
       rewards: {
         tokenAmounts: {
-          [token.address]: rewards,
+          [token.ind]: rewards,
         },
       },
     },

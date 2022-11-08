@@ -1,6 +1,9 @@
 import findWorkspaceRoot from 'find-yarn-workspace-root';
 import fs from 'fs';
 import path from 'path';
+import TSON from 'typescript-json';
+
+import { BentoChainAdapter } from './_lib/types';
 
 const WORKSPACE_ROOT_PATH = findWorkspaceRoot(null) ?? '';
 const ADAPTER_ROOT_PATH = path.resolve(WORKSPACE_ROOT_PATH, './adapters');
@@ -21,21 +24,30 @@ const fetchChildren = (basePath: string) =>
     return [];
   });
 
-const adapters = fetchChildren(ADAPTER_ROOT_PATH);
-for (const adapter of adapters) {
-  const indexPath = path.join(adapter.path, 'index.ts');
-  const hasIndex = fs.existsSync(indexPath);
+const chains = fetchChildren(ADAPTER_ROOT_PATH);
+for (const chain of chains) {
+  const chainAdapterPath = path.join(chain.path, 'index.ts');
+  const hasIndex = fs.existsSync(chainAdapterPath);
   if (!hasIndex) {
-    throw Error(`Adapter ${adapter.name} is missing index.ts`);
+    console.error(`❌ Chain ${chain.name}: missing index.ts`);
+  } else {
+    const chainAdapter = require(chainAdapterPath);
+    if (!TSON.is<BentoChainAdapter>(chainAdapter)) {
+      console.error(
+        `❌ Chain ${chain.name}: not a valid \`BentoChainAdapter\``,
+      );
+    } else {
+      console.log(`✅ Chain: ${chain.name}`);
+    }
   }
 
-  const services = fetchChildren(adapter.path);
+  const services = fetchChildren(chain.path);
   for (const service of services) {
-    const servicePath = path.join(service.path, 'index.ts');
-    const hasService = fs.existsSync(servicePath);
-    if (!hasService) {
-      throw Error(
-        `Service ${service.name} is missing index.ts in adapter ${adapter.name}`,
+    const serviceAdapterPath = path.join(service.path, 'index.ts');
+    const hasIndex = fs.existsSync(serviceAdapterPath);
+    if (!hasIndex) {
+      console.error(
+        `❌ Service ${chain.name}/${service.name}: missing index.ts`,
       );
     }
   }

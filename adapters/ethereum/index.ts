@@ -5,10 +5,13 @@ import {
   EEEE_ADDRESS,
   ETHEREUM_TOKENS,
   TokenBalance,
+  ZERO_ADDRESS,
   priceFromCoinGecko,
 } from '@bento/core';
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import { JsonRpcProvider } from '@ethersproject/providers';
+
+import { ChainGetAccount, ChainInfo } from '@/_lib/types';
 
 export class EthereumChain implements Chain {
   currency = {
@@ -17,6 +20,7 @@ export class EthereumChain implements Chain {
     logo: '/assets/icons/ethereum.png',
     decimals: 18,
     coinGeckoId: 'ethereum',
+    ind: ZERO_ADDRESS,
   };
   chainId = 1;
   _provider = new JsonRpcProvider(Config.RPC_URL.ETHEREUM_MAINNET);
@@ -79,4 +83,22 @@ export class EthereumChain implements Chain {
   };
 }
 
-export default EthereumChain;
+export const ethereumChain = new EthereumChain();
+
+const info: ChainInfo = {
+  name: 'Cosmos Hub',
+  type: 'cosmos-sdk',
+};
+export default info;
+
+export const getAccount: ChainGetAccount = async (account) => {
+  return {
+    type: 'chain',
+    tokens: [ethereumChain.currency],
+    wallet: {
+      tokenAmounts: {
+        [ethereumChain.currency.ind]: await ethereumChain.getBalance(account),
+      },
+    },
+  };
+};
