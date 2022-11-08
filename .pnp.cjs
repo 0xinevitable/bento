@@ -2654,7 +2654,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["lodash.groupby", "npm:4.6.0"],\
             ["next", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:12.3.2-canary.25"],\
             ["next-transpile-modules", "npm:9.1.0"],\
-            ["osmojs", "npm:0.33.0"],\
+            ["osmojs", "npm:0.35.0"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:18.2.0"],\
@@ -12674,22 +12674,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["osmojs", [\
-        ["npm:0.33.0", {\
-          "packageLocation": "./.yarn/cache/osmojs-npm-0.33.0-1a1928e47e-ec9524201d.zip/node_modules/osmojs/",\
-          "packageDependencies": [\
-            ["osmojs", "npm:0.33.0"],\
-            ["@babel/runtime", "npm:7.19.0"],\
-            ["@cosmjs/amino", "npm:0.29.2"],\
-            ["@cosmjs/encoding", "npm:0.29.2"],\
-            ["@cosmjs/proto-signing", "npm:0.29.2"],\
-            ["@cosmjs/stargate", "npm:0.29.2"],\
-            ["@cosmjs/tendermint-rpc", "npm:0.29.2"],\
-            ["@osmonauts/lcd", "npm:0.8.0"],\
-            ["long", "npm:5.2.0"],\
-            ["protobufjs", "npm:6.11.3"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:0.35.0", {\
           "packageLocation": "./.yarn/cache/osmojs-npm-0.35.0-45ce1d538e-28a79b4334.zip/node_modules/osmojs/",\
           "packageDependencies": [\

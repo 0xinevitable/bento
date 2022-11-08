@@ -1515,7 +1515,7 @@ __metadata:
     lodash.groupby: ^4.6.0
     next: canary
     next-transpile-modules: ^9.1.0
-    osmojs: ^0.33.0
+    osmojs: ^0.35.0
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -9845,22 +9845,6 @@ __metadata:
   version: 0.1.2
   resolution: "os@npm:0.1.2"
   checksum: dc2d99759eef13f5dc47ddb12c67b9760a7196fd83a35a7aec2d75b82f91163ca1d4e8872238f8c2a35f4cddd5adf5ce6638a234c0563c748d3cd1d69a9f7153
-  languageName: node
-  linkType: hard
-
-"osmojs@npm:^0.33.0":
-  version: 0.33.0
-  resolution: "osmojs@npm:0.33.0"
-  dependencies:
-    "@babel/runtime": ^7.19.0
-    "@cosmjs/amino": 0.29.2
-    "@cosmjs/proto-signing": 0.29.2
-    "@cosmjs/stargate": 0.29.2
-    "@cosmjs/tendermint-rpc": ^0.29.2
-    "@osmonauts/lcd": ^0.8.0
-    long: ^5.2.0
-    protobufjs: ^6.11.3
-  checksum: ec9524201d80c940e54a729ebf41233762a459fa97c7935f554820b701424872e156c9b124522afc45873fbe7b536981f79997ce87c9424eaf727cdde4d813a6
   languageName: node
   linkType: hard
 
