@@ -3,12 +3,17 @@ import fs from 'fs';
 import path from 'path';
 import TSON from 'typescript-json';
 
-import { BentoChainAdapter } from './_lib/types';
+import { BentoChainAdapter, ServiceInfo } from './_lib/types';
 
 const WORKSPACE_ROOT_PATH = findWorkspaceRoot(null) ?? '';
 const ADAPTER_ROOT_PATH = path.resolve(WORKSPACE_ROOT_PATH, './adapters');
 
-const fetchChildren = (basePath: string) =>
+type Child = {
+  name: string;
+  path: string;
+};
+
+const fetchChildren = (basePath: string): Child[] =>
   fs.readdirSync(basePath).flatMap((filename) => {
     if (
       filename.startsWith('_') ||
@@ -24,31 +29,64 @@ const fetchChildren = (basePath: string) =>
     return [];
   });
 
-const chains = fetchChildren(ADAPTER_ROOT_PATH);
-for (const chain of chains) {
-  const chainAdapterPath = path.join(chain.path, 'index.ts');
-  const hasIndex = fs.existsSync(chainAdapterPath);
-  if (!hasIndex) {
-    console.error(`❌ Chain ${chain.name}: missing index.ts`);
-  } else {
-    const chainAdapter = require(chainAdapterPath);
-    if (!TSON.is<BentoChainAdapter>(chainAdapter)) {
-      console.error(
-        `❌ Chain ${chain.name}: not a valid \`BentoChainAdapter\``,
-      );
-    } else {
-      console.log(`✅ Chain: ${chain.name}`);
-    }
-  }
-
-  const services = fetchChildren(chain.path);
-  for (const service of services) {
-    const serviceAdapterPath = path.join(service.path, 'index.ts');
-    const hasIndex = fs.existsSync(serviceAdapterPath);
+const validateChildren = (
+  children: Child[],
+  adapterName: string,
+  typeName: string,
+  testModule: (module: unknown) => boolean,
+  callback?: (child: Child) => void,
+) => {
+  for (const child of children) {
+    const chainAdapterPath = path.join(child.path, 'index.ts');
+    const hasIndex = fs.existsSync(chainAdapterPath);
     if (!hasIndex) {
-      console.error(
-        `❌ Service ${chain.name}/${service.name}: missing index.ts`,
-      );
+      console.error(`❌ ${adapterName} ${child.name}: missing index.ts`);
+    } else {
+      let chainAdapter: any;
+      let hasError: boolean = false;
+      try {
+        chainAdapter = require(chainAdapterPath);
+      } catch (err) {
+        console.error(
+          `❌ ${adapterName} ${child.name}: failed to load index.ts`,
+          err,
+        );
+        hasError = true;
+      }
+
+      if (!hasError) {
+        if (!testModule(chainAdapter)) {
+          console.error(
+            `❌ ${adapterName} ${child.name}: not a valid \`${typeName}\``,
+          );
+        } else {
+          console.log(`✅ Chain: ${child.name}`);
+        }
+      }
     }
+
+    callback?.(child);
   }
-}
+};
+
+const main = () => {
+  const chains = fetchChildren(ADAPTER_ROOT_PATH);
+  validateChildren(
+    chains,
+    'Chain',
+    'BentoChainAdapter',
+    (module: unknown) => TSON.is<BentoChainAdapter>(module),
+    (chain) => {
+      const services = fetchChildren(chain.path);
+      validateChildren(
+        services,
+        'Service',
+        'ServiceInfo',
+        (module: unknown) => TSON.is<ServiceInfo>(module),
+        (_service) => {},
+      );
+    },
+  );
+};
+
+main();
