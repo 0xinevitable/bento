@@ -1,13 +1,10 @@
 import BigNumber from 'bn.js';
 import { Multicall } from 'klaytn-multicall';
 
+import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
+import { getTokenInfo } from '@/klaytn/_lib/getTokenInfo';
+
 import { klaytnChain } from '..';
-import {
-  DeFiStaking,
-  KlaytnDeFiProtocolType,
-  KlaytnDeFiType,
-} from '../../_lib/types/staking';
-import { getTokenInfo } from '../_lib/getTokenInfo';
 import IKSLP from './IKSLP.json';
 
 const provider = klaytnChain._provider;
@@ -64,7 +61,6 @@ export const getLPPoolBalance = async (
   const tokens = [tokenInfoA || null, tokenInfoB || null];
 
   return {
-    protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
     prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
     address: pool.exchange_address.toLowerCase(),

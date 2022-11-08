@@ -1,10 +1,7 @@
 import { Multicall } from 'klaytn-multicall';
 
-import {
-  DeFiStaking,
-  KlaytnDeFiProtocolType,
-  KlaytnDeFiType,
-} from '../../_lib/types/staking';
+import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
+
 import { klaytnChain } from '../index';
 import {
   MINIMAL_ABIS,
@@ -45,7 +42,6 @@ export const getGovernanceStake = async (
     Number(claimableRawRewards) / 10 ** SCNR_TOKEN_INFO.decimals;
 
   return {
-    protocol: KlaytnDeFiProtocolType.SWAPSCANNER,
     type: KlaytnDeFiType.SWAPSCANNER_GOVERNANCE,
     prefix: SCNR_TOKEN_INFO.symbol,
     address: SCNR_STAKING_ADDRESS,

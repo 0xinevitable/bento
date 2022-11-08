@@ -12,10 +12,13 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "baseUrl": ".",
     "outDir": "dist",
     "declaration": true,
     "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["*"]
+    },
     "jsx": "react"
   },
   "include": ["**/*"],

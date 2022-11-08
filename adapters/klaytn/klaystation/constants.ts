@@ -1,4 +1,4 @@
-import { KlaytnDeFiType } from '../../_lib/types/staking';
+import { KlaytnDeFiType } from '@/_lib/types/staking';
 
 export const PROTOCOL_ADDRESS = '0x03Ef42272dc34d5EF78a21F8D6781182C67b82A0';
 export const PROTOCOL_ABI = [

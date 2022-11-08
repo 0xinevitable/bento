@@ -1,11 +1,8 @@
 import axios from 'axios';
 
-import {
-  DeFiStaking,
-  KlaytnDeFiProtocolType,
-  KlaytnDeFiType,
-} from '../../_lib/types/staking';
-import { getTokenInfo } from '../_lib/getTokenInfo';
+import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
+import { getTokenInfo } from '@/klaytn/_lib/getTokenInfo';
+
 import { KSD_ADDRESS, KSD_TOKEN_INFO } from './constants';
 
 export const getLPPoolList = async () => {
@@ -60,7 +57,6 @@ export const getLPPoolBalance = async (
   });
 
   return {
-    protocol: KlaytnDeFiProtocolType.KOKONUTSWAP,
     type: KlaytnDeFiType.KOKONUTSWAP_LP,
     prefix: pool.symbol,
     address: pool.lpTokenAddress,

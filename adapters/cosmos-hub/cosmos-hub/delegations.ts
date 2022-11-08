@@ -1,6 +1,6 @@
 import { OsmosisChain } from '@bento/core';
 
-import { DeFiStaking } from '../../_lib/types/staking';
+import { DeFiStaking } from '@/_lib/types/staking';
 
 const osmosisChain = new OsmosisChain();
 const osmosis = osmosisChain.currency;

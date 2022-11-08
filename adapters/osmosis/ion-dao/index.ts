@@ -2,7 +2,7 @@ import { safePromiseAll } from '@bento/common';
 import { OSMOSIS_TOKENS } from '@bento/core';
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 
-import { DeFiStaking, OsmosisDeFiType } from '../../_lib/types/staking';
+import { DeFiStaking, OsmosisDeFiType } from '@/_lib/types/staking';
 
 const ION_DENOM = 'uion';
 const ION_TOKEN_INFO = OSMOSIS_TOKENS.find((v) => v.address === ION_DENOM)!;

@@ -11,7 +11,7 @@ import {
   CosmosSDKBasedChain,
   CosmosSDKBasedDelegationRewardsResponse,
   CosmosSDKBasedDelegationsResponse,
-} from '../_lib/types/cosmos-sdk';
+} from '@/_lib/types/cosmos-sdk';
 
 export class OsmosisChain implements CosmosSDKBasedChain {
   currency = {

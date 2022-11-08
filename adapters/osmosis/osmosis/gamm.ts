@@ -9,7 +9,7 @@ import groupBy from 'lodash.groupby';
 // import Long from 'long';
 import { osmosis } from 'osmojs';
 
-import { DeFiStaking, OsmosisDeFiType } from '../../_lib/types/staking';
+import { DeFiStaking, OsmosisDeFiType } from '@/_lib/types/staking';
 
 export interface Coin {
   denom: string;

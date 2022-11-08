@@ -1,7 +1,8 @@
 import { ZERO_ADDRESS } from '@bento/core';
 
+import { DeFiStaking } from '@/_lib/types/staking';
+
 import { klaytnChain } from '..';
-import { DeFiStaking, KlaytnDeFiProtocolType } from '../../_lib/types/staking';
 import {
   NODE_TYPE__BY_CONTRACT_ADDRESS,
   PROTOCOL_ABI,
@@ -29,7 +30,6 @@ export const getDelegations = async (
     const delegated = (deposit / sklayTotalSupply) * totalStaking;
 
     return {
-      protocol: KlaytnDeFiProtocolType.KLAYSTATION,
       type: nodeType,
       address: stakingInfo.delegation,
       tokens: [{ ...klaytnChain.currency, address: ZERO_ADDRESS }],

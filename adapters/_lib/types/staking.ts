@@ -1,23 +1,5 @@
 import { TokenInput } from '@bento/core';
 
-export enum KlaytnDeFiProtocolType {
-  KLAYSTATION = 'kstn',
-  KLAYSWAP = 'ks',
-  KOKONUTSWAP = 'kks',
-  SWAPSCANNER = 'scnr',
-}
-export enum OsmosisDeFiProtocolType {
-  ION = 'o_ion',
-  OSMOSIS = 'o_o',
-}
-export enum CosmosHubDeFiProtocolType {
-  COSMOS_HUB = 'cosmos_hub',
-}
-export type DeFiProtocolType =
-  | KlaytnDeFiProtocolType
-  | OsmosisDeFiProtocolType
-  | CosmosHubDeFiProtocolType;
-
 export enum KlayStationNodes {
   KLAYSTATION_NODE_HASHED_AND_OZYS = 'kstn_n_hno',
   KLAYSTATION_NODE_KED = 'kstn_n_ked',
@@ -94,7 +76,6 @@ export type DeFiStakingResponse = {
 
 export const Examples: Record<string, DeFiStaking> = {
   LP: {
-    // protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
     address: '',
     tokens: [],
@@ -109,7 +90,6 @@ export const Examples: Record<string, DeFiStaking> = {
     unstake: null, // Unstaking period does not exist
   },
   MINIMAL: {
-    // protocol: KlaytnDeFiProtocolType.KLAYSWAP,
     type: KlaytnDeFiType.KLAYSWAP_LP,
     address: '0x00',
     tokens: [],

@@ -5,7 +5,7 @@ import {
   CosmosHubDelegationsResponse,
   CosmosSDKBasedBalanceResponse,
   CosmosSDKBasedChain,
-} from '../_lib/types/cosmos-sdk';
+} from '@/_lib/types/cosmos-sdk';
 
 export class CosmosHubChain implements CosmosSDKBasedChain {
   currency = {
