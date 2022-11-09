@@ -1,6 +1,11 @@
+import { safeAsyncFlatMap } from '@bento/common';
 import axios from 'axios';
 
-import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
+import {
+  ProtocolAccountInfo,
+  ProtocolGetAccount,
+  ProtocolInfo,
+} from '@/_lib/types';
 
 import { getTokenInfo } from '../_lib/getTokenInfo';
 import { KSD_ADDRESS, KSD_TOKEN_INFO } from './_constants';
@@ -19,7 +24,7 @@ export const getLPPoolBalance = async (
   lpTokenRawBalance: string,
   pool: KokonutSwapAPI.Pool,
   pools: KokonutSwapAPI.Pool[],
-): Promise<DeFiStaking> => {
+): Promise<ProtocolAccountInfo> => {
   const poolAddress = pool.address.toLowerCase();
   const {
     data: { farmPools },
@@ -57,11 +62,11 @@ export const getLPPoolBalance = async (
   });
 
   return {
-    type: KlaytnDeFiType.KOKONUTSWAP_LP,
+    type: 'protocol',
     prefix: pool.symbol,
-    address: pool.lpTokenAddress,
-    tokens: tokenInfos,
-    relatedTokens: [KSD_TOKEN_INFO],
+    ind: pool.lpTokenAddress,
+    tokens: tokenInfos.map((v) => (!v ? null : { ...v, ind: v.address })),
+    relatedTokens: [{ ...KSD_TOKEN_INFO, ind: KSD_TOKEN_INFO.address }],
     wallet: {
       value: lpBalanceInWalletValue,
       lpAmount: lpBalanceInWallet,
@@ -77,6 +82,49 @@ export const getLPPoolBalance = async (
     },
     unstake: null,
   };
+};
+
+const info: ProtocolInfo = {
+  native: false,
+  ind: null,
+  name: {
+    en: 'Crypto Pool',
+    ko: '크립토 풀',
+  },
+  conditional: {
+    passAllBalances: true,
+  },
+};
+export default info;
+
+export const getAccount: ProtocolGetAccount = async (
+  account,
+  _,
+  allRawTokenBalances,
+) => {
+  const pools = await getLPPoolList();
+
+  const items = await safeAsyncFlatMap(
+    Object.entries(allRawTokenBalances || {}),
+    async ([tokenAddress, tokenRawBalance]) => {
+      const pool = pools.find((v) => v.lpTokenAddress === tokenAddress);
+      if (!!pool) {
+        const item = await getLPPoolBalance(
+          account,
+          tokenRawBalance,
+          pool,
+          pools,
+        );
+        if (!item) {
+          return [];
+        }
+        return item;
+      }
+      return [];
+    },
+  );
+
+  return items;
 };
 
 export declare module KokonutSwapAPI {

@@ -1,14 +1,29 @@
+import { safeAsyncFlatMap } from '@bento/common';
 import axios from 'axios';
 import BigNumber from 'bn.js';
 
-import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
+import {
+  ProtocolAccountInfo,
+  ProtocolGetAccount,
+  ProtocolInfo,
+} from '@/_lib/types';
 
 import { klaytnChain } from '../_lib/chain';
 import { getTokenInfo } from '../_lib/getTokenInfo';
 import KLAYSwapSingleLeveragePool from './_abis/KLAYSwapSingleLeveragePool.json';
 import { KSP_TOKEN_INFO } from './_constants';
+import KLAYSWAP_LEVERAGE_POOLS from './_data/klayswap-leverage-pools.json';
 
 const provider = klaytnChain._provider;
+
+const isSameAddress = (a: string, b: string): boolean => {
+  try {
+    return a.toLowerCase() === b.toLowerCase();
+  } catch (err) {
+    console.error(err, { a, b });
+    return false;
+  }
+};
 
 // TODO: Someday
 // export const getEcopotPoolList = async () => {
@@ -39,7 +54,7 @@ export const getSinglePoolBalance = async (
   tokenBalance: string,
   pool: SingleLeveragePool,
   _dynamicPool: SingleLeveragePool | undefined,
-): Promise<DeFiStaking> => {
+): Promise<ProtocolAccountInfo> => {
   const dynamicPool = _dynamicPool || pool;
   const iToken = new provider.klay.Contract(
     KLAYSwapSingleLeveragePool as any[],
@@ -69,12 +84,12 @@ export const getSinglePoolBalance = async (
   }
 
   return {
-    type: KlaytnDeFiType.KLAYSWAP_LEVERAGE_SINGLE,
+    type: 'protocol',
     prefix: tokenInfo?.symbol,
-    address: pool.address,
+    ind: pool.address,
     wallet: null,
-    tokens: [tokenInfo || null],
-    relatedTokens: [KSP_TOKEN_INFO],
+    tokens: [!tokenInfo ? null : { ...tokenInfo, ind: tokenInfo.address }],
+    relatedTokens: [{ ...KSP_TOKEN_INFO, ind: KSP_TOKEN_INFO.address }],
     staked: {
       tokenAmounts,
     },
@@ -85,6 +100,55 @@ export const getSinglePoolBalance = async (
     },
     unstake: null,
   };
+};
+
+const info: ProtocolInfo = {
+  native: false,
+  ind: null,
+  name: {
+    en: 'Single-side Deposit',
+    ko: '단일 예치',
+  },
+  conditional: {
+    passAllBalances: true,
+  },
+};
+export default info;
+
+export const getAccount: ProtocolGetAccount = async (
+  account,
+  _,
+  allRawTokenBalances,
+) => {
+  const dynamicLeveragePools = await getLeveragePoolList().catch(
+    () => undefined,
+  );
+
+  const items = await safeAsyncFlatMap(
+    Object.entries(allRawTokenBalances || {}),
+    async ([tokenAddress, tokenRawBalance]) => {
+      const klayswapLeveragePool = KLAYSWAP_LEVERAGE_POOLS.find((v) =>
+        isSameAddress(v.address, tokenAddress),
+      );
+      if (!!klayswapLeveragePool) {
+        const item = getSinglePoolBalance(
+          account,
+          tokenRawBalance,
+          klayswapLeveragePool,
+          dynamicLeveragePools?.find(
+            (v) => v.address === klayswapLeveragePool.address,
+          ),
+        );
+        if (!item) {
+          return [];
+        }
+        return item;
+      }
+      return [];
+    },
+  );
+
+  return items;
 };
 
 export interface SingleLeveragePool {

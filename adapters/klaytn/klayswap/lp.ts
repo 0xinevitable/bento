@@ -1,16 +1,23 @@
+import { safeAsyncFlatMap } from '@bento/common';
 import BigNumber from 'bn.js';
 
-import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
+import {
+  ProtocolAccountInfo,
+  ProtocolGetAccount,
+  ProtocolInfo,
+  TokenInput,
+} from '@/_lib/types';
 
 import { klaytnChain, multicall } from '../_lib/chain';
 import { getTokenInfo } from '../_lib/getTokenInfo';
 import IKSLP from './_abis/IKSLP.json';
+import KLAYSWAP_LP_POOLS from './_data/klayswap-lp-pools.json';
 
 export const getLPPoolBalance = async (
   _account: string,
   lpTokenBalance: string,
   pool: KLAYswap.Pool,
-): Promise<DeFiStaking> => {
+): Promise<ProtocolAccountInfo> => {
   const kslp = new klaytnChain._provider.klay.Contract(
     [
       ...IKSLP,
@@ -54,12 +61,22 @@ export const getLPPoolBalance = async (
     tokenAmounts[tokenInfoB.address] = balanceB;
   }
 
-  const tokens = [tokenInfoA || null, tokenInfoB || null];
+  let tokens: (TokenInput | null)[] = [];
+  if (tokenInfoA) {
+    tokens.push({ ...tokenInfoA, ind: tokenInfoA.address });
+  } else {
+    tokens.push(null);
+  }
+  if (tokenInfoB) {
+    tokens.push({ ...tokenInfoB, ind: tokenInfoB.address });
+  } else {
+    tokens.push(null);
+  }
 
   return {
-    type: KlaytnDeFiType.KLAYSWAP_LP,
+    type: 'protocol',
     prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
-    address: pool.exchange_address.toLowerCase(),
+    ind: pool.exchange_address.toLowerCase(),
     tokens,
     wallet: null,
     staked: {
@@ -70,6 +87,54 @@ export const getLPPoolBalance = async (
     rewards: 'unavailable',
     unstake: null,
   };
+};
+
+const isSameAddress = (a: string, b: string): boolean => {
+  try {
+    return a.toLowerCase() === b.toLowerCase();
+  } catch (err) {
+    console.error(err, { a, b });
+    return false;
+  }
+};
+
+const info: ProtocolInfo = {
+  native: false,
+  ind: null,
+  name: {
+    en: 'Pair Deposit',
+    ko: '페어 예치',
+  },
+  conditional: {
+    passAllBalances: true,
+  },
+};
+export default info;
+export const getAccount: ProtocolGetAccount = async (
+  account,
+  _,
+  allRawTokenBalances,
+) => {
+  const pools = KLAYSWAP_LP_POOLS;
+
+  const items = await safeAsyncFlatMap(
+    Object.entries(allRawTokenBalances || {}),
+    async ([tokenAddress, tokenRawBalance]) => {
+      const klayswapLPPool = pools.find((v) =>
+        isSameAddress(v.exchange_address, tokenAddress),
+      );
+      if (!!klayswapLPPool) {
+        const item = getLPPoolBalance(account, tokenRawBalance, klayswapLPPool);
+        if (!item) {
+          return [];
+        }
+        return item;
+      }
+      return [];
+    },
+  );
+
+  return items;
 };
 
 export declare module KLAYswap {

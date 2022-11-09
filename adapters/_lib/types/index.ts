@@ -24,7 +24,8 @@ export type ProtocolInfo = {
   ind: string | null;
   name: LocalizedString;
   conditional?: {
-    hasToken: string;
+    hasToken?: string;
+    passAllBalances?: boolean;
   };
 };
 
@@ -78,6 +79,7 @@ export type ProtocolAccountInfo = {
 export type ProtocolGetAccount = (
   account: string,
   rawTokenBalance?: string,
+  allRawTokenBalances?: Record<string, string>,
 ) => Promise<ProtocolAccountInfo[]>;
 
 export type BentoChainAdapter = {
