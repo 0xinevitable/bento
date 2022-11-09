@@ -1,6 +1,6 @@
 import { Multicall } from 'klaytn-multicall';
 
-import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
+import { ProtocolGetAccount, ProtocolInfo } from '@/_lib/types';
 
 import { klaytnChain } from '../_lib/chain';
 import {
@@ -8,13 +8,22 @@ import {
   SCNR_STAKING_ADDRESS,
   SCNR_TOKEN_INFO,
 } from './_constants';
-import { getSCNRTokenPrice } from './lp';
+import { getSCNRTokenPrice } from './_lp';
 
 const provider = klaytnChain._provider;
-export const getGovernanceStake = async (
-  account: string,
-  multicall: Multicall,
-): Promise<DeFiStaking> => {
+const multicall = new Multicall({ provider });
+
+const info: ProtocolInfo = {
+  native: false,
+  ind: SCNR_STAKING_ADDRESS,
+  name: {
+    en: 'Staking',
+    ko: '단일 예치',
+  },
+};
+export default info;
+
+export const getAccount: ProtocolGetAccount = async (account: string) => {
   const staking = new provider.klay.Contract(
     MINIMAL_ABIS.Staking as any,
     SCNR_STAKING_ADDRESS,
@@ -41,24 +50,26 @@ export const getGovernanceStake = async (
   const claimableRewards =
     Number(claimableRawRewards) / 10 ** SCNR_TOKEN_INFO.decimals;
 
-  return {
-    type: KlaytnDeFiType.SWAPSCANNER_GOVERNANCE,
-    prefix: SCNR_TOKEN_INFO.symbol,
-    address: SCNR_STAKING_ADDRESS,
-    tokens: [SCNR_TOKEN_INFO],
-    wallet: null,
-    staked: {
-      value: stakedBalance * tokenPrice,
-      tokenAmounts: {
-        [SCNR_TOKEN_INFO.address]: stakedBalance,
+  return [
+    {
+      type: 'protocol',
+      prefix: SCNR_TOKEN_INFO.symbol,
+      ind: SCNR_STAKING_ADDRESS,
+      tokens: [{ ...SCNR_TOKEN_INFO, ind: SCNR_TOKEN_INFO.address }],
+      wallet: null,
+      staked: {
+        value: stakedBalance * tokenPrice,
+        tokenAmounts: {
+          [SCNR_TOKEN_INFO.address]: stakedBalance,
+        },
       },
-    },
-    rewards: {
-      value: claimableRewards * tokenPrice,
-      tokenAmounts: {
-        [SCNR_TOKEN_INFO.address]: claimableRewards,
+      rewards: {
+        value: claimableRewards * tokenPrice,
+        tokenAmounts: {
+          [SCNR_TOKEN_INFO.address]: claimableRewards,
+        },
       },
+      unstake: 'unavailable',
     },
-    unstake: 'unavailable',
-  };
+  ];
 };

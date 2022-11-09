@@ -7,6 +7,7 @@ import { osmosis } from 'osmojs';
 import {
   ProtocolAccountInfo,
   ProtocolGetAccount,
+  ProtocolInfo,
   TokenInput,
 } from '@/_lib/types';
 
@@ -61,6 +62,16 @@ const fallbackLockupQuery = (error: Error) => {
 
 const getDenomsFromPool = (pool: Pool) =>
   pool.pool_assets.map((poolAsset) => poolAsset.token.denom);
+
+const info: ProtocolInfo = {
+  native: true,
+  ind: null,
+  name: {
+    en: 'Osmosis LPs',
+    ko: '오스모시스 LP 풀',
+  },
+};
+export default info;
 
 export const getAccount: ProtocolGetAccount = async (account: string) => {
   const client = await osmosis.ClientFactory.createLCDClient({
@@ -144,7 +155,9 @@ export const getAccount: ProtocolGetAccount = async (account: string) => {
         const allDenoms = tokenInfo?.denomUnits?.map((v) => v.denom) || [];
         for (const denom of allDenoms) {
           if (!(denom in tokenInfoByDenom) && !!tokenInfo) {
-            tokenInfoByDenom[denom] = tokenInfo;
+            // FIXME:
+            // tokenInfoByDenom[denom] = tokenInfo;
+            tokenInfoByDenom[denom] = { ...tokenInfo, ind: tokenInfo.address };
           }
           if (!!tokenInfo?.coinGeckoId && !(denom in coinGeckoIdByDenom)) {
             coinGeckoIdByDenom[denom] = tokenInfo.coinGeckoId;
@@ -280,7 +293,7 @@ export const getAccount: ProtocolGetAccount = async (account: string) => {
             const tokenAmount =
               (tokenLiquidity * poolStakeRatio) / 10 ** tokenInfo.decimals;
 
-            tokenAmounts[tokenInfo.address] = tokenAmount;
+            tokenAmounts[tokenInfo.ind] = tokenAmount;
             return acc + tokenAmount * assetPrices[denom];
           }, 0);
 
@@ -323,8 +336,8 @@ export const getAccount: ProtocolGetAccount = async (account: string) => {
       }, {} as Record<string, number>);
 
       stakings.push({
-        type: OsmosisDeFiType.OSMOSIS_GAMM_LP,
-        address: poolId,
+        type: 'protocol',
+        ind: poolId,
         prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
         tokens: tokens,
         wallet: fromAmount(walletAmount),
