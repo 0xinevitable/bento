@@ -12,6 +12,7 @@ import {
 } from '@bento/core';
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import Caver from 'caver-js';
+import { Multicall } from 'klaytn-multicall';
 
 export class KlaytnChain implements Chain {
   currency = {
@@ -125,6 +126,7 @@ export class KlaytnChain implements Chain {
 }
 
 export const klaytnChain = new KlaytnChain();
+export const multicall = new Multicall({ provider: klaytnChain._provider });
 
 export const MinimalABIs = {
   ERC20: [

@@ -1,21 +1,17 @@
 import BigNumber from 'bn.js';
-import { Multicall } from 'klaytn-multicall';
 
 import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
 
-import { klaytnChain } from '../_lib/chain';
+import { klaytnChain, multicall } from '../_lib/chain';
 import { getTokenInfo } from '../_lib/getTokenInfo';
-import IKSLP from './IKSLP.json';
-
-const provider = klaytnChain._provider;
+import IKSLP from './_abis/IKSLP.json';
 
 export const getLPPoolBalance = async (
   _account: string,
   lpTokenBalance: string,
   pool: KLAYswap.Pool,
-  multicall: Multicall,
 ): Promise<DeFiStaking> => {
-  const kslp = new provider.klay.Contract(
+  const kslp = new klaytnChain._provider.klay.Contract(
     [
       ...IKSLP,
       {

@@ -88,7 +88,12 @@ const validateProtocols = (service: Child) => {
     }
     const adapterPath = path.join(basePath, filename);
     if (fs.statSync(path.join(basePath, filename)).isDirectory()) {
-      return [];
+      const protocolAdapterPath = path.join(adapterPath, 'index.ts');
+      const hasIndex = fs.existsSync(protocolAdapterPath);
+      if (!hasIndex) {
+        return [];
+      }
+      return { name: filename, path: adapterPath };
     }
     return { name: filename, path: adapterPath };
   });
