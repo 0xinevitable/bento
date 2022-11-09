@@ -119,7 +119,7 @@ const validateProtocols = (service: Child) => {
           `❌   ㄴ Protocol: ${service.name}/${protocol.name}: not a valid \`BentoProtocolAdapter\``,
         );
       } else {
-        console.log(`✅   ㄴ Protocol: ${protocol.name}`);
+        console.log(`✅   ㄴ Protocol: ${service.name}/${protocol.name}`);
       }
     }
   }
