@@ -1,35 +1,48 @@
-import { OsmosisChain } from '@bento/core';
+import { ProtocolGetAccount, ProtocolInfo } from '@/_lib/types';
 
-import { DeFiStaking } from '@/_lib/types/staking';
+import { CosmosHubChain } from '..';
 
-const osmosisChain = new OsmosisChain();
-const osmosis = osmosisChain.currency;
+const cosmosHubChain = new CosmosHubChain();
+const atom = cosmosHubChain.currency;
 
-export default async function (address: string): Promise<DeFiStaking> {
-  const [delegations, rewards, osmoPrice] = await Promise.all([
-    osmosisChain.getDelegations(address),
-    osmosisChain.getRewards(address),
-    osmosisChain.getCurrencyPrice(),
+const info: ProtocolInfo = {
+  native: true,
+  ind: null,
+  name: {
+    en: 'Governance Staking',
+    ko: '거버넌스 스테이킹',
+  },
+};
+export default info;
+
+export const getAccount: ProtocolGetAccount = async (address: string) => {
+  const [delegations] = await Promise.all([
+    cosmosHubChain.getDelegations(address),
+    // cosmosHubChain.getRewards(address),
+    // cosmosHubChain.getCurrencyPrice(),
   ]);
 
-  return {
-    native: true,
-    type: 'delegations',
-    address: null,
-    wallet: null,
-    tokens: [{ ...osmosis, address: osmosis.coinMinimalDenom }],
-    staked: {
-      tokenAmounts: {
-        [osmosis.coinMinimalDenom]: delegations,
+  return [
+    {
+      type: 'protocol',
+      native: true,
+      ind: null,
+      wallet: null,
+      tokens: [{ ...atom, address: atom.coinMinimalDenom }],
+      staked: {
+        tokenAmounts: {
+          [atom.coinMinimalDenom]: delegations,
+        },
+        // value: delegations * atomPrice,
       },
-      value: delegations * osmoPrice,
+      unstake: 'unavailable',
+      rewards: 'unavailable',
+      // rewards: {
+      //   tokenAmounts: {
+      //     [atom.coinMinimalDenom]: rewards,
+      //   },
+      //   value: rewards * atomPrice,
+      // },
     },
-    unstake: 'unavailable',
-    rewards: {
-      tokenAmounts: {
-        [osmosis.coinMinimalDenom]: rewards,
-      },
-      value: rewards * osmoPrice,
-    },
-  };
-}
+  ];
+};

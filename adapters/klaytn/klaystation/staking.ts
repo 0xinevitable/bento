@@ -1,27 +1,38 @@
 import { ZERO_ADDRESS } from '@bento/core';
 
-import { DeFiStaking } from '@/_lib/types/staking';
+import {
+  LocalizedString,
+  ProtocolAccountInfo,
+  ProtocolGetAccount,
+} from '@/_lib/types';
 
 import { klaytnChain } from '../_lib/chain';
-import {
-  NODE_TYPE__BY_CONTRACT_ADDRESS,
-  PROTOCOL_ABI,
-  PROTOCOL_ADDRESS,
-} from './constants';
+import { PROTOCOL_ABI, PROTOCOL_ADDRESS } from './_constants';
 
-export const getDelegations = async (
-  provider: any,
-  account: string,
-): Promise<DeFiStaking[]> => {
+const provider = klaytnChain._provider;
+
+const DELEGATOR_BY_CONTRACT_ADDRESS: Record<string, LocalizedString> = {
+  '0xe33337cb6fbb68954fe1c3fde2b21f56586632cd': {
+    ko: '해시드-오지스',
+  },
+  '0xeffa404dac6ba720002974c54d57b20e89b22862': {
+    ko: '한국경제신문',
+  },
+  '0x962cdb28e662b026df276e5ee7fdf13a06341d68': {
+    ko: 'FSN',
+  },
+};
+
+export const getAccount: ProtocolGetAccount = async (account) => {
   const protocol = new provider.klay.Contract(PROTOCOL_ABI, PROTOCOL_ADDRESS);
 
   const items: StakingInfo[] = await protocol.methods
     .getStakingInfo(account)
     .call();
 
-  const delegations: DeFiStaking[] = items.map((stakingInfo) => {
-    const nodeType =
-      NODE_TYPE__BY_CONTRACT_ADDRESS[stakingInfo.delegation.toLowerCase()];
+  const delegations: ProtocolAccountInfo[] = items.map((stakingInfo) => {
+    const delegator =
+      DELEGATOR_BY_CONTRACT_ADDRESS[stakingInfo.delegation.toLowerCase()];
 
     const deposit = Number(stakingInfo.deposit) / 10 ** 18;
     const sklayTotalSupply = Number(stakingInfo.sklayTotalSupply) / 10 ** 18;
@@ -30,8 +41,9 @@ export const getDelegations = async (
     const delegated = (deposit / sklayTotalSupply) * totalStaking;
 
     return {
-      type: nodeType,
-      address: stakingInfo.delegation,
+      type: 'protocol',
+      delegator: delegator,
+      ind: stakingInfo.delegation,
       tokens: [{ ...klaytnChain.currency, address: ZERO_ADDRESS }],
       wallet: null,
       staked: {

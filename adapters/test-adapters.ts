@@ -3,7 +3,11 @@ import fs from 'fs';
 import path from 'path';
 import TSON from 'typescript-json';
 
-import { BentoChainAdapter, BentoServiceAdapter } from './_lib/types';
+import {
+  BentoChainAdapter,
+  BentoProtocolAdapter,
+  BentoServiceAdapter,
+} from './_lib/types';
 
 const WORKSPACE_ROOT_PATH = findWorkspaceRoot(null) ?? '';
 const ADAPTER_ROOT_PATH = path.resolve(WORKSPACE_ROOT_PATH, './adapters');
@@ -69,6 +73,51 @@ const validateChildren = (
   }
 };
 
+const validateProtocols = (service: Child) => {
+  const basePath = service.path;
+  const protocols = fs.readdirSync(basePath).flatMap((filename) => {
+    if (
+      filename.startsWith('_') ||
+      filename.startsWith('.') ||
+      filename === 'dist' ||
+      filename === 'index.ts' ||
+      path.extname(filename) !== '.ts'
+    ) {
+      return [];
+    }
+    const adapterPath = path.join(basePath, filename);
+    if (fs.statSync(path.join(basePath, filename)).isDirectory()) {
+      return [];
+    }
+    return { name: filename, path: adapterPath };
+  });
+
+  for (const protocol of protocols) {
+    const protocolAdapterPath = protocol.path;
+    let protocolAdapter: any;
+    let hasError: boolean = false;
+    try {
+      protocolAdapter = require(protocolAdapterPath);
+    } catch (err) {
+      console.error(
+        `❌   ㄴ Protocol: ${service.name}/${protocol.name}: failed to load protocol adapter`,
+        err,
+      );
+      hasError = true;
+    }
+
+    if (!hasError) {
+      if (!TSON.is<BentoProtocolAdapter>(protocolAdapter)) {
+        console.error(
+          `❌   ㄴ Protocol: ${service.name}/${protocol.name}: not a valid \`BentoProtocolAdapter\``,
+        );
+      } else {
+        console.log(`✅   ㄴ Protocol: ${protocol.name}`);
+      }
+    }
+  }
+};
+
 const main = () => {
   const chains = fetchChildren(ADAPTER_ROOT_PATH);
   validateChildren(
@@ -83,7 +132,9 @@ const main = () => {
         'ㄴ Service',
         'BentoServiceAdapter',
         (module: unknown) => TSON.is<BentoServiceAdapter>(module),
-        (_service) => {},
+        (service) => {
+          validateProtocols(service);
+        },
       );
     },
   );

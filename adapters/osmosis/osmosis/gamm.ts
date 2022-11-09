@@ -1,15 +1,14 @@
 import { safePromiseAll } from '@bento/common';
-import {
-  OSMOSIS_TOKENS,
-  TokenInput,
-  pricesFromCoinGecko,
-  withCache,
-} from '@bento/core';
+import { OSMOSIS_TOKENS, pricesFromCoinGecko, withCache } from '@bento/core';
 import groupBy from 'lodash.groupby';
 // import Long from 'long';
 import { osmosis } from 'osmojs';
 
-import { DeFiStaking, OsmosisDeFiType } from '@/_lib/types/staking';
+import {
+  ProtocolAccountInfo,
+  ProtocolGetAccount,
+  TokenInput,
+} from '@/_lib/types';
 
 export interface Coin {
   denom: string;
@@ -63,9 +62,7 @@ const fallbackLockupQuery = (error: Error) => {
 const getDenomsFromPool = (pool: Pool) =>
   pool.pool_assets.map((poolAsset) => poolAsset.token.denom);
 
-export const getGAMMLPs = async (
-  walletAddress: string,
-): Promise<DeFiStaking[]> => {
+export const getAccount: ProtocolGetAccount = async (account: string) => {
   const client = await osmosis.ClientFactory.createLCDClient({
     restEndpoint: 'https://lcd-osmosis.blockapsis.com',
   });
@@ -81,18 +78,18 @@ export const getGAMMLPs = async (
   const fetchLockupBalances = () =>
     Promise.all([
       client.osmosis.lockup
-        .accountLockedCoins({ owner: walletAddress })
+        .accountLockedCoins({ owner: account })
         .catch(fallbackLockupQuery),
       client.osmosis.lockup
-        .accountUnlockableCoins({ owner: walletAddress })
+        .accountUnlockableCoins({ owner: account })
         .catch(fallbackLockupQuery),
       client.osmosis.lockup
-        .accountUnlockingCoins({ owner: walletAddress })
+        .accountUnlockingCoins({ owner: account })
         .catch(fallbackLockupQuery),
     ]);
 
   const walletBalancesResponse = await client.cosmos.bank.v1beta1.allBalances({
-    address: walletAddress,
+    address: account,
   });
   const lockupBalances = await fetchLockupBalances();
 
@@ -224,7 +221,7 @@ export const getGAMMLPs = async (
       return { prices, ...poolBalance };
     }),
   );
-  const stakings: DeFiStaking[] = [];
+  const stakings: ProtocolAccountInfo[] = [];
   const poolBalancesWithPricesByPoolID = groupBy(
     poolBalancesWithPrices,
     'poolId',

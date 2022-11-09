@@ -53,7 +53,7 @@ export type ChainGetAccount = (account: string) => Promise<ChainAccountInfo>;
 
 export type ProtocolAccountInfo = {
   type: 'protocol';
-  delegator?: string;
+  delegator?: LocalizedString;
   prefix?: string;
   native?: boolean;
 
@@ -74,7 +74,7 @@ export type ProtocolAccountInfo = {
 };
 export type ProtocolGetAccount = (
   account: string,
-) => Promise<ProtocolAccountInfo>;
+) => Promise<ProtocolAccountInfo[]>;
 
 export type BentoChainAdapter = {
   default: ChainInfo;

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
 
 import { getTokenInfo } from '../_lib/getTokenInfo';
-import { KSD_ADDRESS, KSD_TOKEN_INFO } from './constants';
+import { KSD_ADDRESS, KSD_TOKEN_INFO } from './_constants';
 
 export const getLPPoolList = async () => {
   const { data } = await axios.get<KokonutSwapAPI.PoolListResponse>(

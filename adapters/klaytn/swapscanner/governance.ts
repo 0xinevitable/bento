@@ -7,7 +7,7 @@ import {
   MINIMAL_ABIS,
   SCNR_STAKING_ADDRESS,
   SCNR_TOKEN_INFO,
-} from './constants';
+} from './_constants';
 import { getSCNRTokenPrice } from './lp';
 
 const provider = klaytnChain._provider;

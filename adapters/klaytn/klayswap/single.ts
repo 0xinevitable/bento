@@ -6,7 +6,7 @@ import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
 import { klaytnChain } from '../_lib/chain';
 import { getTokenInfo } from '../_lib/getTokenInfo';
 import KLAYSwapSingleLeveragePool from './KLAYSwapSingleLeveragePool.json';
-import { KSP_TOKEN_INFO } from './constants';
+import { KSP_TOKEN_INFO } from './_constants';
 
 const provider = klaytnChain._provider;
 

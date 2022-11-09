@@ -1,35 +1,47 @@
-import { OsmosisChain } from '@bento/core';
+import { ProtocolGetAccount, ProtocolInfo } from '@/_lib/types';
 
-import { DeFiStaking } from '@/_lib/types/staking';
+import { OsmosisChain } from '..';
 
 const osmosisChain = new OsmosisChain();
-const osmosis = osmosisChain.currency;
+const osmo = osmosisChain.currency;
 
-export const getDelegations = async (address: string): Promise<DeFiStaking> => {
+const info: ProtocolInfo = {
+  native: true,
+  ind: null,
+  name: {
+    en: 'Governance Staking',
+    ko: '거버넌스 스테이킹',
+  },
+};
+export default info;
+
+export const getAccount: ProtocolGetAccount = async (address: string) => {
   const [delegations, rewards, osmoPrice] = await Promise.all([
     osmosisChain.getDelegations(address),
     osmosisChain.getRewards(address),
     osmosisChain.getCurrencyPrice(),
   ]);
 
-  return {
-    native: true,
-    type: 'governance',
-    address: null,
-    wallet: null,
-    tokens: [{ ...osmosis, address: osmosis.coinMinimalDenom }],
-    staked: {
-      tokenAmounts: {
-        [osmosis.coinMinimalDenom]: delegations,
+  return [
+    {
+      type: 'protocol',
+      native: true,
+      ind: null,
+      wallet: null,
+      tokens: [{ ...osmo, address: osmo.coinMinimalDenom }],
+      staked: {
+        tokenAmounts: {
+          [osmo.coinMinimalDenom]: delegations,
+        },
+        value: delegations * osmoPrice,
       },
-      value: delegations * osmoPrice,
-    },
-    unstake: 'unavailable',
-    rewards: {
-      tokenAmounts: {
-        [osmosis.coinMinimalDenom]: rewards,
+      unstake: 'unavailable',
+      rewards: {
+        tokenAmounts: {
+          [osmo.coinMinimalDenom]: rewards,
+        },
+        value: rewards * osmoPrice,
       },
-      value: rewards * osmoPrice,
     },
-  };
+  ];
 };

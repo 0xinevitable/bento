@@ -1,7 +1,7 @@
 import { withCache } from '@bento/core';
 
 import { klaytnChain } from '../_lib/chain';
-import { MINIMAL_ABIS, SCNR_KLAY_LP_ADDRESS } from './constants';
+import { MINIMAL_ABIS, SCNR_KLAY_LP_ADDRESS } from './_constants';
 
 const provider = klaytnChain._provider;
 

@@ -7,7 +7,7 @@ import {
   KSD_ADDRESS,
   KSD_TOKEN_INFO,
   STAKED_KOKOS_ADDRESS,
-} from './constants';
+} from './_constants';
 
 // NOTE: Rewards are in KSD
 export const getGovernanceStake = async (
