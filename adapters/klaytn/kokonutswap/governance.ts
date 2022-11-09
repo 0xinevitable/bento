@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
+import { ProtocolGetAccount, ProtocolInfo } from '@/_lib/types';
 
 import {
   KOKOS_TOKEN_INFO,
@@ -9,11 +9,24 @@ import {
   STAKED_KOKOS_ADDRESS,
 } from './_constants';
 
+const info: ProtocolInfo = {
+  native: false,
+  ind: STAKED_KOKOS_ADDRESS,
+  name: {
+    en: 'Governance',
+    ko: '거버넌스',
+  },
+  conditional: {
+    hasToken: STAKED_KOKOS_ADDRESS,
+  },
+};
+export default info;
+
 // NOTE: Rewards are in KSD
-export const getGovernanceStake = async (
+export const getAccount: ProtocolGetAccount = async (
   account: string,
-  rawStakedBalance: string,
-): Promise<DeFiStaking> => {
+  rawTokenBalance?: string,
+) => {
   const { data } = await axios
     .get<UserGovernanceResponse>(
       `https://prod.kokonut-api.com/govern/users/${account}`,
@@ -22,39 +35,43 @@ export const getGovernanceStake = async (
       },
     )
     .catch(() => ({ data: null }));
-  const balance = Number(rawStakedBalance) / 10 ** KOKOS_TOKEN_INFO.decimals;
+  const balance = Number(rawTokenBalance) / 10 ** KOKOS_TOKEN_INFO.decimals;
 
-  return {
-    type: KlaytnDeFiType.KOKONUTSWAP_GOVERNANCE,
-    prefix: KOKOS_TOKEN_INFO.symbol,
-    address: STAKED_KOKOS_ADDRESS,
-    tokens: [KOKOS_TOKEN_INFO],
-    relatedTokens: [KSD_TOKEN_INFO],
-    wallet: null,
-    staked: {
-      tokenAmounts: {
-        [KOKOS_TOKEN_INFO.address]: balance,
-      },
-    },
-    // TODO:
-    rewards: {
-      tokenAmounts: {
-        [KSD_ADDRESS]: Number(data?.ksdReward || 0),
-      },
-    },
-    unstake: {
-      claimable: {
+  return [
+    {
+      type: 'protocol',
+      prefix: KOKOS_TOKEN_INFO.symbol,
+      ind: STAKED_KOKOS_ADDRESS,
+      tokens: [{ ...KOKOS_TOKEN_INFO, ind: KOKOS_TOKEN_INFO.address }],
+      relatedTokens: [{ ...KSD_TOKEN_INFO, ind: KSD_TOKEN_INFO.address }],
+      wallet: null,
+      staked: {
         tokenAmounts: {
-          [KOKOS_TOKEN_INFO.address]: Number(data?.unstakeInfo.completed || 0),
+          [KOKOS_TOKEN_INFO.address]: balance,
         },
       },
-      pending: {
+      // TODO:
+      rewards: {
         tokenAmounts: {
-          [KOKOS_TOKEN_INFO.address]: Number(data?.unstakeInfo.yet || 0),
+          [KSD_ADDRESS]: Number(data?.ksdReward || 0),
+        },
+      },
+      unstake: {
+        claimable: {
+          tokenAmounts: {
+            [KOKOS_TOKEN_INFO.address]: Number(
+              data?.unstakeInfo.completed || 0,
+            ),
+          },
+        },
+        pending: {
+          tokenAmounts: {
+            [KOKOS_TOKEN_INFO.address]: Number(data?.unstakeInfo.yet || 0),
+          },
         },
       },
     },
-  };
+  ];
 };
 
 export type UserGovernanceResponse = {

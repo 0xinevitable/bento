@@ -51,9 +51,10 @@ const validateChildren = (
       try {
         chainAdapter = require(chainAdapterPath);
       } catch (err) {
+        const typedError = err as Error;
         console.error(
           `❌ ${adapterName} ${child.name}: failed to load index.ts`,
-          err,
+          typedError.message,
         );
         hasError = true;
       }
@@ -99,9 +100,10 @@ const validateProtocols = (service: Child) => {
     try {
       protocolAdapter = require(protocolAdapterPath);
     } catch (err) {
+      const typedError = err as Error;
       console.error(
         `❌   ㄴ Protocol: ${service.name}/${protocol.name}: failed to load protocol adapter`,
-        err,
+        typedError.message,
       );
       hasError = true;
     }

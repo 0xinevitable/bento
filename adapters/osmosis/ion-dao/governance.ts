@@ -2,7 +2,7 @@ import { safePromiseAll } from '@bento/common';
 import { OSMOSIS_TOKENS } from '@bento/core';
 import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 
-import { DeFiStaking, OsmosisDeFiType } from '@/_lib/types/staking';
+import { ProtocolGetAccount, ProtocolInfo } from '@/_lib/types';
 
 const ION_DENOM = 'uion';
 const ION_TOKEN_INFO = OSMOSIS_TOKENS.find((v) => v.address === ION_DENOM)!;
@@ -10,44 +10,54 @@ const ION_TOKEN_INFO = OSMOSIS_TOKENS.find((v) => v.address === ION_DENOM)!;
 const STAKING_ADDRESS =
   'osmo1yg8930mj8pk288lmkjex0qz85mj8wgtns5uzwyn2hs25pwdnw42sf745wc';
 
-export const IONDAO = {
-  getGovernanceStake: async (bech32address: string): Promise<DeFiStaking> => {
-    const cosmwasmClient = await CosmWasmClient.connect(
-      // https://discord.com/channels/798583171548840026/877743338760069141/986639531975516240
-      'https://rpc-osmosis.blockapsis.com',
-    );
-    const [{ power: stakedRawBalance }, { claims }] = (await safePromiseAll([
-      cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
-        voting_power_at_height: {
-          address: bech32address,
-        },
-      }),
-      cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
-        claims: {
-          address: bech32address,
-        },
-      }),
-    ])) as [VotingPowerAtHeightResponse, ClaimsResponse];
+const info: ProtocolInfo = {
+  native: false,
+  ind: null,
+  name: {
+    en: 'Governance',
+    ko: '거버넌스',
+  },
+};
+export default info;
 
-    const stakedBalance =
-      Number(stakedRawBalance) / 10 ** ION_TOKEN_INFO.decimals;
-    const [unstakedClaimableAmount, unstakedPendingAmount] = claims.reduce(
-      ([claimableAcc, pendingAcc], claim) => {
-        const timestamp = Number(claim.release_at.at_time) / 1_000_000;
-        const amount = Number(claim.amount) / 10 ** ION_TOKEN_INFO.decimals;
-        if (timestamp <= Date.now()) {
-          return [claimableAcc + amount, pendingAcc];
-        }
-        return [claimableAcc, pendingAcc + amount];
+export const getAccount: ProtocolGetAccount = async (account: string) => {
+  const cosmwasmClient = await CosmWasmClient.connect(
+    // https://discord.com/channels/798583171548840026/877743338760069141/986639531975516240
+    'https://rpc-osmosis.blockapsis.com',
+  );
+  const [{ power: stakedRawBalance }, { claims }] = (await safePromiseAll([
+    cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
+      voting_power_at_height: {
+        address: account,
       },
-      [0, 0],
-    );
+    }),
+    cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
+      claims: {
+        address: account,
+      },
+    }),
+  ])) as [VotingPowerAtHeightResponse, ClaimsResponse];
 
-    return {
-      type: OsmosisDeFiType.ION_GOVERNANCE,
+  const stakedBalance =
+    Number(stakedRawBalance) / 10 ** ION_TOKEN_INFO.decimals;
+  const [unstakedClaimableAmount, unstakedPendingAmount] = claims.reduce(
+    ([claimableAcc, pendingAcc], claim) => {
+      const timestamp = Number(claim.release_at.at_time) / 1_000_000;
+      const amount = Number(claim.amount) / 10 ** ION_TOKEN_INFO.decimals;
+      if (timestamp <= Date.now()) {
+        return [claimableAcc + amount, pendingAcc];
+      }
+      return [claimableAcc, pendingAcc + amount];
+    },
+    [0, 0],
+  );
+
+  return [
+    {
+      type: 'protocol',
       prefix: ION_TOKEN_INFO.symbol,
-      address: STAKING_ADDRESS,
-      tokens: [ION_TOKEN_INFO],
+      ind: STAKING_ADDRESS,
+      tokens: [{ ...ION_TOKEN_INFO, ind: ION_TOKEN_INFO.address }],
       wallet: null,
       staked: {
         tokenAmounts: {
@@ -67,8 +77,8 @@ export const IONDAO = {
         },
       },
       rewards: null,
-    };
-  },
+    },
+  ];
 };
 
 type VotingPowerAtHeightResponse = {

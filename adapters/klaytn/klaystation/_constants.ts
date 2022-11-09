@@ -1,5 +1,3 @@
-import { KlaytnDeFiType } from '@/_lib/types/staking';
-
 export const PROTOCOL_ADDRESS = '0x03Ef42272dc34d5EF78a21F8D6781182C67b82A0';
 export const PROTOCOL_ABI = [
   {
@@ -30,11 +28,3 @@ export const PROTOCOL_ABI = [
     type: 'function',
   },
 ];
-export const NODE_TYPE__BY_CONTRACT_ADDRESS: Record<string, KlaytnDeFiType> = {
-  '0xe33337cb6fbb68954fe1c3fde2b21f56586632cd':
-    KlaytnDeFiType.KLAYSTATION_NODE_HASHED_AND_OZYS,
-  '0xeffa404dac6ba720002974c54d57b20e89b22862':
-    KlaytnDeFiType.KLAYSTATION_NODE_KED,
-  '0x962cdb28e662b026df276e5ee7fdf13a06341d68':
-    KlaytnDeFiType.KLAYSTATION_NODE_FSN,
-};

@@ -4,6 +4,7 @@ import {
   LocalizedString,
   ProtocolAccountInfo,
   ProtocolGetAccount,
+  ProtocolInfo,
 } from '@/_lib/types';
 
 import { klaytnChain } from '../_lib/chain';
@@ -22,6 +23,16 @@ const DELEGATOR_BY_CONTRACT_ADDRESS: Record<string, LocalizedString> = {
     ko: 'FSN',
   },
 };
+
+const info: ProtocolInfo = {
+  native: false,
+  ind: null,
+  name: {
+    en: 'GC Staking',
+    ko: '거버넌스 카운슬 스테이킹',
+  },
+};
+export default info;
 
 export const getAccount: ProtocolGetAccount = async (account) => {
   const protocol = new provider.klay.Contract(PROTOCOL_ABI, PROTOCOL_ADDRESS);

@@ -23,6 +23,9 @@ export type ProtocolInfo = {
   native: boolean;
   ind: string | null;
   name: LocalizedString;
+  conditional?: {
+    hasToken: string;
+  };
 };
 
 export type TokenInput = {
@@ -74,6 +77,7 @@ export type ProtocolAccountInfo = {
 };
 export type ProtocolGetAccount = (
   account: string,
+  rawTokenBalance?: string,
 ) => Promise<ProtocolAccountInfo[]>;
 
 export type BentoChainAdapter = {
