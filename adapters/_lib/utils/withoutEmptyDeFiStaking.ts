@@ -1,17 +1,29 @@
-import { AmountWithOptionalValue, DeFiStaking } from '../types/staking';
+import { Balance } from '../types';
 
-export const withoutEmptyDeFiStaking = (staking: DeFiStaking) => {
+type BalanceObject = {
+  wallet?: Balance;
+  staked?: Balance;
+  rewards?: Balance;
+  unstake?:
+    | {
+        claimable: Balance;
+        pending: Balance;
+      }
+    | null
+    | 'unavailable';
+};
+export const withoutEmptyDeFiStaking = (obj: BalanceObject) => {
   if (
-    isAmountExist(staking.wallet) ||
-    isAmountExist(staking.staked) ||
-    isAmountExist(staking.rewards)
+    isAmountExist(obj.wallet) ||
+    isAmountExist(obj.staked) ||
+    isAmountExist(obj.rewards)
   ) {
     return true;
   }
-  if (!!staking.unstake && staking.unstake !== 'unavailable') {
+  if (!!obj.unstake && obj.unstake !== 'unavailable') {
     if (
-      isAmountExist(staking.unstake.claimable) ||
-      isAmountExist(staking.unstake.pending)
+      isAmountExist(obj.unstake.claimable) ||
+      isAmountExist(obj.unstake.pending)
     ) {
       return true;
     }
@@ -19,9 +31,7 @@ export const withoutEmptyDeFiStaking = (staking: DeFiStaking) => {
   return false;
 };
 
-const isAmountExist = (
-  value: AmountWithOptionalValue | 'unavailable' | null,
-) => {
+const isAmountExist = (value?: Balance) => {
   if (!!value && value !== 'unavailable') {
     if ((value.lpAmount || 0) > 0) {
       return true;
