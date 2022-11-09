@@ -2,9 +2,9 @@ import BigNumber from 'bn.js';
 import { Multicall } from 'klaytn-multicall';
 
 import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
-import { getTokenInfo } from '@/klaytn/_lib/getTokenInfo';
 
-import { klaytnChain } from '..';
+import { klaytnChain } from '../_lib/chain';
+import { getTokenInfo } from '../_lib/getTokenInfo';
 import IKSLP from './IKSLP.json';
 
 const provider = klaytnChain._provider;

@@ -1,85 +1,13 @@
-import { safePromiseAll } from '@bento/common';
-import { OSMOSIS_TOKENS } from '@bento/core';
-import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
+import { ServiceInfo } from '@/_lib/types';
 
-import { DeFiStaking, OsmosisDeFiType } from '@/_lib/types/staking';
-
-const ION_DENOM = 'uion';
-const ION_TOKEN_INFO = OSMOSIS_TOKENS.find((v) => v.address === ION_DENOM)!;
-
-const STAKING_ADDRESS =
-  'osmo1yg8930mj8pk288lmkjex0qz85mj8wgtns5uzwyn2hs25pwdnw42sf745wc';
-
-export const IONDAO = {
-  getGovernanceStake: async (bech32address: string): Promise<DeFiStaking> => {
-    const cosmwasmClient = await CosmWasmClient.connect(
-      // https://discord.com/channels/798583171548840026/877743338760069141/986639531975516240
-      'https://rpc-osmosis.blockapsis.com',
-    );
-    const [{ power: stakedRawBalance }, { claims }] = (await safePromiseAll([
-      cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
-        voting_power_at_height: {
-          address: bech32address,
-        },
-      }),
-      cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
-        claims: {
-          address: bech32address,
-        },
-      }),
-    ])) as [VotingPowerAtHeightResponse, ClaimsResponse];
-
-    const stakedBalance =
-      Number(stakedRawBalance) / 10 ** ION_TOKEN_INFO.decimals;
-    const [unstakedClaimableAmount, unstakedPendingAmount] = claims.reduce(
-      ([claimableAcc, pendingAcc], claim) => {
-        const timestamp = Number(claim.release_at.at_time) / 1_000_000;
-        const amount = Number(claim.amount) / 10 ** ION_TOKEN_INFO.decimals;
-        if (timestamp <= Date.now()) {
-          return [claimableAcc + amount, pendingAcc];
-        }
-        return [claimableAcc, pendingAcc + amount];
-      },
-      [0, 0],
-    );
-
-    return {
-      type: OsmosisDeFiType.ION_GOVERNANCE,
-      prefix: ION_TOKEN_INFO.symbol,
-      address: STAKING_ADDRESS,
-      tokens: [ION_TOKEN_INFO],
-      wallet: null,
-      staked: {
-        tokenAmounts: {
-          [ION_DENOM]: stakedBalance,
-        },
-      },
-      unstake: {
-        claimable: {
-          tokenAmounts: {
-            [ION_DENOM]: unstakedClaimableAmount,
-          },
-        },
-        pending: {
-          tokenAmounts: {
-            [ION_DENOM]: unstakedPendingAmount,
-          },
-        },
-      },
-      rewards: null,
-    };
+const info: ServiceInfo = {
+  native: false,
+  name: 'ION DAO',
+  logo: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/ion.png',
+  url: 'https://ion.wtf',
+  description: {
+    en: 'ION is the secondary native token on the Osmosis chain. The community are collectively discussing potential use-cases to be developed.',
+    ko: 'ION은 오스모시스의 두번째 네이티브 토큰입니다. ION DAO 커뮤니티에서는 그 잠재적 사용 사례를 공동으로 논의하고 있습니다.',
   },
 };
-
-type VotingPowerAtHeightResponse = {
-  power: string;
-  height: number;
-};
-type ClaimsResponse = {
-  claims: {
-    amount: string;
-    release_at: {
-      at_time: string;
-    };
-  }[];
-};
+export default info;

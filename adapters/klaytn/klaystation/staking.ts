@@ -2,7 +2,7 @@ import { ZERO_ADDRESS } from '@bento/core';
 
 import { DeFiStaking } from '@/_lib/types/staking';
 
-import { klaytnChain } from '..';
+import { klaytnChain } from '../_lib/chain';
 import {
   NODE_TYPE__BY_CONTRACT_ADDRESS,
   PROTOCOL_ABI,

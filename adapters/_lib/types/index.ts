@@ -80,3 +80,10 @@ export type BentoChainAdapter = {
   default: ChainInfo;
   getAccount: ChainGetAccount;
 };
+export type BentoServiceAdapter = {
+  default: ServiceInfo;
+};
+export type BentoProtocolAdapter = {
+  default: ProtocolInfo;
+  getAccount: ProtocolGetAccount;
+};

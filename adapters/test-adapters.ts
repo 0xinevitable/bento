@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import TSON from 'typescript-json';
 
-import { BentoChainAdapter, ServiceInfo } from './_lib/types';
+import { BentoChainAdapter, BentoServiceAdapter } from './_lib/types';
 
 const WORKSPACE_ROOT_PATH = findWorkspaceRoot(null) ?? '';
 const ADAPTER_ROOT_PATH = path.resolve(WORKSPACE_ROOT_PATH, './adapters');
@@ -60,7 +60,7 @@ const validateChildren = (
             `❌ ${adapterName} ${child.name}: not a valid \`${typeName}\``,
           );
         } else {
-          console.log(`✅ Chain: ${child.name}`);
+          console.log(`✅ ${adapterName}: ${child.name}`);
         }
       }
     }
@@ -80,9 +80,9 @@ const main = () => {
       const services = fetchChildren(chain.path);
       validateChildren(
         services,
-        'Service',
-        'ServiceInfo',
-        (module: unknown) => TSON.is<ServiceInfo>(module),
+        'ㄴ Service',
+        'BentoServiceAdapter',
+        (module: unknown) => TSON.is<BentoServiceAdapter>(module),
         (_service) => {},
       );
     },

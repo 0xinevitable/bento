@@ -2,9 +2,9 @@ import axios from 'axios';
 import BigNumber from 'bn.js';
 
 import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
-import { getTokenInfo } from '@/klaytn/_lib/getTokenInfo';
 
-import { klaytnChain } from '..';
+import { klaytnChain } from '../_lib/chain';
+import { getTokenInfo } from '../_lib/getTokenInfo';
 import KLAYSwapSingleLeveragePool from './KLAYSwapSingleLeveragePool.json';
 import { KSP_TOKEN_INFO } from './constants';
 

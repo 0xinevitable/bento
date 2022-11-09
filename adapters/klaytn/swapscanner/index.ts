@@ -1,20 +1,13 @@
-import {
-  SCNR_ADDRESS,
-  SCNR_KLAY_LP_ADDRESS,
-  SCNR_STAKING_ADDRESS,
-  SCNR_TOKEN_INFO,
-} from './constants';
-import { getGovernanceStake } from './governance';
-import { getSCNRTokenPrice } from './lp';
+import { ServiceInfo } from '@/_lib/types';
 
-// import { getLPPoolBalance } from './lp';
-
-export const Swapscanner = {
-  SCNR_ADDRESS,
-  SCNR_KLAY_LP_ADDRESS,
-  SCNR_STAKING_ADDRESS,
-  SCNR_TOKEN_INFO,
-  getSCNRTokenPrice,
-  // getLPPoolBalance,
-  getGovernanceStake,
+const info: ServiceInfo = {
+  native: false,
+  name: 'Swapscanner',
+  logo: '',
+  url: 'https://swapscanner.io',
+  description: {
+    en: 'Swapscanner is a next-generation DEX Aggregator that enables users to buy tokens at the lowest price in the Klaytn Network.',
+    ko: '스왑스캐너는 클레이튼 생태계에서 최저가 토큰 구매를 보장하는 차세대 DEX 애그리게이터입니다.',
+  },
 };
+export default info;

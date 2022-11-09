@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 import { DeFiStaking, KlaytnDeFiType } from '@/_lib/types/staking';
-import { getTokenInfo } from '@/klaytn/_lib/getTokenInfo';
 
+import { getTokenInfo } from '../_lib/getTokenInfo';
 import { KSD_ADDRESS, KSD_TOKEN_INFO } from './constants';
 
 export const getLPPoolList = async () => {
