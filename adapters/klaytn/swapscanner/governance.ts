@@ -52,7 +52,6 @@ export const getAccount: ProtocolGetAccount = async (account: string) => {
 
   return [
     {
-      type: 'protocol',
       prefix: SCNR_TOKEN_INFO.symbol,
       ind: SCNR_STAKING_ADDRESS,
       tokens: [{ ...SCNR_TOKEN_INFO, ind: SCNR_TOKEN_INFO.address }],

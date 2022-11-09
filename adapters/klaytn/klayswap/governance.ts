@@ -22,7 +22,6 @@ export const getAccount: ProtocolGetAccount = async (
   const balance = Number(rawTokenBalance) / 10 ** KSP_TOKEN_INFO.decimals;
   return [
     {
-      type: 'protocol',
       prefix: KSP_TOKEN_INFO.symbol,
       ind: VOTING_KSP_ADDRESS,
       tokens: [{ ...KSP_TOKEN_INFO, ind: KSP_TOKEN_INFO.address }],

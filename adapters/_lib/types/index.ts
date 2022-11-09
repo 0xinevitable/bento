@@ -49,14 +49,12 @@ export type AmountWithOptionalValue = {
 export type Balance = AmountWithOptionalValue | null | 'unavailable';
 
 export type ChainAccountInfo = {
-  type: 'chain';
   tokens: (TokenInput | null)[];
   wallet: Balance;
 };
 export type ChainGetAccount = (account: string) => Promise<ChainAccountInfo>;
 
 export type ProtocolAccountInfo = {
-  type: 'protocol';
   delegator?: LocalizedString;
   prefix?: string;
   native?: boolean;

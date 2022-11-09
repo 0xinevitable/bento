@@ -52,7 +52,6 @@ export const getAccount: ProtocolGetAccount = async (account) => {
     const delegated = (deposit / sklayTotalSupply) * totalStaking;
 
     return {
-      type: 'protocol',
       delegator: delegator,
       ind: stakingInfo.delegation,
       tokens: [{ ...klaytnChain.currency, address: ZERO_ADDRESS }],

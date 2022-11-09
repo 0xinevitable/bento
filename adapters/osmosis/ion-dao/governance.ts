@@ -54,7 +54,6 @@ export const getAccount: ProtocolGetAccount = async (account: string) => {
 
   return [
     {
-      type: 'protocol',
       prefix: ION_TOKEN_INFO.symbol,
       ind: STAKING_ADDRESS,
       tokens: [{ ...ION_TOKEN_INFO, ind: ION_TOKEN_INFO.address }],

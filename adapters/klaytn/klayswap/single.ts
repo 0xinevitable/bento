@@ -84,7 +84,6 @@ export const getSinglePoolBalance = async (
   }
 
   return {
-    type: 'protocol',
     prefix: tokenInfo?.symbol,
     ind: pool.address,
     wallet: null,

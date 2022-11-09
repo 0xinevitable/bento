@@ -99,7 +99,6 @@ export default info;
 
 export const getAccount: ChainGetAccount = async (account) => {
   return {
-    type: 'chain',
     tokens: [bnbChain.currency],
     wallet: {
       tokenAmounts: {

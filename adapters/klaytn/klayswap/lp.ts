@@ -74,7 +74,6 @@ export const getLPPoolBalance = async (
   }
 
   return {
-    type: 'protocol',
     prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
     ind: pool.exchange_address.toLowerCase(),
     tokens,

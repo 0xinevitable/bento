@@ -39,7 +39,6 @@ export const getAccount: ProtocolGetAccount = async (
 
   return [
     {
-      type: 'protocol',
       prefix: KOKOS_TOKEN_INFO.symbol,
       ind: STAKED_KOKOS_ADDRESS,
       tokens: [{ ...KOKOS_TOKEN_INFO, ind: KOKOS_TOKEN_INFO.address }],

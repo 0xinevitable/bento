@@ -24,7 +24,6 @@ export const getAccount: ProtocolGetAccount = async (address: string) => {
 
   return [
     {
-      type: 'protocol',
       native: true,
       ind: null,
       wallet: null,

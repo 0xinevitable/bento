@@ -336,7 +336,6 @@ export const getAccount: ProtocolGetAccount = async (account: string) => {
       }, {} as Record<string, number>);
 
       stakings.push({
-        type: 'protocol',
         ind: poolId,
         prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '),
         tokens: tokens,
