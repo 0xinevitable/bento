@@ -59,7 +59,6 @@ const fetchChainAdapters = async () => {
 };
 
 const handler = async (req: APIRequest, res: NextApiResponse) => {
-  const type = req.query.type;
   const wallets = parseWallets(req.query.walletAddress ?? '');
   const network = (
     req.query.network ?? ''
@@ -72,7 +71,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     const bech32Address = Bech32Address.fromBech32(walletAddress);
     let chain = chainAdapters[network];
 
-    if (type === 'cosmos-sdk' && chain.default.type === 'cosmos-sdk') {
+    if (chain.default.type === 'cosmos-sdk') {
       // chainBech32Address
       account = bech32Address.toBech32(chain.default.bech32Config.prefix);
     }
