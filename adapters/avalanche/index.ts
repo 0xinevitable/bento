@@ -9,7 +9,7 @@ import {
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import { JsonRpcProvider } from '@ethersproject/providers';
 
-import { Chain, ChainGetAccount, ChainInfo, TokenBalance } from '@/_lib/types';
+import { Chain, ChainGetAccount, ChainInfo } from '@/_lib/types';
 
 export class AvalancheChain implements Chain {
   currency = {
@@ -24,16 +24,16 @@ export class AvalancheChain implements Chain {
   _provider = new JsonRpcProvider(Config.RPC_URL.AVALANCHE_C_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
-  getBalance = async (address: string): Promise<TokenBalance> => {
-    const rawBalance = await this._provider.getBalance(address);
+  getBalance = async (account: string) => {
+    const rawBalance = await this._provider.getBalance(account);
     const balance = Number(rawBalance) / 10 ** this.currency.decimals;
     return { ...this.currency, balance };
   };
-  getTokenBalances = async (walletAddress: string): Promise<TokenBalance[]> => {
+  getTokenBalances = async (account: string) => {
     try {
       const items = await getTokenBalancesFromCovalent({
         chainId: this.chainId,
-        walletAddress,
+        walletAddress: account,
       });
 
       const promises = safeAsyncFlatMap(items, async (token) => {
@@ -62,7 +62,7 @@ export class AvalancheChain implements Chain {
           return 0;
         };
         const price = await getPrice();
-        const item: TokenBalance = {
+        return {
           name: tokenInfo?.name ?? token.contract_name,
           symbol: tokenInfo?.symbol ?? symbol,
           decimals: token.contract_decimals,
@@ -73,7 +73,6 @@ export class AvalancheChain implements Chain {
           balance,
           price,
         };
-        return item;
       });
       return promises;
     } catch (err) {
@@ -90,9 +89,7 @@ const info: ChainInfo = {
 };
 export default info;
 
-export const getAccount: ChainGetAccount = async (
-  account,
-): Promise<TokenBalance[]> => {
+export const getAccount: ChainGetAccount = async (account) => {
   const items = await Promise.all([
     avalancheChain.getBalance(account),
     (await avalancheChain.getTokenBalances(account)).flat(),

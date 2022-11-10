@@ -33,26 +33,30 @@ export class CosmosHubChain implements CosmosSDKBasedChain {
       `/cosmos/bank/v1beta1/balances/${address}`,
     ),
   );
-  getBalance = async (address: string) => {
-    const { data } = await this._getBalances(address);
+  getBalance = async (account: string) => {
+    const { data } = await this._getBalances(account);
     const coinBalance =
       data.balances.find((v) => v.denom === this.currency.coinMinimalDenom)
         ?.amount ?? 0;
     const balance = Number(coinBalance) / 10 ** this.currency.decimals;
-    return balance;
+    return { ...this.currency, balance };
   };
-  getDelegations = async (address: string) => {
-    const { data } = await this._provider.get<CosmosHubDelegationsResponse>(
-      `/staking/delegators/${address}/delegations`,
-    );
-    const delegations = data.result;
-    const totalDelegated = delegations.reduce(
-      (acc, cur) => acc + Number(cur.balance.amount),
-      0,
-    );
-    return totalDelegated / 10 ** this.currency.decimals;
+  getDelegations = async (account: string) => {
+    try {
+      const { data } = await this._provider.get<CosmosHubDelegationsResponse>(
+        `/staking/delegators/${account}/delegations`,
+      );
+      const delegations = data.result;
+      const totalDelegated = delegations.reduce(
+        (acc, cur) => acc + Number(cur.balance.amount),
+        0,
+      );
+      return totalDelegated / 10 ** this.currency.decimals;
+    } catch (err) {
+      throw err;
+    }
   };
-  getTokenBalances = async (_address: string) => {
+  getTokenBalances = async (_account: string) => {
     // const { data } = await this._getBalances(address);
     // return data.balances as any;
     return [];
@@ -68,12 +72,9 @@ const info: ChainInfo = {
 export default info;
 
 export const getAccount: ChainGetAccount = async (account) => {
-  return {
-    tokens: [cosmosHubChain.currency],
-    wallet: {
-      tokenAmounts: {
-        [cosmosHubChain.currency.ind]: await cosmosHubChain.getBalance(account),
-      },
-    },
-  };
+  const items = await Promise.all([
+    cosmosHubChain.getBalance(account),
+    (await cosmosHubChain.getTokenBalances(account)).flat(),
+  ]);
+  return items.flat();
 };

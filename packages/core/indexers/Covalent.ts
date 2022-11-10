@@ -18,7 +18,7 @@ export const getTokenBalancesFromCovalent = async ({
   )}`;
 
   const response = await axios.get<TokenBalancesResponse>(API_URL, {
-    timeout: 4_000,
+    timeout: 10_000,
   });
 
   return response.data.data.items;
