@@ -14,8 +14,7 @@ import { withCORS } from '@/utils/middlewares/withCORS';
 
 interface APIRequest extends NextApiRequest {
   query: {
-    type: ChainType;
-    network?: CosmosSDKBasedNetworks;
+    network?: string;
     walletAddress?: string;
   };
 }
@@ -57,19 +56,52 @@ const fetchChainAdapters = async () => {
 
   return modules;
 };
+const fetchServiceAdapters = async (networkName: string) => {
+  const basePath = path.resolve(
+    WORKSPACE_ROOT_PATH,
+    `./adapters/${networkName}`,
+  );
+  const files = await fs.readdir(basePath);
+
+  let modules: Record<string, BentoChainAdapter> = {};
+
+  await Promise.all(
+    files.map(async (filename) => {
+      if (
+        filename.startsWith('_') ||
+        filename.startsWith('.') ||
+        filename === 'dist'
+      ) {
+        return;
+      }
+      const adapterPath = path.join(basePath, filename);
+      const stat = await fs.stat(adapterPath);
+      if (!stat.isDirectory()) {
+        return;
+      }
+      const module =
+        await require(`@bento/adapters/dist/${networkName}/${filename}/index`);
+      modules[filename] = module as BentoChainAdapter;
+    }),
+  );
+
+  return modules;
+};
 
 const handler = async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
-  const network = (
-    req.query.network ?? ''
-  ).toLowerCase() as CosmosSDKBasedNetworks;
+  const network = (req.query.network ?? '').toLowerCase();
 
-  const chainAdapters = await fetchChainAdapters();
+  const [chainAdapters, serviceAdaptersInChain] = await Promise.all([
+    fetchChainAdapters(),
+    fetchServiceAdapters(network),
+  ]);
   const chain = chainAdapters[network];
 
   const result = await safeAsyncFlatMap(wallets, async (walletAddress) => {
     let account = walletAddress;
     const bech32Address = Bech32Address.fromBech32(walletAddress);
+    let chain = chainAdapters[network];
 
     if (chain.default.type === 'cosmos-sdk') {
       // chainBech32Address
