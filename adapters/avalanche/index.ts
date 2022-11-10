@@ -1,17 +1,15 @@
-import { Config, safePromiseAllV1 } from '@bento/common';
+import { Config, safeAsyncFlatMap } from '@bento/common';
 import {
   AVALANCHE_TOKENS,
-  Chain,
   Currency,
   EEEE_ADDRESS,
-  TokenBalance,
   ZERO_ADDRESS,
   priceFromCoinGecko,
 } from '@bento/core';
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import { JsonRpcProvider } from '@ethersproject/providers';
 
-import { ChainGetAccount, ChainInfo } from '@/_lib/types';
+import { Chain, ChainGetAccount, ChainInfo, TokenBalance } from '@/_lib/types';
 
 export class AvalancheChain implements Chain {
   currency = {
@@ -26,66 +24,61 @@ export class AvalancheChain implements Chain {
   _provider = new JsonRpcProvider(Config.RPC_URL.AVALANCHE_C_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
-  getBalance = async (address: string) => {
+  getBalance = async (address: string): Promise<TokenBalance> => {
     const rawBalance = await this._provider.getBalance(address);
     const balance = Number(rawBalance) / 10 ** this.currency.decimals;
-    return balance;
+    return { ...this.currency, balance };
   };
-
-  getTokenBalances = async (walletAddress: string) => {
-    const items = await getTokenBalancesFromCovalent({
-      chainId: this.chainId,
-      walletAddress,
-    });
-
-    const promises = items.flatMap(async (token) => {
-      if (token.type === 'nft') {
-        return [];
-      }
-      if (
-        token.contract_address === EEEE_ADDRESS // Klaytn
-      ) {
-        return [];
-      }
-      const balance =
-        typeof token.balance === 'string'
-          ? Number(token.balance) / 10 ** token.contract_decimals
-          : 0;
-      if (balance <= 0) {
-        return [];
-      }
-      const symbol = token.contract_ticker_symbol;
-      const tokenInfo = AVALANCHE_TOKENS.find(
-        (v) => v.address.toLowerCase() === token.contract_address.toLowerCase(),
-      );
-      const getPrice = async () => {
-        if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
-          // return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
-          //   (error) => {
-          //     console.error(error);
-          //     return 0;
-          //   },
-          // );
-          return undefined;
-        }
-        return 0;
-      };
-      const price = await getPrice();
-      return {
+  getTokenBalances = async (walletAddress: string): Promise<TokenBalance[]> => {
+    try {
+      const items = await getTokenBalancesFromCovalent({
+        chainId: this.chainId,
         walletAddress,
-        platform: 'avalanche',
-        name: tokenInfo?.name ?? token.contract_name,
-        symbol: tokenInfo?.symbol ?? symbol,
-        decimals: token.contract_decimals,
-        address: token.contract_address,
-        logo: tokenInfo?.logo,
-        coinGeckoId: tokenInfo?.coinGeckoId,
-        coinMarketCapId: tokenInfo?.coinMarketCapId,
-        balance,
-        price,
-      };
-    }) as Promise<TokenBalance>[];
-    return safePromiseAllV1(promises);
+      });
+
+      const promises = safeAsyncFlatMap(items, async (token) => {
+        if (token.type === 'nft') {
+          return [];
+        }
+        if (token.contract_address === EEEE_ADDRESS) {
+          return [];
+        }
+        const balance =
+          typeof token.balance === 'string'
+            ? Number(token.balance) / 10 ** token.contract_decimals
+            : 0;
+        if (balance <= 0) {
+          return [];
+        }
+        const symbol = token.contract_ticker_symbol;
+        const tokenInfo = AVALANCHE_TOKENS.find(
+          (v) =>
+            v.address.toLowerCase() === token.contract_address.toLowerCase(),
+        );
+        const getPrice = async () => {
+          if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
+            return undefined;
+          }
+          return 0;
+        };
+        const price = await getPrice();
+        const item: TokenBalance = {
+          name: tokenInfo?.name ?? token.contract_name,
+          symbol: tokenInfo?.symbol ?? symbol,
+          decimals: token.contract_decimals,
+          ind: token.contract_address,
+          logo: tokenInfo?.logo,
+          coinGeckoId: tokenInfo?.coinGeckoId,
+          coinMarketCapId: tokenInfo?.coinMarketCapId,
+          balance,
+          price,
+        };
+        return item;
+      });
+      return promises;
+    } catch (err) {
+      throw err;
+    }
   };
 }
 
@@ -97,13 +90,12 @@ const info: ChainInfo = {
 };
 export default info;
 
-export const getAccount: ChainGetAccount = async (account) => {
-  return {
-    tokens: [avalancheChain.currency],
-    wallet: {
-      tokenAmounts: {
-        [avalancheChain.currency.ind]: await avalancheChain.getBalance(account),
-      },
-    },
-  };
+export const getAccount: ChainGetAccount = async (
+  account,
+): Promise<TokenBalance[]> => {
+  const items = await Promise.all([
+    avalancheChain.getBalance(account),
+    (await avalancheChain.getTokenBalances(account)).flat(),
+  ]);
+  return items.flat();
 };

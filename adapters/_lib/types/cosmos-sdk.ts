@@ -1,4 +1,4 @@
-import { type Chain } from '@bento/core';
+import { type Chain } from '.';
 
 export type CosmosSDKBasedBalanceResponse = {
   balances: [

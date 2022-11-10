@@ -1,3 +1,30 @@
+import { Currency } from '@bento/core';
+
+export type TokenInput = {
+  symbol: string;
+  name: string;
+  decimals: number;
+  ind: Indicator;
+  logo?: string;
+  coinGeckoId?: string;
+  coinMarketCapId?: number;
+  denomUnits?: { denom: string; exponent: number; aliases?: string[] }[];
+};
+
+export type TokenBalance = TokenInput & {
+  balance: number;
+  price?: number;
+};
+
+export interface Chain {
+  currency: TokenInput;
+  chainId?: number;
+  _provider?: any;
+  getCurrencyPrice: (currency?: Currency) => Promise<number>;
+  getBalance: (account: string) => Promise<TokenBalance>;
+  getTokenBalances: (account: string) => Promise<TokenBalance[]>;
+}
+
 type Indicator = string;
 
 export type LocalizedString =
@@ -29,18 +56,6 @@ export type ProtocolInfo = {
   };
 };
 
-export type TokenInput = {
-  symbol: string;
-  name: string;
-  decimals: number;
-  ind: Indicator; // indicator
-  coinGeckoId?: string;
-  coinMarketCapId?: number;
-  logo?: string;
-  staking?: boolean;
-  denomUnits?: { denom: string; exponent: number; aliases?: string[] }[];
-};
-
 export type AmountWithOptionalValue = {
   value?: number | null;
   lpAmount?: number | null;
@@ -52,7 +67,7 @@ export type ChainAccountInfo = {
   tokens: (TokenInput | null)[];
   wallet: Balance;
 };
-export type ChainGetAccount = (account: string) => Promise<ChainAccountInfo>;
+export type ChainGetAccount = (account: string) => Promise<TokenBalance[]>;
 
 export type ProtocolAccountInfo = {
   delegator?: LocalizedString;
