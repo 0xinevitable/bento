@@ -147,8 +147,8 @@ const main = async () => {
         } catch (err) {
           const typedError = err as Error;
           console.error(
-            `❌ - failed to fetch account info`,
-            typedError.message,
+            `❌ - failed to fetch account info:`,
+            typedError.message || 'unknown error',
           );
         }
       }
