@@ -138,9 +138,18 @@ const main = async () => {
     (module: unknown) => TSON.is<BentoChainAdapter>(module),
     async (chain, module) => {
       if (!!module && !!module.TEST_ADDRESS) {
-        const accountInfo = await module.getAccount(module.TEST_ADDRESS);
-        if (!!accountInfo) {
-          console.log('🚀 - account info fetched', JSON.stringify(accountInfo));
+        try {
+          const accountInfo = await module.getAccount(module.TEST_ADDRESS);
+          console.log(
+            '🚀 - account info fetched',
+            JSON.stringify(accountInfo).slice(0, 45) + '...',
+          );
+        } catch (err) {
+          const typedError = err as Error;
+          console.error(
+            `❌ - failed to fetch account info`,
+            typedError.message,
+          );
         }
       }
 

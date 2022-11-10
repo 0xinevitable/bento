@@ -1,3 +1,4 @@
+import { safeAsyncFlatMap } from '@bento/common';
 import {
   Currency,
   OSMOSIS_TOKENS,
@@ -34,23 +35,23 @@ export class OsmosisChain implements CosmosSDKBasedChain {
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
 
-  _getBalances = withCache(async (address: string) =>
+  _getBalances = withCache(async (account: string) =>
     this._provider.get<CosmosSDKBasedBalanceResponse>(
-      `/cosmos/bank/v1beta1/balances/${address}`,
+      `/cosmos/bank/v1beta1/balances/${account}`,
     ),
   );
-  getBalance = async (address: string) => {
-    const { data } = await this._getBalances(address);
+  getBalance = async (account: string) => {
+    const { data } = await this._getBalances(account);
     const coinBalance =
       data.balances.find((v) => v.denom === this.currency.coinMinimalDenom)
         ?.amount ?? 0;
     const balance = Number(coinBalance) / 10 ** this.currency.decimals;
-    return balance;
+    return { ...this.currency, balance };
   };
-  getDelegations = async (address: string) => {
+  getDelegations = async (account: string) => {
     const { data } =
       await this._provider.get<CosmosSDKBasedDelegationsResponse>(
-        `/cosmos/staking/v1beta1/delegations/${address}`,
+        `/cosmos/staking/v1beta1/delegations/${account}`,
       );
     const delegations = data.delegation_responses;
     const totalDelegated = delegations.reduce(
@@ -70,49 +71,56 @@ export class OsmosisChain implements CosmosSDKBasedChain {
     const totalRewards = Number(osmosisRewards?.amount ?? 0);
     return totalRewards / 10 ** this.currency.decimals;
   };
+
   getTokenBalances = async (walletAddress: string) => {
-    const { data } = await this._getBalances(walletAddress);
-    return data.balances.flatMap((asset) => {
-      if (asset.denom === this.currency.coinMinimalDenom) {
-        return [];
-      }
-      const tokenInfo = OSMOSIS_TOKENS.find(
-        (tokenInfo) =>
-          !!tokenInfo.denomUnits?.find((v) => v.denom === asset.denom),
-      );
-      if (!tokenInfo) {
-        return [];
-      }
+    try {
+      const { data } = await this._getBalances(walletAddress);
 
-      const decimals = tokenInfo.decimals;
-      const balance =
-        typeof asset.amount === 'string'
-          ? Number(asset.amount) / 10 ** decimals
-          : 0;
-      if (balance <= 0) {
-        return [];
-      }
-
-      const getPrice = () => {
-        if (tokenInfo.coinGeckoId) {
-          return undefined;
+      const promises = safeAsyncFlatMap(data.balances, async (asset) => {
+        if (asset.denom === this.currency.coinMinimalDenom) {
+          return [];
         }
-        return 0;
-      };
-      const price = getPrice();
+        const tokenInfo = OSMOSIS_TOKENS.find(
+          (tokenInfo) =>
+            !!tokenInfo.denomUnits?.find((v) => v.denom === asset.denom),
+        );
+        if (!tokenInfo) {
+          return [];
+        }
 
-      return {
-        walletAddress,
-        platform: 'osmosis',
-        name: tokenInfo.name,
-        symbol: tokenInfo.symbol,
-        decimals,
-        logo: tokenInfo.logo,
-        coinGeckoId: tokenInfo.coinGeckoId,
-        balance,
-        price,
-      };
-    });
+        const decimals = tokenInfo.decimals;
+        const balance =
+          typeof asset.amount === 'string'
+            ? Number(asset.amount) / 10 ** decimals
+            : 0;
+        if (balance <= 0) {
+          return [];
+        }
+
+        const getPrice = () => {
+          if (tokenInfo.coinGeckoId) {
+            return undefined;
+          }
+          return 0;
+        };
+        const price = getPrice();
+
+        return {
+          name: tokenInfo.name,
+          symbol: tokenInfo.symbol,
+          ind: tokenInfo.address,
+          decimals,
+          logo: tokenInfo.logo,
+          coinGeckoId: tokenInfo.coinGeckoId,
+          balance,
+          price,
+        };
+      });
+
+      return promises;
+    } catch (err) {
+      throw err;
+    }
   };
 }
 
@@ -125,12 +133,11 @@ const info: ChainInfo = {
 export default info;
 
 export const getAccount: ChainGetAccount = async (account) => {
-  return {
-    tokens: [osmosisChain.currency],
-    wallet: {
-      tokenAmounts: {
-        [osmosisChain.currency.ind]: await osmosisChain.getBalance(account),
-      },
-    },
-  };
+  const items = await Promise.all([
+    osmosisChain.getBalance(account),
+    (await osmosisChain.getTokenBalances(account)).flat(),
+  ]);
+  return items.flat();
 };
+
+export const TEST_ADDRESS = 'osmo15zysaya5j34vy2cqd7y9q8m3drjpy0d2lvmkpa';

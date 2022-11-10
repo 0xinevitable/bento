@@ -35,7 +35,7 @@ export class BNBChain implements Chain {
     try {
       const items = await getTokenBalancesFromCovalent({
         chainId: this.chainId,
-        walletAddress: account,
+        account,
       });
 
       const promises = safeAsyncFlatMap(items, async (token) => {

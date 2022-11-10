@@ -1,10 +1,8 @@
-import { Config, safePromiseAllV1 } from '@bento/common';
+import { Config, safeAsyncFlatMap } from '@bento/common';
 import {
-  Chain,
   Currency,
   EEEE_ADDRESS,
   KLAYTN_TOKENS,
-  TokenBalance,
   TokenInput,
   ZERO_ADDRESS,
   priceFromCoinGecko,
@@ -13,6 +11,8 @@ import {
 import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
 import Caver from 'caver-js';
 import { Multicall } from 'klaytn-multicall';
+
+import { Chain } from '@/_lib/types';
 
 export class KlaytnChain implements Chain {
   currency = {
@@ -30,7 +30,7 @@ export class KlaytnChain implements Chain {
   getBalance = async (address: string) => {
     const rawBalance = await this._provider.klay.getBalance(address);
     const balance = Number(rawBalance) / 10 ** this.currency.decimals;
-    return balance;
+    return { ...this.currency, balance };
   };
 
   public tokens: TokenInput[] = KLAYTN_TOKENS;
@@ -60,68 +60,70 @@ export class KlaytnChain implements Chain {
     return exchangeRatio * klayPrice;
   });
 
-  getTokenBalances = async (walletAddress: string) => {
-    const items = await getTokenBalancesFromCovalent({
-      chainId: this.chainId,
-      walletAddress,
-    });
+  getTokenBalances = async (account: string) => {
+    try {
+      const items = await getTokenBalancesFromCovalent({
+        chainId: this.chainId,
+        account,
+      });
 
-    const promises = items.flatMap(async (token) => {
-      if (token.type === 'nft') {
-        return [];
-      }
-      if (
-        token.contract_address === EEEE_ADDRESS // Klaytn
-      ) {
-        return [];
-      }
-      const balance =
-        typeof token.balance === 'string'
-          ? Number(token.balance) / 10 ** token.contract_decimals
-          : 0;
-      const symbol = token.contract_ticker_symbol;
-
-      if (balance <= 0) {
-        return [];
-      }
-      const tokenInfo = KLAYTN_TOKENS.find(
-        (v) => v.address.toLowerCase() === token.contract_address,
-      );
-      const getPrice = async () => {
-        if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
-          // return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
-          //   (error) => {
-          //     console.error(error);
-          //     return 0;
-          //   },
-          // );
-          return undefined;
+      const promises = safeAsyncFlatMap(items, async (token) => {
+        if (token.type === 'nft') {
+          return [];
         }
-
-        // FIXME: Remove hardcoded
-        if (symbol === 'SCNR') {
-          return this._getSCNRTokenPrice().catch(() => 0);
+        if (
+          token.contract_address === EEEE_ADDRESS // Klaytn
+        ) {
+          return [];
         }
-        return 0;
-      };
+        const balance =
+          typeof token.balance === 'string'
+            ? Number(token.balance) / 10 ** token.contract_decimals
+            : 0;
+        const symbol = token.contract_ticker_symbol;
 
-      const price = await getPrice();
-      const balanceInfo = {
-        walletAddress,
-        platform: 'klaytn',
-        name: tokenInfo?.name ?? token.contract_name,
-        symbol: tokenInfo?.symbol ?? symbol,
-        decimals: token.contract_decimals,
-        address: token.contract_address,
-        logo: tokenInfo?.logo,
-        coinGeckoId: tokenInfo?.coinGeckoId,
-        coinMarketCapId: tokenInfo?.coinMarketCapId,
-        balance,
-        price,
-      };
-      return balanceInfo;
-    }) as Promise<TokenBalance>[];
-    return safePromiseAllV1(promises);
+        if (balance <= 0) {
+          return [];
+        }
+        const tokenInfo = KLAYTN_TOKENS.find(
+          (v) => v.address.toLowerCase() === token.contract_address,
+        );
+        const getPrice = async () => {
+          if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
+            // return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
+            //   (error) => {
+            //     console.error(error);
+            //     return 0;
+            //   },
+            // );
+            return undefined;
+          }
+
+          // FIXME: Remove hardcoded
+          if (symbol === 'SCNR') {
+            return this._getSCNRTokenPrice().catch(() => 0);
+          }
+          return 0;
+        };
+
+        const price = await getPrice();
+        return {
+          name: tokenInfo?.name ?? token.contract_name,
+          symbol: tokenInfo?.symbol ?? symbol,
+          decimals: token.contract_decimals,
+          ind: token.contract_address,
+          logo: tokenInfo?.logo,
+          coinGeckoId: tokenInfo?.coinGeckoId,
+          coinMarketCapId: tokenInfo?.coinMarketCapId,
+          balance,
+          price,
+        };
+      });
+
+      return promises;
+    } catch (err) {
+      throw err;
+    }
   };
 }
 

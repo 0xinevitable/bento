@@ -4,15 +4,15 @@ import axios from 'axios';
 
 type Options = {
   chainId: number;
-  walletAddress: string;
+  account: string;
 };
 
 export const getTokenBalancesFromCovalent = async ({
   chainId,
-  walletAddress,
+  account,
 }: Options): Promise<TokenBalanceItem[]> => {
   const API_KEY = randomOf(splitAPIKeys(process.env.COVALENT_API_KEYS));
-  const API_URL = `https://api.covalenthq.com/v1/${chainId}/address/${walletAddress}/balances_v2/?key=${API_KEY.replace(
+  const API_URL = `https://api.covalenthq.com/v1/${chainId}/address/${account}/balances_v2/?key=${API_KEY.replace(
     ':',
     '',
   )}`;

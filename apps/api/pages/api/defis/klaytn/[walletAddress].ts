@@ -101,12 +101,12 @@ const handleError = (error: any) => {
 };
 
 const getDeFiStakingsByWalletAddress = async (
-  walletAddress: string,
+  account: string,
 ): Promise<DeFiStaking[]> => {
   const [tokenBalances, dynamicLeveragePools] = await Promise.all([
     getTokenBalancesFromCovalent({
       chainId: klaytnChain.chainId,
-      walletAddress,
+      account,
     }),
     KlaySwap.getLeveragePoolList().catch(() => undefined),
   ]);
@@ -124,7 +124,7 @@ const getDeFiStakingsByWalletAddress = async (
     if (!!klayswapLPPool) {
       try {
         return KlaySwap.getLPPoolBalance(
-          walletAddress,
+          account,
           token.balance,
           klayswapLPPool,
           multicall,
@@ -140,7 +140,7 @@ const getDeFiStakingsByWalletAddress = async (
     );
     if (!!klayswapLeveragePool) {
       return KlaySwap.getSinglePoolBalance(
-        walletAddress,
+        account,
         token.balance,
         klayswapLeveragePool,
         dynamicLeveragePools?.find(
@@ -151,7 +151,7 @@ const getDeFiStakingsByWalletAddress = async (
 
     // KLAYswap Governance
     if (isSameAddress(token.contract_address, KlaySwap.VOTING_KSP_ADDRESS)) {
-      return KlaySwap.getGovernanceStake(walletAddress, token.balance);
+      return KlaySwap.getGovernanceStake(account, token.balance);
     }
 
     // Kokonutswap LP
@@ -160,7 +160,7 @@ const getDeFiStakingsByWalletAddress = async (
     );
     if (!!kokonutswapLPPool) {
       return KokonutSwap.getLPPoolBalance(
-        walletAddress,
+        account,
         token.balance,
         kokonutswapLPPool,
         KOKONUTSWAP_LP_POOLS,
@@ -171,13 +171,13 @@ const getDeFiStakingsByWalletAddress = async (
     if (
       isSameAddress(token.contract_address, KokonutSwap.STAKED_KOKOS_ADDRESS)
     ) {
-      return KokonutSwap.getGovernanceStake(walletAddress, token.balance);
+      return KokonutSwap.getGovernanceStake(account, token.balance);
     }
 
     // Swapscanner Governance
     if (isSameAddress(token.contract_address, SCNR_ADDRESS)) {
       try {
-        return Swapscanner.getGovernanceStake(walletAddress, multicall);
+        return Swapscanner.getGovernanceStake(account, multicall);
       } catch (error) {
         console.error(error);
       }
@@ -187,7 +187,7 @@ const getDeFiStakingsByWalletAddress = async (
   });
 
   // Delegations (KlayStation)
-  const promisesForDelegations = KlayStation.getDelegations(walletAddress);
+  const promisesForDelegations = KlayStation.getDelegations(account);
 
   const stakings = (
     await safePromiseAllV1([

@@ -9,12 +9,11 @@ const info: ChainInfo = {
 export default info;
 
 export const getAccount: ChainGetAccount = async (account) => {
-  return {
-    tokens: [klaytnChain.currency],
-    wallet: {
-      tokenAmounts: {
-        [klaytnChain.currency.ind]: await klaytnChain.getBalance(account),
-      },
-    },
-  };
+  const items = await Promise.all([
+    klaytnChain.getBalance(account),
+    (await klaytnChain.getTokenBalances(account)).flat(),
+  ]);
+  return items.flat();
 };
+
+export const TEST_ADDRESS = '0x7777777141f111cf9f0308a63dbd9d0cad3010c4';
