@@ -1,5 +1,5 @@
-export type WalletType = 'evm' | 'cosmos-sdk' | 'solana';
-export const WALLET_TYPES = {
+export type ChainType = 'evm' | 'cosmos-sdk' | 'sealevel';
+export const CHAIN_TYPES = {
   evm: {
     type: 'evm',
     name: 'EVM',
@@ -11,7 +11,7 @@ export const WALLET_TYPES = {
     logo: '/assets/icons/cosmos-sdk.png',
   },
   solana: {
-    type: 'solana',
+    type: 'sealevel',
     name: 'Solana',
     logo: '/assets/icons/solana.png',
   },
@@ -25,6 +25,7 @@ export type EVMBasedNetworks =
   | 'klaytn'
   | 'opensea';
 export type CosmosSDKBasedNetworks = 'cosmos-hub' | 'osmosis';
+export type SealevelBasedNetworks = 'solana';
 
 export type Wallet =
   | {
@@ -37,4 +38,8 @@ export type Wallet =
       address: string;
       networks: CosmosSDKBasedNetworks[];
     }
-  | { type: 'solana'; address: string };
+  | {
+      type: 'sealevel';
+      address: string;
+      networks: SealevelBasedNetworks[];
+    };

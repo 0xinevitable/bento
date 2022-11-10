@@ -68,6 +68,7 @@ export const cosmosHubChain = new CosmosHubChain();
 const info: ChainInfo = {
   name: 'Cosmos Hub',
   type: 'cosmos-sdk',
+  bech32Config: cosmosHubChain.bech32Config,
 };
 export default info;
 

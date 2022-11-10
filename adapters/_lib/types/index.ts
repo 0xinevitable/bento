@@ -33,10 +33,18 @@ export type LocalizedString =
       [locale: string]: string;
     };
 
-export type ChainInfo = {
-  name: string;
-  type: 'evm' | 'sealevel' | 'cosmos-sdk';
-};
+export type ChainInfo =
+  | {
+      name: string;
+      type: 'cosmos-sdk';
+      bech32Config: {
+        prefix: string;
+      };
+    }
+  | {
+      name: string;
+      type: 'evm' | 'sealevel';
+    };
 
 export type ServiceInfo = {
   native: boolean;

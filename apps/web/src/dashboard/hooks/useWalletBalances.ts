@@ -34,14 +34,6 @@ export const useWalletBalances = ({ wallets }: Options) => {
       {};
 
     wallets.forEach((wallet) => {
-      if (wallet.type === 'solana') {
-        const previousAddrs = data[wallet.type]?.[1] ?? [];
-        data[wallet.type] = [
-          KEYS_BY_NETWORK[wallet.type],
-          [...previousAddrs, wallet.address],
-        ];
-        return;
-      }
       wallet.networks.forEach((network) => {
         if (network === 'opensea') {
           return;

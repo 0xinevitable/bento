@@ -129,6 +129,7 @@ export const osmosisChain = new OsmosisChain();
 const info: ChainInfo = {
   name: 'Osmosis',
   type: 'cosmos-sdk',
+  bech32Config: osmosisChain.bech32Config,
 };
 export default info;
 

@@ -1,9 +1,11 @@
-import { Wallet, shortenAddress } from '@bento/common';
+import { ChainType, Wallet, shortenAddress } from '@bento/common';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import React, { useCallback } from 'react';
+
+import { WalletType } from '@/utils/analytics';
 
 import { Colors } from '@/styles';
 import { axiosWithCredentials } from '@/utils';
@@ -20,9 +22,9 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
   const { t } = useTranslation('common');
 
   const onClickCopy = useCallback(
-    (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
+    (walletAddress: string, chainType: ChainType) => {
       Analytics.logEvent('click_copy_wallet_address', {
-        type: walletType,
+        type: chainType,
         address: walletAddress,
       });
       copyToClipboard(walletAddress);
