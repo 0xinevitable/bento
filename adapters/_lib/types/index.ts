@@ -98,6 +98,7 @@ export type ProtocolGetAccount = (
 export type BentoChainAdapter = {
   default: ChainInfo;
   getAccount: ChainGetAccount;
+  TEST_ADDRESS?: string;
 };
 export type BentoServiceAdapter = {
   default: ServiceInfo;

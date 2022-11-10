@@ -33,20 +33,24 @@ const fetchChildren = (basePath: string): Child[] =>
     return [];
   });
 
-const validateChildren = (
+const validateChildren = async (
   children: Child[],
   adapterName: string,
   typeName: string,
   testModule: (module: unknown) => boolean,
-  callback?: (child: Child) => void,
+  callback?: (
+    child: Child,
+    module: BentoChainAdapter | null | undefined,
+  ) => Promise<void>,
 ) => {
   for (const child of children) {
     const chainAdapterPath = path.join(child.path, 'index.ts');
     const hasIndex = fs.existsSync(chainAdapterPath);
+    let chainAdapter: any;
+
     if (!hasIndex) {
       console.error(`❌ ${adapterName} ${child.name}: missing index.ts`);
     } else {
-      let chainAdapter: any;
       let hasError: boolean = false;
       try {
         chainAdapter = require(chainAdapterPath);
@@ -70,7 +74,7 @@ const validateChildren = (
       }
     }
 
-    callback?.(child);
+    await callback?.(child, chainAdapter);
   }
 };
 
@@ -125,21 +129,28 @@ const validateProtocols = (service: Child) => {
   }
 };
 
-const main = () => {
+const main = async () => {
   const chains = fetchChildren(ADAPTER_ROOT_PATH);
-  validateChildren(
+  await validateChildren(
     chains,
     'Chain',
     'BentoChainAdapter',
     (module: unknown) => TSON.is<BentoChainAdapter>(module),
-    (chain) => {
+    async (chain, module) => {
+      if (!!module && !!module.TEST_ADDRESS) {
+        const accountInfo = await module.getAccount(module.TEST_ADDRESS);
+        if (!!accountInfo) {
+          console.log('🚀 - account info fetched', JSON.stringify(accountInfo));
+        }
+      }
+
       const services = fetchChildren(chain.path);
       validateChildren(
         services,
         'ㄴ Service',
         'BentoServiceAdapter',
         (module: unknown) => TSON.is<BentoServiceAdapter>(module),
-        (service) => {
+        async (service) => {
           validateProtocols(service);
         },
       );

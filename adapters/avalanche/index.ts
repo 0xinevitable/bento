@@ -99,3 +99,5 @@ export const getAccount: ChainGetAccount = async (
   ]);
   return items.flat();
 };
+
+export const TEST_ADDRESS = '0x00a386afb1524b572de7ea0a3aaad25cdf7e749a';

@@ -10,7 +10,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsc",
-    "test": "ts-node --compiler ttypescript test-adapters"
+    "test": "env-cmd -f .env ts-node --compiler ttypescript test-adapters"
   },
   "dependencies": {
     "@bento/common": "workspace:^",
@@ -32,6 +32,7 @@
     "@types/bn.js": "^5.1.1",
     "@types/lodash.groupby": "^4.6.7",
     "@types/node": "^18.11.5",
+    "env-cmd": "^10.1.0",
     "find-yarn-workspace-root": "^2.0.0",
     "ts-node": "^10.9.1",
     "ttypescript": "^1.5.13",

@@ -2608,6 +2608,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["bech32", "npm:2.0.0"],\
             ["bn.js", "npm:5.2.1"],\
             ["caver-js", "npm:1.9.0"],\
+            ["env-cmd", "virtual:0617f0e340d72c9c77188243ca93686dc86e18e668bf9985bd9c7de757278a77cfeffee6be8f7813e7c7bd4b8cf3d8b5fd13421736af7c904b5f21e0632c9e10#npm:10.1.0"],\
             ["find-yarn-workspace-root", "npm:2.0.0"],\
             ["klaytn-multicall", "npm:1.0.5"],\
             ["lodash.groupby", "npm:4.6.0"],\
@@ -2652,7 +2653,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["compressed-json", "npm:1.0.16"],\
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
-            ["env-cmd", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:10.1.0"],\
+            ["env-cmd", "virtual:0617f0e340d72c9c77188243ca93686dc86e18e668bf9985bd9c7de757278a77cfeffee6be8f7813e7c7bd4b8cf3d8b5fd13421736af7c904b5f21e0632c9e10#npm:10.1.0"],\
             ["klaytn-multicall", "npm:1.0.5"],\
             ["lodash.groupby", "npm:4.6.0"],\
             ["next", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:12.3.2-canary.25"],\
@@ -2748,7 +2749,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cookies-next", "npm:2.1.1"],\
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
-            ["env-cmd", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:10.1.0"],\
+            ["env-cmd", "virtual:0617f0e340d72c9c77188243ca93686dc86e18e668bf9985bd9c7de757278a77cfeffee6be8f7813e7c7bd4b8cf3d8b5fd13421736af7c904b5f21e0632c9e10#npm:10.1.0"],\
             ["file-saver", "npm:2.0.5"],\
             ["framer-motion", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:7.6.1"],\
             ["immer", "npm:9.0.16"],\
@@ -8840,10 +8841,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:10.1.0", {\
-          "packageLocation": "./.yarn/__virtual__/env-cmd-virtual-75e1806ca9/0/cache/env-cmd-npm-10.1.0-85470635d6-efef550742.zip/node_modules/env-cmd/",\
+        ["virtual:0617f0e340d72c9c77188243ca93686dc86e18e668bf9985bd9c7de757278a77cfeffee6be8f7813e7c7bd4b8cf3d8b5fd13421736af7c904b5f21e0632c9e10#npm:10.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/env-cmd-virtual-20db94dfbc/0/cache/env-cmd-npm-10.1.0-85470635d6-efef550742.zip/node_modules/env-cmd/",\
           "packageDependencies": [\
-            ["env-cmd", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:10.1.0"],\
+            ["env-cmd", "virtual:0617f0e340d72c9c77188243ca93686dc86e18e668bf9985bd9c7de757278a77cfeffee6be8f7813e7c7bd4b8cf3d8b5fd13421736af7c904b5f21e0632c9e10#npm:10.1.0"],\
             ["@types/cross-spawn", null],\
             ["commander", "npm:4.1.1"],\
             ["cross-spawn", "npm:7.0.3"]\
