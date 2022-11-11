@@ -54,20 +54,23 @@ const getCached: <DataType extends any>(
   DEFAULT_CACHE_TIME,
 );
 
-type WithCachedOptions<DataType extends any> = {
+type WithRedisCachedOptions<DataType extends any> = {
   defaultValue: DataType;
   redisClient: ReturnType<typeof createRedisClient>;
   ttl?: number;
 };
 
-export const withCached = <Params extends Array<any>, DataType extends any>(
+export const withRedisCached = <
+  Params extends Array<any>,
+  DataType extends any,
+>(
   key: string,
   fetcher: (...params: Params) => Promise<DataType>,
   {
     defaultValue,
     redisClient,
     ttl = DEFAULT_CACHE_TIME,
-  }: WithCachedOptions<DataType>,
+  }: WithRedisCachedOptions<DataType>,
 ) => {
   return async (...params: Params) => {
     let hasError: boolean = false;

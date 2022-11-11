@@ -8,7 +8,7 @@ import { Bech32Address } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';
-import { withCached } from '@/utils/cache';
+import { withRedisCached } from '@/utils/cache';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 interface APIRequest extends NextApiRequest {
@@ -56,7 +56,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     }
 
     try {
-      const getAccount = withCached(
+      const getAccount = withRedisCached(
         `balances:${chainName}:${account}`,
         adapter.getAccount,
         { redisClient, defaultValue: [] },
