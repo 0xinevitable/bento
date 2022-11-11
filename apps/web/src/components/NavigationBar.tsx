@@ -6,11 +6,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Icon, NoSSR, Portal } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
+import { useWindowSize } from '@/hooks/useWindowSize';
 
 import { MinimalButton } from '@/dashboard/components/MinimalButton';
 import { Colors } from '@/styles';
@@ -98,6 +99,13 @@ export const NavigationBar = () => {
     [i18n, currentLanguage],
   );
 
+  const { width: windowWidth } = useWindowSize();
+  useEffect(() => {
+    if (isMobileMenuOpen && windowWidth > 680) {
+      setMobileMenuOpen(false);
+    }
+  }, [isMobileMenuOpen, windowWidth]);
+
   return (
     <Wrapper>
       <Container>
@@ -120,7 +128,7 @@ export const NavigationBar = () => {
                 <Link href={item.href}>
                   <Center style={{ cursor: 'pointer' }}>
                     <Iconify icon={item.icon} style={{ fontSize: 20 }} />
-                    <span className="sys title">{t(item.title)}</span>
+                    <span className="title">{t(item.title)}</span>
                   </Center>
                 </Link>
               </NavigationItem>
@@ -216,7 +224,7 @@ const Wrapper = styled.header`
   height: 64px;
   padding: 0 20px;
 
-  border-bottom: 1px solid #323232;
+  border-bottom: 0.4pt solid #1c1c1c;
   background-color: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(12px);
 
@@ -281,7 +289,7 @@ const LogoImage = styled.img`
 
 const NavigationList = styled.ul`
   display: flex;
-  gap: 16px;
+  gap: 8px;
 
   @media (max-width: 680px) {
     display: none;
@@ -301,17 +309,17 @@ const NavigationItem = styled.li<NavigationItemProps>`
   }
 
   & > a {
-    padding: 4px 16px;
+    padding: 0 8px;
     height: 100%;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
 
-    & > span.title {
+    span.title {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: bold;
       line-height: 1;
     }
   }
