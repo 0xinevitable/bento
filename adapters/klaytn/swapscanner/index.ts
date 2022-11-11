@@ -4,7 +4,10 @@ import { SCNR_TOKEN_INFO } from './_constants';
 
 const info: ServiceInfo = {
   native: false,
-  name: 'Swapscanner',
+  name: {
+    en: 'Swapscanner',
+    ko: '스왑스캐너',
+  },
   logo: SCNR_TOKEN_INFO.logo,
   url: 'https://swapscanner.io',
   description: {
