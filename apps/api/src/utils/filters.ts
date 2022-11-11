@@ -1,18 +1,6 @@
-import { Balance } from '@bento/adapters/_lib/types';
+import type { Balance, ProtocolAccountInfo } from '@bento/adapters/_lib/types';
 
-type BalanceObject = {
-  wallet?: Balance;
-  staked?: Balance;
-  rewards?: Balance;
-  unstake?:
-    | {
-        claimable: Balance;
-        pending: Balance;
-      }
-    | null
-    | 'unavailable';
-};
-export const withoutEmptyDeFiStaking = (obj: BalanceObject) => {
+export const withoutEmptyProtocolAccounts = (obj: ProtocolAccountInfo) => {
   if (
     isAmountExist(obj.wallet) ||
     isAmountExist(obj.staked) ||

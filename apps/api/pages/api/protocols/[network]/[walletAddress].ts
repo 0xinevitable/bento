@@ -10,7 +10,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';
 import { withRedisCached } from '@/utils/cache';
-import { withoutEmptyDeFiStaking } from '@/utils/filters';
+import { withoutEmptyProtocolAccounts } from '@/utils/filters';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 interface APIRequest extends NextApiRequest {
@@ -120,7 +120,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
             return {
               protocolId,
               info,
-              accounts: accounts.filter(withoutEmptyDeFiStaking),
+              accounts: accounts.filter(withoutEmptyProtocolAccounts),
             };
           },
         ),
