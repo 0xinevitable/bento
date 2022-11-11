@@ -15,6 +15,7 @@ import backgroundImage from './assets/background.png';
 import discordLogo from './assets/discord.webp';
 import githubLogo from './assets/github.webp';
 import telegramLogo from './assets/telegram.webp';
+import titleImage from './assets/title.png';
 import twitterLogo from './assets/twitter.webp';
 
 const withOpacity = (hex: string, opacity: number) => {
@@ -89,13 +90,17 @@ const CommunityPage: NextPage = () => {
             sizes="1440px"
             placeholder="blur"
           />
+
+          <TitleContainer>
+            <TitleImage alt="" src={titleImage} placeholder="blur" />
+          </TitleContainer>
         </BackgroundImageContainer>
       </BackgroundImageWrapper>
       <Border />
       <PageContainer
         style={{ paddingTop: 0, paddingBottom: 64, minHeight: 'unset' }}
       >
-        <Title>Prepare for the Future</Title>
+        <Title>Shape Our Future Together</Title>
         <List>
           {communities.map((community) => (
             <Item key={community.type}>
@@ -188,6 +193,27 @@ const BackgroundImage = styled(Image)`
   height: 400px;
   object-fit: cover;
   max-width: 900px;
+`;
+
+const TitleContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+`;
+const TitleImage = styled(Image)`
+  width: 357px;
+  height: 92px;
+  object-fit: contain;
+
+  @media (max-width: 620px) {
+    width: 320px;
+    height: 82px;
+  }
 `;
 
 const Border = styled.div`
