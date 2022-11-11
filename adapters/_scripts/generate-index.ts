@@ -23,7 +23,7 @@ const onlyAdapters = (filename: string) =>
 
 const main = async () => {
   const chains = await fetchChildren(ADAPTER_ROOT_PATH, onlyIndex);
-  const networkNameUnion = chains.map((v) => `'${v.name}'`).join(' | ');
+  const chainNameUnion = chains.map((v) => `'${v.name}'`).join(' | ');
 
   const chainScripts = await safePromiseAll(
     chains.map(async (chain) => {
@@ -69,13 +69,13 @@ import {
   BentoServiceAdapter,
 } from './_lib/types';
 
-export { type BentoChainAdapter };
+export type { BentoChainAdapter, BentoProtocolAdapter, BentoServiceAdapter };
 export { type CosmosSDKBasedChain } from './_lib/types/cosmos-sdk';
 
-type NetworkName = ${networkNameUnion};
+export type BentoSupportedNetwork = ${chainNameUnion};
 
 type Adapters = Record<
-  NetworkName,
+  BentoSupportedNetwork,
   {
     chain: BentoChainAdapter;
     services: Record<

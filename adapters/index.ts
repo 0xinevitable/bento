@@ -4,10 +4,10 @@ import {
   BentoServiceAdapter,
 } from './_lib/types';
 
-export { type BentoChainAdapter };
+export type { BentoChainAdapter, BentoProtocolAdapter, BentoServiceAdapter };
 export { type CosmosSDKBasedChain } from './_lib/types/cosmos-sdk';
 
-type NetworkName =
+export type BentoSupportedNetwork =
   | 'avalanche'
   | 'bnb'
   | 'cosmos-hub'
@@ -18,7 +18,7 @@ type NetworkName =
   | 'solana';
 
 type Adapters = Record<
-  NetworkName,
+  BentoSupportedNetwork,
   {
     chain: BentoChainAdapter;
     services: Record<

@@ -1,4 +1,4 @@
-import { adapters } from '@bento/adapters';
+import { adapters, type BentoSupportedNetwork } from '@bento/adapters';
 import {
   ChainType,
   CosmosSDKBasedNetworks,
@@ -29,7 +29,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const wallets = parseWallets(req.query.walletAddress ?? '');
   const network = (
     req.query.network ?? ''
-  ).toLowerCase() as CosmosSDKBasedNetworks;
+  ).toLowerCase() as BentoSupportedNetwork;
 
   const adapter = adapters[network]?.chain;
   if (!adapter) {
