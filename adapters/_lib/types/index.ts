@@ -99,8 +99,8 @@ export type ProtocolAccountInfo = {
 };
 export type ProtocolGetAccount = (
   account: string,
-  rawTokenBalance?: string,
-  allRawTokenBalances?: Record<string, string>,
+  rawTokenBalance?: number,
+  allRawTokenBalances?: Record<string, number>,
 ) => Promise<ProtocolAccountInfo[]>;
 
 export type BentoChainAdapter = {

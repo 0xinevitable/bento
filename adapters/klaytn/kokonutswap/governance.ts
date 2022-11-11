@@ -25,7 +25,7 @@ export default info;
 // NOTE: Rewards are in KSD
 export const getAccount: ProtocolGetAccount = async (
   account: string,
-  rawTokenBalance?: string,
+  rawTokenBalance?: number,
 ) => {
   try {
     const { data } = await axios.get<UserGovernanceResponse>(
@@ -34,7 +34,7 @@ export const getAccount: ProtocolGetAccount = async (
         timeout: 2_500,
       },
     );
-    const balance = Number(rawTokenBalance) / 10 ** KOKOS_TOKEN_INFO.decimals;
+    const balance = (rawTokenBalance || 0) / 10 ** KOKOS_TOKEN_INFO.decimals;
 
     return [
       {

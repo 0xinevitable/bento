@@ -39,7 +39,10 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const redisClient = createRedisClient();
   await redisClient.connect();
 
-  const chain = (await adapter.chain).default;
+  const chainAdapter = await adapter.chain;
+  const chain = chainAdapter.default;
+  const chainName = chain.name;
+
   const services = await safePromiseAll(
     Object.entries(adapter.services).map(async ([serviceId, service]) => {
       const info = service.info.default;
@@ -58,12 +61,43 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
                 account = bech32Address.toBech32(chain.bech32Config.prefix);
               }
 
+              let getAccountParams: Parameters<typeof protocol.getAccount> = [
+                account,
+              ];
+
+              if (!!info.conditional) {
+                // FIXME: Cache in local after first call to Redis
+                const getChainBalances = withCached(
+                  `balances:${chainName}:${account}`,
+                  chainAdapter.getAccount,
+                  { redisClient, defaultValue: [] },
+                );
+                const { data: balances } = await getChainBalances(account);
+                if (!!info.conditional?.hasToken) {
+                  const token = balances.find(
+                    (token) => token.ind === info.conditional?.hasToken,
+                  );
+                  getAccountParams.push(token?.balance || 0);
+                } else if (info.conditional.passAllBalances) {
+                  const balancesMap = balances.reduce(
+                    (acc, token) => ({
+                      ...acc,
+                      [token.ind]: token.balance,
+                    }),
+                    {},
+                  );
+                  getAccountParams.push(balancesMap);
+                }
+              }
+
               const getAccount = withCached(
                 `protocol:${chain.name}:${serviceId}:${protocolId}:${account}`,
                 protocol.getAccount,
                 { redisClient, defaultValue: [] },
               );
-              const { data: accountInfo } = await getAccount(account);
+              const { data: accountInfo } = await getAccount(
+                ...getAccountParams,
+              );
               return accountInfo.flatMap((v) => ({ account, ...v }));
             });
 

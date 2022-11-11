@@ -15,7 +15,7 @@ import KLAYSWAP_LP_POOLS from './_data/klayswap-lp-pools.json';
 
 export const getLPPoolBalance = async (
   _account: string,
-  lpTokenBalance: string,
+  lpTokenBalance: number,
   pool: KLAYswap.Pool,
 ): Promise<ProtocolAccountInfo> => {
   const kslp = new klaytnChain._provider.klay.Contract(
