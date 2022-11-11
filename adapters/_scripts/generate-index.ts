@@ -23,7 +23,7 @@ const onlyAdapters = (filename: string) =>
 
 const main = async () => {
   const chains = await fetchChildren(ADAPTER_ROOT_PATH, onlyIndex);
-  const chainNameUnion = chains.map((v) => `'${v.name}'`).join(' | ');
+  let chainNameUnion = chains.map((v) => `'${v.name}'`).join(' | ');
 
   let chainsWithServices: string[] = [];
   const chainScripts = await safePromiseAll(
@@ -66,6 +66,8 @@ const main = async () => {
       `;
     }),
   );
+
+  chainsWithServices = chainsWithServices.sort();
 
   const content = dedent`
 import {

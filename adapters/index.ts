@@ -18,8 +18,8 @@ export type BentoSupportedNetwork =
   | 'solana';
 
 export const BentoDeFiSupportedNetworks: BentoSupportedNetwork[] = [
-  'klaytn',
   'cosmos-hub',
+  'klaytn',
   'osmosis',
 ];
 
