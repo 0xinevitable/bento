@@ -2985,9 +2985,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ianvs/prettier-plugin-sort-imports@npm:^3.5.2":
-  version: 3.5.2
-  resolution: "@ianvs/prettier-plugin-sort-imports@npm:3.5.2"
+"@ianvs/prettier-plugin-sort-imports@npm:^3.7.1":
+  version: 3.7.1
+  resolution: "@ianvs/prettier-plugin-sort-imports@npm:3.7.1"
   dependencies:
     "@babel/core": ^7.17.7
     "@babel/generator": ^7.17.7
@@ -2998,8 +2998,12 @@ __metadata:
     lodash.clone: ^4.5.0
     lodash.isequal: ^4.5.0
   peerDependencies:
+    "@vue/compiler-sfc": ">=3.0.0"
     prettier: 2.x
-  checksum: 33dc1d630fe83099d1c5fbbfc96103e93ab528c6235f83c614294400bd90db7f7520b3fe2068c21cb58d9dfb42907e67acc70bc1f829c55888955bdeef5025f9
+  peerDependenciesMeta:
+    "@vue/compiler-sfc":
+      optional: true
+  checksum: a08c9c1ce7da39f4575c2022f339378ffd9064cbf3bef51bdc9ae777ed966d688830023b061e89bb5997070406880c4709b6ff70537043caf39121d56251b5b7
   languageName: node
   linkType: hard
 
@@ -5096,7 +5100,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "bento@workspace:."
   dependencies:
-    "@ianvs/prettier-plugin-sort-imports": ^3.5.2
+    "@ianvs/prettier-plugin-sort-imports": ^3.7.1
     "@types/node": ^18.11.5
     prettier: ^2.7.1
     turbo: ^1.6.1
