@@ -5,7 +5,6 @@ import { Trans, useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 
 import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
-import { OsmosisDeFiType } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 import { InlineBadge } from './InlineBadge';
@@ -87,13 +86,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
           <Name>
             {!!protocol.prefix && `${protocol.prefix} `}
-            <Trans
+            {/* FIXME: Show protocol metadata from `protocol API` */}
+            {/* <Trans
               t={t}
-              i18nKey={`defi-type-${protocol.type}`}
+              i18nKey={`defi-type-${protocol.address}`}
               components={{
                 validator: <ValidatorBadge />,
               }}
-            />
+            /> */}
           </Name>
         </HeaderTitle>
 
@@ -112,16 +112,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
         {!!protocol.address && (
           <AccountItem>
             <span className="field">
-              {protocol.type === OsmosisDeFiType.OSMOSIS_GAMM_LP
+              {/* FIXME: Exception for Osmosis */}
+              {/* {protocol.type === OsmosisDeFiType.OSMOSIS_GAMM_LP
                 ? t('Pool ID')
-                : t('Rep Contract')}
+                : t('Rep Contract')} */}
+              {t('Rep Contract')}
             </span>
             <span className="sys">
-              <InlineBadge>
-                {protocol.type === OsmosisDeFiType.OSMOSIS_GAMM_LP
-                  ? protocol.address
-                  : shortenAddress(protocol.address)}
-              </InlineBadge>
+              <InlineBadge>{shortenAddress(protocol.address)}</InlineBadge>
             </span>
           </AccountItem>
         )}

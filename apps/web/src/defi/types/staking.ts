@@ -1,52 +1,5 @@
 import { TokenInput } from '@bento/core';
 
-export enum KlaytnDeFiProtocolType {
-  KLAYSTATION = 'kstn',
-  KLAYSWAP = 'ks',
-  KOKONUTSWAP = 'kks',
-  SWAPSCANNER = 'scnr',
-}
-export enum OsmosisDeFiProtocolType {
-  ION = 'o_ion',
-  OSMOSIS = 'o_o',
-}
-export type DeFiProtocolType = KlaytnDeFiProtocolType | OsmosisDeFiProtocolType;
-
-export enum KlayStationNodes {
-  KLAYSTATION_NODE_HASHED_AND_OZYS = 'kstn_n_hno',
-  KLAYSTATION_NODE_KED = 'kstn_n_ked',
-  KLAYSTATION_NODE_FSN = 'kstn_n_fsn',
-}
-export enum KlaytnDeFiType {
-  // KlaySwap(KLAYswap)
-  KLAYSWAP_LP = 'ks_lp',
-  KLAYSWAP_GOVERNANCE = 'ks_g',
-  KLAYSWAP_LEVERAGE_SINGLE = 'ks_l_s',
-  // KLAYSWAP_LEVERAGE_PLUS = 'ks_l_p',
-
-  // KokonutSwap
-  KOKONUTSWAP_LP = 'kks_lp',
-  KOKONUTSWAP_GOVERNANCE = 'kks_g',
-
-  // KlayStation Node Delegation
-  KLAYSTATION_NODE_HASHED_AND_OZYS = 'kstn_n_hno',
-  KLAYSTATION_NODE_KED = 'kstn_n_ked',
-  KLAYSTATION_NODE_FSN = 'kstn_n_fsn',
-
-  // Swapscanner
-  SWAPSCANNER_GOVERNANCE = 'scnr_g',
-  SWAPSCANNER_LP = 'scnr_lp',
-}
-
-export enum OsmosisDeFiType {
-  ION_GOVERNANCE = 'ion_g',
-  // ION_IBC = 'ion_ibc',
-  OSMOSIS_GAMM_LP = 'o_glp',
-  OSMOSIS_GOVERNANCE = 'o_g',
-}
-
-export type DeFiType = KlaytnDeFiType | OsmosisDeFiType;
-
 type ContractAddressOrDenom = string;
 export type AmountWithOptionalValue = {
   value?: number | null;
@@ -57,8 +10,6 @@ export type AmountWithOptionalValue = {
 export type NativeInput = Omit<TokenInput, 'address'>;
 
 export type DeFiStaking = {
-  protocol: DeFiProtocolType;
-  type: DeFiType;
   prefix?: string;
 
   // representative contract address
@@ -82,32 +33,4 @@ export type DeFiStakingResponse = {
   account: string;
   stakings: DeFiStaking[];
   cachedTime: number;
-};
-
-export const Examples: Record<string, DeFiStaking> = {
-  LP: {
-    protocol: KlaytnDeFiProtocolType.KLAYSWAP,
-    type: KlaytnDeFiType.KLAYSWAP_LP,
-    address: '',
-    tokens: [],
-    wallet: {
-      lpAmount: 0.005,
-    }, // 0.005 LP tokens have not been staked, but exist in wallet
-    staked: {
-      lpAmount: 1000,
-      value: null,
-    },
-    rewards: 'unavailable', // Rewards are not catched by us
-    unstake: null, // Unstaking period does not exist
-  },
-  MINIMAL: {
-    protocol: KlaytnDeFiProtocolType.KLAYSWAP,
-    type: KlaytnDeFiType.KLAYSWAP_LP,
-    address: '0x00',
-    tokens: [],
-    wallet: null, // LP tokens cannot exist in wallet unstaked
-    staked: { tokenAmounts: { '0x00': 1000 } },
-    rewards: null, // Rewards are not distributed
-    unstake: null, // Unstaking period does not exist
-  },
 };
