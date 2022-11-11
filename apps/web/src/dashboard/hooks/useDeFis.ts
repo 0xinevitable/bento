@@ -39,11 +39,13 @@ export const useProtocols = (wallets: Wallet[]) => {
   const [defis, setDefis] = useState<ServiceData[]>([]);
 
   useEffect(() => {
-    const items = responses.flatMap((response) => {
+    let allServices: ServiceData[] = [];
+
+    responses.forEach((response) => {
       if (!response.data) {
-        return [];
+        return;
       }
-      return response.data.map((service) => {
+      const services = response.data.map((service) => {
         let protocols = service.protocols.map((protocol) => {
           let accounts = protocol.accounts.map((accountInfo) => {
             return {
@@ -72,11 +74,33 @@ export const useProtocols = (wallets: Wallet[]) => {
         return {
           ...service,
           protocols,
+          netWorth: protocols.reduce(
+            (acc, protocol) => acc + protocol.netWorth,
+            0,
+          ),
         };
+      });
+
+      services.forEach((service) => {
+        // FIXME: use service id
+        const existingService = allServices.find(
+          (s) => s.name === service.name,
+        );
+
+        if (!existingService) {
+          allServices.push(service);
+          return;
+        }
+
+        existingService.protocols = existingService.protocols.concat(
+          service.protocols,
+        );
+        existingService.netWorth += service.netWorth;
       });
     });
 
-    setDefis(items);
+    allServices = allServices.sort((a, b) => b.netWorth - a.netWorth);
+    setDefis(allServices);
   }, [responses, getCachedPrice]);
 
   return { defis };

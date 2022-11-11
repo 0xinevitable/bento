@@ -358,11 +358,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                               );
                               return (
                                 <CollapsePanel
-                                  title={service.name}
-                                  count={service.protocols.reduce(
-                                    (acc, v) => acc + v.accounts.length,
-                                    0,
-                                  )}
+                                  service={service}
                                   // FIXME: Use service id
                                   key={service.name}
                                   valuation={valuation}

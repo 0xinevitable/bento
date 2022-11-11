@@ -5,19 +5,15 @@ import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 
 import {
-  LocalizedString,
+
   ProtocolAccountInfo,
   ProtocolInfo,
 } from '@/constants/adapters';
 import { Colors } from '@/styles';
+import { formatLocalizedString } from '@/utils/format'
 
 import { Valuation } from '@/defi/utils';
 import { InlineBadge } from './InlineBadge';
-
-const displayLocalizedString = (
-  value: LocalizedString,
-  currentLanguage: string,
-) => (typeof value === 'string' ? value : value[currentLanguage] || value.en);
 
 const formatNumber = (value: number | null | undefined): string =>
   (value || 0).toLocaleString(undefined, {
@@ -102,10 +98,10 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
           <Name>
             {!!protocol.prefix && `${protocol.prefix} `}
-            {displayLocalizedString(info.name, currentLanguage)}
+            {formatLocalizedString(info.name, currentLanguage)}
             {protocol.delegator && (
               <ValidatorBadge>
-                {displayLocalizedString(protocol.delegator, currentLanguage)}
+                {formatLocalizedString(protocol.delegator, currentLanguage)}
               </ValidatorBadge>
             )}
           </Name>
