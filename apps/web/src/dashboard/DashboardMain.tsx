@@ -10,7 +10,7 @@ import { Checkbox, Skeleton } from '@/components/system';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
-import { useDeFis } from '@/dashboard/hooks/useDeFis';
+import { useProtocols } from '@/dashboard/hooks/useDeFis';
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
 import {
@@ -167,7 +167,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     }
   }, [currentTab]);
 
-  const { defis } = useDeFis(wallets);
+  const { defis } = useProtocols(wallets);
 
   const netWorthInUSDOnlyDeFi = useMemo(
     () =>

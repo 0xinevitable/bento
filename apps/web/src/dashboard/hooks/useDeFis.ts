@@ -12,7 +12,7 @@ import { getDeFiStakingValue } from '@/defi/utils/getDeFiStakingValue';
 
 import { useMultipleRequests } from './useMultipleRequests';
 
-export const useDeFis = (wallets: Wallet[]) => {
+export const useProtocols = (wallets: Wallet[]) => {
   const calculatedRequests = useMemo(
     () =>
       wallets.reduce<string[]>(
