@@ -77,7 +77,7 @@ export type BentoSupportedNetwork = ${chainNameUnion};
 type Adapters = Record<
   BentoSupportedNetwork,
   {
-    chain: BentoChainAdapter;
+    chain: Promise<BentoChainAdapter>;
     services: Record<
       string,
       {

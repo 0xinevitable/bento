@@ -31,7 +31,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     req.query.network ?? ''
   ).toLowerCase() as BentoSupportedNetwork;
 
-  const adapter = adapters[network]?.chain;
+  const adapter = await adapters[network]?.chain;
   if (!adapter) {
     res.status(400).json({
       error: `Network ${network} is not supported`,
@@ -41,10 +41,10 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
   const result = await safeAsyncFlatMap(wallets, async (walletAddress) => {
     let account = walletAddress;
-    const bech32Address = Bech32Address.fromBech32(walletAddress);
 
     if (adapter.default.type === 'cosmos-sdk') {
       // chainBech32Address
+      const bech32Address = Bech32Address.fromBech32(walletAddress);
       account = bech32Address.toBech32(adapter.default.bech32Config.prefix);
     }
 

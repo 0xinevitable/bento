@@ -34,7 +34,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     return;
   }
 
-  const chain = adapter.chain.default;
+  const chain = (await adapter.chain).default;
   const services = await safePromiseAll(
     Object.values(adapter.services).map(async (service) => {
       const info = service.info.default;
