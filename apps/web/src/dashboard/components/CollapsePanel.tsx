@@ -1,28 +1,36 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useTheme } from '@geist-ui/core';
+import { useMemo } from 'react';
 import useCollapse from 'react-collapsed';
 
+import { formatLocalizedString } from '@/utils/format';
+
+import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 import { InlineBadge } from './InlineBadge';
 
 type CollapsePanelProps = {
-  title: string;
-  count?: number;
+  service: ServiceData;
   children?: React.ReactNode;
   valuation: number;
   currentLanguage: string;
 };
 
-// FIXME: Show metadata from `protocols API` response
 export const CollapsePanel: React.FC<CollapsePanelProps> = ({
-  title,
-  // metadata,
-  count,
+  service,
   children,
   valuation,
   currentLanguage,
 }) => {
-  const lang = currentLanguage === 'ko' ? 'ko' : 'en';
+  const { palette } = useTheme();
+
+  const count = useMemo(
+    () => service.protocols.reduce((acc, v) => acc + v.accounts.length, 0),
+    [service],
+  );
+
   const { getCollapseProps, getToggleProps } = useCollapse({
     defaultExpanded: false,
   });
@@ -32,8 +40,12 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
       <Header {...getToggleProps()}>
         <HeaderTitleRow>
           <ProtocolInfo>
-            {/* <ProtocolLogo alt={title} src={metadata?.logo} /> */}
-            <span>{title}</span>
+            {!!service.logo ? (
+              <ProtocolLogo alt="" src={service.logo} />
+            ) : (
+              <ProtocolLogoEmpty />
+            )}
+            <span>{service.name}</span>
             {typeof count !== 'undefined' && (
               <span className="sys">
                 <InlineBadge>{count.toLocaleString()}</InlineBadge>
@@ -47,7 +59,9 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
             })}`}
           </Valuation>
         </HeaderTitleRow>
-        {/* <Paragraph>{metadata?.description[lang]}</Paragraph> */}
+        <Paragraph>
+          {formatLocalizedString(service?.description, currentLanguage)}
+        </Paragraph>
       </Header>
       <Content {...getCollapseProps()}>{children}</Content>
     </Container>
@@ -92,13 +106,22 @@ const ProtocolInfo = styled.span`
   display: flex;
   align-items: center;
 `;
-const ProtocolLogo = styled.img`
+
+const logoStyles = css`
   margin-right: 8px;
   width: 36px;
   height: 36px;
   border-radius: 50%;
+`;
+const ProtocolLogo = styled.img`
+  ${logoStyles}
   object-fit: cover;
 `;
+const ProtocolLogoEmpty = styled.div`
+  ${logoStyles}
+  background: ${Colors.gray500};
+`;
+
 const Paragraph = styled.p`
   margin-top: 8px;
   font-size: 14px;

@@ -4,12 +4,16 @@ import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 
-import { ProtocolAccountInfo, ProtocolInfo } from '@/constants/adapters';
+import {
 
+  ProtocolAccountInfo,
+  ProtocolInfo,
+} from '@/constants/adapters';
 import { Colors } from '@/styles';
+import { formatLocalizedString } from '@/utils/format'
 
+import { Valuation } from '@/defi/utils';
 import { InlineBadge } from './InlineBadge';
-import { Valuation } from '@/defi/utils/getDeFiStakingValue';
 
 const formatNumber = (value: number | null | undefined): string =>
   (value || 0).toLocaleString(undefined, {
@@ -61,13 +65,16 @@ const DecomposeTokenAmounts: React.FC<DecomposeTokenAmountsProps> = ({
 type DeFiStakingItemProps = {
   info: ProtocolInfo;
   protocol: ProtocolAccountInfo & {
-    account: string, valuation: Valuation };
+    account: string;
+    valuation: Valuation;
+  };
 };
 export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   info,
   protocol,
 }) => {
-  const { t } = useTranslation('dashboard');
+  const { t, i18n } = useTranslation('dashboard');
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
   const protocolTokens = useMemo(
     () => [...protocol.tokens, ...(protocol.relatedTokens || [])],
@@ -91,14 +98,12 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
           <Name>
             {!!protocol.prefix && `${protocol.prefix} `}
-            {/* FIXME: Show protocol metadata from `protocol API` */}
-            {/* <Trans
-              t={t}
-              i18nKey={`defi-type-${protocol.address}`}
-              components={{
-                validator: <ValidatorBadge />,
-              }}
-            /> */}
+            {formatLocalizedString(info.name, currentLanguage)}
+            {protocol.delegator && (
+              <ValidatorBadge>
+                {formatLocalizedString(protocol.delegator, currentLanguage)}
+              </ValidatorBadge>
+            )}
           </Name>
         </HeaderTitle>
 
@@ -157,31 +162,31 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           </InfoItem>
         )}
 
-      {!!protocol.staked && (
-        <InfoItem>
-          <span className="field">{t('Staking')}</span>
-          {protocol.staked === 'unavailable' ? (
-            <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
-          ) : (
-            <InfoValuation className="sys">
-              {`$${formatNumber(protocol.valuation.staking)}`}
-              {typeof protocol.staked.lpAmount === 'number' && (
-                <>
-                  <br />
-                  <SmallAmountInfo className="sys">
-                    {`${formatNumber(protocol.staked.lpAmount)} LP`}
-                  </SmallAmountInfo>
-                </>
-              )}
+        {!!protocol.staked && (
+          <InfoItem>
+            <span className="field">{t('Staking')}</span>
+            {protocol.staked === 'unavailable' ? (
+              <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
+            ) : (
+              <InfoValuation className="sys">
+                {`$${formatNumber(protocol.valuation.staking)}`}
+                {typeof protocol.staked.lpAmount === 'number' && (
+                  <>
+                    <br />
+                    <SmallAmountInfo className="sys">
+                      {`${formatNumber(protocol.staked.lpAmount)} LP`}
+                    </SmallAmountInfo>
+                  </>
+                )}
 
-              <DecomposeTokenAmounts
-                tokenAmounts={protocol.staked.tokenAmounts}
-                protocolTokens={protocolTokens}
-              />
-            </InfoValuation>
-          )}
-        </InfoItem>
-      )}
+                <DecomposeTokenAmounts
+                  tokenAmounts={protocol.staked.tokenAmounts}
+                  protocolTokens={protocolTokens}
+                />
+              </InfoValuation>
+            )}
+          </InfoItem>
+        )}
 
         {!!protocol.rewards && (
           <InfoItem>

@@ -58,7 +58,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@ianvs/prettier-plugin-sort-imports", "virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.5.2"],\
+            ["@ianvs/prettier-plugin-sort-imports", "virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.7.1"],\
             ["@types/node", "npm:18.11.5"],\
             ["prettier", "npm:2.7.1"],\
             ["turbo", "npm:1.6.1"],\
@@ -4257,23 +4257,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@ianvs/prettier-plugin-sort-imports", [\
-        ["npm:3.5.2", {\
-          "packageLocation": "./.yarn/cache/@ianvs-prettier-plugin-sort-imports-npm-3.5.2-398f9314a5-33dc1d630f.zip/node_modules/@ianvs/prettier-plugin-sort-imports/",\
+        ["npm:3.7.1", {\
+          "packageLocation": "./.yarn/cache/@ianvs-prettier-plugin-sort-imports-npm-3.7.1-f119116f1f-a08c9c1ce7.zip/node_modules/@ianvs/prettier-plugin-sort-imports/",\
           "packageDependencies": [\
-            ["@ianvs/prettier-plugin-sort-imports", "npm:3.5.2"]\
+            ["@ianvs/prettier-plugin-sort-imports", "npm:3.7.1"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.5.2", {\
-          "packageLocation": "./.yarn/__virtual__/@ianvs-prettier-plugin-sort-imports-virtual-9cbc734a10/0/cache/@ianvs-prettier-plugin-sort-imports-npm-3.5.2-398f9314a5-33dc1d630f.zip/node_modules/@ianvs/prettier-plugin-sort-imports/",\
+        ["virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.7.1", {\
+          "packageLocation": "./.yarn/__virtual__/@ianvs-prettier-plugin-sort-imports-virtual-9bad612cdb/0/cache/@ianvs-prettier-plugin-sort-imports-npm-3.7.1-f119116f1f-a08c9c1ce7.zip/node_modules/@ianvs/prettier-plugin-sort-imports/",\
           "packageDependencies": [\
-            ["@ianvs/prettier-plugin-sort-imports", "virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.5.2"],\
+            ["@ianvs/prettier-plugin-sort-imports", "virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.7.1"],\
             ["@babel/core", "npm:7.19.1"],\
             ["@babel/generator", "npm:7.19.0"],\
             ["@babel/parser", "npm:7.19.1"],\
             ["@babel/traverse", "npm:7.19.1"],\
             ["@babel/types", "npm:7.19.0"],\
             ["@types/prettier", null],\
+            ["@types/vue__compiler-sfc", null],\
+            ["@vue/compiler-sfc", null],\
             ["javascript-natural-sort", "npm:0.7.1"],\
             ["lodash.clone", "npm:4.5.0"],\
             ["lodash.isequal", "npm:4.5.0"],\
@@ -4281,6 +4283,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "packagePeers": [\
             "@types/prettier",\
+            "@types/vue__compiler-sfc",\
+            "@vue/compiler-sfc",\
             "prettier"\
           ],\
           "linkType": "HARD"\
@@ -7175,7 +7179,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["bento", "workspace:."],\
-            ["@ianvs/prettier-plugin-sort-imports", "virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.5.2"],\
+            ["@ianvs/prettier-plugin-sort-imports", "virtual:eb714d94e42d5c2e83cabe72aec16d92cc4e7c9731317c2a8fc8a9b02bf13356fec3118f643d5c4676cdd82ccd5c11dedc0fd746c9980566d2c5164af605def1#npm:3.7.1"],\
             ["@types/node", "npm:18.11.5"],\
             ["prettier", "npm:2.7.1"],\
             ["turbo", "npm:1.6.1"],\
