@@ -35,46 +35,50 @@ const info: ProtocolInfo = {
 export default info;
 
 export const getAccount: ProtocolGetAccount = async (account) => {
-  const protocol = new provider.klay.Contract(PROTOCOL_ABI, PROTOCOL_ADDRESS);
+  try {
+    const protocol = new provider.klay.Contract(PROTOCOL_ABI, PROTOCOL_ADDRESS);
 
-  const items: StakingInfo[] = await protocol.methods
-    .getStakingInfo(account)
-    .call();
+    const items: StakingInfo[] = await protocol.methods
+      .getStakingInfo(account)
+      .call();
 
-  const delegations: ProtocolAccountInfo[] = items.map((stakingInfo) => {
-    const delegator =
-      DELEGATOR_BY_CONTRACT_ADDRESS[stakingInfo.delegation.toLowerCase()];
+    const delegations: ProtocolAccountInfo[] = items.map((stakingInfo) => {
+      const delegator =
+        DELEGATOR_BY_CONTRACT_ADDRESS[stakingInfo.delegation.toLowerCase()];
 
-    const deposit = Number(stakingInfo.deposit) / 10 ** 18;
-    const sklayTotalSupply = Number(stakingInfo.sklayTotalSupply) / 10 ** 18;
-    const totalStaking = Number(stakingInfo.totalStaking) / 10 ** 18;
+      const deposit = Number(stakingInfo.deposit) / 10 ** 18;
+      const sklayTotalSupply = Number(stakingInfo.sklayTotalSupply) / 10 ** 18;
+      const totalStaking = Number(stakingInfo.totalStaking) / 10 ** 18;
 
-    const delegated = (deposit / sklayTotalSupply) * totalStaking;
+      const delegated = (deposit / sklayTotalSupply) * totalStaking;
 
-    return {
-      delegator: delegator,
-      ind: stakingInfo.delegation,
-      tokens: [{ ...klaytnChain.currency, address: ZERO_ADDRESS }],
-      wallet: null,
-      staked: {
-        tokenAmounts: {
-          [ZERO_ADDRESS]: delegated,
-        },
-      },
-      // TODO:
-      rewards: 'unavailable',
-      unstake: {
-        claimable: 'unavailable',
-        pending: {
+      return {
+        delegator: delegator,
+        ind: stakingInfo.delegation,
+        tokens: [{ ...klaytnChain.currency, address: ZERO_ADDRESS }],
+        wallet: null,
+        staked: {
           tokenAmounts: {
-            [ZERO_ADDRESS]: Number(stakingInfo.pending) / 10 ** 18,
+            [ZERO_ADDRESS]: delegated,
           },
         },
-      },
-    };
-  });
+        // TODO:
+        rewards: 'unavailable',
+        unstake: {
+          claimable: 'unavailable',
+          pending: {
+            tokenAmounts: {
+              [ZERO_ADDRESS]: Number(stakingInfo.pending) / 10 ** 18,
+            },
+          },
+        },
+      };
+    });
 
-  return delegations;
+    return delegations;
+  } catch (err) {
+    throw err;
+  }
 };
 
 type StakingInfo = {

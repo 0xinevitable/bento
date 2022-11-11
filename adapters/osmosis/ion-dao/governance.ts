@@ -21,63 +21,67 @@ const info: ProtocolInfo = {
 export default info;
 
 export const getAccount: ProtocolGetAccount = async (account: string) => {
-  const cosmwasmClient = await CosmWasmClient.connect(
-    // https://discord.com/channels/798583171548840026/877743338760069141/986639531975516240
-    'https://rpc-osmosis.blockapsis.com',
-  );
-  const [{ power: stakedRawBalance }, { claims }] = (await safePromiseAll([
-    cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
-      voting_power_at_height: {
-        address: account,
-      },
-    }),
-    cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
-      claims: {
-        address: account,
-      },
-    }),
-  ])) as [VotingPowerAtHeightResponse, ClaimsResponse];
-
-  const stakedBalance =
-    Number(stakedRawBalance) / 10 ** ION_TOKEN_INFO.decimals;
-  const [unstakedClaimableAmount, unstakedPendingAmount] = claims.reduce(
-    ([claimableAcc, pendingAcc], claim) => {
-      const timestamp = Number(claim.release_at.at_time) / 1_000_000;
-      const amount = Number(claim.amount) / 10 ** ION_TOKEN_INFO.decimals;
-      if (timestamp <= Date.now()) {
-        return [claimableAcc + amount, pendingAcc];
-      }
-      return [claimableAcc, pendingAcc + amount];
-    },
-    [0, 0],
-  );
-
-  return [
-    {
-      prefix: ION_TOKEN_INFO.symbol,
-      ind: STAKING_ADDRESS,
-      tokens: [{ ...ION_TOKEN_INFO, ind: ION_TOKEN_INFO.address }],
-      wallet: null,
-      staked: {
-        tokenAmounts: {
-          [ION_DENOM]: stakedBalance,
+  try {
+    const cosmwasmClient = await CosmWasmClient.connect(
+      // https://discord.com/channels/798583171548840026/877743338760069141/986639531975516240
+      'https://rpc-osmosis.blockapsis.com',
+    );
+    const [{ power: stakedRawBalance }, { claims }] = (await safePromiseAll([
+      cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
+        voting_power_at_height: {
+          address: account,
         },
+      }),
+      cosmwasmClient.queryContractSmart(STAKING_ADDRESS, {
+        claims: {
+          address: account,
+        },
+      }),
+    ])) as [VotingPowerAtHeightResponse, ClaimsResponse];
+
+    const stakedBalance =
+      Number(stakedRawBalance) / 10 ** ION_TOKEN_INFO.decimals;
+    const [unstakedClaimableAmount, unstakedPendingAmount] = claims.reduce(
+      ([claimableAcc, pendingAcc], claim) => {
+        const timestamp = Number(claim.release_at.at_time) / 1_000_000;
+        const amount = Number(claim.amount) / 10 ** ION_TOKEN_INFO.decimals;
+        if (timestamp <= Date.now()) {
+          return [claimableAcc + amount, pendingAcc];
+        }
+        return [claimableAcc, pendingAcc + amount];
       },
-      unstake: {
-        claimable: {
+      [0, 0],
+    );
+
+    return [
+      {
+        prefix: ION_TOKEN_INFO.symbol,
+        ind: STAKING_ADDRESS,
+        tokens: [{ ...ION_TOKEN_INFO, ind: ION_TOKEN_INFO.address }],
+        wallet: null,
+        staked: {
           tokenAmounts: {
-            [ION_DENOM]: unstakedClaimableAmount,
+            [ION_DENOM]: stakedBalance,
           },
         },
-        pending: {
-          tokenAmounts: {
-            [ION_DENOM]: unstakedPendingAmount,
+        unstake: {
+          claimable: {
+            tokenAmounts: {
+              [ION_DENOM]: unstakedClaimableAmount,
+            },
+          },
+          pending: {
+            tokenAmounts: {
+              [ION_DENOM]: unstakedPendingAmount,
+            },
           },
         },
+        rewards: null,
       },
-      rewards: null,
-    },
-  ];
+    ];
+  } catch (err) {
+    throw err;
+  }
 };
 
 type VotingPowerAtHeightResponse = {

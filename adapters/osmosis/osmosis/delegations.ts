@@ -16,31 +16,35 @@ const info: ProtocolInfo = {
 export default info;
 
 export const getAccount: ProtocolGetAccount = async (address: string) => {
-  const [delegations, rewards, osmoPrice] = await Promise.all([
-    osmosisChain.getDelegations(address),
-    osmosisChain.getRewards(address),
-    osmosisChain.getCurrencyPrice(),
-  ]);
+  try {
+    const [delegations, rewards, osmoPrice] = await Promise.all([
+      osmosisChain.getDelegations(address),
+      osmosisChain.getRewards(address),
+      osmosisChain.getCurrencyPrice(),
+    ]);
 
-  return [
-    {
-      native: true,
-      ind: null,
-      wallet: null,
-      tokens: [{ ...osmo, address: osmo.coinMinimalDenom }],
-      staked: {
-        tokenAmounts: {
-          [osmo.coinMinimalDenom]: delegations,
+    return [
+      {
+        native: true,
+        ind: null,
+        wallet: null,
+        tokens: [{ ...osmo, address: osmo.coinMinimalDenom }],
+        staked: {
+          tokenAmounts: {
+            [osmo.coinMinimalDenom]: delegations,
+          },
+          value: delegations * osmoPrice,
         },
-        value: delegations * osmoPrice,
-      },
-      unstake: 'unavailable',
-      rewards: {
-        tokenAmounts: {
-          [osmo.coinMinimalDenom]: rewards,
+        unstake: 'unavailable',
+        rewards: {
+          tokenAmounts: {
+            [osmo.coinMinimalDenom]: rewards,
+          },
+          value: rewards * osmoPrice,
         },
-        value: rewards * osmoPrice,
       },
-    },
-  ];
+    ];
+  } catch (err) {
+    throw err;
+  }
 };
