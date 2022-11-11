@@ -6,7 +6,7 @@ import { useCachedPricings } from '@/hooks/pricings';
 import {
   BentoDeFiSupportedNetworks,
   BentoSupportedNetwork,
-} from '@/constants/networks';
+} from '@/constants/adapters';
 import {
   Valuation,
   getDeFiStakingValue,

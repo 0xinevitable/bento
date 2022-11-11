@@ -1,21 +1,3 @@
-// FIXME: Use type from @bento/adapters
-export type BentoSupportedNetwork =
-  | 'avalanche'
-  | 'bnb'
-  | 'cosmos-hub'
-  | 'ethereum'
-  | 'klaytn'
-  | 'osmosis'
-  | 'polygon'
-  | 'solana';
-
-// FIXME: Use constant from @bento/adapters
-export const BentoDeFiSupportedNetworks: BentoSupportedNetwork[] = [
-  'cosmos-hub',
-  'klaytn',
-  'osmosis',
-];
-
 export type Network = {
   id: string;
   type: string;

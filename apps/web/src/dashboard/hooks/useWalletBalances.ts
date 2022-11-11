@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { useCachedPricings } from '@/hooks/pricings';
 
-import { BentoSupportedNetwork } from '@/constants/networks';
+import { BentoSupportedNetwork } from '@/constants/adapters';
 import {
   CosmosSDKWalletBalance,
   EVMWalletBalance,
