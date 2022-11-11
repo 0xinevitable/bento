@@ -57,7 +57,7 @@ export const AnimatedToolTip = ({
             transition={{ type: 'easeInOut', duration: 0.1 }}
             {...getFloatingProps({
               ref: floating,
-              className: 'Tooltip',
+              className: 'sys Tooltip',
               style: {
                 position: strategy,
                 top: y ?? 0,
