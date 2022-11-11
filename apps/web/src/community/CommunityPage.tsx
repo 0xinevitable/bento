@@ -92,8 +92,6 @@ const CommunityPage: NextPage = () => {
     const handler = (e: MouseEvent) => {
       const X = (e.clientX - b.left) / w;
       const Y = (e.clientY - b.top) / h;
-
-      console.log(X, Y);
       document.documentElement.style.setProperty('--x', 100 * X + '%');
       document.documentElement.style.setProperty('--y', 100 * Y + '%');
     };
