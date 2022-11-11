@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { useCachedPricings } from '@/hooks/pricings';
 
-import { KEYS_BY_NETWORK } from '@/constants/networks';
+import { BentoSupportedNetwork } from '@/constants/networks';
 import {
   CosmosSDKWalletBalance,
   EVMWalletBalance,
@@ -30,8 +30,7 @@ export const useWalletBalances = ({ wallets }: Options) => {
 
   const calculatedRequests = useMemo(() => {
     // TODO: Clean this thing up
-    const data: PartialRecord<keyof typeof KEYS_BY_NETWORK, [Key, Address[]]> =
-      {};
+    const data: PartialRecord<BentoSupportedNetwork, [Key, Address[]]> = {};
 
     wallets.forEach((wallet) => {
       wallet.networks.forEach((network) => {
@@ -40,7 +39,7 @@ export const useWalletBalances = ({ wallets }: Options) => {
         }
         const previousAddrs = data[network]?.[1] ?? [];
         data[network] = [
-          KEYS_BY_NETWORK[network],
+          `/api/balances/${network}`,
           [...previousAddrs, wallet.address],
         ];
       });
