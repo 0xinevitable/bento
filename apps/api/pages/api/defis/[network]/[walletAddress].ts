@@ -1,12 +1,12 @@
 import { type BentoChainAdapter } from '@bento/adapters';
 import {
-  ChainType,
-  CosmosSDKBasedNetworks,
-  safeAsyncFlatMap,
-} from '@bento/common';
+  BentoProtocolAdapter,
+  BentoServiceAdapter,
+} from '@bento/adapters/_lib/types';
+import { safeAsyncFlatMap } from '@bento/common';
 import { Bech32Address } from '@bento/core';
 import findWorkspaceRoot from 'find-yarn-workspace-root';
-import { promises as fs } from 'fs';
+import fsSync, { promises as fs } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 
@@ -63,25 +63,79 @@ const fetchServiceAdapters = async (networkName: string) => {
   );
   const files = await fs.readdir(basePath);
 
-  let modules: Record<string, BentoChainAdapter> = {};
+  let modules: Record<
+    string,
+    { info: BentoServiceAdapter; protocols: BentoProtocolAdapter[] }[]
+  > = {};
 
   await Promise.all(
-    files.map(async (filename) => {
+    files.map(async (serviceFileName) => {
       if (
-        filename.startsWith('_') ||
-        filename.startsWith('.') ||
-        filename === 'dist'
+        serviceFileName.startsWith('_') ||
+        serviceFileName.startsWith('.') ||
+        serviceFileName === 'dist'
       ) {
         return;
       }
-      const adapterPath = path.join(basePath, filename);
+      const adapterPath = path.join(basePath, serviceFileName);
       const stat = await fs.stat(adapterPath);
       if (!stat.isDirectory()) {
         return;
       }
-      const module =
-        await require(`@bento/adapters/dist/${networkName}/${filename}/index`);
-      modules[filename] = module as BentoChainAdapter;
+      console.log(
+        `@bento/adapters/dist/${networkName}/${serviceFileName}/index`,
+      );
+      const module: BentoServiceAdapter =
+        await require(`@bento/adapters/dist/${networkName}/${serviceFileName}/index`);
+
+      // protocols
+      const files = await fs.readdir(adapterPath);
+      const protocolModules = await safeAsyncFlatMap(
+        files,
+        async (filename) => {
+          console.log(filename);
+          if (
+            filename.startsWith('_') ||
+            filename.startsWith('.') ||
+            filename === 'dist' ||
+            filename === 'index.ts' ||
+            path.extname(filename) !== '.ts'
+          ) {
+            return [];
+          }
+
+          const protocolAdapterPath = path.join(adapterPath, filename);
+          console.log({ protocolAdapterPath });
+          const stat = await fs.stat(protocolAdapterPath);
+          if (stat.isDirectory()) {
+            const hasIndex = fsSync.existsSync(protocolAdapterPath);
+            if (!hasIndex) {
+              return [];
+            }
+          }
+
+          const moduleName = `@bento/adapters/dist/${networkName}/${serviceFileName}/${filename.replace(
+            '.ts',
+            '.js',
+          )}`;
+          console.log({ moduleName });
+          try {
+            const module = await require(moduleName);
+            console.log({ module });
+            return module;
+          } catch (err) {
+            console.error(err);
+            return [];
+          }
+        },
+      );
+
+      console.log({ protocolModules });
+      if (modules[networkName]) {
+        modules[networkName].push({ info: module, protocols: protocolModules });
+      } else {
+        modules[networkName] = [{ info: module, protocols: protocolModules }];
+      }
     }),
   );
 
@@ -112,9 +166,12 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
       return [];
     }
 
+    console.log(serviceAdaptersInChain);
+
     try {
-      const balances = await chain.getAccount(account);
-      return balances.map((v) => ({ account, ...v }));
+      return [];
+      // const balances = await chain.getAccount(account);
+      // return balances.map((v) => ({ account, ...v }));
     } catch (err) {
       console.error(err);
       return [];
