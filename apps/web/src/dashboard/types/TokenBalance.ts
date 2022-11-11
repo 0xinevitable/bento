@@ -46,6 +46,6 @@ export type DashboardTokenBalance = {
   netWorth: number;
   amount: number;
   price: number;
-  type?: 'nft';
+  type: 'nft' | 'token';
   platform: string;
 };

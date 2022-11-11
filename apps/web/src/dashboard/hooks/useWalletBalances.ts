@@ -53,11 +53,12 @@ export const useWalletBalances = ({ wallets }: Options) => {
   const { responses: result, refetch } = useMultipleRequests<TokenBalance[]>(
     calculatedRequests,
     undefined,
-    (key, data) => ({
-      ...data,
-      type: 'token',
-      chain: key.replace('/api/balances/', ''),
-    }),
+    (key, data) =>
+      data.map((v) => ({
+        ...v,
+        type: 'token',
+        chain: key.split('/')[3] as BentoSupportedNetwork,
+      })),
   );
   useInterval(refetch, 60 * 1_000);
 

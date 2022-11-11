@@ -20,7 +20,7 @@ export type TokenDetailModalParams = {
     netWorth: number;
     amount: number;
     price: number;
-    type?: 'nft';
+    type: 'nft' | 'token';
     coinGeckoId?: string;
   };
 };

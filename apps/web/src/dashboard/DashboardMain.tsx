@@ -123,7 +123,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             symbol: first.symbol,
             name: first.name,
             logo: first.logo,
-            // type: 'type' in first ? first.type : undefined,
+            type: first.type,
             tokenAddress: first.ind,
             balances: balances,
             netWorth: amount * first.price,
