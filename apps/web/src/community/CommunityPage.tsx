@@ -3,7 +3,7 @@ import { GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { PageContainer } from '@/components/PageContainer';
 import { MetaHead } from '@/components/system';
@@ -79,11 +79,37 @@ const CommunityPage: NextPage = () => {
 
   const { t } = useTranslation(['community']);
 
+  const backgroundImageRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = backgroundImageRef.current;
+    if (!el) {
+      return;
+    }
+    const w = el.clientWidth;
+    const h = el.clientHeight;
+    const b = el.getBoundingClientRect();
+
+    const handler = (e: MouseEvent) => {
+      const X = (e.clientX - b.left) / w;
+      const Y = (e.clientY - b.top) / h;
+
+      console.log(X, Y);
+      document.documentElement.style.setProperty('--x', 100 * X + '%');
+      document.documentElement.style.setProperty('--y', 100 * Y + '%');
+    };
+
+    window.addEventListener('mousemove', handler);
+
+    return () => {
+      window.removeEventListener('mousemove', handler);
+    };
+  }, []);
+
   return (
     <>
       <MetaHead />
       <BackgroundImageWrapper>
-        <BackgroundImageContainer>
+        <BackgroundImageContainer ref={backgroundImageRef}>
           <BackgroundImage
             alt=""
             src={backgroundImage}
@@ -94,6 +120,8 @@ const CommunityPage: NextPage = () => {
           <TitleContainer>
             <TitleImage alt="" src={titleImage} placeholder="blur" />
           </TitleContainer>
+
+          <LayerOne />
         </BackgroundImageContainer>
       </BackgroundImageWrapper>
       <Border />
@@ -157,8 +185,7 @@ const BackgroundImageContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  filter: contrast(1.08) saturate(1.1)
-    drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.25));
+  filter: contrast(1.08) drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.25));
 
   &:before {
     content: '';
@@ -193,6 +220,19 @@ const BackgroundImage = styled(Image)`
   height: 400px;
   object-fit: cover;
   max-width: 900px;
+`;
+const LayerOne = styled.div`
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  mix-blend-mode: soft-light;
+  clip-path: inset(0 0 1px 0 round 48px);
+  background: radial-gradient(
+    farthest-corner circle at var(--x) var(--y),
+    rgba(0, 0, 0, 0.8) 10%,
+    rgba(0, 0, 0, 0.65) 20%,
+    rgba(0, 0, 0, 0) 90%
+  );
 `;
 
 const TitleContainer = styled.div`
