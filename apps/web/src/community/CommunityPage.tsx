@@ -253,6 +253,12 @@ const List = styled.ul`
   gap: 4px;
 
   user-select: none;
+
+  @media (max-width: 370px) {
+    max-width: 240px;
+    row-gap: 16px;
+    margin: 36px auto 0;
+  }
 `;
 const Item = styled.li`
   display: flex;
