@@ -21,12 +21,20 @@ const getCached = async <DataType extends any>(
 const MINUTES = 60 * 1000;
 const DEFAULT_CACHE_TIME = 1 * MINUTES;
 
+type WithCachedOptions<DataType extends any> = {
+  defaultValue: DataType;
+  redisClient: ReturnType<typeof createRedisClient>;
+  ttl?: number;
+};
+
 export const withCached = <Params extends Array<any>, DataType extends any>(
   key: string,
-  defaultValue: DataType,
-  redisClient: ReturnType<typeof createRedisClient>,
   fetcher: (...params: Params) => Promise<DataType>,
-  ttl = DEFAULT_CACHE_TIME,
+  {
+    defaultValue,
+    redisClient,
+    ttl = DEFAULT_CACHE_TIME,
+  }: WithCachedOptions<DataType>,
 ) => {
   return async (...params: Params) => {
     let hasError: boolean = false;
