@@ -56,7 +56,7 @@ export const TokenDetailModal: React.FC<Props> = ({
       if (wallet.balance > 0) {
         walletsByPosition.push({
           amount: wallet.balance,
-          address: wallet.walletAddress,
+          address: wallet.account,
         });
       }
     }

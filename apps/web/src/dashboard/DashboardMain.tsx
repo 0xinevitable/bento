@@ -389,7 +389,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                           // FIXME: group stats with different wallets...
                                           key={`${item.type}-${
                                             item.address || 'gov'
-                                          }-${item.walletAddress}`}
+                                          }-${item.account}`}
                                           protocol={item}
                                         />
                                       ))}

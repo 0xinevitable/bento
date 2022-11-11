@@ -21,15 +21,15 @@ export const ProfileWalletList: React.FC<ProfileWalletListProps> = ({
   const { t } = useTranslation('dashboard');
 
   const onClickCopy = useCallback(
-    (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
+    (account: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
       Analytics.logEvent('click_copy_wallet_address', {
         type: walletType,
-        address: walletAddress,
+        address: account,
       });
-      copyToClipboard(walletAddress);
+      copyToClipboard(account);
       toast({
         title: 'Copied to clipboard!',
-        description: walletAddress,
+        description: account,
       });
     },
     [],

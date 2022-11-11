@@ -79,7 +79,7 @@ export type DeFiStaking = {
 };
 
 export type DeFiStakingResponse = {
-  walletAddress: string;
+  account: string;
   stakings: DeFiStaking[];
   cachedTime: number;
 };

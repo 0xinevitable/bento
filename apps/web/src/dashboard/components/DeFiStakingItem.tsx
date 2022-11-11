@@ -106,7 +106,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
         <AccountItem>
           <span className="field">{t('Account')}</span>
           <span className="sys">
-            <InlineBadge>{shortenAddress(protocol.walletAddress)}</InlineBadge>
+            <InlineBadge>{shortenAddress(protocol.account)}</InlineBadge>
           </span>
         </AccountItem>
         {!!protocol.address && (

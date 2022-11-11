@@ -1,5 +1,5 @@
 export type CosmosSDKWalletBalance = {
-  walletAddress: string;
+  account: string;
   platform: string;
 
   symbol: string;
@@ -12,7 +12,7 @@ export type CosmosSDKWalletBalance = {
 };
 
 export type EVMWalletBalance = {
-  walletAddress: string;
+  account: string;
   platform: string;
 
   name: string;
@@ -26,7 +26,7 @@ export type EVMWalletBalance = {
 };
 
 export type SolanaWalletBalance = {
-  walletAddress: string;
+  account: string;
   platform: string;
 
   name: string;
@@ -40,7 +40,7 @@ export type SolanaWalletBalance = {
 
 export type NFTWalletBalance = {
   type: 'nft';
-  walletAddress: string;
+  account: string;
   platform: string;
 
   symbol: string | null;

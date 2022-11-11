@@ -22,13 +22,13 @@ export const useNFTBalances = ({ wallets }: Options) => {
   >([]);
   const [ethereumPrice, setEthereumPrice] = useState<number>(0);
   const [fetchedAssets, setFetchedAssets] = useState<{
-    [walletAddress: string]: {
-      [cursor: string]: (OpenSeaAsset & { walletAddress: string })[];
+    [account: string]: {
+      [cursor: string]: (OpenSeaAsset & { account: string })[];
     };
   }>({});
 
   useEffect(() => {
-    const fetchAssets = async (walletAddress: string) => {
+    const fetchAssets = async (account: string) => {
       let cursor: string | undefined = undefined;
       let firstFetch: boolean = true;
 
@@ -36,7 +36,7 @@ export const useNFTBalances = ({ wallets }: Options) => {
         // FIXME: TypeScript behaving strange here
         const res: { assets: OpenSeaAsset[]; cursor: string | undefined } =
           await OpenSea.getAssets({
-            owner: walletAddress,
+            owner: account,
             cursor,
           });
 
@@ -46,11 +46,11 @@ export const useNFTBalances = ({ wallets }: Options) => {
 
         setFetchedAssets((prev) => ({
           ...prev,
-          [walletAddress]: {
-            ...prev[walletAddress],
+          [account]: {
+            ...prev[account],
             [cursor ?? 'undefined']: assets.map((v) => ({
               ...v,
-              walletAddress,
+              account,
             })),
           },
         }));
@@ -82,35 +82,29 @@ export const useNFTBalances = ({ wallets }: Options) => {
     const flattedAssets = Object.values(fetchedAssets)
       .map((v) => Object.values(v))
       .flat(3);
-    const groupedByWalletAddress = groupBy(flattedAssets, 'walletAddress');
+    const groupedByWalletAddress = groupBy(flattedAssets, 'account');
 
-    safeAsyncFlatMap(
-      Object.keys(groupedByWalletAddress),
-      async (walletAddress) => {
-        const groupByCollection: Record<
-          string,
-          (OpenSeaAsset & { walletAddress: string })[]
-        > = groupBy(
-          groupedByWalletAddress[walletAddress],
-          (v) => v.collection.slug,
-        );
+    safeAsyncFlatMap(Object.keys(groupedByWalletAddress), async (account) => {
+      const groupByCollection: Record<
+        string,
+        (OpenSeaAsset & { account: string })[]
+      > = groupBy(groupedByWalletAddress[account], (v) => v.collection.slug);
 
-        const balances: NFTWalletBalance[] = (
-          await safeAsyncFlatMap(
-            chunk(Object.keys(groupByCollection), CHUNK_SIZE),
-            async (chunckedCollectionSlugs) =>
-              getNFTBalancesFromSlugs({
-                slugs: chunckedCollectionSlugs,
-                walletAddress,
-                ethereumPrice,
-                groupByCollection,
-              }),
-          )
-        ).filter((v) => v.totalVolume > 0);
+      const balances: NFTWalletBalance[] = (
+        await safeAsyncFlatMap(
+          chunk(Object.keys(groupByCollection), CHUNK_SIZE),
+          async (chunckedCollectionSlugs) =>
+            getNFTBalancesFromSlugs({
+              slugs: chunckedCollectionSlugs,
+              account,
+              ethereumPrice,
+              groupByCollection,
+            }),
+        )
+      ).filter((v) => v.totalVolume > 0);
 
-        return balances;
-      },
-    ).then((data) => {
+      return balances;
+    }).then((data) => {
       setOpenSeaNFTBalance(data);
     });
   }, [ethereumPrice, JSON.stringify(fetchedAssets)]);
@@ -122,18 +116,18 @@ export const useNFTBalances = ({ wallets }: Options) => {
 
 type Props = {
   slugs: string[];
-  walletAddress: string;
+  account: string;
   ethereumPrice: number;
   groupByCollection: Record<
     string,
     (OpenSeaAsset & {
-      walletAddress: string;
+      account: string;
     })[]
   >;
 };
 const getNFTBalancesFromSlugs = ({
   slugs,
-  walletAddress,
+  account,
   ethereumPrice,
   groupByCollection,
 }: Props) =>
@@ -153,7 +147,7 @@ const getNFTBalancesFromSlugs = ({
       return {
         symbol: first.asset_contract.symbol || null,
         name: collection.name,
-        walletAddress,
+        account,
         balance: groupByCollection[collectionSlug].length,
         logo: collection.image_url,
         price: ethereumPrice * floorPrice,

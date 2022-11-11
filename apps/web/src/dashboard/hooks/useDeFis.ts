@@ -16,7 +16,7 @@ import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
 import { useMultipleRequests } from './useMultipleRequests';
 
 export type DeFiStakingWithClientData = DeFiStaking & {
-  walletAddress: string;
+  account: string;
   valuation: Valuation;
 };
 
@@ -53,7 +53,7 @@ export const useDeFis = (wallets: Wallet[]) => {
       }
       return item.data.stakings.map((staking) => ({
         ...staking,
-        walletAddress: item.data?.walletAddress!,
+        account: item.data?.account!,
         valuation: getDeFiStakingValue(staking, getCachedPrice),
       }));
     });
