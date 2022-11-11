@@ -8,7 +8,6 @@ export type WalletListItemProps = Wallet & {
   onClickCopy?: (address: string, type: ChainType) => void;
 };
 
-// FIXME: Based from @bento/web
 export const WalletListItem: React.FC<WalletListItemProps> = ({
   onClickCopy,
   ...wallet
