@@ -8,19 +8,12 @@ import { AssetMedia } from '@/components/system';
 
 import { NFTDetailModal } from '@/profile/instance/sections/NFTDetailModal';
 import { UserProfile } from '@/profile/types/UserProfile';
+import { ErrorResponse } from '@/profile/types/api';
 import { Colors } from '@/styles';
 import { Analytics, axiosWithCredentials, toast } from '@/utils';
 
 import { EmptyBalance } from '../components/EmptyBalance';
 import { KlaytnNFTAsset } from '../hooks/useKlaytnNFTs';
-
-// FIXME: Duplicated type declaration
-type ErrorResponse =
-  | {
-      code: 'USERNAME_UNUSABLE' | 'VALUE_REQUIRED' | string;
-      message: string;
-    }
-  | undefined;
 
 type Props = {
   selected: boolean;
