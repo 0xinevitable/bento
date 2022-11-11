@@ -18,8 +18,8 @@ export type BentoSupportedNetwork =
   | 'solana';
 
 export const BentoDeFiSupportedNetworks: BentoSupportedNetwork[] = [
-  'cosmos-hub',
   'klaytn',
+  'cosmos-hub',
   'osmosis',
 ];
 
@@ -30,7 +30,7 @@ type Adapters = Record<
     services: Record<
       string,
       {
-        info: BentoServiceAdapter;
+        info: Promise<BentoServiceAdapter>;
         protocols: Record<string, Promise<BentoProtocolAdapter>>;
       }
     >;

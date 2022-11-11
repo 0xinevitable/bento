@@ -90,7 +90,7 @@ type Adapters = Record<
     services: Record<
       string,
       {
-        info: BentoServiceAdapter;
+        info: Promise<BentoServiceAdapter>;
         protocols: Record<string, Promise<BentoProtocolAdapter>>;
       }
     >;
