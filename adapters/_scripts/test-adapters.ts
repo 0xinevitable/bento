@@ -2,12 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import TSON from 'typescript-json';
 
-import { ADAPTER_ROOT_PATH, Child, fetchChildren } from './_lib/scripts/utils';
+import { ADAPTER_ROOT_PATH, Child, fetchChildren } from '../_lib/scripts/utils';
 import {
   BentoChainAdapter,
   BentoProtocolAdapter,
   BentoServiceAdapter,
-} from './_lib/types';
+} from '../_lib/types';
 
 const onlyIndex = (filename: string) =>
   !(

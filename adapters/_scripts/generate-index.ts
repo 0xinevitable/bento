@@ -8,7 +8,7 @@ import {
   ADAPTER_ROOT_PATH,
   WORKSPACE_ROOT_PATH,
   fetchChildren,
-} from './_lib/scripts/utils';
+} from '../_lib/scripts/utils';
 
 const INDEX_OUTPUT_PATH = path.join(ADAPTER_ROOT_PATH, './index.ts');
 

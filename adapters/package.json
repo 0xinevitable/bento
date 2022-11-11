@@ -10,8 +10,8 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsc",
-    "test": "env-cmd -f .env ts-node --compiler ttypescript test-adapters",
-    "codegen": "env-cmd -f .env ts-node --compiler ttypescript generate-index"
+    "test": "env-cmd -f .env ts-node --compiler ttypescript _scripts/test-adapters",
+    "codegen": "env-cmd -f .env ts-node --compiler ttypescript _scripts/generate-index"
   },
   "dependencies": {
     "@bento/common": "workspace:^",
