@@ -44,9 +44,9 @@ export const adapters: Adapters = {
     chain: require('./cosmos-hub'),
     services: {
       'cosmos-hub': {
-        info: require('./cosmos-hub'),
+        info: require('./cosmos-hub/cosmos-hub'),
         protocols: {
-          delegations: require('./cosmos-hub/delegations'),
+          delegations: require('./cosmos-hub/cosmos-hub/delegations'),
         },
       },
     },
@@ -59,30 +59,30 @@ export const adapters: Adapters = {
     chain: require('./klaytn'),
     services: {
       klaystation: {
-        info: require('./klaystation'),
+        info: require('./klaytn/klaystation'),
         protocols: {
-          staking: require('./klaystation/staking'),
+          staking: require('./klaytn/klaystation/staking'),
         },
       },
       klayswap: {
-        info: require('./klayswap'),
+        info: require('./klaytn/klayswap'),
         protocols: {
-          governance: require('./klayswap/governance'),
-          lp: require('./klayswap/lp'),
-          single: require('./klayswap/single'),
+          governance: require('./klaytn/klayswap/governance'),
+          lp: require('./klaytn/klayswap/lp'),
+          single: require('./klaytn/klayswap/single'),
         },
       },
       kokonutswap: {
-        info: require('./kokonutswap'),
+        info: require('./klaytn/kokonutswap'),
         protocols: {
-          governance: require('./kokonutswap/governance'),
-          lp: require('./kokonutswap/lp'),
+          governance: require('./klaytn/kokonutswap/governance'),
+          lp: require('./klaytn/kokonutswap/lp'),
         },
       },
       swapscanner: {
-        info: require('./swapscanner'),
+        info: require('./klaytn/swapscanner'),
         protocols: {
-          governance: require('./swapscanner/governance'),
+          governance: require('./klaytn/swapscanner/governance'),
         },
       },
     },
@@ -91,16 +91,16 @@ export const adapters: Adapters = {
     chain: require('./osmosis'),
     services: {
       'ion-dao': {
-        info: require('./ion-dao'),
+        info: require('./osmosis/ion-dao'),
         protocols: {
-          governance: require('./ion-dao/governance'),
+          governance: require('./osmosis/ion-dao/governance'),
         },
       },
       osmosis: {
-        info: require('./osmosis'),
+        info: require('./osmosis/osmosis'),
         protocols: {
-          delegations: require('./osmosis/delegations'),
-          gamm: require('./osmosis/gamm'),
+          delegations: require('./osmosis/osmosis/delegations'),
+          gamm: require('./osmosis/osmosis/gamm'),
         },
       },
     },

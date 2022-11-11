@@ -37,12 +37,12 @@ const main = async () => {
           );
           return dedent`
             '${service.name}': {
-              info: require('./${service.name}'),
+              info: require('./${chain.name}/${service.name}'),
               protocols: {
                 ${protocols
                   .map(
                     (v) =>
-                      `'${v.name}': require('./${service.name}/${v.name}')`,
+                      `'${v.name}': require('./${chain.name}/${service.name}/${v.name}')`,
                   )
                   .join(',')}
               }
