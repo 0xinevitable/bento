@@ -57,7 +57,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
   const services: APIResponse = await safePromiseAll(
     Object.entries(adapter.services).map(async ([serviceId, service]) => {
-      const info = service.info.default;
+      const info = (await service.info).default;
 
       const protocols = await safePromiseAll(
         Object.entries(service.protocols).map(
