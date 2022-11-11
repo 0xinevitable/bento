@@ -7,6 +7,8 @@ import {
 import { Bech32Address } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { createRedisClient } from '@/utils/Redis';
+import { withCached } from '@/utils/cache';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 interface APIRequest extends NextApiRequest {
@@ -39,6 +41,11 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     return;
   }
 
+  const redisClient = createRedisClient();
+  await redisClient.connect();
+
+  const chainName = adapter.default.name;
+
   const result = await safeAsyncFlatMap(wallets, async (walletAddress) => {
     let account = walletAddress;
 
@@ -49,13 +56,20 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
     }
 
     try {
-      const balances = await adapter.getAccount(account);
+      const getAccount = withCached(
+        `balances:${chainName}:${account}`,
+        adapter.getAccount,
+        { redisClient, defaultValue: [] },
+      );
+      const { data: balances } = await getAccount(account);
       return balances.map((v) => ({ account, ...v }));
     } catch (err) {
       console.error(err);
       return [];
     }
   });
+
+  await redisClient.disconnect();
 
   res.status(200).json(result);
 };
