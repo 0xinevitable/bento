@@ -4,12 +4,15 @@ import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 
-import { ProtocolAccountInfo, ProtocolInfo } from '@/constants/adapters';
+import { LocalizedString, ProtocolAccountInfo, ProtocolInfo } from '@/constants/adapters';
 
 import { Colors } from '@/styles';
+import { Valuation } from '@/defi/utils/getDeFiStakingValue';
 
 import { InlineBadge } from './InlineBadge';
-import { Valuation } from '@/defi/utils/getDeFiStakingValue';
+
+const displayLocalizedString = (value : LocalizedString, currentLanguage: string) =>
+  typeof value === 'string' ? value : value[currentLanguage] || value.en
 
 const formatNumber = (value: number | null | undefined): string =>
   (value || 0).toLocaleString(undefined, {
@@ -67,7 +70,8 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   info,
   protocol,
 }) => {
-  const { t } = useTranslation('dashboard');
+  const { t , i18n } = useTranslation('dashboard');
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
   const protocolTokens = useMemo(
     () => [...protocol.tokens, ...(protocol.relatedTokens || [])],
@@ -91,14 +95,11 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
           <Name>
             {!!protocol.prefix && `${protocol.prefix} `}
-            {/* FIXME: Show protocol metadata from `protocol API` */}
-            {/* <Trans
-              t={t}
-              i18nKey={`defi-type-${protocol.address}`}
-              components={{
-                validator: <ValidatorBadge />,
-              }}
-            /> */}
+            {displayLocalizedString(info.name, currentLanguage)}
+            {protocol.delegator && (
+              <ValidatorBadge>
+                {displayLocalizedString(protocol.delegator, currentLanguage)}</ValidatorBadge>
+            )}
           </Name>
         </HeaderTitle>
 
