@@ -46,7 +46,8 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
       const protocols = await safePromiseAll(
         Object.entries(service.protocols).map(
-          async ([protocolId, protocol]) => {
+          async ([protocolId, protocolResolver]) => {
+            const protocol = await protocolResolver;
             const info = protocol.default;
             const accounts = await safeAsyncFlatMap(wallets, async (wallet) => {
               let account = wallet;
