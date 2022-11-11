@@ -219,7 +219,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                   netWorthInWallet={netWorthInWallet}
                   netWorthInProtocols={netWorthInProtocols}
                   tokenBalances={tokenBalances}
-                  // defiStakesByProtocol={defiStakesByProtocol}
+                  services={defis}
                 />
 
                 <WalletListSection

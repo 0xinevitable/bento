@@ -8,6 +8,7 @@ import { AnimatedToolTip } from '@/components/system';
 import { NETWORKS } from '@/constants/networks';
 import { displayName } from '@/dashboard/constants/platform';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
+import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 import { AssetRatioChart } from './AssetRatioChart';
@@ -16,20 +17,19 @@ type AssetRatioSectionProps = {
   netWorthInWallet: number;
   netWorthInProtocols: number;
   tokenBalances: DashboardTokenBalance[];
-  // defiStakesByProtocol: [string, ServiceWithClientData[]][];
+  services: ServiceData[];
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
-  netWorthInProtocols: netWorthInUSDOnlyDeFi,
-  // FIXME: dirty code here
-  netWorthInWallet: netWorthInUSDOnlyWallet,
-  // defiStakesByProtocol,
+  netWorthInWallet,
+  netWorthInProtocols,
+  services,
 }) => {
   const { t } = useTranslation('dashboard');
 
   const netWorthInUSD = useMemo(
-    () => netWorthInUSDOnlyWallet + netWorthInUSDOnlyDeFi,
-    [netWorthInUSDOnlyWallet, netWorthInUSDOnlyDeFi],
+    () => netWorthInWallet + netWorthInProtocols,
+    [netWorthInWallet, netWorthInProtocols],
   );
 
   const assetRatioByPlatform = useMemo(() => {
@@ -39,23 +39,11 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       const assets = groups[platform] || [];
       let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
 
-      // FIXME: Update here with data from `protocol API`
-      // defiStakesByProtocol.forEach(([defiProtocol, defiStakes]) => {
-      //   if (platform === 'klaytn' && KLAYTN_DEFIS.includes(defiProtocol)) {
-      //     netWorth += defiStakes.reduce(
-      //       (acc, val) => val.valuation.total + acc,
-      //       0,
-      //     );
-      //   } else if (
-      //     platform === 'osmosis' &&
-      //     OSMOSIS_DEFIS.includes(defiProtocol)
-      //   ) {
-      //     netWorth += defiStakes.reduce(
-      //       (acc, val) => val.valuation.total + acc,
-      //       0,
-      //     );
-      //   }
-      // });
+      services.forEach((service) => {
+        if (service.chain === platform) {
+          netWorth += service.netWorth;
+        }
+      });
 
       let ratio = (netWorth / netWorthInUSD) * 100;
       if (isNaN(ratio)) {
@@ -91,8 +79,8 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       <div>
         <AssetRatioChart
           tokenBalances={tokenBalances}
-          netWorthInUSD={netWorthInUSD}
-          netWorthInUSDOnlyDeFi={netWorthInUSDOnlyDeFi}
+          totalNetWorth={netWorthInUSD}
+          netWorthInProtocols={netWorthInProtocols}
         />
       </div>
 
