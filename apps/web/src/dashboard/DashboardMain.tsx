@@ -151,7 +151,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     return tokenBalances.filter((v) => v.type !== 'nft');
   }, [isNFTBalancesIncluded, tokenBalances]);
 
-  const netWorthInUSD = useMemo(
+  const netWorthInWallet = useMemo(
     () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
     [tokenBalances],
   );
@@ -169,7 +169,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
   const { defis } = useProtocols(wallets);
 
-  const netWorthInUSDOnlyDeFi = useMemo(
+  const netWorthInProtocols = useMemo(
     () =>
       defis.reduce(
         (acc, service) =>
@@ -181,10 +181,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
   const CRYPTO_FEEDS: ('DEFI' | 'WALLET')[] = useMemo(
     () =>
-      netWorthInUSDOnlyDeFi > netWorthInUSD
+      netWorthInProtocols > netWorthInWallet
         ? ['DEFI', 'WALLET']
         : ['WALLET', 'DEFI'],
-    [netWorthInUSDOnlyDeFi, netWorthInUSD],
+    [netWorthInProtocols, netWorthInWallet],
   );
 
   return (
@@ -216,10 +216,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             >
               <TopSummaryContainer>
                 <AssetRatioSection
-                  netWorthInUSD={netWorthInUSD}
-                  netWorthInUSDOnlyDeFi={netWorthInUSDOnlyDeFi}
+                  netWorthInWallet={netWorthInWallet}
+                  netWorthInProtocols={netWorthInProtocols}
                   tokenBalances={tokenBalances}
-                  // defiStakesByProtocol={defiStakesByProtocol}
+                  services={defis}
                 />
 
                 <WalletListSection

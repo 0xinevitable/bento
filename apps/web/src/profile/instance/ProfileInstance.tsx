@@ -43,6 +43,7 @@ import {
 } from '../components/ProfileEditor';
 import { Palette, usePalette } from '../hooks/usePalette';
 import { UserProfile } from '../types/UserProfile';
+import { ErrorResponse } from '../types/api';
 import { FixedFooter } from './components/FixedFooter';
 import { ProfileViewer } from './components/ProfileViewer';
 import { StickyTab } from './components/StickyTab';
@@ -51,13 +52,6 @@ import { AssetSection } from './sections/AssetSection';
 import { NFTSection } from './sections/NFTSection';
 import { ProfileLinkSection } from './sections/ProfileLinkSection';
 import { ProfileWalletList } from './sections/ProfileWalletList';
-
-type ErrorResponse =
-  | {
-      code: 'USERNAME_UNUSABLE' | 'VALUE_REQUIRED' | string;
-      message: string;
-    }
-  | undefined;
 
 const EMPTY_DRAFT: UserInformationDraft = {
   username: '',

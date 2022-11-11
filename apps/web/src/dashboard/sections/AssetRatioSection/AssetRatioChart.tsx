@@ -22,14 +22,14 @@ const AVAILABLE_COLORS = [
 
 type AssetRatioChartProps = {
   tokenBalances: DashboardTokenBalance[];
-  netWorthInUSD: number;
-  netWorthInUSDOnlyDeFi: number;
+  totalNetWorth: number;
+  netWorthInProtocols: number;
 };
 
 export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
   tokenBalances,
-  netWorthInUSD,
-  netWorthInUSDOnlyDeFi,
+  totalNetWorth,
+  netWorthInProtocols,
 }) => {
   const data = useMemo(() => {
     if (tokenBalances.length < 1) {
@@ -43,7 +43,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
       0,
     );
     if (netWorthInNFTs > 0) {
-      const percentage = (netWorthInNFTs / netWorthInUSD) * 100;
+      const percentage = (netWorthInNFTs / totalNetWorth) * 100;
       items.push({
         label: 'OpenSea NFTs',
         value: !percentage || isNaN(percentage) ? 0 : percentage,
@@ -51,8 +51,8 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
       });
     }
 
-    if (netWorthInUSDOnlyDeFi > 0) {
-      const percentage = (netWorthInUSDOnlyDeFi / netWorthInUSD) * 100;
+    if (netWorthInProtocols > 0) {
+      const percentage = (netWorthInProtocols / totalNetWorth) * 100;
       items.push({
         label: 'DeFi',
         value: !percentage || isNaN(percentage) ? 0 : percentage,
@@ -68,7 +68,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
         }
 
         const { name, netWorth } = info;
-        const percentage = (netWorth / netWorthInUSD) * 100;
+        const percentage = (netWorth / totalNetWorth) * 100;
         if (percentage < 0.01 || index > AVAILABLE_COLORS.length + 2) {
           return [];
         }
@@ -81,7 +81,7 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
     );
 
     return items;
-  }, [tokenBalances, netWorthInUSDOnlyDeFi]);
+  }, [tokenBalances, netWorthInProtocols]);
 
   return (
     <ChartContainer>

@@ -1,4 +1,5 @@
 import {
+  BentoSupportedNetwork,
   ProtocolAccountInfo,
   ProtocolInfo,
   ServiceInfo,
@@ -8,6 +9,7 @@ import { Valuation } from '../utils/getDeFiStakingValue';
 
 export type ServiceData = ServiceInfo & {
   netWorth: number;
+  chain: BentoSupportedNetwork;
   protocols: {
     netWorth: number;
     info: ProtocolInfo;
@@ -18,6 +20,7 @@ export type ServiceData = ServiceInfo & {
   }[];
 };
 export type ProtocolResponse = (ServiceInfo & {
+  chain: BentoSupportedNetwork;
   protocols: {
     info: ProtocolInfo;
     accounts: (ProtocolAccountInfo & {

@@ -15,6 +15,7 @@ import {
   UserInformationDraft,
 } from '@/profile/components/ProfileEditor';
 import { UserProfile } from '@/profile/types/UserProfile';
+import { ErrorResponse } from '@/profile/types/api';
 import { Colors } from '@/styles';
 import { Config, axiosWithCredentials } from '@/utils';
 import { Analytics, toast } from '@/utils';
@@ -34,13 +35,6 @@ const hashCode = (value: string) => {
   }
   return hash;
 };
-
-type ErrorResponse =
-  | {
-      code: 'USERNAME_UNUSABLE' | 'VALUE_REQUIRED' | string;
-      message: string;
-    }
-  | undefined;
 
 type Props = {
   isMyProfile: boolean;
