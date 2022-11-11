@@ -20,8 +20,10 @@ interface APIRequest extends NextApiRequest {
 }
 
 type APIResponse = (ServiceInfo & {
+  serviceId: string;
   chain: BentoSupportedNetwork;
   protocols: {
+    protocolId: string;
     info: ProtocolInfo;
     accounts: ProtocolAccountInfo[];
   }[];
@@ -114,12 +116,17 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
               return accountInfo.flatMap((v) => ({ account, ...v }));
             });
 
-            return { info, accounts };
+            return { protocolId, info, accounts };
           },
         ),
       );
 
-      return { chain: network, ...info, protocols };
+      return {
+        serviceId,
+        chain: network,
+        ...info,
+        protocols,
+      };
     }),
   );
 
