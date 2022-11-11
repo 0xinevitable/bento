@@ -19,21 +19,25 @@ export const getAccount: ProtocolGetAccount = async (
   _account: string,
   rawTokenBalance?: string,
 ) => {
-  const balance = Number(rawTokenBalance) / 10 ** KSP_TOKEN_INFO.decimals;
-  return [
-    {
-      prefix: KSP_TOKEN_INFO.symbol,
-      ind: VOTING_KSP_ADDRESS,
-      tokens: [{ ...KSP_TOKEN_INFO, ind: KSP_TOKEN_INFO.address }],
-      wallet: null,
-      staked: {
-        tokenAmounts: {
-          [KSP_TOKEN_INFO.address]: balance,
+  try {
+    const balance = Number(rawTokenBalance) / 10 ** KSP_TOKEN_INFO.decimals;
+    return [
+      {
+        prefix: KSP_TOKEN_INFO.symbol,
+        ind: VOTING_KSP_ADDRESS,
+        tokens: [{ ...KSP_TOKEN_INFO, ind: KSP_TOKEN_INFO.address }],
+        wallet: null,
+        staked: {
+          tokenAmounts: {
+            [KSP_TOKEN_INFO.address]: balance,
+          },
         },
+        // TODO:
+        rewards: 'unavailable',
+        unstake: null,
       },
-      // TODO:
-      rewards: 'unavailable',
-      unstake: null,
-    },
-  ];
+    ];
+  } catch (err) {
+    throw err;
+  }
 };

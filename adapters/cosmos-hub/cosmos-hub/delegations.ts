@@ -16,32 +16,36 @@ const info: ProtocolInfo = {
 export default info;
 
 export const getAccount: ProtocolGetAccount = async (address: string) => {
-  const [delegations] = await Promise.all([
-    cosmosHubChain.getDelegations(address),
-    // cosmosHubChain.getRewards(address),
-    // cosmosHubChain.getCurrencyPrice(),
-  ]);
+  try {
+    const [delegations] = await Promise.all([
+      cosmosHubChain.getDelegations(address),
+      // cosmosHubChain.getRewards(address),
+      // cosmosHubChain.getCurrencyPrice(),
+    ]);
 
-  return [
-    {
-      native: true,
-      ind: null,
-      wallet: null,
-      tokens: [{ ...atom, address: atom.coinMinimalDenom }],
-      staked: {
-        tokenAmounts: {
-          [atom.coinMinimalDenom]: delegations,
+    return [
+      {
+        native: true,
+        ind: null,
+        wallet: null,
+        tokens: [{ ...atom, address: atom.coinMinimalDenom }],
+        staked: {
+          tokenAmounts: {
+            [atom.coinMinimalDenom]: delegations,
+          },
+          // value: delegations * atomPrice,
         },
-        // value: delegations * atomPrice,
+        unstake: 'unavailable',
+        rewards: 'unavailable',
+        // rewards: {
+        //   tokenAmounts: {
+        //     [atom.coinMinimalDenom]: rewards,
+        //   },
+        //   value: rewards * atomPrice,
+        // },
       },
-      unstake: 'unavailable',
-      rewards: 'unavailable',
-      // rewards: {
-      //   tokenAmounts: {
-      //     [atom.coinMinimalDenom]: rewards,
-      //   },
-      //   value: rewards * atomPrice,
-      // },
-    },
-  ];
+    ];
+  } catch (err) {
+    throw err;
+  }
 };

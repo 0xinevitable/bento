@@ -114,26 +114,34 @@ export const getAccount: ProtocolGetAccount = async (
   _,
   allRawTokenBalances,
 ) => {
-  const pools = KLAYSWAP_LP_POOLS;
+  try {
+    const pools = KLAYSWAP_LP_POOLS;
 
-  const items = await safeAsyncFlatMap(
-    Object.entries(allRawTokenBalances || {}),
-    async ([tokenAddress, tokenRawBalance]) => {
-      const klayswapLPPool = pools.find((v) =>
-        isSameAddress(v.exchange_address, tokenAddress),
-      );
-      if (!!klayswapLPPool) {
-        const item = getLPPoolBalance(account, tokenRawBalance, klayswapLPPool);
-        if (!item) {
-          return [];
+    const items = await safeAsyncFlatMap(
+      Object.entries(allRawTokenBalances || {}),
+      async ([tokenAddress, tokenRawBalance]) => {
+        const klayswapLPPool = pools.find((v) =>
+          isSameAddress(v.exchange_address, tokenAddress),
+        );
+        if (!!klayswapLPPool) {
+          const item = getLPPoolBalance(
+            account,
+            tokenRawBalance,
+            klayswapLPPool,
+          );
+          if (!item) {
+            return [];
+          }
+          return item;
         }
-        return item;
-      }
-      return [];
-    },
-  );
+        return [];
+      },
+    );
 
-  return items;
+    return items;
+  } catch (err) {
+    throw err;
+  }
 };
 
 export declare module KLAYswap {

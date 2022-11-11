@@ -119,35 +119,37 @@ export const getAccount: ProtocolGetAccount = async (
   _,
   allRawTokenBalances,
 ) => {
-  const dynamicLeveragePools = await getLeveragePoolList().catch(
-    () => undefined,
-  );
+  try {
+    const dynamicLeveragePools = await getLeveragePoolList();
 
-  const items = await safeAsyncFlatMap(
-    Object.entries(allRawTokenBalances || {}),
-    async ([tokenAddress, tokenRawBalance]) => {
-      const klayswapLeveragePool = KLAYSWAP_LEVERAGE_POOLS.find((v) =>
-        isSameAddress(v.address, tokenAddress),
-      );
-      if (!!klayswapLeveragePool) {
-        const item = getSinglePoolBalance(
-          account,
-          tokenRawBalance,
-          klayswapLeveragePool,
-          dynamicLeveragePools?.find(
-            (v) => v.address === klayswapLeveragePool.address,
-          ),
+    const items = await safeAsyncFlatMap(
+      Object.entries(allRawTokenBalances || {}),
+      async ([tokenAddress, tokenRawBalance]) => {
+        const klayswapLeveragePool = KLAYSWAP_LEVERAGE_POOLS.find((v) =>
+          isSameAddress(v.address, tokenAddress),
         );
-        if (!item) {
-          return [];
+        if (!!klayswapLeveragePool) {
+          const item = getSinglePoolBalance(
+            account,
+            tokenRawBalance,
+            klayswapLeveragePool,
+            dynamicLeveragePools?.find(
+              (v) => v.address === klayswapLeveragePool.address,
+            ),
+          );
+          if (!item) {
+            return [];
+          }
+          return item;
         }
-        return item;
-      }
-      return [];
-    },
-  );
+        return [];
+      },
+    );
 
-  return items;
+    return items;
+  } catch (err) {
+    throw err;
+  }
 };
 
 export interface SingleLeveragePool {

@@ -25,7 +25,7 @@ type Adapters = Record<
       string,
       {
         info: BentoServiceAdapter;
-        protocols: Record<string, BentoProtocolAdapter>;
+        protocols: Record<string, Promise<BentoProtocolAdapter>>;
       }
     >;
   }

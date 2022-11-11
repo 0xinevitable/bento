@@ -101,29 +101,33 @@ export const getAccount: ProtocolGetAccount = async (
   _,
   allRawTokenBalances,
 ) => {
-  const pools = await getLPPoolList();
+  try {
+    const pools = await getLPPoolList();
 
-  const items = await safeAsyncFlatMap(
-    Object.entries(allRawTokenBalances || {}),
-    async ([tokenAddress, tokenRawBalance]) => {
-      const pool = pools.find((v) => v.lpTokenAddress === tokenAddress);
-      if (!!pool) {
-        const item = await getLPPoolBalance(
-          account,
-          tokenRawBalance,
-          pool,
-          pools,
-        );
-        if (!item) {
-          return [];
+    const items = await safeAsyncFlatMap(
+      Object.entries(allRawTokenBalances || {}),
+      async ([tokenAddress, tokenRawBalance]) => {
+        const pool = pools.find((v) => v.lpTokenAddress === tokenAddress);
+        if (!!pool) {
+          const item = await getLPPoolBalance(
+            account,
+            tokenRawBalance,
+            pool,
+            pools,
+          );
+          if (!item) {
+            return [];
+          }
+          return item;
         }
-        return item;
-      }
-      return [];
-    },
-  );
+        return [];
+      },
+    );
 
-  return items;
+    return items;
+  } catch (err) {
+    throw err;
+  }
 };
 
 export declare module KokonutSwapAPI {
