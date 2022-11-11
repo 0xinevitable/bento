@@ -15,7 +15,6 @@ import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { WalletBalance } from '@/dashboard/types/WalletBalance';
-import { Metadata } from '@/defi/klaytn/constants/metadata';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
@@ -172,19 +171,6 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     () => Object.entries(groupBy(defis, 'protocol')),
     [defis],
   );
-
-  const [defiMetadata, setDefiMetadata] = useState<Record<
-    string,
-    Metadata
-  > | null>(null);
-  useEffect(() => {
-    if (!!defiMetadata) {
-      return;
-    }
-    import('../defi/klaytn/constants/metadata').then((v) =>
-      setDefiMetadata(v.KLAYTN_DEFI_METADATA),
-    );
-  }, [defiStakesByProtocol]);
 
   const netWorthInUSDOnlyDeFi = useMemo(
     () =>
@@ -377,7 +363,6 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                 return (
                                   <CollapsePanel
                                     title={t(`protocol-${protocol}`)}
-                                    metadata={defiMetadata?.[protocol]}
                                     count={defiProtocols.length}
                                     key={protocol}
                                     valuation={valuation}

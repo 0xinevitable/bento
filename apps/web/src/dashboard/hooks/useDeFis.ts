@@ -7,11 +7,11 @@ import {
   BentoDeFiSupportedNetworks,
   BentoSupportedNetwork,
 } from '@/constants/adapters';
+import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
 import {
   Valuation,
   getDeFiStakingValue,
-} from '@/defi/klaytn/utils/getDeFiStakingValue';
-import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
+} from '@/defi/utils/getDeFiStakingValue';
 
 import { useMultipleRequests } from './useMultipleRequests';
 
