@@ -1520,7 +1520,6 @@ __metadata:
     date-fns: ^2.29.3
     dedent: ^0.7.0
     env-cmd: ^10.1.0
-    find-yarn-workspace-root: ^2.0.0
     klaytn-multicall: ^1.0.5
     lodash.groupby: ^4.6.0
     next: canary

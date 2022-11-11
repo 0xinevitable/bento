@@ -2659,7 +2659,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["date-fns", "npm:2.29.3"],\
             ["dedent", "npm:0.7.0"],\
             ["env-cmd", "virtual:0617f0e340d72c9c77188243ca93686dc86e18e668bf9985bd9c7de757278a77cfeffee6be8f7813e7c7bd4b8cf3d8b5fd13421736af7c904b5f21e0632c9e10#npm:10.1.0"],\
-            ["find-yarn-workspace-root", "npm:2.0.0"],\
             ["klaytn-multicall", "npm:1.0.5"],\
             ["lodash.groupby", "npm:4.6.0"],\
             ["next", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:12.3.2-canary.25"],\
