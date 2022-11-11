@@ -25,9 +25,14 @@ const main = async () => {
   const chains = await fetchChildren(ADAPTER_ROOT_PATH, onlyIndex);
   const chainNameUnion = chains.map((v) => `'${v.name}'`).join(' | ');
 
+  let chainsWithServices: string[] = [];
   const chainScripts = await safePromiseAll(
     chains.map(async (chain) => {
       const services = await fetchChildren(chain.path, onlyIndex);
+      if (services.length > 0) {
+        chainsWithServices.push(chain.name);
+      }
+
       const serviceScripts = await safePromiseAll(
         services.map(async (service) => {
           const protocols = await fetchChildren(
@@ -73,6 +78,10 @@ export type { BentoChainAdapter, BentoProtocolAdapter, BentoServiceAdapter };
 export { type CosmosSDKBasedChain } from './_lib/types/cosmos-sdk';
 
 export type BentoSupportedNetwork = ${chainNameUnion};
+
+export const BentoDeFiSupportedNetworks: BentoSupportedNetwork[] = ${JSON.stringify(
+    chainsWithServices,
+  )};
 
 type Adapters = Record<
   BentoSupportedNetwork,

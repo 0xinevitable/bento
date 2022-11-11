@@ -17,6 +17,12 @@ export type BentoSupportedNetwork =
   | 'polygon'
   | 'solana';
 
+export const BentoDeFiSupportedNetworks: BentoSupportedNetwork[] = [
+  'cosmos-hub',
+  'klaytn',
+  'osmosis',
+];
+
 type Adapters = Record<
   BentoSupportedNetwork,
   {

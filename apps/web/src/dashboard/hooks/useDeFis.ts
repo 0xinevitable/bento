@@ -4,6 +4,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { useCachedPricings } from '@/hooks/pricings';
 
 import {
+  BentoDeFiSupportedNetworks,
+  BentoSupportedNetwork,
+} from '@/constants/networks';
+import {
   Valuation,
   getDeFiStakingValue,
 } from '@/defi/klaytn/utils/getDeFiStakingValue';
@@ -19,23 +23,23 @@ export type DeFiStakingWithClientData = DeFiStaking & {
 export const useDeFis = (wallets: Wallet[]) => {
   const calculatedRequests = useMemo(
     () =>
-      wallets.reduce<string[]>((acc, wallet) => {
-        // FIXME: Add more DeFis here
-        if (
-          wallet.type === 'cosmos-sdk' &&
-          wallet.networks.includes('osmosis')
-        ) {
-          return [...acc, `/api/defis/osmosis/${wallet.address}`];
-        }
-        if (wallet.type === 'evm' && wallet.networks.includes('klaytn')) {
-          return [...acc, `/api/defis/klaytn/${wallet.address}`];
-        }
-        return acc;
-      }, []),
+      wallets.reduce<string[]>(
+        (acc, wallet) => [
+          ...acc,
+          ...wallet.networks.flatMap((network) =>
+            !BentoDeFiSupportedNetworks.includes(
+              network as BentoSupportedNetwork,
+            )
+              ? []
+              : `/api/protocols/${network}/${wallet.address}`,
+          ),
+        ],
+        [],
+      ),
     [JSON.stringify(wallets)],
   );
 
-  // FIXME: Refetch rule
+  // TODO: Implement refetch rule
   const { responses: result, refetch } =
     useMultipleRequests<DeFiStakingResponse>(calculatedRequests);
   const { getCachedPrice } = useCachedPricings();
