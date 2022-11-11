@@ -4,15 +4,20 @@ import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 
-import { LocalizedString, ProtocolAccountInfo, ProtocolInfo } from '@/constants/adapters';
-
+import {
+  LocalizedString,
+  ProtocolAccountInfo,
+  ProtocolInfo,
+} from '@/constants/adapters';
 import { Colors } from '@/styles';
-import { Valuation } from '@/defi/utils/getDeFiStakingValue';
 
+import { Valuation } from '@/defi/utils';
 import { InlineBadge } from './InlineBadge';
 
-const displayLocalizedString = (value : LocalizedString, currentLanguage: string) =>
-  typeof value === 'string' ? value : value[currentLanguage] || value.en
+const displayLocalizedString = (
+  value: LocalizedString,
+  currentLanguage: string,
+) => (typeof value === 'string' ? value : value[currentLanguage] || value.en);
 
 const formatNumber = (value: number | null | undefined): string =>
   (value || 0).toLocaleString(undefined, {
@@ -64,13 +69,15 @@ const DecomposeTokenAmounts: React.FC<DecomposeTokenAmountsProps> = ({
 type DeFiStakingItemProps = {
   info: ProtocolInfo;
   protocol: ProtocolAccountInfo & {
-    account: string, valuation: Valuation };
+    account: string;
+    valuation: Valuation;
+  };
 };
 export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
   info,
   protocol,
 }) => {
-  const { t , i18n } = useTranslation('dashboard');
+  const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
   const protocolTokens = useMemo(
@@ -98,7 +105,8 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
             {displayLocalizedString(info.name, currentLanguage)}
             {protocol.delegator && (
               <ValidatorBadge>
-                {displayLocalizedString(protocol.delegator, currentLanguage)}</ValidatorBadge>
+                {displayLocalizedString(protocol.delegator, currentLanguage)}
+              </ValidatorBadge>
             )}
           </Name>
         </HeaderTitle>
@@ -158,31 +166,31 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           </InfoItem>
         )}
 
-      {!!protocol.staked && (
-        <InfoItem>
-          <span className="field">{t('Staking')}</span>
-          {protocol.staked === 'unavailable' ? (
-            <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
-          ) : (
-            <InfoValuation className="sys">
-              {`$${formatNumber(protocol.valuation.staking)}`}
-              {typeof protocol.staked.lpAmount === 'number' && (
-                <>
-                  <br />
-                  <SmallAmountInfo className="sys">
-                    {`${formatNumber(protocol.staked.lpAmount)} LP`}
-                  </SmallAmountInfo>
-                </>
-              )}
+        {!!protocol.staked && (
+          <InfoItem>
+            <span className="field">{t('Staking')}</span>
+            {protocol.staked === 'unavailable' ? (
+              <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
+            ) : (
+              <InfoValuation className="sys">
+                {`$${formatNumber(protocol.valuation.staking)}`}
+                {typeof protocol.staked.lpAmount === 'number' && (
+                  <>
+                    <br />
+                    <SmallAmountInfo className="sys">
+                      {`${formatNumber(protocol.staked.lpAmount)} LP`}
+                    </SmallAmountInfo>
+                  </>
+                )}
 
-              <DecomposeTokenAmounts
-                tokenAmounts={protocol.staked.tokenAmounts}
-                protocolTokens={protocolTokens}
-              />
-            </InfoValuation>
-          )}
-        </InfoItem>
-      )}
+                <DecomposeTokenAmounts
+                  tokenAmounts={protocol.staked.tokenAmounts}
+                  protocolTokens={protocolTokens}
+                />
+              </InfoValuation>
+            )}
+          </InfoItem>
+        )}
 
         {!!protocol.rewards && (
           <InfoItem>
