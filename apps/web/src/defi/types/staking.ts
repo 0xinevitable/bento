@@ -28,6 +28,8 @@ export type ProtocolResponse = (ServiceInfo & {
   protocols: {
     protocolId: string;
     info: ProtocolInfo;
-    accounts: ProtocolAccountInfo[];
+    accounts: (ProtocolAccountInfo & {
+      account: string;
+    })[];
   }[];
 })[];

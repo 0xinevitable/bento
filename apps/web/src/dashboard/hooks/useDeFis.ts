@@ -82,9 +82,8 @@ export const useProtocols = (wallets: Wallet[]) => {
       });
 
       services.forEach((service) => {
-        // FIXME: use service id
         const existingService = allServices.find(
-          (s) => s.name === service.name,
+          (s) => s.serviceId === service.serviceId,
         );
 
         if (!existingService) {
