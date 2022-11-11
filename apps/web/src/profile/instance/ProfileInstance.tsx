@@ -18,13 +18,16 @@ import React, {
 
 import { AnimatedTab } from '@/components/AnimatedTab';
 import { Modal } from '@/components/system';
+import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useWalletContext } from '@/hooks/useWalletContext';
 import { formatUsername } from '@/utils/format';
 
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
-import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import {
+  DashboardTokenBalance,
+  WalletBalance,
+} from '@/dashboard/types/TokenBalance';
 import { Colors } from '@/styles';
 import {
   Analytics,
@@ -48,8 +51,6 @@ import { AssetSection } from './sections/AssetSection';
 import { NFTSection } from './sections/NFTSection';
 import { ProfileLinkSection } from './sections/ProfileLinkSection';
 import { ProfileWalletList } from './sections/ProfileWalletList';
-
-const MINIMAL_NET_WORTH = 0.0001;
 
 type ErrorResponse =
   | {
@@ -164,48 +165,55 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
   const { balances: walletBalances } = useWalletBalances({ wallets });
   const { balances: nftBalances } = useNFTBalances({ wallets });
 
-  const tokenBalances = useMemo<DashboardTokenBalance[]>(() => {
-    // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
-    // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
-    const balancesByPlatform = Object.entries(
-      groupBy<WalletBalance>(
-        [...walletBalances],
-        (balance) => balance.symbol + balance.name,
-      ),
-    ).map((v) => v[1]);
+  const [tokenBalances, setTokenBalances] = useState<DashboardTokenBalance[]>(
+    [],
+  );
+  useLazyEffect(
+    () => {
+      // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
+      // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
+      const balancesByPlatform = Object.entries(
+        groupBy<WalletBalance>(
+          [...walletBalances, ...nftBalances],
+          (balance) => balance.symbol + balance.name,
+        ),
+      ).map((v) => v[1]);
 
-    const tokens = balancesByPlatform
-      .map((balances) => {
-        // NOTE: balances 는 모두 같은 토큰의 정보를 담고 있기에, first 에서만 정보를 꺼내온다.
-        const [first] = balances;
+      const tokens = balancesByPlatform
+        .map((balances) => {
+          // NOTE: balances 는 모두 같은 토큰의 정보를 담고 있기에, first 에서만 정보를 꺼내온다.
+          const [first] = balances;
 
-        const amount = balances.reduce(
-          walletBalanceReducer(
-            first.symbol ?? first.name,
-            (acc, balance) => acc + balance.balance,
-          ),
-          0,
-        );
+          const amount = balances.reduce(
+            walletBalanceReducer(
+              first.symbol ?? first.name,
+              (acc, balance) => acc + balance.balance,
+            ),
+            0,
+          );
 
-        return {
-          platform: first.platform,
-          symbol: first.symbol,
-          name: first.name,
-          logo: first.logo,
-          type: 'type' in first ? first.type : undefined,
-          tokenAddress: 'address' in first ? first.address : undefined,
-          balances: balances,
-          netWorth: amount * first.price,
-          amount,
-          price: first.price,
-          coinGeckoId: 'coinGeckoId' in first ? first.coinGeckoId : undefined,
-        };
-      })
-      .flat();
+          return {
+            platform: first.chain,
+            symbol: first.symbol,
+            name: first.name,
+            logo: first.logo,
+            type: first.type,
+            tokenAddress: first.ind,
+            balances: balances,
+            netWorth: amount * first.price,
+            amount,
+            price: first.price,
+            coinGeckoId: 'coinGeckoId' in first ? first.coinGeckoId : undefined,
+          };
+        })
+        .flat();
 
-    tokens.sort((a, b) => b.netWorth - a.netWorth);
-    return tokens.filter((v) => v.netWorth > MINIMAL_NET_WORTH);
-  }, [walletBalances]);
+      tokens.sort((a, b) => b.netWorth - a.netWorth);
+      setTokenBalances(tokens.filter((v) => v.netWorth > 0));
+    },
+    [walletBalances, nftBalances],
+    500,
+  );
 
   const nftAssets = useMemo<OpenSeaAsset[]>(
     () =>

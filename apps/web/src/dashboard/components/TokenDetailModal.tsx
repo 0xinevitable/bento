@@ -1,12 +1,11 @@
 import { shortenAddress } from '@bento/common';
 import { OpenSeaAsset, cachedAxios } from '@bento/core';
 import styled from '@emotion/styled';
-import clsx from 'clsx';
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { Badge, Modal } from '@/components/system';
+import { Modal } from '@/components/system';
 
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { WalletBalance } from '@/dashboard/types/TokenBalance';
 import { Colors } from '@/styles';
 
 import { AssetMedia } from './AssetMedia';
@@ -21,7 +20,7 @@ export type TokenDetailModalParams = {
     netWorth: number;
     amount: number;
     price: number;
-    type?: 'nft';
+    type: 'nft' | 'token';
     coinGeckoId?: string;
   };
 };
@@ -56,7 +55,7 @@ export const TokenDetailModal: React.FC<Props> = ({
       if (wallet.balance > 0) {
         walletsByPosition.push({
           amount: wallet.balance,
-          address: wallet.walletAddress,
+          address: wallet.account,
         });
       }
     }

@@ -10,12 +10,13 @@ import { Checkbox, Skeleton } from '@/components/system';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
-import { useDeFis } from '@/dashboard/hooks/useDeFis';
+import { useProtocols } from '@/dashboard/hooks/useDeFis';
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
-import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
-import { Metadata } from '@/defi/klaytn/constants/metadata';
+import {
+  DashboardTokenBalance,
+  WalletBalance,
+} from '@/dashboard/types/TokenBalance';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
@@ -118,12 +119,12 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           );
 
           return {
-            platform: first.platform,
+            platform: first.chain,
             symbol: first.symbol,
             name: first.name,
             logo: first.logo,
-            type: 'type' in first ? first.type : undefined,
-            tokenAddress: 'address' in first ? first.address : undefined,
+            type: first.type,
+            tokenAddress: first.ind,
             balances: balances,
             netWorth: amount * first.price,
             amount,
@@ -166,34 +167,16 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     }
   }, [currentTab]);
 
-  const { defis } = useDeFis(wallets);
-  // Entries
-  const defiStakesByProtocol = useMemo(
-    () => Object.entries(groupBy(defis, 'protocol')),
-    [defis],
-  );
-
-  const [defiMetadata, setDefiMetadata] = useState<Record<
-    string,
-    Metadata
-  > | null>(null);
-  useEffect(() => {
-    if (!!defiMetadata) {
-      return;
-    }
-    import('../defi/klaytn/constants/metadata').then((v) =>
-      setDefiMetadata(v.KLAYTN_DEFI_METADATA),
-    );
-  }, [defiStakesByProtocol]);
+  const { defis } = useProtocols(wallets);
 
   const netWorthInUSDOnlyDeFi = useMemo(
     () =>
-      defiStakesByProtocol.reduce(
-        (acc, [, stakes]) =>
-          acc + stakes.reduce((a, v) => a + v.valuation.total, 0),
+      defis.reduce(
+        (acc, service) =>
+          acc + service.protocols.reduce((a, v) => a + v.netWorth, 0),
         0,
       ),
-    [defiStakesByProtocol],
+    [defis],
   );
 
   const CRYPTO_FEEDS: ('DEFI' | 'WALLET')[] = useMemo(
@@ -236,7 +219,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                   netWorthInUSD={netWorthInUSD}
                   netWorthInUSDOnlyDeFi={netWorthInUSDOnlyDeFi}
                   tokenBalances={tokenBalances}
-                  defiStakesByProtocol={defiStakesByProtocol}
+                  // defiStakesByProtocol={defiStakesByProtocol}
                 />
 
                 <WalletListSection
@@ -368,36 +351,52 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                       <AssetListCard>
                         {defis.length > 0 ? (
                           <Collapse>
-                            {defiStakesByProtocol.map(
-                              ([protocol, defiProtocols]) => {
-                                const valuation = defiProtocols.reduce(
-                                  (acc, v) => acc + v.valuation.total,
-                                  0,
-                                );
-                                return (
-                                  <CollapsePanel
-                                    title={t(`protocol-${protocol}`)}
-                                    metadata={defiMetadata?.[protocol]}
-                                    count={defiProtocols.length}
-                                    key={protocol}
-                                    valuation={valuation}
-                                    currentLanguage={currentLanguage}
-                                  >
-                                    <ul>
-                                      {defiProtocols.map((item) => (
-                                        <DeFiStakingItem
-                                          // FIXME: group stats with different wallets...
-                                          key={`${item.type}-${
-                                            item.address || 'gov'
-                                          }-${item.walletAddress}`}
-                                          protocol={item}
-                                        />
-                                      ))}
-                                    </ul>
-                                  </CollapsePanel>
-                                );
-                              },
-                            )}
+                            {defis.map((service) => {
+                              const valuation = service.protocols.reduce(
+                                (acc, v) => acc + v.netWorth,
+                                0,
+                              );
+                              return (
+                                <CollapsePanel
+                                  title={service.name}
+                                  count={service.protocols.reduce(
+                                    (acc, v) => acc + v.accounts.length,
+                                    0,
+                                  )}
+                                  // FIXME: Use service id
+                                  key={service.name}
+                                  valuation={valuation}
+                                  currentLanguage={currentLanguage}
+                                >
+                                  <ul>
+                                    {service.protocols.map((protocol) => (
+                                      // <DeFiStakingItem
+                                      //   // FIXME: group stats with different wallets...
+                                      //   // FIXME: Use protocol id in key
+                                      //   key={`${item.address || 'gov'}-${
+                                      //     item.account
+                                      //   }`}
+                                      //   protocol={item}
+                                      // />
+                                      <React.Fragment
+                                        key={
+                                          typeof protocol.info.name === 'string'
+                                            ? protocol.info.name
+                                            : protocol.info.name.en
+                                        }
+                                      >
+                                        {protocol.accounts.map((account) => (
+                                          <DeFiStakingItem
+                                            info={protocol.info}
+                                            protocol={account}
+                                          />
+                                        ))}
+                                      </React.Fragment>
+                                    ))}
+                                  </ul>
+                                </CollapsePanel>
+                              );
+                            })}
                           </Collapse>
                         ) : (
                           <EmptyBalance />

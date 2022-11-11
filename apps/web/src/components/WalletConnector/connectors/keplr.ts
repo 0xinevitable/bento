@@ -26,15 +26,15 @@ export const connectKeplr = async ({
 
   const offlineSigner = window.keplr.getOfflineSignerOnlyAmino(chainId);
   const accounts = await offlineSigner.getAccounts();
-  const walletAddress = accounts[0].address;
-  const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+  const account = accounts[0].address;
+  const messageToBeSigned = await getMessagedToBeSigned(account);
   if (!messageToBeSigned) {
     return;
   }
 
   const { pub_key: publicKey, signature } = await window.keplr.signArbitrary(
     chainId,
-    walletAddress,
+    account,
     messageToBeSigned,
   );
 
@@ -42,7 +42,7 @@ export const connectKeplr = async ({
   await validateAndSaveWallet({
     networks,
     walletType,
-    walletAddress,
+    account,
     signature,
     nonce: messageToBeSigned,
     publicKeyValue: publicKey.value,
@@ -51,7 +51,7 @@ export const connectKeplr = async ({
     Analytics.logEvent('connect_wallet', {
       type: 'keplr',
       networks: networks.map((v) => v.id) as any[],
-      address: walletAddress,
+      address: account,
     });
   });
 

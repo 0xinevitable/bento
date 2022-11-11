@@ -1,14 +1,15 @@
 import { shortenAddress } from '@bento/common';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Trans, useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next';
 import { useMemo } from 'react';
 
-import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
-import { OsmosisDeFiType } from '@/defi/types/staking';
+import { ProtocolAccountInfo, ProtocolInfo } from '@/constants/adapters';
+
 import { Colors } from '@/styles';
 
 import { InlineBadge } from './InlineBadge';
+import { Valuation } from '@/defi/utils/getDeFiStakingValue';
 
 const formatNumber = (value: number | null | undefined): string =>
   (value || 0).toLocaleString(undefined, {
@@ -58,9 +59,12 @@ const DecomposeTokenAmounts: React.FC<DecomposeTokenAmountsProps> = ({
 };
 
 type DeFiStakingItemProps = {
-  protocol: DeFiStakingWithClientData;
+  info: ProtocolInfo;
+  protocol: ProtocolAccountInfo & {
+    account: string, valuation: Valuation };
 };
 export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
+  info,
   protocol,
 }) => {
   const { t } = useTranslation('dashboard');
@@ -87,13 +91,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
           <Name>
             {!!protocol.prefix && `${protocol.prefix} `}
-            <Trans
+            {/* FIXME: Show protocol metadata from `protocol API` */}
+            {/* <Trans
               t={t}
-              i18nKey={`defi-type-${protocol.type}`}
+              i18nKey={`defi-type-${protocol.address}`}
               components={{
                 validator: <ValidatorBadge />,
               }}
-            />
+            /> */}
           </Name>
         </HeaderTitle>
 
@@ -106,22 +111,20 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
         <AccountItem>
           <span className="field">{t('Account')}</span>
           <span className="sys">
-            <InlineBadge>{shortenAddress(protocol.walletAddress)}</InlineBadge>
+            <InlineBadge>{shortenAddress(protocol.account)}</InlineBadge>
           </span>
         </AccountItem>
-        {!!protocol.address && (
+        {!!protocol.ind && (
           <AccountItem>
             <span className="field">
-              {protocol.type === OsmosisDeFiType.OSMOSIS_GAMM_LP
+              {/* FIXME: Exception for Osmosis */}
+              {/* {protocol.type === OsmosisDeFiType.OSMOSIS_GAMM_LP
                 ? t('Pool ID')
-                : t('Rep Contract')}
+                : t('Rep Contract')} */}
+              {t('Rep Contract')}
             </span>
             <span className="sys">
-              <InlineBadge>
-                {protocol.type === OsmosisDeFiType.OSMOSIS_GAMM_LP
-                  ? protocol.address
-                  : shortenAddress(protocol.address)}
-              </InlineBadge>
+              <InlineBadge>{shortenAddress(protocol.ind)}</InlineBadge>
             </span>
           </AccountItem>
         )}
@@ -154,25 +157,31 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           </InfoItem>
         )}
 
+      {!!protocol.staked && (
         <InfoItem>
           <span className="field">{t('Staking')}</span>
-          <InfoValuation className="sys">
-            {`$${formatNumber(protocol.valuation.staking)}`}
-            {typeof protocol.staked.lpAmount === 'number' && (
-              <>
-                <br />
-                <SmallAmountInfo className="sys">
-                  {`${formatNumber(protocol.staked.lpAmount)} LP`}
-                </SmallAmountInfo>
-              </>
-            )}
+          {protocol.staked === 'unavailable' ? (
+            <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
+          ) : (
+            <InfoValuation className="sys">
+              {`$${formatNumber(protocol.valuation.staking)}`}
+              {typeof protocol.staked.lpAmount === 'number' && (
+                <>
+                  <br />
+                  <SmallAmountInfo className="sys">
+                    {`${formatNumber(protocol.staked.lpAmount)} LP`}
+                  </SmallAmountInfo>
+                </>
+              )}
 
-            <DecomposeTokenAmounts
-              tokenAmounts={protocol.staked.tokenAmounts}
-              protocolTokens={protocolTokens}
-            />
-          </InfoValuation>
+              <DecomposeTokenAmounts
+                tokenAmounts={protocol.staked.tokenAmounts}
+                protocolTokens={protocolTokens}
+              />
+            </InfoValuation>
+          )}
         </InfoItem>
+      )}
 
         {!!protocol.rewards && (
           <InfoItem>

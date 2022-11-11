@@ -7,31 +7,23 @@ import { AnimatedToolTip } from '@/components/system';
 
 import { NETWORKS } from '@/constants/networks';
 import { displayName } from '@/dashboard/constants/platform';
-import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import {
-  KlaytnDeFiProtocolType,
-  OsmosisDeFiProtocolType,
-} from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 import { AssetRatioChart } from './AssetRatioChart';
-
-const KLAYTN_DEFIS = Object.values(KlaytnDeFiProtocolType) as string[];
-const OSMOSIS_DEFIS = Object.values(OsmosisDeFiProtocolType) as string[];
 
 type AssetRatioSectionProps = {
   netWorthInUSD: number;
   netWorthInUSDOnlyDeFi: number;
   tokenBalances: DashboardTokenBalance[];
-  defiStakesByProtocol: [string, DeFiStakingWithClientData[]][];
+  // defiStakesByProtocol: [string, ServiceWithClientData[]][];
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
   netWorthInUSDOnlyDeFi,
   // FIXME: dirty code here
   netWorthInUSD: netWorthInUSDOnlyWallet,
-  defiStakesByProtocol,
+  // defiStakesByProtocol,
 }) => {
   const { t } = useTranslation('dashboard');
 
@@ -47,23 +39,23 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       const assets = groups[platform] || [];
       let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
 
-      // FIXME: Hardcoded here
-      defiStakesByProtocol.forEach(([defiProtocol, defiStakes]) => {
-        if (platform === 'klaytn' && KLAYTN_DEFIS.includes(defiProtocol)) {
-          netWorth += defiStakes.reduce(
-            (acc, val) => val.valuation.total + acc,
-            0,
-          );
-        } else if (
-          platform === 'osmosis' &&
-          OSMOSIS_DEFIS.includes(defiProtocol)
-        ) {
-          netWorth += defiStakes.reduce(
-            (acc, val) => val.valuation.total + acc,
-            0,
-          );
-        }
-      });
+      // FIXME: Update here with data from `protocol API`
+      // defiStakesByProtocol.forEach(([defiProtocol, defiStakes]) => {
+      //   if (platform === 'klaytn' && KLAYTN_DEFIS.includes(defiProtocol)) {
+      //     netWorth += defiStakes.reduce(
+      //       (acc, val) => val.valuation.total + acc,
+      //       0,
+      //     );
+      //   } else if (
+      //     platform === 'osmosis' &&
+      //     OSMOSIS_DEFIS.includes(defiProtocol)
+      //   ) {
+      //     netWorth += defiStakes.reduce(
+      //       (acc, val) => val.valuation.total + acc,
+      //       0,
+      //     );
+      //   }
+      // });
 
       let ratio = (netWorth / netWorthInUSD) * 100;
       if (isNaN(ratio)) {
@@ -81,7 +73,11 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
     // maximum length is 3
     items = items.sort((a, b) => b.ratio - a.ratio);
     return items.slice(0, 3);
-  }, [netWorthInUSD, defiStakesByProtocol, tokenBalances]);
+  }, [
+    netWorthInUSD,
+    // defiStakesByProtocol,
+    tokenBalances,
+  ]);
 
   return (
     <Container>

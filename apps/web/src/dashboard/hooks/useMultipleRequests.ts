@@ -7,6 +7,7 @@ type RequestKey = string;
 export const useMultipleRequests = <T extends any>(
   requests: (RequestKey | null)[],
   fetcher: AxiosInstance = axiosWithCredentials,
+  modifier?: (key: RequestKey, data: T) => T,
 ) => {
   const responsesRef = useRef<
     Record<
@@ -16,31 +17,34 @@ export const useMultipleRequests = <T extends any>(
   >({});
 
   const [count, setCount] = useState<number>(0);
-  const retrieveResponse = useCallback((requestKey: RequestKey) => {
-    responsesRef.current[requestKey] = {
-      ...responsesRef.current[requestKey],
-      isLoading: true,
-    };
+  const retrieveResponse = useCallback(
+    (requestKey: RequestKey) => {
+      responsesRef.current[requestKey] = {
+        ...responsesRef.current[requestKey],
+        isLoading: true,
+      };
 
-    fetcher
-      .get<T>(requestKey)
-      .then(({ data }) => {
-        responsesRef.current[requestKey] = {
-          data,
-          error: null,
-          isLoading: false,
-        };
-        setCount((prev) => prev + 1);
-      })
-      .catch((error: any) => {
-        responsesRef.current[requestKey] = {
-          ...responsesRef.current[requestKey],
-          error,
-          isLoading: false,
-        };
-        setCount((prev) => prev + 1);
-      });
-  }, []);
+      fetcher
+        .get<T>(requestKey)
+        .then(({ data }) => {
+          responsesRef.current[requestKey] = {
+            data: !modifier ? data : modifier(requestKey, data),
+            error: null,
+            isLoading: false,
+          };
+          setCount((prev) => prev + 1);
+        })
+        .catch((error: any) => {
+          responsesRef.current[requestKey] = {
+            ...responsesRef.current[requestKey],
+            error,
+            isLoading: false,
+          };
+          setCount((prev) => prev + 1);
+        });
+    },
+    [modifier],
+  );
 
   useEffect(() => {
     requests.forEach((requestKey) => {

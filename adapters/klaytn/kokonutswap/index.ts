@@ -1,9 +1,11 @@
 import { ServiceInfo } from '@/_lib/types';
 
+import { KOKOS_TOKEN_INFO } from './_constants';
+
 const info: ServiceInfo = {
   native: false,
   name: 'Kokonut Swap',
-  logo: '',
+  logo: KOKOS_TOKEN_INFO.logo,
   url: 'https://kokonutswap.finance',
   description: {
     en: 'Kokonut Swap is a next-generation AMM DEX protocol for the Klaytn ecosystem, which enables users/protocols to exchange stablecoins with low slippage.',

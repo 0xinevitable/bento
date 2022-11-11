@@ -51,7 +51,7 @@ export const getLeveragePoolList = async () => {
 
 export const getSinglePoolBalance = async (
   account: string,
-  tokenBalance: string,
+  tokenBalance: number,
   pool: SingleLeveragePool,
   _dynamicPool: SingleLeveragePool | undefined,
 ): Promise<ProtocolAccountInfo> => {

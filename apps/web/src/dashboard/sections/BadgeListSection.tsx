@@ -7,7 +7,6 @@ import ogBadgeIllust1 from '@/assets/badges/og-1.png';
 import ogBadgeIllust2 from '@/assets/badges/og-2.png';
 import { debounce } from '@/utils/debounce';
 
-import { KlaytnDeFiProtocolType } from '@/defi/types/staking';
 import { Colors, float } from '@/styles';
 import { FeatureFlags, axiosWithCredentials, toast } from '@/utils';
 
@@ -135,7 +134,7 @@ export const BadgeListSection: React.FC<Props> = ({ userId, selected }) => {
         {FeatureFlags.isBadgeMockupsEnabled && (
           <>
             {badges.map((badge, index) => {
-              if (badge.type === KlaytnDeFiProtocolType.KLAYSWAP) {
+              if (badge.type === 'klayswap') {
                 return (
                   <KLAYswapBadge
                     key={index}
@@ -146,7 +145,7 @@ export const BadgeListSection: React.FC<Props> = ({ userId, selected }) => {
                   />
                 );
               }
-              if (badge.type === KlaytnDeFiProtocolType.SWAPSCANNER) {
+              if (badge.type === 'swapscanner') {
                 return (
                   <SwapscannerBadge
                     key={index}

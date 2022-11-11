@@ -23,21 +23,21 @@ export const connectKaikas = async ({
 
   const provider = window.klaytn;
   const accounts = await provider.enable();
-  const walletAddress = accounts[0];
-  const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+  const account = accounts[0];
+  const messageToBeSigned = await getMessagedToBeSigned(account);
   if (!messageToBeSigned) {
     return;
   }
 
   const Caver = await import('caver-js');
   const caver = new Caver.default(provider);
-  const signature = await caver.rpc.klay.sign(walletAddress, messageToBeSigned);
+  const signature = await caver.rpc.klay.sign(account, messageToBeSigned);
   const walletType = 'kaikas';
 
   await validateAndSaveWallet({
     networks,
     walletType,
-    walletAddress,
+    account,
     signature,
     nonce: messageToBeSigned,
     signOut,
@@ -45,7 +45,7 @@ export const connectKaikas = async ({
     Analytics.logEvent('connect_wallet', {
       type: 'kaikas',
       networks: networks.map((v) => v.id) as any[],
-      address: walletAddress,
+      address: account,
     });
   });
 

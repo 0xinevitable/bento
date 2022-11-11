@@ -8,7 +8,7 @@ import { Colors } from '@/styles';
 
 export type WalletListItemProps = MotionProps & {
   wallet: Wallet;
-  onClickDelete?: (walletAddress: string) => void;
+  onClickDelete?: (account: string) => void;
   onClickCopy?: (address: string, type: ChainType) => void;
 };
 

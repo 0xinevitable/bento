@@ -56,8 +56,8 @@ export const connectMetaMaskOrWalletConnect = async ({
   const provider = new Web3Provider(instance);
 
   const signer = provider.getSigner();
-  const walletAddress = await signer.getAddress();
-  const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+  const account = await signer.getAddress();
+  const messageToBeSigned = await getMessagedToBeSigned(account);
   if (!messageToBeSigned) {
     return;
   }
@@ -67,7 +67,7 @@ export const connectMetaMaskOrWalletConnect = async ({
   await validateAndSaveWallet({
     networks,
     walletType,
-    walletAddress,
+    account,
     signature,
     nonce: messageToBeSigned,
     signOut,
@@ -75,7 +75,7 @@ export const connectMetaMaskOrWalletConnect = async ({
     Analytics.logEvent('connect_wallet', {
       type: 'metamask-or-walletconnect',
       networks: networks.map((v) => v.id) as any[],
-      address: walletAddress,
+      address: account,
     });
   });
 

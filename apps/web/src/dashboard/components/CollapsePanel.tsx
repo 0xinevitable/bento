@@ -1,23 +1,22 @@
 import styled from '@emotion/styled';
 import useCollapse from 'react-collapsed';
 
-import { Metadata } from '@/defi/klaytn/constants/metadata';
 import { Colors } from '@/styles';
 
 import { InlineBadge } from './InlineBadge';
 
 type CollapsePanelProps = {
   title: string;
-  metadata: Metadata | undefined;
   count?: number;
   children?: React.ReactNode;
   valuation: number;
   currentLanguage: string;
 };
 
+// FIXME: Show metadata from `protocols API` response
 export const CollapsePanel: React.FC<CollapsePanelProps> = ({
   title,
-  metadata,
+  // metadata,
   count,
   children,
   valuation,
@@ -33,7 +32,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
       <Header {...getToggleProps()}>
         <HeaderTitleRow>
           <ProtocolInfo>
-            <ProtocolLogo alt={title} src={metadata?.logo} />
+            {/* <ProtocolLogo alt={title} src={metadata?.logo} /> */}
             <span>{title}</span>
             {typeof count !== 'undefined' && (
               <span className="sys">
@@ -48,7 +47,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
             })}`}
           </Valuation>
         </HeaderTitleRow>
-        <Paragraph>{metadata?.description[lang]}</Paragraph>
+        {/* <Paragraph>{metadata?.description[lang]}</Paragraph> */}
       </Header>
       <Content {...getCollapseProps()}>{children}</Content>
     </Container>

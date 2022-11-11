@@ -17,10 +17,10 @@ export default info;
 
 export const getAccount: ProtocolGetAccount = async (
   _account: string,
-  rawTokenBalance?: string,
+  rawTokenBalance?: number,
 ) => {
   try {
-    const balance = Number(rawTokenBalance) / 10 ** KSP_TOKEN_INFO.decimals;
+    const balance = (rawTokenBalance || 0) / 10 ** KSP_TOKEN_INFO.decimals;
     return [
       {
         prefix: KSP_TOKEN_INFO.symbol,

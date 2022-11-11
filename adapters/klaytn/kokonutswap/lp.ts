@@ -21,7 +21,7 @@ const LP_TOKEN_DECIMALS = 18;
 
 export const getLPPoolBalance = async (
   _account: string,
-  lpTokenRawBalance: string,
+  lpTokenRawBalance: number,
   pool: KokonutSwapAPI.Pool,
   pools: KokonutSwapAPI.Pool[],
 ): Promise<ProtocolAccountInfo> => {
@@ -39,7 +39,7 @@ export const getLPPoolBalance = async (
 
   // get price with lpStaked, lpValue
   const lpPrice = Number(pool.lpTokenRealPrice || 0); // formatted with decimals
-  const lpBalanceInWallet = Number(lpTokenRawBalance) / 10 ** LP_TOKEN_DECIMALS;
+  const lpBalanceInWallet = lpTokenRawBalance / 10 ** LP_TOKEN_DECIMALS;
   let lpBalanceInWalletValue = lpBalanceInWallet * lpPrice;
   if (isNaN(lpBalanceInWalletValue)) {
     lpBalanceInWalletValue = 0;

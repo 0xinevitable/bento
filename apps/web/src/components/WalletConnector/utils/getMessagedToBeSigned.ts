@@ -1,12 +1,12 @@
 import { axiosWithCredentials } from '@/utils';
 import { toast } from '@/utils';
 
-export const getMessagedToBeSigned = async (walletAddress: string) => {
+export const getMessagedToBeSigned = async (account: string) => {
   try {
     const {
       data: { nonce: messageToBeSigned },
     } = await axiosWithCredentials.get<{ nonce: string }>(
-      `/api/auth/nonce/${walletAddress.toLowerCase()}`,
+      `/api/auth/nonce/${account.toLowerCase()}`,
     );
     return messageToBeSigned;
   } catch (error) {

@@ -21,31 +21,28 @@ type Props = {
 export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
   const { t } = useTranslation('common');
 
-  const onClickCopy = useCallback(
-    (walletAddress: string, chainType: ChainType) => {
-      Analytics.logEvent('click_copy_wallet_address', {
-        type: chainType,
-        address: walletAddress,
-      });
-      copyToClipboard(walletAddress);
-      toast({
-        title: 'Copied to clipboard!',
-        description: walletAddress,
-      });
-    },
-    [],
-  );
+  const onClickCopy = useCallback((account: string, chainType: ChainType) => {
+    Analytics.logEvent('click_copy_wallet_address', {
+      type: chainType,
+      address: account,
+    });
+    copyToClipboard(account);
+    toast({
+      title: 'Copied to clipboard!',
+      description: account,
+    });
+  }, []);
 
   const onClickDelete = useCallback(
-    async (walletAddress: string) => {
+    async (account: string) => {
       try {
         await axiosWithCredentials.post(`/api/profile/delete-wallet`, {
-          walletAddress,
+          account,
         });
         toast({
           type: 'success',
           title: 'Deleted Wallet',
-          description: `Removed wallet ${shortenAddress(walletAddress)}`,
+          description: `Removed wallet ${shortenAddress(account)}`,
         });
       } catch (error: any) {
         toast({
