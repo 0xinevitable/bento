@@ -32,7 +32,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
     [netWorthInWallet, netWorthInProtocols],
   );
 
-  const assetRatioByPlatform = useMemo(() => {
+  const [summary, assetRatioByPlatform] = useMemo(() => {
     const groups = groupBy(tokenBalances, 'platform');
 
     let items = NETWORKS.map(({ id: platform }) => {
@@ -58,14 +58,9 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       };
     });
 
-    // maximum length is 3
     items = items.sort((a, b) => b.ratio - a.ratio);
-    return items.slice(0, 3);
-  }, [
-    netWorthInUSD,
-    // defiStakesByProtocol,
-    tokenBalances,
-  ]);
+    return [items.slice(0, 3), items];
+  }, [netWorthInUSD, tokenBalances]);
 
   return (
     <Container>
@@ -80,12 +75,12 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
         <AssetRatioChart
           tokenBalances={tokenBalances}
           totalNetWorth={netWorthInUSD}
-          netWorthInProtocols={netWorthInProtocols}
+          assetRatioByPlatform={assetRatioByPlatform}
         />
       </div>
 
       <BadgeList>
-        {assetRatioByPlatform.map((item) => (
+        {summary.map((item) => (
           <AnimatedToolTip
             key={item.platform}
             label={`$${item.netWorth.toLocaleString(undefined, {
