@@ -4,6 +4,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 import { withAttrs } from '@/utils/withAttrs';
 
+import { NETWORKS } from '@/constants/networks';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';
@@ -23,65 +24,43 @@ const AVAILABLE_COLORS = [
 type AssetRatioChartProps = {
   tokenBalances: DashboardTokenBalance[];
   totalNetWorth: number;
-  netWorthInProtocols: number;
+  assetRatioByPlatform: {
+    platform: string;
+    netWorth: number;
+    name: string;
+    ratio: number;
+  }[];
 };
 
 export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
   tokenBalances,
   totalNetWorth,
-  netWorthInProtocols,
+  assetRatioByPlatform,
 }) => {
   const data = useMemo(() => {
-    if (tokenBalances.length < 1) {
+    if (assetRatioByPlatform.length < 1) {
       return [{ label: 'Empty', value: 100 }];
     }
 
-    // merge type nft with one
     let items: { label: string; value: number; logo?: string }[] = [];
-    const netWorthInNFTs = tokenBalances.reduce(
-      (acc, info) => (info.type === 'nft' ? (acc += info.netWorth) : acc),
-      0,
-    );
-    if (netWorthInNFTs > 0) {
-      const percentage = (netWorthInNFTs / totalNetWorth) * 100;
-      items.push({
-        label: 'OpenSea NFTs',
-        value: !percentage || isNaN(percentage) ? 0 : percentage,
-        logo: '/assets/icons/opensea.png',
-      });
-    }
-
-    if (netWorthInProtocols > 0) {
-      const percentage = (netWorthInProtocols / totalNetWorth) * 100;
-      items.push({
-        label: 'DeFi',
-        value: !percentage || isNaN(percentage) ? 0 : percentage,
-        // FIXME:
-        logo: 'https://www.bento.finance/android-chrome-512x512.png',
-      });
-    }
 
     items = items.concat(
-      tokenBalances.flatMap((info, index) => {
-        if (info.type === 'nft') {
+      assetRatioByPlatform.flatMap((item, index) => {
+        const { name, ratio } = item;
+        if (ratio < 0.01 || index > AVAILABLE_COLORS.length + 2) {
           return [];
         }
 
-        const { name, netWorth } = info;
-        const percentage = (netWorth / totalNetWorth) * 100;
-        if (percentage < 0.01 || index > AVAILABLE_COLORS.length + 2) {
-          return [];
-        }
         return {
           label: name,
-          logo: info.logo,
-          value: !percentage || isNaN(percentage) ? 0 : percentage,
+          logo: NETWORKS.find((v) => v.id === item.platform)?.logo,
+          value: !ratio || isNaN(ratio) ? 0 : ratio,
         };
       }),
     );
 
     return items;
-  }, [tokenBalances, netWorthInProtocols]);
+  }, [tokenBalances]);
 
   return (
     <ChartContainer>
