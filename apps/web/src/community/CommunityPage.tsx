@@ -11,6 +11,7 @@ import { MetaHead } from '@/components/system';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
+import backgroundImage from './assets/background.png';
 import discordLogo from './assets/discord.webp';
 import githubLogo from './assets/github.webp';
 import telegramLogo from './assets/telegram.webp';
@@ -80,9 +81,21 @@ const CommunityPage: NextPage = () => {
   return (
     <>
       <MetaHead />
-      <Black />
-      <PageContainer style={{ paddingBottom: 64 }}>
-        <Title>{t('Community')}</Title>
+      <BackgroundImageWrapper>
+        <BackgroundImageContainer>
+          <BackgroundImage
+            alt=""
+            src={backgroundImage}
+            sizes="1440px"
+            placeholder="blur"
+          />
+        </BackgroundImageContainer>
+      </BackgroundImageWrapper>
+      <Border />
+      <PageContainer
+        style={{ paddingTop: 0, paddingBottom: 64, minHeight: 'unset' }}
+      >
+        <Title>Prepare for the Future</Title>
         <List>
           {communities.map((community) => (
             <Item key={community.type}>
@@ -96,24 +109,23 @@ const CommunityPage: NextPage = () => {
                     medium: 'community',
                   })
                 }
+                style={{
+                  filter: `drop-shadow(0 2px 32px ${withOpacity(
+                    community.color,
+                    0.85,
+                  )})`,
+                }}
               >
                 <IconWrapper
                   style={{
                     padding: 4,
-                    backgroundColor: withOpacity(community.color, 0.65),
-                    boxShadow: `0 4px 32px ${withOpacity(
-                      community.color,
-                      0.85,
-                    )}`,
+                    backgroundColor: withOpacity(community.color, 0.25),
                   }}
                 >
-                  <Image
+                  <StyledImage
                     className="icon"
                     src={community.icon}
                     alt={t(community.type)}
-                    width={120}
-                    height={120}
-                    style={{ borderRadius: 26 }}
                   />
                 </IconWrapper>
                 <span className="title">{t(community.type)}</span>
@@ -127,35 +139,92 @@ const CommunityPage: NextPage = () => {
 };
 export default CommunityPage;
 
-const Black = styled.div`
+const BackgroundImageWrapper = styled.div`
   width: 100%;
-  height: 72px;
-  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+`;
+const BackgroundImageContainer = styled.div`
+  width: 900px;
+  min-width: 900px;
+  max-width: 900px;
+
+  display: flex;
+  justify-content: center;
+  position: relative;
+  filter: contrast(1.08) saturate(1.1)
+    drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.25));
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 100) 10%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 100) 10%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+`;
+const BackgroundImage = styled(Image)`
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  max-width: 900px;
+`;
+
+const Border = styled.div`
+  width: 100%;
+  height: 2px;
+  background-color: #aaaaaa;
+  background-image: linear-gradient(
+    to right,
+    #aaaaaa 0%,
+    #282c30 37.71%,
+    #787d83 100%
+  );
 `;
 
 const Title = styled.h1`
   margin-top: 32px;
 
   font-weight: 900;
-  font-size: 42px;
-  line-height: 103%;
+  font-size: 32px;
+  line-height: 1;
 
   text-align: center;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.3px;
   color: rgba(255, 255, 255, 0.85);
+  font-variant: small-caps;
 
   z-index: 1;
 `;
 const List = styled.ul`
   margin-top: 36px;
+  width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-
-  gap: 12px;
-  row-gap: 24px;
+  gap: 4px;
 
   user-select: none;
 `;
@@ -171,12 +240,20 @@ const Item = styled.li`
     flex-direction: column;
     align-items: center;
     gap: 8px;
+
+    @media (max-width: 620px) {
+      gap: 4px;
+    }
   }
 
   .title {
     color: ${Colors.gray200};
     font-weight: bold;
     text-align: center;
+
+    @media (max-width: 620px) {
+      font-size: 12px;
+    }
   }
 
   &:hover {
@@ -192,11 +269,37 @@ const Item = styled.li`
 `;
 
 const IconWrapper = styled.div`
-  width: 128px;
-  height: 128px;
+  width: 108px;
+  height: 108px;
   border-radius: 28px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  clip-path: path(
+    'M 54 0 c 16.77389681711179 0 25.160845225667686 0 31.77660356514323 2.7403368295936765 a 36 36 0 0 1 19.483059605263094 19.483059605263094 c 2.7403368295936765 6.615758339475543 2.7403368295936765 15.00270674803144 2.7403368295936765 31.77660356514323 L 108 54 c 0 16.77389681711179 0 25.160845225667686 -2.7403368295936765 31.77660356514323 a 36 36 0 0 1 -19.483059605263094 19.483059605263094 c -6.615758339475543 2.7403368295936765 -15.00270674803144 2.7403368295936765 -31.77660356514323 2.7403368295936765 L 54 108 c -16.77389681711179 0 -25.160845225667686 0 -31.77660356514323 -2.7403368295936765 a 36 36 0 0 1 -19.483059605263094 -19.483059605263094 c -2.7403368295936765 -6.615758339475543 -2.7403368295936765 -15.00270674803144 -2.7403368295936765 -31.77660356514323 L 0 54 c 0 -16.77389681711179 0 -25.160845225667686 2.7403368295936765 -31.77660356514323 a 36 36 0 0 1 19.483059605263094 -19.483059605263094 c 6.615758339475543 -2.7403368295936765 15.00270674803144 -2.7403368295936765 31.77660356514323 -2.7403368295936765 Z'
+  );
+
+  @media (max-width: 620px) {
+    width: 58px;
+    height: 58px;
+    border-radius: 20px;
+    clip-path: unset;
+  }
+`;
+const StyledImage = styled(Image)`
+  width: 100%;
+  height: 100%;
+
+  clip-path: path(
+    'M 51.4 0 c 17.368025817930885 0 26.052038726896328 0 32.6378944278172 3.4870310973391967 a 30 30 0 0 1 12.475074474843604 12.475074474843604 c 3.4870310973391967 6.585855700920876 3.4870310973391967 15.269868609886318 3.4870310973391967 32.6378944278172 L 100 51.4 c 0 17.368025817930885 0 26.052038726896328 -3.4870310973391967 32.6378944278172 a 30 30 0 0 1 -12.475074474843604 12.475074474843604 c -6.585855700920876 3.4870310973391967 -15.269868609886318 3.4870310973391967 -32.6378944278172 3.4870310973391967 L 48.6 100 c -17.368025817930885 0 -26.052038726896328 0 -32.6378944278172 -3.4870310973391967 a 30 30 0 0 1 -12.475074474843604 -12.475074474843604 c -3.4870310973391967 -6.585855700920876 -3.4870310973391967 -15.269868609886318 -3.4870310973391967 -32.6378944278172 L 0 48.6 c 0 -17.368025817930885 0 -26.052038726896328 3.4870310973391967 -32.6378944278172 a 30 30 0 0 1 12.475074474843604 -12.475074474843604 c 6.585855700920876 -3.4870310973391967 15.269868609886318 -3.4870310973391967 32.6378944278172 -3.4870310973391967 Z'
+  );
+
+  @media (max-width: 620px) {
+    width: 54px;
+    height: 54px;
+    border-radius: 18px;
+    clip-path: unset;
+  }
 `;
