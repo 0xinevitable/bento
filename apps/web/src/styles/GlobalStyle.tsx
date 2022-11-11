@@ -296,11 +296,11 @@ export const GlobalStyle: React.FC = () => {
             border: 1px solid ${theme.palette.border};
           }
 
-          blockquote :global(*:first-child) {
+          blockquote :global(*:first-of-type) {
             margin-top: 0;
           }
 
-          blockquote :global(*:last-child) {
+          blockquote :global(*:last-of-type) {
             margin-bottom: 0;
           }
         `,

@@ -80,7 +80,7 @@ const Tab = styled.div<TabProps>`
   cursor: pointer;
   transition: color 0.2s ease-in-out;
 
-  &:not(:first-child) {
+  &:not(:first-of-type) {
     margin-left: 8px;
   }
 
