@@ -49,7 +49,7 @@ export type ChainInfo =
 export type ServiceInfo = {
   native: boolean;
   name: string;
-  logo: string;
+  logo?: string;
   url?: string;
   description: LocalizedString;
 };

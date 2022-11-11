@@ -1,9 +1,11 @@
 import { ServiceInfo } from '@/_lib/types';
 
+import { SCNR_TOKEN_INFO } from './_constants';
+
 const info: ServiceInfo = {
   native: false,
   name: 'Swapscanner',
-  logo: '',
+  logo: SCNR_TOKEN_INFO.logo,
   url: 'https://swapscanner.io',
   description: {
     en: 'Swapscanner is a next-generation DEX Aggregator that enables users to buy tokens at the lowest price in the Klaytn Network.',

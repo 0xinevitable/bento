@@ -1,9 +1,11 @@
 import { ServiceInfo } from '@/_lib/types';
 
+import { KSP_TOKEN_INFO } from './_constants';
+
 const info: ServiceInfo = {
   native: false,
   name: 'KLAYswap',
-  logo: '',
+  logo: KSP_TOKEN_INFO.logo,
   url: 'https://klayswap.com',
   description: {
     en: 'KLAYswap is an AMM-based Instant Swap Protocol.',
