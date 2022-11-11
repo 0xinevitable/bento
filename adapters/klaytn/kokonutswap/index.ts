@@ -4,7 +4,10 @@ import { KOKOS_TOKEN_INFO } from './_constants';
 
 const info: ServiceInfo = {
   native: false,
-  name: 'Kokonut Swap',
+  name: {
+    en: 'Kokonut Swap',
+    ko: '코코넛 스왑',
+  },
   logo: KOKOS_TOKEN_INFO.logo,
   url: 'https://kokonutswap.finance',
   description: {

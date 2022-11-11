@@ -2,7 +2,10 @@ import { ServiceInfo } from '@/_lib/types';
 
 const info: ServiceInfo = {
   native: true,
-  name: 'Osmosis',
+  name: {
+    en: 'Osmosis',
+    ko: '오스모시스',
+  },
   logo: '/assets/icons/osmosis.png',
   url: 'https://osmosis.zone',
   description: {

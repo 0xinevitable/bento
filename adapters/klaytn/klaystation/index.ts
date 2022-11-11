@@ -2,7 +2,10 @@ import { ServiceInfo } from '@/_lib/types';
 
 const info: ServiceInfo = {
   native: false,
-  name: 'KLAYSTATION',
+  name: {
+    en: 'KLAYSTATION',
+    ko: '클레이스테이션',
+  },
   logo: '/assets/icons/services/klaytn/klaystation.svg',
   url: 'https://klaystation.io/',
   description: {

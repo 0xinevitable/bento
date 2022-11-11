@@ -4,7 +4,10 @@ import { KSP_TOKEN_INFO } from './_constants';
 
 const info: ServiceInfo = {
   native: false,
-  name: 'KLAYswap',
+  name: {
+    en: 'KLAYswap',
+    ko: '클레이스왑',
+  },
   logo: KSP_TOKEN_INFO.logo,
   url: 'https://klayswap.com',
   description: {

@@ -48,7 +48,7 @@ export type ChainInfo =
 
 export type ServiceInfo = {
   native: boolean;
-  name: string;
+  name: LocalizedString;
   logo?: string;
   url?: string;
   description: LocalizedString;
