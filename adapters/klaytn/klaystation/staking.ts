@@ -14,12 +14,15 @@ const provider = klaytnChain._provider;
 
 const DELEGATOR_BY_CONTRACT_ADDRESS: Record<string, LocalizedString> = {
   '0xe33337cb6fbb68954fe1c3fde2b21f56586632cd': {
+    en: 'Hashed-Ozys',
     ko: '해시드-오지스',
   },
   '0xeffa404dac6ba720002974c54d57b20e89b22862': {
+    en: 'The Korea Economic Daily',
     ko: '한국경제신문',
   },
   '0x962cdb28e662b026df276e5ee7fdf13a06341d68': {
+    en: 'FSN',
     ko: 'FSN',
   },
 };
