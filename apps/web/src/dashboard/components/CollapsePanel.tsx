@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useTheme } from '@geist-ui/core';
 import { useMemo } from 'react';
 import useCollapse from 'react-collapsed';
 
@@ -24,8 +23,6 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
   valuation,
   currentLanguage,
 }) => {
-  const { palette } = useTheme();
-
   const count = useMemo(
     () => service.protocols.reduce((acc, v) => acc + v.accounts.length, 0),
     [service],
