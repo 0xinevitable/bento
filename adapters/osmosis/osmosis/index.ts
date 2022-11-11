@@ -3,7 +3,7 @@ import { ServiceInfo } from '@/_lib/types';
 const info: ServiceInfo = {
   native: true,
   name: 'Osmosis',
-  logo: 'https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png',
+  logo: '/assets/icons/osmosis.png',
   url: 'https://osmosis.zone',
   description: {
     en: 'Osmosis is the largest interchain DEX in the Cosmos Ecosystem.',
