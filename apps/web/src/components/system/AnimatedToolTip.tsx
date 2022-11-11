@@ -20,11 +20,11 @@ interface Props {
   children: JSX.Element;
 }
 
-export const AnimatedToolTip = ({
+export const AnimatedToolTip: React.FC<Props> = ({
   children,
   label,
   placement = 'top',
-}: Props) => {
+}) => {
   const [open, setOpen] = useState(false);
 
   const { x, y, reference, floating, strategy, context } = useFloating({
