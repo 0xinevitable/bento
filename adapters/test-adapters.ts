@@ -1,37 +1,20 @@
-import findWorkspaceRoot from 'find-yarn-workspace-root';
 import fs from 'fs';
 import path from 'path';
 import TSON from 'typescript-json';
 
+import { ADAPTER_ROOT_PATH, Child, fetchChildren } from './_lib/scripts/utils';
 import {
   BentoChainAdapter,
   BentoProtocolAdapter,
   BentoServiceAdapter,
 } from './_lib/types';
 
-const WORKSPACE_ROOT_PATH = findWorkspaceRoot(null) ?? '';
-const ADAPTER_ROOT_PATH = path.resolve(WORKSPACE_ROOT_PATH, './adapters');
-
-type Child = {
-  name: string;
-  path: string;
-};
-
-const fetchChildren = (basePath: string): Child[] =>
-  fs.readdirSync(basePath).flatMap((filename) => {
-    if (
-      filename.startsWith('_') ||
-      filename.startsWith('.') ||
-      filename === 'dist'
-    ) {
-      return [];
-    }
-    const adapterPath = path.join(basePath, filename);
-    if (fs.statSync(path.join(basePath, filename)).isDirectory()) {
-      return { name: filename, path: adapterPath };
-    }
-    return [];
-  });
+const onlyIndex = (filename: string) =>
+  !(
+    filename.startsWith('_') ||
+    filename.startsWith('.') ||
+    filename === 'dist'
+  );
 
 const validateChildren = async (
   children: Child[],
@@ -130,7 +113,7 @@ const validateProtocols = (service: Child) => {
 };
 
 const main = async () => {
-  const chains = fetchChildren(ADAPTER_ROOT_PATH);
+  const chains = await fetchChildren(ADAPTER_ROOT_PATH, onlyIndex);
   await validateChildren(
     chains,
     'Chain',
@@ -153,7 +136,7 @@ const main = async () => {
         }
       }
 
-      const services = fetchChildren(chain.path);
+      const services = await fetchChildren(chain.path, onlyIndex);
       validateChildren(
         services,
         'ㄴ Service',

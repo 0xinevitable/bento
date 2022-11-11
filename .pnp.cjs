@@ -2601,18 +2601,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/providers", "npm:5.7.2"],\
             ["@solana/web3.js", "npm:1.66.2"],\
             ["@types/bn.js", "npm:5.1.1"],\
+            ["@types/dedent", "npm:0.7.0"],\
             ["@types/lodash.groupby", "npm:4.6.7"],\
             ["@types/node", "npm:18.11.5"],\
+            ["@types/prettier", "npm:2.7.1"],\
             ["axios", "npm:1.1.3"],\
             ["axios-cache-interceptor", "npm:0.10.7"],\
             ["bech32", "npm:2.0.0"],\
             ["bn.js", "npm:5.2.1"],\
             ["caver-js", "npm:1.9.0"],\
+            ["dedent", "npm:0.7.0"],\
             ["env-cmd", "virtual:0617f0e340d72c9c77188243ca93686dc86e18e668bf9985bd9c7de757278a77cfeffee6be8f7813e7c7bd4b8cf3d8b5fd13421736af7c904b5f21e0632c9e10#npm:10.1.0"],\
             ["find-yarn-workspace-root", "npm:2.0.0"],\
             ["klaytn-multicall", "npm:1.0.5"],\
             ["lodash.groupby", "npm:4.6.0"],\
             ["osmojs", "npm:0.35.0"],\
+            ["prettier", "npm:2.7.1"],\
             ["query-string", "npm:7.1.1"],\
             ["ts-node", "virtual:01bd07887e346c5ac5c129c1f0c11f41a9f35f213732826f3bd2ebe6fe6638663944788285c0110a430941772729efa99954c2806e5b1458ce448f7f3b506884#npm:10.9.1"],\
             ["ttypescript", "virtual:0617f0e340d72c9c77188243ca93686dc86e18e668bf9985bd9c7de757278a77cfeffee6be8f7813e7c7bd4b8cf3d8b5fd13421736af7c904b5f21e0632c9e10#npm:1.5.13"],\
