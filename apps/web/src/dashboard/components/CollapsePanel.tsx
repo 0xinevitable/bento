@@ -42,7 +42,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
             ) : (
               <ProtocolLogoEmpty />
             )}
-            <span>{service.name}</span>
+            <span>{formatLocalizedString(service.name, currentLanguage)}</span>
             {typeof count !== 'undefined' && (
               <span className="sys">
                 <InlineBadge>{count.toLocaleString()}</InlineBadge>

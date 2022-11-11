@@ -359,30 +359,18 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                               return (
                                 <CollapsePanel
                                   service={service}
-                                  // FIXME: Use service id
-                                  key={service.name}
+                                  key={`${service.chain}-${service.serviceId}`}
                                   valuation={valuation}
                                   currentLanguage={currentLanguage}
                                 >
                                   <ul>
                                     {service.protocols.map((protocol) => (
-                                      // <DeFiStakingItem
-                                      //   // FIXME: group stats with different wallets...
-                                      //   // FIXME: Use protocol id in key
-                                      //   key={`${item.address || 'gov'}-${
-                                      //     item.account
-                                      //   }`}
-                                      //   protocol={item}
-                                      // />
                                       <React.Fragment
-                                        key={
-                                          typeof protocol.info.name === 'string'
-                                            ? protocol.info.name
-                                            : protocol.info.name.en
-                                        }
+                                        key={`${service.serviceId}-${protocol.protocolId}`}
                                       >
                                         {protocol.accounts.map((account) => (
                                           <DeFiStakingItem
+                                            key={`${service.serviceId}-${protocol.protocolId}-${account.account}`}
                                             info={protocol.info}
                                             protocol={account}
                                           />
