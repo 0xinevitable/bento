@@ -1,4 +1,4 @@
-import { Balance } from '../types';
+import { Balance } from '@bento/adapters/_lib/types';
 
 type BalanceObject = {
   wallet?: Balance;

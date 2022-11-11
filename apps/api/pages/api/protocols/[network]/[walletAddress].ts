@@ -10,6 +10,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';
 import { withRedisCached } from '@/utils/cache';
+import { withoutEmptyDeFiStaking } from '@/utils/filters';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 interface APIRequest extends NextApiRequest {
@@ -116,7 +117,11 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
               return accountInfo.flatMap((v) => ({ account, ...v }));
             });
 
-            return { protocolId, info, accounts };
+            return {
+              protocolId,
+              info,
+              accounts: accounts.filter(withoutEmptyDeFiStaking),
+            };
           },
         ),
       );
