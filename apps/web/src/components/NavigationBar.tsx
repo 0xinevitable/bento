@@ -6,11 +6,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Icon, NoSSR, Portal } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
+import { useWindowSize } from '@/hooks/useWindowSize';
 
 import { MinimalButton } from '@/dashboard/components/MinimalButton';
 import { Colors } from '@/styles';
@@ -97,6 +98,13 @@ export const NavigationBar = () => {
       }),
     [i18n, currentLanguage],
   );
+
+  const { width: windowWidth } = useWindowSize();
+  useEffect(() => {
+    if (isMobileMenuOpen && windowWidth > 680) {
+      setMobileMenuOpen(false);
+    }
+  }, [isMobileMenuOpen, windowWidth]);
 
   return (
     <Wrapper>
