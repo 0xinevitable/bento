@@ -66,7 +66,7 @@ export const NETWORKS: Network[] = [
   },
   {
     id: 'solana',
-    type: 'solana',
+    type: 'sealevel',
     name: 'Solana',
     logo: '/assets/icons/solana.png',
   },

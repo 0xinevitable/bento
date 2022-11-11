@@ -154,9 +154,9 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
       </WalletButton>
 
       <WalletButton
-        disabled={firstNetwork !== 'solana' || isLoading}
+        disabled={firstNetwork !== 'sealevel' || isLoading}
         onClick={
-          firstNetwork === 'solana' && !isLoading
+          firstNetwork === 'sealevel' && !isLoading
             ? () => onClickConnect('phantom')
             : undefined
         }

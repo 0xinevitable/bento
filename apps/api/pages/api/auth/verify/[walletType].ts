@@ -146,7 +146,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
   const walletArchitectureType =
     walletType === 'phantom'
-      ? 'solana'
+      ? 'sealevel'
       : walletType === 'keplr'
       ? 'cosmos-sdk'
       : 'evm';

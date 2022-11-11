@@ -1454,10 +1454,45 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bento/adapters@workspace:^, @bento/adapters@workspace:adapters":
+  version: 0.0.0-use.local
+  resolution: "@bento/adapters@workspace:adapters"
+  dependencies:
+    "@bento/common": "workspace:^"
+    "@bento/core": "workspace:^"
+    "@cosmjs/cosmwasm-stargate": ^0.29.3
+    "@ethersproject/providers": ^5.7.2
+    "@solana/web3.js": ^1.66.2
+    "@types/bn.js": ^5.1.1
+    "@types/dedent": ^0.7.0
+    "@types/lodash.groupby": ^4.6.7
+    "@types/node": ^18.11.5
+    "@types/prettier": ^2.7.1
+    axios: ^1.1.3
+    axios-cache-interceptor: ^0.10.7
+    bech32: ^2.0.0
+    bn.js: ^5.2.1
+    caver-js: ^1.9.0
+    dedent: ^0.7.0
+    env-cmd: ^10.1.0
+    find-yarn-workspace-root: ^2.0.0
+    klaytn-multicall: ^1.0.5
+    lodash.groupby: ^4.6.0
+    osmojs: ^0.35.0
+    prettier: ^2.7.1
+    query-string: ^7.1.1
+    ts-node: ^10.9.1
+    ttypescript: ^1.5.13
+    typescript: ^4.8.3
+    typescript-json: ^3.3.22
+  languageName: unknown
+  linkType: soft
+
 "@bento/api@workspace:apps/api":
   version: 0.0.0-use.local
   resolution: "@bento/api@workspace:apps/api"
   dependencies:
+    "@bento/adapters": "workspace:^"
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
     "@cosmjs/amino": ^0.29.3
@@ -1489,7 +1524,7 @@ __metadata:
     lodash.groupby: ^4.6.0
     next: canary
     next-transpile-modules: ^9.1.0
-    osmojs: ^0.33.0
+    osmojs: ^0.35.0
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -4205,7 +4240,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:^2.6.3":
+"@types/prettier@npm:^2.6.3, @types/prettier@npm:^2.7.1":
   version: 2.7.1
   resolution: "@types/prettier@npm:2.7.1"
   checksum: 5e3f58e229d6c73b5f5cae2e8f96c1c4a5b5805f83459e17a045ba8e96152b1d38e86b63e3172fb159dac923388699660862b75b2d37e54220805f0e691e26f1
@@ -9822,9 +9857,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"osmojs@npm:^0.33.0":
-  version: 0.33.0
-  resolution: "osmojs@npm:0.33.0"
+"osmojs@npm:^0.35.0":
+  version: 0.35.0
+  resolution: "osmojs@npm:0.35.0"
   dependencies:
     "@babel/runtime": ^7.19.0
     "@cosmjs/amino": 0.29.2
@@ -9834,7 +9869,7 @@ __metadata:
     "@osmonauts/lcd": ^0.8.0
     long: ^5.2.0
     protobufjs: ^6.11.3
-  checksum: ec9524201d80c940e54a729ebf41233762a459fa97c7935f554820b701424872e156c9b124522afc45873fbe7b536981f79997ce87c9424eaf727cdde4d813a6
+  checksum: 28a79b4334718353a2d94b57d26c4db2012291bb0a232bff8536aa90d1fd54597c24242742860c20d1fffd9057b32f6944a82d198a18404539a1fe3c1b9d2443
   languageName: node
   linkType: hard
 
@@ -11905,6 +11940,13 @@ __metadata:
     tstl: ^2.5.6
     uuid: ^8.3.2
   checksum: 5859f859877788673561d3a7251ac80f7832e773c295c0d70001ed75c5b4a4a2063d77074d3a42cd7d098fa5d3b377bc6087d80fea0da0039cd98e685d9231f3
+  languageName: node
+  linkType: hard
+
+"typescript-json@npm:^3.3.22":
+  version: 3.3.22
+  resolution: "typescript-json@npm:3.3.22"
+  checksum: 502cf2215d2b3545ff3ea74f8976c7dcb07480ad099e111117dd4c2c33eb11c8252c49bc4a28f5985f7f842bd92a0dc9b00146f437f9424e42881ff003fc519a
   languageName: node
   linkType: hard
 

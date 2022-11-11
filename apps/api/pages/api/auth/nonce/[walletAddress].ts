@@ -64,7 +64,7 @@ const identifyWalletAddress = (value: string) => {
   } catch {
     try {
       if (PublicKey.isOnCurve(new PublicKey(value))) {
-        return 'solana';
+        return 'sealevel';
       }
     } catch {
       return null;

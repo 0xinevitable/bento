@@ -1,4 +1,5 @@
 const withTM = require('next-transpile-modules')([
+  '@bento/adapters',
   '@bento/common',
   '@bento/core',
 ]);
