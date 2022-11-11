@@ -13,16 +13,16 @@ import { Colors } from '@/styles';
 import { AssetRatioChart } from './AssetRatioChart';
 
 type AssetRatioSectionProps = {
-  netWorthInUSD: number;
-  netWorthInUSDOnlyDeFi: number;
+  netWorthInWallet: number;
+  netWorthInProtocols: number;
   tokenBalances: DashboardTokenBalance[];
   // defiStakesByProtocol: [string, ServiceWithClientData[]][];
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
-  netWorthInUSDOnlyDeFi,
+  netWorthInProtocols: netWorthInUSDOnlyDeFi,
   // FIXME: dirty code here
-  netWorthInUSD: netWorthInUSDOnlyWallet,
+  netWorthInWallet: netWorthInUSDOnlyWallet,
   // defiStakesByProtocol,
 }) => {
   const { t } = useTranslation('dashboard');
