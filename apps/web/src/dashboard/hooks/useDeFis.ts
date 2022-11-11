@@ -7,18 +7,10 @@ import {
   BentoDeFiSupportedNetworks,
   BentoSupportedNetwork,
 } from '@/constants/adapters';
-import { DeFiStaking, DeFiStakingResponse } from '@/defi/types/staking';
-import {
-  Valuation,
-  getDeFiStakingValue,
-} from '@/defi/utils/getDeFiStakingValue';
+import { ProtocolResponse, ServiceData } from '@/defi/types/staking';
+import { getDeFiStakingValue } from '@/defi/utils/getDeFiStakingValue';
 
 import { useMultipleRequests } from './useMultipleRequests';
-
-export type DeFiStakingWithClientData = DeFiStaking & {
-  account: string;
-  valuation: Valuation;
-};
 
 export const useDeFis = (wallets: Wallet[]) => {
   const calculatedRequests = useMemo(
@@ -40,27 +32,52 @@ export const useDeFis = (wallets: Wallet[]) => {
   );
 
   // TODO: Implement refetch rule
-  const { responses: result, refetch } =
-    useMultipleRequests<DeFiStakingResponse>(calculatedRequests);
+  const { responses, refetch } =
+    useMultipleRequests<ProtocolResponse>(calculatedRequests);
   const { getCachedPrice } = useCachedPricings();
 
-  const [defis, setDefis] = useState<DeFiStakingWithClientData[]>([]);
+  const [defis, setDefis] = useState<ServiceData[]>([]);
 
   useEffect(() => {
-    let items = result.flatMap((item) => {
-      if (!item.data?.stakings) {
+    const items = responses.flatMap((response) => {
+      if (!response.data) {
         return [];
       }
-      return item.data.stakings.map((staking) => ({
-        ...staking,
-        account: item.data?.account!,
-        valuation: getDeFiStakingValue(staking, getCachedPrice),
-      }));
+      return response.data.map((service) => {
+        let protocols = service.protocols.map((protocol) => {
+          let accounts = protocol.accounts.map((accountInfo) => {
+            return {
+              ...accountInfo,
+              account: accountInfo.account,
+              valuation: getDeFiStakingValue(accountInfo, getCachedPrice),
+            };
+          });
+
+          accounts = accounts.sort(
+            (a, b) => b.valuation.total - a.valuation.total,
+          );
+
+          return {
+            ...protocol,
+            accounts,
+            netWorth: accounts.reduce(
+              (acc, account) => acc + account.valuation.total,
+              0,
+            ),
+          };
+        });
+
+        protocols = protocols.sort((a, b) => b.netWorth - a.netWorth);
+
+        return {
+          ...service,
+          protocols,
+        };
+      });
     });
 
-    items = items.sort((a, b) => b.valuation.total - a.valuation.total);
     setDefis(items);
-  }, [result, getCachedPrice]);
+  }, [responses, getCachedPrice]);
 
   return { defis };
 };

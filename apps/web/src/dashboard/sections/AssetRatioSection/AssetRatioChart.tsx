@@ -4,7 +4,6 @@ import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 import { withAttrs } from '@/utils/withAttrs';
 
-import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 
 import { TooltipContent, tooltipWrapperStyle } from './AssetRatioChartTooltip';

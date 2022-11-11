@@ -1,4 +1,9 @@
 import { adapters, type BentoSupportedNetwork } from '@bento/adapters';
+import {
+  ProtocolAccountInfo,
+  ProtocolInfo,
+  ServiceInfo,
+} from '@bento/adapters/_lib/types';
 import { safeAsyncFlatMap, safePromiseAll } from '@bento/common';
 import { Bech32Address } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -13,6 +18,13 @@ interface APIRequest extends NextApiRequest {
     walletAddress?: string;
   };
 }
+
+type APIResponse = (ServiceInfo & {
+  protocols: {
+    info: ProtocolInfo;
+    accounts: ProtocolAccountInfo[];
+  }[];
+})[];
 
 const parseWallets = (mixedQuery: string) => {
   const query = mixedQuery.toLowerCase();
@@ -43,7 +55,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const chain = chainAdapter.default;
   const chainName = chain.name;
 
-  const services = await safePromiseAll(
+  const services: APIResponse = await safePromiseAll(
     Object.entries(adapter.services).map(async ([serviceId, service]) => {
       const info = service.info.default;
 
@@ -105,6 +117,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
           },
         ),
       );
+
       return { ...info, protocols };
     }),
   );

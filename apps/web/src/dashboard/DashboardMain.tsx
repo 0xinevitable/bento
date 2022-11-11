@@ -168,20 +168,15 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   }, [currentTab]);
 
   const { defis } = useDeFis(wallets);
-  // Entries
-  const defiStakesByProtocol = useMemo(
-    () => Object.entries(groupBy(defis, 'protocol')),
-    [defis],
-  );
 
   const netWorthInUSDOnlyDeFi = useMemo(
     () =>
-      defiStakesByProtocol.reduce(
-        (acc, [, stakes]) =>
-          acc + stakes.reduce((a, v) => a + v.valuation.total, 0),
+      defis.reduce(
+        (acc, service) =>
+          acc + service.protocols.reduce((a, v) => a + v.netWorth, 0),
         0,
       ),
-    [defiStakesByProtocol],
+    [defis],
   );
 
   const CRYPTO_FEEDS: ('DEFI' | 'WALLET')[] = useMemo(
@@ -224,7 +219,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                   netWorthInUSD={netWorthInUSD}
                   netWorthInUSDOnlyDeFi={netWorthInUSDOnlyDeFi}
                   tokenBalances={tokenBalances}
-                  defiStakesByProtocol={defiStakesByProtocol}
+                  // defiStakesByProtocol={defiStakesByProtocol}
                 />
 
                 <WalletListSection
@@ -356,36 +351,52 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                       <AssetListCard>
                         {defis.length > 0 ? (
                           <Collapse>
-                            {defiStakesByProtocol.map(
-                              ([protocol, defiProtocols]) => {
-                                const valuation = defiProtocols.reduce(
-                                  (acc, v) => acc + v.valuation.total,
-                                  0,
-                                );
-                                return (
-                                  <CollapsePanel
-                                    title={t(`protocol-${protocol}`)}
-                                    count={defiProtocols.length}
-                                    key={protocol}
-                                    valuation={valuation}
-                                    currentLanguage={currentLanguage}
-                                  >
-                                    <ul>
-                                      {defiProtocols.map((item) => (
-                                        <DeFiStakingItem
-                                          // FIXME: group stats with different wallets...
-                                          // FIXME: Use protocol id in key
-                                          key={`${item.address || 'gov'}-${
-                                            item.account
-                                          }`}
-                                          protocol={item}
-                                        />
-                                      ))}
-                                    </ul>
-                                  </CollapsePanel>
-                                );
-                              },
-                            )}
+                            {defis.map((service) => {
+                              const valuation = service.protocols.reduce(
+                                (acc, v) => acc + v.netWorth,
+                                0,
+                              );
+                              return (
+                                <CollapsePanel
+                                  title={service.name}
+                                  count={service.protocols.reduce(
+                                    (acc, v) => acc + v.accounts.length,
+                                    0,
+                                  )}
+                                  // FIXME: Use service id
+                                  key={service.name}
+                                  valuation={valuation}
+                                  currentLanguage={currentLanguage}
+                                >
+                                  <ul>
+                                    {service.protocols.map((protocol) => (
+                                      // <DeFiStakingItem
+                                      //   // FIXME: group stats with different wallets...
+                                      //   // FIXME: Use protocol id in key
+                                      //   key={`${item.address || 'gov'}-${
+                                      //     item.account
+                                      //   }`}
+                                      //   protocol={item}
+                                      // />
+                                      <React.Fragment
+                                        key={
+                                          typeof protocol.info.name === 'string'
+                                            ? protocol.info.name
+                                            : protocol.info.name.en
+                                        }
+                                      >
+                                        {protocol.accounts.map((account) => (
+                                          <DeFiStakingItem
+                                            info={protocol.info}
+                                            protocol={account}
+                                          />
+                                        ))}
+                                      </React.Fragment>
+                                    ))}
+                                  </ul>
+                                </CollapsePanel>
+                              );
+                            })}
                           </Collapse>
                         ) : (
                           <EmptyBalance />

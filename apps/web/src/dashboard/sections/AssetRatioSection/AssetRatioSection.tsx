@@ -7,7 +7,6 @@ import { AnimatedToolTip } from '@/components/system';
 
 import { NETWORKS } from '@/constants/networks';
 import { displayName } from '@/dashboard/constants/platform';
-import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { Colors } from '@/styles';
 
@@ -17,14 +16,14 @@ type AssetRatioSectionProps = {
   netWorthInUSD: number;
   netWorthInUSDOnlyDeFi: number;
   tokenBalances: DashboardTokenBalance[];
-  defiStakesByProtocol: [string, DeFiStakingWithClientData[]][];
+  // defiStakesByProtocol: [string, ServiceWithClientData[]][];
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
   netWorthInUSDOnlyDeFi,
   // FIXME: dirty code here
   netWorthInUSD: netWorthInUSDOnlyWallet,
-  defiStakesByProtocol,
+  // defiStakesByProtocol,
 }) => {
   const { t } = useTranslation('dashboard');
 
@@ -74,7 +73,11 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
     // maximum length is 3
     items = items.sort((a, b) => b.ratio - a.ratio);
     return items.slice(0, 3);
-  }, [netWorthInUSD, defiStakesByProtocol, tokenBalances]);
+  }, [
+    netWorthInUSD,
+    // defiStakesByProtocol,
+    tokenBalances,
+  ]);
 
   return (
     <Container>
