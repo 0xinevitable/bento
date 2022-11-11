@@ -9,7 +9,7 @@ import { Bech32Address } from '@bento/core';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createRedisClient } from '@/utils/Redis';
-import { withCached } from '@/utils/cache';
+import { withRedisCached } from '@/utils/cache';
 import { withCORS } from '@/utils/middlewares/withCORS';
 
 interface APIRequest extends NextApiRequest {
@@ -80,7 +80,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
 
               if (!!info.conditional) {
                 // FIXME: Cache in local after first call to Redis
-                const getChainBalances = withCached(
+                const getChainBalances = withRedisCached(
                   `balances:${chainName}:${account}`,
                   chainAdapter.getAccount,
                   { redisClient, defaultValue: [] },
@@ -103,7 +103,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
                 }
               }
 
-              const getAccount = withCached(
+              const getAccount = withRedisCached(
                 `protocol:${chain.name}:${serviceId}:${protocolId}:${account}`,
                 protocol.getAccount,
                 { redisClient, defaultValue: [] },

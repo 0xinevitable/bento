@@ -7,43 +7,80 @@ export type CacheVO<DataType extends any> = {
   v: DataType;
 };
 
-const getCached = async <DataType extends any>(
-  __key: string,
-  __redisClient: ReturnType<typeof createRedisClient>,
-) => {
-  const cachedRawValue = await __redisClient.get(__key);
-  if (!cachedRawValue) {
-    return null;
-  }
-  return CompressedJSON.decompress.fromString<DataType>(cachedRawValue);
+const withMemory = <ReturnType extends any, Params extends Array<any>>(
+  fetcher: (...params: Params) => ReturnType,
+  ttl: number,
+): ((...params: Params) => ReturnType) => {
+  const cache: Record<string, { value: any | null; expiresAt: number }> = {};
+  return (...params: Params) => {
+    const key = params[0];
+    if (
+      !!cache[key] &&
+      cache[key].value &&
+      cache[key].expiresAt &&
+      cache[key].expiresAt > Date.now()
+    ) {
+      return cache[key].value;
+    }
+
+    if (!cache[key]) {
+      cache[key] = { value: null, expiresAt: 0 };
+    }
+
+    cache[key].value = null;
+    cache[key].value = fetcher(...params);
+    cache[key].expiresAt = Date.now() + ttl;
+    return cache[key].value;
+  };
 };
 
 const MINUTES = 60 * 1000;
 const DEFAULT_CACHE_TIME = 1 * MINUTES;
 
-type WithCachedOptions<DataType extends any> = {
+const getCached: <DataType extends any>(
+  __key: string,
+  __redisClient: ReturnType<typeof createRedisClient>,
+) => Promise<DataType | null> = withMemory(
+  async (
+    __key: string,
+    __redisClient: ReturnType<typeof createRedisClient>,
+  ) => {
+    const cachedRawValue = await __redisClient.get(__key);
+    if (!cachedRawValue) {
+      return null;
+    }
+    return CompressedJSON.decompress.fromString(cachedRawValue);
+  },
+  DEFAULT_CACHE_TIME,
+);
+
+type WithRedisCachedOptions<DataType extends any> = {
   defaultValue: DataType;
   redisClient: ReturnType<typeof createRedisClient>;
   ttl?: number;
 };
 
-export const withCached = <Params extends Array<any>, DataType extends any>(
+export const withRedisCached = <
+  Params extends Array<any>,
+  DataType extends any,
+>(
   key: string,
   fetcher: (...params: Params) => Promise<DataType>,
   {
     defaultValue,
     redisClient,
     ttl = DEFAULT_CACHE_TIME,
-  }: WithCachedOptions<DataType>,
+  }: WithRedisCachedOptions<DataType>,
 ) => {
   return async (...params: Params) => {
     let hasError: boolean = false;
     let data: DataType = defaultValue;
     let cachedTime = 0;
 
-    const cached = await getCached<CacheVO<DataType>>(key, redisClient).catch(
-      () => null,
-    );
+    const cached: CacheVO<DataType> | null = await getCached<CacheVO<DataType>>(
+      key,
+      redisClient,
+    ).catch(() => null);
     if (!!cached && cached.t >= Date.now() - ttl) {
       // Use cached value if not expired
       data = cached.v;
