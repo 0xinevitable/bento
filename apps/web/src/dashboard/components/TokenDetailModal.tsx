@@ -1,12 +1,11 @@
 import { shortenAddress } from '@bento/common';
 import { OpenSeaAsset, cachedAxios } from '@bento/core';
 import styled from '@emotion/styled';
-import clsx from 'clsx';
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { Badge, Modal } from '@/components/system';
+import { Modal } from '@/components/system';
 
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { WalletBalance } from '@/dashboard/types/TokenBalance';
 import { Colors } from '@/styles';
 
 import { AssetMedia } from './AssetMedia';

@@ -24,7 +24,7 @@ import { formatUsername } from '@/utils/format';
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import { TokenBalance } from '@/dashboard/types/TokenBalance';
 import { Colors } from '@/styles';
 import {
   Analytics,
@@ -94,8 +94,8 @@ type ProfileInstanceProps = {
 };
 
 const walletBalanceReducer =
-  (key: string, callback: (acc: number, balance: WalletBalance) => number) =>
-  (acc: number, balance: WalletBalance) =>
+  (key: string, callback: (acc: number, balance: TokenBalance) => number) =>
+  (acc: number, balance: TokenBalance) =>
     (balance.symbol ?? balance.name) === key ? callback(acc, balance) : acc;
 
 const fetchWallets = async (userId: string): Promise<Wallet[]> => {
@@ -168,7 +168,7 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
     // NOTE: `balance.symbol + balance.name` 로 키를 만들어 groupBy 하고, 그 결과만 남긴다.
     // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
     const balancesByPlatform = Object.entries(
-      groupBy<WalletBalance>(
+      groupBy<TokenBalance>(
         [...walletBalances],
         (balance) => balance.symbol + balance.name,
       ),
@@ -188,12 +188,11 @@ export const ProfileInstance: React.FC<ProfileInstanceProps> = ({
         );
 
         return {
-          platform: first.platform,
+          platform: first.chain,
           symbol: first.symbol,
           name: first.name,
           logo: first.logo,
-          type: 'type' in first ? first.type : undefined,
-          tokenAddress: 'address' in first ? first.address : undefined,
+          tokenAddress: first.ind,
           balances: balances,
           netWorth: amount * first.price,
           amount,

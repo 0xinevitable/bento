@@ -5,13 +5,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { useCachedPricings } from '@/hooks/pricings';
 
 import { BentoSupportedNetwork } from '@/constants/adapters';
-import {
-  CosmosSDKWalletBalance,
-  EVMWalletBalance,
-  SolanaWalletBalance,
-} from '@/dashboard/types/WalletBalance';
 
 import { useInterval } from '../../hooks/useInterval';
+import { TokenBalance } from '../types/TokenBalance';
 import { useMultipleRequests } from './useMultipleRequests';
 
 type Key = string;
@@ -54,16 +50,21 @@ export const useWalletBalances = ({ wallets }: Options) => {
     );
   }, [JSON.stringify(wallets)]);
 
-  const { responses: result, refetch } =
-    useMultipleRequests<
-      (EVMWalletBalance | CosmosSDKWalletBalance | SolanaWalletBalance)[]
-    >(calculatedRequests);
+  const { responses: result, refetch } = useMultipleRequests<TokenBalance[]>(
+    calculatedRequests,
+    undefined,
+    (key, data) => ({
+      ...data,
+      type: 'token',
+      chain: key.replace('/api/balances/', ''),
+    }),
+  );
   useInterval(refetch, 60 * 1_000);
 
   const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
-  const [balancesWithPrices, setBalancesWithPrices] = useState<
-    (EVMWalletBalance | CosmosSDKWalletBalance | SolanaWalletBalance)[]
-  >([]);
+  const [balancesWithPrices, setBalancesWithPrices] = useState<TokenBalance[]>(
+    [],
+  );
 
   useEffect(() => {
     const result = produce(balances, (draft) => {

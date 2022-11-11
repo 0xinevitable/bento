@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useCachedPricings } from '@/hooks/pricings';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
 
-import { NFTWalletBalance } from '@/dashboard/types/WalletBalance';
+import { NFTBalance } from '@/dashboard/types/TokenBalance';
 
 const CHUNK_SIZE = 5;
 
@@ -17,9 +17,7 @@ type Options = {
 
 export const useNFTBalances = ({ wallets }: Options) => {
   const { getCachedPrice } = useCachedPricings();
-  const [openSeaNFTBalance, setOpenSeaNFTBalance] = useState<
-    NFTWalletBalance[]
-  >([]);
+  const [openSeaNFTBalance, setOpenSeaNFTBalance] = useState<NFTBalance[]>([]);
   const [ethereumPrice, setEthereumPrice] = useState<number>(0);
   const [fetchedAssets, setFetchedAssets] = useState<{
     [account: string]: {
@@ -90,7 +88,7 @@ export const useNFTBalances = ({ wallets }: Options) => {
         (OpenSeaAsset & { account: string })[]
       > = groupBy(groupedByWalletAddress[account], (v) => v.collection.slug);
 
-      const balances: NFTWalletBalance[] = (
+      const balances: NFTBalance[] = (
         await safeAsyncFlatMap(
           chunk(Object.keys(groupByCollection), CHUNK_SIZE),
           async (chunckedCollectionSlugs) =>
@@ -130,7 +128,7 @@ const getNFTBalancesFromSlugs = ({
   account,
   ethereumPrice,
   groupByCollection,
-}: Props) =>
+}: Props): Promise<(NFTBalance & { totalVolume: number })[]> =>
   safePromiseAll(
     slugs.map(async (collectionSlug) => {
       const assets = groupByCollection[collectionSlug];
@@ -145,14 +143,17 @@ const getNFTBalancesFromSlugs = ({
         });
 
       return {
+        type: 'nft' as const,
+        // FIXME:
+        chain: 'opensea' as const,
         symbol: first.asset_contract.symbol || null,
+        ind: first.asset_contract.address,
         name: collection.name,
         account,
         balance: groupByCollection[collectionSlug].length,
         logo: collection.image_url,
         price: ethereumPrice * floorPrice,
         totalVolume,
-        type: 'nft' as const,
         platform: 'opensea',
         assets,
       };

@@ -13,8 +13,10 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useDeFis } from '@/dashboard/hooks/useDeFis';
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
-import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
+import {
+  DashboardTokenBalance,
+  WalletBalance,
+} from '@/dashboard/types/TokenBalance';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
@@ -117,12 +119,12 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           );
 
           return {
-            platform: first.platform,
+            platform: first.chain,
             symbol: first.symbol,
             name: first.name,
             logo: first.logo,
-            type: 'type' in first ? first.type : undefined,
-            tokenAddress: 'address' in first ? first.address : undefined,
+            // type: 'type' in first ? first.type : undefined,
+            tokenAddress: first.ind,
             balances: balances,
             netWorth: amount * first.price,
             amount,
