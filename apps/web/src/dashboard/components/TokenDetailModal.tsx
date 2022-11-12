@@ -5,13 +5,16 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { Modal } from '@/components/system';
 
+import { BentoSupportedNetwork } from '@/constants/adapters';
 import { WalletBalance } from '@/dashboard/types/TokenBalance';
 import { Colors } from '@/styles';
 
 import { AssetMedia } from './AssetMedia';
+import { LogoWithChain } from './list-items/common/LogoWithChain';
 
 export type TokenDetailModalParams = {
   tokenBalance?: {
+    platform: BentoSupportedNetwork | 'opensea';
     symbol: string | null;
     name: string;
     logo?: string;
@@ -89,7 +92,12 @@ export const TokenDetailModal: React.FC<Props> = ({
       {!tokenBalance ? null : (
         <>
           <TokenHeader>
-            <TokenImage src={tokenBalance.logo} />
+            <LogoWithChain
+              logo={tokenBalance.logo}
+              chain={tokenBalance.platform}
+              size={64}
+            />
+
             <TokenInformation>
               <TokenName>{tokenBalance.name}</TokenName>
               {tokenBalance.symbol !== null && (

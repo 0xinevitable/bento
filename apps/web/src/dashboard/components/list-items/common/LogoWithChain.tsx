@@ -10,28 +10,38 @@ const capitalize = (value: string) =>
 type LogoWithChainProps = {
   logo?: string;
   chain: BentoSupportedNetwork | 'opensea';
+  size?: number;
 };
 
 export const LogoWithChain: React.FC<LogoWithChainProps> = ({
   logo,
   chain,
+  size = 44,
 }) => (
-  <LogoContainer>
+  <LogoContainer size={size}>
     <LogoBackground>
-      {!!logo ? <Logo alt="" src={logo} /> : <LogoEmpty />}
+      {!!logo ? (
+        <Logo alt="" src={logo} size={size} />
+      ) : (
+        <LogoEmpty size={size} />
+      )}
     </LogoBackground>
 
-    <ChainImage alt={capitalize(chain)} src={`/assets/icons/${chain}.png`} />
+    <ChainImage
+      alt={capitalize(chain)}
+      src={`/assets/icons/${chain}.png`}
+      size={size}
+    />
   </LogoContainer>
 );
 
-const LOGO_SIZE = 44;
 const GAP = 10;
 
-const LogoContainer = styled.div`
-  padding: 1px;
-  width: ${LOGO_SIZE + GAP}px;
-  height: ${LOGO_SIZE + GAP}px;
+type SizeProps = {
+  size: number;
+};
+const LogoContainer = styled.div<SizeProps>`
+  padding: 1.5px;
   border-radius: 50%;
 
   display: flex;
@@ -47,6 +57,13 @@ const LogoContainer = styled.div`
     #282c30 37.71%,
     #787d83 100%
   );
+
+  ${({ size }) =>
+    size &&
+    css`
+      width: ${size + GAP}px;
+      height: ${size + GAP}px;
+    `};
 `;
 const LogoBackground = styled.div`
   background: ${Colors.black};
@@ -58,26 +75,40 @@ const LogoBackground = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const logoStyles = css`
-  width: ${LOGO_SIZE}px;
-  height: ${LOGO_SIZE}px;
+const Logo = styled.img<SizeProps>`
   border-radius: 50%;
-`;
-const Logo = styled.img`
-  ${logoStyles}
   object-fit: cover;
+
+  ${({ size }) =>
+    size &&
+    css`
+      width: ${size}px;
+      height: ${size}px;
+    `};
 `;
-const LogoEmpty = styled.div`
-  ${logoStyles}
+const LogoEmpty = styled.div<SizeProps>`
+  border-radius: 50%;
+
+  ${({ size }) =>
+    size &&
+    css`
+      width: ${size}px;
+      height: ${size}px;
+    `};
 `;
 
-const ChainImage = styled.img`
+const ChainImage = styled.img<SizeProps>`
   position: absolute;
   left: -10px;
   bottom: -10px;
 
-  width: 24px;
-  height: 24px;
   border-radius: 50%;
   box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.44);
+
+  ${({ size }) =>
+    size &&
+    css`
+      width: ${Math.floor(size * 0.54)}px;
+      height: ${Math.floor(size * 0.54)}px;
+    `};
 `;
