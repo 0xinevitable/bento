@@ -156,7 +156,7 @@ export const NFTListSection: React.FC<Props> = ({
   );
 };
 
-// FIXME: Those are similar declares with `TokenDetailModal`
+// FIXME: Those are similar declares with `DetailModal`
 const AssetList = styled.ul`
   display: flex;
   flex-wrap: wrap;

@@ -24,10 +24,10 @@ import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
 import { DeFiStakingItem } from './components/DeFiStakingItem';
+import { DetailModalParams } from './components/DetailModal';
 import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
-import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { Breakpoints } from './constants/breakpoints';
 import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
@@ -56,10 +56,8 @@ type DashboardMainProps = {
   revalidateProfile: () => Promise<void>;
   revalidateWallets: () => Promise<Wallet[] | undefined>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setTokenDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setTokenDetailModalParams: React.Dispatch<
-    React.SetStateAction<TokenDetailModalParams>
-  >;
+  setDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setDetailModalParams: React.Dispatch<React.SetStateAction<DetailModalParams>>;
 };
 
 export const DashboardMain: React.FC<DashboardMainProps> = ({
@@ -69,8 +67,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   revalidateProfile,
   revalidateWallets,
   setAddWalletModalVisible,
-  setTokenDetailModalVisible,
-  setTokenDetailModalParams,
+  setDetailModalVisible,
+  setDetailModalParams,
 }) => {
   const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
@@ -307,8 +305,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                       platform: item.platform,
                                       address: item.tokenAddress ?? undefined,
                                     });
-                                    setTokenDetailModalVisible((prev) => !prev);
-                                    setTokenDetailModalParams({
+                                    setDetailModalVisible((prev) => !prev);
+                                    setDetailModalParams({
                                       tokenBalance: item,
                                     });
                                   }}
@@ -356,8 +354,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                   valuation={valuation}
                                   currentLanguage={currentLanguage}
                                   onClick={() => {
-                                    setTokenDetailModalVisible((prev) => !prev);
-                                    setTokenDetailModalParams({
+                                    setDetailModalVisible((prev) => !prev);
+                                    setDetailModalParams({
                                       service,
                                     });
                                   }}

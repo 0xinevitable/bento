@@ -18,7 +18,7 @@ import { AssetMedia } from './AssetMedia';
 import { DeFiStakingItem } from './DeFiStakingItem';
 import { LogoWithChain } from './list-items/common/LogoWithChain';
 
-export type TokenDetailModalParams = {
+export type DetailModalParams = {
   service?: ServiceData;
   tokenBalance?: {
     platform: BentoSupportedNetwork | 'opensea';
@@ -34,14 +34,14 @@ export type TokenDetailModalParams = {
     coinGeckoId?: string;
   };
 };
-type Props = TokenDetailModalParams & {
+type Props = DetailModalParams & {
   visible?: boolean;
   onDismiss?: () => void;
 };
 
 type WalletsByPosition = { amount: number; address: string };
 
-export const TokenDetailModal: React.FC<Props> = ({
+export const DetailModal: React.FC<Props> = ({
   visible: isVisible = false,
   onDismiss,
   tokenBalance,
@@ -324,7 +324,7 @@ export const TokenDetailModal: React.FC<Props> = ({
   );
 };
 
-export default TokenDetailModal;
+export default DetailModal;
 
 const OverlayWrapper = styled(Modal)`
   .modal-container {
