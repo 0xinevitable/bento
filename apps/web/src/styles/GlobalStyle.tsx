@@ -9,6 +9,10 @@ const globalStyles = css`
     --SystemFontStack: ${systemFontStack};
   }
 
+  html {
+    overscroll-behavior-y: none;
+  }
+
   * {
     box-sizing: border-box;
     word-break: keep-all;
