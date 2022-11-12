@@ -14,6 +14,7 @@ import { formatLocalizedString } from '@/utils/format'
 
 import { Valuation } from '@/defi/utils';
 import { InlineBadge } from './InlineBadge';
+import { Breakpoints } from '../constants/breakpoints';
 
 const formatNumber = (value: number | null | undefined): string =>
   (value || 0).toLocaleString(undefined, {
@@ -366,6 +367,10 @@ const InfoList = styled.ul`
   width: 100%;
   display: flex;
   gap: 8px;
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    flex-direction: column;
+  }
 `;
 const InfoItem = styled.li`
   padding: 10px;
