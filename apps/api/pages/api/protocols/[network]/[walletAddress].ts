@@ -59,72 +59,80 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const chain = chainAdapter.default;
   const chainName = chain.name;
 
-  const services: APIResponse = await safePromiseAll(
-    Object.entries(adapter.services).map(async ([serviceId, service]) => {
+  const services: APIResponse = await safeAsyncFlatMap(
+    Object.entries(adapter.services),
+    async ([serviceId, service]) => {
       const info = (await service.info).default;
 
-      const protocols = await safePromiseAll(
-        Object.entries(service.protocols).map(
-          async ([protocolId, protocolResolver]) => {
-            const protocol = await protocolResolver;
-            const info = protocol.default;
-            const accounts = await safeAsyncFlatMap(wallets, async (wallet) => {
-              let account = wallet;
+      const protocols = await safeAsyncFlatMap(
+        Object.entries(service.protocols),
+        async ([protocolId, protocolResolver]) => {
+          const protocol = await protocolResolver;
+          const info = protocol.default;
 
-              if (chain.type === 'cosmos-sdk') {
-                // chainBech32Address
-                const bech32Address = Bech32Address.fromBech32(account);
-                account = bech32Address.toBech32(chain.bech32Config.prefix);
-              }
+          let accounts = await safeAsyncFlatMap(wallets, async (wallet) => {
+            let account = wallet;
 
-              let getAccountParams: Parameters<typeof protocol.getAccount> = [
-                account,
-              ];
+            if (chain.type === 'cosmos-sdk') {
+              // chainBech32Address
+              const bech32Address = Bech32Address.fromBech32(account);
+              account = bech32Address.toBech32(chain.bech32Config.prefix);
+            }
 
-              if (!!info.conditional) {
-                // FIXME: Cache in local after first call to Redis
-                const getChainBalances = withRedisCached(
-                  `balances:${chainName}:${account}`,
-                  chainAdapter.getAccount,
-                  { redisClient, defaultValue: [] },
-                );
-                const { data: balances } = await getChainBalances(account);
-                if (!!info.conditional?.hasToken) {
-                  const token = balances.find(
-                    (token) => token.ind === info.conditional?.hasToken,
-                  );
-                  getAccountParams.push(token?.balance || 0);
-                } else if (info.conditional.passAllBalances) {
-                  const balancesMap = balances.reduce(
-                    (acc, token) => ({
-                      ...acc,
-                      [token.ind]: token.balance,
-                    }),
-                    {},
-                  );
-                  getAccountParams.push(balancesMap);
-                }
-              }
+            let getAccountParams: Parameters<typeof protocol.getAccount> = [
+              account,
+            ];
 
-              const getAccount = withRedisCached(
-                `protocol:${chain.name}:${serviceId}:${protocolId}:${account}`,
-                protocol.getAccount,
+            if (!!info.conditional) {
+              // FIXME: Cache in local after first call to Redis
+              const getChainBalances = withRedisCached(
+                `balances:${chainName}:${account}`,
+                chainAdapter.getAccount,
                 { redisClient, defaultValue: [] },
               );
-              const { data: accountInfo } = await getAccount(
-                ...getAccountParams,
-              );
-              return accountInfo.flatMap((v) => ({ account, ...v }));
-            });
+              const { data: balances } = await getChainBalances(account);
+              if (!!info.conditional?.hasToken) {
+                const token = balances.find(
+                  (token) => token.ind === info.conditional?.hasToken,
+                );
+                getAccountParams.push(token?.balance || 0);
+              } else if (info.conditional.passAllBalances) {
+                const balancesMap = balances.reduce(
+                  (acc, token) => ({
+                    ...acc,
+                    [token.ind]: token.balance,
+                  }),
+                  {},
+                );
+                getAccountParams.push(balancesMap);
+              }
+            }
 
-            return {
-              protocolId,
-              info,
-              accounts: accounts.filter(withoutEmptyProtocolAccounts),
-            };
-          },
-        ),
+            const getAccount = withRedisCached(
+              `protocol:${chain.name}:${serviceId}:${protocolId}:${account}`,
+              protocol.getAccount,
+              { redisClient, defaultValue: [] },
+            );
+            const { data: accountInfo } = await getAccount(...getAccountParams);
+            return accountInfo.flatMap((v) => ({ account, ...v }));
+          });
+          accounts = accounts.filter(withoutEmptyProtocolAccounts);
+
+          if (!accounts.length) {
+            return [];
+          }
+
+          return {
+            protocolId,
+            info,
+            accounts: accounts.filter(withoutEmptyProtocolAccounts),
+          };
+        },
       );
+
+      if (!protocols.length) {
+        return [];
+      }
 
       return {
         serviceId,
@@ -132,7 +140,7 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
         ...info,
         protocols,
       };
-    }),
+    },
   );
 
   await redisClient.disconnect();
