@@ -355,23 +355,13 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                   key={`${service.chain}-${service.serviceId}`}
                                   valuation={valuation}
                                   currentLanguage={currentLanguage}
-                                >
-                                  <ul>
-                                    {service.protocols.map((protocol) => (
-                                      <React.Fragment
-                                        key={`${service.serviceId}-${protocol.protocolId}`}
-                                      >
-                                        {protocol.accounts.map((account) => (
-                                          <DeFiStakingItem
-                                            key={`${service.serviceId}-${protocol.protocolId}-${account.account}`}
-                                            info={protocol.info}
-                                            protocol={account}
-                                          />
-                                        ))}
-                                      </React.Fragment>
-                                    ))}
-                                  </ul>
-                                </DeFiProtocolItem>
+                                  onClick={() => {
+                                    setTokenDetailModalVisible((prev) => !prev);
+                                    setTokenDetailModalParams({
+                                      service,
+                                    });
+                                  }}
+                                />
                               );
                             })}
                           </Collapse>

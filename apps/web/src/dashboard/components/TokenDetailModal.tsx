@@ -1,18 +1,25 @@
 import { shortenAddress } from '@bento/common';
 import { OpenSeaAsset, cachedAxios } from '@bento/core';
 import styled from '@emotion/styled';
+import { Badge, Card } from '@geist-ui/core';
+import { Icon } from '@iconify/react';
+import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { Modal } from '@/components/system';
+import { formatLocalizedString } from '@/utils/format';
 
 import { BentoSupportedNetwork } from '@/constants/adapters';
 import { WalletBalance } from '@/dashboard/types/TokenBalance';
+import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 import { AssetMedia } from './AssetMedia';
+import { DeFiStakingItem } from './DeFiStakingItem';
 import { LogoWithChain } from './list-items/common/LogoWithChain';
 
 export type TokenDetailModalParams = {
+  service?: ServiceData;
   tokenBalance?: {
     platform: BentoSupportedNetwork | 'opensea';
     symbol: string | null;
@@ -38,6 +45,7 @@ export const TokenDetailModal: React.FC<Props> = ({
   visible: isVisible = false,
   onDismiss,
   tokenBalance,
+  service,
 }) => {
   const assets = useMemo<OpenSeaAsset[]>(
     () =>
@@ -82,6 +90,9 @@ export const TokenDetailModal: React.FC<Props> = ({
       setPriceChange(data.market_data?.price_change_percentage_24h ?? null);
     });
   }, [tokenBalance]);
+
+  const { i18n } = useTranslation('dashboard');
+  const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
   return (
     <OverlayWrapper
@@ -250,6 +261,65 @@ export const TokenDetailModal: React.FC<Props> = ({
           )}
         </>
       )}
+
+      {!service ? null : (
+        <>
+          <TokenHeader>
+            <LogoWithChain
+              logo={service.logo}
+              chain={service.chain}
+              size={64}
+            />
+
+            <TokenInformation>
+              <TokenName>
+                {formatLocalizedString(service.name, currentLanguage)}
+              </TokenName>
+              {service.url && (
+                <a
+                  style={{ width: 'fit-content' }}
+                  target="_blank"
+                  href={service.url}
+                  rel="noopener"
+                >
+                  <Badge
+                    type="success"
+                    style={{ display: 'flex', alignItems: 'center', gap: 4 }}
+                    scale={0.75}
+                  >
+                    <Icon icon="majesticons:globe-grid-line" />
+                    <span className="sys" style={{ fontWeight: 500 }}>
+                      Website
+                    </span>
+                  </Badge>
+                </a>
+              )}
+            </TokenInformation>
+          </TokenHeader>
+
+          <Card style={{ marginTop: 16 }}>
+            <Paragraph className="sys">
+              {formatLocalizedString(service.description, currentLanguage)}
+            </Paragraph>
+          </Card>
+
+          <ProtocolAccountList>
+            {service.protocols.map((protocol) => (
+              <React.Fragment
+                key={`${service.serviceId}-${protocol.protocolId}`}
+              >
+                {protocol.accounts.map((account) => (
+                  <DeFiStakingItem
+                    key={`${service.serviceId}-${protocol.protocolId}-${account.account}`}
+                    info={protocol.info}
+                    protocol={account}
+                  />
+                ))}
+              </React.Fragment>
+            ))}
+          </ProtocolAccountList>
+        </>
+      )}
     </OverlayWrapper>
   );
 };
@@ -303,6 +373,11 @@ const TokenInformation = styled.div`
   margin-left: 16px;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+
+  a:focus {
+    opacity: 0.65;
+  }
 `;
 const TokenName = styled.h2`
   font-size: 24px;
@@ -311,7 +386,6 @@ const TokenName = styled.h2`
   line-height: 1;
 `;
 const TokenSymbol = styled.span`
-  margin-top: 6px;
   font-size: 18px;
   line-height: 1;
 `;
@@ -409,4 +483,21 @@ const AllocationWalletList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
+`;
+
+const ProtocolAccountList = styled.ul`
+  margin-top: 16px;
+  padding: 16px 0 12px;
+  border-top: 1px solid ${Colors.gray600};
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+
+const Paragraph = styled.p`
+  margin-top: 8px;
+  font-size: 14px;
+  color: ${Colors.gray400};
+  line-height: 1.2;
 `;
