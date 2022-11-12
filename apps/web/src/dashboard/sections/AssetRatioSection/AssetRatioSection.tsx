@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import { useMemo } from 'react';
 
 import { AnimatedToolTip } from '@/components/system';
 
 import { NETWORKS } from '@/constants/networks';
+import bitcoinImage from '@/dashboard/assets/bitcoin-v2.png';
 import { Breakpoints } from '@/dashboard/constants/breakpoints';
 import { displayName } from '@/dashboard/constants/platform';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
@@ -66,6 +68,12 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   return (
     <Container>
       <Illust />
+      <BitcoinIllust
+        alt=""
+        src={bitcoinImage}
+        sizes="240px"
+        placeholder="blur"
+      />
 
       <Information>
         <Field>{t('Net Worth')}</Field>
@@ -132,6 +140,21 @@ const Container = styled.div`
   @media (max-width: ${Breakpoints.Tiny}px) {
     padding: 20px 16px;
     border-radius: 28px;
+  }
+`;
+
+const BitcoinIllust = styled(Image)`
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+
+  position: absolute;
+  top: 32px;
+  right: 20px;
+  z-index: -1;
+
+  @media (max-width: ${Breakpoints.Tiny}px) {
+    display: none;
   }
 `;
 
@@ -210,7 +233,7 @@ const Illust: React.FC = () => (
       top: 0,
       right: 0,
       filter: 'saturate(120%)',
-      zIndex: -1,
+      zIndex: -2,
     }}
   >
     <g clipPath="url(#clip0_199_1955)">
