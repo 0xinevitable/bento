@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
 import { GetStaticProps, NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import { PageContainer } from '@/components/PageContainer';
 import { MetaHead } from '@/components/system';
@@ -26,6 +28,15 @@ const withOpacity = (hex: string, opacity: number) => {
   return result
     ? `rgba(${result[0]}, ${result[1]}, ${result[2]}, ${opacity})`
     : '';
+};
+
+const LIST_VARIANTS = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.2 } },
+};
+const ITEM_VARIANTS = {
+  hidden: { opacity: 0, y: 32 },
+  show: { opacity: 1, y: 0 },
 };
 
 const communities = [
@@ -79,6 +90,10 @@ const CommunityPage: NextPage = () => {
 
   const { t } = useTranslation(['community']);
 
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+  });
+
   const backgroundImageRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = backgroundImageRef.current;
@@ -127,9 +142,14 @@ const CommunityPage: NextPage = () => {
         style={{ paddingTop: 0, paddingBottom: 64, minHeight: 'unset' }}
       >
         <Title>Shape Our Future Together</Title>
-        <List>
+        <List
+          ref={ref}
+          variants={LIST_VARIANTS}
+          initial="hidden"
+          animate={inView ? 'show' : 'hidden'}
+        >
           {communities.map((community) => (
-            <Item key={community.type}>
+            <Item key={community.type} variants={ITEM_VARIANTS}>
               <a
                 href={community.url}
                 target="_blank"
@@ -280,7 +300,7 @@ const Title = styled.h1`
 
   z-index: 1;
 `;
-const List = styled.ul`
+const List = styled(motion.ul)`
   margin-top: 36px;
   width: 100%;
 
@@ -298,7 +318,7 @@ const List = styled.ul`
     margin: 36px auto 0;
   }
 `;
-const Item = styled.li`
+const Item = styled(motion.li)`
   display: flex;
 
   * {
