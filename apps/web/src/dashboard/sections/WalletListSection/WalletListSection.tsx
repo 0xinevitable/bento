@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { Button } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 
+import { Breakpoints } from '@/dashboard/constants/breakpoints';
 import { Colors } from '@/styles';
 
 import { WalletList, walletCountStyle } from './WalletList';
@@ -93,6 +94,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+
+  @media (max-width: ${Breakpoints.Tablet}px) {
+    min-width: unset;
+    width: 100%;
+  }
 `;
 
 const SectionTitleContainer = styled.div`

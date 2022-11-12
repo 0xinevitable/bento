@@ -1,7 +1,7 @@
 import { Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
-import { Avatar, Text, User, useTheme } from '@geist-ui/core';
+import { Avatar, Text, useTheme } from '@geist-ui/core';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -30,6 +30,7 @@ import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
 import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
+import { Breakpoints } from './constants/breakpoints';
 import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { BadgeListSection } from './sections/BadgeListSection';
@@ -66,7 +67,6 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   isMyProfile,
   wallets,
   profile,
-  imageToken,
   revalidateProfile,
   revalidateWallets,
   setAddWalletModalVisible,
@@ -195,7 +195,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardWrapper>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <ProfileContainer>
           {profile.images?.[0] ? (
             <Avatar src={profile.images[0]} scale={3} />
           ) : (
@@ -215,14 +215,16 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               {formatUsername(profile.username)}
             </Text>
           </div>
-        </div>
+        </ProfileContainer>
 
         <DashboardContentWrapper>
-          <Tab
-            current={currentTab}
-            onChange={setCurrentTab}
-            items={DASHBOARD_TAB_ITEMS}
-          />
+          <TabContainer>
+            <Tab
+              current={currentTab}
+              onChange={setCurrentTab}
+              items={DASHBOARD_TAB_ITEMS}
+            />
+          </TabContainer>
           <DashboardContent>
             <AnimatedTab
               className="tab-crypto"
@@ -449,6 +451,32 @@ const DashboardWrapper = styled.div`
   flex-direction: column;
   gap: 32px;
 `;
+const ProfileContainer = styled.div`
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  @media (max-width: ${Breakpoints.Tablet}px) {
+    padding: 0 24px;
+  }
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    padding: 0;
+  }
+`;
+
+const TabContainer = styled.div`
+  padding: 0 32px;
+
+  @media (max-width: ${Breakpoints.Tablet}px) {
+    padding: 0 24px;
+  }
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    padding: 0;
+  }
+`;
 
 const DashboardContentWrapper = styled.div`
   display: flex;
@@ -456,7 +484,7 @@ const DashboardContentWrapper = styled.div`
   flex: 1;
 `;
 const DashboardContent = styled.div`
-  padding: 27px 33px;
+  padding: 28px 32px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -465,9 +493,15 @@ const DashboardContent = styled.div`
   border: 2px solid ${Colors.gray700};
   border-radius: 16px;
 
-  @media (max-width: 1240px) {
-    padding: 24px 0 0;
+  @media (max-width: ${Breakpoints.Tablet}px) {
+    padding: 28px 0 0;
     border: 0;
+    border-top: 0.4pt solid ${Colors.gray700};
+    border-radius: 0;
+  }
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    padding-top: 20px;
   }
 
   & .tab-crypto {
@@ -479,17 +513,8 @@ const TopSummaryContainer = styled.div`
   width: 100%;
   gap: 32px;
 
-  @media (max-width: 1300px) {
-    gap: 24px;
-  }
-
-  @media (max-width: 1200px) {
-    gap: 20px;
-  }
-
-  @media (max-width: 1110px) {
+  @media (max-width: ${Breakpoints.Tablet}px) {
     flex-direction: column;
-    gap: 32px;
   }
 `;
 
@@ -504,7 +529,7 @@ const AssetListCard = styled.section`
   background: ${Colors.gray850};
   border-radius: 8px;
 
-  @media (max-width: 400px) {
+  @media (max-width: ${Breakpoints.Mobile}px) {
     padding: 12px;
   }
 
