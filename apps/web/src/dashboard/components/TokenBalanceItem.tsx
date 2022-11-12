@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { Badge } from '@/components/system';
@@ -21,7 +22,12 @@ export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
     <Container onClick={onClick}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ position: 'relative' }}>
-          <Logo src={info.logo} alt={info.name} />
+          {!!info.logo ? (
+            <Logo src={info.logo} alt={info.name} />
+          ) : (
+            <LogoEmpty />
+          )}
+
           <PlatformBadge
             alt={capitalize(info.platform)}
             src={`/assets/icons/${info.platform}.png`}
@@ -109,11 +115,18 @@ const Container = styled.li`
   }
 `;
 
-const Logo = styled.img`
+const logoStyles = css`
   width: 36px;
   height: 36px;
   border-radius: 50%;
+`;
+const Logo = styled.img`
+  ${logoStyles}
   object-fit: cover;
+`;
+const LogoEmpty = styled.div`
+  ${logoStyles}
+  background: ${Colors.gray500};
 `;
 
 const PlatformBadge = styled.img`

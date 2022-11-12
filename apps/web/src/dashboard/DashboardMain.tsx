@@ -540,9 +540,10 @@ const AssetListCard = styled.section`
   }
 `;
 const Collapse = styled.ul`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 4px;
 `;
 
 const SectionTitle = styled.h3`

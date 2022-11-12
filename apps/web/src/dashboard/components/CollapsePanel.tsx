@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Badge } from '@geist-ui/core';
+import { Icon } from '@iconify/react';
 import { useMemo, useState } from 'react';
 import useCollapse from 'react-collapsed';
 
@@ -8,7 +10,8 @@ import { formatLocalizedString } from '@/utils/format';
 import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
-import { InlineBadge } from './InlineBadge';
+const capitalize = (value: string) =>
+  value.charAt(0).toUpperCase() + value.slice(1);
 
 type CollapsePanelProps = {
   service: ServiceData;
@@ -43,30 +46,53 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
         onPointerEnter={() => setHeaderHovered(true)}
         onPointerLeave={() => setHeaderHovered(false)}
       >
-        <HeaderTitleRow>
-          <ProtocolInfo>
+        <LogoContainer>
+          <LogoBackground>
             {!!service.logo ? (
-              <ProtocolLogo alt="" src={service.logo} />
+              <Logo alt="" src={service.logo} />
             ) : (
-              <ProtocolLogoEmpty />
+              <LogoEmpty />
             )}
+          </LogoBackground>
+
+          <PlatformBadge
+            alt={capitalize(service.chain)}
+            src={`/assets/icons/${service.chain}.png`}
+          />
+        </LogoContainer>
+
+        <ProtocolInfo>
+          <ProtocolInfoRow>
             <span>{formatLocalizedString(service.name, currentLanguage)}</span>
             {typeof count !== 'undefined' && (
               <span className="sys">
-                <InlineBadge>{count.toLocaleString()}</InlineBadge>
+                <Badge
+                  scale={0.7}
+                  type="secondary"
+                  style={{
+                    display: 'flex',
+                    marginLeft: 4,
+                    gap: 2,
+                    backgroundColor: Colors.gray600,
+                  }}
+                >
+                  <Icon icon="ant-design:bank-twotone" />
+                  {count.toLocaleString()}
+                </Badge>
               </span>
             )}
-          </ProtocolInfo>
+          </ProtocolInfoRow>
 
           <Valuation className="sys">
             {`$${valuation.toLocaleString(undefined, {
               maximumFractionDigits: 6,
             })}`}
           </Valuation>
-        </HeaderTitleRow>
-        <Paragraph className="sys">
+        </ProtocolInfo>
+
+        {/* <Paragraph className="sys">
           {formatLocalizedString(service?.description, currentLanguage)}
-        </Paragraph>
+        </Paragraph> */}
       </Header>
       <Content {...getCollapseProps()}>{children}</Content>
     </Container>
@@ -76,12 +102,29 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
 
   background: ${Colors.gray900};
   border: 1px solid ${Colors.gray800};
   border-radius: 8px;
   overflow: hidden;
+
+  width: calc((100% - 8px) / 3);
+
+  @media (max-width: 1100px) {
+    width: calc((100% - 4px) / 2);
+  }
+
+  @media (max-width: 880px) {
+    width: calc((100% - 8px) / 3);
+  }
+
+  @media (max-width: 720px) {
+    width: calc((100% - 8px) / 2);
+  }
+
+  @media (max-width: 540px) {
+    width: 100%;
+  }
 
   &.header-hovered {
     border: 1px solid ${Colors.gray700};
@@ -89,10 +132,9 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  padding: 16px 14px;
+  padding: 10px;
 
   display: flex;
-  flex-direction: column;
   cursor: pointer;
   user-select: none;
   transition: all 0.2s ease-in-out;
@@ -102,40 +144,74 @@ const Header = styled.div`
   }
 `;
 
-const HeaderTitleRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  font-size: 18px;
-  font-weight: bold;
-  color: ${Colors.gray100};
-`;
 const ProtocolInfo = styled.span`
+  margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+const ProtocolInfoRow = styled.span`
   display: flex;
   align-items: center;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  color: ${Colors.gray400};
 `;
 
+const LogoContainer = styled.div`
+  padding: 1px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  background-color: #aaaaaa;
+  background-image: radial-gradient(
+    96.62% 96.62% at 10.25% 1.96%,
+    #aaaaaa 0%,
+    #282c30 37.71%,
+    #787d83 100%
+  );
+`;
+const LogoBackground = styled.div`
+  background: ${Colors.black};
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const logoStyles = css`
-  margin-right: 8px;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
 `;
-const ProtocolLogo = styled.img`
+const Logo = styled.img`
   ${logoStyles}
   object-fit: cover;
 `;
-const ProtocolLogoEmpty = styled.div`
+const LogoEmpty = styled.div`
   ${logoStyles}
-  background: ${Colors.gray500};
 `;
 
-const Paragraph = styled.p`
-  margin-top: 8px;
-  font-size: 14px;
-  color: ${Colors.gray400};
-  line-height: 1.2;
+const PlatformBadge = styled.img`
+  position: absolute;
+  left: -10px;
+  bottom: -10px;
+
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.44);
 `;
 
 const Content = styled.div`
@@ -149,8 +225,7 @@ const Content = styled.div`
   }
 `;
 const Valuation = styled.span`
-  font-weight: bold;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 28px;
   font-weight: bold;
   color: ${Colors.gray050};
