@@ -100,6 +100,10 @@ export const DetailModal: React.FC<Props> = ({
       onDismiss={onDismiss}
       transition={{ ease: 'linear' }}
     >
+      <CloseButton onClick={onDismiss}>
+        <Icon icon="fluent-emoji-high-contrast:cross-mark" />
+      </CloseButton>
+
       {!tokenBalance ? null : (
         <>
           <TokenHeader>
@@ -352,6 +356,25 @@ const OverlayWrapper = styled(Modal)`
     }
   }
 `;
+
+const CloseButton = styled.button`
+  padding: 16px;
+  display: flex;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  font-size: 16px;
+  color: ${Colors.gray400};
+
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    opacity: 0.65;
+  }
+`;
+
 const TokenHeader = styled.div`
   width: 100%;
   display: flex;
@@ -371,6 +394,7 @@ const TokenIcon = styled(TokenImage)`
 
 const TokenInformation = styled.div`
   margin-left: 16px;
+  margin-right: 28px;
   min-width: 0;
 
   display: flex;
