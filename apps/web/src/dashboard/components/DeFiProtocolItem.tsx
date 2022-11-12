@@ -13,14 +13,14 @@ import { Colors } from '@/styles';
 const capitalize = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);
 
-type CollapsePanelProps = {
+type DeFiProtocolItemProps = {
   service: ServiceData;
   children?: React.ReactNode;
   valuation: number;
   currentLanguage: string;
 };
 
-export const CollapsePanel: React.FC<CollapsePanelProps> = ({
+export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
   service,
   children,
   valuation,

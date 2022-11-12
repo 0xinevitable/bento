@@ -23,7 +23,7 @@ import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
-import { CollapsePanel } from './components/CollapsePanel';
+import { DeFiProtocolItem } from './components/DeFiProtocolItem';
 import { DeFiStakingItem } from './components/DeFiStakingItem';
 import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
@@ -373,7 +373,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                 0,
                               );
                               return (
-                                <CollapsePanel
+                                <DeFiProtocolItem
                                   service={service}
                                   key={`${service.chain}-${service.serviceId}`}
                                   valuation={valuation}
@@ -394,7 +394,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                       </React.Fragment>
                                     ))}
                                   </ul>
-                                </CollapsePanel>
+                                </DeFiProtocolItem>
                               );
                             })}
                           </Collapse>
