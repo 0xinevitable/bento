@@ -9,8 +9,9 @@ import { formatLocalizedString } from '@/utils/format';
 import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
-import { Badge } from '../common/Badge';
-import { LogoWithChain } from '../common/LogoWithChain';
+import { Badge } from './common/Badge';
+import { Container } from './common/Container';
+import { LogoWithChain } from './common/LogoWithChain';
 
 type DeFiProtocolItemProps = {
   service: ServiceData;
@@ -38,86 +39,35 @@ export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
 
   return (
     <Container className={isHeaderHovered ? 'header-hovered' : undefined}>
-      <Header
-        {...getToggleProps()}
-        onMouseEnter={() => setHeaderHovered(true)}
-        onMouseLeave={() => setHeaderHovered(false)}
-        onPointerEnter={() => setHeaderHovered(true)}
-        onPointerLeave={() => setHeaderHovered(false)}
-      >
-        <LogoWithChain logo={service.logo} chain={service.chain} />
+      <LogoWithChain logo={service.logo} chain={service.chain} />
 
-        <ProtocolInfo>
-          <ProtocolInfoRow>
-            <span>{formatLocalizedString(service.name, currentLanguage)}</span>
-            {typeof count !== 'undefined' && (
-              <Badge>
-                <Icon icon="ant-design:bank-twotone" />
-                {count.toLocaleString()}
-              </Badge>
-            )}
-          </ProtocolInfoRow>
+      <ProtocolInfo>
+        <ProtocolInfoRow>
+          <span>{formatLocalizedString(service.name, currentLanguage)}</span>
+          {typeof count !== 'undefined' && (
+            <Badge>
+              <Icon icon="ant-design:bank-twotone" />
+              {count.toLocaleString()}
+            </Badge>
+          )}
+        </ProtocolInfoRow>
 
-          <Valuation className="sys">
-            {`$${valuation.toLocaleString(undefined, {
-              maximumFractionDigits: 6,
-            })}`}
-          </Valuation>
-        </ProtocolInfo>
+        <Valuation className="sys">
+          {`$${valuation.toLocaleString(undefined, {
+            maximumFractionDigits: 6,
+          })}`}
+        </Valuation>
+      </ProtocolInfo>
 
-        {/* <Paragraph className="sys">
+      {/* <Paragraph className="sys">
           {formatLocalizedString(service?.description, currentLanguage)}
         </Paragraph> */}
-      </Header>
+
+      {/* TODO: Move to external modal */}
       <Content {...getCollapseProps()}>{children}</Content>
     </Container>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  background: ${Colors.gray900};
-  border: 1px solid ${Colors.gray800};
-  border-radius: 8px;
-  overflow: hidden;
-
-  width: calc((100% - 8px) / 3);
-
-  @media (max-width: 1100px) {
-    width: calc((100% - 4px) / 2);
-  }
-
-  @media (max-width: 880px) {
-    width: calc((100% - 8px) / 3);
-  }
-
-  @media (max-width: 720px) {
-    width: calc((100% - 8px) / 2);
-  }
-
-  @media (max-width: 540px) {
-    width: 100%;
-  }
-
-  &.header-hovered {
-    border: 1px solid ${Colors.gray700};
-  }
-`;
-
-const Header = styled.div`
-  padding: 10px;
-
-  display: flex;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    background: ${Colors.gray800};
-  }
-`;
 
 const ProtocolInfo = styled.span`
   margin-left: 8px;
@@ -133,60 +83,6 @@ const ProtocolInfoRow = styled.span`
   font-weight: 600;
   line-height: 16px;
   color: ${Colors.gray400};
-`;
-
-const LogoContainer = styled.div`
-  padding: 1px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: relative;
-
-  background-color: #aaaaaa;
-  background-image: radial-gradient(
-    96.62% 96.62% at 10.25% 1.96%,
-    #aaaaaa 0%,
-    #282c30 37.71%,
-    #787d83 100%
-  );
-`;
-const LogoBackground = styled.div`
-  background: ${Colors.black};
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-const logoStyles = css`
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-`;
-const Logo = styled.img`
-  ${logoStyles}
-  object-fit: cover;
-`;
-const LogoEmpty = styled.div`
-  ${logoStyles}
-`;
-
-const PlatformBadge = styled.img`
-  position: absolute;
-  left: -10px;
-  bottom: -10px;
-
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.44);
 `;
 
 const Content = styled.div`
