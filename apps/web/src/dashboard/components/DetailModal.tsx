@@ -100,6 +100,10 @@ export const DetailModal: React.FC<Props> = ({
       onDismiss={onDismiss}
       transition={{ ease: 'linear' }}
     >
+      <CloseButton onClick={onDismiss}>
+        <Icon icon="fluent-emoji-high-contrast:cross-mark" />
+      </CloseButton>
+
       {!tokenBalance ? null : (
         <>
           <TokenHeader>
@@ -110,7 +114,7 @@ export const DetailModal: React.FC<Props> = ({
             />
 
             <TokenInformation>
-              <TokenName>{tokenBalance.name}</TokenName>
+              <TokenName className="truncate">{tokenBalance.name}</TokenName>
               {tokenBalance.symbol !== null && (
                 <TokenSymbol style={{ color: Colors.gray400 }}>
                   {`$${tokenBalance.symbol}`}
@@ -272,7 +276,7 @@ export const DetailModal: React.FC<Props> = ({
             />
 
             <TokenInformation>
-              <TokenName>
+              <TokenName className="truncate">
                 {formatLocalizedString(service.name, currentLanguage)}
               </TokenName>
               {service.url && (
@@ -352,6 +356,25 @@ const OverlayWrapper = styled(Modal)`
     }
   }
 `;
+
+const CloseButton = styled.button`
+  padding: 16px;
+  display: flex;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  font-size: 16px;
+  color: ${Colors.gray400};
+
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    opacity: 0.65;
+  }
+`;
+
 const TokenHeader = styled.div`
   width: 100%;
   display: flex;
@@ -371,6 +394,9 @@ const TokenIcon = styled(TokenImage)`
 
 const TokenInformation = styled.div`
   margin-left: 16px;
+  margin-right: 28px;
+  min-width: 0;
+
   display: flex;
   flex-direction: column;
   gap: 8px;

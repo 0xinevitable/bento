@@ -1,12 +1,9 @@
-import styled from '@emotion/styled';
 import { Icon } from '@iconify/react';
 import { useMemo } from 'react';
-import useCollapse from 'react-collapsed';
 
 import { formatLocalizedString } from '@/utils/format';
 
 import { ServiceData } from '@/defi/types/staking';
-import { Colors } from '@/styles';
 
 import { Badge } from './common/Badge';
 import { Container } from './common/Container';
@@ -29,10 +26,6 @@ export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
     () => service.protocols.reduce((acc, v) => acc + v.accounts.length, 0),
     [service],
   );
-
-  const { getCollapseProps, getToggleProps } = useCollapse({
-    defaultExpanded: false,
-  });
 
   return (
     <Container onClick={onClick}>
@@ -57,21 +50,6 @@ export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
           })}`}
         </span>
       </div>
-
-      {/* <Paragraph className="sys">
-          {formatLocalizedString(service?.description, currentLanguage)}
-        </Paragraph> */}
     </Container>
   );
 };
-
-const Content = styled.div`
-  padding: 8px 8px 12px;
-  border-top: 1px solid ${Colors.gray600};
-
-  & > ul {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-`;
