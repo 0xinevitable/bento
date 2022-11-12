@@ -1,7 +1,6 @@
 import { Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
-import { Avatar, Text, useTheme } from '@geist-ui/core';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -10,7 +9,6 @@ import { AnimatedTab } from '@/components/AnimatedTab';
 import { Checkbox, Skeleton } from '@/components/system';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
-import { formatUsername } from '@/utils/format';
 
 import { DeFiProtocolItem } from '@/dashboard/components/list-items/DeFiProtocolItem';
 import { WalletBalanceItem } from '@/dashboard/components/list-items/WalletBalanceItem';
@@ -26,15 +24,16 @@ import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
 import { DeFiStakingItem } from './components/DeFiStakingItem';
+import { DetailModalParams } from './components/DetailModal';
 import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
-import { TokenDetailModalParams } from './components/TokenDetailModal';
 import { Breakpoints } from './constants/breakpoints';
 import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { BadgeListSection } from './sections/BadgeListSection';
 import { NFTListSection } from './sections/NFTListSection';
+import { UserProfileSection } from './sections/UserProfileSection';
 import { WalletListSection } from './sections/WalletListSection';
 
 enum DashboardTabType {
@@ -57,10 +56,8 @@ type DashboardMainProps = {
   revalidateProfile: () => Promise<void>;
   revalidateWallets: () => Promise<Wallet[] | undefined>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setTokenDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setTokenDetailModalParams: React.Dispatch<
-    React.SetStateAction<TokenDetailModalParams>
-  >;
+  setDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setDetailModalParams: React.Dispatch<React.SetStateAction<DetailModalParams>>;
 };
 
 export const DashboardMain: React.FC<DashboardMainProps> = ({
@@ -70,8 +67,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   revalidateProfile,
   revalidateWallets,
   setAddWalletModalVisible,
-  setTokenDetailModalVisible,
-  setTokenDetailModalParams,
+  setDetailModalVisible,
+  setDetailModalParams,
 }) => {
   const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
@@ -188,34 +185,12 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     [netWorthInProtocols, netWorthInWallet],
   );
 
-  const { palette } = useTheme();
-
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardWrapper>
-        <ProfileContainer>
-          {profile.images?.[0] ? (
-            <Avatar src={profile.images[0]} scale={3} />
-          ) : (
-            <Avatar
-              text={(profile.display_name || profile.username)[0]}
-              scale={3}
-            />
-          )}
-
-          <div>
-            <Text h3 style={{ color: palette.accents_8, lineHeight: 1 }}>
-              {profile.display_name}
-            </Text>
-            <Text
-              style={{ marginTop: 6, color: palette.accents_6, lineHeight: 1 }}
-            >
-              {formatUsername(profile.username)}
-            </Text>
-          </div>
-        </ProfileContainer>
+        <UserProfileSection profile={profile} />
 
         <DashboardContentWrapper>
           <TabContainer>
@@ -330,8 +305,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                       platform: item.platform,
                                       address: item.tokenAddress ?? undefined,
                                     });
-                                    setTokenDetailModalVisible((prev) => !prev);
-                                    setTokenDetailModalParams({
+                                    setDetailModalVisible((prev) => !prev);
+                                    setDetailModalParams({
                                       tokenBalance: item,
                                     });
                                   }}
@@ -378,23 +353,13 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                   key={`${service.chain}-${service.serviceId}`}
                                   valuation={valuation}
                                   currentLanguage={currentLanguage}
-                                >
-                                  <ul>
-                                    {service.protocols.map((protocol) => (
-                                      <React.Fragment
-                                        key={`${service.serviceId}-${protocol.protocolId}`}
-                                      >
-                                        {protocol.accounts.map((account) => (
-                                          <DeFiStakingItem
-                                            key={`${service.serviceId}-${protocol.protocolId}-${account.account}`}
-                                            info={protocol.info}
-                                            protocol={account}
-                                          />
-                                        ))}
-                                      </React.Fragment>
-                                    ))}
-                                  </ul>
-                                </DeFiProtocolItem>
+                                  onClick={() => {
+                                    setDetailModalVisible((prev) => !prev);
+                                    setDetailModalParams({
+                                      service,
+                                    });
+                                  }}
+                                />
                               );
                             })}
                           </Collapse>
@@ -450,20 +415,6 @@ const DashboardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-`;
-const ProfileContainer = styled.div`
-  padding: 0 32px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-
-  @media (max-width: ${Breakpoints.Tablet}px) {
-    padding: 0 24px;
-  }
-
-  @media (max-width: ${Breakpoints.Mobile}px) {
-    padding: 0;
-  }
 `;
 
 const TabContainer = styled.div`

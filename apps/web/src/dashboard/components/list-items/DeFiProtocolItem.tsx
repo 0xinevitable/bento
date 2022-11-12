@@ -14,16 +14,16 @@ import { LogoWithChain } from './common/LogoWithChain';
 
 type DeFiProtocolItemProps = {
   service: ServiceData;
-  children?: React.ReactNode;
   valuation: number;
   currentLanguage: string;
+  onClick?: () => void;
 };
 
 export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
   service,
-  children,
   valuation,
   currentLanguage,
+  onClick,
 }) => {
   const count = useMemo(
     () => service.protocols.reduce((acc, v) => acc + v.accounts.length, 0),
@@ -35,7 +35,7 @@ export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
   });
 
   return (
-    <Container>
+    <Container onClick={onClick}>
       <LogoWithChain logo={service.logo} chain={service.chain} />
 
       <div className="info">
@@ -61,9 +61,6 @@ export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
       {/* <Paragraph className="sys">
           {formatLocalizedString(service?.description, currentLanguage)}
         </Paragraph> */}
-
-      {/* TODO: Move to external modal */}
-      <Content {...getCollapseProps()}>{children}</Content>
     </Container>
   );
 };

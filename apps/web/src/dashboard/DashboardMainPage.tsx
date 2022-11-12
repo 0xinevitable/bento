@@ -26,15 +26,13 @@ import { formatUsername } from '@/utils/format';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Analytics, Supabase } from '@/utils';
 
-import { TokenDetailModalParams } from './components/TokenDetailModal';
+import { DetailModalParams } from './components/DetailModal';
 
 const DynamicDashboardMain = dynamic(() => import('./DashboardMain'));
 const DynmaicAddWalletModal = dynamic(
   () => import('./components/AddWalletModal'),
 );
-const DynamicTokenDetailModal = dynamic(
-  () => import('./components/TokenDetailModal'),
-);
+const DynamicDetailModal = dynamic(() => import('./components/DetailModal'));
 
 type Props =
   | {
@@ -278,10 +276,11 @@ const DashboardPage = ({
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);
-  const [isTokenDetailModalVisible, setTokenDetailModalVisible] =
+  const [isDetailModalVisible, setDetailModalVisible] =
     useState<boolean>(false);
-  const [tokenDetailModalParams, setTokenDetailModalParams] =
-    useState<TokenDetailModalParams>({});
+  const [detailModalParams, setDetailModalParams] = useState<DetailModalParams>(
+    {},
+  );
 
   const hasWallet = !!session && wallets.length > 0;
 
@@ -388,8 +387,8 @@ const DashboardPage = ({
           revalidateProfile={revalidateProfile}
           revalidateWallets={revalidateWallets}
           setAddWalletModalVisible={setAddWalletModalVisible}
-          setTokenDetailModalVisible={setTokenDetailModalVisible}
-          setTokenDetailModalParams={setTokenDetailModalParams}
+          setDetailModalVisible={setDetailModalVisible}
+          setDetailModalParams={setDetailModalParams}
         />
 
         <DynmaicAddWalletModal
@@ -397,13 +396,13 @@ const DashboardPage = ({
           onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
           revalidateWallets={revalidateWallets}
         />
-        <DynamicTokenDetailModal
-          visible={isTokenDetailModalVisible}
+        <DynamicDetailModal
+          visible={isDetailModalVisible}
           onDismiss={() => {
-            setTokenDetailModalVisible((prev) => !prev);
-            setTokenDetailModalParams({});
+            setDetailModalVisible((prev) => !prev);
+            setDetailModalParams({});
           }}
-          {...tokenDetailModalParams}
+          {...detailModalParams}
         />
       </PageContainer>
     </>

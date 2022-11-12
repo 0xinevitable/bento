@@ -47,5 +47,5 @@ export type DashboardTokenBalance = {
   amount: number;
   price: number;
   type: 'nft' | 'token';
-  platform: string;
+  platform: BentoSupportedNetwork | 'opensea';
 };
