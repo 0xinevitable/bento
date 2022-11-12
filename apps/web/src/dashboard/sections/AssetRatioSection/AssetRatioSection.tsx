@@ -103,7 +103,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 };
 
 const Container = styled.div`
-  max-width: 378px;
+  width: 100%;
   padding: 28px 24px;
   gap: 24px;
   flex: 1;
@@ -132,13 +132,13 @@ const Information = styled.div`
 `;
 const Field = styled.span`
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 100%;
   color: ${Colors.gray100};
 `;
 const Title = styled.h2`
-  font-weight: 800;
-  font-size: 40px;
+  font-weight: 900;
+  font-size: 48px;
   line-height: 100%;
   color: ${Colors.gray050};
 `;

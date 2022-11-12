@@ -89,7 +89,7 @@ export const WalletListSection: React.FC<Props> = ({
 };
 
 const Container = styled.div`
-  flex: 1;
+  min-width: 420px;
   display: flex;
   flex-direction: column;
   position: relative;
