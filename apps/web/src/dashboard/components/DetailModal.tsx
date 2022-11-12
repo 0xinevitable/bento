@@ -110,7 +110,7 @@ export const DetailModal: React.FC<Props> = ({
             />
 
             <TokenInformation>
-              <TokenName>{tokenBalance.name}</TokenName>
+              <TokenName className="truncate">{tokenBalance.name}</TokenName>
               {tokenBalance.symbol !== null && (
                 <TokenSymbol style={{ color: Colors.gray400 }}>
                   {`$${tokenBalance.symbol}`}
@@ -272,7 +272,7 @@ export const DetailModal: React.FC<Props> = ({
             />
 
             <TokenInformation>
-              <TokenName>
+              <TokenName className="truncate">
                 {formatLocalizedString(service.name, currentLanguage)}
               </TokenName>
               {service.url && (
@@ -371,6 +371,8 @@ const TokenIcon = styled(TokenImage)`
 
 const TokenInformation = styled.div`
   margin-left: 16px;
+  min-width: 0;
+
   display: flex;
   flex-direction: column;
   gap: 8px;
