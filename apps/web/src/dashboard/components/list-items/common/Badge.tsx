@@ -9,7 +9,7 @@ export const Badge: React.FC<BadgeProps> = ({ style, ...props }) => (
     type="secondary"
     style={{
       display: 'flex',
-      marginLeft: 4,
+      marginLeft: 5,
       gap: 2,
       backgroundColor: Colors.gray600,
       ...style,

@@ -14,6 +14,43 @@ export const Container = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+
+  img {
+    user-select: none;
+  }
+
+  div.info {
+    margin-left: 8px;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  span.name-row {
+    display: flex;
+    align-items: center;
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 16px;
+    color: ${Colors.gray400};
+  }
+
+  span.valuation {
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: bold;
+    color: ${Colors.gray050};
+  }
+
+  &:hover {
+    background: ${Colors.gray800};
+    border: 1px solid ${Colors.gray700};
+  }
 
   @media (max-width: 1100px) {
     width: calc((100% - 4px) / 2);
@@ -29,16 +66,5 @@ export const Container = styled.li`
 
   @media (max-width: 540px) {
     width: 100%;
-  }
-
-  img {
-    user-select: none;
-  }
-
-  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
-
-  &:hover {
-    background: ${Colors.gray800};
-    border: 1px solid ${Colors.gray700};
   }
 `;

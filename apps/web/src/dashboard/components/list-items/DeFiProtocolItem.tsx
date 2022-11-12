@@ -1,7 +1,6 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Icon } from '@iconify/react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import useCollapse from 'react-collapsed';
 
 import { formatLocalizedString } from '@/utils/format';
@@ -35,29 +34,29 @@ export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
     defaultExpanded: false,
   });
 
-  const [isHeaderHovered, setHeaderHovered] = useState<boolean>(false);
-
   return (
-    <Container className={isHeaderHovered ? 'header-hovered' : undefined}>
+    <Container>
       <LogoWithChain logo={service.logo} chain={service.chain} />
 
-      <ProtocolInfo>
-        <ProtocolInfoRow>
-          <span>{formatLocalizedString(service.name, currentLanguage)}</span>
+      <div className="info">
+        <span className="name-row">
+          <span className="truncate">
+            {formatLocalizedString(service.name, currentLanguage)}
+          </span>
           {typeof count !== 'undefined' && (
             <Badge>
               <Icon icon="ant-design:bank-twotone" />
               {count.toLocaleString()}
             </Badge>
           )}
-        </ProtocolInfoRow>
+        </span>
 
-        <Valuation className="sys">
+        <span className="valuation sys">
           {`$${valuation.toLocaleString(undefined, {
             maximumFractionDigits: 6,
           })}`}
-        </Valuation>
-      </ProtocolInfo>
+        </span>
+      </div>
 
       {/* <Paragraph className="sys">
           {formatLocalizedString(service?.description, currentLanguage)}
@@ -69,22 +68,6 @@ export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
   );
 };
 
-const ProtocolInfo = styled.span`
-  margin-left: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-`;
-const ProtocolInfoRow = styled.span`
-  display: flex;
-  align-items: center;
-
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
-  color: ${Colors.gray400};
-`;
-
 const Content = styled.div`
   padding: 8px 8px 12px;
   border-top: 1px solid ${Colors.gray600};
@@ -94,10 +77,4 @@ const Content = styled.div`
     flex-direction: column;
     gap: 6px;
   }
-`;
-const Valuation = styled.span`
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: bold;
-  color: ${Colors.gray050};
 `;
