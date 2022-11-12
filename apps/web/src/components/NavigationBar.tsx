@@ -389,6 +389,8 @@ const LogoutButton = styled.button`
 `;
 const LoginButton = styled(MinimalButton)`
   margin: -32px 0;
+  padding: 12px 0;
+  width: 102px;
 `;
 
 const LanguageSelectorContainer = styled.div<{ desktop?: boolean }>`

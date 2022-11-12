@@ -1,6 +1,7 @@
 import { Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
+import { Avatar, Text, useTheme } from '@geist-ui/core';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -9,7 +10,10 @@ import { AnimatedTab } from '@/components/AnimatedTab';
 import { Checkbox, Skeleton } from '@/components/system';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { formatUsername } from '@/utils/format';
 
+import { DeFiProtocolItem } from '@/dashboard/components/list-items/DeFiProtocolItem';
+import { WalletBalanceItem } from '@/dashboard/components/list-items/WalletBalanceItem';
 import { useProtocols } from '@/dashboard/hooks/useDeFis';
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
@@ -21,18 +25,16 @@ import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
-import { CollapsePanel } from './components/CollapsePanel';
 import { DeFiStakingItem } from './components/DeFiStakingItem';
 import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
-import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
+import { Breakpoints } from './constants/breakpoints';
 import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { BadgeListSection } from './sections/BadgeListSection';
 import { NFTListSection } from './sections/NFTListSection';
-import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
 
 enum DashboardTabType {
@@ -65,7 +67,6 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   isMyProfile,
   wallets,
   profile,
-  imageToken,
   revalidateProfile,
   revalidateWallets,
   setAddWalletModalVisible,
@@ -187,28 +188,43 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     [netWorthInProtocols, netWorthInWallet],
   );
 
+  const { palette } = useTheme();
+
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardWrapper>
         <ProfileContainer>
-          <div className="sticky">
-            <ProfileSummarySection
-              profile={profile}
-              revalidateProfile={revalidateProfile}
-              isMyProfile={isMyProfile}
-              imageToken={imageToken}
+          {profile.images?.[0] ? (
+            <Avatar src={profile.images[0]} scale={3} />
+          ) : (
+            <Avatar
+              text={(profile.display_name || profile.username)[0]}
+              scale={3}
             />
+          )}
+
+          <div>
+            <Text h3 style={{ color: palette.accents_8, lineHeight: 1 }}>
+              {profile.display_name}
+            </Text>
+            <Text
+              style={{ marginTop: 6, color: palette.accents_6, lineHeight: 1 }}
+            >
+              {formatUsername(profile.username)}
+            </Text>
           </div>
         </ProfileContainer>
 
         <DashboardContentWrapper>
-          <Tab
-            current={currentTab}
-            onChange={setCurrentTab}
-            items={DASHBOARD_TAB_ITEMS}
-          />
+          <TabContainer>
+            <Tab
+              current={currentTab}
+              onChange={setCurrentTab}
+              items={DASHBOARD_TAB_ITEMS}
+            />
+          </TabContainer>
           <DashboardContent>
             <AnimatedTab
               className="tab-crypto"
@@ -304,7 +320,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                   : 'native'
                               }`;
                               return (
-                                <TokenBalanceItem
+                                <WalletBalanceItem
                                   key={key}
                                   tokenBalance={item}
                                   onClick={() => {
@@ -340,7 +356,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                           alignItems: 'center',
                         }}
                       >
-                        <span className="title">{t('DeFi Staking')}</span>
+                        <span className="title">{t('DeFi Protocols')}</span>
                         <InlineBadge>
                           {defis.length > 0
                             ? defis.length.toLocaleString()
@@ -357,7 +373,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                 0,
                               );
                               return (
-                                <CollapsePanel
+                                <DeFiProtocolItem
                                   service={service}
                                   key={`${service.chain}-${service.serviceId}`}
                                   valuation={valuation}
@@ -378,7 +394,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                       </React.Fragment>
                                     ))}
                                   </ul>
-                                </CollapsePanel>
+                                </DeFiProtocolItem>
                               );
                             })}
                           </Collapse>
@@ -430,58 +446,45 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 export default DashboardMain;
 
 const DashboardWrapper = styled.div`
-  display: flex;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 32px;
-
-  @media (max-width: 1300px) {
-    gap: 28px;
-  }
-
-  @media (max-width: 1200px) {
-    gap: 24px;
-  }
-
-  @media (max-width: 880px) {
-    flex-direction: column;
-    gap: 32px;
-  }
 `;
 const ProfileContainer = styled.div`
-  &,
-  & > div.sticky {
-    width: 400px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 
-    @media (max-width: 1200px) {
-      width: 360px;
-    }
+  @media (max-width: ${Breakpoints.Tablet}px) {
+    padding: 0 24px;
   }
 
-  @media (max-width: 880px) {
-    width: 100%;
-
-    & div.profile-summary {
-      height: 360px;
-      padding-bottom: unset;
-    }
-  }
-
-  & > div.sticky {
-    position: fixed;
-
-    @media (max-width: 880px) {
-      position: static;
-      width: unset;
-    }
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    padding: 0;
   }
 `;
+
+const TabContainer = styled.div`
+  padding: 0 32px;
+
+  @media (max-width: ${Breakpoints.Tablet}px) {
+    padding: 0 24px;
+  }
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    padding: 0;
+  }
+`;
+
 const DashboardContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
 `;
 const DashboardContent = styled.div`
-  padding: 27px 33px;
+  padding: 28px 32px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -490,9 +493,15 @@ const DashboardContent = styled.div`
   border: 2px solid ${Colors.gray700};
   border-radius: 16px;
 
-  @media (max-width: 1240px) {
-    padding: 24px 0 0;
+  @media (max-width: ${Breakpoints.Tablet}px) {
+    padding: 28px 0 0;
     border: 0;
+    border-top: 0.4pt solid ${Colors.gray700};
+    border-radius: 0;
+  }
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    padding-top: 20px;
   }
 
   & .tab-crypto {
@@ -504,17 +513,8 @@ const TopSummaryContainer = styled.div`
   width: 100%;
   gap: 32px;
 
-  @media (max-width: 1300px) {
-    gap: 24px;
-  }
-
-  @media (max-width: 1200px) {
-    gap: 20px;
-  }
-
-  @media (max-width: 1110px) {
+  @media (max-width: ${Breakpoints.Tablet}px) {
     flex-direction: column;
-    gap: 32px;
   }
 `;
 
@@ -529,7 +529,7 @@ const AssetListCard = styled.section`
   background: ${Colors.gray850};
   border-radius: 8px;
 
-  @media (max-width: 400px) {
+  @media (max-width: ${Breakpoints.Mobile}px) {
     padding: 12px;
   }
 
@@ -541,9 +541,10 @@ const AssetListCard = styled.section`
   }
 `;
 const Collapse = styled.ul`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 4px;
 `;
 
 const SectionTitle = styled.h3`
