@@ -1,9 +1,12 @@
 import { Wallet } from '@bento/common';
 import styled from '@emotion/styled';
+import { deleteCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { Button } from '@/components/system';
+import { useSession } from '@/hooks/useSession';
 
 import { Colors } from '@/styles';
 
@@ -22,6 +25,8 @@ export const WalletListSection: React.FC<Props> = ({
   onClickAddWallet,
   revalidateWallets,
 }) => {
+  const router = useRouter();
+  const { session } = useSession();
   const { t } = useTranslation('common');
 
   return (
@@ -34,11 +39,24 @@ export const WalletListSection: React.FC<Props> = ({
         <>
           <WalletList wallets={wallets} revalidateWallets={revalidateWallets} />
           <ButtonContainer>
-            {isMyProfile && (
+            {isMyProfile ? (
               <AddWalletButton onClick={onClickAddWallet}>
                 {t('Add Another')}
               </AddWalletButton>
-            )}
+            ) : !session ? (
+              <AddWalletButton
+                onClick={() => {
+                  deleteCookie('supabase_auth_token', {
+                    path: '/',
+                  });
+                  setTimeout(() => {
+                    router.push('/home?login=open');
+                  });
+                }}
+              >
+                {t('Log In')}
+              </AddWalletButton>
+            ) : null}
           </ButtonContainer>
         </>
       ) : (
