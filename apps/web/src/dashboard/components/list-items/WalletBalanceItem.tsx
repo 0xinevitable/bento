@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-
-import { Badge } from '@/components/system';
+import { Icon } from '@iconify/react';
 
 import { BentoSupportedNetwork } from '@/constants/adapters';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { Colors } from '@/styles';
 
+import { Badge } from '../common/Badge';
 import { LogoWithChain } from '../common/LogoWithChain';
 
 type WalletBalanceItemProps = {
@@ -50,9 +50,10 @@ export const WalletBalanceItem: React.FC<WalletBalanceItemProps> = ({
             >
               {info.type === 'nft' ? info.name : info.symbol}
             </span>
-            <span className="sys">
-              <InlineBadge>{info.amount.toLocaleString()}</InlineBadge>
-            </span>
+            <Badge>
+              <Icon icon="mingcute:wallet-4-line" />
+              {info.amount.toLocaleString()}
+            </Badge>
           </span>
           <NetWorth className="sys">
             {`$${info.netWorth.toLocaleString()}`}

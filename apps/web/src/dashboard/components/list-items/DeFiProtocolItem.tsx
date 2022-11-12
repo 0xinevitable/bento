@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Badge } from '@geist-ui/core';
 import { Icon } from '@iconify/react';
 import { useMemo, useState } from 'react';
 import useCollapse from 'react-collapsed';
@@ -10,6 +9,7 @@ import { formatLocalizedString } from '@/utils/format';
 import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
+import { Badge } from '../common/Badge';
 import { LogoWithChain } from '../common/LogoWithChain';
 
 type DeFiProtocolItemProps = {
@@ -51,21 +51,10 @@ export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
           <ProtocolInfoRow>
             <span>{formatLocalizedString(service.name, currentLanguage)}</span>
             {typeof count !== 'undefined' && (
-              <span className="sys">
-                <Badge
-                  scale={0.7}
-                  type="secondary"
-                  style={{
-                    display: 'flex',
-                    marginLeft: 4,
-                    gap: 2,
-                    backgroundColor: Colors.gray600,
-                  }}
-                >
-                  <Icon icon="ant-design:bank-twotone" />
-                  {count.toLocaleString()}
-                </Badge>
-              </span>
+              <Badge>
+                <Icon icon="ant-design:bank-twotone" />
+                {count.toLocaleString()}
+              </Badge>
             )}
           </ProtocolInfoRow>
 
