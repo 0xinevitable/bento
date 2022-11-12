@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 
 import { Badge } from '@/components/system';
 
+import { BentoSupportedNetwork } from '@/constants/adapters';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { Colors } from '@/styles';
 
-const capitalize = (value: string) =>
-  value.charAt(0).toUpperCase() + value.slice(1);
+import { LogoWithChain } from '../common/LogoWithChain';
 
 type WalletBalanceItemProps = {
   tokenBalance: DashboardTokenBalance;
@@ -21,18 +21,11 @@ export const WalletBalanceItem: React.FC<WalletBalanceItemProps> = ({
   return (
     <Container onClick={onClick}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <div style={{ position: 'relative' }}>
-          {!!info.logo ? (
-            <Logo src={info.logo} alt={info.name} />
-          ) : (
-            <LogoEmpty />
-          )}
+        <LogoWithChain
+          logo={info.logo}
+          chain={info.platform as BentoSupportedNetwork | 'opensea'}
+        />
 
-          <PlatformBadge
-            alt={capitalize(info.platform)}
-            src={`/assets/icons/${info.platform}.png`}
-          />
-        </div>
         <div
           style={{
             marginLeft: 8,

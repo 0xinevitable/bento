@@ -10,8 +10,7 @@ import { formatLocalizedString } from '@/utils/format';
 import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
-const capitalize = (value: string) =>
-  value.charAt(0).toUpperCase() + value.slice(1);
+import { LogoWithChain } from '../common/LogoWithChain';
 
 type DeFiProtocolItemProps = {
   service: ServiceData;
@@ -46,20 +45,7 @@ export const DeFiProtocolItem: React.FC<DeFiProtocolItemProps> = ({
         onPointerEnter={() => setHeaderHovered(true)}
         onPointerLeave={() => setHeaderHovered(false)}
       >
-        <LogoContainer>
-          <LogoBackground>
-            {!!service.logo ? (
-              <Logo alt="" src={service.logo} />
-            ) : (
-              <LogoEmpty />
-            )}
-          </LogoBackground>
-
-          <PlatformBadge
-            alt={capitalize(service.chain)}
-            src={`/assets/icons/${service.chain}.png`}
-          />
-        </LogoContainer>
+        <LogoWithChain logo={service.logo} chain={service.chain} />
 
         <ProtocolInfo>
           <ProtocolInfoRow>

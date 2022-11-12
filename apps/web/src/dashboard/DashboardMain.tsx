@@ -12,6 +12,8 @@ import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { formatUsername } from '@/utils/format';
 
+import { DeFiProtocolItem } from '@/dashboard/components/list-items/DeFiProtocolItem';
+import { WalletBalanceItem } from '@/dashboard/components/list-items/WalletBalanceItem';
 import { useProtocols } from '@/dashboard/hooks/useDeFis';
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
@@ -23,13 +25,11 @@ import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
-import { DeFiProtocolItem } from './components/DeFiProtocolItem';
 import { DeFiStakingItem } from './components/DeFiStakingItem';
 import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
-import { WalletBalanceItem } from './components/WalletBalanceItem';
 import { Breakpoints } from './constants/breakpoints';
 import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
