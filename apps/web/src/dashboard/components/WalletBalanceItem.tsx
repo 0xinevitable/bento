@@ -9,12 +9,12 @@ import { Colors } from '@/styles';
 const capitalize = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);
 
-type TokenBalanceItemProps = {
+type WalletBalanceItemProps = {
   tokenBalance: DashboardTokenBalance;
   onClick: () => void;
 };
 
-export const TokenBalanceItem: React.FC<TokenBalanceItemProps> = ({
+export const WalletBalanceItem: React.FC<WalletBalanceItemProps> = ({
   tokenBalance: info,
   onClick,
 }) => {

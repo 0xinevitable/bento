@@ -28,8 +28,8 @@ import { DeFiStakingItem } from './components/DeFiStakingItem';
 import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
-import { TokenBalanceItem } from './components/TokenBalanceItem';
 import { TokenDetailModalParams } from './components/TokenDetailModal';
+import { WalletBalanceItem } from './components/WalletBalanceItem';
 import { Breakpoints } from './constants/breakpoints';
 import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
@@ -320,7 +320,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                   : 'native'
                               }`;
                               return (
-                                <TokenBalanceItem
+                                <WalletBalanceItem
                                   key={key}
                                   tokenBalance={item}
                                   onClick={() => {
