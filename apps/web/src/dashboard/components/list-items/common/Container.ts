@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+import { Breakpoints } from '@/dashboard/constants/breakpoints';
 import { Colors } from '@/styles';
 
 export const Container = styled.li`
@@ -36,7 +37,7 @@ export const Container = styled.li`
 
     font-size: 16px;
     font-weight: 600;
-    line-height: 16px;
+    line-height: 1;
     color: ${Colors.gray400};
   }
 
@@ -52,19 +53,20 @@ export const Container = styled.li`
     border: 1px solid ${Colors.gray700};
   }
 
-  @media (max-width: 1100px) {
+  @media (max-width: ${Breakpoints.Tablet}px) {
     width: calc((100% - 4px) / 2);
   }
 
-  @media (max-width: 880px) {
-    width: calc((100% - 8px) / 3);
-  }
-
-  @media (max-width: 720px) {
-    width: calc((100% - 8px) / 2);
-  }
-
-  @media (max-width: 540px) {
+  @media (max-width: ${Breakpoints.Mobile}px) {
     width: 100%;
+
+    span.name-row {
+      font-size: 14px;
+    }
+
+    span.valuation {
+      font-size: 18px;
+      line-height: 20px;
+    }
   }
 `;
