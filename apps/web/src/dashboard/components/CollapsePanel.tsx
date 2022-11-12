@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import useCollapse from 'react-collapsed';
 
 import { formatLocalizedString } from '@/utils/format';
@@ -32,9 +32,17 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
     defaultExpanded: false,
   });
 
+  const [isHeaderHovered, setHeaderHovered] = useState<boolean>(false);
+
   return (
-    <Container>
-      <Header {...getToggleProps()}>
+    <Container className={isHeaderHovered ? 'header-hovered' : undefined}>
+      <Header
+        {...getToggleProps()}
+        onMouseEnter={() => setHeaderHovered(true)}
+        onMouseLeave={() => setHeaderHovered(false)}
+        onPointerEnter={() => setHeaderHovered(true)}
+        onPointerLeave={() => setHeaderHovered(false)}
+      >
         <HeaderTitleRow>
           <ProtocolInfo>
             {!!service.logo ? (
@@ -56,7 +64,7 @@ export const CollapsePanel: React.FC<CollapsePanelProps> = ({
             })}`}
           </Valuation>
         </HeaderTitleRow>
-        <Paragraph>
+        <Paragraph className="sys">
           {formatLocalizedString(service?.description, currentLanguage)}
         </Paragraph>
       </Header>
@@ -70,10 +78,14 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
 
-  background: ${Colors.gray800};
-  border: 1px solid ${Colors.gray600};
+  background: ${Colors.gray900};
+  border: 1px solid ${Colors.gray800};
   border-radius: 8px;
   overflow: hidden;
+
+  &.header-hovered {
+    border: 1px solid ${Colors.gray700};
+  }
 `;
 
 const Header = styled.div`
@@ -86,7 +98,7 @@ const Header = styled.div`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background: ${Colors.gray700};
+    background: ${Colors.gray800};
   }
 `;
 
