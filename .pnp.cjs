@@ -2772,7 +2772,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prop-types", "npm:15.8.1"],\
             ["query-string", "npm:7.1.1"],\
             ["react", "npm:18.2.0"],\
-            ["react-collapsed", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:3.4.0"],\
             ["react-dom", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:18.2.0"],\
             ["react-intersection-observer", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:9.4.0"],\
             ["react-is", "npm:18.2.0"],\
@@ -13268,16 +13267,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["raf", [\
-        ["npm:3.4.1", {\
-          "packageLocation": "./.yarn/cache/raf-npm-3.4.1-c25d48d76e-50ba284e48.zip/node_modules/raf/",\
-          "packageDependencies": [\
-            ["raf", "npm:3.4.1"],\
-            ["performance-now", "npm:2.1.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["randombytes", [\
         ["npm:2.1.0", {\
           "packageLocation": "./.yarn/cache/randombytes-npm-2.1.0-e3da76bccf-d779499376.zip/node_modules/randombytes/",\
@@ -13315,34 +13304,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["react", "npm:18.2.0"],\
             ["loose-envify", "npm:1.4.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["react-collapsed", [\
-        ["npm:3.4.0", {\
-          "packageLocation": "./.yarn/cache/react-collapsed-npm-3.4.0-a7596422d9-f64da118c5.zip/node_modules/react-collapsed/",\
-          "packageDependencies": [\
-            ["react-collapsed", "npm:3.4.0"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:3.4.0", {\
-          "packageLocation": "./.yarn/__virtual__/react-collapsed-virtual-7253591da8/0/cache/react-collapsed-npm-3.4.0-a7596422d9-f64da118c5.zip/node_modules/react-collapsed/",\
-          "packageDependencies": [\
-            ["react-collapsed", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:3.4.0"],\
-            ["@types/react", "npm:18.0.23"],\
-            ["@types/react-dom", "npm:18.0.7"],\
-            ["raf", "npm:3.4.1"],\
-            ["react", "npm:18.2.0"],\
-            ["react-dom", "virtual:490b23f81c79c20e389a0b00561db2c3f65a9208b5c07b176f7c2b2cce6d2997a276236860bc0f7230007c0f6ac74479c761242e7d0082d2cd4d4cc87aa7635c#npm:18.2.0"],\
-            ["tiny-warning", "npm:1.0.3"]\
-          ],\
-          "packagePeers": [\
-            "@types/react-dom",\
-            "@types/react",\
-            "react-dom",\
-            "react"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -14916,15 +14877,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["timeout-abort-controller", "npm:1.1.1"],\
             ["abort-controller", "npm:3.0.0"],\
             ["retimer", "npm:2.0.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["tiny-warning", [\
-        ["npm:1.0.3", {\
-          "packageLocation": "./.yarn/cache/tiny-warning-npm-1.0.3-750b7a07c4-da62c4acac.zip/node_modules/tiny-warning/",\
-          "packageDependencies": [\
-            ["tiny-warning", "npm:1.0.3"]\
           ],\
           "linkType": "HARD"\
         }]\
