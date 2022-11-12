@@ -32,7 +32,6 @@ import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { BadgeListSection } from './sections/BadgeListSection';
 import { NFTListSection } from './sections/NFTListSection';
-import { ProfileSummarySection } from './sections/ProfileSummarySection';
 import { WalletListSection } from './sections/WalletListSection';
 
 enum DashboardTabType {
@@ -192,7 +191,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardWrapper>
-        <ProfileContainer>
+        {/* <ProfileContainer>
           <div className="sticky">
             <ProfileSummarySection
               profile={profile}
@@ -201,7 +200,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               imageToken={imageToken}
             />
           </div>
-        </ProfileContainer>
+        </ProfileContainer> */}
 
         <DashboardContentWrapper>
           <Tab
