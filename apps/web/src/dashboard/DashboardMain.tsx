@@ -1,6 +1,7 @@
 import { Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
+import { Avatar, Text, User, useTheme } from '@geist-ui/core';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -9,6 +10,7 @@ import { AnimatedTab } from '@/components/AnimatedTab';
 import { Checkbox, Skeleton } from '@/components/system';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { formatUsername } from '@/utils/format';
 
 import { useProtocols } from '@/dashboard/hooks/useDeFis';
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
@@ -186,21 +188,34 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     [netWorthInProtocols, netWorthInWallet],
   );
 
+  const { palette } = useTheme();
+
   return (
     <React.Fragment>
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardWrapper>
-        {/* <ProfileContainer>
-          <div className="sticky">
-            <ProfileSummarySection
-              profile={profile}
-              revalidateProfile={revalidateProfile}
-              isMyProfile={isMyProfile}
-              imageToken={imageToken}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          {profile.images?.[0] ? (
+            <Avatar src={profile.images[0]} scale={3} />
+          ) : (
+            <Avatar
+              text={(profile.display_name || profile.username)[0]}
+              scale={3}
             />
+          )}
+
+          <div>
+            <Text h3 style={{ color: palette.accents_8, lineHeight: 1 }}>
+              {profile.display_name}
+            </Text>
+            <Text
+              style={{ marginTop: 6, color: palette.accents_6, lineHeight: 1 }}
+            >
+              {formatUsername(profile.username)}
+            </Text>
           </div>
-        </ProfileContainer> */}
+        </div>
 
         <DashboardContentWrapper>
           <Tab
@@ -429,51 +444,12 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 export default DashboardMain;
 
 const DashboardWrapper = styled.div`
-  display: flex;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 32px;
-
-  @media (max-width: 1300px) {
-    gap: 28px;
-  }
-
-  @media (max-width: 1200px) {
-    gap: 24px;
-  }
-
-  @media (max-width: 880px) {
-    flex-direction: column;
-    gap: 32px;
-  }
 `;
-const ProfileContainer = styled.div`
-  &,
-  & > div.sticky {
-    width: 400px;
 
-    @media (max-width: 1200px) {
-      width: 360px;
-    }
-  }
-
-  @media (max-width: 880px) {
-    width: 100%;
-
-    & div.profile-summary {
-      height: 360px;
-      padding-bottom: unset;
-    }
-  }
-
-  & > div.sticky {
-    position: fixed;
-
-    @media (max-width: 880px) {
-      position: static;
-      width: unset;
-    }
-  }
-`;
 const DashboardContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
