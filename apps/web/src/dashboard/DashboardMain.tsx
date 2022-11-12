@@ -339,7 +339,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                           alignItems: 'center',
                         }}
                       >
-                        <span className="title">{t('DeFi Staking')}</span>
+                        <span className="title">{t('DeFi Protocols')}</span>
                         <InlineBadge>
                           {defis.length > 0
                             ? defis.length.toLocaleString()
