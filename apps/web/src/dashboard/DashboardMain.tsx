@@ -23,7 +23,6 @@ import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
-import { DeFiStakingItem } from './components/DeFiStakingItem';
 import { DetailModalParams } from './components/DetailModal';
 import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
