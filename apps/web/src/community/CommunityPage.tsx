@@ -20,6 +20,8 @@ import telegramLogo from './assets/telegram.webp';
 import titleImage from './assets/title.png';
 import twitterLogo from './assets/twitter.webp';
 
+const isTitleShown = false;
+
 const withOpacity = (hex: string, opacity: number) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i
     .exec(hex)
@@ -130,9 +132,11 @@ const CommunityPage: NextPage = () => {
             placeholder="blur"
           />
 
-          <TitleContainer>
-            <TitleImage alt="" src={titleImage} placeholder="blur" />
-          </TitleContainer>
+          {isTitleShown && (
+            <TitleContainer>
+              <TitleImage alt="" src={titleImage} placeholder="blur" />
+            </TitleContainer>
+          )}
 
           <LayerOne />
         </BackgroundImageContainer>
