@@ -22,8 +22,8 @@ export const connectPhantom = async ({
   }
 
   const resp = await window.solana.connect();
-  const walletAddress = resp.publicKey.toString();
-  const messageToBeSigned = await getMessagedToBeSigned(walletAddress);
+  const account = resp.publicKey.toString();
+  const messageToBeSigned = await getMessagedToBeSigned(account);
   if (!messageToBeSigned) {
     return;
   }
@@ -37,7 +37,7 @@ export const connectPhantom = async ({
   await validateAndSaveWallet({
     networks,
     walletType,
-    walletAddress,
+    account,
     signature,
     nonce: messageToBeSigned,
     signOut,
@@ -45,7 +45,7 @@ export const connectPhantom = async ({
     Analytics.logEvent('connect_wallet', {
       type: 'phantom',
       networks: networks.map((v) => v.id) as any[],
-      address: walletAddress,
+      address: account,
     });
   });
 

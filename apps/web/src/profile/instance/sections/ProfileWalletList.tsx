@@ -1,4 +1,4 @@
-import { Wallet } from '@bento/common';
+import { ChainType, Wallet } from '@bento/common';
 import styled from '@emotion/styled';
 import clsx from 'clsx';
 import { useTranslation } from 'next-i18next';
@@ -9,7 +9,7 @@ import { Analytics, copyToClipboard, toast } from '@/utils';
 import { Empty } from './Empty';
 import { WalletListItem } from './ProfileWalletItem';
 
-const SORTED_ORDER = ['cosmos-sdk', 'solana', 'evm'];
+const SORTED_ORDER: ChainType[] = ['cosmos-sdk', 'sealevel', 'evm'];
 
 type ProfileWalletListProps = {
   wallets: Wallet[];
@@ -20,20 +20,17 @@ export const ProfileWalletList: React.FC<ProfileWalletListProps> = ({
 }) => {
   const { t } = useTranslation('dashboard');
 
-  const onClickCopy = useCallback(
-    (walletAddress: string, walletType: 'evm' | 'cosmos-sdk' | 'solana') => {
-      Analytics.logEvent('click_copy_wallet_address', {
-        type: walletType,
-        address: walletAddress,
-      });
-      copyToClipboard(walletAddress);
-      toast({
-        title: 'Copied to clipboard!',
-        description: walletAddress,
-      });
-    },
-    [],
-  );
+  const onClickCopy = useCallback((account: string, walletType: ChainType) => {
+    Analytics.logEvent('click_copy_wallet_address', {
+      type: walletType,
+      address: account,
+    });
+    copyToClipboard(account);
+    toast({
+      title: 'Copied to clipboard!',
+      description: account,
+    });
+  }, []);
 
   const sortedWallets = useMemo(() => {
     return [...wallets].sort((a, b) => {

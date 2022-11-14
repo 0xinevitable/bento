@@ -10,28 +10,29 @@ import { Checkbox, Skeleton } from '@/components/system';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
-import { useDeFis } from '@/dashboard/hooks/useDeFis';
+import { DeFiProtocolItem } from '@/dashboard/components/list-items/DeFiProtocolItem';
+import { WalletBalanceItem } from '@/dashboard/components/list-items/WalletBalanceItem';
+import { useProtocols } from '@/dashboard/hooks/useDeFis';
 import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
-import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import { WalletBalance } from '@/dashboard/types/WalletBalance';
-import { Metadata } from '@/defi/klaytn/constants/metadata';
+import {
+  DashboardTokenBalance,
+  WalletBalance,
+} from '@/dashboard/types/TokenBalance';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
-import { CollapsePanel } from './components/CollapsePanel';
-import { DeFiStakingItem } from './components/DeFiStakingItem';
+import { DetailModalParams } from './components/DetailModal';
 import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
-import { TokenBalanceItem } from './components/TokenBalanceItem';
-import { TokenDetailModalParams } from './components/TokenDetailModal';
+import { Breakpoints } from './constants/breakpoints';
 import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
 import { AssetRatioSection } from './sections/AssetRatioSection';
 import { BadgeListSection } from './sections/BadgeListSection';
 import { NFTListSection } from './sections/NFTListSection';
-import { ProfileSummarySection } from './sections/ProfileSummarySection';
+import { UserProfileSection } from './sections/UserProfileSection';
 import { WalletListSection } from './sections/WalletListSection';
 
 enum DashboardTabType {
@@ -54,22 +55,19 @@ type DashboardMainProps = {
   revalidateProfile: () => Promise<void>;
   revalidateWallets: () => Promise<Wallet[] | undefined>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setTokenDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setTokenDetailModalParams: React.Dispatch<
-    React.SetStateAction<TokenDetailModalParams>
-  >;
+  setDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setDetailModalParams: React.Dispatch<React.SetStateAction<DetailModalParams>>;
 };
 
 export const DashboardMain: React.FC<DashboardMainProps> = ({
   isMyProfile,
   wallets,
   profile,
-  imageToken,
   revalidateProfile,
   revalidateWallets,
   setAddWalletModalVisible,
-  setTokenDetailModalVisible,
-  setTokenDetailModalParams,
+  setDetailModalVisible,
+  setDetailModalParams,
 }) => {
   const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
@@ -118,12 +116,12 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
           );
 
           return {
-            platform: first.platform,
+            platform: first.chain,
             symbol: first.symbol,
             name: first.name,
             logo: first.logo,
-            type: 'type' in first ? first.type : undefined,
-            tokenAddress: 'address' in first ? first.address : undefined,
+            type: first.type,
+            tokenAddress: first.ind,
             balances: balances,
             netWorth: amount * first.price,
             amount,
@@ -150,7 +148,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     return tokenBalances.filter((v) => v.type !== 'nft');
   }, [isNFTBalancesIncluded, tokenBalances]);
 
-  const netWorthInUSD = useMemo(
+  const netWorthInWallet = useMemo(
     () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
     [tokenBalances],
   );
@@ -166,42 +164,24 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     }
   }, [currentTab]);
 
-  const { defis } = useDeFis(wallets);
-  // Entries
-  const defiStakesByProtocol = useMemo(
-    () => Object.entries(groupBy(defis, 'protocol')),
-    [defis],
-  );
+  const { defis } = useProtocols(wallets);
 
-  const [defiMetadata, setDefiMetadata] = useState<Record<
-    string,
-    Metadata
-  > | null>(null);
-  useEffect(() => {
-    if (!!defiMetadata) {
-      return;
-    }
-    import('../defi/klaytn/constants/metadata').then((v) =>
-      setDefiMetadata(v.KLAYTN_DEFI_METADATA),
-    );
-  }, [defiStakesByProtocol]);
-
-  const netWorthInUSDOnlyDeFi = useMemo(
+  const netWorthInProtocols = useMemo(
     () =>
-      defiStakesByProtocol.reduce(
-        (acc, [, stakes]) =>
-          acc + stakes.reduce((a, v) => a + v.valuation.total, 0),
+      defis.reduce(
+        (acc, service) =>
+          acc + service.protocols.reduce((a, v) => a + v.netWorth, 0),
         0,
       ),
-    [defiStakesByProtocol],
+    [defis],
   );
 
   const CRYPTO_FEEDS: ('DEFI' | 'WALLET')[] = useMemo(
     () =>
-      netWorthInUSDOnlyDeFi > netWorthInUSD
+      netWorthInProtocols > netWorthInWallet
         ? ['DEFI', 'WALLET']
         : ['WALLET', 'DEFI'],
-    [netWorthInUSDOnlyDeFi, netWorthInUSD],
+    [netWorthInProtocols, netWorthInWallet],
   );
 
   return (
@@ -209,23 +189,16 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardWrapper>
-        <ProfileContainer>
-          <div className="sticky">
-            <ProfileSummarySection
-              profile={profile}
-              revalidateProfile={revalidateProfile}
-              isMyProfile={isMyProfile}
-              imageToken={imageToken}
-            />
-          </div>
-        </ProfileContainer>
+        <UserProfileSection profile={profile} />
 
         <DashboardContentWrapper>
-          <Tab
-            current={currentTab}
-            onChange={setCurrentTab}
-            items={DASHBOARD_TAB_ITEMS}
-          />
+          <TabContainer>
+            <Tab
+              current={currentTab}
+              onChange={setCurrentTab}
+              items={DASHBOARD_TAB_ITEMS}
+            />
+          </TabContainer>
           <DashboardContent>
             <AnimatedTab
               className="tab-crypto"
@@ -233,10 +206,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
             >
               <TopSummaryContainer>
                 <AssetRatioSection
-                  netWorthInUSD={netWorthInUSD}
-                  netWorthInUSDOnlyDeFi={netWorthInUSDOnlyDeFi}
+                  netWorthInWallet={netWorthInWallet}
+                  netWorthInProtocols={netWorthInProtocols}
                   tokenBalances={tokenBalances}
-                  defiStakesByProtocol={defiStakesByProtocol}
+                  services={defis}
                 />
 
                 <WalletListSection
@@ -321,7 +294,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                   : 'native'
                               }`;
                               return (
-                                <TokenBalanceItem
+                                <WalletBalanceItem
                                   key={key}
                                   tokenBalance={item}
                                   onClick={() => {
@@ -331,8 +304,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                                       platform: item.platform,
                                       address: item.tokenAddress ?? undefined,
                                     });
-                                    setTokenDetailModalVisible((prev) => !prev);
-                                    setTokenDetailModalParams({
+                                    setDetailModalVisible((prev) => !prev);
+                                    setDetailModalParams({
                                       tokenBalance: item,
                                     });
                                   }}
@@ -357,7 +330,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                           alignItems: 'center',
                         }}
                       >
-                        <span className="title">{t('DeFi Staking')}</span>
+                        <span className="title">{t('DeFi Protocols')}</span>
                         <InlineBadge>
                           {defis.length > 0
                             ? defis.length.toLocaleString()
@@ -368,36 +341,26 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                       <AssetListCard>
                         {defis.length > 0 ? (
                           <Collapse>
-                            {defiStakesByProtocol.map(
-                              ([protocol, defiProtocols]) => {
-                                const valuation = defiProtocols.reduce(
-                                  (acc, v) => acc + v.valuation.total,
-                                  0,
-                                );
-                                return (
-                                  <CollapsePanel
-                                    title={t(`protocol-${protocol}`)}
-                                    metadata={defiMetadata?.[protocol]}
-                                    count={defiProtocols.length}
-                                    key={protocol}
-                                    valuation={valuation}
-                                    currentLanguage={currentLanguage}
-                                  >
-                                    <ul>
-                                      {defiProtocols.map((item) => (
-                                        <DeFiStakingItem
-                                          // FIXME: group stats with different wallets...
-                                          key={`${item.type}-${
-                                            item.address || 'gov'
-                                          }-${item.walletAddress}`}
-                                          protocol={item}
-                                        />
-                                      ))}
-                                    </ul>
-                                  </CollapsePanel>
-                                );
-                              },
-                            )}
+                            {defis.map((service) => {
+                              const valuation = service.protocols.reduce(
+                                (acc, v) => acc + v.netWorth,
+                                0,
+                              );
+                              return (
+                                <DeFiProtocolItem
+                                  service={service}
+                                  key={`${service.chain}-${service.serviceId}`}
+                                  valuation={valuation}
+                                  currentLanguage={currentLanguage}
+                                  onClick={() => {
+                                    setDetailModalVisible((prev) => !prev);
+                                    setDetailModalParams({
+                                      service,
+                                    });
+                                  }}
+                                />
+                              );
+                            })}
                           </Collapse>
                         ) : (
                           <EmptyBalance />
@@ -447,58 +410,31 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 export default DashboardMain;
 
 const DashboardWrapper = styled.div`
-  display: flex;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 32px;
+`;
 
-  @media (max-width: 1300px) {
-    gap: 28px;
+const TabContainer = styled.div`
+  padding: 0 32px;
+
+  @media (max-width: ${Breakpoints.Tablet}px) {
+    padding: 0 24px;
   }
 
-  @media (max-width: 1200px) {
-    gap: 24px;
-  }
-
-  @media (max-width: 880px) {
-    flex-direction: column;
-    gap: 32px;
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    padding: 0;
   }
 `;
-const ProfileContainer = styled.div`
-  &,
-  & > div.sticky {
-    width: 400px;
 
-    @media (max-width: 1200px) {
-      width: 360px;
-    }
-  }
-
-  @media (max-width: 880px) {
-    width: 100%;
-
-    & div.profile-summary {
-      height: 360px;
-      padding-bottom: unset;
-    }
-  }
-
-  & > div.sticky {
-    position: fixed;
-
-    @media (max-width: 880px) {
-      position: static;
-      width: unset;
-    }
-  }
-`;
 const DashboardContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
 `;
 const DashboardContent = styled.div`
-  padding: 27px 33px;
+  padding: 28px 32px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -507,9 +443,15 @@ const DashboardContent = styled.div`
   border: 2px solid ${Colors.gray700};
   border-radius: 16px;
 
-  @media (max-width: 1240px) {
-    padding: 24px 0 0;
+  @media (max-width: ${Breakpoints.Tablet}px) {
+    padding: 28px 0 0;
     border: 0;
+    border-top: 0.4pt solid ${Colors.gray700};
+    border-radius: 0;
+  }
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    padding-top: 20px;
   }
 
   & .tab-crypto {
@@ -521,17 +463,8 @@ const TopSummaryContainer = styled.div`
   width: 100%;
   gap: 32px;
 
-  @media (max-width: 1300px) {
-    gap: 24px;
-  }
-
-  @media (max-width: 1200px) {
-    gap: 20px;
-  }
-
-  @media (max-width: 1110px) {
+  @media (max-width: ${Breakpoints.Tablet}px) {
     flex-direction: column;
-    gap: 32px;
   }
 `;
 
@@ -546,7 +479,7 @@ const AssetListCard = styled.section`
   background: ${Colors.gray850};
   border-radius: 8px;
 
-  @media (max-width: 400px) {
+  @media (max-width: ${Breakpoints.Mobile}px) {
     padding: 12px;
   }
 
@@ -558,9 +491,10 @@ const AssetListCard = styled.section`
   }
 `;
 const Collapse = styled.ul`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 4px;
 `;
 
 const SectionTitle = styled.h3`

@@ -1,67 +1,50 @@
 import styled from '@emotion/styled';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import { useMemo } from 'react';
 
 import { AnimatedToolTip } from '@/components/system';
 
 import { NETWORKS } from '@/constants/networks';
+import bitcoinImage from '@/dashboard/assets/bitcoin-v2.png';
+import { Breakpoints } from '@/dashboard/constants/breakpoints';
 import { displayName } from '@/dashboard/constants/platform';
-import { DeFiStakingWithClientData } from '@/dashboard/hooks/useDeFis';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
-import {
-  KlaytnDeFiProtocolType,
-  OsmosisDeFiProtocolType,
-} from '@/defi/types/staking';
+import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 import { AssetRatioChart } from './AssetRatioChart';
 
-const KLAYTN_DEFIS = Object.values(KlaytnDeFiProtocolType) as string[];
-const OSMOSIS_DEFIS = Object.values(OsmosisDeFiProtocolType) as string[];
-
 type AssetRatioSectionProps = {
-  netWorthInUSD: number;
-  netWorthInUSDOnlyDeFi: number;
+  netWorthInWallet: number;
+  netWorthInProtocols: number;
   tokenBalances: DashboardTokenBalance[];
-  defiStakesByProtocol: [string, DeFiStakingWithClientData[]][];
+  services: ServiceData[];
 };
 export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
   tokenBalances,
-  netWorthInUSDOnlyDeFi,
-  // FIXME: dirty code here
-  netWorthInUSD: netWorthInUSDOnlyWallet,
-  defiStakesByProtocol,
+  netWorthInWallet,
+  netWorthInProtocols,
+  services,
 }) => {
   const { t } = useTranslation('dashboard');
 
   const netWorthInUSD = useMemo(
-    () => netWorthInUSDOnlyWallet + netWorthInUSDOnlyDeFi,
-    [netWorthInUSDOnlyWallet, netWorthInUSDOnlyDeFi],
+    () => netWorthInWallet + netWorthInProtocols,
+    [netWorthInWallet, netWorthInProtocols],
   );
 
-  const assetRatioByPlatform = useMemo(() => {
+  const [summary, assetRatioByPlatform] = useMemo(() => {
     const groups = groupBy(tokenBalances, 'platform');
 
     let items = NETWORKS.map(({ id: platform }) => {
       const assets = groups[platform] || [];
       let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
 
-      // FIXME: Hardcoded here
-      defiStakesByProtocol.forEach(([defiProtocol, defiStakes]) => {
-        if (platform === 'klaytn' && KLAYTN_DEFIS.includes(defiProtocol)) {
-          netWorth += defiStakes.reduce(
-            (acc, val) => val.valuation.total + acc,
-            0,
-          );
-        } else if (
-          platform === 'osmosis' &&
-          OSMOSIS_DEFIS.includes(defiProtocol)
-        ) {
-          netWorth += defiStakes.reduce(
-            (acc, val) => val.valuation.total + acc,
-            0,
-          );
+      services.forEach((service) => {
+        if (service.chain === platform) {
+          netWorth += service.netWorth;
         }
       });
 
@@ -78,14 +61,19 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       };
     });
 
-    // maximum length is 3
     items = items.sort((a, b) => b.ratio - a.ratio);
-    return items.slice(0, 3);
-  }, [netWorthInUSD, defiStakesByProtocol, tokenBalances]);
+    return [items.slice(0, 3), items];
+  }, [netWorthInUSD, tokenBalances]);
 
   return (
     <Container>
       <Illust />
+      <BitcoinIllust
+        alt=""
+        src={bitcoinImage}
+        sizes="240px"
+        placeholder="blur"
+      />
 
       <Information>
         <Field>{t('Net Worth')}</Field>
@@ -95,13 +83,13 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
       <div>
         <AssetRatioChart
           tokenBalances={tokenBalances}
-          netWorthInUSD={netWorthInUSD}
-          netWorthInUSDOnlyDeFi={netWorthInUSDOnlyDeFi}
+          totalNetWorth={netWorthInUSD}
+          assetRatioByPlatform={assetRatioByPlatform}
         />
       </div>
 
       <BadgeList>
-        {assetRatioByPlatform.map((item) => (
+        {summary.map((item) => (
           <AnimatedToolTip
             key={item.platform}
             label={`$${item.netWorth.toLocaleString(undefined, {
@@ -124,7 +112,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 };
 
 const Container = styled.div`
-  max-width: 378px;
+  width: 100%;
   padding: 28px 24px;
   gap: 24px;
   flex: 1;
@@ -139,10 +127,34 @@ const Container = styled.div`
   border-radius: 36px;
   background: linear-gradient(180deg, #14191e 0%, #0f1214 100%);
 
-  @media (max-width: 1110px) {
+  @media (max-width: ${Breakpoints.Tablet}px) {
     max-width: 100%;
     width: 100%;
     flex: unset;
+  }
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    padding: 24px 20px;
+  }
+
+  @media (max-width: ${Breakpoints.Tiny}px) {
+    padding: 20px 16px;
+    border-radius: 28px;
+  }
+`;
+
+const BitcoinIllust = styled(Image)`
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+
+  position: absolute;
+  top: 32px;
+  right: 20px;
+  z-index: -1;
+
+  @media (max-width: ${Breakpoints.Tiny}px) {
+    display: none;
   }
 `;
 
@@ -153,15 +165,24 @@ const Information = styled.div`
 `;
 const Field = styled.span`
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 100%;
   color: ${Colors.gray100};
 `;
 const Title = styled.h2`
-  font-weight: 800;
-  font-size: 40px;
+  font-weight: 900;
+  font-size: 48px;
   line-height: 100%;
   color: ${Colors.gray050};
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    font-size: 32px;
+    line-height: 120%;
+  }
+
+  @media (max-width: ${Breakpoints.Tiny}px) {
+    font-size: 28px;
+  }
 `;
 
 const BadgeList = styled.ul`
@@ -212,7 +233,7 @@ const Illust: React.FC = () => (
       top: 0,
       right: 0,
       filter: 'saturate(120%)',
-      zIndex: -1,
+      zIndex: -2,
     }}
   >
     <g clipPath="url(#clip0_199_1955)">

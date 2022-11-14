@@ -1,6 +1,6 @@
 {
   "name": "@bento/web",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "private": true,
   "scripts": {
     "dev": "env-cmd -f .env.debug.local next dev",
@@ -20,6 +20,7 @@
     "@ethersproject/providers": "^5.7.2",
     "@ethersproject/wallet": "^5.7.0",
     "@floating-ui/react-dom-interactions": "^0.10.2",
+    "@geist-ui/core": "^2.3.8",
     "@iconify/react": "^4.0.0",
     "@react-spring/web": "^9.5.5",
     "@solana/web3.js": "^1.66.2",
@@ -49,7 +50,6 @@
     "prop-types": "^15.8.1",
     "query-string": "^7.1.1",
     "react": "^18.2.0",
-    "react-collapsed": "^3.4.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.4.0",
     "react-is": "^18.2.0",

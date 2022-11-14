@@ -1,11 +1,13 @@
+import { ChainType } from '@bento/common';
 import { Session } from '@supabase/supabase-js';
 
-import { KEYS_BY_NETWORK } from '../constants/networks';
+import { BentoSupportedNetwork } from '@/constants/adapters';
+
 import { WALLETS } from '../constants/wallets';
 
 const isBrowser = typeof window !== 'undefined';
 
-type WalletType = Lowercase<keyof typeof WALLETS>;
+export type WalletType = Lowercase<keyof typeof WALLETS>;
 
 export type AnalyticsEvent = {
   view_landing: undefined;
@@ -48,14 +50,14 @@ export type AnalyticsEvent = {
   // 지갑 연결 모달
   view_connect_wallet: undefined;
   click_connect_wallet_select_chain: {
-    type: keyof typeof KEYS_BY_NETWORK;
+    type: BentoSupportedNetwork;
   };
   click_connect_wallet_select_wallet: {
     type: WalletType | 'metamask-or-walletconnect';
   };
   connect_wallet: {
     type: WalletType | 'metamask-or-walletconnect';
-    networks: (keyof typeof KEYS_BY_NETWORK)[];
+    networks: BentoSupportedNetwork[];
     address: string;
   };
 
@@ -67,7 +69,7 @@ export type AnalyticsEvent = {
   click_dashboard_main_show_wallet_list: undefined;
 
   click_copy_wallet_address: {
-    type: 'evm' | 'cosmos-sdk' | 'solana';
+    type: ChainType;
     address: string;
   };
   click_show_all_wallets: undefined;

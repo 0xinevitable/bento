@@ -1,3 +1,5 @@
+import { LocalizedString } from '@/constants/adapters';
+
 export const formatUsername = (
   username: string | undefined,
   prefix: string = '@',
@@ -10,3 +12,8 @@ export const formatUsername = (
   }
   return prefix + username;
 };
+
+export const formatLocalizedString = (
+  value: LocalizedString,
+  currentLanguage: string,
+) => (typeof value === 'string' ? value : value[currentLanguage] || value.en);

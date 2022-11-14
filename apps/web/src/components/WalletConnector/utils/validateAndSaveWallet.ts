@@ -8,14 +8,14 @@ export const validateAndSaveWallet = async (
   params: (
     | {
         walletType: 'web3' | 'kaikas' | 'phantom';
-        walletAddress: string;
+        account: string;
         signature: string;
         nonce: string;
         networks: Network[];
       }
     | {
         walletType: 'keplr';
-        walletAddress: string;
+        account: string;
         signature: string;
         nonce: string;
         publicKeyValue: string;
@@ -23,12 +23,12 @@ export const validateAndSaveWallet = async (
       }
   ) & { signOut: () => Promise<void> },
 ) => {
-  const { walletType, walletAddress, signature, nonce, networks } = params;
+  const { walletType, account, signature, nonce, networks } = params;
   try {
     const { data } = await axiosWithCredentials.post(
       `/api/auth/verify/${walletType}`,
       {
-        walletAddress,
+        account,
         signature,
         nonce: Base64.encode(nonce),
         ...(walletType === 'keplr' && {

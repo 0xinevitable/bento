@@ -1396,6 +1396,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.16.7":
+  version: 7.20.1
+  resolution: "@babel/runtime@npm:7.20.1"
+  dependencies:
+    regenerator-runtime: ^0.13.10
+  checksum: 00567a333d3357925742a6f5e39394dcc0af6e6029103fe188158bf7ae8b0b3ee3c6c0f68fccc217f0a6cfa455f6be252298baf56b3f5ff37b34313b170cd9f6
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.18.3":
   version: 7.20.0
   resolution: "@babel/runtime@npm:7.20.0"
@@ -1445,10 +1454,45 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bento/adapters@workspace:^, @bento/adapters@workspace:adapters":
+  version: 0.0.0-use.local
+  resolution: "@bento/adapters@workspace:adapters"
+  dependencies:
+    "@bento/common": "workspace:^"
+    "@bento/core": "workspace:^"
+    "@cosmjs/cosmwasm-stargate": ^0.29.3
+    "@ethersproject/providers": ^5.7.2
+    "@solana/web3.js": ^1.66.2
+    "@types/bn.js": ^5.1.1
+    "@types/dedent": ^0.7.0
+    "@types/lodash.groupby": ^4.6.7
+    "@types/node": ^18.11.5
+    "@types/prettier": ^2.7.1
+    axios: ^1.1.3
+    axios-cache-interceptor: ^0.10.7
+    bech32: ^2.0.0
+    bn.js: ^5.2.1
+    caver-js: ^1.9.0
+    dedent: ^0.7.0
+    env-cmd: ^10.1.0
+    find-yarn-workspace-root: ^2.0.0
+    klaytn-multicall: ^1.0.5
+    lodash.groupby: ^4.6.0
+    osmojs: ^0.35.0
+    prettier: ^2.7.1
+    query-string: ^7.1.1
+    ts-node: ^10.9.1
+    ttypescript: ^1.5.13
+    typescript: ^4.8.3
+    typescript-json: ^3.3.22
+  languageName: unknown
+  linkType: soft
+
 "@bento/api@workspace:apps/api":
   version: 0.0.0-use.local
   resolution: "@bento/api@workspace:apps/api"
   dependencies:
+    "@bento/adapters": "workspace:^"
     "@bento/common": "workspace:^"
     "@bento/core": "workspace:^"
     "@cosmjs/amino": ^0.29.3
@@ -1480,7 +1524,7 @@ __metadata:
     lodash.groupby: ^4.6.0
     next: canary
     next-transpile-modules: ^9.1.0
-    osmojs: ^0.33.0
+    osmojs: ^0.35.0
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -1536,6 +1580,7 @@ __metadata:
     "@ethersproject/providers": ^5.7.2
     "@ethersproject/wallet": ^5.7.0
     "@floating-ui/react-dom-interactions": ^0.10.2
+    "@geist-ui/core": ^2.3.8
     "@iconify/react": ^4.0.0
     "@next/bundle-analyzer": ^13.0.0
     "@react-spring/web": ^9.5.5
@@ -1582,7 +1627,6 @@ __metadata:
     prop-types: ^15.8.1
     query-string: ^7.1.1
     react: ^18.2.0
-    react-collapsed: ^3.4.0
     react-dom: ^18.2.0
     react-intersection-observer: ^9.4.0
     react-is: ^18.2.0
@@ -2928,9 +2972,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ianvs/prettier-plugin-sort-imports@npm:^3.5.2":
-  version: 3.5.2
-  resolution: "@ianvs/prettier-plugin-sort-imports@npm:3.5.2"
+"@geist-ui/core@npm:^2.3.8":
+  version: 2.3.8
+  resolution: "@geist-ui/core@npm:2.3.8"
+  dependencies:
+    "@babel/runtime": ^7.16.7
+  peerDependencies:
+    react: ">=16.9.0"
+    react-dom: ">=16.9.0"
+  checksum: 47015f5262455bf0397ff141156580d77c24dff3b938a36300b72cc9c7aedbea5d776ba7f5dbac93555f97629fa2ef90c4dfe87de9d0f0f33b603792386714aa
+  languageName: node
+  linkType: hard
+
+"@ianvs/prettier-plugin-sort-imports@npm:^3.7.1":
+  version: 3.7.1
+  resolution: "@ianvs/prettier-plugin-sort-imports@npm:3.7.1"
   dependencies:
     "@babel/core": ^7.17.7
     "@babel/generator": ^7.17.7
@@ -2941,8 +2997,12 @@ __metadata:
     lodash.clone: ^4.5.0
     lodash.isequal: ^4.5.0
   peerDependencies:
+    "@vue/compiler-sfc": ">=3.0.0"
     prettier: 2.x
-  checksum: 33dc1d630fe83099d1c5fbbfc96103e93ab528c6235f83c614294400bd90db7f7520b3fe2068c21cb58d9dfb42907e67acc70bc1f829c55888955bdeef5025f9
+  peerDependenciesMeta:
+    "@vue/compiler-sfc":
+      optional: true
+  checksum: a08c9c1ce7da39f4575c2022f339378ffd9064cbf3bef51bdc9ae777ed966d688830023b061e89bb5997070406880c4709b6ff70537043caf39121d56251b5b7
   languageName: node
   linkType: hard
 
@@ -4183,7 +4243,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:^2.6.3":
+"@types/prettier@npm:^2.6.3, @types/prettier@npm:^2.7.1":
   version: 2.7.1
   resolution: "@types/prettier@npm:2.7.1"
   checksum: 5e3f58e229d6c73b5f5cae2e8f96c1c4a5b5805f83459e17a045ba8e96152b1d38e86b63e3172fb159dac923388699660862b75b2d37e54220805f0e691e26f1
@@ -5039,7 +5099,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "bento@workspace:."
   dependencies:
-    "@ianvs/prettier-plugin-sort-imports": ^3.5.2
+    "@ianvs/prettier-plugin-sort-imports": ^3.7.1
     "@types/node": ^18.11.5
     prettier: ^2.7.1
     turbo: ^1.6.1
@@ -9800,9 +9860,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"osmojs@npm:^0.33.0":
-  version: 0.33.0
-  resolution: "osmojs@npm:0.33.0"
+"osmojs@npm:^0.35.0":
+  version: 0.35.0
+  resolution: "osmojs@npm:0.35.0"
   dependencies:
     "@babel/runtime": ^7.19.0
     "@cosmjs/amino": 0.29.2
@@ -9812,7 +9872,7 @@ __metadata:
     "@osmonauts/lcd": ^0.8.0
     long: ^5.2.0
     protobufjs: ^6.11.3
-  checksum: ec9524201d80c940e54a729ebf41233762a459fa97c7935f554820b701424872e156c9b124522afc45873fbe7b536981f79997ce87c9424eaf727cdde4d813a6
+  checksum: 28a79b4334718353a2d94b57d26c4db2012291bb0a232bff8536aa90d1fd54597c24242742860c20d1fffd9057b32f6944a82d198a18404539a1fe3c1b9d2443
   languageName: node
   linkType: hard
 
@@ -10302,15 +10362,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"raf@npm:^3.4.1":
-  version: 3.4.1
-  resolution: "raf@npm:3.4.1"
-  dependencies:
-    performance-now: ^2.1.0
-  checksum: 50ba284e481c8185dbcf45fc4618ba3aec580bb50c9121385d5698cb6012fe516d2015b1df6dd407a7b7c58d44be8086108236affbce1861edd6b44637c8cd52
-  languageName: node
-  linkType: hard
-
 "randombytes@npm:^2.0.0, randombytes@npm:^2.0.1, randombytes@npm:^2.0.5, randombytes@npm:^2.1.0":
   version: 2.1.0
   resolution: "randombytes@npm:2.1.0"
@@ -10327,19 +10378,6 @@ __metadata:
     randombytes: ^2.0.5
     safe-buffer: ^5.1.0
   checksum: 33734bb578a868d29ee1b8555e21a36711db084065d94e019a6d03caa67debef8d6a1bfd06a2b597e32901ddc761ab483a85393f0d9a75838f1912461d4dbfc7
-  languageName: node
-  linkType: hard
-
-"react-collapsed@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "react-collapsed@npm:3.4.0"
-  dependencies:
-    raf: ^3.4.1
-    tiny-warning: ^1.0.3
-  peerDependencies:
-    react: ">=16.8"
-    react-dom: ">=16.8"
-  checksum: f64da118c5cabb474bddad70e92fbcc7f6fe308f02fe62c5293bd42f87f10aef489bd87c1428b6bc00620708e3d8162875bd2a10d777c6dd0193e37a902667c5
   languageName: node
   linkType: hard
 
@@ -11629,13 +11667,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiny-warning@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "tiny-warning@npm:1.0.3"
-  checksum: da62c4acac565902f0624b123eed6dd3509bc9a8d30c06e017104bedcf5d35810da8ff72864400ad19c5c7806fc0a8323c68baf3e326af7cb7d969f846100d71
-  languageName: node
-  linkType: hard
-
 "to-fast-properties@npm:^2.0.0":
   version: 2.0.0
   resolution: "to-fast-properties@npm:2.0.0"
@@ -11883,6 +11914,13 @@ __metadata:
     tstl: ^2.5.6
     uuid: ^8.3.2
   checksum: 5859f859877788673561d3a7251ac80f7832e773c295c0d70001ed75c5b4a4a2063d77074d3a42cd7d098fa5d3b377bc6087d80fea0da0039cd98e685d9231f3
+  languageName: node
+  linkType: hard
+
+"typescript-json@npm:^3.3.22":
+  version: 3.3.22
+  resolution: "typescript-json@npm:3.3.22"
+  checksum: 502cf2215d2b3545ff3ea74f8976c7dcb07480ad099e111117dd4c2c33eb11c8252c49bc4a28f5985f7f842bd92a0dc9b00146f437f9424e42881ff003fc519a
   languageName: node
   linkType: hard
 

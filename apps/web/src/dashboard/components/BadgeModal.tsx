@@ -3,14 +3,11 @@ import React from 'react';
 
 import { Modal } from '@/components/system';
 
-import { KlaytnDeFiProtocolType } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 import { KLAYswapBadge, SwapscannerBadge } from '../sections/Badges';
 
-export type BadgeType =
-  | KlaytnDeFiProtocolType.KLAYSWAP
-  | KlaytnDeFiProtocolType.SWAPSCANNER;
+export type BadgeType = 'klayswap' | 'swapscanner';
 
 type Props = {
   mode: BadgeType | null;
@@ -31,12 +28,8 @@ export const BadgeModal: React.FC<Props> = ({
       onDismiss={onDismiss}
       transition={{ ease: 'linear' }}
     >
-      {mode === KlaytnDeFiProtocolType.KLAYSWAP && (
-        <KLAYswapBadge onClick={() => {}} />
-      )}
-      {mode === KlaytnDeFiProtocolType.SWAPSCANNER && (
-        <SwapscannerBadge onClick={() => {}} />
-      )}
+      {mode === 'klayswap' && <KLAYswapBadge onClick={() => {}} />}
+      {mode === 'swapscanner' && <SwapscannerBadge onClick={() => {}} />}
 
       {!!achievements && (
         <AchievementList>

@@ -17,8 +17,8 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
       {!!logo && <Logo src={logo} alt={label} />}
 
       <Information>
-        <ProtocolName>{label}</ProtocolName>
-        <ProtocolRatio>
+        <ProtocolName className="sys">{label}</ProtocolName>
+        <ProtocolRatio className="sys">
           {`${value.toLocaleString(undefined, {
             maximumFractionDigits: 2,
           })}%`}
@@ -49,16 +49,15 @@ const Information = styled.div`
   margin-left: 8px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
 `;
 const ProtocolName = styled.label`
   color: rgba(255, 255, 255, 0.65);
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
 `;
 const ProtocolRatio = styled.span`
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
   color: white;
 
   &:not(:last-of-type) {

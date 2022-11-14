@@ -20,11 +20,11 @@ interface Props {
   children: JSX.Element;
 }
 
-export const AnimatedToolTip = ({
+export const AnimatedToolTip: React.FC<Props> = ({
   children,
   label,
   placement = 'top',
-}: Props) => {
+}) => {
   const [open, setOpen] = useState(false);
 
   const { x, y, reference, floating, strategy, context } = useFloating({
@@ -57,7 +57,7 @@ export const AnimatedToolTip = ({
             transition={{ type: 'easeInOut', duration: 0.1 }}
             {...getFloatingProps({
               ref: floating,
-              className: 'Tooltip',
+              className: 'sys Tooltip',
               style: {
                 position: strategy,
                 top: y ?? 0,

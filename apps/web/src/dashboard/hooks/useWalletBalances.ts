@@ -4,14 +4,10 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { useCachedPricings } from '@/hooks/pricings';
 
-import { KEYS_BY_NETWORK } from '@/constants/networks';
-import {
-  CosmosSDKWalletBalance,
-  EVMWalletBalance,
-  SolanaWalletBalance,
-} from '@/dashboard/types/WalletBalance';
+import { BentoSupportedNetwork } from '@/constants/adapters';
 
 import { useInterval } from '../../hooks/useInterval';
+import { TokenBalance } from '../types/TokenBalance';
 import { useMultipleRequests } from './useMultipleRequests';
 
 type Key = string;
@@ -30,25 +26,16 @@ export const useWalletBalances = ({ wallets }: Options) => {
 
   const calculatedRequests = useMemo(() => {
     // TODO: Clean this thing up
-    const data: PartialRecord<keyof typeof KEYS_BY_NETWORK, [Key, Address[]]> =
-      {};
+    const data: PartialRecord<BentoSupportedNetwork, [Key, Address[]]> = {};
 
     wallets.forEach((wallet) => {
-      if (wallet.type === 'solana') {
-        const previousAddrs = data[wallet.type]?.[1] ?? [];
-        data[wallet.type] = [
-          KEYS_BY_NETWORK[wallet.type],
-          [...previousAddrs, wallet.address],
-        ];
-        return;
-      }
       wallet.networks.forEach((network) => {
         if (network === 'opensea') {
           return;
         }
         const previousAddrs = data[network]?.[1] ?? [];
         data[network] = [
-          KEYS_BY_NETWORK[network],
+          `/api/balances/${network}`,
           [...previousAddrs, wallet.address],
         ];
       });
@@ -63,16 +50,22 @@ export const useWalletBalances = ({ wallets }: Options) => {
     );
   }, [JSON.stringify(wallets)]);
 
-  const { responses: result, refetch } =
-    useMultipleRequests<
-      (EVMWalletBalance | CosmosSDKWalletBalance | SolanaWalletBalance)[]
-    >(calculatedRequests);
+  const { responses: result, refetch } = useMultipleRequests<TokenBalance[]>(
+    calculatedRequests,
+    undefined,
+    (key, data) =>
+      data.map((v) => ({
+        ...v,
+        type: 'token',
+        chain: key.split('/')[3] as BentoSupportedNetwork,
+      })),
+  );
   useInterval(refetch, 60 * 1_000);
 
   const balances = useMemo(() => result.flatMap((v) => v.data ?? []), [result]);
-  const [balancesWithPrices, setBalancesWithPrices] = useState<
-    (EVMWalletBalance | CosmosSDKWalletBalance | SolanaWalletBalance)[]
-  >([]);
+  const [balancesWithPrices, setBalancesWithPrices] = useState<TokenBalance[]>(
+    [],
+  );
 
   useEffect(() => {
     const result = produce(balances, (draft) => {

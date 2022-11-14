@@ -1,4 +1,4 @@
-import { Wallet, shortenAddress } from '@bento/common';
+import { ChainType, Wallet, shortenAddress } from '@bento/common';
 import styled from '@emotion/styled';
 import { Icon } from '@iconify/react';
 import { MotionProps, motion } from 'framer-motion';
@@ -8,11 +8,8 @@ import { Colors } from '@/styles';
 
 export type WalletListItemProps = MotionProps & {
   wallet: Wallet;
-  onClickDelete?: (walletAddress: string) => void;
-  onClickCopy?: (
-    address: string,
-    type: 'evm' | 'cosmos-sdk' | 'solana',
-  ) => void;
+  onClickDelete?: (account: string) => void;
+  onClickCopy?: (address: string, type: ChainType) => void;
 };
 
 export const WalletListItem: React.FC<WalletListItemProps> = ({
@@ -39,17 +36,11 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
         </WalletAddress>
 
         <PlatformList>
-          {wallet.type === 'solana' ? (
-            <PlatformListItem>
-              <img src="/assets/icons/solana.png" />
+          {wallet.networks.map((network) => (
+            <PlatformListItem key={network}>
+              <img src={`/assets/icons/${network}.png`} />
             </PlatformListItem>
-          ) : (
-            wallet.networks.map((network) => (
-              <PlatformListItem key={network}>
-                <img src={`/assets/icons/${network}.png`} />
-              </PlatformListItem>
-            ))
-          )}
+          ))}
         </PlatformList>
       </Information>
       <ButtonList>
