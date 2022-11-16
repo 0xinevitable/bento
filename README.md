@@ -28,7 +28,7 @@
 > **Warning**<br/>
 > This product is still under rapid development 🛠
 
-![Group wallets across all chains. Bento — the Web3 Dashboard Built as Open Source.](https://github.com/inevitable-changes/bento/blob/develop/apps/web/public/assets/og-image.jpg?raw=true)
+[![Group wallets across all chains. Bento — the Web3 Dashboard Built as Open Source.](https://github.com/inevitable-changes/bento/blob/develop/apps/web/public/assets/og-image.jpg?raw=true)](https://bento.finance)
 
 ## 🚀 Preparing Local Dev Environment
 
