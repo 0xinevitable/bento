@@ -114,7 +114,7 @@ export const WalletSection: React.FC<TrackedSectionOptions> = ({
               alt=""
               width={526}
               height={526}
-              src="/assets/dashboard-landing/illusts/wallet.png"
+              src="/assets/landing/wallet.png"
             />
           </WalletIllustWrapper>
         </Content>
