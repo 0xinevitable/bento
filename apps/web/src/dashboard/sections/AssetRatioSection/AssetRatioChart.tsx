@@ -78,9 +78,9 @@ export const AssetRatioChart: React.FC<AssetRatioChartProps> = ({
               dataKey="value"
               minAngle={PIE_WIDTH - 2}
             >
-              {data.map((_, index) => (
+              {data.map((data, index) => (
                 <Cell
-                  key={index}
+                  key={data.label}
                   fill={AVAILABLE_COLORS[index] ?? '#5b739b'}
                   stroke="transparent"
                 />
