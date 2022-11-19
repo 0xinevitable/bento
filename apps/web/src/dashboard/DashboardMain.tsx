@@ -10,6 +10,7 @@ import { Checkbox, Skeleton } from '@/components/system';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
+import { SearchBar } from '@/dashboard/components/SearchBar';
 import { DeFiProtocolItem } from '@/dashboard/components/list-items/DeFiProtocolItem';
 import { WalletBalanceItem } from '@/dashboard/components/list-items/WalletBalanceItem';
 import { useProtocols } from '@/dashboard/hooks/useDeFis';
@@ -189,6 +190,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardWrapper>
+        <SearchBar />
         <UserProfileSection profile={profile} />
 
         <DashboardContentWrapper>
