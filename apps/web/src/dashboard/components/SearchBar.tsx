@@ -3,7 +3,9 @@ import { Input } from '@geist-ui/core';
 import React from 'react';
 
 export const SearchBar: React.FC = () => {
-  return <StyledInput placeholder="GitHub" />;
+  return <StyledInput placeholder="Search Accounts" />;
 };
 
-const StyledInput = styled(Input)``;
+const StyledInput = styled(Input)`
+  width: 100%;
+`;

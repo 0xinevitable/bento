@@ -191,6 +191,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
       <DashboardWrapper>
         <SearchBar />
+
         <UserProfileSection profile={profile} />
 
         <DashboardContentWrapper>
