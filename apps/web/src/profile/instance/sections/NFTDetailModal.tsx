@@ -1,11 +1,13 @@
 import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import React, { useMemo } from 'react';
 
 import { AnimatedToolTip, AssetMedia, Modal } from '@/components/system';
 
 import { KlaytnNFTAsset } from '@/dashboard/hooks/useKlaytnNFTs';
+import { Colors } from '@/styles';
 
 export type NFTDetailModalParams = {
   asset: OpenSeaAsset | KlaytnNFTAsset | null;
@@ -16,6 +18,31 @@ type Props = NFTDetailModalParams & {
   visible?: boolean;
   onDismiss?: () => void;
 };
+
+type ExternalLinkType = 'opensea' | 'looksrare' | 'x2y2' | 'etherscan' | 'blur';
+const displayNames: Record<ExternalLinkType, string> = {
+  opensea: 'OpenSea',
+  looksrare: 'LooksRare',
+  x2y2: 'X2Y2',
+  etherscan: 'Etherscan',
+  blur: 'Blur',
+};
+const getNFTExternalLinks = (
+  network: 'ethereum' | 'klaytn',
+  contract: string,
+  tokenID: string,
+) =>
+  network === 'ethereum'
+    ? {
+        opensea: `https://opensea.io/assets/ethereum/${contract}/${tokenID}`,
+        looksrare: `https://looksrare.org/collections/${contract}/${tokenID}`,
+        x2y2: `https://x2y2.io/eth/${contract}/${tokenID}`,
+        blur: `https://blur.io/collection/${contract}`,
+        etherscan: `https://etherscan.io/nft/${contract}/${tokenID}`,
+      }
+    : {
+        opensea: `https://opensea.io/assets/klaytn/${contract}/${tokenID}`,
+      };
 
 export const NFTDetailModal: React.FC<Props> = ({
   visible: isVisible = false,
@@ -37,6 +64,22 @@ export const NFTDetailModal: React.FC<Props> = ({
     [asset],
   );
 
+  const externalLinks = useMemo(
+    () =>
+      !asset || !asset.asset_contract
+        ? []
+        : (Object.entries(
+            getNFTExternalLinks(
+              'network' in asset && asset.network === 'klaytn'
+                ? 'klaytn'
+                : 'ethereum',
+              asset.asset_contract.address,
+              asset.token_id,
+            ),
+          ) as [ExternalLinkType, string][]),
+    [asset],
+  );
+
   return (
     <OverlayWrapper
       visible={isVisible}
@@ -48,7 +91,13 @@ export const NFTDetailModal: React.FC<Props> = ({
           <>
             <AssetListItem key={asset.id}>
               <AssetMedia
-                src={(!isVideo ? imageURL : asset.animation_url) || undefined}
+                src={
+                  (!isVideo
+                    ? imageURL
+                    : !asset.animation_url
+                    ? asset.image_url
+                    : asset.animation_url) || undefined
+                }
                 poster={imageURL || undefined}
                 isVideo={isVideo}
               />
@@ -63,6 +112,25 @@ export const NFTDetailModal: React.FC<Props> = ({
                 )}
                 <CollectionName>{asset.collection.name}</CollectionName>
               </CollectionRow>
+
+              <ExternalLinkList>
+                {externalLinks.map(([linkType, href]) => (
+                  <ExternalLink
+                    key={linkType}
+                    className="sys"
+                    href={href}
+                    target="_blank"
+                  >
+                    <ExternalLinkLogo
+                      alt=""
+                      src={`/assets/icons/${linkType}.png`}
+                      width={48}
+                      height={48}
+                    />
+                    <span>{displayNames[linkType]}</span>
+                  </ExternalLink>
+                ))}
+              </ExternalLinkList>
             </TokenHeader>
 
             {!!imageURL && isMyProfile && (
@@ -255,3 +323,50 @@ const MdiImageIcon: React.FC = () => (
     </defs>
   </svg>
 );
+
+const ExternalLinkList = styled.div`
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+`;
+const ExternalLink = styled.a`
+  padding: 2px 8px;
+  width: fit-content;
+
+  background: ${Colors.gray700};
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &,
+  span {
+    transition: all 0.2s ease-in-out;
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 500;
+    color: ${Colors.gray200};
+  }
+
+  &:hover {
+    background: ${Colors.gray600};
+
+    span {
+      color: ${Colors.gray100};
+    }
+  }
+
+  &:focus {
+    opacity: 0.65;
+  }
+`;
+const ExternalLinkLogo = styled(Image)`
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  border-radius: 50%;
+`;

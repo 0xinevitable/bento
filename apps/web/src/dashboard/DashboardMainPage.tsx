@@ -1,7 +1,8 @@
 import { Wallet } from '@bento/common';
+import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
 import { User } from '@supabase/supabase-js';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { getCookie } from 'cookies-next';
 import { createHmac } from 'crypto';
 import { format } from 'date-fns';
@@ -24,15 +25,22 @@ import { getServerSupabase } from '@/utils/ServerSupabase';
 import { formatUsername } from '@/utils/format';
 
 import { UserProfile } from '@/profile/types/UserProfile';
-import { Analytics, Supabase } from '@/utils';
+import { ErrorResponse } from '@/profile/types/api';
+import { Analytics, Supabase, axiosWithCredentials, toast } from '@/utils';
 
 import { DetailModalParams } from './components/DetailModal';
+import { KlaytnNFTAsset } from './hooks/useKlaytnNFTs';
 
 const DynamicDashboardMain = dynamic(() => import('./DashboardMain'));
 const DynmaicAddWalletModal = dynamic(
   () => import('./components/AddWalletModal'),
 );
 const DynamicDetailModal = dynamic(() => import('./components/DetailModal'));
+const DynamicNFTDetailModal = dynamic(() =>
+  import('@/profile/instance/sections/NFTDetailModal').then(
+    (module) => module.NFTDetailModal,
+  ),
+);
 
 type Props =
   | {
@@ -335,6 +343,57 @@ const DashboardPage = ({
     ];
   }, [profile]);
 
+  const [selectedNFT, setSelectedNFT] = useState<
+    OpenSeaAsset | KlaytnNFTAsset | null
+  >(null);
+
+  const onClickSetAsProfile = useCallback(
+    async (assetImage: string) => {
+      try {
+        await axiosWithCredentials.post(`/api/profile`, {
+          username: profile?.username.toLowerCase(),
+          display_name: profile?.display_name,
+          images: [assetImage],
+        });
+        revalidateProfile?.();
+
+        setTimeout(() => {
+          toast({
+            type: 'success',
+            title: 'Changes Saved',
+          });
+
+          document.body.scrollIntoView({
+            behavior: 'smooth',
+          });
+        });
+      } catch (e) {
+        if (e instanceof AxiosError) {
+          const errorResponse = e.response?.data as ErrorResponse;
+          if (errorResponse?.code === 'USERNAME_UNUSABLE') {
+            toast({
+              type: 'error',
+              title: errorResponse.message,
+              description: 'Please choose another username',
+            });
+          } else if (errorResponse?.code === 'VALUE_REQUIRED') {
+            toast({
+              type: 'error',
+              title: errorResponse.message,
+            });
+          } else {
+            toast({
+              type: 'error',
+              title: 'Server Error',
+              description: errorResponse?.message || 'Something went wrong',
+            });
+          }
+        }
+      }
+    },
+    [profile, revalidateProfile],
+  );
+
   return (
     <>
       <Head>
@@ -384,11 +443,12 @@ const DashboardPage = ({
           wallets={wallets}
           profile={profile}
           imageToken={imageToken}
-          revalidateProfile={revalidateProfile}
           revalidateWallets={revalidateWallets}
           setAddWalletModalVisible={setAddWalletModalVisible}
           setDetailModalVisible={setDetailModalVisible}
           setDetailModalParams={setDetailModalParams}
+          selectedNFT={selectedNFT}
+          setSelectedNFT={setSelectedNFT}
         />
 
         <DynmaicAddWalletModal
@@ -402,7 +462,34 @@ const DashboardPage = ({
             setDetailModalVisible((prev) => !prev);
             setDetailModalParams({});
           }}
+          // selectedNFT={selectedNFT}
+          setSelectedNFT={setSelectedNFT}
           {...detailModalParams}
+        />
+
+        <DynamicNFTDetailModal
+          asset={selectedNFT}
+          visible={!!selectedNFT}
+          onDismiss={() => setSelectedNFT(null)}
+          isMyProfile={isMyProfile}
+          onClickSetAsProfile={(assetImage) => {
+            if (!profile || !selectedNFT) {
+              return;
+            }
+            Analytics.logEvent('set_nft_as_profile', {
+              user_id: profile.user_id ?? '',
+              username: profile.username ?? '',
+              is_my_profile: isMyProfile,
+              token_network:
+                'network' in selectedNFT && selectedNFT.network === 'klaytn'
+                  ? 'klaytn'
+                  : 'ethereum',
+              token_contract: selectedNFT.asset_contract.address,
+              token_id: selectedNFT.token_id,
+              medium: 'dashboard_main',
+            });
+            onClickSetAsProfile(assetImage);
+          }}
         />
       </PageContainer>
     </>
