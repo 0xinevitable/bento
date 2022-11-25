@@ -1,40 +1,32 @@
 import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
-import { AxiosError } from 'axios';
-import { useTranslation } from 'next-i18next';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { AssetMedia } from '@/components/system';
 
-import { NFTDetailModal } from '@/profile/instance/sections/NFTDetailModal';
 import { UserProfile } from '@/profile/types/UserProfile';
-import { ErrorResponse } from '@/profile/types/api';
 import { Colors } from '@/styles';
-import { Analytics, axiosWithCredentials, toast } from '@/utils';
+import { Analytics } from '@/utils';
 
 import { EmptyBalance } from '../components/EmptyBalance';
 import { KlaytnNFTAsset } from '../hooks/useKlaytnNFTs';
 
 type Props = {
-  selected: boolean;
   nftAssets: (OpenSeaAsset | KlaytnNFTAsset)[];
   profile: UserProfile | null;
-  revalidateProfile: () => void;
   isMyProfile: boolean;
+
+  selectedNFT: OpenSeaAsset | KlaytnNFTAsset | null;
+  setSelectedNFT: (asset: OpenSeaAsset | KlaytnNFTAsset | null) => void;
 };
 
 export const NFTListSection: React.FC<Props> = ({
   nftAssets,
-  selected,
   profile,
-  revalidateProfile,
   isMyProfile,
+  selectedNFT,
+  setSelectedNFT,
 }) => {
-  const { t } = useTranslation('dashboard');
-  const [selectedNFT, setSelectedNFT] = useState<
-    OpenSeaAsset | KlaytnNFTAsset | null
-  >(null);
-
   useEffect(() => {
     if (!selectedNFT || !profile) {
       return;
@@ -50,53 +42,6 @@ export const NFTListSection: React.FC<Props> = ({
       medium: 'dashboard_main',
     });
   }, [selectedNFT, isMyProfile, profile]);
-
-  const onClickSetAsProfile = useCallback(
-    async (assetImage: string) => {
-      try {
-        await axiosWithCredentials.post(`/api/profile`, {
-          username: profile?.username.toLowerCase(),
-          display_name: profile?.display_name,
-          images: [assetImage],
-        });
-        revalidateProfile?.();
-
-        setTimeout(() => {
-          toast({
-            type: 'success',
-            title: 'Changes Saved',
-          });
-
-          document.body.scrollIntoView({
-            behavior: 'smooth',
-          });
-        });
-      } catch (e) {
-        if (e instanceof AxiosError) {
-          const errorResponse = e.response?.data as ErrorResponse;
-          if (errorResponse?.code === 'USERNAME_UNUSABLE') {
-            toast({
-              type: 'error',
-              title: errorResponse.message,
-              description: 'Please choose another username',
-            });
-          } else if (errorResponse?.code === 'VALUE_REQUIRED') {
-            toast({
-              type: 'error',
-              title: errorResponse.message,
-            });
-          } else {
-            toast({
-              type: 'error',
-              title: 'Server Error',
-              description: errorResponse?.message || 'Something went wrong',
-            });
-          }
-        }
-      }
-    },
-    [profile, revalidateProfile],
-  );
 
   return (
     <AssetList>
@@ -127,33 +72,6 @@ export const NFTListSection: React.FC<Props> = ({
       ) : (
         // TODO: Change this for NFTs
         <EmptyBalance />
-      )}
-
-      {selected && (
-        <NFTDetailModal
-          asset={selectedNFT}
-          visible={!!selectedNFT}
-          onDismiss={() => setSelectedNFT(null)}
-          isMyProfile={isMyProfile}
-          onClickSetAsProfile={(assetImage) => {
-            if (!profile || !selectedNFT) {
-              return;
-            }
-            Analytics.logEvent('set_nft_as_profile', {
-              user_id: profile.user_id ?? '',
-              username: profile.username ?? '',
-              is_my_profile: isMyProfile,
-              token_network:
-                'network' in selectedNFT && selectedNFT.network === 'klaytn'
-                  ? 'klaytn'
-                  : 'ethereum',
-              token_contract: selectedNFT.asset_contract.address,
-              token_id: selectedNFT.token_id,
-              medium: 'dashboard_main',
-            });
-            onClickSetAsProfile(assetImage);
-          }}
-        />
       )}
     </AssetList>
   );
