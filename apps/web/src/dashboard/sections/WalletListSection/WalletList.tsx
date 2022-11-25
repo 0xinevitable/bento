@@ -37,9 +37,7 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
       try {
         await axios.post(
           `${Config.MAIN_API_BASE_URL}/api/profile/delete-wallet`,
-          {
-            account,
-          },
+          { account },
         );
         toast({
           type: 'success',
