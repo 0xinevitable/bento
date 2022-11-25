@@ -64,7 +64,6 @@ export const NFTDetailModal: React.FC<Props> = ({
     [asset],
   );
 
-  console.log({ isVideo });
   const externalLinks = useMemo(
     () =>
       !asset || !asset.asset_contract
