@@ -138,7 +138,7 @@ export type AnalyticsEvent = {
     user_id: string;
     username: string;
     is_my_profile: boolean;
-    token_network: 'ethereum';
+    token_network: 'ethereum' | 'klaytn';
     token_contract: string;
     token_id: string;
     medium: 'dashboard_main' | 'profile';
