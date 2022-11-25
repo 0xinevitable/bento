@@ -32,6 +32,7 @@ export const useKlaytnNFTs = (wallets: Wallet[]) => {
       }
       return item.data.result.map((nft) => ({
         // ...nft,
+        network: 'klaytn' as const,
         id: nft.id,
         token_id: nft.tokenId,
         name: nft.name,
@@ -55,6 +56,7 @@ export const useKlaytnNFTs = (wallets: Wallet[]) => {
 };
 
 export type KlaytnNFTAsset = {
+  network: 'klaytn';
   id: string;
   token_id: string;
   name: string | null;

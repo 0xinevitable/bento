@@ -143,7 +143,10 @@ export const NFTListSection: React.FC<Props> = ({
               user_id: profile.user_id ?? '',
               username: profile.username ?? '',
               is_my_profile: isMyProfile,
-              token_network: 'ethereum',
+              token_network:
+                'network' in selectedNFT && selectedNFT.network === 'klaytn'
+                  ? 'klaytn'
+                  : 'ethereum',
               token_contract: selectedNFT.asset_contract.address,
               token_id: selectedNFT.token_id,
               medium: 'dashboard_main',
