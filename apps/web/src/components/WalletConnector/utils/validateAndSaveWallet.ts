@@ -1,8 +1,8 @@
 import { Base64 } from '@bento/common';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 import { Network } from '@/constants/networks';
-import { Config } from '@/utils';
+import { axiosWithCredentials } from '@/utils';
 
 export const validateAndSaveWallet = async (
   params: (
@@ -25,8 +25,8 @@ export const validateAndSaveWallet = async (
 ) => {
   const { walletType, account, signature, nonce, networks } = params;
   try {
-    const { data } = await axios.post(
-      `${Config.MAIN_API_BASE_URL}/api/auth/verify/${walletType}`,
+    const { data } = await axiosWithCredentials.post(
+      `/api/auth/verify/${walletType}`,
       {
         account,
         signature,
