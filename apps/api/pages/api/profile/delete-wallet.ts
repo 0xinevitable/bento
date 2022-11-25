@@ -14,7 +14,7 @@ type APIRequest = NextApiRequest & {
 
 const handler = async (req: APIRequest, res: NextApiResponse) => {
   let {
-    body: { walletAddress: _walletAddress },
+    body: { account: _walletAddress },
   } = req;
   let walletAddress: string = _walletAddress as string;
 
