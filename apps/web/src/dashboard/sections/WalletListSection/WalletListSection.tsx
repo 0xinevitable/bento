@@ -79,9 +79,24 @@ export const WalletListSection: React.FC<Props> = ({
           </EmptyContainer>
 
           <ButtonContainer>
-            <AddWalletButton onClick={onClickAddWallet}>
-              {t('Connect Wallet')}
-            </AddWalletButton>
+            {isMyProfile ? (
+              <AddWalletButton onClick={onClickAddWallet}>
+                {t('Connect Wallet')}
+              </AddWalletButton>
+            ) : !session ? (
+              <AddWalletButton
+                onClick={() => {
+                  deleteCookie('supabase_auth_token', {
+                    path: '/',
+                  });
+                  setTimeout(() => {
+                    router.push('/home?login=open');
+                  });
+                }}
+              >
+                {t('Log In')}
+              </AddWalletButton>
+            ) : null}
           </ButtonContainer>
         </>
       )}
