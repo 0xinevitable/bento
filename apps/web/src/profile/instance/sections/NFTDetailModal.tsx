@@ -64,6 +64,7 @@ export const NFTDetailModal: React.FC<Props> = ({
     [asset],
   );
 
+  console.log({ isVideo });
   const externalLinks = useMemo(
     () =>
       !asset || !asset.asset_contract
@@ -91,7 +92,13 @@ export const NFTDetailModal: React.FC<Props> = ({
           <>
             <AssetListItem key={asset.id}>
               <AssetMedia
-                src={(!isVideo ? imageURL : asset.animation_url) || undefined}
+                src={
+                  (!isVideo
+                    ? imageURL
+                    : !asset.animation_url
+                    ? asset.image_url
+                    : asset.animation_url) || undefined
+                }
                 poster={imageURL || undefined}
                 isVideo={isVideo}
               />
