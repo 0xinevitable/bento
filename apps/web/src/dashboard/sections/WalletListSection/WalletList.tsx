@@ -1,13 +1,12 @@
 import { ChainType, Wallet, shortenAddress } from '@bento/common';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import React, { useCallback } from 'react';
 
 import { Colors } from '@/styles';
-import { Config } from '@/utils';
+import { axiosWithCredentials } from '@/utils';
 import { Analytics, copyToClipboard, toast } from '@/utils';
 
 import { WalletListItem } from './WalletListItem';
@@ -35,10 +34,9 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
   const onClickDelete = useCallback(
     async (account: string) => {
       try {
-        await axios.post(
-          `${Config.MAIN_API_BASE_URL}/api/profile/delete-wallet`,
-          { account },
-        );
+        await axiosWithCredentials.post(`/api/profile/delete-wallet`, {
+          account,
+        });
         toast({
           type: 'success',
           title: 'Deleted Wallet',
