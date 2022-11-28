@@ -27,12 +27,14 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const redisClient = createRedisClient();
   await redisClient.connect();
 
+  const account =
+    walletType === 'sealevel' ? walletAddress : walletAddress.toLowerCase();
+  const expireTime = 20 * 60 * 1_000; // 20 min
+
   await redisClient.set(
     `add-wallet-nonce:${nonce}`,
-    `${
-      walletType === 'sealevel' ? walletAddress : walletAddress.toLowerCase()
-    }///${20 * 60 * 1_000}`,
-  ); // 20 min
+    `${account}///${expireTime}`,
+  );
 
   await redisClient.disconnect();
 
