@@ -14,7 +14,7 @@ type APIRequest = NextApiRequest & {
 };
 
 const handler = async (req: APIRequest, res: NextApiResponse) => {
-  const walletAddress = req.query.walletAddress.toLowerCase();
+  const walletAddress = req.query.walletAddress;
   const walletType = identifyWalletAddress(walletAddress);
   if (!walletType) {
     return res.status(400).json({
@@ -27,10 +27,14 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   const redisClient = createRedisClient();
   await redisClient.connect();
 
+  const account =
+    walletType === 'sealevel' ? walletAddress : walletAddress.toLowerCase();
+  const expireTime = 20 * 60 * 1_000; // 20 min
+
   await redisClient.set(
     `add-wallet-nonce:${nonce}`,
-    `${walletAddress}///${20 * 60 * 1_000}`,
-  ); // 20 min
+    `${account}///${expireTime}`,
+  );
 
   await redisClient.disconnect();
 
@@ -58,15 +62,15 @@ const identifyWalletAddress = (value: string) => {
     }
   }
   try {
-    if (!!Bech32Address.fromBech32(value)) {
+    if (!!Bech32Address.fromBech32(value.toLowerCase())) {
       return 'cosmos-sdk';
     }
   } catch {
     try {
-      if (PublicKey.isOnCurve(new PublicKey(value))) {
+      if (PublicKey.isOnCurve(new PublicKey(value).toBytes())) {
         return 'sealevel';
       }
-    } catch {
+    } catch (err) {
       return null;
     }
   }

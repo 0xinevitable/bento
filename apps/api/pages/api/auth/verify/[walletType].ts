@@ -64,8 +64,9 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   await redisClient.connect();
   const nonceData = await redisClient.get(`add-wallet-nonce:${nonceId}`);
   const walletAddressFromNonce = nonceData?.split('///')?.[0];
+
   // TODO: Check expiration
-  if (walletAddressFromNonce !== walletAddress.toLowerCase()) {
+  if (walletAddressFromNonce?.toLowerCase() !== walletAddress.toLowerCase()) {
     return res.status(400).json({
       error: 'Invalid nonce',
     });
