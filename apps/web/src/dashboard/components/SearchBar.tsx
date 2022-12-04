@@ -1,4 +1,4 @@
-import { shortenAddress } from '@bento/common';
+import { ChainType, shortenAddress } from '@bento/common';
 import styled from '@emotion/styled';
 import { AutoComplete, Input } from '@geist-ui/core';
 import { AutoCompleteOptions } from '@geist-ui/core/esm/auto-complete';
@@ -9,6 +9,7 @@ import { useLazyEffect } from '@/hooks/useLazyEffect';
 
 export const SearchBar: React.FC = () => {
   const [queryDraft, setQueryDraft] = useState<string>('');
+  const [queryChainType, setQueryChainType] = useState<ChainType | null>(null);
   const [options, setOptions] = useState<AutoCompleteOptions>([]);
 
   const onSearch = useCallback(
@@ -19,14 +20,12 @@ export const SearchBar: React.FC = () => {
   const search = useCallback(async (value: string) => {
     const { identifyWalletAddress } = await import('@bento/core');
     const walletType = identifyWalletAddress(value);
+    setQueryChainType(walletType);
     if (!walletType) {
       setOptions([]);
       return;
     }
-
-    setOptions([
-      { label: shortenAddress(value), value: `${walletType}$${value}` },
-    ]);
+    setOptions([{ label: shortenAddress(value), value }]);
   }, []);
 
   useLazyEffect(
@@ -39,14 +38,13 @@ export const SearchBar: React.FC = () => {
 
   const router = useRouter();
   const onSelect = useCallback(
-    (value: string) => {
-      const [walletType, account] = value.split('$');
-      if (!walletType || !account) {
+    (account: string) => {
+      if (!queryChainType || !account) {
         return;
       }
-      router.push(`/wallet/${walletType}/${account}`);
+      router.push(`/wallet/${queryChainType}/${account}`);
     },
-    [router],
+    [router, queryChainType],
   );
 
   return (
