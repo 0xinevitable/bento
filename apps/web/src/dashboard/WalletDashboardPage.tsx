@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { PageContainer } from '@/components/PageContainer';
+import { NoSSR } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { formatUsername } from '@/utils/format';
 
@@ -77,23 +78,24 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
     };
   }, [account]);
 
-  const wallets = [
-    {
-      type: walletType,
-      address: account,
+  const wallets = useMemo(
+    () => [
+      {
+        type: walletType,
+        address: account,
 
-      // FIXME: Use data from API->Adapters
-      networks:
-        walletType === 'evm'
-          ? ['ethereum', 'polygon', 'bnb', 'avalanche', 'solana', 'opensea']
-          : walletType === 'cosmos-sdk'
-          ? ['cosmos-hub', 'osmosis']
-          : ['solana'],
-    },
-  ];
+        // FIXME: Use data from API->Adapters
+        networks:
+          walletType === 'evm'
+            ? ['ethereum', 'polygon', 'bnb', 'avalanche', 'opensea']
+            : walletType === 'cosmos-sdk'
+            ? ['cosmos-hub', 'osmosis']
+            : ['solana'],
+      },
+    ],
+    [walletType, account],
+  );
 
-  const [isAddWalletModalVisible, setAddWalletModalVisible] =
-    useState<boolean>(false);
   const [isDetailModalVisible, setDetailModalVisible] =
     useState<boolean>(false);
   const [detailModalParams, setDetailModalParams] = useState<DetailModalParams>(
@@ -202,16 +204,19 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
 
       <Black />
       <PageContainer style={{ paddingTop: 0 }}>
-        <DynamicDashboardMain
-          isMyProfile={isMyProfile}
-          wallets={wallets as Wallet[]}
-          profile={profile as UserProfile}
-          setAddWalletModalVisible={setAddWalletModalVisible}
-          setDetailModalVisible={setDetailModalVisible}
-          setDetailModalParams={setDetailModalParams}
-          selectedNFT={selectedNFT}
-          setSelectedNFT={setSelectedNFT}
-        />
+        <NoSSR>
+          <DynamicDashboardMain
+            isMyProfile={isMyProfile}
+            wallets={wallets as Wallet[]}
+            profile={profile as UserProfile}
+            // FIXME: Remove this
+            setAddWalletModalVisible={() => {}}
+            setDetailModalVisible={setDetailModalVisible}
+            setDetailModalParams={setDetailModalParams}
+            selectedNFT={selectedNFT}
+            setSelectedNFT={setSelectedNFT}
+          />
+        </NoSSR>
 
         {/* <DynmaicAddWalletModal
           visible={isAddWalletModalVisible}
