@@ -2695,6 +2695,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@bento/core", "workspace:packages/core"],\
             ["@bento/common", "workspace:packages/common"],\
+            ["@ethersproject/address", "npm:5.7.0"],\
             ["@ethersproject/providers", "npm:5.7.2"],\
             ["@solana/web3.js", "npm:1.66.2"],\
             ["@types/node", "npm:18.11.5"],\

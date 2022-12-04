@@ -1552,6 +1552,7 @@ __metadata:
   resolution: "@bento/core@workspace:packages/core"
   dependencies:
     "@bento/common": "workspace:^"
+    "@ethersproject/address": ^5.7.0
     "@ethersproject/providers": ^5.7.2
     "@solana/web3.js": ^1.66.2
     "@types/node": ^18.11.5
