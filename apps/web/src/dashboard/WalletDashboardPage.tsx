@@ -14,7 +14,7 @@ import { useSession } from '@/hooks/useSession';
 import { formatUsername } from '@/utils/format';
 
 import { UserProfile } from '@/profile/types/UserProfile';
-import { Analytics } from '@/utils';
+import { Analytics, FeatureFlags } from '@/utils';
 
 import { DetailModalParams } from './components/DetailModal';
 import { KlaytnNFTAsset } from './hooks/useKlaytnNFTs';
@@ -35,6 +35,9 @@ type Props = {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context,
 ) => {
+  if (!FeatureFlags.isSearchEnabled) {
+    return { notFound: true };
+  }
   const { walletType, account } = context.query;
   if (
     !walletType ||

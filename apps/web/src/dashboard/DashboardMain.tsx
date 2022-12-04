@@ -22,7 +22,7 @@ import {
 } from '@/dashboard/types/TokenBalance';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { Analytics } from '@/utils';
+import { Analytics, FeatureFlags } from '@/utils';
 
 import { DetailModalParams } from './components/DetailModal';
 import { EmptyBalance } from './components/EmptyBalance';
@@ -194,7 +194,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardWrapper>
-        <SearchBar />
+        {FeatureFlags.isSearchEnabled && <SearchBar />}
 
         <UserProfileSection profile={profile} />
 
