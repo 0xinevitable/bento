@@ -1499,7 +1499,6 @@ __metadata:
     "@cosmjs/cosmwasm-stargate": ^0.29.3
     "@cosmjs/crypto": 0.29.3
     "@cosmjs/encoding": ^0.29.3
-    "@ethersproject/address": ^5.7.0
     "@ethersproject/providers": ^5.7.2
     "@ethersproject/wallet": ^5.7.0
     "@next/bundle-analyzer": ^13.0.0
@@ -1577,7 +1576,6 @@ __metadata:
     "@emotion/core": ^11.0.0
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
-    "@ethersproject/address": ^5.7.0
     "@ethersproject/providers": ^5.7.2
     "@ethersproject/wallet": ^5.7.0
     "@floating-ui/react-dom-interactions": ^0.10.2
@@ -1585,7 +1583,6 @@ __metadata:
     "@iconify/react": ^4.0.0
     "@next/bundle-analyzer": ^13.0.0
     "@react-spring/web": ^9.5.5
-    "@solana/web3.js": ^1.66.2
     "@supabase/supabase-js": 1.35.7
     "@tanem/react-nprogress": ^5.0.15
     "@types/amplitude-js": ^8.16.2

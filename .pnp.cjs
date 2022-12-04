@@ -2638,7 +2638,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@cosmjs/cosmwasm-stargate", "npm:0.29.3"],\
             ["@cosmjs/crypto", "npm:0.29.3"],\
             ["@cosmjs/encoding", "npm:0.29.3"],\
-            ["@ethersproject/address", "npm:5.7.0"],\
             ["@ethersproject/providers", "npm:5.7.2"],\
             ["@ethersproject/wallet", "npm:5.7.0"],\
             ["@next/bundle-analyzer", "npm:13.0.0"],\
@@ -2722,7 +2721,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@emotion/core", "npm:11.0.0"],\
             ["@emotion/react", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:11.10.5"],\
             ["@emotion/styled", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:11.10.5"],\
-            ["@ethersproject/address", "npm:5.7.0"],\
             ["@ethersproject/providers", "npm:5.7.2"],\
             ["@ethersproject/wallet", "npm:5.7.0"],\
             ["@floating-ui/react-dom-interactions", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:0.10.2"],\
@@ -2730,7 +2728,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@iconify/react", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:4.0.0"],\
             ["@next/bundle-analyzer", "npm:13.0.0"],\
             ["@react-spring/web", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:9.5.5"],\
-            ["@solana/web3.js", "npm:1.66.2"],\
             ["@supabase/supabase-js", "npm:1.35.7"],\
             ["@tanem/react-nprogress", "virtual:6e66b773e095279aca23838fa145fe9fada06e42b22238b42a9314a452bad23fc3be4c729338ce551499af77ed071559a86afb7efa1ed2904c1c4c6e8ce1d8f3#npm:5.0.15"],\
             ["@types/amplitude-js", "npm:8.16.2"],\
