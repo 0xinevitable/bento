@@ -14,6 +14,7 @@ import { WalletBalance } from '@/dashboard/types/TokenBalance';
 import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
+import { KlaytnNFTAsset } from '../hooks/useKlaytnNFTs';
 import { AssetMedia } from './AssetMedia';
 import { DeFiStakingItem } from './DeFiStakingItem';
 import { LogoWithChain } from './list-items/common/LogoWithChain';
@@ -37,6 +38,7 @@ export type DetailModalParams = {
 type Props = DetailModalParams & {
   visible?: boolean;
   onDismiss?: () => void;
+  setSelectedNFT: (asset: OpenSeaAsset | KlaytnNFTAsset | null) => void;
 };
 
 type WalletsByPosition = { amount: number; address: string };
@@ -46,6 +48,7 @@ export const DetailModal: React.FC<Props> = ({
   onDismiss,
   tokenBalance,
   service,
+  setSelectedNFT,
 }) => {
   const assets = useMemo<OpenSeaAsset[]>(
     () =>
@@ -132,7 +135,10 @@ export const DetailModal: React.FC<Props> = ({
                   false;
 
                 return (
-                  <AssetListItem key={asset.id}>
+                  <AssetListItem
+                    key={asset.id}
+                    onClick={() => setSelectedNFT(asset)}
+                  >
                     <AssetMedia
                       src={
                         !isVideo
@@ -430,6 +436,13 @@ const AssetListItem = styled.li`
 
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(0.95);
+  }
 
   @media (max-width: 840px) {
     width: calc(33% - 6px);

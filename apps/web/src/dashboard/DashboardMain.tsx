@@ -53,22 +53,26 @@ type DashboardMainProps = {
   wallets: Wallet[];
   profile: UserProfile;
   imageToken: string;
-  revalidateProfile: () => Promise<void>;
   revalidateWallets: () => Promise<Wallet[] | undefined>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalParams: React.Dispatch<React.SetStateAction<DetailModalParams>>;
+
+  selectedNFT: OpenSeaAsset | KlaytnNFTAsset | null;
+  setSelectedNFT: (asset: OpenSeaAsset | KlaytnNFTAsset | null) => void;
 };
 
 export const DashboardMain: React.FC<DashboardMainProps> = ({
   isMyProfile,
   wallets,
   profile,
-  revalidateProfile,
   revalidateWallets,
   setAddWalletModalVisible,
   setDetailModalVisible,
   setDetailModalParams,
+
+  selectedNFT,
+  setSelectedNFT,
 }) => {
   const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
@@ -387,10 +391,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               ) : (
                 <NFTListSection
                   nftAssets={nftAssets}
-                  selected={currentTab === DashboardTabType.NFTs}
                   isMyProfile={isMyProfile}
                   profile={profile}
-                  revalidateProfile={revalidateProfile}
+                  selectedNFT={selectedNFT}
+                  setSelectedNFT={setSelectedNFT}
                 />
               )}
             </AnimatedTab>

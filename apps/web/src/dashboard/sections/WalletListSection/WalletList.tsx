@@ -5,8 +5,6 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import React, { useCallback } from 'react';
 
-import { WalletType } from '@/utils/analytics';
-
 import { Colors } from '@/styles';
 import { axiosWithCredentials } from '@/utils';
 import { Analytics, copyToClipboard, toast } from '@/utils';

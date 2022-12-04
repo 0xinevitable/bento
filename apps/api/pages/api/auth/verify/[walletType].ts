@@ -19,7 +19,7 @@ type APIRequest = NextApiRequest &
           walletType: 'web3' | 'kaikas' | 'phantom';
         };
         body: {
-          walletAddress: string;
+          account: string;
           signature: string;
           nonce: string;
           networks: string;
@@ -30,7 +30,7 @@ type APIRequest = NextApiRequest &
           walletType: 'keplr';
         };
         body: {
-          walletAddress: string;
+          account: string;
           signature: string;
           nonce: string;
           publicKeyValue: string;
@@ -44,7 +44,7 @@ const caver = new Caver('https://public-node-api.klaytnapi.com/v1/cypress');
 const handler = async (req: APIRequest, res: NextApiResponse) => {
   const { walletType } = req.query;
   const { signature, nonce, ...optionalParams } = req.body;
-  let walletAddress = optionalParams.walletAddress;
+  let walletAddress = optionalParams.account;
   if (walletType !== 'phantom') {
     walletAddress = walletAddress.toLowerCase();
   }
@@ -64,8 +64,9 @@ const handler = async (req: APIRequest, res: NextApiResponse) => {
   await redisClient.connect();
   const nonceData = await redisClient.get(`add-wallet-nonce:${nonceId}`);
   const walletAddressFromNonce = nonceData?.split('///')?.[0];
+
   // TODO: Check expiration
-  if (walletAddressFromNonce !== walletAddress.toLowerCase()) {
+  if (walletAddressFromNonce?.toLowerCase() !== walletAddress.toLowerCase()) {
     return res.status(400).json({
       error: 'Invalid nonce',
     });

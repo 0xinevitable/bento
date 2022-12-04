@@ -6,7 +6,7 @@ export const getMessagedToBeSigned = async (account: string) => {
     const {
       data: { nonce: messageToBeSigned },
     } = await axiosWithCredentials.get<{ nonce: string }>(
-      `/api/auth/nonce/${account.toLowerCase()}`,
+      `/api/auth/nonce/${account}`,
     );
     return messageToBeSigned;
   } catch (error) {
