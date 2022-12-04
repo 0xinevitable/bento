@@ -13,7 +13,7 @@ import { WalletListItem } from './WalletListItem';
 
 type Props = {
   wallets: Wallet[];
-  revalidateWallets: () => Promise<Wallet[] | undefined>;
+  revalidateWallets?: () => Promise<Wallet[] | undefined>;
 };
 
 export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
@@ -49,7 +49,7 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
           description: error.message || 'Something went wrong',
         });
       } finally {
-        await revalidateWallets();
+        await revalidateWallets?.();
       }
     },
     [revalidateWallets],

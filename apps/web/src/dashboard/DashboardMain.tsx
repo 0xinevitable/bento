@@ -52,8 +52,8 @@ type DashboardMainProps = {
   isMyProfile: boolean;
   wallets: Wallet[];
   profile: UserProfile;
-  imageToken: string;
-  revalidateWallets: () => Promise<Wallet[] | undefined>;
+  imageToken?: string;
+  revalidateWallets?: () => Promise<Wallet[] | undefined>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalParams: React.Dispatch<React.SetStateAction<DetailModalParams>>;

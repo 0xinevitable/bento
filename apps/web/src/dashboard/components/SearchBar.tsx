@@ -44,7 +44,7 @@ export const SearchBar: React.FC = () => {
       if (!walletType || !account) {
         return;
       }
-      router.push(`/wallet/${walletType}/${value}`);
+      router.push(`/wallet/${walletType}/${account}`);
     },
     [router],
   );
