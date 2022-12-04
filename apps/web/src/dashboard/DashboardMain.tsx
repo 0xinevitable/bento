@@ -10,6 +10,7 @@ import { Checkbox, Skeleton } from '@/components/system';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
+import { SearchBar } from '@/dashboard/components/SearchBar';
 import { DeFiProtocolItem } from '@/dashboard/components/list-items/DeFiProtocolItem';
 import { WalletBalanceItem } from '@/dashboard/components/list-items/WalletBalanceItem';
 import { useProtocols } from '@/dashboard/hooks/useDeFis';
@@ -21,7 +22,7 @@ import {
 } from '@/dashboard/types/TokenBalance';
 import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
-import { Analytics } from '@/utils';
+import { Analytics, FeatureFlags } from '@/utils';
 
 import { DetailModalParams } from './components/DetailModal';
 import { EmptyBalance } from './components/EmptyBalance';
@@ -51,8 +52,8 @@ type DashboardMainProps = {
   isMyProfile: boolean;
   wallets: Wallet[];
   profile: UserProfile;
-  imageToken: string;
-  revalidateWallets: () => Promise<Wallet[] | undefined>;
+  imageToken?: string;
+  revalidateWallets?: () => Promise<Wallet[] | undefined>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalParams: React.Dispatch<React.SetStateAction<DetailModalParams>>;
@@ -193,6 +194,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       <div style={{ width: '100%', height: 32 }} />
 
       <DashboardWrapper>
+        {FeatureFlags.isSearchEnabled && <SearchBar />}
+
         <UserProfileSection profile={profile} />
 
         <DashboardContentWrapper>

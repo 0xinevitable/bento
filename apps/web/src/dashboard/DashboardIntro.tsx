@@ -11,7 +11,9 @@ import { AnimatedToolTip, Badge } from '@/components/system';
 import { NETWORKS } from '@/constants/networks';
 import { FixedLoginNudge } from '@/profile/components/LoginNudge';
 import { Colors } from '@/styles';
-import { Analytics, Supabase } from '@/utils';
+import { Analytics, FeatureFlags, Supabase } from '@/utils';
+
+import { SearchBar } from './components/SearchBar';
 
 type DashboardIntroProps = {
   session: Session | null;
@@ -66,6 +68,8 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
           alignItems: 'center',
         }}
       >
+        {FeatureFlags.isSearchEnabled && <SearchBar />}
+
         <Badge>⚡ Bento.Finance</Badge>
         <h1
           style={{

@@ -16,7 +16,6 @@
     "@cosmjs/cosmwasm-stargate": "^0.29.3",
     "@cosmjs/crypto": "0.29.3",
     "@cosmjs/encoding": "^0.29.3",
-    "@ethersproject/address": "^5.7.0",
     "@ethersproject/providers": "^5.7.2",
     "@ethersproject/wallet": "^5.7.0",
     "@resvg/resvg-js": "^2.1.0",
