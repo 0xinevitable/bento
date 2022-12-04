@@ -27,7 +27,8 @@ const globalStyles = css`
   }
 
   .sys,
-  .sys * {
+  .sys *,
+  .auto-complete-dropdown * {
     font-family: var(--SystemFontStack) !important;
   }
 
