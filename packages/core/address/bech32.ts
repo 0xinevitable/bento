@@ -1,8 +1,5 @@
 import { bech32 } from 'bech32';
 
-export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-export const EEEE_ADDRESS = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
-
 // NOTE: From https://github.com/junhoyeo/keplr-wallet/blob/5c8cc2b7ee5357584d25bc8026dcee946f82c56f/packages/cosmos/src/bech32/index.ts#L4
 export class Bech32Address {
   constructor(public readonly address: Uint8Array) {}
