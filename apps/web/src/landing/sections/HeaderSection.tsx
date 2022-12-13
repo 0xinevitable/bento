@@ -74,7 +74,7 @@ export const HeaderSection: React.FC = () => {
       </GlobeWrapper>
 
       <Content>
-        <Title className="sys">{t('Discover Your ⚡Web3 World')}</Title>
+        <Title className="sys">{t('Group Wallets across All Chains')}</Title>
         <Description className="sys">
           {t('Bento aggregates your identity from the 2nd/3rd web')}
         </Description>
