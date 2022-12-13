@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import createGlobe from 'cobe';
-import { useTranslation } from 'next-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
@@ -74,7 +74,16 @@ export const HeaderSection: React.FC = () => {
       </GlobeWrapper>
 
       <Content>
-        <Title className="sys">{t('Group Wallets across All Chains')}</Title>
+        <Title>
+          <Trans
+            t={t}
+            i18nKey="Group <Keyword>Wallets</Keyword> <InlineBlock>Across All <Keyword>Chains</Keyword></InlineBlock>"
+            components={{
+              Keyword: <Keyword />,
+              InlineBlock: <InlineBlock />,
+            }}
+          />
+        </Title>
         <Description className="sys">
           {t('Bento aggregates your identity from the 2nd/3rd web')}
         </Description>
@@ -182,7 +191,6 @@ const Title = styled.h1`
   }
 
   color: ${Colors.gray000};
-  text-shadow: 0px 2px 24px ${Colors.black};
 
   @media (max-width: 900px) {
     font-size: 58px;
@@ -197,6 +205,17 @@ const Title = styled.h1`
   @media (max-width: 512px) {
     font-size: 48px;
   }
+`;
+const Keyword = styled.span`
+  color: #c4deff;
+  background: linear-gradient(to right, #c4deff, #ded5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+`;
+const InlineBlock = styled.span`
+  display: inline-block;
 `;
 
 const Description = styled.p`
