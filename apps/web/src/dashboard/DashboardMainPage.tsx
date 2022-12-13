@@ -21,7 +21,6 @@ import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
 import { formatUsername } from '@/utils/format';
 
-import { UserProfile } from '@/profile/types/UserProfile';
 import { ErrorResponse } from '@/profile/types/api';
 import { Analytics, Supabase, axiosWithCredentials, toast } from '@/utils';
 
@@ -51,7 +50,7 @@ const getKoreanTimestring = (timestamp: string) => {
 const capitalize = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);
 
-const notifySlack = async (user: User, profile: UserProfile) => {
+const notifySlack = async (user: User, username: string) => {
   if (!process.env.SLACK_NEW_PROFILE_WEBHOOK) {
     // disabled
     return;
@@ -67,7 +66,7 @@ const notifySlack = async (user: User, profile: UserProfile) => {
         ? `https://twitter.com/${user.user_metadata.user_name}`
         : `https://github.com/${user.user_metadata.user_name}`,
       user_id: user.id,
-      profile_url: `https://www.bento.finance/u/${profile.username}`,
+      profile_url: `https://www.bento.finance/u/${username}`,
       joined_at: getKoreanTimestring(user.created_at),
     })
     .catch((e) => {
@@ -78,7 +77,11 @@ const notifySlack = async (user: User, profile: UserProfile) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context,
 ) => {
-  const username = context.query.username as string | undefined;
+  const username =
+    typeof context.query.username === 'string' ? context.query.username : '';
+  if (!username) {
+    return { notFound: true };
+  }
 
   const { data } = await axios
     .get<BentoUserResponse>(`http://bentoapi.io/users/${username}`)
@@ -89,8 +92,60 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   const user = data?.result;
 
   if (!user) {
-    return { notFound: true };
+    const { data: supabaseUser } = await Supabase.auth.api.getUserById(
+      username,
+    );
+    if (!supabaseUser) {
+      return { notFound: true };
+    }
+
+    const displayName =
+      supabaseUser.identities?.[0]?.identity_data?.user_name ||
+      supabaseUser.user_metadata.user_name ||
+      '';
+
+    const userId = supabaseUser.id;
+    const initialProfile = {
+      user_id: userId,
+      username: userId,
+      display_name: displayName,
+      bio: '',
+    };
+
+    const upsertResult = await Supabase.from('profile').upsert(initialProfile);
+    if (upsertResult.error) {
+      console.error(upsertResult.error);
+      return { notFound: true };
+    }
+
+    try {
+      await notifySlack(supabaseUser, initialProfile.username);
+    } catch (e) {
+      console.error(e);
+    }
+
+    const { data } = await axios
+      .get<BentoUserResponse>(`http://bentoapi.io/users/${username}`)
+      .catch((e) => {
+        console.error(e);
+        return { data: null };
+      });
+    const user = data?.result;
+    if (!user) {
+      return { notFound: true };
+    }
+
+    return {
+      props: {
+        user,
+        ...(await serverSideTranslations(context.locale || 'en', [
+          'common',
+          'dashboard',
+        ])),
+      },
+    };
   }
+
   return {
     props: {
       user,
@@ -100,13 +155,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
       ])),
     },
   };
-};
-
-const fetchWallets = async (userId: string): Promise<Wallet[]> => {
-  const walletQuery = await Supabase.from('wallets')
-    .select('*')
-    .eq('user_id', userId);
-  return walletQuery.data ?? [];
 };
 
 const DashboardPage = (props: Props) => {
