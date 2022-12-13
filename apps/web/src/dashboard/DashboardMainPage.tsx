@@ -1,10 +1,8 @@
-import { Wallet } from '@bento/common';
+import { BentoUser, BentoUserResponse, Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
 import { User } from '@supabase/supabase-js';
 import axios, { AxiosError } from 'axios';
-import { getCookie } from 'cookies-next';
-import { createHmac } from 'crypto';
 import { format } from 'date-fns';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -21,7 +19,6 @@ import React, {
 
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
-import { getServerSupabase } from '@/utils/ServerSupabase';
 import { formatUsername } from '@/utils/format';
 
 import { UserProfile } from '@/profile/types/UserProfile';
@@ -42,29 +39,13 @@ const DynamicNFTDetailModal = dynamic(() =>
   ),
 );
 
-type Props =
-  | {
-      type: 'MY_PROFILE';
-      imageToken: string;
-      profile: UserProfile;
-    }
-  | {
-      type: 'USER_PROFILE';
-      imageToken: string;
-      profile: UserProfile;
-    };
+type Props = { user: BentoUser };
 
 const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
 const getKoreanTimestring = (timestamp: string) => {
   const curr = new Date(timestamp);
   const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
   return format(new Date(utc + KR_TIME_DIFF), 'yyyy-MM-dd HH:mm:ss');
-};
-
-const getImageTokenFromUserId = (userId: string) => {
-  const hmac = createHmac('sha256', 'my_secret');
-  hmac.update(JSON.stringify({ user_id: userId }));
-  return hmac.digest('hex');
 };
 
 const capitalize = (value: string) =>
@@ -97,139 +78,28 @@ const notifySlack = async (user: User, profile: UserProfile) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context,
 ) => {
-  const Supabase = getServerSupabase();
-  const accessToken: string =
-    (getCookie('supabase_auth_token', {
-      req: context.req,
-      res: context.res,
-    }) as string) || '';
   const username = context.query.username as string | undefined;
 
-  if (username && username.length >= 36) {
-    const userId = username;
-    const [profileQueryRes, userQueryRes] = await Promise.all([
-      Supabase.from('profile').select('*').eq('user_id', userId.toLowerCase()),
-      Supabase.auth.api.getUserById(userId),
-    ]);
-    const profiles: UserProfile[] = profileQueryRes.data ?? [];
-    const profile = profiles[0];
+  const { data } = await axios
+    .get<BentoUserResponse>(`http://bentoapi.io/users/${username}`)
+    .catch((e) => {
+      console.error(e);
+      return { data: null };
+    });
+  const user = data?.result;
 
-    if (!profile) {
-      if (!userQueryRes.data) {
-        return {
-          redirect: {
-            destination: '/',
-            permanent: false,
-          },
-        };
-      }
-
-      const user = userQueryRes.data;
-
-      const displayName =
-        user.identities?.[0]?.identity_data?.user_name ||
-        user.user_metadata.user_name ||
-        '';
-
-      const data = await Supabase.from('profile').upsert({
-        user_id: userId,
-        username: userId,
-        display_name: displayName,
-        bio: '',
-      });
-
-      if (!!data.error) {
-        console.log({ error: data.error });
-        return {
-          redirect: {
-            destination: '/',
-            permanent: false,
-          },
-        };
-      }
-
-      const newProfile = {
-        user_id: userId,
-        username: userId,
-        display_name: displayName,
-        bio: '',
-        images: [],
-        verified: false,
-        tabs: [],
-        links: [],
-      };
-      try {
-        await notifySlack(user, newProfile);
-      } catch (error) {
-        console.error(error);
-      }
-
-      return {
-        props: {
-          type: 'USER_PROFILE',
-          profile: newProfile,
-          imageToken: getImageTokenFromUserId(userId),
-          ...(await serverSideTranslations(context.locale || 'en', [
-            'common',
-            'dashboard',
-          ])),
-        },
-      };
-    }
-    return {
-      props: {
-        type: 'USER_PROFILE',
-        profile,
-        imageToken: getImageTokenFromUserId(userId),
-        ...(await serverSideTranslations(context.locale || 'en', [
-          'common',
-          'dashboard',
-        ])),
-      },
-    };
+  if (!user) {
+    return { notFound: true };
   }
-
-  // username should not be empty
-  if (!username) {
-    return {
-      redirect: {
-        permanent: false,
-        destination:
-          (context.locale === 'en' ? '' : `/${context.locale}`) +
-          `/profile/intro`,
-      },
-    };
-  }
-
-  let profile: UserProfile | null = null;
-  const [usernameQueryRes, { user: userFromCookie }] = await Promise.all([
-    Supabase.from('profile') //
-      .select('*')
-      .eq('username', username.toLowerCase()),
-    Supabase.auth.api.getUser(accessToken),
-  ]);
-  const profiles: UserProfile[] = usernameQueryRes.data ?? [];
-  if (profiles.length > 0) {
-    profile = profiles[0];
-  }
-
-  if (!!profile) {
-    return {
-      props: {
-        type:
-          userFromCookie?.id === profile.user_id //
-            ? 'MY_PROFILE'
-            : 'USER_PROFILE',
-        profile,
-        imageToken: getImageTokenFromUserId(profile.user_id),
-        ...(await serverSideTranslations(context.locale || 'en', [
-          'common',
-          'dashboard',
-        ])),
-      },
-    };
-  }
-  return { notFound: true };
+  return {
+    props: {
+      user,
+      ...(await serverSideTranslations(context.locale || 'en', [
+        'common',
+        'dashboard',
+      ])),
+    },
+  };
 };
 
 const fetchWallets = async (userId: string): Promise<Wallet[]> => {
@@ -239,48 +109,28 @@ const fetchWallets = async (userId: string): Promise<Wallet[]> => {
   return walletQuery.data ?? [];
 };
 
-const DashboardPage = ({
-  profile: preloadedProfile,
-  imageToken,
-  ...props
-}: Props) => {
+const DashboardPage = (props: Props) => {
   const router = useRouter();
   const { session } = useSession();
-  const [profile, setProfile] = useState<UserProfile>(preloadedProfile);
-  const revalidateProfile = useCallback(async () => {
-    const userId = preloadedProfile?.user_id;
-    if (!userId) {
-      return;
-    }
-    const res = await Supabase.from('profile') //
-      .select('*')
-      .eq('user_id', userId);
-    if (res.error) {
-      console.error(res.error);
-      return;
-    }
-    const profiles: UserProfile[] = res.data ?? [];
+  const [bentoUser, setBentoUser] = useState<BentoUser>(props.user);
 
-    if (profiles.length > 0) {
-      const firstProfile = profiles[0];
-      setProfile(firstProfile);
-    }
-  }, [preloadedProfile]);
-
-  const [wallets, setWallets] = useState<Wallet[]>([]);
+  // const [wallets, setWallets] = useState<Wallet[]>([]);
   const revalidateWallets = useCallback(async () => {
-    try {
-      const wallets = await fetchWallets(profile.user_id);
-      setWallets(wallets);
-    } catch {
-      setWallets([]);
-    }
-    return wallets;
-  }, [profile.user_id]);
+    // FIXME:
+    // try {
+    //   const wallets = await fetchWallets(bentoUser.id);
+    //   setWallets(wallets);
+    // } catch {
+    //   setWallets([]);
+    // }
+    // return wallets;
+    return [];
+  }, [bentoUser.id]);
 
-  useEffect(() => {
-    revalidateWallets();
-  }, [revalidateWallets]);
+  // useEffect(() => {
+  //   revalidateWallets();
+  // }, [revalidateWallets]);
+  const wallets = bentoUser.wallets;
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
     useState<boolean>(false);
@@ -305,25 +155,24 @@ const DashboardPage = ({
       return;
     } else {
       Analytics.logEvent('view_dashboard_main', {
-        user_id: profile.user_id,
-        username: profile.username,
+        user_id: bentoUser.id,
+        username: bentoUser.username,
       });
     }
-  }, [hasWallet, profile?.user_id, profile?.username]);
+  }, [hasWallet, bentoUser.id, bentoUser.username]);
 
-  const [isMyProfile, setMyProfile] = useState<boolean>(
-    props.type === 'MY_PROFILE',
-  );
+  // FIXME:
+  const [isMyProfile, setMyProfile] = useState<boolean>(false);
   useEffect(() => {
-    setMyProfile(session?.user?.id === profile.user_id);
+    setMyProfile(session?.user?.id === bentoUser.id);
   }, [JSON.stringify(session)]);
 
   const [title, description, ogImageURL] = useMemo(() => {
     let _title: string = '';
     let _description: string = '';
 
-    const formattedUsername = formatUsername(profile.username);
-    const displayName = profile.display_name;
+    const formattedUsername = formatUsername(bentoUser.username);
+    const displayName = bentoUser.displayName;
 
     if (!!displayName) {
       _title = `${displayName} (${formattedUsername}) | Bento`;
@@ -331,17 +180,17 @@ const DashboardPage = ({
       _title = `${formattedUsername} | Bento`;
     }
 
-    _description = profile.bio ?? '';
+    _description = bentoUser.bio ?? '';
 
     return [
       _title,
       _description,
       `https://dev-server.bento.finance/api/images/og/u/${formatUsername(
-        profile.username,
+        bentoUser.username,
         '',
       )}`,
     ];
-  }, [profile]);
+  }, [bentoUser]);
 
   const [selectedNFT, setSelectedNFT] = useState<
     OpenSeaAsset | KlaytnNFTAsset | null
@@ -351,11 +200,11 @@ const DashboardPage = ({
     async (assetImage: string) => {
       try {
         await axiosWithCredentials.post(`/api/profile`, {
-          username: profile?.username.toLowerCase(),
-          display_name: profile?.display_name,
+          username: bentoUser.username.toLowerCase(),
+          display_name: bentoUser.displayName,
           images: [assetImage],
         });
-        revalidateProfile?.();
+        // revalidateProfile?.();
 
         setTimeout(() => {
           toast({
@@ -391,7 +240,8 @@ const DashboardPage = ({
         }
       }
     },
-    [profile, revalidateProfile],
+    [],
+    // [profile, revalidateProfile],
   );
 
   return (
@@ -440,9 +290,8 @@ const DashboardPage = ({
       <PageContainer style={{ paddingTop: 0 }}>
         <DynamicDashboardMain
           isMyProfile={isMyProfile}
-          wallets={wallets}
-          profile={profile}
-          imageToken={imageToken}
+          user={bentoUser}
+          // imageToken={imageToken}
           revalidateWallets={revalidateWallets}
           setAddWalletModalVisible={setAddWalletModalVisible}
           setDetailModalVisible={setDetailModalVisible}
@@ -473,12 +322,12 @@ const DashboardPage = ({
           onDismiss={() => setSelectedNFT(null)}
           isMyProfile={isMyProfile}
           onClickSetAsProfile={(assetImage) => {
-            if (!profile || !selectedNFT) {
+            if (!bentoUser || !selectedNFT) {
               return;
             }
             Analytics.logEvent('set_nft_as_profile', {
-              user_id: profile.user_id ?? '',
-              username: profile.username ?? '',
+              user_id: bentoUser.id ?? '',
+              username: bentoUser.username ?? '',
               is_my_profile: isMyProfile,
               token_network:
                 'network' in selectedNFT && selectedNFT.network === 'klaytn'

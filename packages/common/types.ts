@@ -27,19 +27,29 @@ export type EVMBasedNetworks =
 export type CosmosSDKBasedNetworks = 'cosmos-hub' | 'osmosis';
 export type SealevelBasedNetworks = 'solana';
 
-export type Wallet =
-  | {
-      type: 'evm'; // EVM based chains
-      address: string;
-      networks: EVMBasedNetworks[];
-    }
-  | {
-      type: 'cosmos-sdk'; // Cosmos SDK based chains
-      address: string;
-      networks: CosmosSDKBasedNetworks[];
-    }
-  | {
-      type: 'sealevel';
-      address: string;
-      networks: SealevelBasedNetworks[];
-    };
+export type Wallet = {
+  address: string;
+  isVerified: boolean;
+} & (
+  | { type: 'evm'; networks: EVMBasedNetworks[] }
+  | { type: 'cosmos-sdk'; networks: CosmosSDKBasedNetworks[] }
+  | { type: 'sealevel'; networks: SealevelBasedNetworks[] }
+);
+
+export type BentoAPIResponse<T extends object> = {
+  statusCode: number;
+  timestamp: string;
+  path: string;
+  result: T;
+};
+
+export type BentoUser = {
+  id: string;
+  email: string;
+  username: string;
+  displayName: string;
+  profileImage: string;
+  bio: string;
+  wallets: Wallet[];
+};
+export type BentoUserResponse = BentoAPIResponse<BentoUser>;

@@ -1,4 +1,4 @@
-import { Wallet } from '@bento/common';
+import { BentoUser, Wallet } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
 import groupBy from 'lodash.groupby';
@@ -50,8 +50,7 @@ const walletBalanceReducer =
 
 type DashboardMainProps = {
   isMyProfile: boolean;
-  wallets: Wallet[];
-  profile: UserProfile;
+  user: BentoUser;
   imageToken?: string;
   revalidateWallets?: () => Promise<Wallet[] | undefined>;
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -64,8 +63,7 @@ type DashboardMainProps = {
 
 export const DashboardMain: React.FC<DashboardMainProps> = ({
   isMyProfile,
-  wallets,
-  profile,
+  user,
   revalidateWallets,
   setAddWalletModalVisible,
   setDetailModalVisible,
@@ -77,11 +75,13 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
-  const { balances: walletBalances } = useWalletBalances({ wallets });
-  const { balances: nftBalances } = useNFTBalances({
-    wallets,
+  const { balances: walletBalances } = useWalletBalances({
+    wallets: user.wallets,
   });
-  const { klaytnNFTs } = useKlaytnNFTs(wallets);
+  const { balances: nftBalances } = useNFTBalances({
+    wallets: user.wallets,
+  });
+  const { klaytnNFTs } = useKlaytnNFTs(user.wallets);
 
   const nftAssets = useMemo<(OpenSeaAsset | KlaytnNFTAsset)[]>(() => {
     return [
@@ -169,7 +169,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     }
   }, [currentTab]);
 
-  const { defis } = useProtocols(wallets);
+  const { defis } = useProtocols(user.wallets);
 
   const netWorthInProtocols = useMemo(
     () =>
@@ -196,7 +196,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       <DashboardWrapper>
         {FeatureFlags.isSearchEnabled && <SearchBar />}
 
-        <UserProfileSection profile={profile} />
+        <UserProfileSection user={user} />
 
         <DashboardContentWrapper>
           <TabContainer>
@@ -221,7 +221,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
                 <WalletListSection
                   isMyProfile={isMyProfile}
-                  wallets={wallets}
+                  wallets={user.wallets}
                   revalidateWallets={revalidateWallets}
                   onClickAddWallet={() =>
                     setAddWalletModalVisible((prev) => !prev)
@@ -392,7 +392,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                 <NFTListSection
                   nftAssets={nftAssets}
                   isMyProfile={isMyProfile}
-                  profile={profile}
+                  user={user}
                   selectedNFT={selectedNFT}
                   setSelectedNFT={setSelectedNFT}
                 />
@@ -401,7 +401,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
             <AnimatedTab selected={currentTab === DashboardTabType.Badges}>
               <BadgeListSection
-                userId={profile.user_id}
+                userId={user.id}
                 selected={currentTab === DashboardTabType.Badges}
               />
             </AnimatedTab>

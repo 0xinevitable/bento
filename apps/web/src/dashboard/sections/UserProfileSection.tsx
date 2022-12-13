@@ -1,28 +1,24 @@
+import { BentoUser } from '@bento/common';
 import styled from '@emotion/styled';
 import { Avatar, Text, useTheme } from '@geist-ui/core';
 
 import { formatUsername } from '@/utils/format';
 
-import { UserProfile } from '@/profile/types/UserProfile';
-
 import { Breakpoints } from '../constants/breakpoints';
 
 type UserProfileProps = {
-  profile: UserProfile;
+  user: BentoUser;
 };
 
-export const UserProfileSection: React.FC<UserProfileProps> = ({ profile }) => {
+export const UserProfileSection: React.FC<UserProfileProps> = ({ user }) => {
   const { palette } = useTheme();
 
   return (
     <ProfileContainer>
-      {profile.images?.[0] ? (
-        <ImageAvatar src={profile.images[0]} />
+      {user.profileImage ? (
+        <ImageAvatar src={user.profileImage} />
       ) : (
-        <Avatar
-          text={(profile.display_name || profile.username)[0]}
-          scale={3}
-        />
+        <Avatar text={(user.displayName || user.username)[0]} scale={3} />
       )}
 
       <div>
@@ -31,14 +27,14 @@ export const UserProfileSection: React.FC<UserProfileProps> = ({ profile }) => {
           className="sys"
           style={{ color: palette.accents_8, lineHeight: 1 }}
         >
-          {profile.display_name}
+          {user.displayName}
         </Text>
         <Text
           span
           className="sys"
           style={{ marginTop: 6, color: palette.accents_6, lineHeight: 1 }}
         >
-          {formatUsername(profile.username)}
+          {formatUsername(user.username)}
         </Text>
       </div>
     </ProfileContainer>
