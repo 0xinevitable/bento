@@ -149,8 +149,6 @@ const GlobeWrapper = styled.div`
         rgba(0, 0, 0, 0) 0%,
         ${Colors.gray900} 85.94%
       );
-      border-radius: 50%;
-      box-shadow: 0 32px 128px rgba(0, 0, 0, 0.6);
     }
   }
 
