@@ -121,11 +121,38 @@ export const FooterSection: React.FC<TrackedSectionOptions> = ({
 const Wrapper = styled.div`
   width: 100%;
   padding: 0 32px 0;
+
+  background-image: url('/assets/landing/header-background.jpg');
+  background-size: 100% 100%;
+  background-position: center;
   position: relative;
   z-index: 0;
 
   @media (max-width: 620px) {
     padding: 0 20px 0;
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  &:before {
+    top: 0;
+    height: 300px;
+    background: linear-gradient(180deg, ${Colors.gray900}, rgba(0, 0, 0, 0));
+    z-index: 0;
+  }
+
+  &:after {
+    bottom: 0;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), ${Colors.gray900});
+    z-index: -1;
   }
 `;
 const Section = styled(TrackedSection)`

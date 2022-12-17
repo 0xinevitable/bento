@@ -23,7 +23,6 @@ export const Footer: React.FC = () => {
 
 const Container = styled.footer`
   margin-bottom: 100px;
-  z-index: 1;
 
   font-weight: 900;
   font-size: 24px;

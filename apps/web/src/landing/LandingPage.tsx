@@ -9,7 +9,6 @@ import { MetaHead } from '@/components/system';
 import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
 
-import { Gradient } from './components/Gradient';
 import { BackgroundSection } from './sections/BackgroundSection';
 import { DashboardSection } from './sections/DashboardSection';
 import { Footer } from './sections/Footer';
@@ -43,8 +42,6 @@ const LandingPage: React.FC = () => {
     <>
       <MetaHead />
       <Container>
-        <Gradient />
-
         <HeaderSection />
 
         <BackgroundSection id="background" event="view_landing_section" />
