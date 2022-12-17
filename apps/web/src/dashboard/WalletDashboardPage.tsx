@@ -210,8 +210,7 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
         <NoSSR>
           <DynamicDashboardMain
             isMyProfile={isMyProfile}
-            wallets={wallets as Wallet[]}
-            profile={profile as UserProfile}
+            user={{}}
             // FIXME: Remove this
             setAddWalletModalVisible={() => {}}
             setDetailModalVisible={setDetailModalVisible}
