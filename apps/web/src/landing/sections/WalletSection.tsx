@@ -73,6 +73,7 @@ const MOCKED_WALLET: Wallet = {
   type: 'evm',
   address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
   networks: ['ethereum', 'polygon', 'bnb', 'avalanche', 'opensea', 'klaytn'],
+  isVerified: true,
 };
 
 export const WalletSection: React.FC<TrackedSectionOptions> = ({
