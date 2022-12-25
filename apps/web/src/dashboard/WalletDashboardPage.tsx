@@ -47,7 +47,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   ) {
     return { notFound: true };
   }
-  if (!['evm', 'cosmos-sdk', 'sealevel'].includes(walletType)) {
+  if (!['evm', 'cosmos-sdk', 'sealevel', 'solana'].includes(walletType)) {
     return { notFound: true };
   }
   return {
@@ -81,19 +81,19 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
     };
   }, [account]);
 
-  const wallets = useMemo(
+  const wallets = useMemo<Wallet[]>(
     () => [
       {
         type: walletType,
         address: account,
 
         // FIXME: Use data from API->Adapters
-        networks:
-          walletType === 'evm'
-            ? ['ethereum', 'polygon', 'bnb', 'avalanche', 'opensea']
-            : walletType === 'cosmos-sdk'
-            ? ['cosmos-hub', 'osmosis']
-            : ['solana'],
+        networks: (walletType === 'evm'
+          ? ['ethereum', 'polygon', 'bnb', 'avalanche', 'klaytn', 'opensea']
+          : walletType === 'cosmos-sdk'
+          ? ['cosmos-hub', 'osmosis']
+          : ['solana']) as any[],
+        isVerified: false,
       },
     ],
     [walletType, account],
@@ -210,8 +210,15 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
         <NoSSR>
           <DynamicDashboardMain
             isMyProfile={isMyProfile}
-            wallets={wallets as Wallet[]}
-            profile={profile as UserProfile}
+            user={{
+              id: '',
+              email: '',
+              username: 'unknown',
+              displayName: 'unknown',
+              profileImage: '',
+              bio: '',
+              wallets,
+            }}
             // FIXME: Remove this
             setAddWalletModalVisible={() => {}}
             setDetailModalVisible={setDetailModalVisible}

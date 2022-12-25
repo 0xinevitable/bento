@@ -68,8 +68,6 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
           alignItems: 'center',
         }}
       >
-        {FeatureFlags.isSearchEnabled && <SearchBar />}
-
         <Badge>⚡ Bento.Finance</Badge>
         <h1
           style={{
@@ -123,6 +121,8 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
           </a>
         </div>
       </div>
+
+      {FeatureFlags.isSearchEnabled && <SearchBar />}
 
       <ProtocolSection>
         <Subtitle>{t('Your favorite chains and protocols')}</Subtitle>

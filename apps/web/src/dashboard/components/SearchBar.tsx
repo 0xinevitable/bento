@@ -1,31 +1,22 @@
 import { ChainType, shortenAddress } from '@bento/common';
+import { identifyWalletAddress } from '@bento/core';
 import styled from '@emotion/styled';
-import { AutoComplete, Input } from '@geist-ui/core';
-import { AutoCompleteOptions } from '@geist-ui/core/esm/auto-complete';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 
+import { Button } from '@/components/system';
 import { useLazyEffect } from '@/hooks/useLazyEffect';
+
+import { Colors } from '@/styles';
 
 export const SearchBar: React.FC = () => {
   const [queryDraft, setQueryDraft] = useState<string>('');
   const [queryChainType, setQueryChainType] = useState<ChainType | null>(null);
-  const [options, setOptions] = useState<AutoCompleteOptions>([]);
-
-  const onSearch = useCallback(
-    (value: string) => setQueryDraft(value),
-    [setQueryDraft],
-  );
 
   const search = useCallback(async (value: string) => {
-    const { identifyWalletAddress } = await import('@bento/core');
     const walletType = identifyWalletAddress(value);
     setQueryChainType(walletType);
-    if (!walletType) {
-      setOptions([]);
-      return;
-    }
-    setOptions([{ label: shortenAddress(value), value }]);
   }, []);
 
   useLazyEffect(
@@ -37,36 +28,72 @@ export const SearchBar: React.FC = () => {
   );
 
   const router = useRouter();
-  const onSelect = useCallback(
-    (account: string) => {
-      if (!queryChainType || !account) {
-        return;
-      }
-      router.push(`/wallet/${queryChainType}/${account}`);
-    },
-    [router, queryChainType],
-  );
+  const onClickSearch = useCallback(() => {
+    const account = queryDraft;
+    if (!queryChainType || !account) {
+      return;
+    }
+    router.push(`/wallet/${queryChainType}/${account}`);
+  }, [router, queryChainType, queryDraft]);
 
   return (
-    <SearchWrapper className="sys">
-      <AutoComplete
-        placeholder="Search Accounts"
-        onSearch={onSearch}
-        onSelect={onSelect}
-        options={options}
-      />
-    </SearchWrapper>
+    <Container>
+      <InputWrapper>
+        <Input
+          className="sys"
+          placeholder="Look up any wallet address or ENS"
+          onChange={(e) => setQueryDraft(e.target.value)}
+        />
+
+        <AnimatePresence>
+          {queryChainType && (
+            <ButtonContainer
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <SearchButton onClick={onClickSearch}>Search</SearchButton>
+            </ButtonContainer>
+          )}
+        </AnimatePresence>
+      </InputWrapper>
+    </Container>
   );
 };
 
-const SearchWrapper = styled.div`
-  && .auto-complete {
-    width: 100%;
-    max-width: 400px;
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+const InputWrapper = styled.div`
+  margin-top: 24px;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+`;
+const Input = styled.input`
+  width: 100%;
 
-    .with-label,
-    .input-container {
-      width: 100%;
-    }
-  }
+  padding: 20px 16px;
+  padding-right: 142px;
+
+  background-color: ${Colors.gray800};
+  border-radius: 8px;
+  color: ${Colors.gray100};
+  border: 1px solid ${Colors.gray700};
+`;
+const ButtonContainer = styled(motion.div)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const SearchButton = styled(Button)`
+  height: unset;
+  padding: 18px 26px;
+  font-size: 16px;
 `;
