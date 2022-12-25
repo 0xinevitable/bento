@@ -89,7 +89,7 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
 
         // FIXME: Use data from API->Adapters
         networks: (walletType === 'evm'
-          ? ['ethereum', 'polygon', 'bnb', 'avalanche', 'opensea']
+          ? ['ethereum', 'polygon', 'bnb', 'avalanche', 'klaytn', 'opensea']
           : walletType === 'cosmos-sdk'
           ? ['cosmos-hub', 'osmosis']
           : ['solana']) as any[],
