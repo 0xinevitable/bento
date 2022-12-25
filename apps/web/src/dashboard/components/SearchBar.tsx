@@ -41,7 +41,7 @@ export const SearchBar: React.FC = () => {
       <InputWrapper>
         <Input
           className="sys"
-          placeholder="Look up any wallet address or ENS, ICNS, ..."
+          placeholder="Look up any wallet address or ENS"
           onChange={(e) => setQueryDraft(e.target.value)}
         />
 
