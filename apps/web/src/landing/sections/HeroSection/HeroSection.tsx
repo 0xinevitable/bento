@@ -60,6 +60,17 @@ export const HeroSection: React.FC = () => {
             </Button>
           </ButtonContainer>
         </Content>
+
+        <AwardList>
+          <AwardImage
+            alt="KLAYMAKERS22 Fi+ Track - Second Place"
+            src="/assets/landing/klaymakers-1.svg"
+          />
+          <AwardImage
+            alt="KLAYMAKERS22 The Ground X Challenge - Winner"
+            src="/assets/landing/klaymakers-2.svg"
+          />
+        </AwardList>
       </Container>
     </>
   );
@@ -67,7 +78,6 @@ export const HeroSection: React.FC = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 494px;
 
   display: flex;
   flex-direction: column;
@@ -148,4 +158,16 @@ const Description = styled.p`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const AwardList = styled.div`
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+const AwardImage = styled.img`
+  width: 240px;
+  height: 112px;
+  object-fit: contain;
 `;
