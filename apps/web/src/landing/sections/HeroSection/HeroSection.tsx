@@ -7,19 +7,20 @@ import { Button } from '@/components/v2/Button';
 
 import { Analytics } from '@/utils';
 
-import backgroundImage from './assets/header-background.jpg';
-import logoImage from './assets/header-logo.jpg';
+import backgroundImage from './assets/hero-background.jpg';
+import logoImage from './assets/hero-logo.jpg';
 
-export const HeaderSection: React.FC = () => {
+export const HeroSection: React.FC = () => {
   const router = useRouter();
   const { t } = useTranslation('landing');
 
   return (
     <>
-      <HeaderLogoContainer>
-        <HeaderLogo alt="" src={logoImage} priority quality={100} />
-      </HeaderLogoContainer>
-      <Header>
+      <LogoImageContainer>
+        <LogoImage alt="" src={logoImage} priority quality={100} />
+      </LogoImageContainer>
+
+      <Container>
         <BackgroundImageContainer>
           <BackgroundImage
             alt=""
@@ -59,12 +60,12 @@ export const HeaderSection: React.FC = () => {
             </Button>
           </ButtonContainer>
         </Content>
-      </Header>
+      </Container>
     </>
   );
 };
 
-const Header = styled.div`
+const Container = styled.div`
   width: 100%;
   height: 494px;
 
@@ -86,7 +87,7 @@ const BackgroundImage = styled(Image)`
   width: 900px;
   height: 437px;
 `;
-const HeaderLogoContainer = styled.div`
+const LogoImageContainer = styled.div`
   width: 100%;
 
   position: absolute;
@@ -97,7 +98,7 @@ const HeaderLogoContainer = styled.div`
   justify-content: center;
   pointer-events: none;
 `;
-const HeaderLogo = styled(Image)`
+const LogoImage = styled(Image)`
   width: 156px;
   height: 156px;
 

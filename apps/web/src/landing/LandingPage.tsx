@@ -13,7 +13,7 @@ import { BackgroundSection } from './sections/BackgroundSection';
 import { DashboardSection } from './sections/DashboardSection';
 import { Footer } from './sections/Footer';
 import { FooterSection } from './sections/FooterSection';
-import { HeaderSection } from './sections/HeaderSection';
+import { HeroSection } from './sections/HeroSection';
 import { IdentitySection } from './sections/IdentitySection';
 import { ProfileSection } from './sections/ProfileSection';
 // import { RoadmapSection } from './sections/RoadmapSection';
@@ -42,7 +42,7 @@ const LandingPage: React.FC = () => {
     <>
       <MetaHead />
       <Container>
-        <HeaderSection />
+        <HeroSection />
 
         <BackgroundSection id="background" event="view_landing_section" />
         <WalletSection id="wallets" event="view_landing_section" />
