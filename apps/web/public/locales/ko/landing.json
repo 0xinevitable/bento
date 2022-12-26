@@ -1,6 +1,7 @@
 {
-  "Group <Keyword>Wallets</Keyword> <InlineBlock>Across All <Keyword>Chains</Keyword></InlineBlock>": "<InlineBlock>모든 <Keyword>체인</Keyword>의</InlineBlock> <InlineBlock>모든 <Keyword>지갑</Keyword>을</InlineBlock> <InlineBlock>한 곳에서</InlineBlock>",
-  "Bento aggregates your identity from the 2nd/3rd web": "벤토는 인터넷과 블록체인 위의 정보를 하나로 모아, 여러분을 나타내 줍니다.",
+  "HERO_TITLE": "<InlineBlock>블록체인에 상관없이</InlineBlock> <InlineBlock>모든 지갑을 하나로 모으세요.</InlineBlock>",
+  "HERO_DESC": "벤토는 여러분의 모든 자산을 한 눈에 <InlineBlock>볼 수 있는 웹3 대시보드입니다.</InlineBlock>",
+
   "Start Now": "지금 시작하기",
   "FOLLOW US ON TWITTER": "트위터 팔로우하기",
   "Talk with us": "팀과 이야기 나누어요",

@@ -22,16 +22,11 @@ export const UserProfileSection: React.FC<UserProfileProps> = ({ user }) => {
       )}
 
       <div>
-        <Text
-          h3
-          className="sys"
-          style={{ color: palette.accents_8, lineHeight: 1 }}
-        >
+        <Text h3 style={{ color: palette.accents_8, lineHeight: 1 }}>
           {user.displayName}
         </Text>
         <Text
           span
-          className="sys"
           style={{ marginTop: 6, color: palette.accents_6, lineHeight: 1 }}
         >
           {formatUsername(user.username)}

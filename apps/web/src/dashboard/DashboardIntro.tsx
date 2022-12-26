@@ -208,7 +208,7 @@ const Subtitle = styled.h2`
   font-weight: 700;
   font-size: 18px;
   line-height: 103%;
-  letter-spacing: 0.01em;
+
   color: #ffffff;
 `;
 const ProtocolList = styled.ul`

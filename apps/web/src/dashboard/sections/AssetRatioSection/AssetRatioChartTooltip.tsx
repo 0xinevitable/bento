@@ -17,8 +17,8 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
       {!!logo && <Logo src={logo} alt={label} />}
 
       <Information>
-        <ProtocolName className="sys">{label}</ProtocolName>
-        <ProtocolRatio className="sys">
+        <ProtocolName>{label}</ProtocolName>
+        <ProtocolRatio>
           {`${value.toLocaleString(undefined, {
             maximumFractionDigits: 2,
           })}%`}

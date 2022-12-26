@@ -95,13 +95,11 @@ const Button = styled.button`
   justify-content: center;
   border-radius: 8px;
 
-  font-family: 'Raleway';
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
   text-align: center;
   color: ${Colors.gray400};
-
   transition: all 0.2s ease-in-out;
 `;
 

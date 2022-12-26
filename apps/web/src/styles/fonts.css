@@ -6,3 +6,12 @@
   src: local('Pretendard Variable'),
     url('/fonts/PretendardVariable.woff2') format('woff2-variations');
 }
+
+@font-face {
+  font-family: 'Satoshi Variable';
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: local('Satoshi Variable'),
+    url('/fonts/Satoshi-Variable.ttf') format('truetype-variations');
+}

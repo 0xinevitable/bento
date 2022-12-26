@@ -153,7 +153,6 @@ export const DetailModal: React.FC<Props> = ({
                       isVideo={isVideo}
                     />
                     <AssetName
-                      className="sys"
                       style={{
                         color: Colors.gray200,
                         fontSize: 14,
@@ -240,17 +239,13 @@ export const DetailModal: React.FC<Props> = ({
                             }}
                           >
                             <TokenIcon src={tokenBalance.logo} />
-                            <span
-                              className="sys"
-                              style={{ color: Colors.gray100 }}
-                            >
+                            <span style={{ color: Colors.gray100 }}>
                               {wallet.amount.toLocaleString(undefined, {
                                 maximumFractionDigits: 6,
                               })}
                             </span>
                           </span>
                           <span
-                            className="sys"
                             style={{ color: Colors.gray400, fontWeight: 600 }}
                           >
                             {shortenAddress(wallet.address)}
@@ -298,9 +293,7 @@ export const DetailModal: React.FC<Props> = ({
                     scale={0.75}
                   >
                     <Icon icon="majesticons:globe-grid-line" />
-                    <span className="sys" style={{ fontWeight: 500 }}>
-                      Website
-                    </span>
+                    <span style={{ fontWeight: 500 }}>Website</span>
                   </Badge>
                 </a>
               )}
@@ -308,7 +301,7 @@ export const DetailModal: React.FC<Props> = ({
           </TokenHeader>
 
           <Card style={{ marginTop: 16 }}>
-            <Paragraph className="sys">
+            <Paragraph>
               {formatLocalizedString(service.description, currentLanguage)}
             </Paragraph>
           </Card>

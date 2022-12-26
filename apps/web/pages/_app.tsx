@@ -94,11 +94,8 @@ const App = ({ Component, pageProps }: AppProps) => {
 export default appWithTranslation(App, nextI18nextConfig);
 
 const Container = styled.div`
-  width: 100vw;
-
+  /* width: 100vw;
   position: relative;
-  overflow: hidden;
-
   display: flex;
-  flex-direction: column;
+  flex-direction: column; */
 `;
