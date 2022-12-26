@@ -129,7 +129,6 @@ export const NavigationBar = () => {
 };
 
 const Wrapper = styled.header`
-  padding-top: 28px;
   width: 100%;
 
   display: flex;
@@ -137,7 +136,7 @@ const Wrapper = styled.header`
   overflow: hidden;
 
   position: fixed;
-  top: 0;
+  top: 28px;
   left: 0;
   right: 0;
   z-index: 90;
