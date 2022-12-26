@@ -115,12 +115,7 @@ export const NFTDetailModal: React.FC<Props> = ({
 
               <ExternalLinkList>
                 {externalLinks.map(([linkType, href]) => (
-                  <ExternalLink
-                    key={linkType}
-                    className="sys"
-                    href={href}
-                    target="_blank"
-                  >
+                  <ExternalLink key={linkType} href={href} target="_blank">
                     <ExternalLinkLogo
                       alt=""
                       src={`/assets/icons/${linkType}.png`}

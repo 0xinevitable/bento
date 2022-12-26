@@ -4,7 +4,7 @@ import { Analytics } from '@/utils';
 
 export const Footer: React.FC = () => {
   return (
-    <Container className="sys">
+    <Container>
       <a
         title="INEVITABLE"
         href="https://inevitable.team"

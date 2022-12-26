@@ -84,7 +84,7 @@ export const HeaderSection: React.FC = () => {
             }}
           />
         </Title>
-        <Description className="sys">
+        <Description>
           {t('Bento aggregates your identity from the 2nd/3rd web')}
         </Description>
         <Button

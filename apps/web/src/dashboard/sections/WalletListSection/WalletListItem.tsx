@@ -27,7 +27,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
         src={`/assets/icons/ic-arch-${wallet.type}.svg`}
       />
       <Information>
-        <WalletAddress className="sys">
+        <WalletAddress>
           {shortenAddress(wallet.address)}
 
           <button onClick={() => onClickCopy?.(wallet.address, wallet.type)}>

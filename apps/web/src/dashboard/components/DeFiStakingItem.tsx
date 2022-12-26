@@ -44,7 +44,7 @@ const DecomposeTokenAmounts: React.FC<DecomposeTokenAmountsProps> = ({
   return (
     <>
       <br />
-      <TokenAmountInfo className="sys">
+      <TokenAmountInfo >
         {entries.map(([tokenAddress, amount], index, arr) => {
           const token = protocolTokens.find(
             (token) => token?.address === tokenAddress,
@@ -108,7 +108,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           </Name>
         </HeaderTitle>
 
-        <Valuation className="sys">
+        <Valuation >
           {`$${formatNumber(protocol.valuation.total)}`}
         </Valuation>
       </Header>
@@ -116,7 +116,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
       <AccountInfo>
         <AccountItem>
           <span className="field">{t('Account')}</span>
-          <span className="sys">
+          <span >
             <InlineBadge>{shortenAddress(protocol.account)}</InlineBadge>
           </span>
         </AccountItem>
@@ -129,7 +129,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
                 : t('Rep Contract')} */}
               {t('Rep Contract')}
             </span>
-            <span className="sys">
+            <span >
               <InlineBadge>{shortenAddress(protocol.ind)}</InlineBadge>
             </span>
           </AccountItem>
@@ -141,14 +141,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           <InfoItem>
             <span className="field">{t('LPs without Farming')}</span>
             {protocol.wallet === 'unavailable' ? (
-              <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
+              <InfoValuation >{t('Unavailable')}</InfoValuation>
             ) : (
-              <InfoValuation className="sys">
+              <InfoValuation >
                 {`$${formatNumber(protocol.valuation.wallet)}`}
                 {typeof protocol.wallet.lpAmount === 'number' && (
                   <>
                     <br />
-                    <SmallAmountInfo className="sys">
+                    <SmallAmountInfo >
                       {`${formatNumber(protocol.wallet.lpAmount)} LP`}
                     </SmallAmountInfo>
                   </>
@@ -167,14 +167,14 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           <InfoItem>
             <span className="field">{t('Staking')}</span>
             {protocol.staked === 'unavailable' ? (
-              <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
+              <InfoValuation >{t('Unavailable')}</InfoValuation>
             ) : (
-              <InfoValuation className="sys">
+              <InfoValuation >
                 {`$${formatNumber(protocol.valuation.staking)}`}
                 {typeof protocol.staked.lpAmount === 'number' && (
                   <>
                     <br />
-                    <SmallAmountInfo className="sys">
+                    <SmallAmountInfo >
                       {`${formatNumber(protocol.staked.lpAmount)} LP`}
                     </SmallAmountInfo>
                   </>
@@ -193,9 +193,9 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           <InfoItem>
             <span className="field">{t('Rewards')}</span>
             {protocol.rewards === 'unavailable' ? (
-              <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
+              <InfoValuation >{t('Unavailable')}</InfoValuation>
             ) : (
-              <InfoValuation className="sys">
+              <InfoValuation >
                 {`$${formatNumber(protocol.valuation.rewards)}`}
 
                 <DecomposeTokenAmounts
@@ -211,12 +211,12 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           <InfoItem>
             <span className="field">{t('Unstaking')}</span>
             {protocol.unstake === 'unavailable' ? (
-              <InfoValuation className="sys">{t('Unavailable')}</InfoValuation>
+              <InfoValuation >{t('Unavailable')}</InfoValuation>
             ) : (
               <>
                 <span className="item">
                   <span className="title">{t('Claimable')}</span>
-                  <InfoValuation className="sys">
+                  <InfoValuation >
                     {`$${formatNumber(protocol.valuation.claimable)}`}
 
                     {protocol.unstake.claimable !== 'unavailable' &&
@@ -231,7 +231,7 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
 
                 <span className="item">
                   <span className="title">{t('Pending')}</span>
-                  <InfoValuation className="sys">
+                  <InfoValuation >
                     {`$${formatNumber(protocol.valuation.pending)}`}
 
                     {protocol.unstake.pending !== 'unavailable' &&
