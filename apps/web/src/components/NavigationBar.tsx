@@ -20,7 +20,6 @@ import { Button } from './v2/Button';
 const Breakpoints = {
   Mobile: 512,
   Tablet: 768,
-  Laptop: 1340,
   Desktop: 1440,
 };
 
@@ -122,6 +121,7 @@ export const NavigationBar = () => {
 
 const Wrapper = styled.header`
   width: 100%;
+  padding: 0 20px;
 
   display: flex;
   justify-content: center;
@@ -132,6 +132,17 @@ const Wrapper = styled.header`
   left: 0;
   right: 0;
   z-index: 90;
+
+  &,
+  * {
+    user-select: none;
+    transition: all 0.2s ease;
+  }
+
+  ${onMobile} {
+    padding: 0 8px;
+    top: 20px;
+  }
 `;
 const Container = styled.div`
   padding-left: 28px;
@@ -148,11 +159,22 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ${onMobile} {
+    height: fit-content;
+    padding: 12px 0;
+    padding-left: 16px;
+    padding-right: 10px;
+  }
 `;
 
 const NavigationList = styled.ul`
   display: flex;
   gap: 20px;
+
+  ${onMobile} {
+    gap: 12px;
+  }
 `;
 
 type NavigationItemProps = {
@@ -194,6 +216,10 @@ const RightContent = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+
+  ${onMobile} {
+    gap: 10px;
+  }
 `;
 const LanguageBadge = styled.button`
   padding: 8px;
@@ -210,4 +236,9 @@ const LanguageBadge = styled.button`
   letter-spacing: -0.02em;
   color: #97a3b6;
 `;
-const StartButton = styled(Button)``;
+const StartButton = styled(Button)`
+  ${onMobile} {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+`;
