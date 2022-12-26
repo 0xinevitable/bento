@@ -11,7 +11,7 @@ export const Button = styled.button`
   font-size: 18px;
   line-height: 100%;
   text-align: center;
-  letter-spacing: 0.01em;
+
   color: #ffffff;
 
   transition: all 0.2s ease-in-out;

@@ -102,7 +102,7 @@ const Title = styled.h2`
   line-height: 103%;
 
   text-align: center;
-  letter-spacing: 0.01em;
+
   color: rgba(255, 255, 255, 0.85);
 
   z-index: 1;
@@ -126,7 +126,7 @@ const Description = styled.p`
   line-height: 120%;
 
   text-align: center;
-  letter-spacing: 0.01em;
+
   white-space: break-spaces;
   color: rgba(255, 255, 255, 0.66);
 

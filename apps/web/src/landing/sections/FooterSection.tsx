@@ -252,7 +252,7 @@ const TwitterButton = styled.button`
   font-size: 18.8px;
   line-height: 100%;
   text-align: center;
-  letter-spacing: 0.01em;
+
   color: #000000;
 
   transition: all 0.2s ease-in-out;
@@ -336,7 +336,7 @@ const CTAButton = styled.button`
   font-size: 24px;
   line-height: 103%;
   text-align: center;
-  letter-spacing: 0.01em;
+
   color: #ffffff;
 
   transition: all 0.2s ease-in-out;

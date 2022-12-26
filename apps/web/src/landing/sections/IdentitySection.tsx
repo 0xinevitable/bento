@@ -89,7 +89,7 @@ const Paragraph = styled.p`
   font-weight: 400;
   font-size: 16px;
   line-height: 145%;
-  letter-spacing: 0.01em;
+
   color: rgba(255, 255, 255, 0.9);
 
   @media (max-width: 1235px) {

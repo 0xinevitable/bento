@@ -271,7 +271,7 @@ const LanguageSelectorContainer = styled.div<{ desktop?: boolean }>`
     font-size: 20px;
     line-height: 120%;
     text-align: center;
-    letter-spacing: 0.01em;
+
     user-select: none;
 
     & > span {
