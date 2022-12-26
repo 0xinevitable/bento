@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   & > div {
     margin: 0 auto;
     width: 100%;
-    max-width: 1328px;
+    max-width: 1200px;
 
     position: relative;
     z-index: 0;

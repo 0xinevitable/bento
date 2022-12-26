@@ -88,7 +88,7 @@ const Wrapper = styled.div`
 `;
 const Section = styled(TrackedSection)`
   margin: 0 auto;
-  max-width: 1328px;
+  max-width: 1200px;
   width: 100%;
   position: relative;
 `;
