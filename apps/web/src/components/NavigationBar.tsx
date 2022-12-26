@@ -110,6 +110,9 @@ export const NavigationBar = () => {
               {t('Log In')}
             </StartButton>
           )}
+          {!!session && (
+            <StartButton onClick={onClickLogout}>{t('Logout')}</StartButton>
+          )}
         </RightContent>
       </Container>
     </Wrapper>
