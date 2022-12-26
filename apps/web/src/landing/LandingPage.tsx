@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { GetStaticProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { MetaHead } from '@/components/system';
@@ -12,11 +11,7 @@ import { Analytics } from '@/utils';
 import { BackgroundSection } from './sections/BackgroundSection';
 import { DashboardSection } from './sections/DashboardSection';
 import { Footer } from './sections/Footer';
-import { FooterSection } from './sections/FooterSection';
-import { HeaderSection } from './sections/HeaderSection';
-import { IdentitySection } from './sections/IdentitySection';
-import { ProfileSection } from './sections/ProfileSection';
-// import { RoadmapSection } from './sections/RoadmapSection';
+import { HeroSection } from './sections/HeroSection';
 import { StatusQuoSection } from './sections/StatusQuoSection';
 import { WalletSection } from './sections/WalletSection';
 
@@ -32,8 +27,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 const LandingPage: React.FC = () => {
-  const router = useRouter();
-
   useEffect(() => {
     Analytics.logEvent('view_landing', undefined);
   }, []);
@@ -42,24 +35,13 @@ const LandingPage: React.FC = () => {
     <>
       <MetaHead />
       <Container>
-        <HeaderSection />
+        <HeroSection />
 
         <BackgroundSection id="background" event="view_landing_section" />
         <WalletSection id="wallets" event="view_landing_section" />
         <DashboardSection id="dashboard" event="view_landing_section" />
-        <ProfileSection id="profiles" event="view_landing_section" />
-
-        <OurMissionContainer>
-          <OurMissionTypography />
-        </OurMissionContainer>
 
         <StatusQuoSection id="status-quo" event="view_landing_section" />
-        <IdentitySection id="identity" event="view_landing_section" />
-
-        <FooterSection id="footer" event="view_landing_section" />
-
-        {/* <RoadmapSection id="roadmap" event="view_landing_section" /> */}
-
         <Footer />
       </Container>
     </>

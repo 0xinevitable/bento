@@ -1,3 +1,4 @@
+import { BentoUser } from '@bento/common';
 import { OpenSeaAsset } from '@bento/core';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
@@ -13,7 +14,7 @@ import { KlaytnNFTAsset } from '../hooks/useKlaytnNFTs';
 
 type Props = {
   nftAssets: (OpenSeaAsset | KlaytnNFTAsset)[];
-  profile: UserProfile | null;
+  user: BentoUser;
   isMyProfile: boolean;
 
   selectedNFT: OpenSeaAsset | KlaytnNFTAsset | null;
@@ -22,26 +23,26 @@ type Props = {
 
 export const NFTListSection: React.FC<Props> = ({
   nftAssets,
-  profile,
+  user,
   isMyProfile,
   selectedNFT,
   setSelectedNFT,
 }) => {
   useEffect(() => {
-    if (!selectedNFT || !profile) {
+    if (!selectedNFT || !user) {
       return;
     }
 
     Analytics.logEvent('view_profile_nft', {
-      user_id: profile.user_id ?? '',
-      username: profile.username ?? '',
+      user_id: user.id ?? '',
+      username: user.username ?? '',
       is_my_profile: isMyProfile,
       token_network: 'ethereum',
       token_contract: selectedNFT.asset_contract.address,
       token_id: selectedNFT.token_id,
       medium: 'dashboard_main',
     });
-  }, [selectedNFT, isMyProfile, profile]);
+  }, [selectedNFT, isMyProfile, user]);
 
   return (
     <AssetList>

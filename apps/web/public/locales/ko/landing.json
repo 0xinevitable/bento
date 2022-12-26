@@ -1,6 +1,7 @@
 {
-  "Discover Your ⚡Web3 World": "당신의 ⚡웹3 세상을 발견하세요.",
-  "Bento aggregates your identity from the 2nd/3rd web": "벤토는 인터넷과 블록체인 위의 정보를 하나로 모아, 여러분을 나타내 줍니다.",
+  "HERO_TITLE": "<InlineBlock>블록체인에 상관없이</InlineBlock> <InlineBlock>모든 지갑을 하나로 모으세요.</InlineBlock>",
+  "HERO_DESC": "벤토는 여러분의 모든 자산을 한 눈에 <InlineBlock>볼 수 있는 웹3 대시보드입니다.</InlineBlock>",
+
   "Start Now": "지금 시작하기",
   "FOLLOW US ON TWITTER": "트위터 팔로우하기",
   "Talk with us": "팀과 이야기 나누어요",
@@ -9,6 +10,7 @@
 
   "BACKGROUND": "우리가 벤토를 만들게 된 이유",
   "Dashboards That are Made Right.": "제대로 만들어진 대시보드",
+  "BACKGROUND_DESC": "기존에 있던 대부분의 대시보드들은 직접 또는 같은 VC를 공유하는 팀이 만든 레이어 1 체인과 연결되어 있기에, 그 생태계 밖으로 나가거나, 다른 체인을 지원하는 시도를 하기 어려웠습니다. <br /><br />또한 이들은 오픈소스가 아닙니다. 개발이 중앙화되어 있기에, 새로운 프로토콜을 지원하는 속도가 느립니다. 여러분이 새로운 프로토콜을 추가하고 싶다면, 개발팀에 온전히 의존해야 합니다.<br /><br />세상은 오픈소스 대시보드가 필요했습니다.",
 
   "Connect All Wallets": "모든 지갑을 연결하다",
   "Manage and Share ": "보유한 지갑을 한번에",
@@ -22,9 +24,13 @@
   "Entire Portfolio": "포트폴리오를 한눈에",
   "Learn More": "더 알아보기",
 
+  "DASHBOARD_PARA_1": "벤토는 다양한 블록체인 위에서 만들어진 지갑 여러 개를 연결해, 한 눈에 볼 수 있게 해주는 웹3 대시보드입니다.",
+  "DASHBOARD_PARA_2": "디파이 프로토콜에 투자하고 계신가요? 현재 스테이킹 중인 자산도 함께 볼 수 있어요.",
+
   "Group social links and posts": "소셜 링크들과 포스트들을 하나로",
 
   "The Status Quo": "개념 자체를 바꾸다",
   "Users are ": "지갑이라는 개념은 ",
-  "NOT Wallets": "사용자랑은 다르니까"
+  "NOT Wallets": "사용자랑은 다르니까",
+  "STATUS_QUO_DESC": "크로스 체인, 인터체인의 시대가 열리고 있습니다. <br />여러 앱을 사용하다 보면 유저의 인격과 자산은 여러 개의 지갑으로 분리됩니다. 앞으로는 한 가지 지갑만으로는 더 이상 “사용자”를 정의할 수 없습니다. <br />벤토는 웹3의 “진짜 유저”를 정의하는 것을 목표로 합니다."
 }

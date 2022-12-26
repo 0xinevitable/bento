@@ -17,7 +17,7 @@ type Props = {
   wallets: Wallet[];
   isMyProfile: boolean;
   onClickAddWallet: () => void;
-  revalidateWallets: () => Promise<Wallet[] | undefined>;
+  revalidateWallets?: () => Promise<Wallet[] | undefined>;
 };
 
 export const WalletListSection: React.FC<Props> = ({

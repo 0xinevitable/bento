@@ -1,4 +1,4 @@
-import { Block } from '@/profile/blocks';
+import { Block } from '../blocks';
 
 export enum UserProfileTab {
   Links = 'Links',

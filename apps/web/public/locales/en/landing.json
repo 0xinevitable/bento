@@ -1,1 +1,11 @@
-{}
+{
+  "HERO_TITLE": "<InlineBlock>Group All Wallets</InlineBlock> <InlineBlock>Regardless of Blockchains.</InlineBlock>",
+  "HERO_DESC": "Easily Track and Manage Your Assets with Bento, <InlineBlock>the Web3 Dashboard.</InlineBlock>",
+
+  "BACKGROUND_DESC": "All dashboard services out there are either: Associated with specific layer-1 chains, built by the same team or shared VCs, or maintained as close-source software. <br /><br />Both making them move timid outside their ecosystem.",
+
+  "DASHBOARD_PARA_1": "Bento is an open-source web3 dashboard in that users can add multiple wallets and group their crypto assets into one.",
+  "DASHBOARD_PARA_2": "Investing in DeFi? View not only balances but your stakes for various protocols as well.",
+
+  "STATUS_QUO_DESC": "Exactly. Users are entirely different from wallets, <br />a more extensive concept by itself. <br />But current web3 products treat them the same. <br />In the cross-chain universe, user activities and assets no longer remain in one address or chain."
+}

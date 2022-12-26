@@ -7,6 +7,7 @@ export const AnimatedTab = (
   props: AnimatedTabProps & HTMLMotionProps<'div'>,
 ) => (
   <motion.div
+    initial={false}
     animate={
       !props.selected
         ? { opacity: 0, transform: 'scale(0.9)' }

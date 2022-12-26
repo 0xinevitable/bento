@@ -1,11 +1,10 @@
 import { Global, css } from '@emotion/react';
 import { useTheme } from '@geist-ui/core';
 
-import { ralewayFontStack, systemFontStack } from '@/styles';
+import { systemFontStack } from '@/styles';
 
 const globalStyles = css`
   :root {
-    --RalewayFontStack: ${ralewayFontStack};
     --SystemFontStack: ${systemFontStack};
   }
 
@@ -16,19 +15,7 @@ const globalStyles = css`
   * {
     box-sizing: border-box;
     word-break: keep-all;
-
-    &:lang(en) {
-      font-family: var(--RalewayFontStack);
-    }
-
-    &:lang(ko) {
-      font-family: var(--SystemFontStack);
-    }
-  }
-
-  .sys,
-  .sys * {
-    font-family: var(--SystemFontStack) !important;
+    font-family: var(--SystemFontStack);
   }
 
   img {
@@ -42,6 +29,11 @@ const globalStyles = css`
 
   button {
     cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:focus {
+      opacity: 0.65;
+    }
   }
 
   ::selection {

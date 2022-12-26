@@ -77,7 +77,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 
       <Information>
         <Field>{t('Net Worth')}</Field>
-        <Title className="sys">{`$${netWorthInUSD.toLocaleString()}`}</Title>
+        <Title>{`$${netWorthInUSD.toLocaleString()}`}</Title>
       </Information>
 
       <div>
@@ -96,7 +96,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
               maximumFractionDigits: 2,
             })}`}
           >
-            <Badge className="sys" style={{ cursor: 'pointer' }}>
+            <Badge style={{ cursor: 'pointer' }}>
               <img src={`/assets/icons/${item.platform}.png`} alt={item.name} />
               <span>
                 {`${item.ratio.toLocaleString(undefined, {

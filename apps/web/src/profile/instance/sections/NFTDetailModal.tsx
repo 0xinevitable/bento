@@ -12,7 +12,7 @@ import { Colors } from '@/styles';
 export type NFTDetailModalParams = {
   asset: OpenSeaAsset | KlaytnNFTAsset | null;
   isMyProfile: boolean;
-  onClickSetAsProfile: (assetImage: string) => void;
+  onClickSetAsProfile?: (assetImage: string) => void;
 };
 type Props = NFTDetailModalParams & {
   visible?: boolean;
@@ -115,12 +115,7 @@ export const NFTDetailModal: React.FC<Props> = ({
 
               <ExternalLinkList>
                 {externalLinks.map(([linkType, href]) => (
-                  <ExternalLink
-                    key={linkType}
-                    className="sys"
-                    href={href}
-                    target="_blank"
-                  >
+                  <ExternalLink key={linkType} href={href} target="_blank">
                     <ExternalLinkLogo
                       alt=""
                       src={`/assets/icons/${linkType}.png`}
@@ -133,7 +128,7 @@ export const NFTDetailModal: React.FC<Props> = ({
               </ExternalLinkList>
             </TokenHeader>
 
-            {!!imageURL && isMyProfile && (
+            {!!imageURL && isMyProfile && !!onClickSetAsProfile && (
               <AnimatedToolTip label={t('Set as profile')}>
                 <SetProfileImageButton
                   onClick={() => {

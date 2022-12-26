@@ -11,7 +11,9 @@ import { AnimatedToolTip, Badge } from '@/components/system';
 import { NETWORKS } from '@/constants/networks';
 import { FixedLoginNudge } from '@/profile/components/LoginNudge';
 import { Colors } from '@/styles';
-import { Analytics, Supabase } from '@/utils';
+import { Analytics, FeatureFlags, Supabase } from '@/utils';
+
+import { SearchBar } from './components/SearchBar';
 
 type DashboardIntroProps = {
   session: Session | null;
@@ -120,6 +122,8 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
         </div>
       </div>
 
+      {FeatureFlags.isSearchEnabled && <SearchBar />}
+
       <ProtocolSection>
         <Subtitle>{t('Your favorite chains and protocols')}</Subtitle>
         <ProtocolList>
@@ -204,7 +208,7 @@ const Subtitle = styled.h2`
   font-weight: 700;
   font-size: 18px;
   line-height: 103%;
-  letter-spacing: 0.01em;
+
   color: #ffffff;
 `;
 const ProtocolList = styled.ul`

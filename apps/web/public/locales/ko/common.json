@@ -7,6 +7,7 @@
 
   "Log In": "로그인/가입",
   "Logout": "로그아웃",
+  "Home": "홈",
   "Dashboard": "대시보드",
   "Community": "커뮤니티",
   "Profile": "프로필",
@@ -36,5 +37,11 @@
   "Sign with Wallet": "이제 지갑을 선택하고 메시지 서명하면 끝!",
   "wc-2-desc": "지갑의 소유권을 인증하기 위해 이 과정이 필요해요. 어떠한 권한도 가져가지 않아요.",
 
-  "Share": "공유하기"
+  "Share": "공유하기",
+
+  "telegram-notice": "Notice",
+  "telegram-community": "Telegram",
+  "twitter": "Twitter",
+  "discord": "Discord",
+  "github": "GitHub"
 }
