@@ -29,6 +29,11 @@ const globalStyles = css`
 
   button {
     cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:focus {
+      opacity: 0.65;
+    }
   }
 
   ::selection {
