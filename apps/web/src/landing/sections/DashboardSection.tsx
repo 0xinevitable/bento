@@ -58,11 +58,9 @@ export const DashboardSection: React.FC<TrackedSectionOptions> = ({
             {t('Entire Portfolio')}
           </SectionTitle>
           <Paragraph>
-            Bento is an open-source web3 dashboard in that users can add
-            multiple wallets and group their crypto assets into one.
+            {t('DASHBOARD_PARA_1')}
             <br />
-            Investing in DeFi? View not only balances but your stakes for
-            various protocols as well.
+            {t('DASHBOARD_PARA_2')}
           </Paragraph>
 
           <ChainLogoList>
