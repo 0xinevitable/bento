@@ -1,14 +1,12 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { Icon as Iconify } from '@iconify/react';
 import { deleteCookie } from 'cookies-next';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Icon, NoSSR, Portal } from '@/components/system';
+import { NoSSR } from '@/components/system';
 import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
 import { useWindowSize } from '@/hooks/useWindowSize';
@@ -24,7 +22,6 @@ const Breakpoints = {
 };
 
 const onMobile = `@media (max-width: ${Breakpoints.Mobile}px)`;
-const onTablet = `@media (max-width: ${Breakpoints.Tablet}px)`;
 
 const NAVIGATION_ITEMS = [
   {
