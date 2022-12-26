@@ -160,6 +160,10 @@ const Title = styled.h1`
   ${onTablet} {
     font-size: 36px;
   }
+
+  &:lang(ko) {
+    line-height: 128%;
+  }
 `;
 const InlineBlock = styled.span`
   display: inline-block;
