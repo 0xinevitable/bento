@@ -109,15 +109,6 @@ export const NavigationBar = () => {
   return (
     <Wrapper>
       <Container>
-        <Link href="/">
-          <div>
-            <HiddenTitle>Bento</HiddenTitle>
-            <LogoWrapper>
-              <LogoImage src="/assets/illusts/bento-logo-with-blur.png" />
-            </LogoWrapper>
-          </div>
-        </Link>
-
         <NoSSR>
           <NavigationList>
             {NAVIGATION_ITEMS.map((item) => (
@@ -126,107 +117,20 @@ export const NavigationBar = () => {
                 active={currentPath === item.href}
               >
                 <Link href={item.href}>
-                  <Center style={{ cursor: 'pointer' }}>
-                    <Iconify icon={item.icon} style={{ fontSize: 20 }} />
-                    <span className="title">{t(item.title)}</span>
-                  </Center>
+                  <span className="title">{t(item.title)}</span>
                 </Link>
               </NavigationItem>
             ))}
           </NavigationList>
         </NoSSR>
-
-        <RightContent>
-          <NoSSR>
-            {!session && (
-              <LoginButton
-                onClick={() => {
-                  deleteCookie('supabase_auth_token', {
-                    path: '/',
-                  });
-                  setTimeout(() => {
-                    router.push('/home?login=open');
-                  });
-                }}
-              >
-                {t('Log In')}
-              </LoginButton>
-            )}
-            {!!session && (
-              <LogoutButton className="sys" onClick={onClickLogout}>
-                {t('Logout')}
-              </LogoutButton>
-            )}
-          </NoSSR>
-
-          <LanguageSelector
-            currentLanguage={currentLanguage}
-            onChangeLocale={onChangeLocale}
-            isDesktop
-          />
-        </RightContent>
-
-        <MobileMenuButton onClick={() => setMobileMenuOpen((prev) => !prev)}>
-          <Icon
-            size={30}
-            icon={!isMobileMenuOpen ? 'ic-mobile-menu' : 'ic-mobile-close'}
-            color="white"
-          />
-        </MobileMenuButton>
       </Container>
-
-      <Portal id="mobile-menu">
-        <MobileMenuContainer
-          style={isMobileMenuOpen ? { height: '100%' } : { height: 0 }}
-        >
-          <AnimatePresence>
-            {isMobileMenuOpen && (
-              <MobileMenuContent
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                {NAVIGATION_ITEMS.map((item) => (
-                  <MobileMenuItem
-                    key={`${item.title}-${item.href}`}
-                    style={{
-                      color: currentPath === item.href ? '#ff375c' : 'white',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <Center>
-                        <Iconify icon={item.icon} />
-                        <span className="title">{t(item.title)}</span>
-                      </Center>
-                    </Link>
-                  </MobileMenuItem>
-                ))}
-
-                <LanguageSelector
-                  currentLanguage={currentLanguage}
-                  onChangeLocale={onChangeLocale}
-                />
-              </MobileMenuContent>
-            )}
-          </AnimatePresence>
-        </MobileMenuContainer>
-      </Portal>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.header`
+  padding-top: 28px;
   width: 100%;
-  height: 64px;
-  padding: 0 20px;
-
-  border-bottom: 0.4pt solid #1c1c1c;
-  background-color: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(12px);
 
   display: flex;
   justify-content: center;
@@ -237,54 +141,16 @@ const Wrapper = styled.header`
   left: 0;
   right: 0;
   z-index: 90;
-
-  ${onMobile} {
-    padding: 0 16px;
-  }
-
-  & * {
-    transition: all 0.2s ease-in-out;
-  }
 `;
 const Container = styled.div`
-  max-width: 1328px;
   width: 100%;
-  height: 100%;
+  max-width: 780px;
+  height: 70px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const Center = styled.span`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-const HiddenTitle = styled.span`
-  display: none;
-`;
-const LogoWrapper = styled.div`
-  width: 156px;
-  height: 78px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  ${onTablet} {
-    margin-left: -20px;
-  }
-`;
-
-const BLUR_SIZE = 31.2;
-const LogoImage = styled.img`
-  max-width: unset;
-  margin: ${-BLUR_SIZE}px;
-  width: ${156 + BLUR_SIZE * 2}px;
-  height: ${78 + BLUR_SIZE * 2}px;
-  transform: scale(1.3);
-  user-select: none;
+  background: rgba(29, 30, 43, 0.25);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
 `;
 
 const NavigationList = styled.ul`
