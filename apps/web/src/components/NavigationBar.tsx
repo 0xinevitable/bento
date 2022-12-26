@@ -34,8 +34,7 @@ const NAVIGATION_ITEMS = [
   },
   {
     title: 'Dashboard',
-    href: '#',
-    startsWith: '/u/',
+    href: '/home',
   },
 ];
 
@@ -87,11 +86,7 @@ export const NavigationBar = () => {
             {NAVIGATION_ITEMS.map((item) => (
               <NavigationItem
                 key={`${item.title}-${item.href}`}
-                active={
-                  item.startsWith
-                    ? currentPath.startsWith(item.startsWith)
-                    : currentPath === item.href
-                }
+                active={currentPath === item.href}
               >
                 <Link href={item.href}>
                   <span className="title">{t(item.title)}</span>
@@ -105,7 +100,20 @@ export const NavigationBar = () => {
           <LanguageBadge onClick={onChangeLocale}>
             {currentLanguage.toUpperCase()}
           </LanguageBadge>
-          <StartButton>{t('Log In')}</StartButton>
+          {!session && (
+            <StartButton
+              onClick={() => {
+                deleteCookie('supabase_auth_token', {
+                  path: '/',
+                });
+                setTimeout(() => {
+                  router.push('/home?login=open');
+                });
+              }}
+            >
+              {t('Log In')}
+            </StartButton>
+          )}
         </RightContent>
       </Container>
     </Wrapper>
@@ -152,7 +160,7 @@ type NavigationItemProps = {
 };
 const NavigationItem = styled.li<NavigationItemProps>`
   position: relative;
-  color: rgba(255, 255, 255, 0.45);
+  color: #343639;
 
   * {
     transition: color 0.05s ease;
