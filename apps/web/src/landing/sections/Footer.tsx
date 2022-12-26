@@ -32,6 +32,7 @@ export const Footer: React.FC = () => {
     <Container>
       {communities.map((community) => (
         <a
+          key={community.type}
           href={community.url}
           target="_blank"
           rel="noreferrer"
@@ -46,7 +47,7 @@ export const Footer: React.FC = () => {
         </a>
       ))}
 
-      <span style={{ opacity: 0.65 }}>2022-2023 Bento</span>
+      <span style={{ opacity: 0.65 }}>©2022 Bento</span>
     </Container>
   );
 };
