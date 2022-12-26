@@ -13,9 +13,9 @@ import { useSession } from '@/hooks/useSession';
 import { useSignOut } from '@/hooks/useSignOut';
 import { useWindowSize } from '@/hooks/useWindowSize';
 
-import { MinimalButton } from '@/dashboard/components/MinimalButton';
-import { Colors } from '@/styles';
 import { Analytics } from '@/utils';
+
+import { Button } from './v2/Button';
 
 const Breakpoints = {
   Mobile: 512,
@@ -29,42 +29,15 @@ const onTablet = `@media (max-width: ${Breakpoints.Tablet}px)`;
 
 const NAVIGATION_ITEMS = [
   {
-    title: 'Dashboard',
-    href: '/home',
-    icon: 'ic:round-space-dashboard',
+    title: 'Home',
+    href: '/',
   },
   {
-    title: 'Community',
-    href: '/community',
-    icon: 'codicon:heart-filled',
+    title: 'Dashboard',
+    href: '#',
+    startsWith: '/u/',
   },
 ];
-
-type LanguageSelectorProps = {
-  currentLanguage: 'en' | 'ko' | string;
-  onChangeLocale: () => void;
-  isDesktop?: boolean;
-};
-const LanguageSelector: React.FC<LanguageSelectorProps> = ({
-  currentLanguage,
-  onChangeLocale,
-  isDesktop: desktop,
-}) => (
-  <LanguageSelectorContainer desktop={desktop}>
-    <button
-      className={currentLanguage === 'en' ? 'selected' : ''}
-      onClick={onChangeLocale}
-    >
-      <span>EN</span>
-    </button>
-    <button
-      className={currentLanguage === 'ko' ? 'selected' : ''}
-      onClick={onChangeLocale}
-    >
-      <span>KO</span>
-    </button>
-  </LanguageSelectorContainer>
-);
 
 export const NavigationBar = () => {
   const router = useRouter();
@@ -114,7 +87,11 @@ export const NavigationBar = () => {
             {NAVIGATION_ITEMS.map((item) => (
               <NavigationItem
                 key={`${item.title}-${item.href}`}
-                active={currentPath === item.href}
+                active={
+                  item.startsWith
+                    ? currentPath.startsWith(item.startsWith)
+                    : currentPath === item.href
+                }
               >
                 <Link href={item.href}>
                   <span className="title">{t(item.title)}</span>
@@ -123,6 +100,13 @@ export const NavigationBar = () => {
             ))}
           </NavigationList>
         </NoSSR>
+
+        <RightContent>
+          <LanguageBadge onClick={onChangeLocale}>
+            {currentLanguage.toUpperCase()}
+          </LanguageBadge>
+          <StartButton>{t('Log In')}</StartButton>
+        </RightContent>
       </Container>
     </Wrapper>
   );
@@ -142,6 +126,8 @@ const Wrapper = styled.header`
   z-index: 90;
 `;
 const Container = styled.div`
+  padding-left: 28px;
+  padding-right: 12px;
   width: 100%;
   max-width: 780px;
   height: 70px;
@@ -150,22 +136,21 @@ const Container = styled.div`
   border: 0.5px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px);
   border-radius: 8px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const NavigationList = styled.ul`
   display: flex;
-  gap: 8px;
-
-  @media (max-width: 680px) {
-    display: none;
-  }
+  gap: 20px;
 `;
 
 type NavigationItemProps = {
   active?: boolean;
 };
 const NavigationItem = styled.li<NavigationItemProps>`
-  height: 64px;
   position: relative;
   color: rgba(255, 255, 255, 0.45);
 
@@ -174,39 +159,15 @@ const NavigationItem = styled.li<NavigationItemProps>`
   }
 
   & > a {
-    padding: 0 8px;
-    height: 100%;
-
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4px;
 
     span.title {
       font-size: 14px;
       font-weight: bold;
       line-height: 1;
     }
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    height: 0;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    background-color: #fe214a;
-    width: 100%;
-
-    transition: height 0.2s ease-in-out;
-  }
-
-  &:not(:last-of-type) {
-    margin-right: 12px;
   }
 
   ${({ active }) =>
@@ -224,140 +185,21 @@ const RightContent = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 32px;
-
-  position: relative;
-  z-index: 10;
-
-  @media (max-width: 680px) {
-    margin-left: auto;
-    margin-right: 20px;
-  }
+  gap: 16px;
 `;
+const LanguageBadge = styled.button`
+  padding: 8px;
+  width: fit-content;
 
-const LogoutButton = styled.button`
-  margin-right: 16px;
-  height: 32px;
+  background: rgba(151, 163, 182, 0.22);
+  border: 2px solid #97a3b6;
+  border-radius: 8px;
 
-  font-size: 14px;
   font-weight: 500;
-  line-height: 20px;
-  color: ${Colors.gray000};
-
-  transition-property: color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-
-  &:hover {
-    color: ${Colors.gray200};
-  }
+  font-size: 16px;
+  line-height: 100%;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #97a3b6;
 `;
-const LoginButton = styled(MinimalButton)`
-  margin: -32px 0;
-  padding: 12px 0;
-  width: 102px;
-`;
-
-const LanguageSelectorContainer = styled.div<{ desktop?: boolean }>`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  gap: 0;
-
-  & > button {
-    height: 100%;
-    padding: 0 6px;
-    font-weight: 900;
-    font-size: 20px;
-    line-height: 120%;
-    text-align: center;
-
-    user-select: none;
-
-    & > span {
-      color: ${Colors.gray500};
-    }
-
-    &.selected > span {
-      color: #ffcff2;
-      background: linear-gradient(
-          to right,
-          #ffffff 5%,
-          #e4f7ff 15%,
-          #cef0ff 41%,
-          #b4c4ff 48%,
-          #ffcff2 54%,
-          #ffffff 62%,
-          #d2d2d2 81%,
-          #ffd7d7 92%,
-          #d5d5d5 100%
-        ),
-        #ffcff2;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
-    }
-  }
-
-  ${({ desktop }) =>
-    desktop
-      ? css`
-          @media (max-width: 680px) {
-            display: none;
-          }
-        `
-      : css`
-          height: fit-content;
-          margin: auto -8px 80px;
-          transform: scale(1.5);
-          transform-origin: top left;
-        `};
-`;
-
-const MobileMenuButton = styled.button`
-  width: 40px;
-  height: 40px;
-
-  align-items: center;
-  justify-content: center;
-
-  border: 2px solid white;
-  border-radius: 2px;
-
-  display: none;
-
-  @media (max-width: 680px) {
-    display: flex;
-  }
-`;
-
-const MobileMenuContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 80;
-  background-color: black;
-  transition: all 0.5s ease-in-out;
-`;
-const MobileMenuContent = styled(motion.ul)`
-  margin: 0 auto;
-  padding: ${64 + 16}px 20px 0;
-  max-width: 1328px;
-
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-`;
-const MobileMenuItem = styled.li`
-  padding: 16px 0;
-  font-size: 24px;
-
-  span.title {
-    line-height: 100%;
-    font-weight: 500;
-  }
-`;
+const StartButton = styled(Button)``;
