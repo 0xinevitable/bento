@@ -163,21 +163,25 @@ const DashboardPage = (props: Props) => {
   const [bentoUser, setBentoUser] = useState<BentoUser>(props.user);
 
   // const [wallets, setWallets] = useState<Wallet[]>([]);
-  const revalidateWallets = useCallback(async () => {
-    // FIXME:
-    // try {
-    //   const wallets = await fetchWallets(bentoUser.id);
-    //   setWallets(wallets);
-    // } catch {
-    //   setWallets([]);
-    // }
-    // return wallets;
+  const revalidate = useCallback(async () => {
+    FIXME: try {
+      const { data } = await axios
+        .get<BentoUserResponse>(`http://bentoapi.io/users/${bentoUser.id}`)
+        .catch((e) => {
+          console.error(e);
+          return { data: null };
+        });
+      if (data?.result) {
+        const user = data?.result;
+        setBentoUser(user);
+        return user.wallets;
+      }
+    } catch (e) {
+      console.error(e);
+    }
     return [];
   }, [bentoUser.id]);
 
-  // useEffect(() => {
-  //   revalidateWallets();
-  // }, [revalidateWallets]);
   const wallets = bentoUser.wallets;
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
@@ -252,7 +256,7 @@ const DashboardPage = (props: Props) => {
           display_name: bentoUser.displayName,
           images: [assetImage],
         });
-        // revalidateProfile?.();
+        revalidate();
 
         setTimeout(() => {
           toast({
@@ -288,8 +292,7 @@ const DashboardPage = (props: Props) => {
         }
       }
     },
-    [],
-    // [profile, revalidateProfile],
+    [revalidate],
   );
 
   return (
@@ -340,7 +343,7 @@ const DashboardPage = (props: Props) => {
           isMyProfile={isMyProfile}
           user={bentoUser}
           // imageToken={imageToken}
-          revalidateWallets={revalidateWallets}
+          revalidateWallets={revalidate}
           setAddWalletModalVisible={setAddWalletModalVisible}
           setDetailModalVisible={setDetailModalVisible}
           setDetailModalParams={setDetailModalParams}
@@ -351,7 +354,7 @@ const DashboardPage = (props: Props) => {
         <DynmaicAddWalletModal
           visible={isAddWalletModalVisible}
           onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
-          revalidateWallets={revalidateWallets}
+          revalidateWallets={revalidate}
         />
         <DynamicDetailModal
           visible={isDetailModalVisible}
