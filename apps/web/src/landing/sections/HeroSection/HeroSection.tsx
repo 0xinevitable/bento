@@ -34,7 +34,7 @@ export const HeroSection: React.FC = () => {
           <Title>
             <Trans
               t={t}
-              i18nKey="<InlineBlock>Group All Wallets</InlineBlock> <InlineBlock>Regardless of Blockchains.</InlineBlock>"
+              i18nKey="HERO_TITLE"
               components={{
                 InlineBlock: <InlineBlock />,
               }}
@@ -43,7 +43,7 @@ export const HeroSection: React.FC = () => {
           <Description>
             <Trans
               t={t}
-              i18nKey="Easily Track and Manage Your Assets with Bento, <InlineBlock>the Web3 Dashboard.</InlineBlock>"
+              i18nKey="HERO_DESC"
               components={{ InlineBlock: <InlineBlock /> }}
             />
           </Description>
