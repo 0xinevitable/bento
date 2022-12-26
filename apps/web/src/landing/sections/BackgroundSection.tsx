@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
-import { useTranslation } from 'next-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
 import bitcoinIllust from '@/assets/illusts/bitcoin.png';
@@ -28,15 +28,7 @@ export const BackgroundSection: React.FC<TrackedSectionOptions> = ({
           {t('Dashboards That are Made Right.')}
         </Title>
         <Description style={{ marginTop: 24 }}>
-          All dashboard services out there are either:
-          <br />
-          Associated with specific layer-1 chains,
-          {`\n`}
-          built by the same team or shared VCs
-          <br />
-          Or maintained as close-source software.
-          {`\n`}
-          Both making them move timid outside their ecosystem.
+          <Trans t={t} i18nKey="BACKGROUND_DESC" components={{ br: <br /> }} />
         </Description>
 
         <BitcoinIllustContainer {...float(20, true, 2)}>

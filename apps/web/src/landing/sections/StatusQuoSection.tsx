@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useTranslation } from 'next-i18next';
+import { Trans, useTranslation } from 'next-i18next';
 import Image from 'next/image';
 
 import { TrackedSection, TrackedSectionOptions } from '@/components/system';
@@ -38,18 +38,18 @@ export const StatusQuoSection: React.FC<TrackedSectionOptions> = ({
     <Wrapper>
       <Section {...trackedSectionOptions}>
         <Information>
-          <SectionBadge>The Status Quo</SectionBadge>
+          <SectionBadge>{t('The Status Quo')}</SectionBadge>
           <SectionTitle>
             {t('Users are ')}
             <br />
             {t('NOT Wallets')}
           </SectionTitle>
           <Paragraph>
-            Exactly. Users are entirely different from wallets, <br />
-            a more extensive concept by itself. <br />
-            But current web3 products treat them the same. <br />
-            In the cross-chain universe, user activities and assets no longer
-            remain in one address or chain.
+            <Trans
+              t={t}
+              i18nKey="STATUS_QUO_DESC"
+              components={{ br: <br /> }}
+            />
           </Paragraph>
         </Information>
 

@@ -56,6 +56,11 @@ module.exports = withPlugins(
           destination: '/',
           permanent: false,
         },
+        {
+          source: '/community',
+          destination: '/',
+          permanent: false,
+        },
       ];
     },
   },
