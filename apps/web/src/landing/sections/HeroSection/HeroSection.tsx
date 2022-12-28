@@ -8,7 +8,7 @@ import { Button } from '@/components/v2/Button';
 import { onTablet } from '@/landing/utils/breakpoints';
 import { Analytics } from '@/utils';
 
-import backgroundImage from './assets/hero-background.jpg';
+import backgroundImage from './assets/hero-background.png';
 import logoImage from './assets/hero-logo.jpg';
 
 export const HeroSection: React.FC = () => {
