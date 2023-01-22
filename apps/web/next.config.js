@@ -33,7 +33,8 @@ module.exports = withPlugins(
     i18n,
     publicRuntimeConfig: pick(process.env, [
       'ENVIRONMENT',
-      'MAIN_API_BASE_URL',
+      'API_BASE_URL',
+      'SERVERLESS_API_BASE_URL',
     ]),
     webpack: (config) => {
       config.resolve.fallback = {

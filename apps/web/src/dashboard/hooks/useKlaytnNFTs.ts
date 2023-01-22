@@ -2,7 +2,7 @@ import { Wallet } from '@bento/common';
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 
-import { FeatureFlags } from '@/utils';
+import { Config, FeatureFlags } from '@/utils';
 
 import { useMultipleRequests } from './useMultipleRequests';
 
@@ -13,8 +13,8 @@ export const useKlaytnNFTs = (wallets: Wallet[]) => {
         ? []
         : wallets.flatMap((wallet) =>
             wallet.type === 'evm' && wallet.networks.includes('klaytn')
-              ? // FIXME: Hardcoded URL
-                `https://bentoapi.io/nft/chains/8217/wallets/${wallet.address}`
+              ? // FIXME: Hardcoded chain ID in URL
+                `${Config.API_BASE_URL}/nft/chains/8217/wallets/${wallet.address}`
               : [],
           ),
     [JSON.stringify(wallets)],

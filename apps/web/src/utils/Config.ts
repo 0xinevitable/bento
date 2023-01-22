@@ -4,13 +4,16 @@ import getNextConfig from 'next/config';
 const { publicRuntimeConfig } = getNextConfig();
 
 const getConfig = () => {
-  const { ENVIRONMENT, MAIN_API_BASE_URL } = publicRuntimeConfig as {
-    ENVIRONMENT: 'debug' | 'development' | 'production';
-    MAIN_API_BASE_URL: string;
-  };
+  const { ENVIRONMENT, API_BASE_URL, SERVERLESS_API_BASE_URL } =
+    publicRuntimeConfig as {
+      ENVIRONMENT: 'debug' | 'development' | 'production';
+      API_BASE_URL: string;
+      SERVERLESS_API_BASE_URL: string;
+    };
   return {
     ENVIRONMENT,
-    MAIN_API_BASE_URL,
+    API_BASE_URL,
+    SERVERLESS_API_BASE_URL,
     ...BentoConfig,
   };
 };

@@ -22,7 +22,13 @@ import { useSession } from '@/hooks/useSession';
 import { formatUsername } from '@/utils/format';
 
 import { ErrorResponse } from '@/profile/types/api';
-import { Analytics, Supabase, axiosWithCredentials, toast } from '@/utils';
+import {
+  Analytics,
+  Config,
+  Supabase,
+  axiosWithCredentials,
+  toast,
+} from '@/utils';
 
 import { DetailModalParams } from './components/DetailModal';
 import { KlaytnNFTAsset } from './hooks/useKlaytnNFTs';
@@ -84,7 +90,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   }
 
   const { data } = await axios
-    .get<BentoUserResponse>(`http://bentoapi.io/users/${username}`)
+    .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${username}`)
     .catch((e) => {
       console.error(e);
       return { data: null };
@@ -125,7 +131,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     }
 
     const { data } = await axios
-      .get<BentoUserResponse>(`http://bentoapi.io/users/${username}`)
+      .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${username}`)
       .catch((e) => {
         console.error(e);
         return { data: null };
@@ -166,7 +172,7 @@ const DashboardPage = (props: Props) => {
   const revalidate = useCallback(async () => {
     FIXME: try {
       const { data } = await axios
-        .get<BentoUserResponse>(`http://bentoapi.io/users/${bentoUser.id}`)
+        .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${bentoUser.id}`)
         .catch((e) => {
           console.error(e);
           return { data: null };
@@ -237,7 +243,7 @@ const DashboardPage = (props: Props) => {
     return [
       _title,
       _description,
-      `https://dev-server.bento.finance/api/images/og/u/${formatUsername(
+      `${Config.SERVERLESS_API_BASE_URL}/api/images/og/u/${formatUsername(
         bentoUser.username,
         '',
       )}`,

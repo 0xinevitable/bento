@@ -14,7 +14,7 @@ import { useSession } from '@/hooks/useSession';
 import { formatUsername } from '@/utils/format';
 
 import { UserProfile } from '@/profile/types/UserProfile';
-import { Analytics, FeatureFlags } from '@/utils';
+import { Analytics, Config, FeatureFlags } from '@/utils';
 
 import { DetailModalParams } from './components/DetailModal';
 import { KlaytnNFTAsset } from './hooks/useKlaytnNFTs';
@@ -152,7 +152,7 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
     return [
       _title,
       _description,
-      `https://dev-server.bento.finance/api/images/og/u/${formatUsername(
+      `${Config.SERVERLESS_API_BASE_URL}/api/images/og/u/${formatUsername(
         profile.username,
         '',
       )}`,

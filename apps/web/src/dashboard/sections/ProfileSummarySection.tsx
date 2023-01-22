@@ -168,7 +168,7 @@ export const ProfileSummarySection: React.FC<Props> = ({
       });
     }
     const imageURL = queryString.stringifyUrl({
-      url: `${Config.MAIN_API_BASE_URL}/api/images/card`,
+      url: `${Config.SERVERLESS_API_BASE_URL}/api/images/card`,
       query: {
         token: imageToken,
         user_id: profile?.user_id,

@@ -42,7 +42,8 @@ First, clone this repo.
 
 ```env
 ENVIRONMENT=debug
-MAIN_API_BASE_URL=https://www.bento.finance
+API_BASE_URL=
+SERVERLESS_API_BASE_URL=https://www.bento.finance
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_URL=
 NEXT_PUBLIC_OPENSEA_API_KEYS=
