@@ -1,4 +1,4 @@
-// proxy query params to card api(`${Config.MAIN_API_BASE_URL}/api/images/card)
+// proxy query params to card api(`${Config.SERVERLESS_API_BASE_URL}/api/images/card)
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 import queryString from 'query-string';
@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { query } = req;
   const { data } = await axios.get(
     queryString.stringifyUrl({
-      url: `${Config.MAIN_API_BASE_URL}/api/images/card`,
+      url: `${Config.SERVERLESS_API_BASE_URL}/api/images/card`,
       query,
     }),
     { responseType: 'arraybuffer' },

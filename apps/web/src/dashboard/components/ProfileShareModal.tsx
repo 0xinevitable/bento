@@ -78,7 +78,7 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
           <AnimatedToolTip label={t('Click to Download')} placement="top">
             <a
               href={cardURL.replace(
-                `${Config.MAIN_API_BASE_URL}/api/images`,
+                `${Config.SERVERLESS_API_BASE_URL}/api/images`,
                 '/api/proxy',
               )}
               download={`${filename}.png`}
@@ -97,7 +97,7 @@ export const ProfileShareModal: React.FC<ProfileShareModalProps> = ({
                 axios
                   .get(
                     cardURL.replace(
-                      `${Config.MAIN_API_BASE_URL}/api/images`,
+                      `${Config.SERVERLESS_API_BASE_URL}/api/images`,
                       '/api/proxy',
                     ),
                     { responseType: 'blob' },
