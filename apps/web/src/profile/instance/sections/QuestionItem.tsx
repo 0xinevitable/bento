@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import React, { useCallback, useMemo, useState } from 'react';
 
-import HorizontalDotsIcon from '@/assets/icons/ic-dots-horizontal.svg';
+// import HorizontalDotsIcon from '@/assets/icons/ic-dots-horizontal.svg';
 import { useTimeAgo } from '@/hooks/useTimeAgo';
 
 import { throttle } from '@/utils';
@@ -135,7 +135,7 @@ type MoreButtonProps = {
 const MoreButton: React.FC<MoreButtonProps> = ({ onClick }) => {
   return (
     <MoreButtonContainer onClick={onClick}>
-      <MoreButtonIcon />
+      {/* <MoreButtonIcon /> */}
     </MoreButtonContainer>
   );
 };
@@ -154,11 +154,11 @@ const MoreButtonContainer = styled.button`
     background-color: rgba(255, 255, 255, 0.3);
   }
 `;
-const MoreButtonIcon = styled(HorizontalDotsIcon)`
-  width: 18px;
-  height: 18px;
-  color: #262c34;
-`;
+// const MoreButtonIcon = styled(HorizontalDotsIcon)`
+//   width: 18px;
+//   height: 18px;
+//   color: #262c34;
+// `;
 
 const Answer = styled.p`
   margin: 0;

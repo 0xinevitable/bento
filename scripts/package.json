@@ -5,20 +5,29 @@
   "scripts": {
     "generate-assets": "ts-node assets",
     "generate-release-notes": "ts-node release-notes",
-    "generate-defi": "ts-node defi"
+    "depcheck": "ts-node check-dependencies",
+    "resolve-peers": "ts-node resolve-peers"
   },
   "dependencies": {
     "@bento/common": "workspace:^",
     "@bento/core": "workspace:^",
     "@supabase/supabase-js": "^1.35.7",
     "axios": "^0.27.2",
+    "chalk": "4.1.2",
     "dedent": "^0.7.0",
+    "depcheck": "^1.4.3",
     "find-yarn-workspace-root": "^2.0.0",
+    "glob": "^8.1.0",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
     "prettier": "^2.7.1",
     "typescript-json": "^2.1.6"
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
+    "@types/glob": "^8.0.1",
+    "@types/js-yaml": "^4.0.5",
+    "@types/lodash": "^4.14.191",
     "@types/node": "^18.7.19",
     "@types/prettier": "^2.6.3",
     "ts-node": "^10.9.1",

@@ -3,7 +3,6 @@ const withTM = require('next-transpile-modules')([
   '@bento/core',
 ]);
 
-const withSvgr = require('next-plugin-svgr');
 const withInterceptStdout = require('next-intercept-stdout');
 const { withPlugins } = require('next-composed-plugins');
 const { i18n } = require('./next-i18next.config');
@@ -66,7 +65,6 @@ module.exports = withPlugins(
   },
   [
     withTM,
-    withSvgr,
     [
       withInterceptStdout,
       (text) => (text.includes('Duplicate atom key') ? '' : text),
