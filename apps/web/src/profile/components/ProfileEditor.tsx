@@ -4,8 +4,8 @@ import { useCallback } from 'react';
 
 import { Button } from '@/components/system';
 
-import { FieldInput } from '../components/FieldInput';
-import { FieldTextArea } from '../components/FieldTextArea';
+import { FieldInput } from './FieldInput';
+import { FieldTextArea } from './FieldTextArea';
 
 export type UserInformationDraft = {
   username: string;
