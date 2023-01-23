@@ -20,7 +20,6 @@ import {
   DashboardTokenBalance,
   WalletBalance,
 } from '@/dashboard/types/TokenBalance';
-import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
 
@@ -191,7 +190,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
   return (
     <React.Fragment>
-      <div style={{ width: '100%', height: 32 }} />
+      <div style={{ width: '100%', height: 64 }} />
 
       <DashboardWrapper>
         {FeatureFlags.isSearchEnabled && <SearchBar />}
