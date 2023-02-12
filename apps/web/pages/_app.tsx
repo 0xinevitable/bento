@@ -12,6 +12,7 @@ import '@/styles/fonts.css';
 import '@/styles/tailwind.reset.css';
 
 import styled from '@emotion/styled';
+import { ThemeProvider } from 'next-themes';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 
@@ -64,30 +65,32 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <GeistProvider themeType="dark">
-      <GlobalStyle />
-      <ToastProvider />
+    <ThemeProvider>
+      <GeistProvider themeType="dark">
+        <GlobalStyle />
+        <ToastProvider />
 
-      <SessionManager />
-      <PricingsProvider>
-        <WalletsProvider>
-          <Container>
-            <LoadingProgress
-              isRouteChanging={loadingState.isRouteChanging}
-              key={loadingState.loadingKey}
-            />
-            <NavigationBar />
+        <SessionManager />
+        <PricingsProvider>
+          <WalletsProvider>
+            <Container>
+              <LoadingProgress
+                isRouteChanging={loadingState.isRouteChanging}
+                key={loadingState.loadingKey}
+              />
+              <NavigationBar />
 
-            <Component {...pageProps} />
-          </Container>
+              <Component {...pageProps} />
+            </Container>
 
-          <div id="portal" />
-          <div id="profile-edit" />
-          <div id="mobile-menu" />
-          <div id="landing-background" />
-        </WalletsProvider>
-      </PricingsProvider>
-    </GeistProvider>
+            <div id="portal" />
+            <div id="profile-edit" />
+            <div id="mobile-menu" />
+            <div id="landing-background" />
+          </WalletsProvider>
+        </PricingsProvider>
+      </GeistProvider>
+    </ThemeProvider>
   );
 };
 
