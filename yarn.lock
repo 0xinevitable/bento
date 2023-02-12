@@ -696,6 +696,7 @@ __metadata:
     next-composed-plugins: ^1.0.1
     next-i18next: ^12.1.0
     next-intercept-stdout: ^1.0.1
+    next-themes: ^0.2.1
     next-transpile-modules: ^9.1.0
     node-fetch: ^3.3.0
     postcss: ^8.4.21
@@ -8623,6 +8624,17 @@ __metadata:
   dependencies:
     intercept-stdout: ^0.1.2
   checksum: 85716609625eca573bda7f6acff3383856e0cbf93787f818485f7f9545b52b34c0c00794ec9e002f104e83cd180a0e2b09d2127f6b50ee0e60b13ae2c0ce06e8
+  languageName: node
+  linkType: hard
+
+"next-themes@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "next-themes@npm:0.2.1"
+  peerDependencies:
+    next: "*"
+    react: "*"
+    react-dom: "*"
+  checksum: ebc248b956138e73436c4ed0a0f0a877a0a48a33156db577029b8b8469e48b5c777d61abf2baeb75953378febea74e067a4869ff90b4a3e94fce123289b862ba
   languageName: node
   linkType: hard
 
