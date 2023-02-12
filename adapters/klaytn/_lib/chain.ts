@@ -9,7 +9,6 @@ import {
   withCache,
 } from '@bento/core';
 import { getTokenBalancesFromUnmarshal } from '@bento/core/indexers';
-import { UnmarshalChainId } from '@bento/core/indexers/Unmarshal';
 import Caver from 'caver-js';
 import { Multicall } from 'klaytn-multicall';
 
@@ -25,7 +24,7 @@ export class KlaytnChain implements Chain {
     ind: ZERO_ADDRESS,
   };
   chainId = 8217;
-  unmarshalChainId = 'klaytn' as UnmarshalChainId;
+  unmarshalChainId = 'klaytn';
   _provider = new Caver(Config.RPC_URL.KLAYTN_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
@@ -65,7 +64,8 @@ export class KlaytnChain implements Chain {
   getTokenBalances = async (account: string) => {
     try {
       const items = await getTokenBalancesFromUnmarshal({
-        chainId: this.unmarshalChainId,
+        // FIXME: Update type
+        chainId: this.unmarshalChainId as any,
         account,
       });
 
