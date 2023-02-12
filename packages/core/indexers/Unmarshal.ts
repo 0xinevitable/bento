@@ -4,7 +4,7 @@ import { type Chain as UnmarshalChainId } from '@unmarshal/sdk';
 import axios from 'axios';
 import queryString from 'query-string';
 
-export { type Chain as UnmarshalChainId } from '@unmarshal/sdk';
+export { UnmarshalChainId };
 
 type Options = {
   chainId: UnmarshalChainId;
