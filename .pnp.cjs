@@ -795,6 +795,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ethersproject/providers", "npm:5.7.2"],\
             ["@solana/web3.js", "npm:1.66.2"],\
             ["@types/node", "npm:18.11.5"],\
+            ["@unmarshal/sdk", "npm:1.0.5"],\
             ["axios", "npm:1.1.3"],\
             ["axios-cache-interceptor", "npm:0.10.7"],\
             ["bech32", "npm:2.0.0"],\
@@ -3852,6 +3853,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-yoga-layout-npm-1.9.2-3c692aa211-dbc3d6ab99.zip/node_modules/@types/yoga-layout/",\
           "packageDependencies": [\
             ["@types/yoga-layout", "npm:1.9.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@unmarshal/sdk", [\
+        ["npm:1.0.5", {\
+          "packageLocation": "./.yarn/cache/@unmarshal-sdk-npm-1.0.5-4e4fd47c87-2d3f354a46.zip/node_modules/@unmarshal/sdk/",\
+          "packageDependencies": [\
+            ["@unmarshal/sdk", "npm:1.0.5"],\
+            ["axios", "npm:1.1.3"]\
           ],\
           "linkType": "HARD"\
         }]\
