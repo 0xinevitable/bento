@@ -80,7 +80,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const { balances: nftBalances } = useNFTBalances({
     wallets: user.wallets,
   });
-  const { klaytnNFTs } = useKlaytnNFTs(user.wallets);
+
+  // FIXME: Enable Klaytn NFTs again
+  // const { klaytnNFTs } = useKlaytnNFTs(user.wallets);
+  const klaytnNFTs: KlaytnNFTAsset[] = [];
 
   const nftAssets = useMemo<(OpenSeaAsset | KlaytnNFTAsset)[]>(() => {
     return [
