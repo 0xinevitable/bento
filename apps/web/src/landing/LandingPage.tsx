@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { GetStaticProps } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect } from 'react';
 
@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-const LandingPage: React.FC = () => {
+const LandingPage: NextPage & { theme?: string } = () => {
   useEffect(() => {
     Analytics.logEvent('view_landing', undefined);
   }, []);
@@ -47,6 +47,7 @@ const LandingPage: React.FC = () => {
     </>
   );
 };
+LandingPage.theme = 'dark';
 
 export default LandingPage;
 

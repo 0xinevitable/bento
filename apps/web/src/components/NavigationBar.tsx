@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { Icon } from '@iconify/react';
 import { deleteCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
+import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -46,6 +48,8 @@ export const NavigationBar = () => {
 
   const { session } = useSession();
   const { signOut } = useSignOut();
+
+  const { forcedTheme, resolvedTheme, setTheme } = useTheme();
 
   const onClickLogout = useCallback(async () => {
     await Analytics.logEvent('click_logout', {
@@ -94,9 +98,32 @@ export const NavigationBar = () => {
 
         <NoSSR>
           <RightContent>
-            <LanguageBadge onClick={onChangeLocale}>
-              {currentLanguage.toUpperCase()}
-            </LanguageBadge>
+            <ToggleBadgeList>
+              {!forcedTheme && (
+                <ToggleBadge
+                  onClick={() =>
+                    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+                  }
+                  style={{ padding: 0, width: 32 }}
+                >
+                  {resolvedTheme === 'light' && (
+                    <Icon
+                      icon="material-symbols:dark-mode-outline-rounded"
+                      fontSize={18}
+                    />
+                  )}
+                  {resolvedTheme === 'dark' && (
+                    <Icon
+                      icon="material-symbols:light-mode-outline"
+                      fontSize={18}
+                    />
+                  )}
+                </ToggleBadge>
+              )}
+              <ToggleBadge onClick={onChangeLocale}>
+                {currentLanguage.toUpperCase()}
+              </ToggleBadge>
+            </ToggleBadgeList>
             {!session && (
               <StartButton
                 onClick={() => {
@@ -223,9 +250,19 @@ const RightContent = styled.div`
     gap: 10px;
   }
 `;
-const LanguageBadge = styled.button`
-  padding: 8px;
+const ToggleBadgeList = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+const ToggleBadge = styled.button`
+  padding: 0 8px;
   width: fit-content;
+  height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   background: rgba(151, 163, 182, 0.22);
   border: 2px solid #97a3b6;

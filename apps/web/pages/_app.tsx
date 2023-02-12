@@ -25,7 +25,10 @@ import nextI18nextConfig from '../next-i18next.config';
 
 Analytics.initialize();
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = ({
+  Component,
+  pageProps,
+}: AppProps & { Component: { theme?: string } }) => {
   const router = useRouter();
 
   const [loadingState, setLoadingState] = useState({
@@ -65,7 +68,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <ThemeProvider>
+    <ThemeProvider forcedTheme={Component.theme || undefined}>
       <GeistProvider themeType="dark">
         <GlobalStyle />
         <ToastProvider />
