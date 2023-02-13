@@ -1,11 +1,8 @@
-<p align="center">
-  <a href="https://bento.finance">
-    <img alt="Bento" src="https://raw.githubusercontent.com/inevitable-dao/bento/develop/apps/web/public/android-chrome-512x512.png" height="128" />
-  </a>
-  <h1 align="center">
-    Bento, the Open-Source Web3 Dashboard
-  </h1>
-</p>
+[![Group wallets across all chains. Bento — the Web3 Dashboard Built as Open Source.](https://github.com/inevitable-dao/bento/blob/develop/apps/web/public/assets/og-image.jpg?raw=true)](https://bento.finance)
+
+<h1 align="center">
+  Bento, the Open-Source Web3 Dashboard
+</h1>
 
 <p align="center">
   <a href="https://bento.finance">
@@ -27,8 +24,6 @@
 
 > **Warning**<br/>
 > This product is still under rapid development 🛠
-
-[![Group wallets across all chains. Bento — the Web3 Dashboard Built as Open Source.](https://github.com/inevitable-dao/bento/blob/develop/apps/web/public/assets/og-image.jpg?raw=true)](https://bento.finance)
 
 ## 🚀 Preparing Local Dev Environment
 
