@@ -85,6 +85,10 @@ const Wrapper = styled.div`
   padding: 0 32px;
   width: 100%;
   display: flex;
+
+  @media (max-width: 900px) {
+    padding-top: 100px;
+  }
 `;
 const Container = styled(TrackedSection)`
   margin: 0 auto;
