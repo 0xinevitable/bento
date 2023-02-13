@@ -154,7 +154,6 @@ export const AddWalletButton = styled(Button)`
     font-size: 14px;
     line-height: 100%;
     text-align: center;
-    color: ${Colors.white};
   }
 `;
 
