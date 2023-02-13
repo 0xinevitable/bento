@@ -1,6 +1,7 @@
 type EnvironmentSecrets = {
   SUPABASE_ANON_KEY: string;
   SUPABASE_URL: string;
+  API_BASE_URL: string;
   OPENSEA_API_KEYS: string[];
   CMC_PRO_API_KEYS: string[];
 };
@@ -24,6 +25,7 @@ export const splitAPIKeys = (value: string | undefined) =>
 export const Config: Secrets = {
   SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
   SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || '',
   OPENSEA_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_OPENSEA_API_KEYS),
   CMC_PRO_API_KEYS: splitAPIKeys(process.env.NEXT_PUBLIC_CMC_PRO_API_KEYS),
   ...HARDCODED_SECRETS,

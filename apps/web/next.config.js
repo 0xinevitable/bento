@@ -33,7 +33,6 @@ module.exports = withPlugins(
     i18n,
     publicRuntimeConfig: pick(process.env, [
       'ENVIRONMENT',
-      'API_BASE_URL',
       'SERVERLESS_API_BASE_URL',
     ]),
     webpack: (config) => {
