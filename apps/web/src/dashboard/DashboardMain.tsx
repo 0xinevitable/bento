@@ -285,6 +285,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                               marginLeft: 6,
                               color: Colors.gray200,
                               fontSize: 14,
+                              fontWeight: 600,
                               lineHeight: '20px',
                             }}
                           >

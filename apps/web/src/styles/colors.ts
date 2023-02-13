@@ -4,6 +4,7 @@ export const Colors = {
   yellow100: '#FFD978',
   brandgradient:
     'linear-gradient(224deg, #FF9898 8.17%, #FF77B8 54.56%, #F9BAFF 100%);',
+  brand600: '#FF439D',
   brand500: '#FF77B8',
   brand400: '#FF92C6',
   black: '#000',

@@ -4,12 +4,16 @@ import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useMemo } from 'react';
 
+import { AnimatedToolTip } from '@/components/system';
+
 import { NETWORKS } from '@/constants/networks';
 import { Breakpoints } from '@/dashboard/constants/breakpoints';
 import { displayName } from '@/dashboard/constants/platform';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
+
+const AVAILABLE_COLORS = ['#FF439D', '#FF77B8', '#ff8181', '#FAB4F9'];
 
 type AssetRatioSectionProps = {
   netWorthInWallet: number;
@@ -30,35 +34,40 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
     [netWorthInWallet, netWorthInProtocols],
   );
 
-  const [summary, assetRatioByPlatform] = useMemo(() => {
-    const groups = groupBy(tokenBalances, 'platform');
-
-    let items = NETWORKS.map(({ id: platform }) => {
-      const assets = groups[platform] || [];
-      let netWorth = assets.reduce((acc, info) => acc + info.netWorth, 0);
-
-      services.forEach((service) => {
-        if (service.chain === platform) {
-          netWorth += service.netWorth;
+  const summary = useMemo(() => {
+    // const nfts = tokenBalances.find(v => v.platform === 'opensea')
+    // const others= ..
+    const [nfts, others] = tokenBalances.reduce(
+      (acc, cur) => {
+        if (cur.platform === 'opensea') {
+          acc[0].push(cur);
+        } else {
+          acc[1].push(cur);
         }
-      });
+        return acc;
+      },
+      [[], []] as DashboardTokenBalance[][],
+    );
 
-      let ratio = (netWorth / netWorthInUSD) * 100;
-      if (isNaN(ratio)) {
-        ratio = 0;
-      }
+    const protocols = services.map((v) => v.protocols).flat();
 
-      return {
-        platform,
-        netWorth,
-        name: displayName(platform),
-        ratio,
-      };
-    });
+    const nftsRatio =
+      (nfts.reduce((acc, cur) => acc + cur.netWorth, 0) / netWorthInUSD) * 100;
+    const othersRatio =
+      (others.reduce((acc, cur) => acc + cur.netWorth, 0) / netWorthInUSD) *
+      100;
+    const protocolsRatio =
+      (protocols.reduce((acc, cur) => acc + cur.netWorth, 0) / netWorthInUSD) *
+      100;
 
-    items = items.sort((a, b) => b.ratio - a.ratio);
-    return [items.slice(0, 3), items];
-  }, [netWorthInUSD, tokenBalances]);
+    const items = [
+      { name: 'NFTs', ratio: nftsRatio },
+      { name: 'Tokens', ratio: othersRatio },
+      { name: 'DeFi', ratio: protocolsRatio },
+    ].filter((v) => v.ratio > 0);
+    items.sort((a, b) => b.ratio - a.ratio);
+    return items;
+  }, [tokenBalances, services]);
 
   return (
     <Container>
@@ -66,6 +75,36 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
         <Field>{t('Net Worth')}</Field>
         <Title>{`$${netWorthInUSD.toLocaleString()}`}</Title>
       </Information>
+
+      <BarList>
+        {summary.map((item, index) => (
+          <Bar
+            key={item.name}
+            style={{
+              background: AVAILABLE_COLORS[index] || '#5b739b',
+              width: `${item.ratio.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}%`,
+            }}
+          />
+        ))}
+      </BarList>
+
+      <BadgeList>
+        {summary.map((item, index) => (
+          <BadgeItem key={item.name}>
+            <BadgeColorIndicator
+              style={{ background: AVAILABLE_COLORS[index] || '#5b739b' }}
+            />
+            <span>{item.name}</span>
+            <span className="ratio">
+              {`${item.ratio.toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              })}%`}
+            </span>
+          </BadgeItem>
+        ))}
+      </BadgeList>
     </Container>
   );
 };
@@ -102,22 +141,8 @@ const Container = styled.div`
   }
 `;
 
-const BitcoinIllust = styled(Image)`
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-
-  position: absolute;
-  top: 32px;
-  right: 20px;
-  z-index: -1;
-
-  @media (max-width: ${Breakpoints.Tiny}px) {
-    display: none;
-  }
-`;
-
 const Information = styled.div`
+  margin-bottom: auto;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -144,12 +169,50 @@ const Title = styled.h2`
   }
 `;
 
-const BadgeList = styled.ul`
+const BarList = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+  width: 100%;
 `;
-const Badge = styled.li`
+const Bar = styled.div`
+  min-width: 12px;
+  height: 20px;
+  border-radius: 4px;
+`;
+
+const BadgeList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+`;
+const BadgeItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  & > span {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+    text-align: center;
+    color: ${Colors.gray400};
+
+    &.ratio {
+      font-weight: 900;
+      color: ${Colors.gray100};
+    }
+  }
+`;
+const BadgeColorIndicator = styled.div`
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+`;
+const Badge = styled.div`
   padding: 6px 12px 6px 8px;
   gap: 6px;
 
