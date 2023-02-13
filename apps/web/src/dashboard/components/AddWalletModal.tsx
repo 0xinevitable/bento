@@ -181,11 +181,11 @@ const NetworkItem = styled.div<NetworkItemProps>`
   ${({ selected }) =>
     selected &&
     css`
-      border-color: rgba(168, 85, 247, 0.65);
-      background-color: rgba(168, 85, 247, 0.25);
+      border-color: rgba(255, 119, 184, 0.65);
+      background-color: rgba(255, 119, 184, 0.25);
 
       &:hover {
-        border-color: rgba(168, 85, 247, 0.65);
+        border-color: rgba(255, 119, 184, 0.65);
       }
     `};
 
