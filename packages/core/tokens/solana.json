@@ -23,10 +23,9 @@
   },
   {
     "symbol": "LINK",
-    "name": "Chainlink (Wormhole)",
+    "name": "Chainlink (Portal)",
     "decimals": 8,
     "address": "2wpTofQ8SkACrkZWrZDjXPitYa8AwWgX8AfxdeBRRVLX",
-    "coinGeckoId": "chainlink-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/2wpTofQ8SkACrkZWrZDjXPitYa8AwWgX8AfxdeBRRVLX/logo.png"
   },
   {
@@ -88,10 +87,9 @@
   },
   {
     "symbol": "AAVE",
-    "name": "Aave (Wormhole)",
+    "name": "Aave Token (Portal)",
     "decimals": 8,
     "address": "3vAs4D1WE6Na4tCgt4BApgFfENbm8WY7q4cSPD1yM4Cg",
-    "coinGeckoId": "aave-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/3vAs4D1WE6Na4tCgt4BApgFfENbm8WY7q4cSPD1yM4Cg/logo.png"
   },
   {
@@ -569,10 +567,9 @@
   },
   {
     "symbol": "PAXG",
-    "name": "Paxos Gold (Wormhole)",
+    "name": "Paxos Gold (Portal)",
     "decimals": 8,
     "address": "C6oFsE8nXRDThzrMEQ5SxaNFGKoyyfWDDVPw37JKvPTe",
-    "coinGeckoId": "paxos-gold-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/C6oFsE8nXRDThzrMEQ5SxaNFGKoyyfWDDVPw37JKvPTe/logo.png"
   },
   {
@@ -598,10 +595,9 @@
   },
   {
     "symbol": "agEUR",
-    "name": "agEUR (Wormhole)",
+    "name": "agEUR (Portal)",
     "decimals": 8,
     "address": "CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1",
-    "coinGeckoId": "ageur-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/CbNYA9n3927uXUukee2Hf4tm3xxkffJPPZvGazc2EAH1/logo.png"
   },
   {
@@ -926,10 +922,9 @@
   },
   {
     "symbol": "GRT",
-    "name": "The Graph (Wormhole)",
+    "name": "Graph Token (Portal)",
     "decimals": 8,
     "address": "HGsLG4PnZ28L8A4R5nPqKgZd86zUUdmfnkTRnuFJ5dAX",
-    "coinGeckoId": "the-graph-wormhole",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/HGsLG4PnZ28L8A4R5nPqKgZd86zUUdmfnkTRnuFJ5dAX/logo.png"
   },
   {
@@ -1132,5 +1127,60 @@
     "address": "z3dn17yLaGMKffVogeFHQ9zWVcXgqgf3PQnDsNs2g6M",
     "coinGeckoId": "oxygen",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/z3dn17yLaGMKffVogeFHQ9zWVcXgqgf3PQnDsNs2g6M/logo.png"
+  },
+  {
+    "symbol": "SAMO",
+    "name": "Samoyedcoin",
+    "decimals": 9,
+    "address": "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU",
+    "coinGeckoId": "samoyedcoin",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU/logo.png"
+  },
+  {
+    "symbol": "GARI",
+    "name": "Gari Network",
+    "decimals": 9,
+    "address": "CKaKtYvz6dKPyMvYq9Rh3UBrnNqYZAyd7iF4hJtjUvks",
+    "coinGeckoId": "gari-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/CKaKtYvz6dKPyMvYq9Rh3UBrnNqYZAyd7iF4hJtjUvks/logo.png"
+  },
+  {
+    "symbol": "ALEPH",
+    "name": "Wrapped ALEPH (Sollet)",
+    "decimals": 6,
+    "address": "CsZ5LZkDS7h9TDKjrbL7VAwQZ9nsRu8vJLhRYfmGaN8K",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/CsZ5LZkDS7h9TDKjrbL7VAwQZ9nsRu8vJLhRYfmGaN8K/logo.png"
+  },
+  {
+    "symbol": "Bonk",
+    "name": "Bonk",
+    "decimals": 5,
+    "address": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+    "coinGeckoId": "bonk",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263/logo.png"
+  },
+  {
+    "symbol": "WOO",
+    "name": "WOO Network",
+    "decimals": 6,
+    "address": "E5rk3nmgLUuKUiS94gg4bpWwWwyjCMtddsAXkTFLtHEy",
+    "coinGeckoId": "woo-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/E5rk3nmgLUuKUiS94gg4bpWwWwyjCMtddsAXkTFLtHEy/logo.png"
+  },
+  {
+    "symbol": "SBR",
+    "name": "Saber",
+    "decimals": 6,
+    "address": "Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1",
+    "coinGeckoId": "saber",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1/logo.png"
+  },
+  {
+    "symbol": "ZBC",
+    "name": "Zebec Protocol",
+    "decimals": 9,
+    "address": "zebeczgi5fSEtbpfQKVZKCJ3WgYXxjkMUkNNx7fLKAF",
+    "coinGeckoId": "zebec-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/zebeczgi5fSEtbpfQKVZKCJ3WgYXxjkMUkNNx7fLKAF/logo.png"
   }
 ]

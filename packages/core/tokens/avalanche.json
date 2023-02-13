@@ -184,7 +184,6 @@
     "name": "Binance USD",
     "decimals": 6,
     "address": "0x19860CCB0A68fd4213aB9D8266F7bBf05A8dDe98",
-    "coinGeckoId": "binance-usd",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x19860CCB0A68fd4213aB9D8266F7bBf05A8dDe98/logo.png"
   },
   {
@@ -446,5 +445,45 @@
     "address": "0xd6070ae98b8069de6B494332d1A1a81B6179D960",
     "coinGeckoId": "beefy-finance",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xd6070ae98b8069de6B494332d1A1a81B6179D960/logo.png"
+  },
+  {
+    "symbol": "ANKR",
+    "name": "Ankr Network",
+    "decimals": 18,
+    "address": "0x20CF1b6E9d856321ed4686877CF4538F2C84B4dE",
+    "coinGeckoId": "ankr",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x20CF1b6E9d856321ed4686877CF4538F2C84B4dE/logo.png"
+  },
+  {
+    "symbol": "AXL",
+    "name": "Axelar",
+    "decimals": 6,
+    "address": "0x44c784266cf024a60e8acF2427b9857Ace194C5d",
+    "coinGeckoId": "axelar",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x44c784266cf024a60e8acF2427b9857Ace194C5d/logo.png"
+  },
+  {
+    "symbol": "JOE",
+    "name": "JOE",
+    "decimals": 18,
+    "address": "0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd",
+    "coinGeckoId": "joe",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd/logo.png"
+  },
+  {
+    "symbol": "ankrAVAX",
+    "name": "Ankr Staked AVAX",
+    "decimals": 18,
+    "address": "0xc3344870d52688874b06d844E0C36cc39FC727F6",
+    "coinGeckoId": "ankr-staked-avax",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xc3344870d52688874b06d844E0C36cc39FC727F6/logo.png"
+  },
+  {
+    "symbol": "axlUSDC",
+    "name": "Axelar USDC",
+    "decimals": 6,
+    "address": "0xfaB550568C688d5D8A52C7d794cb93Edc26eC0eC",
+    "coinGeckoId": "axlusdc",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xfaB550568C688d5D8A52C7d794cb93Edc26eC0eC/logo.png"
   }
 ]

@@ -47,7 +47,7 @@ export const update = async () => {
   const tokens: TokenInput[] = (await safePromiseAll(tokensPromise))
     .flat()
     .flatMap((token) => {
-      if (token.type !== 'ERC20') {
+      if (token?.type !== 'ERC20') {
         return [];
       }
       const coinGeckoToken = coingeckoTokenList.find(
