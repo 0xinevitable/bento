@@ -5,7 +5,7 @@ const meta = {
   title: 'Bento | Your Cross-chain Web3 Dashboard',
   description:
     'The open-source, cross-chain web3 dashboard. Add multiple wallets, group your crypto—native tokens, DAOs, and NFTs—into one, and keep track of your favorite DeFi investments.',
-  image: 'https://bento.finance/assets/og-image.jpg',
+  image: 'https://bento.finance/assets/og-image-v2.jpg',
   url: 'https://bento.finance',
 };
 
