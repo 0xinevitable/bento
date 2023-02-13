@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
 import { AnimatedToolTip, Badge } from '@/components/system';
+import { Button } from '@/components/v2/Button';
 
 import { NETWORKS } from '@/constants/networks';
 import { FixedLoginNudge } from '@/profile/components/LoginNudge';
@@ -92,7 +93,9 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
             gap: 8,
           }}
         >
-          <Button onClick={onClickLogin}>{t('View your Dashboard')}</Button>
+          <StartButton onClick={onClickLogin}>
+            {t('View your Dashboard')}
+          </StartButton>
           <a
             title="About"
             style={{
@@ -161,40 +164,7 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
   );
 };
 
-const Button = styled.button`
-  padding: 20px 32px;
-  /* width: 100%; */
-  width: fit-content;
-  /* max-width: 282px; */
-  position: relative;
-
-  border-radius: 8px;
-  border: 1px solid rgba(255, 165, 165, 0.66);
-  background: radial-gradient(98% 205% at 0% 0%, #74021a 0%, #c1124f 100%);
-  filter: drop-shadow(0px 10px 32px rgba(151, 42, 53, 0.33));
-
-  font-weight: 700;
-  font-size: 21.3946px;
-
-  line-height: 100%;
-  text-align: center;
-  letter-spacing: -0.05em;
-
-  /* color: rgba(255, 255, 255, 0.92); */
-  color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0px 4px 12px rgba(101, 0, 12, 0.42);
-
-  &:hover {
-    border-color: rgba(255, 165, 165, 0.45);
-
-    /* 85% opacity */
-    background: radial-gradient(
-      98% 205% at 0% 0%,
-      rgba(116, 2, 27, 0.85) 0%,
-      rgba(193, 18, 79, 0.85) 100%
-    );
-  }
-`;
+const StartButton = styled(Button)``;
 
 const ProtocolSection = styled.section`
   margin-top: 86px;
