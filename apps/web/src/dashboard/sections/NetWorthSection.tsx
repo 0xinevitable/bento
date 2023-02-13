@@ -1,27 +1,23 @@
 import styled from '@emotion/styled';
-import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
 import { useMemo } from 'react';
 
 import { AnimatedToolTip } from '@/components/system';
 
-import { NETWORKS } from '@/constants/networks';
 import { Breakpoints } from '@/dashboard/constants/breakpoints';
-import { displayName } from '@/dashboard/constants/platform';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
 const AVAILABLE_COLORS = ['#FF439D', '#FF77B8', '#ff8181', '#FAB4F9'];
 
-type AssetRatioSectionProps = {
+type NetWorthSectionProps = {
   netWorthInWallet: number;
   netWorthInProtocols: number;
   tokenBalances: DashboardTokenBalance[];
   services: ServiceData[];
 };
-export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
+export const NetWorthSection: React.FC<NetWorthSectionProps> = ({
   tokenBalances,
   netWorthInWallet,
   netWorthInProtocols,
