@@ -19,10 +19,11 @@ import React, {
 
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
+import { getServerSupabase } from '@/utils/ServerSupabase';
 import { formatUsername } from '@/utils/format';
 
 import { ErrorResponse } from '@/profile/types/api';
-import { Analytics, Supabase, axiosWithCredentials, toast } from '@/utils';
+import { Analytics, Config, axiosWithCredentials, toast } from '@/utils';
 
 import { DetailModalParams } from './components/DetailModal';
 import { KlaytnNFTAsset } from './hooks/useKlaytnNFTs';
@@ -77,24 +78,25 @@ const notifySlack = async (user: User, username: string) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context,
 ) => {
-  const username =
+  const usernameOrId =
     typeof context.query.username === 'string' ? context.query.username : '';
-  if (!username) {
+  if (!usernameOrId) {
     return { notFound: true };
   }
 
   const { data } = await axios
-    .get<BentoUserResponse>(`http://bentoapi.io/users/${username}`)
+    .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${usernameOrId}`)
     .catch((e) => {
       console.error(e);
       return { data: null };
     });
   const user = data?.result;
 
+  const Supabase = getServerSupabase();
   if (!user) {
-    const { data: supabaseUser } = await Supabase.auth.api.getUserById(
-      username,
-    );
+    const { data: supabaseUser } = await Supabase.auth.api
+      .getUserById(usernameOrId)
+      .catch(() => ({ data: null }));
     if (!supabaseUser) {
       return { notFound: true };
     }
@@ -125,7 +127,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     }
 
     const { data } = await axios
-      .get<BentoUserResponse>(`http://bentoapi.io/users/${username}`)
+      .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${usernameOrId}`)
       .catch((e) => {
         console.error(e);
         return { data: null };
@@ -163,21 +165,25 @@ const DashboardPage = (props: Props) => {
   const [bentoUser, setBentoUser] = useState<BentoUser>(props.user);
 
   // const [wallets, setWallets] = useState<Wallet[]>([]);
-  const revalidateWallets = useCallback(async () => {
-    // FIXME:
-    // try {
-    //   const wallets = await fetchWallets(bentoUser.id);
-    //   setWallets(wallets);
-    // } catch {
-    //   setWallets([]);
-    // }
-    // return wallets;
+  const revalidate = useCallback(async () => {
+    FIXME: try {
+      const { data } = await axios
+        .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${bentoUser.id}`)
+        .catch((e) => {
+          console.error(e);
+          return { data: null };
+        });
+      if (data?.result) {
+        const user = data?.result;
+        setBentoUser(user);
+        return user.wallets;
+      }
+    } catch (e) {
+      console.error(e);
+    }
     return [];
   }, [bentoUser.id]);
 
-  // useEffect(() => {
-  //   revalidateWallets();
-  // }, [revalidateWallets]);
   const wallets = bentoUser.wallets;
 
   const [isAddWalletModalVisible, setAddWalletModalVisible] =
@@ -233,7 +239,7 @@ const DashboardPage = (props: Props) => {
     return [
       _title,
       _description,
-      `https://dev-server.bento.finance/api/images/og/u/${formatUsername(
+      `${Config.SERVERLESS_API_BASE_URL}/api/images/og/u/${formatUsername(
         bentoUser.username,
         '',
       )}`,
@@ -252,7 +258,7 @@ const DashboardPage = (props: Props) => {
           display_name: bentoUser.displayName,
           images: [assetImage],
         });
-        // revalidateProfile?.();
+        revalidate();
 
         setTimeout(() => {
           toast({
@@ -288,8 +294,7 @@ const DashboardPage = (props: Props) => {
         }
       }
     },
-    [],
-    // [profile, revalidateProfile],
+    [revalidate],
   );
 
   return (
@@ -340,7 +345,7 @@ const DashboardPage = (props: Props) => {
           isMyProfile={isMyProfile}
           user={bentoUser}
           // imageToken={imageToken}
-          revalidateWallets={revalidateWallets}
+          revalidateWallets={revalidate}
           setAddWalletModalVisible={setAddWalletModalVisible}
           setDetailModalVisible={setDetailModalVisible}
           setDetailModalParams={setDetailModalParams}
@@ -351,7 +356,7 @@ const DashboardPage = (props: Props) => {
         <DynmaicAddWalletModal
           visible={isAddWalletModalVisible}
           onDismiss={() => setAddWalletModalVisible((prev) => !prev)}
-          revalidateWallets={revalidateWallets}
+          revalidateWallets={revalidate}
         />
         <DynamicDetailModal
           visible={isDetailModalVisible}

@@ -8,7 +8,7 @@ import {
   priceFromCoinGecko,
   withCache,
 } from '@bento/core';
-import { getTokenBalancesFromCovalent } from '@bento/core/indexers';
+import { getTokenBalancesFromUnmarshal } from '@bento/core/indexers';
 import Caver from 'caver-js';
 import { Multicall } from 'klaytn-multicall';
 
@@ -24,6 +24,7 @@ export class KlaytnChain implements Chain {
     ind: ZERO_ADDRESS,
   };
   chainId = 8217;
+  unmarshalChainId = 'klaytn';
   _provider = new Caver(Config.RPC_URL.KLAYTN_MAINNET);
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
@@ -62,8 +63,9 @@ export class KlaytnChain implements Chain {
 
   getTokenBalances = async (account: string) => {
     try {
-      const items = await getTokenBalancesFromCovalent({
-        chainId: this.chainId,
+      const items = await getTokenBalancesFromUnmarshal({
+        // FIXME: Update type
+        chainId: this.unmarshalChainId as any,
         account,
       });
 
@@ -76,9 +78,10 @@ export class KlaytnChain implements Chain {
         ) {
           return [];
         }
+        const decimals = token.contract_decimals || 18;
         const balance =
           typeof token.balance === 'string'
-            ? Number(token.balance) / 10 ** token.contract_decimals
+            ? Number(token.balance) / 10 ** decimals
             : 0;
         const symbol = token.contract_ticker_symbol;
 
@@ -90,12 +93,6 @@ export class KlaytnChain implements Chain {
         );
         const getPrice = async () => {
           if (tokenInfo?.coinGeckoId || tokenInfo?.coinMarketCapId) {
-            // return priceFromCoinMarketCap(tokenInfo.coinMarketCapId).catch(
-            //   (error) => {
-            //     console.error(error);
-            //     return 0;
-            //   },
-            // );
             return undefined;
           }
 
@@ -108,10 +105,10 @@ export class KlaytnChain implements Chain {
 
         const price = await getPrice();
         return {
-          name: tokenInfo?.name ?? token.contract_name,
-          symbol: tokenInfo?.symbol ?? symbol,
-          decimals: token.contract_decimals,
-          ind: token.contract_address,
+          name: tokenInfo?.name ?? token.contract_name ?? '',
+          symbol: tokenInfo?.symbol ?? symbol ?? '',
+          decimals: decimals,
+          ind: token.contract_address ?? '',
           logo: tokenInfo?.logo,
           coinGeckoId: tokenInfo?.coinGeckoId,
           coinMarketCapId: tokenInfo?.coinMarketCapId,

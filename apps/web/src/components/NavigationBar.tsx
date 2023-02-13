@@ -92,28 +92,30 @@ export const NavigationBar = () => {
           </NavigationList>
         </NoSSR>
 
-        <RightContent>
-          <LanguageBadge onClick={onChangeLocale}>
-            {currentLanguage.toUpperCase()}
-          </LanguageBadge>
-          {!session && (
-            <StartButton
-              onClick={() => {
-                deleteCookie('supabase_auth_token', {
-                  path: '/',
-                });
-                setTimeout(() => {
-                  router.push('/home?login=open');
-                });
-              }}
-            >
-              {t('Log In')}
-            </StartButton>
-          )}
-          {!!session && (
-            <StartButton onClick={onClickLogout}>{t('Logout')}</StartButton>
-          )}
-        </RightContent>
+        <NoSSR>
+          <RightContent>
+            <LanguageBadge onClick={onChangeLocale}>
+              {currentLanguage.toUpperCase()}
+            </LanguageBadge>
+            {!session && (
+              <StartButton
+                onClick={() => {
+                  deleteCookie('supabase_auth_token', {
+                    path: '/',
+                  });
+                  setTimeout(() => {
+                    router.push('/home?login=open');
+                  });
+                }}
+              >
+                {t('Log In')}
+              </StartButton>
+            )}
+            {!!session && (
+              <StartButton onClick={onClickLogout}>{t('Logout')}</StartButton>
+            )}
+          </RightContent>
+        </NoSSR>
       </Container>
     </Wrapper>
   );

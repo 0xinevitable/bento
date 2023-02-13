@@ -17,7 +17,7 @@ const definedFeatures = {
   isEmailMagicLinkEnabled: Environment.off,
   isKlaytnDeFiEnabled: Environment.production,
   isBadgeMockupsEnabled: Environment.off,
-  isSearchEnabled: Environment.production,
+  isSearchEnabled: Environment.off,
 };
 
 type FeatureName = keyof typeof definedFeatures;

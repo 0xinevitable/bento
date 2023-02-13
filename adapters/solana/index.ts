@@ -16,7 +16,7 @@ export class SolanaChain implements Chain {
     coinGeckoId: 'solana',
     ind: SOLANA_ZERO_ADDRESS,
   };
-  chainId = 1399811149;
+  chainName = 'solana-mainnet';
   _provider = new Connection(clusterApiUrl('mainnet-beta'));
   getCurrencyPrice = (currency: Currency = 'usd') =>
     priceFromCoinGecko(this.currency.coinGeckoId, currency);
@@ -29,7 +29,7 @@ export class SolanaChain implements Chain {
   getTokenBalances = async (account: string) => {
     try {
       const items = await getTokenBalancesFromCovalent({
-        chainId: this.chainId,
+        chainId: this.chainName,
         account,
       });
 
@@ -101,3 +101,5 @@ export const getAccount: ChainGetAccount = async (account) => {
   ]);
   return items.flat();
 };
+
+export const TEST_ADDRESS = 'HJLQd7CxQK5epNLE3R4u8b2MdGzmcvXjpntGWfht4FZH';

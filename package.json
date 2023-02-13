@@ -2,7 +2,7 @@
   "name": "bento",
   "version": "1.0.0",
   "private": true,
-  "repository": "https://github.com/inevitable-changes/dashboard",
+  "repository": "https://github.com/inevitable-dao/dashboard",
   "author": "Junho Yeo <i@junho.io>",
   "license": "MPL-2.0",
   "scripts": {
@@ -27,7 +27,8 @@
   "resolutions": {
     "bn.js": "5.2.1",
     "bignumber.js": "9.0.2",
-    "recharts": "2.1.12"
+    "recharts": "2.1.12",
+    "node-fetch": "2.6.8"
   },
   "packageManager": "yarn@3.2.4"
 }

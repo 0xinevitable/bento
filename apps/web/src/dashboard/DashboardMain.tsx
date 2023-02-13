@@ -20,7 +20,6 @@ import {
   DashboardTokenBalance,
   WalletBalance,
 } from '@/dashboard/types/TokenBalance';
-import { UserProfile } from '@/profile/types/UserProfile';
 import { Colors } from '@/styles';
 import { Analytics, FeatureFlags } from '@/utils';
 
@@ -81,7 +80,10 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   const { balances: nftBalances } = useNFTBalances({
     wallets: user.wallets,
   });
-  const { klaytnNFTs } = useKlaytnNFTs(user.wallets);
+
+  // FIXME: Enable Klaytn NFTs again
+  // const { klaytnNFTs } = useKlaytnNFTs(user.wallets);
+  const klaytnNFTs: KlaytnNFTAsset[] = [];
 
   const nftAssets = useMemo<(OpenSeaAsset | KlaytnNFTAsset)[]>(() => {
     return [
@@ -191,7 +193,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
   return (
     <React.Fragment>
-      <div style={{ width: '100%', height: 32 }} />
+      <div style={{ width: '100%', height: 64 }} />
 
       <DashboardWrapper>
         {FeatureFlags.isSearchEnabled && <SearchBar />}

@@ -3,7 +3,6 @@ const withTM = require('next-transpile-modules')([
   '@bento/core',
 ]);
 
-const withSvgr = require('next-plugin-svgr');
 const withInterceptStdout = require('next-intercept-stdout');
 const { withPlugins } = require('next-composed-plugins');
 const { i18n } = require('./next-i18next.config');
@@ -34,13 +33,17 @@ module.exports = withPlugins(
     i18n,
     publicRuntimeConfig: pick(process.env, [
       'ENVIRONMENT',
-      'MAIN_API_BASE_URL',
+      'SERVERLESS_API_BASE_URL',
     ]),
     webpack: (config) => {
       config.resolve.fallback = {
         ...config.resolve.fallback,
         fs: false,
         electron: false,
+      };
+      config.module = {
+        ...config.module,
+        exprContextCritical: false,
       };
       return config;
     },
@@ -66,7 +69,6 @@ module.exports = withPlugins(
   },
   [
     withTM,
-    withSvgr,
     [
       withInterceptStdout,
       (text) => (text.includes('Duplicate atom key') ? '' : text),
