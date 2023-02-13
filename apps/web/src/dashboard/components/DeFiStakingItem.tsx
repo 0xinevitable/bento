@@ -124,10 +124,9 @@ export const DeFiStakingItem: React.FC<DeFiStakingItemProps> = ({
           <AccountItem>
             <span className="field">
               {/* FIXME: Exception for Osmosis */}
-              {/* {protocol.type === OsmosisDeFiType.OSMOSIS_GAMM_LP
+              {typeof info.name !== 'string' && info.name.en.endsWith('Osmosis LPs')
                 ? t('Pool ID')
-                : t('Rep Contract')} */}
-              {t('Rep Contract')}
+                : t('Rep Contract')}
             </span>
             <span >
               <InlineBadge>{shortenAddress(protocol.ind)}</InlineBadge>
@@ -268,6 +267,11 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 const HeaderTitle = styled.div`
   display: flex;
@@ -282,6 +286,12 @@ const Name = styled.h5`
   color: white;
   font-size: 18px;
   font-weight: 600;
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   &:lang(ko) {
     letter-spacing: -0.8px;
@@ -351,6 +361,12 @@ const AccountInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+
+  @media (max-width: ${Breakpoints.Mobile}px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 `;
 const AccountItem = styled.div`
   display: flex;

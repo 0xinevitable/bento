@@ -38,7 +38,7 @@ import { WalletListSection } from './sections/WalletListSection';
 enum DashboardTabType {
   Crypto = 'Crypto',
   NFTs = 'NFTs',
-  Badges = 'Badges',
+  // Badges = 'Badges',
 }
 const DASHBOARD_TAB_ITEMS = Object.values(DashboardTabType);
 
@@ -402,12 +402,12 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               )}
             </AnimatedTab>
 
-            <AnimatedTab selected={currentTab === DashboardTabType.Badges}>
+            {/* <AnimatedTab selected={currentTab === DashboardTabType.Badges}>
               <BadgeListSection
                 userId={user.id}
                 selected={currentTab === DashboardTabType.Badges}
               />
-            </AnimatedTab>
+            </AnimatedTab> */}
           </DashboardContent>
         </DashboardContentWrapper>
       </DashboardWrapper>
