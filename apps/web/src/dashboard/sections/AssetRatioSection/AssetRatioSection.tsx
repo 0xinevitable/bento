@@ -4,17 +4,12 @@ import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useMemo } from 'react';
 
-import { AnimatedToolTip } from '@/components/system';
-
 import { NETWORKS } from '@/constants/networks';
-import bitcoinImage from '@/dashboard/assets/bitcoin-v2.png';
 import { Breakpoints } from '@/dashboard/constants/breakpoints';
 import { displayName } from '@/dashboard/constants/platform';
 import { DashboardTokenBalance } from '@/dashboard/types/TokenBalance';
 import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
-
-import { AssetRatioChart } from './AssetRatioChart';
 
 type AssetRatioSectionProps = {
   netWorthInWallet: number;
