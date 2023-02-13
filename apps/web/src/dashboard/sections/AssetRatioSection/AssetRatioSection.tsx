@@ -67,46 +67,10 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 
   return (
     <Container>
-      <Illust />
-      <BitcoinIllust
-        alt=""
-        src={bitcoinImage}
-        sizes="240px"
-        placeholder="blur"
-      />
-
       <Information>
         <Field>{t('Net Worth')}</Field>
         <Title>{`$${netWorthInUSD.toLocaleString()}`}</Title>
       </Information>
-
-      <div>
-        <AssetRatioChart
-          tokenBalances={tokenBalances}
-          totalNetWorth={netWorthInUSD}
-          assetRatioByPlatform={assetRatioByPlatform}
-        />
-      </div>
-
-      <BadgeList>
-        {summary.map((item) => (
-          <AnimatedToolTip
-            key={item.platform}
-            label={`$${item.netWorth.toLocaleString(undefined, {
-              maximumFractionDigits: 2,
-            })}`}
-          >
-            <Badge style={{ cursor: 'pointer' }}>
-              <img src={`/assets/icons/${item.platform}.png`} alt={item.name} />
-              <span>
-                {`${item.ratio.toLocaleString(undefined, {
-                  maximumFractionDigits: 2,
-                })}%`}
-              </span>
-            </Badge>
-          </AnimatedToolTip>
-        ))}
-      </BadgeList>
     </Container>
   );
 };
