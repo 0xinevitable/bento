@@ -33,7 +33,7 @@
   },
   {
     "symbol": "WEMIX",
-    "name": "WEMIX",
+    "name": "WEMIX TOKEN",
     "decimals": 18,
     "address": "0x5096db80b21ef45230c9e423c373f1fc9c0198dd",
     "coinGeckoId": "wemix-token",
@@ -148,7 +148,8 @@
     "name": "Orbit Bridge Klaytn Orbit Chain",
     "decimals": 18,
     "address": "0xfe41102f325deaa9f303fdd9484eb5911a7ba557",
-    "logo": "https://dexata.kr/images/token/korc.svg"
+    "logo": "https://dexata.kr/images/token/korc.svg",
+    "coinGeckoId": "orbit-bridge-klaytn-orbit-chain"
   },
   {
     "symbol": "ISR",
@@ -167,7 +168,7 @@
   },
   {
     "symbol": "SSX",
-    "name": "SOMESING",
+    "name": "SOMESING Exchange",
     "decimals": 18,
     "address": "0xdcd62c57182e780e23d2313c4782709da85b9d6c",
     "coinGeckoId": "somesing",
@@ -234,10 +235,11 @@
   },
   {
     "symbol": "oHANDY",
-    "name": "Orbit Bridge Klaytn Handy Token",
+    "name": "Orbit Bridge Klaytn Handy",
     "decimals": 18,
     "address": "0x3f34671fba493ab39fbf4ecac2943ee62b654a88",
-    "logo": "https://dexata.kr/images/token/khandy.svg"
+    "logo": "https://dexata.kr/images/token/khandy.svg",
+    "coinGeckoId": "orbit-bridge-klaytn-handy"
   },
   {
     "symbol": "MNR",
@@ -279,10 +281,11 @@
   },
   {
     "symbol": "oBELT",
-    "name": "Orbit Bridge Klaytn BELT Token",
+    "name": "Orbit Bridge Klaytn BELT",
     "decimals": 18,
     "address": "0xdfe180e288158231ffa5faf183eca3301344a51f",
-    "logo": "https://dexata.kr/images/token/kbelt.svg"
+    "logo": "https://dexata.kr/images/token/kbelt.svg",
+    "coinGeckoId": "orbit-bridge-klaytn-belt"
   },
   {
     "symbol": "oBNB",
@@ -487,7 +490,6 @@
     "name": "Firewood",
     "decimals": 18,
     "address": "0x7b7363cf78662b638a87f63871c302be363ddc7a",
-    "coinGeckoId": "firewood",
     "logo": "https://dexata.kr/images/token/wood.png"
   },
   {
@@ -617,7 +619,7 @@
     "decimals": 18,
     "address": "0xdd483a970a7a7fef2b223c3510fac852799a88bf",
     "coinGeckoId": "dsc-mix",
-    "logo": "https://dexata.kr/images/token/mix.png"
+    "logo": "/assets/icons/klaytn/0xdd483a970a7a7fef2b223c3510fac852799a88bf.png"
   },
   {
     "symbol": "oDON",
@@ -912,7 +914,7 @@
   },
   {
     "symbol": "KLEVA",
-    "name": "Kleva",
+    "name": "KLEVA",
     "decimals": 18,
     "address": "0x5fff3a6c16c2208103f318f4713d4d90601a7313",
     "coinGeckoId": "kleva",
@@ -940,10 +942,9 @@
   },
   {
     "symbol": "GOLF",
-    "name": "Golfrochain",
+    "name": "GOLFROCHAIN",
     "decimals": 18,
     "address": "0x83c3b5a9a9d1f1438f2505ba972366eecfc4488e",
-    "coinGeckoId": "golfrochain",
     "logo": "https://dexata.kr/images/token/golf.png"
   },
   {
@@ -1089,10 +1090,9 @@
   },
   {
     "symbol": "MKC",
-    "name": "Meta Kongz",
+    "name": "MEKONG COIN",
     "decimals": 18,
     "address": "0x119883ee408aa5b9625c5d09a79fa8be9f9f6017",
-    "coinGeckoId": "meta-kongz",
     "logo": "https://dexata.kr/images/token/mkc.svg"
   },
   {
@@ -1111,17 +1111,17 @@
   },
   {
     "symbol": "AZIT",
-    "name": "AziT",
+    "name": "azit",
     "decimals": 18,
     "address": "0x6cef6dd9a3c4ad226b8b66effeea2c125df194f1",
-    "logo": "https://dexata.kr/images/token/azit.svg"
+    "logo": "https://dexata.kr/images/token/azit.svg",
+    "coinGeckoId": "azit"
   },
   {
     "symbol": "KOKOS",
-    "name": "i4i Finance",
+    "name": "Kokonut Swap Token",
     "decimals": 18,
     "address": "0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560",
-    "coinGeckoId": "i4i-finance",
     "logo": "/assets/icons/klaytn/0xcd670d77f3dcab82d43dff9bd2c4b87339fb3560.png"
   },
   {
@@ -1182,7 +1182,7 @@
   },
   {
     "symbol": "FDM",
-    "name": "Fandom",
+    "name": "Fautor",
     "decimals": 16,
     "address": "0xb1834e4e773a180168f2292e036ca8e17f86196f",
     "coinGeckoId": "fandom",
@@ -1205,21 +1205,24 @@
     "name": "Decentralized Liquidity Program",
     "decimals": 18,
     "address": "0x4d87baa66061a3bb391456576cc49b77540b9aa9",
-    "logo": "https://dexata.kr/images/token/DLP_logo_80x80.png"
+    "logo": "https://dexata.kr/images/token/DLP_logo_80x80.png",
+    "coinGeckoId": "decentralized-liquidity-program"
   },
   {
     "symbol": "NGIT",
     "name": "Nightingale Token",
     "decimals": 18,
     "address": "0x46db825593ca7c3fdfc9ccb5850ea96c39b79330",
-    "logo": "https://dexata.kr/images/token/ngit.png"
+    "logo": "https://dexata.kr/images/token/ngit.png",
+    "coinGeckoId": "nightingale-token"
   },
   {
     "symbol": "MARD",
     "name": "Marmalade Token",
     "decimals": 18,
     "address": "0x79bb4d71f6c168531a259dd6d40a8d5de5a34427",
-    "logo": "https://dexata.kr/images/token/mard.png"
+    "logo": "https://dexata.kr/images/token/mard.png",
+    "coinGeckoId": "marmalade-token"
   },
   {
     "symbol": "SYL",
@@ -1334,10 +1337,9 @@
   },
   {
     "symbol": "ORB",
-    "name": "KlayCity ORB",
+    "name": "KlayCity",
     "decimals": 18,
     "address": "0x01ad62e0ff6dcaa72889fca155c7036c78ca1783",
-    "coinGeckoId": "klaycity-orb",
     "logo": "https://assets.coingecko.com/coins/images/24332/large/SDoj93A.png?1647359309"
   },
   {
@@ -1370,10 +1372,9 @@
   },
   {
     "symbol": "USDK",
-    "name": "KROME stablecoin",
+    "name": "Krome Stablecoin",
     "decimals": 18,
     "address": "0xd2137fdf10bd9e4e850c17539eb24cfe28777753",
-    "coinGeckoId": "krome-stablecoin",
     "logo": "/assets/icons/klaytn/0xd2137fdf10bd9e4e850c17539eb24cfe28777753.png"
   },
   {
@@ -1388,7 +1389,6 @@
     "name": "GemHUB",
     "decimals": 18,
     "address": "0x4836cc1f355bb2a61c210eaa0cd3f729160cd95e",
-    "coinGeckoId": "gemhub",
     "logo": "https://dexata.kr/images/token/ghub.svg"
   },
   {
@@ -2286,10 +2286,11 @@
   },
   {
     "symbol": "WETH",
-    "name": "Wrapped ETH",
+    "name": "WETH",
     "decimals": 18,
     "address": "0xcd6f29dc9ca217d0973d3d21bf58edd3ca871a86",
-    "coinGeckoId": "weth"
+    "coinGeckoId": "weth",
+    "logo": "/assets/icons/klaytn/0xcd6f29dc9ca217d0973d3d21bf58edd3ca871a86.png"
   },
   {
     "symbol": "MAG",
@@ -2728,7 +2729,8 @@
     "symbol": "BTS",
     "name": "BATTLE SINGER",
     "decimals": 18,
-    "address": "0x8116e335dd735d38bc64dcf2676582785bf8deac"
+    "address": "0x8116e335dd735d38bc64dcf2676582785bf8deac",
+    "logo": "/assets/icons/klaytn/0x8116e335dd735d38bc64dcf2676582785bf8deac.png"
   },
   {
     "symbol": "KPOP",
@@ -2758,10 +2760,11 @@
   },
   {
     "symbol": "ASAN",
-    "name": "ASAN Token",
+    "name": "ASAN VERSE",
     "decimals": 18,
     "address": "0x27b33131a0b02879d63830292931281b1b83000f",
-    "logo": "/assets/icons/klaytn/0x27b33131a0b02879d63830292931281b1b83000f.png"
+    "logo": "/assets/icons/klaytn/0x27b33131a0b02879d63830292931281b1b83000f.png",
+    "coinGeckoId": "asan-verse"
   },
   {
     "symbol": "STAR",
@@ -2918,6 +2921,308 @@
     "symbol": "NecroSword",
     "name": "Necro sword",
     "decimals": 18,
-    "address": "0xd054b605178d9929c9947fcaeaeb38acbb95c818"
+    "address": "0xd054b605178d9929c9947fcaeaeb38acbb95c818",
+    "logo": "/assets/icons/klaytn/0xd054b605178d9929c9947fcaeaeb38acbb95c818.png"
+  },
+  {
+    "symbol": "WCD",
+    "name": "Kurrency Token",
+    "decimals": 18,
+    "address": "0x4dad4bc54d3fca70ffe16f89612330540a6b5a92"
+  },
+  {
+    "symbol": "PD",
+    "name": "Pudding",
+    "decimals": 18,
+    "address": "0x3d7b9801ff79f9ea599663e7b43077c9486bd1f1",
+    "logo": "/assets/icons/klaytn/0x3d7b9801ff79f9ea599663e7b43077c9486bd1f1.png"
+  },
+  {
+    "symbol": "DropTheBit",
+    "name": "AirDrop the bit",
+    "decimals": 18,
+    "address": "0x07d7d3aab1d0c3cd9c38217b6429b9983a135587"
+  },
+  {
+    "symbol": "AFMC",
+    "name": "AirDrop for MemeCoin",
+    "decimals": 18,
+    "address": "0x57ab0caf9d4aaaf6fb3bd64f8db29027db37926a"
+  },
+  {
+    "symbol": "XMAS",
+    "name": "AirDrop for XMAS",
+    "decimals": 18,
+    "address": "0xb7eef4b136d5c1ff7be14efde49493aee3788074",
+    "logo": "/assets/icons/klaytn/0xb7eef4b136d5c1ff7be14efde49493aee3788074.png"
+  },
+  {
+    "symbol": "PRIME",
+    "name": "Prime",
+    "decimals": 18,
+    "address": "0x16886052065ce8317dc6afcc5c4d953abc28b185"
+  },
+  {
+    "symbol": "HNY",
+    "name": "HappyNewYear With Meme Coin",
+    "decimals": 18,
+    "address": "0xb2913216f9ec04a8791b1e9a8a3111135b071030"
+  },
+  {
+    "symbol": "ZBZ",
+    "name": "ZOMBIZ",
+    "decimals": 18,
+    "address": "0x35805bec6c7e3cf900ff8d1bb8267e535b1ddd76",
+    "logo": "/assets/icons/klaytn/0x35805bec6c7e3cf900ff8d1bb8267e535b1ddd76.png"
+  },
+  {
+    "symbol": "MFAs",
+    "name": "MemeCoins for Airdrops",
+    "decimals": 18,
+    "address": "0xbcb2bc26c56dbcacae99c2aee782655f877e9efd"
+  },
+  {
+    "symbol": "SAK",
+    "name": "Sakka Finance",
+    "decimals": 18,
+    "address": "0x37cdc46c78cf403f1da8a1eebcffb3ed1dd01868"
+  },
+  {
+    "symbol": "KMC",
+    "name": "Klay MemeCoin",
+    "decimals": 18,
+    "address": "0xec209a39543c5d4d99030eb7d039e8419ea4c8aa"
+  },
+  {
+    "symbol": "oPBOS",
+    "name": "Orbit Bridge Klaytn Phobos Token",
+    "decimals": 18,
+    "address": "0x78f3c81c5f6c8964aea1a48309dccb837526af56",
+    "logo": "/assets/icons/klaytn/0x78f3c81c5f6c8964aea1a48309dccb837526af56.png"
+  },
+  {
+    "symbol": "KICK",
+    "name": "Kick",
+    "decimals": 18,
+    "address": "0x1c8c176332c4b60f3b98c65d08abaa1480cfb96c"
+  },
+  {
+    "symbol": "PXL",
+    "name": "Pixel",
+    "decimals": 18,
+    "address": "0x5425b810432bc7e7dbc74859ed3c37bb39d9df00"
+  },
+  {
+    "symbol": "DBY",
+    "name": "Metaderby token",
+    "decimals": 18,
+    "address": "0x99b5e2571c4d9fa1ccc5ce19d1a515e3ddfb5b2e",
+    "logo": "/assets/icons/klaytn/0x99b5e2571c4d9fa1ccc5ce19d1a515e3ddfb5b2e.png"
+  },
+  {
+    "symbol": "SAWON",
+    "name": "SaWonDeFi",
+    "decimals": 18,
+    "address": "0x52d1ec2ed762d7fb3be336ec678569c730b87d66",
+    "logo": "/assets/icons/klaytn/0x52d1ec2ed762d7fb3be336ec678569c730b87d66.png"
+  },
+  {
+    "symbol": "tUSDG",
+    "name": "Greylake Test Usd Token",
+    "decimals": 6,
+    "address": "0x22bbc9504f6396492d095d248a33aa59d197af12"
+  },
+  {
+    "symbol": "tGLT",
+    "name": "Greylake Test Token",
+    "decimals": 18,
+    "address": "0xd6c2920dd7da5484544335162d77fc7058b2a9f2"
+  },
+  {
+    "symbol": "HOOF",
+    "name": "Metaderby game token",
+    "decimals": 18,
+    "address": "0x7c625f150f3b3c1d0dc750ce6bb4ca7352c98c38"
+  },
+  {
+    "symbol": "HOLD",
+    "name": "HOLD",
+    "decimals": 18,
+    "address": "0xe5d085431c0e55fdfc6f354ef4522e6d2b58b90c",
+    "logo": "/assets/icons/klaytn/0xe5d085431c0e55fdfc6f354ef4522e6d2b58b90c.png"
+  },
+  {
+    "symbol": "oMRST",
+    "name": "Orbit Bridge Klaytn Mars Token",
+    "decimals": 18,
+    "address": "0x341ba3a6738fd107484fbc4f6b8f6c5fce75d339",
+    "logo": "/assets/icons/klaytn/0x341ba3a6738fd107484fbc4f6b8f6c5fce75d339.png"
+  },
+  {
+    "symbol": "NECTAR",
+    "name": "Nectar",
+    "decimals": 18,
+    "address": "0x39076d7a914017e04f6c0f67d88f4162625e8d1d"
+  },
+  {
+    "symbol": "KADC",
+    "name": "klaytn AirDrop Coin",
+    "decimals": 18,
+    "address": "0x9bcb5207fb92a7b91714defe74d48b242f05f1ad"
+  },
+  {
+    "symbol": "illuminate",
+    "name": "illuminate",
+    "decimals": 18,
+    "address": "0xb42795bd4347a12cdb8843088de5fe211e68d54a",
+    "logo": "/assets/icons/klaytn/0xb42795bd4347a12cdb8843088de5fe211e68d54a.png"
+  },
+  {
+    "symbol": "PEARL",
+    "name": "PEARL In Coin",
+    "decimals": 18,
+    "address": "0x1bcc34cbaa032b09bc4981ff4f6b2e511a156aea",
+    "logo": "/assets/icons/klaytn/0x1bcc34cbaa032b09bc4981ff4f6b2e511a156aea.png"
+  },
+  {
+    "symbol": "WMXPRO",
+    "name": "WMXPRO",
+    "decimals": 18,
+    "address": "0xffd8d7e3f51ad8a6b42aaa61997e391ac35c1d66"
+  },
+  {
+    "symbol": "WEP",
+    "name": "WEPLAY",
+    "decimals": 18,
+    "address": "0xe10642c827e85ff661dfc1966b91743fdc8f23ab"
+  },
+  {
+    "symbol": "MADEN",
+    "name": "MADEN",
+    "decimals": 18,
+    "address": "0xfb94b4fb83de37f0d64923c3b931aeb1ae18b02c"
+  },
+  {
+    "symbol": "fund",
+    "name": "fund",
+    "decimals": 18,
+    "address": "0xe417fedd26bb5f3cbb2ce7c4760e64d91e77fe59"
+  },
+  {
+    "symbol": "TREE",
+    "name": "klayTree",
+    "decimals": 18,
+    "address": "0xc58f81a287df385a406b0f6775221ce72c909345",
+    "logo": "/assets/icons/klaytn/0xc58f81a287df385a406b0f6775221ce72c909345.png"
+  },
+  {
+    "symbol": "CHAOS",
+    "name": "Chaos Coin",
+    "decimals": 18,
+    "address": "0x443999129f351680c26791053327e7baa74b7ef8"
+  },
+  {
+    "symbol": "DIAMOND",
+    "name": "DIAMOND Coin for AirDrop",
+    "decimals": 18,
+    "address": "0x7f8720628ce7e03d616873cb0078ad0a0f838315"
+  },
+  {
+    "symbol": "ADSC",
+    "name": "AirDrop Solution Company",
+    "decimals": 18,
+    "address": "0xe3eebd079d212c435a80ffe29c61712f64d8ad50"
+  },
+  {
+    "symbol": "oTON",
+    "name": "Orbit Bridge Klaytn Toncoin",
+    "decimals": 9,
+    "address": "0x4b96dbf8f42c8c296573933a6616dcafb80ca461",
+    "logo": "/assets/icons/klaytn/0x4b96dbf8f42c8c296573933a6616dcafb80ca461.png"
+  },
+  {
+    "symbol": "MOON",
+    "name": "To The Moon",
+    "decimals": 18,
+    "address": "0x116397597f42034a237e1e04496916e681a4a81d"
+  },
+  {
+    "symbol": "investfund",
+    "name": "investfund",
+    "decimals": 18,
+    "address": "0x63e2ff719027e1e58447e0671c1cb04825ecc9e9"
+  },
+  {
+    "symbol": "stone",
+    "name": "stone",
+    "decimals": 18,
+    "address": "0xc975bb1a4996f25b4215c9083c314f4fa9be558e"
+  },
+  {
+    "symbol": "CTC",
+    "name": "CTC",
+    "decimals": 18,
+    "address": "0x1dd06bc0cd19f4bba5dda209528e14e10483bac0"
+  },
+  {
+    "symbol": "DCB",
+    "name": "dCube",
+    "decimals": 18,
+    "address": "0x50ca1ce4ade3d465baeb611e934c5c8e752f22c3",
+    "logo": "/assets/icons/klaytn/0x50ca1ce4ade3d465baeb611e934c5c8e752f22c3.png"
+  },
+  {
+    "symbol": "KLTT",
+    "name": "KOREA LOTTO",
+    "decimals": 18,
+    "address": "0x0e32c7bab4eaf8d4d1feed05902fb9f9569f529b"
+  },
+  {
+    "symbol": "CBANK",
+    "name": "CRYPTO BANK",
+    "decimals": 18,
+    "address": "0xf2eb788cfc3386a6511b7d1973e3fe6f87f89117"
+  },
+  {
+    "symbol": "FOCUS",
+    "name": "KLAY FOCUS",
+    "decimals": 18,
+    "address": "0xa994257ec92d34f70a5d6ca24a4d6a2c77c64aaa"
+  },
+  {
+    "symbol": "KZON",
+    "name": "KLAY ZONE",
+    "decimals": 18,
+    "address": "0x6133026fa43cd67fadf44b6f29aaba0509d877e4"
+  },
+  {
+    "symbol": "CDM",
+    "name": "Coindiamond",
+    "decimals": 18,
+    "address": "0xa124c0833c2b3020a4fc60108cc81275e06efd61"
+  },
+  {
+    "symbol": "CDM",
+    "name": "Coindiamond",
+    "decimals": 18,
+    "address": "0x20af6731bcbe020654e7333d321d5824418bcd15"
+  },
+  {
+    "symbol": "CDM",
+    "name": "Coindiamond",
+    "decimals": 18,
+    "address": "0xd01852de8b0f3919fe30761d5e622a27e8cf871f"
+  },
+  {
+    "symbol": "CDM",
+    "name": "Coindiamond",
+    "decimals": 18,
+    "address": "0x3d96671d2f469e8c487f5161e55d0b5da71b9090"
+  },
+  {
+    "symbol": "CDM",
+    "name": "Coindiamond",
+    "decimals": 18,
+    "address": "0xb38e68a348079e84a1e27fb142729d418d472ea4"
   }
 ]
