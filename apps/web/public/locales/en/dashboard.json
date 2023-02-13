@@ -1,4 +1,8 @@
 {
+  "pa_defi": "DeFi",
+  "pa_tokens": "Tokens",
+  "pa_nfts": "NFTs",
+
   "protocol-kstn": "KLAYSTATION",
   "protocol-ks": "KLAYswap",
   "protocol-kks": "KokonutSwap",

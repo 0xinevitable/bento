@@ -155,6 +155,10 @@ const ButtonList = styled.div`
 
     transition: all 0.2s ease-in-out;
 
+    &:hover {
+      opacity: 0.9;
+    }
+
     &:focus {
       opacity: 0.75;
     }

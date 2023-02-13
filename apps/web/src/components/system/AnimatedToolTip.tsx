@@ -14,8 +14,10 @@ import {
 import { AnimatePresence, motion } from 'framer-motion';
 import { cloneElement, useState } from 'react';
 
+import { Colors } from '@/styles';
+
 interface Props {
-  label: string;
+  label: React.ReactNode;
   placement?: Placement;
   children: JSX.Element;
 }
@@ -62,6 +64,8 @@ export const AnimatedToolTip: React.FC<Props> = ({
                 position: strategy,
                 top: y ?? 0,
                 left: x ?? 0,
+                border: `1px solid ${Colors.gray600}`,
+                backgroundColor: Colors.gray850,
               },
             })}
           >

@@ -28,10 +28,10 @@ import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
 import { Breakpoints } from './constants/breakpoints';
-import { KlaytnNFTAsset, useKlaytnNFTs } from './hooks/useKlaytnNFTs';
-import { AssetRatioSection } from './sections/AssetRatioSection';
+import { KlaytnNFTAsset } from './hooks/useKlaytnNFTs';
 import { BadgeListSection } from './sections/BadgeListSection';
 import { NFTListSection } from './sections/NFTListSection';
+import { NetWorthSection } from './sections/NetWorthSection';
 import { UserProfileSection } from './sections/UserProfileSection';
 import { WalletListSection } from './sections/WalletListSection';
 
@@ -214,7 +214,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
               selected={currentTab === DashboardTabType.Crypto}
             >
               <TopSummaryContainer>
-                <AssetRatioSection
+                <NetWorthSection
                   netWorthInWallet={netWorthInWallet}
                   netWorthInProtocols={netWorthInProtocols}
                   tokenBalances={tokenBalances}
@@ -285,6 +285,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                               marginLeft: 6,
                               color: Colors.gray200,
                               fontSize: 14,
+                              fontWeight: 600,
                               lineHeight: '20px',
                             }}
                           >

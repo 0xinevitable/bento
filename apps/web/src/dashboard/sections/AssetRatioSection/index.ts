@@ -1,1 +1,0 @@
-export { AssetRatioSection } from './AssetRatioSection';
