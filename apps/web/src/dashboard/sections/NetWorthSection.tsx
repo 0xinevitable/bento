@@ -11,6 +11,13 @@ import { Colors } from '@/styles';
 
 const AVAILABLE_COLORS = ['#FF439D', '#FF77B8', '#ff8181', '#FAB4F9'];
 
+type PortfolioAllocationItem = {
+  name: string;
+  netWorth: number;
+  ratio: number;
+  color?: string;
+};
+
 type NetWorthSectionProps = {
   netWorthInWallet: number;
   netWorthInProtocols: number;
@@ -45,7 +52,7 @@ export const NetWorthSection: React.FC<NetWorthSectionProps> = ({
 
     const protocols = services.map((v) => v.protocols).flat();
 
-    const items = [
+    const items: PortfolioAllocationItem[] = [
       {
         name: 'pa_nfts',
         netWorth: nfts.reduce((acc, cur) => acc + cur.netWorth, 0),
@@ -62,6 +69,9 @@ export const NetWorthSection: React.FC<NetWorthSectionProps> = ({
       const ratio = (v.netWorth / netWorthInUSD) * 100;
       return ratio > 0 ? { ...v, ratio } : [];
     });
+    if (items.length === 0) {
+      return [{ name: 'pa_empty', netWorth: 0, ratio: 100, color: '#5b739b' }];
+    }
     items.sort((a, b) => b.ratio - a.ratio);
     return items;
   }, [tokenBalances, services]);
@@ -94,7 +104,8 @@ export const NetWorthSection: React.FC<NetWorthSectionProps> = ({
               <Bar
                 key={item.name}
                 style={{
-                  background: AVAILABLE_COLORS[index] || '#5b739b',
+                  background:
+                    item.color || AVAILABLE_COLORS[index] || '#5b739b',
                   width: `${item.ratio.toLocaleString(undefined, {
                     maximumFractionDigits: 2,
                   })}%`,
@@ -125,7 +136,10 @@ export const NetWorthSection: React.FC<NetWorthSectionProps> = ({
                 style={{ cursor: 'pointer', width: 'fit-content' }}
               >
                 <BreakdownColorIndicator
-                  style={{ background: AVAILABLE_COLORS[index] || '#5b739b' }}
+                  style={{
+                    background:
+                      item.color || AVAILABLE_COLORS[index] || '#5b739b',
+                  }}
                 />
                 <BreakdownLabel>{t(item.name)}</BreakdownLabel>
                 <BreakdownValue>
@@ -213,6 +227,7 @@ const Bar = styled.li`
   height: 20px;
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 `;
 
 const BreakdownList = styled.ul`
