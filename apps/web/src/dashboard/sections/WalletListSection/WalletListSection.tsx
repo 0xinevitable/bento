@@ -38,7 +38,11 @@ export const WalletListSection: React.FC<Props> = ({
 
       {wallets.length > 0 ? (
         <>
-          <WalletList wallets={wallets} revalidateWallets={revalidateWallets} />
+          <WalletList
+            wallets={wallets}
+            isMyProfile={isMyProfile}
+            revalidateWallets={revalidateWallets}
+          />
           <ButtonContainer>
             {isMyProfile ? (
               <AddWalletButton onClick={onClickAddWallet}>
@@ -154,7 +158,6 @@ export const AddWalletButton = styled(Button)`
     font-size: 14px;
     line-height: 100%;
     text-align: center;
-    color: ${Colors.white};
   }
 `;
 

@@ -3,12 +3,19 @@ import styled from '@emotion/styled';
 
 import { withAttrs } from '@/utils/withAttrs';
 
-export const Checkbox = withAttrs(
+import { Colors } from '@/styles';
+
+export const Checkbox: React.FC<
+  React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
+> = withAttrs(
   { type: 'checkbox' },
   styled.input`
     width: 18px;
     height: 18px;
-    color: #fe214a;
+    color: ${Colors.brand600};
     vertical-align: middle;
     -webkit-appearance: none;
     background: none;
@@ -16,7 +23,7 @@ export const Checkbox = withAttrs(
     outline: 0;
     flex-grow: 0;
     border-radius: 50%;
-    background-color: #25191b;
+    background-color: ${Colors.gray800};
     transition: background-color 300ms;
     cursor: pointer;
 

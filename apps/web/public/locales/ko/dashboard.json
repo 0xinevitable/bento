@@ -38,6 +38,11 @@
   "Edit Profile": "프로필 고치기",
 
   "Net Worth": "총 자산 가치",
+  "Portfolio Allocation": "포트폴리오 분포",
+  "pa_defi": "디파이",
+  "pa_tokens": "토큰",
+  "pa_nfts": "NFT",
+  "pa_empty": "아직 아무것도 없어요!",
   "Token Net Worth": "총 토큰 가치",
 
   "Assets": "자산 목록",

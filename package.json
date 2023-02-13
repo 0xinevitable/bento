@@ -27,7 +27,6 @@
   "resolutions": {
     "bn.js": "5.2.1",
     "bignumber.js": "9.0.2",
-    "recharts": "2.1.12",
     "node-fetch": "2.6.8"
   },
   "packageManager": "yarn@3.2.4"

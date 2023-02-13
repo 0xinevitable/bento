@@ -153,7 +153,7 @@ const Container = styled.div`
   max-width: 780px;
   height: 70px;
 
-  background: rgba(18, 11, 16, 0.6);
+  background: rgba(0, 0, 0, 0.6);
   border: 0.5px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(6px);
   border-radius: 8px;
