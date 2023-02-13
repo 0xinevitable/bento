@@ -51,15 +51,15 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
 
     const items = [
       {
-        name: 'NFTs',
+        name: 'pa_nfts',
         netWorth: nfts.reduce((acc, cur) => acc + cur.netWorth, 0),
       },
       {
-        name: 'Tokens',
+        name: 'pa_tokens',
         netWorth: tokens.reduce((acc, cur) => acc + cur.netWorth, 0),
       },
       {
-        name: 'DeFi',
+        name: 'pa_defi',
         netWorth: protocols.reduce((acc, cur) => acc + cur.netWorth, 0),
       },
     ].flatMap((v) => {
@@ -85,7 +85,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
               key={item.name}
               label={
                 <>
-                  <BreakdownLabel>{item.name}</BreakdownLabel>{' '}
+                  <BreakdownLabel>{t(item.name)}</BreakdownLabel>{' '}
                   <BreakdownValue>
                     {`$${item.netWorth.toLocaleString(undefined, {
                       maximumFractionDigits: 2,
@@ -114,7 +114,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
               key={item.name}
               label={
                 <>
-                  <BreakdownLabel>{item.name}</BreakdownLabel>{' '}
+                  <BreakdownLabel>{t(item.name)}</BreakdownLabel>{' '}
                   <BreakdownValue>
                     {`$${item.netWorth.toLocaleString(undefined, {
                       maximumFractionDigits: 2,
@@ -131,7 +131,7 @@ export const AssetRatioSection: React.FC<AssetRatioSectionProps> = ({
                 <BreakdownColorIndicator
                   style={{ background: AVAILABLE_COLORS[index] || '#5b739b' }}
                 />
-                <BreakdownLabel>{item.name}</BreakdownLabel>
+                <BreakdownLabel>{t(item.name)}</BreakdownLabel>
                 <BreakdownValue>
                   {`${item.ratio.toLocaleString(undefined, {
                     maximumFractionDigits: 2,
