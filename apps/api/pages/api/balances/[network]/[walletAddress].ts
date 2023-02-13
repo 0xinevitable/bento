@@ -19,8 +19,11 @@ interface APIRequest extends NextApiRequest {
   };
 }
 
-const parseWallets = (mixedQuery: string) => {
-  const query = mixedQuery.toLowerCase();
+const parseWallets = (network: BentoSupportedNetwork, mixedQuery: string) => {
+  let query = mixedQuery;
+  if (network !== 'solana') {
+    query = query.toLowerCase();
+  }
   if (query.indexOf(',') === -1) {
     return [query];
   }
@@ -28,10 +31,10 @@ const parseWallets = (mixedQuery: string) => {
 };
 
 const handler = async (req: APIRequest, res: NextApiResponse) => {
-  const wallets = parseWallets(req.query.walletAddress ?? '');
   const network = (
     req.query.network ?? ''
   ).toLowerCase() as BentoSupportedNetwork;
+  const wallets = parseWallets(network, req.query.walletAddress ?? '');
 
   const adapter = await adapters[network]?.chain;
   if (!adapter) {

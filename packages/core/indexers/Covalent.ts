@@ -3,7 +3,7 @@ import { randomOf } from '@bento/common';
 import axios from 'axios';
 
 type Options = {
-  chainId: number;
+  chainId: number | string;
   account: string;
 };
 
