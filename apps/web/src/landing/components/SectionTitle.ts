@@ -12,4 +12,8 @@ export const SectionTitle = styled.h2`
   @media (max-width: 600px) {
     font-size: 36px;
   }
+
+  &:lang(ko) {
+    line-height: 128%;
+  }
 `;
