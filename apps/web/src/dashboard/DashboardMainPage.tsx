@@ -164,6 +164,15 @@ const DashboardPage = (props: Props) => {
   const { session } = useSession();
   const [bentoUser, setBentoUser] = useState<BentoUser>(props.user);
 
+  useEffect(() => {
+    if (router.query.username !== props.user.username) {
+      const destination =
+        (router.locale === 'en' ? '' : `/${router.locale}`) +
+        `/u/${props.user.username}`;
+      router.push(destination, undefined, { shallow: true });
+    }
+  }, [router.locale, props.user.username]);
+
   // const [wallets, setWallets] = useState<Wallet[]>([]);
   const revalidate = useCallback(async () => {
     FIXME: try {
