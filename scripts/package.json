@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "generate-assets": "ts-node assets",
+    "generate-assets": "NEXT_PUBLIC_API_BASE_URL=https://bentoapi.io ts-node assets",
     "generate-release-notes": "ts-node release-notes",
     "depcheck": "ts-node check-dependencies",
     "resolve-peers": "ts-node resolve-peers"
