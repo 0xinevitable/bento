@@ -15,7 +15,7 @@ export const getTokenBalancesFromUnmarshal = async ({
 }: Options): Promise<TokenBalanceItem[]> => {
   const API_KEY = randomOf(splitAPIKeys(process.env.UNMARSHAL_API_KEYS));
   const API_URL = queryString.stringifyUrl({
-    url: `https://api.unmarshal.io/v1/${chainId}/address/${account}/assets`,
+    url: `https://api.unmarshal.com/v1/${chainId}/address/${account}/assets`,
     query: {
       auth_key: API_KEY,
       verified: false,
