@@ -99,6 +99,7 @@ export const DetailModal: React.FC<Props> = ({
 
   return (
     <OverlayWrapper
+      className="wrapper"
       visible={isVisible}
       onDismiss={onDismiss}
       transition={{ ease: 'linear' }}
@@ -330,15 +331,17 @@ export const DetailModal: React.FC<Props> = ({
 export default DetailModal;
 
 const OverlayWrapper = styled(Modal)`
-  .modal-container {
-    margin-top: 52px;
+  &.wrapper {
+    z-index: 90;
+  }
 
+  .modal-container {
     padding: 16px;
     max-width: 800px;
     height: fit-content;
     width: 95vw;
 
-    max-height: calc(100vh - 64px - 84px);
+    max-height: 85vh;
     overflow: scroll;
 
     display: flex;
