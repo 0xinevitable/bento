@@ -13,10 +13,15 @@ import { WalletListItem } from './WalletListItem';
 
 type Props = {
   wallets: Wallet[];
+  isMyProfile?: boolean;
   revalidateWallets?: () => Promise<Wallet[] | undefined>;
 };
 
-export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
+export const WalletList: React.FC<Props> = ({
+  wallets,
+  isMyProfile,
+  revalidateWallets,
+}) => {
   const { t } = useTranslation('common');
 
   const onClickCopy = useCallback((account: string, chainType: ChainType) => {
@@ -64,6 +69,7 @@ export const WalletList: React.FC<Props> = ({ wallets, revalidateWallets }) => {
             wallet={wallet}
             onClickDelete={onClickDelete}
             onClickCopy={onClickCopy}
+            isMyProfile={isMyProfile}
           />
         ))}
       </WalletItemList>

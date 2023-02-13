@@ -8,6 +8,7 @@ import { Colors } from '@/styles';
 
 export type WalletListItemProps = MotionProps & {
   wallet: Wallet;
+  isMyProfile?: boolean;
   onClickDelete?: (account: string) => void;
   onClickCopy?: (address: string, type: ChainType) => void;
 };
@@ -16,6 +17,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
   onClickCopy,
   onClickDelete,
   wallet,
+  isMyProfile,
   ...motionProps
 }) => {
   const { t } = useTranslation('common');
@@ -43,12 +45,14 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
           ))}
         </PlatformList>
       </Information>
-      <ButtonList>
-        {/* <button>Edit</button> */}
-        <button onClick={() => onClickDelete?.(wallet.address)}>
-          {t('Delete')}
-        </button>
-      </ButtonList>
+      {isMyProfile && (
+        <ButtonList>
+          {/* <button>Edit</button> */}
+          <button onClick={() => onClickDelete?.(wallet.address)}>
+            {t('Delete')}
+          </button>
+        </ButtonList>
+      )}
     </Container>
   );
 };

@@ -107,7 +107,7 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
   );
 
   return (
-    <WalletList>
+    <WalletListContainer>
       <WalletButton
         disabled={firstNetwork !== 'evm' || isLoading}
         onClick={
@@ -181,11 +181,11 @@ export const WalletConnector: React.FC<WalletSelectorProps> = ({
           </LoadingContainer>
         )}
       </AnimatePresence>
-    </WalletList>
+    </WalletListContainer>
   );
 };
 
-const WalletList = styled.div`
+const WalletListContainer = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
