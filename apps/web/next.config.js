@@ -42,6 +42,10 @@ module.exports = withPlugins(
         fs: false,
         electron: false,
       };
+      config.module = {
+        ...config.module,
+        exprContextCritical: false,
+      };
       return config;
     },
     async redirects() {
