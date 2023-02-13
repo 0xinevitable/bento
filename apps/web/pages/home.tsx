@@ -2,8 +2,10 @@ import { getCookie } from 'cookies-next';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import { getServerSupabase } from '@/utils/ServerSupabase';
+
 import { UserProfile } from '@/profile/types/UserProfile';
-import { FeatureFlags, Supabase } from '@/utils';
+import { FeatureFlags } from '@/utils';
 
 export { default } from '@/dashboard/DashboardIntroPage';
 
@@ -17,6 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       req: context.req,
       res: context.res,
     }) as string) || '';
+  const Supabase = getServerSupabase();
   const { user: userFromCookie } = await Supabase.auth.api.getUser(accessToken);
   const loggedIn = !!userFromCookie;
   const locale = context.locale || 'en';

@@ -19,16 +19,11 @@ import React, {
 
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
+import { getServerSupabase } from '@/utils/ServerSupabase';
 import { formatUsername } from '@/utils/format';
 
 import { ErrorResponse } from '@/profile/types/api';
-import {
-  Analytics,
-  Config,
-  Supabase,
-  axiosWithCredentials,
-  toast,
-} from '@/utils';
+import { Analytics, Config, axiosWithCredentials, toast } from '@/utils';
 
 import { DetailModalParams } from './components/DetailModal';
 import { KlaytnNFTAsset } from './hooks/useKlaytnNFTs';
@@ -83,24 +78,25 @@ const notifySlack = async (user: User, username: string) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context,
 ) => {
-  const username =
+  const usernameOrId =
     typeof context.query.username === 'string' ? context.query.username : '';
-  if (!username) {
+  if (!usernameOrId) {
     return { notFound: true };
   }
 
   const { data } = await axios
-    .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${username}`)
+    .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${usernameOrId}`)
     .catch((e) => {
       console.error(e);
       return { data: null };
     });
   const user = data?.result;
 
+  const Supabase = getServerSupabase();
   if (!user) {
-    const { data: supabaseUser } = await Supabase.auth.api.getUserById(
-      username,
-    );
+    const { data: supabaseUser } = await Supabase.auth.api
+      .getUserById(usernameOrId)
+      .catch(() => ({ data: null }));
     if (!supabaseUser) {
       return { notFound: true };
     }
@@ -131,7 +127,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     }
 
     const { data } = await axios
-      .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${username}`)
+      .get<BentoUserResponse>(`${Config.API_BASE_URL}/users/${usernameOrId}`)
       .catch((e) => {
         console.error(e);
         return { data: null };
