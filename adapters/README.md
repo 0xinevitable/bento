@@ -90,7 +90,7 @@ export const getAccount = async (account: string) => {
 
   return [
     {
-      delegator: 'Manythings', // optional; for validator/node
+      delegator: 'Notional', // optional; for validator/node
       tokens: tokens, // tokens used in `tokenAmounts`
       relatedTokens: [],
       prefix: tokens.flatMap((v) => v?.symbol || []).join(' + '), // optional
