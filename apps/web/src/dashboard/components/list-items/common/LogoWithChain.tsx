@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import { capitalize } from '@/utils/format';
+
 import { BentoSupportedNetwork } from '@/constants/adapters';
 import { Colors } from '@/styles';
-
-const capitalize = (value: string) =>
-  value.charAt(0).toUpperCase() + value.slice(1);
 
 type LogoWithChainProps = {
   logo?: string;

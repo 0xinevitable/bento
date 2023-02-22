@@ -20,7 +20,7 @@ import React, {
 import { PageContainer } from '@/components/PageContainer';
 import { useSession } from '@/hooks/useSession';
 import { getServerSupabase } from '@/utils/ServerSupabase';
-import { formatUsername } from '@/utils/format';
+import { capitalize, formatUsername } from '@/utils/format';
 
 import { ErrorResponse } from '@/profile/types/api';
 import { Analytics, Config, axiosWithCredentials, toast } from '@/utils';
@@ -47,9 +47,6 @@ const getKoreanTimestring = (timestamp: string) => {
   const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
   return format(new Date(utc + KR_TIME_DIFF), 'yyyy-MM-dd HH:mm:ss');
 };
-
-const capitalize = (value: string) =>
-  value.charAt(0).toUpperCase() + value.slice(1);
 
 const notifySlack = async (user: User, username: string) => {
   if (!process.env.SLACK_NEW_PROFILE_WEBHOOK) {

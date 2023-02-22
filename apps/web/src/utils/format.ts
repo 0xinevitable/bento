@@ -17,3 +17,6 @@ export const formatLocalizedString = (
   value: LocalizedString,
   currentLanguage: string,
 ) => (typeof value === 'string' ? value : value[currentLanguage] || value.en);
+
+export const capitalize = (value: string) =>
+  value.charAt(0).toUpperCase() + value.slice(1);
