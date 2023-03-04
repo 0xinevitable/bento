@@ -103,10 +103,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const pngBuffer = pngData.asPng();
 
   res.setHeader('content-type', 'image/png');
-  res.setHeader(
-    'cache-control',
-    'public, immutable, no-transform, max-age=31536000',
-  );
   res.send(pngBuffer);
 };
 
