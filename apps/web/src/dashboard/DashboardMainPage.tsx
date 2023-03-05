@@ -245,7 +245,7 @@ const DashboardPage = (props: Props) => {
     return [
       _title,
       _description,
-      `${Config.SERVERLESS_API_BASE_URL}/api/images/og/u/${formatUsername(
+      `${Config.SERVERLESS_API_BASE_URL}/api/images/og/u/v2/${formatUsername(
         bentoUser.username,
         '',
       )}`,
