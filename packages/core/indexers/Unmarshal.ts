@@ -4,6 +4,8 @@ import { type Chain as UnmarshalChainId } from '@unmarshal/sdk';
 import axios from 'axios';
 import queryString from 'query-string';
 
+import { EEEE_ADDRESS, ZERO_ADDRESS } from '../address';
+
 type Options = {
   chainId: UnmarshalChainId;
   account: string;
@@ -18,16 +20,18 @@ export const getTokenBalancesFromUnmarshal = async ({
     url: `https://api.unmarshal.com/v1/${chainId}/address/${account}/assets`,
     query: {
       auth_key: API_KEY,
-      verified: false,
-      chainId: false,
-      token: true,
+      includeLowVolume: true,
     },
   });
 
   const response = await axios.get<TokenBalanceItem[]>(API_URL, {
     timeout: 10_000,
   });
-  return response.data;
+  return response.data.map((item) =>
+    item.contract_address === EEEE_ADDRESS
+      ? { ...item, contract_address: ZERO_ADDRESS }
+      : item,
+  );
 };
 
 // Token Balances (typing in Unmarshal core)
