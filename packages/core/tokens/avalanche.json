@@ -485,5 +485,76 @@
     "address": "0xfaB550568C688d5D8A52C7d794cb93Edc26eC0eC",
     "coinGeckoId": "axlusdc",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xfaB550568C688d5D8A52C7d794cb93Edc26eC0eC/logo.png"
+  },
+  {
+    "symbol": "SYN",
+    "name": "Synapse",
+    "decimals": 18,
+    "address": "0x1f1E7c893855525b303f99bDF5c3c05Be09ca251",
+    "coinGeckoId": "synapse-2",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x1f1E7c893855525b303f99bDF5c3c05Be09ca251/logo.png"
+  },
+  {
+    "symbol": "sAVAX",
+    "name": "BENQI Liquid Staked AVAX",
+    "decimals": 18,
+    "address": "0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE",
+    "coinGeckoId": "benqi-liquid-staked-avax",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE/logo.png"
+  },
+  {
+    "symbol": "GMX",
+    "name": "GMX",
+    "decimals": 18,
+    "address": "0x62edc0692BD897D2295872a9FFCac5425011c661",
+    "coinGeckoId": "gmx",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x62edc0692BD897D2295872a9FFCac5425011c661/logo.png"
+  },
+  {
+    "symbol": "PLN",
+    "name": "Pollen",
+    "decimals": 18,
+    "address": "0x7b2B702706D9b361dfE3f00bD138C0CFDA7FB2Cf",
+    "coinGeckoId": "pollen",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x7b2B702706D9b361dfE3f00bD138C0CFDA7FB2Cf/logo.png"
+  },
+  {
+    "symbol": "DYP",
+    "name": "Dypius",
+    "decimals": 18,
+    "address": "0x961C8c0B1aaD0c0b10a51FeF6a867E3091BCef17",
+    "coinGeckoId": "defi-yield-protocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0x961C8c0B1aaD0c0b10a51FeF6a867E3091BCef17/logo.png"
+  },
+  {
+    "symbol": "iDYP",
+    "name": "iDeFiYieldProtocol",
+    "decimals": 18,
+    "address": "0xBD100d061E120b2c67A24453CF6368E63f1Be056",
+    "coinGeckoId": "idefiyieldprotocol",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xBD100d061E120b2c67A24453CF6368E63f1Be056/logo.png"
+  },
+  {
+    "symbol": "XEN",
+    "name": "XEN Crypto",
+    "decimals": 18,
+    "address": "0xC0C5AA69Dbe4d6DDdfBc89c0957686ec60F24389",
+    "coinGeckoId": "xen-crypto",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xC0C5AA69Dbe4d6DDdfBc89c0957686ec60F24389/logo.png"
+  },
+  {
+    "symbol": "FLUX",
+    "name": "Flux",
+    "decimals": 8,
+    "address": "0xc4B06F17ECcB2215a5DBf042C672101Fc20daF55",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xc4B06F17ECcB2215a5DBf042C672101Fc20daF55/logo.png"
+  },
+  {
+    "symbol": "OK",
+    "name": "Okcash",
+    "decimals": 18,
+    "address": "0xd3Ac016b1B8C80EeAdDe4D186A9138C9324e4189",
+    "coinGeckoId": "okcash",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/avalanchec/assets/0xd3Ac016b1B8C80EeAdDe4D186A9138C9324e4189/logo.png"
   }
 ]

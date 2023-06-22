@@ -2440,5 +2440,34 @@
     "address": "0xFbC4f3f645C4003a2E4F4e9b51077d2DaA9a9341",
     "coinGeckoId": "zedxion",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xFbC4f3f645C4003a2E4F4e9b51077d2DaA9a9341/logo.png"
+  },
+  {
+    "symbol": "GALA",
+    "name": "Gala",
+    "decimals": 8,
+    "address": "0xd1d2Eb1B1e90B638588728b4130137D262C87cae",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xd1d2Eb1B1e90B638588728b4130137D262C87cae/logo.png"
+  },
+  {
+    "symbol": "ZEDXION",
+    "name": "ZEDXION",
+    "decimals": 18,
+    "address": "0xbAFDabaDcf19d0cFbbe0AB9C69CF050D86ff888C",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xbAFDabaDcf19d0cFbbe0AB9C69CF050D86ff888C/logo.png"
+  },
+  {
+    "symbol": "MAGIC",
+    "name": "Magic",
+    "decimals": 18,
+    "address": "0xB0c7a3Ba49C7a6EaBa6cD4a96C55a1391070Ac9A",
+    "coinGeckoId": "magic",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xB0c7a3Ba49C7a6EaBa6cD4a96C55a1391070Ac9A/logo.png"
+  },
+  {
+    "symbol": "PAN",
+    "name": "Peter Pan",
+    "decimals": 18,
+    "address": "0xCEBA2a8F6Ec221AEB5f3a7bcd15Cbc7e6a387bfb",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/ethereum/assets/0xCEBA2a8F6Ec221AEB5f3a7bcd15Cbc7e6a387bfb/logo.png"
   }
 ]

@@ -33,7 +33,7 @@
   },
   {
     "symbol": "WEMIX",
-    "name": "WEMIX TOKEN",
+    "name": "WEMIX",
     "decimals": 18,
     "address": "0x5096db80b21ef45230c9e423c373f1fc9c0198dd",
     "coinGeckoId": "wemix-token",
@@ -3224,5 +3224,189 @@
     "name": "Coindiamond",
     "decimals": 18,
     "address": "0xb38e68a348079e84a1e27fb142729d418d472ea4"
+  },
+  {
+    "symbol": "WCD",
+    "name": "Kurrency Token",
+    "decimals": 18,
+    "address": "0xbaa081e4313f1994dc8e7072f80ff9f49df14db8",
+    "logo": "/assets/icons/klaytn/0xbaa081e4313f1994dc8e7072f80ff9f49df14db8.png"
+  },
+  {
+    "symbol": "NOX",
+    "name": "AVATARA NOX",
+    "decimals": 18,
+    "address": "0x5166fa1acba89e5e0de27841a1110b7f9ac112da",
+    "coinGeckoId": "avatara-nox",
+    "logo": "/assets/icons/klaytn/0x5166fa1acba89e5e0de27841a1110b7f9ac112da.png"
+  },
+  {
+    "symbol": "NOX",
+    "name": "Nox",
+    "decimals": 18,
+    "address": "0x1f6b9ebefd37ad48a2c47596e799e02f404f34e7"
+  },
+  {
+    "symbol": "KACE",
+    "name": "KLAY ACE COIN",
+    "decimals": 18,
+    "address": "0x69f6433fe7f9e6cb9a1aef0ee408c181f017d9ad"
+  },
+  {
+    "symbol": "3KM",
+    "name": "3KM TOKEN",
+    "decimals": 18,
+    "address": "0x0ab503536019cb4303bda69467c1ec5de1589918"
+  },
+  {
+    "symbol": "DTC",
+    "name": "DTC TOKEN",
+    "decimals": 18,
+    "address": "0xa479bf71ded32fcb26b4510787352614c56c5184"
+  },
+  {
+    "symbol": "PPT",
+    "name": "Pocket ProjecT",
+    "decimals": 18,
+    "address": "0x60b6cc2b8cf4687dafa08c2078f7677eab23df7e",
+    "coinGeckoId": "pocket-project"
+  },
+  {
+    "symbol": "KMECA",
+    "name": "KLAY MECA",
+    "decimals": 18,
+    "address": "0xff2f4f402a469fadee431c7c76a4cef3c838f30c"
+  },
+  {
+    "symbol": "BCAB",
+    "name": "Block Chain AI Bot",
+    "decimals": 18,
+    "address": "0x2ea1b6dfc74f311142d0be8460fd5e59fabd3fc0"
+  },
+  {
+    "symbol": "RUBY",
+    "name": "RUBY TOKEN",
+    "decimals": 18,
+    "address": "0xf9f41278f26a32c74502eb4075221916a0c3b0c8"
+  },
+  {
+    "symbol": "oMEGA",
+    "name": "Orbit Bridge Klaytn Megaton Finance",
+    "decimals": 9,
+    "address": "0x800800500fd721a2e8092bd2d0401841b33b0fe7"
+  },
+  {
+    "symbol": "PsuB",
+    "name": "PsuBi",
+    "decimals": 18,
+    "address": "0x19c0d5ddcf06f282e7a547d25ab09fe5a7984aae"
+  },
+  {
+    "symbol": "kbn",
+    "name": "KlayBunny",
+    "decimals": 18,
+    "address": "0x7a9ccc1e5a64538a45c1ca9d0b201a20df09e28f"
+  },
+  {
+    "symbol": "KMIX",
+    "name": "KLAY REMIX TOKEN",
+    "decimals": 18,
+    "address": "0x2e2802bb5452037d79b21108e83c3f8bd44efbae"
+  },
+  {
+    "symbol": "ISR",
+    "name": "Insureum",
+    "decimals": 18,
+    "address": "0xb6b6fd8e645084ec45ebdcb452e8dab7c1e6f4c8"
+  },
+  {
+    "symbol": "MAYO",
+    "name": "Mayo Point",
+    "decimals": 18,
+    "address": "0x87fa550a58325127952e38863880fb15fe86500e"
+  },
+  {
+    "symbol": "KLTR",
+    "name": "Klay-Trum",
+    "decimals": 18,
+    "address": "0x73a31d279b3f4fd7eb5ef2e2488a65d94c956bd3"
+  },
+  {
+    "symbol": "AWM",
+    "name": "Another World Metaverse",
+    "decimals": 18,
+    "address": "0x3043988aa54bb3ae4da60ecb1dc643c630a564f0"
+  },
+  {
+    "symbol": "KlayDoge",
+    "name": "KlayDoge",
+    "decimals": 18,
+    "address": "0x4065ba5469c3dced25bc3f69497ef60eb759f636"
+  },
+  {
+    "symbol": "oMGOLD",
+    "name": "Orbit Bridge Klaytn Mgold",
+    "decimals": 18,
+    "address": "0x307ac5598abdf419456ce623c0977499777e5b67"
+  },
+  {
+    "symbol": "PEPE",
+    "name": "PEPE-KLAY",
+    "decimals": 18,
+    "address": "0x8df54176cb34ee8d654e52b5b4f34cfe802471e4"
+  },
+  {
+    "symbol": "CENT",
+    "name": "Center Coin",
+    "decimals": 18,
+    "address": "0xd364de0683b29e582e5713425b215b24ce804ae9"
+  },
+  {
+    "symbol": "bds",
+    "name": "budongsan",
+    "decimals": 18,
+    "address": "0xdebb5c7ad09937e3d075612915239b747de8bef3"
+  },
+  {
+    "symbol": "CCMF",
+    "name": "CCMF Token",
+    "decimals": 18,
+    "address": "0x3039aa5523bb3582cfadf4d6c50e318b3aea4c6a"
+  },
+  {
+    "symbol": "COAI",
+    "name": "COAI",
+    "decimals": 18,
+    "address": "0x104eea7499e6ab7fb000706f19b2c0c2ee7b94fe"
+  },
+  {
+    "symbol": "HANG",
+    "name": "HANGSTER",
+    "decimals": 18,
+    "address": "0x2f86fb586308825b703c0266ee7c17b96c31faf3"
+  },
+  {
+    "symbol": "Aurory",
+    "name": "Auroraklay membership",
+    "decimals": 18,
+    "address": "0x36709d1ed5298467eda41a68f97b4e58faeecd1a"
+  },
+  {
+    "symbol": "oMUDOL2",
+    "name": "Orbit Bridge Klaytn Mudol2 Token",
+    "decimals": 18,
+    "address": "0x549455b9fe3bd53a64e49726b27eb08a92835177"
+  },
+  {
+    "symbol": "WKLAY",
+    "name": "Wrapped Klay",
+    "decimals": 18,
+    "address": "0x19aac5f612f524b754ca7e7c41cbfa2e981a4432"
+  },
+  {
+    "symbol": "oWEMIX",
+    "name": "Orbit Bridge Klaytn WEMIX",
+    "decimals": 18,
+    "address": "0x67cb285790bb9f5dce728f80a3104a2297df2bb2"
   }
 ]
