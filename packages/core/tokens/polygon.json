@@ -952,5 +952,97 @@
     "decimals": 6,
     "address": "0xf14fbC6B30e2c4BC05A1D4fbE34bf9f14313309D",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xf14fbC6B30e2c4BC05A1D4fbE34bf9f14313309D/logo.png"
+  },
+  {
+    "symbol": "DF",
+    "name": "dForce",
+    "decimals": 18,
+    "address": "0x08C15FA26E519A78a666D19CE5C646D55047e0a3",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x08C15FA26E519A78a666D19CE5C646D55047e0a3/logo.png"
+  },
+  {
+    "symbol": "MYST",
+    "name": "Mysterium",
+    "decimals": 18,
+    "address": "0x1379E8886A944d2D9d440b3d88DF536Aea08d9F3",
+    "coinGeckoId": "mysterium",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x1379E8886A944d2D9d440b3d88DF536Aea08d9F3/logo.png"
+  },
+  {
+    "symbol": "KASTA",
+    "name": "Kasta",
+    "decimals": 18,
+    "address": "0x235737dBb56e8517391473f7c964DB31fA6ef280",
+    "coinGeckoId": "kasta",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x235737dBb56e8517391473f7c964DB31fA6ef280/logo.png"
+  },
+  {
+    "symbol": "mXEN",
+    "name": "XEN Crypto",
+    "decimals": 18,
+    "address": "0x2AB0e9e4eE70FFf1fB9D67031E44F6410170d00e",
+    "coinGeckoId": "xen-crypto",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x2AB0e9e4eE70FFf1fB9D67031E44F6410170d00e/logo.png"
+  },
+  {
+    "symbol": "ORBS",
+    "name": "Orbs",
+    "decimals": 18,
+    "address": "0x614389EaAE0A6821DC49062D56BDA3d9d45Fa2ff",
+    "coinGeckoId": "orbs",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x614389EaAE0A6821DC49062D56BDA3d9d45Fa2ff/logo.png"
+  },
+  {
+    "symbol": "YGG",
+    "name": "Yield Guild Games (PoS)",
+    "decimals": 18,
+    "address": "0x82617aA52dddf5Ed9Bb7B370ED777b3182A30fd1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x82617aA52dddf5Ed9Bb7B370ED777b3182A30fd1/logo.png"
+  },
+  {
+    "symbol": "MULTI",
+    "name": "Multichain",
+    "decimals": 18,
+    "address": "0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3",
+    "coinGeckoId": "multichain",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3/logo.png"
+  },
+  {
+    "symbol": "TRB",
+    "name": "Tellor",
+    "decimals": 18,
+    "address": "0xE3322702BEdaaEd36CdDAb233360B939775ae5f1",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xE3322702BEdaaEd36CdDAb233360B939775ae5f1/logo.png"
+  },
+  {
+    "symbol": "GNS",
+    "name": "Gains Network",
+    "decimals": 18,
+    "address": "0xE5417Af564e4bFDA1c483642db72007871397896",
+    "coinGeckoId": "gains-network",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xE5417Af564e4bFDA1c483642db72007871397896/logo.png"
+  },
+  {
+    "symbol": "CHAMP",
+    "name": "Ultimate Champions",
+    "decimals": 18,
+    "address": "0xED755dBa6Ec1eb520076Cec051a582A6d81A8253",
+    "coinGeckoId": "ultimate-champions",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xED755dBa6Ec1eb520076Cec051a582A6d81A8253/logo.png"
+  },
+  {
+    "symbol": "OK",
+    "name": "Okcash",
+    "decimals": 18,
+    "address": "0xd3Ac016b1B8C80EeAdDe4D186A9138C9324e4189",
+    "coinGeckoId": "okcash",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xd3Ac016b1B8C80EeAdDe4D186A9138C9324e4189/logo.png"
+  },
+  {
+    "symbol": "IOTX",
+    "name": "IoTeX Network",
+    "decimals": 18,
+    "address": "0xf6372cDb9c1d3674E83842e3800F2A62aC9F3C66",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/polygon/assets/0xf6372cDb9c1d3674E83842e3800F2A62aC9F3C66/logo.png"
   }
 ]

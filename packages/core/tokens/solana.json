@@ -1182,5 +1182,20 @@
     "address": "zebeczgi5fSEtbpfQKVZKCJ3WgYXxjkMUkNNx7fLKAF",
     "coinGeckoId": "zebec-protocol",
     "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/zebeczgi5fSEtbpfQKVZKCJ3WgYXxjkMUkNNx7fLKAF/logo.png"
+  },
+  {
+    "symbol": "WLKN",
+    "name": "Walken",
+    "decimals": 9,
+    "address": "EcQCUYv57C4V6RoPxkVUiDwtX1SP8y8FP5AEToYL8Az",
+    "coinGeckoId": "walken",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/EcQCUYv57C4V6RoPxkVUiDwtX1SP8y8FP5AEToYL8Az/logo.png"
+  },
+  {
+    "symbol": "FLUX",
+    "name": "Flux",
+    "decimals": 8,
+    "address": "FLUX1wa2GmbtSB6ZGi2pTNbVCw3zEeKnaPCkPtFXxqXe",
+    "logo": "https://assets-cdn.trustwallet.com/blockchains/solana/assets/FLUX1wa2GmbtSB6ZGi2pTNbVCw3zEeKnaPCkPtFXxqXe/logo.png"
   }
 ]
