@@ -1,15 +1,28 @@
 import styled from '@emotion/styled';
+import { Send } from 'lucide-react';
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useCallback, useState } from 'react';
 
 import { Button } from '@/components/v2/Button';
 
+import { Footer } from '@/landing/sections/Footer';
 import backgroundImage from '@/landing/sections/HeroSection/assets/hero-background.png';
+import { Colors } from '@/styles';
 
 const ConstructionPage: NextPage = () => {
   const router = useRouter();
   // const { t } = useTranslation('landing');
+
+  const [email, setEmail] = useState<string>('');
+  const onSubmit: React.FormEventHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      console.log('email', email);
+    },
+    [email],
+  );
 
   return (
     <>
@@ -36,11 +49,32 @@ const ConstructionPage: NextPage = () => {
             <span>momentarily paused</span> as we are improving our system.
           </Description>
 
-          <ButtonContainer>
-            <Input placeholder="Your Email" />
-            <Button onClick={async () => {}}></Button>
-          </ButtonContainer>
+          <form onSubmit={onSubmit}>
+            <ButtonContainer>
+              <Input
+                placeholder="Your Email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value.trim())}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    onSubmit(e);
+                  }
+                }}
+              />
+              <SendButton
+                type="submit"
+                style={{ width: 60, height: 60, padding: 0 }}
+              >
+                <Send style={{ color: Colors.gray800 }} />
+              </SendButton>
+            </ButtonContainer>
+          </form>
         </Content>
+
+        <Footer style={{ marginTop: 200, opacity: 0.8 }} />
       </Container>
     </>
   );
@@ -48,6 +82,7 @@ const ConstructionPage: NextPage = () => {
 
 const Container = styled.div`
   width: 100%;
+  padding: 0 16px;
 
   display: flex;
   flex-direction: column;
@@ -105,6 +140,7 @@ const Description = styled.p`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
+  gap: 4px;
 `;
 
 const Input = styled.input`
@@ -124,6 +160,17 @@ const Input = styled.input`
 
   &::placeholder {
     color: rgba(201, 206, 251, 0.8);
+  }
+
+  &:focus {
+    background: #333549;
+  }
+`;
+const SendButton = styled(Button)`
+  transition: all 0.12s ease;
+
+  &:hover {
+    background-color: ${Colors.gray100};
   }
 `;
 

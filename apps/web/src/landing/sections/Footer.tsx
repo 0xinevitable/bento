@@ -26,10 +26,10 @@ const communities = [
   },
 ] as const;
 
-export const Footer: React.FC = () => {
+export const Footer: React.FC<React.HTMLAttributes<HTMLElement>> = (props) => {
   const { t } = useTranslation('common');
   return (
-    <Container>
+    <Container {...props}>
       {communities.map((community) => (
         <a
           key={community.type}
