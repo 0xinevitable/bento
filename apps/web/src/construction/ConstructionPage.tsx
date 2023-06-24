@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import axios from 'axios';
 import { Send } from 'lucide-react';
 import { NextPage } from 'next';
 import Image from 'next/image';
@@ -10,16 +11,43 @@ import { Button } from '@/components/v2/Button';
 import { Footer } from '@/landing/sections/Footer';
 import backgroundImage from '@/landing/sections/HeroSection/assets/hero-background.png';
 import { Colors } from '@/styles';
+import { toast } from '@/utils';
 
 const ConstructionPage: NextPage = () => {
   const router = useRouter();
   // const { t } = useTranslation('landing');
 
   const [email, setEmail] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const onSubmit: React.FormEventHandler = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
-      console.log('email', email);
+      if (loading) {
+        return;
+      }
+      setLoading(true);
+
+      const { data } = await axios.post(
+        'https://api.getwaitlist.com/api/v1/waiter',
+        { email, waitlist_id: 8610 },
+      );
+
+      if (!!data) {
+        toast({
+          type: 'success',
+          title: 'Success!',
+          description: `You're now subscribed.`,
+        });
+        setEmail('');
+      } else {
+        toast({
+          type: 'error',
+          title: 'Error!',
+          description: `Something went wrong. Please try again later.`,
+        });
+      }
+
+      setLoading(false);
     },
     [email],
   );
