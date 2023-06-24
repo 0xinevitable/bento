@@ -18,6 +18,7 @@ const definedFeatures = {
   isKlaytnDeFiEnabled: Environment.production,
   isBadgeMockupsEnabled: Environment.off,
   isSearchEnabled: Environment.off,
+  isInConstruction: Environment.production,
 };
 
 type FeatureName = keyof typeof definedFeatures;

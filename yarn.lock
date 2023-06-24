@@ -691,6 +691,7 @@ __metadata:
     jotai: ^1.8.6
     lodash.chunk: ^4.2.0
     lodash.groupby: ^4.6.0
+    lucide-react: ^0.248.0
     minireset.css: ^0.0.7
     next: ^13.0.1-canary.2
     next-composed-plugins: ^1.0.1
@@ -8191,6 +8192,15 @@ __metadata:
   version: 2.2.1
   resolution: "ltgt@npm:2.2.1"
   checksum: 7e3874296f7538bc8087b428ac4208008d7b76916354b34a08818ca7c83958c1df10ec427eeeaad895f6b81e41e24745b18d30f89abcc21d228b94f6961d50a2
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.248.0":
+  version: 0.248.0
+  resolution: "lucide-react@npm:0.248.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0
+  checksum: 3b239b89333492faaa3b1d6cf9c6caed70d1e08938ee665557ab179d82e807232127bde0b4258042d5f84bc3494c690dd4060acf08eeb54132344a6a623a62f8
   languageName: node
   linkType: hard
 
