@@ -42,6 +42,7 @@
     "jotai": "^1.8.6",
     "lodash.chunk": "^4.2.0",
     "lodash.groupby": "^4.6.0",
+    "lucide-react": "^0.248.0",
     "minireset.css": "^0.0.7",
     "next": "^13.0.1-canary.2",
     "next-i18next": "^12.1.0",

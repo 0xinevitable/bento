@@ -48,23 +48,20 @@ module.exports = withPlugins(
       return config;
     },
     async redirects() {
-      return [
+      // redirect everything except /api, /wip, / to /wip
+      const keywords = ['u', 'wallet', 'home'];
+      return keywords.flatMap((v) => [
         {
-          source: '/profile/landing',
-          destination: '/',
+          source: `/${v}`,
+          destination: `/wip`,
           permanent: false,
         },
         {
-          source: '/profile/intro',
-          destination: '/',
+          source: `/${v}/:path*`,
+          destination: `/wip`,
           permanent: false,
         },
-        {
-          source: '/community',
-          destination: '/',
-          permanent: false,
-        },
-      ];
+      ]);
     },
   },
   [
