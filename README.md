@@ -73,4 +73,4 @@ Finally, we start the development server. By default, the port is set to `3000`.
 
 - The project is licensed under the [Mozilla Public License Version 2.0](https://opensource.org/licenses/MPL-2.0). You must include this license and copyright notice if you use this work. This also means that you'll have to notify changes and open-source your work(the modified software) in the same license(or, in certain cases, one of the GNU licenses).
 
-**Copyright (c) 2023 Inevitable**
+**Copyright (c) 2022-2024 Inevitable**
