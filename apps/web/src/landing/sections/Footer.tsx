@@ -47,7 +47,7 @@ export const Footer: React.FC<React.HTMLAttributes<HTMLElement>> = (props) => {
         </a>
       ))}
 
-      <span style={{ opacity: 0.65 }}>©2023 Bento</span>
+      <span style={{ opacity: 0.65 }}>2022-2024 Bento</span>
     </Container>
   );
 };
