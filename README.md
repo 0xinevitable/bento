@@ -1,4 +1,4 @@
-[![Group wallets across all chains. Bento — the Web3 Dashboard Built as Open Source.](https://github.com/inevitable-dao/bento/blob/develop/apps/web/public/assets/og-image.jpg?raw=true)](https://bento.finance)
+[![Group wallets across all chains. Bento — the Web3 Dashboard Built as Open Source.](https://github.com/0xinevitable/bento/blob/develop/apps/web/public/assets/og-image.jpg?raw=true)](https://bento.finance)
 
 <h1 align="center">
   Bento, the Open-Source Web3 Dashboard
@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://bento.finance">
-    <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/inevitable-dao/bento/production?color=%23000000&label=deploy&logo=Vercel&logoColor=white&style=for-the-badge&labelColor=000" />
+    <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/0xinevitable/bento/production?color=%23000000&label=deploy&logo=Vercel&logoColor=white&style=for-the-badge&labelColor=000" />
   </a>
   <a href="https://opensource.org/licenses/MPL-2.0">
     <img alt="License: MPL 2.0" src="https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg?style=for-the-badge&labelColor=000" />
@@ -28,7 +28,7 @@
 ## 🚀 Preparing Local Dev Environment
 
 ```bash
-git clone https://github.com/inevitable-dao/bento
+git clone https://github.com/0xinevitable/bento
 cd bento
 yarn
 ```

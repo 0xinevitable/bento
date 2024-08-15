@@ -22,7 +22,7 @@ const communities = [
   },
   {
     type: 'github',
-    url: 'https://github.com/inevitable-dao ',
+    url: 'https://github.com/0xinevitable ',
   },
 ] as const;
 
