@@ -2,7 +2,7 @@
   "name": "bento",
   "version": "1.0.0",
   "private": true,
-  "repository": "https://github.com/inevitable-dao/dashboard",
+  "repository": "https://github.com/0xinevitable/dashboard",
   "author": "Junho Yeo <i@junho.io>",
   "license": "MPL-2.0",
   "scripts": {

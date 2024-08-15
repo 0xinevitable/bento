@@ -7,7 +7,7 @@ const main = async () => {
   let page: number = 1;
 
   while (1) {
-    const url = `https://api.github.com/repos/inevitable-dao/bento/pulls?state=closed&page=${page}`;
+    const url = `https://api.github.com/repos/0xinevitable/bento/pulls?state=closed&page=${page}`;
     const response = await axios.get(url);
     const closedPullRequests = response.data;
     console.log(closedPullRequests.length, page);
