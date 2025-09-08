@@ -21,17 +21,7 @@ const ASSETS = {
 };
 
 const CHAINS = [
-  { name: 'Ethereum', src: '/assets/icons/ethereum.png' },
-  { name: 'BNB', src: '/assets/icons/bnb.png' },
-  { name: 'Avalanche', src: '/assets/icons/avalanche.png' },
-  { name: 'Polygon', src: '/assets/icons/polygon.png' },
-  { name: 'Optimism', src: '/assets/icons/optimism.png' },
-  { name: 'Klaytn', src: '/assets/icons/klaytn.png' },
-  { name: 'Cosmos Hub', src: '/assets/icons/cosmos-hub.png' },
-  { name: 'Osmosis', src: '/assets/icons/osmosis.png' },
-  { name: 'Evmos', src: '/assets/icons/evmos.png' },
-  { name: 'OpenSea', src: '/assets/icons/opensea.png' },
-  { name: 'Solana', src: '/assets/icons/solana.png' },
+  { name: 'Mitosis', src: '/assets/icons/mitosis.png' },
 ];
 
 const cardSources = (name: string) => ({

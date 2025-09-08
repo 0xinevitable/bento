@@ -1,5 +1,4 @@
-import { BentoUser, Wallet } from '@bento/common';
-import { OpenSeaAsset } from '@bento/core';
+import { BentoUser, Wallet } from '@/types/common';
 import styled from '@emotion/styled';
 import groupBy from 'lodash.groupby';
 import { useTranslation } from 'next-i18next';
@@ -14,7 +13,6 @@ import { SearchBar } from '@/dashboard/components/SearchBar';
 import { DeFiProtocolItem } from '@/dashboard/components/list-items/DeFiProtocolItem';
 import { WalletBalanceItem } from '@/dashboard/components/list-items/WalletBalanceItem';
 import { useProtocols } from '@/dashboard/hooks/useDeFis';
-import { useNFTBalances } from '@/dashboard/hooks/useNFTBalances';
 import { useWalletBalances } from '@/dashboard/hooks/useWalletBalances';
 import {
   DashboardTokenBalance,
@@ -28,16 +26,13 @@ import { EmptyBalance } from './components/EmptyBalance';
 import { InlineBadge } from './components/InlineBadge';
 import { Tab } from './components/Tab';
 import { Breakpoints } from './constants/breakpoints';
-import { KlaytnNFTAsset } from './hooks/useKlaytnNFTs';
 import { BadgeListSection } from './sections/BadgeListSection';
-import { NFTListSection } from './sections/NFTListSection';
 import { NetWorthSection } from './sections/NetWorthSection';
 import { UserProfileSection } from './sections/UserProfileSection';
 import { WalletListSection } from './sections/WalletListSection';
 
 enum DashboardTabType {
   Crypto = 'Crypto',
-  NFTs = 'NFTs',
   // Badges = 'Badges',
 }
 const DASHBOARD_TAB_ITEMS = Object.values(DashboardTabType);
@@ -55,9 +50,6 @@ type DashboardMainProps = {
   setAddWalletModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setDetailModalParams: React.Dispatch<React.SetStateAction<DetailModalParams>>;
-
-  selectedNFT: OpenSeaAsset | KlaytnNFTAsset | null;
-  setSelectedNFT: (asset: OpenSeaAsset | KlaytnNFTAsset | null) => void;
 };
 
 export const DashboardMain: React.FC<DashboardMainProps> = ({
@@ -68,31 +60,13 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
   setDetailModalVisible,
   setDetailModalParams,
 
-  selectedNFT,
-  setSelectedNFT,
 }) => {
   const { t, i18n } = useTranslation('dashboard');
   const currentLanguage = i18n.resolvedLanguage || i18n.language || 'en';
 
   const { balances: walletBalances } = useWalletBalances({
-    wallets: user.wallets,
+    wallets: user.wallets || [],
   });
-  const { balances: nftBalances } = useNFTBalances({
-    wallets: user.wallets,
-  });
-
-  // FIXME: Enable Klaytn NFTs again
-  // const { klaytnNFTs } = useKlaytnNFTs(user.wallets);
-  const klaytnNFTs: KlaytnNFTAsset[] = [];
-
-  const nftAssets = useMemo<(OpenSeaAsset | KlaytnNFTAsset)[]>(() => {
-    return [
-      ...klaytnNFTs,
-      ...(nftBalances?.flatMap((item) =>
-        'assets' in item ? item.assets : [],
-      ) ?? []),
-    ];
-  }, [nftBalances, klaytnNFTs]);
 
   const [tokenBalances, setTokenBalances] = useState<DashboardTokenBalance[]>(
     [],
@@ -104,7 +78,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       // TODO: 추후 `tokenAddress` 로만 그룹핑 해야 할 것 같다(같은 심볼과 이름을 사용하는 토큰이 여러개 있을 수 있기 때문).
       const balancesByPlatform = Object.entries(
         groupBy<WalletBalance>(
-          [...walletBalances, ...nftBalances],
+          [...walletBalances],
           (balance) => balance.symbol + balance.name,
         ),
       ).map((v) => v[1]);
@@ -141,19 +115,11 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
       tokens.sort((a, b) => b.netWorth - a.netWorth);
       setTokenBalances(tokens.filter((v) => v.netWorth > 0));
     },
-    [walletBalances, nftBalances],
+    [walletBalances],
     500,
   );
 
-  const [isNFTBalancesIncluded, setNFTBalancesIncluded] =
-    useLocalStorage<boolean>('@is-nfts-shown-v1', true);
-
-  const renderedTokenBalances = useMemo(() => {
-    if (isNFTBalancesIncluded) {
-      return tokenBalances;
-    }
-    return tokenBalances.filter((v) => v.type !== 'nft');
-  }, [isNFTBalancesIncluded, tokenBalances]);
+  const renderedTokenBalances = tokenBalances;
 
   const netWorthInWallet = useMemo(
     () => tokenBalances.reduce((acc, info) => acc + info.netWorth, 0),
@@ -164,14 +130,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
     DashboardTabType.Crypto,
   );
 
-  const [isNFTsInitialized, setNFTsInitialized] = useState<boolean>(false);
-  useEffect(() => {
-    if (currentTab === DashboardTabType.NFTs) {
-      setNFTsInitialized(true);
-    }
-  }, [currentTab]);
 
-  const { defis } = useProtocols(user.wallets);
+  const { defis } = useProtocols(user.wallets || []);
 
   const netWorthInProtocols = useMemo(
     () =>
@@ -223,7 +183,7 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
 
                 <WalletListSection
                   isMyProfile={isMyProfile}
-                  wallets={user.wallets}
+                  wallets={user.wallets || []}
                   revalidateWallets={revalidateWallets}
                   onClickAddWallet={() =>
                     setAddWalletModalVisible((prev) => !prev)
@@ -258,40 +218,8 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                           alignItems: 'center',
                         }}
                       >
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            cursor: 'pointer',
-                            userSelect: 'none',
-                          }}
-                          onClick={() => {
-                            if (!isNFTBalancesIncluded) {
-                              // showing
-                              Analytics.logEvent('click_show_nfts', undefined);
-                            } else {
-                              // hiding
-                              Analytics.logEvent('click_hide_nfts', undefined);
-                            }
-                            setNFTBalancesIncluded(!isNFTBalancesIncluded);
-                          }}
-                        >
-                          <Checkbox
-                            checked={isNFTBalancesIncluded ?? false}
-                            readOnly
-                          />
-                          <span
-                            style={{
-                              marginLeft: 6,
-                              color: Colors.gray200,
-                              fontSize: 14,
-                              fontWeight: 600,
-                              lineHeight: '20px',
-                            }}
-                          >
-                            {t('Show NFTs')}
-                          </span>
-                        </div>
+                        <div style={{ flex: 1 }} />
+                        <SearchBar />
                       </div>
 
                       <AssetListCard>
@@ -380,26 +308,6 @@ export const DashboardMain: React.FC<DashboardMainProps> = ({
                   );
                 }
               })}
-            </AnimatedTab>
-
-            <AnimatedTab selected={currentTab === DashboardTabType.NFTs}>
-              {!isNFTsInitialized ? (
-                <Skeleton
-                  style={{
-                    width: '100%',
-                    height: '300px',
-                    borderRadius: '8px',
-                  }}
-                />
-              ) : (
-                <NFTListSection
-                  nftAssets={nftAssets}
-                  isMyProfile={isMyProfile}
-                  user={user}
-                  selectedNFT={selectedNFT}
-                  setSelectedNFT={setSelectedNFT}
-                />
-              )}
             </AnimatedTab>
 
             {/* <AnimatedTab selected={currentTab === DashboardTabType.Badges}>

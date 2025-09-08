@@ -1,4 +1,4 @@
-import { shortenAddress } from '@bento/common';
+import { shortenAddress } from '@/types/common';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
@@ -12,7 +12,7 @@ import {
 import { Colors } from '@/styles';
 import { formatLocalizedString } from '@/utils/format'
 
-import { Valuation } from '@/defi/utils';
+import type { Valuation } from '@/defi/utils';
 import { InlineBadge } from './InlineBadge';
 import { Breakpoints } from '../constants/breakpoints';
 

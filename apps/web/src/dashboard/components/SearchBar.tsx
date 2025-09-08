@@ -1,5 +1,4 @@
-import { ChainType, shortenAddress } from '@bento/common';
-import { identifyWalletAddress } from '@bento/core';
+import { ChainType, shortenAddress, identifyWalletAddress } from '@/types/common';
 import styled from '@emotion/styled';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';

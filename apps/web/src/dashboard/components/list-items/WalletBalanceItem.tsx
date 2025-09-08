@@ -22,13 +22,13 @@ export const WalletBalanceItem: React.FC<WalletBalanceItemProps> = ({
     <Container onClick={onClick}>
       <LogoWithChain
         logo={info.logo}
-        chain={info.platform as BentoSupportedNetwork | 'opensea'}
+        chain={info.platform as BentoSupportedNetwork}
       />
 
       <div className="info">
         <span className="name-row">
           <span className="truncate">
-            {info.type === 'nft' ? info.name : info.symbol}
+            {info.symbol}
           </span>
           <Badge>
             <Icon icon="mingcute:wallet-4-line" />

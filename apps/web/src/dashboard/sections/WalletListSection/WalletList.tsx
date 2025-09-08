@@ -1,4 +1,4 @@
-import { ChainType, Wallet, shortenAddress } from '@bento/common';
+import { ChainType, Wallet, shortenAddress } from '@/types/common';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';

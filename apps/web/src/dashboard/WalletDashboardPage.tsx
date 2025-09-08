@@ -1,5 +1,4 @@
-import { ChainType, Wallet, shortenAddress } from '@bento/common';
-import { OpenSeaAsset } from '@bento/core';
+import { ChainType, Wallet, shortenAddress } from '@/types/common';
 import styled from '@emotion/styled';
 import { GetServerSideProps } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -17,15 +16,9 @@ import { UserProfile } from '@/profile/types/UserProfile';
 import { Analytics, Config, FeatureFlags } from '@/utils';
 
 import { DetailModalParams } from './components/DetailModal';
-import { KlaytnNFTAsset } from './hooks/useKlaytnNFTs';
 
 const DynamicDashboardMain = dynamic(() => import('./DashboardMain'));
 const DynamicDetailModal = dynamic(() => import('./components/DetailModal'));
-const DynamicNFTDetailModal = dynamic(() =>
-  import('@/profile/instance/sections/NFTDetailModal').then(
-    (module) => module.NFTDetailModal,
-  ),
-);
 
 type Props = {
   walletType: ChainType;
@@ -35,25 +28,10 @@ type Props = {
 export const getServerSideProps: GetServerSideProps<Props> = async (
   context,
 ) => {
-  if (!FeatureFlags.isSearchEnabled) {
-    return { notFound: true };
-  }
-  const { walletType, account } = context.query;
-  if (
-    !walletType ||
-    !account ||
-    typeof walletType !== 'string' ||
-    typeof account !== 'string'
-  ) {
-    return { notFound: true };
-  }
-  if (!['evm', 'cosmos-sdk', 'sealevel', 'solana'].includes(walletType)) {
-    return { notFound: true };
-  }
   return {
     props: {
-      walletType: walletType as ChainType,
-      account,
+      walletType: 'evm',
+      account:  context.query.account as string,
       ...(await serverSideTranslations(context.locale || 'en', [
         'common',
         'dashboard',
@@ -88,11 +66,7 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
         address: account,
 
         // FIXME: Use data from API->Adapters
-        networks: (walletType === 'evm'
-          ? ['ethereum', 'polygon', 'bnb', 'avalanche', 'klaytn', 'opensea']
-          : walletType === 'cosmos-sdk'
-          ? ['cosmos-hub', 'osmosis']
-          : ['solana']) as any[],
+        networks: walletType === 'evm' ? ['mitosis'] : [],
         isVerified: false,
       },
     ],
@@ -159,9 +133,6 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
     ];
   }, [profile]);
 
-  const [selectedNFT, setSelectedNFT] = useState<
-    OpenSeaAsset | KlaytnNFTAsset | null
-  >(null);
 
   return (
     <>
@@ -223,8 +194,6 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
             setAddWalletModalVisible={() => {}}
             setDetailModalVisible={setDetailModalVisible}
             setDetailModalParams={setDetailModalParams}
-            selectedNFT={selectedNFT}
-            setSelectedNFT={setSelectedNFT}
           />
         </NoSSR>
 
@@ -239,17 +208,9 @@ const WalletDashboardPage = ({ walletType, account }: Props) => {
             setDetailModalVisible((prev) => !prev);
             setDetailModalParams({});
           }}
-          // selectedNFT={selectedNFT}
-          setSelectedNFT={setSelectedNFT}
           {...detailModalParams}
         />
 
-        <DynamicNFTDetailModal
-          asset={selectedNFT}
-          visible={!!selectedNFT}
-          onDismiss={() => setSelectedNFT(null)}
-          isMyProfile={isMyProfile}
-        />
       </PageContainer>
     </>
   );

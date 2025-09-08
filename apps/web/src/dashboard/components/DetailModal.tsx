@@ -1,5 +1,5 @@
-import { shortenAddress } from '@bento/common';
-import { OpenSeaAsset, cachedAxios } from '@bento/core';
+import { shortenAddress } from '@/types/common';
+import { cachedAxios } from '@/types/common';
 import styled from '@emotion/styled';
 import { Badge, Card } from '@geist-ui/core';
 import { Icon } from '@iconify/react';
@@ -14,7 +14,6 @@ import { WalletBalance } from '@/dashboard/types/TokenBalance';
 import { ServiceData } from '@/defi/types/staking';
 import { Colors } from '@/styles';
 
-import { KlaytnNFTAsset } from '../hooks/useKlaytnNFTs';
 import { AssetMedia } from './AssetMedia';
 import { DeFiStakingItem } from './DeFiStakingItem';
 import { LogoWithChain } from './list-items/common/LogoWithChain';
@@ -22,7 +21,7 @@ import { LogoWithChain } from './list-items/common/LogoWithChain';
 export type DetailModalParams = {
   service?: ServiceData;
   tokenBalance?: {
-    platform: BentoSupportedNetwork | 'opensea';
+    platform: BentoSupportedNetwork;
     symbol: string | null;
     name: string;
     logo?: string;
@@ -38,7 +37,6 @@ export type DetailModalParams = {
 type Props = DetailModalParams & {
   visible?: boolean;
   onDismiss?: () => void;
-  setSelectedNFT: (asset: OpenSeaAsset | KlaytnNFTAsset | null) => void;
 };
 
 type WalletsByPosition = { amount: number; address: string };
@@ -48,9 +46,8 @@ export const DetailModal: React.FC<Props> = ({
   onDismiss,
   tokenBalance,
   service,
-  setSelectedNFT,
 }) => {
-  const assets = useMemo<OpenSeaAsset[]>(
+  const assets = useMemo<any[]>(
     () =>
       tokenBalance?.balances.flatMap((item) =>
         'assets' in item ? item.assets : [],
@@ -138,7 +135,7 @@ export const DetailModal: React.FC<Props> = ({
                 return (
                   <AssetListItem
                     key={asset.id}
-                    onClick={() => setSelectedNFT(asset)}
+                    onClick={() => {}}
                   >
                     <AssetMedia
                       src={

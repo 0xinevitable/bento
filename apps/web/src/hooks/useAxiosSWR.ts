@@ -1,4 +1,4 @@
-import { cachedAxios } from '@bento/core';
+import { cachedAxios } from '@/types/common';
 import useSWR, { Key } from 'swr';
 import { BareFetcher, PublicConfiguration } from 'swr/dist/types';
 

@@ -15,27 +15,14 @@ export type TokenInput = {
   denomUnits?: { denom: string; exponent: number; aliases?: string[] }[];
 };
 
-export type NFTInput = {
-  type: 'nft';
-
-  // FIXME: chain to 'ethereum'
-  chain: 'opensea';
-
-  symbol: string | null;
-  name: string;
-  ind: Indicator;
-  logo?: string;
-  assets?: any[];
-};
-
 export type BalanceInfo = {
   account: string;
   balance: number;
   price: number;
 };
+
 export type TokenBalance = TokenInput & BalanceInfo;
-export type NFTBalance = NFTInput & BalanceInfo;
-export type WalletBalance = TokenBalance | NFTBalance;
+export type WalletBalance = TokenBalance;
 
 export type DashboardTokenBalance = {
   symbol: string | null;
@@ -46,6 +33,6 @@ export type DashboardTokenBalance = {
   netWorth: number;
   amount: number;
   price: number;
-  type: 'nft' | 'token';
-  platform: BentoSupportedNetwork | 'opensea';
+  type: 'token';
+  platform: BentoSupportedNetwork;
 };

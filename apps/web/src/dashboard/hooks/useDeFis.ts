@@ -1,4 +1,4 @@
-import { Wallet } from '@bento/common';
+import { Wallet } from '@/types/common';
 import { useEffect, useMemo, useState } from 'react';
 
 import { useCachedPricings } from '@/hooks/pricings';
@@ -18,7 +18,7 @@ export const useProtocols = (wallets: Wallet[]) => {
       wallets.reduce<string[]>(
         (acc, wallet) => [
           ...acc,
-          ...wallet.networks.flatMap((network) =>
+          ...(wallet.networks || []).flatMap((network) =>
             !BentoDeFiSupportedNetworks.includes(
               network as BentoSupportedNetwork,
             )

@@ -3,8 +3,6 @@ import { useCallback, useEffect } from 'react';
 
 import { useSession } from '@/hooks/useSession';
 
-import { Supabase } from '@/utils';
-
 import { profileAtom } from '../states';
 import { UserProfile } from '../types/UserProfile';
 
@@ -30,25 +28,12 @@ export const useProfile: (options: ProfileOptions) => {
       return;
     }
 
-    const userId =
-      options.type === 'MY_PROFILE'
-        ? session.user.id
-        : options.preloadedProfile?.user_id;
-    if (!userId) {
-      return;
-    }
-    const query = Supabase.from('profile') //
-      .select('*')
-      .eq('user_id', userId);
-
-    const profileQueryResult = await query;
-    const profiles: UserProfile[] = profileQueryResult.data ?? [];
-
-    if (profiles.length === 0) {
-      setProfile(null);
+    // Profile fetching removed - would need to implement via API
+    // For now just use the preloaded profile if available
+    if (options.preloadedProfile) {
+      setProfile(options.preloadedProfile);
     } else {
-      const firstProfile = profiles[0];
-      setProfile(firstProfile);
+      setProfile(null);
     }
   }, [JSON.stringify(session), JSON.stringify(options), setProfile]);
 

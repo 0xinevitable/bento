@@ -1,4 +1,4 @@
-import { Wallet } from '@bento/common';
+import { Wallet } from '@/types/common';
 import styled from '@emotion/styled';
 import { deleteCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';

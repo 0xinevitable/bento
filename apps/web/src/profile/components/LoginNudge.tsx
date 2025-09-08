@@ -7,10 +7,6 @@ import { useCallback } from 'react';
 import { Modal } from '@/components/system';
 
 import { Colors } from '@/styles';
-import {
-  // FeatureFlags,
-  Supabase,
-} from '@/utils';
 
 type LoginNudgeProps = {
   className?: string;
@@ -28,20 +24,8 @@ export const LoginNudge: React.FC<LoginNudgeProps> = ({
 
   const onClickLogin = useCallback(
     async (provider: 'twitter' | 'github') => {
-      console.log({ redirectTo });
-      const localePrefix = router.locale === 'en' ? '' : `/${router.locale}`;
-      const { user, session, error } = await Supabase.auth.signIn(
-        { provider },
-        {
-          redirectTo:
-            redirectTo === 'current'
-              ? window.location.href
-              : redirectTo === 'home'
-              ? `${window.location.origin}${localePrefix}/home`
-              : `${window.location.origin}${localePrefix}/${redirectTo}`,
-        },
-      );
-      console.log({ user, session, error });
+      console.log('Auth not implemented', { provider, redirectTo });
+      // Auth removed - would need to implement new auth provider
     },
     [redirectTo],
   );

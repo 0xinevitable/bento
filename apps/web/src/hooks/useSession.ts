@@ -1,66 +1,12 @@
-import { Session } from '@supabase/supabase-js';
-import { deleteCookie } from 'cookies-next';
 import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { sessionAtom } from '../states';
-import {
-  Analytics,
-  Config,
-  Supabase,
-  axiosWithCredentials,
-  toast,
-} from '../utils';
-
-const registerAccessToken = (session: Session | null) => {
-  if (session) {
-    axiosWithCredentials.interceptors.request.use((config) => {
-      return {
-        ...config,
-        headers: {
-          ...config.headers,
-          'x-supabase-auth': session.access_token,
-        },
-      };
-    });
-
-    document.cookie = `supabase_auth_token=${session.access_token};max-age=${
-      (session.expires_in || 60 * 60 * 24) * 1_000
-    };secure;samesite=lax;path=/`;
-
-    if (Config.ENVIRONMENT !== 'production') {
-      console.log('Access token saved to Cookie');
-    }
-  } else {
-    deleteCookie('supabase_auth_token', {
-      path: '/',
-    });
-
-    if (Config.ENVIRONMENT !== 'production') {
-      console.log('Access token removed from Cookie');
-    }
-  }
-};
+import { Analytics, toast } from '../utils';
 
 export const SessionManager: React.FC = () => {
   const [currentSession, setCurrentSession] = useAtom(sessionAtom);
-
-  useEffect(() => {
-    const session = Supabase.auth.session();
-    setCurrentSession(session);
-    registerAccessToken(session);
-
-    Supabase.auth.onAuthStateChange((event, session) => {
-      registerAccessToken(session);
-
-      if (event == 'SIGNED_IN') {
-        if (currentSession?.user?.id !== session?.user?.id) {
-          setCurrentSession(session);
-        }
-      }
-    });
-  }, []);
 
   const router = useRouter();
   useEffect(() => {

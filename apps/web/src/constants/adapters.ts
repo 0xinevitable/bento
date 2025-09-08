@@ -1,5 +1,3 @@
-import { Currency } from '@bento/core';
-
 export type TokenInput = {
   symbol: string;
   name: string;
@@ -20,7 +18,7 @@ export interface Chain {
   currency: TokenInput;
   chainId?: number;
   _provider?: any;
-  getCurrencyPrice: (currency?: Currency) => Promise<number>;
+  getCurrencyPrice: (currency?: any) => Promise<number>;
   getBalance: (account: string) => Promise<TokenBalance>;
   getTokenBalances: (account: string) => Promise<TokenBalance[]>;
 }
@@ -116,19 +114,6 @@ export type BentoProtocolAdapter = {
   getAccount: ProtocolGetAccount;
 };
 
-// FIXME: Use types/values from @bento/adapters
-export type BentoSupportedNetwork =
-  | 'avalanche'
-  | 'bnb'
-  | 'cosmos-hub'
-  | 'ethereum'
-  | 'klaytn'
-  | 'osmosis'
-  | 'polygon'
-  | 'solana';
+export type BentoSupportedNetwork = 'mitosis';
 
-export const BentoDeFiSupportedNetworks: BentoSupportedNetwork[] = [
-  'cosmos-hub',
-  'klaytn',
-  'osmosis',
-];
+export const BentoDeFiSupportedNetworks: BentoSupportedNetwork[] = ['mitosis'];

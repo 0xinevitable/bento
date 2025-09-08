@@ -1,4 +1,4 @@
-import { Wallet } from '@bento/common';
+import { Wallet } from '@/types/common';
 import React, { useCallback, useContext, useState } from 'react';
 
 // import { Supabase } from '../utils';

@@ -1,7 +1,8 @@
-import { ChainType } from '@bento/common';
-import { Session } from '@supabase/supabase-js';
+import type { Session } from '@/states/session';
 
 import { BentoSupportedNetwork } from '@/constants/adapters';
+
+export type ChainType = 'evm' | 'cosmos-sdk' | 'sealevel';
 
 import { WALLETS } from '../constants/wallets';
 

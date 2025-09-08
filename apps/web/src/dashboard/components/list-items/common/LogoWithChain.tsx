@@ -8,7 +8,7 @@ import { Colors } from '@/styles';
 
 type LogoWithChainProps = {
   logo?: string;
-  chain: BentoSupportedNetwork | 'opensea';
+  chain: BentoSupportedNetwork;
   size?: number;
 };
 

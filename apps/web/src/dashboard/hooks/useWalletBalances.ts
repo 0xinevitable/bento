@@ -1,4 +1,4 @@
-import { Wallet } from '@bento/common';
+import { Wallet } from '@/types/common';
 import produce from 'immer';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -29,12 +29,9 @@ export const useWalletBalances = ({ wallets }: Options) => {
     const data: PartialRecord<BentoSupportedNetwork, [Key, Address[]]> = {};
 
     wallets.forEach((wallet) => {
-      wallet.networks.forEach((network) => {
-        if (network === 'opensea') {
-          return;
-        }
-        const previousAddrs = data[network]?.[1] ?? [];
-        data[network] = [
+      wallet.networks?.forEach((network) => {
+        const previousAddrs = data[network as BentoSupportedNetwork]?.[1] ?? [];
+        data[network as BentoSupportedNetwork] = [
           `/api/balances/${network}`,
           [...previousAddrs, wallet.address],
         ];

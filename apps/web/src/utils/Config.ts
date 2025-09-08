@@ -1,4 +1,3 @@
-import { Config as BentoConfig } from '@bento/common';
 import getNextConfig from 'next/config';
 
 const { publicRuntimeConfig } = getNextConfig();
@@ -11,7 +10,7 @@ const getConfig = () => {
   return {
     ENVIRONMENT,
     SERVERLESS_API_BASE_URL,
-    ...BentoConfig,
+    API_BASE_URL: SERVERLESS_API_BASE_URL || '', // Use SERVERLESS_API_BASE_URL as API_BASE_URL
   };
 };
 export const Config = getConfig();

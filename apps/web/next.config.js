@@ -1,8 +1,3 @@
-const withTM = require('next-transpile-modules')([
-  '@bento/common',
-  '@bento/core',
-]);
-
 const withInterceptStdout = require('next-intercept-stdout');
 const { withPlugins } = require('next-composed-plugins');
 const { i18n } = require('./next-i18next.config');
@@ -45,27 +40,15 @@ module.exports = withPlugins(
         ...config.module,
         exprContextCritical: false,
       };
+      // Ignore problematic @base-org/account module
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '@base-org/account': false,
+      };
       return config;
-    },
-    async redirects() {
-      // redirect everything except /api, /wip, / to /wip
-      const keywords = ['u', 'wallet', 'home'];
-      return keywords.flatMap((v) => [
-        {
-          source: `/${v}`,
-          destination: `/wip`,
-          permanent: false,
-        },
-        {
-          source: `/${v}/:path*`,
-          destination: `/wip`,
-          permanent: false,
-        },
-      ]);
     },
   },
   [
-    withTM,
     [
       withInterceptStdout,
       (text) => (text.includes('Duplicate atom key') ? '' : text),

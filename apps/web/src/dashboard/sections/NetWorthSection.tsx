@@ -38,25 +38,11 @@ export const NetWorthSection: React.FC<NetWorthSectionProps> = ({
   );
 
   const summary = useMemo(() => {
-    const [nfts, tokens] = tokenBalances.reduce(
-      (acc, cur) => {
-        if (cur.platform === 'opensea') {
-          acc[0].push(cur);
-        } else {
-          acc[1].push(cur);
-        }
-        return acc;
-      },
-      [[], []] as DashboardTokenBalance[][],
-    );
+    const tokens = tokenBalances;
 
     const protocols = services.map((v) => v.protocols).flat();
 
     const items: PortfolioAllocationItem[] = [
-      {
-        name: 'pa_nfts',
-        netWorth: nfts.reduce((acc, cur) => acc + cur.netWorth, 0),
-      },
       {
         name: 'pa_tokens',
         netWorth: tokens.reduce((acc, cur) => acc + cur.netWorth, 0),

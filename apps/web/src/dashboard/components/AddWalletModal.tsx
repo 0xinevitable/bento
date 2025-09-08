@@ -1,4 +1,4 @@
-import { Wallet } from '@bento/common';
+import { Wallet } from '@/types/common';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useTranslation } from 'next-i18next';
@@ -90,14 +90,7 @@ export const AddWalletModal: React.FC<AddWalletModalProps> = ({
           <section>
             <Title>{t('Sign with Wallet')}</Title>
             <Description>{t('wc-2-desc')}</Description>
-            <WalletConnector
-              networks={networks}
-              onSave={() => {
-                onDismiss?.();
-                setNetworks([]);
-                revalidateWallets();
-              }}
-            />
+            <WalletConnector />
           </section>
         </>
       )}

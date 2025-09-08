@@ -1,9 +1,12 @@
 import { GeistProvider } from '@geist-ui/core';
 import { appWithTranslation } from 'next-i18next';
 import React, { useEffect, useState } from 'react';
+import { WagmiProvider } from 'wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { SessionManager } from '@/hooks/useSession';
 import { WalletsProvider } from '@/hooks/useWalletContext';
+import { wagmiConfig } from '@/lib/wagmi';
 
 import { Analytics, ToastProvider } from '@/utils';
 
@@ -23,6 +26,8 @@ import { GlobalStyle } from '@/styles/GlobalStyle';
 import nextI18nextConfig from '../next-i18next.config';
 
 Analytics.initialize();
+
+const queryClient = new QueryClient();
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -64,30 +69,34 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   return (
-    <GeistProvider themeType="dark">
-      <GlobalStyle />
-      <ToastProvider />
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <GeistProvider themeType="dark">
+          <GlobalStyle />
+          <ToastProvider />
 
-      <SessionManager />
-      <PricingsProvider>
-        <WalletsProvider>
-          <Container>
-            <LoadingProgress
-              isRouteChanging={loadingState.isRouteChanging}
-              key={loadingState.loadingKey}
-            />
-            <NavigationBar />
+          <SessionManager />
+          <PricingsProvider>
+            <WalletsProvider>
+              <Container>
+                <LoadingProgress
+                  isRouteChanging={loadingState.isRouteChanging}
+                  key={loadingState.loadingKey}
+                />
+                <NavigationBar />
 
-            <Component {...pageProps} />
-          </Container>
+                <Component {...pageProps} />
+              </Container>
 
-          <div id="portal" />
-          <div id="profile-edit" />
-          <div id="mobile-menu" />
-          <div id="landing-background" />
-        </WalletsProvider>
-      </PricingsProvider>
-    </GeistProvider>
+              <div id="portal" />
+              <div id="profile-edit" />
+              <div id="mobile-menu" />
+              <div id="landing-background" />
+            </WalletsProvider>
+          </PricingsProvider>
+        </GeistProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 };
 

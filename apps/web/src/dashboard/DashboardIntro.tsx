@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Icon } from '@iconify/react';
-import { Session } from '@supabase/supabase-js';
+import type { Session } from '@/states/session';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -12,7 +12,7 @@ import { Button } from '@/components/v2/Button';
 import { NETWORKS } from '@/constants/networks';
 import { FixedLoginNudge } from '@/profile/components/LoginNudge';
 import { Colors } from '@/styles';
-import { Analytics, FeatureFlags, Supabase } from '@/utils';
+import { Analytics, FeatureFlags } from '@/utils';
 
 import { SearchBar } from './components/SearchBar';
 
@@ -26,12 +26,9 @@ export const DashboardIntro: React.FC<DashboardIntroProps> = ({ session }) => {
     useState<boolean>(false);
 
   const login = useCallback(async (provider: 'twitter' | 'github') => {
-    const { user, session, error } = await Supabase.auth.signIn(
-      { provider },
-      { redirectTo: `${window.location.origin}/home` },
-    );
+    // Auth removed - would need to implement new auth provider
     Analytics.logEvent('sign_in', { anonymous: false });
-    console.log({ user, session, error });
+    console.log('Auth not implemented');
   }, []);
 
   const onClickLogin = useCallback(() => {

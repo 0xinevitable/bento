@@ -1,5 +1,5 @@
-import { safePromiseAll } from '@bento/common';
-import { pricesFromCoinGecko } from '@bento/core';
+import { safePromiseAll } from '@/types/common';
+import { pricesFromCoinGecko } from '@/types/common';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import React, { useCallback } from 'react';
 

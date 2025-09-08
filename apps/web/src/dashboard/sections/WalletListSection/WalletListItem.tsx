@@ -1,4 +1,4 @@
-import { ChainType, Wallet, shortenAddress } from '@bento/common';
+import { ChainType, Wallet, shortenAddress } from '@/types/common';
 import styled from '@emotion/styled';
 import { Icon } from '@iconify/react';
 import { MotionProps, motion } from 'framer-motion';
@@ -38,7 +38,7 @@ export const WalletListItem: React.FC<WalletListItemProps> = ({
         </WalletAddress>
 
         <PlatformList>
-          {wallet.networks.map((network) => (
+          {wallet.networks?.map((network) => (
             <PlatformListItem key={network}>
               <img src={`/assets/icons/${network}.png`} />
             </PlatformListItem>

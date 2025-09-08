@@ -1,4 +1,4 @@
-import { Base64 } from '@bento/common';
+import { Base64 } from '@/types/common';
 import { AxiosError } from 'axios';
 
 import { Network } from '@/constants/networks';

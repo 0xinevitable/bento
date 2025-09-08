@@ -1,4 +1,4 @@
-import { BentoUser } from '@bento/common';
+import { BentoUser } from '@/types/common';
 import styled from '@emotion/styled';
 import { Avatar, Text, useTheme } from '@geist-ui/core';
 
@@ -18,7 +18,7 @@ export const UserProfileSection: React.FC<UserProfileProps> = ({ user }) => {
       {user.profileImage ? (
         <ImageAvatar src={user.profileImage} />
       ) : (
-        <Avatar text={(user.displayName || user.username)[0]} scale={3} />
+        <Avatar text={(user.displayName || user.username || 'U')[0]} scale={3} />
       )}
 
       <div>
