@@ -78,7 +78,7 @@ const ConstructionPage: NextPage = () => {
           </Description>
 
           <form onSubmit={onSubmit}>
-            <ButtonContainer>
+            <InputContainer>
               <Input
                 placeholder="Your Email"
                 type="email"
@@ -98,7 +98,7 @@ const ConstructionPage: NextPage = () => {
               >
                 <Send style={{ color: Colors.gray800 }} />
               </SendButton>
-            </ButtonContainer>
+            </InputContainer>
           </form>
         </Content>
 
@@ -165,7 +165,7 @@ const Description = styled.p`
     font-weight: bold;
   }
 `;
-const ButtonContainer = styled.div`
+const InputContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 4px;
